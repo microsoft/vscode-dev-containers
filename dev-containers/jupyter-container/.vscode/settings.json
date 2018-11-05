@@ -1,0 +1,10 @@
+{
+    "python.linting.enabled": false,
+    "jupyter.notebook.startupArgs": [
+        "--no-browser",
+        "--port=8989",
+        "--ip=0.0.0.0",
+        "--allow-root",
+        "--NotebookApp.allow_origin=\"*\""
+    ],
+}

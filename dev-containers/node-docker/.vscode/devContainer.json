@@ -1,0 +1,7 @@
+{
+	"dockerFile": "../dev-container.dockerfile",
+	"appPort": 8090,
+	"extensions": [
+		"dbaeumer.vscode-eslint"
+	]
+}
