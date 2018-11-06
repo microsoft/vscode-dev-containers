@@ -3,9 +3,7 @@
 
 ## Basics
 
-<<<<AW: I suggest to mention the important limitation that only local Docker containers are supported because the contains needs access to the local filesystem.>>>>
-
-A **Development Container**  is a Docker container that comes with:
+A **Development Container**  is a locally running Docker container that comes with:
 - a basic tool stack (Python, node, Go, etc.) and its prerequisites, e.g., `pylint` for Python.
 - a set of VS Code extensions that matches the tool stack, for example, the Microsoft Python extension for Python.
 - a version of Visual Studio Code that can run inside the container and that we refer to as **Visual Studio Code Headless**.
@@ -40,22 +38,26 @@ For a quick tour refer to the [smoke test](https://github.com/Microsoft/vscode-r
 
 You can use Development Containers for different scenarios:
 
-- **"No-Docker"**: you are working on an application/service that is deployed on Linux. You are **not** using Docker for deployment and are not familiar with Docker. Using a Development Container allows you to develop against the libraries that are used for deployment and you have parity between what is used for development and what is used in production. <<<AW: and you don't have to change your own productive environment>>>
+- **"No-Docker"**: you are working on an application/service that is deployed on Linux. You are **not** using Docker for deployment and are not familiar with Docker. Using a Development Container allows you to develop against the libraries that are used for deployment and you have parity between what is used for development and what is used in production. For example, you want to develop on macOS or Windows but you deploy to Linux in production.
 - **Docker used for deployment** supports basically two setups:
-  - **simple**: you are working on a single service that can be described by a single `Dockerfile`
-  - **docker-compose**: you are working on services that are described using a `docker-compose-file`.
+  - **single Dockerfile**: you are working on a single service that can be described by a single `Dockerfile`
+  - **docker-compose**: you are working on services that are described using a `docker-compose-file.yml`.
+
+In all of the above cases you can tag a folder as a Development Container by adding a file `.vscode/devContainer.json` to the folder. This file describes how to open the folder in a Development Container. This file can be considered the "recipe for creating a container". **TO DO** There will be a command that guides you when creating a new `devContainer.json` file for a folder.
 
 ### "No-Docker"
 
-**Notice** support for this scenario is not yet implemented. The plan is that in this case a user only has to define the tool stack but doesn´t have to create a Dockerfile.
+**Notice** support for this scenario is not yet implemented. The intent is that in this case a user only has to define the tool stack but doesn´t have to create a Dockerfile.
 
-### Simple Docker
+For this setup the `.vscode/devContainer.json` defines the following attributes:
+- `stack`: the tool and runtime stack should be provisioned in the container. There will be a set of predefined stacks.
+- `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.
+- `extensions`: a set of extensions (given as an array of extension IDs) that should be installed into the container. .
 
-A Development Container is marked <<<AW: may be "tagged" is clearer?>>> with a file `.vscode/devContainer.json`. This file can be considered the "recipe for creating a container".
+### Single Dockerfile
 
-
-The file supports the following attributes:
-- `dockerFile`: the location of the Dockerfile that defines the contents. The path is relative to the location of the `.vscode` folder. This [page](dev-container-dockerfile.md) provides more information for how to create a Dockerfile for a Development Container.
+For this setup the `.vscode/devContainer.json` defines the following attributes:
+- `dockerFile`: the location of the Dockerfile that defines the contents of the container. The path is relative to the location of the `.vscode` folder. This [page](dev-container-dockerfile.md) provides more information for how to create a Dockerfile for a Development Container.
 - `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.
 - `extensions`: a set of extensions (given as an array of extension IDs) that should be installed into the container. .
 
@@ -73,14 +75,11 @@ For example:
 
 When you open a folder in this setup, then this will create a Docker container and start it immediately. You can use the docker extension to see the running container. The container is stopped when VS Code is terminated. Since the version of VS Code Headless and VS Code need to match, the container is reconstructed whenever the version of VS Code changes.
 
-
-
-
 ### Docker Compose
 
-This section describes the setup steps when you are using `docker-compose` to run multiple containers together. For the single container case see above.
+This section describes the setup steps when you are using `docker-compose` to run multiple containers together. 
 
-Given the following `docker-compose.yml` file:
+The following `docker-compose.yml` file defines a web service implemented in python that uses a redis service to persist some state:
 ```json
 version: '3'
 services:
@@ -111,11 +110,11 @@ services:
     image: "redis:alpine"
 ```
 
-Next you must create a development container description file `devContainer.json` in the `.vscode` folder (**TO DO** provide a command to create a default version) with the following attributes:
+Next you must create a development container description file `devContainer.json` in the `.vscode` folder with the following attributes:
 - `dockerComposeFile` the name of the docker-compose file used to start the services.
 - `service` the service you want to work on.
 - `volume` the source volume mounted in the container.
-- `devPort` the port VS Code can use to connect to its backend.
+- `devPort` the port VS Code can use to connect to its backend (8000 in the example above).
 - `extensions` the list of extensions that must be installed into the container.
 
 Here is an example:
@@ -140,10 +139,9 @@ To develop the service run the command **Dev Container: Open Folder...** and sel
 In the Development Container setup extensions can be run either inside the Development Container or locally in VS Code. VS Code infers the location where to run the extension based on some extension characteristics. Currently we distinguish the following two:
 
 - **UI Extensions** make contributions to the UI only, do not access files in a workspace, and consequently can run locally. Examples for UI extensions are themes, snippets, language grammars, keymaps.
-- **Workspace Extensions** these extensions access the files inside a workspace and they therefore must run inside the Development Container. A typical example of a Workspace extension is an extension that provides language features like Intellisense and operates on the files of the Workspace. A good example is the Python extension.
+- **Workspace Extensions** these extensions access the files inside a workspace and they therefore must run inside the Development Container. A typical example of a Workspace extension is an extension that provides language features like Intellisense and operates on the files of the Workspace. 
 
-<<<AW: the following paragraph is a bit confusing...>>>
-When you install an extension manually, then VS Code and installs the extension in the appropriate location. Similarly VS Code makes sure to activate extensions depending on their characteristic. For example, a Workspace extension like the Python extension will never be activated locally on the VS Code side. Therefore what can happen is that an extension is automatically disabled when running in a VS Code Headless setup and the extension shows up in the `Disabled` section of the Extensions Viewlet.
+When you install an extension manually, then VS Code and installs the extension in the appropriate location. 
 
 ### "Always-in-Container-Installed" Extensions
 
@@ -159,7 +157,8 @@ There are extensions that you would like to always have installed in a container
 
 As an extension author you should test your extension in the Development Container setup. We are considering to add a new tag for extensions so that they can declare whether they have been tested in the Development Container setup.
 
-Sometimes VS Code's heuristic for determining the execution location automatically might fail. In this situation an extension author can overrule what VS Code infers with the attribute `uiExtension`. The attribute can be either `true` or `false`. <<<AW: consider to use an enum here; maybe there are more than two characteristics in the future.>>> When you make use of this setting, then ensure that your extension does not access the workspace contents. Since the workspace will not be available when an extension is run locally.
+Sometimes VS Code's heuristic for determining the execution location automatically might fail. In this situation an extension author can overrule what VS Code infers with the attribute `uiExtension`. The attribute can be either `true` or `false`. When you make use of this setting, then ensure that your extension does not access the workspace contents. Since the workspace will not be available when an extension is run locally.
+**TO DO** use an enum instead of a boolean flag, e.g., `extensionKind`: `ui` | `workspace`.
 
 Use the command **Developer: Show Running Extensions** to see where an extension is running.
 
