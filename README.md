@@ -50,7 +50,7 @@ In all of the above cases you can tag a folder as a Development Container by add
 **Notice** support for this scenario is not yet implemented. The intent is that in this case a user only has to define the tool stack but doesn´t have to create a Dockerfile.
 
 For this setup the `.vscode/devContainer.json` defines the following attributes:
-- `stack`: the tool and runtime stack should be provisioned in the container. There will be a set of predefined stacks.
+- `image`: the tool and runtime stack should be provisioned in the container. There will be a set of predefined stacks.
 - `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.
 - `extensions`: a set of extensions (given as an array of extension IDs) that should be installed into the container. .
 
@@ -171,3 +171,6 @@ To test a version of your extension in the Development Container setup you can p
 
 ### Debugging your Extension (**TBD**)
 
+### Reporting Issues
+
+When reporting issues please file them against the https://github.com/Microsoft/vscode-remote/issues repository.
