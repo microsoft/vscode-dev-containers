@@ -38,23 +38,23 @@ For a quick tour refer to the [smoke test](https://github.com/Microsoft/vscode-r
 
 You can use Development Containers for different scenarios:
 
-- **"No-Docker"**: you are working on an application/service that is deployed on Linux. You are **not** using Docker for deployment and are not familiar with Docker. Using a Development Container allows you to develop against the libraries that are used for deployment and you have parity between what is used for development and what is used in production. For example, you want to develop on macOS or Windows but you deploy to Linux in production.
-- **Docker used for deployment** supports basically two setups:
-  - **single Dockerfile**: you are working on a single service that can be described by a single `Dockerfile`
+- **Image**: you are working on an application/service that is deployed on Linux. You are **not** using Docker for deployment and are not familiar with Docker. Using a Development Container allows you to develop against the libraries that are used for deployment and you have parity between what is used for development and what is used in production. For example, you want to develop on macOS or Windows but you deploy to Linux in production.
+- **Docker** supports basically two setups:
+  - **Dockerfile**: you are working on a single service that can be described by a single `Dockerfile`
   - **docker-compose**: you are working on services that are described using a `docker-compose-file.yml`.
 
 In all of the above cases you can tag a folder as a Development Container by adding a file `.vscode/devContainer.json` to the folder. This file describes how to open the folder in a Development Container. This file can be considered the "recipe for creating a container". **TO DO** There will be a command that guides you when creating a new `devContainer.json` file for a folder.
 
-### "No-Docker"
+### Image
 
-**Notice** support for this scenario is not yet implemented. The intent is that in this case a user only has to define the tool stack but doesn´t have to create a Dockerfile.
+**Notice** this is not implemented yet.
 
 For this setup the `.vscode/devContainer.json` defines the following attributes:
-- `image`: the tool and runtime stack should be provisioned in the container. There will be a set of predefined stacks.
+- `image`: the image with the runtime and tools that should be used to provision the Development Container. The VS Code and partner teams will make images for different stacks available.
 - `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.
 - `extensions`: a set of extensions (given as an array of extension IDs) that should be installed into the container. .
 
-### Single Dockerfile
+### Dockerfile
 
 For this setup the `.vscode/devContainer.json` defines the following attributes:
 - `dockerFile`: the location of the Dockerfile that defines the contents of the container. The path is relative to the location of the `.vscode` folder. This [page](dev-container-dockerfile.md) provides more information for how to create a Dockerfile for a Development Container.
@@ -158,7 +158,7 @@ There are extensions that you would like to always have installed in a container
 As an extension author you should test your extension in the Development Container setup. We are considering to add a new tag for extensions so that they can declare whether they have been tested in the Development Container setup.
 
 Sometimes VS Code's heuristic for determining the execution location automatically might fail. In this situation an extension author can overrule what VS Code infers with the attribute `uiExtension`. The attribute can be either `true` or `false`. When you make use of this setting, then ensure that your extension does not access the workspace contents. Since the workspace will not be available when an extension is run locally.
-**TO DO** use an enum instead of a boolean flag, e.g., `extensionKind`: `ui` | `workspace`.
+**Notice** the name of the attribute has not been finalized yet. 
 
 Use the command **Developer: Show Running Extensions** to see where an extension is running.
 
