@@ -54,6 +54,18 @@ For this setup the `.vscode/devContainer.json` defines the following attributes:
 - `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.
 - `extensions`: a set of extensions (given as an array of extension IDs) that should be installed into the container. .
 
+For example:
+
+```json
+{
+	"image": "microsoft/dotnet:sdk",
+	"appPort": 8090,
+	"extensions": [
+		"ms-vscode.csharp"
+	]
+}
+```
+
 ### Dockerfile
 
 For this setup the `.vscode/devContainer.json` defines the following attributes:
