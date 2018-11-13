@@ -47,8 +47,6 @@ In all of the above cases you can tag a folder as a Development Container by add
 
 ### Image
 
-**Notice** this is not implemented yet.
-
 For this setup the `.vscode/devContainer.json` defines the following attributes:
 - `image`: the image with the runtime and tools that should be used to provision the Development Container. The VS Code and partner teams will make images for different stacks available.
 - `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.

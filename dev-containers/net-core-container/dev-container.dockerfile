@@ -1,1 +1,0 @@
-FROM microsoft/dotnet:sdk 

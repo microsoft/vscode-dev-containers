@@ -1,5 +1,5 @@
 {
-	"dockerFile": "../dev-container.dockerfile",
+	"image": "microsoft/dotnet:sdk",
 	"appPort": 8090,
 	"extensions": [
 		"ms-vscode.csharp"

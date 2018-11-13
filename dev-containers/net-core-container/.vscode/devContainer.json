@@ -1,5 +1,5 @@
 {
-	"dockerFile": "../dev-container.dockerfile",
+	"image": "microsoft/dotnet:sdk",
 	"extensions": [
 		"ms-vscode.csharp"
 	]
