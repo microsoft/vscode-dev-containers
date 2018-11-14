@@ -1,6 +1,6 @@
 {
 	"dockerFile": "../dev-container.dockerfile",
-	"appPort": "7071",
+	"appPort": 7071,
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions"
 	]
