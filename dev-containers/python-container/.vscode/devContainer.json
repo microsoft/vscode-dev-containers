@@ -1,5 +1,5 @@
 {
-	"dockerFile": "../dev-container.dockerfile",
+	"dockerFile": "dev-container.dockerfile",
 	"appPort": 8989,
 	"extensions": [
 		"ms-python.python"

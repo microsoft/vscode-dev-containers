@@ -75,7 +75,7 @@ For example:
 
 ```json
 {
-	"dockerFile": "../dev-container.dockerfile",
+	"dockerFile": "dev-container.dockerfile",
 	"appPort": 8090,
 	"extensions": [
 		"dbaeumer.vscode-eslint"

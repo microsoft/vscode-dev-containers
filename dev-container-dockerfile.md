@@ -11,7 +11,7 @@ In an empty folder create the description file:
 `devContainer.json`
 ```json
 {
-	"dockerFile": "../dev-container.dockerfile",
+	"dockerFile": "dev-container.dockerfile",
 	"extensions": [
 		"vscjava.vscode-java-pack"
 	]

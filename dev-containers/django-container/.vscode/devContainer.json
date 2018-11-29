@@ -1,5 +1,5 @@
 {
-	"dockerFile": "../dev-container.dockerfile",
+	"dockerFile": "dev-container.dockerfile",
 	"extensions": [
 		"ms-python.python",
 		"batisteo.vscode-django"
