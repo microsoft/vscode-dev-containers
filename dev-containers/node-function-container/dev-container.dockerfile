@@ -14,5 +14,3 @@ RUN apt-get update \
     && dpkg -i --force-depends azure-functions-core-tools*.deb \
     && rm azure-functions-core-tools*.deb \
 	&& rm -rf /var/lib/apt/lists/*
-
-EXPOSE 7071
