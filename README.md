@@ -43,7 +43,7 @@ You can use Development Containers for different scenarios:
   - **Dockerfile**: you are working on a single service that can be described by a single `Dockerfile`
   - **docker-compose**: you are working on services that are described using a `docker-compose-file.yml`.
 
-In all of the above cases you can tag a folder as a Development Container by adding a file `.vscode/devContainer.json` to the folder. This file describes how to open the folder in a Development Container. This file can be considered the "recipe for creating a container". **TO DO** There will be a command that guides you when creating a new `devContainer.json` file for a folder.
+In all of the above cases you can tag a folder as a Development Container by adding a file `.vscode/devContainer.json` to the folder. This file describes how to open the folder in a Development Container. This file can be considered the "recipe for creating a container". 
 
 ### Image
 
@@ -143,6 +143,9 @@ Here is an example:
 To develop the service run the command **Dev Container: Open Folder...** and select the workspace you want to open. You can start the services from the command line using `docker-compose -f docker-compose.develop.yml up`. If the service is not running, then the action will start the services using `docker-compose up`. Once the service is up, VS Code will inject the VS Code headless backend into the container and install the recommended extensions.
 
 **Please Note:** This injection will happen whenever a container is created. Therefore, when you want to continue development on the container use `docker-compose stop` to stop but not destroy the containers. In this way the VS Code backend and the extensions do not need to be installed on the next start.
+
+## Creating the Configuration Files
+The command **Dev Container: Create Configuration File...** helps you to create the configuration files for a folder. The command will prompt you for the runtime you want to use in the container and then asks whether the container should export an application port. 
 
 ## Managing Extensions
 
