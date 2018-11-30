@@ -26,7 +26,7 @@ To get insight into the running Docker containers it is recommended to install t
 
 You are now ready to open a folder in a container:
 
-- Start `code-wsl` (**Please note:** on macOS you must start code-wsl from the command line (Issue [#242](https://github.com/Microsoft/vscode-remote/issues/242))).
+- Start `code-wsl`
 - Open a folder in a Development Container by running the command **Dev Container: Open Folder in Container...** from the command palette.
 - Select the folder with the tool stack you want to try out.
 
@@ -43,14 +43,14 @@ You can use Development Containers for different scenarios:
   - **Dockerfile**: you are working on a single service that can be described by a single `Dockerfile`
   - **docker-compose**: you are working on services that are described using a `docker-compose-file.yml`.
 
-In all of the above cases you can tag a folder as a Development Container by adding a file `.vscode/devContainer.json` to the folder. This file describes how to open the folder in a Development Container. This file can be considered the "recipe for creating a container". 
+In all of the above cases you can indicate that a folder can be opened as a Development Container by adding a file `.vscode/devContainer.json` to the folder. This file describes how to open the folder in a Development Container. This file can be considered the _recipe for creating a container_.
 
 ### Image
 
 For this setup the `.vscode/devContainer.json` defines the following attributes:
 - `image`: the image with the runtime and tools that should be used to provision the Development Container. The VS Code and partner teams will make images for different stacks available.
 - `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.
-- `extensions`: a set of extensions (given as an array of extension IDs) that should be installed into the container. .
+- `extensions`: a set of VS Code extensions (given as an array of extension IDs) that should be installed into the container. .
 
 For example:
 
@@ -69,7 +69,7 @@ For example:
 For this setup the `.vscode/devContainer.json` defines the following attributes:
 - `dockerFile`: the location of the Dockerfile that defines the contents of the container. The path is relative to the location of the `.vscode` folder. This [page](dev-container-dockerfile.md) provides more information for how to create a Dockerfile for a Development Container.
 - `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.
-- `extensions`: a set of extensions (given as an array of extension IDs) that should be installed into the container. .
+- `extensions`: a set of VS Code extensions (given as an array of extension IDs) that should be installed into the container. .
 
 For example:
 
@@ -125,7 +125,7 @@ Next you must create a development container description file `devContainer.json
 - `service` the service you want to work on.
 - `volume` the source volume mounted in the container.
 - `devPort` the port VS Code can use to connect to its backend (8000 in the example above).
-- `extensions` the list of extensions that must be installed into the container.
+- `extensions` the list of VS Code extensions that must be installed into the container.
 
 Here is an example:
 ```json
