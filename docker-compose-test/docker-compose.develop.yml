@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: dev-container.dockerfile
+    ports:
+     - "5000:5000"
+     - "8000:8000"
+    volumes:
+      - .:/app
+  redis:
+    image: "redis:alpine"
