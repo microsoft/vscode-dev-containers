@@ -9,5 +9,7 @@ services:
      - "8000:8000"
     volumes:
       - .:/app
+    ## TO DO define command so that the app is started under the debugger
+    #command: node --inspect index.js
   redis:
     image: "redis:alpine"
