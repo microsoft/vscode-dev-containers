@@ -88,6 +88,7 @@ When you open a folder in this setup, then this will create a Docker container a
 ### Docker Compose
 
 This section describes the setup steps when you are using `docker-compose` to run multiple containers together. 
+A sample setup can be found here: https://github.com/Microsoft/vscode-dev-containers/tree/master/docker-compose-test.
 
 The following `docker-compose.yml` file defines a web service implemented in python that uses a redis service to persist some state:
 ```json
@@ -120,6 +121,16 @@ services:
     image: "redis:alpine"
 ```
 
+If you want to install additional development tools like `pylint` into the container, then you need to create a development version of the Dockerfile, e.g. a `dev-container.dockerfile`:
+```Dockerfile
+FROM python:3
+ADD . /code
+WORKDIR /code
+RUN pip install -r requirements.txt
+RUN pip install pylint
+CMD ["python", "app.py"]
+```
+
 Next you must create a development container description file `devContainer.json` in the `.vscode` folder with the following attributes:
 - `dockerComposeFile` the name of the docker-compose file used to start the services.
 - `service` the service you want to work on.
@@ -140,12 +151,18 @@ Here is an example:
 }
 ```
 
-To develop the service run the command **Dev Container: Open Folder...** and select the workspace you want to open. You can start the services from the command line using `docker-compose -f docker-compose.develop.yml up`. If the service is not running, then the action will start the services using `docker-compose up`. Once the service is up, VS Code will inject the VS Code headless backend into the container and install the recommended extensions.
+To develop the service run the command **Dev Container: Open Folder in Container...** and select the workspace you want to open. You can start the services from the command line using `docker-compose -f docker-compose.develop.yml up`. If the service is not running, then the action will start the services using `docker-compose up`. Once the service is up, VS Code will inject the VS Code headless backend into the container and install the recommended extensions.
+
+**Please Note:** This injection will happen whenever a container is created. Therefore, when you want to continue development on the container use `docker-compose stop` to stop but not destroy the containers. In this way the VS Code backend and the extensions do not need to be installed on the next start.
+
+**Known Limitations:**:
+- The injection uses `apt get` which is not available in alpine images.
+- The app is started in the web container without debugging support, therefore it isn't working
 
 **Please Note:** This injection will happen whenever a container is created. Therefore, when you want to continue development on the container use `docker-compose stop` to stop but not destroy the containers. In this way the VS Code backend and the extensions do not need to be installed on the next start.
 
 ## Creating the Configuration Files
-The command **Dev Container: Create Configuration File...** helps you to create the configuration files for a folder. The command will prompt you for the runtime you want to use in the container and then asks whether the container should export an application port. 
+The command **Dev Container: Create Configuration File...** helps you to create the configuration files for a folder. The command will prompt you for the runtime you want to use in the container and then asks whether the container should expose a port for the application. 
 
 ## Managing Extensions
 
