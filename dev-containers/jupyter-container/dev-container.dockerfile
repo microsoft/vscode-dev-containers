@@ -1,5 +1,7 @@
 FROM jupyter/scipy-notebook:2c80cf3537ca
 
+USER root
+
 # RUN pip install pylint
 
 # Install git

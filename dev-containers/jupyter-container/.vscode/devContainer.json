@@ -5,5 +5,6 @@
 		"ms-python.python",
 		"LittleFoxTeam.vscode-python-test-adapter",
 		"donjayamanne.jupyter"
-	]
+	],
+	"runArgs": ["--user", "jovyan"]
 }
