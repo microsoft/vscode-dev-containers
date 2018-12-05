@@ -83,7 +83,18 @@ For example:
 }
 ```
 
-When you open a folder in this setup, then this will create a Docker container and start it immediately. You can use the docker extension to see the running container. The container is stopped when VS Code is terminated. Since the version of VS Code Headless and VS Code need to match, the container is reconstructed whenever the version of VS Code changes.
+There is an advanced attribute `runArgs`: this is an advance attribute to define additional arguments that should be used when running the docker image. The example below is for a Go development container using `runArgs` to change the security policy to enable the ptrace system call:
+```json
+{
+	"dockerFile": "dev-container.dockerfile",
+	"extensions": [
+		"ms-vscode.go"
+	],
+	"runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"]
+}
+```
+
+When you open a folder in this setup, then this will create a Docker container and start it immediately. You can use the [docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) to observe the running container. The container is stopped when the VS Code window showing the development container is closed. Since the version of VS Code Headless and VS Code need to match, the container is reconstructed whenever the version of VS Code changes.
 
 ### Docker Compose
 
