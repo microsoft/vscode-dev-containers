@@ -9,7 +9,6 @@ services:
      - "8000:8000"
     volumes:
       - .:/app
-    ## TO DO define command so that the app is started under the debugger
-    #command: node --inspect index.js
+    command: /bin/sh -c "while :; do sleep 5000; done"
   redis:
     image: "redis:alpine"
