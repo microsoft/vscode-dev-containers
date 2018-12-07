@@ -26,7 +26,7 @@ To get insight into the running Docker containers it is recommended to install t
 
 You are now ready to open a folder in a container:
 
-- Start `code-wsl` (**Please note:** on macOS you must start code-wsl from the command line (Issue [#242](https://github.com/Microsoft/vscode-remote/issues/242))).
+- Start `code-wsl`.
 - Open a folder in a Development Container by running the command **Dev Container: Open Folder in Container...** from the command palette.
 - Select the folder with the tool stack you want to try out.
 
@@ -39,7 +39,7 @@ For a quick tour refer to the [smoke test](https://github.com/Microsoft/vscode-r
 You can use Development Containers for different scenarios:
 
 - **Image**: you are working on an application/service that is deployed on Linux. You are **not** using Docker for deployment and are not familiar with Docker. Using a Development Container allows you to develop against the libraries that are used for deployment and you have parity between what is used for development and what is used in production. For example, you want to develop on macOS or Windows but you deploy to Linux in production.
-- **Docker** supports basically two setups:
+- **Docker** supports two Docker setups:
   - **Dockerfile**: you are working on a single service that can be described by a single `Dockerfile`
   - **docker-compose**: you are working on services that are described using a `docker-compose-file.yml`.
 
@@ -67,7 +67,7 @@ For example:
 ### Dockerfile
 
 For this setup the `.vscode/devContainer.json` defines the following attributes:
-- `dockerFile`: the location of the Dockerfile that defines the contents of the container. The path is relative to the location of the `.vscode` folder. This [page](doc/dev-container-dockerfile.md) provides more information for how to create a Dockerfile for a Development Container.
+- `dockerFile`: the location of the Dockerfile that defines the contents of the container. The path is relative to the root of the workspace. This [page](doc/dev-container-dockerfile.md) provides more information for how to create a Dockerfile for a Development Container.
 - `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.
 - `extensions`: a set of extensions (given as an array of extension IDs) that should be installed into the container. .
 
@@ -83,7 +83,7 @@ For example:
 }
 ```
 
-There is an advanced attribute `runArgs`: this is an advance attribute to define additional arguments that should be used when running the docker image. The example below is for a Go development container using `runArgs` to change the security policy to enable the ptrace system call:
+The advanced attribute `runArgs` can be used to define additional arguments that should be used when running the container. The example below uses `runArgs` to change the security policy to enable the ptrace system call for Go development container:
 ```json
 {
 	"dockerFile": "dev-container.dockerfile",
@@ -133,11 +133,11 @@ RUN pip install pylint
 CMD ["python", "app.py"]
 ```
 
-With that in place we can now create a `docker-compose.develop.yml` that will be used when developing on the `web` service implemented in python. In this file you make two modifications to enable running VS Code against a container:
-- build the dev-container for the web service instead of the normale container defined in the `Dockerfile`.
+With that in place we can now create a `docker-compose.develop.yml` that will be used when developing on the `web` service implemented in python. In this file you make the following modifications to enable running VS Code against a container:
+- build the development container for the web service instead of the normale container defined in the `Dockerfile`.
 - open an additional port so that VS Code can connect to its backend running inside the container. The VS Code headless server listens on port 8000 inside the container.
 - mount the code of the service as a volume so that the source you work on is persisted on the local file system.
-- overwrite the command that is run in the container so that the container is kept running. This is done so that you can develop on the python server and restart it after you made change. Also, if you want to debug the server you can launch it under the debugger.
+- overwrite the command that is run in the container so that the container is kept running. This is done so that you can develop on the python server and restart it after you made change. Also, if you want to debug the server you can launch the server under the debugger.
 
 This results in the following `docker-compose.develop.yml`:
 ```yaml
@@ -145,14 +145,14 @@ version: '3'
 services:
   web:
     build: 
-      context: .
+      context: .    # build development container
       dockerfile: dev-container.dockerfile
     ports:
      - "5000:5000"
-     - "8000:8000"
+     - "8000:8000"  # open port to connect to VS Code headless
     volumes:
-      - .:/app
-    command: /bin/sh -c "while :; do sleep 5000; done"
+      - .:/app      # volume share the code
+    command: /bin/sh -c "while :; do sleep 5000; done" # keep the container running
   redis:
     image: "redis:alpine"
 ```
