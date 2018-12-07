@@ -67,7 +67,7 @@ For example:
 ### Dockerfile
 
 For this setup the `.vscode/devContainer.json` defines the following attributes:
-- `dockerFile`: the location of the Dockerfile that defines the contents of the container. The path is relative to the location of the `.vscode` folder. This [page](dev-container-dockerfile.md) provides more information for how to create a Dockerfile for a Development Container.
+- `dockerFile`: the location of the Dockerfile that defines the contents of the container. The path is relative to the location of the `.vscode` folder. This [page](doc/dev-container-dockerfile.md) provides more information for how to create a Dockerfile for a Development Container.
 - `appPort`: an application port that is opened by the container, that is, when the container supports running a server that is listening at a particular port.
 - `extensions`: a set of extensions (given as an array of extension IDs) that should be installed into the container. .
 
@@ -99,10 +99,9 @@ When you open a folder in this setup, then this will create a Docker container a
 ### Docker Compose
 
 This section describes the setup steps when you are using `docker-compose` to run multiple containers together. 
-A sample setup can be found here: https://github.com/Microsoft/vscode-dev-containers/tree/master/docker-compose-test.
 
 The following `docker-compose.yml` file defines a web service implemented in python that uses a redis service to persist some state:
-```json
+```yaml
 version: '3'
 services:
   web:
@@ -113,26 +112,18 @@ services:
     image: "redis:alpine"
 ```
 
-Assume that you want to work on the _web service_ in a container. To keep the development setup separate from production it is recommended to create a separate `docker-compose.develop.yml` file. In this file you make two modifications to enable running VS Code against a container:
-- open an additional port so that VS Code can connect to its backend running inside the container. The VS Code headless server listens on port 8000 inside the container.
-- mount the code of the service as a volume so that the source you work on is persisted on the local file system.
-
-This results in the following `docker-compose.develop.yml`:
-```json
-version: '3'
-services:
-  web:
-    build: .
-    ports:
-     - "5000:5000"
-     - "8000:8000"
-    volumes:
-      - .:/app
-  redis:
-    image: "redis:alpine"
+This is the `Dockerfile` for the `web` service:
+```Dockerfile
+FROM python:3
+ADD . /code
+WORKDIR /code
+RUN pip install -r requirements.txt
+CMD ["python", "app.py"]
 ```
 
-If you want to install additional development tools like `pylint` into the container, then you need to create a development version of the Dockerfile, e.g. a `dev-container.dockerfile`:
+
+Assume that you want to work on the _web service_ in a container. First you want to create a `dev-container.dockerfile` to create a container for the service for development. For develpment you want to have `pylint` installed into the container:
+
 ```Dockerfile
 FROM python:3
 ADD . /code
@@ -141,6 +132,31 @@ RUN pip install -r requirements.txt
 RUN pip install pylint
 CMD ["python", "app.py"]
 ```
+
+With that in place we can now create a `docker-compose.develop.yml` that will be used when developing on the `web` service implemented in python. In this file you make two modifications to enable running VS Code against a container:
+- build the dev-container for the web service instead of the normale container defined in the `Dockerfile`.
+- open an additional port so that VS Code can connect to its backend running inside the container. The VS Code headless server listens on port 8000 inside the container.
+- mount the code of the service as a volume so that the source you work on is persisted on the local file system.
+- overwrite the command that is run in the container so that the container is kept running. This is done so that you can develop on the python server and restart it after you made change. Also, if you want to debug the server you can launch it under the debugger.
+
+This results in the following `docker-compose.develop.yml`:
+```yaml
+version: '3'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: dev-container.dockerfile
+    ports:
+     - "5000:5000"
+     - "8000:8000"
+    volumes:
+      - .:/app
+    command: /bin/sh -c "while :; do sleep 5000; done"
+  redis:
+    image: "redis:alpine"
+```
+
 
 Next you must create a development container description file `devContainer.json` in the `.vscode` folder with the following attributes:
 - `dockerComposeFile` the name of the docker-compose file used to start the services.
@@ -162,7 +178,12 @@ Here is an example:
 }
 ```
 
-To develop the service run the command **Dev Container: Open Folder in Container...** and select the workspace you want to open. You can start the services from the command line using `docker-compose -f docker-compose.develop.yml up`. If the service is not running, then the action will start the services using `docker-compose up`. Once the service is up, VS Code will inject the VS Code headless backend into the container and install the recommended extensions.
+To develop the service run the command **Dev Container: Open Folder in Container...** and select the workspace you want to open. You can start the services from the command line using `docker-compose -f docker-compose.develop.yml up`. If the service is not running, then the action will start the services using `docker-compose -f docker-compose.develop.yml up`. Once the service is up, VS Code will inject the VS Code headless backend into the container and install the recommended extensions.
+
+#### Docker-Compose-Samples
+For complete setups refer to the following samples:
+- [node](https://github.com/Microsoft/vscode-dev-containers/tree/master/docker-compose-tests/node) a simple setup with a single service implemented in node.
+- [python-redis](https://github.com/Microsoft/vscode-dev-containers/tree/master/docker-compose-tests/python-redis) a setup with a redis service and a python web service  
 
 **Please Note:** This injection will happen whenever a container is created. Therefore, when you want to continue development on the container use `docker-compose stop` to stop but not destroy the containers. In this way the VS Code backend and the extensions do not need to be installed on the next start.
 
