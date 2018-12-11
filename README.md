@@ -152,7 +152,7 @@ services:
      - "8000:8000"  # open port to connect to VS Code headless
     volumes:
       - .:/app      # volume share the code
-    command: /bin/sh -c "while :; do sleep 5000; done" # keep the container running
+    command: sleep infinity # keep the container running
   redis:
     image: "redis:alpine"
 ```
