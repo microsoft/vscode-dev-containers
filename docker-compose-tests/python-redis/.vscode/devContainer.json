@@ -2,8 +2,7 @@
     "dockerComposeFile": "docker-compose.develop.yml",
     "service": "web",
     "volume": "app",
-    "devPort": "8000",
-	  "extensions": [
-		  "ms-python.python"
-	]
+    "extensions": [
+        "ms-python.python"
+    ]
 }

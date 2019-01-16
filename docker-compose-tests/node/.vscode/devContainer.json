@@ -2,8 +2,7 @@
     "dockerComposeFile": "docker-compose.develop.yml",
     "service": "web",
     "volume": "app",
-    "devPort": "8000",
-	"extensions": [
-		"dbaeumer.vscode-eslint"
-	]
+    "extensions": [
+        "dbaeumer.vscode-eslint"
+    ]
 }
