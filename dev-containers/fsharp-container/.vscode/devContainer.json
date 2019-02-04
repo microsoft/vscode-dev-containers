@@ -1,0 +1,7 @@
+{
+	"dockerFile": "dev-container.dockerfile",
+	"extensions": [
+		"Ionide.Ionide-fsharp",
+		"ms-vscode.csharp"
+	]
+}
