@@ -1,0 +1,7 @@
+{
+	"dockerFile": "dart-dev-container.dockerfile",
+	"extensions": [
+		"dart-code.dart-code"
+	],
+	"appPort": 8080
+}
