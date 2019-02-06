@@ -1,10 +1,10 @@
 # Kubernetes and Helm Container
 
-This sample allows you to work with Kubernetes clusters and the Kubernetes extension from within a dev container!
+When building an app that deploys into a container-based environment in production, you may want to sandbox your development in a dev container while without sacrificing your ability to build and deploy your application into a local or remote [Kubernetes](https://kubernetes.io/) cluster. This example illustrates how you use the needed CLIs, the [Kubernetes](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) extension, and the [Docker](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) extension from inside a dev container to meet this need.
 
-The container includes the kubectl, Helm, and the Docker CLI. It will also sync your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container and make the necessary modifications to allow it to interact with anything running on your local machine. This includes interacting with Kubernetes support in Docker Desktop or a local Minikube install.
+The dev container accomplishes this by including the needed CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker) and syncing your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container with the necessary modifications to allow it to interact with anything running on your local machine. This includes interacting with a Kubernetes cluster managed through Docker Desktop or a local Minikube install.
 
-Follow the steps below for your operating system to get up and running.
+To get started, follow the appropriate steps below for your operating system.
 
 ## macOS Setup
 
