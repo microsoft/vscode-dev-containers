@@ -1,6 +1,6 @@
-FROM jupyter/scipy-notebook:2c80cf3537ca
+FROM jupyter/scipy-notebook:83ed2c63671f
 
-USER root
+# USER root
 
 # RUN pip install pylint
 
@@ -12,3 +12,5 @@ USER root
 #   && rm -rf /var/lib/apt/lists/*
 
 # RUN pip install jupyter
+
+# USER jovyan
