@@ -1,0 +1,10 @@
+{
+    "dockerFile": "dev-container.dockerfile",
+    "extensions": [
+        "peterjausovec.vscode-docker",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
+    ],
+    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+        "-v", "/var/run/docker.sock:/var/run/docker.sock",
+        "-v", "$HOME/.kube:/root/.kube-localhost"]
+}

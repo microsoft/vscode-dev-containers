@@ -1,8 +1,8 @@
 # Docker in Docker Container
 
-This example has a dev container that actually contains the Docker CLI. This allows you to use the Docker extension and run docker commands from within a dev container that can still control, interact with, and deploy to your local OS Docker install!
+When building an app that deploys into a container-based environment in production, you may want to sandbox your development using a dev container without sacrificing your ability build and deploy into separate Docker containers or take advantage of the [Docker](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) VS Code extension. This example illustrates how you can meet this need by using your local Docker Desktop installation with the `docker` CLI and [Docker](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) VS Code extension running inside a dev container.
 
-While this will run out-of-box on macOS and Linux, there is an extra **step for Windows**.
+While this will run example will run without any changes on macOS and Linux, there are **extra steps for Windows**.
 
 ## Windows Steps
 
