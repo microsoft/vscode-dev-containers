@@ -1,9 +1,10 @@
 # Kubernetes and Helm Container
 
-This sample dev container allows you to work with Kubernetes clusters and use the Kubernetes extension from within the container! 
+This sample allows you to work with Kubernetes clusters and the Kubernetes extension from within a dev container!
 
-The container includes the kubectl for Kubernetes, Helm, and the Docker CLI and can be easily set up to work with a local Minikube install. Just follow the steps below for your operating system.
+The container includes the kubectl, Helm, and the Docker CLI. It will also sync your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container and make the necessary modifications to allow it to interact with anything running on your local machine. This includes interacting with Kubernetes support in Docker Desktop or a local Minikube install.
 
+Follow the steps below for your operating system to get up and running.
 
 ## macOS Setup
 
@@ -18,7 +19,7 @@ The container includes the kubectl for Kubernetes, Helm, and the Docker CLI and 
 5. Edit `.vscode/devConatiner.json` and change `$HOME` in the last item in the `runArgs` array to the absolute path of your home folder. e.g.
     ```
     "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-        "-v","/var/run/docker.sock:/var/run/docker.sock", 
+        "-v", "/var/run/docker.sock:/var/run/docker.sock", 
         "-v", "/Users/clantz/.kube:/root/.kube-localhost"]
     ```
     > **Note:** Resolving [vscode-remote#670](https://github.com/Microsoft/vscode-remote/issues/670) will remove this step.
@@ -67,9 +68,9 @@ The container includes the kubectl for Kubernetes, Helm, and the Docker CLI and 
     kubectl config set-context minikube
     ```
 
-4. Open this folder in VS Code
+3. Open this folder in VS Code
 
-5. Edit `.vscode/devConatiner.json` and change `$HOME` in the last item in the `runArgs` array to the absolute path of your home folder. e.g.
+4. Edit `.vscode/devConatiner.json` and change `$HOME` in the last item in the `runArgs` array to the absolute path of your home folder. e.g.
     ```
     "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
         "-v","/var/run/docker.sock:/var/run/docker.sock", 
@@ -77,9 +78,9 @@ The container includes the kubectl for Kubernetes, Helm, and the Docker CLI and 
     ```
     > **Note:** Resolving [vscode-remote#670](https://github.com/Microsoft/vscode-remote/issues/670) will remove this step.
 
-6. Run the **Remote: Reopen folder in Container** command. Once connected, you should see your clusters in the Kubernetes explorer.
+5. Run the **Remote: Reopen folder in Container** command. Once connected, you should see your clusters in the Kubernetes explorer.
 
-7. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
+6. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
     ```
     helm init
     ```
