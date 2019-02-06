@@ -1,0 +1,6 @@
+{
+	"image": "tianon/latex",
+    "extensions": [
+        "James-Yu.latex-workshop"
+    ]
+}
