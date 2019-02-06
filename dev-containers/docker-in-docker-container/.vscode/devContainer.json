@@ -1,0 +1,7 @@
+{
+    "dockerFile": "dev-container.dockerfile",
+    "extensions": [
+        "peterjausovec.vscode-docker"
+    ],
+    "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
+}
