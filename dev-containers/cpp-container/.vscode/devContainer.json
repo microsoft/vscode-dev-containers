@@ -1,4 +1,5 @@
 {
+	"name": "C++",
 	"dockerFile": "dev-container.dockerfile",
 	"extensions": [
 		"ms-vscode.cpptools"

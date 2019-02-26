@@ -1,4 +1,5 @@
 {
+    "name": "Kubernetes",
     "dockerFile": "dev-container.dockerfile",
     "extensions": [
         "peterjausovec.vscode-docker",

@@ -1,5 +1,6 @@
 {
-	"dockerFile": "dev-container.dockerfile",
+	"name": "Node.js",
+	"image": "chrmarti/node",
 	"appPort": 8090,
 	"extensions": [
 		"dbaeumer.vscode-eslint"

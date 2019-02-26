@@ -1,4 +1,5 @@
 {
+	"name": "Python",
 	"dockerFile": "dev-container.dockerfile",
 	"appPort": 8989,
 	"extensions": [
