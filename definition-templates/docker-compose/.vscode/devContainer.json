@@ -1,5 +1,5 @@
 {
-	"name": "template-docker-compose",
+	"name": "Dev Container Definition Template - Docker Compose",
     "dockerComposeFile": "docker-compose.dev-container.yml",
     "appPort": 3000,
     "devPort": 8000,

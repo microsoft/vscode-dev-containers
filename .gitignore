@@ -1,10 +1,10 @@
-bin
-obj
+**/bin
+**/obj
 *.DS_Store
 *.pyc
 Thumbs.db
-.build
-node_modules
-.vscode/ipch
+**/.build
+**/node_modules
 *.out
 *.log
+**/.vscode/ipch
