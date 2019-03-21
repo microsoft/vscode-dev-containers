@@ -1,3 +1,4 @@
 {
-  "FSharp.fsacRuntime": "netcore"
+  "FSharp.fsacRuntime":"netcore",
+  "razor.disabled": true
 }

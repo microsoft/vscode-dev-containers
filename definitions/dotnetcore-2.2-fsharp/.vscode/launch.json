@@ -12,40 +12,9 @@
       "program": "${workspaceFolder}/test-project/bin/Debug/netcoreapp2.2/app.dll",
       "args": [],
       "cwd": "${workspaceFolder}/test-project",
-      "console": "internalConsole",
+      "console": "integratedTerminal",
       "stopAtEntry": false,
       "internalConsoleOptions": "openOnSessionStart"
-    },
-    {
-      "name": ".NET Core Launch (web)",
-      "type": "coreclr",
-      "request": "launch",
-      "preLaunchTask": "build",
-      "program": "${workspaceFolder}/test-project/bin/Debug/netcoreapp2.2/app.dll",
-      "args": [],
-      "cwd": "${workspaceFolder}/test-project",
-      "stopAtEntry": false,
-      "internalConsoleOptions": "openOnSessionStart",
-      "launchBrowser": {
-        "enabled": true,
-        "args": "${auto-detect-url}",
-        "windows": {
-          "command": "cmd.exe",
-          "args": "/C start ${auto-detect-url}"
-        },
-        "osx": {
-          "command": "open"
-        },
-        "linux": {
-          "command": "xdg-open"
-        }
-      },
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "sourceFileMap": {
-        "/Views": "${workspaceFolder}/test-project/Views"
-      }
     },
     {
       "name": ".NET Core Attach",

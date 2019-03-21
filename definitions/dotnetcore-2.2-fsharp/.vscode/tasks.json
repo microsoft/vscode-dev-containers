@@ -5,7 +5,7 @@
   "tasks": [
     {
       "label": "build",
-      "command": "dotnet build",
+      "command": "cd test-project && dotnet build",
       "type": "shell",
       "group": "build",
       "presentation": {
