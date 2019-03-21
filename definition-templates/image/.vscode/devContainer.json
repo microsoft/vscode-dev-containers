@@ -1,0 +1,9 @@
+{
+	"name": "template-image",
+	"image": "ubuntu:1804",
+	"appPort": 3000,
+	"extensions": [
+		"mutantdino.resourcemonitor"
+    ],
+    "runArgs": []
+}

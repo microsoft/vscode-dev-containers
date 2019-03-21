@@ -1,0 +1,9 @@
+{
+	"name": "template-dockerfile",
+	"dockerFile": "dev-container.dockerfile",
+	"appPort": 3000,
+	"extensions": [
+		"mutantdino.resourcemonitor"
+    ],
+		"runArgs": []
+}

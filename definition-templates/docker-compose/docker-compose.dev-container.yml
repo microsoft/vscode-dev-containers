@@ -1,0 +1,16 @@
+version: '3'
+services:
+  your-service-name-here:
+    build: 
+      context: .
+      dockerfile: dev-container.dockerfile  # Can use an image if preferred
+
+    ports:
+     - "3000:3000"  # Application port to forward, value of "appPort" in .vscode/devContainer.json
+     - "8000:8000"  # Port VS Code Remote server should use to communicate with VS Code, value of "devPort" in .vscode/devContainer.json
+
+     volumes:
+      - .:/app  # This is where VS Code should expect to find your project's source code, value of "volume" in .vscode/devContainer.json
+
+    command: /bin/sh -c "sleep infinity"  # This prevents the container from shutting down if you stop your application
+

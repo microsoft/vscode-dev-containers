@@ -1,0 +1,9 @@
+{
+    "name": "Python & Redis",
+    "dockerComposeFile": "docker-compose.dev-container.yml",
+    "service": "web",
+    "volume": "app",
+    "extensions": [
+        "ms-python.python"
+    ]
+}
