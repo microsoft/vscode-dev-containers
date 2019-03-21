@@ -1,4 +1,4 @@
-FROM rust:1.32
+FROM rust:1
 
 RUN rustup update
 RUN rustup component add rls rust-analysis rust-src
