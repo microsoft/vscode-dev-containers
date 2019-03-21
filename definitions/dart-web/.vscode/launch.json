@@ -13,7 +13,8 @@
             "name": "Dart",
             "type": "dart",
             "request": "launch",
-            "program": "test-project/web/main.dart"
+            "program": "test-project/web/main.dart",
+            "preLaunchTask": "Serve"
         }
     ]
 }

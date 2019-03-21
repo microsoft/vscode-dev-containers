@@ -10,10 +10,11 @@ This repository contains a set of **dev container definition** files such as `de
 
 ## Trying a definition
 
-1. Check out the README under the definition folder in `definitions` to see if there are any manual steps
-2. Clone this repository or copy the contents of the folder to your machine
-3. Run the **Remote: Open Folder in Container...** command in VS Code
-4. Select the definition folder in the folder open dialog
+1. Open a folder in the `definitions` folder
+2. Check out the README to see if there are any manual steps
+3. Clone this repository or copy the contents of the folder to your machine
+4. Run the **Remote: Open Folder in Container...** command in VS Code
+5. Select the definition folder in the "open" dialog
 
 Many definitions come with a `test-project` that you can use to see everything working along with a `launch.json`.
 
