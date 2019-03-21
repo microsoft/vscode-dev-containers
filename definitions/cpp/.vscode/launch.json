@@ -5,12 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "Launch Main",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/test-project/a.out",
+            "program": "${workspaceFolder}/test-project/main.out",
             "args": [],
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "cwd": "${workspaceFolder}/test-project",
             "environment": [],
             "externalConsole": false,
@@ -21,7 +21,8 @@
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ]
+            ],
+            "preLaunchTask": "Build Main"
         }
     ]
 }

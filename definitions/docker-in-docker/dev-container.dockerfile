@@ -1,7 +1,7 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
 FROM ubuntu:latest
 
-# Install required tools
+# Install git
 RUN apt-get update \
 	&& apt-get install -y git
 

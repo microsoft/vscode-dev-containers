@@ -2,7 +2,9 @@ bin
 obj
 *.DS_Store
 *.pyc
-.idea
 Thumbs.db
 .build
 node_modules
+.vscode/ipch
+*.out
+*.log

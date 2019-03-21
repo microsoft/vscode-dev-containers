@@ -4,3 +4,4 @@ test-project
 .vscode/launch.test.json
 .vscode/settings.json
 .vscode/tasks.json
+.vscode/ipch

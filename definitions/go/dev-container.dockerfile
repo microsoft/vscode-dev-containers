@@ -19,5 +19,11 @@ RUN go get -u -v \
     github.com/derekparker/delve/cmd/dlv
 
 # Install git
-RUN apt-get update && apt-get -y install git \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y install git
+
+# Clean up
+RUN apt-get autoremove -y \
+    && apt-get clean -y \
+    && apt-get autoclean -y \
+    && rm -rf /var/lib/apt/lists/*
+	

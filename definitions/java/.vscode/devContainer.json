@@ -1,7 +1,0 @@
-{
-	"name": "Java",
-	"dockerFile": "dev-container.dockerfile",
-	"extensions": [
-		"vscjava.vscode-java-pack"		
-	]
-}

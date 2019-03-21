@@ -1,0 +1,9 @@
+{
+	"name": "Django",
+	"dockerFile": "dev-container.dockerfile",
+	"appPort": 8080,
+	"extensions": [
+		"ms-python.python",
+		"batisteo.vscode-django"
+	]
+}
