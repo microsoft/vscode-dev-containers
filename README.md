@@ -10,18 +10,19 @@ This repository contains a set of **dev container definition** files such as `de
 
 ## Trying a definition
 
-1. Check out the README for the definition folder under `definitions` to see if there are any manual steps
+1. Check out the README under the definition folder in `definitions` to see if there are any manual steps
 2. Clone this repository or copy the contents of the folder to your machine
 3. Run the **Remote: Open Folder in Container...** command in VS Code
-4. Select the definition folder
+4. Select the definition folder in the folder open dialog
 
-Many definitions come with a `test-project` that you can use to see everything working.
+Many definitions come with a `test-project` that you can use to see everything working along with a `launch.json`.
 
 ## Using a definition
 
-Run the **Remote: Create Container Configuration File...** command in VS Code or manually copy the contents of one of the `definitions` sub-folders into your project. 
+You can either:
+- Run **Remote: Create Container Configuration File...** command in VS Code and pick the definition
 
-When manually copying, note that some definitions contain a `test-project`, `.vscode/launch.json`, `.vscode/settings.json` or `.vscode/tasks.json` file that can be omitted.
+- Manually copy the contents of one of the `definitions` sub-folders into your project. When manually copying, note that some definitions contain a `test-project` folder and/or a `.vscode/launch.json`, `.vscode/settings.json` or `.vscode/tasks.json` file that can be omitted.
 
 ## Contents
 
