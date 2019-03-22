@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-slim
 
 ENV PYTHONUNBUFFERED 1
 
@@ -15,7 +15,7 @@ ADD . /app/
 RUN apt-get update && apt-get -y install git
 
 # Install any missing dependencies for enhanced language service
-RUN apt-get install libicu
+RUN apt-get install libicu57
 
 # Clean up
 RUN apt-get autoremove -y \

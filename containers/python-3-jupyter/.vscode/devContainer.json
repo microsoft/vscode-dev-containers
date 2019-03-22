@@ -4,7 +4,6 @@
 	"appPort": 8989,
 	"extensions": [
 		"ms-python.python",
-		"LittleFoxTeam.vscode-python-test-adapter",
-		"donjayamanne.jupyter"
+		"LittleFoxTeam.vscode-python-test-adapter"
 	]
 }

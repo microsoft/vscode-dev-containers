@@ -1,7 +1,7 @@
 {
     "name": "Node.js & Mongo DB",
     "dockerComposeFile": "docker-compose.dev-container.yml",
-    "service": "app",
+    "service": "web",
     "volume": "app",
     "extensions": [
         "dbaeumer.vscode-eslint"
