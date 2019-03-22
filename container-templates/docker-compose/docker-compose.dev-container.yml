@@ -6,9 +6,8 @@ services:
       dockerfile: dev-container.dockerfile  # Using a Dockerfile is optional, but included for completeness.
 
     ports:
-     - "3000:3000"  # Application port to forward, value of "appPort" in .vscode/devContainer.json
-     - "8000:8000"  # Port VS Code Remote server should use to communicate with VS Code, value of "devPort" in .vscode/devContainer.json
-
+     - "3000:3000"  # Application port to forward
+     
      volumes:
       - .:/app  # This is where VS Code should expect to find your project's source code, value of "volume" in .vscode/devContainer.json
 

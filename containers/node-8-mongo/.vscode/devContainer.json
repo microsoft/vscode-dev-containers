@@ -1,8 +1,6 @@
 {
     "name": "Node.js & Mongo DB",
     "dockerComposeFile": "docker-compose.dev-container.yml",
-    "appPort": 3000,
-    "devPort": 8000,
     "service": "app",
     "volume": "app",
     "extensions": [

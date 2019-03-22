@@ -1,7 +1,6 @@
 {
-	"name": "Python",
+	"name": "Python 3",
 	"dockerFile": "dev-container.dockerfile",
-	"appPort": 8989,
 	"extensions": [
 		"ms-python.python"
 	]

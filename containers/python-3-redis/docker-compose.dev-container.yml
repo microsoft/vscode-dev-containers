@@ -6,7 +6,6 @@ services:
       dockerfile: dev-container.dockerfile
     ports:
      - "5000:5000"
-     - "8000:8000"
     volumes:
       - .:/app
     command: sleep infinity
