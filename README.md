@@ -6,29 +6,29 @@ Visual Studio Code Remote allows you to open any folder inside (or mounted into)
 
 **[See here to learn more about VS Code Remote](https://aka.ms/vscode-remote)**.
 
-This repository contains a set of **dev container definition** files such as `devContainer.json` that can be added to existing projects to quickly get up and running inside a containerized environment.
+This repository contains a set of **dev container definitions** made up of files like `devContainer.json` that can be added to existing projects to get you up and running in a containerized environment.
 
 ## Trying a definition
 
-1. Open a folder in the `definitions` folder
+1. Open a `containers` sub-folder
 2. Check out the README to see if there are any manual steps
 3. Clone this repository or copy the contents of the folder to your machine
 4. Run the **Remote: Open Folder in Container...** command in VS Code
 5. Select the definition folder in the "open" dialog
 
-Many definitions come with a `test-project` that you can use to see everything working along with a `launch.json`.
+Many definitions include a `test-project` that you can use to see the dev container in action.
 
 ## Using a definition
 
 You can either:
 - Run **Remote: Create Container Configuration File...** command in VS Code and pick the definition
 
-- Manually copy the contents of one of the `definitions` sub-folders into your project. When manually copying, note that some definitions contain a `test-project` folder and/or a `.vscode/launch.json`, `.vscode/settings.json` or `.vscode/tasks.json` file that can be omitted.
+- Manually copy the contents of one of the `containers` sub-folders into your project. When manually copying, note that some definitions contain a `test-project` folder and/or a `.vscode/launch.json`, `.vscode/settings.json` or `.vscode/tasks.json` file that can be omitted.
 
 ## Contents
 
-- `definitions` - Dev container definition folders. 
-- `definitions-templates` - Templates for creating your own container definitions in your project or for contributing back to this repository.
+- `containers` - Dev container definition folders. 
+- `container-templates` - Templates for creating your own container definitions in your project or for contributing back to this repository.
 
 ## Contributing
 
