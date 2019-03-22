@@ -21,7 +21,8 @@ Many definitions include a `test-project` that you can use to see the dev contai
 ## Using a definition
 
 You can either:
-- Run **Remote: Create Container Configuration File...** command in VS Code and pick the definition
+
+- Run **Remote: Create Container Configuration File...** command in VS Code and pick the definition.
 
 - Manually copy the contents of one of the `containers` sub-folders into your project. When manually copying, note that some definitions contain a `test-project` folder and/or a `.vscode/launch.json`, `.vscode/settings.json` or `.vscode/tasks.json` file that can be omitted.
 

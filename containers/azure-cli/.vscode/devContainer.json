@@ -1,0 +1,7 @@
+{
+	"name": "Azure CLI",
+	"dockerFile": "dev-container.dockerfile",
+	"extensions": [
+		"ms-vscode.azurecli"
+	]
+}
