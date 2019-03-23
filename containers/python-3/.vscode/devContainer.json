@@ -2,6 +2,7 @@
 	"name": "Python 3",
 	"dockerFile": "dev-container.dockerfile",
 	"extensions": [
-		"ms-python.python"
+		"ms-python.python",
+		"LittleFoxTeam.vscode-python-test-adapter"
 	]
 }

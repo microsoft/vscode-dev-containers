@@ -4,6 +4,7 @@
     "service": "web",
     "volume": "app",
     "extensions": [
-        "ms-python.python"
+        "ms-python.python",
+		"LittleFoxTeam.vscode-python-test-adapter"
     ]
 }

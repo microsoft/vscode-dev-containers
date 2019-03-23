@@ -1,4 +1,6 @@
-FROM jupyter/scipy-notebook
+FROM jupyter/pyspark-notebook
+
+USER root
 
 # Install git
 RUN apt-get update && apt-get -y install git

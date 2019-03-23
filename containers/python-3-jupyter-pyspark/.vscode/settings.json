@@ -1,0 +1,7 @@
+{
+    "python.linting.enabled": true,
+    "python.dataScience.useDefaultConfigForJupyter": true,
+    "python.dataScience.notebookFileRoot": "${workspaceFolder}/test-project",
+    "python.pythonPath": "/opt/conda/bin/python"
+
+}
