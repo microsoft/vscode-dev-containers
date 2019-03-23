@@ -1,0 +1,5 @@
+az login
+az account list -o table
+az account set -s 'Try Out Subscription'
+
+az functionapp list -o table

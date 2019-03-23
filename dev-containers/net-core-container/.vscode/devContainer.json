@@ -1,7 +1,0 @@
-{
-	"name": ".NET Core",
-	"dockerFile": "dev-container.dockerfile",
-	"extensions": [
-		"ms-vscode.csharp"
-	]
-}

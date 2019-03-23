@@ -1,0 +1,8 @@
+{
+	"name": "Node.js 8",
+	"dockerFile": "dev-container.dockerfile",
+	"appPort": 3000,
+	"extensions": [
+		"dbaeumer.vscode-eslint"
+	]
+}

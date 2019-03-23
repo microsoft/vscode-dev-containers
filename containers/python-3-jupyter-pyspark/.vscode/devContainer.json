@@ -1,0 +1,9 @@
+{
+	"name": "Jupyter PySpark",
+	"image": "jupyter/pyspark-notebook",
+	"appPort": 8888,
+	"extensions": [
+		"ms-python.python",
+		"LittleFoxTeam.vscode-python-test-adapter"
+	]
+}

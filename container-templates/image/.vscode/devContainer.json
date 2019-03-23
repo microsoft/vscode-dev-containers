@@ -1,0 +1,9 @@
+{
+	"name": "Dev Container Definition Template - Container Image",
+	"image": "ubuntu:1804",
+	"appPort": 3000,
+	"extensions": [
+		"mutantdino.resourcemonitor"
+    ],
+  "runArgs": []
+}

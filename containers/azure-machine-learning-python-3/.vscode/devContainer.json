@@ -1,0 +1,8 @@
+{
+    "name": "Azure Machine Learning",
+    "dockerFile": "dev-container.dockerfile",
+    "extensions": [
+        "ms-toolsai.vscode-ai"
+    ],
+    "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]	
+}

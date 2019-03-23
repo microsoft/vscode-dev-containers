@@ -1,0 +1,10 @@
+**/bin
+**/obj
+*.DS_Store
+*.pyc
+Thumbs.db
+**/.build
+**/node_modules
+*.out
+*.log
+**/.vscode/ipch

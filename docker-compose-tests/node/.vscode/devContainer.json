@@ -1,9 +1,0 @@
-{
-    "name": "Node.js",
-    "dockerComposeFile": "docker-compose.develop.yml",
-    "service": "web",
-    "volume": "app",
-    "extensions": [
-        "dbaeumer.vscode-eslint"
-    ]
-}

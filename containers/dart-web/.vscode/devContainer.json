@@ -1,0 +1,9 @@
+{
+	"name": "Dart",
+	"dockerFile": "dev-container.dockerfile",
+	"appPort": 8080,
+	"extensions": [
+		"dart-code.dart-code",
+		"msjsdiag.debugger-for-chrome"
+	]
+}
