@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Illustrates how you access a Kubernetes cluster from inside a dev container. Includes the Docker CLI, kubectl, and Helm.*
+*Illustrates how you can access a local (or remote) Kubernetes cluster from inside a dev container. Includes the Docker CLI, kubectl, and Helm.*
 
 | Metadata | Value |  
 |----------|-------|
