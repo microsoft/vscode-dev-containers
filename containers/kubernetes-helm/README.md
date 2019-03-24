@@ -87,7 +87,7 @@ To get started, follow the appropriate steps below for your operating system.
 
 The trick that makes this work is as follows:
 
-1. Install all of the needed CLIs in the container. From `dev-container.dockerfile`:
+1. First, install all of the needed CLIs in the container. From `dev-container.dockerfile`:
 
     ```Dockerfile
     # Install Docker CE CLI
@@ -107,7 +107,7 @@ The trick that makes this work is as follows:
     RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash -
     ```
 
-2. Forward the local Docker socket and mount the local `.kube` folder in the container so the configuration can be reused. From `devContainer.json`:
+2. Next, forward the local Docker socket and mount the local `.kube` folder in the container so the configuration can be reused. From `devContainer.json`:
 
     ```json
         "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
@@ -115,7 +115,7 @@ The trick that makes this work is as follows:
             "-v", "$HOME/.kube:/root/.kube-localhost"]
     ```
 
-3. Update `.bashrc` to automatically copy the local machine's Kubernetes config into the container and swap out localhost for host.docker.internal whenever a new shell starts. From `dev-container.dockerfile`:
+3. Finally, update `.bashrc` to automatically swap out localhost for host.docker.internal in a containr copy of the Kubernetes config. From `dev-container.dockerfile`:
 
     ```Dockerfile
     RUN echo 'if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then \
