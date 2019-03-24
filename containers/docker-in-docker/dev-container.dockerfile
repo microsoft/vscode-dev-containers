@@ -1,5 +1,5 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
-FROM ubuntu:latest
+FROM ubuntu:1804
 
 # Install git
 RUN apt-get update \
@@ -15,6 +15,5 @@ RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent soft
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
-    && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/*
 

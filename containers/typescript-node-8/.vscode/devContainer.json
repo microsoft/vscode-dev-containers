@@ -1,7 +1,7 @@
 {
 	"name": "TypeScript",
 	"dockerFile": "dev-container.dockerfile",
-	"appPort": 8090,
+	"appPort": 3000,
 	"extensions": [
 		"ms-vscode.vscode-typescript-tslint-plugin"
 	]

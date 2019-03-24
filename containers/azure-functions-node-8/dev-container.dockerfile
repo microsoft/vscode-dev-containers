@@ -22,5 +22,4 @@ RUN apt-get install -y apt-transport-https \
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
-    && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/*

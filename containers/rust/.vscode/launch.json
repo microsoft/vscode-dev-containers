@@ -12,7 +12,8 @@
                 "args": [
                     "build",
                     "--bin=hello_world",
-                    "--package=hello_world"
+                    "--package=hello_world",
+                    "--manifest-path=test-project/Cargo.toml"
                 ],
                 "filter": {
                     "kind": "bin"
@@ -30,7 +31,8 @@
                     "test",
                     "--no-run",
                     "--bin=hello_world",
-                    "--package=hello_world"
+                    "--package=hello_world",
+                    "--manifest-path=test-project/Cargo.toml"
                 ],
                 "filter": {
                     "kind": "bin"

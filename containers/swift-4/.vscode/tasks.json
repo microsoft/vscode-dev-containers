@@ -6,7 +6,7 @@
         {
             "label": "swift-build",
             "type": "shell",
-            "command": "swift build",
+            "command": "cd test-project && swift build",
             "problemMatcher": []
         }
     ]

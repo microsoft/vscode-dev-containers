@@ -24,5 +24,4 @@ RUN mkdir -p /tmp/docker-downloads \
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
-    && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/*

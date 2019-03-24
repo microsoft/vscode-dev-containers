@@ -6,7 +6,7 @@
   "author": "First Last <first.last@example.com>",
   "main": "out/server.js",
   "scripts": {
-    "compile": "tsc -p tsconfig.json",
+    "compile": "node_modules/.bin/tsc -p tsconfig.json",
     "start": "node out/server.js"
   },
   "dependencies": {
@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
-    "tslint": "^5.11.0",
-    "typescript": "3.1.4"
+    "tslint": "^5.11.0"
   }
 }

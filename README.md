@@ -6,7 +6,7 @@ Visual Studio Code Remote allows you to open any folder inside (or mounted into)
 
 **[See here to learn more about VS Code Remote](https://aka.ms/vscode-remote)**.
 
-This repository contains a set of **dev container definitions** made up of files like `devContainer.json` that can be added to existing projects to get you up and running in a containerized environment.
+This repository contains a set of **dev container definitions** made up of files like `devContainer.json` that can be added to existing projects to get you up and running in a containerized environment. These files describe the conatiner image, any runtime arguments for when the conatiner is started, and any VS Code extensions that should be installed into it.
 
 ## Trying a definition
 

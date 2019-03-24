@@ -1,4 +1,4 @@
-FROM java:latest
+FROM java:11
 
 # Install required tools
 RUN apt-get update \
@@ -10,6 +10,5 @@ RUN apt-get install -y graphviz
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
-    && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/*
 

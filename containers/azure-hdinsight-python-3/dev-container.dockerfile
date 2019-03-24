@@ -11,5 +11,4 @@ RUN apt-get install -y python3 python3-pip
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
-    && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/*
