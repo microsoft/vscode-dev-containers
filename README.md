@@ -70,7 +70,7 @@ If you want to create a new definition:
 
 ### Developing and testing a definition
 
-VS Code Remote provides straight forward developer loop for creating or editing container definitions. Just follow these steps:
+VS Code Remote provides a straight forward development loop for creating and editing container definitions. Just follow these steps to get started:
 
 1. Create a definition folder and open it in VS Code
 2. Edit the contents of the definition
