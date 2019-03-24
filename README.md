@@ -33,3 +33,53 @@ You can either:
 
 ## Contributing
 
+Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? Great - we love contributions! 
+
+### Contributing a definition
+
+If you want to create a new definition:
+
+1. Fork and clone this repository
+
+2. Create a new folder in the `containers` directory. The name of the folder is effectivley the **definition ID** and should follow the following format:
+
+    ````
+    <language>-<optional: version>-<descriptor>
+    ````
+
+    You'll find many examples in the current `containers` folder.
+
+3. You can grab one of the templates from the `container-templates` folder to help you get an idea of what to contribute for different scenarios, but here's a quick summary of what you should include:
+
+    ```
+    📁 <language>-<optional: version>-<descriptor>
+       📁 .vscode
+          📄 devContainer.json
+       📁 test-project (optional)
+       📄 dev-container.dockerfile (optional)
+       📄 docker-compose.dev-container.yml (optional)
+       📄 .vscodeignore
+       📄 README.md
+    ```
+
+    Other assets can be included if needed, but keep in mind that this will overlay on top of an existing project. Anything you don't want added to a project should be placed in `.vscodeignore`. The `README.md` in the folder should give a brief description of the purpose of the container definition and any manual steps that may be needed to use it.
+
+4. Commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in! We appreciate any and all feedback!!
+
+### Developing and testing a definition
+
+VS Code's default beahviors provide a straight forward developer loop for creating or editing definitions:
+
+1. Create a definition folder and open it in VS Code
+2. Edit the contents of the definition
+3. Run the **Remote: Reopen Folder in Container** command
+4. If this fails, click "Open folder locally" in the dialog that appears
+5. Go to step 2
+
+If you've successfully created your container, note that you may need to run the **Remote: Rebuild Container** command when you make changes and/or delete the container or container image from Docker. You can install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy. While you can use the Docker from inside a container by following the steps in the [Docker-in-Docker](containers/docker-in-docker) container definition, you'll likely be removing the container you are actually using.
+
+Finally, after you get your container up and running, you can add test assets to help you verify the extension as long as they are included in the `.vscodeignore` folder. By convention, most definitions are using a  `test-project` folder. 
+
+### License
+
+All contributions in this repository are under the MIT license. See `LICENSE`.
