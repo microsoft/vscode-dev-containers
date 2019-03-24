@@ -1,9 +1,9 @@
 {
 	"name": "Jupyter PySpark",
-	"image": "jupyter/pyspark-notebook",
-	"appPort": 8888,
+	"dockerComposeFile": "docker-compose.dev-container.yml",
+	"service": "jupyter",
+	"volume": "notebook",
 	"extensions": [
-		"ms-python.python",
-		"LittleFoxTeam.vscode-python-test-adapter"
+		"ms-python.python"
 	]
 }
