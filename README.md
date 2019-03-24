@@ -70,15 +70,15 @@ If you want to create a new definition:
 
 ### Developing and testing a definition
 
-VS Code's default beahviors provide a straight forward developer loop for creating or editing definitions:
+VS Code Remote provides straight forward developer loop for creating or editing container definitions. Just follow these steps:
 
 1. Create a definition folder and open it in VS Code
 2. Edit the contents of the definition
 3. Run the **Remote: Reopen Folder in Container** command
-4. If this fails, click "Open folder locally" in the dialog that appears
-5. Go to step 2
+4. If this fails, click "Open folder locally" in the dialog that appears and go to step 2
+6. If it opens succesfully but you don't like the contents, edit the contents from within the container and run the **Remote: Rebuild Container** command to make changes.
 
-If you've successfully created your container, note that you may need to run the **Remote: Rebuild Container** command when you make changes and/or delete the container or container image from Docker. You can install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy. While you can use the Docker from inside a container by following the steps in the [Docker-in-Docker](containers/docker-in-docker) container definition, you'll likely be removing the container you are actually using.
+Note that if you make major changes, Docker may occasionally not pick up your changes. In this case you'll want to delete the existing container and image, open the folder locally, and go to step 2 above. You can install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy. While you can use the Docker from inside a container by forwarding the Docker unix socket and installing the CLI in the container (see [Docker-in-Docker](containers/docker-in-docker)), you'll likely be removing the container you are actually using so this approach is not reccomended in this case.
 
 Finally, after you get your container up and running, you can add test assets to help you verify the extension as long as they are included in the `.vscodeignore` folder. By convention, most definitions are using a  `test-project` folder. 
 
