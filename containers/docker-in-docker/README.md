@@ -18,11 +18,25 @@ Dev containers can be useful for all types of applications including those that 
 
 ## Usage
 
-No additional setup steps are required, but note that the included `dev-container.dockerfile` can be altered to work with other Debian/Ubuntu based-container images such as `node` or `python`. Simply update `FROM` statement in the file to change the starting image. For example:
+No additional setup steps are required, but note that the included `dev-container.dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. First, update the `FROM` statement to reference the new base image. For example:
 
 ```Dockerfile
 FROM node:8
 ```
+
+Next, if you choose an image that is Debian based instead of Ubuntu, you will need to update this line...
+
+```
+        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+```
+
+...to ...
+
+```
+        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
+```
+
+See the [Docker CE installation steps for Linux](https://docs.docker.com/install/linux/docker-ce/debian/) for details on other distributions. Note that you only need the Docker CLI in this particular case.
 
 ## How it works
 
