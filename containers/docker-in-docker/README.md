@@ -28,7 +28,7 @@ FROM node:8
 
 The trick that makes this work is as follows:
 
-1. Install the Docker CLI in the container. From `dev-container.dockerfile`:
+1. First, install the Docker CLI in the container. From `dev-container.dockerfile`:
 
     ```Dockerfile
     # Install Docker CE CLI
@@ -38,7 +38,7 @@ The trick that makes this work is as follows:
         && apt-get update \
         && apt-get install -y docker-ce-cli
     ```
-2. Forward the Docker socket. From `devContainer.json`:
+2. Then just forward the Docker socket by mounting it in the container. From `devContainer.json`:
 
     ```json
     "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
