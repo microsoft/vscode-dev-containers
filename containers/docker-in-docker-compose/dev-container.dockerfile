@@ -5,7 +5,8 @@ FROM ubuntu:1804
 RUN apt-get update \
 	&& apt-get install -y git
 
-# Install Docker CE CLI
+# Install Docker CE CLI. If you choose a Debian based image, update https://download.docker.com/linux/ubuntu
+# to https://download.docker.com/linux/debian on the third line below.
 RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
     && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
     && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
