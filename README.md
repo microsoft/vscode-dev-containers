@@ -82,6 +82,12 @@ Note that if you make major changes, Docker may occasionally not pick up your ed
 
 Finally, after you get your container up and running, you can test it by adding test assets into the definition folder as long as they are referenced in the `.vscodeignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form. By convention, most definitions place test assets in a `test-project` folder. 
 
-### License
+### Speeding up container provisioning
+
+While using a `Dockerfile` is a convienent way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image be built by anyone using it.  If your definition is stable, we strongly reccomend building and publishing your image to [DockerHub](https://hub.docker.com) or [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) instead. 
+
+Once you've published your container image, just update `devContainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
+
+## License
 
 All contributions in this repository are under the MIT license. See `LICENSE`.
