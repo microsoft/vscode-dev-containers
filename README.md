@@ -78,9 +78,9 @@ VS Code Remote provides straight forward developer loop for creating or editing 
 4. If this fails, click "Open folder locally" in the dialog that appears and go to step 2
 6. If it opens succesfully but you don't like the contents, edit the contents from within the container and run the **Remote: Rebuild Container** command to make changes.
 
-Note that if you make major changes, Docker may occasionally not pick up your changes. In this case you'll want to delete the existing container and image, open the folder locally, and go to step 2 above. You can install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy. While you can use the Docker from inside a container by forwarding the Docker unix socket and installing the CLI in the container (see [Docker-in-Docker](containers/docker-in-docker)), you'll likely be removing the container you are actually using so this approach is not reccomended in this case.
+Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy. While you can use Docker from inside a container by forwarding the Docker unix socket and installing the CLI in the container (see [Docker-in-Docker](containers/docker-in-docker)), you'll likely be removing the container you are actually using so this approach will not work well in this case.
 
-Finally, after you get your container up and running, you can add test assets to help you verify the extension as long as they are included in the `.vscodeignore` folder. By convention, most definitions are using a  `test-project` folder. 
+Finally, after you get your container up and running, you can test it by adding test assets into the definition folder as long as they are referenced in the `.vscodeignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form. By convention, most definitions place test assets in a `test-project` folder. 
 
 ### License
 
