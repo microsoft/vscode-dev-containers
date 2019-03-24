@@ -4,13 +4,13 @@
 
 *Illustrates how you can use it to access your local Docker install from inside the a dev container by simply volume mounting the Docker unix socket.  This variation uses `runArgs` and a `Dockerfile` to do the volume mounting*
 
-> **Note:** You can also check out the [Docker Compose](../docker-in-docker-compose) variation of this same definition.
-
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code team |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Any |
+
+> **Note:** There is also a [Docker Compose](../docker-in-docker-compose) variation of this same definition.
 
 ## Description
 
