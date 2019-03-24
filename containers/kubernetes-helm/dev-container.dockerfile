@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:1804
 
 # Install required tools
 RUN apt-get update \
