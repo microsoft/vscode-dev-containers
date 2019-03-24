@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Illustrates how you can use it to access your local Docker install from inside the a dev container by simply volume mounting the Docker unix socket. This variation uses Docker Compose to do the volume mounting.*
+*Illustrates how you can use it to access your local Docker install from inside a dev container by simply volume mounting the Docker unix socket. This variation uses Docker Compose to do the volume mounting.*
 
 | Metadata | Value |  
 |----------|-------|
