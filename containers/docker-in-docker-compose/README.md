@@ -1,6 +1,6 @@
-# Docker in Docker
+# Docker in Docker Compose
 
-> **Note:** You can also check out the [Docker Compose](../docker-in-docker-compose) variation of this same definition.
+> **Note:** You can also check out the [Dockerfile](../docker-in-docker) variation of this same definition.
 
 Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into your local Docker Desktop instance without affecting your dev container. This example illustrates how you can do this by running CLI commands and using the [Docker VS Code extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) right from inside your dev container.
 
@@ -24,10 +24,12 @@ The trick that makes this work is as follows:
         && apt-get update \
         && apt-get install -y docker-ce-cli
     ```
-2. Forward the Docker socket. From `devContainer.json`:
+2. Forward the Docker socket. From `docker-compose.dev-container.yml`:
 
-    ```json
-    "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
+    ```yaml
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     ```
 
 That's it!
+

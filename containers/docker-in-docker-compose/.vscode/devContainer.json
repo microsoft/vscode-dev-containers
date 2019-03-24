@@ -1,0 +1,9 @@
+{
+    "name": "Docker-in-Docker",
+    "dockerComposeFile": "docker-compose.dev-container.yml",
+    "service": "docker-in-docker",
+    "volume": "app",
+    "extensions": [
+        "peterjausovec.vscode-docker"
+    ]
+}
