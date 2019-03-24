@@ -33,7 +33,7 @@ You can either:
 
 ## Contributing
 
-Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? Great - we love contributions! 
+Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? Great! we love contributions! Read on to get a sense of what you'll need to do.
 
 ### Contributing a definition
 
@@ -62,7 +62,7 @@ If you want to create a new definition:
        📄 README.md
     ```
 
-    Other assets can be included if needed, but keep in mind that this will overlay on top of an existing project. Anything you don't want added to a project should be placed in `.vscodeignore`. The `README.md` in the folder should give a brief description of the purpose of the container definition and any manual steps that may be needed to use it.
+    Other assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Anything you don't want added to a project should be referenced in [glob](https://facelessuser.github.io/wcmatch/glob/) form in `.vscodeignore`. Create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
 
 4. Commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in! We appreciate any and all feedback!!
 
