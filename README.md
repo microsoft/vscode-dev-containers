@@ -62,7 +62,9 @@ If you want to create a new definition:
        📄 README.md
     ```
 
-    Other assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Anything you don't want added to a project should be referenced in [glob](https://facelessuser.github.io/wcmatch/glob/) form in `.vscodeignore`. Create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
+    See [VS Code Remote's documentation](https://aka.ms/vscode-remote/docker) for information on the expected contents of `devContainer.json` and how it relates to other files listed above.
+    
+    Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Anything you don't want added to a project should be referenced in [glob](https://facelessuser.github.io/wcmatch/glob/) form in `.vscodeignore`. Create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
 
 4. Commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in! We appreciate any and all feedback!!
 
