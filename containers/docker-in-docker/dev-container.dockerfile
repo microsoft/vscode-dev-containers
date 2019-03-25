@@ -5,7 +5,7 @@
 #-----------------------------------------------------------------------------------------
 
 # Note: You can use any Debian/Ubuntu based image you want. 
-FROM ubuntu:1804
+FROM ubuntu:18.04
 
 # Install git
 RUN apt-get update \

@@ -7,5 +7,5 @@
     ],
     "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
         "-v", "/var/run/docker.sock:/var/run/docker.sock",
-        "-v", "$HOME/.kube:/root/.kube-localhost"]
+        "-v", "${env:HOME}${env:USERPROFILE}/.kube:/root/.kube-localhost"]
 }

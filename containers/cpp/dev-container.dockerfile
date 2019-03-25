@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM ubuntu:1804
+FROM ubuntu:18.04
 
 # Install git
 RUN apt-get update && apt-get -y install git

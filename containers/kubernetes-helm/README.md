@@ -30,28 +30,9 @@ To get started, follow the appropriate steps below for your operating system.
 
 3. Check **Kubernetes > Enable Kubernetes**
 
-4. Open this folder in VS Code
+4. Run the **Remote: Open Folder in Container...** command and select a local copy of this folder
 
-5. Edit `.vscode/devConatiner.json` and change `$HOME` in the last item in the `runArgs` array to the absolute path of your home / user profile folder. e.g. On macOS:
-    
-    ```json
-    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-        "-v", "/var/run/docker.sock:/var/run/docker.sock", 
-        "-v", "/Users/clantz/.kube:/root/.kube-localhost"]
-    ```
-    On Windows:
-
-    ```json
-    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-        "-v", "/var/run/docker.sock:/var/run/docker.sock", 
-        "-v", "C:\\Users\\clantz\\.kube:/root/.kube-localhost"]
-    ```
-
-    > **Note:** Resolving [vscode-remote#670](https://github.com/Microsoft/vscode-remote/issues/670) and [vscode-remote#669](https://github.com/Microsoft/vscode-remote/issues/669) will remove this step.
-
-6. Run the **Remote: Reopen folder in Container** command. Once connected, you should see your clusters in the Kubernetes explorer.
-
-7. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
+5. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
     ```
     helm init
     ```
@@ -66,19 +47,9 @@ To get started, follow the appropriate steps below for your operating system.
     kubectl config set-context minikube
     ```
 
-3. Open this folder in VS Code
+3. Run the **Remote: Open Folder in Container...** command and select a local copy of this folder
 
-4. Edit `.vscode/devConatiner.json` and change `$HOME` in the last item in the `runArgs` array to the absolute path of your home folder. e.g.
-    ```json
-    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-        "-v","/var/run/docker.sock:/var/run/docker.sock", 
-        "-v", "/home/clantz/.kube:/root/.kube-localhost"]
-    ```
-    > **Note:** Resolving [vscode-remote#670](https://github.com/Microsoft/vscode-remote/issues/670) will remove this step.
-
-5. Run the **Remote: Reopen folder in Container** command. Once connected, you should see your clusters in the Kubernetes explorer.
-
-6. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
+4. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
     ```
     helm init
     ```
