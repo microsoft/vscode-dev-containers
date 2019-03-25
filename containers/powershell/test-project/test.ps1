@@ -1,3 +1,9 @@
+#-----------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root for license information.
+#-----------------------------------------------------------------------------------------
+
+
 param([int]$Count=50, [int]$DelayMilliseconds=200)
 
 function Write-Item($itemCount) {
@@ -16,11 +22,9 @@ function Write-Item($itemCount) {
     }
 }
 
-# Do-Work will be underlined in green if you haven't disable script analysis.
-# Hover over the function name below to see the PSScriptAnalyzer warning that "Do-Work"
-# doesn't use an approved verb.
+
 function Do-Work($workCount) {
-    Write-Output "Doing work..."
+    Write-Output "Doing remote work..."
     Write-Item $workcount
     Write-Host "Done!"
 }

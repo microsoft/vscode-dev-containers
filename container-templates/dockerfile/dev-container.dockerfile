@@ -1,3 +1,8 @@
+#-----------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root for license information.
+#-----------------------------------------------------------------------------------------
+
 # Debian and Ubuntu based images are supported. Alpine images are not yet supported.
 FROM ubuntu:1804
 

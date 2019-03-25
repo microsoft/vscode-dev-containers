@@ -1,3 +1,8 @@
+/*----------------------------------------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See LICENSE in the project root for license information.
+ *---------------------------------------------------------------------------------------*/
+
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +21,7 @@ namespace aspnetapp
                 .UseKestrel()
                 .UseUrls("http://0.0.0.0:8090")
                 .Configure(app => app.Run(async context => {
-                    await context.Response.WriteAsync("Hello world from ASP.NET Core");
+                    await context.Response.WriteAsync("Hello remote world from ASP.NET Core!");
                 }))
                 .Build();
 

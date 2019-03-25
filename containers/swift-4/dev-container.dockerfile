@@ -1,4 +1,9 @@
-FROM swift:4.2.1
+#-----------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root for license information.
+#-----------------------------------------------------------------------------------------
+
+FROM swift:4
 
 # Install git
 RUN apt-get update && apt-get -y install git

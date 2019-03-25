@@ -28,7 +28,7 @@ const HOST = '0.0.0.0';
 	app.get('/', async (req, res) => {
 		await testHitsCollection.insertOne({date:new Date()});
 		const count = await testHitsCollection.countDocuments();
-		res.send('Hello world! ' + count + ' test records found.');
+		res.send('Hello remote world! ' + count + ' test records found.');
 	});
 
 	app.listen(PORT, HOST);
