@@ -21,3 +21,9 @@
 ## How it works
 
 [Optional - If the definition provides a pattern you think will be useful for others, describe the pattern here.]
+
+## License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License. See [../../LICENSE](LICENSE). 
+
