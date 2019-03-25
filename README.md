@@ -4,7 +4,7 @@ A **development container** is a running Docker container that comes with a basi
 
 Visual Studio Code Remote allows you to open any folder inside (or mounted into) a dev container and take advantage of VS Code's full feature set. When using the capability, VS Code selectively runs certain extensions in the container to optimize your experience. The result is that VS Code can provide a local-quality development experience including full IntelliSense, debugging, and more regardless of where your code is located. 
 
-**[See here to learn more about VS Code Remote](https://aka.ms/vscode-remote)**.
+**[See here to learn more about VS Code Remote](https://aka.ms/vscode-remote/docker)**.
 
 This repository contains a set of **dev container definitions** made up of files like `devContainer.json` that can be added to existing projects to get you up and running in a containerized environment. These files describe the conatiner image, any runtime arguments for when the conatiner is started, and any VS Code extensions that should be installed into it.
 
