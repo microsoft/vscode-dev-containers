@@ -6,7 +6,7 @@ Visual Studio Code Remote allows you to open any folder inside (or mounted into)
 
 **[See here to learn more about VS Code Remote](https://aka.ms/vscode-remote)**.
 
-This repository contains a set of **dev container definitions** made up of files like `devContainer.json` that can be added to existing projects to get you up and running in a containerized environment. These files describe the conatiner image, any runtime arguments for when the conatiner is started, and any VS Code extensions that should be installed into it.
+This repository contains a set of **dev container definitions** made up of files like `devContainer.json` that can be added to existing projects to get you up and running in a containerized environment. These files describe the container image, any runtime arguments for when the container is started, and any VS Code extensions that should be installed into it.
 
 ## Trying a definition
 
@@ -22,9 +22,17 @@ Many definitions include a `test-project` that you can use to see the dev contai
 
 You can either:
 
-- Run **Remote: Create Container Configuration File...** command in VS Code and pick a definition. The appopriate files will then be added to your project.
+- Run **Remote: Create Container Configuration File...** command in VS Code and pick a definition. The appropriate files will then be added to your project.
 
 - Manually copy the contents of one of the `containers` sub-folders into your project. When manually copying, note that some definitions contain a `test-project` folder and/or `.vscode/launch.json`, `.vscode/settings.json`, or `.vscode/tasks.json` files. These and `README.md` and `.vscodeignore` can typically be omitted.
+
+## Adding a definition to an existing public or private repo
+
+Files like `.vscode/devContainer.json` that are make up each dev container definition in the `containers` folder can to be modified as needed and then committed into your own project's source control repo for reuse by others. 
+
+By committing these files to source control, anyone with the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed in VS Code that opens a cloned copy of your repo will be asked if they want reopen the folder in a container instead. You can also suggest that they install the Remote Development extension if they do not have it by adding it  `recommendations` list in `.vscode/extensions.json` (as described [here](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)).
+
+Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
 
 ## Contents
 
@@ -41,7 +49,7 @@ If you want to create a new definition:
 
 1. Fork and clone this repository
 
-2. Create a new folder in the `containers` directory. The name of the folder is effectivley the **definition ID** and should follow the following format:
+2. Create a new folder in the `containers` directory. The name of the folder is effectively the **definition ID** and should follow the following format:
 
     ````
     <language>-<optional: version>-<descriptor>
@@ -76,7 +84,7 @@ VS Code Remote provides a straight forward development loop for creating and edi
 2. Edit the contents of the definition
 3. Run the **Remote: Reopen Folder in Container** command
 4. If this fails, click "Open folder locally" in the dialog that appears and go to step 2
-6. If it opens succesfully but you don't like the contents, edit the contents from within the container and run the **Remote: Rebuild Container** command to make changes.
+6. If it opens successfully but you don't like the contents, edit the contents from within the container and run the **Remote: Rebuild Container** command to make changes.
 
 Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy. While you can use Docker from inside a container by forwarding the Docker unix socket and installing the CLI in the container (see [Docker-in-Docker](containers/docker-in-docker)), you'll likely be removing the container you are actually using so this approach will not work well in this case.
 
