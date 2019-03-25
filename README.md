@@ -28,7 +28,7 @@ You can either:
 
 ## Adding a definition to an existing public or private repo
 
-Files like `.vscode/devContainer.json` that are make up each dev container definition in the `containers` folder can to be modified as needed and then committed into your own project's source control repo for reuse by others. 
+Files like `.vscode/devContainer.json` that make up each dev container definition in the `containers` folder can to be modified as needed and then committed into your own project's source control repo for reuse by others. 
 
 By committing these files to source control, anyone with the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed in VS Code that opens a cloned copy of your repo will be asked if they want reopen the folder in a container instead. You can also suggest that they install the Remote Development extension if they do not have it by adding it to the `recommendations` list in `.vscode/extensions.json` (as described [here](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)).
 
