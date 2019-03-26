@@ -4,7 +4,7 @@
 #-----------------------------------------------------------------------------------------
 
 # Note: You can use any Debian/Ubuntu based image you want. 
-FROM ubuntu:18.04
+FROM ubuntu:bionic
 
 # Install git
 RUN apt-get update \

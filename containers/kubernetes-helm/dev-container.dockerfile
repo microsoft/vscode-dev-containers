@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM ubuntu:18.04
+FROM ubuntu:bionic
 
 # Install required tools
 RUN apt-get update \

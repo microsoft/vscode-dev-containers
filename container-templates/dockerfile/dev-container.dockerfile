@@ -4,7 +4,7 @@
 #-----------------------------------------------------------------------------------------
 
 # Debian and Ubuntu based images are supported. Alpine images are not yet supported.
-FROM ubuntu:18.04
+FROM ubuntu:bionic
 
 # Install common tools developers typically will need
 RUN apt-get update \

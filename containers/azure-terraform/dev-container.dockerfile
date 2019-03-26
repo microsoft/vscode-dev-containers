@@ -4,7 +4,7 @@
 #-----------------------------------------------------------------------------------------
 
 # Pick any base image, but if you select node, skip installing node. 😊
-FROM ubuntu:18.04
+FROM ubuntu:bionic
 
 # Install required tools
 RUN apt-get update \
