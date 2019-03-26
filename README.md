@@ -41,7 +41,17 @@ You can also optionally have VS Code recommend developers install the Remote Dev
 
 ## Contributing
 
-Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? Great! we love contributions! Read on to get a sense of what you'll need to do.
+Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.microsoft.com.
+
+When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ### Contributing a definition
 
@@ -95,10 +105,6 @@ Finally, after you get your container up and running, you can test it by adding 
 While using a `Dockerfile` is a convienent way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image be built by anyone using it.  If your definition is stable, we strongly reccomend building and publishing your image to [DockerHub](https://hub.docker.com) or [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) instead. 
 
 Once you've published your container image, just update `devContainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
-
-### Code of Conduct
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## License
 
