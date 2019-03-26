@@ -28,11 +28,11 @@ You can either:
 
 ## Adding a definition to an existing public or private repo
 
-Files like `.vscode/devContainer.json` that make up each dev container definition in the `containers` folder can to be modified as needed and then committed into your own project's source control repo for reuse by others. 
+Files like `.vscode/devContainer.json` that make up each dev container definition in the `containers` folder can be committed into your own project's source control repo for reuse by others. These files can be modified to support your project's own unique needs rather than asking each developer to modify an existing definition.
 
-By committing these files to source control, anyone with the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed in VS Code that opens a cloned copy of your repo will be asked if they want reopen the folder in a container instead. You can also suggest that they install the Remote Development extension if they do not have it by adding it to the `recommendations` list in `.vscode/extensions.json` (as described [here](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)).
+By committing the files to source control, anyone opening a cloned copy of your repo in VS Code with the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed will be asked if they want reopen the folder in a container instead. Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
 
-Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
+You can also optionally have VS Code recommend developers install the Remote Development extension when editing files in your repository by including it in the `recommendations` array in `.vscode/extensions.json` (as described [here](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)) and then adding the file to source control.
 
 ## Contents
 
