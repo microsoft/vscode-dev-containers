@@ -26,6 +26,32 @@ You can either:
 
 - Manually copy the contents of one of the `containers` sub-folders into your project. Copy the `.devcontainer` folder and `.vscode/devContainer.json` into your project and you should be ready to go!
 
+### How do I just reuse an existing `Dockerfile` or `docker-compose.yml` instead?
+
+At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference the `Dockerfile` or `docker-compose.yml`. You can think of `devContainer.json` as conceptually similar to VS Code's debug focused `launch.json` file, but focused on launching your development container instead of your application and a debugger.
+
+Since you are here, check out the [Existing Dockerfile](containers/docker-existing-dockerfile) and [Existing Docker Compose](containers/docker-existing-docker-compose) definitions for details, but here's the most basic version of the file:
+
+```json
+{
+    "name": "[Optional] Your project name here",
+    "dockerFile": "../Dockerfile"
+}
+```
+
+Similarly, if you have a `docker-compose.yml` file, you can add these properties to `.vscode/devContainer.json`:
+
+```json
+{
+    "name": "[Optional] Your project name here",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "the-name-of-the-service-you-want-to-work-with-in-vscode",
+    "volume": "/container/path/to/source/code"
+}
+```
+
+From here, you may want to [alter your configuration](https://aka.ms/vscode-remote/docker/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, or set runtime arguments. In other cases, you may just want to [attach to an already running container](https://aka.ms/vscode-remote/docker/attach).
+
 ## Adding a definition to an existing public or private repo
 
 Files like `.vscode/devContainer.json` that make up each dev container definition in the `containers` folder can be committed into your own project's source control repo for reuse by others. These files can be modified to support your project's own unique needs rather than asking each developer to modify an existing definition.
