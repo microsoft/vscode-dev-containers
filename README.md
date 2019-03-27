@@ -26,7 +26,7 @@ You can either:
 
 - Manually copy the contents of one of the `containers` sub-folders into your project. Copy the `.devcontainer` folder and `.vscode/devContainer.json` into your project and you should be ready to go!
 
-### How do I just reuse an existing `Dockerfile` or `docker-compose.yml` instead?
+#### How can I reuse an existing `Dockerfile` or `docker-compose.yml`?
 
 At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference the `Dockerfile` or `docker-compose.yml`. The intent of `devContainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead.
 
@@ -50,7 +50,7 @@ Similarly, if you have a `docker-compose.yml` file, set these properties:
 }
 ```
 
-From here, you may want to [alter your configuration](https://aka.ms/vscode-remote/docker/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, or set runtime arguments. In other cases, you may just want to [attach to an already running container](https://aka.ms/vscode-remote/docker/attach).
+The other definitions in the `containers` folder will provide examples of how to cover new scenarios you may encounter along the way. For example, you may want to [alter your configuration](https://aka.ms/vscode-remote/docker/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, or set runtime arguments. In other cases, you may just want to [attach to an already running container](https://aka.ms/vscode-remote/docker/attach). 
 
 ## Adding a definition to an existing public or private repo
 
