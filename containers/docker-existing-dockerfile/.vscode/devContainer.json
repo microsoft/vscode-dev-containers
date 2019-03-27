@@ -1,7 +1,7 @@
 {
     "name": "Existing Dockerfile",
 
-    "//", "Update this if you aren't using the standard 'Dockerfile' filename",
+    "//": "Update this if you aren't using the standard 'Dockerfile' filename",
     "dockerFile": "Dockerfile",
     
     "//": "List any ports you want to expose that aren't already exposed in your Dockerfile",
