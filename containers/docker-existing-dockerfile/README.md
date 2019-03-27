@@ -1,10 +1,8 @@
 # Existing Dockerfile
 
-# Existing Docker Compose
-
 ## Summary
 
-*Illustrates you can reuse an existing docker-compose.yml for your dev container.*
+*Illustrates you can reuse an existing Dockerfile for your dev container.*
 
 | Metadata | Value |  
 |----------|-------|
