@@ -28,7 +28,7 @@ You can either:
 
 ### How do I just reuse an existing `Dockerfile` or `docker-compose.yml` instead?
 
-At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference the `Dockerfile` or `docker-compose.yml`. You can think of `devContainer.json` as conceptually similar to VS Code's debug focused `launch.json` file, but focused on launching your development container instead of your application and a debugger.
+At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference the `Dockerfile` or `docker-compose.yml`. You can think of `devContainer.json` as conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead.
 
 Since you are here, check out the [Existing Dockerfile](containers/docker-existing-dockerfile) and [Existing Docker Compose](containers/docker-existing-docker-compose) definitions for details, but here's the most basic version of the file:
 
