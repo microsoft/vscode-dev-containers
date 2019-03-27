@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/opt/conda/bin/python",
+    "python.dataScience.jupyterServerURI": "http://localhost:8888?token=1e8a4466-396e-4a1b-bec6-729de2772f29"
+}

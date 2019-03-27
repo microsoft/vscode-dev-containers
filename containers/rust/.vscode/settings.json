@@ -2,6 +2,5 @@
     "search.exclude": {
         "**/target": true
     },
-    "lldb.executable": "/usr/bin/lldb-3.9",
     "lldb.verboseLogging": true
 }

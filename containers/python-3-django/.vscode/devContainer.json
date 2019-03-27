@@ -1,6 +1,6 @@
 {
 	"name": "Django",
-	"dockerFile": "dev-container.dockerfile",
+	"dockerFile": "../.devcontainer/Dockerfile",
 	"appPort": 8080,
 	"extensions": [
 		"ms-python.python",

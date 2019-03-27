@@ -1,6 +1,6 @@
 {
 	"name": "PHP",
-	"dockerFile": "dev-container.dockerfile",
+	"dockerFile": "../.devcontainer/Dockerfile",
 	"extensions": [
 		"felixfbecker.php-debug",
 		"felixfbecker.php-intellisense"

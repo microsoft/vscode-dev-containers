@@ -1,6 +1,6 @@
 {
     "name": "Docker-in-Docker",
-    "dockerComposeFile": "docker-compose.dev-container.yml",
+    "dockerComposeFile": "../.devcontainer/docker-compose.yml",
     "service": "docker-in-docker",
     "volume": "app",
     "extensions": [

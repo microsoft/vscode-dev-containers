@@ -1,0 +1,19 @@
+#-----------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See LICENSE in the project root for license information.
+#-----------------------------------------------------------------------------------------
+
+# Using Docker Compose so VS Code does not override the default command and the container 
+# stays running after VS Code stops so you can access Jupyter Notebooks via port 8888.
+
+version: '3'
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+     - "8888:8888"
+    volumes:
+      - .:/notebook
+

@@ -1,0 +1,12 @@
+*.log
+.vscode
+.vscode-test
+out/test
+src
+.gitignore
+.npmignore
+tsconfig.json
+tslint.json
+vscode.d.ts
+**/*.map
+*.tgz

@@ -1,6 +1,6 @@
 {
 	"name": "Azure HDInsight",
-	"dockerFile": "dev-container.dockerfile",
+	"dockerFile": "../devcontainer/Dockerfile",
 	"extensions": [
 		"mshdinsight.azure-hdinsight"
 	]

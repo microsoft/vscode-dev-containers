@@ -1,6 +1,6 @@
 {
 	"name": "Node.js 8",
-	"dockerFile": "dev-container.dockerfile",
+	"dockerFile": "../.devcontainer/Dockerfile",
 	"appPort": 3000,
 	"extensions": [
 		"dbaeumer.vscode-eslint"

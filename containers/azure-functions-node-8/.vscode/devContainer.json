@@ -1,6 +1,6 @@
 {
 	"name": "Azure Functions & Node.js",
-	"dockerFile": "dev-container.dockerfile",
+	"dockerFile": "../.devcontainer/Dockerfile",
 	"appPort": 7071,
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions"

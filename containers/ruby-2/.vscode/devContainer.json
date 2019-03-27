@@ -1,6 +1,6 @@
 {
 	"name": "Ruby",
-	"dockerFile": "dev-container.dockerfile",
+	"dockerFile": "../.devcontainer/Dockerfile",
 	"extensions": [
 		"rebornix.Ruby"
 	]

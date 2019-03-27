@@ -1,6 +1,6 @@
 {
 	"name": "Dev Container Definition Template - Docker Compose",
-    "dockerComposeFile": "docker-compose.dev-container.yml",
+    "dockerComposeFile": "../.devcontainer/docker-compose.yml",
     "service": "your-service-name-here",
     "volume": "app",
 	"extensions": [
