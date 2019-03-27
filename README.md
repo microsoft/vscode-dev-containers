@@ -28,23 +28,23 @@ You can either:
 
 ### How do I just reuse an existing `Dockerfile` or `docker-compose.yml` instead?
 
-At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference the `Dockerfile` or `docker-compose.yml`. You can think of `devContainer.json` as conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead.
+At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference the `Dockerfile` or `docker-compose.yml`. The intent of `devContainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead.
 
-Since you are here, check out the [Existing Dockerfile](containers/docker-existing-dockerfile) and [Existing Docker Compose](containers/docker-existing-docker-compose) definitions for details, but here's the most basic version of the file:
+Since you are here, check out the [Existing Dockerfile](containers/docker-existing-dockerfile) and [Existing Docker Compose](containers/docker-existing-docker-compose) definitions for details, but here's the a quick tour of the basic properties. If you have a `Dockerfile`, set these properties:
 
 ```json
 {
     "name": "[Optional] Your project name here",
-    "dockerFile": "../Dockerfile"
+    "dockerFile": "Dockerfile"
 }
 ```
 
-Similarly, if you have a `docker-compose.yml` file, you can add these properties to `.vscode/devContainer.json`:
+Similarly, if you have a `docker-compose.yml` file, set these properties:
 
 ```json
 {
     "name": "[Optional] Your project name here",
-    "dockerComposeFile": "../docker-compose.yml",
+    "dockerComposeFile": "docker-compose.yml",
     "service": "the-name-of-the-service-you-want-to-work-with-in-vscode",
     "volume": "/container/path/to/source/code"
 }
