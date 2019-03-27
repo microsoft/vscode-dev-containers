@@ -12,9 +12,8 @@ RUN pip install pylint
 RUN mkdir /app
 WORKDIR /app
 
-ADD requirements.txt /app/
+COPY .devcontainer/requirements.txt /app/
 RUN pip install -r requirements.txt
-ADD . /app/
 
 # Install git
 RUN apt-get update && apt-get -y install git

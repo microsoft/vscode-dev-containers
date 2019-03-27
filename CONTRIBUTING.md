@@ -42,7 +42,9 @@ If you want to create a new definition:
 
     See [VS Code Remote's documentation](https://aka.ms/vscode-remote/docker) for information on the expected contents of `devContainer.json` and how it relates to other files listed above.
     
-    Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Anything you don't want added to a project should be referenced in [glob](https://facelessuser.github.io/wcmatch/glob/) form in `.devcontainer/ignore` with paths relative to the location of the `ignore` file. Create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
+    Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Keeping these files in the `.devcontainer` should reduce the chances of something conflicting but note that any command that are run are relative to the root of the project, so you'll need to include `.devcontainer` in any path references.
+    
+    Anything you don't want added to a project should be referenced in [glob](https://facelessuser.github.io/wcmatch/glob/) form in `.devcontainer/ignore` with paths relative to the root of the folder. Create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
 
 4. Commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in! We appreciate any and all feedback!!
 
@@ -58,7 +60,7 @@ VS Code Remote provides a straight forward development loop for creating and edi
 
 Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy. While you can use Docker from inside a container by forwarding the Docker unix socket and installing the CLI in the container (see [Docker-in-Docker](containers/docker-in-docker)), you'll likely be removing the container you are actually using so this approach will not work well in this case.
 
-Finally, after you get your container up and running, you can test it by adding test assets into the definition folder as long as they are referenced in the `.devcontainer/ignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form ith paths relative to the location of the `ignore` file. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `ignore` files. 
+Finally, after you get your container up and running, you can test it by adding test assets into the definition folder as long as they are referenced in the `.devcontainer/ignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form ith paths relative the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `ignore` files. 
 
 ## Speeding up container provisioning
 

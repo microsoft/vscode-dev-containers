@@ -8,7 +8,7 @@ FROM python:3-slim
 RUN mkdir /app
 WORKDIR /app
 
-ADD requirements.txt /app/
+COPY .devcontainer/requirements.txt /app/
 RUN pip install -r requirements.txt
 
 RUN pip install pylint

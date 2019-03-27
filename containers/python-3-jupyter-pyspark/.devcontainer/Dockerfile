@@ -10,10 +10,10 @@ USER root
 RUN pip install pylint
 
 # Copy jupyter_notebook_config.py with token that matches settings
-COPY jupyter_notebook_config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
+COPY .devcontainer/jupyter_notebook_config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
 
 # Copy default endpoint specific user settings overrides into container to specify Python path, token
-COPY settings.vscode.json /home/jovyan/.vscode-remote/data/User/settings.json
+COPY .devcontainer/settings.vscode.json /home/jovyan/.vscode-remote/data/User/settings.json
 
 # Install git
 RUN apt-get update && apt-get -y install git
