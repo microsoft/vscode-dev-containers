@@ -6,7 +6,7 @@
 version: '3'
 services:
   docker-in-docker:
-      build: 
+    build: 
       context: .
       dockerfile: .devcontainer/Dockerfile
     volumes:
@@ -15,6 +15,6 @@ services:
       # Forwarding the socket is the key to getting this to work
       - /var/run/docker.sock:/var/run/docker.sock 
     
-  # Overrides default command so things don't shut down after the process ends - useful for debugging
-  command: sleep infinity 
+    # Overrides default command so things don't shut down after the process ends - useful for debugging
+    command: sleep infinity 
     

@@ -1,0 +1,14 @@
+{
+    "name": "Existing Docker Compose",
+
+    // Most of the configuration is in the .devcontainer/docker-compose.yml file
+    "dockerComposeFile": ".devcontainer/docker-compose.yml",
+
+    // This is the name of the service that extends from your existing service. Set the
+    // real service name in .devcontainer/docker-compose.yml
+    "service": "devcontainer",
+
+    // Path to where VS Code should start when connected to the service. This is typically
+    // a file mount in .devcontainer/docker-compose.yml
+    "volume": "workspace"
+}
