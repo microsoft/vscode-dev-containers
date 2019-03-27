@@ -1,6 +1,6 @@
 {
 	"name": "Swift",
-	"dockerFile": "dev-container.dockerfile",
+	"dockerFile": ".devcontainer/Dockerfile",
 	"extensions": [
 		"vknabel.vscode-swift-development-environment",
 		"vadimcn.vscode-lldb"

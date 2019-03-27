@@ -1,6 +1,6 @@
 {
 	"name": "PowerShell",
-	"dockerFile": "dev-container.dockerfile",
+	"dockerFile": ".devcontainer/Dockerfile",
 	"extensions": [
 		"ms-vscode.powershell"
 	]

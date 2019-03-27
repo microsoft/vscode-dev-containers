@@ -8,7 +8,7 @@ services:
   docker-in-docker:
       build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: .devcontainer/Dockerfile
     volumes:
       - .:/app
 

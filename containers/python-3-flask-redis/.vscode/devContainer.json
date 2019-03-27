@@ -1,6 +1,6 @@
 {
     "name": "Python & Redis",
-    "dockerComposeFile": "../.devcontainer/docker-compose.yml",
+    "dockerComposeFile": ".devcontainer/docker-compose.yml",
     "service": "web",
     "volume": "app",
     "extensions": [

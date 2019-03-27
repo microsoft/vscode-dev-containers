@@ -1,6 +1,6 @@
 {
 	"name": "Go",
-	"dockerFile": "../.devcontainer/Dockerfile",
+	"dockerFile": ".devcontainer/Dockerfile",
 	"extensions": [
 		"ms-vscode.go"
 	],

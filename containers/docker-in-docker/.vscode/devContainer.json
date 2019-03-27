@@ -1,6 +1,6 @@
 {
     "name": "Docker-in-Docker",
-    "dockerFile": "../.devcontainer/Dockerfile",
+    "dockerFile": ".devcontainer/Dockerfile",
     "extensions": [
         "peterjausovec.vscode-docker"
     ],

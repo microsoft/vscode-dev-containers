@@ -1,6 +1,6 @@
 {
 	"name": "Jupyter PySpark",
-	"dockerComposeFile": "../.devcontainer/docker-compose.yml",
+	"dockerComposeFile": ".devcontainer/docker-compose.yml",
 	"service": "jupyter",
 	"volume": "notebook",
 	"extensions": [
