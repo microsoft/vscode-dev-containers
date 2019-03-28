@@ -53,6 +53,7 @@ Similarly, if you have a `docker-compose.yml` file, set these properties:
     "volume": "/"
 }
 ```
+...optionally setting `volume` to where you have volume mounted the source code. You may want to [extend your `docker-compose.yml` to avoid common pitfalls](containers/docker-existing-docker-compose).
 
 The other definitions in the `containers` folder will provide examples of how to cover new scenarios you may encounter along the way. For example, you may want to [alter your configuration](https://aka.ms/vscode-remote/docker/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, or set runtime arguments. In other cases, you may just want to [attach to an already running container](https://aka.ms/vscode-remote/docker/attach). 
 
