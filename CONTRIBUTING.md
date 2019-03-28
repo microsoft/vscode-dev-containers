@@ -1,18 +1,88 @@
 # Contributing
 
-Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? We love contributions and suggestions!  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
+There are many ways for you to contribute to VS Code Remote Development. This document will outline a number of ways you can get involved.
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+## Reporting Issues
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+Have you identified a reproducible problem in a dev container definition? We want to hear about it! Here's how you can make reporting your issue as effective as possible.
 
-## Contributing a definition
+### Identify Where to Report
+
+This repository is specifically for dev container definitions. If you are not looking to report an issue related to a container definition, you may want to report the an issue in the feedback repository for [VS Code Remote Development extensions](https://github.com/Microsoft/vscode-remote-release). Or you may be looking for the [VS Code OSS](https://github.com/Microsoft/vscode) repository. However, note that, the VS Code project is distributed across multiple repositories. See the list of [Related Projects](https://github.com/Microsoft/vscode/wiki/Related-Projects) if you aren't sure which repo is correct.
+
+### Look For an Existing Issue
+
+Before you create a new issue, please do a search in [open issues](https://github.com/Microsoft/vscode-dev-containers/issues) to see if the issue or feature request has already been filed.
+
+Be sure to scan through the [most popular](https://github.com/Microsoft/vscode-dev-containers/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc) feature requests.
+
+If you find your issue already exists, make relevant comments and add your [reaction](https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments). Use a reaction in place of a "+1" comment:
+
+* 👍 - upvote
+* 👎 - downvote
+
+If you cannot find an existing issue that describes your bug or feature, create a new issue using the guidelines below.
+
+### Writing Good Bug Reports and Feature Requests
+
+File a single issue per problem and feature request. Do not enumerate multiple bugs or feature requests in the same issue.
+
+Do not add your issue as a comment to an existing issue unless it's for the identical input. Many issues look similar, but have different causes.
+
+The more information you can provide, the more likely someone will be successful at reproducing the issue and finding a fix.
+
+Please include the following with each issue:
+
+* Version of VS Code
+  
+* Your operating system
+
+* List of extensions that you have installed
+
+* Reproducible steps (1... 2... 3...) that cause the issue
+
+* What you expected to see, versus what you actually saw
+
+* Images, animations, or a link to a video showing the issue occurring
+
+* A code snippet that demonstrates the issue or a link to a code repository the developers can easily pull down to recreate the issue locally
+
+  * **Note:** Because the developers need to copy and paste the code snippet, including a code snippet as a media file (i.e. .gif) is not sufficient.
+
+* Errors from the Dev Tools Console (open from the menu: Help > Toggle Developer Tools)
+  
+* If you are using VS Code Remote Docker support, include your container configuration files if you are able to.
+
+### Final Checklist
+
+Please remember to do the following:
+
+* [ ] Search the issue repository to ensure your report is a new issue
+
+* [ ] Recreate the issue after disabling all extensions
+
+* [ ] Simplify your code around the issue to better isolate the problem
+
+Don't feel bad if the developers can't reproduce the issue right away. They will simply ask for more information!
+
+### Follow Your Issue
+
+Once submitted, your report will go into the a similar [issue tracking](https://github.com/Microsoft/vscode/wiki/Issue-Tracking) workflow that is used for the core VS Code project. Be sure to understand what will happen next, so you know what to expect, and how to continue to assist throughout the process.
+
+## Automated Issue Management
+
+We use a bot to help us manage issues. This bot currently:
+
+* Automatically closes any issue marked `needs-more-info` if there has been no response in the past 7 days.
+* Automatically locks issues 45 days after they are closed.
+
+If you believe the bot got something wrong, please open a new issue and let us know.
+
+## Contributing Dev Container Definitions
+
+Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition We love contributions!  Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
+
+When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
 
 If you want to create a new definition:
 
@@ -40,7 +110,7 @@ If you want to create a new definition:
        📄 README.md
     ```
 
-    See [VS Code Remote's documentation](https://aka.ms/vscode-remote/docker) for information on the expected contents of `devContainer.json` and how it relates to other files listed above.
+    See the [VS Code Remote Development documentation](https://aka.ms/vscode-remote/docker) for information on the expected contents of `devContainer.json` and how it relates to other files listed above.
     
     Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Keeping these files in the `.devcontainer` should reduce the chances of something conflicting but note that any command that are run are relative to the root of the project, so you'll need to include `.devcontainer` in any path references.
     
@@ -48,7 +118,7 @@ If you want to create a new definition:
 
 4. Commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in! We appreciate any and all feedback!!
 
-## Developing and testing a definition
+### Developing and testing a definition
 
 VS Code Remote provides a straight forward development loop for creating and editing container definitions. Just follow these steps to get started:
 
@@ -62,13 +132,22 @@ Note that if you make major changes, Docker may occasionally not pick up your ed
 
 Finally, after you get your container up and running, you can test it by adding test assets into the definition folder as long as they are referenced in the `.devcontainer/ignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form ith paths relative the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `ignore` files. 
 
-## Speeding up container provisioning
+### Speeding up container provisioning
 
 While using a `Dockerfile` is a convienent way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image be built by anyone using it.  If your definition is stable, we strongly reccomend building and publishing your image to [DockerHub](https://hub.docker.com) or [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) instead. 
 
 Once you've published your container image, just update `devContainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
 
-## License
+## Contributing to Documentation
 
-Copyright (c) Microsoft Corporation. All rights reserved.<br />
-Licensed under the MIT License. See [LICENSE](../LICENSE). 
+The majority of VS Code Remote's documentation can be found in the [VS Code docs repository](https://github.com/Microsoft/vscode-docs). This is usually the best place to contribute, but if you have a correction or suggestion for the countent found here, we welcome your contributions.
+
+## Code of Conduct
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Thank You!
+
+Your contributions, large or small, make great projects like this possible. Thank you for taking the time to contribute.

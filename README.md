@@ -65,11 +65,15 @@ You can also optionally have VS Code recommend developers install the Remote Dev
 - `containers` - Dev container definition folders. 
 - `container-templates` - Templates for creating your own container definitions in your project or for contributing back to this repository.
 
-## Contributing
+## Contributing & Feedback
 
-Find a bug? Have a suggestion? Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? We love all contributions and suggestions! See [CONTRIBUTING.md](CONTRIBUTING.md) for details on what to do.
+Have a question or feedback? There are many ways to contribute.
 
-## Code of Conduct
+- Contribute or provide feedback for the [VS Code Remote Development extensions](https://github.com/Microsoft/vscode-remote-release/CONTRIBUTING.md).
+- Search [existing issues](https://github.com/Microsoft/vscode-dev-containers/issues) with dev container definitions or [report a problem](https://github.com/Microsoft/vscode-dev-containers/issues/new).
+- Contribute a [development container definition](CONTRIBUTING.md#contributing-dev-container-definitions) to the repository.
+- Contribute to [our documentation](https://github.com/Microsoft/vscode-docs) or [VS Code itself](https://github.com/Microsoft/vscode).
+- ...and more. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
