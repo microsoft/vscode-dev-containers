@@ -58,9 +58,19 @@ The other definitions in the `containers` folder will provide examples of how to
 
 ## Adding a definition to an existing public or private repo
 
-You can commit dev container definition files like `.vscode/devContainer.json` into your own project's source control repo for reuse by others. By committing these files to source control, anyone opening a cloned copy of your repo in VS Code with the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed will be asked if they want reopen the folder in a container instead. Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
+You can easily share a customized dev container definition for your project by simply adding files like `.vscode/devContainer.json` to source control. By including these files in your repository, anyone that opens a local copy of your repo in VS Code will be automatically asked if they want reopen the folder in a container instead if the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed.
 
-You can also have VS Code automatically recommend that anyone that opens a cloned copy of your repo should install the Remote Development extension. You can do this by simply adding the extension ID to `recommendations` array in `.vscode/extensions.json` (as described [here](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)) and then adding the file to source control.
+You can also have VS Code prompt anyone opening your repo to install the Remote Development extension. Simply add the extension ID to `recommendations` array in `.vscode/extensions.json` (as described [here](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)) and then add the file to source control.
+
+```json
+{
+    "recommendations": [
+        "vscode.remotedevelopment"
+    ]
+}
+```
+
+Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
 
 ## Contents
 
