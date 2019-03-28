@@ -26,9 +26,9 @@ You can either:
 
 - Manually copy the contents of one of the `containers` sub-folders into your project. Copy the `.devcontainer` folder and `.vscode/devContainer.json` into your project and you should be ready to go!
 
-#### Can I just reuse an existing Docker configuration?
+### Can I just reuse an existing Docker configuration?
 
-Absolutley! If you want to use an existing Dockerfile as a starting point, run **Remote-Docker: Create Container Configuraton File...** from the command pallette (Cmd/Ctrl+Shift+P). You'll be prompted to select a Dockerfile or you can opt to use a base image instead.
+Absolutely! If you want to use an existing Dockerfile as a starting point, run **Remote-Docker: Create Container Configuraton File...** from the command pallette (Cmd/Ctrl+Shift+P). You'll be prompted to select a Dockerfile or you can opt to use a base image instead.
 
 ##### About `.vscode/devContainer.json`
 
@@ -94,4 +94,4 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved. <br />
-Licensed under the MIT License. See [LICENSE](LICENSE). 
+Licensed under the MIT License. See [LICENSE](LICENSE).
