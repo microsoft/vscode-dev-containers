@@ -32,7 +32,7 @@ Absolutley! If you want to use an existing Dockerfile as a starting point, run *
 
 ##### About `.vscode/devContainer.json`
 
-The intent of `devContainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead. At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference the `Dockerfile` or `docker-compose.yml`. 
+The intent of `devContainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead. At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference an image, `Dockerfile`, or `docker-compose.yml`. 
 
 Since you are here, check out the [Existing Dockerfile](containers/docker-existing-dockerfile) and [Existing Docker Compose](containers/docker-existing-docker-compose) definitions for details, but here's the a quick tour of the basic properties. If you have a `Dockerfile`, set these properties:
 
