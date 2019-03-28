@@ -4,7 +4,7 @@ about: Create a report to help us improve
 ---
 
 <!--  🚨 Please only include bugs related to Dev Container Definitions here. 🚨 Other locations:
-        VS Code Remote Development extensions: http://github.com/Microsoft/vscode-remote-release 
+        VS Code Remote Development: http://github.com/Microsoft/vscode-remote-release 
         VS Code OSS: http://github.com/Microsoft/vscode
 -->
 
