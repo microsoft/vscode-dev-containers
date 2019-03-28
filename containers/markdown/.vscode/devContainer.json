@@ -1,0 +1,10 @@
+{
+    "name": "Markdown Editing",
+    "dockerFile": ".devcontainer/Dockerfile",
+    "extensions": [
+        "yzhang.markdown-all-in-one",
+        "streetsidesoftware.code-spell-checker",
+        "DavidAnson.vscode-markdownlint",
+        "esbenp.prettier-vscode"
+    ]
+}
