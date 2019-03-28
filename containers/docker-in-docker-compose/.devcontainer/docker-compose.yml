@@ -10,7 +10,7 @@ services:
       context: .
       dockerfile: .devcontainer/Dockerfile
     volumes:
-      - .:/app
+      - .:/workspace
 
       # Forwarding the socket is the key to getting this to work
       - /var/run/docker.sock:/var/run/docker.sock 
