@@ -1,5 +1,5 @@
 {
-    "name": "Markdown Editing",
+    "name": "Dev Container Editing",
     "dockerFile": ".vscode/Dockerfile",
     "extensions": [
         "yzhang.markdown-all-in-one",
