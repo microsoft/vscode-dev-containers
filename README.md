@@ -43,7 +43,7 @@ Since you are here, check out the [Existing Dockerfile](containers/docker-existi
 }
 ```
 
-Similarly, if you have a `docker-compose.yml` file, set these properties:
+For Docker Compose, you can [attach to an already running container](https://aka.ms/vscode-remote/docker/attach) or configure `.vscode/devContainer.json` with these properties:
 
 ```json
 {
@@ -53,7 +53,7 @@ Similarly, if you have a `docker-compose.yml` file, set these properties:
     "volume": "name-of-volume-where-source-code-is-located"
 }
 ```
-You may want to [extend your `docker-compose.yml` to avoid common pitfalls](containers/docker-existing-docker-compose).
+However, you may want to [extend your `docker-compose.yml`](containers/docker-existing-docker-compose) to avoid common pitfalls.
 
 The other definitions in the `containers` folder will provide examples of how to cover new scenarios you may encounter along the way. For example, you may want to [alter your configuration](https://aka.ms/vscode-remote/docker/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, or set runtime arguments. In other cases, you may just want to [attach to an already running container](https://aka.ms/vscode-remote/docker/attach). 
 
