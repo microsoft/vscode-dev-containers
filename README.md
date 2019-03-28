@@ -2,11 +2,11 @@
 
 A **development container** is a running Docker container that comes with a basic tool stack (Python, node, Go, etc.) and its prerequisites (e.g. `pylint` for Python). This container may be used to actually run an application or be focused exclusively on sandboxing tools, libraries, runtimes, or other utilities that need to be run against a codebase.
 
-Visual Studio Code Remote allows you to open any folder inside (or mounted into) a dev container and take advantage of VS Code's full feature set. When using the capability, VS Code selectively runs certain extensions in the container to optimize your experience. The result is that VS Code can provide a local-quality development experience including full IntelliSense, debugging, and more regardless of where your code is located. 
+Visual Studio Code Remote allows you to open any folder inside (or mounted into) a dev container and take advantage of VS Code's full feature set. When using the capability, VS Code selectively runs certain extensions in the container to optimize your experience. The result is that VS Code can provide a local-quality development experience including full IntelliSense, debugging, and more regardless of where your code is hosted. 
 
 **[See here to learn more about VS Code Remote](https://aka.ms/vscode-remote/docker)**.
 
-This repository contains a set of **dev container definitions** made up of files like `devContainer.json` that can be added to existing projects to get you up and running in a containerized environment. These files describe the container image, any runtime arguments for when the container is started, and any VS Code extensions that should be installed into it.
+This repository contains a set of **dev container definitions** made up of files like `devContainer.json` to help get you up and running in a containerized environment. These definitions describe the needed container image, any runtime arguments for starting the container, and any VS Code extensions that should be installed into it.
 
 ## Trying a definition
 
@@ -58,11 +58,9 @@ The other definitions in the `containers` folder will provide examples of how to
 
 ## Adding a definition to an existing public or private repo
 
-Files like `.vscode/devContainer.json` that make up each dev container definition in the `containers` folder can be committed into your own project's source control repo for reuse by others. These files can be modified to support your project's own unique needs rather than asking each developer to modify an existing definition.
+You can commit dev container definition files like `.vscode/devContainer.json` into your own project's source control repo for reuse by others. By committing these files to source control, anyone opening a cloned copy of your repo in VS Code with the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed will be asked if they want reopen the folder in a container instead. Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
 
-By committing the files to source control, anyone opening a cloned copy of your repo in VS Code with the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed will be asked if they want reopen the folder in a container instead. Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
-
-You can also optionally have VS Code recommend developers install the Remote Development extension when editing files in your repository by including it in the `recommendations` array in `.vscode/extensions.json` (as described [here](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)) and then adding the file to source control.
+You can also have VS Code automatically recommend that anyone that opens a cloned copy of your repo should install the Remote Development extension. You can do this by simply adding the extension ID to `recommendations` array in `.vscode/extensions.json` (as described [here](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)) and then adding the file to source control.
 
 ## Contents
 
