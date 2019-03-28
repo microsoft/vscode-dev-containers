@@ -50,10 +50,10 @@ Similarly, if you have a `docker-compose.yml` file, set these properties:
     "name": "[Optional] Your project name here",
     "dockerComposeFile": "docker-compose.yml",
     "service": "the-name-of-the-service-you-want-to-work-with-in-vscode",
-    "volume": "/"
+    "volume": "name-of-volume-where-source-code-is-located"
 }
 ```
-...optionally setting `volume` to where you have volume mounted the source code. You may want to [extend your `docker-compose.yml` to avoid common pitfalls](containers/docker-existing-docker-compose).
+You may want to [extend your `docker-compose.yml` to avoid common pitfalls](containers/docker-existing-docker-compose).
 
 The other definitions in the `containers` folder will provide examples of how to cover new scenarios you may encounter along the way. For example, you may want to [alter your configuration](https://aka.ms/vscode-remote/docker/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, or set runtime arguments. In other cases, you may just want to [attach to an already running container](https://aka.ms/vscode-remote/docker/attach). 
 
