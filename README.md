@@ -50,7 +50,7 @@ Similarly, if you have a `docker-compose.yml` file, set these properties:
     "name": "[Optional] Your project name here",
     "dockerComposeFile": "docker-compose.yml",
     "service": "the-name-of-the-service-you-want-to-work-with-in-vscode",
-    "volume": "/container/path/to/source/code"
+    "volume": "/"
 }
 ```
 
