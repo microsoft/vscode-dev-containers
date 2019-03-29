@@ -8,7 +8,7 @@ services:
   your-service-name-here:
     build: 
       context: .
-      dockerfile: Dockerfile  # Using a Dockerfile is optional, but included for completeness.
+      dockerfile: .devcontainer/Dockerfile  # Using a Dockerfile is optional, but included for completeness.
 
     ports:
      - "3000:3000"  # Application port to forward
