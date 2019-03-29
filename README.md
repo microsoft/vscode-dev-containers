@@ -28,11 +28,11 @@ You can either:
 
 ### Can I just reuse an existing Docker configuration?
 
-Absolutely! If you want to use an existing Dockerfile as a starting point, run **Remote-Docker: Create Container Configuraton File...** from the command pallette (Cmd/Ctrl+Shift+P). You'll be prompted to select a Dockerfile or you can opt to use a base image instead.
+Absolutely! If you want to use an existing Dockerfile as a starting point, run **Remote-Docker: Create Container Configuration File...** from the command pallette (Cmd/Ctrl+Shift+P). You'll be prompted to select a Dockerfile or you can opt to use a base image instead.
 
-##### About `.vscode/devContainer.json`
+#### About `.vscode/devContainer.json`
 
-The intent of `devContainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead. At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference an image, `Dockerfile`, or `docker-compose.yml`. 
+The intent of `devContainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead. At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference an image, `Dockerfile`, or `docker-compose.yml`.
 
 Since you are here, check out the [Existing Dockerfile](containers/docker-existing-dockerfile) and [Existing Docker Compose](containers/docker-existing-docker-compose) definitions for details, but here's the a quick tour of the basic properties. If you have a `Dockerfile`, set these properties:
 
@@ -53,9 +53,10 @@ For Docker Compose, you can [attach to an already running container](https://aka
     "volume": "name-of-volume-where-source-code-is-located"
 }
 ```
-However, you may want to [extend your `docker-compose.yml`](containers/docker-existing-docker-compose) to avoid common pitfalls.
 
-The other definitions in the `containers` folder will provide examples of how to cover new scenarios you may encounter along the way. For example, you may want to [alter your configuration](https://aka.ms/vscode-remote/docker/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, or set runtime arguments. In other cases, you may just want to [attach to an already running container](https://aka.ms/vscode-remote/docker/attach). 
+Note that, if you only have a deployment / non-development focused `docker-compose.yml`, you may want to [create a development version](https://aka.ms/vscode-remote/docker/docker-compose/development-version) to tweak what happens when the containers are started.
+
+The other definitions in the `containers` folder will provide examples of how to cover new scenarios you may encounter along the way. For example, you may want to [alter your configuration](https://aka.ms/vscode-remote/docker/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, or set runtime arguments. In other cases, you may just want to [attach to an already running container](https://aka.ms/vscode-remote/docker/attach).
 
 ## Adding a definition to an existing public or private repo
 
@@ -66,7 +67,7 @@ You can also have VS Code prompt anyone opening your repo to install the Remote 
 ```json
 {
     "recommendations": [
-        "vscode.remotedevelopment"
+        "vscode.remote-development"
     ]
 }
 ```
