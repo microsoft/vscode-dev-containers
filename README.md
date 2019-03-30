@@ -54,7 +54,7 @@ For Docker Compose, you can [attach to an already running container](https://aka
 }
 ```
 
-Note that, if you only have a deployment / non-development focused `docker-compose.yml`, you may want to [create a development version](https://aka.ms/vscode-remote/docker/docker-compose/development-version) to tweak what happens when the containers are started.
+Note that, if you only have a single deployment / non-development focused `docker-compose.yml`, you may want to [extend your Docker Compose file](https://aka.ms/vscode-remote/docker/docker-compose/development-version) to override or supplement what happens when your containers are started.
 
 The other definitions in the `containers` folder will provide examples of how to cover new scenarios you may encounter along the way. For example, you may want to [alter your configuration](https://aka.ms/vscode-remote/docker/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, or set runtime arguments. In other cases, you may just want to [attach to an already running container](https://aka.ms/vscode-remote/docker/attach).
 
