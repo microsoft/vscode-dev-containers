@@ -5,10 +5,13 @@
 
 FROM python:3-slim
 
+# Copy default endpoint specific user settings overrides into container to specify Python path
+COPY settings.vscode.json /root/.vscode-remote/data/User/settings.json
+
 RUN mkdir /app
 WORKDIR /app
 
-COPY .devcontainer/requirements.txt /app/
+COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
 RUN pip install pylint

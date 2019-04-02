@@ -11,9 +11,9 @@ services:
   jupyter:
     build:
       context: .
-      dockerfile: .devcontainer/Dockerfile
+      dockerfile: Dockerfile
     ports:
      - "8888:8888"
     volumes:
-      - .:/notebook
+      - ..:/notebook
 
