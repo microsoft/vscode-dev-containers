@@ -37,6 +37,8 @@ Please include the following with each issue:
   
 * Your operating system
 
+* Include any modifications to container configuration files you've made if possible.
+
 * List of extensions that you have installed
 
 * Reproducible steps (1... 2... 3...) that cause the issue
@@ -51,8 +53,6 @@ Please include the following with each issue:
 
 * Errors from the Dev Tools Console (open from the menu: Help > Toggle Developer Tools)
   
-* If you are using VS Code Remote Docker support, include your container configuration files if you are able to.
-
 ### Final Checklist
 
 Please remember to do the following:
