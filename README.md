@@ -53,7 +53,7 @@ Check out the `container-templates` folder for simple examples and the definitio
 
 #### Are development containers intended to define how an application is deployed?
 
-No. A development container is an environment that you can use to develop your application even before you are ready to build or deploy. The "dev container definitions" found in the [vscode-dev-containers repo](https://aka.ms/vscode-dev-containers) are intended to help jump start this process by including a set of well-known container build or deployment files and a `devcontainer.json` file. `devcontainer.json` is not intended to provide a home for tooling and edit-time related settings and a pointer to the image (or files that define the image) that should be used for the development container.
+No. A development container is an environment that you can use to develop your application even before you are ready to build or deploy. The "dev container definitions" found in the [vscode-dev-containers repo](https://aka.ms/vscode-dev-containers) are intended to help jump start this process by including a set of well-known container build or deployment files and a `devcontainer.json` file. This file provides a home for tooling and edit-time related settings and a pointer to the image (or files that define the image) that should be used for the development container.
 
 Support for [attaching to a running container](#attaching-to-running-containers) can be used to interact with deployment focused containers or for other container build or deployment workflows.
 
