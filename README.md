@@ -49,7 +49,7 @@ You can also check out the [existing Dockerfile](containers/docker-existing-dock
 
 The intent of `devcontainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead. At its simplest, all you need to do is add a `.devcontainer/devcontainer.json` file to your project and reference an image, `Dockerfile`, or `docker-compose.yml` and a few properties.
 
-Check out the `container-templates` folder for simple examples and the definitions in the `containers` folder illustrate ways to handle a number of different scenarios. From there, you can [alter your configuration](https://aka.ms/vscode-remote/containers/folder-setup) to install additional tools like Git in the container, automatically install extensions, expose additional ports, set runtime arguments, and more.
+Check out the `container-templates` folder for simple examples. The definitions in the `containers` folder can be used as-is or as samples for how to modify your existing config to support different scenarios. From there, you can [alter your configuration](https://aka.ms/vscode-remote/containers/folder-setup) to install additional tools like Git in the container, automatically install other extensions, expose additional ports, set runtime arguments, and more.
 
 #### Are development containers intended to define how an application is deployed?
 
