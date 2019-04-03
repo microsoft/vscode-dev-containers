@@ -6,7 +6,7 @@ Visual Studio Code Remote allows you to open any folder inside (or mounted into)
 
 **[See here to learn more about VS Code Remote](https://aka.ms/vscode-remote/containers)**.
 
-This repository contains a set of **dev container definitions** made up of files like `devContainer.json` to help get you up and running in a containerized environment. These definitions describe the needed container image, any runtime arguments for starting the container, and any VS Code extensions that should be installed into it.
+This repository contains a set of **dev container definitions** made up of files like `devcontainer.json` to help get you up and running in a containerized environment. These definitions describe the needed container image, any runtime arguments for starting the container, and any VS Code extensions that should be installed into it.
 
 ## Trying a definition
 
@@ -24,15 +24,15 @@ You can either:
 
 - Run **Remote: Create Container Configuration File...** command in VS Code and pick a definition. The appropriate files will then be added to your project.
 
-- Manually copy the contents of one of the `containers` sub-folders into your project. Copy the `.devcontainer` folder and `.vscode/devContainer.json` into your project and you should be ready to go!
+- Manually copy the contents of one of the `containers` sub-folders into your project. Copy the `.devcontainer` folder into your project and you should be ready to go!
 
 ### Can I just reuse an existing Docker configuration?
 
 Absolutely! If you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Create Container Configuration File...** from the command pallette (Cmd/Ctrl+Shift+P). You'll be prompted to select a Dockerfile or you can opt to use a base image instead.
 
-#### About `.vscode/devContainer.json`
+#### About `.devcontainer/devcontainer.json`
 
-The intent of `devContainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead. At its simplest, all you need to do is add a `.vscode/devContainer.json` file to your project and reference an image, `Dockerfile`, or `docker-compose.yml`.
+The intent of `devcontainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead. At its simplest, all you need to do is add a `.devcontainer/devcontainer.json` file to your project and reference an image, `Dockerfile`, or `docker-compose.yml`.
 
 Since you are here, check out the [existing Dockerfile](containers/docker-existing-dockerfile) and [existing Docker Compose](containers/docker-existing-docker-compose) definitions for details, but here's the a quick tour of the basic properties. If you have a `Dockerfile`, set these properties:
 
@@ -43,7 +43,7 @@ Since you are here, check out the [existing Dockerfile](containers/docker-existi
 }
 ```
 
-For Docker Compose, you can [attach to an already running container](https://aka.ms/vscode-remote/containers/attach) or configure `.vscode/devContainer.json` with these properties:
+For Docker Compose, you can [attach to an already running container](https://aka.ms/vscode-remote/containers/attach) or configure `.devcontainer/devcontainer.json` with these properties:
 
 ```json
 {
@@ -60,7 +60,7 @@ The other definitions in the `containers` folder will provide examples of how to
 
 ## Adding a definition to an existing public or private repo
 
-You can easily share a customized dev container definition for your project by simply adding files like `.vscode/devContainer.json` to source control. By including these files in your repository, anyone that opens a local copy of your repo in VS Code will be automatically asked if they want reopen the folder in a container instead if the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed.
+You can easily share a customized dev container definition for your project by simply adding files like `.devcontainer/devcontainer.json` to source control. By including these files in your repository, anyone that opens a local copy of your repo in VS Code will be automatically asked if they want reopen the folder in a container instead if the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed.
 
 Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
 

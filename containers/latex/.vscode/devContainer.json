@@ -1,7 +1,0 @@
-{
-    "name": "LaTeX",
-	"image": "tianon/latex",
-    "extensions": [
-        "James-Yu.latex-workshop"
-    ]
-}
