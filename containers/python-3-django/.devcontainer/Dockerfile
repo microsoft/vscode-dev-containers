@@ -10,13 +10,12 @@ COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/User/settings.
 
 ENV PYTHONUNBUFFERED 1
 
-RUN pip install pylint
+RUN mkdir /workspace
+WORKDIR /workspace
 
-RUN mkdir /app
-WORKDIR /app
-
-COPY .devcontainer/requirements.txt /app/
-RUN pip install -r requirements.txt
+# Install pylint and Django
+COPY .devcontainer/requirements.txt /workspace/
+RUN pip install -r requirements.txt && rm -f requirements.txt
 
 # Install git
 RUN apt-get update && apt-get -y install git

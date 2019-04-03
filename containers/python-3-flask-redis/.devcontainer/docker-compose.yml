@@ -12,7 +12,7 @@ services:
     ports:
      - "5000:5000"
     volumes:
-      - ..:/app
+      - ..:/workspace
     command: sleep infinity
   redis:
     image: "redis:alpine"
