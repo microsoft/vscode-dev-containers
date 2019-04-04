@@ -1,14 +1,14 @@
-# Dart - Web
+# Python V3, Flask, & Redis
 
 ## Summary
 
-*A basic dev container definition for developing web applications using Dart in a container. Includes everything you need to get up and running.*
+*A basic multi-container dev container definition for building Flask applications in a container that rely on Redis. Includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
-| *Definition type* | Dockerfile |
-| *Languages, platforms* | Dart |
+| *Definition type* | Docker Compose |
+| *Languages, platforms* | Python, Flask, Redis |
 
 ## Usage
 

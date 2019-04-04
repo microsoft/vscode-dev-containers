@@ -1,14 +1,14 @@
-# Dart - Web
+# Ruby v2
 
 ## Summary
 
-*A basic dev container definition for developing web applications using Dart in a container. Includes everything you need to get up and running.*
+*A basic dev container definition for developing Ruby applications in a container. Includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | Dart |
+| *Languages, platforms* | Ruby |
 
 ## Usage
 

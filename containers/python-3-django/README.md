@@ -1,14 +1,14 @@
-# Dart - Web
+# Python v3 & Django
 
 ## Summary
 
-*A basic dev container definition for developing web applications using Dart in a container. Includes everything you need to get up and running.*
+*A basic dev container definition for building Django-based applications container. Includes everything you need to get up and running like Django, PyLint and the Python extension.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | Dart |
+| *Languages, platforms* | Python |
 
 ## Usage
 

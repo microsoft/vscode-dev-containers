@@ -22,6 +22,10 @@ To get started, follow the appropriate steps below for your operating system.
 
 ## Usage
 
+First, install the **[Visual Studio Code Remote Development](https://aka.ms/vscode-remote/download/extension)** extension pack if you have not already.
+
+To try out the definition with an existing project,  copy the  `.devcontainer` folder into your project root and then follow the OS specific directions below.
+
 ### macOS  / Windows Setup
 
 1. Install "Docker Desktop for Mac" / "Docker Desktop for Windows" locally if you have not.

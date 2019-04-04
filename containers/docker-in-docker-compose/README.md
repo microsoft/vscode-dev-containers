@@ -18,7 +18,11 @@ Dev containers can be useful for all types of applications including those that 
 
 ## Usage
 
-No additional setup steps are required, but note that the included `dev-container.dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. First, update the `FROM` statement to reference the new base image. For example:
+[See here for information on using this definition with an existing project](../../README.md#using-a-definition).
+
+If you prefer, you can also just look through the contents of the `.devcontainer` folder to understand how to make changes to your own project.
+
+No additional setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. First, update the `FROM` statement to reference the new base image. For example:
 
 ```Dockerfile
 FROM node:8

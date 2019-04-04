@@ -1,14 +1,14 @@
-# Dart - Web
+# Python v3
 
 ## Summary
 
-*A basic dev container definition for developing web applications using Dart in a container. Includes everything you need to get up and running.*
+*A basic dev container definition for developing Python 3 applications in a container. Includes everything you need to get up and running like PyLint and the Python extension.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | Dart |
+| *Languages, platforms* | Python |
 
 ## Usage
 

@@ -1,14 +1,14 @@
-# Dart - Web
+# Node.js v8 & TypeScript
 
 ## Summary
 
-*A basic dev container definition for developing web applications using Dart in a container. Includes everything you need to get up and running.*
+*A basic dev container definition for building Node.js applications in TypeScript in a container. Includes everything you need to get up and running like Node.js and the TypeScript compiler.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | Dart |
+| *Languages, platforms* | Node.js, TypeScript |
 
 ## Usage
 
