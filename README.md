@@ -6,7 +6,7 @@ The Containers extension in the [Visual Studio Code Remote Development](https://
 
 **[Learn more about the Visual Studio Code Remote - Containers extension](https://aka.ms/vscode-remote/containers)**.
 
-This repository contains a set of **dev container definitions** made up of files like `devcontainer.json` to help get you up and running in a containerized environment. These definitions describe the needed container image, any runtime arguments for starting the container, and any VS Code extensions that should be installed into it.
+This repository contains a set of **dev container definitions** made up of files like `devcontainer.json` to help get you up and running in a containerized environment. These definitions describe the needed container image, any runtime arguments for starting the container, and any VS Code extensions that should be installed into it. They're can be useful to help you get started or as samples for how to adapt your own configuration to different situations.
 
 ## Trying a definition
 
@@ -14,9 +14,9 @@ This repository contains a set of **dev container definitions** made up of files
 2. Check out the README to see if there are any manual steps
 3. Clone this repository or copy the contents of the folder to your machine
 4. Run the **Remote: Open Folder in Container...** command in VS Code
-5. Select the definition folder in the "open" dialog
+5. Select the root of the definition folder in the "open" dialog (**not** the `test-project` folder if present)
 
-Many definitions include a `test-project` that you can use to see the dev container in action. Note that if you open this folder locally instead, you'll be prompted to reopen it in a container as well. You can also use the **Remote: Reopen Folder in Container** command at any time.
+Many definitions include a `test-project` with a sample and/or launch settings in the `.vscode` folder that you can use to see the dev container in action. If you open the folder locally instead, you'll be prompted to reopen it in a container but uou can also use the **Remote: Reopen Folder in Container** command at any time.
 
 ## Using a definition
 
