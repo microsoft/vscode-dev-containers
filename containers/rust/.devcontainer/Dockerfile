@@ -6,7 +6,7 @@
 FROM rust:1
 
 # Copy endpoint specific user setting overrides into container
-COPY settings.vscode.json /root/.vscode-remote/data/User/settings.json
+COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/User/settings.json
 
 RUN rustup update
 RUN rustup component add rls rust-analysis rust-src
