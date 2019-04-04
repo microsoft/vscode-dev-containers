@@ -11,6 +11,16 @@
 | *Languages, platforms* | Any |
 
 > **Note:** There is also a [Docker Compose](../docker-existing-docker-compose) variation of this same definition.
+> 
+## Usage
+
+First, install the **[Visual Studio Code Remote Development](https://aka.ms/vscode-remote/download/extension)** extension pack if you have not already.
+
+To use the definition with your own project that contains a `Dockerfile`:
+
+1. Copy the `.devcontainer` folder into your project root.
+2. Modify the `.devcontainer/devcontainer.json` as needed (see comments)
+3. Reopen the folder in the container (e.g. using the **Remote-Container: Reopen Folder in Container** command in VS Code) to use it unmodified.
 
 ## License
 
