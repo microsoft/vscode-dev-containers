@@ -13,10 +13,10 @@ This repository contains a set of **dev container definitions** made up of files
 1. Click on one of the `containers` sub-folders to open it in your browser
 2. Check out the README to see if there are any manual steps
 3. Clone this repository or copy the contents of the folder to your machine
-4. Run the **Remote: Open Folder in Container...** command in VS Code
+4. Run the **Remote-Containers: Open Folder in Container...** command in VS Code
 5. Select the root of the definition folder in the "open" dialog (**not** the `test-project` folder if present)
 
-Many definitions include a `test-project` with a sample and/or launch settings in the `.vscode` folder that you can use to see the dev container in action. If you open the folder locally instead, you'll be prompted to reopen it in a container but uou can also use the **Remote: Reopen Folder in Container** command at any time.
+Many definitions include a `test-project` with a sample and/or launch settings in the `.vscode` folder that you can use to see the dev container in action. If you open the folder locally instead, you'll be prompted to reopen it in a container but uou can also use the **Remote-Containers: Reopen Folder in Container** command at any time.
 
 ## Using a definition
 
@@ -24,7 +24,7 @@ You can either:
 
 - Manually copy the contents of one of the `containers` sub-folders into your project. Copy the `.devcontainer` folder into your project and you should be ready to go!
 
-- Run **Remote: Create Container Configuration File...** command in VS Code and pick a definition. The appropriate files will then be added to your project.
+- Run **Remote-Containers: Create Container Configuration File...** command in VS Code and pick a definition. The appropriate files will then be added to your project.
 
 ## Adding a definition to an existing public or private repo
 
