@@ -2,7 +2,7 @@
     "name": "Python & Redis",
     "dockerComposeFile": ".devcontainer/docker-compose.yml",
     "service": "web",
-    "volume": "workspace",
+    "workspaceFolder": "/workspace",
     "extensions": [
         "ms-python.python",
 		"LittleFoxTeam.vscode-python-test-adapter"

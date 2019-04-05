@@ -2,7 +2,7 @@
 	"name": "Jupyter PySpark",
 	"dockerComposeFile": ".devcontainer/docker-compose.yml",
 	"service": "jupyter",
-	"volume": "notebook",
+	"workspaceFolder": "/notebooks",
 	"extensions": [
 		"ms-python.python"
 	]

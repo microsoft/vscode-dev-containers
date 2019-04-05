@@ -10,7 +10,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ..:/app
+      - ..:/workspace
     ports:
       - "3000:3000"
     command: sleep infinity

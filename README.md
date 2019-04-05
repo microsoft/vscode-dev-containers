@@ -22,9 +22,9 @@ Many definitions include a `test-project` with a sample and/or launch settings i
 
 You can either:
 
-- Run **Remote: Create Container Configuration File...** command in VS Code and pick a definition. The appropriate files will then be added to your project.
-
 - Manually copy the contents of one of the `containers` sub-folders into your project. Copy the `.devcontainer` folder into your project and you should be ready to go!
+
+- Run **Remote: Create Container Configuration File...** command in VS Code and pick a definition. The appropriate files will then be added to your project.
 
 ## Adding a definition to an existing public or private repo
 

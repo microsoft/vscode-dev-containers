@@ -2,7 +2,7 @@
     "name": "Node.js & Mongo DB",
     "dockerComposeFile": ".devcontainer/docker-compose.yml",
     "service": "web",
-    "volume": "app",
+    "workspaceFolder": "/workspace",
     "extensions": [
         "dbaeumer.vscode-eslint"
     ]

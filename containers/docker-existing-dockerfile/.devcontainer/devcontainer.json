@@ -1,14 +1,18 @@
 {
     "name": "Existing Dockerfile",
 
-    "// Update the dockerFile property if you aren't using the standard 'Dockerfile' filename":"",
+    // Update the "dockerFile" property if you aren't using the standard 'Dockerfile' filename.
+
     "dockerFile": "Dockerfile",
     
-    "// Use appPort to list ports you want to expose that aren't already exposed in your Dockerfile":"",
+    // Use the optional "appPort" property to expose ports not already in your Dockerfile
+
     "appPort": [],
 
-    "// If you install the Docker CE CLI in your container, this runArgs list lets you interact with your host":"",
-    "// Docker service from inside the container. See the docker-in-docker and docker-in-docker-compose": "",
-    "// definitions for details.":"",
+    // The optional "runArgs" property can be used to specify Docker CLI arguments to use when the container.
+    // is started. If you install the Docker CE CLI in your container, the runArgs list below will lets you interact 
+    // with your host's Docker service from inside the container. See the docker-in-docker and docker-in-docker-compose
+    // definitions for details.
+    
     "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
 }
