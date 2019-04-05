@@ -7,14 +7,6 @@ FROM jupyter/pyspark-notebook
 
 USER root
 
-RUN pip install pylint
-
-# Copy jupyter_notebook_config.py with token that matches settings
-COPY jupyter_notebook_config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
-
-# Copy default endpoint specific user settings overrides into container to specify Python path, token
-COPY settings.vscode.json /home/jovyan/.vscode-remote/data/User/settings.json
-
 # Install git
 RUN apt-get update && apt-get -y install git
 
@@ -22,3 +14,18 @@ RUN apt-get update && apt-get -y install git
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+# Copy jupyter_notebook_config.py with token that matches settings
+COPY jupyter_notebook_config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
+
+# Copy default endpoint specific user settings overrides into container to specify Python path, token
+COPY settings.vscode.json /home/jovyan/.vscode-remote/data/User/settings.json
+
+RUN chown jovyan -R /home/jovyan
+
+USER jovyan
+
+RUN pip install pylint
+
+
+
