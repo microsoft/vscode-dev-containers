@@ -39,13 +39,13 @@ Beyond the advantages of having your team use a consistent environment and tool-
 
 ## Common Questions
 
-#### Can I just reuse an existing container image or Docker configuration?
+### Can I just reuse an existing container image or Docker configuration?
 
 Absolutely! If you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Create Container Configuration File...** from the command pallette (Cmd/Ctrl+Shift+P). You'll be prompted to select a Dockerfile or you can opt to use a base image instead and customize from there. 
 
 You can also check out the [existing Dockerfile](containers/docker-existing-dockerfile) and [existing Docker Compose](containers/docker-existing-docker-compose) definitions for an example. You can also [attach to an already running container](https://aka.ms/vscode-remote/containers/attach) if you'd prefer.
 
-##### What is the goal of `devcontainer.json`?
+### What is the goal of `devcontainer.json`?
 
 The intent of `devcontainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead. At its simplest, all you need to do is add a `.devcontainer/devcontainer.json` file to your project and reference an image, `Dockerfile`, or `docker-compose.yml` and a few properties.
 
