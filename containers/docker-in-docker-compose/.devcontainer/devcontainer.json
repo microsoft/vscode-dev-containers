@@ -2,7 +2,7 @@
     "name": "Docker-in-Docker",
     "dockerComposeFile": ".devcontainer/docker-compose.yml",
     "service": "docker-in-docker",
-    "volume": "workspace",
+    "workspaceFolder": "/workspace",
     "extensions": [
         "peterjausovec.vscode-docker"
     ]

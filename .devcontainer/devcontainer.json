@@ -1,6 +1,6 @@
 {
     "name": "Dev Container Editing",
-    "dockerFile": ".vscode/Dockerfile",
+    "dockerFile": ".devcontainer/Dockerfile",
     "extensions": [
         "yzhang.markdown-all-in-one",
         "streetsidesoftware.code-spell-checker",

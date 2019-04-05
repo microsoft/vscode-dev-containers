@@ -100,9 +100,8 @@ If you want to create a new definition:
 
     ```
     📁 <language>-<optional: version>-<descriptor>
-       📁 .vscode
-          📄 devContainer.json
        📁 .devcontainer
+          📄 devcontainer.json
           📄 Dockerfile (optional)
           📄 docker-compose.yml (optional)
           📄 ignore
@@ -110,7 +109,7 @@ If you want to create a new definition:
        📄 README.md
     ```
 
-    See the [VS Code Remote Development documentation](https://aka.ms/vscode-remote/docker) for information on the expected contents of `devContainer.json` and how it relates to other files listed above.
+    See the [VS Code Remote Development documentation](https://aka.ms/vscode-remote/docker) for information on the expected contents of `devcontainer.json` and how it relates to other files listed above.
     
     Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Keeping these files in the `.devcontainer` should reduce the chances of something conflicting but note that any command that are run are relative to the root of the project, so you'll need to include `.devcontainer` in any path references.
     
@@ -136,7 +135,7 @@ Finally, after you get your container up and running, you can test it by adding 
 
 While using a `Dockerfile` is a convienent way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image be built by anyone using it.  If your definition is stable, we strongly reccomend building and publishing your image to [DockerHub](https://hub.docker.com) or [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) instead. 
 
-Once you've published your container image, just update `devContainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
+Once you've published your container image, just update `devcontainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
 
 ## Contributing to Documentation
 
