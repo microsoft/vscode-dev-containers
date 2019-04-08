@@ -6,7 +6,7 @@
 FROM python:3-slim
 
 # Copy default endpoint specific user settings overrides into container to specify Python path
-COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/User/settings.json
+COPY settings.vscode.json /root/.vscode-remote/data/User/settings.json
 
 ENV PYTHONUNBUFFERED 1
 
@@ -14,7 +14,7 @@ RUN mkdir /workspace
 WORKDIR /workspace
 
 # Install pylint and Django
-COPY .devcontainer/requirements.txt /workspace/
+COPY requirements.txt /workspace/
 RUN pip install -r requirements.txt && rm -f requirements.txt
 
 # Install git

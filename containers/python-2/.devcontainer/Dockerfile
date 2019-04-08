@@ -6,7 +6,7 @@
 FROM python:2-slim
 
 # Copy endpoint specific user settings overrides into container to specify Python path
-COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/User/settings.json
+COPY settings.vscode.json /root/.vscode-remote/data/User/settings.json
 
 RUN pip install pylint
 
