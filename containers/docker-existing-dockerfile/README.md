@@ -1,4 +1,4 @@
-# Existing Dockerfile Sample
+# Reusing an Existing Dockerfile
 
 ## Summary
 
