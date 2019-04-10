@@ -104,8 +104,8 @@ If you want to create a new definition:
           📄 devcontainer.json
           📄 Dockerfile (optional)
           📄 docker-compose.yml (optional)
-          📄 ignore
        📁 test-project (optional)
+       📄 .npmignore
        📄 README.md
     ```
 
@@ -113,7 +113,7 @@ If you want to create a new definition:
     
     Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Keeping these files in the `.devcontainer` should reduce the chances of something conflicting but note that any command that are run are relative to the root of the project, so you'll need to include `.devcontainer` in any path references.
     
-    Anything you don't want added to a project should be referenced in [glob](https://facelessuser.github.io/wcmatch/glob/) form in `.devcontainer/ignore` with paths relative to the root of the folder. Create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
+    Anything you don't want added to a project should be referenced in [glob](https://facelessuser.github.io/wcmatch/glob/) form in `.npmignore` with paths relative to the root of the folder. Create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
 
 4. Commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in! We appreciate any and all feedback!!
 
