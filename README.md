@@ -36,6 +36,7 @@ Beyond the advantages of having your team use a consistent environment and tool-
 
 - `containers` - Dev container definition folders. 
 - `container-templates` - Templates for creating your own container definitions in your project or for contributing back to this repository.
+- `repository-configurations` - Dev container definitions working on a cloned copy of specific, public source code repository (rather than general purpose).
 
 ## Common Questions
 
