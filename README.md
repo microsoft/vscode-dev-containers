@@ -16,15 +16,15 @@ This repository contains a set of **dev container definitions** made up of files
 4. Run the **Remote-Containers: Open Folder in Container...** command in VS Code
 5. Select the root of the definition folder in the "open" dialog (**not** the `test-project` folder if present)
 
-Many definitions include a `test-project` with a sample and/or launch settings in the `.vscode` folder that you can use to see the dev container in action. If you open the folder locally instead, you'll be prompted to reopen it in a container but uou can also use the **Remote-Containers: Reopen Folder in Container** command at any time.
+Many definitions include a `test-project` with a sample and/or launch settings in the `.vscode` folder that you can use to see the dev container in action.
 
 ## Using a definition
 
 You can either:
 
-- Run **Remote-Containers: Create Container Configuration File...** command in VS Code and pick a definition. The appropriate files will then be added to your project. These are updated with each VS Code release.
+- Open a folder in VS Code without a `devcontainer.json` file and run the **Remote-Containers: Create Container Configuration File...** or **Remote-Containers: Reopen Folder in Container** commands. You be prompted to pick a definition and any options and the appropriate files will then be added to your project.
 
-- Manually copy the contents of one of the `containers` sub-folders into your project. Copy the `.devcontainer` folder into your project and you should be ready to go!
+- Manually copy the contents of one of the `containers` sub-folders into your project. Typically you can just copy the `.devcontainer` folder into your project but the folder's README may mention additional files.
 
 ## Adding a definition to an existing public or private repo
 
@@ -34,15 +34,15 @@ Beyond the advantages of having your team use a consistent environment and tool-
 
 ## Contents
 
-- `containers` - Dev container definition folders. 
-- `container-templates` - Templates for creating your own container definitions in your project or for contributing back to this repository.
+- `containers` - Contains reusable dev container definitions.
+- `container-templates` - Contains templates for creating your own container definitions for your project or to [contribute back](CONTRIBUTING.md#contributing-dev-container-definitions).
 - `repository-configurations` - Dev container definitions working on a cloned copy of specific, public source code repository (rather than general purpose).
 
 ## Common Questions
 
 ### Can I just reuse an existing container image or Docker configuration?
 
-Absolutely! If you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Create Container Configuration File...** from the command pallette (Cmd/Ctrl+Shift+P). You'll be prompted to select a Dockerfile or you can opt to use a base image instead and customize from there. 
+Absolutely! If you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Create Container Configuration File...** from the command pallette (Cmd/Ctrl+Shift+P). You'll be prompted to select a Dockerfile or you can opt to use a base image instead and customize from there.
 
 You can also check out the [existing Dockerfile](containers/docker-existing-dockerfile) and [existing Docker Compose](containers/docker-existing-docker-compose) definitions for an example. You can also [attach to an already running container](https://aka.ms/vscode-remote/containers/attach) if you'd prefer.
 
