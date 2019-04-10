@@ -3,7 +3,8 @@
 	"version": "0.2.0",
 	"description": "VS Code Dev Containers: Definitions and Templates",
 	"files": [
-		"containers"
+		"containers",
+		"repository-configurations"
 	],
 	"repository": {
 		"type": "git",
