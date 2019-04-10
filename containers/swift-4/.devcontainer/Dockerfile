@@ -6,7 +6,7 @@
 FROM swift:4
 
 # Copy endpoint specific user setting overrides into container
-COPY settings.vscode.json /root/.vscode-remote/data/User/settings.json
+COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 
 # Install git
 RUN apt-get update && apt-get -y install git

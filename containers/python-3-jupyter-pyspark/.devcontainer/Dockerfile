@@ -19,7 +19,7 @@ RUN apt-get autoremove -y \
 COPY jupyter_notebook_config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
 
 # Copy default endpoint specific user settings overrides into container to specify Python path, token
-COPY settings.vscode.json /home/jovyan/.vscode-remote/data/User/settings.json
+COPY settings.vscode.json /home/jovyan/.vscode-remote/data/Machine/settings.json
 
 RUN chown jovyan -R /home/jovyan
 

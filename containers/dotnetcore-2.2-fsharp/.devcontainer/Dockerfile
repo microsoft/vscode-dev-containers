@@ -7,7 +7,7 @@ FROM microsoft/dotnet:2.2-sdk
 
 # Copy endpoint specific user settings overrides into container to specify
 # .NET Core should be used as the runtime.
-COPY settings.vscode.json /root/.vscode-remote/data/User/settings.json
+COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 
 # Install git
 RUN apt-get update && apt-get -y install git

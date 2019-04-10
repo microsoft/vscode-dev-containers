@@ -6,7 +6,7 @@
 FROM python:3-slim
 
 # Copy default endpoint specific user settings overrides into container to specify Python path
-COPY settings.vscode.json /root/.vscode-remote/data/User/settings.json
+COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 
 ENV PYTHONUNBUFFERED 1
 
