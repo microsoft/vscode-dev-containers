@@ -1,0 +1,5 @@
+{
+	"name": "Ubuntu 18.04 + Git",
+	"dockerFile": ".devcontainer/Dockerfile",
+	"appPort": []
+}
