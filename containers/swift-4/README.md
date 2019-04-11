@@ -1,4 +1,4 @@
-# Swift v4
+# Swift 4
 
 ## Summary
 

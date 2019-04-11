@@ -1,14 +1,14 @@
-# Node.js v8 & Mongo DB
+# Node.js 10 & TypeScript
 
 ## Summary
 
-*A basic multi-container dev container definition for building Node.js applications in a  container that rely on a Mongo DB. Includes everything you need to get up and running.*
+*A basic dev container definition for building Node.js applications in TypeScript in a container. Includes everything you need to get up and running like Node.js and the TypeScript compiler.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
-| *Definition type* | Docker Compose |
-| *Languages, platforms* | Node.js, JavaScript, Mongo DB |
+| *Definition type* | Dockerfile |
+| *Languages, platforms* | Node.js, TypeScript |
 
 ## Usage
 

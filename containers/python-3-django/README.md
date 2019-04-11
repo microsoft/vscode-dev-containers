@@ -1,4 +1,4 @@
-# Python v3 & Django
+# Python 3 & Django
 
 ## Summary
 

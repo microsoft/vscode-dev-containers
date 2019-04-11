@@ -1,4 +1,4 @@
-# PHP v7
+# PHP 7
 
 ## Summary
 

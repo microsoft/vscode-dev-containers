@@ -1,4 +1,4 @@
-# Python v3
+# Python 3
 
 ## Summary
 

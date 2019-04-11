@@ -1,4 +1,4 @@
-# .NET Core v2.2
+# .NET Core 2.2
 
 ## Summary
 

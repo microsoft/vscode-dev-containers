@@ -1,4 +1,4 @@
-# Ruby v2
+# Ruby 2
 
 ## Summary
 

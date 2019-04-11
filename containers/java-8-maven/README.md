@@ -1,4 +1,4 @@
-# Java v8 and Maven
+# Java 8 & Maven
 
 ## Summary
 

@@ -1,4 +1,4 @@
-# Python V3, Jupyter, & PySpark
+# Python 3, Jupyter, & PySpark
 
 ## Summary
 

@@ -1,5 +1,5 @@
 {
-    "name": "Extend an Existing Docker Compose",
+    "name": "Existing Docker Compose (Extend)",
 
     "// Update the 'dockerComposeFile' list if you have more compose files or use different names.":"",
     "// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.":"",

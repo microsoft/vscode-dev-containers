@@ -1,5 +1,5 @@
 {
-    "name": "Docker-in-Docker Compose",
+    "name": "Docker in Docker Compose",
     "dockerComposeFile": ".devcontainer/docker-compose.yml",
     "service": "docker-in-docker",
     "workspaceFolder": "/workspace",

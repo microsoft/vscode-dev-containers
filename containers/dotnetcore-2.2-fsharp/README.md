@@ -1,4 +1,4 @@
-# F#
+# F# (.NET Core 2.2)
 
 ## Summary
 

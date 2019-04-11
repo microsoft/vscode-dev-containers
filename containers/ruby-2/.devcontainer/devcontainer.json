@@ -1,5 +1,5 @@
 {
-	"name": "Ruby",
+	"name": "Ruby 2",
 	"dockerFile": ".devcontainer/Dockerfile",
 	"extensions": [
 		"rebornix.Ruby"

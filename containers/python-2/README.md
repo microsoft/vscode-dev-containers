@@ -1,4 +1,4 @@
-# Python v2
+# Python 2
 
 ## Summary
 

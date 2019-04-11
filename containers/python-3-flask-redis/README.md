@@ -1,4 +1,4 @@
-# Python V3, Flask, & Redis
+# Python 3, Flask, & Redis
 
 ## Summary
 

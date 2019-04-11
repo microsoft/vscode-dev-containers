@@ -1,5 +1,5 @@
 {
-	"name": "Swift",
+	"name": "Swift 4",
 	"dockerFile": ".devcontainer/Dockerfile",
 	"extensions": [
 		"vknabel.vscode-swift-development-environment",

@@ -1,5 +1,5 @@
 {
-    "name": "Reuse an Existing Dockerfile",
+    "name": "Existing Dockerfile",
 
     "// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.":"",
 

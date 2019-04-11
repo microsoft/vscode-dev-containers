@@ -1,4 +1,4 @@
-# Node.js v8 & TypeScript
+# Node.js 8 & TypeScript
 
 ## Summary
 
