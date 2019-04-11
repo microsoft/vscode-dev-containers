@@ -36,7 +36,7 @@ Beyond the advantages of having your team use a consistent environment and tool-
 
 - `containers` - Contains reusable dev container definitions.
 - `container-templates` - Contains templates for creating your own container definitions for your project or to [contribute back](CONTRIBUTING.md#contributing-dev-container-definitions).
-- `repository-containers` - Dev container definitions working on a cloned copy of specific, public source code repository (rather than general purpose).
+- `repository-containers` - Dev container definitions for working on a cloned copy of specific, public source code repository (rather than general purpose).
 
 ## Common Questions
 
