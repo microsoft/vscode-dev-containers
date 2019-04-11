@@ -3,6 +3,7 @@
     "dockerComposeFile": ".devcontainer/docker-compose.yml",
     "service": "your-service-name-here",
     "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
 	"extensions": [
 		"mutantdino.resourcemonitor"
     ]

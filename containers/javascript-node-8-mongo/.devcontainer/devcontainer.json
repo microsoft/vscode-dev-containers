@@ -3,6 +3,7 @@
     "dockerComposeFile": ".devcontainer/docker-compose.yml",
     "service": "web",
     "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
     "extensions": [
         "dbaeumer.vscode-eslint"
     ]

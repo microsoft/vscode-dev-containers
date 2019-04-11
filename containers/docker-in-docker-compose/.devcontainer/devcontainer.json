@@ -3,6 +3,7 @@
     "dockerComposeFile": ".devcontainer/docker-compose.yml",
     "service": "docker-in-docker",
     "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
     "extensions": [
         "peterjausovec.vscode-docker"
     ]

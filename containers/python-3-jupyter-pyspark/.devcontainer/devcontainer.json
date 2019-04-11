@@ -3,6 +3,7 @@
 	"dockerComposeFile": ".devcontainer/docker-compose.yml",
 	"service": "jupyter",
 	"workspaceFolder": "/notebooks",
+	"shutdownAction": "stopCompose",
 	"extensions": [
 		"ms-python.python"
 	]
