@@ -4,7 +4,7 @@
 	"description": "VS Code Dev Containers: Definitions and Templates",
 	"files": [
 		"containers",
-		"repository-configurations"
+		"repository-containers"
 	],
 	"repository": {
 		"type": "git",
