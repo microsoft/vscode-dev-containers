@@ -1,6 +1,6 @@
 {
     "name": "Markdown Editing",
-    "dockerFile": ".devcontainer/Dockerfile",
+    "dockerFile": "Dockerfile",
     "extensions": [
         "yzhang.markdown-all-in-one",
         "streetsidesoftware.code-spell-checker",

@@ -1,6 +1,6 @@
 {
     "name": "Docker in Docker Compose",
-    "dockerComposeFile": ".devcontainer/docker-compose.yml",
+    "dockerComposeFile": "docker-compose.yml",
     "service": "docker-in-docker",
     "workspaceFolder": "/workspace",
     "shutdownAction": "stopCompose",

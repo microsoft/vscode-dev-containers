@@ -1,6 +1,6 @@
 {
 	"name": "Jupyter PySpark",
-	"dockerComposeFile": ".devcontainer/docker-compose.yml",
+	"dockerComposeFile": "docker-compose.yml",
 	"service": "jupyter",
 	"workspaceFolder": "/notebooks",
 	"shutdownAction": "stopCompose",

@@ -1,6 +1,6 @@
 {
 	"name": "Dart",
-	"dockerFile": ".devcontainer/Dockerfile",
+	"dockerFile": "Dockerfile",
 	"appPort": 8080,
 	"extensions": [
 		"dart-code.dart-code",

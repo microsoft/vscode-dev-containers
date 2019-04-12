@@ -1,6 +1,6 @@
 {
 	"name": "Java",
-	"dockerFile": ".devcontainer/Dockerfile",
+	"dockerFile": "Dockerfile",
 	"extensions": [
 		"vscjava.vscode-java-pack"		
 	]

@@ -1,6 +1,6 @@
 {
     "name": "Python & Redis",
-    "dockerComposeFile": ".devcontainer/docker-compose.yml",
+    "dockerComposeFile": "docker-compose.yml",
     "service": "web",
     "workspaceFolder": "/workspace",
     "shutdownAction": "stopCompose",

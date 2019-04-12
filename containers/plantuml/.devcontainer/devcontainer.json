@@ -1,6 +1,6 @@
 {
     "name": "PlantUML",
-    "dockerFile": ".devcontainer/Dockerfile",
+    "dockerFile": "Dockerfile",
     "extensions": [
         "jebbs.plantuml"
     ]

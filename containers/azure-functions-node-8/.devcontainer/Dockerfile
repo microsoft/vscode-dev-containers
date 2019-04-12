@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM microsoft/dotnet:2.1-sdk-stretch
+FROM microsoft/dotnet:2.1-sdk-bionic
 
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
@@ -20,10 +20,8 @@ RUN apt-get install -y apt-transport-https \
     && dpkg -i packages-microsoft-prod.deb \
     && rm packages-microsoft-prod.deb \
     && apt-get update \
-    && apt-get download azure-functions-core-tools \
-    && dpkg -i --force-depends azure-functions-core-tools*.deb \
-    && rm azure-functions-core-tools*.deb
-
+    && apt-get install -y azure-functions-core-tools
+    
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \

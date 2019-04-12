@@ -1,6 +1,6 @@
 {
 	"name": "Rust",
-	"dockerFile": ".devcontainer/Dockerfile",
+	"dockerFile": "Dockerfile",
 	"extensions": [
 		"rust-lang.rust",
 		"bungcip.better-toml",

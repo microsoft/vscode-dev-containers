@@ -1,6 +1,6 @@
 {
 	"name": ".NET Core 2.2",
-	"dockerFile": ".devcontainer/Dockerfile",
+	"dockerFile": "Dockerfile",
 	"appPort": 8090,
 	"extensions": [
 		"ms-vscode.csharp"

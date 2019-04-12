@@ -1,6 +1,6 @@
 {
 	"name": "Azure Terraform",
-	"dockerFile": ".devcontainer/Dockerfile",
+	"dockerFile": "Dockerfile",
 	"extensions": [
 		"mauve.terraform",
 		"ms-azuretools.azureterraform"

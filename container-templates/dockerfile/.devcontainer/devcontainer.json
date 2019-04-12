@@ -1,6 +1,6 @@
 {
 	"name": "Dev Container Definition Template - Dockerfile",
-	"dockerFile": ".devcontainer/Dockerfile",
+	"dockerFile": "Dockerfile",
 	"appPort": 3000,
 	"extensions": [
 		"mutantdino.resourcemonitor"

@@ -3,7 +3,7 @@
 
     "// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.":"",
 
-    "dockerFile": "Dockerfile",
+    "dockerFile": "../Dockerfile",
     
     "// Use the optional 'appPort' property to expose ports not already in your Dockerfile":"",
 

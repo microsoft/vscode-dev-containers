@@ -1,6 +1,6 @@
 {
     "name": "Kubernetes",
-    "dockerFile": ".devcontainer/Dockerfile",
+    "dockerFile": "Dockerfile",
     "extensions": [
         "peterjausovec.vscode-docker",
         "ms-kubernetes-tools.vscode-kubernetes-tools"

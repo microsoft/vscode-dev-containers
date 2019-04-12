@@ -1,6 +1,6 @@
 {
 	"name": "C++",
-	"dockerFile": ".devcontainer/Dockerfile",
+	"dockerFile": "Dockerfile",
 	"extensions": [
 		"ms-vscode.cpptools"
 	],
