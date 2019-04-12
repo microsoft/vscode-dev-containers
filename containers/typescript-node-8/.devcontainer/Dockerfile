@@ -5,15 +5,17 @@
 
 FROM node:8-slim
 
-# Install yarn and git
-RUN apt-get update \
-    && apt-get install -y apt-transport-https \
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
+
+# Install yarn 
+RUN apt-get install -y apt-transport-https \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && apt-get install -y yarn git
+    && apt-get install -y yarn
 
-# Install tslint
+# Install tslint and typescript
 RUN npm install -g tslint typescript
 
 # Clean up

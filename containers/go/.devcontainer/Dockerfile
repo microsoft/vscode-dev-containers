@@ -23,8 +23,8 @@ RUN go get -u -v \
     github.com/mgechev/revive \
     github.com/derekparker/delve/cmd/dlv
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Clean up
 RUN apt-get autoremove -y \

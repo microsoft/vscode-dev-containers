@@ -7,9 +7,8 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
 FROM ubuntu:bionic
 
-# Install git
-RUN apt-get update \
-	&& apt-get install -y git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install Docker CE CLI. If you choose a Debian based image, update https://download.docker.com/linux/ubuntu
 # to https://download.docker.com/linux/debian on the third line below.

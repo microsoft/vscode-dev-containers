@@ -5,8 +5,8 @@
 
 FROM maven:3.6-jdk-8-slim
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Clean up
 RUN apt-get autoremove -y \

@@ -5,9 +5,8 @@
 
 FROM java:11
 
-# Install required tools
-RUN apt-get update \
-	&& apt-get install -y git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install GraphViz
 RUN apt-get install -y graphviz

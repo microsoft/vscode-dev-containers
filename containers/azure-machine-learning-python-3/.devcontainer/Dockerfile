@@ -5,9 +5,8 @@
 
 FROM python:3.7-slim
 
-# Install required tools
-RUN apt-get update \
-	&& apt-get install -y git 
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install Docker CE - ** COMMENT OUT IF YOU WILL ONLY RUN LOCAL OR IN AZURE **
 RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common \

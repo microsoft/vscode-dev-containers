@@ -11,8 +11,8 @@ COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 RUN rustup update
 RUN rustup component add rls rust-analysis rust-src
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install other dependencies
 RUN apt-get install -y lldb-3.9

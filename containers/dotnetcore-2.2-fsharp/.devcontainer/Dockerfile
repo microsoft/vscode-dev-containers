@@ -9,8 +9,8 @@ FROM microsoft/dotnet:2.2-sdk
 # .NET Core should be used as the runtime.
 COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install fsharp
 RUN apt-get install -y fsharp

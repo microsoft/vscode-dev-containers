@@ -9,8 +9,8 @@ FROM ruby:2
 RUN gem install ruby-debug-ide
 RUN gem install debase
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Clean up
 RUN apt-get autoremove -y \

@@ -5,9 +5,8 @@
 
 FROM ubuntu:bionic
 
-# Install git
-RUN apt-get update \
-	&& apt-get install -y git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Clean up
 RUN apt-get autoremove -y \

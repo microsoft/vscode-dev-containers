@@ -19,7 +19,7 @@ RUN pip install -r requirements.txt && rm -f requirements.txt
 RUN apt-get update && apt-get -y install git
 
 # Install any missing dependencies for enhanced language service
-RUN apt-get install -y libicu57
+RUN apt-get install -y libicu[0-9][0-9]
 
 # Clean up
 RUN apt-get autoremove -y \

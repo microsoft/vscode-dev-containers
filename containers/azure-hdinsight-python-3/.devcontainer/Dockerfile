@@ -6,9 +6,8 @@
 # HDInsight extension needs mono
 FROM mono:5
 
-# Install git tools
-RUN apt-get update \
-    && apt-get install -y git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install python 3
 RUN apt-get install -y python3 python3-pip

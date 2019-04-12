@@ -9,8 +9,8 @@ ENV PATH="$PATH":"/root/.pub-cache/bin"
 
 RUN pub global activate webdev
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Clean up
 RUN apt-get autoremove -y \

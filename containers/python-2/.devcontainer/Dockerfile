@@ -10,8 +10,8 @@ COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 
 RUN pip install pylint
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install any missing dependencies for enhanced language service
 RUN apt-get install -y libicu57

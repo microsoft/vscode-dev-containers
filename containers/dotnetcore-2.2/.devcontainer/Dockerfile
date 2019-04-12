@@ -5,8 +5,8 @@
 
 FROM microsoft/dotnet:2.2-sdk
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Clean up
 RUN apt-get autoremove -y \

@@ -5,8 +5,8 @@
 
 FROM debian:9
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install the Azure CLI
 RUN apt-get install -y apt-transport-https curl gnupg2 lsb-release \

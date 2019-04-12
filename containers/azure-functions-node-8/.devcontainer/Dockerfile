@@ -5,8 +5,8 @@
 
 FROM microsoft/dotnet:2.1-sdk-stretch
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install Node.js
 RUN apt-get install -y curl \

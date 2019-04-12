@@ -5,8 +5,8 @@
 
 FROM ubuntu:bionic
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
 
 # Install C++ tools
 RUN apt-get -y install build-essential cmake cppcheck valgrind

@@ -6,9 +6,9 @@
 # Pick any base image, but if you select node, skip installing node. 😊
 FROM ubuntu:bionic
 
-# Install required tools
+# Install git, required tools
 RUN apt-get update \
-	&& apt-get install -y git curl gnupg unzip
+	&& apt-get install -y git curl gnupg unzip procps
 
 # [Optional] Install Node.js for Azure Cloud Shell support 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
