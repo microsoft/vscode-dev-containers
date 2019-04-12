@@ -1,4 +1,4 @@
-# Node.js (latest LTS), Yarn, & JavaScript
+# Node.js (latest LTS) & JavaScript
 
 ## Summary
 

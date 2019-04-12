@@ -1,4 +1,4 @@
-# Node.js 8, Yarn, & JavaScript
+# Node.js 8 & JavaScript
 
 ## Summary
 
