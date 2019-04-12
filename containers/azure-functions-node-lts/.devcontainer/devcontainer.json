@@ -1,5 +1,5 @@
 {
-	"name": "Azure Functions & Node.js",
+	"name": "Azure Functions & Node.js (latest LTS)",
 	"dockerFile": "Dockerfile",
 	"appPort": 7071,
 	"extensions": [
