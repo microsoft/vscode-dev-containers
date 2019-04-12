@@ -1,0 +1,8 @@
+{
+	"name": "F# (.NET Core Latest)",
+	"dockerFile": "Dockerfile",
+	"extensions": [
+		"Ionide.Ionide-fsharp",
+		"ms-vscode.csharp"
+	]
+}

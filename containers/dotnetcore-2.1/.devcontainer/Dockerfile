@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM microsoft/dotnet:2.2-sdk
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1
 
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps

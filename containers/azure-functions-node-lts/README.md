@@ -1,4 +1,4 @@
-# Azure Functions w/Node.js v8
+# Azure Functions & Node.js (latest LTS)
 
 ## Summary
 

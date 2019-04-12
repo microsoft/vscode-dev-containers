@@ -4,7 +4,7 @@
 #-----------------------------------------------------------------------------------------
 
 # Pick any base image, but if you select node, skip installing node. 😊
-FROM ubuntu:bionic
+FROM debian:9
 
 # Install git, required tools
 RUN apt-get update \

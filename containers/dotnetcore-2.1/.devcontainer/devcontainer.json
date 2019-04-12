@@ -1,8 +1,8 @@
 {
-	"name": "F#",
+	"name": "C# (.NET Core 2.1)",
 	"dockerFile": "Dockerfile",
+	"appPort": 8090,
 	"extensions": [
-		"Ionide.Ionide-fsharp",
 		"ms-vscode.csharp"
 	]
 }

@@ -1,14 +1,14 @@
-# F# (.NET Core 2.2)
+# C# (.NET Core 2.1)
 
 ## Summary
 
-*A basic dev container definition for using F# in a container. Includes everything you need to get up and running.*
+*A basic dev container definition for developing .NET Core applications in a container. Includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | F# |
+| *Languages, platforms* | .NET Core |
 
 ## Usage
 

@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM microsoft/dotnet:2.2-sdk
+FROM mcr.microsoft.com/dotnet/core/sdk:latest
 
 # Copy endpoint specific user settings overrides into container to specify
 # .NET Core should be used as the runtime.

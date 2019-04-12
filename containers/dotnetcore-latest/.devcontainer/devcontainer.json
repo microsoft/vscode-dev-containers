@@ -1,5 +1,5 @@
 {
-	"name": ".NET Core 2.2",
+	"name": ".C# (.NET Core Latest)",
 	"dockerFile": "Dockerfile",
 	"appPort": 8090,
 	"extensions": [

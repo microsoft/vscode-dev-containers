@@ -1,0 +1,9 @@
+{
+	"name": "Azure Functions & C# (.NET Core Latest)",
+	"dockerFile": "Dockerfile",
+	"appPort": 7071,
+	"extensions": [
+		"ms-azuretools.vscode-azurefunctions",
+		"ms-vscode.csharp"
+	]
+}

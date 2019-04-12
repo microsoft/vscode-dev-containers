@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM microsoft/dotnet:2.1-sdk-bionic
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1
 
 # Install git, process tools, bash
 RUN apt-get update && apt-get -y install git procps
@@ -18,13 +18,13 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh
 # Install eslint
 RUN /bin/bash -c "source $HOME/.nvm/nvm.sh && npm install -g eslint"
 
-# Install Azure Functions
-RUN apt-get install -y apt-transport-https \
-    && curl -sSO https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb \
-    && dpkg -i packages-microsoft-prod.deb \
-    && rm packages-microsoft-prod.deb \
+# Install Azure Functions and Azure CLI
+RUN apt-get install -y apt-transport-https curl gnupg2 lsb-release \
+    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
+    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list \
+    && curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && apt-get update \
-    && apt-get install -y azure-functions-core-tools
+    && apt-get install -y azure-cli azure-functions-core-tools
     
 # Clean up
 RUN apt-get autoremove -y \

@@ -1,4 +1,4 @@
-# Azure Functions & Node.js 8
+# Azure Functions & C# (.NET Core 2.1)
 
 ## Summary
 
