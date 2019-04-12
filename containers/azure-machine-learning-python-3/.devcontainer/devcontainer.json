@@ -2,7 +2,8 @@
     "name": "Azure Machine Learning", 
     "dockerFile": "Dockerfile", 
     "extensions": [ 
-        "ms-toolsai.vscode-ai" 
+        "ms-toolsai.vscode-ai",
+        "peterjausovec.vscode-docker"
     ], 
     "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]	 
 } 

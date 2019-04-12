@@ -3,6 +3,9 @@
 	"dockerFile": "Dockerfile",
 	"extensions": [
 		"mauve.terraform",
-		"ms-azuretools.azureterraform"
-	]
+		"ms-azuretools.azureterraform",
+		"ms-vscode.azurecli",
+        "peterjausovec.vscode-docker"
+	],
+	"runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
 }
