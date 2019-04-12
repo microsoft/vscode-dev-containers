@@ -1,0 +1,8 @@
+{
+	"name": "Azure Functions & Node.js",
+	"dockerFile": "Dockerfile",
+	"appPort": 7071,
+	"extensions": [
+		"ms-azuretools.vscode-azurefunctions"
+	]
+}

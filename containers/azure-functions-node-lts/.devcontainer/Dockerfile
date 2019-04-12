@@ -12,7 +12,7 @@ RUN apt-get update && apt-get -y install git procps
 # Update "setup" to "setup_<verison>.x" if you want a specific verison of Node.js
 # See https://github.com/nodesource/distributions/tree/master/deb for a list
 RUN apt-get install -y curl \
-    && curl -sSL https://deb.nodesource.com/setup_8.x | bash - \
+    && curl -sSL https://deb.nodesource.com/setup | bash - \
     && apt-get update \
     && apt-get install -y nodejs 
 
