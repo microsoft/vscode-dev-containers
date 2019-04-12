@@ -5,16 +5,18 @@
 
 FROM microsoft/dotnet:2.1-sdk-bionic
 
-# Install git, process tools
+# Install git, process tools, bash
 RUN apt-get update && apt-get -y install git procps
 
-# Install Node.js
-# Update "setup" to "setup_<verison>.x" if you want a specific verison of Node.js
-# See https://github.com/nodesource/distributions/tree/master/deb for a list
-RUN apt-get install -y curl \
-    && curl -sSL https://deb.nodesource.com/setup | bash - \
-    && apt-get update \
-    && apt-get install -y nodejs 
+# Install Node.js via NVM - See https://github.com/creationix/nvm
+# Change the "lts/*" in the two lines below to pick a different version
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash \
+    && /bin/bash -c "source $HOME/.nvm/nvm.sh \
+        && nvm install lts/* \
+        && nvm alias default lts/*"
+
+# Install eslint
+RUN /bin/bash -c "source $HOME/.nvm/nvm.sh && npm install -g eslint"
 
 # Install Azure Functions
 RUN apt-get install -y apt-transport-https \
