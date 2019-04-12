@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM python:3-slim
+FROM python:3
 
 # Copy default endpoint specific user settings overrides into container to specify Python path
 COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
