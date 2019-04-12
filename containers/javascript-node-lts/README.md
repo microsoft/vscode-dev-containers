@@ -1,8 +1,8 @@
-# Node.js 8 & JavaScript
+# Node.js (latest LTS), Yarn, & JavaScript
 
 ## Summary
 
-*A basic dev container definition for developing Node.js applications in a container. Includes everything you need to get up and running.*
+*A basic dev container definition for developing Node.js applications in a container along with the yarn package manager. Includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|

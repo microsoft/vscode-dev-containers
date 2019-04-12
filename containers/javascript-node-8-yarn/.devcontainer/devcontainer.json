@@ -1,8 +1,0 @@
-{
-	"name": "Node.js 8 & Yarn",
-	"dockerFile": ".devcontainer/Dockerfile",
-	"appPort": 3000,
-	"extensions": [
-		"dbaeumer.vscode-eslint"
-	]
-}
