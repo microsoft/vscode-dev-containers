@@ -3,7 +3,7 @@
 	"dockerFile": "Dockerfile",
 	"extensions": [
 		"mauve.terraform",
-		"ms-azuretools.azureterraform",
+		"ms-azuretools.vscode-azureterraform",
 		"ms-vscode.azurecli",
         "peterjausovec.vscode-docker"
 	],
