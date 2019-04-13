@@ -24,7 +24,9 @@ To get started, follow the appropriate steps below for your operating system.
 
 First, install the **[Visual Studio Code Remote Development](https://aka.ms/vscode-remote/download/extension)** extension pack if you have not already.
 
-To try out the definition with an existing project,  copy the  `.devcontainer` folder into your project root and then follow the OS specific directions below.
+To try out the definition with an existing project, copy the  `.devcontainer` folder into your project root and then follow the OS specific directions below.
+
+> **Note:** If you want to disable sync'ing local Kubernetes config into the container, remove `"-e", "SYNC_LOCALHOST_KUBECONFIG=true",` from `runArgs` in `.devcontainer/devcontainer.json`.
 
 ### macOS  / Windows Setup
 
@@ -62,19 +64,19 @@ To try out the definition with an existing project,  copy the  `.devcontainer` f
 
 The trick that makes this work is as follows:
 
-1. First, install all of the needed CLIs in the container. From `dev-container.dockerfile`:
+1. First, install all of the needed CLIs in the container. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
     # Install Docker CE CLI
     RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
-        && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
-        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+        && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - \
+        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
         && apt-get update \
         && apt-get install -y docker-ce-cli
 
     # Install kubectl
     RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
-        && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list \
+        && echo "deb https://apt.kubernetes.io/ kubernetes-$(lsb_release -cs) main" | tee -a /etc/apt/sources.list.d/kubernetes.list \
         && apt-get update \
         && apt-get install -y kubectl
 
@@ -82,7 +84,7 @@ The trick that makes this work is as follows:
     RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash -
     ```
 
-2. Next, forward the local Docker socket and mount the local `.kube` folder in the container so the configuration can be reused. From `devContainer.json`:
+2. Next, forward the local Docker socket and mount the local `.kube` folder in the container so the configuration can be reused. From `.devcontainer/devcontainer.json`:
 
     ```json
         "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
@@ -90,7 +92,7 @@ The trick that makes this work is as follows:
             "-v", "$HOME/.kube:/root/.kube-localhost"]
     ```
 
-3. Finally, update `.bashrc` to automatically swap out localhost for host.docker.internal in a containr copy of the Kubernetes config. From `dev-container.dockerfile`:
+3. Finally, update `.bashrc` to automatically swap out localhost for host.docker.internal in a containr copy of the Kubernetes config. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
     RUN echo 'if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then \

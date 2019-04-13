@@ -22,22 +22,8 @@ Dev containers can be useful for all types of applications including those that 
 
 If you prefer, you can also just look through the contents of the `.devcontainer` folder to understand how to make changes to your own project.
 
-No additional setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. First, update the `FROM` statement to reference the new base image. For example:
-
 ```Dockerfile
 FROM node:8
-```
-
-Next, if you choose an image that is Debian based instead of Ubuntu, you will need to update this line...
-
-```
-        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
-```
-
-...to ...
-
-```
-        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
 ```
 
 See the [Docker CE installation steps for Linux](https://docs.docker.com/install/linux/docker-ce/debian/) for details on other distributions. Note that you only need the Docker CLI in this particular case.
@@ -46,17 +32,17 @@ See the [Docker CE installation steps for Linux](https://docs.docker.com/install
 
 The trick that makes this work is as follows:
 
-1. First, install the Docker CLI in the container. From `dev-container.dockerfile`:
+1. First, install the Docker CLI in the container. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
-    # Install Docker CE CLI
     RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
-        && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
-        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+        && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - \
+        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
         && apt-get update \
         && apt-get install -y docker-ce-cli
     ```
-2. Then just forward the Docker socket by mounting it in the container. From `docker-compose.dev-container.yml`:
+
+2. Then just forward the Docker socket by mounting it in the container. From `.devcontainer/docker-compose.yml`:
 
     ```yaml
     volumes:

@@ -4,7 +4,7 @@
 #-----------------------------------------------------------------------------------------
 
 # Debian and Ubuntu based images are supported. Alpine images are not yet supported.
-FROM ubuntu:bionic
+FROM debian:9
 
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
