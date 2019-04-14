@@ -16,7 +16,8 @@ RUN apt-get update \
             apt-transport-https \
             ca-certificates \
             gnupg-agent \
-            software-properties-common
+            software-properties-common \
+            lsb-release
 
 # [Optional] Install Node.js for Azure Cloud Shell support 
 # Change the "lts/*" in the two lines below to pick a different version
