@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM node:8
+FROM node:lts
 
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
