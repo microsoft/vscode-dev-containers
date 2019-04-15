@@ -1,9 +1,10 @@
 {
-	"name": "Dev Container Definition Template - Dockerfile",
-	"dockerFile": "Dockerfile",
-	"appPort": 3000,
-	"extensions": [
-		"mutantdino.resourcemonitor"
+    // "See https://aka.ms/vscode-remote/devcontainer.json for format details."
+    "name": "Dev Container Definition Template - Dockerfile",   
+    "dockerFile": "Dockerfile",
+    "appPort": 3000,
+    "extensions": [
+        "mutantdino.resourcemonitor"
     ],
-	"runArgs": []
+    "runArgs": []
 }

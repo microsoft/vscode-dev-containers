@@ -1,10 +1,11 @@
 {
-	"name": "Dev Container Definition Template - Docker Compose",
+    // "See https://aka.ms/vscode-remote/devcontainer.json for format details."
+    "name": "Dev Container Definition Template - Docker Compose",
     "dockerComposeFile": "docker-compose.yml",
     "service": "your-service-name-here",
     "workspaceFolder": "/workspace",
     "shutdownAction": "stopCompose",
-	"extensions": [
-		"mutantdino.resourcemonitor"
+    "extensions": [
+        "mutantdino.resourcemonitor"
     ]
 }

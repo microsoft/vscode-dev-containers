@@ -11,8 +11,8 @@
 # Debian and Ubuntu based images are supported. Alpine images are not yet supported.
 FROM debian:9
 
-# Install git, process tools
-RUN apt-get update && apt-get -y install git procps
+# Install git, process tools, lsb-release (common in install instructions for CLIs)
+RUN apt-get update && apt-get -y install git procps lsb-release
 
 # *****************************************************
 # * Add steps for installing needed dependencies here *
