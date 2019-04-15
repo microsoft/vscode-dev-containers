@@ -1,4 +1,4 @@
-# Extending an Existing Docker Compose
+# Existing Docker Compose (Extend)
 
 ## Summary
 
