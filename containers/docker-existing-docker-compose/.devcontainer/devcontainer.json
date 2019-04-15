@@ -9,9 +9,6 @@
         "docker-compose.yml"
     ],
     
-    // "Add any extensions you want auto-installed here."
-    "extensions": [],
-
     // "The 'service' property is the name of the service for the container that VS Code should"
     // "use. Update this value and .devcontainer/docker-compose.yml to the real service name."
     "service": "your-service-name-here", 
@@ -20,8 +17,14 @@
     // "connected. This is typically a file mount in .devcontainer/docker-compose.yml"
     "workspaceFolder": "/workspace"
 
+    // "Add any extensions you want auto-installed here."
+    "extensions": [],
+
+    // "Remove this line if you want to keep your containers running after VS Code shuts down."
+    "shutdownAction": "stopCompose",
+    
     // "Other notes:"
-    // "- The appPorts property is not supported in the Docker Compose case. Add the ports into"
+    // "- The 'appPorts' property is not supported in the Docker Compose case. Add the ports into"
     // "  the docker-compose.yml in the .devcontainer folder instead." 
-    // "- The runArgs property is also not supported."
+    // "- The 'runArgs' property is also not supported."
 }
