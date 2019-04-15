@@ -7,7 +7,6 @@
         "streetsidesoftware.code-spell-checker",
         "DavidAnson.vscode-markdownlint",
         "esbenp.prettier-vscode",
-        "PeterJausovec.vscode-docker",
         "eamodio.gitlens",
         "mutantdino.resourcemonitor"
     ],
