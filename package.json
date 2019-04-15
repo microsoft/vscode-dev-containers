@@ -2,14 +2,22 @@
 	"name": "vscode-dev-containers",
 	"version": "0.5.0",
 	"description": "VS Code Dev Containers: Definitions and Templates",
-	"files": [
-		"containers",
-		"repository-containers"
-	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Microsoft/vscode-dev-containers.git"
 	},
 	"author": "Microsoft Corporation",
-	"license": "SEE LICENSE IN LICENSE.md"
+	"license": "SEE LICENSE IN LICENSE.md",
+	"files": [
+		"containers",
+		"containers-readmes",
+		"repository-containers"
+	],
+	"scripts": {
+		"prepack": "rimraf containers-readmes && copyfiles --up 1 containers/**/README.md containers-readmes"
+	},
+	"devDependencies": {
+		"copyfiles": "^2.1.0",
+		"rimraf": "^2.6.3"
+	}
 }
