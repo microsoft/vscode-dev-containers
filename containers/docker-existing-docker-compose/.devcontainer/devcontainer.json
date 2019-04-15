@@ -9,8 +9,8 @@
         "docker-compose.yml"
     ],
     
-    // "The extensions property works as-is"
-    "extensions": []
+    // "Add any extensions you want auto-installed here."
+    "extensions": [],
 
     // "The 'service' property is the name of the service for the container that VS Code should"
     // "use. Update this value and .devcontainer/docker-compose.yml to the real service name."
