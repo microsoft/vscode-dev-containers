@@ -1,5 +1,5 @@
 {
-	"name": "Django",
+	"name": "Python 3 & Django",
 	"dockerFile": "Dockerfile",
 	"appPort": 8080,
 	"extensions": [
