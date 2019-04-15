@@ -1,5 +1,5 @@
 {
-	"name": ".C# (.NET Core Latest)",
+	"name": "C# (.NET Core Latest)",
 	"dockerFile": "Dockerfile",
 	"appPort": 8090,
 	"extensions": [
