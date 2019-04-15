@@ -1,5 +1,5 @@
 {
-	"name": "Jupyter PySpark",
+	"name": "Python 3, Jupyter, & PySpark",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "jupyter",
 	"workspaceFolder": "/notebooks",
