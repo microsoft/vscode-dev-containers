@@ -10,13 +10,6 @@ FROM debian:9
 RUN apt-get update \
 	&& apt-get install -y git procps lsb-release
 
-# Install Docker CE CLI
-RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
-    && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - \
-    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
-    && apt-get update \
-    && apt-get install -y docker-ce-cli
-
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
