@@ -1,8 +1,8 @@
-# Ubuntu 18.04 + Git
+# Debian 9 + Git
 
 ## Summary
 
-*A starter container definition with Ubuntu 18.04 and Git installed.*
+*Simple Debian 9 container with Git installed.*
 
 | Metadata | Value |  
 |----------|-------|

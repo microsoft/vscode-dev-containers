@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definitions that demonstrates installation and use of the Azure CLI in a container.*
+*Debian container with the Azure CLI, related extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

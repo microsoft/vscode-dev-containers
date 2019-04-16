@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for building Node.js based Azure Functions in a container. Includes everything you need to get up and running.*
+*Get going quickly with Azure Functions with Node.js. Includes Azure Functions SDK, Node.js 8, nvm, the Azure CLI, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

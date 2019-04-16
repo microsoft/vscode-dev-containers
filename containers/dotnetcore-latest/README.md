@@ -1,8 +1,8 @@
-# C# (.NET Core 2.1)
+# C# (latest .NET Core)
 
 ## Summary
 
-*A basic dev container definition for developing .NET Core applications in a container. Includes everything you need to get up and running.*
+*Develop C# and .NET Core (latest) based applications - includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

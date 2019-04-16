@@ -1,8 +1,8 @@
-# Azure Machine Learning w/Python 3
+# Azure Machine Learning & Python 3
 
 ## Summary
 
-*A basic dev container definition for using Azure Machine Learning in a container. Includes everything you need to get up and running.*
+*Use Azure Machine Learning and Python - includes Python, the Docker CLI (for running locally), and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

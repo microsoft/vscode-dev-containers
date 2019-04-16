@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for developing Rust applications in a container. Includes everything you need to get up and running.*
+*Develop Rust based applications - includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|

@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for developing Java applications in a container. Includes the JDK along with any dependencies Maven requires.*
+*Develop Java 8 based applications - includes the JDK along with any dependencies Maven requires.*
 
 | Metadata | Value |  
 |----------|-------|

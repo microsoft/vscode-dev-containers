@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for using F# in a container. Includes everything you need to get up and running.*
+*Develop F# and .NET Core (latest) based applications - includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for building Node.js applications in TypeScript in a container and using the yarn package manager. Includes everything you need to get up and running like Node.js and the TypeScript compiler.*
+*Develop Node.js based applications in TypeScript - includes Node.js, tslint, yarn, and the TypeScript compiler.*
 
 | Metadata | Value |  
 |----------|-------|

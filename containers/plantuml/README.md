@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for editing PlantUML in a container that includes Java and GraphViz and the PlantUML extension.*
+*Use PlantUML without installing all the dependencies locally - includes Java, GraphViz, and the PlantUML extension.*
 
 | Metadata | Value |  
 |----------|-------|

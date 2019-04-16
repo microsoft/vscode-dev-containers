@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for developing Go applications in a container. Includes everything you need to get up and running.*
+*Develop Go based applications - includes Go, common tools, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

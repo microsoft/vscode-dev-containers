@@ -1,5 +1,5 @@
 {
-    "name": "Kubernetes",
+    "name": "Kubernetes & Helm",
     "dockerFile": "Dockerfile",
     "extensions": [
         "peterjausovec.vscode-docker",

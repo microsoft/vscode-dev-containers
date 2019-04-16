@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for building Node.js based Azure Functions in a container. Includes everything you need to get up and running.*
+*Develop Azure Functions in C# - Includes NET Core (latest), the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

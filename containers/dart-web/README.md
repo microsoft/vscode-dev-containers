@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for developing web applications using Dart in a container. Includes everything you need to get up and running.*
+*Develop Dart based web applications - includes Dart, needed extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

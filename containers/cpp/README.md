@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for building C++ apps in container. Includes everything you need to get up and running.*
+*Develop C++ applications on Linux - includes Debian 9 C++ build tools, but can be updated to use other Linux base containers.*
 
 | Metadata | Value |  
 |----------|-------|

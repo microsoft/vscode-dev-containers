@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic multi-container dev container definition for building Node.js applications in a  container that rely on a Mongo DB. Includes everything you need to get up and running.*
+*Develop applications in Node.js and Mongo DB - includes Node.js, eslint, and yarn in a container linked to a Mongo DB.*
 
 | Metadata | Value |  
 |----------|-------|

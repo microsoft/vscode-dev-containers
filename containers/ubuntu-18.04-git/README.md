@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A starter container definition with Ubuntu 18.04 and Git installed.*
+*Simple Ubuntu 18.04 container with Git installed.*
 
 | Metadata | Value |  
 |----------|-------|

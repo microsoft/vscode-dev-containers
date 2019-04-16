@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for editing markdown files in a container.*
+*A simple container for editing markdown.*
 
 | Metadata | Value |  
 |----------|-------|

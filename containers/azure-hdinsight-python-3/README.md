@@ -1,8 +1,8 @@
-# Azure HDInsight w/Python 3
+# Azure HDInsight & Python 3
 
 ## Summary
 
-*A basic dev container definition for using Azure HDInsight in a container. Includes everything you need to get up and running.*
+*Get going quickly with Azure HDInsight and Python. Includes Python and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

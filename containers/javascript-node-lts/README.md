@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for developing Node.js applications in a container along with the yarn package manager. Includes everything you need to get up and running.*
+*Develop Node.js (latest LTS) based applications - includes Node.js, eslint, and yarn.*
 
 | Metadata | Value |  
 |----------|-------|

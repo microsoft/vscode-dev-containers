@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container that demonstrates the installation and use of Terraform in a container. Includes everything you need to get up and running.*
+*Get going quickly with Terraform in Azure. Includes Terraform, the Azure CLI, the Docker CLI (for testing locally), Node.js for Cloud Shell, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

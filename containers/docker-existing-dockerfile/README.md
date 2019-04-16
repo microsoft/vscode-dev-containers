@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Illustrates you can reuse an existing Dockerfile for your dev container.*
+*Sample illustrating reuse of an existing Dockefile.*
 
 | Metadata | Value |  
 |----------|-------|

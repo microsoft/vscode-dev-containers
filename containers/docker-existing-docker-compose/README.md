@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Illustrates how you can reuse an existing docker-compose.yml for your dev container.*
+*Extend an existing docker-compose.yml for use in a dev container.*
 
 | Metadata | Value |  
 |----------|-------|
