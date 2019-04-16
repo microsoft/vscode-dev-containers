@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM python:3-slim
+FROM python:3
 
 # Copy default endpoint specific user settings overrides into container to specify Python path
 COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get -y install git procps
 RUN apt-get install -y libicu[0-9][0-9]
 
 # Install Python dependencies from requirements.txt if it exists
-COPY .devcontainer/requirements.txt.tmp requirements.txt* /workspace/
+COPY .devcontainer/requirements.txt.temp requirements.txt* /workspace/
 RUN if [ -f "requirements.txt" ]; then pip install -r requirements.txt && rm requirements.txt; fi
 
 # Clean up
