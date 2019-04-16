@@ -16,7 +16,7 @@ RUN apt-get install -y libicu[0-9][0-9]
 
 # Install Python dependencies from requirements.txt if it exists
 COPY .devcontainer/requirements.txt.temp requirements.txt* /workspace/
-RUN if [ -f "requirements.txt" ]; then pip install -r requirements.txt && rm requirements.txt; fi
+RUN if [ -f "requirements.txt" ]; then pip install -r requirements.txt && rm requirements.txt*; fi
 
 # Expose port 5000 as the default web port
 EXPOSE 5000
