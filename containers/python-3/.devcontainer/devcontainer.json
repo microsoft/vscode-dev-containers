@@ -1,8 +1,10 @@
 {
 	"name": "Python 3",
-	"dockerFile": "Dockerfile",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
 	"extensions": [
 		"ms-python.python",
-		"LittleFoxTeam.vscode-python-test-adapter"
+		"VisualStudioExptTeam.vscodeintellicode"
 	]
 }
