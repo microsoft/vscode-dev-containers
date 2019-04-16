@@ -6,22 +6,22 @@
 FROM python:3-slim
 
 # Copy default endpoint specific user settings overrides into container to specify Python path
-COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
+COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 
 ENV PYTHONUNBUFFERED 1
 
 RUN mkdir /workspace
 WORKDIR /workspace
 
-# Install pylint and Django
-COPY requirements.txt /workspace/
-RUN pip install -r requirements.txt && rm -f requirements.txt
-
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
 
 # Install any missing dependencies for enhanced language service
 RUN apt-get install -y libicu[0-9][0-9]
+
+# Install Python dependencies from requirements.txt if it exists
+COPY .devcontainer/requirements.txt.tmp requirements.txt* /workspace/
+RUN if [ -f "requirements.txt" ]; then pip install -r requirements.txt && rm requirements.txt; fi
 
 # Clean up
 RUN apt-get autoremove -y \
