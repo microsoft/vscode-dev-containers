@@ -1,7 +1,8 @@
 {
-	"name": "Anaconda 3",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
+	"name": "Python 3 - Anaconda",
+	"context": "..",
+	"dockerFile": "Dockerfile",
+	"appPort": "5000:5000",
 	"workspaceFolder": "/workspace",
 	"extensions": [
 		"ms-python.python",
