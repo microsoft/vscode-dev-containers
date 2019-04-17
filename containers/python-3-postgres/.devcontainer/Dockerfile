@@ -16,9 +16,6 @@ WORKDIR /workspace
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
 
-# Install any missing dependencies for enhanced language service
-RUN apt-get install -y libicu[0-9][0-9]
-
 # Install Python dependencies from requirements.txt if it exists
 COPY .devcontainer/requirements.txt.temp requirements.txt* /workspace/
 RUN if [ -f "requirements.txt" ]; then pip install -r requirements.txt && rm requirements.txt; fi

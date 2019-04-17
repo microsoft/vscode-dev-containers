@@ -2,7 +2,6 @@
 	"name": "Python 3 - Miniconda",
 	"context": "..",
 	"dockerFile": "Dockerfile",
-	"appPort": "5000:5000",
 	"workspaceFolder": "/workspace",
 	"extensions": [
 		"ms-python.python",
