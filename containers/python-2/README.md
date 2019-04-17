@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for developing Python 2 applications in a container. Includes everything you need to get up and running like PyLint and the Python extension.*
+*A basic dev container definition for developing Python 2 applications in a container. Installs dependencies from your requirements.txt file and the Python extension.*
 
 | Metadata | Value |  
 |----------|-------|
