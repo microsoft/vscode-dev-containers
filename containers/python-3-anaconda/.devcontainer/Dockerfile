@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM python:3
+FROM continuumio/anaconda3
 
 # Copy default endpoint specific user settings overrides into container to specify Python path
 COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
@@ -15,8 +15,8 @@ RUN mkdir /workspace
 WORKDIR /workspace
 
 # Install Python dependencies from requirements.txt if it exists
-COPY .devcontainer/requirements.txt.temp requirements.txt* /workspace/
-RUN if [ -f "requirements.txt" ]; then pip install -r requirements.txt && rm requirements.txt*; fi
+COPY .devcontainer/environment.yml.temp environment.yml* /workspace/
+RUN if [ -f "environment.yml" ]; then conda env update base -f environment.yml && rm environment.yml*; fi
 
 # Clean up
 RUN apt-get autoremove -y \

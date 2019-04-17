@@ -1,8 +1,8 @@
-# Python 2
+# Python 3 - Miniconda
 
 ## Summary
 
-*A basic dev container definition for developing Python 2 applications in a container. Installs dependencies from your requirements.txt file and the Python extension.*
+*A basic dev container definition for developing Python 3 applications in an Miniconda container. Installs dependencies from your environment.yml file and the Python extension.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -16,7 +16,9 @@
 
 If you prefer, you can also just look through the contents of the `.devcontainer` folder to understand how to make changes to your own project.
 
-If you want to try out the test project instead, run **Remote-Container: Open Folder in Container...** in VS Code and select a cloned copy of the entire folder. You can then start the test program from Debug panel in VS Code.
+If you want to try out the test project instead, run **Remote-Container: Open Folder in Container...** in VS Code and select a cloned copy of the entire folder. 
+
+Then, open test-project/hello.py and press shift-enter to run the cell and see the interactive matplotlib output.
 
 ## License
 

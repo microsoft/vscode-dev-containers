@@ -1,7 +1,8 @@
 {
-	"name": "Python 3",
+	"name": "Python 3 - Anaconda",
 	"context": "..",
 	"dockerFile": "Dockerfile",
+	"appPort": "5000:5000",
 	"workspaceFolder": "/workspace",
 	"extensions": [
 		"ms-python.python",

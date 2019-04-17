@@ -1,5 +1,5 @@
 {
-	"name": "Python 3",
+	"name": "Python 3 - Miniconda",
 	"context": "..",
 	"dockerFile": "Dockerfile",
 	"workspaceFolder": "/workspace",
