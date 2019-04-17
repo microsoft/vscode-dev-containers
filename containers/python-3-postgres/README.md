@@ -2,8 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for building Python + PostgreSQL applications in containers.
-Includes a Python application container and PostgreSQL server, and a Django test project.*
+*Develop applications with Python 3 and PostgreSQL. Includes a Python application container and PostgreSQL server, and a Django test project.*
 
 | Metadata | Value |  
 |----------|-------|

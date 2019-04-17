@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Dart based web applications - includes Dart, needed extensions, and dependencies.*
+*Develop Dart based web applications. Includes Dart, needed extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

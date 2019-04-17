@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Node.js (latest LTS) based applications - includes Node.js, eslint, and yarn.*
+*Develop Node.js (latest LTS) based applications. Includes Node.js, eslint, and yarn.*
 
 | Metadata | Value |  
 |----------|-------|

@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for editing PowerShell scripts in a container.*
+*Develop PowerShell scripts without installing anything locally.*
 
 | Metadata | Value |  
 |----------|-------|

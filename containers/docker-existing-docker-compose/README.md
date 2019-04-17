@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Extend an existing docker-compose.yml for use in a dev container.*
+*Sample illustrating how to extend an existing Docker Compose file for use in a dev container.*
 
 | Metadata | Value |  
 |----------|-------|

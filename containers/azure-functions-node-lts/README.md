@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Azure Functions in Node.js - Includes Node.js (latest LTS), eslint, the Azure Functions SDK, and related extensions and dependencies.*
+*Develop Azure Functions in Node.js. Includes Node.js (latest LTS), eslint, the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

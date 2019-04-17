@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for developing Python 3 applications in an Anaconda container. Installs dependencies from your environment.yml file and the Python extension.*
+*Develop Python 3 - Anaconda applications. Installs dependencies from your environment.yml file and the Python extension.*
 
 | Metadata | Value |  
 |----------|-------|

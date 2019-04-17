@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop C++ applications on Linux - includes Debian 9 C++ build tools, but can be updated to use other Linux base containers.*
+*Develop C++ applications on Linux. Includes Debian 9 C++ build tools, but can be updated to use other Linux base containers.*
 
 | Metadata | Value |  
 |----------|-------|

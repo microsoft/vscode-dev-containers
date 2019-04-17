@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop C# and .NET Core 2.1 based applications - includes all needed SDKs, extensions, and dependencies.*
+*Develop C# and .NET Core 2.1 based applications. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop F# and .NET Core (latest) based applications - includes all needed SDKs, extensions, and dependencies.*
+*Develop F# and .NET Core (latest) based applications. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

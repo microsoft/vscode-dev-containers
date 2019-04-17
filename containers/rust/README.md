@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Rust based applications - includes everything you need to get up and running.*
+*Develop Rust based applications. Includes appropriate runtime args and everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|

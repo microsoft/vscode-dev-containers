@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Go based applications - includes Go, common tools, extensions, and dependencies.*
+*Develop Go based applications. Includes appropriate runtime args, Go, common tools, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

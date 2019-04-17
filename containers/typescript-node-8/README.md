@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Node.js based applications in TypeScript - includes Node.js, tslint, yarn, and the TypeScript compiler.*
+*Develop Node.js 8 based applications in TypeScript. Includes Node.js, tslint, yarn, and the TypeScript compiler.*
 
 | Metadata | Value |  
 |----------|-------|

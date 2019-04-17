@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Node.js 8 based applications - includes Node.js, eslint, and yarn.*
+*Develop Node.js 8 based applications. Includes Node.js, eslint, and yarn.*
 
 | Metadata | Value |  
 |----------|-------|

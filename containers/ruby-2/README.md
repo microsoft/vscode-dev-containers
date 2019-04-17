@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Ruby based applications - includes everything you need to get up and running.*
+*Develop Ruby 2 based applications. includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|

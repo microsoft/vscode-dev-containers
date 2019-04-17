@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Swift based applications - includes everything you need to get up and running.*
+*Develop Swift 4 based applications. Includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|

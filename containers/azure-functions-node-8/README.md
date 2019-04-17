@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Get going quickly with Azure Functions with Node.js. Includes Azure Functions SDK, Node.js 8, nvm, the Azure CLI, and related extensions and dependencies.*
+*Develop Azure Functions in Node.js. Includes Node.js 8, eslint, the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

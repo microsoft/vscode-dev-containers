@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Use PlantUML without installing all the dependencies locally - includes Java, GraphViz, and the PlantUML extension.*
+*Use PlantUML without installing all the dependencies locally. Includes Java, GraphViz, and the PlantUML extension.*
 
 | Metadata | Value |  
 |----------|-------|

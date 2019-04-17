@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Get going quickly with Azure HDInsight and Python. Includes Python and related extensions and dependencies.*
+*Use Azure HDInsight with Python 3. Includes Python and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Use Azure Machine Learning and Python - includes Python, the Docker CLI (for running locally), and related extensions and dependencies.*
+*Use Azure Machine Learning with Python 3. Includes Python, the Docker CLI (for local testing), and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

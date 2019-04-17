@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Azure Functions in C# - Includes NET Core (latest), the Azure Functions SDK, and related extensions and dependencies.*
+*Develop Azure Functions in C#. Includes NET Core (latest), the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

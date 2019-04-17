@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Access a local (or remote) Kubernetes cluster from inside a dev container - includes the Docker CLI, kubectl, and Helm.*
+*Access a local (or remote) Kubernetes cluster from inside a dev container.Includes kubectl, Helm, and the Docker CLI.*
 
 | Metadata | Value |  
 |----------|-------|

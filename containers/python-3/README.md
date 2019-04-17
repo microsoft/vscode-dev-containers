@@ -2,7 +2,7 @@
 
 ## Summary
 
-*A basic dev container definition for developing Python 3 applications in a container. Installs dependencies from your requirements.txt file and the Python extension.*
+*Develop Python 3 applications. Installs dependencies from your requirements.txt file and the Python extension.*
 
 | Metadata | Value |  
 |----------|-------|
