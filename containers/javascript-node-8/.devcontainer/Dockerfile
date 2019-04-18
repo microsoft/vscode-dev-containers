@@ -5,15 +5,20 @@
 
 FROM node:8
 
-# Install git, process tools
-RUN apt-get update && apt-get -y install git procps
+# Configure apt
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+   && apt-get -y install --no-install-recommends apt-utils 2>&1
+
+# Verify git and process tools are installed
+RUN apt-get install -y git procps
 
 # Install yarn 
 RUN apt-get install -y curl apt-transport-https lsb-release \
-    && curl -sS https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/pubkey.gpg | apt-key add - \
+    && curl -sS https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/pubkey.gpg | apt-key add - 2>/dev/null \
     && echo "deb https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && apt-get install -y yarn
+    && apt-get -y install --no-install-recommends yarn
 
 # Install eslint
 RUN npm install -g eslint
