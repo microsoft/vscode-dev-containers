@@ -1,10 +1,17 @@
 # VS Code Remote Development Container Definitions
 
+<table style="width: 100%; border-style: none;"><tr>
+<td style="width: 140px; text-align: center;"><a href="https://aka.ms/vscode-remote/download/extension"><img width="128px" src="https://microsoft.github.io/vscode-remote-release/images/remote-extensionpack.png" alt="Visual Studio Code logo"/></a></td>
+<td>
+<strong>Visual Studio Code Remote Development</strong><br />
+<i>Open any folder in a container, on a remote machine, or in WSL and take advantage of VS Code's full feature set. <strong><a href="https://aka.ms/vscode-remote">Learn more!</a></strong><br />
+<strong><a href="https://aka.ms/vscode-remote/download/extension"><img src="https://microsoft.github.io/vscode-remote-release//images/download.png" alt="Download now!"/></a></strong></i>
+</td>
+</tr></table>
+
 A **development container** is a running container that comes with a basic tool stack (Python, node, Go, etc.) and its prerequisites. The Remote - Containers extension in the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension pack allows you to open any folder inside (or mounted into) a dev container and take advantage of VS Code's full feature set.
 
 This repository contains a set of **dev container definitions** to help get you up and running in a containerized environment. They describe the needed container image, any runtime arguments for starting the container, and any VS Code extensions that should be installed into it. They're can help you get started or be used as examples for adapting your own configuration to different situations.
-
-**[Learn more!](https://aka.ms/vscode-remote/containers)**
 
 ## Using a definition
 
@@ -24,9 +31,9 @@ To add a dev container definition in your project, you can either:
 If you want to try out a definition before chooisng one:
 
 1. Browse the contents of the  `containers` folder in this repository and pick one. Check out the `README` to see if there are any manual setup steps you should be aware of before continuing.
-2. Clone this repository locall.
+2. Clone this repository locally.
 3. Start VS Code, press <kbd>F1</kbd>, and run the **Remote-Containers: Open Folder in Container...** command.
-4. Select the root of the definition folder in the "open" dialog (**not** the `test-project` folder if present).
+4. Select the root of the definition folder from the cloned repository when prompted (**not** the `test-project` folder if present).
 
 Many definitions include a `test-project` with a sample and/or launch settings in the `.vscode` folder that you can use to see the dev container in action. See the definition's `README` for details.
 
