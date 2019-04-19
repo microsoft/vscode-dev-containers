@@ -17,7 +17,7 @@ To add a dev container definition in your project, you can either:
   and select either the **Remote-Containers: Create Container Configuration File...** or **Remote-Containers: Reopen Folder in Container** commands. 
   3. Follow the directions and pick a development container definition when the list appears.
 
-- Or manually copy the contents of one of the `containers` sub-folders into your project. Typically you can just copy the `.devcontainer` folder into your project and ignore everything else. See the `README` for details.
+- Or manually copy the contents of one of folders in the `containers` directory into your project. Typically you can just copy the `.devcontainer` folder ignore everything else. See the definition's `README` for details.
 
 ## Trying a definition
 
