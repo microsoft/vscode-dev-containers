@@ -5,8 +5,8 @@
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1
 
-# Install git, process tools, bash
-RUN apt-get update && apt-get -y install git procps
+# Verify git and needed tools are installed
+RUN apt-get update && apt-get -y install git curl tar procps
 
 # Install Node.js via NVM -  See https://github.com/creationix/nvm
 # Change the number "8" in the two lines below to pick a different version
@@ -17,6 +17,14 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh
 
 # Install eslint
 RUN /bin/bash -c "source $HOME/.nvm/nvm.sh && npm install -g eslint"
+
+# Install latest yarn
+RUN curl -sfSLO --compressed "https://yarnpkg.com/latest.tar.gz" \
+    && rm -rf /opt/yarn-* \
+    && tar -xzf latest.tar.gz -C /opt/ \
+    && ln -snf /opt/yarn-v*/bin/yarn /usr/local/bin/yarn \
+    && ln -snf /opt/yarn-v*/bin/yarnpkg /usr/local/bin/yarnpkg \
+    && rm latest.tar.gz
 
 # Install Azure Functions and Azure CLI
 RUN apt-get install -y apt-transport-https curl gnupg2 lsb-release \

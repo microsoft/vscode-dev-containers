@@ -10,15 +10,17 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1
 
-# Verify git and process tools are installed
-RUN apt-get install -y git procps
+# Verify git and needed tools are installed
+RUN apt-get install -y git curl tar procps
 
-# Install yarn 
-RUN apt-get install -y curl apt-transport-https lsb-release \
-    && curl -sS https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/pubkey.gpg | apt-key add - 2>/dev/null \
-    && echo "deb https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update \
-    && apt-get -y install --no-install-recommends yarn
+# Update Yarn to latest
+# See https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#upgradingdowngrading-yarn
+RUN curl -sfSLO --compressed "https://yarnpkg.com/latest.tar.gz" \
+    && rm -rf /opt/yarn-* \
+    && tar -xzf latest.tar.gz -C /opt/ \
+    && ln -snf /opt/yarn-v*/bin/yarn /usr/local/bin/yarn \
+    && ln -snf /opt/yarn-v*/bin/yarnpkg /usr/local/bin/yarnpkg \
+    && rm latest.tar.gz
 
 # Install eslint
 RUN npm install -g eslint
