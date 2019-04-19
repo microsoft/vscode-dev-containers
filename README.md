@@ -12,7 +12,7 @@ To add a dev container definition in your project, you can either:
 
 - Add them using VS Code:
   
-  1. Start VS Code and open the your project folder
+  1. Start VS Code and open your project folder.
   2. Press <kbd>F1</kbd>
   and select either the **Remote-Containers: Create Container Configuration File...** or **Remote-Containers: Reopen Folder in Container** commands. 
   3. Follow the directions and pick a development container definition when the list appears.
