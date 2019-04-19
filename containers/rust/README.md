@@ -12,11 +12,16 @@
 
 ## Usage
 
-[See here for information on using this definition with an existing project](../../README.md#using-a-definition).
+[See here for information on adding it to your project.](../../README.md#using-a-definition).  There is no extra steps to using this dev container. 
 
-If you prefer, you can also just look through the contents of the `.devcontainer` folder to understand how to make changes to your own project.
+### Try it!
 
-If you want to try out the test project instead, run **Remote-Container: Open Folder in Container...** in VS Code and select a cloned copy of the entire folder. You can then start the test program from Debug panel in VS Code.
+Just follow these steps to try out the test project:
+
+1. Clone the vscode-dev-containers repository
+2. Start VS Code and run **Remote-Container: Open Folder in Container...** and select this folder
+3. Hit F5 or click on the Debug panel and start select "Debug executable 'hello world'"
+4. The project will run and output "Hello, VS Code Remote!"
 
 ## License
 

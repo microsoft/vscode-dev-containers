@@ -9,8 +9,6 @@ import PackageDescription
 let package = Package(
     name: "helloworld",
     targets: [
-        .target(
-            name: "helloworld",
-            path: "Sources")
+        Target(name:"helloworld")
     ]
 )

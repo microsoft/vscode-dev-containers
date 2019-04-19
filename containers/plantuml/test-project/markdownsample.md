@@ -1,4 +1,3 @@
-
 # Markdown Sample
 
 Open the markdown preview to check it out!

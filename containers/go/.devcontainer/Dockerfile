@@ -23,6 +23,14 @@ RUN go get -u -v \
     github.com/mgechev/revive \
     github.com/derekparker/delve/cmd/dlv
 
+# gocode-gomod
+RUN go get -x -d github.com/stamblerre/gocode \
+    && go build -o gocode-gomod github.com/stamblerre/gocode \
+    && mv gocode-gomod $GOPATH/bin/
+
+# Copy default endpoint specific user settings overrides into container to specify Python path
+COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
+
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
 
@@ -30,4 +38,3 @@ RUN apt-get update && apt-get -y install git procps
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-	
