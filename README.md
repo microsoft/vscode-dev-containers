@@ -29,7 +29,7 @@ To add a dev container definition in your project, you can either:
 
 ## Trying a definition
 
-If you want to try out a definition before chooisng one:
+If you want to try out a definition before choosing one:
 
 1. If this is your first time creating a dev container, follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to configure your machine.
 2. Browse the contents of the  `containers` folder in this repository and pick one. Check out the `README` to see if there are any manual setup steps you should be aware of before continuing.
