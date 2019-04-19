@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Java 8 based applications. Includes the JDK along with any dependencies Maven requires.*
+*Develop Java 8 based applications. Includes the JDK, XML tools, along with any dependencies Maven requires.*
 
 | Metadata | Value |  
 |----------|-------|

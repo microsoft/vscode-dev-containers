@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM maven:3.6-jdk-8
+FROM maven:3-jdk-8
 
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
