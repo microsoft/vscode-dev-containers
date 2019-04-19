@@ -19,10 +19,11 @@ To add a dev container definition in your project, you can either:
 
 - Add them using VS Code:
   
-  1. Start VS Code and open your project folder.
-  2. Press <kbd>F1</kbd>
+  1. If this is your first time creating a dev container, follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to configure your machine.
+  2. Start VS Code and open your project folder.
+  3. Press <kbd>F1</kbd>
   and select either the **Remote-Containers: Create Container Configuration File...** or **Remote-Containers: Reopen Folder in Container** commands. 
-  3. Follow the directions and pick a development container definition when the list appears.
+  4. Follow the directions and pick a development container definition when the list appears.
 
 - Or manually copy the contents of one of folders in the `containers` directory into your project. Typically you can just copy the `.devcontainer` folder ignore everything else. See the definition's `README` for details.
 
@@ -30,10 +31,11 @@ To add a dev container definition in your project, you can either:
 
 If you want to try out a definition before chooisng one:
 
-1. Browse the contents of the  `containers` folder in this repository and pick one. Check out the `README` to see if there are any manual setup steps you should be aware of before continuing.
-2. Clone this repository locally.
-3. Start VS Code, press <kbd>F1</kbd>, and run the **Remote-Containers: Open Folder in Container...** command.
-4. Select the root of the definition folder from the cloned repository when prompted (**not** the `test-project` folder if present).
+1. If this is your first time creating a dev container, follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to configure your machine.
+2. Browse the contents of the  `containers` folder in this repository and pick one. Check out the `README` to see if there are any manual setup steps you should be aware of before continuing.
+3. Clone this repository locally.
+4. Start VS Code, press <kbd>F1</kbd>, and run the **Remote-Containers: Open Folder in Container...** command.
+5. Select the root of the definition folder from the cloned repository when prompted (**not** the `test-project` folder if present).
 
 Many definitions include a `test-project` with a sample and/or launch settings in the `.vscode` folder that you can use to see the dev container in action. See the definition's `README` for details.
 
