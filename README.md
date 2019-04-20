@@ -27,9 +27,9 @@ To add a dev container definition in your project, you can either:
 
 - Or manually copy the contents of one of folders in the `containers` directory into your project. Typically you can just copy the `.devcontainer` folder ignore everything else. See the definition's `README` for details.
 
-## Trying a definition
+## Testing a definition
 
-If you want to try out a definition before choosing one:
+If you want to test a definition before choosing one:
 
 1. If this is your first time creating a dev container, follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to configure your machine.
 2. Browse the contents of the  `containers` folder in this repository and pick one. Check out the `README` to see if there are any manual setup steps you should be aware of before continuing.
@@ -37,7 +37,7 @@ If you want to try out a definition before choosing one:
 4. Start VS Code, press <kbd>F1</kbd>, and run the **Remote-Containers: Open Folder in Container...** command.
 5. Select the root of the definition folder from the cloned repository when prompted (**not** the `test-project` folder if present).
 
-Many definitions include a `test-project` with a sample and/or launch settings in the `.vscode` folder that you can use to see the dev container in action. See the definition's `README` for details.
+Many definitions include a `test-project` you can use to see the dev container in action. See the definition's `README` for details on how to use them.
 
 ## Adding a definition to an existing public or private repo
 
