@@ -9,7 +9,7 @@
 </td>
 </tr></table>
 
-A **development container** is a running container that comes with a basic tool stack (Python, Node.js, Go, etc.) and its prerequisites. The Remote - Containers extension in the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension pack allows you to open any folder inside (or mounted into) a dev container and take advantage of VS Code's full feature set.
+A **development container** is a running container that comes with a tool stack (Python, Node.js, Go, etc.) and its prerequisites. The Remote - Containers extension in the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension pack allows you to open any folder inside (or mounted into) a dev container and take advantage of VS Code's full feature set.
 
 This repository contains a set of **dev container definitions** to help get you up and running in a containerized environment. They describe the needed container image, any runtime arguments for starting the container, and any VS Code extensions that should be installed into it. They're can help you get started or be used as examples for adapting your own configuration to different situations.
 
