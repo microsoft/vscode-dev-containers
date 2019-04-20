@@ -43,10 +43,11 @@ If you want to test a definition before choosing one:
 If you're looking to try a sample project rather than information on setting up a dev container, check out one of the following repositories:
 
 - [Node Sample](https://github.com/Microsoft/vscode-remote-try-node)
+- [Python Sample](https://github.com/Microsoft/vscode-remote-try-python)
 - [Go Sample](https://github.com/Microsoft/vscode-remote-try-go)
 - [Java Sample](https://github.com/Microsoft/vscode-remote-try-java)
 - [PHP Sample](https://github.com/Microsoft/vscode-remote-try-php)
-- [Python Sample](https://github.com/Microsoft/vscode-remote-try-python)
+- [C++ Sample](https://github.com/Microsoft/vscode-remote-try-cpp)
 - [Ruby Sample](https://github.com/Microsoft/vscode-remote-try-ruby)
 - [Rust Sample](https://github.com/Microsoft/vscode-remote-try-rust)
 - [.NET Core Sample](https://github.com/Microsoft/vscode-remote-try-dotnetcore)
