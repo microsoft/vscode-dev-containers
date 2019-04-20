@@ -49,6 +49,7 @@ If you're looking to try a sample project rather than information on setting up 
 - [Python Sample](https://github.com/Microsoft/vscode-remote-try-python)
 - [Ruby Sample](https://github.com/Microsoft/vscode-remote-try-ruby)
 - [Rust Sample](https://github.com/Microsoft/vscode-remote-try-rust)
+- [.NET Core Sample](https://github.com/Microsoft/vscode-remote-try-dotnetcore)
 
 
 ## Adding a definition to an existing public or private repo
