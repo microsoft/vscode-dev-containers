@@ -14,10 +14,10 @@ const MONGO_URL = 'mongodb://mongo:27017';
 const DB_NAME = 'test-project';
 const HOST = '0.0.0.0';
 
-(async()=> {
+(async () => {
 
 	// Use connect to mongo server
-	const client = new MongoClient(MONGO_URL);
+	const client = new MongoClient(MONGO_URL, { useNewUrlParser: true });
 	await client.connect();
 	console.log('Connected successfully to Mongo DB');
 	const db = client.db(DB_NAME);
@@ -26,7 +26,7 @@ const HOST = '0.0.0.0';
 	// App
 	const app = express();
 	app.get('/', async (req, res) => {
-		await testHitsCollection.insertOne({date:new Date()});
+		await testHitsCollection.insertOne({ date: new Date() });
 		const count = await testHitsCollection.countDocuments();
 		res.send('Hello remote world! ' + count + ' test records found.');
 	});
@@ -34,4 +34,3 @@ const HOST = '0.0.0.0';
 	app.listen(PORT, HOST);
 	console.log(`Running on http://${HOST}:${PORT}`);
 })();
-
