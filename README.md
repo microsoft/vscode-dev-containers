@@ -39,6 +39,19 @@ If you want to test a definition before choosing one:
 
 Many definitions include a `test-project` you can use to see the dev container in action. See the definition's `README` for details on how to use them.
 
+## Sample Projects
+
+If you're looking to try a sample project rather than information on setting up a dev container, check out one of the following repositories:
+
+- [Node Sample](https://github.com/Microsoft/vscode-remote-try-node)
+- [Go Sample](https://github.com/Microsoft/vscode-remote-try-go)
+- [Java Sample](https://github.com/Microsoft/vscode-remote-try-java)
+- [PHP Sample](https://github.com/Microsoft/vscode-remote-try-php)
+- [Python Sample](https://github.com/Microsoft/vscode-remote-try-python)
+- [Ruby Sample](https://github.com/Microsoft/vscode-remote-try-ruby)
+- [Rust Sample](https://github.com/Microsoft/vscode-remote-try-rust)
+
+
 ## Adding a definition to an existing public or private repo
 
 You can easily share a customized dev container definition for your project by simply adding files like `.devcontainer/devcontainer.json` to source control. By including these files in your repository, anyone that opens a local copy of your repo in VS Code will be automatically asked if they want reopen the folder in a container instead if the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed.
