@@ -36,8 +36,7 @@ If you want to test a definition before choosing one:
 3. Clone this repository locally.
 4. Start VS Code, press <kbd>F1</kbd>, and run the **Remote-Containers: Open Folder in Container...** command.
 5. Select the root of the definition folder from the cloned repository when prompted (**not** the `test-project` folder if present).
-
-Many definitions include a `test-project` you can use to see the dev container in action. See the definition's `README` for details on how to use them.
+6. See the definition's `README` for what to do next.
 
 ## Sample Projects
 
