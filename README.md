@@ -27,6 +27,12 @@ To add a dev container definition in your project, you can either:
 
 - Or manually copy the contents of one of folders in the `containers` directory into your project. Typically you can just copy the `.devcontainer` folder ignore everything else. See the definition's `README` for details.
 
+## Adding a definition to an existing public or private repo
+
+You can easily share a customized dev container definition for your project by simply adding files like `.devcontainer/devcontainer.json` to source control. By including these files in your repository, anyone that opens a local copy of your repo in VS Code will be automatically asked if they want reopen the folder in a container instead if the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension pack is installed.
+
+Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
+
 ## Testing a definition
 
 If you want to test a definition before choosing one:
@@ -52,12 +58,6 @@ If you're looking to try a sample project rather than information on setting up 
 - [Rust Sample](https://github.com/Microsoft/vscode-remote-try-rust)
 - [.NET Core Sample](https://github.com/Microsoft/vscode-remote-try-dotnetcore)
 
-
-## Adding a definition to an existing public or private repo
-
-You can easily share a customized dev container definition for your project by simply adding files like `.devcontainer/devcontainer.json` to source control. By including these files in your repository, anyone that opens a local copy of your repo in VS Code will be automatically asked if they want reopen the folder in a container instead if the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed.
-
-Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
 
 ## Contents
 
