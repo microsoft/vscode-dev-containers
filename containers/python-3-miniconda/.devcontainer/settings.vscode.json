@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "/opt/conda/bin/python"
+    "python.pythonPath": "/opt/conda/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }

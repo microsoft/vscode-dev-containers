@@ -8,10 +8,14 @@ FROM python:2
 # Copy endpoint specific user settings overrides into container to specify Python path
 COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 
-RUN pip install pylint
-
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
+
+RUN mkdir /workspace
+WORKDIR /workspace
+
+# Install pylint
+RUN pip install pylint
 
 # Install Python dependencies from requirements.txt if it exists
 COPY .devcontainer/requirements.txt.temp requirements.txt* /workspace/

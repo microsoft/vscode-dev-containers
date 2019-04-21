@@ -5,7 +5,6 @@
 	"appPort": "5000:5000",
 	"workspaceFolder": "/workspace",
 	"extensions": [
-		"ms-python.python",
-		"VisualStudioExptTeam.vscodeintellicode"
+		"ms-python.python"
 	]
 }
