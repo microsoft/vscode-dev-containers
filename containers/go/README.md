@@ -26,7 +26,7 @@ This definition does require any special steps to use. Just follow these steps:
    2. Copy the contents of `containers/go/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
-4. After following step 2 or 3, you can modify the contents of the `.devcontainer` directory added to your project folder to meet your needs.
+4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
