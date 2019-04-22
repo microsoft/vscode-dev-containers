@@ -1,5 +1,5 @@
 {
-	"name": "PHP",
+	"name": "PHP 7",
 	"dockerFile": "Dockerfile",
 	"extensions": [
 		"felixfbecker.php-debug",

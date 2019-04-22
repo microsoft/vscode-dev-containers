@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch currently open script",
+            "name": "Launch application",
             "type": "php",
             "request": "launch",
-            "program": "${file}",
-            "cwd": "${fileDirname}",
+            "program": "${workspaceFolder}/test-project/main.php",
+            "cwd": "${workspaceFolder}/test-project",
             "port": 9000
         }
     ]
