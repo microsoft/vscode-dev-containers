@@ -12,7 +12,7 @@
 
 ## Usage
 
-[See here for information on using this definition with an existing project](../../README.md#using-a-definition).
+[See here for information on using this definition with an existing project](https://aka.ms/vscode-remote/containers/getting-started/open).
 
 If you prefer, you can also just look through the contents of the `.devcontainer` folder to understand how to make changes to your own project.
 
@@ -36,4 +36,4 @@ Then browse to [http://localhost:5000/admin](http://localhost:5000/admin) and lo
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](../../LICENSE).
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).
