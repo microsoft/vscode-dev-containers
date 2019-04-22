@@ -10,7 +10,7 @@ function Write-Item($itemCount) {
     $i = 1
 
     while ($i -le $itemCount) {
-        $str = "Output $i"
+        $str = "Hello remote world #$i!"
         Write-Output $str
 
         # In the gutter on the left, right click and select "Add Conditional Breakpoint"
@@ -23,10 +23,10 @@ function Write-Item($itemCount) {
 }
 
 
-function Do-Work($workCount) {
-    Write-Output "Doing remote work..."
+function Hello($workCount) {
+    Write-Output "Saying hello..."
     Write-Item $workcount
-    Write-Host "Done!"
+    Write-Host "Done saying hello!"
 }
 
-Do-Work $Count
+Hello $Count
