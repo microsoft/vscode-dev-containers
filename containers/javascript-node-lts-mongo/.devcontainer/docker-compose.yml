@@ -11,8 +11,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ..:/workspace
-    ports:
-      - "3000:3000"
     command: sleep infinity
     links:
       - mongo

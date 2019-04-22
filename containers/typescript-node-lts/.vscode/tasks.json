@@ -7,8 +7,8 @@
             "label": "compile",
             "type": "shell",
             "command": "cd test-project && npm run compile",
-            "problemMatcher": "$tsc"
-
+            "problemMatcher": "$tsc",
+            "dependsOn": "npm: install - test-project"
         }
     ]
 }
