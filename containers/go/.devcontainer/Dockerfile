@@ -21,7 +21,7 @@ RUN go get -u -v \
     honnef.co/go/tools/... \
     github.com/golangci/golangci-lint/cmd/golangci-lint \
     github.com/mgechev/revive \
-    github.com/derekparker/delve/cmd/dlv
+    github.com/derekparker/delve/cmd/dlv 2>&1
 
 # gocode-gomod
 RUN go get -x -d github.com/stamblerre/gocode \

@@ -10,9 +10,9 @@
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Dart |
 
-## Using the definition with an existing folder
+## Using this definition with an existing folder
 
-This definition does not have any special setup requirements, so follow these steps to use it:
+This definition does require any special steps to use. Just follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
@@ -26,12 +26,13 @@ This definition does not have any special setup requirements, so follow these st
    2. Copy the contents of `containers/dart/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
-4. Modify the contents of the `.devcontainer` folder added to your project as needed.
-5. Press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to use it.
+4. After following step 2 or 3, you can modify the contents of the `.devcontainer` directory added to your project folder to meet your needs.
+
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
 ## Testing the definition
 
-This definition includes some test code that you can use to verify it is working as expected on your system. Follow these steps:
+This definition includes some test code that will help you verify it is working as expected on your system. Follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
@@ -39,11 +40,11 @@ This definition includes some test code that you can use to verify it is working
 4. Select the `containers/dart` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `pub get` and build the code be for starting it.
 6. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port...**
-7. Select port 8080 and open `http://localhost:8080` in a browser.
-8. From here, you can add breakpoints or edit the contents of the `test-project` folder for further testing.
+7. Select port 8080 and open `http://localhost:8080` in a browser. You should see "Hello remote world!"
+8. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](../../LICENSE).
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/LICENSE).
