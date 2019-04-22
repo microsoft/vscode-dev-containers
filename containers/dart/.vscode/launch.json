@@ -5,16 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Dart: Attach to Process",
-            "type": "dart",
-            "request": "attach"
-        },
-        {
-            "name": "Dart",
+            "name": "Launch Server",
             "type": "dart",
             "request": "launch",
-            "program": "test-project/web/main.dart",
-            "preLaunchTask": "Serve"
+            "program": "server.dart",
+            "cwd": "${workspaceFolder}/test-project",
+            "preLaunchTask": "get"
         }
     ]
 }

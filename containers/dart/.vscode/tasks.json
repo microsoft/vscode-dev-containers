@@ -4,9 +4,10 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Serve",
+            "label": "get",
             "type": "shell",
-            "command": "cd test-project && webdev serve --hostname 0.0.0.0 --live-reload"
+            "command": "cd test-project && pub get"
         }
+
     ]
 }
