@@ -1,0 +1,10 @@
+{
+    "name": "Jekyll Now",
+    "dockerFile": "Dockerfile",
+    "appPort": [
+        4000
+    ],
+    "extensions": [
+        "mrmlnc.vscode-scss"
+    ]
+}
