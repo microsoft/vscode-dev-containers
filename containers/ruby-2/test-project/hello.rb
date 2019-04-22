@@ -3,12 +3,11 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-def sayGoodnight(name)
-  result = "Goodnight, " + name
+def sayHello(name)
+  result = "Hello, " + name + "!"
   return result
 end
   
   
-  # Time for bed...
-puts sayGoodnight("John-Boy")
-puts sayGoodnight("Mary-Ellen")
+puts sayHello("Remote Extension Host")
+puts sayHello("Local Extension Host")
