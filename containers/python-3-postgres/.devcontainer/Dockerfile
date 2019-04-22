@@ -10,11 +10,14 @@ COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/Machine/settin
 
 ENV PYTHONUNBUFFERED 1
 
+# Install git, process tools
+RUN apt-get update && apt-get -y install git procps
+
 RUN mkdir /workspace
 WORKDIR /workspace
 
-# Install git, process tools
-RUN apt-get update && apt-get -y install git procps
+# Install pylint
+RUN pip install pylint
 
 # Install Python dependencies from requirements.txt if it exists
 COPY .devcontainer/requirements.txt.temp requirements.txt* /workspace/
