@@ -5,6 +5,8 @@ services:
     build: 
       context: ..
       dockerfile: .devcontainer/Dockerfile
+    ports:
+      - 5000:5000
     volumes:
       - ..:/workspace
     command: sleep infinity
