@@ -12,7 +12,7 @@
 
 ## Using this definition with an existing folder
 
-This definition requires an Azure subscription to use. Create a [free trial account here](https://azure.microsoft.com/en-us/free/). Once you have an Azure account, follow these steps:
+This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/) and learn more about using [Azure Functions with VS Code here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code). Once you have an Azure account, follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 

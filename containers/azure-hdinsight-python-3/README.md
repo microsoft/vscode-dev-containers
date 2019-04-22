@@ -12,7 +12,7 @@
 
 ## Using this definition with an existing folder
 
-This definition requires an Azure subscription to use. Create a [free trial account here](https://azure.microsoft.com/en-us/free/). Once you have an Azure account, follow these steps:
+This definition requires an Azure subscription to use. You can create a [free trial account here](https://azure.microsoft.com/en-us/free/) and learn more about using [Azure HDInsight with VS Code here](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-for-vscode#open-hdinsight-work-folder). Once you have an Azure account, follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 

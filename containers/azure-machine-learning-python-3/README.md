@@ -12,7 +12,7 @@
 
 ## Using this definition with an existing folder
 
-This definition requires an Azure subscription to use. Create a [free trial account here](https://azure.microsoft.com/en-us/free/). Once you have an Azure account, follow these steps:
+This definition requires an Azure subscription to use. You can create a [free account here](https://account.azure.com/signup?offer=ms-azr-0044p&appId=102&ref=azureplat-generic&redirectURL=https%3a%2f%2fazure.microsoft.com%2fen-us%2fget-started%2fwelcome-to-azure%2f&l=en-us&correlationId=15FE63BE1C4960F42D1B6EFB18496296) and learn more about using [Azure Machine Learning with VS Code here](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-vscode-tools#get-started-with-azure-machine-learning). Once you have an Azure account, follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 

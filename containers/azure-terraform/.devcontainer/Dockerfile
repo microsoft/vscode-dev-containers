@@ -44,7 +44,7 @@ RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb
     && apt-get update \
     && apt-get install -y azure-cli 
 
-# Install Terraform and tflint
+# Install Terraform, tflint, and graphviz
 RUN mkdir -p /tmp/docker-downloads \
     && curl -sSL -o /tmp/docker-downloads/terraform.zip https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip \
     && unzip /tmp/docker-downloads/terraform.zip \

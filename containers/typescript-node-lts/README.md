@@ -10,18 +10,6 @@
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Node.js, TypeScript |
 
-# Node.js 8 & TypeScript
-
-## Summary
-
-*Develop Node.js 8 based applications in TypeScript. Includes Node.js, tslint, yarn, and the TypeScript compiler.*
-
-| Metadata | Value |  
-|----------|-------|
-| *Contributors* | The VS Code Team |
-| *Definition type* | Dockerfile |
-| *Languages, platforms* | Node.js, TypeScript |
-
 ## Using this definition with an existing folder
 
 This definition does require any special steps to use. Just follow these steps:
