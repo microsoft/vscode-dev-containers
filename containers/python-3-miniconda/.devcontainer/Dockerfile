@@ -14,6 +14,9 @@ RUN apt-get update && apt-get -y install git procps
 RUN mkdir /workspace
 WORKDIR /workspace
 
+# Install pylint
+RUN pip install pylint
+
 # Install Python dependencies from requirements.txt if it exists
 COPY .devcontainer/environment.yml.temp environment.yml* /workspace/
 RUN if [ -f "environment.yml" ]; then conda env update base -f environment.yml && rm environment.yml*; fi
