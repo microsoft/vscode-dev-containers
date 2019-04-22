@@ -25,7 +25,7 @@ Beyond that, just follow these steps to use the definition:
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Create Container Configuration File...** from the command palette.
-   3. Select the Dart definition.
+   3. Select the F# (.NET Core 2.1) definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.

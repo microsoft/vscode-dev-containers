@@ -19,7 +19,7 @@ This definition does require any special steps to use. Just follow these steps:
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Create Container Configuration File...** from the command palette.
-   3. Select the Dart definition.
+   3. Select the Go definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
@@ -38,8 +38,9 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/go` folder.
-5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. You should see "Hello remote world!" in the debug console.
-6. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
+6. You should see "Hello remote world!" in the Debug Console after the program executes.
+7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 

@@ -38,9 +38,9 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/dart` folder.
-5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `pub get` and build the code be for starting it.
+5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `pub get` and build the code before starting it.
 6. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port...**
-7. Select port 8080 and open `http://localhost:8080` in a browser.
+7. Select port 8080 and click the "Open Browser" button in the notification that appears.
 8. You should see "Hello remote world!" after the page loads.
 9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 

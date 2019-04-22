@@ -25,7 +25,7 @@ Beyond that, just follow these steps to use the definition:
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Create Container Configuration File...** from the command palette.
-   3. Select the Dart definition.
+   3. Select the C# (.NET Core 2.1) definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
@@ -47,7 +47,7 @@ This definition includes some test code that will help you verify it is working 
 5. After the folder has opened in the container, if prompted to restore packages in a notification, click "Restore".
 6. After packages are restored, press <kbd>F5</kbd> to start the project.
 7. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port...**
-8. Select port 8090 and open `http://localhost:8090` in a browser.
+8. Select port 8090 and click the "Open Browser" button in the notification that appears.
 9. You should see "Hello remote world from ASP.NET Core!" after the page loads.
 10. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
