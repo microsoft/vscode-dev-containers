@@ -7,31 +7,12 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'hello_world'",
+            "name": "Debug executable",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=hello_world",
-                    "--package=hello_world",
-                    "--manifest-path=test-project/Cargo.toml"
-                ],
-                "filter": {
-                    "kind": "bin"
-                }
-            },
-            "args": [],
-            "cwd": "${workspaceFolder}/test-project"
-        },
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Debug unit tests in executable 'hello_world'",
-            "cargo": {
-                "args": [
-                    "test",
-                    "--no-run",
-                    "--bin=hello_world",
-                    "--package=hello_world",
+                    "--bin=hello_remote_world",
+                    "--package=hello_remote_world",
                     "--manifest-path=test-project/Cargo.toml"
                 ],
                 "filter": {
