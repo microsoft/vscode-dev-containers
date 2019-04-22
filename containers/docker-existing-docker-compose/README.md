@@ -20,11 +20,11 @@ To use the definition with an existing project that contains a `docker-compose.y
 2. Modify the `.devcontainer/dev-container.yml` and `devcontainer.json` files as needed (see comments)
 3. Reopen the folder in the container (e.g. using the **Remote-Container: Reopen Folder in Container** command in VS Code) to use it unmodified.
 
-[See here for more information on using this definition with an existing project](../../README.md#using-a-definition).
+[See here for more information on using this definition with an existing project](https://aka.ms/vscode-remote/containers/getting-started/open).
 
 If you prefer, you can also just look through the contents of the `.devcontainer` folder to understand how to make changes to your own project.
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](../../LICENSE). 
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE). 

@@ -10,18 +10,6 @@
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Node.js, TypeScript |
 
-# Node.js 8 & TypeScript
-
-## Summary
-
-*Develop Node.js 8 based applications in TypeScript. Includes Node.js, tslint, yarn, and the TypeScript compiler.*
-
-| Metadata | Value |  
-|----------|-------|
-| *Contributors* | The VS Code Team |
-| *Definition type* | Dockerfile |
-| *Languages, platforms* | Node.js, TypeScript |
-
 ## Using this definition with an existing folder
 
 This definition does require any special steps to use. Just follow these steps:
@@ -51,7 +39,7 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/typescript-node-lts` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `npm install` and compile the source before starting it.
-6. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port...**
+6. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
 7. Select port 3000 and click the "Open Browser" button in the notification that appears.
 8. You should see "Hello remote world!" after the page loads.
 9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.

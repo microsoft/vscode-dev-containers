@@ -46,7 +46,7 @@ This definition includes some test code that will help you verify it is working 
 4. Select the `containers/dotnetcore-2.1` folder.
 5. After the folder has opened in the container, if prompted to restore packages in a notification, click "Restore".
 6. After packages are restored, press <kbd>F5</kbd> to start the project.
-7. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port...**
+7. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
 8. Select port 8090 and click the "Open Browser" button in the notification that appears.
 9. You should see "Hello remote world from ASP.NET Core!" after the page loads.
 10. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
