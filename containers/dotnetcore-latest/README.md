@@ -8,11 +8,17 @@
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | .NET Core |
+| *Languages, platforms* | .NET Core, C# |
 
 ## Using this definition with an existing folder
 
-This definition does require any special steps to use. Just follow these steps:
+When using this development container, it's important to note that only the integrated terminal is currently supported in Dev Containers. You may need to modify `launch.json` configurations to include the following value if an external console is used.
+
+```json
+"console": "integratedTerminal"
+```
+
+Beyond that, just follow these steps to use the definition:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
@@ -38,13 +44,15 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/dotnetcore-latest` folder.
-5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `pub get` and build the code be for starting it.
-6. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port...**
-7. Select port 8090 and open `http://localhost:8090` in a browser. You should see "Hello remote world from ASP.NET Core!"
-8. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+5. After the folder has opened in the container, if prompted to restore packages in a notification, click "Restore".
+6. After packages are restored, press <kbd>F5</kbd> to start the project.
+7. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port...**
+8. Select port 8090 and open `http://localhost:8090` in a browser.
+9. You should see "Hello remote world from ASP.NET Core!" after the page loads.
+10. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/LICENSE).
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).

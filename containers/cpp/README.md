@@ -38,8 +38,9 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/cpp` folder.
-5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. You should see "Hello, Remote World!" in the a terminal window.
-6. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
+6. You should see "Hello, Remote World!" in the a terminal window after the program finishes executing.
+7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 
