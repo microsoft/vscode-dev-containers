@@ -11,7 +11,8 @@
 | *Languages, platforms* | Java, Maven |
 
 ## Using this definition with an existing folder
-When using this development container, it's important to note that only the integrated terminal is currently supported in Dev Containers. You may need to modify `launch.json` configurations to include the following value if an external console is used.
+
+Note that only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
 
 ```json
 "console": "integratedTerminal"

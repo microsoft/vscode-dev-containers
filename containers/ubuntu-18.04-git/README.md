@@ -1,4 +1,4 @@
-# Ubuntu 18.04 + Git
+# Ubuntu 18.04 & Git
 
 ## Summary
 
@@ -10,16 +10,39 @@
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Any |
 
-## Usage
+## Using this definition with an existing folder
 
-[See here for information on using this definition with an existing project](../../README.md#using-a-definition).
+This definition does require any special steps to use. Just follow these steps:
 
-If you prefer, you can also just look through the contents of the `.devcontainer` folder to understand how to make changes to your own project.
+1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
-If you want to try out the test project instead, run **Remote-Container: Open Folder in Container...** in VS Code and select a cloned copy of the entire folder. You can then start the test program from Debug panel in VS Code.
+2. To use VS Code's copy of this definition:
+   1. Start VS Code and open your project folder.
+   2. Press <kbd>F1</kbd> select and **Remote-Containers: Create Container Configuration File...** from the command palette.
+   3. Select the Ubuntu 18.04 & Git definition.
+
+3. To use latest-and-greatest copy of this definition from the repository:
+   1. Clone this repository.
+   2. Copy the contents of `containers/ubuntu-18.04-git/.devcontainer` to the root of your project folder.
+   3. Start VS Code and open your project folder.
+
+4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+
+## Testing the definition
+
+This definition includes some test code that will help you verify it is working as expected on your system. Follow these steps:
+
+1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+2. Clone this repository.
+3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
+4. Select the `containers/ubuntu-18.04-git` folder.
+5. Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>`</kbd> and type the following command to verify installation: `apt-get update && apt-get install -y lsb-release && git --version && lsb_release -a`
+6. After lsb_release installs, you should see the Git version and details about the version of Linux in the container.
 
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](../../LICENSE). 
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE)

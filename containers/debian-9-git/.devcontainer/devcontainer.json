@@ -1,5 +1,5 @@
 {
-	"name": "Debian 9 + Git",
+	"name": "Debian 9 & Git",
 	"dockerFile": "Dockerfile",
 	"appPort": []
 }
