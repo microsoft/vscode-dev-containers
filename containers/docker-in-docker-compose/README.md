@@ -16,43 +16,59 @@
 
 Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into your local Docker Desktop instance without affecting your dev container. This example illustrates how you can do this by running CLI commands and using the [Docker VS Code extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) right from inside your dev container.
 
-## Usage
+## How it works / adapting your existing dev container config
 
-[See here for information on using this definition with an existing project](https://aka.ms/vscode-remote/containers/getting-started/open).
+You can adapt your own existing development container Docker Compose setup to support this scenario by following these steps:
 
-If you prefer, you can also just look through the contents of the `.devcontainer` folder to understand how to make changes to your own project.
-
-```Dockerfile
-FROM node:8
-```
-
-See the [Docker CE installation steps for Linux](https://docs.docker.com/install/linux/docker-ce/debian/) for details on other distributions. Note that you only need the Docker CLI in this particular case.
-
-## How it works
-
-The trick that makes this work is as follows:
-
-1. First, install the Docker CLI in the container. From `.devcontainer/Dockerfile`:
+1. First, install the Docker CLI in your dev container. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
-    RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
+    RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
         && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - \
         && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
         && apt-get update \
         && apt-get install -y docker-ce-cli
     ```
 
-2. Then just forward the Docker socket by mounting it in the container. From `.devcontainer/docker-compose.yml`:
+2. Then just forward the Docker socket by mounting it in the container in your Docker Compose config. From `.devcontainer/docker-compose.yml`:
 
     ```yaml
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ```
 
+3. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+
 That's it!
+
+## Using this definition with an existing folder
+
+There are no special setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. Just, update the `FROM` statement to reference the new base image. For example:
+
+```Dockerfile
+FROM node:8
+```
+
+Beyond that, just follow these steps to use the definition:
+
+1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+
+2. To use VS Code's copy of this definition:
+   1. Start VS Code and open your project folder.
+   2. Press <kbd>F1</kbd> select and **Remote-Containers: Create Container Configuration File...** from the command palette.
+   3. Select the Docker in Docker Compose definition.
+
+3. To use latest-and-greatest copy of this definition from the repository:
+   1. Clone this repository.
+   2. Copy the contents of `containers/docker-in-docker-compose/.devcontainer` to the root of your project folder.
+   3. Start VS Code and open your project folder.
+
+4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE). 
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).
