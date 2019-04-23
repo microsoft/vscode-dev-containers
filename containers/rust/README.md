@@ -12,7 +12,7 @@
 
 ## Using this definition with an existing folder
 
-This definition does require any special steps to use. Just follow these steps:
+This definition does require any special steps to use. The `Cargo.toml` file in the root of this folder is for the test project and is not included in the dev container definition. Just follow these steps to use the definition:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 

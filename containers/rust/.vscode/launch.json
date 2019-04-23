@@ -13,14 +13,13 @@
                     "build",
                     "--bin=hello_remote_world",
                     "--package=hello_remote_world",
-                    "--manifest-path=test-project/Cargo.toml"
+                    "--manifest-path=Cargo.toml"
                 ],
                 "filter": {
                     "kind": "bin"
                 }
             },
-            "args": [],
-            "cwd": "${workspaceFolder}/test-project"
+            "args": []
         }
     ]
 }
