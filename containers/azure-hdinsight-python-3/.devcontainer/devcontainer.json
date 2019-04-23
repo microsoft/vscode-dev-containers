@@ -1,7 +1,0 @@
-{
-	"name": "Azure HDInsight",
-	"dockerFile": "Dockerfile",
-	"extensions": [
-		"mshdinsight.azure-hdinsight"
-	]
-}
