@@ -26,7 +26,7 @@ You can adapt your own existing development container Dockerfile to support this
 
     ```Dockerfile
     # Install Docker CE CLI
-    RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
+    RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
         && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - \
         && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
         && apt-get update \
@@ -69,7 +69,7 @@ That's it!
 There are no special setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. Just, update the `FROM` statement to reference the new base image. For example:
 
 ```Dockerfile
-FROM node:8
+FROM node:lts
 ```
 
 In addition, if you want to **disable sync'ing** local Kubernetes config into the container, remove `"-e", "SYNC_LOCALHOST_KUBECONFIG=true",` from `runArgs` in `.devcontainer/devcontainer.json`.
@@ -95,7 +95,7 @@ Follow the steps below for your operating system to use the definition.
    3. Start VS Code and open your project folder.
 
 6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
-   
+
 7. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
 8. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:

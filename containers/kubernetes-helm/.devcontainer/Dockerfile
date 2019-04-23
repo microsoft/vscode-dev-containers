@@ -9,7 +9,6 @@ FROM debian:9
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
 
-
 # Install Docker CE CLI
 RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
     && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - \

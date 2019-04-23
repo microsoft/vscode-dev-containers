@@ -47,7 +47,7 @@ That's it!
 There are no special setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. Just, update the `FROM` statement to reference the new base image. For example:
 
 ```Dockerfile
-FROM node:8
+FROM node:lts
 ```
 
 Beyond that, just follow these steps to use the definition:
