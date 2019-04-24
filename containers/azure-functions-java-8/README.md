@@ -1,0 +1,37 @@
+# Azure Functions & Java 8
+
+## Summary
+
+*Develop Azure Functions in Java. Includes JDK 8, Maven, XML tools, the Azure Functions SDK, and related extensions and dependencies.*
+
+| Metadata | Value |  
+|----------|-------|
+| *Contributors* | The VS Code Java Team |
+| *Definition type* | Dockerfile |
+| *Languages, platforms* | Azure Functions, Java |
+
+## Using this definition with an existing folder
+
+This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/) and learn more about using [Azure Functions with VS Code here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code). Once you have an Azure account, follow these steps:
+
+1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+
+2. To use VS Code's copy of this definition:
+   1. Start VS Code and open your project folder.
+   2. Press <kbd>F1</kbd> select and **Remote-Containers: Create Container Configuration File...** from the command palette.
+   3. Select the Azure Functions & Java 8 definition.
+
+3. To use latest-and-greatest copy of this definition from the repository:
+   1. Clone this repository.
+   2. Copy the contents of `containers/azure-functions-java-8/.devcontainer` to the root of your project folder.
+   3. Start VS Code and open your project folder.
+
+4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+
+## License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).
