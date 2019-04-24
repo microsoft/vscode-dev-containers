@@ -27,13 +27,13 @@ You can adapt your own existing development container Dockerfile to support this
     ```Dockerfile
     # Install Docker CE CLI
     RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
-        && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - \
+        && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
         && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
         && apt-get update \
         && apt-get install -y docker-ce-cli
 
     # Install kubectl
-    RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
+    RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - 2>/dev/null \
         && echo "deb https://apt.kubernetes.io/ kubernetes-$(lsb_release -cs) main" | tee -a /etc/apt/sources.list.d/kubernetes.list \
         && apt-get update \
         && apt-get install -y kubectl

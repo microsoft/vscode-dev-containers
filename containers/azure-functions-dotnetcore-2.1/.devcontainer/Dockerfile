@@ -12,7 +12,7 @@ RUN apt-get update && apt-get -y install git procps
 RUN apt-get install -y apt-transport-https curl gnupg2 lsb-release \
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list \
-    && curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 2>/dev/null \
     && apt-get update \
     && apt-get install -y azure-cli azure-functions-core-tools
     
