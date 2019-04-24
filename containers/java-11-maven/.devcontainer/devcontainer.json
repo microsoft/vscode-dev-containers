@@ -1,0 +1,8 @@
+{
+	"name": "Java 11 & Maven",
+	"dockerFile": "Dockerfile",
+	"extensions": [
+		"vscjava.vscode-java-pack",
+		"redhat.vscode-xml"
+	]
+}
