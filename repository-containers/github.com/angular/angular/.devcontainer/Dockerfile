@@ -3,13 +3,16 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM openjdk:7
+FROM openjdk:8
 
 # Install git
 RUN apt-get update && apt-get -y install git
 
 # https support
 RUN apt-get install apt-transport-https
+
+# get gcc
+RUN apt-get update &&apt-get install build-essential -y
 
 # Install Node.js v10-stable
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
