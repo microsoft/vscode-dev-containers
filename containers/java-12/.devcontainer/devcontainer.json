@@ -1,0 +1,7 @@
+{
+	"name": "Java 12",
+	"dockerFile": "Dockerfile",
+	"extensions": [
+		"vscjava.vscode-java-pack"
+	]
+}
