@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "func",
+      "command": "host start",
+      "problemMatcher": "$func-watch",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/test-project/target/azure-functions/myapp-20190424131606275/"
+      },
+      "dependsOn": "package"
+    },
+    {
+      "label": "package",
+      "command": "cd ${workspaceFolder}/test-project && mvn clean package",
+      "type": "shell"
+    }
+  ]
+}

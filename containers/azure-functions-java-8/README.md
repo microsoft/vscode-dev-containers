@@ -12,7 +12,7 @@
 
 ## Using this definition with an existing folder
 
-This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/) and learn more about using [Azure Functions with VS Code here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code). Once you have an Azure account, follow these steps:
+This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/), learn more about using [Azure Functions with VS Code](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code) and [Java Azure Functions with VS Code](https://code.visualstudio.com/docs/java/java-azurefunctions) here. Once you have an Azure account, follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
@@ -29,6 +29,18 @@ This definition requires an Azure subscription to use. You can create a [free ac
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+
+## Testing the definition
+
+This definition includes some test code that will help you verify it is working as expected on your system. Follow these steps:
+
+1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+2. Clone this repository.
+3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
+4. Select the `containers/azure-functions-java-8` folder.
+5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
+6. After the debugger is started, type `curl http://localhost:7071/api/HttpTrigger-Java?name=test` in the terminal, you should see "Hello, test" echoed by the Azure Function.
+7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 
