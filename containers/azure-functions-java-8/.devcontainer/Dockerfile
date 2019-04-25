@@ -10,6 +10,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1
 
+# Verify git and needed tools are installed
+RUN apt-get -y install \
+        git \
+        procps \
+        curl \
+        apt-transport-https \
+        gnupg2 \
+        lsb-release
+
 # Install dotnet core sdk - See https://github.com/dotnet/dotnet-docker/blob/master/2.1/sdk/stretch/amd64/Dockerfile
 # Install .NET CLI dependencies
 RUN apt-get install -y --no-install-recommends \
@@ -45,14 +54,6 @@ ENV ASPNETCORE_URLS=http://+:80 \
 # Trigger first run experience by running arbitrary cmd to populate local package cache
 RUN dotnet help &> /dev/null
 
-# Verify git and needed tools are installed
-RUN apt-get -y install \
-        git \
-        procps \
-        curl \
-        apt-transport-https \
-        gnupg2 \
-        lsb-release
 
 # Install Azure Functions and Azure CLI
 RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \

@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Java applications. Includes the JDK 12, Maven and Gradle build tools.*
+*Develop Java 12 applications. Includes JDK 12, Maven, and Gradle build tools.*
 
 | Metadata | Value |  
 |----------|-------|

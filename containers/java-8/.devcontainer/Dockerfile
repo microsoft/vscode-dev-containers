@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM maven:3-jdk-11
+FROM maven:3-jdk-8
 
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive

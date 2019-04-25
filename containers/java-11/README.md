@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Java applications. Includes the JDK 11, Maven and Gradle build tools.*
+*Develop Java 11 applications. Includes the JDK 11, Maven, and Gradle build tools.*
 
 | Metadata | Value |  
 |----------|-------|
