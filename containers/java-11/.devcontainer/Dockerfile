@@ -5,8 +5,13 @@
 
 FROM maven:3-jdk-11
 
-# Install git, process tools
-RUN apt-get update && apt-get -y install git procps curl
+# Configure apt
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends apt-utils 2>&1
+
+# Verify git, needed tools installed
+RUN apt-get -y install git procps curl
 
 # Install Gradle
 ENV GRADLE_HOME /opt/gradle
@@ -23,3 +28,4 @@ RUN curl -SL --output gradle.zip "https://services.gradle.org/distributions/grad
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=dialog

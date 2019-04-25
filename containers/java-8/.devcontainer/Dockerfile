@@ -3,14 +3,15 @@
 # Licensed under the MIT License. See LICENSE in the project root for license information.
 #-----------------------------------------------------------------------------------------
 
-FROM maven:3-jdk-12
+FROM maven:3-jdk-8
 
-# Add a setting to disable the out of date git warning. Unfortunatley, openJDK 
-# Docker images use Oracle SE Linux which has an outdated version of git (<2.0).
-COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
+# Configure apt
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends apt-utils 2>&1
 
 # Verify git, needed tools installed
-RUN yum install -y git curl procps unzip
+RUN apt-get -y install git procps curl
 
 # Install Gradle
 ENV GRADLE_HOME /opt/gradle
@@ -23,5 +24,8 @@ RUN curl -SL --output gradle.zip "https://services.gradle.org/distributions/grad
     && mv "gradle-${GRADLE_VERSION}" "${GRADLE_HOME}/" \
     && ln -s "${GRADLE_HOME}/bin/gradlec" /usr/bin/gradle
 
-# Clean yum cache
-RUN yum clean all
+# Clean up
+RUN apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=dialog
