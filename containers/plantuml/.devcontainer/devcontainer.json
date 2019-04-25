@@ -1,0 +1,7 @@
+{
+    "name": "PlantUML",
+    "dockerFile": "Dockerfile",
+    "extensions": [
+        "jebbs.plantuml"
+    ]
+}
