@@ -3,10 +3,10 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# **************************************************************************
-# * Note: A dev-container.dockerfile is optional when using Docker Compose *
-# *       but has been included here for completeness.                     *
-# **************************************************************************
+# ********************************************************
+# * Note: A Docker is optional when using Docker Compose *
+# *       but has been included here for completeness.   *
+# ********************************************************
 
 # Debian and Ubuntu based images are supported. Alpine images are not yet supported.
 FROM debian:9
