@@ -43,7 +43,7 @@ ENV ASPNETCORE_URLS=http://+:80 \
     NUGET_XMLDOC_MODE=skip
 
 # Trigger first run experience by running arbitrary cmd to populate local package cache
-RUN dotnet help
+RUN dotnet help &> /dev/null
 
 # Verify git and needed tools are installed
 RUN apt-get -y install \
