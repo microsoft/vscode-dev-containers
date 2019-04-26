@@ -52,10 +52,6 @@ If you want to try a sample project which already has a dev container, check out
 - [Python Sample](https://github.com/Microsoft/vscode-remote-try-python)
 - [Go Sample](https://github.com/Microsoft/vscode-remote-try-go)
 - [Java Sample](https://github.com/Microsoft/vscode-remote-try-java)
-- [PHP Sample](https://github.com/Microsoft/vscode-remote-try-php)
-- [C++ Sample](https://github.com/Microsoft/vscode-remote-try-cpp)
-- [Ruby Sample](https://github.com/Microsoft/vscode-remote-try-ruby)
-- [Rust Sample](https://github.com/Microsoft/vscode-remote-try-rust)
 - [.NET Core Sample](https://github.com/Microsoft/vscode-remote-try-dotnetcore)
 
 ## Contents
