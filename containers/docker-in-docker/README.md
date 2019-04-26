@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Access your local Docker install from inside a dev container.*
+*Access your local Docker install from inside a dev container. Installs Docker extension in the container along with needed CLIs.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -14,7 +14,9 @@
 
 ## Description
 
-Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into your local Docker Desktop instance without affecting your dev container. This example illustrates how you can do this by running CLI commands and using the [Docker VS Code extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) right from inside your dev container.
+Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into your local Docker Desktop instance without affecting your dev container.
+
+This example illustrates how you can do this by running CLI commands and using the [Docker VS Code extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) right from inside your dev container. It installs the Docker extension inside the container so you can use its full feature set with your project.
 
 ## How it works / adapting your existing dev container config
 
@@ -38,7 +40,23 @@ You can adapt your own existing development container Dockerfile to support this
     "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
     ```
 
-3. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+3. Add a container specific user settings file that forces the Docker extension to be installed inside the container instead of locally. From `.devcontainer/Dockerfile`:
+
+    ```Dockerfile
+    COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
+    ```
+
+    From `.devcontainer/settings.vscode.json`:
+
+    ```json
+    {
+        "remote.extensionKind": {
+            "peterjausovec.vscode-docker": "workspace"
+        }
+    }
+    ```
+
+4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
