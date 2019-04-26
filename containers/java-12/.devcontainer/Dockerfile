@@ -7,6 +7,7 @@ FROM maven:3-jdk-12
 
 # Add a setting to disable the out of date git warning. Unfortunatley, openJDK 
 # Docker images use Oracle SE Linux which has an outdated version of git (<2.0).
+# Also specifies correct Java path.
 COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 
 # Verify git, needed tools installed

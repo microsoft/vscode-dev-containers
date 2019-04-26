@@ -5,6 +5,9 @@
 
 FROM maven:3-jdk-8
 
+# Copy endpoint specific user settings overrides into container to specify Java path
+COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
+
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
