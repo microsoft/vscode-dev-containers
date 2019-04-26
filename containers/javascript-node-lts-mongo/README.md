@@ -10,7 +10,7 @@
 | *Definition type* | Docker Compose |
 | *Languages, platforms* | Node.js, JavaScript, Mongo DB |
 
-This definition does require any special steps to use. Just follow these steps:
+This definition does not require any special steps to use. Just follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
