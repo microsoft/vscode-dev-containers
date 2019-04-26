@@ -6,15 +6,23 @@
 version: '3'
 services:
   your-service-name-here:
+    # Using a Dockerfile is optional, but included for completeness.
     build: 
       context: .
-      dockerfile: .devcontainer/Dockerfile  # Using a Dockerfile is optional, but included for completeness.
+      dockerfile: .devcontainer/Dockerfile  
 
+    # Application port(s) to expose
     ports:
-     - "3000:3000"  # Application port to forward
+     - "3000:3000"  
      
      volumes:
-      - ..:/workspace  # This is where VS Code should expect to find your project's source code, value of "volume" in .vscode/devContainer.json
+      # This is where VS Code should expect to find your project's source code
+      # and the value of "workspaceFolder" in .devcontainer/devcontainer.json
+      - ..:/workspace  
 
-    command: sleep infinity  # This prevents the container from shutting down if you stop your application
+      # This lets you avoid setting up Git again in the container
+      - ~/.gitconfig:/root/.gitconfig
 
+    # Overrides default command so things don't shut down after the process ends - useful for debugging
+    command: sleep infinity  
+    

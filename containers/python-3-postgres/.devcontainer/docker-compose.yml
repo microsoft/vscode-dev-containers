@@ -5,9 +5,15 @@ services:
     build: 
       context: ..
       dockerfile: .devcontainer/Dockerfile
+
     volumes:
       - ..:/workspace
+      # This lets you avoid setting up Git again in the container
+      - ~/.gitconfig:/root/.gitconfig
+
+    # Overrides default command so things don't shut down after the process ends - useful for debugging
     command: sleep infinity
+    
   db:
     image: postgres
     restart: always
