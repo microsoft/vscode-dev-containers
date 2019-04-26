@@ -15,7 +15,7 @@ services:
     ports:
      - "3000:3000"  
      
-     volumes:
+    volumes:
       # This is where VS Code should expect to find your project's source code
       # and the value of "workspaceFolder" in .devcontainer/devcontainer.json
       - ..:/workspace  
