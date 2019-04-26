@@ -1,0 +1,5 @@
+{
+    "remote.extensionKind": {
+        "peterjausovec.vscode-docker": "workspace"
+    }
+}

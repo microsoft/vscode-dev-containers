@@ -12,11 +12,11 @@
 
 ## Description
 
-Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into a local or remote [Kubernetes](https://kubernetes.io/) cluster without affecting your dev container. This example illustrates how you can do this by using CLIs, the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) right from inside your dev container.
+Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into a local or remote [Kubernetes](https://kubernetes.io/) cluster without affecting your dev container.
 
-This definition builds up from the [docker-in-docker](../docker-in-docker) container definition to add Kubernetes and Helm support.
+This example illustrates how you can do this by using CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker), the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) right from inside your dev container.  This definition builds up from the [docker-in-docker](../docker-in-docker) container definition to add Kubernetes and Helm support.  It installs the Docker and Kubernetes extensions inside the container so you can use its full feature set with your project.
 
-The dev container includes the needed CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker) and syncs your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container with the necessary modifications to allow it to interact with anything running on your local machine. This includes interacting with a Kubernetes cluster managed through Docker Desktop or a local Minikube install.
+The dev container also syncs your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container with the necessary modifications to allow it to interact with anything running on your local machine whenever the container or a terminal window is started. This includes interacting with a Kubernetes cluster managed through Docker Desktop or a local Minikube install.
 
 ## How it works / adapting your existing dev container config
 
@@ -50,7 +50,7 @@ You can adapt your own existing development container Dockerfile to support this
             "-v", "$HOME/.kube:/root/.kube-localhost"]
     ```
 
-3. Finally, update `.bashrc` to automatically swap out localhost for host.docker.internal in a containr copy of the Kubernetes config. From `.devcontainer/Dockerfile`:
+3. Update `.bashrc` to automatically swap out localhost for host.docker.internal in a containr copy of the Kubernetes config. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
     RUN echo 'if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then \
@@ -60,7 +60,23 @@ You can adapt your own existing development container Dockerfile to support this
             fi' >> $HOME/.bashrc
     ```
 
-3. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+5. Add a container specific user settings file that forces the Docker extension to be installed inside the container instead of locally. From `.devcontainer/Dockerfile`:
+
+    ```Dockerfile
+    COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
+    ```
+
+    From `.devcontainer/settings.vscode.json`:
+
+    ```json
+    {
+        "remote.extensionKind": {
+            "peterjausovec.vscode-docker": "workspace"
+        }
+    }
+    ```
+
+6. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
