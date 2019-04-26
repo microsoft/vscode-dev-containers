@@ -9,11 +9,18 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+    
     volumes:
       - ..:/workspace
+      # This lets you avoid setting up Git again in the container
+      - ~/.gitconfig:/root/.gitconfig
+
+    # Overrides default command so things don't shut down after the process ends - useful for debugging
     command: sleep infinity
+    
     links:
       - mongo
+
   mongo:
     image: mongo
     volumes:
