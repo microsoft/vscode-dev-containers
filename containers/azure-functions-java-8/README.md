@@ -39,8 +39,9 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/azure-functions-java-8` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. After the debugger is started, type `curl http://localhost:7071/api/HttpTrigger-Java?name=test` in the terminal, you should see "Hello, test" echoed by the Azure Function.
-7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+6. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTrigger-Java?name=remote`.
+7. You should see "Hello, remote" echoed by the Azure Function.
+8. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 

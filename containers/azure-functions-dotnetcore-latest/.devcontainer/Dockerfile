@@ -5,14 +5,24 @@
 
 FROM mcr.microsoft.com/dotnet/core/sdk:latest
 
-# Install git, process tools, bash
-RUN apt-get update && apt-get -y install git procps
+# Configure apt
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends apt-utils 2>&1
+
+# Verify git and needed tools are installed
+RUN apt-get -y install \
+        git \
+        procps \
+        curl \
+        apt-transport-https \
+        gnupg2 \
+        lsb-release
 
 # Install Azure Functions and Azure CLI
-RUN apt-get install -y apt-transport-https curl gnupg2 lsb-release \
-    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
+RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list \
-    && curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 2>/dev/null \
+    && curl -L https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
     && apt-get update \
     && apt-get install -y azure-cli azure-functions-core-tools
 
@@ -20,3 +30,4 @@ RUN apt-get install -y apt-transport-https curl gnupg2 lsb-release \
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=dialog
