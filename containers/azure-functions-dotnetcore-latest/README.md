@@ -30,6 +30,20 @@ This definition requires an Azure subscription to use. You can create a [free ac
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
+## Testing the definition
+
+This definition includes some test code that will help you verify it is working as expected on your system. Follow these steps:
+
+1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+2. Clone this repository.
+3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
+4. Select the `containers/azure-functions-dotnetcore-latest` folder.
+5. After the folder has opened in the container, in a moment you will see a notification to restore packages. Click "Restore".
+6. Once packages are restored, press <kbd>F5</kbd> to start the project.
+7. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTriggerCSharp?name=remote`.
+8. You should see "Hello, remote" echoed by the Azure Function.
+9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.

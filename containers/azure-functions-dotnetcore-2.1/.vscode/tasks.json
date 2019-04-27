@@ -1,0 +1,57 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "clean",
+      "command": "dotnet clean",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/test-project"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build",
+      "command": "dotnet build",
+      "type": "shell",
+      "dependsOn": "clean",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/test-project"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "clean release",
+      "command": "dotnet clean --configuration Release",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/test-project"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "publish",
+      "command": "dotnet publish --configuration Release",
+      "type": "shell",
+      "dependsOn": "clean release",
+      "options": {
+        "cwd": "${workspaceFolder}/test-project"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "type": "func",
+      "dependsOn": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/test-project/bin/Debug/netcoreapp2.1"
+      },
+      "command": "host start",
+      "isBackground": true,
+      "problemMatcher": "$func-watch"
+    }
+  ]
+}
