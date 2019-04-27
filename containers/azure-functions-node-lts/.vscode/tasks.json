@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "func",
+      "command": "host start",
+      "problemMatcher": "$func-watch",
+      "dependsOn": "func: extensions install",
+      "isBackground": true
+    },
+    {
+      "label": "PATH",
+      "type": "shell",
+      "command": "echo $PATH"
+    }
+  ]
+}
