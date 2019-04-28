@@ -46,7 +46,7 @@ This definition includes some test code that will help you verify it is working 
    4. HttpTriggerCSharp
    5. Anonymous
    6. Open in current window
-7. After the restore has completed, press <kbd>F5</kbd> to start debugging project.
+7. Press <kbd>F5</kbd> to start debugging project.
 8. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTriggerCSharp?name=remote`.
     - If the port 7071 is not already open, press <kbd>F1</kbd>, select **Remote-Containers: Forward Port from Container...**, and then port 7071.
 9.  You should see "Hello, remote" echoed by the Azure Function.
