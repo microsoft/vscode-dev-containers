@@ -38,11 +38,20 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/azure-functions-dotnetcore-2.1` folder.
-5. After the folder has opened in the container, in a moment you will see a notification to restore packages. Click "Restore".
-6. Once packages are restored, press <kbd>F5</kbd> to start the project.
-7. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTriggerCSharp?name=remote`.
-8. You should see "Hello, remote" echoed by the Azure Function.
-9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+5. After the folder has opened in the container, press <kbd>F1</kbd> and select **Azure Functions: Create Function...**.
+6. Enter these options:
+   1. Yes (when prompted to create a new project)
+   2. C#
+   3. HTTP Trigger
+   4. HttpTriggerCSharp
+   5. Anonymous
+   6. Open in current window
+7. After the files are added, in a moment you will see a notification to restore packages. Click "Restore".
+8. After the restore has completed, press <kbd>F5</kbd> to start debugging project.
+9. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTriggerCSharp?name=remote`.
+    - If the port 7071 is not already open, press <kbd>F1</kbd>, select **Remote-Containers: Forward Port from Container...", and then port 7071.
+10. You should see "Hello, remote" echoed by the Azure Function.
+11. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 
