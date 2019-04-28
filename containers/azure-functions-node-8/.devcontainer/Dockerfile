@@ -25,7 +25,10 @@ RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb
     && curl -sL https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
     && apt-get update \
     && apt-get install -y azure-cli dotnet-sdk-2.1 azure-functions-core-tools
-    
+
+# Install eslint
+RUN npm install -g eslint
+
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
