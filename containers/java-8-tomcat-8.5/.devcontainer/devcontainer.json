@@ -1,0 +1,8 @@
+{
+	"name": "Java 8 & Tomcat 8.5",
+	"dockerFile": "Dockerfile",
+	"extensions": [
+		"vscjava.vscode-java-pack",
+		"adashen.vscode-tomcat"
+	]
+}
