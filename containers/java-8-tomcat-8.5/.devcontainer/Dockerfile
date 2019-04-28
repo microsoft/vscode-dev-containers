@@ -5,6 +5,10 @@
 
 FROM tomcat:8.5-jre8
 
+# Copy endpoint specific user settings into container to specify Java path
+COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
+
+
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \

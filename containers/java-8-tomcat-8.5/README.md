@@ -39,13 +39,14 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/java-8-tomcat-8.5` folder.
 5. After the folder has opened in the container, press <kbd>F1</kbd>, and select **Tomcat: Add Tomcat Server**.
-6. In the prompted File Dialog, select `/usr/local/tomcat` and click **OK** button to add a new Tomcat Server.
-7. Go to VS Code Terminal viewlet, click **+** button to new a bash terminal, then run the commands below to generate a war file.
- ```
- cd test-project
- mvn clean package
- ```
-8. Find the war file `test-project/target/mywebapp-0.0.1-SNAPSHOT.war`, click the context menu **Debug on Tomcat Server**, then the application will be started in a Tomcat Server.
+6. Select `/usr/local/tomcat` as the path and click **OK** to add a new Tomcat Server.
+7. Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>`</kbd> to open a new terminal, then run the commands below to generate a war file.
+    ```
+    cd test-project
+    mvn clean package
+    ```
+8. Navigate to `test-project/target/mywebapp-0.0.1-SNAPSHOT.war` in the explorer, right-click on the file, and select **Debug on Tomcat Server**
+9. The application will then start in the Tomcat Server!
 
 ## License
 
