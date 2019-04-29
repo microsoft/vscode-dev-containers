@@ -1,10 +1,10 @@
 # Contributing
 
-There are many ways for you to contribute to VS Code Remote Development. This document will outline a number of ways you can get involved.
+This document outlines a number of ways you can get involved.
 
 ## Contributing Dev Container Definitions
 
-Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition We love contributions!  Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
+Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? We love contributions!  Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
 
 When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
 
@@ -35,13 +35,13 @@ If you want to create a new definition:
 
     See the [VS Code Remote Development documentation](https://aka.ms/vscode-remote/docker) for information on the expected contents of `devcontainer.json` and how it relates to other files listed above.
 
-    Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Keeping these files in the `.devcontainer` should reduce the chances of something conflicting but note that any command that are run are relative to the root of the project, so you'll need to include `.devcontainer` in any path references.
+    Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Keeping these files in the `.devcontainer` folder should reduce the chances of something conflicting but note that any command that are run are relative to the root of the project, so you'll need to include `.devcontainer` in any path references.
 
     VS Code respects [`.npmignore`](https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package) as a way to keep certain content out of projects when your definition is used. Add anything you don't want copied across into this file in [glob](https://facelessuser.github.io/wcmatch/glob/) form.
 
     Finally, create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
 
-4. Commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in! We appreciate any and all feedback!!
+4. Commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in. We appreciate any and all feedback!
 
 ### Developing and testing a definition
 
@@ -55,7 +55,7 @@ VS Code Remote provides a straight forward development loop for creating and edi
 
 Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy. While you can use Docker from inside a container by forwarding the Docker unix socket and installing the CLI in the container (see [Docker-in-Docker](containers/docker-in-docker)), you'll likely be removing the container you are actually using so this approach will not work well in this case.
 
-Finally, after you get your container up and running, you can test it by adding test assets into the definition folder as long as they are referenced in the `.devcontainer/ignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form ith paths relative the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `ignore` files. 
+Finally, after you get your container up and running, you can test it by adding test assets into the definition folder and add them to the `.devcontainer/ignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form relative to the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `ignore` files. 
 
 ### Speeding up container provisioning
 
@@ -65,7 +65,7 @@ Once you've published your container image, just update `devcontainer.json` to r
 
 ## Contributing to Documentation
 
-The majority of VS Code Remote's documentation can be found in the [VS Code docs repository](https://github.com/Microsoft/vscode-docs). This is usually the best place to contribute, but if you have a correction or suggestion for the countent found here, we welcome your contributions.
+The majority of VS Code Remote's documentation can be found in the [VS Code docs repository](https://github.com/Microsoft/vscode-docs). This is usually the best place to contribute, but if you have a correction or suggestion for the content found here, we welcome your contributions.
 
 ## Reporting Issues
 
@@ -73,7 +73,7 @@ Have you identified a reproducible problem in a dev container definition? We wan
 
 ### Identify Where to Report
 
-This repository is specifically for dev container definitions. If you are not looking to report an issue related to a container definition, you may want to report the an issue in the feedback repository for [VS Code Remote Development extensions](https://github.com/Microsoft/vscode-remote-release). Or you may be looking for the [VS Code OSS](https://github.com/Microsoft/vscode) repository. However, note that, the VS Code project is distributed across multiple repositories. See the list of [Related Projects](https://github.com/Microsoft/vscode/wiki/Related-Projects) if you aren't sure which repo is correct.
+This repository is specifically for dev container definitions. If you are not looking to report an issue related to a container definition, you may want to report the issue in the feedback repository for [VS Code Remote Development extensions](https://github.com/Microsoft/vscode-remote-release). Or you may be looking for the [VS Code OSS](https://github.com/Microsoft/vscode) repository. However, note that, the VS Code project is distributed across multiple repositories. See the list of [Related Projects](https://github.com/Microsoft/vscode/wiki/Related-Projects) if you aren't sure which repo is correct.
 
 ### Look For an Existing Issue
 
@@ -114,9 +114,9 @@ Please include the following with each issue:
 
 * A code snippet that demonstrates the issue or a link to a code repository the developers can easily pull down to recreate the issue locally
 
-  * **Note:** Because the developers need to copy and paste the code snippet, including a code snippet as a media file (i.e. .gif) is not sufficient.
+  * **Note:** Because the developers need to copy and paste the code snippet, including a code snippet as a media file (i.e. `.gif`) is not sufficient.
 
-* Errors from the Dev Tools Console (open from the menu: Help > Toggle Developer Tools)
+* Errors from the Dev Tools Console (open from the menu: **Help > Toggle Developer Tools**)
   
 ### Final Checklist
 
@@ -132,7 +132,7 @@ Don't feel bad if the developers can't reproduce the issue right away. They will
 
 ### Follow Your Issue
 
-Once submitted, your report will go into the a similar [issue tracking](https://github.com/Microsoft/vscode/wiki/Issue-Tracking) workflow that is used for the core VS Code project. Be sure to understand what will happen next, so you know what to expect, and how to continue to assist throughout the process.
+Once submitted, your report will go into a similar [issue tracking](https://github.com/Microsoft/vscode/wiki/Issue-Tracking) workflow that is used for the VS Code project. Be sure to understand what will happen next, so you know what to expect, and how to continue to assist throughout the process.
 
 ### Automated Issue Management
 
