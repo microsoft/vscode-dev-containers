@@ -11,7 +11,7 @@
 
 A **development container** is a running [Docker](https://www.docker.com) container with a well-defined tool/runtime stack and its prerequisites. The Remote - Containers extension in the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension pack allows you to open any folder inside (or mounted into) a dev container and take advantage of VS Code's full development feature set.
 
-This repository contains a set of **dev container definitions** to help get you up and running with a containerized environment. The definitions describe the appropriate container image, runtime arguments for starting the container, and VS Code extensions that should be installed. They can help you get started or be used as examples for adapting your own configuration to different situations.
+This repository contains a set of **dev container definitions** to help get you up and running with a containerized environment. The definitions describe the appropriate container image, runtime arguments for starting the container, and VS Code extensions that should be installed. They can also be used as examples for adapting your own configuration to different situations.
 
 ## Using a definition
 
@@ -25,7 +25,7 @@ To add a dev container definition in your project, you can either:
   and select either the **Remote-Containers: Create Container Configuration File...** or **Remote-Containers: Reopen Folder in Container** commands.
   4. Follow the directions and pick one of the existing development container definitions in this repository from the list.
 
-- Or manually copy the contents of one of folders in the `containers` directory into your project. You should be able to copy just the `.devcontainer` folder and ignore everything else. See the definition's `README` for details.
+- Or manually copy the contents of one of the folders in the `containers` directory into your project. You should be able to copy just the `.devcontainer` folder and ignore everything else. See the definition's `README` for details.
 
 ## Adding a definition to an existing repository
 
@@ -64,7 +64,7 @@ If you want to try a sample project which already has a dev container, check out
 
 ### Can I just reuse an existing container image or Docker / Docker Compose configuration?
 
-Yes, if you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Create Container Configuration File...** from the Command Palette (F1). You'll be prompted to select a Dockerfile or Docker Compose file and customize from there. If you prefer, you can also start up the container and [attach to it](https://aka.ms/vscode-remote/containers/attach).
+Yes, if you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Create Container Configuration File...** from the Command Palette (<kbd>F1</kbd>). You'll be prompted to select a Dockerfile or Docker Compose file and customize from there. If you prefer, you can also start up the container and [attach to it](https://aka.ms/vscode-remote/containers/attach).
 
 ### What is the goal of `devcontainer.json`?
 
@@ -74,7 +74,7 @@ A `devcontainer.json` file is similar to `launch.json` for debugging, but design
 
 Have a question or feedback?
 
-- Contribute or provide feedback for the [VS Code Remote Development extensions](https://github.com/Microsoft/vscode-remote-release/CONTRIBUTING.md).
+- Contribute or provide feedback for the [VS Code Remote Development extensions](https://github.com/Microsoft/vscode-remote-release/blob/master/CONTRIBUTING.md).
 - Search [existing issues](https://github.com/Microsoft/vscode-dev-containers/issues) with dev container definitions or [report a problem](https://github.com/Microsoft/vscode-dev-containers/issues/new).
 - Contribute a [development container definition](CONTRIBUTING.md#contributing-dev-container-definitions) to the repository.
 
