@@ -34,7 +34,7 @@ RUN curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper
     && apt-get install -y docker-ce-cli
 
 # Install pylint and Azure ML SDK
-RUN pip install pylint azureml-sdk 2>&1
+RUN pip install pylint azureml-sdk[notebooks,automl] 2>&1
 
 # Clean up
 RUN apt-get autoremove -y \
