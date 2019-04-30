@@ -1,18 +1,22 @@
-# Azure Machine Learning & Python 3
+# Azure Machine Learning & Python 3 - Anaconda
 
 ## Summary
 
-*Use Azure Machine Learning with Python 3. Includes Python, the Docker CLI (for local testing), and related extensions and dependencies.*
+*Use Azure Machine Learning with Python 3 - Anaconda. Includes Anaconda, the Docker CLI (for local testing), and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | Azure Machine Learning, Python |
+| *Languages, platforms* | Azure Machine Learning, Python, Anaconda |
 
 ## Using this definition with an existing folder
 
-This definition requires an Azure subscription to use. You can create a [free account here](https://account.azure.com/signup?offer=ms-azr-0044p&appId=102&ref=azureplat-generic&redirectURL=https%3a%2f%2fazure.microsoft.com%2fen-us%2fget-started%2fwelcome-to-azure%2f&l=en-us&correlationId=15FE63BE1C4960F42D1B6EFB18496296) and learn more about using [Azure Machine Learning with VS Code here](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-vscode-tools#get-started-with-azure-machine-learning). Once you have an Azure account, follow these steps:
+This definition requires an Azure subscription to use. You can create a [free account here](https://account.azure.com/signup?offer=ms-azr-0044p&appId=102&ref=azureplat-generic&redirectURL=https%3a%2f%2fazure.microsoft.com%2fen-us%2fget-started%2fwelcome-to-azure%2f&l=en-us&correlationId=15FE63BE1C4960F42D1B6EFB18496296) and learn more about using [Azure Machine Learning with VS Code here](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-vscode-tools#get-started-with-azure-machine-learning).
+
+The definition also uses an Anaconda base image which can take some time to download the first time given its size.
+
+Once you have an Azure account, follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
