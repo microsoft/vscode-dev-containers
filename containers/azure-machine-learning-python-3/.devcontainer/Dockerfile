@@ -25,6 +25,7 @@ RUN apt-get install -y \
             ca-certificates \
             gnupg-agent \
             software-properties-common \
+            sudo \
             lsb-release 2>&1
 
 # Install Docker CLI
