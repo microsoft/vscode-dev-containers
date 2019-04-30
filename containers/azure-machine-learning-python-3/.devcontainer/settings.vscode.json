@@ -1,0 +1,8 @@
+{
+    "remote.extensionKind": {
+        "peterjausovec.vscode-docker": "workspace"
+    },
+    "python.pythonPath": "/opt/conda/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
+}
