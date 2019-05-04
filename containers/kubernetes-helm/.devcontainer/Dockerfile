@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# You can use any Debian/Ubuntu based image as abase
+# You can use any Debian/Ubuntu based image as a base
 FROM debian:9
 
 # Copy settings file so Docker extension is installed inside the container
