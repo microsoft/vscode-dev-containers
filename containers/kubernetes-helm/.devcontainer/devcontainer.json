@@ -5,7 +5,11 @@
         "peterjausovec.vscode-docker",
         "ms-kubernetes-tools.vscode-kubernetes-tools"
     ],
-    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-        "-v", "/var/run/docker.sock:/var/run/docker.sock",
-        "-v", "${env:HOME}${env:USERPROFILE}/.kube:/root/.kube-localhost"]
+    "runArgs": [
+      "-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+      "-e", "SYNC_LOCALHOST_MINIKUBE=true",
+      "-v", "/var/run/docker.sock:/var/run/docker.sock",
+      "-v", "${env:HOME}${env:USERPROFILE}/.kube:/root/.kube-localhost",
+      "-v", "${env:HOME}${env:USERPROFILE}/.minikube:/root/.minikube-localhost"
+    ]
 }
