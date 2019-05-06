@@ -1,15 +1,13 @@
 {
-    "name": "Kubernetes & Helm",
-    "dockerFile": "Dockerfile",
-    "extensions": [
-        "peterjausovec.vscode-docker",
-        "ms-kubernetes-tools.vscode-kubernetes-tools"
-    ],
-    "runArgs": [
-      "-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-      "-e", "SYNC_LOCALHOST_MINIKUBE=true",
-      "-v", "/var/run/docker.sock:/var/run/docker.sock",
-      "-v", "${env:HOME}${env:USERPROFILE}/.kube:/root/.kube-localhost",
-      "-v", "${env:HOME}${env:USERPROFILE}/.minikube:/root/.minikube-localhost"
-    ]
+  "name": "Kubernetes & Helm",
+  "dockerFile": "Dockerfile",
+  "extensions": [
+    "peterjausovec.vscode-docker",
+    "ms-kubernetes-tools.vscode-kubernetes-tools"
+  ],
+  "runArgs": [
+    "--mount", "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
+    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost",
+    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost"
+  ]
 }
