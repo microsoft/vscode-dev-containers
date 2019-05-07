@@ -8,6 +8,6 @@
   "runArgs": [
     "--mount", "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
     "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost",
-    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost"
+    "-v", "${env:HOME}${env:USERPROFILE}/.minikube:/root/.minikube-localhost"
   ]
 }
