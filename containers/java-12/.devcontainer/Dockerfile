@@ -15,14 +15,14 @@ RUN yum install -y git curl procps unzip
 
 # Install Gradle
 ENV GRADLE_HOME /opt/gradle
-ENV GRADLE_VERSION 5.4
-ARG GRADLE_DOWNLOAD_SHA256=c8c17574245ecee9ed7fe4f6b593b696d1692d1adbfef425bef9b333e3a0e8de
+ENV GRADLE_VERSION 5.4.1
+ARG GRADLE_DOWNLOAD_SHA256=7bdbad1e4f54f13c8a78abc00c26d44dd8709d4aedb704d913fb1bb78ac025dc
 RUN curl -sSL --output gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
     && echo "${GRADLE_DOWNLOAD_SHA256} *gradle.zip" | sha256sum --check - \
     && unzip gradle.zip \
     && rm gradle.zip \
     && mv "gradle-${GRADLE_VERSION}" "${GRADLE_HOME}/" \
-    && ln -s "${GRADLE_HOME}/bin/gradlec" /usr/bin/gradle
+    && ln -s "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle
 
 # Clean yum cache
 RUN yum clean all
