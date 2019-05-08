@@ -20,12 +20,12 @@ services:
       # Forwards the Docker socket from one side ot the other
       - /var/run/docker.sock:/var/run/docker.sock 
 
-    # Uncomment the next four lines if you will use ptrace-based debuggers like C++, Go, and Rust
+    # Uncomment the next four lines if you will use a ptrace-based debuggers like C++, Go, and Rust.
     # cap_add:
     #  - SYS_PTRACE
     # security_opt:
     #   - seccomp:unconfined
 
-    # Overrides default command so things don't shut down after the process ends - useful for debugging
+    # Overrides default command so things don't shut down after the process ends - useful for debugging.
     command: sleep infinity 
     

@@ -13,13 +13,12 @@
 
     // The optional 'runArgs' property can be used to specify additional runtime arguments.
     "runArgs": [
-        //  Uncomment the next line if you plan to install the Docker CLI. See the Docker in Docker definition for details
+        //  Uncomment the next line if you plan to install the Docker CLI. See the docker-in-docker definition for details
         // "-v","/var/run/docker.sock:/var/run/docker.sock",
 
-        // Uncomment the next three lines if you will be using a ptrace-based debuggers like C++, Go, and Rust.
+        // Uncomment the next two lines if you will use a ptrace-based debugger like C++, Go, and Rust
         // "--cap-add=SYS_PTRACE",
-        // "--security-opt",
-        /// "seccomp=unconfined"
+        // "--security-opt", "seccomp=unconfined"
     ]
 
 }

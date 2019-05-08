@@ -10,9 +10,8 @@
         "-v", "/var/run/docker.sock:/var/run/docker.sock",
         "-v", "${env:HOME}${env:USERPROFILE}/.kube:/root/.kube-localhost",
 
-        // Uncomment the next three lines if you will be using a ptrace-based debuggers like C++, Go, and Rust.
+        // Uncomment the next two lines if you will use a ptrace-based debugger like C++, Go, and Rust.
         // "--cap-add=SYS_PTRACE",
-        // "--security-opt",
-        /// "seccomp=unconfined"
+        // "--security-opt", "seccomp=unconfined"
     ]
 }
