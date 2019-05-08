@@ -20,11 +20,6 @@
     // "Add any extensions you want auto-installed here."
     "extensions": [],
 
-    // "Remove this line if you want to keep your containers running after VS Code shuts down."
+    // "Update the value of this line like to 'none' if you want to keep your containers running after VS Code shuts down."
     "shutdownAction": "stopCompose"
-    
-    // "Other notes:"
-    // "- The 'appPorts' property is not supported in the Docker Compose case. Add the ports into"
-    // "  the docker-compose.yml in the .devcontainer folder instead." 
-    // "- The 'runArgs' property is also not supported."
 }

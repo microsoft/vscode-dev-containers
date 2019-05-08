@@ -1,11 +1,21 @@
 {
-    // "See https://aka.ms/vscode-remote/devcontainer.json for format details."
+    // See https://aka.ms/vscode-remote/devcontainer.json for format details.
     "name": "Dev Container Definition Template - Docker Compose",
+
+    // Update the 'dockerComposeFile' list if you have more compose files or use different names.
     "dockerComposeFile": "docker-compose.yml",
-    "service": "your-service-name-here",
+    
+    // The 'service' property is the name of the service for the container that VS Code should
+    // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+    "service": "your-service-name-here", 
+
+    // The optional 'workspaceFolder' property is the path VS Code should open by default when
+    // connected. This is typically a volume mount in .devcontainer/docker-compose.yml
     "workspaceFolder": "/workspace",
-    "shutdownAction": "stopCompose",
-    "extensions": [
-        "mutantdino.resourcemonitor"
-    ]
+
+    // Add any extensions you want auto-installed here.
+    "extensions": [],
+
+    // Update the value of this line like to 'none' if you want to keep your containers running after VS Code shuts down.
+    "shutdownAction": "stopCompose"
 }
