@@ -1,14 +1,13 @@
 {
-    "name": "Docker in Docker",
-    "dockerFile": "Dockerfile",
-    "extensions": [
-        "peterjausovec.vscode-docker"
-    ],
-    "runArgs": [
-        "-v","/var/run/docker.sock:/var/run/docker.sock",
-
-        // Uncomment the next two lines if you will use a ptrace-based debugger like C++, Go, and Rust.
-        // "--cap-add=SYS_PTRACE",
-        // "--security-opt", "seccomp=unconfined"
-    ]
+	"name": "Docker in Docker",
+	"dockerFile": "Dockerfile",
+	"extensions": [
+		"peterjausovec.vscode-docker"
+	],
+	"runArgs": [
+		"-v", "/var/run/docker.sock:/var/run/docker.sock",
+		// Uncomment the next two lines if you will use a ptrace-based debugger like C++, Go, and Rust.
+		// "--cap-add=SYS_PTRACE",
+		// "--security-opt", "seccomp=unconfined"
+	]
 }

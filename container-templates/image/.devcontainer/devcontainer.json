@@ -1,24 +1,22 @@
 {
-    // See https://aka.ms/vscode-remote/devcontainer.json for format details.
-    "name": "Dev Container Definition Template - Container Image",
+	// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+	"name": "Dev Container Definition Template - Container Image",
 
-    // Update the 'image' property with your Docker image name.
-    "image": "ubuntu:bionic",
-    
-    // Use the optional 'appPort' property to expose ports not already in your Dockerfile
-    "appPort": [],
-    
-    // Add any extensions you want auto-installed here.
-    "extensions": [],
+	// Update the 'image' property with your Docker image name.
+	"image": "ubuntu:bionic",
 
-    // The optional 'runArgs' property can be used to specify additional runtime arguments.
-    "runArgs": [
-        //  Uncomment the next line if you want to use Docker from the container. See the docker-in-docker definition for details.
-        // "-v","/var/run/docker.sock:/var/run/docker.sock",
+	// Use the optional 'appPort' property to expose ports not already in your Dockerfile
+	"appPort": [],
 
-        // Uncomment the next two lines if you will use a ptrace-based debugger like C++, Go, and Rust.
-        // "--cap-add=SYS_PTRACE",
-        // "--security-opt", "seccomp=unconfined"
-    ]
-
+	// Add any extensions you want auto-installed here.
+	"extensions": [],
+	
+	// The optional 'runArgs' property can be used to specify additional runtime arguments.
+	"runArgs": [
+		//  Uncomment the next line if you want to use Docker from the container. See the docker-in-docker definition for details.
+		// "-v","/var/run/docker.sock:/var/run/docker.sock",
+		// Uncomment the next two lines if you will use a ptrace-based debugger like C++, Go, and Rust.
+		// "--cap-add=SYS_PTRACE",
+		// "--security-opt", "seccomp=unconfined"
+	]
 }

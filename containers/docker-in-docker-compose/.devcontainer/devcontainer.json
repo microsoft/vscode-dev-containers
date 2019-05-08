@@ -1,10 +1,10 @@
 {
-    "name": "Docker in Docker Compose",
-    "dockerComposeFile": "docker-compose.yml",
-    "service": "docker-in-docker",
-    "workspaceFolder": "/workspace",
-    "shutdownAction": "stopCompose",
-    "extensions": [
-        "peterjausovec.vscode-docker"
-    ]
+	"name": "Docker in Docker Compose",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "docker-in-docker",
+	"workspaceFolder": "/workspace",
+	"shutdownAction": "stopCompose",
+	"extensions": [
+		"peterjausovec.vscode-docker"
+	]
 }
