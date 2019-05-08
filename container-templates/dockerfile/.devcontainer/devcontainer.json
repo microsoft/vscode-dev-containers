@@ -15,6 +15,7 @@
 	"runArgs": [
 		//  Uncomment the next line if you want to use Docker from the container. See the docker-in-docker definition for details.
 		// "-v","/var/run/docker.sock:/var/run/docker.sock",
+
 		// Uncomment the next two lines if you will use a ptrace-based debugger like C++, Go, and Rust
 		// "--cap-add=SYS_PTRACE",
 		// "--security-opt", "seccomp=unconfined"
