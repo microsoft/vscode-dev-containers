@@ -13,5 +13,5 @@
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": []
+	// "postCreateCommand": ["gcc -v"]
 }

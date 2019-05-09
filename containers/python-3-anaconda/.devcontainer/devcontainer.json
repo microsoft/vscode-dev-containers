@@ -10,6 +10,6 @@
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": []
+	// "postCreateCommand": ["conda env update base -f environment.yml"]
 
 }
