@@ -2,9 +2,14 @@
 	"name": "Python 3 - Anaconda",
 	"context": "..",
 	"dockerFile": "Dockerfile",
-	"appPort": "5000:5000",
-	"workspaceFolder": "/workspace",
 	"extensions": [
 		"ms-python.python"
-	]
+	],
+		
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": ["conda env update base -f environment.yml"]
+
 }

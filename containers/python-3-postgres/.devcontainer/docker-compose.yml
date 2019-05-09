@@ -11,7 +11,7 @@ services:
       # This lets you avoid setting up Git again in the container
       - ~/.gitconfig:/root/.gitconfig
 
-    # Overrides default command so things don't shut down after the process ends - useful for debugging
+    # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
     
   db:

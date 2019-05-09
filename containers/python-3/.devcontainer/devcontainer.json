@@ -2,8 +2,14 @@
 	"name": "Python 3",
 	"context": "..",
 	"dockerFile": "Dockerfile",
-	"workspaceFolder": "/workspace",
 	"extensions": [
 		"ms-python.python"
-	]
+	],
+
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": ["pip install -r requirements.txt"]
+
 }

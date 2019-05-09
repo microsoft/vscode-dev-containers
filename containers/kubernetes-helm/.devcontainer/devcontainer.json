@@ -5,7 +5,19 @@
         "peterjausovec.vscode-docker",
         "ms-kubernetes-tools.vscode-kubernetes-tools"
     ],
-    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+    "runArgs": [
+        "-e", "SYNC_LOCALHOST_KUBECONFIG=true",
         "-v", "/var/run/docker.sock:/var/run/docker.sock",
-        "-v", "${env:HOME}${env:USERPROFILE}/.kube:/root/.kube-localhost"]
+        "-v", "${env:HOME}${env:USERPROFILE}/.kube:/root/.kube-localhost",
+
+        // Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust.
+        // "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"
+    ],
+    	
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": ["kubectl version"]
+
 }

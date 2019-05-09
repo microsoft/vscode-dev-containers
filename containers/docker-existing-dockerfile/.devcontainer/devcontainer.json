@@ -1,22 +1,28 @@
 {
-    // "See https://aka.ms/vscode-remote/devcontainer.json for format details."
-    "name": "Existing Dockerfile",
+	// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+	"name": "Existing Dockerfile",
 
-    // "Sets the run context to one level up instead of the .devcontainer folder.
-    "context": "..",
+	// Sets the run context to one level up instead of the .devcontainer folder.
+	"context": "..",
 
-    // "Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename."
-    "dockerFile": "Dockerfile",    
-    
-    // "Use the optional 'appPort' property to expose ports not already in your Dockerfile"
-    "appPort": [],
-    
-    // "Add any extensions you want auto-installed here."
-    "extensions": [],
+	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+	"dockerFile": "Dockerfile",
 
-    // "The optional 'runArgs' property can be used to specify Docker CLI arguments to use when the container."
-    // "is started. If you install the Docker CE CLI in your container, the runArgs list below will lets you interact"
-    // "with your host's Docker service from inside the container. See the docker-in-docker and docker-in-docker"
-    // "definitions for details."
-    "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
+	// Uncomment the next line to automatically install extensions.
+	// "extensions": [],
+
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": ["uname -a"]
+
+	// The optional 'runArgs' property can be used to specify additional runtime arguments.
+	"runArgs": [
+		//  Uncomment the next line if you want to use Docker from the container. See the docker-in-docker definition for details.
+		// "-v","/var/run/docker.sock:/var/run/docker.sock",
+
+		// Uncomment the next line if you will be using a ptrace-based debugger like C++, Go, and Rust.
+		// "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"
+	]
 }
