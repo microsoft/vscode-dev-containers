@@ -22,5 +22,5 @@
 	],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": ["az --version"]
+	// "postCreateCommand": ["uname -a"]
 }

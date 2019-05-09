@@ -6,7 +6,6 @@
 	"image": "ubuntu:bionic",
 
 	// Use the optional 'appPort' property to publish any ports you want to access.
-
 	"appPort": [],
 
 	// Add any extensions you want auto-installed here.
@@ -23,5 +22,5 @@
 	],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": []
+	// "postCreateCommand": ["uname -a"]
 }

@@ -20,6 +20,6 @@
 	"shutdownAction": "stopCompose",
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": []
+	// "postCreateCommand": ["uname -a"]
 	
 }
