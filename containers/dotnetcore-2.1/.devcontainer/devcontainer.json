@@ -3,5 +3,12 @@
 	"dockerFile": "Dockerfile",
 	"extensions": [
 		"ms-vscode.csharp"
-	]
+	],
+	
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": []
+
 }

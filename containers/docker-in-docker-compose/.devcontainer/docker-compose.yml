@@ -17,7 +17,7 @@ services:
       # This lets you avoid setting up Git again in the container
       - ~/.gitconfig:/root/.gitconfig
 
-      # Forwards the Docker socket from one side ot the other
+      # Forwards the local Docker socket to the container.
       - /var/run/docker.sock:/var/run/docker.sock 
 
     # Uncomment the next four lines if you will use a ptrace-based debuggers like C++, Go, and Rust.
@@ -26,6 +26,6 @@ services:
     # security_opt:
     #   - seccomp:unconfined
 
-    # Overrides default command so things don't shut down after the process ends - useful for debugging.
+    # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity 
     

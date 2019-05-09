@@ -6,5 +6,8 @@
 		"ms-azuretools.vscode-azurefunctions",
 		"vscjava.vscode-java-pack",
 		"redhat.vscode-xml"
-	]
+	],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": []
 }

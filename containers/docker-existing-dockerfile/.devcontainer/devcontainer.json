@@ -8,19 +8,21 @@
 	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
 	"dockerFile": "Dockerfile",
 
-	// Use the optional 'appPort' property to expose ports not already in your Dockerfile
-	"appPort": [],
+	// Uncomment the next line to automatically install extensions.
+	// "extensions": [],
 
-	// Add any extensions you want auto-installed here.
-	"extensions": [],
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": []
 
 	// The optional 'runArgs' property can be used to specify additional runtime arguments.
 	"runArgs": [
 		//  Uncomment the next line if you want to use Docker from the container. See the docker-in-docker definition for details.
 		// "-v","/var/run/docker.sock:/var/run/docker.sock",
 
-		// Uncomment the next two lines if you will be using a ptrace-based debugger like C++, Go, and Rust.
-		// "--cap-add=SYS_PTRACE",
-		// "--security-opt", "seccomp=unconfined"
+		// Uncomment the next line if you will be using a ptrace-based debugger like C++, Go, and Rust.
+		// "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"
 	]
 }

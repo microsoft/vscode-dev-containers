@@ -5,5 +5,8 @@
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
 		"dbaeumer.vscode-eslint"
-	]
+	],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": []
 }

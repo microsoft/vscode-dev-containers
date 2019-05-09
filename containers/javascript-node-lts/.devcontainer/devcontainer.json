@@ -1,8 +1,14 @@
 {
 	"name": "Node.js (latest LTS)",
 	"dockerFile": "Dockerfile",
-	"appPort": 3000,
 	"extensions": [
 		"dbaeumer.vscode-eslint"
-	]
+	],
+	
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": []
+
 }

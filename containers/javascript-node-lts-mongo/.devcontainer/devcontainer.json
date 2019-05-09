@@ -1,10 +1,16 @@
 {
-    "name": "Node.js & Mongo DB",
-    "dockerComposeFile": "docker-compose.yml",
-    "service": "web",
-    "workspaceFolder": "/workspace",
-    "shutdownAction": "stopCompose",
-    "extensions": [
-        "dbaeumer.vscode-eslint"
-    ]
+	"name": "Node.js & Mongo DB",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "web",
+	"workspaceFolder": "/workspace",
+	"extensions": [
+		"dbaeumer.vscode-eslint"
+	],
+
+	// Update the value of this line to 'none' if you want to keep your containers running after VS Code shuts down.
+	"shutdownAction": "stopCompose",
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": []
+
 }

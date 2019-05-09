@@ -5,7 +5,8 @@
 	// Update the 'image' property with your Docker image name.
 	"image": "ubuntu:bionic",
 
-	// Use the optional 'appPort' property to expose ports not already in your Dockerfile
+	// Use the optional 'appPort' property to publish any ports you want to access.
+
 	"appPort": [],
 
 	// Add any extensions you want auto-installed here.
@@ -19,5 +20,8 @@
 		// Uncomment the next two lines if you will use a ptrace-based debugger like C++, Go, and Rust.
 		// "--cap-add=SYS_PTRACE",
 		// "--security-opt", "seccomp=unconfined"
-	]
+	],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": []
 }
