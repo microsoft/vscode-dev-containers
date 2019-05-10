@@ -9,6 +9,6 @@
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": ["java -version"]
+	// "postCreateCommand": "java -version"
 
 }

@@ -15,7 +15,7 @@
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": ["uname -a"]
+	// "postCreateCommand": ["uname -a"],
 
 	// The optional 'runArgs' property can be used to specify additional runtime arguments.
 	"runArgs": [
