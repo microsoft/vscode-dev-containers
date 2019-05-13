@@ -10,5 +10,5 @@
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": ["pub get"]
+	// "postCreateCommand": "pub get"
 }
