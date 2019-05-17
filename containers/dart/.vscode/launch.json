@@ -8,8 +8,8 @@
             "name": "Launch Server",
             "type": "dart",
             "request": "launch",
-            "program": "server.dart",
-            "cwd": "${workspaceFolder}/test-project",
+            "program": "bin/server.dart",
+            "cwd": "test-project",
             "preLaunchTask": "get"
         }
     ]
