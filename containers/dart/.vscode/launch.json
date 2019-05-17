@@ -8,9 +8,13 @@
             "name": "Launch Server",
             "type": "dart",
             "request": "launch",
-            "program": "server.dart",
-            "cwd": "${workspaceFolder}/test-project",
-            "preLaunchTask": "get"
+            "program": "bin/server.dart",
+            "cwd": "test-project",
+            "serverReadyAction": {
+                "pattern": "Listening on localhost:([0-9]+)",
+                "uriFormat": "http://localhost:%s",
+                "action": "openExternally"
+              }
         }
     ]
 }

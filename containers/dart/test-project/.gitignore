@@ -9,3 +9,6 @@ build/
 
 # Directory created by dartdoc
 doc/api/
+
+# Don't exclude bin/ folders for Dart projects
+![Bb]in/
