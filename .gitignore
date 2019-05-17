@@ -65,6 +65,9 @@ project.fragment.lock.json
 artifacts/
 **/Properties/launchSettings.json
 
+# Bazel
+bazel-*
+
 # StyleCop
 StyleCopReport.xml
 
