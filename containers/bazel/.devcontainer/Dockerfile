@@ -18,13 +18,13 @@ ENV BAZEL_SHA256=7ca3bbec5730afc3732514cbebb1e8f451df455d85d6bed5eb5614c2bfe36f1
 RUN apt-get -y install curl pkg-config zip g++ zlib1g-dev unzip python
 RUN curl -fSsL -o bazel-installer.sh https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh \
     && chmod +x bazel-installer.sh \
-    && ./bazel-installer.sh --user \
+    && ./bazel-installer.sh \
     && rm ./bazel-installer.sh
 
 RUN echo '\n\
-export PATH="$PATH:$HOME/bin" \n\
-'\
->> $HOME/.bashrc
+    export PATH="$PATH:$HOME/bin" \n\
+    '\
+    >> $HOME/.bashrc
 
 # Clean up
 RUN apt-get autoremove -y \
