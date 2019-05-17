@@ -8,7 +8,3 @@ description: A test project
 
 environment:
   sdk: '>=2.1.0 <3.0.0'
-
-dev_dependencies:
-  pedantic: ^1.0.0
- 

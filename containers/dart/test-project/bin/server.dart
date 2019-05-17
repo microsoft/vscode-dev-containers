@@ -4,7 +4,6 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import 'dart:io';
-import 'package:pedantic/pedantic.dart';
 
 Future main() async {
   final server = await HttpServer.bind(
@@ -19,7 +18,6 @@ Future main() async {
   print('Listening on localhost:${server.port}');
 
   await for (HttpRequest request in server) {
-    request.response.write('Hello remote world!');
-    unawaited(request.response.close());
+    request.response..write('Hello remote world!')..close();
   }
 }
