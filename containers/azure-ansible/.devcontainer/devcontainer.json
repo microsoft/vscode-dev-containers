@@ -1,0 +1,17 @@
+{
+	"name": "Azure Ansible",
+	"dockerFile": "Dockerfile",
+	"extensions": [
+		"vscoss.vscode-ansible",
+		"redhat.vscode-yaml",
+		"ms-vscode.azurecli"
+	],
+	"runArgs": [
+		"-v",
+		"/var/run/docker.sock:/var/run/docker.sock"
+	],
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "ansible --version"
+}
