@@ -9,8 +9,7 @@
             "type": "dart",
             "request": "launch",
             "program": "bin/server.dart",
-            "cwd": "test-project",
-            "preLaunchTask": "get"
+            "cwd": "test-project"
         }
     ]
 }
