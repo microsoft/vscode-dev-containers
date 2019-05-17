@@ -2,8 +2,7 @@
 	"name": "Dart",
 	"dockerFile": "Dockerfile",
 	"extensions": [
-		"dart-code.dart-code",
-		"msjsdiag.debugger-for-chrome"
+		"dart-code.dart-code"
 	],
 
 	// Uncomment the next line if you want to publish any ports.
