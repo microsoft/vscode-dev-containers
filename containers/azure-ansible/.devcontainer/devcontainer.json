@@ -1,5 +1,5 @@
 {
-	"name": "Azure Terraform",
+	"name": "Azure Ansible",
 	"dockerFile": "Dockerfile",
 	"extensions": [
 		"vscoss.vscode-ansible",
