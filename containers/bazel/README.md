@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | Phetsinorath William <deva.shikanime@protonmail.com> |
+| *Contributors* | William Phetsinorath <deva.shikanime@protonmail.com> |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | All platforms |
 
