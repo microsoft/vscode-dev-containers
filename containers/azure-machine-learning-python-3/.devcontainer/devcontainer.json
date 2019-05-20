@@ -5,5 +5,11 @@
         "ms-toolsai.vscode-ai",
         "peterjausovec.vscode-docker"
     ], 
-    "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]	 
+	"runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"],
+	
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "pip install -r requirements.txt"
 } 

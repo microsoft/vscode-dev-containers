@@ -1,10 +1,26 @@
 {
-    // "See https://aka.ms/vscode-remote/devcontainer.json for format details."
-    "name": "Dev Container Definition Template - Container Image",
-    "image": "ubuntu:bionic",
-    "appPort": 3000,
-    "extensions": [
-        "mutantdino.resourcemonitor"
-    ],
-    "runArgs": []
+	// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+	"name": "Dev Container Definition Template - Container Image",
+
+	// Update the 'image' property with your Docker image name.
+	"image": "ubuntu:bionic",
+
+	// Use the optional 'appPort' property to publish any ports you want to access.
+	"appPort": [],
+
+	// Add any extensions you want auto-installed here.
+	"extensions": [],
+	
+	// The optional 'runArgs' property can be used to specify additional runtime arguments.
+	"runArgs": [
+		//  Uncomment the next line if you want to use Docker from the container. See the docker-in-docker definition for details.
+		// "-v","/var/run/docker.sock:/var/run/docker.sock",
+
+		// Uncomment the next two lines if you will use a ptrace-based debugger like C++, Go, and Rust.
+		// "--cap-add=SYS_PTRACE",
+		// "--security-opt", "seccomp=unconfined"
+	],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": ["uname -a"]
 }

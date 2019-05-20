@@ -2,7 +2,12 @@
 	"name": "Dart",
 	"dockerFile": "Dockerfile",
 	"extensions": [
-		"dart-code.dart-code",
-		"msjsdiag.debugger-for-chrome"
-	]
+		"dart-code.dart-code"
+	],
+
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": ""
 }

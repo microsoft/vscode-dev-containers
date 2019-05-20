@@ -9,6 +9,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
       - ..:/workspace
@@ -16,10 +17,15 @@ services:
       # This lets you avoid setting up Git again in the container
       - ~/.gitconfig:/root/.gitconfig
 
-      # Forwarding the socket is optional, but lets docker work inside the container if you install the Docker CLI.
-      # See the docker-in-docker-compose definition for details on how to install it.
+      # Forwards the local Docker socket to the container.
       - /var/run/docker.sock:/var/run/docker.sock 
-    
-    # Overrides default command so things don't shut down after the process ends - useful for debugging
+
+    # Uncomment the next four lines if you will use a ptrace-based debuggers like C++, Go, and Rust.
+    # cap_add:
+    #  - SYS_PTRACE
+    # security_opt:
+    #   - seccomp:unconfined
+
+    # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity 
     

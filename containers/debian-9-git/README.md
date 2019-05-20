@@ -38,7 +38,7 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/debian-9-git` folder.
-5. Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>`</kbd> and type the following command to verify installation: `apt-get update && apt-get install -y lsb-release && git --version && lsb_release -a`
+5. Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd> and type the following command to verify installation: `apt-get update && apt-get install -y lsb-release && git --version && lsb_release -a`
 6. After lsb_release installs, you should see the Git version and details about the version of Linux in the container.
 
 ## License

@@ -9,11 +9,11 @@ services:
     # Using a Dockerfile is optional, but included for completeness.
     build: 
       context: .
-      dockerfile: .devcontainer/Dockerfile  
+      dockerfile: Dockerfile  
 
-    # Application port(s) to expose
-    ports:
-     - "3000:3000"  
+    # Uncomment to expose one or more ports
+    # ports:
+    #  - "3000:3000"  
      
     volumes:
       # This is where VS Code should expect to find your project's source code
@@ -23,6 +23,15 @@ services:
       # This lets you avoid setting up Git again in the container
       - ~/.gitconfig:/root/.gitconfig
 
-    # Overrides default command so things don't shut down after the process ends - useful for debugging
+      # Uncomment the next line if you plan to install the Docker CLI. See the docker-in-docker-compose definition for details.
+      # - /var/run/docker.sock:/var/run/docker.sock 
+
+    # Uncomment the next four lines if you will use a ptrace-based debugger like C++, Go, and Rust.
+    # cap_add:
+    #   - SYS_PTRACE
+    # security_opt:
+    #   - seccomp:unconfined
+
+    # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity  
     

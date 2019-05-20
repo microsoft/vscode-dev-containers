@@ -1,13 +1,23 @@
 {
-  "name": "Kubernetes & Helm",
-  "dockerFile": "Dockerfile",
-  "extensions": [
-    "peterjausovec.vscode-docker",
-    "ms-kubernetes-tools.vscode-kubernetes-tools"
-  ],
-  "runArgs": [
-    "--mount", "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
-    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost",
-    "-v", "${env:HOME}${env:USERPROFILE}/.minikube:/root/.minikube-localhost"
-  ]
+    "name": "Kubernetes & Helm",
+    "dockerFile": "Dockerfile",
+    "extensions": [
+        "peterjausovec.vscode-docker",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
+    ],
+    "runArgs": [
+				"--mount", "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
+				"--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost",
+				"-v", "${env:HOME}${env:USERPROFILE}/.minikube:/root/.minikube-localhost"
+
+        // Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust.
+        // "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"
+    ],
+    	
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "kubectl version"
+
 }

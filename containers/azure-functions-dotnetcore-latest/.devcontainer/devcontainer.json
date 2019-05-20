@@ -5,5 +5,8 @@
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
 		"ms-vscode.csharp"
-	]
+	],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore"
 }

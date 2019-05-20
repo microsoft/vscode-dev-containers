@@ -1,5 +1,17 @@
 {
 	"name": "Ubuntu 18.04 & Git",
 	"dockerFile": "Dockerfile",
-	"appPort": []
+	
+	// Uncomment the next line to automatically install any extensions.
+	// "extensions": [],
+
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust.
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ]
+
 }
