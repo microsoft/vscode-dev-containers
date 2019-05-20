@@ -4,11 +4,26 @@ This document outlines a number of ways you can get involved.
 
 ## Contributing Dev Container Definitions
 
-Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? We love contributions!  Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
+This repository contains a set of **dev container definitions** to help get you up and running with a containerized environment. The definitions describe the appropriate container image, runtime arguments for starting the container, and VS Code extensions that should be installed. They are intended to be dropped into an existing project or folder rather than acting as sample projects. (See the [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) repositories if you are looking for sample projects.)  
+
+Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? We love contributions! Read on to learn how.
+
+### Anatomy of a Dev Container Definition
+
+The contents of the folders in the `containers` directory ultimately populate the available definitions list shown in the **Remote-Containers: Create Container Configuration File...** command. To make this work, each folder consists of up to three things:
+
+1. **The container definition itself** - These are the files and folders that will be added to a user's existing project / folder if they select the definition. Typically these files are stored in a `.devcontainer` folder.
+2. **Test assets** - While you are creating your definition, you may need to use a test project to make sure it works as expected. Contributing these files back will also help others that want to contribute to your definition in the future. These files are typically located in a `test-project` folder.
+3. **A `.npmignore` file** - This tells VS Code which files in the folder should be ignored when a user selects it for their project / folder. The file typically lists test assets or folders.
+
+### Creating a new definition
+
+Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
 
 When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
 
-If you want to create a new definition:
+
+To create a new definition:
 
 1. Fork and clone this repository
 
@@ -37,11 +52,9 @@ If you want to create a new definition:
 
     Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Keeping these files in the `.devcontainer` folder should reduce the chances of something conflicting but note that any command that are run are relative to the root of the project, so you'll need to include `.devcontainer` in any path references.
 
-    VS Code respects [`.npmignore`](https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package) as a way to keep certain content out of projects when your definition is used. Add anything you don't want copied across into this file in [glob](https://facelessuser.github.io/wcmatch/glob/) form.
-
     Finally, create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
 
-4. Commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in. We appreciate any and all feedback!
+4. Update [`.npmignore`](https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package) if you've added new folders that should be excluded if used. Add anything you don't want copied in to a user's existing project / folder into this file in [glob](https://facelessuser.github.io/wcmatch/glob/) form.
 
 ### Developing and testing a definition
 
@@ -49,17 +62,26 @@ VS Code Remote provides a straight forward development loop for creating and edi
 
 1. Create a definition folder and open it in VS Code
 2. Edit the contents of the definition
-3. Run the **Remote: Reopen Folder in Container** command
-4. If this fails, click "Open folder locally" in the dialog that appears and go to step 2
-6. If it opens successfully but you don't like the contents, edit the contents from within the container and run the **Remote: Rebuild Container** command to make changes.
+3. Try it with `kbstyle(F1)` > **Remote-Containers: Reopen Folder in Container**.
+4. On failure:
+   1. `kbstyle(F1)` > **Remote-Containers: Reopen Folder Locally**, which will open a new local window.
+   2. In this local window: Edit the contents of the `.devcontainer` folder as required.
+   3. Try it again: Go back to the container window, `kbstyle(F1)` > **Developer: Reload Window**.
+   4. Repeat as needed.
+5. If the build was successful, but you want to make more changes:
+      1. Edit the contents of the `.devcontainer` folder as required when connected to the container.
+      2. `kbstyle(F1)` > **Remote-Containers: Rebuild Container**.
+      3. On failure: Follow the same workflow above.
 
-Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy. While you can use Docker from inside a container by forwarding the Docker unix socket and installing the CLI in the container (see [Docker-in-Docker](containers/docker-in-docker)), you'll likely be removing the container you are actually using so this approach will not work well in this case.
+Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy
 
-Finally, after you get your container up and running, you can test it by adding test assets into the definition folder and add them to the `.devcontainer/ignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form relative to the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `ignore` files. 
+After you get your container up and running, you can test it by adding test assets / projects into the definition folder and then adding their locations to the `.npmignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form relative to the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `.npmignore` files.
+
+Finally, commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in. We appreciate any and all feedback!
 
 ### Speeding up container provisioning
 
-While using a `Dockerfile` is a convienent way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image be built by anyone using it.  If your definition is stable, we strongly reccomend building and publishing your image to [DockerHub](https://hub.docker.com) or [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) instead. 
+While using a `Dockerfile` is a convenient way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image be built by anyone using it.  If your definition is stable, we strongly recommend building and publishing your image to [DockerHub](https://hub.docker.com) or [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) instead. 
 
 Once you've published your container image, just update `devcontainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
 
