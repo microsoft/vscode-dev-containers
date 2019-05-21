@@ -16,4 +16,6 @@ RUN apt-get update && apt-get -y install git procps
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-	
+
+# Set the default shell to bash instead of sh
+ENV SHELL /bin/bash

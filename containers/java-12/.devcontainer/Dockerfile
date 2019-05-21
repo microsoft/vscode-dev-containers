@@ -26,3 +26,6 @@ RUN curl -sSL --output gradle.zip "https://services.gradle.org/distributions/gra
 
 # Clean yum cache
 RUN yum clean all
+
+# Set the default shell to bash instead of sh
+ENV SHELL /bin/bash
