@@ -2,7 +2,6 @@
 	"name": "Bazel",
 	"dockerFile": "Dockerfile",
 
-	// Uncomment the next line to automatically install extensions.
 	"extensions": ["devondcarew.bazel-code"],
 
 	// Uncomment the next line if you want to publish any ports.
