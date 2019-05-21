@@ -25,11 +25,11 @@ Beyond that, just follow these steps:
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Create Container Configuration File...** from the command palette.
-   3. Select the Python 2 definition.
+   3. Select the Python 3 definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/python-2/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/python-3/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -43,7 +43,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/python-2` folder.
+4. Select the `containers/python-3` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
 6. You should see "Hello, remote world!" in a terminal window after the program executes.
 7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
