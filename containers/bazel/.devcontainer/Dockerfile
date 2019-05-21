@@ -32,3 +32,6 @@ RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 ENV DEBIAN_FRONTEND=dialog
+
+# Use bash as the default shell instead of sh
+ENV SHELL /bin/bash
