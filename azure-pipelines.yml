@@ -49,3 +49,9 @@ steps:
     gitHubConnection: 'GitHub Connection'
     repositoryName: $(Build.Repository.Name)
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+
+- task: Npm@1
+  inputs:
+    command: publish
+    publishEndpoint: 'NPM Connection'
+  # condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
