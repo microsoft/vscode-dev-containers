@@ -25,18 +25,18 @@ You can adapt your own existing development container Dockerfile to support this
 1. First, update your `devcontainer.json` to forward the local Docker socket and mount the local `.kube` folder in the container so its contents can be reused. From `.devcontainer/devcontainer.json`:
 
     ```json
-        "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-            "-v", "/var/run/docker.sock:/var/run/docker.sock",
-            "-v", "$HOME/.kube:/root/.kube-localhost"]
+    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+        "-v", "/var/run/docker.sock:/var/run/docker.sock",
+        "-v", "$HOME/.kube:/root/.kube-localhost"]
     ```
     
     If you also want to reuse your Minikube certificates, just add a mount for your local `.minikube` folder as well:
     
     ```json
-        "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-            "-v", "/var/run/docker.sock:/var/run/docker.sock",
-            "-v", "$HOME/.kube:/root/.kube-localhost",
-            "-v", "$HOME/.minikube:/root/.minikube-localhost"]
+    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+        "-v", "/var/run/docker.sock:/var/run/docker.sock",
+        "-v", "$HOME/.kube:/root/.kube-localhost",
+        "-v", "$HOME/.minikube:/root/.minikube-localhost"]
     ```
 
 2. Second, update your Dockerfile so the default shell is `bash`, and update the `.bashrc` script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. From `.devcontainer/Dockerfile`:
