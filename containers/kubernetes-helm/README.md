@@ -50,7 +50,7 @@ You can adapt your own existing development container Dockerfile to support this
             "-v", "$HOME/.kube:/root/.kube-localhost"]
     ```
     
-    If you also want to sync reuse the contents of your `.minikube` folder, just add a mount for this directory as well:
+    If you also want to reuse your Minikube certificates, just add a mount for your local `.minikube` folder as well:
     
     ```json
         "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
@@ -59,7 +59,7 @@ You can adapt your own existing development container Dockerfile to support this
             "-v", "$HOME/.minikube:/root/.minikube-localhost"]
     ```
     
-3. Update `.bashrc` to automatically swap out localhost for host.docker.internal in a container copy of the Kubernetes config and optionally Minikube certificates if the volume is enabled. From `.devcontainer/Dockerfile`:
+3. Update `.bashrc` to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
     RUN echo '\n\
