@@ -22,7 +22,48 @@ The dev container also syncs your local Kubernetes config (`~/.kube/config` or `
 
 You can adapt your own existing development container Dockerfile to support this scenario by following these steps:
 
-1. First, install all of the needed CLIs in the container. From `.devcontainer/Dockerfile`:
+1. First, update your `devcontainer.json` to forward the local Docker socket and mount the local `.kube` folder in the container so its contents can be reused. From `.devcontainer/devcontainer.json`:
+
+    ```json
+        "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+            "-v", "/var/run/docker.sock:/var/run/docker.sock",
+            "-v", "$HOME/.kube:/root/.kube-localhost"]
+    ```
+    
+    If you also want to reuse your Minikube certificates, just add a mount for your local `.minikube` folder as well:
+    
+    ```json
+        "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+            "-v", "/var/run/docker.sock:/var/run/docker.sock",
+            "-v", "$HOME/.kube:/root/.kube-localhost",
+            "-v", "$HOME/.minikube:/root/.minikube-localhost"]
+    ```
+
+2. Second, update your Dockerfile so the default shell is `bash`, and update the `.bashrc` script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. From `.devcontainer/Dockerfile`:
+
+    ```Dockerfile
+    ENV SHELL /bin/bash
+
+    RUN echo '\n\
+    if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then\n\
+        mkdir -p $HOME/.kube\n\
+        cp -r $HOME/.kube-localhost/* $HOME/.kube\n\
+        sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
+    \n\
+        if [ -d "$HOME/.minikube-localhost" ]; then\n\
+            mkdir -p $HOME/.minikube\n\
+            cp -r $HOME/.minikube-localhost/ca.crt $HOME/.minikube\n\
+            sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
+            cp -r $HOME/.minikube-localhost/client.crt $HOME/.minikube\n\
+            sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
+            cp -r $HOME/.minikube-localhost/client.key $HOME/.minikube\n\
+            sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
+        fi\n\
+    fi' \
+    >> $HOME/.bashrc    
+    ```
+
+3. Next, update your Dockerfile to install all of the needed CLIs in the container. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
     # Install Docker CE CLI
@@ -42,46 +83,7 @@ You can adapt your own existing development container Dockerfile to support this
     RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash -
     ```
 
-2. Next, forward the local Docker socket and mount the local `.kube` folder in the container so the configuration can be reused. From `.devcontainer/devcontainer.json`:
-
-    ```json
-        "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-            "-v", "/var/run/docker.sock:/var/run/docker.sock",
-            "-v", "$HOME/.kube:/root/.kube-localhost"]
-    ```
-    
-    If you also want to reuse your Minikube certificates, just add a mount for your local `.minikube` folder as well:
-    
-    ```json
-        "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-            "-v", "/var/run/docker.sock:/var/run/docker.sock",
-            "-v", "$HOME/.kube:/root/.kube-localhost",
-            "-v", "$HOME/.minikube:/root/.minikube-localhost"]
-    ```
-    
-3. Update `.bashrc` to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. From `.devcontainer/Dockerfile`:
-
-    ```Dockerfile
-    RUN echo '\n\
-    if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then\n\
-        mkdir -p $HOME/.kube\n\
-        cp -r $HOME/.kube-localhost/* $HOME/.kube\n\
-        sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
-    \n\
-        if [ -d "$HOME/.minikube-localhost" ]; then\n\
-            mkdir -p $HOME/.minikube\n\
-            cp -r $HOME/.minikube-localhost/ca.crt $HOME/.minikube\n\
-            sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
-            cp -r $HOME/.minikube-localhost/client.crt $HOME/.minikube\n\
-            sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
-            cp -r $HOME/.minikube-localhost/client.key $HOME/.minikube\n\
-            sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
-        fi\n\
-    fi' \
-    >> $HOME/.bashrc
-    ```
-
-5. Add a container specific user settings file that forces the Docker extension to be installed inside the container instead of locally. From `.devcontainer/Dockerfile`:
+4. Finally, have your Dockerfile add a container specific user settings file that forces the Docker extension to be installed inside the container instead of locally. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
     COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
@@ -97,23 +99,31 @@ You can adapt your own existing development container Dockerfile to support this
     }
     ```
 
-6. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+5. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
 ## Using this definition with an existing folder
 
-There are no special setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. Just, update the `FROM` statement to reference the new base image. For example:
+A few notes on the definition:
 
-```Dockerfile
-FROM node:lts
-```
+* The included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. Just, update the `FROM` statement to reference the new base image. For example:
 
-In addition, if you want to **disable sync'ing** local Kubernetes config into the container, remove `"-e", "SYNC_LOCALHOST_KUBECONFIG=true",` from `runArgs` in `.devcontainer/devcontainer.json`.
+    ```Dockerfile
+    FROM node:lts
+    ```
 
-Follow the steps below for your operating system to use the definition.
+* If you also want to sync your Minikube certificates, open `.devcontainer/devcontainer.json` and uncomment this line in `runArgs`:
 
-### macOS / Windows
+    ```json
+    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost",
+    ```
+    
+* If you want to **disable sync'ing** local Kubernetes config / Minikube certs into the container, remove `"-e", "SYNC_LOCALHOST_KUBECONFIG=true",` from `runArgs` in `.devcontainer/devcontainer.json`.
+
+See the section below for your operating system for more detailed setup instructions.
+
+### Windows / macOS
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
@@ -164,10 +174,10 @@ Follow the steps below for your operating system to use the definition.
 
 6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
-7. Open `.devcontainer/devcontainer.json` and uncomment/add this line to `runArgs` array:
+7. Open `.devcontainer/devcontainer.json` and uncomment this line in the `runArgs` array:
 
     ```json
-    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost"
+    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost",
     ```
 
 8. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
