@@ -49,7 +49,16 @@ You can adapt your own existing development container Dockerfile to support this
             "-v", "/var/run/docker.sock:/var/run/docker.sock",
             "-v", "$HOME/.kube:/root/.kube-localhost"]
     ```
-
+    
+    If you also want to sync reuse the contents of your `.minikube` folder, just add a mount for this directory as well:
+    
+    ```json
+        "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+            "-v", "/var/run/docker.sock:/var/run/docker.sock",
+            "-v", "$HOME/.kube:/root/.kube-localhost",
+            "-v", "$HOME/.minikube:/root/.minikube-localhost"]
+    ```
+    
 3. Update `.bashrc` to automatically swap out localhost for host.docker.internal in a container copy of the Kubernetes config and optionally Minikube certificates if the volume is enabled. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
@@ -155,7 +164,11 @@ Follow the steps below for your operating system to use the definition.
 
 6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
-7. Open `.devcontainer/devcontainer.json` and uncomment the minikube volume binding.
+7. Open `.devcontainer/devcontainer.json` and uncomment/add this line to `runArgs` array:
+
+    ```json
+    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost"
+    ```
 
 8. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
