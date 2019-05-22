@@ -35,11 +35,23 @@ RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bas
 
 # Copy localhost's ~/.kube/config file into the container and swap out localhost
 # for host.docker.internal whenever a new shell starts to keep them in sync.
-RUN echo 'if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then \
-        mkdir -p $HOME/.kube \
-        && cp -r $HOME/.kube-localhost/* $HOME/.kube \
-        && sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config; \
-        fi' >> $HOME/.bashrc
+RUN echo '\n\
+if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then\n\
+    mkdir -p $HOME/.kube\n\
+    cp -r $HOME/.kube-localhost/* $HOME/.kube\n\
+    sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
+\n\
+    if [ -d "$HOME/.minikube-localhost" ]; then\n\
+        mkdir -p $HOME/.minikube\n\
+        cp -r $HOME/.minikube-localhost/ca.crt $HOME/.minikube\n\
+        sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
+        cp -r $HOME/.minikube-localhost/client.crt $HOME/.minikube\n\
+        sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
+        cp -r $HOME/.minikube-localhost/client.key $HOME/.minikube\n\
+        sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
+    fi\n\
+fi' \
+>> $HOME/.bashrc
 
 # Clean up
 RUN apt-get autoremove -y \

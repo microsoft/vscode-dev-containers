@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code team |
+| *Contributors* | The VS Code team and Phetsinorath William |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Any |
 
@@ -50,14 +50,26 @@ You can adapt your own existing development container Dockerfile to support this
             "-v", "$HOME/.kube:/root/.kube-localhost"]
     ```
 
-3. Update `.bashrc` to automatically swap out localhost for host.docker.internal in a containr copy of the Kubernetes config. From `.devcontainer/Dockerfile`:
+3. Update `.bashrc` to automatically swap out localhost for host.docker.internal in a container copy of the Kubernetes config and optionally Minikube certificates if the volume is enabled. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
-    RUN echo 'if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then \
-            mkdir -p $HOME/.kube \
-            && cp -r $HOME/.kube-localhost/* $HOME/.kube \
-            && sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config; \
-            fi' >> $HOME/.bashrc
+    RUN echo '\n\
+    if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then\n\
+        mkdir -p $HOME/.kube\n\
+        cp -r $HOME/.kube-localhost/* $HOME/.kube\n\
+        sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
+    \n\
+        if [ -d "$HOME/.minikube-localhost" ]; then\n\
+            mkdir -p $HOME/.minikube\n\
+            cp -r $HOME/.minikube-localhost/ca.crt $HOME/.minikube\n\
+            sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
+            cp -r $HOME/.minikube-localhost/client.crt $HOME/.minikube\n\
+            sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
+            cp -r $HOME/.minikube-localhost/client.key $HOME/.minikube\n\
+            sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
+        fi\n\
+    fi' \
+    >> $HOME/.bashrc
     ```
 
 5. Add a container specific user settings file that forces the Docker extension to be installed inside the container instead of locally. From `.devcontainer/Dockerfile`:
@@ -92,7 +104,7 @@ In addition, if you want to **disable sync'ing** local Kubernetes config into th
 
 Follow the steps below for your operating system to use the definition.
 
-### macOS  / Windows
+### macOS / Windows
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
@@ -119,10 +131,10 @@ Follow the steps below for your operating system to use the definition.
     helm init
     ```
 
-## Linux Setup
+## Linux / Minikube Setup
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
-   
+
 2. Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your local OS if you have not already.
 
 3. Start Minikube as follows:
@@ -143,9 +155,11 @@ Follow the steps below for your operating system to use the definition.
 
 6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
-7. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+7. Open `.devcontainer/devcontainer.json` and uncomment the minikube volume binding.
 
-8. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
+8. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+
+9. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
     ```
     helm init
     ```
