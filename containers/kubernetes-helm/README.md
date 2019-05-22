@@ -104,7 +104,7 @@ In addition, if you want to **disable sync'ing** local Kubernetes config into th
 
 Follow the steps below for your operating system to use the definition.
 
-### macOS  / Windows
+### macOS / Windows
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
@@ -131,7 +131,7 @@ Follow the steps below for your operating system to use the definition.
     helm init
     ```
 
-## Linux/Minikube Setup
+## Linux / Minikube Setup
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
