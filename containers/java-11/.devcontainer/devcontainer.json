@@ -4,6 +4,9 @@
 	"extensions": [
 		"vscjava.vscode-java-pack"
 	],
+	"settings": {
+		"java.home": "/docker-java-home"
+	},
 	
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],

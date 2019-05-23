@@ -5,6 +5,11 @@
 	"extensions": [
 		"ms-python.python"
 	],
+	"settings": {
+		"python.pythonPath": "/opt/conda/bin/python",
+		"python.linting.pylintEnabled": true,
+		"python.linting.enabled": true
+	},
 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],

@@ -6,6 +6,11 @@
 	"extensions": [
 		"peterjausovec.vscode-docker"
 	],
+	"settings": {
+		"remote.extensionKind": {
+			"peterjausovec.vscode-docker": "workspace"
+		}
+	},
 
 	// Update the value of this line to 'none' if you want to keep your containers running after VS Code shuts down.
 	"shutdownAction": "stopCompose",

@@ -4,6 +4,11 @@
 	"extensions": [
 		"peterjausovec.vscode-docker"
 	],
+	"settings": {
+	    "remote.extensionKind": {
+			"peterjausovec.vscode-docker": "workspace"
+		}	
+	},
 	"runArgs": [
 		"-v", "/var/run/docker.sock:/var/run/docker.sock",
 

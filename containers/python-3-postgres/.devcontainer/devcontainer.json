@@ -6,6 +6,11 @@
 	"extensions": [
 		"ms-python.python"
 	],
+	"settings": {
+		"python.pythonPath": "/usr/local/bin/python",
+		"python.linting.pylintEnabled": true,
+		"python.linting.enabled": true
+	},
 
 	// Update the value of this line to 'none' if you want to keep your containers running after VS Code shuts down.
 	"shutdownAction": "stopCompose",

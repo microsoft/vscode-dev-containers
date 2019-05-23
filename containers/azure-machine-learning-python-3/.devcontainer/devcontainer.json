@@ -5,7 +5,17 @@
         "ms-toolsai.vscode-ai",
         "peterjausovec.vscode-docker"
     ], 
-	"runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"],
+    "settings": {
+        "remote.extensionKind": {
+            "peterjausovec.vscode-docker": "workspace"
+        },
+        "python.pythonPath": "/opt/conda/bin/python",
+        "python.linting.pylintEnabled": true,
+        "python.linting.enabled": true
+    },
+	"runArgs": [
+        "-v","/var/run/docker.sock:/var/run/docker.sock"
+    ],
 	
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],

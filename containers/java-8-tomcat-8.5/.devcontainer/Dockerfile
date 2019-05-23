@@ -5,17 +5,13 @@
 
 FROM tomcat:8.5-jre8
 
-# Copy endpoint specific user settings into container to specify Java path
-COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
-
-
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1
 
 # Verify git, needed tools installed
-RUN apt-get -y install git procps curl
+RUN apt-get -y install git procps curl lsb-release
 
 # Install openjdk 8
 RUN apt-get -y install --no-install-recommends openjdk-8-jdk

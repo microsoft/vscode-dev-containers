@@ -4,6 +4,10 @@
 	"extensions": [
 		"vscjava.vscode-java-pack"
 	],
+	"settings": {
+		"java.home": "/usr/java/openjdk-12",
+		"git.ignoreLegacyWarning": true
+	},
 	
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
