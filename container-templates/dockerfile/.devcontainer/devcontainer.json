@@ -18,13 +18,13 @@
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
-	// Uncomment the next line to automatically install extensions.
-	// "extensions": [ "eamodio.gitlens" ],
-
 	// Uncomment the next line if you want to add in default container specific settings.json values
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
+
+	// Add the IDs of any extensions you want installed in the array below.
+	"extensions": []
 
 }
