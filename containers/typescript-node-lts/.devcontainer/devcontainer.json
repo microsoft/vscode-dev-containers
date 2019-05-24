@@ -1,9 +1,6 @@
 {
 	"name": "Node.js (latest LTS) & TypeScript",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"ms-vscode.vscode-typescript-tslint-plugin"
-	],
 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
@@ -12,6 +9,9 @@
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "yarn install"
+	// "postCreateCommand": "yarn install",
 
+	"extensions": [
+		"ms-vscode.vscode-typescript-tslint-plugin"
+	]
 }

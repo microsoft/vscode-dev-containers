@@ -1,12 +1,6 @@
 {
 	"name": "Markdown Editing",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"yzhang.markdown-all-in-one",
-		"streetsidesoftware.code-spell-checker",
-		"DavidAnson.vscode-markdownlint",
-		"esbenp.prettier-vscode"
-	],
 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
@@ -17,4 +11,10 @@
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "uname -a"
 
+	"extensions": [
+		"yzhang.markdown-all-in-one",
+		"streetsidesoftware.code-spell-checker",
+		"DavidAnson.vscode-markdownlint",
+		"esbenp.prettier-vscode"
+	]
 }

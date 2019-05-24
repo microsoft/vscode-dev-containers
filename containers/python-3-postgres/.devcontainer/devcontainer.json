@@ -3,6 +3,13 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
+
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "python --version",
+
 	"extensions": [
 		"ms-python.python"
 	],
@@ -10,12 +17,5 @@
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.pylintEnabled": true,
 		"python.linting.enabled": true
-	},
-
-	// Update the value of this line to 'none' if you want to keep your containers running after VS Code shuts down.
-	"shutdownAction": "stopCompose",
-
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "pip install -r requirements.txt"
-	
+	}
 }

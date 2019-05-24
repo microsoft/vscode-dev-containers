@@ -1,9 +1,6 @@
 {
 	"name": "Ruby 2",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"rebornix.Ruby"
-	],
 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
@@ -12,6 +9,9 @@
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "ruby --version"
+	// "postCreateCommand": "ruby --version",
 
+	"extensions": [
+		"rebornix.Ruby"
+	]
 }

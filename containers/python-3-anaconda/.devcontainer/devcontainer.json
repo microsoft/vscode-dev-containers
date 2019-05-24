@@ -2,6 +2,13 @@
 	"name": "Python 3 - Anaconda",
 	"context": "..",
 	"dockerFile": "Dockerfile",
+		
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "python --version",
+
 	"extensions": [
 		"ms-python.python"
 	],
@@ -9,12 +16,5 @@
 		"python.pythonPath": "/opt/conda/bin/python",
 		"python.linting.pylintEnabled": true,
 		"python.linting.enabled": true
-	},
-		
-	// Uncomment the next line if you want to publish any ports.
-	// "appPort": [],
-
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "conda env update base -f environment.yml"
-
+	}
 }

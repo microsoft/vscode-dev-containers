@@ -1,9 +1,6 @@
 {
 	"name": "PowerShell",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"ms-vscode.powershell"
-	],
 		
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
@@ -12,6 +9,9 @@
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "powershell echo $PSVersionTable"
+	// "postCreateCommand": "powershell echo $PSVersionTable",
 
+	"extensions": [
+		"ms-vscode.powershell"
+	]
 }

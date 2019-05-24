@@ -1,9 +1,6 @@
 {
 	"name": "Node.js 8",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"dbaeumer.vscode-eslint"
-	],
 	
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
@@ -12,6 +9,9 @@
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "yarn install"
+	// "postCreateCommand": "yarn install",
 
+	"extensions": [
+		"dbaeumer.vscode-eslint"
+	]
 }

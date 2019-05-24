@@ -1,7 +1,17 @@
 { 
     "name": "Azure Machine Learning", 
     "dockerFile": "Dockerfile", 
-    "extensions": [ 
+	"runArgs": [
+        "-v","/var/run/docker.sock:/var/run/docker.sock"
+    ],
+	
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "pip install -r requirements.txt",
+	
+	"extensions": [ 
         "ms-toolsai.vscode-ai",
         "peterjausovec.vscode-docker"
     ], 
@@ -12,14 +22,5 @@
         "python.pythonPath": "/opt/conda/bin/python",
         "python.linting.pylintEnabled": true,
         "python.linting.enabled": true
-    },
-	"runArgs": [
-        "-v","/var/run/docker.sock:/var/run/docker.sock"
-    ],
-	
-	// Uncomment the next line if you want to publish any ports.
-	// "appPort": [],
-
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "pip install -r requirements.txt"
+    }
 } 
