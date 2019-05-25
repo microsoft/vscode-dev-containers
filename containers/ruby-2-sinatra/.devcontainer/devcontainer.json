@@ -1,0 +1,14 @@
+{
+	"name": "Ruby 2 Sinatra",
+	"dockerFile": "Dockerfile",
+	"extensions": [
+		"rebornix.Ruby"
+	],
+
+	// Uncomment the next line if you want to publish any ports.
+	"appPort": [4567],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "ruby ./app -o 0.0.0.0 -p 80"
+
+}
