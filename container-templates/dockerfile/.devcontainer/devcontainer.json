@@ -5,12 +5,6 @@
 	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
 	"dockerFile": "Dockerfile",
 
-	// Use the optional 'appPort' property to publish any ports you want to access.
-	"appPort": [],
-
-	// Add any extensions you want auto-installed here.
-	"extensions": [],
-
 	// The optional 'runArgs' property can be used to specify additional runtime arguments.
 	"runArgs": [
 		//  Uncomment the next line if you want to use Docker from the container. See the docker-in-docker definition for details.
@@ -21,6 +15,16 @@
 		// "--security-opt", "seccomp=unconfined"
 	],
 
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": ["uname -a"]
+	// "postCreateCommand": "uname -a",
+
+	// Add the IDs of any extensions you want installed in the array below.
+	"extensions": []
+
 }

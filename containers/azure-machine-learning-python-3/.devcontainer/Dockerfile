@@ -12,10 +12,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1
 
-# Copy default endpoint specific user settings overrides into container to 
-# to specify Python path and that Docker should run as a workspace extension
-COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
-
 # Install git, required tools
 RUN apt-get install -y \
             git \

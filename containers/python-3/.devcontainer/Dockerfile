@@ -5,9 +5,6 @@
 
 FROM python:3
 
-# Copy default endpoint specific user settings overrides into container to specify Python path
-COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
-
 # Install git, process tools
 RUN apt-get update && apt-get -y install git procps
 

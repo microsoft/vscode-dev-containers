@@ -6,9 +6,6 @@
 # You can use any Debian/Ubuntu based image as a base
 FROM debian:9
 
-# Copy settings file so Docker extension is installed inside the container
-COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
-
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \

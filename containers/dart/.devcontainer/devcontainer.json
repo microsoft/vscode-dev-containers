@@ -1,13 +1,17 @@
 {
 	"name": "Dart",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"dart-code.dart-code"
-	],
 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": ""
+	// "postCreateCommand": "uname -a",
+
+	"extensions": [
+		"dart-code.dart-code"
+	]
 }

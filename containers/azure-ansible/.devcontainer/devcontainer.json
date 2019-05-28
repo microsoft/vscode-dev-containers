@@ -1,17 +1,24 @@
 {
 	"name": "Azure Ansible",
 	"dockerFile": "Dockerfile",
+	"runArgs": [
+		// Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust.
+		// "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
+		"-v", "/var/run/docker.sock:/var/run/docker.sock"
+	],
+
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "ansible --version",
+
 	"extensions": [
 		"vscoss.vscode-ansible",
 		"redhat.vscode-yaml",
 		"ms-vscode.azurecli"
-	],
-	"runArgs": [
-		"-v",
-		"/var/run/docker.sock:/var/run/docker.sock"
-	],
-	// Uncomment the next line if you want to publish any ports.
-	// "appPort": [],
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "ansible --version"
+	]
 }

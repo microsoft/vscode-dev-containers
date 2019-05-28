@@ -29,9 +29,9 @@ You can adapt your own existing development container Dockerfile to support this
         "-v", "/var/run/docker.sock:/var/run/docker.sock",
         "-v", "$HOME/.kube:/root/.kube-localhost"]
     ```
-    
+
     If you also want to reuse your Minikube certificates, just add a mount for your local `.minikube` folder as well:
-    
+
     ```json
     "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
         "-v", "/var/run/docker.sock:/var/run/docker.sock",
@@ -39,7 +39,17 @@ You can adapt your own existing development container Dockerfile to support this
         "-v", "$HOME/.minikube:/root/.minikube-localhost"]
     ```
 
-2. Second, update your Dockerfile so the default shell is `bash`, and update the `.bashrc` script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. From `.devcontainer/Dockerfile`:
+2. Second, update `devcontainer.json` to force the Docker extension to be installed inside the container instead of locally. From `.devcontainer/devcontainer.json`:
+
+    ```json
+    "settings": {
+        "remote.extensionKind": {
+            "peterjausovec.vscode-docker": "workspace"
+        }
+    },
+    ```
+
+3. Next, update your Dockerfile so the default shell is `bash`, and then add a script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates to `.bashrc`. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
     ENV SHELL /bin/bash
@@ -60,10 +70,10 @@ You can adapt your own existing development container Dockerfile to support this
             sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
         fi\n\
     fi' \
-    >> $HOME/.bashrc    
+    >> $HOME/.bashrc
     ```
 
-3. Next, update your Dockerfile to install all of the needed CLIs in the container. From `.devcontainer/Dockerfile`:
+4. Finally, update your Dockerfile to install all of the needed CLIs in the container. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
     # Install Docker CE CLI
@@ -81,22 +91,6 @@ You can adapt your own existing development container Dockerfile to support this
 
     # Install Helm
     RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash -
-    ```
-
-4. Finally, have your Dockerfile add a container specific user settings file that forces the Docker extension to be installed inside the container instead of locally. From `.devcontainer/Dockerfile`:
-
-    ```Dockerfile
-    COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
-    ```
-
-    From `.devcontainer/settings.vscode.json`:
-
-    ```json
-    {
-        "remote.extensionKind": {
-            "peterjausovec.vscode-docker": "workspace"
-        }
-    }
     ```
 
 5. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
