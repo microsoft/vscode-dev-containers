@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team, Mehant |
+| *Contributors* | The VS Code Team, [Mehant](mailto:kmehant@gmail.com) |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Perl |
 
