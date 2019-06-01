@@ -11,6 +11,9 @@ RUN apt-get update && apt-get -y install git procps
 # Install animate.css via npm
 RUN npm install animate.css --save
 
+# Uncomment to install animate.css via yarn
+# RUN yarn add animate.css
+
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
