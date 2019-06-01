@@ -8,7 +8,7 @@
 	// Uncomment the next line if you want to add in default container specific settings.json values
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
-	"postCreateCommand": "create-react-app sample_project && cd sample_project",
+	"postCreateCommand": "create-react-app sample_project",
 
 	"extensions": [
 		"dsznajder.es7-react-js-snippets",

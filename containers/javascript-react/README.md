@@ -43,7 +43,8 @@ This definition includes a sample react app project that will help you verify it
 7. Select port 3000 and click the "Open Browser" button in the notification that appears.
 8. You should see spinning react symbol after the page loads.
 9. For debugging, ensure that your development server is running and then press <kbd>F5</kbd> or the green arrow to launch the debugger and open a new browser instance.
-10. From here, you can add breakpoints or edit the contents of the `sample-project` folder to do further testing. You can use this as reference [Debugging React App](https://code.visualstudio.com/docs/nodejs/reactjs-tutorial#_debugging-react)
+10. It's better to assign `runtimeExecutable` in `launch.json` with worskspace absolute path to chrome executable.
+11. From here, you can add breakpoints or edit the contents of the `sample-project` folder to do further testing. You can use this as reference [Debugging React App](https://code.visualstudio.com/docs/nodejs/reactjs-tutorial#_debugging-react)
 
 
 ## License
