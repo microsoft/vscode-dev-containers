@@ -5,7 +5,7 @@
 		"rebornix.Ruby"
 	],
 
-	// Uncomment the next line if you want to publish any ports.
+	// Change the port number if you are not using default port in Sinatra
 	"appPort": [4567],
 
 	// Uncomment the next line to run commands after the container is created.
