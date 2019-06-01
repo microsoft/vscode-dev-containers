@@ -1,14 +1,19 @@
 {
 	"name": "Java 12",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"vscjava.vscode-java-pack"
-	],
 	
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "java -version"
+	// "postCreateCommand": "java -version",
+
+	"extensions": [
+		"vscjava.vscode-java-pack"
+	],
+	"settings": {
+		"java.home": "/usr/java/openjdk-12",
+		"git.ignoreLegacyWarning": true
+	}
 
 }

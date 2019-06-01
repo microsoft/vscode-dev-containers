@@ -2,11 +2,15 @@
 	"name": "Azure Functions & Java 8",
 	"dockerFile": "Dockerfile",
 	"appPort": 7071,
+
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
 		"vscjava.vscode-java-pack"
-	],
-
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "java -version"
+	]
 }

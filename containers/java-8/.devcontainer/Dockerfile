@@ -5,16 +5,13 @@
 
 FROM maven:3-jdk-8
 
-# Copy endpoint specific user settings into container to specify Java path
-COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
-
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1
 
 # Verify git, needed tools installed
-RUN apt-get -y install git procps curl
+RUN apt-get -y install git procps curl lsb-release
 
 # Install Gradle
 ENV GRADLE_HOME /opt/gradle
@@ -32,6 +29,9 @@ RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 ENV DEBIAN_FRONTEND=dialog
+
+# Allow for a consistant java home location for settings - image is changing over time
+RUN if [ ! -d "/docker-java-home" ]; then ln -s "${JAVA_HOME}" /docker-java-home; fi
 
 # Set the default shell to bash instead of sh
 ENV SHELL /bin/bash

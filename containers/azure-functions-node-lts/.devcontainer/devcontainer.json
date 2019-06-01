@@ -2,11 +2,15 @@
 	"name": "Azure Functions & Node.js (latest LTS)",
 	"dockerFile": "Dockerfile",
 	"appPort": 7071,
+
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "npm install",
+
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
 		"dbaeumer.vscode-eslint"
-	],
-
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "npm install"
+	]
 }

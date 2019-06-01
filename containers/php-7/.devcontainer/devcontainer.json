@@ -1,15 +1,18 @@
 {
 	"name": "PHP 7",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"felixfbecker.php-debug",
-		"felixfbecker.php-intellisense"
-	],
 		
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "php -v"
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "php -v",
+
+	"extensions": [
+		"felixfbecker.php-debug",
+		"felixfbecker.php-intellisense"
+	]
 }

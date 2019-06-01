@@ -1,26 +1,29 @@
 {
 	"name": "Kubernetes & Helm",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"peterjausovec.vscode-docker",
-		"ms-kubernetes-tools.vscode-kubernetes-tools"
-	],
 	"runArgs": [
-		"-e", "SYNC_LOCALHOST_KUBECONFIG=true",
+		// Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust.
+		// "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
 		"--mount", "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
 		"--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost",
-
 		// Uncomment the next line to also sync certs in your .minikube folder
-		// "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost"
-
-		// Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust.
-		// "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"
+		// "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost",
+		"-e", "SYNC_LOCALHOST_KUBECONFIG=true"
 	],
 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "kubectl version"
+	// "postCreateCommand": "kubectl version",
 
+	"extensions": [
+		"peterjausovec.vscode-docker",
+		"ms-kubernetes-tools.vscode-kubernetes-tools"
+	],
+	"settings": {
+		"remote.extensionKind": {
+			"peterjausovec.vscode-docker": "workspace"
+		}	
+	}
 }

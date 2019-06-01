@@ -2,11 +2,15 @@
 	"name": "Azure Functions & C# (.NET Core Latest)",
 	"dockerFile": "Dockerfile",
 	"appPort": 7071,
+
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore",
+
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
 		"ms-vscode.csharp"
-	],
-
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore"
+	]
 }

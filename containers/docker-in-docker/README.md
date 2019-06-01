@@ -40,20 +40,14 @@ You can adapt your own existing development container Dockerfile to support this
     "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
     ```
 
-3. Add a container specific user settings file that forces the Docker extension to be installed inside the container instead of locally. From `.devcontainer/Dockerfile`:
-
-    ```Dockerfile
-    COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
-    ```
-
-    From `.devcontainer/settings.vscode.json`:
+3. Finally, update `devcontainer.json` to force the Docker extension to be installed inside the container instead of locally. From `.devcontainer/devcontainer.json`:
 
     ```json
-    {
+    "settings": {
         "remote.extensionKind": {
             "peterjausovec.vscode-docker": "workspace"
         }
-    }
+    },
     ```
 
 4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
