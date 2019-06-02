@@ -5,6 +5,10 @@
 		"rebornix.Ruby", 
 		"craigmaslowski.erb"
 	],
+	"runArgs": [
+		// change this to your project name to debug
+		"-e", "PROJECT_NAME=test-project"
+	], 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": ["80:80"],
 

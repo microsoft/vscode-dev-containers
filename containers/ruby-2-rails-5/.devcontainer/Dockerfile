@@ -38,5 +38,3 @@ RUN apt-get autoremove -y \
 
 # Set the default shell to bash instead of sh
 ENV SHELL /bin/bash
-
-ENV PROJECT_NAME test-project

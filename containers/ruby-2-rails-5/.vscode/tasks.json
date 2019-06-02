@@ -3,25 +3,10 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {   // 2. bundle install in project folder
+        {   // bundle install in project folder
             "label": "bundleInstall",
-            "dependsOn": "setEnv",      // sequential
             "type": "shell",
-            "command": "cd ${env:PROJECT_NAME} && bundle install"
+            "command": "cd ${env:PROJECT_NAME} && bundle install && gem cleanup"
         }, 
-        {   // 1. input project name and set as env variable, the only way 
-            // to share it to launch.json. You can also hard code it.
-            "label": "setEnv",
-            "type": "shell",
-            "command": "export PROJECT_NAME=${input:projectName}"
-        }
     ], 
-    "inputs": [
-        {   // prompt user to input project name for debugging
-            "type": "promptString",
-            "id": "projectName",
-            "description": "Please input the name of the project to debug.",
-            "default": "test-project"
-        }
-    ]
 }
