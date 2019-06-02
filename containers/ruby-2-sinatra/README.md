@@ -39,7 +39,7 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/ruby-2-sinatra` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. You should see "Try http://localhost:4567/ in the browser!" in the Debug Console, and by browsing http://localhost:4567/ you should see "Hello from Sinatra!".
+6. You should see "Try http://localhost:4567/ in the browser!" in the Debug Console. Press <kbd>F1</kbd>. Select **Remote-Containers: Forward Porrt From Container...** then choose **Forward 4567**, and by browsing http://localhost:4567/ you should see "Hello from Sinatra!".
 7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
