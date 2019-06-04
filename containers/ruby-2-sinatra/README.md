@@ -2,11 +2,11 @@
 
 ## Summary
 
-*Develop Ruby 2 Sinatra applications. includes everything you need to get up and running.*
+*Develop Ruby 2 Sinatra applications. Includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team, [Amblizer][la] |
+| *Contributors* | [Amblizer][la] |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Ruby |
 
