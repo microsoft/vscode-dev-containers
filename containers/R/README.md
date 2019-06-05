@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team, Mehant |
+| *Contributors* | The VS Code Team, [Mehant](mailto:kmehant@gmail.com) |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | R |
 
@@ -38,9 +38,8 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/R` folder.
-5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. You should see "Hello, Remote World!" in the a terminal window after the program finishes executing.
-7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+5. After the folder has opened in the container, you should see the R version printed in the terminal.
+6. Now open the `test-project/sample.R` and press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> for Windows users and Change <kbd>Ctrl</kbd> to <kbd>command</kbd> for Mac users to run the script.
 
 ## License
 
