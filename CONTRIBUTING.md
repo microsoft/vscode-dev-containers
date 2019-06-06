@@ -8,6 +8,19 @@ This repository contains a set of **dev container definitions** to help get you 
 
 Have a container set up you're proud of and would like to share? Want to see some changes made to an existing definition? We love contributions! Read on to learn how.
 
+### What makes a good Dev Container Definition?
+
+A good definition in this repository will solve a common developer setup problem, illustrate a unique container runtime configuration, highlight an important tip or trick, or provide a good template for devlopers getting started to customize for their own needs. They're not intened to be exhastive or cover every possible scenario or framework combination.
+
+When thinking about contributing a new dev container definition, consider the following questions:
+
+1. How different is the scenario you are interested in from other dev container definitions in the repository? 
+    - Does it drive significantly different extension, runtime, configuration requirements? 
+    - Are the requirements cumbersome install or are they typically things added by a package manager (pip, npm, etc) using an project's manifest file (`package.json`, `requirements.txt`, etc)?
+2. How likely are other developers to find the definition useful on its own? Could the scenario be broaded to help more people?
+
+If the definition is too similar others, consider contributing a PR to improve an existing one instead. If the scenario is too specific consider generalizing it and making it more broadly applicable.
+
 ### Anatomy of a Dev Container Definition
 
 The contents of the folders in the `containers` directory ultimately populate the available definitions list shown in the **Remote-Containers: Create Container Configuration File...** command. To make this work, each folder consists of up to three things:
