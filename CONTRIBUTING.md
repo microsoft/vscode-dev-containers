@@ -10,9 +10,14 @@ Have a container set up you're proud of and would like to share? Want to see som
 
 ### What makes a good Dev Container Definition?
 
-A good definition in this repository will solve a common developer setup problem, illustrate a unique container runtime configuration, highlight an important tip or trick, or provide a good template for devlopers getting started to customize for their own needs. They're not intened to be exhastive or cover every possible scenario or framework combination.
+A good definition in this repository will:
 
-When thinking about contributing a new dev container definition, consider the following questions:
+- Solve a common setup or installation challenge
+- Illustrate a unique container runtime configuration
+- Highlight an important tip or trick
+- Or provide an easy to understand template for devlopers that are just getting started with dev containers. 
+
+Since devcontainer.json can be commited to a source code repository, the definitions here are not intended to cover every possible permutation. When thinking about contributing a new dev container definition, consider the following questions:
 
 1. How different is the scenario you are interested in from other dev container definitions in the repository? 
     - Does it drive significantly different extension, runtime, configuration requirements? 
