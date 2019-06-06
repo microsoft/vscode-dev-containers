@@ -8,8 +8,8 @@
 	// Uncomment the next line if you want to add in default container specific settings.json values
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "powershell echo $PSVersionTable",
+	// Uncomment the next line to run commands after the container is created. This gets run in bash which is why we call `pwsh`.
+	// "postCreateCommand": "pwsh -c '$PSVersionTable'",
 
 	"extensions": [
 		"ms-vscode.powershell"
