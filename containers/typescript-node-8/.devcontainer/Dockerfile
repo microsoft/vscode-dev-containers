@@ -7,7 +7,6 @@ FROM node:8
 
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
-ENV DEBIAN_FRONTEND=dialog
 ENV SHELL /bin/bash
 
 RUN apt-get update \
@@ -25,3 +24,5 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+ENV DEBIAN_FRONTEND=dialog
