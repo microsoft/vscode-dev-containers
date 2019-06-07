@@ -3,7 +3,6 @@
 	"dockerFile": "Dockerfile",
 	"extensions": [
 		"rebornix.Ruby", 
-		"craigmaslowski.erb"
 	],
 	"runArgs": [
 		// change this to your project name to debug

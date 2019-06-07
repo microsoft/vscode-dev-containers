@@ -6,7 +6,7 @@
         {   // bundle install in project folder
             "label": "bundleInstall",
             "type": "shell",
-            "command": "cd ${env:PROJECT_NAME} && bundle install && gem cleanup"
+            "command": "cd ${env:PROJECT_NAME} && bundle install"
         }, 
     ], 
 }
