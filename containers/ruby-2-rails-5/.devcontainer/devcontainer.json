@@ -4,10 +4,7 @@
 	"extensions": [
 		"rebornix.Ruby", 
 	],
-	"runArgs": [
-		// change this to your project name to debug
-		"-e", "PROJECT_NAME=test-project"
-	], 
+	"runArgs": [], 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": ["80:80"],
 

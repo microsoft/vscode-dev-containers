@@ -3,10 +3,15 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {   // bundle install in project folder
-            "label": "bundleInstall",
+        {
+            "label": "Create test-project",
             "type": "shell",
-            "command": "cd ${env:PROJECT_NAME} && bundle install"
+            "command": "rails new test-project -G --skip && cd test-project && bundle install"
+        }, 
+        {
+            "label": "Delete test-project",
+            "type": "shell",
+            "command": "cd test-project && rm -rf * && rm -f .ruby-version"
         }, 
     ], 
 }

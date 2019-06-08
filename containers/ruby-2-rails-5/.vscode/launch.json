@@ -9,10 +9,11 @@
             "type": "Ruby",
             "request": "launch",
             // Current dir using env variable input in tasks.json
-            "cwd": "${workspaceRoot}/${env:PROJECT_NAME}", 
+            "cwd": "${workspaceRoot}/test-project", 
             // run bundle install before rails server
-            "preLaunchTask": "bundleInstall",
+            "preLaunchTask": "Create test-project",
             "program": "bin/rails",
+            "postDebugTask": "Delete test-project",
             // Setup debug binding IP and port.
             "args": ["s", "-b", "0.0.0.0", "-p", "80"], 
         }
