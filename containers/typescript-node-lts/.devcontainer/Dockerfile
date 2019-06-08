@@ -26,7 +26,7 @@ RUN apt-get install -y git procps \
     && echo "deb https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
     && apt-get -y install --no-install-recommends yarn \
-    # Install tslint and typescript
+    # Install tslint and typescript globally
     && npm install -g tslint typescript \
     # Clean up
     && apt-get autoremove -y \
