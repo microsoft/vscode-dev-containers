@@ -11,7 +11,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Set the default shell to bash instead of sh
 ENV SHELL /bin/bash
 
-
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
     # Verify git and needed tools are installed
