@@ -15,6 +15,7 @@
 	"postCreateCommand": "R --version",
 
 	"extensions": [
-		"ikuyadeu.r"
+		"ikuyadeu.r",
+		"mikhail-arkhipov.r"
 	]
 }
