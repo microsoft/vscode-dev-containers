@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Perform statistical computing using R language on linux. Includes R installed and needed extensions*
+*Perform statistical computing using the R language on Linux. Includes R and needed extensions.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -39,7 +39,7 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/R` folder.
 5. After the folder has opened in the container, you should see the R version printed in the terminal.
-6. Now open the `test-project/sample.R` and press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> for Windows users and Change <kbd>Ctrl</kbd> to <kbd>command</kbd> for Mac users to run the script.
+6. Now open the `test-project/sample.R` and press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> to run the script.
 
 ## License
 
