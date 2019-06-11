@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM node:lts
+FROM python:2.7
 
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
@@ -12,6 +12,10 @@ RUN apt-get update \
 
 # Install git, process tools
 RUN apt-get -y install git procps
+
+# Install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+    && apt-get install -y nodejs
 
 # Install Truffle Suite
 RUN npm i --unsafe-perm -g truffle
@@ -25,15 +29,6 @@ RUN apt-get install -y apt-transport-https curl gnupg2 lsb-release \
     && curl -sL https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 2>/dev/null \
     && apt-get update \
     && apt-get install -y azure-cli
-	
-# Install Python 2.7.15
-RUN apt-get install -y build-essential \
-	&& curl https://www.python.org/ftp/python/2.7.15/Python-2.7.15.tgz --output Python-2.7.15.tgz \
-	&& tar -xvf Python-2.7.15.tgz \
-	&& rm Python-2.7.15.tgz \
-	&& cd Python-2.7.15 \
-	&& ./configure --enable-optimizations \
-	&& make install
 
 # Clean up
 RUN apt-get autoremove -y \
