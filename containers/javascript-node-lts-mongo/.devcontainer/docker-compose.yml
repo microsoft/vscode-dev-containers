@@ -23,6 +23,7 @@ services:
 
   mongo:
     image: mongo
+    restart: unless-stopped	
     volumes:
       - /data/db
  
