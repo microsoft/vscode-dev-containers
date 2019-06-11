@@ -5,20 +5,30 @@
 
 FROM php:7-cli
 
-# Install xdebug
-RUN yes | pecl install xdebug \
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+# Set the default shell to bash rather than sh
+ENV SHELL /bin/bash
+
+# Configure apt and install packages
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends apt-utils 2>&1 \
+    #
+    # Install git, procps, lsb-release (useful for CLI installs)
+    && apt-get -y install git procps lsb-release \
+	#
+	# Install xdebug
+	&& yes | pecl install xdebug \
 	&& echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
 	&& echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-	&& echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini
-
-# Install git, process tools
-RUN apt-get update && apt-get -y install git procps
-
-# Clean up
-RUN apt-get autoremove -y \
+	&& echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    #
+    # Clean up
+    && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the default shell to bash instead of sh
-ENV SHELL /bin/bash
+# Switch back to dialog for any ad-hoc use of apt-get
+ENV DEBIAN_FRONTEND=dialog
+
 

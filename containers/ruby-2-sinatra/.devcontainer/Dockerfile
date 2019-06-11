@@ -1,37 +1,47 @@
 FROM debian:latest
 
-# Install vim, git, process tools
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+# Set the default shell to bash rather than sh
+ENV SHELL /bin/bash
+
+# Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y install --no-install-recommends apt-utils 2>&1 \
+    #
+    # Install vim, git, process tools, lsb-release
+    && apt-get update \
     && apt-get install -y \
         vim \
         git \
-        procps
-
-# Install ruby
-RUN apt-get install -y \
+        procps \
+        lsb-release \
+    #
+    # Install ruby
+    && apt-get install -y \
         ruby \
         ruby-dev \
         build-essential \
-        libsqlite3-dev
-
-# Install debug tools
-RUN gem install \
+        libsqlite3-dev \
+    #
+    # Install debug tools
+    && gem install \
         rake \
         ruby-debug-ide \
-        debase
-
-# Install sinatra MVC components
-RUN gem install \
+        debase \
+    #
+    # Install sinatra MVC components
+    && gem install \
         sinatra \
         sinatra-reloader \
         thin \
         data_mapper \
-        dm-sqlite-adapter
+        dm-sqlite-adapter \
+    #
+    # Clean up
+    && apt-get autoremove -y \
+        && apt-get clean -y \
+        && rm -rf /var/lib/apt/lists/*
 
-# Clean up
-RUN apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set the default shell to bash instead of sh
-ENV SHELL /bin/bash
+# Switch back to dialog for any ad-hoc use of apt-get
+ENV DEBIAN_FRONTEND=dialog

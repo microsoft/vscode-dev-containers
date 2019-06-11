@@ -16,5 +16,7 @@
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.pylintEnabled": true,
 		"python.linting.enabled": true
-	}
+	},
+	// Install contents of requirements.txt if present
+	"postCreateCommand": "if [ -f requirements.txt ]; then pip install -r requirements.txt; fi"
 }

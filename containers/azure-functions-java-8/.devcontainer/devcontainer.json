@@ -12,5 +12,8 @@
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
 		"vscjava.vscode-java-pack"
-	]
+	],
+	"settings": {
+		"java.home": "/docker-java-home"
+	}
 }
