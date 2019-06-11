@@ -2,13 +2,13 @@
 
 ## Summary
 
-*Develop Java 11 applications. Includes the JDK 11, Maven, and Gradle build tools.*
+*Develop Java 11 applications. Includes JDK 11 and Java extensions.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Java Team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | Java, Maven, Gradle |
+| *Languages, platforms* | Java |
 
 ## Using this definition with an existing folder
 
@@ -35,6 +35,8 @@ Beyond that, just follow these steps to use the definition:
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+
+6. If you want to include maven or gradle build tools into your dev container, please uncomment the corresponding steps from the `containers/java-11/.devcontainer/Dockerfile`, and run **Remote-Containers: Rebuild Container** to rebuild the dev container.
 
 ## Testing the definition
 
