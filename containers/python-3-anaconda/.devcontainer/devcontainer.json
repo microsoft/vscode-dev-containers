@@ -18,5 +18,5 @@
 		"python.linting.enabled": true
 	},
 	// Install contents of environment.yml if present
-	"postCreateCommand": "if [ -f environment.yml ]; conda env update base -f environment.yml; fi"
+	"postCreateCommand": "if [ -f environment.yml ]; then conda env update base -f environment.yml; fi"
 }
