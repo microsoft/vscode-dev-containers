@@ -1,3 +1,4 @@
-jupyter
-numpy
-matplotlib
+dependencies:
+  - jupyter
+  - numpy
+  - matplotlib
