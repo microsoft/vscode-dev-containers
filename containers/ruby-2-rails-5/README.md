@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team, [Amblizer][la] |
+| *Contributors* | [Amblizer][la] |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Ruby |
 
