@@ -18,7 +18,7 @@ RUN apt-get update \
     && apt-get -y install git procps lsb-release \
     #
     # Install F#
-    && apt-get install fsharp \
+    && apt-get install -y fsharp \
     #
     # Clean up
     && apt-get autoremove -y \

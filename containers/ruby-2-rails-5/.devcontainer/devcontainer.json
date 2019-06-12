@@ -1,13 +1,17 @@
 {
 	"name": "Ruby 2 Rails",
 	"dockerFile": "Dockerfile",
-	"extensions": [
-		"rebornix.Ruby", 
-	],
-	"runArgs": [], 
+
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": ["80:80"],
 
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cd ${input:projectName} && bundle install"
+	// "postCreateCommand": "cd ${input:projectName} && bundle install",
+
+	"extensions": [
+		"rebornix.Ruby", 
+	]
 }
