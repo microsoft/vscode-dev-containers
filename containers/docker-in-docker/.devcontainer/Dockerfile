@@ -11,7 +11,8 @@ FROM debian:9
 ENV DEBIAN_FRONTEND=noninteractive
 # Set the default shell to bash rather than sh
 ENV SHELL /bin/bash
-
+# Docker Compose version
+ARG COMPOSE_VERSION=1.24.0
 
 # Configure apt and install packages
 RUN apt-get update \
@@ -26,6 +27,10 @@ RUN apt-get update \
     && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
     && apt-get update \
     && apt-get install -y docker-ce-cli \
+    #
+    # Install Docker Compose
+    && curl -sSL "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
+    && chmod +x /usr/local/bin/docker-compose \
     #
     # Clean up
     && apt-get autoremove -y \

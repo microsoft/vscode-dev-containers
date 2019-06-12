@@ -11,8 +11,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Set the default shell to bash rather than sh
 ENV SHELL /bin/bash
 # Terraform and tflint versions
-ENV TERRAFORM_VERSION=0.11.13
-ENV TFLINT_VERSION=0.7.5
+ARG TERRAFORM_VERSION=0.11.13
+ARG TFLINT_VERSION=0.7.5
 
 # Configure apt and install packages
 RUN apt-get update \
