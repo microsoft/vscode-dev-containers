@@ -17,7 +17,5 @@
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.pylintEnabled": true,
 		"python.linting.enabled": true
-	},
-	// Install contents of environment.yml if present
-	"postCreateCommand": "if [ -f environment.yml ]; conda env update base -f environment.yml; fi"
+	}
 }

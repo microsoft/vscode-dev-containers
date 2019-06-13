@@ -10,6 +10,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Set the default shell to bash rather than sh
 ENV SHELL /bin/bash
 
+# Copy environment.yml (if found) to a temp locaition so we update the environment. Also
+# copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
+COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
+
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
@@ -19,6 +23,10 @@ RUN apt-get update \
     #
     # Install pylint
     && pip install pylint \
+    #
+    # Update Python environment based on environment.yml (if presenet)
+    && if [ -f "/tmp/conda-tmp/environment.yml" ]; then conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
+    && rm -rf /tmp/conda-tmp \
     #
     # Clean up
     && apt-get autoremove -y \

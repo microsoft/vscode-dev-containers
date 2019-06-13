@@ -6,6 +6,9 @@
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+
 	"extensions": [
 		"ms-python.python"
 	],
@@ -13,7 +16,5 @@
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.pylintEnabled": true,
 		"python.linting.enabled": true
-	},
-	// Install contents of requirements.txt if present
-	"postCreateCommand": "if [ -f requirements.txt ]; then pip install -r requirements.txt; fi"
+	}
 }

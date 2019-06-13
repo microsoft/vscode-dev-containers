@@ -12,6 +12,10 @@ ENV SHELL /bin/bash
 
 ENV PYTHONUNBUFFERED 1
 
+# Copy requirements.txt (if found) to a temp locaition so we can install it. Also
+# copy "noop.txt" so the COPY instruction does not fail if no requirements.txt exists.
+COPY requirements.txt* .devcontainer/noop.txt /tmp/pip-tmp/
+
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
@@ -21,6 +25,10 @@ RUN apt-get update \
     #
     # Install pylint
     && pip install pylint \
+    #
+    # Update Python environment based on requirements.txt (if presenet)
+    && if [ -f "/tmp/pip-tmp/requirements.txt" ]; then pip install -r /tmp/pip-tmp/requirements.txt; fi \
+    && rm -rf /tmp/pip-tmp \
     #
     # Clean up
     && apt-get autoremove -y \
