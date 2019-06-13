@@ -26,10 +26,8 @@ RUN apt-get update \
     && apt-get install -y docker-ce-cli \
     #
     # Install kubectl
-    && curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
-    && echo "deb https://apt.kubernetes.io/ kubernetes-$(lsb_release -cs) main" | tee -a /etc/apt/sources.list.d/kubernetes.list \
-    && apt-get update \
-    && apt-get install -y kubectl \
+    && curl -sSLO -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+    && chmod +x /usr/local/bin/kubectl \
     #
     # Install Helm
     && curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash - \
