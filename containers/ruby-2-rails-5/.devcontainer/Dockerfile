@@ -10,13 +10,12 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
     #
     # Install vim, git, process tools, lsb-release
-    RUN apt-get update \
-        && apt-get install -y \
-            vim \
-            git \
-            procps \
-            lsb-release \
-    #
+    && apt-get install -y \
+        vim \
+        git \
+        procps \
+        lsb-release \
+#
     # Install ruby
     && apt-get install -y \
         ruby \

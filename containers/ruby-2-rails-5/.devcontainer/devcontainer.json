@@ -12,6 +12,6 @@
 	// "postCreateCommand": "cd ${input:projectName} && bundle install",
 
 	"extensions": [
-		"rebornix.Ruby", 
+		"rebornix.Ruby"
 	]
 }
