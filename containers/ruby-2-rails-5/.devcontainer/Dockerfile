@@ -15,7 +15,7 @@ RUN apt-get update \
         git \
         procps \
         lsb-release \
-#
+    #
     # Install ruby
     && apt-get install -y \
         ruby \
