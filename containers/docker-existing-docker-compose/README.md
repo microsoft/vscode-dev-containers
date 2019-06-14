@@ -27,7 +27,7 @@ Follow these steps to use it:
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/docker-existing-docker-compose/.devcontainer` to the root of your project folder.
+   2. Copy the `containers/docker-existing-docker-compose/.devcontainer` folder to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, you will need to modify the following files in `.devcontainer` folder that was added to your project:
