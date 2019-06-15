@@ -5,32 +5,35 @@
 
 FROM mcr.microsoft.com/dotnet/core/sdk:latest
 
-# Configure apt
+# Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils 2>&1
+# Set the default shell to bash rather than sh
+ENV SHELL /bin/bash
 
-# Verify git and needed tools are installed
-RUN apt-get -y install \
+# Configure apt and install packages
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends apt-utils 2>&1 \
+    #
+    # Verify git and needed tools are installed
+    && apt-get -y install \
         git \
         procps \
         curl \
         apt-transport-https \
         gnupg2 \
-        lsb-release
-
-# Install Azure Functions and Azure CLI
-RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
+        lsb-release \
+    #
+    # Install Azure Functions and Azure CLI
+    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list \
     && curl -sL https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
     && apt-get update \
-    && apt-get install -y azure-cli azure-functions-core-tools
-
-# Clean up
-RUN apt-get autoremove -y \
+    && apt-get install -y azure-cli azure-functions-core-tools \
+    #
+    # Clean up
+    && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-ENV DEBIAN_FRONTEND=dialog
 
-# Set the default shell to bash instead of sh
-ENV SHELL /bin/bash
+# Switch back to dialog for any ad-hoc use of apt-get
+ENV DEBIAN_FRONTEND=dialog

@@ -5,19 +5,29 @@
 
 FROM swift:4
 
-# Install git, process tools
-RUN apt-get update && apt-get -y install git procps
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+# Set the default shell to bash rather than sh
+ENV SHELL /bin/bash
 
-# Install SourceKite, see https://github.com/vknabel/vscode-swift-development-environment/blob/master/README.md#installation
-RUN git clone https://github.com/jinmingjian/sourcekite.git
-RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/swift:/usr/lib
-RUN ln -s /usr/lib/libsourcekitdInProc.so /usr/lib/sourcekitdInProc
-RUN cd sourcekite && swift build -Xlinker -l:sourcekitdInProc -c release
-
-# Clean up
-RUN apt-get autoremove -y \
+# Configure apt and install packages
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends apt-utils 2>&1 \
+    #
+    # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
+    && apt-get -y install git procps lsb-release \
+    #
+    # Install SourceKite, see https://github.com/vknabel/vscode-swift-development-environment/blob/master/README.md#installation
+    && git clone https://github.com/jinmingjian/sourcekite.git \
+    && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/swift:/usr/lib \
+    && ln -s /usr/lib/libsourcekitdInProc.so /usr/lib/sourcekitdInProc \
+    && cd sourcekite && swift build -Xlinker -l:sourcekitdInProc -c release \
+    #
+    # Clean up
+    && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the default shell to bash instead of sh
-ENV SHELL /bin/bash
+# Switch back to dialog for any ad-hoc use of apt-get
+ENV DEBIAN_FRONTEND=dialog
+

@@ -7,7 +7,7 @@
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "python --version",
+	// "postCreateCommand": "java -version",
 
 	"extensions": [
 		"ms-python.python"
