@@ -8,8 +8,7 @@ FROM debian:9
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
-# Set the default shell to bash rather than sh
-ENV SHELL /bin/bash
+
 # Docker Compose version
 ARG COMPOSE_VERSION=1.24.0
 
