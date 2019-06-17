@@ -1,0 +1,15 @@
+{
+  "name": "docker web app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "First Last <email address>",
+  "description": "Node JS + Postgres",
+  "dependencies": {
+    "bluebird": "^3.5.5",
+    "express": "^4.17.1",
+    "pg-promise": "^8.7.2"
+  }
+}
