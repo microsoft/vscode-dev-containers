@@ -8,8 +8,7 @@ FROM debian:9
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
-# Set the default shell to bash rather than sh
-ENV SHELL /bin/bash
+
 # Terraform and tflint versions
 ARG TERRAFORM_VERSION=0.11.13
 ARG TFLINT_VERSION=0.7.5

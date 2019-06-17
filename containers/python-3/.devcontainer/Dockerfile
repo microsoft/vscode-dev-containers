@@ -7,8 +7,6 @@ FROM python:3
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
-# Set the default shell to bash rather than sh
-ENV SHELL /bin/bash
 
 # Copy requirements.txt (if found) to a temp locaition so we can install it. Also
 # copy "noop.txt" so the COPY instruction does not fail if no requirements.txt exists.

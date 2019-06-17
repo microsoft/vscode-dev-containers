@@ -6,8 +6,7 @@ FROM debian:9
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
-# Set the default shell to bash rather than sh
-ENV SHELL /bin/bash
+
 # Bazel version and hash
 ENV BAZEL_VERSION=0.25.2 
 ENV BAZEL_SHA256=5b9ab8a68c53421256909f79c47bde76a051910217531cbf35ee995448254fa7 

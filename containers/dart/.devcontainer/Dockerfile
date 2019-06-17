@@ -7,8 +7,7 @@ FROM google/dart:2
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
-# Set the default shell to bash rather than sh
-ENV SHELL /bin/bash
+
 # Add bin location to path
 ENV PATH="$PATH":"/root/.pub-cache/bin"
 

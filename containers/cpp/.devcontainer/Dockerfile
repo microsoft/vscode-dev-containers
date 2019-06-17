@@ -7,16 +7,13 @@ FROM debian:9
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
-# Set the default shell to bash rather than sh
-ENV SHELL /bin/bash
 
+# Configure apt and install packages
 RUN apt-get update \
-    #
-    # Configure apt
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
     # 
     # Verify git, process tools, lsb-release (useful for CLI installs) installed
-    && apt-get update && apt-get -y install git procps lsb-release \
+    && apt-get -y install git procps lsb-release \
     #
     # Install C++ tools
     && apt-get -y install build-essential cmake cppcheck valgrind \

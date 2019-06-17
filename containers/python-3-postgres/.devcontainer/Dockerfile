@@ -7,8 +7,6 @@ FROM python:3
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
-# Set the default shell to bash rather than sh
-ENV SHELL /bin/bash
 
 ENV PYTHONUNBUFFERED 1
 

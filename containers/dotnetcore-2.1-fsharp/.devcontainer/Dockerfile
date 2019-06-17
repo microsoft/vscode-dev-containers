@@ -7,8 +7,6 @@ FROM mcr.microsoft.com/dotnet/core/sdk:2.1
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
-# Set the default shell to bash rather than sh
-ENV SHELL /bin/bash
 
 # Configure apt and install packages
 RUN apt-get update \
