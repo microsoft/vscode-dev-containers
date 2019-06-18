@@ -1,0 +1,20 @@
+{
+	"name": "vscode-dev-containers-test",
+	"version": "0.1.0",
+	"description": "VS Code Dev Containers Tests",
+	"author": "Microsoft Corporation",
+	"license": "SEE LICENSE IN LICENSE.md",
+	"scripts": {
+		"test": "cross-env TS_NODE_IGNORE=false mocha -r ts-node/register --exit src/**/*.test.ts",
+		"prepare": "cd node_modules/remote-containers ; yarn"
+	},
+	"devDependencies": {
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^10.14.8",
+		"cross-env": "^5.2.0",
+		"mocha": "^6.1.4",
+		"remote-containers": "https://github.com/Microsoft/vscode-remote-containers.git",
+		"ts-node": "^8.3.0",
+		"typescript": "^3.5.2"
+	}
+}
