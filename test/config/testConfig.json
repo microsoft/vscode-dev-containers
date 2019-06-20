@@ -1,0 +1,17 @@
+{
+	"skipDefinitionBuild": [
+		"docker-existing-dockerfile",
+		"docker-existing-docker-compose"
+	],
+	"tryRepoList": [
+		"vscode-remote-try-node",
+		"vscode-remote-try-python",
+		"vscode-remote-try-go",
+		"vscode-remote-try-java",
+		"vscode-remote-try-dotnetcore",
+		"vscode-remote-try-rust",
+		"vscode-remote-try-cpp",
+		"vscode-remote-try-php"
+	],
+	"logLevel": "info"
+}

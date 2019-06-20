@@ -8,7 +8,8 @@
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"newLine": "LF"
+		"newLine": "LF",
+		"resolveJsonModule": true
 	},
 	"include": [
 		"src/**/*"
