@@ -15,10 +15,9 @@ if(!fs.existsSync(rootFolder)) {
 }
 const definitionList = getDefinitionListFromPath(rootFolder, 'tryReposToTest', () => getConfig('tryRepoList'));
 
-
+// Verify try repos are on disk and clone them if not.
 definitionList.forEach((definition: string) => {
 	const definitionPath = path.join(rootFolder, definition);
-	// Verify try repos are on disk and clone them if not.
 	if (!fs.existsSync(definitionPath)) {
 		log('info', `Cloning ${definition}.`);
 		fs.mkdirSync(definitionPath);

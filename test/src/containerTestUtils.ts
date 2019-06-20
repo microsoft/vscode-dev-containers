@@ -5,24 +5,13 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import * as tv4 from 'tv4';
 import * as Docker from 'dockerode';
-import { jsonc } from 'jsonc';
-import { resolve, getDevContainerConfigPathIn, readDevContainerConfigFile } from 'remote-containers/src/node/configContainer';
-import { exec, createTestParams } from 'remote-containers/test/testUtils';
 import * as config from '../config/testConfig.json';
 
 let logLevel: string;
 
-// Docker instance used in a few spots
-const docker = new Docker();
-
-// Dev Container schema
-log('debug', 'Reading JSON schema');
-const schema = jsonc.readSync(path.join(__dirname, '..', 'config', 'devContainer.schema.json'));
-
 export function getConfig(property: string, defaultVal: any = undefined) {
-	// Generate env var name from property
+	// Generate env var name from property - pascalCase to PASCAL_CASE
 	const envVar = property.split('').reduce((prev: string, next: string) => {
 		if (next >= 'A' && next <= 'Z') {
 			return prev + '_' + next;
@@ -86,49 +75,8 @@ function defaultGetDefnitionListFn(definitionsPath: string) {
 
 }
 
-export function validatetDevContainerJson(definitionPath: string) {
-	log('debug', `Validating devcontainer.json at ${definitionPath}`);
-	const jsonPath = path.join(definitionPath, '.devcontainer', 'devcontainer.json');
-	const json = fs.existsSync(jsonPath) ? jsonc.readSync(jsonPath) :
-		jsonc.readSync(path.join(definitionPath, '.devcontainer.json'));
 
-	return tv4.validate(json, schema);
-}
-
-export async function testContainerResolver(definitionPath: string): Promise<any> {
-
-	log('debug', `Finding and reading devcontainer.json at ${definitionPath}`);
-	const configPath = await getDevContainerConfigPathIn(definitionPath);
-	const config: any = configPath && await readDevContainerConfigFile(configPath);
-
-	const params = await createTestParams();
-	params.getExtensionsToInstall = () => config.extensions;
-	params.cwd = definitionPath;
-	params.progress = {
-		report: (value: any) => { log('trace', value.message); }
-	};
-	params.output = {
-		write: (message) => { log('trace', message); }
-	};
-
-	log('debug', 'Running resolver.');
-	return await resolve(params, config);
-}
-
-export async function execTestScript(devContainer: any, vscodeDevConPath: string = '') {
-	const container = await docker.getContainer(devContainer.properties.id);
-	const containerInfo = await container.inspect();
-	const workingDir = findMountDestination(containerInfo, devContainer.params.cwd, vscodeDevConPath);
-	const result = await exec(`docker exec ${containerInfo.Id} /bin/sh -c "cd ${workingDir} && if [ -f test-project/test.sh ]; then chmod +x test-project/test.sh && ./test.sh; else ls -a; fi"`)
-	log('trace', result.stdout);
-	if (result.error) {
-		log('trace', result.error + ': ' + result.stderr);
-	}
-
-	return result;
-}
-
-function findMountDestination(containerInfo: Docker.ContainerInspectInfo, sourceDir: string, vscodeDevConPath: string) {
+export function findMountDestination(containerInfo: Docker.ContainerInspectInfo, sourceDir: string, vscodeDevConPath: string) {
 	for (let i = 0; i < containerInfo.Mounts.length; i++) {
 		const mount = containerInfo.Mounts[i];
 		// Handle case where the git directory is mounted
@@ -141,23 +89,4 @@ function findMountDestination(containerInfo: Docker.ContainerInspectInfo, source
 		}
 	}
 	return null;
-}
-
-export async function cleanUp(devContainer: any) {
-
-	log('debug', 'Stopping container');
-	devContainer.params.shutdowns.forEach(async (shutdown: (rebuild?: boolean) => {}) => await shutdown(false));
-
-	log('debug', 'Removing container');
-	const container = await docker.getContainer(devContainer.properties.id);
-	await container.remove({ force: true });
-
-	log('debug', 'Pruning all unused images');
-	const result = await exec('docker image prune -a -f');
-	log('trace', result.stdout);
-	if (result.error) {
-		log('trace', result.error + ': ' + result.stderr);
-	}
-
-	return result;
 }
