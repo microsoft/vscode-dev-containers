@@ -1,0 +1,19 @@
+{
+	"name": "Node.js & Postgres",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "web",
+	"workspaceFolder": "/workspace",
+
+	// Uncomment the line below if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "npm install",
+
+	"extensions": [
+		"dbaeumer.vscode-eslint"
+	]
+}
