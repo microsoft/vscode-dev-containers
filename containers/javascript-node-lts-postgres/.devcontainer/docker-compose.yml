@@ -1,0 +1,33 @@
+#-------------------------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+#-------------------------------------------------------------------------------------------------------------
+
+version: '3'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    
+    volumes:
+      - ..:/workspace
+      # This lets you avoid setting up Git again in the container
+      - ~/.gitconfig:/root/.gitconfig
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    links:
+      - db
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: user
+      POSTGRES_DB: data
+ 
