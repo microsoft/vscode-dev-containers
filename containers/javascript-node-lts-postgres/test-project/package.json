@@ -1,5 +1,5 @@
 {
-  "name": "docker web app",
+  "name": "docker_web_app",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
