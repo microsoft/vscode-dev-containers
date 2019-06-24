@@ -8,7 +8,7 @@ ARG GLIBC_VERSION=2.29-r0
 
 RUN apk add --no-cache -q git \
     #
-    # Install glibc compatibility - optional, but extnesion more likely to work
+    # Install glibc compatibility - optional, but extensions more likely to work
     && apk add --no-cache ca-certificates wget libstdc++ libgcc \
     && wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
     && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \
