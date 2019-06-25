@@ -12,9 +12,9 @@
 
 ## Using this definition with an existing folder
 
-This definition does not require any special steps to use. However, the `Dockerfile` includes **optional** `glibc` compatibility support which will reduce the chances of extensions with native dependencies failing. If you want, you can remove this section of the Dockerfile and rebuild the container with your preferred extensions installed to see if you actually need it.
+This definition does not require any special steps to use. However, the `.devcontainer/Dockerfile` references a base image with `glibc` compatibility support installed. This will reduce the chances of extensions with native dependencies failing due to incompatibilities with Alpine, but is not always required. To see if your extensions actually need `glibc`, change the `FROM` statment to `alpine:3.10` in the Dockerfile and build/rebuild the container.
 
-Just follow these steps:
+To use it, just follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
