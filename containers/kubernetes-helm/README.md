@@ -127,7 +127,7 @@ See the section below for your operating system for more detailed setup instruct
 
 4. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Create Container Configuration File...** from the command palette.
+   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the Docker in Docker Compose definition.
 
 5. To use latest-and-greatest copy of this definition from the repository:
@@ -158,7 +158,7 @@ See the section below for your operating system for more detailed setup instruct
 
 4. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Create Container Configuration File...** from the command palette.
+   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the Docker in Docker Compose definition.
 
 5. To use latest-and-greatest copy of this definition from the repository:
