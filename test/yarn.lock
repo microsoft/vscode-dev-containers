@@ -910,9 +910,9 @@ readable-stream@~1.0.26-4:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-"remote-containers@https://github.com/Microsoft/vscode-remote-containers.git":
+"remote-containers@git+https://github.com/Microsoft/vscode-remote-containers.git":
   version "0.65.0"
-  resolved "https://github.com/Microsoft/vscode-remote-containers.git#efe4e56165cc0d6019e114a4a69d1e8ac3f1b7b0"
+  resolved "git+https://github.com/Microsoft/vscode-remote-containers.git#efe4e56165cc0d6019e114a4a69d1e8ac3f1b7b0"
   dependencies:
     dockerode "^2.5.8"
     follow-redirects "^1.7.0"
