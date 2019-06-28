@@ -5,8 +5,9 @@
 	"author": "Microsoft Corporation",
 	"license": "SEE LICENSE IN REPOSITORY ROOT",
 	"scripts": {
+		"preinstall": "yarn remove --ignore-scripts remote-containers & yarn add --ignore-scripts --force --dev https://github.com/Microsoft/vscode-remote-containers.git",
 		"test": "cross-env TS_NODE_IGNORE=false mocha -r ts-node/register --exit src/**/*.test.ts",
-		"prepare": "cd node_modules/remote-containers ; yarn"
+		"prepare": "cd node_modules/remote-containers && yarn"
 	},
 	"devDependencies": {
 		"@types/chai": "^4.1.7",
@@ -14,14 +15,15 @@
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^10.14.8",
 		"@types/tv4": "^1.2.29",
-		"tv4":"^1.3.0",
-		"chai":"4.2.0",
+		"chai": "4.2.0",
 		"cross-env": "^5.2.0",
 		"dockerode": "^2.5.8",
 		"jsonc": "^1.1.0",
 		"mocha": "^6.1.4",
 		"remote-containers": "https://github.com/Microsoft/vscode-remote-containers.git",
 		"ts-node": "^8.3.0",
+		"tv4": "^1.3.0",
 		"typescript": "^3.5.2"
-	}
+	},
+	"dependencies": {}
 }

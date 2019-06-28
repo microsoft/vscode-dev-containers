@@ -911,8 +911,8 @@ readable-stream@~1.0.26-4:
     string_decoder "~0.10.x"
 
 "remote-containers@https://github.com/Microsoft/vscode-remote-containers.git":
-  version "0.62.0"
-  resolved "https://github.com/Microsoft/vscode-remote-containers.git#e86d7a48cc4cb070d4f4c8c09ce5d5132e194775"
+  version "0.65.0"
+  resolved "https://github.com/Microsoft/vscode-remote-containers.git#efe4e56165cc0d6019e114a4a69d1e8ac3f1b7b0"
   dependencies:
     dockerode "^2.5.8"
     follow-redirects "^1.7.0"
@@ -921,7 +921,7 @@ readable-stream@~1.0.26-4:
     markdown-it "^8.4.2"
     mkdirp "^0.5.1"
     tar-stream "^2.1.0"
-    vscode-dev-containers "https://github.com/microsoft/vscode-dev-containers/releases/download/v0.21.0/vscode-dev-containers-0.21.0.tgz"
+    vscode-dev-containers "https://github.com/microsoft/vscode-dev-containers/releases/download/v0.23.0/vscode-dev-containers-0.23.0.tgz"
 
 require-directory@^2.1.1:
   version "2.1.1"
@@ -1173,9 +1173,9 @@ util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
-"vscode-dev-containers@https://github.com/microsoft/vscode-dev-containers/releases/download/v0.21.0/vscode-dev-containers-0.21.0.tgz":
-  version "0.21.0"
-  resolved "https://github.com/microsoft/vscode-dev-containers/releases/download/v0.21.0/vscode-dev-containers-0.21.0.tgz#491661fdb14e7a2cd366125d38020635ec4f2250"
+"vscode-dev-containers@https://github.com/microsoft/vscode-dev-containers/releases/download/v0.23.0/vscode-dev-containers-0.23.0.tgz":
+  version "0.23.0"
+  resolved "https://github.com/microsoft/vscode-dev-containers/releases/download/v0.23.0/vscode-dev-containers-0.23.0.tgz#592d602460c500ba71009726b5af5f780c0d97d5"
 
 which-module@^2.0.0:
   version "2.0.0"
