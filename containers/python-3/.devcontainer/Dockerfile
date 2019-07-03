@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Copy requirements.txt (if found) to a temp locaition so we can install it. Also
 # copy "noop.txt" so the COPY instruction does not fail if no requirements.txt exists.
-COPY requirements.txt* .devcontainer/noop.txt /tmp/pip-tmp/
+COPY requirements.txt .devcontainer/noop.txt /tmp/pip-tmp/
 
 # Configure apt and install packages
 RUN apt-get update \
