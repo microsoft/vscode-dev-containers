@@ -28,7 +28,7 @@ If the definition is too similar others, consider contributing a PR to improve a
 
 ### Anatomy of a Dev Container Definition
 
-The contents of the folders in the `containers` directory ultimately populate the available definitions list shown in the **Remote-Containers: Create Container Configuration File...** command. To make this work, each folder consists of up to three things:
+The contents of the folders in the `containers` directory ultimately populate the available definitions list shown in the **Remote-Containers: Add Development Container Configuration Files...** command. To make this work, each folder consists of up to three things:
 
 1. **The container definition itself** - These are the files and folders that will be added to a user's existing project / folder if they select the definition. Typically these files are stored in a `.devcontainer` folder.
 2. **Test assets** - While you are creating your definition, you may need to use a test project to make sure it works as expected. Contributing these files back will also help others that want to contribute to your definition in the future. These files are typically located in a `test-project` folder.
