@@ -8,9 +8,11 @@ FROM python:3
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Copy requirements.txt (if found) to a temp locaition so we can install it. Also
-# copy "noop.txt" so the COPY instruction does not fail if no requirements.txt exists.
-COPY requirements.txt* .devcontainer/noop.txt /tmp/pip-tmp/
+# Copy requirements.txt (if found) to a temp location so we can install it. The `*`
+# is required so COPY doesn't think that part of the command should fail is nothing is
+# found. Also copy "noop.txt" so the COPY instruction copies _something_ to guarantee
+# success somehow.
+COPY *requirements.txt .devcontainer/noop.txt /tmp/pip-tmp/
 
 # Configure apt and install packages
 RUN apt-get update \
@@ -20,10 +22,10 @@ RUN apt-get update \
     && apt-get -y install git procps lsb-release \
     #
     # Install pylint
-    && pip install pylint \
+    && pip --disable-pip-version-check --no-cache-dir install pylint \
     #
     # Update Python environment based on requirements.txt (if presenet)
-    && if [ -f "/tmp/pip-tmp/requirements.txt" ]; then pip install -r /tmp/pip-tmp/requirements.txt; fi \
+    && if [ -f "/tmp/pip-tmp/requirements.txt" ]; then pip --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt; fi \
     && rm -rf /tmp/pip-tmp \
     #
     # Clean up
