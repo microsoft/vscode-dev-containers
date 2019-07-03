@@ -8,14 +8,18 @@ import * as path from 'path';
 import * as tv4 from 'tv4';
 import { jsonc } from 'jsonc';
 import { assert } from 'chai';
-import { getConfig, findMountDestination, log } from './containerTestUtils';
+import { getConfig, findMountDestination, log, getStringFromUri } from './containerTestUtils';
 import { createTestParams, fetchAgentCommit, exec } from 'remote-containers/test/testUtils';
 import { resolve, getDevContainerConfigPathIn, readDevContainerConfigFile } from 'remote-containers/src/node/configContainer';
 import { ResolverResult } from 'remote-containers/src/node/utils';
 
+
 // Dev Container schema
-log('debug', 'Reading JSON schema');
-const schema = jsonc.readSync(path.join(__dirname, '..', 'config', 'devContainer.schema.json'));
+log('debug', 'Downloading devcontainer.json schema');
+const schemaPromise = getStringFromUri(getConfig('devContainerSchemaUri'))
+	.then((schemaString: string) => { 
+		return jsonc.parse(schemaString); 
+	});
 
 // Main test description
 export function describeTest(description: string, rootFolder: string, definitionList: string[]) {
@@ -26,9 +30,9 @@ export function describeTest(description: string, rootFolder: string, definition
 			let devContainer: ResolverResult;
 	
 			// Validate devcontainer.json
-			it('devcontainer.json should be valid', function () {
+			it('devcontainer.json should be valid', async function () {
 				this.slow(5000);
-				assert.isTrue(validateDevContainerJson(definitionPath));
+				assert.isTrue(validateDevContainerJson(definitionPath, await schemaPromise));
 			});
 	
 			// Some definitions won't build since they are templates, skip them
@@ -73,7 +77,7 @@ export function describeTest(description: string, rootFolder: string, definition
 }
 
 
-export function validateDevContainerJson(definitionPath: string) {
+export function validateDevContainerJson(definitionPath: string, schema: any) {
 	log('debug', `Validating devcontainer.json at ${definitionPath}`);
 	const jsonPath = path.join(definitionPath, '.devcontainer', 'devcontainer.json');
 	const json = fs.existsSync(jsonPath) ? jsonc.readSync(jsonPath) :

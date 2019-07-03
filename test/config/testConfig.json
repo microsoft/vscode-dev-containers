@@ -13,5 +13,6 @@
 		"vscode-remote-try-cpp",
 		"vscode-remote-try-php"
 	],
+	"devContainerSchemaUri": "https://raw.githubusercontent.com/microsoft/vscode/master/extensions/configuration-editing/schemas/devContainer.schema.json",
 	"logLevel": "info"
 }

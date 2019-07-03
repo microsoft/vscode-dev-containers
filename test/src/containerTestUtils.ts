@@ -5,6 +5,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import * as https from 'https';
 import * as Docker from 'dockerode';
 import * as config from '../config/testConfig.json';
 
@@ -22,6 +23,18 @@ export function getConfig(property: string, defaultVal: any = undefined) {
 
 	return process.env[envVar] || (<any>config)[property] || defaultVal;
 }
+
+export async function getStringFromUri(uri: string) {
+	return new Promise<string>((resolve, reject) => {
+		https.get(uri, (res) => {
+			let result = '';
+			res.on('data', (chunk)=> { result += chunk.toString(); })
+			res.on('close',() => { resolve(result); });
+			res.on('error', (err) => { reject(err); });
+		});	
+	})
+}
+
 export function getLogLevel() {
 	if (!logLevel) {
 		logLevel = getConfig('testLogLevel', 'info');
