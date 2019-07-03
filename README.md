@@ -22,7 +22,7 @@ To add a dev container definition in your project, you can either:
   1. If this is your first time creating a dev container, follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to configure your machine.
   2. Start VS Code and open your project folder.
   3. Press <kbd>F1</kbd>
-  and select either the **Remote-Containers: Create Container Configuration File...** or **Remote-Containers: Reopen Folder in Container** commands.
+  and select either the **Remote-Containers: Add Development Container Configuration Files...** or **Remote-Containers: Reopen Folder in Container** commands.
   4. Follow the directions and pick one of the existing development container definitions in this repository from the list.
 
 - Or manually copy the contents of one of the folders in the `containers` directory into your project. You should be able to copy just the `.devcontainer` folder and ignore everything else. See the definition's `README` for details.
@@ -69,7 +69,7 @@ If you want to try a sample project which already has a dev container, check out
 
 ### Can I just reuse an existing container image or Docker / Docker Compose configuration?
 
-Yes, if you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Create Container Configuration File...** from the Command Palette (<kbd>F1</kbd>). You'll be prompted to select a Dockerfile or Docker Compose file and customize from there. If you prefer, you can also start up the container and [attach to it](https://aka.ms/vscode-remote/containers/attach).
+Yes, if you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Add Development Container Configuration Files...** from the Command Palette (<kbd>F1</kbd>). You'll be prompted to select a Dockerfile or Docker Compose file and customize from there. If you prefer, you can also start up the container and [attach to it](https://aka.ms/vscode-remote/containers/attach).
 
 ### What is the goal of `devcontainer.json`?
 

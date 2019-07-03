@@ -21,8 +21,8 @@
 	// Uncomment the next line if you want to add in default container specific settings.json values
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
+	// Uncomment the next line to run commands after the container is created - like installing git
+	// "postCreateCommand": "apt-get update && apt-get install -y git",
 
 	// Add the IDs of any extensions you want installed in the array below.
 	"extensions": []
