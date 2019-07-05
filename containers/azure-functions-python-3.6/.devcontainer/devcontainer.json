@@ -1,0 +1,22 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+	"name": "Azure Functions & Python 3.6",
+	"dockerFile": "Dockerfile",
+	"appPort": [ 7071 ],
+	"runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"],
+
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	"settings":  {
+		"remote.extensionKind": {
+			"ms-azuretools.vscode-docker": "workspace"
+		}
+	},
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "npm install",
+
+	"extensions": [
+		"ms-azuretools.vscode-azurefunctions",
+		"ms-python.python"
+	]
+}
