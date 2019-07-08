@@ -1,6 +1,6 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-	"name": "Azure Functions & Python 3.6",
+	"name": "Azure Functions & Python 3",
 	"dockerFile": "Dockerfile",
 	"appPort": [ 7071 ],
 	"runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"],

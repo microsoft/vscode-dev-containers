@@ -1,8 +1,8 @@
-# Azure Functions & Python 3.6
+# Azure Functions & Python 3
 
 ## Summary
 
-*Develop Azure Functions in Python. Includes Python 3.6, the Azure Functions SDK, Docker CLI (required to publish to Azure with native dependencies) and related extensions and dependencies.*
+*Develop Azure Functions in Python. Includes Python 3, the Azure Functions SDK, Docker CLI (required to publish to Azure with native dependencies) and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -19,11 +19,11 @@ This definition requires an Azure subscription to use. You can create a [free ac
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Azure Functions & Python 3.6 definition.
+   3. Select the Azure Functions & Python 3 definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/azure-functions-python-3.6/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/azure-functions-python-3/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -37,7 +37,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/azure-functions-python-3.6` folder.
+4. Select the `containers/azure-functions-python-3` folder.
 5. After the folder has opened in the container, press <kbd>F1</kbd> and select **Azure Functions: Create Function...**.
 6. Enter these options:
    1. Yes (when prompted to create a new project)
