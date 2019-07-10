@@ -10,7 +10,7 @@
 
 	// The optional 'runArgs' property can be used to specify additional runtime arguments.
 	"runArgs": [
-		//  Uncomment the next line if you want to use Docker from the container. See the docker-in-docker definition for details.
+		// Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-in-docker for details.
 		// "-v","/var/run/docker.sock:/var/run/docker.sock",
 
 		// Uncomment the next line if you will be using a ptrace-based debugger like C++, Go, and Rust.
