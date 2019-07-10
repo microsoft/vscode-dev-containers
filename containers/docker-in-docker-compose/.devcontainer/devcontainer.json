@@ -11,11 +11,11 @@
 	// "postCreateCommand": "docker --version"
 
 	"extensions": [
-		"ms-azuretools.vscode-docker"
+		"peterjausovec.vscode-docker"
 	],
 	"settings": {
 		"remote.extensionKind": {
-			"ms-azuretools.vscode-docker": "workspace"
+			"peterjausovec.vscode-docker": "workspace"
 		}
 	}
 }

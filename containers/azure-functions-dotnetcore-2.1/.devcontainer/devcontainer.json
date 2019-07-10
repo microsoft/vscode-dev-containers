@@ -3,9 +3,6 @@
 	"dockerFile": "Dockerfile",
 	"appPort": 7071,
 
-	// Uncomment the next line to share your ssh keys with the container (e.g. for Git)
-	// "runArgs": [ "-v", ${env:HOME}${env:USERPROFILE}/.ssh:/root/.ssh" ],
-
 	// Uncomment the next line if you want to add in default container specific settings.json values
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 

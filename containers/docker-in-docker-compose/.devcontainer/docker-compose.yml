@@ -14,11 +14,11 @@ services:
       # Update this to wherever you want VS Code to mount the folder of your project
       - ..:/workspace
 
+      # This lets you avoid setting up Git again in the container
+      - ~/.gitconfig:/root/.gitconfig
+
       # Forwards the local Docker socket to the container.
       - /var/run/docker.sock:/var/run/docker.sock 
-
-      # Uncomment the next line to share your ssh keys with the container (e.g. for Git)
-      # - ~/.ssh:/root/.ssh
 
     # Uncomment the next four lines if you will use a ptrace-based debuggers like C++, Go, and Rust.
     # cap_add:

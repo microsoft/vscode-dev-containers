@@ -4,13 +4,10 @@
 	"runArgs": [
 		// Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust.
 		// "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
-
 		"--mount", "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
 		"--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost",
-
 		// Uncomment the next line to also sync certs in your .minikube folder
 		// "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost",
-		
 		"-e", "SYNC_LOCALHOST_KUBECONFIG=true"
 	],
 
@@ -21,12 +18,12 @@
 	// "postCreateCommand": "kubectl version",
 
 	"extensions": [
-		"ms-azuretools.vscode-docker",
+		"peterjausovec.vscode-docker",
 		"ms-kubernetes-tools.vscode-kubernetes-tools"
 	],
 	"settings": {
 		"remote.extensionKind": {
-			"ms-azuretools.vscode-docker": "workspace"
+			"peterjausovec.vscode-docker": "workspace"
 		}	
 	}
 }
