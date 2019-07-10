@@ -14,9 +14,6 @@ services:
       # Update this to wherever you want VS Code to mount the folder of your project
       - ..:/workspace
 
-      # This lets you avoid setting up Git again in the container
-      - ~/.gitconfig:/root/.gitconfig
-
       # Forwards the local Docker socket to the container.
       - /var/run/docker.sock:/var/run/docker.sock 
 

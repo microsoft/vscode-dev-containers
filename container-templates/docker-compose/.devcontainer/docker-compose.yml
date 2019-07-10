@@ -20,10 +20,7 @@ services:
       # and the value of "workspaceFolder" in .devcontainer/devcontainer.json
       - ..:/workspace  
 
-      # This lets you avoid setting up Git again in the container
-      - ~/.gitconfig:/root/.gitconfig
-
-      # Uncomment the next line if you plan to install the Docker CLI. See the docker-in-docker-compose definition for details.
+      # Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-in-docker-compose for details.
       # - /var/run/docker.sock:/var/run/docker.sock 
 
     # Uncomment the next four lines if you will use a ptrace-based debugger like C++, Go, and Rust.
