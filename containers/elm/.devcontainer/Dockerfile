@@ -14,6 +14,7 @@ RUN apt-get update \
     #
     # Verify git and needed tools are installed
     && apt-get install -y git procps \
+    && apt-get install -y wget \
     #
     # Install elm globally
     && wget -O - https://github.com/elm/compiler/releases/download/0.19.0/binary-for-linux-64-bit.gz | gunzip -c > /usr/local/bin/elm && chmod +x /usr/local/bin/elm \
