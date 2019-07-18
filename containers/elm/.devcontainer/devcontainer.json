@@ -3,7 +3,8 @@
 	"dockerFile": "Dockerfile",
 
 	// Uncomment the next line if you want to publish any ports.
-	// "appPort": [],
+	// 8000 is the default port used for the `elm reactor` command
+	//"appPort": [8000],
 
 	// Uncomment the next line if you want to add in default container specific settings.json values
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
