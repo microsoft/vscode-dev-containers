@@ -1,5 +1,5 @@
 {
-	"name": "Elm",
+	"name": "Elm (0.19.0)",
 	"dockerFile": "Dockerfile",
 
 	// Uncomment the next line if you want to publish any ports.
