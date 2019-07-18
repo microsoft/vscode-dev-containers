@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     #
     # Configure apt
-    && apt-get -y install --no-install-recommends apt-utils 2>&1 \
+    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git and needed tools are installed
     && apt-get install -y git procps lsb-release \
