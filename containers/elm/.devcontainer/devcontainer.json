@@ -1,5 +1,5 @@
 {
-	"name": "Elm (0.19.0)",
+	"name": "Elm",
 	"dockerFile": "Dockerfile",
 
 	// Uncomment the next line if you want to publish any ports.
@@ -10,7 +10,7 @@
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "yarn install",
+	// "postCreateCommand": "elm make",
 
 	"extensions": [
 		"sbrink.elm"
