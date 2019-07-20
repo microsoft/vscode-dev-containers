@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team & xWiiLLz |
+| *Contributors* | xWiiLLz |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Elm |
 
