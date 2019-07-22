@@ -1,3 +1,8 @@
 {
-    "extensions.ignoreRecommendations": true
+	"extensions.ignoreRecommendations": true,
+	"mochaExplorer.files": "test/src/**/*.test.ts",
+	"mochaExplorer.require": "ts-node/register",
+	"mochaExplorer.cwd": "test",
+	"mochaExplorer.env": { "TS_NODE_IGNORE": "false" },
+	"mochaExplorer.exit": true
 }

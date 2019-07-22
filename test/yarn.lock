@@ -973,7 +973,7 @@ readable-stream@~1.0.26-4:
 
 "remote-containers@https://github.com/Microsoft/vscode-remote-containers.git":
   version "0.66.0"
-  resolved "https://github.com/Microsoft/vscode-remote-containers.git#2806e92d397df28ea389d28d39e1de03bef193dc"
+  resolved "https://github.com/Microsoft/vscode-remote-containers.git#c1603174e82ed5b96e8f6b3ab28af641fa22f77b"
   dependencies:
     dockerode "^2.5.8"
     follow-redirects "^1.7.0"
