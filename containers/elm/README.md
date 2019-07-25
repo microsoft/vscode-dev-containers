@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Elm based applications. Includes the elm extension & binary
+*Develop Elm based applications. Includes the Elm extension & binary*
 
 | Metadata | Value |  
 |----------|-------|
