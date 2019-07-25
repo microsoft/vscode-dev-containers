@@ -1,0 +1,18 @@
+{
+	"name": "Elm",
+	"dockerFile": "Dockerfile",
+
+	// Uncomment the next line if you want to publish any ports.
+	// 8000 is the default port used for the `elm reactor` command
+	//"appPort": [8000],
+
+	// Uncomment the next line if you want to add in default container specific settings.json values
+	// "settings":  { "workbench.colorTheme": "Quiet Light" },
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "elm make",
+
+	"extensions": [
+		"sbrink.elm"
+	]
+}
