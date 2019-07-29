@@ -33,7 +33,7 @@ RUN apt-get update \
     && apt-get install -y docker-ce-cli \
     #
     # Install pylint and Azure ML SDK
-    && pip install pylint azureml-sdk[notebooks,automl] 2>&1 \
+    && /opt/conda/bin/pip install pylint azureml-sdk[notebooks,automl] 2>&1 \
     #
     # Clean up
     && apt-get autoremove -y \
