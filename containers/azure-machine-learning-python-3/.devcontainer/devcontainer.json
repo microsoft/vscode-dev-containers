@@ -1,7 +1,10 @@
 { 
-    "name": "Azure Machine Learning", 
-    "dockerFile": "Dockerfile", 
+	"name": "Azure Machine Learning", 
+	"dockerFile": "Dockerfile", 
 	"runArgs": [
+		// Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
+		// "-u", "1000",
+		
 		"-v", "/var/run/docker.sock:/var/run/docker.sock"
 	],
 	
@@ -12,15 +15,15 @@
 	// "postCreateCommand": "pip install -r requirements.txt",
 	
 	"extensions": [ 
-        "ms-toolsai.vscode-ai",
-        "ms-azuretools.vscode-docker"
-    ], 
-    "settings": {
-        "remote.extensionKind": {
-            "ms-azuretools.vscode-docker": "workspace"
-        },
-        "python.pythonPath": "/opt/conda/bin/python",
-        "python.linting.pylintEnabled": true,
-        "python.linting.enabled": true
-    }
+		"ms-toolsai.vscode-ai",
+		"ms-azuretools.vscode-docker"
+	], 
+	"settings": {
+		"remote.extensionKind": {
+			"ms-azuretools.vscode-docker": "workspace"
+		},
+		"python.pythonPath": "/opt/conda/bin/python",
+		"python.linting.pylintEnabled": true,
+		"python.linting.enabled": true
+	}
 } 

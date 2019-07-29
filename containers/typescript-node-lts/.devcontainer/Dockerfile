@@ -29,6 +29,15 @@ RUN apt-get update \
     # Install tslint and typescript globally
     && npm install -g tslint typescript \
     #
+    # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
+    && if [ "$USER_GID" != "1000" ]; then groupadd --gid $USER_GID $USERNAME; fi \
+    && if [ "$USER_UID" != "1000" ]; then useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME; fi \
+    # [Optional] Uncomment the next four lines to add sudo support
+    # && apt-get install -y sudo \
+    # && if [ "$USER_UID" != "1000" ]; then echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME; fi \
+    # && echo node ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/node \
+    # && chmod 0440 /etc/sudoers.d/$USERNAME \
+    #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
