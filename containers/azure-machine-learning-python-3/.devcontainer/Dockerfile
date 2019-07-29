@@ -17,7 +17,7 @@ ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils 2>&1 \
+    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, required tools installed
     && apt-get install -y \
@@ -46,7 +46,7 @@ RUN apt-get update \
     # && chmod 0440 /etc/sudoers.d/$USERNAME \
     #
     # Install pylint and Azure ML SDK
-    && pip install pylint azureml-sdk[notebooks,automl] 2>&1 \
+    && /opt/conda/bin/pip install pylint azureml-sdk[notebooks,automl] 2>&1 \
     #
     # Clean up
     && apt-get autoremove -y \
@@ -54,4 +54,4 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog
+ENV DEBIAN_FRONTEND=
