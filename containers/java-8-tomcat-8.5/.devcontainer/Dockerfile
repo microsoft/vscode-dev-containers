@@ -8,7 +8,7 @@ FROM tomcat:8.5-jre8
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils 2>&1
+    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1
 
 # Verify git, needed tools installed
 RUN apt-get -y install git procps curl lsb-release
@@ -36,7 +36,7 @@ ENV MAVEN_CONFIG /root/.m2
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-ENV DEBIAN_FRONTEND=dialog
+ENV DEBIAN_FRONTEND=
 
 # Allow for a consistant java home location for settings - image is changing over time
 RUN if [ ! -d "/docker-java-home" ]; then ln -s "${JAVA_HOME}" /docker-java-home; fi
