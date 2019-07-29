@@ -20,7 +20,7 @@ RUN apt-get update \
     && apt-get -y install git procps lsb-release \
     #
     # Install pylint
-    && pip install pylint \
+    && /opt/conda/bin/pip install pylint \
     #
     # Update Python environment based on environment.yml (if presenet)
     && if [ -f "/tmp/conda-tmp/environment.yml" ]; then conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
