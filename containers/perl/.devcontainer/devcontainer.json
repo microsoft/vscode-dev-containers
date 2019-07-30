@@ -2,8 +2,10 @@
 	"name": "Perl",
 	"dockerFile": "Dockerfile",
 	"runArgs": [
-		"--cap-add=SYS_PTRACE",
-		"--security-opt", "seccomp=unconfined"
+		// Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
+		// "-u", "1000",
+
+		"--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"
 	],
 
 	// Uncomment the next line if you want to publish any ports.
@@ -14,6 +16,9 @@
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "perl -v",
+
+	// Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
+	// "runArgs": [ "-u", "1000" ],
 
 	"extensions": [
 		"mortenhenriksen.perl-debug",

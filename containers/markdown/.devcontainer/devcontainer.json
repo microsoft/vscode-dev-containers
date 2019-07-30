@@ -11,6 +11,9 @@
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "uname -a"
 
+	// Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
+	// "runArgs": [ "-u", "1000" ],
+
 	"extensions": [
 		"yzhang.markdown-all-in-one",
 		"streetsidesoftware.code-spell-checker",

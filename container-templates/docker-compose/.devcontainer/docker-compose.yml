@@ -6,6 +6,9 @@
 version: '3'
 services:
   your-service-name-here:
+    # Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
+    # user: 1000
+
     # Using a Dockerfile is optional, but included for completeness.
     build: 
       context: .
