@@ -8,6 +8,13 @@ FROM node:lts
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
+# The node image comes with a base non-root 'node' user, so the alternate
+# user here is primarily for Linux scenarios where you need to match your local
+# user UID/GID. See https://aka.ms/vscode-remote/containers/non-root-user.
+ARG USERNAME=vscode
+ARG USER_UID=1001
+ARG USER_GID=$USER_UID
+
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \ 
