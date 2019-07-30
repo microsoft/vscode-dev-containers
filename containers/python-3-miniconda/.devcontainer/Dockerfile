@@ -17,13 +17,13 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
     #
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
-    && apt-get -y install git procps lsb-release \
+    && apt-get -y install git procps iproute2 lsb-release \
     #
     # Install pylint
-    && pip install pylint \
+    && /opt/conda/bin/pip install pylint \
     #
     # Update Python environment based on environment.yml (if presenet)
-    && if [ -f "/tmp/conda-tmp/environment.yml" ]; then conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
+    && if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
     && rm -rf /tmp/conda-tmp \
     #
     # Clean up
