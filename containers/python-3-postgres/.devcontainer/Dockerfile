@@ -10,6 +10,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PYTHONUNBUFFERED 1
 
+# Or your actual UID, GID on Linux if not the default 1000
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
 # Copy requirements.txt (if found) to a temp locaition so we can install it. Also
 # copy "noop.txt" so the COPY instruction does not fail if no requirements.txt exists.
 COPY requirements.txt* .devcontainer/noop.txt /tmp/pip-tmp/
@@ -27,6 +32,14 @@ RUN apt-get update \
     # Update Python environment based on requirements.txt (if presenet)
     && if [ -f "/tmp/pip-tmp/requirements.txt" ]; then pip install -r /tmp/pip-tmp/requirements.txt; fi \
     && rm -rf /tmp/pip-tmp \
+    #
+    # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
+    && groupadd --gid $USER_GID $USERNAME \
+    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    # [Optional] Uncomment the next three lines to add sudo support
+    # && apt-get install -y sudo \
+    # && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    # && chmod 0440 /etc/sudoers.d/$USERNAME \
     #
     # Clean up
     && apt-get autoremove -y \
