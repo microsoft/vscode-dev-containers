@@ -6,6 +6,9 @@
 version: '3'
 services:
   docker-in-docker:
+    # Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
+    # user: 1000
+
     build: 
       context: .
       dockerfile: Dockerfile

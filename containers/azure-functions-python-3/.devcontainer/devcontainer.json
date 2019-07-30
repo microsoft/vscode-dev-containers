@@ -4,6 +4,9 @@
 	"dockerFile": "Dockerfile",
 	"appPort": [ 7071 ],
 	"runArgs": [
+		// Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
+		// "-u", "1000",
+
 		"-v","/var/run/docker.sock:/var/run/docker.sock"
 	],
 
