@@ -7,7 +7,10 @@
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "python --version",
+	// "postCreateCommand": "pip install -r requirements.txt",
+
+	// Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
+	// "runArgs": [ "-u", "1000" ],
 
 	"extensions": [
 		"ms-python.python"
