@@ -9,33 +9,27 @@ main =
 
 -- MODEL
 
-type alias Model = Int
+type alias Model = String
 
 init : Model
 init =
-  0
-
+  ""
 
 -- UPDATE
 
-type Msg = Increment | Decrement
+type Msg = ToggleText
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    Increment ->
-      model + 1
-
-    Decrement ->
-      model - 1
-
+    ToggleText ->
+      if model == "" then "Hello World!" else ""
 
 -- VIEW
 
 view : Model -> Html Msg
 view model =
   div []
-    [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (String.fromInt model) ]
-    , button [ onClick Increment ] [ text "+" ]
+    [ button [ onClick ToggleText ] [ text "Toggle text" ]
+    , div [] [ text (model) ]
     ]
