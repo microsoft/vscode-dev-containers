@@ -20,6 +20,7 @@
 		"vadimcn.vscode-lldb"
 	],
 	"settings": {
-		"lldb.executable": "/usr/bin/lldb-3.9"
+		"lldb.adapterType": "bundled",
+		"lldb.executable": "/usr/bin/lldb-3.9",
 	}
 }
