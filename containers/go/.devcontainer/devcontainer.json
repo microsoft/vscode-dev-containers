@@ -14,9 +14,6 @@
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "go version",
 
-	// Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
-	// "runArgs": [ "-u", "1000" ],
-
 	"extensions": [
 		"ms-vscode.go"
 	],
