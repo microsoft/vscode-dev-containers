@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV BAZEL_VERSION=0.25.2 
 ENV BAZEL_SHA256=5b9ab8a68c53421256909f79c47bde76a051910217531cbf35ee995448254fa7 
 
-# This Dockerfile adds a non-root 'vscode' user with sudo access. Hoewver, for Linux,
+# This Dockerfile adds a non-root 'vscode' user with sudo access. However, for Linux,
 # this user's GID/UID must match your local user UID/GID to avoid permission issues
 # with bind mounts. Update USER_UID / USER_GID if yours is not 1000. See
 # https://aka.ms/vscode-remote/containers/non-root-user for details.
