@@ -11,7 +11,7 @@
 
 A **development container** is a running [Docker](https://www.docker.com) container with a well-defined tool/runtime stack and its prerequisites. The Remote - Containers extension in the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension pack allows you to open any folder mounted into or inside a dev container and take advantage of VS Code's full development feature set.
 
-This repository contains a set of **dev container definitions** to help get you up and running with a containerized environment. The definitions describe the appropriate container image, runtime arguments for starting the container, and VS Code extensions that should be installed. They are intended to be dropped into an existing project or folder rather than acting as sample projects. (See the [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) repositories if you are looking for sample projects.)
+This repository contains a set of **dev container definitions** to help get you up and running with a containerized environment. The definitions describe the appropriate container image, runtime arguments for starting the container, and VS Code extensions that should be installed. They provide files beyond the `devcontainer.json` container configuration file like Dockerfiles or Docker Compose files that they can be dropped into an existing project and used. They can also be used as  configuration samples for setting up your own containers. (However, see the [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) repositories if you are looking for complete sample projects.)
 
 ## Using a definition
 
@@ -23,7 +23,7 @@ To add a dev container definition in your project, you can either:
   2. Start VS Code and open your project folder.
   3. Press <kbd>F1</kbd>
   and select either the **Remote-Containers: Add Development Container Configuration Files...** or **Remote-Containers: Reopen Folder in Container** commands.
-  4. Follow the directions and pick one of the existing development container definitions in this repository from the list.
+  4. Follow the directions and pick one of the existing development container definitions in this repository from the list. You may need to choose the **From a predefined container configuration definition...** option if your project has an existing Dockerfile or Docker Compose file.
 
 - Or manually copy the contents of one of the folders in the `containers` directory into your project. You should be able to copy just the `.devcontainer` folder and ignore everything else. See the definition's `README` for details.
 
