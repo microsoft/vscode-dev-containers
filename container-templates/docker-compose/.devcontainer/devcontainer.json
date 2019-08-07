@@ -1,5 +1,4 @@
 {
-	// See https://aka.ms/vscode-remote/devcontainer.json for format details.
 	"name": "Dev Container Definition Template - Docker Compose",
 
 	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
@@ -20,7 +19,7 @@
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": ["uname -a"]
+	// "postCreateCommand": "uname -a"
 
 	// Add the IDs of any extensions you want installed in the array below.
 	"extensions": []

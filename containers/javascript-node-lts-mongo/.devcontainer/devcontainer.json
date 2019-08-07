@@ -1,3 +1,4 @@
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
 {
 	"name": "Node.js & Mongo DB",
 	"dockerComposeFile": "docker-compose.yml",

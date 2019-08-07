@@ -1,5 +1,5 @@
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
 {
-	// See https://aka.ms/vscode-remote/devcontainer.json for format details.
 	"name": "Existing Docker Compose (Extend)",
 
 	// Update the 'dockerComposeFile' list if you have more compose files or use different names.

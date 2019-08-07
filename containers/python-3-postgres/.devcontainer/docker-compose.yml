@@ -2,8 +2,10 @@ version: '3'
 
 services:
   app:
-    # Uncomment the next line to use a non-root user. See https://aka.ms/vscode-remote/containers/non-root-user.
-    # user: 1000
+    # Uncomment the next line to use a non-root user. On Linux, this will prevent
+    # new files getting created as root, but you may need to update the USER_UID
+    # and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
+    # user: vscode
 
     build: 
       context: ..
