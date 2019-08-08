@@ -2,7 +2,7 @@
 	"name": "Python 3 - Anaconda",
 	"context": "..",
 	"dockerFile": "Dockerfile",
-		
+
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
@@ -19,7 +19,8 @@
 	],
 	"settings": {
 		"python.pythonPath": "/opt/conda/bin/python",
+		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
-		"python.linting.enabled": true
+		"python.linting.pylintPath": "/opt/conda/bin/pylint"
 	}
 }

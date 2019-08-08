@@ -19,7 +19,8 @@
 	],
 	"settings": {
 		"python.pythonPath": "/opt/conda/bin/python",
+		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
-		"python.linting.enabled": true
+		"python.linting.pylintPath": "/opt/conda/bin/pylint"
 	}
 }
