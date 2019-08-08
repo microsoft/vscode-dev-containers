@@ -19,8 +19,8 @@
 	],
 	"settings": {
 		"python.pythonPath": "/usr/local/bin/python",
+		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
-		"python.linting.pylintPath": "/usr/local/bin/pylint",
-		"python.linting.enabled": true
+		"python.linting.pylintPath": "/usr/local/bin/pylint"
 	}
 }
