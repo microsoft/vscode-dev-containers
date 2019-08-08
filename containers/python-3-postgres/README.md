@@ -4,7 +4,7 @@
 
 *Develop applications with Python 3 and PostgreSQL. Includes a Python application container and PostgreSQL server, and a Django test project.*
 
-| Metadata | Value |  
+| Metadata | Value |
 |----------|-------|
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
 | *Definition type* | Dockerfile |
@@ -12,7 +12,7 @@
 
 ## Using this definition with an existing folder
 
-First, for convenience, this definition will automatically install dependencies from your `requirements.txt` file when the container is built. However, note that `requirements.txt` in the root of this definition folder is **only present for testing** and is not used or required by the definition itself.
+Note that `requirements.txt` in the root of this definition folder is **only present for testing** and is not used or required by the definition itself.
 
 Second, only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
 
