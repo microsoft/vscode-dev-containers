@@ -1,0 +1,60 @@
+#-------------------------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+#-------------------------------------------------------------------------------------------------------------
+
+version: '3'
+
+services:
+  ubuntu-dev:
+    user: vscode
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - ..:/workspace
+      - ${USERPROFILE}/.aws:/home/vscode/.aws
+      - ${APPDATA}:/home/vscode/.appdata
+
+      # Forwards the local Docker socket to the container.
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    environemt:
+      AWS_PROFILE: default
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    networks:
+      default:
+        aliases:
+          - workspace
+          - ubuntu
+
+  db:
+    image: postgres
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: data
+    networks:
+      default:
+        aliases:
+          - postgres
+          - database
+
+  web:
+    image: dpage/pgadmin4
+    ports:
+      - 5050:80
+    volumes:
+      - ${APPDATA}/pgAdminServer:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${USERNAME}@github.com
+      PGADMIN_DEFAULT_PASSWORD: mypassword
+    networks:
+      - default
