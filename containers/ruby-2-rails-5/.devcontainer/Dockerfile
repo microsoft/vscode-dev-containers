@@ -19,6 +19,7 @@ RUN apt-get update \
     && apt-get install -y \
         vim \
         git \
+        iproute2 \
         procps \
         lsb-release \
     #

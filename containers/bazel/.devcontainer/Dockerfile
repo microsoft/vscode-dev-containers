@@ -24,7 +24,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verifty git, process tools, lsb-release (common in install instructions for CLIs) installed
-    && apt-get -y install git procps lsb-release \
+    && apt-get -y install git iproute2 procps lsb-release \
     #
     # Install Bazel
     && apt-get -y install curl pkg-config zip g++ zlib1g-dev unzip python \

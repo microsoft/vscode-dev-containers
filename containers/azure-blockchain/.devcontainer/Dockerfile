@@ -21,7 +21,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, process tools installed
-    && apt-get -y install git procps \
+    && apt-get -y install git iproute2 procps \
     #
     # Install nodejs
     && curl -sL https://deb.nodesource.com/setup_10.x | bash - \

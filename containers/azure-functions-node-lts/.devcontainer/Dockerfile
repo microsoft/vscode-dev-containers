@@ -22,6 +22,7 @@ RUN apt-get update \
     # Verify git and needed tools are installed
     && apt-get -y install \
         git \
+        iproute2 \
         procps \
         curl \
         apt-transport-https \

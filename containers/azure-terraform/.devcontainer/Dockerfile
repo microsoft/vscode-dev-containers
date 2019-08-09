@@ -25,7 +25,7 @@ ARG USER_GID=$USER_UID
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
-    # Install git, required tools installed
+    # install git iproute2, required tools installed
     && apt-get install -y \
         git \
         curl \

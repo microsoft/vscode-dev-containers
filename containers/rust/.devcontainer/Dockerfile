@@ -21,7 +21,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, needed tools installed
-    && apt-get -y install git procps lsb-release \
+    && apt-get -y install git iproute2 procps lsb-release \
     #
     # Install other dependencies
     && apt-get install -y lldb-3.9 \

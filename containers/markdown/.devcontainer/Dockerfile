@@ -23,7 +23,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git and needed tools are installed
-    && apt-get install -y git procps lsb-release \
+    && apt-get -y install git iproute2 procps lsb-release \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
