@@ -9,14 +9,15 @@
 	// "shutdownAction": "none",
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "python --version",
+	// "postCreateCommand": "pip install -r requirements.txt",
 
 	"extensions": [
 		"ms-python.python"
 	],
 	"settings": {
 		"python.pythonPath": "/usr/local/bin/python",
+		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
-		"python.linting.enabled": true
+		"python.linting.pylintPath": "/usr/local/bin/pylint"
 	}
 }

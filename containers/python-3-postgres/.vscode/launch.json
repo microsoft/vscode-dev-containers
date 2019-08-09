@@ -16,7 +16,8 @@
                 "--noreload",
                 "--nothreading"
             ],
-            "django": true
+			"django": true,
+			"preLaunchTask": "pip install"
         }
     ]
 }

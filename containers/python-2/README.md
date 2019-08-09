@@ -4,7 +4,7 @@
 
 *Develop Python 2 applications. Installs dependencies from your requirements.txt file and the Python extension.*
 
-| Metadata | Value |  
+| Metadata | Value |
 |----------|-------|
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
 | *Definition type* | Dockerfile |
@@ -12,7 +12,7 @@
 
 ## Using this definition with an existing folder
 
-For convenience, this definition will automatically install dependencies from your `requirements.txt` file when the container is built. Also note that only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
+Note that only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
 
 ```json
 "console": "integratedTerminal"
