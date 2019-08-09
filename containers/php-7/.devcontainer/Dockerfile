@@ -20,8 +20,8 @@ ARG USER_GID=$USER_UID
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
-    # Install git, procps, lsb-release (useful for CLI installs)
-    && apt-get -y install git procps iproute2 lsb-release \
+    # install git iproute2, procps, lsb-release (useful for CLI installs)
+    && apt-get -y install git iproute2 procps iproute2 lsb-release \
     #
     # Install xdebug
     && yes | pecl install xdebug \

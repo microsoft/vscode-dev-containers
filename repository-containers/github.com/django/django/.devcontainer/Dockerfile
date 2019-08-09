@@ -5,8 +5,8 @@
 
 FROM python:3
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# install git iproute2
+RUN apt-get update && apt-get -y install git iproute2
 
 # Install node
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -

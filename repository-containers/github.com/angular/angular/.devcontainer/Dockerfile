@@ -5,8 +5,8 @@
 
 FROM openjdk:8
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# install git iproute2
+RUN apt-get update && apt-get -y install git iproute2
 
 # https support
 RUN apt-get install apt-transport-https

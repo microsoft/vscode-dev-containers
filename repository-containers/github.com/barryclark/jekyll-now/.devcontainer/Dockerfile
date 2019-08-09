@@ -5,8 +5,8 @@
 
 FROM ruby:2
 
-# Install git, process tools
-RUN apt-get update && apt-get -y install git procps
+# install git iproute2, process tools
+RUN apt-get update && apt-get -y install git iproute2 procps
 
 # Clean up
 RUN apt-get autoremove -y \
@@ -14,4 +14,4 @@ RUN apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install jekyll
-RUN gem install github-pages
+RUN gem install git iproute2hub-pages

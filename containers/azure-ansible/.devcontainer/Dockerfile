@@ -24,6 +24,7 @@ RUN apt-get update \
     # Verify git, required tools installed
     && apt-get install -y \
         git \
+        iproute2 \
         curl \
         procps \
         unzip \
