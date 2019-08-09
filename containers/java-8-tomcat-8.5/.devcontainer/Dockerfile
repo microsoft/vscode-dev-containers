@@ -16,7 +16,7 @@ ARG USER_GID=$USER_UID
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1
+    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
@@ -24,7 +24,7 @@ RUN apt-get update \
     # [Optional] Add sudo support for non-root user
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME 
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
     #
     # Verify git, needed tools installed
     && apt-get -y install git procps curl lsb-release \
