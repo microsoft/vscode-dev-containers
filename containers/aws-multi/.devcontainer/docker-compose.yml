@@ -21,7 +21,7 @@ services:
       # Forwards the local Docker socket to the container.
       - /var/run/docker.sock:/var/run/docker.sock
 
-    environemt:
+    environment:
       AWS_PROFILE: default
 
     # Overrides default command so things don't shut down after the process ends.
