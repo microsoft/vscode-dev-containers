@@ -18,8 +18,8 @@ ARG TFLINT_VERSION=0.9.3
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
-# Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
-    && apt-get -y install git procps curl wget unzip lsb-release \
+# Verify git, process tools, lsb-release (common in install instructions for CLIs), iproute2 (for ip) installed
+    && apt-get -y install git procps curl wget unzip lsb-release iproute2 \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
