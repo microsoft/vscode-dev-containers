@@ -23,7 +23,4 @@
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
-
-	// Add the IDs of any extensions you want installed in the array below.
-	"extensions": []
 }
