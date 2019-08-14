@@ -19,7 +19,7 @@ ARG TFLINT_VERSION=0.9.3
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
 # Verify git, process tools, lsb-release (common in install instructions for CLIs), iproute2 (for ip) installed
-    && apt-get -y install git procps curl wget unzip lsb-release iproute2 \
+    && apt-get -y install git procps curl wget unzip lsb-release iproute2 dialog \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
@@ -148,6 +148,6 @@ RUN echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 # Install AWS SAM CLI
 RUN brew tap aws/tap && brew install aws-sam-cli
 
-# Switch back to readline for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=readline
+# Switch back to dialog for any ad-hoc use of apt-get
+ENV DEBIAN_FRONTEND=dialog
 ENV AWS_SDK_LOAD_CONFIG=1
