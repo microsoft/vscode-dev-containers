@@ -2,8 +2,19 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
+
+# Used to install awsenv - https://github.com/base2Services/aws-env
+FROM base2/awsenv as awsenv
+
+# Chose one of the following depending on if you want dotnet core SDK or not
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-bionic
 #FROM buildpack-deps:bionic-scm
+
+#
+# Or your actual UID, GID on Linux if not the default 1000
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,36 +22,50 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Suppress an apt-key warning about standard out not being a terminal. Use in this script is safe.
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
-# Terraform and tflint versions
-ARG TERRAFORM_VERSION=0.12.6
-ARG TFLINT_VERSION=0.9.3
-
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
-# Verify git, process tools, lsb-release (common in install instructions for CLIs), iproute2 (for ip) installed
-    && apt-get -y install git procps curl wget unzip lsb-release iproute2 dialog \
+# Install pre-requisite packages
+    && apt-get -y install \
+        curl \
+        git \
+        groff \
+        iproute2 \
+        less \
+        locales \
+        lsb-release \
+        procps \
+        sudo \
+        unzip \
+        wget \
+# Creata a non-root user
+    && groupadd --gid $USER_GID $USERNAME \
+    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+# Setup a locale compatible with perl/brew
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
+# Clean up layer
     && apt-get autoremove -y \
     && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# Ensure we have a locale so perl/brew don't complain
+ENV LANG en_US.utf8
+
+# Install awsenv
+COPY --from=awsenv /awsenv /usr/local/bin/awsenv
+
+#
+# Install awscli
+RUN apt-get update && apt-get -y install python3-pip \
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && pip3 install awscli \
     && rm -rf /var/lib/apt/lists/*
 #
 # Install Python3
 RUN apt-get update && apt-get -y install python3 python3-pip \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
-#
-# Install Terraform, tflint, and graphviz
-RUN mkdir -p /tmp/docker-downloads \
-    && curl -sSL -o /tmp/docker-downloads/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-    && unzip /tmp/docker-downloads/terraform.zip \
-    && mv terraform /usr/local/bin \
-    && curl -sSL -o /tmp/docker-downloads/tflint.zip https://github.com/wata727/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip \
-    && unzip /tmp/docker-downloads/tflint.zip \
-    && mv tflint /usr/local/bin \
-    && cd ~ \
-    && rm -rf /tmp/docker-downloads \
-    && apt-get update && apt-get -y install graphviz \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
@@ -59,36 +84,17 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
 # Install Serverless Framework
 RUN npm install -g serverless
 #
-# Install Postgres client
-RUN apt-get update && apt-get -y install curl ca-certificates gnupg \
-    && curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-    && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' \
-    && apt-get update \
-    && apt-get -y install postgresql-client-11 \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
-#
-# Install kubectl
+# Install tools for EKS (kubectl and aws-iam-authenticator)
 RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
     && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list \
     && apt-get update \
     && apt-get install -y kubectl \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
-#
-# Install awscli
-RUN apt-get update && apt-get -y install groff less python3-pip \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && pip3 install awscli \
-    && rm -rf /var/lib/apt/lists/*
-#
-# Install aws-iam-authenticator
-RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/aws-iam-authenticator \
+    && curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/aws-iam-authenticator \
     && mv aws-iam-authenticator /usr/local/bin/ \
-    && chmod 755 /usr/local/bin/aws-iam-authenticator
+    && chmod 755 /usr/local/bin/aws-iam-authenticator \
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
 #
 # Install dotnet tools
 RUN dotnet new -i Amazon.Lambda.Templates::* \
@@ -100,7 +106,7 @@ RUN dotnet new -i Amazon.Lambda.Templates::* \
     && rm -rf /var/lib/apt/lists/*
 #
 # Docker Compose version
-ARG COMPOSE_VERSION=1.24.0
+ARG COMPOSE_VERSION=1.24.1
 #
 # Install Docker CE CLI
 RUN apt-get update \
@@ -117,37 +123,58 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 #
-# Or your actual UID, GID on Linux if not the default 1000
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+# Install Terraform and tflint
+ADD terraform-update.sh /usr/local/bin/terraform-update.sh
+RUN /usr/local/bin/terraform-update.sh
+# Install graphviz
+# RUN apt-get update && apt-get -y install graphviz \
+#     && apt-get autoremove -y \
+#     && apt-get clean -y \
+#     && rm -rf /var/lib/apt/lists/*
 #
-# Creata a non-root user
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update \
-    && apt-get install -y sudo \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME \
+# Install Postgres client
+# RUN apt-get update && apt-get -y install curl ca-certificates gnupg \
+#     && curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
+#     && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' \
+#     && apt-get update \
+#     && apt-get -y install postgresql-client-11 \
+#     && apt-get autoremove -y \
+#     && apt-get clean -y \
+#     && rm -rf /var/lib/apt/lists/*
+
 #
-# Setup a locale compatible with perl/brew
-    && apt-get install -y locales \
-    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
+# Upgrade base packages
+RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-ENV LANG en_US.utf8
+
+# Switch to the created user
+USER $USERNAME
+WORKDIR /home/$USERNAME
 #
-# Install Brew
-USER vscode
-WORKDIR /home/vscode
+# Run awsenv via .basrhc
+RUN echo "# Import environment variables from AWS SSM" >> ~/.bashrc \
+    && echo "export TO_STDOUT=true" >> ~/.bashrc \
+    && echo "eval \$(awsenv | grep export)" >> ~/.bashrc \
+    && echo "unset TO_STDOUT" >> ~/.bashrc
+#
+# Ensure our user can access /var/run/docker.sock for docker-in-docker support
+RUN echo "# Ensure we can use docker-in-docker" >> ~/.bashrc \
+    && echo "test -f /var/run/docker.sock && sudo chmod o+rw /var/run/docker.sock" >> ~/.bashrc \
+#
+# Install Brew and AWS SAM CLI
 ENV PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-RUN echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+RUN test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) \
+    && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bashrc \
+    && brew tap aws/tap && brew install aws-sam-cli
 #
-# Install AWS SAM CLI
-RUN brew tap aws/tap && brew install aws-sam-cli
-
+# Install Hasura CLI
+RUN curl -L https://github.com/hasura/graphql-engine/raw/master/cli/get.sh | bash \
+    && sudo hasura completion bash --file=/etc/bash_completion.d/hasura
+#
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
 ENV AWS_SDK_LOAD_CONFIG=1

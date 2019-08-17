@@ -1,8 +1,8 @@
-# AWS Multi Language
+# Kitchen Sink - AWS
 
 ## Summary
 
-Used to manage a cloud stack and applications.  Includes support for various languages alongside Terraform and AWS CLI tools.  It also includes a Postgres DB container and a pgAdmin4 container which again mounts a Windows folder.
+Used to manage a cloud stack and applications.  Includes support for various languages alongside Terraform and AWS CLI tools.  It optionally (remove commented services in [docker-compose.yml](.devcontainer/docker-compose.yml) includes a Postgres DB container and a pgAdmin4 container which again mounts a Windows folder.
 
 | Metadata | Value |
 |----------|-------|
@@ -14,11 +14,11 @@ Used to manage a cloud stack and applications.  Includes support for various lan
 
 This is a template for a multilanguage development environment for working with Terraform and AWS.
 
-At a minimum you should edit the various environment variables in the [docker-compose.yml](.devcontainer/docker-compose.yml).
+At a minimum you should edit the various environment variables in the [docker-compose.yml](.devcontainer/docker-compose.yml) and uncomment the relevant line for your OS if you want to mount your terraform.rc file for use with [Terraform Cloud](https://learn.hashicorp.com/terraform/cloud/tf_cloud_gettingstarted).
 
-A variation of this has been used for limited development on Windows.  It has not been tested on Mac/Linux.  Mac/Linux users will need to change mount points in the [docker-compose.yml](.devcontainer/docker-compose.yml).
+A variation of this has been used for limited development on Windows.  It has not been tested on Mac/Linux.
 
-It is suggested you comment out things you don't need from the [Dockerfile](.devcontainer/Dockerfile), [devcontainer.json](.devcontainer/devcontainer.json), and if not using Postgres, the [docker-compose.yml](.devcontainer/docker-compose.yml).
+It is suggested you comment out things you don't need from the [Dockerfile](.devcontainer/Dockerfile) and [devcontainer.json](.devcontainer/devcontainer.json).
 
 The Dockerfile has been built in layers and each is commented so you can comment out any you don't need/want.
 
@@ -37,8 +37,9 @@ This is based on the dotnet core SDK 2.2 bionic container and includes the follo
 * Postgresql 11 cient
 * kubectl
 * docker-in-docker support
-* Postgres 11 server (via docker-compose.yml)
-* pgAdmin4 server (via docker-compose.yml)
+* Postgres 11 server (remove commented services in [docker-compose.yml](.devcontainer/docker-compose.yml) 
+* pgAdmin4 server (remove commented services in [docker-compose.yml](.devcontainer/docker-compose.yml) 
+* awsenv
 
 The following Visual Studio Code Extensions are also included:
 * [Terraform](https://marketplace.visualstudio.com/items?itemName=mauve.terraform)
@@ -50,7 +51,6 @@ The following Visual Studio Code Extensions are also included:
 * [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
 * [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 * [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
-* [Python](https://marketplace.visualstudio.com/items?itemName=ms-ossdata.vscode-postgresql)
 
 ## Using this definition with an existing folder
 
@@ -68,7 +68,7 @@ Just follow these steps:
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the AWS Multi Language definition.
+   3. Select the Kitchen Sink - AWS definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
@@ -83,9 +83,9 @@ Just follow these steps:
 
 Setup to use a vscode non root user.  Beware of [quirks](https://code.visualstudio.com/docs/remote/containers-advanced#_adding-a-nonroot-user-to-your-dev-container).
 
-It provides a local Postgres database on port 5433.
+It (optionally) provides a local Postgres database on port 5433.
 
-It also provides a local [pgAdmin4 Server](http://localhost:5050/).
+It also (optionally) provides a local [pgAdmin4 Server](http://localhost:5050/).
 
 You can set the default credentials for both in the [docker-compose.yml](.devcontainer/docker-compose.yml).
 

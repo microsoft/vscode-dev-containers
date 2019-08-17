@@ -4,8 +4,6 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "ubuntu-dev",
 	"workspaceFolder": "/workspace",
-	// Get docker-in-docker working as vscode user
-	"postCreateCommand": "sudo chmod o+rw /var/run/docker.sock && cp ~/.appdata/terraform.rc ~/.terraformrc", 
 	"extensions": [
 		"mauve.terraform",
 		"shardulm94.trailing-spaces",
@@ -16,7 +14,7 @@
 		"ms-vscode.csharp",
 		"ms-python.python",
 		"ms-azuretools.vscode-docker",
-		"ms-ossdata.vscode-postgresql"
+		// "ms-ossdata.vscode-postgresql"
 	],
 	"settings": {
 		"remote.extensionKind": {
