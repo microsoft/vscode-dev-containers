@@ -125,7 +125,8 @@ RUN apt-get update \
 #
 # Install Terraform and tflint
 ADD terraform-update.sh /usr/local/bin/terraform-update.sh
-RUN /usr/local/bin/terraform-update.sh
+RUN sudo chmod 777 /usr/local/bin/terraform-update.sh \
+    && /usr/local/bin/terraform-update.sh
 # Install graphviz
 # RUN apt-get update && apt-get -y install graphviz \
 #     && apt-get autoremove -y \
