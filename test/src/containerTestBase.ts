@@ -110,7 +110,7 @@ export async function execTestScript(devContainer: ResolverResult, vscodeDevConP
 	const container = await devContainer.params.docker.getContainer(devContainer.properties.id);
 	const containerInfo = await container.inspect();
 	const workingDir = findMountDestination(containerInfo, devContainer.params.cwd, vscodeDevConPath);
-	const result = await exec(`docker exec ${containerInfo.Id} /bin/sh -c "cd ${workingDir} && if [ -f test-project/test.sh ]; then chmod +x test-project/test.sh && ./test.sh; else ls -a; fi"`)
+	const result = await exec(`docker exec ${containerInfo.Id} /bin/sh -c "cd ${workingDir} && if [ -f test-project/test.sh ]; then cd test-project && chmod +x test.sh && ./test.sh; else ls -a; fi"`)
 	log('trace', result.stdout);
 	if (result.error) {
 		log('trace', result.error + ': ' + result.stderr);
