@@ -14,8 +14,7 @@ const MONGO_URL = 'mongodb://mongo:27017';
 const DB_NAME = 'test-project';
 const HOST = '0.0.0.0';
 
-(async () => {
-
+(async function() {
 	// Use connect to mongo server
 	const client = new MongoClient(MONGO_URL, { useNewUrlParser: true });
 	await client.connect();
@@ -33,4 +32,9 @@ const HOST = '0.0.0.0';
 
 	app.listen(PORT, HOST);
 	console.log(`Running on http://${HOST}:${PORT}`);
+
+	// Used for automated testing
+	if(process.env.REGRESSION_TESTING === 'true') { process.exit(0); }
 })();
+
+

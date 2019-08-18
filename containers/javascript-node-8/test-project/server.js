@@ -1,7 +1,7 @@
-/*---------------------------------------------------------------------------------------------------------------
+/*--------------------------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
- *--------------------------------------------------------------------------------------------------------------*/
+ *-------------------------------------------------------------------------------------------------------------*/
 
 'use strict';
 
@@ -19,3 +19,6 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
+
+// Used for automated testing
+if(process.env.REGRESSION_TESTING === 'true') { process.exit(0); }
