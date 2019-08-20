@@ -35,6 +35,9 @@ checkExtension() {
     checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]"
 }
 
+# Source .bashrc with the SYNC_LOCALHOST_KUBECONFIG set
+SYNC_LOCALHOST_KUBECONFIG=true source $HOME/.bashrc
+
 # Actual tests
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
 checkExtension "ms-azuretools.vscode-docker"
