@@ -41,6 +41,8 @@ checkExtension "ms-vscode.vscode-typescript-tslint-plugin"
 check "non-root-user" "id node"
 check "/home/node" [ -d "/home/node" ]
 check "sudo" sudo -u node echo "sudo works."
+check "git" git --version
+check "command-line-tools" which top ip lsb_release
 check "node" "node --version"
 check "yarn" yarn install
 check "npm" npm install

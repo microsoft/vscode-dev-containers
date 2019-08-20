@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 cd $(dirname "$0")
 
+# -- Utility functions --
 if [ -z $HOME ]; then
     HOME="/root"
 fi
@@ -35,21 +36,11 @@ checkExtension() {
     checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]"
 }
 
-# Actual tests
+# -- Actual tests - add more here --
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
-checkExtension "dbaeumer.vscode-eslint"
-check "non-root-user" "id node"
-check "/home/node" [ -d "/home/node" ]
-check "sudo" sudo -u node echo "sudo works."
-check "git" git --version
-check "command-line-tools" which top ip lsb_release
-check "node" "node --version"
-check "yarn" yarn install
-check "npm" npm install
-check "eslint" "eslint server.js"
-check "test-project" npm run test
 
-# Report result
+
+# -- Report results --
 if [ ${#FAILED[@]} -ne 0 ]; then
     echo -e "\n💥  Failed tests: ${FAILED[@]}"
     exit 1
