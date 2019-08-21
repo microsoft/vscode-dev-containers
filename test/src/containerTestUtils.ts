@@ -4,6 +4,7 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as fs from 'fs';
+import * as cp from 'child_process';
 import * as path from 'path';
 import * as https from 'https';
 import * as Docker from 'dockerode';
@@ -103,3 +104,51 @@ export function findMountDestination(containerInfo: Docker.ContainerInspectInfo,
 	}
 	return null;
 }
+
+export interface SpawnResult {
+	code: number;
+	signal: string;
+	error: Error | null;
+	output: string;
+	stdout: string;
+	stderr: string;
+}
+
+export function spawn(command: string, args: string[], options: cp.SpawnOptions = {}) {
+	return new Promise<SpawnResult>((resolve, reject) => {
+		if (getLogLevel() === 'trace') {
+			options.stdio = 'inherit';
+		}
+		const result: SpawnResult = {
+			code: 1,
+			signal: '',
+			error: null,
+			output: '',
+			stdout: '',
+			stderr: ''
+		}
+		const process = cp.spawn(command, args, options);
+		if (process.stdout) {
+			process.stdout.on('data', (chunk: any)=> {
+				result.output += chunk.toString();
+				result.stdout += chunk.toString();
+			});	
+		}
+		if (process.stderr) {
+			process.stderr.on('data', (chunk: any)=> {
+				result.output += chunk.toString();
+				result.stderr += chunk.toString();
+			});	
+		}
+		process.on('close', (code: number, signal: string) => {
+			result.code = code;
+			result.signal = signal;
+			resolve(result);
+		});
+		process.on('error', (err: Error) => {
+			result.error = err;
+			reject(result);
+		});
+	});
+}
+

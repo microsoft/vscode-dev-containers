@@ -8,8 +8,8 @@ import * as path from 'path';
 import * as tv4 from 'tv4';
 import { jsonc } from 'jsonc';
 import { assert } from 'chai';
-import { getConfig, findMountDestination, log, getStringFromUri } from './containerTestUtils';
-import { createTestParams, fetchAgentCommit, exec } from 'remote-containers/test/testUtils';
+import { getConfig, findMountDestination, log, getStringFromUri, spawn } from './containerTestUtils';
+import { createTestParams, fetchAgentCommit } from 'remote-containers/test/testUtils';
 import { resolve, getDevContainerConfigPathIn, readDevContainerConfigFile } from 'remote-containers/src/node/configContainer';
 import { ResolverResult } from 'remote-containers/src/node/utils';
 
@@ -56,8 +56,8 @@ export function describeTest(description: string, rootFolder: string, definition
 				this.timeout(0);
 	
 				const result = await execTestScript(devContainer, path.resolve(rootFolder, '..'));
-				assert.isNull(result.error, result.error + ': ' + result.stderr);
-	
+				assert.isNull(result.error, result.error ? result.error.toString() : 'Null error');
+				assert.equal(result.code, 0, `Exit code ${result.code} w/ signal ${result.signal}.\n ${result.output}`);
 				return true;
 			});
 	
@@ -66,8 +66,8 @@ export function describeTest(description: string, rootFolder: string, definition
 				this.timeout(0);
 	
 				const result = await cleanUpTest(devContainer);
-				assert.isNull(result.error, result.error + ': ' + result.stderr);
-	
+				assert.isNull(result.error, result.error ? result.error.toString() : 'Null error');
+				assert.equal(result.code, 0, `Exit code ${result.code} w/ signal ${result.signal}.\n ${result.output}`);
 				return true;
 			});
 	
@@ -110,12 +110,7 @@ export async function execTestScript(devContainer: ResolverResult, vscodeDevConP
 	const container = await devContainer.params.docker.getContainer(devContainer.properties.id);
 	const containerInfo = await container.inspect();
 	const workingDir = findMountDestination(containerInfo, devContainer.params.cwd, vscodeDevConPath);
-	const result = await exec(`docker exec ${containerInfo.Id} /bin/sh -c "cd ${workingDir} && if [ -f test-project/test.sh ]; then cd test-project && chmod +x test.sh && ./test.sh; else ls -a; fi"`)
-	log('trace', result.stdout);
-	if (result.error) {
-		log('trace', result.error + ': ' + result.stderr);
-	}
-
+	const result = await spawn('docker', ['exec', containerInfo.Id, '/bin/sh', '-c', `cd ${workingDir} && if [ -f test-project/test.sh ]; then cd test-project && chmod +x test.sh && ./test.sh; else ls -a; fi`]);
 	return result;
 }
 
@@ -129,11 +124,6 @@ export async function cleanUpTest(devContainer: ResolverResult) {
 	await container.remove({ force: true });
 
 	log('debug', 'Pruning all unused images');
-	const result = await exec('docker image prune -a -f');
-	log('trace', result.stdout);
-	if (result.error) {
-		log('trace', result.error + ': ' + result.stderr);
-	}
-
+	const result = await spawn('docker', ['image', 'prune', '-a', '-f']);
 	return result;
 }
