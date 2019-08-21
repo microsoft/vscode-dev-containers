@@ -41,6 +41,7 @@ curl -sSL https://github.com/takari/maven-wrapper/archive/maven-wrapper-0.5.5.ta
 mv maven-wrapper-maven-wrapper-0.5.5/mvnw mvnw
 mv maven-wrapper-maven-wrapper-0.5.5/.mvn .mvn
 rm -rf mv maven-wrapper-maven-wrapper-0.5.5
+export MAVEN_OPTS=--enable-preview
 
 # Actual tests
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
@@ -49,10 +50,10 @@ check "non-root-user" "id vscode"
 check "/home/vscode" [ -d "/home/vscode" ]
 check "sudo" sudo -u vscode echo "sudo works."
 check "git" git --version
-check "command-line-tools" which top ip lsb_release curl
+check "command-line-tools" which top ifconfig curl
 check "java" java -version
 check "build-and-test-jar" ./mvnw package
-check "test-project" java -jar target/my-app-1.0-SNAPSHOT.jar
+check "test-project" java --enable-preview -jar target/my-app-1.0-SNAPSHOT.jar
 
 # Clean up
 rm -f mvnw
