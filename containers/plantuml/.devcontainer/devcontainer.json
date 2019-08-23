@@ -5,9 +5,6 @@
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
-	// Uncomment the next line if you want to add in default container specific settings.json values
-	// "settings":  { "workbench.colorTheme": "Quiet Light" },
-
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "java -version",
 
@@ -15,8 +12,11 @@
 	// new files getting created as root, but you may need to update the USER_UID
 	// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
 	// "runArgs": [ "-u", "vscode" ],
-
+	
 	"extensions": [
         "jebbs.plantuml"
-	]
+	],
+	"settings": {
+        "plantuml.java": "/usr/local/openjdk-8/bin/java"
+	}
 }
