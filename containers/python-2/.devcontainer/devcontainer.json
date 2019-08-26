@@ -3,6 +3,16 @@
 	"context": "..",
 	"dockerFile": "Dockerfile",
 
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"python.pythonPath": "/usr/local/bin/python",
+		"python.linting.enabled": true,
+		"python.linting.pylintEnabled": true,
+		"python.linting.pylintPath": "/usr/local/bin/pylint"
+	},
+
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
@@ -16,11 +26,5 @@
 
 	"extensions": [
 		"ms-python.python"
-	],
-	"settings": {
-		"python.pythonPath": "/usr/local/bin/python",
-		"python.linting.enabled": true,
-		"python.linting.pylintEnabled": true,
-		"python.linting.pylintPath": "/usr/local/bin/pylint"
-	}
+	]
 }

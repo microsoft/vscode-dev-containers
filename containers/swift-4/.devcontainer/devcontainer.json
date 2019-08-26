@@ -10,17 +10,22 @@
 		"--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"
 	],
 
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"swift.path.sourcekite": "/sourcekite/.build/x86_64-unknown-linux/release/sourcekite"
+	},
+
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "swiftc --version"
 
+	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"vknabel.vscode-swift-development-environment",
 		"vadimcn.vscode-lldb"
-	],
-	"settings": {
-		"swift.path.sourcekite": "/sourcekite/.build/x86_64-unknown-linux/release/sourcekite"
-	}
+	]
 }
