@@ -13,24 +13,26 @@
 		"-v", "/var/run/docker.sock:/var/run/docker.sock"
 	],
 
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+        "remote.extensionKind": {
+            "ms-azuretools.vscode-docker": "workspace"
+		}
+	},
+
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
-
-	// Uncomment the next line if you want to add in default container specific settings.json values
-	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "terraform --version",
 
+	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"mauve.terraform",
 		"ms-azuretools.vscode-azureterraform",
 		"ms-vscode.azurecli",
         "ms-azuretools.vscode-docker"
-	],
-	"settings": {
-        "remote.extensionKind": {
-            "ms-azuretools.vscode-docker": "workspace"
-		}
-	}
+	]
 }

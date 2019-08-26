@@ -4,6 +4,18 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "docker-in-docker",
 	"workspaceFolder": "/workspace",
+	
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"remote.extensionKind": {
+			"ms-azuretools.vscode-docker": "workspace"
+		}
+	},
+
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
 
 	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
 	// "shutdownAction": "none",
@@ -11,12 +23,8 @@
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "docker --version"
 
+	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"ms-azuretools.vscode-docker"
-	],
-	"settings": {
-		"remote.extensionKind": {
-			"ms-azuretools.vscode-docker": "workspace"
-		}
-	}
+	]	
 }

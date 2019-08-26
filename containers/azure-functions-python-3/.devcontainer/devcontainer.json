@@ -11,17 +11,22 @@
 		"-v","/var/run/docker.sock:/var/run/docker.sock"
 	],
 
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings":  {
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"remote.extensionKind": {
+			"ms-azuretools.vscode-docker": "workspace"
+		}
+	},
+
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "npm install",
 
+	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
 		"ms-azuretools.vscode-docker",
 		"ms-python.python"
-	],
-	"settings":  {
-		"remote.extensionKind": {
-			"ms-azuretools.vscode-docker": "workspace"
-		}
-	}
+	]
 }

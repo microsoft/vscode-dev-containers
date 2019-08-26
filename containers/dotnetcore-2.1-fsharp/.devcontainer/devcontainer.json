@@ -2,6 +2,13 @@
 	"name": "F# (.NET Core 2.1)",
 	"dockerFile": "Dockerfile",
 
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"FSharp.fsacRuntime":"netcore"
+	},
+
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
@@ -13,11 +20,9 @@
 	// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
 	// "runArgs": [ "-u", "vscode" ],
 
+	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"Ionide.Ionide-fsharp",
 		"ms-vscode.csharp"
-	],
-	"settings": {
-		"FSharp.fsacRuntime":"netcore"
-	}
+	]
 }

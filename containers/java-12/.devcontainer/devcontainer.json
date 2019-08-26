@@ -1,6 +1,14 @@
 {
 	"name": "Java 12",
 	"dockerFile": "Dockerfile",
+
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"java.home": "/usr/java/openjdk-12",
+		"git.ignoreLegacyWarning": true
+	},
 	
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
@@ -13,12 +21,8 @@
 	// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
 	// "runArgs": [ "-u", "vscode" ],
 
+	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"vscjava.vscode-java-pack"
-	],
-	"settings": {
-		"java.home": "/usr/java/openjdk-12",
-		"git.ignoreLegacyWarning": true
-	}
-
+	]
 }
