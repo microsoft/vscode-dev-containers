@@ -2,11 +2,14 @@
 	"name": "Ruby 2",
 	"dockerFile": "Dockerfile",
 
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
-
-	// Uncomment the next line if you want to add in default container specific settings.json values
-	// "settings":  { "workbench.colorTheme": "Quiet Light" },
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "ruby --version",
@@ -16,6 +19,7 @@
 	// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
 	// "runArgs": [ "-u", "vscode" ],
 
+	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"rebornix.Ruby"
 	]

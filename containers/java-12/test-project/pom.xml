@@ -11,6 +11,7 @@
   <properties>
     <maven.compiler.source>12</maven.compiler.source>
     <maven.compiler.target>12</maven.compiler.target>
+    <argLine>--enable-preview</argLine>
   </properties>
 
   <dependencies>
@@ -29,6 +30,9 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.0.0-M3</version>
+          <configuration>
+            <forkCount>2</forkCount>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -38,6 +42,17 @@
             <source>12</source>
             <target>12</target>
             <compilerArgs>--enable-preview</compilerArgs>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <configuration>
+            <archive>
+              <manifest>
+                <mainClass>com.mycompany.app.App</mainClass>
+              </manifest>
+            </archive>
           </configuration>
         </plugin>
       </plugins>

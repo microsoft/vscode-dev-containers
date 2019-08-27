@@ -10,19 +10,24 @@
 		"--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"
 	],
 
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"lldb.adapterType": "bundled",
+		"lldb.executable": "/usr/bin/lldb"
+	},
+
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "rustc --version"
 
+	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"rust-lang.rust",
 		"bungcip.better-toml",
 		"vadimcn.vscode-lldb"
-	],
-	"settings": {
-		"lldb.adapterType": "bundled",
-		"lldb.executable": "/usr/bin/lldb-3.9"
-	}
+	]
 }
