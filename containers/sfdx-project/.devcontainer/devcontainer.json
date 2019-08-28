@@ -6,6 +6,9 @@
       "redhat.vscode-xml",
       "dbaeumer.vscode-eslint",
       "esbenp.prettier-vscode"
-    ]
+    ],
+    "settings": {
+      "salesforcedx-vscode-apex.java.home": "/usr/lib/jvm/java-11-openjdk-amd64"
+    }
   }
   
