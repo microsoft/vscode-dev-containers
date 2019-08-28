@@ -8,7 +8,6 @@
 # * but has been included here for completeness.         *
 # ********************************************************
 
-# Debian and Ubuntu based images are supported. Alpine images are not yet supported.
 FROM debian:9
 
 # Avoid warnings by switching to noninteractive
