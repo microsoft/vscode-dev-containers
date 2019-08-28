@@ -14,4 +14,4 @@ RUN apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install jekyll
-RUN gem install git iproute2hub-pages
+RUN gem install github-pages
