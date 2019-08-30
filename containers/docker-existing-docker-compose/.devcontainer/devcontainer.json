@@ -20,7 +20,8 @@
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
+		// Uncomment to ensure your container runs using the correct shell for terminals and tasks
+		// "terminal.integrated.shell.linux": "/bin/bash"
 	},
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
