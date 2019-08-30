@@ -24,8 +24,10 @@
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"settings": { 
-		// Uncomment to ensure your container runs using the correct shell for terminals and tasks
-		// "terminal.integrated.shell.linux": "/bin/bash"
+		// This will ignore your local shell user setting for Linux since shells like zsh are typically 
+		// not in base container images. You can also update this to an specific shell to ensure VS Code 
+		// uses the right one for terminals and tasks. For example, /bin/bash (or /bin/ash for Alpine).
+		"terminal.integrated.shell.linux": null
 	},
 
 	// Uncomment the next line if you want to publish any ports.
