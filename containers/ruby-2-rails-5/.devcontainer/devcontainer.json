@@ -9,7 +9,7 @@
 	},
 
 	// Uncomment the next line if you want to publish any ports.
-	// "appPort": ["80:80"],
+	// "appPort": ["3000:3000"],
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "cd ${input:projectName} && bundle install",

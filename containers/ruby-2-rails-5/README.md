@@ -39,8 +39,10 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/ruby-2-rails-5` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. You should see "* Listening on tcp://0.0.0.0:80" in the Debug Console. Press <kbd>F1</kbd>. Select **Remote-Containers: Forward Porrt From Container...** then choose **Forward 80**,  and by browsing http://localhost/ you should see "Yay! You’re on Rails!".
-7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+6. You should see "* Listening on tcp://0.0.0.0:3000" in the Debug Console. 
+7. Press <kbd>F1</kbd>. Select **Remote-Containers: Forward Port from Container...** then choose **Forward 3000**.
+8. By browsing http://localhost:3000/ you should see "Yay! You’re on Rails!".
+9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 

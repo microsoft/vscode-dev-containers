@@ -15,7 +15,7 @@
             "program": "bin/rails",
             "postDebugTask": "Delete test-project",
             // Setup debug binding IP and port.
-            "args": ["s", "-b", "0.0.0.0", "-p", "80"], 
+            "args": ["s", "-b", "0.0.0.0", "-p", "3000"], 
         }
     ]
 }
