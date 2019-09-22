@@ -6,7 +6,7 @@
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
-		"java.home": "/usr/java/openjdk-12",
+		"java.home": "/docker-java-home",
 		"git.ignoreLegacyWarning": true
 	},
 	
