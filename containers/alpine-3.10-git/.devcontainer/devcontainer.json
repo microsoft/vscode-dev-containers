@@ -1,0 +1,32 @@
+{
+	"name": "Alpine 3.10",
+	"dockerFile": "Dockerfile",
+	
+	"runArgs": [
+		// Uncomment the line if you will use a ptrace-based debugger like Go.
+		// "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
+
+		// Uncomment the next line to use a non-root user. On Linux, this will prevent
+		// new files getting created as root, but you may need to update the USER_UID
+		// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
+		// "-u", "vscode"
+	],
+
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": {
+		// This dev container does include /bin/bash if you prefer to use it instead of ash.
+		"terminal.integrated.shell.linux": "/bin/ash"
+	},
+
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Add the IDs of extensions you want installed when the container is created in the array 
+	// below. Note that some extensions may not work in Alpine Linux due to glibc dependencies 
+	// in native code inside the extension. See https://aka.ms/vscode-remote/linux for details.
+	"extensions": []
+}
