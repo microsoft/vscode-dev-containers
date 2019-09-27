@@ -1,5 +1,5 @@
 {
-	"name": "Azure Functions & C# (.NET Core Latest)",
+	"name": "Azure Functions & C# (.NET Core 2.2)",
 	"dockerFile": "Dockerfile",
 	"appPort": 7071,
 
