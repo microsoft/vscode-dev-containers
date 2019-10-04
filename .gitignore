@@ -6,6 +6,7 @@ Thumbs.db
 *.out
 *.class
 *.tgz
+**/.ionide
 
 containers-readmes
 
