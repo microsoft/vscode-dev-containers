@@ -12,11 +12,26 @@
 
 ## Using this definition with an existing folder
 
-Note that only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
+A few notes on this definition:
 
-```json
-"console": "integratedTerminal"
-```
+1. Only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
+
+    ```json
+    "console": "integratedTerminal"
+    ```
+
+2. Given how frequently ASP.NET applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating these lines in `.devcontainer/Dockerfile`.
+
+    ```Dockerfile
+    ARG INSTALL_NODE="true"
+    ARG NODE_MAJOR_VERSION="10"
+    ```
+
+3. If you would like to install the Azure CLI update this line in `.devcontainer/Dockerfile`:
+
+    ```Dockerfile
+    ARG INSTALL_AZURE_CLI="true"
+    ```
 
 Beyond that, just follow these steps to use the definition:
 
