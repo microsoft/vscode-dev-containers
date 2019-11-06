@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM node:8
+FROM node:10
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -20,21 +20,21 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git and needed tools are installed
-    && apt-get -y install git iproute2 procps \    
+    && apt-get -y install \
+        git \
+        iproute2 \
+        procps \
+        curl \
+        apt-transport-https \
+        gnupg2 \
+        lsb-release \
     #
-    # Remove outdated yarn from /opt and install via package 
-    # so it can be easily updated via apt-get upgrade yarn
-    && rm -rf /opt/yarn-* \
-    && rm -f /usr/local/bin/yarn \
-    && rm -f /usr/local/bin/yarnpkg \
-    && apt-get install -y curl apt-transport-https lsb-release \
-    && curl -sS https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/pubkey.gpg | apt-key add - 2>/dev/null \
-    && echo "deb https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    # Install Azure Functions, .NET Core, and Azure CLI
+    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
+    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list \
+    && curl -sL https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
     && apt-get update \
-    && apt-get -y install --no-install-recommends yarn \
-    #
-    # Install tslint and typescript globally
-    && npm install -g tslint eslint typescript \
+    && apt-get install -y azure-cli dotnet-sdk-2.1 azure-functions-core-tools \
     #
     # [Optional] Update a non-root user to match UID/GID - see https://aka.ms/vscode-remote/containers/non-root-user.
     && if [ "$USER_GID" != "1000" ]; then groupmod node --gid $USER_GID; fi \
@@ -44,10 +44,13 @@ RUN apt-get update \
     && echo node ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/node \
     && chmod 0440 /etc/sudoers.d/node \
     #
+    # Install eslint
+    && npm install -g eslint \
+    #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
+        
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=

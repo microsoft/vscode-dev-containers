@@ -1,33 +1,27 @@
-# Node.js 8 & TypeScript
+# Node.js 12 & Mongo DB
 
 ## Summary
 
-*Develop Node.js 8 based applications in TypeScript. Includes Node.js, eslint, tslint, yarn, and the TypeScript compiler.*
+*Develop applications in Node.js and Mongo DB. Includes Node.js, eslint, and yarn in a container linked to a Mongo DB.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
-| *Definition type* | Dockerfile |
-| *Languages, platforms* | Node.js, TypeScript |
+| *Definition type* | Docker Compose |
+| *Languages, platforms* | Node.js, JavaScript, Mongo DB |
 
-## Using this definition with an existing folder
-
-This definition installs `tslint` globally and includes the VS Code TSLint extension for backwards compatibility, but [TSLint has been deprecated](https://github.com/palantir/tslint/issues/4534) in favor of ESLint, so `eslint` and its corresponding extension has been included as well.
-
-Both `eslint`and `typescript` are installed globally for convenance, but [as of ESLint 6](https://eslint.org/docs/user-guide/migrating-to-6.0.0#-plugins-and-shareable-configs-are-no-longer-affected-by-eslints-location), you will need to install the following packages locally to lint TypeScript code: `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser`, `eslint`, `typescript`.
-
-To get started, follow these steps:
+This definition does not require any special steps to use. Just follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Node.js 8 & TypeScript definition.
+   3. Select the Node.js (latest LTS) & Mongo DB definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/typescript-node-8/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/javascript-node-lts-mongo/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -41,11 +35,11 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/typescript-node-8` folder.
-5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `npm install` and compile the source before starting it.
+4. Select the `containers/javascript-node-lts-mongo` folder.
+5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `npm install` before starting it.
 6. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
 7. Select port 3000 and click the "Open Browser" button in the notification that appears.
-8. You should see "Hello remote world!" after the page loads.
+8. You should see "Hello remote world! 1 test record(s) found." after the page loads.
 9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
