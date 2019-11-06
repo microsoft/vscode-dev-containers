@@ -14,7 +14,9 @@ jobs:
     - name: Push and Package
       run: |
         yarn install
+        docker login ${{ secrets.DOCKER_IMAGE_REPOSITORY_URI }} -u ${{ secrets.DOCKER_IMAGE_REPOSITORY_USER }} -p ${{ secrets.DOCKER_IMAGE_REPOSITORY_PWD }}
         build/vscdc pack
+        docker logout ${{ secrets.DOCKER_IMAGE_REPOSITORY_URI }}
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1.0.0
