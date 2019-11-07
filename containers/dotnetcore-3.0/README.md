@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop C# and .NET Core (latest) based applications. Includes all needed SDKs, extensions, and dependencies.*
+*Develop C# and .NET Core 3.0 based applications. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
