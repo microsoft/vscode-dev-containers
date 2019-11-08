@@ -20,14 +20,15 @@
 		// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
 		// "-u", "vscode",
 
-		// [Optional] Enable HTTPS in ASP.NET by mount a local dev cert exported the dotnet CLI locally:
-		//   Windows PowerShell:
+		// [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command: 
+		//  * Windows PowerShell:
 		//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere" 
-		//   macOS/Linux terminal:
-		//     dotnet dev-certs https --trust && dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+		//  * macOS/Linux terminal:
+		//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
 		//
-		// After running the command above, uncomment the lines below and open / rebuild the container.
-		// "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https"
+		// Next, after running the command above, uncomment the lines below and open / rebuild the container.
+		//
+		// "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
 		// "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001",
 		// "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
 		// "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx",
