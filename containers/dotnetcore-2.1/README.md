@@ -73,7 +73,7 @@ Given how frequently ASP.NET applications use Node.js for front end code, this c
 
 ```Dockerfile
 ARG INSTALL_NODE="true"
-ARG NODE_MAJOR_VERSION="10"
+ARG NODE_VERSION="10"
 ```
 
 If you would like to install the Azure CLI update this line in `.devcontainer/Dockerfile`:

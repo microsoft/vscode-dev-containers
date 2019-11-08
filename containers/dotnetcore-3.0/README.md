@@ -1,8 +1,8 @@
-# C# (latest .NET Core)
+# C# (.NET Core 3.0)
 
 ## Summary
 
-*Develop C# and .NET Core (latest) based applications. Includes all needed SDKs, extensions, and dependencies.*
+*Develop C# and .NET Core 3.0 based applications. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -73,7 +73,7 @@ Given how frequently ASP.NET applications use Node.js for front end code, this c
 
 ```Dockerfile
 ARG INSTALL_NODE="true"
-ARG NODE_MAJOR_VERSION="10"
+ARG NODE_VERSION="10"
 ```
 
 If you would like to install the Azure CLI update this line in `.devcontainer/Dockerfile`:
