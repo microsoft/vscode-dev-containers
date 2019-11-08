@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Node.js 8 based applications in TypeScript. Includes Node.js, tslint, yarn, and the TypeScript compiler.*
+*Develop Node.js 8 based applications in TypeScript. Includes Node.js, eslint, tslint, yarn, and the TypeScript compiler.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -12,7 +12,11 @@
 
 ## Using this definition with an existing folder
 
-This definition does not require any special steps to use. Just follow these steps:
+This definition installs `tslint` globally and includes the VS Code TSLint extension for backwards compatibility, but [TSLint has been deprecated](https://github.com/palantir/tslint/issues/4534) in favor of ESLint, so `eslint` and its corresponding extension has been included as well.
+
+Both `eslint`and `typescript` are installed globally for convenance, but [as of ESLint 6](https://eslint.org/docs/user-guide/migrating-to-6.0.0#-plugins-and-shareable-configs-are-no-longer-affected-by-eslints-location), you will need to install the following packages locally to lint TypeScript code: `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser`, `eslint`, `typescript`.
+
+To get started, follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 

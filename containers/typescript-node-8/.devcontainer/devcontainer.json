@@ -21,6 +21,10 @@
 
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
+		"dbaeumer.vscode-eslint",
+
+		// TSLint is included for backwards compatibility, but is deprecated.
+		// See https://github.com/palantir/tslint/issues/4534
 		"ms-vscode.vscode-typescript-tslint-plugin"
 	]
 }

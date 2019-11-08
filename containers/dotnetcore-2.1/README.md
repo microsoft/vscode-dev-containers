@@ -12,13 +12,79 @@
 
 ## Using this definition with an existing folder
 
-Note that only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
+While the definition itself works unmodified, there are some tips that can help you deal with some of the defaults .NET Core uses.
+
+### Using appPort with ASP.NET Core
+
+By default, ASP.NET Core only listens to localhost. The challenge is that ASP.NET Core thinks that localhost is inside the container. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. So you can override the defaults so that ASP.NET will listen to traffic from your local machine as well.
+
+```json
+"appPort": [5000, 5001],
+"runArgs": [
+    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000",
+    "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001"
+]
+```
+
+Rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect.
+
+### Enabling HTTPS in ASP.NET Core
+
+To enable HTTPS in ASP.NET, you can mount an exported copy of your local dev certificate. First, export it using the following command:
+
+**Windows PowerShell**
+
+```powershell
+dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+```
+
+**macOS/Linux terminal**
+
+```powershell
+dotnet dev-certs https --trust && dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+```
+
+Next, add the following in the `runArgs` array in `.devcontainer/devcontainer.json` (assuming port 5000 and 5001 are the correct ports):
+
+```json
+"appPort": [5000, 5001],
+"runArgs": [
+    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000",
+    "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001",
+    "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
+    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
+    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx"
+]
+```
+
+Rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect.
+
+### Debug Configuration
+
+Only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
 
 ```json
 "console": "integratedTerminal"
 ```
 
-Beyond that, just follow these steps to use the definition:
+### Installing Node.js or the Azure CLI
+
+Given how frequently ASP.NET applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating these lines in `.devcontainer/Dockerfile`.
+
+```Dockerfile
+ARG INSTALL_NODE="true"
+ARG NODE_VERSION="10"
+```
+
+If you would like to install the Azure CLI update this line in `.devcontainer/Dockerfile`:
+
+```Dockerfile
+ARG INSTALL_AZURE_CLI="true"
+```
+
+Rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect.
+
+### Adding the definition to your folder
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
