@@ -1,7 +1,7 @@
 {
-	"name": "Node.js 8 & TypeScript",
+	"name": "Node.js 10",
 	"dockerFile": "Dockerfile",
-
+	
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"settings": { 
@@ -10,7 +10,7 @@
 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
-	
+
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "yarn install",
 
@@ -21,10 +21,6 @@
 
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
-		"dbaeumer.vscode-eslint",
-
-		// TSLint is included for backwards compatibility, but is deprecated.
-		// See https://github.com/palantir/tslint/issues/4534
-		"ms-vscode.vscode-typescript-tslint-plugin"
+		"dbaeumer.vscode-eslint"
 	]
 }

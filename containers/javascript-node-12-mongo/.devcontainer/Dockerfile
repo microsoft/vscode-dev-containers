@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM node:8
+FROM node:12
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -17,10 +17,10 @@ ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
+    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \ 
     #
     # Verify git and needed tools are installed
-    && apt-get -y install git iproute2 procps \    
+    && apt-get -y install git iproute2 procps \
     #
     # Remove outdated yarn from /opt and install via package 
     # so it can be easily updated via apt-get upgrade yarn
@@ -33,8 +33,8 @@ RUN apt-get update \
     && apt-get update \
     && apt-get -y install --no-install-recommends yarn \
     #
-    # Install tslint and typescript globally
-    && npm install -g tslint eslint typescript \
+    # Install eslint globally
+    && npm install -g eslint \
     #
     # [Optional] Update a non-root user to match UID/GID - see https://aka.ms/vscode-remote/containers/non-root-user.
     && if [ "$USER_GID" != "1000" ]; then groupmod node --gid $USER_GID; fi \

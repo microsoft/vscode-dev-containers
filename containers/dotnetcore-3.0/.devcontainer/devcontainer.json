@@ -1,7 +1,7 @@
 {
-	"name": "C# (.NET Core 2.1)",
+	"name": "C# (.NET Core 3.0)",
 	"dockerFile": "Dockerfile",
-	
+
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"settings": { 
@@ -9,7 +9,7 @@
 	},
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore"
+	// "postCreateCommand": "dotnet restore",
 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [5000, 5001],
@@ -35,6 +35,7 @@
 		// [Optional] Override the default HTTP endpoints - need to listen to '*' for appPort to work
 		"-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000"
 	],
+	
 
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [

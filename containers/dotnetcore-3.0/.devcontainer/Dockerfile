@@ -2,7 +2,8 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-ARG DOTNETCORE_VESRION=2.1
+
+ARG DOTNETCORE_VESRION=3.0
 FROM mcr.microsoft.com/dotnet/core/sdk:${DOTNETCORE_VESRION}
 
 # This Dockerfile adds a non-root 'vscode' user with sudo access. However, for Linux,

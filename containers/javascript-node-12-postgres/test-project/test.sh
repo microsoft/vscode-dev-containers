@@ -37,7 +37,6 @@ checkExtension() {
 
 # Actual tests
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
-checkExtension "ms-vscode.vscode-typescript-tslint-plugin"
 checkExtension "dbaeumer.vscode-eslint"
 check "non-root-user" "id node"
 check "/home/node" [ -d "/home/node" ]
@@ -47,9 +46,7 @@ check "command-line-tools" which top ip lsb_release
 check "node" "node --version"
 check "yarn" yarn install
 check "npm" npm install
-check "tslint" "tslint src/server.ts"
-check "eslint" "eslint src/server.ts"
-check "typescript" npm run compile
+check "eslint" "eslint server.js"
 check "test-project" npm run test
 
 # Report result

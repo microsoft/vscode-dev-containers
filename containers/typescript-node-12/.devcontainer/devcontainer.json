@@ -1,5 +1,5 @@
 {
-	"name": "Node.js 8 & TypeScript",
+	"name": "Node.js 12 & TypeScript",
 	"dockerFile": "Dockerfile",
 
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
@@ -10,7 +10,7 @@
 
 	// Uncomment the next line if you want to publish any ports.
 	// "appPort": [],
-	
+
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "yarn install",
 

@@ -1,6 +1,7 @@
 {
-	"name": "Node.js 8 & TypeScript",
+	"name": "Azure Functions & Node.js 10",
 	"dockerFile": "Dockerfile",
+	"appPort": 7071,
 
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
@@ -8,11 +9,8 @@
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
-	// Uncomment the next line if you want to publish any ports.
-	// "appPort": [],
-	
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "yarn install",
+	// "postCreateCommand": "npm install",
 
 	// Uncomment the next line to use a non-root user. On Linux, this will prevent
 	// new files getting created as root, but you may need to update the USER_UID
@@ -21,10 +19,7 @@
 
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
-		"dbaeumer.vscode-eslint",
-
-		// TSLint is included for backwards compatibility, but is deprecated.
-		// See https://github.com/palantir/tslint/issues/4534
-		"ms-vscode.vscode-typescript-tslint-plugin"
+		"ms-azuretools.vscode-azurefunctions",
+		"dbaeumer.vscode-eslint"
 	]
 }

@@ -1,5 +1,5 @@
 {
-	"name": "Node.js 8 & TypeScript",
+	"name": "Node.js 10 & TypeScript",
 	"dockerFile": "Dockerfile",
 
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
@@ -19,7 +19,6 @@
 	// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
 	// "runArgs": [ "-u", "node" ],
 
-	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"dbaeumer.vscode-eslint",
 
