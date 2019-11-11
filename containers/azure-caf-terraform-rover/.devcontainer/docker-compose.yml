@@ -1,0 +1,31 @@
+#-------------------------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+#-------------------------------------------------------------------------------------------------------------
+ 
+version: '3.7'
+services:
+  rover:
+    image: aztfmod/rover:latest
+ 
+    volumes:
+      # This is where VS Code should expect to find your project's source code
+      # and the value of "workspaceFolder" in .devcontainer/devcontainer.json
+      - ..:/tf/private
+      - volume-caf-ssh:/root/.shh
+      - volume-caf-cache:/root/.azure
+      - volume-caf-cache1:/root/.terraform.d
+      - volume-caf-vscode-server:/root/.vscode-server
+      - volume-caf-vscode-server-insiders:/.vscode-server-insiders
+      - ~/.ssh:/root/.ssh-localhost:ro
+ 
+ 
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "while sleep 1000; do :; done" 
+ 
+volumes:
+  volume-caf-ssh:
+  volume-caf-cache:
+  volume-caf-cache1:
+  volume-caf-vscode-server:
+  volume-caf-vscode-server-insiders:
