@@ -46,17 +46,7 @@ You can adapt your own existing development container Docker Compose setup to su
       - /var/run/docker.sock:/var/run/docker.sock
     ```
 
-3. Finally, update `devcontainer.json` to force the Docker extension to be installed inside the container instead of locally. From `.devcontainer/devcontainer.json`:
-
-    ```json
-    "settings": {
-        "remote.extensionKind": {
-            "ms-azuretools.vscode-docker": "workspace"
-        }
-    },
-    ```
-
-4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+3. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
