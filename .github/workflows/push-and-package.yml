@@ -1,4 +1,4 @@
-name: Build, Push, and Release
+name: Release Containers
 
 on:
   repository_dispatch:
