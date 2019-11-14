@@ -29,3 +29,10 @@ jobs:
         set -e
         yarn install
         build/vscdc pack --release dev --registry ${{ secrets.REGISTRY }} --registry-path ${{ secrets.REGISTRY_BASE_PATH }} --stub-registry ${{ secrets.STUB_REGISTRY }} --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+        mv ./vscode-dev-containers-*.tgz ./vscode-dev-containers-${{ github.sha }}.tgz
+
+    - name: Upload Package
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: vscode-dev-containers-${{ github.sha }}.tgz
+        path: ./vscode-dev-containers-${{ github.sha }}.tgz
