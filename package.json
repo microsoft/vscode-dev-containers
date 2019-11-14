@@ -17,7 +17,9 @@
 		"prepack": "rimraf containers-readmes && copyfiles --up 1 containers/**/README.md containers-readmes"
 	},
 	"devDependencies": {
-		"copyfiles": "^2.1.0",
-		"rimraf": "^2.6.3"
+		"copyfiles": "^2.1.1",
+		"jsonc": "^2.0.0",
+		"rimraf": "^2.6.3",
+		"yargs": "^14.2.0"
 	}
 }

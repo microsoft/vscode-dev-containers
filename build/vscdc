@@ -1,0 +1,160 @@
+#!/usr/bin/env node
+/*--------------------------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+ *-------------------------------------------------------------------------------------------------------------*/
+
+const utils = require('./src/utils');
+const push = require('./src/push').push;
+const package = require('./src/package').package;
+const createStub = require('./src/stub').createStub;
+const packageJson = require('../package.json');
+
+console.log('vscode-dev-containers CLI\nCopyright (c) Microsoft Corporation. All rights reserved.\n')
+
+require('yargs')
+    .command('pack', 'package dev container definitions', (yargs) => {
+        yargs
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or "dev"',
+                    default: `v${packageJson.version}`
+                },
+                'registry': {
+                    describe: 'container registry to push images to',
+                    default: utils.getConfig('containerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: utils.getConfig('containerRegistryPath', '')
+                },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: utils.getConfig('stubRegistry', utils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: utils.getConfig('stubRegistryPath', utils.getConfig('containerRegistryPath', ''))
+                },
+                'simulate': {
+                    describe: 'whether to simulate a push instead of doing it',
+                    type: 'boolean',
+                    default: false
+                },
+                'update-latest': {
+                    describe: 'whether to tag latest and {MAJOR}',
+                    type: 'boolean',
+                    default: true
+                }
+            })
+    }, packCommand)
+    .command('push [devcontainer]', 'push dev container images to a repository', (yargs) => {
+        yargs
+            .positional('devcontainer', {
+                describe: 'ID of dev container to push',
+                default: null
+            })
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or "dev"',
+                    default: `v${packageJson.version}`
+                },
+                'registry': {
+                    describe: 'container registry to push images to',
+                    default: utils.getConfig('containerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: utils.getConfig('containerRegistryPath', '')
+                },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: utils.getConfig('stubRegistry', utils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: utils.getConfig('stubRegistryPath', utils.getConfig('containerRegistryPath', ''))
+                },
+                'update-latest': {
+                    describe: 'whether to tag latest and {MAJOR}',
+                    type: 'boolean',
+                    default: true
+                },
+                'simulate': {
+                    describe: 'whether to simulate a push instead of doing it',
+                    type: 'boolean',
+                    default: false
+                }
+            })
+    }, pushCommand)
+    .command('stub <devcontainer> [path]', 'generates a stub user.Dockerfile', (yargs) => {
+        yargs
+            .positional('devcontainer', {
+                describe: 'ID of dev container to stub',
+            })
+            .positional('path', {
+                describe: 'path to .devcontainer folder',
+                default: '.'
+            })
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or "dev"',
+                    default: 'dev'
+                },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: utils.getConfig('stubRegistry', utils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: utils.getConfig('stubRegistryPath', utils.getConfig('containerRegistryPath', ''))
+                },
+                'has-base-dockerfile': {
+                    describe: 'whether base.Dockerfile exists',
+                    type: 'boolean',
+                    default: true
+                },
+                'alpine': {
+                    describe: 'add an alpine container',
+                    type: 'boolean',
+                    default: false
+                }
+            })
+    }, stubCommand)
+    .demandCommand()
+    .help()
+    .argv;
+
+function pushCommand(argv) {
+    if (argv.release.charAt(0) !== 'v' && argv.release !== 'dev') {
+        console.error(`(!) Invalid release identifier ${argv.release}. Valid form: v{MAJOR}.{MINOR}.{FIX}`);
+        process.exit(1);
+    }
+    push(argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate, argv.devcontainer)
+        .catch((reason) => {
+            console.error(`(!) Push failed - ${reason}`);
+            process.exit(1);
+        });
+}
+
+
+function packCommand(argv) {
+    if (argv.release.charAt(0) !== 'v' && argv.release !== 'dev') {
+        console.error(`(!) Invalid release identifier ${argv.release}. Valid form: v{MAJOR}.{MINOR}.{FIX}`);
+        process.exit(1);
+    }
+    package(argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate)
+        .catch((reason) => {
+            console.error(`(!) Packaging failed - ${reason}`);
+            process.exit(1);
+        });
+}
+
+
+function stubCommand(argv) {
+    createStub(argv.devcontainer, argv.path, argv.release, argv.hasBaseDockerfile, argv.stubRegistry, argv.stubRegistryPath, argv.alpine)
+        .catch((reason) => {
+            console.error(`(!) Stub generation failed - ${reason}`);
+            process.exit(1);
+        });
+}
