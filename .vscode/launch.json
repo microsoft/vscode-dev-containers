@@ -12,8 +12,7 @@
 			"args": [
 				"push",
 				"--release", "dev",
-				"--stub-registry", "mcr.microsoft.com",
-				"--stub-registry-path", "devcontainers"
+				"--registry", "chuxel.azurecr.io"
 			]
 		},
 		{
@@ -24,8 +23,7 @@
 			"args": [
 				"pack",
 				"--release", "dev",
-				"--stub-registry", "mcr.microsoft.com",
-				"--stub-registry-path", "devcontainers"
+				"--registry", "chuxel.azurecr.io"
 			]
         }
 
