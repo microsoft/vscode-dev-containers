@@ -1,6 +1,6 @@
 {
 	"containerRegistry": "devcon.azurecr.io",
-	"containerRegistryPath": "devcontainers",
+	"containerRegistryPath": "dev/devcontainers",
 	"definitionsToPush": [
 		"alpine-3.10-git",
 		"debian-9-git",
@@ -8,7 +8,6 @@
 		"javascript-node-12",
 		"typescript-node-10",
 		"typescript-node-12",
-		"dotnetcore-3.0",
 		"ubuntu-18.04-git"
 	],
 	"definitionsToSkip": [

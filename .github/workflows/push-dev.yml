@@ -28,7 +28,7 @@ jobs:
         # Push dev images and package
         set -e
         yarn install
-        build/vscdc pack --release dev --registry ${{ secrets.REGISTRY }} --registry-path ${{ secrets.REGISTRY_BASE_PATH }} --stub-registry ${{ secrets.STUB_REGISTRY }} --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+        build/vscdc pack --release master --registry ${{ secrets.REGISTRY }} --registry-path ${{ secrets.REGISTRY_BASE_PATH }} --stub-registry ${{ secrets.STUB_REGISTRY }} --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
         mv ./vscode-dev-containers-*.tgz ./vscode-dev-containers-${{ github.sha }}.tgz
 
     - name: Upload Package

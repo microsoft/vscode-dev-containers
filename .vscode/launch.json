@@ -11,8 +11,9 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"args": [
 				"push",
-				"--release", "dev",
-				"--registry", "chuxel.azurecr.io"
+				"--release", "master",
+				"--registry", "clantz.azurecr.io",
+				"--stubRegistry", "clantz.azurecr.io"
 			]
 		},
 		{
@@ -22,8 +23,9 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"args": [
 				"pack",
-				"--release", "dev",
-				"--registry", "chuxel.azurecr.io"
+				"--release", "master",
+				"--registry", "clantz.azurecr.io",
+				"--stubRegistry", "clantz.azurecr.io"
 			]
         }
 

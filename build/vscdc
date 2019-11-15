@@ -17,7 +17,7 @@ require('yargs')
         yargs
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or "dev"',
+                    describe: 'vscode-dev-containers release tag or "master"',
                     default: `v${packageJson.version}`
                 },
                 'registry': {
@@ -56,7 +56,7 @@ require('yargs')
             })
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or "dev"',
+                    describe: 'vscode-dev-containers release tag or "master"',
                     default: `v${packageJson.version}`
                 },
                 'registry': {
@@ -98,7 +98,7 @@ require('yargs')
             })
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or "dev"',
+                    describe: 'vscode-dev-containers release tag or "master"',
                     default: 'dev'
                 },
                 'stub-registry': {
@@ -126,7 +126,7 @@ require('yargs')
     .argv;
 
 function pushCommand(argv) {
-    if (argv.release.charAt(0) !== 'v' && argv.release !== 'dev') {
+    if (argv.release.charAt(0) !== 'v' && argv.release !== 'master') {
         console.error(`(!) Invalid release identifier ${argv.release}. Valid form: v{MAJOR}.{MINOR}.{FIX}`);
         process.exit(1);
     }
@@ -139,7 +139,7 @@ function pushCommand(argv) {
 
 
 function packCommand(argv) {
-    if (argv.release.charAt(0) !== 'v' && argv.release !== 'dev') {
+    if (argv.release.charAt(0) !== 'v' && argv.release !== 'master') {
         console.error(`(!) Invalid release identifier ${argv.release}. Valid form: v{MAJOR}.{MINOR}.{FIX}`);
         process.exit(1);
     }
@@ -152,6 +152,10 @@ function packCommand(argv) {
 
 
 function stubCommand(argv) {
+    if (argv.release.charAt(0) !== 'v' && argv.release !== 'master') {
+        console.error(`(!) Invalid release identifier ${argv.release}. Valid form: v{MAJOR}.{MINOR}.{FIX}`);
+        process.exit(1);
+    }
     createStub(argv.devcontainer, argv.path, argv.release, argv.hasBaseDockerfile, argv.stubRegistry, argv.stubRegistryPath, argv.alpine)
         .catch((reason) => {
             console.error(`(!) Stub generation failed - ${reason}`);
