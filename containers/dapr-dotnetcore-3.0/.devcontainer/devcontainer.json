@@ -1,0 +1,27 @@
+{
+	"name": "Dapr with C# (.NET Core 3.0)",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "docker-in-docker",
+	"workspaceFolder": "/workspace",
+
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore",
+
+	// Uncomment the next line if you want to publish any ports.
+	// "appPort": [5000, 5001],
+	
+	// Ensure Dapr is running on opening the container
+	"postCreateCommand": "dapr init --network dapr-dotnetcore",
+
+	// Add the IDs of extensions you want installed when the container is created in the array below.
+	"extensions": [
+		"ms-azuretools.vscode-docker",
+		"ms-vscode.csharp"
+	]
+}
