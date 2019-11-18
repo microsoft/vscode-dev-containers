@@ -38,7 +38,7 @@ apt-get -y install --no-install-recommends \
     zlib1g
 
 # Install libssl1.0.x depending on version if it is available
-LIBSSL=$(dpkg-query -f '${db:Status-Abbrev}\t${binary:Package}\n' -W 'libssl1\.0\.?' 2>&1)
+LIBSSL=$(dpkg-query -f '${db:Status-Abbrev}\t${binary:Package}\n' -W 'libssl1\.0\.?' 2>&1 || echo '')
 if [ "$(echo "$LIBSSL" | grep -o 'libssl1\.0\.[0-9]:' | uniq | sort | wc -l)" -eq 0 ]; then
     if [[ ! -z $(apt-cache --names-only search ^libssl1.0.2$) ]]; then
         apt-get -y install  --no-install-recommends libssl1.0.2

@@ -4,15 +4,15 @@
 	"stubRegistry": "mcr.microsoft.com",
 	"stubRegistryPath": "vscode/devcontainers",
 	"definitionBuildGraph": {
+		"ubuntu-18.04-git": true,
+		"alpine-3.10-git": true,
+		"debian-9-git": true,
 		"javascript-node-10": {
 			"typescript-node-10": true
 		},
 		"javascript-node-12": {
 			"typescript-node-12": true
-		},
-		"alpine-3.10-git": true,
-		"debian-9-git": true,
-		"ubuntu-18.04-git": true
+		}
 	},
 	"alpineDefinitions": [
 	    "alpine-3.10-git"

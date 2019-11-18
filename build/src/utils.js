@@ -43,10 +43,10 @@ function getVersionFromRelease(release) {
 }
 
 function getLinuxDistroForDefinition(definitionId) {
-    if (getConfig('alpineDefinitions',[]).indexOf(definitionId) > 0) {
+    if (getConfig('alpineDefinitions',[]).indexOf(definitionId) >= 0) {
         return 'alpine';
     }
-    if (getConfig('redhatDefinitions',[]).indexOf(definitionId) > 0) {
+    if (getConfig('redhatDefinitions',[]).indexOf(definitionId) >= 0) {
         return 'redhat';
     }
     return 'debian';

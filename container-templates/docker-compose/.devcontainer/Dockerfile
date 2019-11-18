@@ -30,12 +30,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Configure apt and install packages
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils dialog curl ca-certificates 2>&1 \
+    && apt-get -y install --no-install-recommends apt-utils dialog wget ca-certificates 2>&1 \
     #
     # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
-    && curl -sSL -o /tmp/common-setup.sh $COMMON_SCRIPT_SOURCE \
+    && wget -q -O /tmp/common-setup.sh $COMMON_SCRIPT_SOURCE \
     && if [ "$COMMON_SCRIPT_SHA" != "dev-mode" ]; then echo "$COMMON_SCRIPT_SHA /tmp/common-setup.sh" | sha256sum -c - ; fi \
-    && bash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID"  \
+    && /bin/ash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
+    && rm /tmp/common-setup.sh \
     #
     # *****************************************************
     # * Add steps for installing needed dependencies here *

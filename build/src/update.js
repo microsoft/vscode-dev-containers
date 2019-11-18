@@ -40,7 +40,7 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
     
     const devContainerDockerfileRaw = await utils.readFile(devContainerDockerfilePath);
     let devContainerDockerfileModified = devContainerDockerfileRaw
-        .replace('COMMON_SCRIPT_SHA="none"', `COMMON_SCRIPT_SHA="${commonScriptSHA}"`)
+        .replace(/COMMON_SCRIPT_SHA=".+"/, `COMMON_SCRIPT_SHA="${commonScriptSHA}"`)
         .replace(/COMMON_SCRIPT_SOURCE=".+"/, `COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/${repo}/${release}/${scriptLibraryPathInRepo}/${commonScriptName}"`);
     const captureGroups = new RegExp(`FROM (${expectedRegistryPath.replace('.','\\.')})/(.+):(.+)`).exec(devContainerDockerfileRaw);
     if (captureGroups) {
