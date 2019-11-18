@@ -11,9 +11,12 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"args": [
 				"push",
-				"--release", "master",
+				"--release", "clantz/image-generation",
+				"--github-repo", "chuxel/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
-				"--stubRegistry", "clantz.azurecr.io"
+				"--registryPath", "vscode-dev-containers",
+				"--stubRegistry", "clantz.azurecr.io",
+				"--stubRegistryPath", "vscode-dev-containers"
 			]
 		},
 		{
@@ -23,9 +26,12 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"args": [
 				"pack",
-				"--release", "master",
+				"--release", "clantz/image-generation",
+				"--github-repo", "chuxel/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
-				"--stubRegistry", "clantz.azurecr.io"
+				"--registryPath", "vscode-dev-containers",
+				"--stubRegistry", "clantz.azurecr.io",
+				"--stubRegistryPath", "vscode-dev-containers"
 			]
         }
 

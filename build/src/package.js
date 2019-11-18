@@ -8,12 +8,12 @@ const push = require('./push').push;
 const utils = require('./utils');
 const packageJson = require('../../package.json');
 
-async function package(release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate) {
+async function package(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate) {
     stubRegistry = stubRegistry || registry;
     stubRegistryPath = stubRegistryPath || registryPath;
 
     // First, push images, update content
-    const stagingFolder = await push(release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate);
+    const stagingFolder = await push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate);
  
     // Then package
     console.log(`\n(*) **** Package ${release} ****`);

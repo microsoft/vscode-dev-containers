@@ -4,6 +4,7 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 const fs = require('fs');
+const crypto = require('crypto');
 const rimrafCb = require('rimraf');
 const mkdirpCb = require('mkdirp');
 const copyFilesCb = require('copyfiles');
@@ -27,11 +28,28 @@ function getConfig(property, defaultVal) {
 }
 
 function getVersionFromRelease(release) {
-    if(release === 'dev' || release === 'master') {
-        return 'dev';
+    // Already is a version
+    if(!isNaN(parseInt(release.charAt(0)))) {
+        return release;
     }
 
-    return (release.charAt(0) === 'v' ? release.substr(1) : release);
+    // Is a release string
+    if(release.charAt(0) === 'v' && !isNaN(parseInt(release.charAt(1)))) {
+        return release.substr(1);
+    }
+
+    // Is a branch
+    return 'dev';
+}
+
+function getLinuxDistroForDefinition(definitionId) {
+    if (getConfig('alpineDefinitions',[]).indexOf(definitionId) > 0) {
+        return 'alpine';
+    }
+    if (getConfig('redhatDefinitions',[]).indexOf(definitionId) > 0) {
+        return 'redhat';
+    }
+    return 'debian';
 }
 
 function getBaseTag(definitionId, registry, registryPath) {
@@ -53,7 +71,7 @@ module.exports = {
                 resolve();
             });
             proc.on('error', (err) => {
-                reject(err)
+                reject(err);
             });
         });
     },
@@ -139,13 +157,37 @@ module.exports = {
     majorMinorFromRelease: function(release) {
         const version = getVersionFromRelease(release);
         
-        if(version ==='dev') {
+        if(version === 'dev') {
             return 'dev';
         }
 
         const versionParts = version.split('.');
         return `${versionParts[0]}.${versionParts[1]}`;
     },
+
+    shaForFile: async (filePath) => {
+        return new Promise((resolve, reject) => {
+            const fd = fs.createReadStream(filePath);
+            const hash = crypto.createHash('sha256');
+            hash.setEncoding('hex');    
+            fd.on('end', function() {
+                hash.end();
+                resolve(hash.read()); 
+            });
+            fd.on('error', (err) => {
+                reject(err);
+            });
+            fd.pipe(hash);
+        })
+    },
+
+    objectByDefinitionLinuxDistro: (definitionId, objectsByDistro) =>{
+        const distro = getLinuxDistroForDefinition(definitionId);
+        const obj = objectsByDistro[distro];
+        return obj;
+    },
+
+    getLinuxDistroForDefinition: getLinuxDistroForDefinition,
 
     getVersionFromRelease: getVersionFromRelease,
 

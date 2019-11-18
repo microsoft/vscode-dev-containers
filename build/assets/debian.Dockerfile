@@ -12,26 +12,26 @@ FROM REPLACE-ME
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # [Optional] Update UID/GID if needed and install additional software
 RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
-        if [ "$USER_GID" != "1000" ]; then sudo groupmod 1000 --gid $USER_GID; fi \
-        && if [ "$USER_UID" != "1000" ]; then sudo usermod --uid $USER_UID node; fi; \
-    fi \
-    #
-    # ***************************************************************
-    # * Add steps for installing any other needed dependencies here *
-    # ***************************************************************
-    #
-    # Clean up
-    && sudo apt-get autoremove -y \
-    && sudo apt-get clean -y \
-    && sudo rm -rf /var/lib/apt/lists/*
+        sudo groupmod 1000 --gid $USER_GID \
+        && sudo usermod --uid $USER_UID --gid $USER_GID 1000 \
+    fi
+
+# ENV DEBIAN_FRONTEND=noninteractive
+# RUN apt-get update \
+#    #
+#    ***************************************************************
+#    * Add steps for installing any other needed dependencies here *
+#    ***************************************************************
+#    && sudo apt-get -y install --no-reccomends <your-package-name-here>
+#    #
+#    # Clean up
+#    && sudo apt-get autoremove -y \
+#    && sudo apt-get clean -y \
+#    && sudo rm -rf /var/lib/apt/lists/*
+# ENV DEBIAN_FRONTEND=
 
 # Uncomment to default to non-root user
 # USER $USER_UID
 
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=

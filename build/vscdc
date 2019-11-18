@@ -7,7 +7,7 @@
 const utils = require('./src/utils');
 const push = require('./src/push').push;
 const package = require('./src/package').package;
-const createStub = require('./src/stub').createStub;
+const createStub = require('./src/update').createStub;
 const packageJson = require('../package.json');
 
 console.log('vscode-dev-containers CLI\nCopyright (c) Microsoft Corporation. All rights reserved.\n')
@@ -17,7 +17,7 @@ require('yargs')
         yargs
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or "master"',
+                    describe: 'vscode-dev-containers release tag or a branch',
                     default: `v${packageJson.version}`
                 },
                 'registry': {
@@ -26,7 +26,7 @@ require('yargs')
                 },
                 'registry-path': {
                     describe: 'container registry path',
-                    default: utils.getConfig('containerRegistryPath', '')
+                    default: utils.getConfig('containerRegistryPath', 'vscode/devcontainers')
                 },
                 'stub-registry': {
                     describe: 'registry to add to stub',
@@ -40,6 +40,10 @@ require('yargs')
                     describe: 'whether to simulate a push instead of doing it',
                     type: 'boolean',
                     default: false
+                },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: utils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'update-latest': {
                     describe: 'whether to tag latest and {MAJOR}',
@@ -56,7 +60,7 @@ require('yargs')
             })
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or "master"',
+                    describe: 'vscode-dev-containers release tag or branch',
                     default: `v${packageJson.version}`
                 },
                 'registry': {
@@ -74,6 +78,10 @@ require('yargs')
                 'stub-registry-path': {
                     describe: 'stub registry path',
                     default: utils.getConfig('stubRegistryPath', utils.getConfig('containerRegistryPath', ''))
+                },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: utils.getConfig('vscodeDevContainersRepo', 'https://github.com/microsoft/vscode-dev-containers')
                 },
                 'update-latest': {
                     describe: 'whether to tag latest and {MAJOR}',
@@ -98,7 +106,7 @@ require('yargs')
             })
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or "master"',
+                    describe: 'vscode-dev-containers release tag or branch',
                     default: 'dev'
                 },
                 'stub-registry': {
@@ -109,15 +117,14 @@ require('yargs')
                     describe: 'stub registry path',
                     default: utils.getConfig('stubRegistryPath', utils.getConfig('containerRegistryPath', ''))
                 },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: utils.getConfig('vscodeDevContainersRepo', 'https://github.com/microsoft/vscode-dev-containers')
+                },
                 'has-base-dockerfile': {
                     describe: 'whether base.Dockerfile exists',
                     type: 'boolean',
                     default: true
-                },
-                'alpine': {
-                    describe: 'add an alpine container',
-                    type: 'boolean',
-                    default: false
                 }
             })
     }, stubCommand)
@@ -126,24 +133,15 @@ require('yargs')
     .argv;
 
 function pushCommand(argv) {
-    if (argv.release.charAt(0) !== 'v' && argv.release !== 'master') {
-        console.error(`(!) Invalid release identifier ${argv.release}. Valid form: v{MAJOR}.{MINOR}.{FIX}`);
-        process.exit(1);
-    }
-    push(argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate, argv.devcontainer)
+    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
             process.exit(1);
         });
 }
 
-
 function packCommand(argv) {
-    if (argv.release.charAt(0) !== 'v' && argv.release !== 'master') {
-        console.error(`(!) Invalid release identifier ${argv.release}. Valid form: v{MAJOR}.{MINOR}.{FIX}`);
-        process.exit(1);
-    }
-    package(argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate)
+    package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate)
         .catch((reason) => {
             console.error(`(!) Packaging failed - ${reason}`);
             process.exit(1);
@@ -152,11 +150,7 @@ function packCommand(argv) {
 
 
 function stubCommand(argv) {
-    if (argv.release.charAt(0) !== 'v' && argv.release !== 'master') {
-        console.error(`(!) Invalid release identifier ${argv.release}. Valid form: v{MAJOR}.{MINOR}.{FIX}`);
-        process.exit(1);
-    }
-    createStub(argv.devcontainer, argv.path, argv.release, argv.hasBaseDockerfile, argv.stubRegistry, argv.stubRegistryPath, argv.alpine)
+    createStub(argv.devcontainer, argv.path, argv.githubRepo, argv.release, argv.hasBaseDockerfile, argv.stubRegistry, argv.stubRegistryPath)
         .catch((reason) => {
             console.error(`(!) Stub generation failed - ${reason}`);
             process.exit(1);

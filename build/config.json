@@ -1,21 +1,24 @@
 {
 	"containerRegistry": "devcon.azurecr.io",
-	"containerRegistryPath": "dev/devcontainers",
-	"definitionsToPush": [
-		"alpine-3.10-git",
-		"debian-9-git",
-		"javascript-node-10",
-		"javascript-node-12",
-		"typescript-node-10",
-		"typescript-node-12",
-		"ubuntu-18.04-git"
-	],
-	"definitionsToSkip": [
-		"docker-existing-docker-compose",
-		"docker-existing-dockerfile"
-	],
+	"containerRegistryPath": "public/vscode/devcontainers",
+	"stubRegistry": "mcr.microsoft.com",
+	"stubRegistryPath": "vscode/devcontainers",
+	"definitionBuildGraph": {
+		"javascript-node-10": {
+			"typescript-node-10": true
+		},
+		"javascript-node-12": {
+			"typescript-node-12": true
+		},
+		"alpine-3.10-git": true,
+		"debian-9-git": true,
+		"ubuntu-18.04-git": true
+	},
 	"alpineDefinitions": [
 	    "alpine-3.10-git"
+	],
+	"redhatDefinitions": [
+	    "java-12"
 	],
 	"filesToStage": [
 		"+(containers|repository-containers)/**/!(test-project)/*",
@@ -24,8 +27,14 @@
 		"yarn.lock",
 		".npmignore"
 	],
-	"devContainerJsonPreamble": "For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at",
-	"dockerFilePreamble": "For information on the contents of the image referenced below, see the Dockerfile at",
-	"vscodeDevContainersRepo": "https://github.com/microsoft/vscode-dev-containers",
-	"containersPathInRepo": "containers"
+	"githubRepoName": "microsoft/vscode-dev-containers",
+	"containersPathInRepo": "containers",
+	"scriptLibraryPathInRepo": "script-library",
+	"commonScriptNames": {
+		"debian": "common-debian.sh",
+		"alpine": "common-alpine.sh",
+		"redhat": "common-redhat.sh"
+	},
+	"devContainerJsonPreamble": "For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:",
+	"dockerFilePreamble": "For information on the contents of the container image below, see following Dockerfile:"
 }
