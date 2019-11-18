@@ -16,7 +16,7 @@ ARG USER_GID=$USER_UID
 ARG INSTALL_ZSH="true"
 
 # Location and expected SHA for common setup script - SHA generated on release
-ARG COMMON_SCRIPT_SOURCE="https://aka.ms/vscode-dev-containers/common-alpine.sh"
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-alpine.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
 # Install git, bash, dependencies, and add a non-root user
