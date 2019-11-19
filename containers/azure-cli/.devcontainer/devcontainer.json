@@ -19,7 +19,8 @@
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
-	// Uncomment the next line if you want to publish any ports.
+	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
+	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
