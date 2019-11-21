@@ -7,7 +7,7 @@
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
-		"java.home": "/docker-java-home"
+		"java.home": "/usr/lib/jvm/zulu-8-azure-amd64"
 	},
 
 	// Uncomment the next line to run commands after the container is created.
