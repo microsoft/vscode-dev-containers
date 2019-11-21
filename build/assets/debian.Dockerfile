@@ -15,22 +15,23 @@ ARG USER_GID=$USER_UID
 # [Optional] Update UID/GID if needed and install additional software
 RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
         sudo groupmod 1000 --gid $USER_GID \
-        && sudo usermod --uid $USER_UID --gid $USER_GID 1000 \
+        && sudo usermod --uid $USER_UID --gid $USER_GID 1000; \
     fi
 
 # ENV DEBIAN_FRONTEND=noninteractive
 # RUN apt-get update \
 #    #
-#    ***************************************************************
-#    * Add steps for installing any other needed dependencies here *
-#    ***************************************************************
+#    # ****************************************************************
+#    # * Add steps for installing any other needed dependencies here. *
+#    # * Omit sudo if it isn't installed and you are running as root. *
+#    # ****************************************************************
 #    && sudo apt-get -y install --no-reccomends <your-package-name-here>
 #    #
 #    # Clean up
 #    && sudo apt-get autoremove -y \
 #    && sudo apt-get clean -y \
 #    && sudo rm -rf /var/lib/apt/lists/*
-# ENV DEBIAN_FRONTEND=
+# ENV DEBIAN_FRONTEND=dialog
 
 # Uncomment to default to non-root user
 # USER $USER_UID

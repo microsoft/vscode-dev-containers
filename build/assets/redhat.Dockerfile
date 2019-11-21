@@ -15,12 +15,13 @@ ARG USER_GID=$USER_UID
 # [Optional] Update UID/GID if needed and install additional software
 RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
         sudo groupmod 1000 --gid $USER_GID \
-        && sudo usermod --uid $USER_UID --gid $USER_GID 1000 \
+        && sudo usermod --uid $USER_UID --gid $USER_GID 1000; \
     fi
 
-# ***************************************************************
-# * Add steps for installing any other needed dependencies here *
-# ***************************************************************
+# ****************************************************************
+# * Add steps for installing any other needed dependencies here. *
+# * Omit sudo if it isn't installed and you are running as root. *
+# ****************************************************************
 # RUN sudo yum -y install <your-package-name-here> \
 #     # 
 #     # Clean up

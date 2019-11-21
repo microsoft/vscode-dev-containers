@@ -3,23 +3,60 @@
 	"containerRegistryPath": "public/vscode/devcontainers",
 	"stubRegistry": "mcr.microsoft.com",
 	"stubRegistryPath": "vscode/devcontainers",
-	"definitionBuildGraph": {
-		"ubuntu-18.04-git": true,
-		"alpine-3.10-git": true,
-		"debian-9-git": true,
-		"javascript-node-10": {
-			"typescript-node-10": true
+
+	"definitionBuildSettings": {
+		"debian-9-git": {
+			"latest": true,
+			"rootDistro": "debian",
+			"tags": [
+				"base:${VERSION}-debian-9",
+				"base:${VERSION}-stretch"
+			]
+		},
+		"ubuntu-18.04-git": {
+			"rootDistro": "debian",
+			"tags": [
+				"base:${VERSION}-ubuntu-18.04",
+				"base:${VERSION}-bionic"
+			]
+		},
+		"alpine-3.10-git": {
+			"rootDistro": "alpine",
+			"tags": [
+				 "base:${VERSION}-alpine-3.10"
+			]
 		},
 		"javascript-node-12": {
-			"typescript-node-12": true
+			"latest": true,
+			"rootDistro": "debian",
+			"tags": [
+				"javascript-node:${VERSION}-12"
+			]
+		},
+		"javascript-node-10": {
+			"latest": true,
+			"rootDistro": "debian",
+			"tags": [
+				"javascript-node:${VERSION}-10"
+			]
+		},
+		"typescript-node-12": {
+			"latest": true,
+			"rootDistro": "debian",
+			"parent": "javascript-node-12",
+			"tags": [
+				"typescript-node:${VERSION}-12"
+			]
+		},
+		"typescript-node-10": {
+			"rootDistro": "debian",
+			"parent": "javascript-node-10",
+			"tags": [
+				"typescript-node:${VERSION}-10"
+			]
 		}
 	},
-	"alpineDefinitions": [
-	    "alpine-3.10-git"
-	],
-	"redhatDefinitions": [
-	    "java-12"
-	],
+
 	"filesToStage": [
 		"+(containers|repository-containers)/**/!(test-project)/*",
 		"LICENSE",
@@ -27,14 +64,11 @@
 		"yarn.lock",
 		".npmignore"
 	],
+
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",
 	"scriptLibraryPathInRepo": "script-library",
-	"commonScriptNames": {
-		"debian": "common-debian.sh",
-		"alpine": "common-alpine.sh",
-		"redhat": "common-redhat.sh"
-	},
+
 	"devContainerJsonPreamble": "For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:",
 	"dockerFilePreamble": "For information on the contents of the container image below, see following Dockerfile:"
 }

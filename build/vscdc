@@ -7,7 +7,8 @@
 const utils = require('./src/utils');
 const push = require('./src/push').push;
 const package = require('./src/package').package;
-const createStub = require('./src/update').createStub;
+const createStub = require('./src/prep').createStub;
+const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
 const packageJson = require('../package.json');
 
 console.log('vscode-dev-containers CLI\nCopyright (c) Microsoft Corporation. All rights reserved.\n')
@@ -81,7 +82,7 @@ require('yargs')
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
-                    default: utils.getConfig('vscodeDevContainersRepo', 'https://github.com/microsoft/vscode-dev-containers')
+                    default: utils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'update-latest': {
                     describe: 'whether to tag latest and {MAJOR}',
@@ -119,7 +120,7 @@ require('yargs')
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
-                    default: utils.getConfig('vscodeDevContainersRepo', 'https://github.com/microsoft/vscode-dev-containers')
+                    default: utils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'has-base-dockerfile': {
                     describe: 'whether base.Dockerfile exists',
@@ -128,6 +129,27 @@ require('yargs')
                 }
             })
     }, stubCommand)
+    .command('cg', 'generate cgmanifest.json', (yargs) => {
+        yargs
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or branch',
+                    default: 'master'
+                },
+                'registry': {
+                    describe: 'container registry to push images to',
+                    default: utils.getConfig('containerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: utils.getConfig('containerRegistryPath', '')
+                },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: utils.getConfig('vscodeDevContainersRepo', 'https://github.com/microsoft/vscode-dev-containers')
+                }
+            })
+    }, cgCommand)
     .demandCommand()
     .help()
     .argv;
@@ -153,6 +175,14 @@ function stubCommand(argv) {
     createStub(argv.devcontainer, argv.path, argv.githubRepo, argv.release, argv.hasBaseDockerfile, argv.stubRegistry, argv.stubRegistryPath)
         .catch((reason) => {
             console.error(`(!) Stub generation failed - ${reason}`);
+            process.exit(1);
+        });
+}
+
+function cgCommand(argv) {
+    generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath)
+        .catch((reason) => {
+            console.error(`(!) Component governence manifest generation failed - ${reason}`);
             process.exit(1);
         });
 }

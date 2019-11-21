@@ -4,6 +4,7 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 const fs = require('fs');
+const https = require('https');
 const crypto = require('crypto');
 const rimrafCb = require('rimraf');
 const mkdirpCb = require('mkdirp');
@@ -29,12 +30,12 @@ function getConfig(property, defaultVal) {
 
 function getVersionFromRelease(release) {
     // Already is a version
-    if(!isNaN(parseInt(release.charAt(0)))) {
+    if (!isNaN(parseInt(release.charAt(0)))) {
         return release;
     }
 
     // Is a release string
-    if(release.charAt(0) === 'v' && !isNaN(parseInt(release.charAt(1)))) {
+    if (release.charAt(0) === 'v' && !isNaN(parseInt(release.charAt(1)))) {
         return release.substr(1);
     }
 
@@ -43,46 +44,61 @@ function getVersionFromRelease(release) {
 }
 
 function getLinuxDistroForDefinition(definitionId) {
-    if (getConfig('alpineDefinitions',[]).indexOf(definitionId) >= 0) {
-        return 'alpine';
-    }
-    if (getConfig('redhatDefinitions',[]).indexOf(definitionId) >= 0) {
-        return 'redhat';
-    }
-    return 'debian';
+    return config.definitionBuildSettings[definitionId].rootDistro || 'debian';
 }
 
-function getBaseTag(definitionId, registry, registryPath) {
-    registry = registry || getConfig('containerRegistry', 'docker.io');
-    registryPath = registryPath || getConfig('registryUser');
-    return `${registry}/${registryPath}/${definitionId}`;
+function getTagsForVersion(definitionId, version, registry, registryPath) {
+    if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
+        return null;
+    }
+    return config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
+        // One of the tags that needs to be supported is one where there is no version, but there
+        // are other attributes. For example, python:3 in addition to python:0.35.0-3. So, a version
+        // of '' is allowed. However, there are also instances that are just the version, so in 
+        // these cases latest would be used instead. However, latest is passed in separately.
+        const baseTag = tag.replace('${VERSION}', version).replace(':-', ':');
+        if (baseTag.charAt(baseTag.length - 1) !== ':') {
+            list.push(`${registry}/${registryPath}/${baseTag}`);
+        }
+        return list;
+    }, []);
 }
 
 module.exports = {
-    spawn: async function (command, args, opts) {
+    spawn: async (command, args, opts) => {
         opts = opts || { stdio: 'inherit', shell: true };
         return new Promise((resolve, reject) => {
+            let result = '';
+            let errorOutput = '';
             const proc = spawnCb(command, args, opts);
             proc.on('close', (code, signal) => {
                 if (code !== 0) {
+                    console.log(result);
+                    console.error(errorOutput);
                     reject(`Non-zero exit code: ${code} ${signal || ''}`);
                     return;
                 }
-                resolve();
+                resolve(result);
             });
+            if (proc.stdout) {
+                proc.stdout.on('data', (chunk) => result += chunk.toString());
+            }
+            if (proc.stderr) {
+                proc.stderr.on('data', (chunk) => result += chunk.toString());
+            }
             proc.on('error', (err) => {
                 reject(err);
             });
         });
     },
 
-    rename: async function (from, to) {
+    rename: async (from, to) => {
         return new Promise((resolve, reject) => {
             fs.rename(from, to, (err) => err ? reject(err) : resolve());
         });
     },
 
-    readFile: async function (filePath) {
+    readFile: async (filePath) => {
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, 'utf8', (err, data) => err ? reject(err) : resolve(data.toString()));
         });
@@ -94,20 +110,20 @@ module.exports = {
         });
     },
 
-    mkdirp: async function (pathToMake) {
+    mkdirp: async (pathToMake) => {
         return new Promise((resolve, reject) => {
             mkdirpCb(pathToMake, (err, made) => err ? reject(err) : resolve(made));
         });
     },
 
-    rimraf: async function (pathToRemove, opts) {
+    rimraf: async (pathToRemove, opts) => {
         opts = opts || {};
         return new Promise((resolve, reject) => {
             rimrafCb(pathToRemove, opts, (err) => err ? reject(err) : resolve(pathToRemove));
         });
     },
 
-    copyFiles: async function (source, blobs, target) {
+    copyFiles: async (source, blobs, target) => {
         return new Promise((resolve, reject) => {
             process.chdir(source);
             copyFilesCb(
@@ -117,7 +133,7 @@ module.exports = {
         });
     },
 
-    readdir: async function (dirPath, opts) {
+    readdir: async (dirPath, opts) => {
         opts = opts || {};
         return new Promise((resolve, reject) => {
             fs.readdir(dirPath, opts, (err, files) => err ? reject(err) : resolve(files));
@@ -128,36 +144,62 @@ module.exports = {
         return fs.existsSync(filePath);
     },
 
-    getTagList: function(definitionId, release, updateLatest, registry, registryPath) {
-        const baseTag = getBaseTag(definitionId, registry, registryPath);
-
+    getTagList: (definitionId, release, updateLatest, registry, registryPath) => {
         const version = getVersionFromRelease(release);
-        if(version === 'dev') {
-            return [`${baseTag}:${version}`]
+        if (version === 'dev') {
+            return getTagsForVersion(definitionId, 'dev', registry, registryPath);
         }
 
         const versionParts = version.split('.');
         if (versionParts.length !== 3) {
-            throw(`Invalid version format in ${version}.`);    
+            throw (`Invalid version format in ${version}.`);
         }
 
-        return updateLatest ?
-            [
-                `${baseTag}:${versionParts[0]}`,
-                `${baseTag}:${versionParts[0]}.${versionParts[1]}`,
-                `${baseTag}:${version}`,
-                `${baseTag}:latest`
-            ] :
-            [  
-                `${baseTag}:${versionParts[0]}.${versionParts[1]}`,
-                `${baseTag}:${version}`
+        const versionList = updateLatest ? [
+            version,
+            `${versionParts[0]}.${versionParts[1]}`,
+            `${versionParts[0]}`,
+            '' // This is the equivalent of latest - e.g. python:3 instead of python:0.35.0-3
+        ] : [
+                version,
+                `${versionParts[0]}.${versionParts[1]}`
             ];
+
+        const tagList = (updateLatest && config.definitionBuildSettings[definitionId].latest) ? ['latest'] : [];
+        versionList.forEach((tagVersion) => {
+            tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath));
+        });
+
+        return tagList;
     },
 
-    majorMinorFromRelease: function(release) {
+    getSortedDefinitionBuildList: () => {
+        const sortedList = [];
+        const settingsCopy = JSON.parse(JSON.stringify(config.definitionBuildSettings));
+
+        for (let definitionId in config.definitionBuildSettings) {
+            const add = (defId) => {
+                if (typeof settingsCopy[defId] === 'object') {
+                    add(settingsCopy[defId].parent);
+                    sortedList.push(defId);
+                    settingsCopy[defId] = undefined;
+                }
+            }
+            add(definitionId);
+        }
+
+        return sortedList;
+    },
+
+    getParentTagForVersion: (definitionId, version, registry, registryPath) => {
+        const parentId = config.definitionBuildSettings[definitionId].parent;
+        return parentId ? getTagsForVersion(parentId, version, registry, registryPath)[0] : null;
+    },
+
+    majorMinorFromRelease: (release) => {
         const version = getVersionFromRelease(release);
-        
-        if(version === 'dev') {
+
+        if (version === 'dev') {
             return 'dev';
         }
 
@@ -169,10 +211,10 @@ module.exports = {
         return new Promise((resolve, reject) => {
             const fd = fs.createReadStream(filePath);
             const hash = crypto.createHash('sha256');
-            hash.setEncoding('hex');    
-            fd.on('end', function() {
+            hash.setEncoding('hex');
+            fd.on('end', function () {
                 hash.end();
-                resolve(hash.read()); 
+                resolve(hash.read());
             });
             fd.on('error', (err) => {
                 reject(err);
@@ -181,17 +223,36 @@ module.exports = {
         })
     },
 
-    objectByDefinitionLinuxDistro: (definitionId, objectsByDistro) =>{
+    shaForString: (content) => {
+        const hash = crypto.createHash('sha256');
+        hash.update(content);
+        return hash.digest('hex');
+    },
+
+    objectByDefinitionLinuxDistro: (definitionId, objectsByDistro) => {
         const distro = getLinuxDistroForDefinition(definitionId);
         const obj = objectsByDistro[distro];
         return obj;
+    },
+
+    getUrlAsString: async (url) => {
+        return new Promise((resolve, reject) => {
+            let content = '';
+            const req = https.get(url, function (res) {
+                res.on('data', function (chunk) {
+                    content += chunk.toString();
+                });
+            });
+            req.on("error", reject);
+            req.on('close', () => resolve(content));
+        });
     },
 
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
 
     getVersionFromRelease: getVersionFromRelease,
 
-    getBaseTag: getBaseTag,
+    getTagsForVersion: getTagsForVersion,
 
     getConfig: getConfig
 };

@@ -56,4 +56,4 @@ ENV MAVEN_CONFIG /root/.m2
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-ENV DEBIAN_FRONTEND=
+ENV DEBIAN_FRONTEND=dialog

@@ -20,7 +20,8 @@ ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
 # Install git, bash, dependencies, and add a non-root user
-RUN apk add --no-cache wget coreutils ca-certificates \
+RUN apk update \
+    && apk add --no-cache wget coreutils ca-certificates \
     #
     # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
     && wget -q -O /tmp/common-setup.sh $COMMON_SCRIPT_SOURCE \
