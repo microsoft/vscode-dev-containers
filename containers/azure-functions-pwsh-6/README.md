@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team |
+| *Contributors* | [brettmillerb](https://github.com/brettmillerb) |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Azure Functions, .NET Core, PowerShell |
 
