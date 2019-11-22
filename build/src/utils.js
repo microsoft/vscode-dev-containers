@@ -47,6 +47,21 @@ function getLinuxDistroForDefinition(definitionId) {
     return config.definitionBuildSettings[definitionId].rootDistro || 'debian';
 }
 
+function getLatestTag(definitionId, registry, registryPath) {
+    if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
+        return null;
+    }
+    return config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
+        // One of the tags that needs to be supported is one where there is no version, but there
+        // are other attributes. For example, python:3 in addition to python:0.35.0-3. So, a version
+        // of '' is allowed. However, there are also instances that are just the version, so in 
+        // these cases latest would be used instead. However, latest is passed in separately.
+        list.push(`${registry}/${registryPath}/${tag.replace(/:.+/, ':latest')}`);
+        return list;
+    }, []);
+
+}
+
 function getTagsForVersion(definitionId, version, registry, registryPath) {
     if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
         return null;
@@ -66,6 +81,8 @@ function getTagsForVersion(definitionId, version, registry, registryPath) {
 
 module.exports = {
     spawn: async (command, args, opts) => {
+        console.log(`(*) Spawn: ${command}${args.reduce((prev, current)=> `${prev} ${current}`,'')}`);
+
         opts = opts || { stdio: 'inherit', shell: true };
         return new Promise((resolve, reject) => {
             let result = '';
@@ -159,13 +176,14 @@ module.exports = {
             version,
             `${versionParts[0]}.${versionParts[1]}`,
             `${versionParts[0]}`,
-            '' // This is the equivalent of latest - e.g. python:3 instead of python:0.35.0-3
+            '' // This is the equivalent of latest for qualified tags- e.g. python:3 instead of python:0.35.0-3
         ] : [
                 version,
                 `${versionParts[0]}.${versionParts[1]}`
             ];
 
-        let tagList = (updateLatest && config.definitionBuildSettings[definitionId].latest) ? ['latest'] : [];
+        // If this variant should actually be the latest tag, use it
+        let tagList = (updateLatest && config.definitionBuildSettings[definitionId].latest) ? getLatestTag(definitionId, registry, registryPath) : [];
         versionList.forEach((tagVersion) => {
             tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath));
         });

@@ -34,7 +34,6 @@
 			]
 		},
 		"javascript-node-10": {
-			"latest": true,
 			"rootDistro": "debian",
 			"tags": [
 				"javascript-node:${VERSION}-10"

@@ -26,7 +26,7 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"args": [
 				"pack",
-				"--release", "clantz/image-generation",
+				"--release", "v0.0.2",
 				"--github-repo", "chuxel/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
 				"--registryPath", "vscode-dev-containers",
