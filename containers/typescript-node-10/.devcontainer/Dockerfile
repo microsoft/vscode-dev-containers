@@ -14,8 +14,8 @@ ARG USER_GID=$USER_UID
 
 # Alter node user as needed, install tslint, typescript. eslint is installed by javascript image
 RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
-        sudo groupmod 1000 --gid $USER_GID \
-        && sudo usermod --uid $USER_UID --gid $USER_GID 1000; \
+        groupmod 1000 --gid $USER_GID \
+        && usermod --uid $USER_UID --gid $USER_GID 1000; \
     fi \
     #
     # Install tslint, typescript. eslint is installed by javascript image
