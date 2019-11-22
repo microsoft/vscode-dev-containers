@@ -19,6 +19,8 @@ ARG USER_GID=$USER_UID
 # Maven settings
 ARG MAVEN_VERSION=3.6.1
 ARG MAVEN_SHA=b4880fb7a3d81edd190a029440cdf17f308621af68475a4fe976296e71ff4a4b546dd6d8a58aaafba334d309cc11e638c52808a4b0e818fc0fd544226d952544
+ENV MAVEN_HOME=/usr/local/share/maven
+COPY maven-settings.xml ${MAVEN_HOME}/ref/
 
 # Configure apt and install packages
 RUN apt-get update \
@@ -43,13 +45,12 @@ RUN apt-get update \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     # 
     # Install Maven
-    && mkdir -p /usr/share/maven /usr/share/maven/ref /home/${USERNAME}/.m2 \
-    && chown $USER_UID:$USER_UID /home/${USERNAME}/.m2 \
+    && mkdir -p ${MAVEN_HOME} ${MAVEN_HOME}/ref \
     && curl -fsSL -o /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
     && echo "${MAVEN_SHA} /tmp/apache-maven.tar.gz" | sha512sum -c - \
-    && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
+    && tar -xzf /tmp/apache-maven.tar.gz -C ${MAVEN_HOME} --strip-components=1 \
     && rm -f /tmp/apache-maven.tar.gz \
-    && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
+    && ln -s ${MAVEN_HOME}/bin/mvn /usr/local/bin/mvn \
     #
     # Install Azure Functions, .NET Core, and Azure CLI
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
@@ -62,12 +63,6 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
-
-ENV MAVEN_HOME /usr/share/maven
-ENV MAVEN_CONFIG /home/$USERNAME/.m2
-
-COPY maven-settings.xml /usr/share/maven/ref/
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
