@@ -16,17 +16,18 @@ While the definition itself works unmodified, there are some tips that can help 
 
 ### Using appPort with ASP.NET Core
 
-By default, ASP.NET Core only listens to localhost. The challenge is that ASP.NET Core thinks that localhost is inside the container. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. So you can override the defaults so that ASP.NET will listen to traffic from your local machine as well.
+By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Unfortunately, means that ASP.NET Core only listens to localhost is inside the container itself. It needs to listen to `*` or `0.0.0.0` for the application to be accessible externally.
+
+This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json`. Using an environment variable to override this setting in the container only, which allows you to leave your actual application config as-is for use when running locally.
 
 ```json
 "appPort": [5000, 5001],
 "runArgs": [
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000",
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001"
+    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000"
 ]
 ```
 
-Rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect.
+If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
 ### Enabling HTTPS in ASP.NET Core
 
@@ -41,7 +42,7 @@ dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.as
 **macOS/Linux terminal**
 
 ```powershell
-dotnet dev-certs https --trust && dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
 ```
 
 Next, add the following in the `runArgs` array in `.devcontainer/devcontainer.json` (assuming port 5000 and 5001 are the correct ports):
@@ -57,7 +58,7 @@ Next, add the following in the `runArgs` array in `.devcontainer/devcontainer.js
 ]
 ```
 
-Rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect.
+If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
 ### Debug Configuration
 
@@ -82,7 +83,7 @@ If you would like to install the Azure CLI update this line in `.devcontainer/Do
 ARG INSTALL_AZURE_CLI="true"
 ```
 
-Rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect.
+If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
 ### Adding the definition to your folder
 

@@ -32,7 +32,7 @@ You can adapt your own existing development container Dockerfile to support this
         && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
         && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
         && apt-get update \
-        && apt-get install -y docker-ce-cli
+        && apt-get install -y docker-ce-cli \
         #
         # Install Docker Compose
         && curl -sSL "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
@@ -45,17 +45,7 @@ You can adapt your own existing development container Dockerfile to support this
     "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
     ```
 
-3. Finally, update `devcontainer.json` to force the Docker extension to be installed inside the container instead of locally. From `.devcontainer/devcontainer.json`:
-
-    ```json
-    "settings": {
-        "remote.extensionKind": {
-            "ms-azuretools.vscode-docker": "workspace"
-        }
-    },
-    ```
-
-4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+3. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
