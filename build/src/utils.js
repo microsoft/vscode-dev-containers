@@ -165,9 +165,9 @@ module.exports = {
                 `${versionParts[0]}.${versionParts[1]}`
             ];
 
-        const tagList = (updateLatest && config.definitionBuildSettings[definitionId].latest) ? ['latest'] : [];
+        let tagList = (updateLatest && config.definitionBuildSettings[definitionId].latest) ? ['latest'] : [];
         versionList.forEach((tagVersion) => {
-            tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath));
+            tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath));
         });
 
         return tagList;
