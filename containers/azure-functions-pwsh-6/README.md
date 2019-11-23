@@ -1,8 +1,8 @@
-# Azure Functions & Pwsh (.NET Core Latest)
+# Azure Functions & PowerShell 6
 
 ## Summary
 
-*Develop Azure Functions in PowerShell. Includes NET Core (Latest), the Azure Functions SDK, and related extensions and dependencies.*
+*Develop Azure Functions in PowerShell. Includes .NET Core 2.2, the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|

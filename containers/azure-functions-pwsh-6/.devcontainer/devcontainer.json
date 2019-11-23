@@ -1,7 +1,8 @@
 {
-    "name": "Azure Functions & pwsh (.NET Core 2.2)",
+    "name": "Azure Functions & PowerShell 6",
     "dockerFile": "Dockerfile",
-    "appPort": 7071,
+	"appPort": 7071,
+	
     // Use 'settings' to set *default* container specific settings.json values on container create. 
     // You can edit these settings after create using File > Preferences > Settings > Remote.
     "settings": {
