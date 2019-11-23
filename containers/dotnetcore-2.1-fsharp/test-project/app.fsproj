@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Compile Include="Program.fs" />
-    <Reference Include="netstandard" />
   </ItemGroup>
 
 </Project>
