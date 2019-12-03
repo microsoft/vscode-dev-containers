@@ -2,7 +2,7 @@
 	"name": "Dev Container Definition Template - Container Image",
 
 	// Update the 'image' property with your Docker image name.
-	"image": "ubuntu:bionic",
+	"image": "ubuntu:18.04",
 
 	// The optional 'runArgs' property can be used to specify additional runtime arguments.
 	"runArgs": [
