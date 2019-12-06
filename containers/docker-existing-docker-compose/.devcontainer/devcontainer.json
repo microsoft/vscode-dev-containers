@@ -26,6 +26,10 @@
 		"terminal.integrated.shell.linux": null
 	},
 
+	// Uncomment the next line to have VS Code connect as an existing non-root user in the container. See
+	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
+	// "remoteUser": "vscode",
+
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
 

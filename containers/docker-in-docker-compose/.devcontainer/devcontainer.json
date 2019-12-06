@@ -20,6 +20,10 @@
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "docker --version"
 
+	// Uncomment the next line to have VS Code connect as an existing non-root user in the container. See
+	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
+	// "remoteUser": "vscode",
+
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"ms-azuretools.vscode-docker"
