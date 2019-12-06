@@ -39,10 +39,10 @@ You can adapt your own existing development container Dockerfile to support this
         && chmod +x /usr/local/bin/docker-compose
     ```
 
-2. Then just forward the Docker socket by mounting it in the container using `runArgs`. From `.devcontainer/devcontainer.json`:
+2. Then just forward the Docker socket by mounting it in the container using the `mounts` property. From `.devcontainer/devcontainer.json`:
 
     ```json
-    "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
+    "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ]
     ```
 
 3. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
