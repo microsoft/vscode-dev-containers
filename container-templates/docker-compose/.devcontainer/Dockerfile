@@ -3,10 +3,10 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# ********************************************************
-# * Note: A Docker is optional when using Docker Compose *
-# * but has been included here for completeness.         *
-# ********************************************************
+# **********************************************************
+# * Note: Using a Dockerfile is optional when using Docker *
+# * Compose but has been included here for completeness.   *
+# **********************************************************
 
 FROM debian:9
 
@@ -32,7 +32,7 @@ RUN apt-get update \
     # * Add steps for installing needed dependencies here *
     # *****************************************************
     #
-    # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
+    # Create a non-root user
     && groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
     # [Optional] Add sudo support for the non-root user
