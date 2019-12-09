@@ -30,7 +30,7 @@ RUN apt-get update \
     # Install pylint
     && /opt/conda/bin/pip install pylint \
     #
-    # Update Python environment based on environment.yml (if presenet)
+    # Update Python environment based on environment.yml (if present)
     && if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
     && rm -rf /tmp/conda-tmp \
     #
