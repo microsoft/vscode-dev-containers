@@ -25,35 +25,31 @@ You can adapt your own existing development container Dockerfile to support this
 1. First, update your `devcontainer.json` to forward the local Docker socket and mount the local `.kube` folder in the container so its contents can be reused. From `.devcontainer/devcontainer.json`:
 
     ```json
-    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-        "-v", "/var/run/docker.sock:/var/run/docker.sock",
-        "-v", "$HOME/.kube:/root/.kube-localhost"]
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock",
+        "source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost,type=bind"
+    ],
+    "remoteEnv": {
+        "SYNC_LOCALHOST_KUBECONFIG": "true"
+    }
     ```
 
     If you also want to reuse your Minikube certificates, just add a mount for your local `.minikube` folder as well:
 
     ```json
-    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-        "-v", "/var/run/docker.sock:/var/run/docker.sock",
-        "-v", "$HOME/.kube:/root/.kube-localhost",
-        "-v", "$HOME/.minikube:/root/.minikube-localhost"]
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock",
+        "source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost,type=bind",
+        "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost,type=bind"
+    ],
+    "remoteEnv": {
+        "SYNC_LOCALHOST_KUBECONFIG": "true"
+    }
     ```
 
-2. Second, update `devcontainer.json` to force the Docker extension to be installed inside the container instead of locally. From `.devcontainer/devcontainer.json`:
-
-    ```json
-    "settings": {
-        "remote.extensionKind": {
-            "ms-azuretools.vscode-docker": "workspace"
-        }
-    },
-    ```
-
-3. Next, update your Dockerfile so the default shell is `bash`, and then add a script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates to `.bashrc`. From `.devcontainer/Dockerfile`:
+2. Next, update your Dockerfile so the default shell is `bash`, and then add a script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates to `.bashrc`. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
-    ENV SHELL /bin/bash
-
     RUN echo '\n\
     if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then\n\
         mkdir -p $HOME/.kube\n\
@@ -73,7 +69,7 @@ You can adapt your own existing development container Dockerfile to support this
     >> $HOME/.bashrc
     ```
 
-4. Finally, update your Dockerfile to install all of the needed CLIs in the container. From `.devcontainer/Dockerfile`:
+3. Finally, update your Dockerfile to install all of the needed CLIs in the container. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
     RUN apt-get update \
@@ -93,7 +89,7 @@ You can adapt your own existing development container Dockerfile to support this
         curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash -
     ```
 
-5. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
@@ -107,13 +103,13 @@ A few notes on the definition:
     FROM node:lts
     ```
 
-* If you also want to sync your Minikube certificates, open `.devcontainer/devcontainer.json` and uncomment this line in `runArgs`:
+* If you also want to sync your Minikube certificates, open `.devcontainer/devcontainer.json` and uncomment this line in the `mount` property :
 
     ```json
-    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost",
+    "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost,type=bind",
     ```
-    
-* If you want to **disable sync'ing** local Kubernetes config / Minikube certs into the container, remove `"-e", "SYNC_LOCALHOST_KUBECONFIG=true",` from `runArgs` in `.devcontainer/devcontainer.json`.
+
+* If you want to **disable sync'ing** local Kubernetes config / Minikube certs into the container, remove `"SYNC_LOCALHOST_KUBECONFIG": "true",` from `remoteEnv` in `.devcontainer/devcontainer.json`.
 
 See the section below for your operating system for more detailed setup instructions.
 
@@ -140,6 +136,7 @@ See the section below for your operating system for more detailed setup instruct
 7. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
 8. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
+
     ```
     helm init
     ```

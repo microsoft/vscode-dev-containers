@@ -5,10 +5,10 @@
 ARG DOTNETCORE_VESRION=2.1
 FROM mcr.microsoft.com/dotnet/core/sdk:${DOTNETCORE_VESRION}
 
-# This Dockerfile adds a non-root 'vscode' user with sudo access. However, for Linux,
-# this user's GID/UID must match your local user UID/GID to avoid permission issues
-# with bind mounts. Update USER_UID / USER_GID if yours is not 1000. See
-# https://aka.ms/vscode-remote/containers/non-root-user for details.
+# This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
+# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
+# will be updated to match your local UID/GID (when using the dockerFile property).
+# See https://aka.ms/vscode-remote/containers/non-root-user for details.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID

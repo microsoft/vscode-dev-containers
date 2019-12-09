@@ -8,10 +8,11 @@ FROM node:8
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
-# The node image comes with a base non-root 'node' user which this Dockerfile
-# gives sudo access. However, for Linux, this user's GID/UID must match your local
-# user UID/GID to avoid permission issues with bind mounts. Update USER_UID / USER_GID 
-# if yours is not 1000. See https://aka.ms/vscode-remote/containers/non-root-user.
+# The node image includes a non-root user with sudo access. Use the "remoteUser"
+# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
+# will be updated to match your local UID/GID (when using the dockerFile property).
+# See https://aka.ms/vscode-remote/containers/non-root-user for details.
+ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
@@ -36,13 +37,16 @@ RUN apt-get update \
     # Install tslint and typescript globally
     && npm install -g tslint eslint typescript \
     #
-    # [Optional] Update a non-root user to match UID/GID - see https://aka.ms/vscode-remote/containers/non-root-user.
-    && if [ "$USER_GID" != "1000" ]; then groupmod node --gid $USER_GID; fi \
-    && if [ "$USER_UID" != "1000" ]; then usermod --uid $USER_UID node; fi \
+    # [Optional] Update a non-root user to UID/GID if needed.
+    && if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
+        groupmod --gid $USER_GID $USERNAME \
+        && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
+        && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
+    fi \
     # [Optional] Add add sudo support for non-root user
     && apt-get install -y sudo \
-    && echo node ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/node \
-    && chmod 0440 /etc/sudoers.d/node \
+    && echo node ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
     #
     # Clean up
     && apt-get autoremove -y \
