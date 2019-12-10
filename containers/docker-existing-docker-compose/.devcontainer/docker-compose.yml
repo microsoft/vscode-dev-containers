@@ -7,9 +7,12 @@ version: '3'
 services:
   # Update this to the name of the service you want to work with in your docker-compose.yml file
   your-service-name-here:
-    # You may want to add a non-root user to your Dockerfile. On Linux, this will prevent
-    # new files getting created as root. See https://aka.ms/vscode-remote/containers/non-root-user
-    # for the needed Dockerfile updates and then uncomment the next line.
+    # You may want to add a non-root user to your Dockerfile and uncomment the line below
+    # to cause all processes to run as this user. Once present, you can also simply
+    # use the "remoteUser" property in devcontainer.json if you just want VS Code and
+    # its sub-processes (terminals, tasks, debugging) to execute as the user. On Linux,
+    # you may need to ensure the UID and GID of the container user you create matches your 
+    # local user. See https://aka.ms/vscode-remote/containers/non-root for details.
     # user: vscode
 
     # Uncomment if you want to add a different Dockerfile in the .devcontainer folder

@@ -9,8 +9,7 @@ FROM node:12
 ENV DEBIAN_FRONTEND=noninteractive
 
 # The node image includes a non-root user with sudo access. Use the "remoteUser"
-# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
-# will be updated to match your local UID/GID (when using the dockerFile property).
+# property in devcontainer.json to use it. 
 # See https://aka.ms/vscode-remote/containers/non-root-user for details.
 ARG USERNAME=node
 ARG USER_UID=1000

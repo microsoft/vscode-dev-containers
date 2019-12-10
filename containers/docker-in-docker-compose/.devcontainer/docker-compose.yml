@@ -6,9 +6,11 @@
 version: '3'
 services:
   docker-in-docker:
-    # Uncomment the next line to use a non-root user. On Linux, this will prevent
-    # new files getting created as root, but you may need to update the USER_UID
-    # and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
+    # Uncomment the next line to use a non-root user for all processes. You can also
+    # simply use the "remoteUser" property in devcontainer.json if you just want VS Code
+    # and its sub-processes (terminals, tasks, debugging) to execute as the user. On Linux,
+    # you may need to update USER_UID and USER_GID in .devcontainer/Dockerfile to match your
+    # user if not 1000. See https://aka.ms/vscode-remote/containers/non-root for details.
     # user: vscode
 
     build: 
