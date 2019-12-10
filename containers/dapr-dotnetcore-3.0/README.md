@@ -1,14 +1,18 @@
-# C# (.NET Core 3.0)
+# Dapr with C# (.NET Core 3.0)
 
 ## Summary
 
-*Develop C# and .NET Core 3.0 based applications. Includes all needed SDKs, extensions, and dependencies.*
+*Develop Dapr applications using C# and .NET Core 3.0. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
-| *Definition type* | Dockerfile |
-| *Languages, platforms* | .NET Core, C# |
+| *Definition type* | Docker Compose |
+| *Languages, platforms* | .NET Core, C#, Dapr |
+
+## Dapr Notes
+
+When the dev container is created, the definition automatically initializes Dapr on a separate Docker network (to isolate it from Dapr instances running locally or in another Dapr dev container). This is done via the `postCreateCommand` in the `.devcontainer/devcontainer.json` and the `DAPR_NETWORK` environment variable in the `.devcontainer/docker-compose.yml`. The `DAPR_REDIS_HOST` and `DAPR_PLACEMENT_HOST` environment variables ensure that Dapr `run` commands implicitly connect to the Dapr instance in that Docker network.
 
 ## Using this definition with an existing folder
 
@@ -18,44 +22,19 @@ While the definition itself works unmodified, there are some tips that can help 
 
 By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Unfortunately, means that ASP.NET Core only listens to localhost is inside the container itself. It needs to listen to `*` or `0.0.0.0` for the application to be accessible externally.
 
-This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json`. Using an environment variable to override this setting in the container only, which allows you to leave your actual application config as-is for use when running locally.
+This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/docker-compose.yml`. Using an environment variable to override this setting in the container only, which allows you to leave your actual application config as-is for use when running locally.
+
+`.devcontainer/docker-compose.yml`:
+
+```yaml
+environment:
+  ASPNETCORE_Kestrel__Endpoints__Http__Url: http://*:5000
+```
+
+`.devcontainer/devcontainer.json`:
 
 ```json
-"appPort": [5000, 5001],
-"runArgs": [
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000"
-]
-```
-
-If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
-
-### Enabling HTTPS in ASP.NET Core
-
-To enable HTTPS in ASP.NET, you can mount an exported copy of your local dev certificate. First, export it using the following command:
-
-**Windows PowerShell**
-
-```powershell
-dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-```
-
-**macOS/Linux terminal**
-
-```powershell
-dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-```
-
-Next, add the following in the `runArgs` array in `.devcontainer/devcontainer.json` (assuming port 5000 and 5001 are the correct ports):
-
-```json
-"appPort": [5000, 5001],
-"runArgs": [
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000",
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001",
-    "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
-    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
-    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx"
-]
+"appPort": [5000],
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
@@ -92,7 +71,7 @@ If you've already opened your folder in a container, rebuild the container using
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the C# (.NET Core Latest) definition.
+   3. Select the Dapr with C# (.NET Core Latest) definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
@@ -110,13 +89,29 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/dotnetcore-latest` folder.
+4. Select the `containers/dapr-dotnetcore-latest` folder.
 5. After the folder has opened in the container, if prompted to restore packages in a notification, click "Restore".
-6. After packages are restored, press <kbd>F5</kbd> to start the project.
-7. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
-8. Select port 8090 and click the "Open Browser" button in the notification that appears.
-9. You should see "Hello remote world from ASP.NET Core!" after the page loads.
-10. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+6. Start the application with Dapr:
+
+    ```bash
+    $ cd test-project
+    $ dapr run --app-id test --app-port 5000 --port 3500 dotnet run
+    ```
+
+7. In a separate terminal, invoke the application via Dapr:
+
+    ```bash
+    # Deposit funds to the account (creating the account if not exists)
+    $ curl -d 42 -H "Content-Type: application/json" -w "\n" -X POST http://localhost:3500/v1.0/invoke/test/method/accounts/123/deposit
+    42
+    # Withdraws funds from the account
+    $ curl -d 10 -H "Content-Type: application/json" -w "\n" -X POST http://localhost:3500/v1.0/invoke/test/method/accounts/123/withdraw
+    32
+    # Get the balance of the account
+    $ curl -w "\n" http://localhost:3500/v1.0/invoke/test/method/accounts/123
+    32
+    $
+    ```
 
 ## License
 
