@@ -23,12 +23,12 @@ RUN apt-get update \
     # Verify git, needed tools installed
     && apt-get -y install git iproute2 procps lsb-release \
     #
-    # Install other dependencies
-    && apt-get install -y lldb \
+    # Install lldb, vadimcn.vscode-lldb VSCode extension dependencies
+    && apt-get install -y lldb python3-minimal libpython3.7 \
     #
     # Install Rust components
-    && rustup update \
-    && rustup component add rls rust-analysis rust-src rustfmt clippy \
+    && rustup update 2>&1 \
+    && rustup component add rls rust-analysis rust-src rustfmt clippy 2>&1 \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \

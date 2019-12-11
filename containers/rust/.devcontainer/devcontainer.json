@@ -7,7 +7,6 @@
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
-		"lldb.adapterType": "bundled",
 		"lldb.executable": "/usr/bin/lldb"
 	},
 
