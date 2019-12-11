@@ -22,9 +22,9 @@ This container solves that problem by setting the environment variable `ASPNETCO
 
 ```json
 "appPort": [5000, 5001],
-"runArgs": [
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000"
-]
+"remoteEnv": {
+    "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000"
+}
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
@@ -45,17 +45,17 @@ dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.as
 dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
 ```
 
-Next, add the following in the `runArgs` array in `.devcontainer/devcontainer.json` (assuming port 5000 and 5001 are the correct ports):
+Next, add the following in to `.devcontainer/devcontainer.json` (assuming port 5000 and 5001 are the correct ports):
 
 ```json
 "appPort": [5000, 5001],
-"runArgs": [
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000",
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001",
-    "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
-    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
-    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx"
-]
+"mounts": [
+    "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind"
+],
+"remoteEnv": {
+    "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000",
+    "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001","ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere","ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
+}
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
