@@ -54,7 +54,9 @@ Next, add the following in to `.devcontainer/devcontainer.json` (assuming port 5
 ],
 "remoteEnv": {
     "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000",
-    "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001","ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere","ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
+    "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001",
+    "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
+    "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx"
 }
 ```
 
