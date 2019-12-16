@@ -17,8 +17,8 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Maven settings
-ARG MAVEN_VERSION=3.6.1
-ARG MAVEN_SHA=b4880fb7a3d81edd190a029440cdf17f308621af68475a4fe976296e71ff4a4b546dd6d8a58aaafba334d309cc11e638c52808a4b0e818fc0fd544226d952544
+ARG MAVEN_VERSION=3.6.3
+ARG MAVEN_SHA=c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0
 ENV MAVEN_HOME=/usr/local/share/maven
 COPY maven-settings.xml ${MAVEN_HOME}/ref/
 
@@ -46,7 +46,7 @@ RUN apt-get update \
     # 
     # Install Maven
     && mkdir -p ${MAVEN_HOME} ${MAVEN_HOME}/ref \
-    && curl -fsSL -o /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+    && curl -fsSL -o /tmp/apache-maven.tar.gz https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
     && echo "${MAVEN_SHA} /tmp/apache-maven.tar.gz" | sha512sum -c - \
     && tar -xzf /tmp/apache-maven.tar.gz -C ${MAVEN_HOME} --strip-components=1 \
     && rm -f /tmp/apache-maven.tar.gz \
