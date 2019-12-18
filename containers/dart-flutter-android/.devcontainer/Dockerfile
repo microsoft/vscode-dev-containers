@@ -5,7 +5,7 @@ RUN mkdir -p /usr/share/man/man1 \
     && mkdir -p /usr/share/man/man7
 
 # Apt
-RUN apt update && apt install -y curl wget git xz-utils lib32stdc++6 unzip openjdk-8-jdk-headless
+RUN apt-get update && apt-get install -y curl wget git xz-utils lib32stdc++6 unzip openjdk-8-jdk-headless
 
 # Android SDK
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip \
