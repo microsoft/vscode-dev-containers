@@ -40,3 +40,9 @@ Please also note when you use this container you're automatically agreeing to th
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
 6. Once the container has started, you can run `flutter create my_project` to create a new project
+
+## License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).
