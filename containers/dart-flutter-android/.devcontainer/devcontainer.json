@@ -1,5 +1,5 @@
 {
-	"name": "flutter",
+	"name": "Dart & Flutter & Android",
 	"dockerFile": "Dockerfile",
 	"extensions": [
 		"dart-code.dart-code",
