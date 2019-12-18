@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team |
+| *Contributors* | The Visual Studio Container Tools team |
 | *Definition type* | Docker Compose |
 | *Languages, platforms* | .NET Core, C#, Dapr |
 
@@ -18,9 +18,9 @@ When the dev container is created, the definition automatically initializes Dapr
 
 While the definition itself works unmodified, there are some tips that can help you deal with some of the defaults .NET Core uses.
 
-### Using appPort with ASP.NET Core
+### Using `ports` with ASP.NET Core
 
-By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Unfortunately, means that ASP.NET Core only listens to localhost is inside the container itself. It needs to listen to `*` or `0.0.0.0` for the application to be accessible externally.
+By default, ASP.NET Core only listens to localhost. If you use the `ports` property in `.devcontainer/docker-compose.yml`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Unfortunately, means that ASP.NET Core only listens to localhost is inside the container itself. It needs to listen to `*` or `0.0.0.0` for the application to be accessible externally.
 
 This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/docker-compose.yml`. Using an environment variable to override this setting in the container only, which allows you to leave your actual application config as-is for use when running locally.
 
@@ -29,12 +29,8 @@ This container solves that problem by setting the environment variable `ASPNETCO
 ```yaml
 environment:
   ASPNETCORE_Kestrel__Endpoints__Http__Url: http://*:5000
-```
-
-`.devcontainer/devcontainer.json`:
-
-```json
-"appPort": [5000],
+ports:
+  - 5000
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.

@@ -6,10 +6,10 @@
 ARG DOTNETCORE_VESRION=3.0
 FROM mcr.microsoft.com/dotnet/core/sdk:${DOTNETCORE_VESRION}
 
-# This Dockerfile adds a non-root 'vscode' user with sudo access. However, for Linux,
-# this user's GID/UID must match your local user UID/GID to avoid permission issues
-# with bind mounts. Update USER_UID / USER_GID if yours is not 1000. See
-# https://aka.ms/vscode-remote/containers/non-root-user for details.
+# The node image includes a non-root user with sudo access. Use the 
+# "remoteUser" property in devcontainer.json to use it. On Linux, update 
+# these values to ensure the container user's UID/GID matches your local values.
+# See https://aka.ms/vscode-remote/containers/non-root-user for details.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -24,6 +24,9 @@ ARG INSTALL_AZURE_CLI="false"
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
+
+# Docker Compose version
+ARG COMPOSE_VERSION=1.24.0
 
 # Configure apt and install packages
 RUN apt-get update \
@@ -90,4 +93,4 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=
+ENV DEBIAN_FRONTEND=dialog
