@@ -1,0 +1,31 @@
+{
+	"name": "Dapr with C# (.NET Core 3.0)",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "docker-in-docker",
+	"workspaceFolder": "/workspace",
+
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
+
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+
+	// Ensure Dapr is running on opening the container
+	"postCreateCommand": "dapr init",
+
+	// Uncomment the next line to have VS Code connect as an existing non-root user in the container. See
+	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
+	// "remoteUser": "vscode",
+
+	// Add the IDs of extensions you want installed when the container is created in the array below.
+	"extensions": [
+		"ms-azuretools.vscode-docker",
+		"ms-vscode.csharp"
+	]
+}
