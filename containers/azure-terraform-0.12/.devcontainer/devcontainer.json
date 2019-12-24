@@ -1,5 +1,5 @@
 {
-	"name": "Azure Terraform",
+	"name": "Azure Terraform 0.12.16",
 	"dockerFile": "Dockerfile",
 	"runArgs": [
 		// Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust.
