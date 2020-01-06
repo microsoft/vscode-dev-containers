@@ -23,7 +23,7 @@ This definition does not require any special steps to use. Just follow these ste
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `.devcontainer` and `.vscode` fodlers under `containers/ruby-2-rails-5/` to the root of your project folder.
+   2. Copy the contents of `.devcontainer` and `.vscode` folders under `containers/ruby-2-rails-5/` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
