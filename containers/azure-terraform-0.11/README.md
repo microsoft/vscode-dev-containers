@@ -1,4 +1,4 @@
-# Azure Terraform
+# Azure Terraform 0.11
 
 ## Summary
 
@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team |
+| *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Terraform |
 
