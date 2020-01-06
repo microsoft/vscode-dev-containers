@@ -14,6 +14,12 @@
 
 While technically optional, this definition includes the Azure Terraform extension which requires an Azure account to use. You can create a [free trial account here](https://azure.microsoft.com/en-us/free/) and find out more about using [Teraform with Azure here](https://docs.microsoft.com/en-us/azure/terraform/terraform-overview).  If you plan to use the Azure Cloud Shell for all of your Terraform operations, you can comment out the installation of the Docker CLI in `.devcontainer/Dockerfile`. Conversely, if you do not plan to use Cloud Shell, you can comment out the installation of Node.js. The definition has been setup so you can do either as it makes sense.
 
+You can also choose the specific version of Terraform installed by updating the following line in `.devcontainer/Dockerfile`:
+
+```Dockerfile
+ARG TERRAFORM_VERSION=0.11.13
+```
+
 Next, follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
