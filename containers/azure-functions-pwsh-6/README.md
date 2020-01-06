@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Azure Functions in PowerShell. Includes .NET Core 1, the Azure Functions SDK, and related extensions and dependencies.*
+*Develop Azure Functions in PowerShell. Includes .NET Core 2.1, the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
