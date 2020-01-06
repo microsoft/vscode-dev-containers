@@ -3,8 +3,8 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-ARG DOTNETCORE_VESRION=3.0
-FROM mcr.microsoft.com/dotnet/core/sdk:${DOTNETCORE_VESRION}
+ARG DOTNETCORE_VERSION=3.0
+FROM mcr.microsoft.com/dotnet/core/sdk:${DOTNETCORE_VERSION}
 
 # The node image includes a non-root user with sudo access. Use the 
 # "remoteUser" property in devcontainer.json to use it. On Linux, update 
