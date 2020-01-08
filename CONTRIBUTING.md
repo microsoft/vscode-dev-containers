@@ -103,6 +103,18 @@ While using a `Dockerfile` is a convenient way to get going with a new container
 
 Once you've published your container image, just update `devcontainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
 
+### Release cadence for new containers or container updates
+
+The vscode-dev-containers repo is currently bundled with the VS Code Remote - Containers extension to ensure version compatibility. (There is a feature request to update the container list [out-of-band](https://github.com/microsoft/vscode-remote-release/issues/425), but this is not currently in place.)
+
+Therefore, the release schedule for vscode-dev-containers is the same as the extension. The extension follows the same release cadence and schedule for **VS Code (stable)** as VS Code itself. 
+* VS Code uses [four week iterations](https://github.com/microsoft/vscode/wiki/Development-Process#inside-an-iteration). 
+* You can find the dates of the current iteration in a pinned issue in the [vscode repository](https://github.com/microsoft/vscode) and in-flight features for the extension itself in the [vscode-remote-release](https://github.com/microsoft/vscode-remote-release) repository.
+
+The Remote - Containers extension ships into **VS Code Insiders** as new features land during the iteration. This is not currently an automated daily release like VS Code itself, so the exact timing during the iteration can vary. However, it will happen during endgame week at a minimum (week 4).
+
+If there is an urgent need for an update to the definitions outside of this release cycle, please raise an issue in this repository requesting an out-of-band release to fix a critical issue.
+
 ## Contributing to Documentation
 
 The majority of VS Code Remote's documentation can be found in the [VS Code docs repository](https://github.com/Microsoft/vscode-docs). This is usually the best place to contribute, but if you have a correction or suggestion for the content found here, we welcome your contributions.
