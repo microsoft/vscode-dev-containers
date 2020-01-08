@@ -16,6 +16,7 @@ A good definition in this repository will:
 - Illustrate a unique container runtime configuration
 - Highlight an important tip or trick
 - Or provide an easy to understand template for devlopers that are just getting started with dev containers. 
+- Works on Linux, macOS, and Windows
 
 Since devcontainer.json can be commited to a source code repository, the definitions here are not intended to cover every possible permutation. When thinking about contributing a new dev container definition, consider the following questions:
 
