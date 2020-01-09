@@ -4,6 +4,7 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as express from 'express';
+import accounts from './accounts';
 
 // Constants
 const PORT = 3000;
@@ -11,8 +12,11 @@ const HOST = '0.0.0.0';
 
 // App
 const app = express();
+
+app.use('/accounts', accounts);
+
 app.get('/', (req: any, res: any) => {
-	res.send('Hello remote world!\n');
+    res.send('Hello remote world!\n');
 });
 
 app.listen(PORT, HOST);

@@ -9,7 +9,7 @@
 		"no-console": false,
 		"indent": [
 			true,
-			"tabs"
+			"spaces"
 		]
 	},
 	"rulesDirectory": []

@@ -1,14 +1,18 @@
-# Node.js 12 & TypeScript
+# Dapr with Node.js 12 & TypeScript
 
 ## Summary
 
-*Develop Node.js 12 based applications in TypeScript. Includes Node.js, eslint, yarn, and the TypeScript compiler.*
+*Develop Dapr applications using Node.js 12 and TypeScript. Includes Dapr, Node.js, eslint, yarn, and the TypeScript compiler.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team |
-| *Definition type* | Dockerfile |
-| *Languages, platforms* | Node.js, TypeScript |
+| *Contributors* | The Visual Studio Container Tools team |
+| *Definition type* | Docker Compose |
+| *Languages, platforms* | Node.js, TypeScript, Dapr |
+
+## Dapr Notes
+
+When the dev container is created, the definition automatically initializes Dapr on a separate Docker network (to isolate it from Dapr instances running locally or in another Dapr dev container). This is done via the `postCreateCommand` in the `.devcontainer/devcontainer.json` and the `DAPR_NETWORK` environment variable in the `.devcontainer/docker-compose.yml`. The `DAPR_REDIS_HOST` and `DAPR_PLACEMENT_HOST` environment variables ensure that Dapr `run` commands implicitly connect to the Dapr instance in that Docker network.
 
 ## Using this definition with an existing folder
 
@@ -41,7 +45,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/typescript-node-12` folder.
+4. Select the `containers/dapr-typescript-node-12` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `npm install` and compile the source before starting it.
 6. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
 7. Select port 3000 and click the "Open Browser" button in the notification that appears.
