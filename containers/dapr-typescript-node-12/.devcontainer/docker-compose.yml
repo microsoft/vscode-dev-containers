@@ -24,7 +24,7 @@ services:
 
     # Uncomment the next two lines if you want to publish the application port.
     # ports:
-    #  - 5000
+    #  - 3000
 
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
