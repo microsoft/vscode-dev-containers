@@ -8,7 +8,9 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/test-project/out/server.js",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run-script", "dapr-debug"],
+            "port": 9229,
             "cwd": "${workspaceFolder}/test-project",
             "preLaunchTask": "compile"
         }
