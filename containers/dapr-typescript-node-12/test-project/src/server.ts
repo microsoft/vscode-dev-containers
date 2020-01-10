@@ -15,10 +15,6 @@ const app = express();
 
 app.use('/accounts', accounts);
 
-app.get('/', (req: any, res: any) => {
-    res.send('Hello remote world!\n');
-});
-
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 

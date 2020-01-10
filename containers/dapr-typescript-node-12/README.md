@@ -27,11 +27,11 @@ To get started, follow these steps:
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Node.js 12 & TypeScript definition.
+   3. Select the Dapr with Node.js 12 & TypeScript definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/typescript-node-12/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/dapr-typescript-node-12/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -47,10 +47,27 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/dapr-typescript-node-12` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `npm install` and compile the source before starting it.
-6. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
-7. Select port 3000 and click the "Open Browser" button in the notification that appears.
-8. You should see "Hello remote world!" after the page loads.
-9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+6. Start the application with Dapr:
+
+    ```bash
+    $ cd test-project
+    $ npm run dapr
+    ```
+
+7. In a separate terminal, invoke the application via Dapr:
+
+    ```bash
+    # Deposit funds to the account (creating the account if not exists)
+    $ curl -d 42 -H "Content-Type: application/json" -w "\n" -X POST http://localhost:3500/v1.0/invoke/test/method/accounts/123/deposit
+    42
+    # Withdraws funds from the account
+    $ curl -d 10 -H "Content-Type: application/json" -w "\n" -X POST http://localhost:3500/v1.0/invoke/test/method/accounts/123/withdraw
+    32
+    # Get the balance of the account
+    $ curl -w "\n" http://localhost:3500/v1.0/invoke/test/method/accounts/123
+    32
+    $
+    ```
 
 ## License
 
