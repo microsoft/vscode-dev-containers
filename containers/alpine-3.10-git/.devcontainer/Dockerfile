@@ -12,13 +12,19 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# Set to false to skip installing zsh and Oh My ZSH!
+ARG INSTALL_ZSH="true"
+
+# Location and expected SHA for common setup script - SHA generated on release
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-alpine.sh"
+ARG COMMON_SCRIPT_SHA="dev-mode"
+
 # Install git, bash, dependencies, and add a non-root user
-RUN apk add --no-cache git bash libgcc libstdc++ \
+RUN apk update \
+    && apk add --no-cache wget coreutils ca-certificates \
     #
-    # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
-    && addgroup -g $USER_GID $USERNAME \
-    && adduser -S -s /bin/bash -u $USER_UID -G $USERNAME $USERNAME \
-    # [Optional] Add sudo support for the non-root user
-    && apk add --no-cache sudo \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
-    && chmod 0440 /etc/sudoers.d/$USERNAME
+    # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
+    && wget -q -O /tmp/common-setup.sh $COMMON_SCRIPT_SOURCE \
+    && if [ "$COMMON_SCRIPT_SHA" != "dev-mode" ]; then echo "$COMMON_SCRIPT_SHA /tmp/common-setup.sh" | sha256sum -c - ; fi \
+    && /bin/ash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
+    && rm /tmp/common-setup.sh

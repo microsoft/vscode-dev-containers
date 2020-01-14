@@ -1,0 +1,22 @@
+{
+	"containerRegistry": "devcon.azurecr.io",
+	"containerRegistryPath": "public/vscode/devcontainers",
+	"stubRegistry": "mcr.microsoft.com",
+	"stubRegistryPath": "vscode/devcontainers",
+
+	"filesToStage": [
+		"+(containers|repository-containers)/**/!(test-project)/*",
+		"LICENSE",
+		"package.json",
+		"yarn.lock",
+		".npmignore"
+	],
+
+	"githubRepoName": "microsoft/vscode-dev-containers",
+	"containersPathInRepo": "containers",
+	"scriptLibraryPathInRepo": "script-library",
+	"definitionBuildConfigFile": "definition-build.json",
+
+	"devContainerJsonPreamble": "For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:",
+	"dockerFilePreamble": "For information on the contents of the container image below, see following Dockerfile:"
+}

@@ -13,32 +13,39 @@ FROM debian:9
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
-# The node image includes a non-root user with sudo access. Use the 
-# "remoteUser" property in devcontainer.json to use it. On Linux, update 
-# these values to ensure the container user's UID/GID matches your local values.
+# This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
+# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
+# will be updated to match your local UID/GID (when using the dockerFile property).
 # See https://aka.ms/vscode-remote/containers/non-root-user for details.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# Set to false to skip installing zsh and Oh My ZSH!
+ARG INSTALL_ZSH="true"
+
+# Location and expected SHA for common setup script - SHA generated on release
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
+ARG COMMON_SCRIPT_SHA="dev-mode"
+
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Configure apt and install packages
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
+    && apt-get -y install --no-install-recommends apt-utils dialog wget ca-certificates 2>&1 \
     #
-    # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
-    && apt-get -y install git iproute2 procps lsb-release \
+    # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
+    && wget -q -O /tmp/common-setup.sh $COMMON_SCRIPT_SOURCE \
+    && if [ "$COMMON_SCRIPT_SHA" != "dev-mode" ]; then echo "$COMMON_SCRIPT_SHA /tmp/common-setup.sh" | sha256sum -c - ; fi \
+    && /bin/ash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
+    && rm /tmp/common-setup.sh \
     #
-    # *****************************************************
-    # * Add steps for installing needed dependencies here *
-    # *****************************************************
-    #
-    # Create a non-root user
-    && groupadd --gid $USER_GID $USERNAME \
-    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    # [Optional] Add sudo support for the non-root user
-    && apt-get install -y sudo \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
-    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    # *********************************************************************
+    # * Uncomment this section to use RUN to install other dependencies.  *
+    # * See https://aka.ms/vscode-remote/containers/dockerfile-run        *
+    # *********************************************************************
+    # && apt-get -y install --no-reccomends <your-package-name-here>
     #
     # Clean up
     && apt-get autoremove -y \
@@ -46,5 +53,5 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=
+ENV DEBIAN_FRONTEND=dialog
 

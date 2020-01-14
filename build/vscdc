@@ -1,0 +1,202 @@
+#!/usr/bin/env node
+/*--------------------------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+ *-------------------------------------------------------------------------------------------------------------*/
+
+const push = require('./src/push').push;
+const package = require('./src/package').package;
+const createStub = require('./src/prep').createStub;
+const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
+const configUtils = require('./src/utils/config');
+const packageJson = require('../package.json');
+
+console.log('vscode-dev-containers CLI\nCopyright (c) Microsoft Corporation. All rights reserved.\n')
+
+require('yargs')
+    .command('pack', 'package dev container definitions', (yargs) => {
+        yargs
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or a branch',
+                    default: `v${packageJson.version}`
+                },
+                'registry': {
+                    describe: 'container registry to push images to',
+                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: configUtils.getConfig('containerRegistryPath', 'vscode/devcontainers')
+                },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry', configUtils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: configUtils.getConfig('stubRegistryPath', configUtils.getConfig('containerRegistryPath', ''))
+                },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
+                },
+                'push-images': {
+                    describe: 'whether to push before packaging',
+                    type: 'boolean',
+                    default: true
+                },
+                'update-latest': {
+                    describe: 'whether to tag latest and {MAJOR}',
+                    type: 'boolean',
+                    default: true
+                },
+                'clean': {
+                    describe: 'whether to clean up staging folder when done',
+                    type: 'boolean',
+                    default: true
+                },
+                'simulate': {
+                    describe: 'whether to simulate a push instead of doing it',
+                    type: 'boolean',
+                    default: false
+                }
+            })
+    }, packCommand)
+    .command('push [devcontainer]', 'push dev container images to a repository', (yargs) => {
+        yargs
+            .positional('devcontainer', {
+                describe: 'ID of dev container to push',
+                default: null
+            })
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or branch',
+                    default: `v${packageJson.version}`
+                },
+                'registry': {
+                    describe: 'container registry to push images to',
+                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: configUtils.getConfig('containerRegistryPath', '')
+                },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry', configUtils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: configUtils.getConfig('stubRegistryPath', configUtils.getConfig('containerRegistryPath', ''))
+                },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
+                },
+                'update-latest': {
+                    describe: 'whether to tag latest and {MAJOR} if pushing',
+                    type: 'boolean',
+                    default: true
+                },
+                'simulate': {
+                    describe: 'whether to simulate a push instead of doing it',
+                    type: 'boolean',
+                    default: false
+                }
+            })
+    }, pushCommand)
+    .command('stub <devcontainer> [path]', 'generates a stub user.Dockerfile', (yargs) => {
+        yargs
+            .positional('devcontainer', {
+                describe: 'ID of dev container to stub',
+            })
+            .positional('path', {
+                describe: 'path to .devcontainer folder',
+                default: '.'
+            })
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or branch',
+                    default: 'dev'
+                },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry', configUtils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: configUtils.getConfig('stubRegistryPath', configUtils.getConfig('containerRegistryPath', ''))
+                },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
+                },
+                'has-base-dockerfile': {
+                    describe: 'whether base.Dockerfile exists',
+                    type: 'boolean',
+                    default: true
+                }
+            })
+    }, stubCommand)
+    .command('cg', 'generate cgmanifest.json', (yargs) => {
+        yargs
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or branch',
+                    default: 'master'
+                },
+                'registry': {
+                    describe: 'container registry to push images to',
+                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: configUtils.getConfig('containerRegistryPath', '')
+                },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: configUtils.getConfig('vscodeDevContainersRepo', 'https://github.com/microsoft/vscode-dev-containers')
+                },
+                'build': {
+                    describe: 'whether to skip the image build step',
+                    default: true
+                }
+            })
+    }, cgCommand)
+    .demandCommand()
+    .help()
+    .argv;
+
+function pushCommand(argv) {
+    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate, argv.devcontainer)
+        .catch((reason) => {
+            console.error(`(!) Push failed - ${reason}`);
+            process.exit(1);
+        });
+}
+
+function packCommand(argv) {
+    package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.pushImages, argv.clean, argv.simulate)
+        .catch((reason) => {
+            console.error(`(!) Packaging failed - ${reason}`);
+            process.exit(1);
+        });
+}
+
+
+function stubCommand(argv) {
+    createStub(argv.devcontainer, argv.path, argv.githubRepo, argv.release, argv.hasBaseDockerfile, argv.stubRegistry, argv.stubRegistryPath)
+        .catch((reason) => {
+            console.error(`(!) Stub generation failed - ${reason}`);
+            process.exit(1);
+        });
+}
+
+function cgCommand(argv) {
+    generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build)
+        .catch((reason) => {
+            console.error(`(!) Component governance manifest generation failed - ${reason}`);
+            process.exit(1);
+        });
+}
