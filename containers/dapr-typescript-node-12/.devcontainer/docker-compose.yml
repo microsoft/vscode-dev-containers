@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
 
     environment:
-      DAPR_NETWORK: dapr-typescript
+      DAPR_NETWORK: dapr-dev-container
       DAPR_REDIS_HOST: dapr_redis
       DAPR_PLACEMENT_HOST: dapr_placement
 
@@ -44,4 +44,4 @@ services:
 
 networks: 
   default:
-    name: dapr-typescript
+    name: dapr-dev-container
