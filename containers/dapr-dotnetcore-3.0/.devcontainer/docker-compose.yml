@@ -19,7 +19,7 @@ services:
 
     environment:
       ASPNETCORE_Kestrel__Endpoints__Http__Url: http://*:5000
-      DAPR_NETWORK: dapr-dotnetcore
+      DAPR_NETWORK: dapr-dev-container
       DAPR_REDIS_HOST: dapr_redis
       DAPR_PLACEMENT_HOST: dapr_placement
 
@@ -45,4 +45,4 @@ services:
 
 networks: 
   default:
-    name: dapr-dotnetcore
+    name: dapr-dev-container
