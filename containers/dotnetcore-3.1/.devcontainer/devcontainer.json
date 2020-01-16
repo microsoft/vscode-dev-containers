@@ -1,0 +1,48 @@
+{
+	"name": "C# (.NET Core 3.1)",
+	"dockerFile": "Dockerfile",
+
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore",
+
+	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
+	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
+	// "appPort": [5000, 5001],
+
+	// [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command: 
+	//  * Windows PowerShell:
+	//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere" 
+	//  * macOS/Linux terminal:
+	//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+	//
+	// Next, after running the command above, uncomment lines in the 'mounts' and 'remoteEnv' lines below, 
+	// and open / rebuild the container so the settings take effect.
+	//
+	"mounts": [
+		// "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind"
+	],
+	"remoteEnv": {
+		// [Optional] Override the default HTTP endpoints - need to listen to '*' for appPort to work
+		"ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000"
+
+		// "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001",
+		// "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
+		// "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
+	},
+
+	// Uncomment the next line to have VS Code connect as an existing non-root user in the container. 
+	// On Linux, by default, the container user's UID/GID will be updated to match your local user. See
+	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
+	// "remoteUser": "vscode",
+
+	// Add the IDs of extensions you want installed when the container is created in the array below.
+	"extensions": [
+		"ms-vscode.csharp"
+	]
+}
