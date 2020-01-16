@@ -1,0 +1,10 @@
+trigger:
+  branches:
+    include: ['*']
+  tags:
+    include: ['*']
+
+steps:
+
+- script: |
+    echo "Stub for OSS CG ingestion"
