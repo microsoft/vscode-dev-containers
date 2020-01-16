@@ -18,6 +18,8 @@
 	},
 	"devDependencies": {
 		"copyfiles": "^2.1.1",
-		"rimraf": "^2.6.3"
+		"jsonc": "^2.0.0",
+		"rimraf": "^2.6.3",
+		"yargs": "^14.2.0"
 	}
 }
