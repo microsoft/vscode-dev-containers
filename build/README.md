@@ -266,7 +266,7 @@ When a release is cut, the contents of vscode-dev-containers repo would staged. 
     // https://github.com/microsoft/vscode-dev-containers/tree/v0.35.0/containers/javascript-node-10
     {
         "name": "Node.js 10",
-        "dockerFile": "user.Dockerfile",
+        "dockerFile": "Dockerfile",
         "extensions": [
             "dbaeumer.vscode-eslint"
         ]
