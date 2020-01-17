@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
+| *Published image* | mcr.microsoft.com/vscode/devcontainers/javascript-node:12 |
 | *Languages, platforms* | Node.js, JavaScript |
 
 ## Using this definition with an existing folder

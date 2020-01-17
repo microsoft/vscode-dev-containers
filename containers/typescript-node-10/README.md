@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
+| *Published image* | mcr.microsoft.com/vscode/devcontainers/typescript-node:10 |
 | *Languages, platforms* | Node.js, TypeScript |
 
 ## Using this definition with an existing folder
