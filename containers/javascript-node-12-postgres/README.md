@@ -1,4 +1,4 @@
-# Node.js (latest LTS) & Postgres
+# Node.js 12 & PostgresSQL
 
 ## Summary
 
