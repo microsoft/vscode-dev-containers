@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop F# and .NET Core 3.0 based applications. Includes all needed SDKs, extensions, and dependencies.*
+*Develop F# and .NET Core 3.1 based applications. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
