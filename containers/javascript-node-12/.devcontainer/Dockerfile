@@ -26,6 +26,8 @@ ARG COMMON_SCRIPT_SHA="dev-mode"
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
+ENV PATH=${PATH}:/usr/local/share/npm-global/bin
+
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog wget ca-certificates 2>&1 \
@@ -52,7 +54,6 @@ RUN apt-get update \
     && chown ${USERNAME}:root /usr/local/share/npm-global \
     && npm config -g set prefix /usr/local/share/npm-global \
     && sudo -u ${USERNAME} npm config -g set prefix /usr/local/share/npm-global \
-    && echo "export PATH=$PATH:/usr/local/share/npm-global/bin" | tee -a /etc/bash.bashrc /root/.zshrc /home/${USERNAME}/.zshrc \
     #
     # Install eslint globally
     && npm install -g eslint \
