@@ -47,6 +47,13 @@ RUN apt-get update \
     && apt-get update \
     && apt-get -y install --no-install-recommends yarn \
     #
+    # Set alternate global install location that both uses have rights to access
+    && mkdir -p /usr/local/share/npm-global \
+    && chown ${USERNAME}:root /usr/local/share/npm-global \
+    && npm config -g set prefix /usr/local/share/npm-global \
+    && sudo -u ${USERNAME} npm config -g set prefix /usr/local/share/npm-global \
+    && echo "export PATH=$PATH:/usr/local/share/npm-global/bin" | tee -a /etc/bash.bashrc /root/.zshrc /home/${USERNAME}/.zshrc \
+    #
     # Install eslint globally
     && npm install -g eslint \
     #
