@@ -15,7 +15,7 @@ A good definition in this repository will:
 - Solve a common setup or installation challenge
 - Illustrate a unique container runtime configuration
 - Highlight an important tip or trick
-- Or provide an easy to understand template for devlopers that are just getting started with dev containers. 
+- Or provide an easy to understand template for developers that are just getting started with dev containers. 
 - Works on Linux, macOS, and Windows
 
 Since devcontainer.json can be commited to a source code repository, the definitions here are not intended to cover every possible permutation. When thinking about contributing a new dev container definition, consider the following questions:
@@ -25,7 +25,7 @@ Since devcontainer.json can be commited to a source code repository, the definit
     - Are the requirements cumbersome install or are they typically things added by a package manager (pip, npm, etc) using an project's manifest file (`package.json`, `requirements.txt`, etc)?
 2. How likely are other developers to find the definition useful on its own? Could the scenario be broaded to help more people?
 
-If the definition is too similar others, consider contributing a PR to improve an existing one instead. If the scenario is too specific consider generalizing it and making it more broadly applicable.
+If the definition is too similar to others, consider contributing a PR to improve an existing one instead. If the scenario is too specific consider generalizing it and making it more broadly applicable.
 
 ### Anatomy of a Dev Container Definition
 
@@ -81,15 +81,15 @@ VS Code Remote provides a straight forward development loop for creating and edi
 
 1. Create a definition folder and open it in VS Code
 2. Edit the contents of the definition
-3. Try it with `kbstyle(F1)` > **Remote-Containers: Reopen Folder in Container**.
+3. Try it with <kbd>F1</kbd> > **Remote-Containers: Reopen Folder in Container**.
 4. On failure:
-   1. `kbstyle(F1)` > **Remote-Containers: Reopen Folder Locally**, which will open a new local window.
+   1. <kbd>F1</kbd> > **Remote-Containers: Reopen Folder Locally**, which will open a new local window.
    2. In this local window: Edit the contents of the `.devcontainer` folder as required.
-   3. Try it again: Go back to the container window, `kbstyle(F1)` > **Developer: Reload Window**.
+   3. Try it again: Go back to the container window, <kbd>F1</kbd> > **Developer: Reload Window**.
    4. Repeat as needed.
 5. If the build was successful, but you want to make more changes:
       1. Edit the contents of the `.devcontainer` folder as required when connected to the container.
-      2. `kbstyle(F1)` > **Remote-Containers: Rebuild Container**.
+      2. <kbd>F1</kbd> > **Remote-Containers: Rebuild Container**.
       3. On failure: Follow the same workflow above.
 
 Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy
@@ -100,7 +100,7 @@ Finally, commit your changes and submit a PR - we'll take a look at it, provide 
 
 ### Speeding up container provisioning
 
-While using a `Dockerfile` is a convenient way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image be built by anyone using it.  If your definition is stable, we strongly recommend building and publishing your image to [DockerHub](https://hub.docker.com) or [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) instead. 
+While using a `Dockerfile` is a convenient way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image to be built by anyone using it.  If your definition is stable, we strongly recommend building and publishing your image to [DockerHub](https://hub.docker.com) or [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) instead. 
 
 Once you've published your container image, just update `devcontainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
 
