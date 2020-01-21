@@ -12,10 +12,12 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# Docker Compose.
+ARG COMPOSE_VERSION=1.24.0
+
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG COMPOSE_VERSION=1.24.0
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
@@ -54,8 +56,8 @@ ENV DEBIAN_FRONTEND=dialog
 WORKDIR /ops
 
 ## Consul
-ARG CONSULVERSION=1.6.0
-ARG CONSULDOWNLOAD=https://releases.hashicorp.com/consul/${CONSULVERSION}/consul_${CONSULVERSION}_linux_amd64.zip
+ARG CONSUL_VERSION=1.6.1
+ARG CONSULDOWNLOAD=https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip
 ARG CONSULCONFIGDIR=/etc/consul.d
 ARG CONSULDIR=/opt/consul 
 
@@ -74,8 +76,8 @@ RUN mkdir -p $CONSULDIR
 RUN chmod 755 $CONSULDIR
 
 ## Consul Template
-ARG CONSULTEMPLATEVERSION=0.20.0
-ARG CONSULTEMPLATEDOWNLOAD=https://releases.hashicorp.com/consul-template/${CONSULTEMPLATEVERSION}/consul-template_${CONSULTEMPLATEVERSION}_linux_amd64.zip
+ARG CONSUL_TEMPLATE_VERSION=0.20.0
+ARG CONSULTEMPLATEDOWNLOAD=https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip
 ARG CONSULTEMPLATECONFIGDIR=/etc/consul-template.d
 ARG CONSULTEMPLATEDIR=/opt/consul-template
 
@@ -94,8 +96,8 @@ RUN mkdir -p $CONSULTEMPLATEDIR
 RUN chmod 755 $CONSULTEMPLATEDIR
 
 ## Vault
-ARG VAULTVERSION=1.0.3
-ARG VAULTDOWNLOAD=https://releases.hashicorp.com/vault/${VAULTVERSION}/vault_${VAULTVERSION}_linux_amd64.zip
+ARG VAULT_VERSION=1.3.1
+ARG VAULTDOWNLOAD=https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
 ARG VAULTCONFIGDIR=/etc/vault.d
 ARG VAULTDIR=/opt/vault
 
@@ -114,8 +116,8 @@ RUN mkdir -p $VAULTDIR
 RUN chmod 755 $VAULTDIR
 
 ## Nomad
-ARG NOMADVERSION=0.9.0
-ARG NOMADDOWNLOAD=https://releases.hashicorp.com/nomad/${NOMADVERSION}/nomad_${NOMADVERSION}_linux_amd64.zip
+ARG NOMAD_VERSION=0.10.2
+ARG NOMADDOWNLOAD=https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip
 ARG NOMADCONFIGDIR=/etc/nomad.d
 ARG NOMADDIR=/opt/nomad
 
