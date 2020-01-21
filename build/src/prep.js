@@ -20,7 +20,7 @@ const containersPathInRepo = configUtils.getConfig('containersPathInRepo');
 const scriptLibraryPathInRepo = configUtils.getConfig('scriptLibraryPathInRepo');
 
 async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, isForBuild) {
-    // Use exact version of building, MAJOR.MINOR if not
+    // Use exact version of building, MAJOR if not
     const version = isForBuild ? configUtils.getVersionFromRelease(release) : configUtils.majorMinorFromRelease(release);
 
     // Read Dockerfile
@@ -51,7 +51,7 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
         }
     } else {
         // Otherwise update any Dockerfiles that refer to an un-versioned tag of another dev container
-        // to the MAJOR.MINOR version from this release.
+        // to the MAJOR version from this release.
         const expectedRegistry = configUtils.getConfig('stubRegistry', 'mcr.microsoft.com');
         const expectedRegistryPath = configUtils.getConfig('stubRegistryPath', 'vscode/devcontainers');
         const fromCaptureGroups = new RegExp(`FROM (${expectedRegistry}/${expectedRegistryPath}/.+:.+)`).exec(devContainerDockerfileRaw);
