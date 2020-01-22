@@ -31,7 +31,7 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
 # *********************************************************************
 # ENV DEBIAN_FRONTEND=noninteractive
 # RUN apt-get update \
-#    && apt-get -y install --no-reccomends <your-package-list-here> \
+#    && apt-get -y install --no-install-recommends <your-package-list-here> \
 #    #
 #    # Clean up
 #    && apt-get autoremove -y \
