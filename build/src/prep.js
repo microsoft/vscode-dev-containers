@@ -20,8 +20,8 @@ const containersPathInRepo = configUtils.getConfig('containersPathInRepo');
 const scriptLibraryPathInRepo = configUtils.getConfig('scriptLibraryPathInRepo');
 
 async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, isForBuild) {
-    // Use exact version of building, MAJOR.MINOR if not
-    const version = isForBuild ? configUtils.getVersionFromRelease(release) : configUtils.majorMinorFromRelease(release);
+    // Use exact version of building, MAJOR if not
+    const version = isForBuild ? configUtils.getVersionFromRelease(release) : configUtils.majorFromRelease(release);
 
     // Read Dockerfile
     const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
@@ -51,7 +51,7 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
         }
     } else {
         // Otherwise update any Dockerfiles that refer to an un-versioned tag of another dev container
-        // to the MAJOR.MINOR version from this release.
+        // to the MAJOR version from this release.
         const expectedRegistry = configUtils.getConfig('stubRegistry', 'mcr.microsoft.com');
         const expectedRegistryPath = configUtils.getConfig('stubRegistryPath', 'vscode/devcontainers');
         const fromCaptureGroups = new RegExp(`FROM (${expectedRegistry}/${expectedRegistryPath}/.+:.+)`).exec(devContainerDockerfileRaw);
@@ -81,8 +81,8 @@ async function createStub(dotDevContainerPath, definitionId, repo, release, base
     const userDockerFilePath = path.join(dotDevContainerPath, 'Dockerfile');
     console.log('(*) Generating user Dockerfile...');
     const templateDockerfile = await configUtils.objectByDefinitionLinuxDistro(definitionId, stubPromises);
-    const majorMinor = configUtils.majorMinorFromRelease(release);
-    const imageTag = configUtils.getTagsForVersion(definitionId, majorMinor, stubRegistry, stubRegistryPath)[0];
+    const devContainerImageVersion = configUtils.majorFromRelease(release);
+    const imageTag = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, stubRegistry, stubRegistryPath)[0];
     const userDockerFile = templateDockerfile.replace(
         'FROM REPLACE-ME', getFromSnippet(definitionId, imageTag, repo, release, baseDockerFileExists));
     await asyncUtils.writeFile(userDockerFilePath, userDockerFile);
@@ -93,8 +93,8 @@ async function updateStub(dotDevContainerPath, definitionId, repo, release, base
     const userDockerFilePath = path.join(dotDevContainerPath, 'Dockerfile');
     const userDockerFile = await asyncUtils.readFile(userDockerFilePath);
 
-    const majorMinor = configUtils.majorMinorFromRelease(release);
-    const imageTag = configUtils.getTagsForVersion(definitionId, majorMinor, registry, registryPath)[0];
+    const devContainerImageVersion = configUtils.majorFromRelease(release);
+    const imageTag = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath)[0];
     const userDockerFileModified = userDockerFile.replace(/FROM .+:.+/,
         getFromSnippet(definitionId, imageTag, repo, release, baseDockerFileExists));
     await asyncUtils.writeFile(userDockerFilePath, userDockerFileModified);

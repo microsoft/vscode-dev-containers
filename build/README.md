@@ -180,7 +180,7 @@ Since the images would continue to exist after this point and the source code is
 When a release is cut, there are a few things that need to happen. One is obviously releasing the appropriate image. However, to continue to help customers understand how to customize their images, we would want to reference a user modifiable "stub" Dockerfile instead of an image directly. This also is important to help deal with shortcomings and workarounds that require something like specifying a build argument. For example:
 
 ```Dockerfile
-FROM mcr.microsoft.com/vscode/devcontainer/javascript-node:0.35-10
+FROM mcr.microsoft.com/vscode/devcontainer/javascript-node:0-10
 
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -210,7 +210,7 @@ ENV DEBIAN_FRONTEND=dialog
 
 This retains its value as a sample but minimizes the number of actual build steps. This template would **evolve over time as new features are added**. For example, the above Dockerfile includes a way to make sure the user's GID/UID matches the local operating system - which is critical for Linux users. However, if we introduce a `user` concept in `devcontainer.json`, the template would no longer need to include this part of the file.
 
-Referencing The MAJOR.MINOR version in this Dockerfile allows us to push fixes or upstream updates that do not materially change the definition.
+Referencing The MAJOR version in this Dockerfile allows us to push fixes or upstream updates that do not materially change the definition.
 
 ### Repository contents
 
@@ -237,7 +237,7 @@ FROM mcr.microsoft.com/vs/devcontainer/javascript-node:dev-10
 
 #### Automated updates of other Dockerfiles
 
-The process also automatically swaps out referenced MCR images for MAJOR.MINOR versions of built images in any Dockerfile that is added to the package. This allows us to push break fix and or security patches as break fix releases and people will get them. The build supports an option to not update `latest` and MAJOR versions, so we can also rev old MAJOR.MINOR versions if we have to, but normally we'd roll forward instead.
+The process also automatically swaps out referenced MCR images for MAJOR versions of built images in any Dockerfile that is added to the package. This allows us to push break fix and or security patches as break fix releases and people will get them. The build supports an option to not update `latest` and MAJOR versions, so we can also rev old MAJOR versions if we have to, but normally we'd roll forward instead.
 
 #### Common scripts
 
@@ -251,12 +251,12 @@ When a release is cut, the contents of vscode-dev-containers repo would staged. 
 
 2. After the image is built and pushed, `base.Dockerfile` is deleted from staging.
 
-3. Next, `Dockerfile` is updated to point to the correct MAJOR.MINOR version. If no Dockerfile is found, a stub is used based on the root image (Alpine vs Debian).
+3. Next, `Dockerfile` is updated to point to the correct MAJOR version. If no Dockerfile is found, a stub is used based on the root image (Alpine vs Debian).
 
     ```Dockerfile
     # For information on the contents of the image referenced below, see the Dockerfile at
     # https://github.com/microsoft/vscode-dev-containers/tree/v0.35.0/containers/javascript-node-10/.devcontainer/base.Dockerfile
-    FROM mcr.microsoft.com/vs/devcontainer/javascript-node:0.35-10
+    FROM mcr.microsoft.com/vs/devcontainer/javascript-node:0-10
     ```
 
 4. `devcontainer.json` is updated to point to `Dockerfile` instead of `base.Dockerfile` (if required) and add a comment to the source code README for this specific version.
