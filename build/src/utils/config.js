@@ -239,7 +239,7 @@ module.exports = {
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,
     getParentTagForVersion: getParentTagForVersion,
     getUpdatedTag: getUpdatedTag,
-    majorMinorFromRelease: majorFromRelease,
+    majorFromRelease: majorFromRelease,
     objectByDefinitionLinuxDistro: objectByDefinitionLinuxDistro,
     getDefinitionDependencies: getDefinitionDependencies,
     getAllDependencies: getAllDependencies,
