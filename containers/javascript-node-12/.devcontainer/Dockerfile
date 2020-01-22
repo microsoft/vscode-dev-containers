@@ -47,6 +47,10 @@ RUN apt-get update \
     && apt-get update \
     && apt-get -y install --no-install-recommends yarn \
     #
+    # Tactically remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
+    # Can leave in image once the CVE is resolved upstream or the node images move to "buster".
+    && apt-get purge -y imagemagick imagemagick-6-common \
+    #
     # Install eslint globally
     && npm install -g eslint \
     #
