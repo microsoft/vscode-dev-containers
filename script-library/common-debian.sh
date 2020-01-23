@@ -20,6 +20,7 @@ fi
 
 apt-get -y install --no-install-recommends \
     git \
+    openssh-client \
     iproute2 \
     procps \
     curl \

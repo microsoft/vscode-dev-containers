@@ -20,6 +20,7 @@ fi
 
 yum install -y \
     git \
+    openssh-clients \
     net-tools \
     which \
     curl \
