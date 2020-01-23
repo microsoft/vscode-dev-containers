@@ -10,8 +10,8 @@
 
 	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
 	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
-	// 4846: nomad; 
-	"appPort": [4846],
+	// 4646: nomad; 8500: consul; 8200: vault;
+	// "appPort": [4646, 8500, 8200],
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
@@ -28,5 +28,5 @@
 	// "remoteUser": "vscode",
 
 	// Add the IDs of extensions you want installed when the container is created in the array below.
-	"extensions": ["wholroyd.hcl"]
+	"extensions": ["wholroyd.hcl", "wakatime.vscode-wakatime"]
 }

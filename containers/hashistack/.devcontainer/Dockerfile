@@ -21,8 +21,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
-    # Verify git, zsh, process tools installed
-    && apt-get -y install git iproute2 procps zsh unzip \
+    # Verify git, zsh, vim, process tools installed
+    && apt-get -y install git iproute2 procps zsh unzip neovim \
     #
     # Install Docker CE CLI
     && apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
@@ -47,6 +47,10 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+# Oh-My-ZSH
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN echo 'alias vim=nvim' >> ~/.zshrc
 
 # Switch back to dialog for any ad-hoc use of apt-get
 # TODO: Move this down once everything settles.
