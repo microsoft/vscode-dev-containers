@@ -225,6 +225,226 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: debian",
+                    "Version": "10",
+                    "DownloadUrl": "https://hub.docker.com/_/debian"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: apt-transport-https",
+                    "Version": "1.8.2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-transport-https_1.8.2_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: apt-utils",
+                    "Version": "1.8.2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-utils_1.8.2_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: ca-certificates",
+                    "Version": "20190110",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20190110_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: curl",
+                    "Version": "7.64.0-4",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/curl/curl_7.64.0-4_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: dialog",
+                    "Version": "1.3-20190211-1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/d/dialog/dialog_1.3-20190211-1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: git",
+                    "Version": "1:2.20.1-2+deb10u1",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/g/git/git_2.20.1-2+deb10u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: iproute2",
+                    "Version": "4.20.0-2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/iproute2/iproute2_4.20.0-2_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libc6",
+                    "Version": "2.28-10",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/glibc/libc6_2.28-10_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libgcc1",
+                    "Version": "1:8.3.0-6",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-8/libgcc1_8.3.0-6_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libgssapi-krb5-2",
+                    "Version": "1.17-3",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/k/krb5/libgssapi-krb5-2_1.17-3_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libicu63",
+                    "Version": "63.1-6",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/icu/libicu63_63.1-6_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: liblttng-ust0",
+                    "Version": "2.10.3-1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/u/ust/liblttng-ust0_2.10.3-1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libssl1.1",
+                    "Version": "1.1.1d-0+deb10u2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1d-0+deb10u2_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libstdc++6",
+                    "Version": "8.3.0-6",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-8/libstdc++6_8.3.0-6_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: lsb-release",
+                    "Version": "10.2019051400",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/lsb/lsb-release_10.2019051400_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: procps",
+                    "Version": "2:3.3.15-2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/p/procps/procps_3.3.15-2_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: sudo",
+                    "Version": "1.8.27-1+deb10u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/sudo/sudo_1.8.27-1+deb10u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: unzip",
+                    "Version": "6.0-23+deb10u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/u/unzip/unzip_6.0-23+deb10u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: wget",
+                    "Version": "1.20.1-1.1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/w/wget/wget_1.20.1-1.1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: zlib1g",
+                    "Version": "1:1.2.11.dfsg-1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: zsh",
+                    "Version": "5.7.1-1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/z/zsh/zsh_5.7.1-1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: debian",
                     "Version": "9",
                     "DownloadUrl": "https://hub.docker.com/_/debian"
                 }
