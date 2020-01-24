@@ -25,6 +25,7 @@ RUN apt-get update \
     # Verify git, required tools installed
     && apt-get install -y \
         git \
+        openssh-client \
         curl \
         procps \
         iproute2 \
