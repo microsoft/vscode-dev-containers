@@ -18,6 +18,7 @@ RUN apt-get update \
     # Install vim, git, process tools, lsb-release
     && apt-get install -y \
         git \
+        openssh-client \
     #
     # Install ruby
     && apt-get install -y \
