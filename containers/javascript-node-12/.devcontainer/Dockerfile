@@ -26,6 +26,8 @@ ARG COMMON_SCRIPT_SHA="dev-mode"
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
+ENV PATH=${PATH}:/usr/local/share/npm-global/bin
+
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog wget ca-certificates 2>&1 \
@@ -46,6 +48,12 @@ RUN apt-get update \
     && echo "deb https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
     && apt-get -y install --no-install-recommends yarn \
+    #
+    # Set alternate global install location that both uses have rights to access
+    && mkdir -p /usr/local/share/npm-global \
+    && chown ${USERNAME}:root /usr/local/share/npm-global \
+    && npm config -g set prefix /usr/local/share/npm-global \
+    && sudo -u ${USERNAME} npm config -g set prefix /usr/local/share/npm-global \
     #
     # Tactically remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
     # Can leave in image once the CVE is resolved upstream or the node images move to "buster".
