@@ -49,7 +49,7 @@ RUN apt-get update \
     && apt-get update \
     && apt-get -y install --no-install-recommends yarn \
     #
-    # Set alternate global install location that both uses have rights to access
+    # Set alternate global install location that both users have rights to access
     && mkdir -p /usr/local/share/npm-global \
     && chown ${USERNAME}:root /usr/local/share/npm-global \
     && npm config -g set prefix /usr/local/share/npm-global \
