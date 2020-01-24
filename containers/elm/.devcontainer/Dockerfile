@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM debian:9
+FROM mcr.microsoft.com/vscode/devcontainers/base:debian-9
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Configuring Elm version
 ARG ELM_VERSION=0.19.0
 
-# This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
+# This Dockerfile's base image has a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
 # will be updated to match your local UID/GID (when using the dockerFile property).
 # See https://aka.ms/vscode-remote/containers/non-root-user for details.
@@ -21,22 +21,17 @@ ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils 2>&1 \ 
-    #
-    # Verify git and needed tools are installed
-    && apt-get install -y git procps \
-    && apt-get install -y wget \
     #
     # Install elm globally
-    && wget -O - https://github.com/elm/compiler/releases/download/${ELM_VERSION}/binary-for-linux-64-bit.gz | gunzip -c > /usr/local/bin/elm && chmod +x /usr/local/bin/elm \
+    && wget -qO - https://github.com/elm/compiler/releases/download/${ELM_VERSION}/binary-for-linux-64-bit.gz | gunzip -c > /usr/local/bin/elm 2>&1 \
+    && chmod +x /usr/local/bin/elm \
     #
-    # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
-    && groupadd --gid $USER_GID $USERNAME \
-    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    # [Optional] Add sudo support for the non-root user
-    && apt-get install -y sudo \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
-    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    # [Optional] Update UID/GID if needed
+    && if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
+        groupmod --gid $USER_GID $USERNAME \
+        && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
+        && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
+    fi \
     #
     # Clean up
     && apt-get autoremove -y \

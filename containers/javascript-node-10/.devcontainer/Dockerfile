@@ -55,6 +55,10 @@ RUN apt-get update \
     && npm config -g set prefix /usr/local/share/npm-global \
     && sudo -u ${USERNAME} npm config -g set prefix /usr/local/share/npm-global \
     #
+    # Tactically remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
+    # Can leave in image once the CVE is resolved upstream or the node images move to "buster".
+    && apt-get purge -y imagemagick imagemagick-6-common \
+    #
     # Install eslint globally
     && npm install -g eslint \
     #

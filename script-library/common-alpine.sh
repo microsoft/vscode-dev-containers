@@ -21,6 +21,7 @@ fi
 # Install git, bash, dependencies, and add a non-root user
 apk add --no-cache \
     git \
+    openssh-client \
     bash \
     libgcc \
     libstdc++ \

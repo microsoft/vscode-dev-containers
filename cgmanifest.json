@@ -494,7 +494,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint",
-                    "Version": "5.20.1"
+                    "Version": "6.0.0"
                 }
             }
         },

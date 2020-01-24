@@ -190,8 +190,8 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
     return currentTag;
 }
 
-// Return just the manor and minor version of a release number
-function majorMinorFromRelease(release) {
+// Return just the major version of a release number
+function majorFromRelease(release) {
     const version = getVersionFromRelease(release);
 
     if (version === 'dev') {
@@ -199,7 +199,7 @@ function majorMinorFromRelease(release) {
     }
 
     const versionParts = version.split('.');
-    return `${versionParts[0]}.${versionParts[1]}`;
+    return versionParts[0];
 }
 
 // Return an object from a map based on the linux distro for the definition
@@ -239,7 +239,7 @@ module.exports = {
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,
     getParentTagForVersion: getParentTagForVersion,
     getUpdatedTag: getUpdatedTag,
-    majorMinorFromRelease: majorMinorFromRelease,
+    majorFromRelease: majorFromRelease,
     objectByDefinitionLinuxDistro: objectByDefinitionLinuxDistro,
     getDefinitionDependencies: getDefinitionDependencies,
     getAllDependencies: getAllDependencies,

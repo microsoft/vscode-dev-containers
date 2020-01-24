@@ -45,7 +45,7 @@ RUN apt-get update \
     # * Uncomment this section to use RUN to install other dependencies.  *
     # * See https://aka.ms/vscode-remote/containers/dockerfile-run        *
     # *********************************************************************
-    # && apt-get -y install --no-reccomends <your-package-name-here>
+    # && apt-get -y install --no-install-recommends <your-package-name-here>
     #
     # Clean up
     && apt-get autoremove -y \
