@@ -60,7 +60,7 @@ RUN apt-get update \
     && apt-get purge -y imagemagick imagemagick-6-common \
     #
     # Install eslint globally
-    && npm install -g eslint \
+    && sudo -u ${USERNAME} npm install -g eslint \
     #
     # Clean up
     && apt-get autoremove -y \
