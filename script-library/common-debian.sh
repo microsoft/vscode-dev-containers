@@ -18,6 +18,10 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Get to latest versions of all packages
+apt-get -y upgrade
+
+# Install common dependencies
 apt-get -y install --no-install-recommends \
     git \
     openssh-client \

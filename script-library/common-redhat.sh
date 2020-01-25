@@ -18,6 +18,10 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Update to latest versions of packages
+yum upgrade -y
+
+# Install common dependencies
 yum install -y \
     git \
     openssh-clients \
