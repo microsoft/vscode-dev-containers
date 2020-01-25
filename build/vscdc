@@ -5,6 +5,7 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 const push = require('./src/push').push;
+const patch = require('./src/patch').patch;
 const package = require('./src/package').package;
 const createStub = require('./src/prep').createStub;
 const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
@@ -164,6 +165,23 @@ require('yargs')
                 }
             })
     }, cgCommand)
+    .command('patch', 'patch existing images', (yargs) => {
+        yargs
+            .options({
+                'patch-path': {
+                    describe: 'path to the folder containing the patch files',
+                    default: '.'
+                },
+                'registry': {
+                    describe: 'container registry to push images to',
+                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: configUtils.getConfig('containerRegistryPath', '')
+                }
+            })
+    }, patchCommand)
     .demandCommand()
     .help()
     .argv;
@@ -197,6 +215,14 @@ function cgCommand(argv) {
     generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build)
         .catch((reason) => {
             console.error(`(!) Component governance manifest generation failed - ${reason}`);
+            process.exit(1);
+        });
+}
+
+function patchCommand(argv) {
+    patch(argv.patchPath, argv.registry, argv.registryPath)
+        .catch((reason) => {
+            console.error(`(!) Patching failed - ${reason}`);
             process.exit(1);
         });
 }

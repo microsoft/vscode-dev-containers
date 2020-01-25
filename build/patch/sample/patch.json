@@ -1,0 +1,14 @@
+{
+	"dockerFile": "Dockerfile",
+	"bumpVersion": true,
+	"tagList": [
+		"base:0.41.0-ubuntu-18.04",
+		"base:0.41.0-bionic",
+		"base:0.41-ubuntu-18.04",
+		"base:0.41-bionic",
+		"base:0-ubuntu-18.04",
+		"base:0-bionic",
+		"base:bionic",
+		"base:ubuntu-18.04"
+	]
+}

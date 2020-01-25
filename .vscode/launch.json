@@ -47,6 +47,19 @@
 				"--registry", "clantz.azurecr.io",
 				"--registryPath", "vscode/devcontainers"
 			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Run Patch",
+			"program": "${workspaceFolder}/build/vscdc",
+			"cwd": "${workspaceFolder}/build",
+			"args": [
+				"patch",
+				"--patchPath", "patch/sample",
+				"--registry", "clantz.azurecr.io",
+				"--registryPath", "vscode/devcontainers"
+			]
 		}
 	]
 }
