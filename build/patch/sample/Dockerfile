@@ -6,4 +6,8 @@
 ARG ORIGINAL_IMAGE=devcon.azurecr.io/public/vscode/devcontainers/base:0.99-ubuntu-18.04
 FROM ${ORIGINAL_IMAGE}
 
-RUN apt-get update && apt-get upgrade -y libgcrypt20
+RUN apt-get update  \
+    && apt-get upgrade -y libgcrypt20 \
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
