@@ -14,7 +14,9 @@ Run with the `--help` option to see inputs.
 
 ## Setting up a container to be built
 
-> **Note:** Only Microsoft VS Code team members can currently onboard an image to this process since it requires access the Microsoft Container Registry. However, if you have your own pre-built image or build process, you can simply reference it directly in you contributed container.
+> **Note:** Only Microsoft VS Code team members can currently onboard an image to this process since it requires access the Microsoft Container Registry. [See here for details](https://github.com/microsoft/vscode-internalbacklog/wiki/Remote-Container-Images-MCR-Setup).
+>
+> However, if you have your own pre-built image or build process, you can simply reference it directly in you contributed container.
 
 Image build/push to MCR is managed using config in `definition-build.json` files that are located in the container definition folder. The config lets you set dependencies between definitions and map actual image tags to multiple definitions. So, the steps to onboard an image are:
 
