@@ -20,7 +20,7 @@
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
-	// Use 'forwardPorts' to specify a list of ports in the container you want to make available locally.
+	// Use 'forwardPorts' (in extension v0.98.0+) to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created.
