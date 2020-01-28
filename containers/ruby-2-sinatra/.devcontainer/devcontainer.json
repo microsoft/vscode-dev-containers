@@ -8,8 +8,8 @@
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
-	// Uncomment and edit the next line if you want to publish any ports.
-	// "appPort": ["4567:4567"]
+	// Use 'forwardPorts' to specify a list of ports in the container you want to make available locally.
+	// "forwardPorts": [4567],
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "",

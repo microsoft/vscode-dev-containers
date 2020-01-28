@@ -1,17 +1,16 @@
 {
-    "name": "PlantUML",
-    "dockerFile": "Dockerfile",
+	"name": "PlantUML",
+	"dockerFile": "Dockerfile",
 
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
-        "plantuml.java": "/usr/local/openjdk-8/bin/java"
+		"plantuml.java": "/usr/local/openjdk-8/bin/java"
 	},
-		
-	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
-	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
-	// "appPort": [],
+
+	// Use 'forwardPorts' to specify a list of ports in the container you want to make available locally.
+	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "java -version",
@@ -23,6 +22,6 @@
 	
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
-        "jebbs.plantuml"
+		"jebbs.plantuml"
 	]
 }

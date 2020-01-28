@@ -11,9 +11,8 @@
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
-	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
-	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
-	// "appPort": [],
+	// Use 'forwardPorts' to specify a list of ports in the container you want to make available locally.
+	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created - like installing git
 	// "postCreateCommand": "apt-get update && apt-get install -y git",

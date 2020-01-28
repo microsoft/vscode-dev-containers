@@ -1,7 +1,7 @@
 {
 	"name": "Azure Functions & Java 8",
 	"dockerFile": "Dockerfile",
-	"appPort": 7071,
+	"forwardPorts": [ 7071 ],
 
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.

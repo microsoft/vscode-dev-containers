@@ -1,7 +1,7 @@
 {
     "name": "Jekyll Now",
     "dockerFile": "Dockerfile",
-    "appPort": [
+    "forwardPorts": [
         4000
     ],
     "extensions": [

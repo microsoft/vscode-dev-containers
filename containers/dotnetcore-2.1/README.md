@@ -14,17 +14,12 @@
 
 While the definition itself works unmodified, there are some tips that can help you deal with some of the defaults .NET Core uses.
 
-### Using appPort with ASP.NET Core
+### Making ASP.NET Core application ports available locally
 
-By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Unfortunately, means that ASP.NET Core only listens to localhost is inside the container itself. It needs to listen to `*` or `0.0.0.0` for the application to be accessible externally.
-
-This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json`. Using an environment variable to override this setting in the container only, which allows you to leave your actual application config as-is for use when running locally.
+By default, ASP.NET Core only listens to localhost. As a result, we recommend using the `forwardPorts` property instead of `appPort` to expose any ports locally. This is because `appPort` [publishes](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwards the port. When publishing a port, applications need to listen to `*` or `0.0.0.0` for the application to be accessible externally. The `forwardPorts` property does not have this limitation.
 
 ```json
-"appPort": [5000, 5001],
-"remoteEnv": {
-    "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000"
-}
+"forwardPort": [5000, 5001]
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
@@ -48,13 +43,11 @@ dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/http
 Next, add the following in to `.devcontainer/devcontainer.json` (assuming port 5000 and 5001 are the correct ports):
 
 ```json
-"appPort": [5000, 5001],
+"forwardPort": [5000, 5001],
 "mounts": [
     "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind"
 ],
 "remoteEnv": {
-    "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000",
-    "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001",
     "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
     "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx"
 }
