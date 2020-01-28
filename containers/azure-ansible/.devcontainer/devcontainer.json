@@ -20,9 +20,8 @@
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
-	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
-	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
-	// "appPort": [],
+	// Use 'forwardPorts' (in extension v0.98.0+) to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "ansible --version",

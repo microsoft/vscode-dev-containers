@@ -11,9 +11,8 @@
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
 
-	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
-	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
-	// "appPort": [5000, 5001],
+	// Use 'forwardPorts' (in extension v0.98.0+) to make a list of ports inside the container available locally.
+	// "forwardPorts": [5000, 5001],
 
 	// [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command: 
 	//  * Windows PowerShell:
@@ -28,10 +27,6 @@
 		// "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind"
 	],
 	"remoteEnv": {
-		// [Optional] Override the default HTTP endpoints - need to listen to '*' for appPort to work
-		"ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000"
-
-		// "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001",
 		// "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
 		// "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
 	},

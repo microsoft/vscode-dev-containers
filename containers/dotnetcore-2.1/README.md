@@ -14,18 +14,17 @@
 
 While the definition itself works unmodified, there are some tips that can help you deal with some of the defaults .NET Core uses.
 
-### Using appPort with ASP.NET Core
+### Using the forwardPorts property
 
-By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Unfortunately, means that ASP.NET Core only listens to localhost is inside the container itself. It needs to listen to `*` or `0.0.0.0` for the application to be accessible externally.
-
-This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json`. Using an environment variable to override this setting in the container only, which allows you to leave your actual application config as-is for use when running locally.
+By default, ASP.NET Core only listens to localhost inside the container. As a result, we recommend using the `forwardPorts` property (available in v0.98.0+) to make these ports available locally.
 
 ```json
-"appPort": [5000, 5001],
-"remoteEnv": {
-    "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000"
-}
+"forwardPorts": [5000, 5001]
 ```
+
+The `appPort` property [publishes](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwards the port, so applications need to listen to `*` or `0.0.0.0` for the application to be accessible externally. This conflicts with ASP.NET Core's defaults, but fortunately the `forwardPorts` property does not have this limitation.
+
+> **Note:** See [here for an alternative](https://github.com/microsoft/vscode-dev-containers/blob/v0.42.0/containers/dotnetcore-2.1/README.md#using-appport-with-aspnet-core) using `appPort` if you need to use an extension version below v0.98.0.
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
@@ -48,17 +47,17 @@ dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/http
 Next, add the following in to `.devcontainer/devcontainer.json` (assuming port 5000 and 5001 are the correct ports):
 
 ```json
-"appPort": [5000, 5001],
+"forwardPorts": [5000, 5001],
 "mounts": [
     "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind"
 ],
 "remoteEnv": {
-    "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000",
-    "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001",
     "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
     "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx"
 }
 ```
+
+> **Note:** See [here for an alternative](https://github.com/microsoft/vscode-dev-containers/blob/v0.42.0/containers/dotnetcore-2.1/README.md#enabling-https-in-aspnet-core) when using an extension version below v0.98.0 as the `forwardPorts` property is not available.
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
