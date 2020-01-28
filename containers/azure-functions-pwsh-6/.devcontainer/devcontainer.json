@@ -13,7 +13,7 @@
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
 		"ms-vscode.powershell"
-	],
+	]
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
