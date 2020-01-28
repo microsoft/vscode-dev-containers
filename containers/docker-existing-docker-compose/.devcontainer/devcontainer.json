@@ -17,18 +17,13 @@
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
 	"workspaceFolder": "/workspace",
 
-	// Use 'settings' to set *default* container specific settings.json values on container create. 
-	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		// This will ignore your local shell user setting for Linux since shells like zsh are typically 
-		// not in base container images. You can also update this to an specific shell to ensure VS Code 
-		// uses the right one for terminals and tasks. For example, /bin/bash (or /bin/ash for Alpine).
 		"terminal.integrated.shell.linux": null
 	},
 
-	// Uncomment the next line to have VS Code connect as an existing non-root user in the container. See
-	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
-	// "remoteUser": "vscode",
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": []
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
@@ -39,6 +34,6 @@
 	// Uncomment the next line to run commands after the container is created - for example installing git.
 	// "postCreateCommand": "apt-get update && apt-get install -y git",
 
-	// Add the IDs of extensions you want installed when the container is created in the array below.
-	"extensions": []
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
 }

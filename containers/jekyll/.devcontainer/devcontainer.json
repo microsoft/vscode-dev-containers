@@ -2,23 +2,21 @@
 	"name": "Jekyll",
 	"dockerFile": "Dockerfile",
 
-	// Use 'settings' to set *default* container specific settings.json values on container create. 
-	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
-	// Use 'forwardPorts' (in extension v0.98.0+) to make a list of ports inside the container available locally.
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": []
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [3000],
 
-	// Uncomment the next line to run commands after the container is created.
+	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "cd ${input:projectName} && bundle install",
 
-	// Uncomment the next line to use a non-root user. On Linux, this will prevent
-	// new files getting created as root, but you may need to update the USER_UID
-	// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
-	// "runArgs": [ "-u", "vscode" ],
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
 
-	// Add the IDs of extensions you want installed when the container is created in the array below.
-	"extensions": []
 }
