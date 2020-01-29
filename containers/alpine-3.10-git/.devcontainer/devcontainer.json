@@ -2,29 +2,24 @@
 	"name": "Alpine 3.10",
 	"dockerFile": "Dockerfile",
 	
-	// Uncomment the next line to have VS Code connect as an existing non-root user in the container. 
-	// On Linux, by default, the container user's UID/GID will be updated to match your local user. See
-	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
-	// "remoteUser": "vscode",
-
-	// Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust
-	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-	
-	// Use 'settings' to set *default* container specific settings.json values on container create. 
-	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	// Set *default* container specific settings.json values on container create. 
 	"settings": {
-		// This dev container does include /bin/bash if you prefer to use it instead of ash.
 		"terminal.integrated.shell.linux": "/bin/ash"
 	},
 
-	// Use 'forwardPorts' (in extension v0.98.0+) to make a list of ports inside the container available locally.
+	// Add the IDs of extensions you want installed when the container is created.
+	// Note that some extensions may not work in Alpine Linux. See https://aka.ms/vscode-remote/linux.
+	"extensions": []
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	// Uncomment the next line to run commands after the container is created.
+	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
 
-	// Add the IDs of extensions you want installed when the container is created in the array 
-	// below. Note that some extensions may not work in Alpine Linux due to glibc dependencies 
-	// in native code inside the extension. See https://aka.ms/vscode-remote/linux for details.
-	"extensions": []
+	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
 }

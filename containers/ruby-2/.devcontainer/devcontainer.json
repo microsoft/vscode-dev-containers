@@ -2,25 +2,23 @@
 	"name": "Ruby 2",
 	"dockerFile": "Dockerfile",
 
-	// Use 'settings' to set *default* container specific settings.json values on container create. 
-	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
-	// Use 'forwardPorts' (in extension v0.98.0+) to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "ruby --version",
-
-	// Uncomment the next line to have VS Code connect as an existing non-root user in the container. 
-	// On Linux, by default, the container user's UID/GID will be updated to match your local user. See
-	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
-	// "remoteUser": "vscode",
-
-	// Add the IDs of extensions you want installed when the container is created in the array below.
+	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"rebornix.Ruby"
 	]
+	
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "ruby --version",
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+
 }

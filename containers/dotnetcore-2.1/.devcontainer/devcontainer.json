@@ -2,16 +2,17 @@
 	"name": "C# (.NET Core 2.1)",
 	"dockerFile": "Dockerfile",
 	
-	// Use 'settings' to set *default* container specific settings.json values on container create. 
-	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore"
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-vscode.csharp"
+	],
 
-	// Use 'forwardPorts' (in extension v0.98.0+) to make a list of ports inside the container available locally.
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
 
 	// [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command: 
@@ -29,15 +30,12 @@
 	"remoteEnv": {
 		// "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
 		// "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx"
-	},
+	}
+	
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore"
 
-	// Uncomment the next line to have VS Code connect as an existing non-root user in the container. 
-	// On Linux, by default, the container user's UID/GID will be updated to match your local user. See
-	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
-	// "remoteUser": "vscode",
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
 
-	// Add the IDs of extensions you want installed when the container is created in the array below.
-	"extensions": [
-		"ms-vscode.csharp"
-	]
 }

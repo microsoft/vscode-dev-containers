@@ -18,5 +18,5 @@
 	"definitionBuildConfigFile": "definition-build.json",
 
 	"devContainerJsonPreamble": "For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:",
-	"dockerFilePreamble": "For information on the contents of the container image below, see following Dockerfile:"
+	"dockerFilePreamble": "To fully customize the contents of this image, use the following Dockerfile instead:"
 }
