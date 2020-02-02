@@ -2,11 +2,11 @@
 
 ## Summary
 
-*Develop Elm based applications. Includes the Elm extension & binary*
+*Develop Elm based applications. Includes the Elm language server extension & binary*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | xWiiLLz |
+| *Contributors* | xWiiLLz, @andys8 |
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | Elm |
 
