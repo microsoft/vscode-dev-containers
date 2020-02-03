@@ -9,12 +9,10 @@ on:
       - 'script-library/**'
 
 jobs:
-  build:
-    
+  build-page-1:
+    name: Build and push (page 1 of 3)
     runs-on: ubuntu-latest
-
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    
     steps:
 
     - name: Container Registry Login
@@ -28,42 +26,166 @@ jobs:
     - name: Checkout
       id: checkout
       uses: actions/checkout@v1
-      
-    - name: Push "dev", Package, update CG manifest
-      id: push_and_package
+
+    - name: Build and push dev tags (page 1 of 3)
+      id: build_and_push
       run: |
-        # Push dev images and package
         set -e
-
         yarn install
-
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
         fi
-        build/vscdc pack  --release $GIT_BRANCH \
+        build/vscdc push  --release $GIT_BRANCH \
+                          --page 1 \
+                          --pageTotal 3 \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
                           --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
 
+  build-page-2:
+    name: Build and push (page 2 of 3)
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    steps:
+
+    - name: Container Registry Login
+      id: docker_login
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Build and push dev tags (page 2 of 3)
+      id: build_and_push
+      run: |
+        set -e
+        yarn install
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        build/vscdc push  --release $GIT_BRANCH \
+                          --page 2 \
+                          --pageTotal 3 \
+                          --github-repo ${{ github.repository }} \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+
+  build-page-3:
+    name: Build and push (page 3 of 3)
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    steps:
+
+    - name: Container Registry Login
+      id: docker_login
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Build and push dev tags (page 3 of 3)
+      id: build_and_push
+      run: |
+        set -e
+        yarn install
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        build/vscdc push  --release "$GIT_BRANCH" \
+                          --page 3 \
+                          --pageTotal 3 \
+                          --github-repo ${{ github.repository }} \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+
+  package:
+    name: Package
+    needs: [build-page-1, build-page-2, build-page-3]
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    steps:
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Get branch name
+      id: get_branch_name
+      run: |
+        set -e
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        echo "::set-output name=git_branch::$GIT_BRANCH"
+
+    - name: Package
+      id: package
+      run: |
+        set -e
+        yarn install
+        build/vscdc pack  --release ${{ steps.get_branch_name.git_branch }} \
+                          --github-repo ${{ github.repository }} \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
+                          --no-push-images
+
         # Set an output with the resulting package name for upload
         PKG_PREFIX=$(node -p "require('./package.json').name")
         mv ./$PKG_PREFIX-*.tgz ./$PKG_PREFIX-${{ github.sha }}.tgz
         echo "::set-output name=package_name::$PKG_PREFIX-${{ github.sha }}.tgz"
-
-        # Update CG manifest
-        build/vscdc cg --no-build --release $BRANCH --github-repo ${{ github.repository }} --registry ${{ secrets.REGISTRY }} --registry-path ${{ secrets.REGISTRY_BASE_PATH }}
-        git config --global user.email "vscr-feedback@microsoft.com"
-        git config --global user.name "CI"
-        git add cgmanifest.json
-        git commit -m 'Automated update' \
-          && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
-          || echo 'No updates to cgmanifest.json'
 
     - name: Upload Package
       uses: actions/upload-artifact@v1.0.0
       with:
         name: ${{ steps.push_and_package.outputs.package_name }}
         path: ./${{ steps.push_and_package.outputs.package_name }}
+
+  cgmanifest:
+    name: Generate cgmanifest.json
+    needs: [build-page-1, build-page-2, build-page-3]
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    steps:
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Update CG Manifest
+      id: update_cg_manifest
+      run: |
+        set -e
+        yarn install
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        build/vscdc cg --no-build --release $GIT_BRANCH --github-repo ${{ github.repository }} --registry ${{ secrets.REGISTRY }} --registry-path ${{ secrets.REGISTRY_BASE_PATH }}
+        git config --global user.email "vscr-feedback@microsoft.com"
+        git config --global user.name "CI"
+        git add cgmanifest.json
+        git commit -m 'Automated update' \
+          && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
+          || echo 'No updates to cgmanifest.json'
