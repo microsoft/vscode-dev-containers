@@ -3,40 +3,36 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM mcr.microsoft.com/vscode/devcontainers/base:debian-9
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:12
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Configuring Elm version
-ARG ELM_VERSION=0.19.0
+ARG ELM_VERSION=latest-0.19.1
+ARG ELM_TEST_VERSION=latest-0.19.1
+ARG ELM_FORMAT_VERSION=latest-0.19.1
 
 # This Dockerfile's base image has a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
 # will be updated to match your local UID/GID (when using the dockerFile property).
 # See https://aka.ms/vscode-remote/containers/non-root-user for details.
-ARG USERNAME=vscode
+ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Configure apt and install packages
-RUN apt-get update \
-    #
-    # Install elm globally
-    && wget -qO - https://github.com/elm/compiler/releases/download/${ELM_VERSION}/binary-for-linux-64-bit.gz | gunzip -c > /usr/local/bin/elm 2>&1 \
-    && chmod +x /usr/local/bin/elm \
+# Install elm, elm-test and elm-format
+RUN sudo -u ${USERNAME} npm install --global \
+    elm@${ELM_VERSION} \
+    elm-test@${ELM_TEST_VERSION} \
+    elm-format@${ELM_FORMAT_VERSION} \
     #
     # [Optional] Update UID/GID if needed
     && if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
         groupmod --gid $USER_GID $USERNAME \
         && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
         && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
-    fi \
-    #
-    # Clean up
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    fi
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
