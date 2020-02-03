@@ -23,7 +23,7 @@ async function package(repo, release, updateLatest, registry, registryPath, stub
 
     if (pushImages) {
         // First, push images, update content
-        await push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate);
+        await push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate, 1, 1);
     }
 
     // Then package

@@ -151,23 +151,65 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath)
     return tagList;
 }
 
-// Walk the image build config and sort list so parents build before children
-function getSortedDefinitionBuildList() {
-    const sortedList = [];
-    const settingsCopy = JSON.parse(JSON.stringify(config.definitionBuildSettings));
+// Walk the image build config and paginate and sort list so parents build before (and with) children
+function getSortedDefinitionBuildList(page, pageTotal) {
 
+    // Bucket definitions by parent
+    const parentBuckets = {}
+    const noParentList = [];
+    let total = 0;
     for (let definitionId in config.definitionBuildSettings) {
-        const add = (defId) => {
-            if (typeof settingsCopy[defId] === 'object') {
-                add(settingsCopy[defId].parent);
-                sortedList.push(defId);
-                settingsCopy[defId] = undefined;
+        if (typeof config.definitionBuildSettings[definitionId] === 'object') {
+            const parentId = config.definitionBuildSettings[definitionId].parent;
+            // TODO: Handle parents that have parents
+            if (typeof parentId !== 'undefined') {
+                parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
+                parentBuckets[parentId].push(definitionId);
+            } else {
+                noParentList.push(definitionId);
             }
+            total++;
         }
-        add(definitionId);
+    }
+    // Remove parents from no parent list - they are in their buckets already
+    for (let parentId in parentBuckets) {
+        if (typeof parentId !== 'undefined') {
+            noParentList.splice(noParentList.indexOf(parentId), 1);
+        }
     }
 
-    return sortedList;
+    // Create pages and distribute entries with no parents
+    const pageSize = Math.ceil(total / pageTotal);
+    const allPages = [];
+    for (let bucketId in parentBuckets) {
+        let bucket = parentBuckets[bucketId];
+        if (typeof bucket === 'object') {
+            if (noParentList.length > 0 && bucket.length < pageSize) {
+                const toConcat = noParentList.splice(0, pageSize - bucket.length);
+                bucket = bucket.concat(toConcat);
+            }
+            allPages.push(bucket);
+        }
+    }
+    if (noParentList.length > 0) {
+        allPages.push(noParentList);
+    }
+
+    if (allPages.length > pageTotal) {
+        // If too many pages, add extra pages to last one
+        for (let i = pageTotal; i < allPages.length; i++) {
+            allPages[allPages.length - 1] = allPages[allPages.length - 1].concat(allPages[i]);
+        }
+    } else if (allPages.length < pageTotal) {
+        // If too few, add some empty pages
+        for (let i = allPages.length; i < pageTotal; i++) {
+            allPages.push([]);
+        }
+    }
+
+    console.log(`(*) Builds paginated as follows: ${JSON.stringify(allPages, null, 4)}\n(*) Processing page ${page} of ${pageTotal}.\n`);
+
+    return allPages[page - 1];
 }
 
 // Get parent tag for a given child definition

@@ -42,10 +42,15 @@ require('yargs')
                     describe: 'vscode-dev-containers repo name',
                     default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
-                'push-images': {
-                    describe: 'whether to push before packaging',
+                'package-only': {
+                    describe: 'whether to prep/build/push before packaging',
                     type: 'boolean',
-                    default: true
+                    default: false
+                },
+                'prep-only': {
+                    describe: 'whether to only prepare content, but ',
+                    type: 'boolean',
+                    default: false
                 },
                 'update-latest': {
                     describe: 'whether to tag latest and {MAJOR}',
@@ -56,11 +61,6 @@ require('yargs')
                     describe: 'whether to clean up staging folder when done',
                     type: 'boolean',
                     default: true
-                },
-                'simulate': {
-                    describe: 'whether to simulate a push instead of doing it',
-                    type: 'boolean',
-                    default: false
                 }
             })
     }, packCommand)
@@ -104,6 +104,16 @@ require('yargs')
                     describe: 'whether to simulate a push instead of doing it',
                     type: 'boolean',
                     default: false
+                },
+                'page': {
+                    describe: 'Page number (of total) to push',
+                    type: 'integer',
+                    default: 1
+                },
+                'page-total': {
+                    describe: 'Total number of pages to use when parallelizing builds',
+                    type: 'integer',
+                    default: 1
                 }
             })
     }, pushCommand)
@@ -187,7 +197,7 @@ require('yargs')
     .argv;
 
 function pushCommand(argv) {
-    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate, argv.devcontainer)
+    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate, argv.page, argv.pageTotal, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
             process.exit(1);
@@ -195,7 +205,7 @@ function pushCommand(argv) {
 }
 
 function packCommand(argv) {
-    package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.pushImages, argv.clean, argv.simulate)
+    package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.packageOnly, argv.clean, argv.prepOnly)
         .catch((reason) => {
             console.error(`(!) Packaging failed - ${reason}`);
             process.exit(1);
