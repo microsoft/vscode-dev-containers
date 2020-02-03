@@ -110,7 +110,7 @@ jobs:
         fi
         build/vscdc push  --page 3 \
                           --pageTotal 3 \
-                          --release "$GIT_BRANCH" \
+                          --release $GIT_BRANCH \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
@@ -137,18 +137,21 @@ jobs:
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
         fi
-        build/vscdc pack  --no-push-images
+        build/vscdc pack  --no-push-images \
                           --release $GIT_BRANCH \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
-                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
 
         # Set an output with the resulting package name for upload
         PKG_PREFIX=$(node -p "require('./package.json').name")
-        mv ./$PKG_PREFIX-*.tgz ./$PKG_PREFIX-${{ github.sha }}.tgz
-        echo "::set-output name=package_name::$PKG_PREFIX-${{ github.sha }}.tgz"
+        PKG_NAME=$PKG_PREFIX-${{ github.sha }}.tgz
+        mv ./$PKG_PREFIX-*.tgz ./$PKG_NAME
+
+        echo 
+        echo "::set-output name=package_name::$PKG_NAME"
 
     - name: Upload Package
       uses: actions/upload-artifact@v1.0.0
@@ -184,10 +187,10 @@ jobs:
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
         fi
-        build/vscdc cg  --no-build 
-                        --release $GIT_BRANCH 
-                        --github-repo ${{ github.repository }} 
-                        --registry ${{ secrets.REGISTRY }} 
+        build/vscdc cg  --no-build \
+                        --release $GIT_BRANCH \
+                        --github-repo ${{ github.repository }} \
+                        --registry ${{ secrets.REGISTRY }} \
                         --registry-path ${{ secrets.REGISTRY_BASE_PATH }}
         git config --global user.email "vscr-feedback@microsoft.com"
         git config --global user.name "CI"
