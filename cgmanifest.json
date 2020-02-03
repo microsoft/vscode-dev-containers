@@ -135,8 +135,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: libssl1.1",
-                    "Version": "1.1.1d-r0",
-                    "DownloadUrl": "1.1.1d-r2:/x86_64/libssl1.1-1.1.1d-r0.apk"
+                    "Version": "1.1.1d-r2",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/libssl1.1-1.1.1d-r2.apk"
                 }
             }
         },
@@ -625,8 +625,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: sudo",
-                    "Version": "1.8.19p1-2.1+deb9u1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/s/sudo/sudo_1.8.19p1-2.1+deb9u1_amd64.deb"
+                    "Version": "1.8.19p1-2.1+deb9u2",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/s/sudo/sudo_1.8.19p1-2.1+deb9u2_amd64.deb"
                 }
             }
         },
