@@ -107,6 +107,9 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
     const componentList = [];
     console.log(`(*) Generating Linux package registrations for ${imageTag}...`);
 
+    console.log(`(*) Pulling image...`);
+    await asyncUtils.spawn('docker', ['pull', imageTag]);
+
     // Generate and exec command to get installed package versions
     console.log('(*) Getting package versions...');
     const packageVersionListCommand = packageList.reduce((prev, current) => {
