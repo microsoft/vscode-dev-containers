@@ -3,7 +3,7 @@ name: Update CG Manifest
 on:
   #repository_dispatch:
   schedule: 
-    - '0 22 * * *'
+    - cron: '0 22 * * *'
 
 jobs:
   cgmanifest:
