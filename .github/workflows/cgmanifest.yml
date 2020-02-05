@@ -2,8 +2,6 @@ name: Update CG Manifest
 
 on:
   repository_dispatch:
-  release: 
-    types: [created]
 
 jobs:
   cgmanifest:
