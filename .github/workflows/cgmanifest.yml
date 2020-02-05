@@ -2,8 +2,8 @@ name: Update CG Manifest
 
 on:
   repository_dispatch:
-  #schedule: 
-  #  - cron: '0 22 * * *'
+  release: 
+    types: [created]
 
 jobs:
   cgmanifest:
