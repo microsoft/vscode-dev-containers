@@ -48,7 +48,7 @@ require('yargs')
                     default: false
                 },
                 'prep-only': {
-                    describe: 'whether to only prepare content, but ',
+                    describe: 'prep the containers for packaging, but do not build/push',
                     type: 'boolean',
                     default: false
                 },
@@ -100,8 +100,8 @@ require('yargs')
                     type: 'boolean',
                     default: true
                 },
-                'simulate': {
-                    describe: 'whether to simulate a push instead of doing it',
+                'prep-only': {
+                    describe: 'whether to just prepare the containers to build/push',
                     type: 'boolean',
                     default: false
                 },
@@ -170,7 +170,7 @@ require('yargs')
                     default: configUtils.getConfig('vscodeDevContainersRepo', 'https://github.com/microsoft/vscode-dev-containers')
                 },
                 'build': {
-                    describe: 'whether to skip the image build step',
+                    describe: 'whether to to build the image first step',
                     default: true
                 }
             })
@@ -197,7 +197,7 @@ require('yargs')
     .argv;
 
 function pushCommand(argv) {
-    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.simulate, argv.page, argv.pageTotal, argv.devcontainer)
+    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.prepOnly, argv.page, argv.pageTotal, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
             process.exit(1);

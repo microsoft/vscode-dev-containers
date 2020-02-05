@@ -9,7 +9,7 @@ const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
 const prep = require('./prep');
 
-async function push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate, page, pageTotal, definitionId) {
+async function push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, page, pageTotal, definitionId) {
     stubRegistry = stubRegistry || registry;
     stubRegistryPath = stubRegistryPath || registryPath;
 
@@ -26,13 +26,13 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
         console.log(`**** Pushing ${currentDefinitionId} ${release} ****`);
         await pushImage(
             path.join(definitionStagingFolder, currentDefinitionId),
-            currentDefinitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate);
+            currentDefinitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly);
     });
 
     return stagingFolder;
 }
 
-async function pushImage(definitionPath, definitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate) {
+async function pushImage(definitionPath, definitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly) {
     const dotDevContainerPath = path.join(definitionPath, '.devcontainer');
     // Use base.Dockerfile for image build if found, otherwise use Dockerfile
     const baseDockerFileExists = await asyncUtils.exists(path.join(dotDevContainerPath, 'base.Dockerfile'));
@@ -59,7 +59,7 @@ async function pushImage(definitionPath, definitionId, repo, release, updateLate
         definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, true);
 
 
-    if (simulate) {
+    if (prepOnly) {
         console.log(`(*) Simulating: Skipping build and push to registry.`);
     } else {
         // Build image

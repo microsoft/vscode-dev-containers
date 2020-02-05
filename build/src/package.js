@@ -10,7 +10,7 @@ const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
 const packageJson = require('../../package.json');
 
-async function package(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, pushImages, cleanWhenDone, simulate) {
+async function package(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, packageOnly, cleanWhenDone, prepOnly) {
     stubRegistry = stubRegistry || registry;
     stubRegistryPath = stubRegistryPath || registryPath;
 
@@ -21,9 +21,9 @@ async function package(repo, release, updateLatest, registry, registryPath, stub
     const stagingFolder = await configUtils.getStagingFolder(release);
     const definitionStagingFolder = path.join(stagingFolder, 'containers');
 
-    if (pushImages) {
+    if (!packageOnly) {
         // First, push images, update content
-        await push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate, 1, 1);
+        await push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, 1, 1);
     }
 
     // Then package
