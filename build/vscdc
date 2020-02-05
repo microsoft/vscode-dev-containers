@@ -47,8 +47,8 @@ require('yargs')
                     type: 'boolean',
                     default: false
                 },
-                'prep-only': {
-                    describe: 'prep the containers for packaging, but do not build/push',
+                'prep-and-package-only': {
+                    describe: 'prep and package, but do not build/push',
                     type: 'boolean',
                     default: false
                 },
@@ -101,9 +101,14 @@ require('yargs')
                     default: true
                 },
                 'prep-only': {
-                    describe: 'whether to just prepare the containers to build/push',
+                    describe: 'prep the containers for build/push, but do not actually do it',
                     type: 'boolean',
                     default: false
+                },
+                'push': {
+                    describe: 'whether to push after prep/build',
+                    type: 'boolean',
+                    default: true
                 },
                 'page': {
                     describe: 'Page number (of total) to push',
@@ -197,7 +202,7 @@ require('yargs')
     .argv;
 
 function pushCommand(argv) {
-    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.prepOnly, argv.page, argv.pageTotal, argv.devcontainer)
+    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.push, argv.prepOnly, argv.page, argv.pageTotal, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
             process.exit(1);
@@ -205,7 +210,7 @@ function pushCommand(argv) {
 }
 
 function packCommand(argv) {
-    package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.packageOnly, argv.clean, argv.prepOnly)
+    package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean)
         .catch((reason) => {
             console.error(`(!) Packaging failed - ${reason}`);
             process.exit(1);
