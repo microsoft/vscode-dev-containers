@@ -172,7 +172,7 @@ jobs:
         echo '(*) Triggering CG manifest generation using repository_dispatch'
 
         # Use alternate GitHub token due to https://github.community/t5/GitHub-Actions/Triggering-a-new-workflow-from-another-workflow/td-p/31676
-        echo curl -X POST \
+        curl -X POST \
           -H "Authorization: token ${{ secrets.ALTERNATE_GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.everest-preview+json" \
           -H "Content-Type: application/json" \
