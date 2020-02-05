@@ -7,11 +7,13 @@ on:
     - 'v*'
 
 jobs:
-  build:
-    
+  build-page-1:
+    name: Build and push (page 1/3)
     runs-on: ubuntu-latest
-    
     steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
 
     - name: Get Tag Name
       id: get_tag_name  
@@ -24,23 +26,114 @@ jobs:
         login-server: ${{ secrets.REGISTRY }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-
-    - name: Checkout
-      id: checkout
-      uses: actions/checkout@v1
       
-    - name: Push and Package
-      id: push_and_package
+    - name: Build and push
+      id: build_and_push
       run: |
+        set -e
         # Push images and package
         yarn install
-        build/vscdc pack  --release ${{ steps.get_tag_name.outputs.tag }} \
+        build/vscdc push  --page 1 \
+                          --pageTotal 3 \
+                          --release ${{ steps.get_tag_name.outputs.tag }} \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
                           --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
 
+  build-page-2:
+    name: Build and push (page 2/3)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Get Tag Name
+      id: get_tag_name  
+      uses: olegtarasov/get-tag@v1
+
+    - name: Container Registry Login
+      id: docker_login
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+      
+    - name: Build and push
+      id: build_and_push
+      run: |
+        set -e
+        # Push images and package
+        yarn install
+        build/vscdc push  --page 2 \
+                          --pageTotal 3 \
+                          --release ${{ steps.get_tag_name.outputs.tag }} \
+                          --github-repo ${{ github.repository }} \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+
+  build-page-3:
+    name: Build and push (page 3/3)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Get Tag Name
+      id: get_tag_name  
+      uses: olegtarasov/get-tag@v1
+
+    - name: Container Registry Login
+      id: docker_login
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+      
+    - name: Build and push
+      id: build_and_push
+      run: |
+        set -e
+        # Push images and package
+        yarn install
+        build/vscdc push  --page 3 \
+                          --pageTotal 3 \
+                          --release ${{ steps.get_tag_name.outputs.tag }} \
+                          --github-repo ${{ github.repository }} \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+
+  package:
+    name: Package and release
+    needs: [build-page-1, build-page-2, build-page-3]
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Package
+      id: package
+      run: |
+        set -e
+        yarn install
+        build/vscdc pack  --prep-and-package-only \
+                          --release ${{ steps.get_tag_name.outputs.tag }} \
+                          --github-repo ${{ github.repository }} \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
         # Set an output with the resulting package name for upload
         PKG_PREFIX=$(node -p "require('./package.json').name")
         echo "::set-output name=package_name::$(ls $PKG_PREFIX-*.tgz)"
@@ -63,6 +156,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${{ steps.push_and_package.outputs.package_name }}
-        asset_name: ${{ steps.push_and_package.outputs.package_name }}
+        asset_path: ./${{ steps.package.outputs.package_name }}
+        asset_name: ${{ steps.package.outputs.package_name }}
         asset_content_type: application/gzip 
