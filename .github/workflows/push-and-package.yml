@@ -57,6 +57,10 @@ jobs:
       id: checkout
       uses: actions/checkout@v1
 
+    - name: Get Tag Name
+      id: get_tag_name  
+      uses: olegtarasov/get-tag@v1
+
     - name: Package
       id: package
       run: |
