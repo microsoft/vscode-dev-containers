@@ -22,6 +22,7 @@ fi
 apk add --no-cache \
     git \
     openssh-client \
+    less \
     bash \
     libgcc \
     libstdc++ \

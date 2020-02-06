@@ -195,8 +195,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: sudo",
-                    "Version": "1.8.27-r2",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/sudo-1.8.27-r2.apk"
+                    "Version": "1.8.27-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/sudo-1.8.27-r0.apk"
                 }
             }
         },

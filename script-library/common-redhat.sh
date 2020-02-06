@@ -25,6 +25,7 @@ yum upgrade -y
 yum install -y \
     git \
     openssh-clients \
+    less \
     net-tools \
     which \
     curl \
