@@ -11,6 +11,7 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"args": [
 				"push",
+				"python-3",
 				"--release", "master",
 				"--page", "3",
 				"--pageTotal", "3",
