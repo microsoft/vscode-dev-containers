@@ -201,7 +201,6 @@ function packCommand(argv) {
         });
 }
 
-
 function updateScriptUrlsCommand(argv) {
     updateAllScriptUrlsInRepo(argv.githubRepo, argv.release, argv.updateSha)
         .catch((reason) => {

@@ -140,7 +140,14 @@ async function updateAllScriptUrlsInRepo(repo, release, updateScriptSha) {
     // Update script versions in definition Dockerfiles for release
     const allDefinitions = await asyncUtils.readdir(definitionFolder);
     await asyncUtils.forEach(allDefinitions, async (currentDefinitionId) => {
-        await updateScriptUrlInDockerfile(path.join(definitionFolder, currentDefinitionId), repo, release, updateScriptSha);
+        const dockerFileBasePath = path.join(definitionFolder, currentDefinitionId, '.devcontainer', 'Dockerfile');
+        if (await asyncUtils.exists(dockerFileBasePath)) {
+            await updateScriptUrlInDockerfile(dockerFileBasePath, repo, release, updateScriptSha);
+        }
+        const dockerFilePath = path.join(definitionFolder, currentDefinitionId, '.devcontainer', 'Dockerfile');
+        if (await asyncUtils.exists(dockerFilePath)) {
+            await updateScriptUrlInDockerfile(dockerFilePath, repo, release, updateScriptSha);
+        }
     });
 }
 
