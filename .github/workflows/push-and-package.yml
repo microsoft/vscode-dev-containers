@@ -7,8 +7,13 @@ on:
     - 'v*'
 
 jobs:
-  build-page-1:
-    name: Build and push (page 1/3)
+  build-and-push:
+    name: Build and push
+    strategy:
+      matrix:
+        page: [1, 2, 3]
+        page-total: [3]
+      fail-fast: true
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -33,78 +38,8 @@ jobs:
         set -e
         # Push images and package
         yarn install
-        build/vscdc push  --page 1 \
-                          --pageTotal 3 \
-                          --release ${{ steps.get_tag_name.outputs.tag }} \
-                          --github-repo ${{ github.repository }} \
-                          --registry ${{ secrets.REGISTRY }} \
-                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
-                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
-                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
-
-  build-page-2:
-    name: Build and push (page 2/3)
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      id: checkout
-      uses: actions/checkout@v1
-
-    - name: Get Tag Name
-      id: get_tag_name  
-      uses: olegtarasov/get-tag@v1
-
-    - name: Container Registry Login
-      id: docker_login
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ secrets.REGISTRY }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-      
-    - name: Build and push
-      id: build_and_push
-      run: |
-        set -e
-        # Push images and package
-        yarn install
-        build/vscdc push  --page 2 \
-                          --pageTotal 3 \
-                          --release ${{ steps.get_tag_name.outputs.tag }} \
-                          --github-repo ${{ github.repository }} \
-                          --registry ${{ secrets.REGISTRY }} \
-                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
-                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
-                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
-
-  build-page-3:
-    name: Build and push (page 3/3)
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      id: checkout
-      uses: actions/checkout@v1
-
-    - name: Get Tag Name
-      id: get_tag_name  
-      uses: olegtarasov/get-tag@v1
-
-    - name: Container Registry Login
-      id: docker_login
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ secrets.REGISTRY }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-      
-    - name: Build and push
-      id: build_and_push
-      run: |
-        set -e
-        # Push images and package
-        yarn install
-        build/vscdc push  --page 3 \
-                          --pageTotal 3 \
+        build/vscdc push  --page ${{ matrix.page }} \
+                          --pageTotal ${{ matrix.page-total }} \
                           --release ${{ steps.get_tag_name.outputs.tag }} \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \
@@ -114,7 +49,7 @@ jobs:
 
   package:
     name: Package and release
-    needs: [build-page-1, build-page-2, build-page-3]
+    needs: [build-and-push]
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     steps:
