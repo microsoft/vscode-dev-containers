@@ -20,7 +20,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # install git iproute2, process tools, lsb-release (common in install instructions for CLIs) and libzip for R Tools extension
-    && apt-get -y install git openssh-client iproute2 procps lsb-release libzip-dev \
+    && apt-get -y install git openssh-client less iproute2 procps lsb-release libzip-dev \
     #
     # Register Microsoft key and feed
     && wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb \
