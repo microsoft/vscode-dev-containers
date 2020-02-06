@@ -102,17 +102,29 @@ function getLatestTag(definitionId, registry, registryPath) {
 
 }
 
+function getVariants(definitionId) {
+    return config.definitionBuildSettings[definitionId].variants;
+}
+
 // Create all the needed variants of the specified version identifier for a given definition
-function getTagsForVersion(definitionId, version, registry, registryPath) {
+function getTagsForVersion(definitionId, version, registry, registryPath, variant) {
     if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
         return null;
+    }
+    // Use the first variant if none passed in, unless there isn't one
+    if (!variant) {
+        const variants = getVariants(definitionId);
+        variant = variants ? variants[0] : 'NOVARIANT';
     }
     return config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
         // One of the tags that needs to be supported is one where there is no version, but there
         // are other attributes. For example, python:3 in addition to python:0.35.0-3. So, a version
         // of '' is allowed. However, there are also instances that are just the version, so in 
         // these cases latest would be used instead. However, latest is passed in separately.
-        const baseTag = tag.replace('${VERSION}', version).replace(':-', ':');
+        let baseTag = tag.replace('${VERSION}', version)
+            .replace(':-', ':')
+            .replace('${VARIANT}', variant || 'NOVARIANT')
+            .replace('-NOVARIANT', '');
         if (baseTag.charAt(baseTag.length - 1) !== ':') {
             list.push(`${registry}/${registryPath}/${baseTag}`);
         }
@@ -121,10 +133,10 @@ function getTagsForVersion(definitionId, version, registry, registryPath) {
 }
 
 // Generate complete list of tags for a given definition
-function getTagList(definitionId, release, updateLatest, registry, registryPath) {
+function getTagList(definitionId, release, updateLatest, registry, registryPath, variant) {
     const version = getVersionFromRelease(release);
     if (version === 'dev') {
-        return getTagsForVersion(definitionId, 'dev', registry, registryPath);
+        return getTagsForVersion(definitionId, 'dev', registry, registryPath, variant);
     }
 
     const versionParts = version.split('.');
@@ -145,7 +157,7 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath)
     // If this variant should actually be the latest tag, use it
     let tagList = (updateLatest && config.definitionBuildSettings[definitionId].latest) ? getLatestTag(definitionId, registry, registryPath) : [];
     versionList.forEach((tagVersion) => {
-        tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath));
+        tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
     });
 
     return tagList;
@@ -213,16 +225,16 @@ function getSortedDefinitionBuildList(page, pageTotal) {
 }
 
 // Get parent tag for a given child definition
-function getParentTagForVersion(definitionId, version, registry, registryPath) {
+function getParentTagForVersion(definitionId, version, registry, registryPath, variant) {
     const parentId = config.definitionBuildSettings[definitionId].parent;
-    return parentId ? getTagsForVersion(parentId, version, registry, registryPath)[0] : null;
+    return parentId ? getTagsForVersion(parentId, version, registry, registryPath, variant)[0] : null;
 }
 
-function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updatedVersion, updatedRegistry, updatedRegistryPath) {
+function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updatedVersion, updatedRegistry, updatedRegistryPath, variant) {
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
     const captureGroups = new RegExp(`${currentRegistry}/${currentRegistryPath}/(.+:.+)`).exec(currentTag);
-    const updatedTags = getTagsForVersion(definitionTagLookup[`ANY/ANY/${captureGroups[1]}`], updatedVersion, updatedRegistry, updatedRegistryPath);
+    const updatedTags = getTagsForVersion(definitionTagLookup[`ANY/ANY/${captureGroups[1]}`], updatedVersion, updatedRegistry, updatedRegistryPath, variant);
     if (updatedTags && updatedTags.length > 0) {
         console.log(`      Updating ${currentTag}\n      to ${updatedTags[0]}`);
         return updatedTags[0];
@@ -278,6 +290,7 @@ async function getStagingFolder(release) {
 module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
+    getVariants: getVariants,
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,
     getParentTagForVersion: getParentTagForVersion,
     getUpdatedTag: getUpdatedTag,

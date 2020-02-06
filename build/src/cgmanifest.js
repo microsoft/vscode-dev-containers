@@ -58,6 +58,7 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
         "Version": 1
     }
 
+    // TODO: Handle variants
     console.log('(*) Generating manifest...');
     const definitionDependencies = configUtils.getAllDependencies();
     for (let definitionId in definitionDependencies) {
