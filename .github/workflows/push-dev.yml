@@ -9,10 +9,15 @@ on:
       - 'script-library/**'
 
 jobs:
-  build-page-1:
-    name: Build and push (page 1/3)
-    runs-on: ubuntu-latest
+  build-and-push:
+    name: Build and push
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    strategy:
+      matrix:
+        page: [1, 2, 3]
+        page-total: [3]
+      fail-fast: true
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       id: checkout
@@ -35,78 +40,8 @@ jobs:
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
         fi
-        build/vscdc push  --page 1 \
-                          --pageTotal 3 \
-                          --release $GIT_BRANCH \
-                          --github-repo ${{ github.repository }} \
-                          --registry ${{ secrets.REGISTRY }} \
-                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
-                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
-                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
-
-  build-page-2:
-    name: Build and push (page 2/3)
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    steps:
-    - name: Checkout
-      id: checkout
-      uses: actions/checkout@v1
-
-    - name: Container Registry Login
-      id: docker_login
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ secrets.REGISTRY }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-
-    - name: Build and push dev tags
-      id: build_and_push
-      run: |
-        set -e
-        yarn install
-        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
-        if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
-        fi
-        build/vscdc push  --page 2 \
-                          --pageTotal 3 \
-                          --release $GIT_BRANCH \
-                          --github-repo ${{ github.repository }} \
-                          --registry ${{ secrets.REGISTRY }} \
-                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
-                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
-                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
-
-  build-page-3:
-    name: Build and push (page 3/3)
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    steps:
-    - name: Checkout
-      id: checkout
-      uses: actions/checkout@v1
-
-    - name: Container Registry Login
-      id: docker_login
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ secrets.REGISTRY }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-
-    - name: Build and push dev tags
-      id: build_and_push
-      run: |
-        set -e
-        yarn install
-        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
-        if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
-        fi
-        build/vscdc push  --page 3 \
-                          --pageTotal 3 \
+        build/vscdc push  --page ${{ matrix.page }} \
+                          --pageTotal ${{ matrix.page-total }} \
                           --release $GIT_BRANCH \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \
@@ -116,11 +51,10 @@ jobs:
 
   package:
     name: Package
-    needs: [build-page-1, build-page-2, build-page-3]
-    runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    needs: [build-and-push]
+    runs-on: ubuntu-latest
     steps:
-
     - name: Checkout
       id: checkout
       uses: actions/checkout@v1
@@ -155,9 +89,9 @@ jobs:
 
   cgmanifest:
     name: Trigger CG generation
-    needs: [build-page-1, build-page-2, build-page-3]
-    runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    needs: [build-and-push]
+    runs-on: ubuntu-latest
     steps:
     - name: Trigger CG generation 
       id: cgmanifest
