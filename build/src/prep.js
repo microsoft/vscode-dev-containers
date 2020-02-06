@@ -25,23 +25,9 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
 
     // Read Dockerfile
     const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
-    let devContainerDockerfileModified = devContainerDockerfileRaw;
-
+    
     // Replace script URL and generate SHA if applicable
-    const scriptCaptureGroups = new RegExp(`COMMON_SCRIPT_SOURCE="(.+)/${scriptLibraryPathInRepo.replace('.', '\\.')}/(.+)"`).exec(devContainerDockerfileRaw);
-    if (scriptCaptureGroups) {
-        const scriptName = scriptCaptureGroups[2];
-        const scriptSource = `https://raw.githubusercontent.com/${repo}/${release}/${scriptLibraryPathInRepo}/${scriptName}`;
-        let sha = scriptSHA[scriptName];
-        if (typeof sha === 'undefined') {
-            const scriptRaw = await asyncUtils.getUrlAsString(scriptSource);
-            sha = await asyncUtils.shaForString(scriptRaw);
-            scriptSHA[scriptName] = sha;
-        }
-        devContainerDockerfileModified = devContainerDockerfileModified
-            .replace(/COMMON_SCRIPT_SHA=".+"/, `COMMON_SCRIPT_SHA="${sha}"`)
-            .replace(/COMMON_SCRIPT_SOURCE=".+"/, `COMMON_SCRIPT_SOURCE="${scriptSource}"`);
-    }
+    let devContainerDockerfileModified = await lockScriptVersion(devContainerDockerfileRaw, repo, release, true);
 
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
@@ -118,9 +104,39 @@ async function updateConfigForRelease(definitionPath, definitionId, repo, releas
     }
 }
 
+// Replace script URL and generate SHA if applicable
+async function lockScriptVersion(devContainerDockerfileRaw, repo, release, lockSha) {
+    lockSha = typeof lockSha === 'undefined' ? true : lockSha;
+    
+    // Replace script URL and generate SHA if applicable
+    const scriptCaptureGroups = new RegExp(`COMMON_SCRIPT_SOURCE="(.+)/${scriptLibraryPathInRepo.replace('.', '\\.')}/(.+)"`).exec(devContainerDockerfileRaw);
+    if (scriptCaptureGroups) {
+        const scriptName = scriptCaptureGroups[2];
+        const scriptSource = `https://raw.githubusercontent.com/${repo}/${release}/${scriptLibraryPathInRepo}/${scriptName}`;
+        let sha = scriptSHA[scriptName];
+        if (lockSha && typeof sha === 'undefined') {
+            const scriptRaw = await asyncUtils.getUrlAsString(scriptSource);
+            sha = await asyncUtils.shaForString(scriptRaw);
+            scriptSHA[scriptName] = sha;
+        }
+        return devContainerDockerfileRaw
+            .replace(/COMMON_SCRIPT_SHA=".+"/, `COMMON_SCRIPT_SHA="${lockSha ? sha : 'dev-mode'}"`)
+            .replace(/COMMON_SCRIPT_SOURCE=".+"/, `COMMON_SCRIPT_SOURCE="${scriptSource}"`);
+
+    }
+    return devContainerDockerfileRaw;
+}
+
+async function lockScriptVersionInDockerfile(devContainerDockerfilePath, repo, release, lockSha) {
+    const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
+    const devContainerDockerfileModified = await lockScriptVersion(devContainerDockerfileRaw, repo, release, lockSha);
+    await asyncUtils.writeFile(devContainerDockerfilePath, devContainerDockerfileModified);
+}
+
 module.exports = {
     createStub: createStub,
     updateStub: updateStub,
     updateConfigForRelease: updateConfigForRelease,
-    prepDockerFile: prepDockerFile
+    prepDockerFile: prepDockerFile,
+    lockScriptVersionInDockerfile: lockScriptVersionInDockerfile
 }
