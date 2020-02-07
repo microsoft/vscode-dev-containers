@@ -9,7 +9,14 @@ const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
 const prep = require('./prep');
 
-async function push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate, definitionId) {
+async function push(repo, release, updateLatest, registry, registryPath, 
+    stubRegistry, stubRegistryPath, pushImages, prepOnly, page, pageTotal, definitionId) {
+    
+    // Optional argument defaults
+    prepOnly = typeof prepOnly === 'undefined' ? false : prepOnly;
+    pushImages = typeof pushImages === 'undefined' ? true : pushImages;
+    page = page || 1;
+    pageTotal = pageTotal || 1;
     stubRegistry = stubRegistry || registry;
     stubRegistryPath = stubRegistryPath || registryPath;
 
@@ -21,18 +28,18 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
     const definitionStagingFolder = path.join(stagingFolder, 'containers');
 
     // Build and push subset of images
-    const definitionsToPush = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList();
+    const definitionsToPush = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList(page, pageTotal);
     await asyncUtils.forEach(definitionsToPush, async (currentDefinitionId) => {
         console.log(`**** Pushing ${currentDefinitionId} ${release} ****`);
         await pushImage(
             path.join(definitionStagingFolder, currentDefinitionId),
-            currentDefinitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate);
+            currentDefinitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, pushImages);
     });
 
     return stagingFolder;
 }
 
-async function pushImage(definitionPath, definitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate) {
+async function pushImage(definitionPath, definitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, pushImages) {
     const dotDevContainerPath = path.join(definitionPath, '.devcontainer');
     // Use base.Dockerfile for image build if found, otherwise use Dockerfile
     const baseDockerFileExists = await asyncUtils.exists(path.join(dotDevContainerPath, 'base.Dockerfile'));
@@ -58,21 +65,26 @@ async function pushImage(definitionPath, definitionId, repo, release, updateLate
     await prep.prepDockerFile(dockerFilePath,
         definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, true);
 
-    // Build image
-    console.log(`(*) Building image...`);
-    const workingDir = path.resolve(dotDevContainerPath, devContainerJson.context || '.')
-    const buildParams = versionTags.reduce((prev, current) => prev.concat(['-t', current]), []);
-    const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };
-    await asyncUtils.spawn('docker', ['build', workingDir, '-f', dockerFilePath].concat(buildParams), spawnOpts);
 
-    // Push
-    if (simulate) {
-        console.log(`(*) Simulating: Skipping push to registry.`);
+    if (prepOnly) {
+        console.log(`(*) Skipping build and push to registry.`);
     } else {
-        console.log(`(*) Pushing ${definitionId}...`);
-        await asyncUtils.forEach(versionTags, async (versionTag) => {
-            await asyncUtils.spawn('docker', ['push', versionTag], spawnOpts);
-        });
+        // Build image
+        console.log(`(*) Building image...`);
+        const workingDir = path.resolve(dotDevContainerPath, devContainerJson.context || '.')
+        const buildParams = versionTags.reduce((prev, current) => prev.concat(['-t', current]), []);
+        const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };
+        await asyncUtils.spawn('docker', ['build', workingDir, '-f', dockerFilePath].concat(buildParams), spawnOpts);
+
+        // Push
+        if(pushImages) {
+            console.log(`(*) Pushing ${definitionId}...`);
+            await asyncUtils.forEach(versionTags, async (versionTag) => {
+                await asyncUtils.spawn('docker', ['push', versionTag], spawnOpts);
+            });
+        } else {
+            console.log(`(*) Skipping push to registry.`);
+        }
     }
 
     // If base.Dockerfile found, update stub/devcontainer.json, otherwise create

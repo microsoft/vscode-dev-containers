@@ -1,21 +1,27 @@
 name: CI & Push "dev"
 
 on: 
-  repository_dispatch:
+  #repository_dispatch:
   push:
-    branches: master
+    branches: [master]
     paths:
       - 'containers/**'
       - 'script-library/**'
 
 jobs:
-  build:
-    
-    runs-on: ubuntu-latest
-
+  build-and-push:
+    name: Build and push
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    
+    strategy:
+      matrix:
+        page: [1, 2, 3]
+        page-total: [3]
+      fail-fast: true
+    runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
 
     - name: Container Registry Login
       id: docker_login
@@ -25,45 +31,80 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Checkout
-      id: checkout
-      uses: actions/checkout@v1
-      
-    - name: Push "dev", Package, update CG manifest
-      id: push_and_package
+    - name: Build and push dev tags
+      id: build_and_push
       run: |
-        # Push dev images and package
         set -e
-
         yarn install
-
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
         fi
-        build/vscdc pack  --release $GIT_BRANCH \
+        build/vscdc push  --page ${{ matrix.page }} \
+                          --pageTotal ${{ matrix.page-total }} \
+                          --release $GIT_BRANCH \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
                           --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
 
+  package:
+    name: Package
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    needs: [build-and-push]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Package
+      id: package
+      run: |
+        set -e
+        yarn install
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        build/vscdc pack  --prep-and-package-only \
+                          --release $GIT_BRANCH \
+                          --github-repo ${{ github.repository }} \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
         # Set an output with the resulting package name for upload
         PKG_PREFIX=$(node -p "require('./package.json').name")
-        mv ./$PKG_PREFIX-*.tgz ./$PKG_PREFIX-${{ github.sha }}.tgz
-        echo "::set-output name=package_name::$PKG_PREFIX-${{ github.sha }}.tgz"
-
-        # Update CG manifest
-        build/vscdc cg --no-build --release $BRANCH --github-repo ${{ github.repository }} --registry ${{ secrets.REGISTRY }} --registry-path ${{ secrets.REGISTRY_BASE_PATH }}
-        git config --global user.email "vscr-feedback@microsoft.com"
-        git config --global user.name "CI"
-        git add cgmanifest.json
-        git commit -m 'Automated update' \
-          && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
-          || echo 'No updates to cgmanifest.json'
+        PKG_NAME=$PKG_PREFIX-${{ github.sha }}.tgz
+        mv ./$PKG_PREFIX-*.tgz ./$PKG_NAME
+        echo "::set-output name=package_name::$PKG_NAME"
 
     - name: Upload Package
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ steps.push_and_package.outputs.package_name }}
-        path: ./${{ steps.push_and_package.outputs.package_name }}
+        name: ${{ steps.package.outputs.package_name }}
+        path: ./${{ steps.package.outputs.package_name }}
+
+  cgmanifest:
+    name: Trigger CG generation
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    needs: [build-and-push]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger CG generation 
+      id: cgmanifest
+      run: |
+        set -e
+        echo '(*) Triggering CG manifest generation using repository_dispatch'
+
+        # Use alternate GitHub token due to https://github.community/t5/GitHub-Actions/Triggering-a-new-workflow-from-another-workflow/td-p/31676
+        curl -X POST \
+          -H "Authorization: token ${{ secrets.ALTERNATE_GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Content-Type: application/json" \
+          https://api.github.com/repos/${{ github.repository }}/dispatches \
+          --data '{"event_type":"oss_cg_trigger"}'
+
+

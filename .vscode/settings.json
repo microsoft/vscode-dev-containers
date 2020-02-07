@@ -3,6 +3,7 @@
     "cSpell.words": [
         "Distro",
         "Dockerfiles",
+        "cgmanifest",
         "copyfiles",
         "devcontainer",
         "devcontainers",

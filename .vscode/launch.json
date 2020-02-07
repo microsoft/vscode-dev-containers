@@ -11,7 +11,9 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"args": [
 				"push",
-				"--release", "clantz/image-generation",
+				"--release", "master",
+				"--page", "3",
+				"--pageTotal", "3",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
 				"--registryPath", "vscode/devcontainers",
@@ -27,7 +29,7 @@
 			"args": [
 				"pack",
 				"--no-clean",
-				"--release", "clantz/image-generation",
+				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
 				"--registryPath", "vscode/devcontainers",

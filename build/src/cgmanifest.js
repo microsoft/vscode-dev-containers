@@ -45,9 +45,9 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
     await configUtils.loadConfig();
 
     if (buildFirst) {
-        // Simulate the build and push process, but don't actually push 
-        console.log('(*) Simulating push process to trigger image builds...');
-        await push(repo, release, false, registry, registryPath, registry, registryPath, true);
+        // Build but don't push images
+        console.log('(*) Building images...');
+        await push(repo, release, false, registry, registryPath, registry, registryPath, false);
     } else {
         console.log('(*) Using existing local images...');
     }
@@ -106,6 +106,9 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
 
     const componentList = [];
     console.log(`(*) Generating Linux package registrations for ${imageTag}...`);
+
+    console.log(`(*) Pulling image...`);
+    await asyncUtils.spawn('docker', ['pull', imageTag]);
 
     // Generate and exec command to get installed package versions
     console.log('(*) Getting package versions...');

@@ -1,0 +1,44 @@
+name: Update CG Manifest
+
+on:
+  repository_dispatch:
+
+jobs:
+  cgmanifest:
+    name: Generate cgmanifest.json
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    steps:
+
+    - name: Container Registry Login
+      id: docker_login
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Update CG Manifest
+      id: update_cg_manifest
+      run: |
+        set -e
+        yarn install
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        build/vscdc cg  --no-build \
+                        --release $GIT_BRANCH \
+                        --github-repo ${{ github.repository }} \
+                        --registry ${{ secrets.REGISTRY }} \
+                        --registry-path ${{ secrets.REGISTRY_BASE_PATH }}
+        git config --global user.email "vscr-feedback@microsoft.com"
+        git config --global user.name "CI"
+        git add cgmanifest.json
+        git commit -m 'Automated update' \
+          && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
+          || echo 'No updates to cgmanifest.json'

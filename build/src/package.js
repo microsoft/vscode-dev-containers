@@ -10,7 +10,13 @@ const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
 const packageJson = require('../../package.json');
 
-async function package(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, pushImages, cleanWhenDone, simulate) {
+async function package(repo, release, updateLatest, registry, registryPath, 
+    stubRegistry, stubRegistryPath, prepAndPackageOnly, packageOnly, cleanWhenDone) {
+
+    // Optional argument defaults
+    packageOnly = typeof packageOnly === 'undefined' ? false : packageOnly;
+    prepAndPackageOnly = typeof prepAndPackageOnly === 'undefined' ? false : prepAndPackageOnly;
+    cleanWhenDone = typeof cleanWhenDone === 'undefined' ? true : cleanWhenDone;
     stubRegistry = stubRegistry || registry;
     stubRegistryPath = stubRegistryPath || registryPath;
 
@@ -21,9 +27,9 @@ async function package(repo, release, updateLatest, registry, registryPath, stub
     const stagingFolder = await configUtils.getStagingFolder(release);
     const definitionStagingFolder = path.join(stagingFolder, 'containers');
 
-    if (pushImages) {
+    if (!packageOnly) {
         // First, push images, update content
-        await push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, simulate);
+        await push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, true, prepAndPackageOnly);
     }
 
     // Then package
@@ -51,13 +57,9 @@ async function package(repo, release, updateLatest, registry, registryPath, stub
     await asyncUtils.spawn('npm', ['pack'], opts); // Need to use npm due to https://github.com/yarnpkg/yarn/issues/685
 
     let outputPath = null;
-    if (simulate) {
-        console.log('(*) Simulating: Skipping package move.');
-    } else {
-        console.log('(*) Moving package...');
-        outputPath = path.join(__dirname, '..', '..', `${packageJson.name}-${packageJsonVersion}.tgz`);
-        await asyncUtils.rename(path.join(stagingFolder, `${packageJson.name}-${packageJsonVersion}.tgz`), outputPath);
-    }
+    console.log('(*) Moving package...');
+    outputPath = path.join(__dirname, '..', '..', `${packageJson.name}-${packageJsonVersion}.tgz`);
+    await asyncUtils.rename(path.join(stagingFolder, `${packageJson.name}-${packageJsonVersion}.tgz`), outputPath);
 
     if (cleanWhenDone) {
         // And finally clean up
