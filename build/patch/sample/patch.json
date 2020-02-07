@@ -1,14 +1,8 @@
 {
 	"dockerFile": "Dockerfile",
-	"bumpVersion": true,
-	"tagList": [
-		"base:0.41.0-ubuntu-18.04",
-		"base:0.41.0-bionic",
-		"base:0.41-ubuntu-18.04",
-		"base:0.41-bionic",
-		"base:0-ubuntu-18.04",
-		"base:0-bionic",
-		"base:bionic",
-		"base:ubuntu-18.04"
+	"bumpVersion": false,
+	"imageIds": [
+		"sha256:fd2e913e41d0c1f61b1e3b30536f0c955d6ca14cc67a4334437ec7f6363e30c8",
+		"sha256:eeace8ba87040c3b117cf60aad092e726d737bd62c66d062372727b391226ca3"
 	]
 }
