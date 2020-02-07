@@ -7,7 +7,7 @@
 const push = require('./src/push').push;
 const patch = require('./src/patch').patch;
 const package = require('./src/package').package;
-const updateAllScriptUrlsInRepo = require('./src/prep').updateAllScriptUrlsInRepo;
+const updateAllScriptSourcesInRepo = require('./src/prep').updateAllScriptSourcesInRepo;
 const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
 const configUtils = require('./src/utils/config');
 const packageJson = require('../package.json');
@@ -122,7 +122,7 @@ require('yargs')
                 }
             })
     }, pushCommand)
-    .command('update-script-urls <release>', 'updates all script URLs in Dockerfiles to a tag or branch', (yargs) => {
+    .command('update-script-sources <release>', 'updates all script source URLs in Dockerfiles to a tag or branch', (yargs) => {
         yargs
             .positional('release', {
                 describe: 'release tag to branch use for script URLs',
@@ -138,7 +138,7 @@ require('yargs')
                     default: true
                 }
             })
-    }, updateScriptUrlsCommand)
+    }, updateScriptSourcesCommand)
     .command('cg', 'generate cgmanifest.json', (yargs) => {
         yargs
             .options({
@@ -201,8 +201,8 @@ function packCommand(argv) {
         });
 }
 
-function updateScriptUrlsCommand(argv) {
-    updateAllScriptUrlsInRepo(argv.githubRepo, argv.release, argv.updateSha)
+function updateScriptSourcesCommand(argv) {
+    updateAllScriptSourcesInRepo(argv.githubRepo, argv.release, argv.updateSha)
         .catch((reason) => {
             console.error(`(!) Stub generation failed - ${reason}`);
             process.exit(1);

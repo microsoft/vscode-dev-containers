@@ -23,7 +23,7 @@ jobs:
       id: checkout
       uses: actions/checkout@v1
 
-    - name: Container Registry Login
+    - name: Container registry login
       id: docker_login
       uses: azure/docker-login@v1
       with:
@@ -81,7 +81,7 @@ jobs:
         mv ./$PKG_PREFIX-*.tgz ./$PKG_NAME
         echo "::set-output name=package_name::$PKG_NAME"
 
-    - name: Upload Package
+    - name: Upload package
       uses: actions/upload-artifact@v1.0.0
       with:
         name: ${{ steps.package.outputs.package_name }}
@@ -106,5 +106,4 @@ jobs:
           -H "Content-Type: application/json" \
           https://api.github.com/repos/${{ github.repository }}/dispatches \
           --data '{"event_type":"oss_cg_trigger"}'
-
 

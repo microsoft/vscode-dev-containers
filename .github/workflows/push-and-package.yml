@@ -18,13 +18,13 @@ jobs:
     steps:
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
-    - name: Get Tag Name
+    - name: Get tag name
       id: get_tag_name  
       uses: olegtarasov/get-tag@v1
 
-    - name: Container Registry Login
+    - name: Container registry login
       id: docker_login
       uses: azure/docker-login@v1
       with:
@@ -55,11 +55,31 @@ jobs:
     steps:
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
-    - name: Get Tag Name
+    - name: Get tag name
       id: get_tag_name  
       uses: olegtarasov/get-tag@v1
+
+    - name: Update Dockerfile common script sources and re-tag
+      id: update_script_source
+      run: |
+        set -e
+        yarn install
+        # Update common script source URLs in all dev containers and and set SHA hash
+        build/vscdc update-script-sources ${{ steps.get_tag_name.outputs.tag }} --github-repo ${{ github.repository }}
+        # Commit to a new tag specific branch
+        git config --global user.email "vscr-feedback@microsoft.com"
+        git config --global user.name "CI"
+        git fetch --tags
+        git branch ${{ steps.get_tag_name.outputs.tag }}-temp-branch
+        git add -u
+        git commit -m 'Automated update of common script sources and hash'
+        # Re-tag and push to origin
+        git tag -d ${{ steps.get_tag_name.outputs.tag }}
+        git tag ${{ steps.get_tag_name.outputs.tag }}
+        git push --delete origin ${{ steps.get_tag_name.outputs.tag }}
+        git push origin ${{ steps.get_tag_name.outputs.tag }}
 
     - name: Package
       id: package
@@ -77,18 +97,18 @@ jobs:
         PKG_PREFIX=$(node -p "require('./package.json').name")
         echo "::set-output name=package_name::$(ls $PKG_PREFIX-*.tgz)"
 
-    - name: Create Release
+    - name: Create release
       id: create_release
       uses: actions/create-release@v1.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
+        tag_name: ${{ steps.get_tag_name.outputs.tag }}
+        release_name:  ${{ steps.get_tag_name.outputs.tag }}
         draft: false
         prerelease: false
 
-    - name: Upload NPM Package as Release Asset
+    - name: Upload package as release asset
       id: upload_release_asset 
       uses: actions/upload-release-asset@v1.0.1
       env:
