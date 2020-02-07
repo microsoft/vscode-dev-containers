@@ -9,7 +9,7 @@ ARG ORIGINAL_IMAGE=devcon.azurecr.io/public/vscode/devcontainers/base:0.45.1-ubu
 FROM ${ORIGINAL_IMAGE}
 
 RUN apt-get update  \
-    && apt-get upgrade -y cyrus-sasl2 \
+    && apt-get upgrade -y libsasl2-2 \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
