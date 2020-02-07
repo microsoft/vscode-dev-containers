@@ -21,7 +21,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME 
 
 # Verify git, needed tools installed
-RUN yum install -y git openssh-client net-tools which curl procps unzip
+RUN yum install -y git openssh-clients less net-tools which curl procps unzip
 
 #-------------------Uncomment the following steps to install Maven CLI Tools----------------------------------
 # ARG MAVEN_VERSION=3.6.3

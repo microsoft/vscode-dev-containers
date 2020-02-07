@@ -17,6 +17,8 @@
 			"iproute2",
 			"procps",
 			"curl",
+			"openssh-client",
+			"less",
 			"wget",
 			"unzip",
 			"lsb-release",

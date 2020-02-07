@@ -27,7 +27,7 @@ RUN apt-get update \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     #
     # Verify git, needed tools installed
-    && apt-get -y install git openssh-client iproute2 procps curl lsb-release
+    && apt-get -y install git openssh-client less iproute2 procps curl lsb-release
 
 #-------------------Uncomment the following steps to install Maven CLI Tools----------------------------------
 # ARG MAVEN_VERSION=3.6.3

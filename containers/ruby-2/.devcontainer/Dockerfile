@@ -20,7 +20,7 @@ ARG USER_GID=$USER_UID
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     # Verify git, process tools installed
-    && apt-get -y install git openssh-client iproute2 procps lsb-release \
+    && apt-get -y install git openssh-client less iproute2 procps lsb-release \
     #
     # Install ruby-debug-ide and debase
     && gem install ruby-debug-ide \

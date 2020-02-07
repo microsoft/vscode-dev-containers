@@ -64,6 +64,26 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Alpine Package: openssh-client",
+                    "Version": "8.1_p1-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/openssh-client-8.1_p1-r0.apk"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Alpine Package: less",
+                    "Version": "551-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/less-551-r0.apk"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Alpine Package: wget",
                     "Version": "1.20.3-r0",
                     "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/wget-1.20.3-r0.apk"
@@ -135,8 +155,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: libssl1.1",
-                    "Version": "1.1.1d-r0",
-                    "DownloadUrl": "1.1.1d-r2:/x86_64/libssl1.1-1.1.1d-r0.apk"
+                    "Version": "1.1.1d-r2",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/libssl1.1-1.1.1d-r2.apk"
                 }
             }
         },
@@ -195,8 +215,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: sudo",
-                    "Version": "1.8.27-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/sudo-1.8.27-r0.apk"
+                    "Version": "1.8.27-r2",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/sudo-1.8.27-r2.apk"
                 }
             }
         },
@@ -304,6 +324,16 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Debian Package: less",
+                    "Version": "487-0.1+b1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/less/less_487-0.1+b1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Debian Package: libc6",
                     "Version": "2.28-10",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/glibc/libc6_2.28-10_amd64.deb"
@@ -377,6 +407,16 @@
                     "Name": "Debian Package: lsb-release",
                     "Version": "10.2019051400",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/lsb/lsb-release_10.2019051400_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: openssh-client",
+                    "Version": "1:7.9p1-10+deb10u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssh/openssh-client_7.9p1-10+deb10u1_amd64.deb"
                 }
             }
         },
@@ -524,6 +564,16 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Debian Package: less",
+                    "Version": "481-2.1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/less/less_481-2.1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Debian Package: libc6",
                     "Version": "2.24-11+deb9u4",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/glibc/libc6_2.24-11+deb9u4_amd64.deb"
@@ -614,6 +664,16 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Debian Package: openssh-client",
+                    "Version": "1:7.4p1-10+deb9u7",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssh/openssh-client_7.4p1-10+deb9u7_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Debian Package: procps",
                     "Version": "2:3.3.12-3+deb9u1",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/p/procps/procps_3.3.12-3+deb9u1_amd64.deb"
@@ -625,8 +685,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: sudo",
-                    "Version": "1.8.19p1-2.1+deb9u1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/s/sudo/sudo_1.8.19p1-2.1+deb9u1_amd64.deb"
+                    "Version": "1.8.19p1-2.1+deb9u2",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/s/sudo/sudo_1.8.19p1-2.1+deb9u2_amd64.deb"
                 }
             }
         },

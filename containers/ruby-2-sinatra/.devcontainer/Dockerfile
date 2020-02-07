@@ -20,6 +20,7 @@ RUN apt-get update \
         vim \
         git \
         openssh-client \
+        less \
         iproute2 \ 
         procps \
         lsb-release \

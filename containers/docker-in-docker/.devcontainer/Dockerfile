@@ -26,7 +26,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, process tools installed
-    && apt-get -y install git openssh-client iproute2 procps \
+    && apt-get -y install git openssh-client less iproute2 procps \
     #
     # Install Docker CE CLI
     && apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \

@@ -25,6 +25,7 @@ apt-get -y upgrade
 apt-get -y install --no-install-recommends \
     git \
     openssh-client \
+    less \
     iproute2 \
     procps \
     curl \
