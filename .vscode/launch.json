@@ -54,14 +54,13 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Run Patch",
+			"name": "Run Update Script URLs",
 			"program": "${workspaceFolder}/build/vscdc",
 			"cwd": "${workspaceFolder}/build",
 			"args": [
-				"patch",
-				"--patchPath", "patch/sample",
-				"--registry", "clantz.azurecr.io",
-				"--registryPath", "vscode/devcontainers"
+				"update-script-urls",
+				"v0.100.0",
+				"--github-repo", "microsoft/vscode-dev-containers"
 			]
 		}
 	]
