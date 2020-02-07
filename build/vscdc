@@ -7,7 +7,7 @@
 const push = require('./src/push').push;
 const patch = require('./src/patch').patch;
 const package = require('./src/package').package;
-const createStub = require('./src/prep').createStub;
+const updateAllScriptSourcesInRepo = require('./src/prep').updateAllScriptSourcesInRepo;
 const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
 const configUtils = require('./src/utils/config');
 const packageJson = require('../package.json');
@@ -122,39 +122,23 @@ require('yargs')
                 }
             })
     }, pushCommand)
-    .command('stub <devcontainer> [path]', 'generates a stub user.Dockerfile', (yargs) => {
+    .command('update-script-sources <release>', 'updates all script source URLs in Dockerfiles to a tag or branch', (yargs) => {
         yargs
-            .positional('devcontainer', {
-                describe: 'ID of dev container to stub',
-            })
-            .positional('path', {
-                describe: 'path to .devcontainer folder',
-                default: '.'
+            .positional('release', {
+                describe: 'release tag to branch use for script URLs',
             })
             .options({
-                'release': {
-                    describe: 'vscode-dev-containers release tag or branch',
-                    default: 'dev'
-                },
-                'stub-registry': {
-                    describe: 'registry to add to stub',
-                    default: configUtils.getConfig('stubRegistry', configUtils.getConfig('containerRegistry', 'docker.io'))
-                },
-                'stub-registry-path': {
-                    describe: 'stub registry path',
-                    default: configUtils.getConfig('stubRegistryPath', configUtils.getConfig('containerRegistryPath', ''))
-                },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
                     default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
-                'has-base-dockerfile': {
-                    describe: 'whether base.Dockerfile exists',
+                'update-sha': {
+                    describe: 'update script SHAs to match file',
                     type: 'boolean',
                     default: true
                 }
             })
-    }, stubCommand)
+    }, updateScriptSourcesCommand)
     .command('cg', 'generate cgmanifest.json', (yargs) => {
         yargs
             .options({
@@ -217,9 +201,8 @@ function packCommand(argv) {
         });
 }
 
-
-function stubCommand(argv) {
-    createStub(argv.devcontainer, argv.path, argv.githubRepo, argv.release, argv.hasBaseDockerfile, argv.stubRegistry, argv.stubRegistryPath)
+function updateScriptSourcesCommand(argv) {
+    updateAllScriptSourcesInRepo(argv.githubRepo, argv.release, argv.updateSha)
         .catch((reason) => {
             console.error(`(!) Stub generation failed - ${reason}`);
             process.exit(1);
