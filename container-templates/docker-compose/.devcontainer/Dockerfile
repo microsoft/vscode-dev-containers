@@ -28,9 +28,6 @@ ARG INSTALL_ZSH="true"
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog wget ca-certificates 2>&1 \
