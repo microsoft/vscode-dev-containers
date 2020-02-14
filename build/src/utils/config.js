@@ -20,12 +20,14 @@ async function loadConfig(repoPath) {
     repoPath = repoPath || path.join(__dirname, '..', '..', '..');
 
     const containersPath = path.join(repoPath, getConfig('containersPathInRepo', 'containers'));
+    // Get list of definition folders
     const definitions = await asyncUtils.readdir(containersPath, { withFileTypes: true });
     await asyncUtils.forEach(definitions, async (definitionFolder) => {
         if (!definitionFolder.isDirectory()) {
             return;
         }
         const definitionId = definitionFolder.name;
+        // If definition-build.json exists, load it
         const possibleDefinitionBuildJson = path.join(containersPath, definitionId, getConfig('definitionBuildConfigFile', 'definition-build.json'));
         if (await asyncUtils.exists(possibleDefinitionBuildJson)) {
             const buildJson = await jsonc.read(possibleDefinitionBuildJson);
@@ -38,17 +40,29 @@ async function loadConfig(repoPath) {
         }
     });
 
-    // Populate tag lookup
+    // Populate image variants and tag lookup
     for (let definitionId in config.definitionBuildSettings) {
-        if (config.definitionBuildSettings[definitionId].tags) {
-            const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY');
-            blankTagList.forEach((blankTag) => {
-                definitionTagLookup[blankTag] = definitionId;
-            });
-            const devTagList = getTagsForVersion(definitionId, 'dev', 'ANY', 'ANY');
-            devTagList.forEach((devTag) => {
-                definitionTagLookup[devTag] = definitionId;
-            });
+        const buildSettings = config.definitionBuildSettings[definitionId];
+        const variants = buildSettings.variants || [undefined];
+        const dependencies = config.definitionDependencies[definitionId]; 
+ 
+        // Populate images list for variants
+        dependencies.imageVariants = buildSettings.variants ? 
+            variants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
+            [dependencies.image];
+
+        // Populate image tag lookup
+        if (buildSettings.tags) {
+            variants.forEach((variant) => {
+                const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY', variant);
+                blankTagList.forEach((blankTag) => {
+                    definitionTagLookup[blankTag] = definitionId;
+                });
+                const devTagList = getTagsForVersion(definitionId, 'dev', 'ANY', 'ANY', variant);
+                devTagList.forEach((devTag) => {
+                    definitionTagLookup[devTag] = definitionId;
+                });
+            })
         }
     }
 }
@@ -210,7 +224,8 @@ function getSortedDefinitionBuildList(page, pageTotal) {
     if (allPages.length > pageTotal) {
         // If too many pages, add extra pages to last one
         for (let i = pageTotal; i < allPages.length; i++) {
-            allPages[allPages.length - 1] = allPages[allPages.length - 1].concat(allPages[i]);
+            allPages[allPages.length - 2] = allPages[allPages.length - 2].concat(allPages[i]);
+            allPages[i] = [];
         }
     } else if (allPages.length < pageTotal) {
         // If too few, add some empty pages

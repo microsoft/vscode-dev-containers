@@ -306,7 +306,7 @@
                 "Other": {
                     "Name": "Debian Package: git",
                     "Version": "1:2.20.1-2+deb10u1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/g/git/git_2.20.1-2+deb10u1_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.20.1-2+deb10u1_amd64.deb"
                 }
             }
         },
@@ -415,8 +415,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: openssh-client",
-                    "Version": "1:7.9p1-10+deb10u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssh/openssh-client_7.9p1-10+deb10u1_amd64.deb"
+                    "Version": "1:7.9p1-10+deb10u2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssh/openssh-client_7.9p1-10+deb10u2_amd64.deb"
                 }
             }
         },
@@ -435,8 +435,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: sudo",
-                    "Version": "1.8.27-1+deb10u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/sudo/sudo_1.8.27-1+deb10u1_amd64.deb"
+                    "Version": "1.8.27-1+deb10u2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/sudo/sudo_1.8.27-1+deb10u2_amd64.deb"
                 }
             }
         },
@@ -546,7 +546,7 @@
                 "Other": {
                     "Name": "Debian Package: git",
                     "Version": "1:2.11.0-3+deb9u5",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/g/git/git_2.11.0-3+deb9u5_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.11.0-3+deb9u5_amd64.deb"
                 }
             }
         },
@@ -626,7 +626,7 @@
                 "Other": {
                     "Name": "Debian Package: libssl1.0.2",
                     "Version": "1.0.2u-1~deb9u1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/o/openssl1.0/libssl1.0.2_1.0.2u-1~deb9u1_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl1.0/libssl1.0.2_1.0.2u-1~deb9u1_amd64.deb"
                 }
             }
         },
@@ -636,7 +636,7 @@
                 "Other": {
                     "Name": "Debian Package: libssl1.1",
                     "Version": "1.1.0l-1~deb9u1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.1_1.1.0l-1~deb9u1_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.0l-1~deb9u1_amd64.deb"
                 }
             }
         },
@@ -686,7 +686,7 @@
                 "Other": {
                     "Name": "Debian Package: sudo",
                     "Version": "1.8.19p1-2.1+deb9u2",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/s/sudo/sudo_1.8.19p1-2.1+deb9u2_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/sudo/sudo_1.8.19p1-2.1+deb9u2_amd64.deb"
                 }
             }
         },
@@ -766,6 +766,65 @@
                     "Name": "Docker Image: node",
                     "Version": "12",
                     "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.8",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.7",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.6",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.5",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pylint",
+                    "Version": "2.4.4"
                 }
             }
         },

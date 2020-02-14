@@ -73,13 +73,13 @@ async function pushImage(definitionPath, definitionId, repo, release, updateLate
             // Build image
             console.log(`(*) Building image...`);
             // Determine tags to use
-            const versionTags = configUtils.getTagList(definitionId, release, updateLatest, registry, registryPath, variant)
+            const versionTags = configUtils.getTagList(definitionId, release, updateLatest, registry, registryPath, variant);
             console.log(`(*) Tags:${versionTags.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
 
-            const workingDir = path.resolve(dotDevContainerPath, devContainerJson.context || '.')
+            const workingDir = path.resolve(dotDevContainerPath, devContainerJson.context || '.');
             const buildParams = versionTags.reduce((prev, current) => prev.concat(['-t', current]), []);
             const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };
-            await asyncUtils.spawn('docker', ['build', workingDir, '-f', dockerFilePath, '--build-arg', `IMAGE_VARIANT=${variant}`].concat(buildParams), spawnOpts);
+            await asyncUtils.spawn('docker', ['build', workingDir, '-f', dockerFilePath, '--build-arg', `VARIANT=${variant}`].concat(buildParams), spawnOpts);
 
             // Push
             if(pushImages) {

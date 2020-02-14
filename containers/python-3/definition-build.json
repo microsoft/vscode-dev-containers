@@ -7,7 +7,7 @@
 		"variants": ["3", "3.8", "3.7", "3.6", "3.5"]
 	},
 	"dependencies": {
-		"image": "python:${IMAGE_VARIANT}",
+		"image": "python:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/python",
 		"debian": [
 			"apt-utils", 
@@ -24,13 +24,11 @@
 			"libc6",
 			"libgcc1",
 			"libgssapi-krb5-2",
-			"libicu57",
+			"libicu63",
 			"libssl1.1",
 			"libstdc++6",
 			"zlib1g",
-			"libssl1.0.2",
 			"sudo",
-			"yarn",
 			"zsh"
 		],
 		"pip": [
