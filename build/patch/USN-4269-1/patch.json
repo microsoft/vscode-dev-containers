@@ -1,0 +1,10 @@
+{
+	"dockerFile": "Dockerfile",
+	"bumpVersion": false,
+	"imageIds": [
+		"sha256:7f1e9282bb5687705dbf75b3ecb3ec3e10a74d888831604f76c1dc0ab5de9ecc",
+		"sha256:0a1f61617c87d2322b7a4207ea04105140440e91b3b08a2369e31f46bde1477c",
+		"sha256:c1bbb99e885084bab42c86419e2cc5b52901d7f9ab51fc61da4e130f04c21e3e",
+		"sha256:ec54a81fb2b228460768a867bff39f3da239b1c4e2c45fa3ec38a69489104ca0"
+	]
+}
