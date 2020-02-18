@@ -1,8 +1,8 @@
-# Dapr with C# (.NET Core 3.0)
+# Dapr with C# (.NET Core 3.1)
 
 ## Summary
 
-*Develop Dapr applications using C# and .NET Core 3.0. Includes all needed SDKs, extensions, and dependencies.*
+*Develop Dapr applications using C# and .NET Core 3.1. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -67,11 +67,11 @@ If you've already opened your folder in a container, rebuild the container using
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Dapr with C# (.NET Core 3.0) definition.
+   3. Select the Dapr with C# (.NET Core 3.1) definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/dapr-dotnetcore-3.0/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/dapr-dotnetcore-3.1/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
