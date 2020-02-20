@@ -71,7 +71,7 @@ jobs:
         # Commit to a new tag specific branch
         git config --global user.email "vscr-feedback@microsoft.com"
         git config --global user.name "CI"
-        git fetch --tags
+        git fetch --tags --force
         git branch ${{ steps.get_tag_name.outputs.tag }}-temp-branch
         git add -u
         git commit -m 'Automated update of common script sources and hash'
