@@ -11,6 +11,7 @@ const config = require('../../config.json');
 
 config.definitionDependencies = config.definitionDependencies || {};
 config.definitionBuildSettings = config.definitionBuildSettings || {};
+config.definitionVersions = config.definitionVersions || {};
 
 const stagingFolders = {};
 const definitionTagLookup = {};
@@ -36,6 +37,9 @@ async function loadConfig(repoPath) {
             }
             if (buildJson.dependencies) {
                 config.definitionDependencies[definitionId] = buildJson.dependencies;
+            }
+            if(buildJson.definitionVersion) {
+                config.definitionVersions[definitionId] = buildJson.definitionVersion;
             }
         }
     });
@@ -83,16 +87,19 @@ function getConfig(property, defaultVal) {
 }
 
 
-// Convert a release string (v1.0.0) or branch (master) into a version
-function getVersionFromRelease(release) {
+// Convert a release string (v1.0.0) or branch (master) into a version. If a definitionId and 
+// release string is passed in, use the version specified in defintion-build.json if one exists.
+function getVersionFromRelease(release, definitionId) {
+    definitionId = definitionId || 'NOT SPECIFIED';
+
     // Already is a version
     if (!isNaN(parseInt(release.charAt(0)))) {
-        return release;
+        return config.definitionVersions[definitionId] || release;
     }
 
     // Is a release string
     if (release.charAt(0) === 'v' && !isNaN(parseInt(release.charAt(1)))) {
-        return release.substr(1);
+        return config.definitionVersions[definitionId] || release.substr(1);
     }
 
     // Is a branch
@@ -148,7 +155,7 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
 
 // Generate complete list of tags for a given definition
 function getTagList(definitionId, release, updateLatest, registry, registryPath, variant) {
-    const version = getVersionFromRelease(release);
+    const version = getVersionFromRelease(release, definitionId);
     if (version === 'dev') {
         return getTagsForVersion(definitionId, 'dev', registry, registryPath, variant);
     }
@@ -260,8 +267,8 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
 }
 
 // Return just the major version of a release number
-function majorFromRelease(release) {
-    const version = getVersionFromRelease(release);
+function majorFromRelease(release, definitionId) {
+    const version = getVersionFromRelease(release, definitionId);
 
     if (version === 'dev') {
         return 'dev';

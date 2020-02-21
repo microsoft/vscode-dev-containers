@@ -1,4 +1,5 @@
 {
+	"latest": true,
 	"build": {
 		"rootDistro": "debian",
 		"parent": "javascript-node-12",
