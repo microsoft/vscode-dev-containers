@@ -21,7 +21,7 @@ const scriptLibraryPathInRepo = configUtils.getConfig('scriptLibraryPathInRepo')
 
 async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, isForBuild, variant) {
     // Use exact version of building, MAJOR if not
-    const version = isForBuild ? configUtils.getVersionFromRelease(release) : configUtils.majorFromRelease(release);
+    const version = isForBuild ? configUtils.getVersionFromRelease(release, definitionId) : configUtils.majorFromRelease(release, definitionId);
 
     // Read Dockerfile
     const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
@@ -67,7 +67,7 @@ async function createStub(dotDevContainerPath, definitionId, repo, release, base
     const userDockerFilePath = path.join(dotDevContainerPath, 'Dockerfile');
     console.log('(*) Generating user Dockerfile...');
     const templateDockerfile = await configUtils.objectByDefinitionLinuxDistro(definitionId, stubPromises);
-    const devContainerImageVersion = configUtils.majorFromRelease(release);
+    const devContainerImageVersion = configUtils.majorFromRelease(release, definitionId);
     const imageTag = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, stubRegistry, stubRegistryPath)[0];
     const userDockerFile = templateDockerfile.replace(
         'FROM REPLACE-ME', getFromSnippet(definitionId, imageTag, repo, release, baseDockerFileExists));
@@ -79,7 +79,7 @@ async function updateStub(dotDevContainerPath, definitionId, repo, release, base
     const userDockerFilePath = path.join(dotDevContainerPath, 'Dockerfile');
     const userDockerFile = await asyncUtils.readFile(userDockerFilePath);
 
-    const devContainerImageVersion = configUtils.majorFromRelease(release);
+    const devContainerImageVersion = configUtils.majorFromRelease(release, definitionId);
     const imageTag = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath)[0];
     const userDockerFileModified = userDockerFile.replace(/FROM .+:.+/,
         getFromSnippet(definitionId, imageTag, repo, release, baseDockerFileExists));
