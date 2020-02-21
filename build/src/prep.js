@@ -19,7 +19,7 @@ const stubPromises = {
 const containersPathInRepo = configUtils.getConfig('containersPathInRepo');
 const scriptLibraryPathInRepo = configUtils.getConfig('scriptLibraryPathInRepo');
 
-async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, isForBuild) {
+async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, isForBuild, variant) {
     // Use exact version of building, MAJOR if not
     const version = isForBuild ? configUtils.getVersionFromRelease(release) : configUtils.majorFromRelease(release);
 
@@ -31,7 +31,7 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
 
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
-        const parentTag = configUtils.getParentTagForVersion(definitionId, version, registry, registryPath);
+        const parentTag = configUtils.getParentTagForVersion(definitionId, version, registry, registryPath, variant);
         if (parentTag) {
             devContainerDockerfileModified = devContainerDockerfileModified.replace(/FROM .+:.+/, `FROM ${parentTag}`)
         }
