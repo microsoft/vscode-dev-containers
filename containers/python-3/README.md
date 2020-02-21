@@ -8,8 +8,6 @@
 |----------|-------|
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
 | *Definition type* | Dockerfile |
-| *Published image* | mcr.microsoft.com/vscode/devcontainers/python:3 |
-| *Available image variants* | python:3.8, python:3.7, python:3.6, python:3.5 |
 | *Languages, platforms* | Python |
 
 ## Using this definition with an existing folder
