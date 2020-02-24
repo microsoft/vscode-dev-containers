@@ -1,0 +1,26 @@
+{
+	"name": "VS Online (Linux Default)",
+	"dockerFile": "Dockerfile",
+	"remoteUser": "vsonline",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/vsonline/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/home/vsonline/workspace",
+	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"MS-vsliveshare.vsliveshare",
+		"VisualStudioExptTeam.vscodeintellicode"
+	],
+
+	// Enables "Docker in Docker". See https://aka.ms/vscode-remote/samples/docker-in-docker.
+	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ]
+
+	// Set *default* container specific settings.json values on container create.
+	// "settings": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a"
+}
