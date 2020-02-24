@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop [reasonml](https://reasonml.github.io/en/) applications. Includes [fish shell](https://fishshell.com/).*
+*Develop ReasonML applications.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -10,9 +10,11 @@
 | *Definition type* | Dockerfile |
 | *Languages, platforms* | ReasonML |
 
+This image contains the development environment to work with [ReasonML](https://reasonml.github.io/) applications. It also includes [fish shell](https://fishshell.com/) to improve the CLI experience.
+
 ## Using this definition with an existing folder
 
-This image contains the development environment to work with ReasonML applications. To get started, follow these steps:
+To get started, follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
