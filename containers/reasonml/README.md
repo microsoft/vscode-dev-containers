@@ -4,7 +4,7 @@
 
 *Develop ReasonML applications.*
 
-| Metadata | Value |  
+| Metadata | Value |
 |----------|-------|
 | *Contributors* | Diullei Gomes ([@diullei](https://github.com/diullei)) |
 | *Definition type* | Dockerfile |
@@ -44,6 +44,7 @@ This definition includes some test code that will help you verify it is working 
 
 ```bash
    cd test-project
+   yarn install # or npm install, for npm
    yarn build # or npm run build, for npm
    node src/Demo.bs.js
 ```
