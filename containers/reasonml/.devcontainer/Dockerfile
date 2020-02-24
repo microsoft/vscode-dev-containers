@@ -23,10 +23,6 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
     #
     && sudo -u ${USERNAME} npm install -g bs-platform esy@latest
 
-# *********************************************************************
-# * Uncomment this section to use RUN to install other dependencies.  *
-# * See https://aka.ms/vscode-remote/containers/dockerfile-run        *
-# *********************************************************************
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
    && apt-get -y install --no-install-recommends software-properties-common ocaml \
