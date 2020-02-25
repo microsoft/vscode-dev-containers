@@ -1,21 +1,21 @@
-# VS Online (Linux Default)
+# VS Online (Linux Universal)
 
 ## Summary
 
-*Use or extend the default multi-language development container for VS Online.*
+*Use or extend the large, universal, multi-language development container for VS Online.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Online and VS Code teams |
 | *Definition type* | Dockerfile |
-| *Published image* | mcr.microsoft.com/vscode/devcontainers/default:linux |
+| *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:linux |
 | *Languages, platforms* | Python, Node, C++, C#, .NET Core, PHP, Java |
 
 ## Description
 
-While language specific development containers can be useful, in some cases you may want to use more than one in a project without having to set them all up. In other cases you may be looking to create a general "sandbox" container you intend to use with multiple projects or repositories. The large container image generated here (`mcr.microsoft.com/vscode/devcontainers/default:linux`) includes a number of runtime versions for popular languages lke Python, Node, PHP, Java, C++, and .NET Core/C# - many of which are [inherited from the Oryx build image](https://github.com/microsoft/oryx#supported-platforms) it is based on.
+While language specific development containers can be useful, in some cases you may want to use more than one in a project without having to set them all up. In other cases you may be looking to create a general "sandbox" container you intend to use with multiple projects or repositories. The large container image generated here (`mcr.microsoft.com/vscode/devcontainers/universal:linux`) includes a number of runtime versions for popular languages lke Python, Node, PHP, Java, C++, and .NET Core/C# - many of which are [inherited from the Oryx build image](https://github.com/microsoft/oryx#supported-platforms) it is based on.
 
-If you use Visual Studio Online, this is the image that is used by default. If you like what you see but want to make a few additions or changes you can use a custom Dockerfile to extend it and add whatever you need.
+If you use Visual Studio Online, this is the "universal" image that is used by default if no custom Dockerfile or image is specified. If you like what you see but want to make a few additions or changes, you can use a custom Dockerfile to extend it and add whatever you need.
 
 The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can opt into using instead of the default `bash`. It also includes [nvm](https://github.com/nvm-sh/nvm) and [nvs](https://github.com/jasongin/nvs) if you need to install a different version of Node.js than those that are in the container by default.
 

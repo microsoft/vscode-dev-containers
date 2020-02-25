@@ -1,5 +1,5 @@
 {
-	"name": "VS Online (Linux Default)",
+	"name": "VS Online (Linux Universal)",
 	"dockerFile": "Dockerfile",
 	"remoteUser": "vsonline",
 	"workspaceMount": "source=${localWorkspaceFolder},target=/home/vsonline/workspace,type=bind,consistency=cached",

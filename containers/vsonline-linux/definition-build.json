@@ -4,8 +4,8 @@
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
-			"default:${VERSION}-linux",
-			"default:${VERSION}"
+			"universal:${VERSION}-linux",
+			"universal:${VERSION}"
 		]
 	}, 
 	"dependencies": {
