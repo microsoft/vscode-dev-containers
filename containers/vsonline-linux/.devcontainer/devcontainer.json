@@ -12,7 +12,7 @@
 		"GitHub.vscode-pull-request-github",
 		"MS-vsliveshare.vsliveshare",
 		"VisualStudioExptTeam.vscodeintellicode"
-	],
+	]
 
 	// Set *default* container specific settings.json values on container create.
 	// "settings": {},
