@@ -40,7 +40,8 @@ jobs:
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
         fi
-        build/vscdc push  --page ${{ matrix.page }} \
+        build/vscdc push  --replace-images \
+                          --page ${{ matrix.page }} \
                           --pageTotal ${{ matrix.page-total }} \
                           --release $GIT_BRANCH \
                           --github-repo ${{ github.repository }} \

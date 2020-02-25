@@ -38,7 +38,8 @@ jobs:
         set -e
         # Push images and package
         yarn install
-        build/vscdc push  --page ${{ matrix.page }} \
+        build/vscdc push  --replace-images \
+                          --page ${{ matrix.page }} \
                           --pageTotal ${{ matrix.page-total }} \
                           --release ${{ steps.get_tag_name.outputs.tag }} \
                           --github-repo ${{ github.repository }} \
