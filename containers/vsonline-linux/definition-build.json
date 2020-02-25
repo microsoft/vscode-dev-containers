@@ -31,7 +31,8 @@
 			"curl", 
 			"gnupg",
 			"apt-transport-https",
-			"debian-archive-keyring"
+			"debian-archive-keyring",
+			"software-properties-common"
 		],
 		"manual": [
 			{
