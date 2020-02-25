@@ -40,9 +40,21 @@ checkExtension() {
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
 check "non-root-user" "id vsonline"
 check "/home/vsonline" [ -d "/home/vsonline" ]
-check "sudo" sudo -u vscode echo "sudo works."
+check "sudo" sudo -u vsonline echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
+
+# Check platforms
+check "oryx" oryx platforms
+check "python" python --version
+check "dotnet" dotnet --info
+check "node" node --version
+check "php" php --version
+
+# Check expected shells
+check "bash" bash --version
+check "fish" fish --version
+check "zsh" zsh --version
 
 # -- Report results --
 if [ ${#FAILED[@]} -ne 0 ]; then
