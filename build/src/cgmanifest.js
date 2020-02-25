@@ -86,9 +86,9 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
 
             // Run commands in the package to pull out needed versions
             cgManifest.Registrations = cgManifest.Registrations.concat(
-                await generatePackageComponentList(dependencyLookupConfig.debian, dependencies.debian, imageTag, alreadyRegistered),
-                await generatePackageComponentList(dependencyLookupConfig.ubuntu, dependencies.ubuntu, imageTag, alreadyRegistered),
-                await generatePackageComponentList(dependencyLookupConfig.alpine, dependencies.alpine, imageTag, alreadyRegistered),
+                await generatePackageComponentList(dependencyLookupConfig.debian, dependencies.debian, imageTag, alreadyRegistered, buildFirst),
+                await generatePackageComponentList(dependencyLookupConfig.ubuntu, dependencies.ubuntu, imageTag, alreadyRegistered, buildFirst),
+                await generatePackageComponentList(dependencyLookupConfig.alpine, dependencies.alpine, imageTag, alreadyRegistered, buildFirst),
                 await generateNpmComponentList(dependencies.npm, alreadyRegistered),
                 await generatePipComponentList(dependencies.pip, imageTag, alreadyRegistered),
                 filteredManualComponentRegistrations(dependencies.manual, alreadyRegistered));
@@ -101,7 +101,7 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
     console.log('(*) Done!');
 }
 
-async function generatePackageComponentList(config, packageList, imageTag, alreadyRegistered) {
+async function generatePackageComponentList(config, packageList, imageTag, alreadyRegistered, buildFirst) {
     if(!packageList) {
         return [];
     }
@@ -109,8 +109,11 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
     const componentList = [];
     console.log(`(*) Generating Linux package registrations for ${imageTag}...`);
 
-    console.log(`(*) Pulling image...`);
-    await asyncUtils.spawn('docker', ['pull', imageTag]);
+    // Pull if not building
+    if (!buildFirst) {
+        console.log(`(*) Pulling image...`);
+        await asyncUtils.spawn('docker', ['pull', imageTag]);
+    }
 
     // Generate and exec command to get installed package versions
     console.log('(*) Getting package versions...');
@@ -118,7 +121,7 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
         return prev += ` ${current}`;
     }, config.listCommand);
     const packageVersionListOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', imageTag, packageVersionListCommand],
+        ['run', '--rm', '-u', 'root', imageTag, packageVersionListCommand],
         { shell: true, stdio: 'pipe' });
 
     // Generate and exec command to extract download URIs
@@ -127,7 +130,7 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
         return prev += ` ${current}`;
     }, config.getUriCommand);
     const packageUriCommandOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', imageTag, `sh -c '${packageUriCommand}'`],
+        ['run', '--rm', '-u', 'root', imageTag, `sh -c '${packageUriCommand}'`],
         { shell: true, stdio: 'pipe' });
 
     const packageVersionList = packageVersionListOutput.split('\n');
