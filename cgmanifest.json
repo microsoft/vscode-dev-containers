@@ -745,8 +745,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: yarn",
-                    "Version": "1.21.1-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.21.1_all.deb"
+                    "Version": "1.22.0-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.0_all.deb"
                 }
             }
         },
