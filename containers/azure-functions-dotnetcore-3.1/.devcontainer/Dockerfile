@@ -39,24 +39,24 @@ RUN apt-get update \
     # [Optional] Add sudo support for the non-root user
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
-    && chmod 0440 /etc/sudoers.d/$USERNAME 
-
-# Install Azure Functions Core Tools v3
-RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    #
+    # Install Azure Functions Core Tools v3
+    && wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg \
     && mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/ \
     && wget -q https://packages.microsoft.com/config/debian/9/prod.list \
     && mv prod.list /etc/apt/sources.list.d/microsoft-prod.list \
     && chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg \
-    && chown root:root /etc/apt/sources.list.d/microsoft-prod.list
-RUN apt-get update \
-    && apt-get install -y azure-functions-core-tools-3
-
-# Clean up
-RUN apt-get autoremove -y \
+    && chown root:root /etc/apt/sources.list.d/microsoft-prod.list \
+    && apt-get update \
+    && apt-get -y install azure-functions-core-tools-3 \
+    #
+    # Clean up
+    && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-    
-# Opt out of Func CLI telemetry gathering
+
+# Uncomment to opt out of Func CLI telemetry gathering
 #ENV FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=true
 
 # Switch back to dialog for any ad-hoc use of apt-get
