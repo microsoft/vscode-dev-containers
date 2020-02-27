@@ -23,11 +23,11 @@ RUN apt-get update \
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
     && apt-get -y install git openssh-client less iproute2 procps lsb-release \
     #
-    # Install Go tools w/module support
+    # Build Go tools w/module support
     && mkdir -p /tmp/gotools \
     && cd /tmp/gotools \
-    && GO111MODULE=on go get -v golang.org/x/tools/gopls@latest 2>&1 \
-    && GO111MODULE=on go get -v \
+    && GOPATH=/tmp/gotools GO111MODULE=on go get -v golang.org/x/tools/gopls@latest 2>&1 \
+    && GOPATH=/tmp/gotools GO111MODULE=on go get -v \
         honnef.co/go/tools/...@latest \
         golang.org/x/tools/cmd/gorename@latest \
         golang.org/x/tools/cmd/goimports@latest \
@@ -49,16 +49,19 @@ RUN apt-get update \
         github.com/mgechev/revive@latest  \
         github.com/go-delve/delve/cmd/dlv@latest 2>&1 \
     #
-    # Install Go tools w/o module support
-    && go get -v github.com/alecthomas/gometalinter 2>&1 \
+    # Build Go tools w/o module support
+    && GOPATH=/tmp/gotools go get -v github.com/alecthomas/gometalinter 2>&1 \
     #
-    # Install gocode-gomod
-    && go get -x -d github.com/stamblerre/gocode 2>&1 \
-    && go build -o gocode-gomod github.com/stamblerre/gocode \
-    && mv gocode-gomod $GOPATH/bin/ \
+    # Build gocode-gomod
+    && GOPATH=/tmp/gotools go get -x -d github.com/stamblerre/gocode 2>&1 \
+    && GOPATH=/tmp/gotools go build -o gocode-gomod github.com/stamblerre/gocode \
+    #
+    # Install Go tools
+    && mv /tmp/gotools/bin/* /usr/local/bin/ \
+    && mv gocode-gomod /usr/local/bin/ \
     #
     # Install golangci-lint
-    && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin 2>&1 \
+    && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /usr/local/bin 2>&1 \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
@@ -67,13 +70,11 @@ RUN apt-get update \
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
-    # Add write permission for /go/pkg
-    && chmod -R a+w /go/pkg \
     #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* /go/src /tmp/gotools
+    && rm -rf /var/lib/apt/lists/* /tmp/gotools
 
 # Update this to "on" or "off" as appropriate
 ENV GO111MODULE=auto
