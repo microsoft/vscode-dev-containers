@@ -16,8 +16,8 @@ ARG USER_GID=$USER_UID
 ARG INSTALL_ZSH="true"
 
 # Location and expected SHA for common setup script - SHA generated on release
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-alpine.sh"
-ARG COMMON_SCRIPT_SHA="dev-mode"
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.106.0/script-library/common-alpine.sh"
+ARG COMMON_SCRIPT_SHA="acb22932d06ab7ea9e196dfa3537d55c7d47ea815bfb93581790297cc9e2173b"
 
 # Install git, bash, dependencies, and add a non-root user
 RUN apk update \
