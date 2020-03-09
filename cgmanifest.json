@@ -745,8 +745,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: yarn",
-                    "Version": "1.22.0-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.0_all.deb"
+                    "Version": "1.22.1-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.1_all.deb"
                 }
             }
         },
@@ -783,7 +783,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "3.8.2"
+                    "Version": "3.8.3"
                 }
             }
         },
