@@ -745,8 +745,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: yarn",
-                    "Version": "1.22.1-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.1_all.deb"
+                    "Version": "1.22.4-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
                 }
             }
         },
@@ -774,7 +774,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint",
-                    "Version": "6.0.0"
+                    "Version": "6.1.0"
                 }
             }
         },
