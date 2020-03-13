@@ -6,7 +6,7 @@
 	//
 	// .NET Core is now the default for F# in .NET Core 3.0+
 	// However, .NET Core scripting is not the default yet. Set that to true.
-	"settings": { 
+	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
 		"FSharp.useSdkScripts":true
 	},
@@ -14,9 +14,9 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"Ionide.Ionide-fsharp",
-		"ms-vscode.csharp"
+		"ms-dotnettools.csharp"
 	]
-	
+
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
