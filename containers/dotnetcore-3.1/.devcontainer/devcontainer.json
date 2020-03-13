@@ -3,25 +3,25 @@
 	"dockerFile": "Dockerfile",
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
+	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"ms-vscode.csharp"
+		"ms-dotnettools.csharp"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
 
-	// [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command: 
+	// [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command:
 	//  * Windows PowerShell:
-	//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere" 
+	//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
 	//  * macOS/Linux terminal:
 	//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
 	//
-	// Next, after running the command above, uncomment lines in the 'mounts' and 'remoteEnv' lines below, 
+	// Next, after running the command above, uncomment lines in the 'mounts' and 'remoteEnv' lines below,
 	// and open / rebuild the container so the settings take effect.
 	//
 	"mounts": [
