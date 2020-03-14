@@ -1,0 +1,8 @@
+{
+    "name": "TensorFlow-Examples",
+    "dockerFile": "Dockerfile",
+    "extensions": [
+        "ms-python.python",
+        "ms-vscode.cpptools"
+    ]
+}
