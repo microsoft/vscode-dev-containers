@@ -1,5 +1,5 @@
 {
-    "name": "TensorFlow-Examples",
+    "name": "TensorFlow-addons",
     "dockerFile": "Dockerfile",
     "extensions": [
         "ms-python.python",
