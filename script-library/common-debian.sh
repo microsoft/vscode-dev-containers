@@ -39,7 +39,6 @@ apt-get -y install --no-install-recommends \
     libgssapi-krb5-2 \
     libicu[0-9][0-9] \
     liblttng-ust0 \
-    libssl1.1 \
     libstdc++6 \
     zlib1g
 
