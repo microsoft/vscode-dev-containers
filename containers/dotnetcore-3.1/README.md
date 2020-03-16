@@ -1,4 +1,4 @@
-# C# (.NET Core 3.0)
+# C# (.NET Core 3.1)
 
 ## Summary
 
