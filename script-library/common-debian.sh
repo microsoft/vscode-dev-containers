@@ -39,10 +39,14 @@ apt-get -y install --no-install-recommends \
     libgssapi-krb5-2 \
     libicu[0-9][0-9] \
     liblttng-ust0 \
-    libssl1.1 \
     libstdc++6 \
     zlib1g
 
+# Install libssl1.1 if available
+if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
+    apt-get -y install  --no-install-recommends libssl1.1
+fi
+ 
 # Install appropriate version of libssl1.0.x if available
 LIBSSL=$(dpkg-query -f '${db:Status-Abbrev}\t${binary:Package}\n' -W 'libssl1\.0\.?' 2>&1 || echo '')
 if [ "$(echo "$LIBSSL" | grep -o 'libssl1\.0\.[0-9]:' | uniq | sort | wc -l)" -eq 0 ]; then
