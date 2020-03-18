@@ -5,7 +5,6 @@ const configUtils = require('./utils/config');
 
 // Example manifest: https://dev.azure.com/mseng/AzureDevOps/_git/Governance.Specs?path=%2Fcgmanifest.json&version=GBusers%2Fcajone%2Fcgmanifest.json
 // Docker images and native OS libraries need to be registered as "other" while others are scenario dependant
-
 const dependencyLookupConfig = {
     debian: {
         // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
@@ -63,32 +62,35 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
     for (let definitionId in definitionDependencies) {
         const dependencies = definitionDependencies[definitionId];
         if (typeof dependencies === 'object') {
-
-            // Add Docker image registration
-            const [image, imageVersion] = dependencies.image.split(':');
-            if (typeof alreadyRegistered[dependencies.image] === 'undefined') {
-                cgManifest.Registrations.push({
-                    "Component": {
-                        "Type": "other",
-                        "Other": {
-                            "Name": `Docker Image: ${image}`,
-                            "Version": imageVersion,
-                            "DownloadUrl": dependencies.imageLink
+            // For each image variant...
+            dependencies.imageVariants.forEach((imageTag) => {
+                // Add Docker image registration
+                if (typeof alreadyRegistered[imageTag] === 'undefined') {
+                    const [image, imageVersion] = imageTag.split(':');
+                    cgManifest.Registrations.push({
+                        "Component": {
+                            "Type": "other",
+                            "Other": {
+                                "Name": `Docker Image: ${image}`,
+                                "Version": imageVersion,
+                                "DownloadUrl": dependencies.imageLink
+                            }
                         }
-                    }
-                });
-                alreadyRegistered[dependencies.image] = [imageVersion];
-            }
+                    });
+                    alreadyRegistered[dependencies.image] = [imageVersion];
+                }
+            })
 
             // Docker image to use to determine installed package versions
             const imageTag = configUtils.getTagsForVersion(definitionId, 'dev', registry, registryPath)[0]
 
             // Run commands in the package to pull out needed versions
             cgManifest.Registrations = cgManifest.Registrations.concat(
-                await generatePackageComponentList(dependencyLookupConfig.debian, dependencies.debian, imageTag, alreadyRegistered),
-                await generatePackageComponentList(dependencyLookupConfig.ubuntu, dependencies.ubuntu, imageTag, alreadyRegistered),
-                await generatePackageComponentList(dependencyLookupConfig.alpine, dependencies.alpine, imageTag, alreadyRegistered),
+                await generatePackageComponentList(dependencyLookupConfig.debian, dependencies.debian, imageTag, alreadyRegistered, buildFirst),
+                await generatePackageComponentList(dependencyLookupConfig.ubuntu, dependencies.ubuntu, imageTag, alreadyRegistered, buildFirst),
+                await generatePackageComponentList(dependencyLookupConfig.alpine, dependencies.alpine, imageTag, alreadyRegistered, buildFirst),
                 await generateNpmComponentList(dependencies.npm, alreadyRegistered),
+                await generatePipComponentList(dependencies.pip, imageTag, alreadyRegistered),
                 filteredManualComponentRegistrations(dependencies.manual, alreadyRegistered));
         }
     }
@@ -99,7 +101,7 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
     console.log('(*) Done!');
 }
 
-async function generatePackageComponentList(config, packageList, imageTag, alreadyRegistered) {
+async function generatePackageComponentList(config, packageList, imageTag, alreadyRegistered, buildFirst) {
     if(!packageList) {
         return [];
     }
@@ -107,8 +109,11 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
     const componentList = [];
     console.log(`(*) Generating Linux package registrations for ${imageTag}...`);
 
-    console.log(`(*) Pulling image...`);
-    await asyncUtils.spawn('docker', ['pull', imageTag]);
+    // Pull if not building
+    if (!buildFirst) {
+        console.log(`(*) Pulling image...`);
+        await asyncUtils.spawn('docker', ['pull', imageTag]);
+    }
 
     // Generate and exec command to get installed package versions
     console.log('(*) Getting package versions...');
@@ -116,7 +121,7 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
         return prev += ` ${current}`;
     }, config.listCommand);
     const packageVersionListOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', imageTag, packageVersionListCommand],
+        ['run', '--rm', '-u', 'root', imageTag, packageVersionListCommand],
         { shell: true, stdio: 'pipe' });
 
     // Generate and exec command to extract download URIs
@@ -125,7 +130,7 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
         return prev += ` ${current}`;
     }, config.getUriCommand);
     const packageUriCommandOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', imageTag, `sh -c '${packageUriCommand}'`],
+        ['run', '--rm', '-u', 'root', imageTag, `sh -c '${packageUriCommand}'`],
         { shell: true, stdio: 'pipe' });
 
     const packageVersionList = packageVersionListOutput.split('\n');
@@ -233,6 +238,51 @@ async function generateNpmComponentList(packageList, alreadyRegistered) {
             alreadyRegistered[uniquePackageName].push(version);
         }
     });
+    return componentList;
+}
+ 
+async function generatePipComponentList(packageList, imageTag, alreadyRegistered) {
+    if(!packageList) {
+        return [];
+    }
+
+    const componentList = [];
+    console.log(`(*) Generating Pip registries...`);
+
+    console.log(`(*) Pulling image...`);
+    await asyncUtils.spawn('docker', ['pull', imageTag]);
+
+    // Generate and exec command to get installed package versions
+    console.log('(*) Getting package versions...');
+    const packageVersionListOutput = await asyncUtils.spawn('docker',
+        ['run', '--rm', imageTag, 'pip list --format json'],
+        { shell: true, stdio: 'pipe' });
+    const packageVersionList = JSON.parse(packageVersionListOutput);
+
+    const versionLookup = packageVersionList.reduce((prev, current)=> {
+        prev[current.name] = current.version;
+        return prev; 
+    }, {});
+
+    packageList.forEach((package) => {
+        const version = versionLookup[package];
+        const uniquePackageName = `pip-${package}`;
+        if (typeof alreadyRegistered[uniquePackageName] === 'undefined'
+            || alreadyRegistered[uniquePackageName].indexOf(version) < 0) {
+            componentList.push({
+                "Component": {
+                    "Type": "Pip",
+                    "Pip": {
+                        "Name": package,
+                        "Version": version
+                    }
+                }
+            });
+            alreadyRegistered[uniquePackageName] = alreadyRegistered[uniquePackageName] || [];
+            alreadyRegistered[uniquePackageName].push(version);
+        }
+    });
+
     return componentList;
 }
 

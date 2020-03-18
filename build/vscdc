@@ -32,11 +32,13 @@ require('yargs')
                 },
                 'stub-registry': {
                     describe: 'registry to add to stub',
-                    default: configUtils.getConfig('stubRegistry', configUtils.getConfig('containerRegistry', 'docker.io'))
+                    default: configUtils.getConfig('stubRegistry',
+                        configUtils.getConfig('containerRegistry', 'docker.io'))
                 },
                 'stub-registry-path': {
                     describe: 'stub registry path',
-                    default: configUtils.getConfig('stubRegistryPath', configUtils.getConfig('containerRegistryPath', ''))
+                    default: configUtils.getConfig('stubRegistryPath',
+                        configUtils.getConfig('containerRegistryPath', ''))
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
@@ -85,11 +87,13 @@ require('yargs')
                 },
                 'stub-registry': {
                     describe: 'registry to add to stub',
-                    default: configUtils.getConfig('stubRegistry', configUtils.getConfig('containerRegistry', 'docker.io'))
+                    default: configUtils.getConfig('stubRegistry',
+                        configUtils.getConfig('containerRegistry', 'docker.io'))
                 },
                 'stub-registry-path': {
                     describe: 'stub registry path',
-                    default: configUtils.getConfig('stubRegistryPath', configUtils.getConfig('containerRegistryPath', ''))
+                    default: configUtils.getConfig('stubRegistryPath',
+                        configUtils.getConfig('containerRegistryPath', ''))
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
@@ -119,6 +123,11 @@ require('yargs')
                     describe: 'Total number of pages to use when parallelizing builds',
                     type: 'integer',
                     default: 1
+                },
+                'replace-images': {
+                    describe: 'Whether to replace released images. Does not apply to dev tag.',
+                    type: 'boolean',
+                    default: false
                 }
             })
     }, pushCommand)
@@ -186,7 +195,8 @@ require('yargs')
     .argv;
 
 function pushCommand(argv) {
-    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.push, argv.prepOnly, argv.page, argv.pageTotal, argv.devcontainer)
+    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry,
+        argv.stubRegistryPath, argv.push, argv.prepOnly, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
             process.exit(1);
@@ -194,7 +204,8 @@ function pushCommand(argv) {
 }
 
 function packCommand(argv) {
-    package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean)
+    package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath,
+        argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean)
         .catch((reason) => {
             console.error(`(!) Packaging failed - ${reason}`);
             process.exit(1);

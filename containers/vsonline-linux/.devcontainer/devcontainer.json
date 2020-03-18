@@ -1,0 +1,25 @@
+{
+	"name": "VS Online (Linux Universal)",
+	"dockerFile": "Dockerfile",
+	"remoteUser": "vsonline",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/vsonline/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/home/vsonline/workspace",
+	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-vsonline.vsonline",
+		"GitHub.vscode-pull-request-github",
+		"MS-vsliveshare.vsliveshare",
+		"VisualStudioExptTeam.vscodeintellicode"
+	]
+
+	// Set *default* container specific settings.json values on container create.
+	// "settings": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a"
+}

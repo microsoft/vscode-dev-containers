@@ -1,28 +1,23 @@
 {
-	"name": "F# (.NET Core 3.1)",
+	"name": "ReasonML",
 	"dockerFile": "Dockerfile",
 
 	// Set *default* container specific settings.json values on container create.
-	//
-	// .NET Core is now the default for F# in .NET Core 3.0+
-	// However, .NET Core scripting is not the default yet. Set that to true.
-	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash",
-		"FSharp.useSdkScripts":true
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"Ionide.Ionide-fsharp",
-		"ms-dotnettools.csharp"
+		"jaredly.reason-vscode"
 	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore",
+	// "postCreateCommand": "yarn install",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
+	// "remoteUser": "node"
 }

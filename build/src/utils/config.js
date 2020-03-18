@@ -11,6 +11,7 @@ const config = require('../../config.json');
 
 config.definitionDependencies = config.definitionDependencies || {};
 config.definitionBuildSettings = config.definitionBuildSettings || {};
+config.definitionVersions = config.definitionVersions || {};
 
 const stagingFolders = {};
 const definitionTagLookup = {};
@@ -20,12 +21,14 @@ async function loadConfig(repoPath) {
     repoPath = repoPath || path.join(__dirname, '..', '..', '..');
 
     const containersPath = path.join(repoPath, getConfig('containersPathInRepo', 'containers'));
+    // Get list of definition folders
     const definitions = await asyncUtils.readdir(containersPath, { withFileTypes: true });
     await asyncUtils.forEach(definitions, async (definitionFolder) => {
         if (!definitionFolder.isDirectory()) {
             return;
         }
         const definitionId = definitionFolder.name;
+        // If definition-build.json exists, load it
         const possibleDefinitionBuildJson = path.join(containersPath, definitionId, getConfig('definitionBuildConfigFile', 'definition-build.json'));
         if (await asyncUtils.exists(possibleDefinitionBuildJson)) {
             const buildJson = await jsonc.read(possibleDefinitionBuildJson);
@@ -35,20 +38,35 @@ async function loadConfig(repoPath) {
             if (buildJson.dependencies) {
                 config.definitionDependencies[definitionId] = buildJson.dependencies;
             }
+            if(buildJson.definitionVersion) {
+                config.definitionVersions[definitionId] = buildJson.definitionVersion;
+            }
         }
     });
 
-    // Populate tag lookup
+    // Populate image variants and tag lookup
     for (let definitionId in config.definitionBuildSettings) {
-        if (config.definitionBuildSettings[definitionId].tags) {
-            const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY');
-            blankTagList.forEach((blankTag) => {
-                definitionTagLookup[blankTag] = definitionId;
-            });
-            const devTagList = getTagsForVersion(definitionId, 'dev', 'ANY', 'ANY');
-            devTagList.forEach((devTag) => {
-                definitionTagLookup[devTag] = definitionId;
-            });
+        const buildSettings = config.definitionBuildSettings[definitionId];
+        const variants = buildSettings.variants || [undefined];
+        const dependencies = config.definitionDependencies[definitionId]; 
+ 
+        // Populate images list for variants
+        dependencies.imageVariants = buildSettings.variants ? 
+            variants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
+            [dependencies.image];
+
+        // Populate image tag lookup
+        if (buildSettings.tags) {
+            variants.forEach((variant) => {
+                const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY', variant);
+                blankTagList.forEach((blankTag) => {
+                    definitionTagLookup[blankTag] = definitionId;
+                });
+                const devTagList = getTagsForVersion(definitionId, 'dev', 'ANY', 'ANY', variant);
+                devTagList.forEach((devTag) => {
+                    definitionTagLookup[devTag] = definitionId;
+                });
+            })
         }
     }
 }
@@ -69,16 +87,19 @@ function getConfig(property, defaultVal) {
 }
 
 
-// Convert a release string (v1.0.0) or branch (master) into a version
-function getVersionFromRelease(release) {
+// Convert a release string (v1.0.0) or branch (master) into a version. If a definitionId and 
+// release string is passed in, use the version specified in defintion-build.json if one exists.
+function getVersionFromRelease(release, definitionId) {
+    definitionId = definitionId || 'NOT SPECIFIED';
+
     // Already is a version
     if (!isNaN(parseInt(release.charAt(0)))) {
-        return release;
+        return config.definitionVersions[definitionId] || release;
     }
 
     // Is a release string
     if (release.charAt(0) === 'v' && !isNaN(parseInt(release.charAt(1)))) {
-        return release.substr(1);
+        return config.definitionVersions[definitionId] || release.substr(1);
     }
 
     // Is a branch
@@ -102,17 +123,29 @@ function getLatestTag(definitionId, registry, registryPath) {
 
 }
 
+function getVariants(definitionId) {
+    return config.definitionBuildSettings[definitionId].variants;
+}
+
 // Create all the needed variants of the specified version identifier for a given definition
-function getTagsForVersion(definitionId, version, registry, registryPath) {
+function getTagsForVersion(definitionId, version, registry, registryPath, variant) {
     if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
         return null;
+    }
+    // Use the first variant if none passed in, unless there isn't one
+    if (!variant) {
+        const variants = getVariants(definitionId);
+        variant = variants ? variants[0] : 'NOVARIANT';
     }
     return config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
         // One of the tags that needs to be supported is one where there is no version, but there
         // are other attributes. For example, python:3 in addition to python:0.35.0-3. So, a version
         // of '' is allowed. However, there are also instances that are just the version, so in 
         // these cases latest would be used instead. However, latest is passed in separately.
-        const baseTag = tag.replace('${VERSION}', version).replace(':-', ':');
+        let baseTag = tag.replace('${VERSION}', version)
+            .replace(':-', ':')
+            .replace('${VARIANT}', variant || 'NOVARIANT')
+            .replace('-NOVARIANT', '');
         if (baseTag.charAt(baseTag.length - 1) !== ':') {
             list.push(`${registry}/${registryPath}/${baseTag}`);
         }
@@ -121,10 +154,10 @@ function getTagsForVersion(definitionId, version, registry, registryPath) {
 }
 
 // Generate complete list of tags for a given definition
-function getTagList(definitionId, release, updateLatest, registry, registryPath) {
-    const version = getVersionFromRelease(release);
+function getTagList(definitionId, release, updateLatest, registry, registryPath, variant) {
+    const version = getVersionFromRelease(release, definitionId);
     if (version === 'dev') {
-        return getTagsForVersion(definitionId, 'dev', registry, registryPath);
+        return getTagsForVersion(definitionId, 'dev', registry, registryPath, variant);
     }
 
     const versionParts = version.split('.');
@@ -145,7 +178,7 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath)
     // If this variant should actually be the latest tag, use it
     let tagList = (updateLatest && config.definitionBuildSettings[definitionId].latest) ? getLatestTag(definitionId, registry, registryPath) : [];
     versionList.forEach((tagVersion) => {
-        tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath));
+        tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
     });
 
     return tagList;
@@ -198,7 +231,8 @@ function getSortedDefinitionBuildList(page, pageTotal) {
     if (allPages.length > pageTotal) {
         // If too many pages, add extra pages to last one
         for (let i = pageTotal; i < allPages.length; i++) {
-            allPages[allPages.length - 1] = allPages[allPages.length - 1].concat(allPages[i]);
+            allPages[allPages.length - 2] = allPages[allPages.length - 2].concat(allPages[i]);
+            allPages[i] = [];
         }
     } else if (allPages.length < pageTotal) {
         // If too few, add some empty pages
@@ -213,16 +247,16 @@ function getSortedDefinitionBuildList(page, pageTotal) {
 }
 
 // Get parent tag for a given child definition
-function getParentTagForVersion(definitionId, version, registry, registryPath) {
+function getParentTagForVersion(definitionId, version, registry, registryPath, variant) {
     const parentId = config.definitionBuildSettings[definitionId].parent;
-    return parentId ? getTagsForVersion(parentId, version, registry, registryPath)[0] : null;
+    return parentId ? getTagsForVersion(parentId, version, registry, registryPath, variant)[0] : null;
 }
 
-function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updatedVersion, updatedRegistry, updatedRegistryPath) {
+function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updatedVersion, updatedRegistry, updatedRegistryPath, variant) {
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
     const captureGroups = new RegExp(`${currentRegistry}/${currentRegistryPath}/(.+:.+)`).exec(currentTag);
-    const updatedTags = getTagsForVersion(definitionTagLookup[`ANY/ANY/${captureGroups[1]}`], updatedVersion, updatedRegistry, updatedRegistryPath);
+    const updatedTags = getTagsForVersion(definitionTagLookup[`ANY/ANY/${captureGroups[1]}`], updatedVersion, updatedRegistry, updatedRegistryPath, variant);
     if (updatedTags && updatedTags.length > 0) {
         console.log(`      Updating ${currentTag}\n      to ${updatedTags[0]}`);
         return updatedTags[0];
@@ -233,8 +267,8 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
 }
 
 // Return just the major version of a release number
-function majorFromRelease(release) {
-    const version = getVersionFromRelease(release);
+function majorFromRelease(release, definitionId) {
+    const version = getVersionFromRelease(release, definitionId);
 
     if (version === 'dev') {
         return 'dev';
@@ -278,6 +312,7 @@ async function getStagingFolder(release) {
 module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
+    getVariants: getVariants,
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,
     getParentTagForVersion: getParentTagForVersion,
     getUpdatedTag: getUpdatedTag,

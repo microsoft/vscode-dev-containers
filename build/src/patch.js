@@ -22,7 +22,7 @@ async function patch(patchPath, registry, registryPath) {
 
     if (patchConfig.imageIds) {
         // ACR registry name is the registry minus .azurecr.io
-        const registryName = registry.replace('.azurecr.io', '');
+        const registryName = registry.replace(/\..*/, '');
         // Get list of repositories
         console.log(`(*) Getting repository list for ACR "${registryName}"...`)
         const repositoryListOutput = await asyncUtils.spawn('az',

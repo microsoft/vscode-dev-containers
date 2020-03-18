@@ -285,8 +285,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: curl",
-                    "Version": "7.64.0-4",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/curl/curl_7.64.0-4_amd64.deb"
+                    "Version": "7.64.0-4+deb10u1",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/c/curl/curl_7.64.0-4+deb10u1_amd64.deb"
                 }
             }
         },
@@ -525,8 +525,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: curl",
-                    "Version": "7.52.1-5+deb9u9",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/curl/curl_7.52.1-5+deb9u9_amd64.deb"
+                    "Version": "7.52.1-5+deb9u10",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/c/curl/curl_7.52.1-5+deb9u10_amd64.deb"
                 }
             }
         },
@@ -745,8 +745,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: yarn",
-                    "Version": "1.21.1-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.21.1_all.deb"
+                    "Version": "1.22.4-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
                 }
             }
         },
@@ -774,7 +774,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint",
-                    "Version": "6.0.0"
+                    "Version": "6.1.0"
                 }
             }
         },
@@ -783,7 +783,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "3.7.5"
+                    "Version": "3.8.3"
                 }
             }
         },
@@ -794,6 +794,136 @@
                     "Name": "Docker Image: ubuntu",
                     "Version": "18.04",
                     "DownloadUrl": "https://hub.docker.com/_/ubuntu"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: mcr.microsoft.com/oryx/build",
+                    "Version": "20200114.13",
+                    "DownloadUrl": "https://github.com/microsoft/oryx"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: debian-archive-keyring",
+                    "Version": "2017.5+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2017.5+deb9u1_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: default-jdk",
+                    "Version": "2:1.8-58+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/j/java-common/default-jdk_1.8-58+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: fish",
+                    "Version": "2.4.0-1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/f/fish/fish_2.4.0-1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: git-lfs",
+                    "Version": "2.10.0",
+                    "DownloadUrl": "https://packagecloud.io/github/git-lfs/debian/pool/stretch/main/g/git-lfs/git-lfs_2.10.0_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: gnupg",
+                    "Version": "2.1.18-8~deb9u4",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gnupg2/gnupg_2.1.18-8~deb9u4_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libkrb5-3",
+                    "Version": "1.15-1+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/k/krb5/libkrb5-3_1.15-1+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: openssl",
+                    "Version": "1.1.0l-1~deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/openssl_1.1.0l-1~deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: software-properties-common",
+                    "Version": "0.96.20.2-1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/software-properties/software-properties-common_0.96.20.2-1_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: vim",
+                    "Version": "2:8.0.0197-4+deb9u3",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/v/vim/vim_8.0.0197-4+deb9u3_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: xtail",
+                    "Version": "2.1-5.1+b1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/x/xtail/xtail_2.1-5.1+b1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "Nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
+                    "commitHash": "8093dbeacdfde0f4740ea6d5becb234dea9eb430"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "Nvs",
+                    "repositoryUrl": "https://github.com/jasongin/nvs",
+                    "commitHash": "b6a607d9c36840ea8051586695d57a644402273c"
                 }
             }
         }

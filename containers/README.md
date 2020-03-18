@@ -11,3 +11,4 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing to this re
 Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE)
+

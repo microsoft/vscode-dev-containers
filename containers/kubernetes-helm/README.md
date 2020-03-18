@@ -86,7 +86,7 @@ You can adapt your own existing development container Dockerfile to support this
         && chmod +x /usr/local/bin/kubectl \
         #
         # Install Helm
-        curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash -
+        curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
     ```
 
 4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
@@ -135,12 +135,6 @@ See the section below for your operating system for more detailed setup instruct
 
 7. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
-8. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
-
-    ```
-    helm init
-    ```
-
 ## Linux / Minikube Setup
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
@@ -172,11 +166,6 @@ See the section below for your operating system for more detailed setup instruct
     ```
 
 8. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
-
-9. [Optional] If you want to use [Helm](https://helm.sh), open a VS Code terminal and run:
-    ```
-    helm init
-    ```
 
 ## License
 
