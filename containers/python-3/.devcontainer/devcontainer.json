@@ -1,7 +1,9 @@
 {
 	"name": "Python 3",
 	"context": "..",
-	"dockerFile": "Dockerfile",
+
+	// Update the FROM statement in this Dockerfile to pick a version of Python.
+	"dockerFile": "base.Dockerfile",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
@@ -21,7 +23,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "pip install -r requirements.txt",
+	// "postCreateCommand": "pip3 install -r requirements.txt",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"

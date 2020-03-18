@@ -14,7 +14,17 @@
 
 ## Using this definition with an existing folder
 
-While the definition itself works unmodified, there are some tips that can help you deal with some of common setup issues.
+### Configuration
+
+While the definition itself works unmodified, you can directly reference pre-built versions of `base.Dockerfile` by using the `image` property in `devcontainer.json` or updating the `FROM` statement in your `Dockerfile`.
+
+- `mcr.microsoft.com/vscode/devcontainers/python:3`
+- `mcr.microsoft.com/vscode/devcontainers/python:3.5`
+- `mcr.microsoft.com/vscode/devcontainers/python:3.6`
+- `mcr.microsoft.com/vscode/devcontainers/python:3.7`
+- `mcr.microsoft.com/vscode/devcontainers/python:3.8`
+
+Alternativley, you can use the contents of `base.Dockerfile` to fully customize the contents to meet your needs.
 
 ### Debug Configuration
 
