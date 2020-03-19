@@ -38,6 +38,11 @@ ARG COMMON_SCRIPT_SHA="dev-mode"
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Default set of utilities to install in a side virtual env
+ARG DEFAULT_UTILITIES="pylint"
+ARG UTILS_PATH=/usr/local/py-utils
+ENV PATH=${PATH}:${UTILS_PATH}/bin
+
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog wget ca-certificates 2>&1 \
@@ -48,8 +53,12 @@ RUN apt-get update \
     && /bin/bash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
     && rm /tmp/common-setup.sh \
     #
-    # Install pylint
-    && pip3 --disable-pip-version-check --no-cache-dir install pylint \
+    # Install default utilities
+    && mkdir -p ${UTILS_PATH} \
+    && chown ${USER_UID}:${USER_GID} ${UTILS_PATH} \
+    && pip3 --disable-pip-version-check --no-cache-dir install virtualenv \
+    && virtualenv ${UTILS_PATH} \
+    && ${UTILS_PATH}/bin/pip3 install ${DEFAULT_UTILITIES} \
     #
     # Update Python environment based on requirements.txt
     # && pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
