@@ -11,7 +11,7 @@
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
-		"python.linting.pylintPath": "/usr/local/bin/pylint"
+		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
