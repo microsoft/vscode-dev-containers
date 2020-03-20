@@ -9,7 +9,6 @@ FROM mcr.microsoft.com/vscode/devcontainers/python:3
 # - mcr.microsoft.com/vscode/devcontainers/python:3.8
 # - mcr.microsoft.com/vscode/devcontainers/python:3.7
 # - mcr.microsoft.com/vscode/devcontainers/python:3.6
-# - mcr.microsoft.com/vscode/devcontainers/python:3.5
 
 # [Optional] If your requirements rarely change, uncomment this section to add them to the image.
 #

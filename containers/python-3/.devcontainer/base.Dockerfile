@@ -39,7 +39,21 @@ ARG COMMON_SCRIPT_SHA="dev-mode"
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Default set of utilities to install in a side virtual env
-ARG DEFAULT_UTILITIES="pylint"
+ARG DEFAULT_UTILS="\
+    pylint \
+    flake8 \
+    autopep8 \
+    black \
+    pytest \
+    yapf \
+    mypy \
+    pydocstyle \
+    pycodestyle \
+    prospector \
+    pylama \
+    bandit \
+    virtualenv \
+    pipx"
 ARG UTILS_PATH=/usr/local/py-utils
 ENV PATH=${PATH}:${UTILS_PATH}/bin
 
@@ -53,12 +67,17 @@ RUN apt-get update \
     && /bin/bash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
     && rm /tmp/common-setup.sh \
     #
-    # Install default utilities
-    && mkdir -p ${UTILS_PATH} \
-    && chown ${USER_UID}:${USER_GID} ${UTILS_PATH} \
-    && pip3 --disable-pip-version-check --no-cache-dir install virtualenv \
-    && virtualenv ${UTILS_PATH} \
-    && ${UTILS_PATH}/bin/pip3 install ${DEFAULT_UTILITIES} \
+    # Setup default python tools in isloated location
+    && mkdir -p ${UTILS_PATH}/bin \
+    && chown -R ${USER_UID}:${USER_GID} ${UTILS_PATH} \
+    && PYTHONUSERBASE=/tmp/pipx-tmp \
+        pip3 --disable-pip-version-check --no-cache-dir install --no-warn-script-location --user pipx \
+    && echo "${DEFAULT_UTILS}" | \
+        PYTHONUSERBASE=/tmp/pipx-tmp \
+        PIPX_HOME=${UTILS_PATH} \
+        PIPX_BIN_DIR=${UTILS_PATH}/bin \
+        xargs -n 1 /tmp/pipx-tmp/bin/pipx install --pip-args=--no-cache-dir \
+    && rm -rf /tmp/pipx-tmp \
     #
     # Update Python environment based on requirements.txt
     # && pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
