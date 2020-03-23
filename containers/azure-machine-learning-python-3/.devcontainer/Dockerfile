@@ -35,6 +35,8 @@ RUN apt-get update \
         gnupg-agent \
         software-properties-common \
         sudo \
+        gcc \
+        g++ \
         lsb-release 2>&1 \
     #
     # Install Docker CLI
