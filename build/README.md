@@ -139,6 +139,37 @@ This configuration would cause separate image variants, each with a different `V
 
 In addition `mcr.microsoft.com/vscode/devcontainers/python` would point to `mcr.microsoft.com/vscode/devcontainers/python:3` since it is the first in the list.
 
+### Creating an alternate "stub" Dockerfile
+
+By default, the **Remote-Containers: Add Development Container Configuration File...** and related properties will use a basic getting started stub / sample Dockerfile [from here](./assets) and with a reference to the appropriate image. This provides some basic getting started information for developers.
+
+However, in some cases you may want to include some special instructions for developers. In this case, you can add a custom stub Dockerfile by creating the following files:
+
+- `base.Dockerfile`: Dockerfile used to generate the image itself
+- `Dockerfile`: A stub Dockerfile
+
+You can then reference `base.Dockerfile` in `devcontainer.json` to make editing the file that is used to create the image easy.
+
+When the definitions are packaged up for use, `base.Dockerfile` is excluded and the `devcontainer.json` file is automatically updated to `Dockerfile`. Any comment links are also modified appropriatley.
+
+If you're using the [variants property](#the-variants-property), you can set up the custom stub so that you can specify the variant from `devcontainer.json` by adding an argument called `VARIANT` right before the `FROM` statement that uses it.
+
+In your `Dockerfile`:
+
+```
+ARG VARIANT=3
+FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
+```
+
+In `devcontainer.json`:
+
+```
+"build": {
+    "args": {
+        "VARIANT": "3.8"
+    }
+}    
+```
 
 ### The dependencies property
 
@@ -175,42 +206,11 @@ Following this is a list of libraries installed in the image by its Dockerfile. 
 - `ubuntu` - Ubuntu packages (apt-get)
 - `alpine` - Alpine Linux packages (apk)
 - `pip` - Python pip packages
+- `pipx` - Python utilities installed using pipx
 - `npm` - npmjs.com packages installed using npm or yarn
 - `manual` - Useful for other types of registrations that do not have a specific type, like `git` in the example above.
 
 For everything but `manual`, the image that is generated is started so the package versions can be queried automatically.
-
-### Creating an alternate "stub" Dockerfile
-
-By default, the **Remote-Containers: Add Development Container Configuration File...** and related properties will use a basic getting started stub / sample Dockerfile [from here](./assets) and with a reference to the appropriate image. This provides some basic getting started information for developers.
-
-However, in some cases you may want to include some special instructions for developers. In this case, you can add a custom stub Dockerfile by creating the following files:
-
-- `base.Dockerfile`: Dockerfile used to generate the image itself
-- `Dockerfile`: A stub Dockerfile
-
-You can then reference `base.Dockerfile` in `devcontainer.json` to make editing the file that is used to create the image easy.
-
-When the definitions are packaged up for use, `base.Dockerfile` is excluded and the `devcontainer.json` file is automatically updated to `Dockerfile`. Any comment links are also modified appropriatley.
-
-If you're using the [variants property](#the-variants-property), you can set up the custom stub so that you can specify the variant from `devcontainer.json` by adding an argument called `VARIANT` right before the `FROM` statement that uses it.
-
-In your `Dockerfile`:
-
-```
-ARG VARIANT=3
-FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
-```
-
-In `devcontainer.json`:
-
-```
-"build": {
-    "args": {
-        "VARIANT": "3.8"
-    }
-}    
-```
 
 ---
 
