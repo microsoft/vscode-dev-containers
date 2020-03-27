@@ -121,10 +121,14 @@ In other cases, you may want to generate multiple images from the same definitio
 ```
 
 And in its corresponding Dockerfile:
+
 ```Dockerfile
 ARG VARIANT=3
 FROM python:${VARIANT}
 ```
+
+> **Note:** You may want to customize the "stub" Dockerfile that is actually used by developers rather than using the default one.  [See below for details](#creating-an-alternate-stub-dockerfile).
+
 
 This configuration would cause separate image variants, each with a different `VARIANT` build argument value passed in, that are then tagged as follows:
 
@@ -134,6 +138,7 @@ This configuration would cause separate image variants, each with a different `V
 - mcr.microsoft.com/vscode/devcontainers/python:3.8
 
 In addition `mcr.microsoft.com/vscode/devcontainers/python` would point to `mcr.microsoft.com/vscode/devcontainers/python:3` since it is the first in the list.
+
 
 ### The dependencies property
 
@@ -187,6 +192,27 @@ However, in some cases you may want to include some special instructions for dev
 You can then reference `base.Dockerfile` in `devcontainer.json` to make editing the file that is used to create the image easy.
 
 When the definitions are packaged up for use, `base.Dockerfile` is excluded and the `devcontainer.json` file is automatically updated to `Dockerfile`. Any comment links are also modified appropriatley.
+
+If you're using the [variants property](#the-variants-property), you can set up the custom stub so that you can specify the variant from `devcontainer.json` by adding an argument called `VARIANT` right before the `FROM` statement that uses it.
+
+In your `Dockerfile`:
+
+```
+ARG VARIANT=3
+FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
+```
+
+In `devcontainer.json`:
+
+```
+"build": {
+    "args": {
+        "VARIANT": "3.8"
+    }
+}    
+```
+
+---
 
 ## Build process details and background
 
