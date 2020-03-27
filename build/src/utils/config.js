@@ -186,6 +186,8 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
 
 // Walk the image build config and paginate and sort list so parents build before (and with) children
 function getSortedDefinitionBuildList(page, pageTotal) {
+    page = page || 1;
+    pageTotal = pageTotal || 1;
 
     // Bucket definitions by parent
     const parentBuckets = {}
