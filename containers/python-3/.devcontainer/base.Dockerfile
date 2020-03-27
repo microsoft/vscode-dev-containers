@@ -3,6 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
+# Update the VARIANT arg in devcontainer.json to pick a Python version: 3, 3.8, 3.7, 3.6 
 ARG VARIANT=3
 FROM python:${VARIANT}
 
@@ -10,11 +11,11 @@ FROM python:${VARIANT}
 # replace the FROM statement above with the following:
 #
 # FROM ubuntu:bionic
-# ARG PYTHON_PACKAGES="python3.5 python3.6 python3.7 python3.8 python3 python3-pip"
+# ARG PYTHON_PACKAGES="python3.5 python3.6 python3.7 python3.8 python3 python3-pip python3-venv"
 # RUN apt-get update && apt-get install --no-install-recommends -yq software-properties-common \
-#    && add-apt-repository ppa:deadsnakes/ppa && apt-get update \
-#    && apt-get install -yq --no-install-recommends ${PYTHON_PACKAGES} \
-#    && pip3 install --upgrade pip setuptools wheel
+#     && add-apt-repository ppa:deadsnakes/ppa && apt-get update \
+#     && apt-get install -yq --no-install-recommends ${PYTHON_PACKAGES} \
+#     && pip3 install --no-cache-dir --upgrade pip setuptools wheel
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
@@ -49,13 +50,12 @@ ARG DEFAULT_UTILS="\
     mypy \
     pydocstyle \
     pycodestyle \
-    prospector \
-    pylama \
     bandit \
     virtualenv \
     pipx"
-ARG UTILS_PATH=/usr/local/py-utils
-ENV PATH=${PATH}:${UTILS_PATH}/bin
+ENV PIPX_HOME=/usr/local/py-utils
+ENV PIPX_BIN_DIR=${PIPX_HOME}/bin
+ENV PATH=${PATH}:${PIPX_BIN_DIR}
 
 # Configure apt and install packages
 RUN apt-get update \
@@ -67,17 +67,12 @@ RUN apt-get update \
     && /bin/bash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
     && rm /tmp/common-setup.sh \
     #
-    # Setup default python tools in isloated location
-    && mkdir -p ${UTILS_PATH}/bin \
-    && chown -R ${USER_UID}:${USER_GID} ${UTILS_PATH} \
-    && PYTHONUSERBASE=/tmp/pipx-tmp \
-        pip3 --disable-pip-version-check --no-cache-dir install --no-warn-script-location --user pipx \
-    && echo "${DEFAULT_UTILS}" | \
-        PYTHONUSERBASE=/tmp/pipx-tmp \
-        PIPX_HOME=${UTILS_PATH} \
-        PIPX_BIN_DIR=${UTILS_PATH}/bin \
-        xargs -n 1 /tmp/pipx-tmp/bin/pipx install --pip-args=--no-cache-dir \
-    && rm -rf /tmp/pipx-tmp \
+    # Setup default python tools in venv'd OS version of python to avoid conflicts
+    && mkdir -p ${PIPX_BIN_DIR} \
+    && chown -R ${USER_UID}:${USER_GID} ${PIPX_HOME} \
+    && PYTHONUSERBASE=/tmp/pip-tmp pip3 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user pipx \
+    && echo "${DEFAULT_UTILS}" | PYTHONUSERBASE=/tmp/pip-tmp xargs -n 1 /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir \
+    && rm -rf /tmp/pip-tmp \
     #
     # Update Python environment based on requirements.txt
     # && pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \

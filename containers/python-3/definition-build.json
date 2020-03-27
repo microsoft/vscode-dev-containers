@@ -31,8 +31,19 @@
 			"sudo",
 			"zsh"
 		],
-		"pip": [
-			"pylint"
+		"pipx": [
+			"pylint",
+			"flake8",
+			"autopep8",
+			"black",
+			"pytest",
+			"yapf",
+			"mypy",
+			"pydocstyle",
+			"pycodestyle",
+			"bandit",
+			"virtualenv",
+			"pipx"
 		],
 		"manual": [
 			{
