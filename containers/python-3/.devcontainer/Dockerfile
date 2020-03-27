@@ -3,12 +3,9 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM mcr.microsoft.com/vscode/devcontainers/python:3
-
-# Additional Python images available (update FROM to use): 
-# - mcr.microsoft.com/vscode/devcontainers/python:3.8
-# - mcr.microsoft.com/vscode/devcontainers/python:3.7
-# - mcr.microsoft.com/vscode/devcontainers/python:3.6
+# Update the VARIANT arg in devcontainer.json to pick a Python version: 3, 3.8, 3.7, 3.6 
+ARG VARIANT=3
+FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
 
 # [Optional] If your requirements rarely change, uncomment this section to add them to the image.
 #
