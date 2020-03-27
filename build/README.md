@@ -16,7 +16,7 @@ Run with the `--help` option to see inputs.
 This CLI is used in the GitHub Actions workflows in this repository.
 
 - `push-dev.yml`: Pushes a "dev" tag for each image to be generated in this repository and fires repository dispatch to trigger cgmanifest.json generation, and attaches an npm package with the definitions to the actions run.
-- `push-and-package.yml`: Triggers when a release tag is pushed (`vX.Y.Z`). Builds and pushes a release version of the images, creates a release, and attaches an npm package with the definitions to the release. Note that this update the tag with source files that contain a SHA hash for script sources. You maay need to run `git pull origin --tags --force` locally after it runs.
+- `push-and-package.yml`: Triggers when a release tag is pushed (`vX.Y.Z`). Builds and pushes a release version of the images, creates a release, and attaches an npm package with the definitions to the release. Note that this update the tag with source files that contain a SHA hash for script sources. You maay need to run `git fetch --tags --force` locally after it runs.
 - `cgmanifest.yml`: Listens to the repository dispatch event to trigger cgmanifest.json generation.
 
 ## Setting up a container to be built
@@ -319,7 +319,7 @@ The process also automatically swaps out referenced MCR images for MAJOR version
 
 Another problem the build solves is mass updates - there's a set of things we want in every image and right now it requires ~54 changes to add things. With this new process, images use a tagged version of scripts in `script-library`. The build generates a SHA for script so they can be safely used in Dockerfiles that are not built into images while still allowing people to just grab `.devcontainer` from master and use it if they prefer.
 
-When a release is cut, this SHA is generated and the source code for the related Git tag is updated to include source files with these values set. Conseuqently, you may need to run `git pull origin --tags --force` to update a tag that already exists on your system.
+When a release is cut, this SHA is generated and the source code for the related Git tag is updated to include source files with these values set. Conseuqently, you may need to run `git fetch --tags --force` to update a tag that already exists on your system.
 
 #### Release process
 
