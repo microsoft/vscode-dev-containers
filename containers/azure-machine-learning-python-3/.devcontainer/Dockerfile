@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Azure ML does not support Debian, so need to use an Ubuntu image
+# Azure ML does not support Debian 10 yet, so cannot use Anaconda image as base
 FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-18.04
 
 ARG ANACONDA_VERSION=2020.02
