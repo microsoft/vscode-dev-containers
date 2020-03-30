@@ -52,8 +52,6 @@ RUN apt-get update \
     && echo "Downloading Anaconda..." \
     && su --login -c "wget -q https://repo.anaconda.com/archive/Anaconda3-${ANACONDA_VERSION}-Linux-x86_64.sh -O /tmp/anaconda-install.sh \
         && /bin/bash /tmp/anaconda-install.sh -u -b -p ${CONDA_INSTALL_PATH}" ${USERNAME} 2>&1  \
-    #&& wget -q https://repo.anaconda.com/archive/Anaconda3-${ANACONDA_VERSION}-Linux-x86_64.sh -O /tmp/anaconda-install.sh \
-    #&& /bin/bash /tmp/anaconda-install.sh -b -p ${CONDA_INSTALL_PATH} 2>&1  \
     && rm /tmp/anaconda-install.sh \
     && ln -s ${CONDA_INSTALL_PATH}/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
     && export SNIPPET="export PATH=\$PATH:\$HOME/.local/bin \
