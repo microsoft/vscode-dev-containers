@@ -8,6 +8,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-18.04
 
 ARG ANACONDA_VERSION=2020.02
 
+ARG AZURE_ML_SDK_EXTRAS=notebooks,automl
+
 # The javascript-node image includes a non-root node user with sudo access. Use 
 # the "remoteUser" property in devcontainer.json to use it. On Linux, the container 
 # user's GID/UIDs will be updated to match your local UID/GID when using the image
@@ -18,23 +20,8 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Default set of utilities to install in a side virtual env
-ARG DEFAULT_UTILS="\
-    pylint \
-    flake8 \
-    autopep8 \
-    black \
-    pytest \
-    yapf \
-    mypy \
-    pydocstyle \
-    pycodestyle \
-    bandit \
-    virtualenv \
-    pipx"
-ENV PIPX_HOME=/usr/local/py-utils
-ENV PIPX_BIN_DIR=${PIPX_HOME}/bin
-ENV PATH=/opt/conda/bin:${PATH}:${PIPX_BIN_DIR}
+ARG CONDA_INSTALL_PATH=/opt/conda
+ENV PATH=${CONDA_INSTALL_PATH}/bin:${PATH}
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Avoid warnings by switching to noninteractive
@@ -50,23 +37,6 @@ RUN apt-get update \
         && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
     fi \
     #
-    # Set up Anaconda - adapted for Ubuntu from https://github.com/ContinuumIO/docker-images/blob/master/anaconda3/debian/Dockerfile
-    && apt-get install -y bzip2 libglib2.0-0 libxext6 libsm6 libxrender1 gcc g++ \
-    && mkdir -p /opt/conda \
-    && chown ${USERNAME} /opt/conda \
-    && echo "Downloading Anaconda..." \
-    && wget -q https://repo.anaconda.com/archive/Anaconda3-${ANACONDA_VERSION}-Linux-x86_64.sh -O /opt/conda/anaconda-install.sh \
-    && /bin/bash /opt/conda/anaconda-install.sh -u -b -p /opt/conda 2>&1  \
-    && rm /opt/conda/anaconda-install.sh \
-    && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
-    && echo ". /opt/conda/etc/profile.d/conda.sh" | tee -a /root/.bashrc >> /home/${USERNAME}/.bashrc \
-    && echo ". /opt/conda/etc/profile.d/conda.sh" | tee -a /root/.zshrc >> /home/${USERNAME}/.zshrc \
-    && echo "conda activate base" | tee -a /root/.bashrc >> /home/${USERNAME}/.bashrc \
-    && echo "conda activate base" | tee -a /root/.zshrc >> /home/${USERNAME}/.zshrc \
-    && find /opt/conda/ -follow -type f -name '*.a' -delete \
-    && find /opt/conda/ -follow -type f -name '*.js.map' -delete \
-    && /opt/conda/bin/conda clean -afy \
-    #
     # Install Docker CLI
     && apt-get install -y gnupg-agent software-properties-common \
     && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
@@ -74,15 +44,29 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y docker-ce-cli \
     #
-    # Install and Azure ML SDK
-    && /opt/conda/bin/pip install azureml-sdk[notebooks,automl] 2>&1 \
+    # Set up Anaconda - adapted for Ubuntu from https://github.com/ContinuumIO/docker-images/blob/master/anaconda3/debian/Dockerfile
+    # Use vscode user for the installation so that it can be used to manage the conda environment.
+    && apt-get install -y bzip2 libglib2.0-0 libxext6 libsm6 libxrender1 gcc g++ \
+    && mkdir -p ${CONDA_INSTALL_PATH} \
+    && chown ${USERNAME}:root /opt/conda \
+    && echo "Downloading Anaconda..." \
+    && su --login -c "wget -q https://repo.anaconda.com/archive/Anaconda3-${ANACONDA_VERSION}-Linux-x86_64.sh -O /tmp/anaconda-install.sh \
+        && /bin/bash /tmp/anaconda-install.sh -u -b -p ${CONDA_INSTALL_PATH}" ${USERNAME} 2>&1  \
+    #&& wget -q https://repo.anaconda.com/archive/Anaconda3-${ANACONDA_VERSION}-Linux-x86_64.sh -O /tmp/anaconda-install.sh \
+    #&& /bin/bash /tmp/anaconda-install.sh -b -p ${CONDA_INSTALL_PATH} 2>&1  \
+    && rm /tmp/anaconda-install.sh \
+    && ln -s ${CONDA_INSTALL_PATH}/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
+    && export SNIPPET="export PATH=\$PATH:\$HOME/.local/bin \
+        && . ${CONDA_INSTALL_PATH}/etc/profile.d/conda.sh \
+        && conda activate base" \
+    && echo "$SNIPPET" | tee -a /root/.bashrc >> /home/${USERNAME}/.bashrc \
+    && echo "$SNIPPET" | tee -a /root/.zshrc >> /home/${USERNAME}/.zshrc \
+    && find ${CONDA_INSTALL_PATH}/ -follow -type f -name '*.a' -delete \
+    && find ${CONDA_INSTALL_PATH}/ -follow -type f -name '*.js.map' -delete \
+    && ${CONDA_INSTALL_PATH}/bin/conda clean -afy \
     #
-    # Setup default python tools in venv'd OS version of python to avoid conflicts
-    && mkdir -p ${PIPX_BIN_DIR} \
-    && chown -R ${USER_UID}:${USER_GID} ${PIPX_HOME} \
-    && PYTHONUSERBASE=/tmp/pip-tmp pip install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user pipx \
-    && echo "${DEFAULT_UTILS}" | PYTHONUSERBASE=/tmp/pip-tmp xargs -n 1 /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir \
-    && rm -rf /tmp/pip-tmp \
+    # Install and Azure ML SDK as vscode user so it can be updated by both users
+    && su --login -c "${CONDA_INSTALL_PATH}/bin/pip install --no-cache-dir --upgrade azureml-sdk[${AZURE_ML_SDK_EXTRAS}]" ${USERNAME} 2>&1 \
     #
     # Clean up
     && apt-get autoremove -y \

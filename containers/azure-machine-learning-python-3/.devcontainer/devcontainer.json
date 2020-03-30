@@ -1,6 +1,8 @@
 { 
 	"name": "Azure Machine Learning", 
 	"dockerFile": "Dockerfile", 
+
+	// This line allows you to use Docker runconfigs if you set "sharedVolumes": false
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
 
 	// Set *default* container specific settings.json values on container create.
@@ -9,16 +11,13 @@
 		"python.pythonPath": "/opt/conda/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
-		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
-		"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
-		"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
-		"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
-		"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
-		"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
-		"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
-		"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
-		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
-		"python.testing.pytestPath": "/usr/local/py-utils/bin/pytest"
+		"python.formatting.autopep8Path": "/opt/conda/bin/flake8",
+		"python.formatting.yapfPath": "/opt/conda/bin/flake8",
+		"python.linting.flake8Path": "/opt/conda/bin/flake8",
+		"python.linting.pycodestylePath": "/opt/conda/bin/pycodestyle",
+		"python.linting.pydocstylePath": "/opt/conda/bin/pydocstyle",
+		"python.linting.pylintPath": "/opt/conda/bin/pylint",
+		"python.testing.pytestPath": "/opt/conda/bin/pytest"
 	},
 		
 	// Add the IDs of extensions you want installed when the container is created.
