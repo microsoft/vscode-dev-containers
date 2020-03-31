@@ -51,8 +51,7 @@ ARG DEFAULT_UTILS="\
     pydocstyle \
     pycodestyle \
     bandit \
-    virtualenv \
-    pipx"
+    virtualenv"
 ENV PIPX_HOME=/usr/local/py-utils
 ENV PIPX_BIN_DIR=${PIPX_HOME}/bin
 ENV PATH=${PATH}:${PIPX_BIN_DIR}
@@ -67,16 +66,14 @@ RUN apt-get update \
     && /bin/bash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
     && rm /tmp/common-setup.sh \
     #
-    # Setup default python tools in venv'd OS version of python to avoid conflicts
+    # Setup default python tools in a venv via pipx to avoid conflicts
     && mkdir -p ${PIPX_BIN_DIR} \
+    && export PYTHONUSERBASE=/tmp/pip-tmp \
+    && pip3 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user pipx \
+    && /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir pipx \
+    && echo "${DEFAULT_UTILS}" | xargs -n 1 /tmp/pip-tmp/bin/pipx install --system-site-packages --pip-args=--no-cache-dir \
     && chown -R ${USER_UID}:${USER_GID} ${PIPX_HOME} \
-    && PYTHONUSERBASE=/tmp/pip-tmp pip3 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user pipx \
-    && echo "${DEFAULT_UTILS}" | PYTHONUSERBASE=/tmp/pip-tmp xargs -n 1 /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir \
     && rm -rf /tmp/pip-tmp \
-    #
-    # Update Python environment based on requirements.txt
-    # && pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
-    # && rm -rf /tmp/pip-tmp \
     #
     # Clean up
     && apt-get autoremove -y \
