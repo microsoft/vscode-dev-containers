@@ -74,10 +74,6 @@ RUN apt-get update \
     && echo "${DEFAULT_UTILS}" | PYTHONUSERBASE=/tmp/pip-tmp xargs -n 1 /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir \
     && rm -rf /tmp/pip-tmp \
     #
-    # Update Python environment based on requirements.txt
-    # && pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
-    # && rm -rf /tmp/pip-tmp \
-    #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
