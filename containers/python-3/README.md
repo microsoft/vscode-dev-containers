@@ -31,6 +31,16 @@ You can also directly reference pre-built versions of `base.Dockerfile` by using
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize the your container's contents.
 
+#### Installing or updating Python utilities
+
+This container installs all Python development utilities using [Pipx](https://pipxproject.github.io/pipx/) to avoid impacting the global Python environment. You can use this same utility add additional utilities in an isolated environment. For example:
+
+```bash
+pipx install prospector
+```
+
+See the [Pipx documentation](https://pipxproject.github.io/pipx/docs/) for additional information.
+
 #### Debug Configuration
 
 Note that only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
