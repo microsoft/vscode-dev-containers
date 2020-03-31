@@ -92,9 +92,15 @@ apt-get install -y sudo
 echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME
 chmod 0440 /etc/sudoers.d/$USERNAME
 
+# Ensure ~/.local/bin is in the PATH for root and non-root users for bash
+echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.bashrc >> /home/$USERNAME/.bashrc
+chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
+
+# Optionally install and configure zsh
 if [ "$INSTALL_ZSH" = "true" ]; then 
     apt-get install -y zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.zshrc
     cp -R /root/.oh-my-zsh /home/$USERNAME
     cp /root/.zshrc /home/$USERNAME
     sed -i -e "s/\/root\/.oh-my-zsh/\/home\/$USERNAME\/.oh-my-zsh/g" /home/$USERNAME/.zshrc
