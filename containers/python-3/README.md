@@ -33,13 +33,13 @@ Alternatively, you can use the contents of `base.Dockerfile` to fully customize 
 
 #### Installing or updating Python utilities
 
-This container installs all Python development utilities using [Pipx](https://pipxproject.github.io/pipx/) to avoid impacting the global Python environment. You can use this same utility add additional utilities in an isolated environment. For example:
+This container installs all Python development utilities using [pipx](https://pipxproject.github.io/pipx/) to avoid impacting the global Python environment. You can use this same utility add additional utilities in an isolated environment. For example:
 
 ```bash
 pipx install prospector
 ```
 
-See the [Pipx documentation](https://pipxproject.github.io/pipx/docs/) for additional information.
+See the [pipx documentation](https://pipxproject.github.io/pipx/docs/) for additional information.
 
 #### Debug Configuration
 
@@ -73,7 +73,7 @@ RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requ
 
 Since `requirements.txt` is likely in the folder you opened rather than the `.devcontainer` folder, be sure to include `"context": ".."` to `devcontainer.json`. This allows the Dockerfile to access everything in the opened folder instead of just the contents of the `.devcontainer` folder.
 
-#### [Optional] Allowing the non-root vscode user to run pip install globally without sudo
+#### [Optional] Allowing the non-root vscode user to pip install globally without sudo
 
 You can opt into using the `vscode` non-root user in the container by adding `"remoteUser": "vscode"` to `devcontainer.json`. However, by default, this you will need to use `sudo` to perform global pip installs.
 
