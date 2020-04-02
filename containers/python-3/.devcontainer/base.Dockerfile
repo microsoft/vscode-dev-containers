@@ -75,6 +75,10 @@ RUN apt-get update \
     && chown -R ${USER_UID}:${USER_GID} ${PIPX_HOME} \
     && rm -rf /tmp/pip-tmp \
     #
+    # Tactically remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
+    # Can leave in Dockerfile once upstream base image moves to > 7.0.7-28.
+    && apt-get purge -y imagemagick imagemagick-6-common \
+    #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
