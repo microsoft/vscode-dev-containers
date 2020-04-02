@@ -4,7 +4,7 @@
         "DSA-4614-1": true,
         "USN-4256-1": true,
         "USN-4269-1": true,
-        "sample": true,
+        "sample": false,
         "CVE-2019-10131": true
     },
     "failed": {}
