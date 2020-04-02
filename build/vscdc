@@ -5,7 +5,7 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 const push = require('./src/push').push;
-const patch = require('./src/patch').patch;
+const patch = require('./src/patch');
 const package = require('./src/package').package;
 const updateAllScriptSourcesInRepo = require('./src/prep').updateAllScriptSourcesInRepo;
 const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
@@ -180,6 +180,11 @@ require('yargs')
     .command('patch', 'patch existing images', (yargs) => {
         yargs
             .options({
+                'all': {
+                    describe: 'run all patches not already complete',
+                    type: 'boolean',
+                    default: false
+                },
                 'patch-path': {
                     describe: 'path to the folder containing the patch files',
                     default: '.'
@@ -233,9 +238,17 @@ function cgCommand(argv) {
 }
 
 function patchCommand(argv) {
-    patch(argv.patchPath, argv.registry, argv.registryPath)
-        .catch((reason) => {
-            console.error(`(!) Patching failed - ${reason}`);
-            process.exit(1);
-        });
+    if (argv.all) {
+        patch.patchAll(argv.registry, argv.registryPath)
+            .catch((reason) => {
+                console.error(`(!) Patching failed - ${reason}`);
+                process.exit(1);
+            });
+    } else {
+        patch.patch(argv.patchPath, argv.registry, argv.registryPath)
+            .catch((reason) => {
+                console.error(`(!) Patching failed - ${reason}`);
+                process.exit(1);
+            });
+    }
 }

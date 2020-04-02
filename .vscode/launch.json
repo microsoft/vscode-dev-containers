@@ -61,6 +61,32 @@
 				"v0.100.0",
 				"--github-repo", "microsoft/vscode-dev-containers"
 			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Run Patch",
+			"program": "${workspaceFolder}/build/vscdc",
+			"cwd": "${workspaceFolder}/build",
+			"args": [
+				"patch",
+				"--patch-path", "patch/sample",
+				"--registry", "clantz.azurecr.io",
+				"--registryPath", "vscode/devcontainers"
+			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Run Patch All",
+			"program": "${workspaceFolder}/build/vscdc",
+			"cwd": "${workspaceFolder}/build",
+			"args": [
+				"patch",
+				"--all",
+				"--registry", "clantz.azurecr.io",
+				"--registryPath", "vscode/devcontainers"
+			]
 		}
 	]
 }

@@ -1,8 +1,9 @@
 {
 	"dockerFile": "Dockerfile",
 	"bumpVersion": false,
+	"deleteUntaggedImages": true,
 	"imageIds": [
-		"sha256:fd2e913e41d0c1f61b1e3b30536f0c955d6ca14cc67a4334437ec7f6363e30c8",
-		"sha256:eeace8ba87040c3b117cf60aad092e726d737bd62c66d062372727b391226ca3"
+		"sha256:8ff701e2402fec0e7c727c8af6a80fe7f9f22464d6d6a785ee764e5080cadcbf",
+		"sha256:71a9746704d054b0dce2ff14fed669442c1dfa8efc7c35b4e504ec73193f5610"
 	]
 }
