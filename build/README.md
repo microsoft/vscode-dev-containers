@@ -9,8 +9,15 @@ The Node.js based build CLI (`build/vsdc`) has commands to:
 1. Build and push to a repository: `build/vsdc push`
 2. Build, push, and npm package assets that are modified as described above: `build/vsdc package`
 3. Generate cgmanifest.json: `build/vsdc cg`
+4. Update all script source URLs in Dockerfiles to a tag or branch: `build/vsdc update-script-sources`
 
 Run with the `--help` option to see inputs.
+
+This CLI is used in the GitHub Actions workflows in this repository.
+
+- `push-dev.yml`: Pushes a "dev" tag for each image to be generated in this repository and fires repository dispatch to trigger cgmanifest.json generation, and attaches an npm package with the definitions to the actions run.
+- `push-and-package.yml`: Triggers when a release tag is pushed (`vX.Y.Z`). Builds and pushes a release version of the images, creates a release, and attaches an npm package with the definitions to the release. Note that this update the tag with source files that contain a SHA hash for script sources. You maay need to run `git fetch --tags --force` locally after it runs.
+- `cgmanifest.yml`: Listens to the repository dispatch event to trigger cgmanifest.json generation.
 
 ## Setting up a container to be built
 
@@ -87,6 +94,83 @@ Finally, there is a **`parent`** property that can be used to specify if the con
 }
 ```
 
+### The definitionVersion property
+
+While in most cases it makes sense to version the contents of a definition with the repository, there may be scenarios where you want to be able to version independantly. A good example of this [is the `vsonline-linux` defintion](../containers/vsonline-linux) where upstream edits could cause breaking changes in this image. Rather than increasing the major version of the extension and all defintions whenever this happens, the definition has its own version number.
+
+When this is necisary, the `definitionVersion` property in the `definition-build.json` file can be set.
+
+```json
+"definitionVersion": "0.1.0"
+```
+
+### The variants property
+
+In many cases, you will only need to create one image per dev container definition. Even if there is only one or two versions of a given runtime available at a given time, it can be useful to simply have different definitions to aid discoverability.
+
+In other cases, you may want to generate multiple images from the same definition but with one small change. This is where the variants property comes in. Consider this `definition-build.json`:
+
+```json
+"build": {
+    "rootDistro": "debian",
+    "tags": [
+        "python:${VERSION}-${VARIANT}"
+    ],
+    "variants": [ "3", "3.6", "3.7", "3.8" ]
+}
+```
+
+And in its corresponding Dockerfile:
+
+```Dockerfile
+ARG VARIANT=3
+FROM python:${VARIANT}
+```
+
+> **Note:** You may want to customize the "stub" Dockerfile that is actually used by developers rather than using the default one.  [See below for details](#creating-an-alternate-stub-dockerfile).
+
+
+This configuration would cause separate image variants, each with a different `VARIANT` build argument value passed in, that are then tagged as follows:
+
+- mcr.microsoft.com/vscode/devcontainers/python:3
+- mcr.microsoft.com/vscode/devcontainers/python:3.6
+- mcr.microsoft.com/vscode/devcontainers/python:3.7
+- mcr.microsoft.com/vscode/devcontainers/python:3.8
+
+In addition `mcr.microsoft.com/vscode/devcontainers/python` would point to `mcr.microsoft.com/vscode/devcontainers/python:3` since it is the first in the list.
+
+### Creating an alternate "stub" Dockerfile
+
+By default, the **Remote-Containers: Add Development Container Configuration File...** and related properties will use a basic getting started stub / sample Dockerfile [from here](./assets) and with a reference to the appropriate image. This provides some basic getting started information for developers.
+
+However, in some cases you may want to include some special instructions for developers. In this case, you can add a custom stub Dockerfile by creating the following files:
+
+- `base.Dockerfile`: Dockerfile used to generate the image itself
+- `Dockerfile`: A stub Dockerfile
+
+You can then reference `base.Dockerfile` in `devcontainer.json` to make editing the file that is used to create the image easy.
+
+When the definitions are packaged up for use, `base.Dockerfile` is excluded and the `devcontainer.json` file is automatically updated to `Dockerfile`. Any comment links are also modified appropriatley.
+
+If you're using the [variants property](#the-variants-property), you can set up the custom stub so that you can specify the variant from `devcontainer.json` by adding an argument called `VARIANT` right before the `FROM` statement that uses it.
+
+In your `Dockerfile`:
+
+```
+ARG VARIANT=3
+FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
+```
+
+In `devcontainer.json`:
+
+```
+"build": {
+    "args": {
+        "VARIANT": "3.8"
+    }
+}    
+```
+
 ### The dependencies property
 
 The dependencies property is used for dependency and version tracking. Consider the Debian 9 [definition-build.json](../containers/debian-9-git/definition-build.json) file.
@@ -121,12 +205,16 @@ Following this is a list of libraries installed in the image by its Dockerfile. 
 - `debian` - Debian packages (apt-get)
 - `ubuntu` - Ubuntu packages (apt-get)
 - `alpine` - Alpine Linux packages (apk)
+- `pip` - Python pip packages
+- `pipx` - Python utilities installed using pipx
 - `npm` - npmjs.com packages installed using npm or yarn
 - `manual` - Useful for other types of registrations that do not have a specific type, like `git` in the example above.
 
 For everything but `manual`, the image that is generated is started so the package versions can be queried automatically.
 
-## Details
+---
+
+## Build process details and background
 
 Currently the vscode-dev-containers repo contains pure Dockerfiles that need to be built when used. While this works well from the perspective of providing samples, some of the images install a significant number of runtimes or tools which can take a long time to build.
 
@@ -138,8 +226,6 @@ We can resolve this by pre-building some of these images, but in-so-doing we wan
 4. Make it easy for contributors to build, customize, and contribute new definitions
 
 We won't be able to build all images in the repository or publish them under a Microsoft registry, but we would want to allow contributors to build their own images for contributions if they wanted to do so by keeping the ability to use a stand alone Dockerfile, image reference, or docker-compose file like today.
-
-## Image generation for vscode-dev-containers
 
 In order to meet the above requirements, this first phase keeps the way the dev containers deployed as it is now - an npm package. Future phases could introduce a formal registry, but this is overkill current state.
 
@@ -166,7 +252,7 @@ This has a few advantages:
 3. Upstream changes that break existing images can be handled as needed.
 4. Developers can opt to use the image tag 0.35 to get the latest break fix version if desired or 0 to always get the latest non-breaking update.
 
-This scheme will work in the near term where we do not have a large number of dev containers in the repository, but over time will not scale. However, to realistically support independent versioning, we'd need to build out a registry service - which may or may not be required. This will be evaluated at a later date.
+When necissary, a specific version can also be specified for an individual image using a `definitionVersion` property, but this is generally the exception.
 
 ### Deprecation of container definitions
 
@@ -186,37 +272,22 @@ When a release is cut, there are a few things that need to happen. One is obviou
 ```Dockerfile
 FROM mcr.microsoft.com/vscode/devcontainer/javascript-node:0-10
 
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-ENV DEBIAN_FRONTEND=noninteractive
-
-# [Optional] Update UID/GID if needed and install additional software
-RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
-        if [ "$USER_GID" != "1000" ]; then sudo groupmod 1000 --gid $USER_GID; fi \
-        && if [ "$USER_UID" != "1000" ]; then sudo usermod --uid $USER_UID 1000; fi; \
-    fi \
-    #
-    # ***************************************************************
-    # * Add steps for installing any other needed dependencies here *
-    # ***************************************************************
-    #
-    # Clean up
-    && sudo apt-get autoremove -y \
-    && sudo apt-get clean -y \
-    && sudo rm -rf /var/lib/apt/lists/*
-
-# Uncomment to default to non-root user
-# USER $USER_UID
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog
+# ** [Optional] Uncomment this section to install additional packages. **
+#
+# ENV DEBIAN_FRONTEND=noninteractive
+# RUN apt-get update \
+#    && apt-get -y install --no-install-recommends <your-package-list-here> \
+#    #
+#    # Clean up
+#    && apt-get autoremove -y \
+#    && apt-get clean -y \
+#    && rm -rf /var/lib/apt/lists/*
+# ENV DEBIAN_FRONTEND=dialog
 ```
 
-This retains its value as a sample but minimizes the number of actual build steps. This template would **evolve over time as new features are added**. For example, the above Dockerfile includes a way to make sure the user's GID/UID matches the local operating system - which is critical for Linux users. However, if we introduce a `user` concept in `devcontainer.json`, the template would no longer need to include this part of the file.
+This retains its value as a sample but minimizes the number of actual build steps. This template can evolve over time as new features are added Referencing The MAJOR version of the image in this Dockerfile allows us to push fixes or upstream updates that do not materially change the definition without developers having to change their projects.
 
-Referencing The MAJOR version in this Dockerfile allows us to push fixes or upstream updates that do not materially change the definition.
-
-### Repository contents
+#### Repository contents
 
 Consequently, this user stub Dockerfile needs to be versioned with the `devcontainer.json` file and can technically version independently of the actual main Dockerfile and image. Given this tie, it makes sense to keep this file with `devcontainer.json` in the repository. The repository therefore would could contain:
 
@@ -226,10 +297,11 @@ Consequently, this user stub Dockerfile needs to be versioned with the `devconta
      📄 devcontainer.json
      📄 Dockerfile
 📁 test-project
+📄 definition-build.json
 📄 README.md
 ```
 
-Here, `devcontainer.json` points to `base.Dockerfile`, but this is the Dockerfile used to generate the actual image rather than the stub Dockerfile. The stub that references the image is in `base.Dockerfile`.  To make things easy, we can also automatically generate this stub at release time if only a Dockerfile is present.
+The `definition-build.json` file dictates how the build process should behave as [dscribed above](#setting-up-a-container-to-be-built). In this case, `devcontainer.json` points to `base.Dockerfile`, but this is the Dockerfile used to generate the actual image rather than the stub Dockerfile. The stub that references the image is in `base.Dockerfile`.  To make things easy, we can also automatically generate this stub at release time if only a Dockerfile is present. If no `base.Dockerfile` is found, the build process falls back to using `Dockerfile`.
 
 Testing, then, is as simple as it is now - open the folder in `vscode-dev-containers` in a container and edit / test as required. Anyone simply copying the folder contents then gets a fully working version of the container even if in-flight and there is no image for it yet.
 
@@ -239,31 +311,33 @@ In the vscode-dev-containers repo itself, the `FROM` statement in `Dockerfile` w
 FROM mcr.microsoft.com/vs/devcontainer/javascript-node:dev-10
 ```
 
-#### Automated updates of other Dockerfiles
+##### Automated updates of other Dockerfiles
 
 The process also automatically swaps out referenced MCR images for MAJOR versions of built images in any Dockerfile that is added to the package. This allows us to push break fix and or security patches as break fix releases and people will get them. The build supports an option to not update `latest` and MAJOR versions, so we can also rev old MAJOR versions if we have to, but normally we'd roll forward instead.
 
-#### Common scripts
+##### Common scripts
 
 Another problem the build solves is mass updates - there's a set of things we want in every image and right now it requires ~54 changes to add things. With this new process, images use a tagged version of scripts in `script-library`. The build generates a SHA for script so they can be safely used in Dockerfiles that are not built into images while still allowing people to just grab `.devcontainer` from master and use it if they prefer.
 
+When a release is cut, this SHA is generated and the source code for the related Git tag is updated to include source files with these values set. Conseuqently, you may need to run `git fetch --tags --force` to update a tag that already exists on your system.
+
 #### Release process
 
-When a release is cut, the contents of vscode-dev-containers repo would staged. The build process would then do the following for the appropriate dev containers:
+When a release is cut, the contents of vscode-dev-containers repo are staged. The build process then does the following for the appropriate dev containers:
 
-1. Build an image using the `base.Dockerfile` and push it to a container registry with the appropriate version tags. If no `base.Dockerfile` is found, `Dockerfile` is renamed to `base.Dockerfile` and used instead.
+1. Build an image using the `base.Dockerfile` and push it to a container registry with the appropriate version tags. If no `base.Dockerfile` is found, `Dockerfile` is used instead.  If the `variants` property is set, one image is built per variant, with the variant value being passed in as the `VARIANT` build argument.
 
-2. After the image is built and pushed, `base.Dockerfile` is deleted from staging.
+2. After the image is built and pushed, `base.Dockerfile` is deleted from staging if present. If no `base.Dockerrfile`, a `Dockerfile` is replaced with stub is used based on the configured rootDistro in `definition-build.json` (Alpine vs Debian).
 
-3. Next, `Dockerfile` is updated to point to the correct MAJOR version. If no Dockerfile is found, a stub is used based on the root image (Alpine vs Debian).
+3. Next, `Dockerfile` is updated to point to the correct MAJOR version and a link is added to the Dockerfile used to build the referenced image.
 
     ```Dockerfile
     # For information on the contents of the image referenced below, see the Dockerfile at
     # https://github.com/microsoft/vscode-dev-containers/tree/v0.35.0/containers/javascript-node-10/.devcontainer/base.Dockerfile
-    FROM mcr.microsoft.com/vs/devcontainer/javascript-node:0-10
+    FROM mcr.microsoft.com/vs/devcontainer/javascript-node:0-10 replaced with an appropriate stub for the type of OS in the container.
     ```
 
-4. `devcontainer.json` is updated to point to `Dockerfile` instead of `base.Dockerfile` (if required) and add a comment to the source code README for this specific version.
+4. `devcontainer.json` is updated to point to `Dockerfile` instead of `base.Dockerfile` (if required) and a comment is added that points to the definition in this repository (along with its associated README for this specific version).
 
     ```json
     // For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at

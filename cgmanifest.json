@@ -4,6 +4,293 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "10",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: apt-transport-https",
+                    "Version": "1.4.9",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-transport-https_1.4.9_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: apt-utils",
+                    "Version": "1.4.9",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-utils_1.4.9_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: ca-certificates",
+                    "Version": "20161130+nmu1+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20161130+nmu1+deb9u1_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: curl",
+                    "Version": "7.52.1-5+deb9u10",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/c/curl/curl_7.52.1-5+deb9u10_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: dialog",
+                    "Version": "1.3-20160828-2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/d/dialog/dialog_1.3-20160828-2_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: git",
+                    "Version": "1:2.11.0-3+deb9u5",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.11.0-3+deb9u5_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: iproute2",
+                    "Version": "4.9.0-1+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/iproute2/iproute2_4.9.0-1+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: less",
+                    "Version": "481-2.1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/less/less_481-2.1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libc6",
+                    "Version": "2.24-11+deb9u4",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/glibc/libc6_2.24-11+deb9u4_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libgcc1",
+                    "Version": "1:6.3.0-18+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-6/libgcc1_6.3.0-18+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libgssapi-krb5-2",
+                    "Version": "1.15-1+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/k/krb5/libgssapi-krb5-2_1.15-1+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libicu57",
+                    "Version": "57.1-6+deb9u4",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/i/icu/libicu57_57.1-6+deb9u4_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libssl1.0.2",
+                    "Version": "1.0.2u-1~deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl1.0/libssl1.0.2_1.0.2u-1~deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libssl1.1",
+                    "Version": "1.1.0l-1~deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.0l-1~deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libstdc++6",
+                    "Version": "6.3.0-18+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-6/libstdc++6_6.3.0-18+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: lsb-release",
+                    "Version": "9.20161125",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/lsb/lsb-release_9.20161125_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: openssh-client",
+                    "Version": "1:7.4p1-10+deb9u7",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssh/openssh-client_7.4p1-10+deb9u7_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: procps",
+                    "Version": "2:3.3.12-3+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/p/procps/procps_3.3.12-3+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: sudo",
+                    "Version": "1.8.19p1-2.1+deb9u2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/sudo/sudo_1.8.19p1-2.1+deb9u2_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: unzip",
+                    "Version": "6.0-21+deb9u2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/u/unzip/unzip_6.0-21+deb9u2_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: wget",
+                    "Version": "1.18-5+deb9u3",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/w/wget/wget_1.18-5+deb9u3_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: yarn",
+                    "Version": "1.22.4-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: zlib1g",
+                    "Version": "1:1.2.8.dfsg-5",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/z/zlib/zlib1g_1.2.8.dfsg-5_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: zsh",
+                    "Version": "5.3.1-4+b3",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/z/zsh/zsh_5.3.1-4+b3_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "npm",
+                "Npm": {
+                    "Name": "eslint",
+                    "Version": "6.8.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
+                    "commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "npm",
+                "Npm": {
+                    "Name": "tslint",
+                    "Version": "6.1.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "npm",
+                "Npm": {
+                    "Name": "typescript",
+                    "Version": "3.8.3"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Docker Image: alpine",
                     "Version": "3.10",
                     "DownloadUrl": "https://hub.docker.com/_/alpine"
@@ -95,8 +382,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: unzip",
-                    "Version": "6.0-r4",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/unzip-6.0-r4.apk"
+                    "Version": "6.0-r6",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/unzip-6.0-r6.apk"
                 }
             }
         },
@@ -232,16 +519,6 @@
         },
         {
             "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
-                    "commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: debian",
@@ -365,8 +642,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: libicu63",
-                    "Version": "63.1-6",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/icu/libicu63_63.1-6_amd64.deb"
+                    "Version": "63.1-6+deb10u1",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/i/icu/libicu63_63.1-6+deb10u1_amd64.deb"
                 }
             }
         },
@@ -494,126 +771,6 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: apt-transport-https",
-                    "Version": "1.4.9",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-transport-https_1.4.9_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: apt-utils",
-                    "Version": "1.4.9",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-utils_1.4.9_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: ca-certificates",
-                    "Version": "20161130+nmu1+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20161130+nmu1+deb9u1_all.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: curl",
-                    "Version": "7.52.1-5+deb9u10",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/c/curl/curl_7.52.1-5+deb9u10_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: dialog",
-                    "Version": "1.3-20160828-2",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/d/dialog/dialog_1.3-20160828-2_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: git",
-                    "Version": "1:2.11.0-3+deb9u5",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.11.0-3+deb9u5_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: iproute2",
-                    "Version": "4.9.0-1+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/iproute2/iproute2_4.9.0-1+deb9u1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: less",
-                    "Version": "481-2.1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/less/less_481-2.1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: libc6",
-                    "Version": "2.24-11+deb9u4",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/glibc/libc6_2.24-11+deb9u4_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: libgcc1",
-                    "Version": "1:6.3.0-18+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-6/libgcc1_6.3.0-18+deb9u1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: libgssapi-krb5-2",
-                    "Version": "1.15-1+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/k/krb5/libgssapi-krb5-2_1.15-1+deb9u1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: libicu57",
-                    "Version": "57.1-6+deb9u3",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/icu/libicu57_57.1-6+deb9u3_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
                     "Name": "Debian Package: liblttng-ust0",
                     "Version": "2.9.0-2+deb9u1",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/u/ust/liblttng-ust0_2.9.0-2+deb9u1_amd64.deb"
@@ -624,9 +781,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: libssl1.0.2",
-                    "Version": "1.0.2u-1~deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl1.0/libssl1.0.2_1.0.2u-1~deb9u1_amd64.deb"
+                    "Name": "Docker Image: python",
+                    "Version": "3",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
@@ -634,9 +791,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: libssl1.1",
-                    "Version": "1.1.0l-1~deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.0l-1~deb9u1_amd64.deb"
+                    "Name": "Docker Image: python",
+                    "Version": "3.8",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
@@ -644,9 +801,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: libstdc++6",
-                    "Version": "6.3.0-18+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-6/libstdc++6_6.3.0-18+deb9u1_amd64.deb"
+                    "Name": "Docker Image: python",
+                    "Version": "3.7",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
@@ -654,136 +811,117 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: lsb-release",
-                    "Version": "9.20161125",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/lsb/lsb-release_9.20161125_all.deb"
+                    "Name": "Docker Image: python",
+                    "Version": "3.6",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: openssh-client",
-                    "Version": "1:7.4p1-10+deb9u7",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssh/openssh-client_7.4p1-10+deb9u7_amd64.deb"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pylint",
+                    "Version": "2.4.4"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: procps",
-                    "Version": "2:3.3.12-3+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/p/procps/procps_3.3.12-3+deb9u1_amd64.deb"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "flake8",
+                    "Version": "3.7.9"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: sudo",
-                    "Version": "1.8.19p1-2.1+deb9u2",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/sudo/sudo_1.8.19p1-2.1+deb9u2_amd64.deb"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "autopep8",
+                    "Version": "1.5"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: unzip",
-                    "Version": "6.0-21+deb9u2",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/u/unzip/unzip_6.0-21+deb9u2_amd64.deb"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "black",
+                    "Version": "19.10b0"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: wget",
-                    "Version": "1.18-5+deb9u3",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/w/wget/wget_1.18-5+deb9u3_amd64.deb"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pytest",
+                    "Version": "5.4.1"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: zlib1g",
-                    "Version": "1:1.2.8.dfsg-5",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/z/zlib/zlib1g_1.2.8.dfsg-5_amd64.deb"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "yapf",
+                    "Version": "0.29.0"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: zsh",
-                    "Version": "5.3.1-4+b3",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/z/zsh/zsh_5.3.1-4+b3_amd64.deb"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "mypy",
+                    "Version": "0.770"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "10",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pydocstyle",
+                    "Version": "5.0.2"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: yarn",
-                    "Version": "1.22.4-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pycodestyle",
+                    "Version": "2.5.0"
                 }
             }
         },
         {
             "Component": {
-                "Type": "npm",
-                "Npm": {
-                    "Name": "eslint",
-                    "Version": "6.8.0"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "bandit",
+                    "Version": "1.6.2"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "12",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "virtualenv",
+                    "Version": "20.0.15"
                 }
             }
         },
         {
             "Component": {
-                "Type": "npm",
-                "Npm": {
-                    "Name": "tslint",
-                    "Version": "6.1.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "npm",
-                "Npm": {
-                    "Name": "typescript",
-                    "Version": "3.8.3"
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pipx",
+                    "Version": "0.15.1.3"
                 }
             }
         },
@@ -924,6 +1062,16 @@
                     "Name": "Nvs",
                     "repositoryUrl": "https://github.com/jasongin/nvs",
                     "commitHash": "b6a607d9c36840ea8051586695d57a644402273c"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "12",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         }

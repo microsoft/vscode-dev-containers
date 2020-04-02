@@ -5,9 +5,6 @@
 
 FROM node:12
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # The node image includes a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
 # will be updated to match your local UID/GID (when using the dockerFile property).
@@ -56,7 +53,7 @@ RUN apt-get update \
     && sudo -u ${USERNAME} npm config -g set prefix /usr/local/share/npm-global \
     #
     # Tactically remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
-    # Can leave in image once the CVE is resolved upstream or the node images move to "buster".
+    # Can leave in Dockerfile once upstream base image moves to > 7.0.7-28.
     && apt-get purge -y imagemagick imagemagick-6-common \
     #
     # Install eslint globally

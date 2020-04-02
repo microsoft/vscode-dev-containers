@@ -148,8 +148,12 @@ require('yargs')
                 }
             })
     }, updateScriptSourcesCommand)
-    .command('cg', 'generate cgmanifest.json', (yargs) => {
+    .command('cg [devcontainer]', 'generate cgmanifest.json', (yargs) => {
         yargs
+            .positional('devcontainer', {
+                describe: 'limits manifest generation to single definition',
+                default: null
+            })
             .options({
                 'release': {
                     describe: 'vscode-dev-containers release tag or branch',
@@ -226,7 +230,7 @@ function updateScriptSourcesCommand(argv) {
 }
 
 function cgCommand(argv) {
-    generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build)
+    generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Component governance manifest generation failed - ${reason}`);
             process.exit(1);
