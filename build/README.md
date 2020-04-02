@@ -212,6 +212,38 @@ Following this is a list of libraries installed in the image by its Dockerfile. 
 
 For everything but `manual`, the image that is generated is started so the package versions can be queried automatically.
 
+## Testing the build
+
+Once you have your build configuration setup, you can use the `vscdc` CLI to test that everything is configured as you would expect.
+
+1. First, build the image(s) using the CLI as follows:
+
+   ```bash
+   build/vscdc push --no-push --registry mcr.microsoft.com --registry-path vscode/devcontainers --release master <you-definition-id-here>
+   ```
+
+2. Use the Docker CLI to verify all of the expected images and tags and have the right contents:
+
+    ```bash
+    docker run -it --rm mcr.microsoft.com/vscode/devcontainers/<expected-repository>:dev-<expected tag> bash
+    ```
+
+Once you're happy with the result, you can also verify that the `devcontainer.json` and the associated concent that will be generated for your definition is correct.
+
+1. Generate a `.tgz` with all of the definitions zipped inside of it.
+
+    ```bash
+    build/vscdc pack --prep-and-package-only --release master
+    ```
+      
+    A new file called `vscode-dev-containers-<version>-dev.tgz` should be in the root of the repository once this is done.
+    
+2. Unzip generated the `tgz` somewhere in your filesystem.
+    
+3. Start VS Code and use  **Remote-Containers: Open Folder in Container...**  on the unzipped definition in the `package/containers` folder and verify everything starts correctly.
+
+That's it!
+
 ---
 
 ## Build process details and background
