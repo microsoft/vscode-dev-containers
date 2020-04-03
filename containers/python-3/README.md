@@ -22,7 +22,7 @@ While the definition itself works unmodified, you can select the version of Pyth
 "args": { "VARIANT": "3.7" }
 ```
 
-You can also directly reference pre-built versions of `base.Dockerfile` by using the `image` property in `devcontainer.json` or updating the `FROM` statement in your `Dockerfile` with one of the following:
+You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your `Dockerfile` with one of the following:
 
 - `mcr.microsoft.com/vscode/devcontainers/python:3` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/python:3.6`
