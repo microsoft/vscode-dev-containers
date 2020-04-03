@@ -12,7 +12,14 @@ jobs:
     - name: Checkout
       id: checkout
       uses: actions/checkout@v1
-
+    
+    - name: Azure CLI login
+      id: az_login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZ_ACR_CREDS }}
+        tenantId: ca5f4aa0-bf57-4ffa-a0fd-686dbd1298f1
+        
     - name: Run troubleshooting script
       id: troubleshooting_script
       run: |
