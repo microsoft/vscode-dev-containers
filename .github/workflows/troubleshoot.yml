@@ -3,8 +3,6 @@ name: Troubleshooting
 on: 
   push:
     branches: [ci-troubleshooting]
-    paths:
-      - '.github/workflows'
 
 jobs:
   troubleshooting:
@@ -19,11 +17,17 @@ jobs:
       id: troubleshooting_script
       run: |
         set -e
-        export SVC_PRN=$(node -c 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).clientId)')
-        export PRN_SECRET=$(node -c 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).clientSecret)')
-        export TENANT=$(node -c 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).tenantId)')
-        export SUB=$(node -c 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).subscriptionId)')
 
+        # Prep test
+        export SVC_PRN=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).clientId)')
+        export PRN_SECRET=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).clientSecret)')
+        export TENANT=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).tenantId)')
+        export SUB=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).subscriptionId)')
+
+        # Run test
+        echo Logging in...
         az login --service-principal -u $SVC_PRN -p $PRN_SECRET --tenant $TENANT
+        echo Show account..
         az account show
+        echo Account list...
         az account list --refresh
