@@ -22,7 +22,7 @@ jobs:
         export SVC_PRN=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).clientId)')
         export PRN_SECRET=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).clientSecret)')
         #export TENANT=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).tenantId)')
-        export TENANT=ca5f4aa0-bf57-4ffa-a0fd-686dbd1298f1
+        export TENANT='ca5f4aa0-bf57-4ffa-a0fd-686dbd1298f1'
         export SUB=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).subscriptionId)')
 
         # Run test
