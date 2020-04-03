@@ -2,12 +2,12 @@
 
 ## Summary
 
-*Develop applications with Python 3 and PostgreSQL. Includes a Python application container and PostgreSQL server, and a Django test project.*
+*Develop applications with Python 3 and PostgreSQL. Includes a Python application container and PostgreSQL server.*
 
 | Metadata | Value |
 |----------|-------|
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
-| *Definition type* | Dockerfile |
+| *Definition type* | Docker Compose |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/python:3 |
 | *Available image variants* |  mcr.microsoft.com/vscode/devcontainers/python:3.8 <br />  mcr.microsoft.com/vscode/devcontainers/python:3.7<br /> mcr.microsoft.com/vscode/devcontainers/python:3.6 |
 | *Languages, platforms* | Python |
@@ -130,6 +130,7 @@ This definition includes some test code that will help you verify it is working 
 5. After the folder has opened in the container, use <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>`</kbd> to open a terminal and run the following commands to initialize the database and create a super user:
     ```bash
     cd test-project
+    pip install --user -r requirements.txt
     python manage.py migrate
     python manage.py createsuperuser
     ```
