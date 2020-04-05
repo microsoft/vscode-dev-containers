@@ -14,7 +14,6 @@ RUN \
     # Install Azure Functions, .NET Core, and Azure CLI
     echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list \
-    && echo "deb [arch=amd64] https://packages.microsoft.com/debian/10/prod/ buster main" > /etc/apt/sources.list.d/azure-functions-core-tools.list \
     && curl -sL https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
     && apt-get update \
     && apt-get install -y azure-cli dotnet-sdk-3.1 azure-functions-core-tools-3 \
@@ -30,6 +29,9 @@ RUN \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-        
+
+# Azure Functions Core Tools needs a place to save data
+ENV XDG_DATA_HOME=/usr/local/share
+
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
