@@ -912,7 +912,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.0.15"
+                    "Version": "20.0.16"
                 }
             }
         },
