@@ -14,11 +14,11 @@
 		"ms-azuretools.vscode-azurefunctions",
 		"ms-azuretools.vscode-docker",
 		"ms-python.python"
-	]
+	],
 	
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "npm install",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
+	"remoteUser": "vscode"
 }
