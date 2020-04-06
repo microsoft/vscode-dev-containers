@@ -840,7 +840,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "autopep8",
-                    "Version": "1.5"
+                    "Version": "1.5.1"
                 }
             }
         },
