@@ -28,10 +28,12 @@ RUN \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /home/vscode/.local/share \
+    && chown -R vscode /home/vscode
 
 # Azure Functions Core Tools needs a place to save data
-ENV XDG_DATA_HOME=/usr/local/share
+ENV XDG_DATA_HOME=/home/vscode/.local/share
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
