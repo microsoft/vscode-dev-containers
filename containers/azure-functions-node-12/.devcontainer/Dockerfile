@@ -29,9 +29,10 @@ RUN apt-get update \
     # [Optional] Update a non-root user to UID/GID if needed.
     && if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
         groupmod --gid $USER_GID $USERNAME \
-        && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
-        && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
+        && usermod --uid $USER_UID --gid $USER_GID $USERNAME; \
     fi \
+    && mkdir -p /home/$USERNAME/.local/share \
+    && chown -R $USER_UID:$USER_GID /home/$USERNAME \
     #
     # Clean up
     && apt-get autoremove -y \
@@ -39,7 +40,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Azure Functions Core Tools needs a place to save data
-ENV XDG_DATA_HOME=/usr/local/share
+ENV XDG_DATA_HOME=/home/$USERNAME/.local/share
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
