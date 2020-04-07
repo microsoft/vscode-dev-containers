@@ -23,7 +23,6 @@ jobs:
         export PRN_SECRET=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).clientSecret)')
         export TENANT=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).tenantId)')
         export SUB=$(node -e 'console.log(JSON.parse(`${{ secrets.AZ_ACR_CREDS }}`).subscriptionId)')
-        # export SUB='ca5f4aa0-bf57-4ffa-a0fd-686dbd1298f1'
 
         # Run test
         echo Logging in...
