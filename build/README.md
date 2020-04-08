@@ -228,9 +228,15 @@ Once you have your build configuration setup, you can use the `vscdc` CLI to tes
     docker run -it --rm mcr.microsoft.com/vscode/devcontainers/<expected-repository>:dev-<expected tag> bash
     ```
 
+3. Finally, test cgmanifest generation by running:
+
+   ```bash
+   build/vscdc cg --registry mcr.microsoft.com --registry-path vscode/devcontainers --release master <you-definition-id-here>
+   ```
+
 Once you're happy with the result, you can also verify that the `devcontainer.json` and the associated concent that will be generated for your definition is correct.
 
-1. Generate a `.tgz` with all of the definitions zipped inside of it.
+4. Generate a `.tgz` with all of the definitions zipped inside of it.
 
     ```bash
     build/vscdc pack --prep-and-package-only --release master
