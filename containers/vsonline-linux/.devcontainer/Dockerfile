@@ -79,6 +79,10 @@ RUN apt-get update -yq \
     && apt-get update \
     && apt-get install -y azure-cli \
     #
+    # Install kubectl
+    && curl -sSL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.16.2/bin/linux/amd64/kubectl \
+    && chmod +x /usr/local/bin/kubectl \
+    #
     # Setup vsonline user
     && { echo && echo "PATH=${EXTRA_PATHS_OVERRIDES}:\$PATH:${USER_EXTRA_PATHS}" ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
     && { echo && echo $BASH_PROMPT ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
