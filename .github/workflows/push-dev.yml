@@ -23,25 +23,28 @@ jobs:
       id: checkout
       uses: actions/checkout@v1
 
-    - name: Container registry login
-      id: docker_login
-      uses: azure/docker-login@v1
+    - name: Azure CLI login
+      id: az_login
+      uses: azure/login@v1
       with:
-        login-server: ${{ secrets.REGISTRY }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
+        creds: ${{ secrets.AZ_ACR_CREDS }}
 
     - name: Build and push dev tags
       id: build_and_push
       run: |
         set -e
+
+        # ACR login
+        ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
+        az acr login --name $ACR_REGISTRY_NAME
+
+        # Build and push dev images
         yarn install
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
         fi
-        build/vscdc push  --replace-images \
-                          --page ${{ matrix.page }} \
+        build/vscdc push  --page ${{ matrix.page }} \
                           --pageTotal ${{ matrix.page-total }} \
                           --release $GIT_BRANCH \
                           --github-repo ${{ github.repository }} \
@@ -76,6 +79,7 @@ jobs:
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
                           --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+
         # Set an output with the resulting package name for upload
         PKG_PREFIX=$(node -p "require('./package.json').name")
         PKG_NAME=$PKG_PREFIX-${{ github.sha }}.tgz
