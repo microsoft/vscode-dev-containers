@@ -57,7 +57,7 @@ RUN apt-get update \
     # Add conda init to .bashrc/.zshrc, tweak ownership if UID was changed
     && export SNIPPET="export PATH=\$PATH:\$HOME/.local/bin \
         && if [ \"\$(stat -c '%U' ${CONDA_INSTALL_PATH})\" != \"${USERNAME}\" ]; then \
-            chown -R ${USERNAME}:root ${CONDA_INSTALL_PATH}; \
+            sudo chown -R ${USERNAME}:root ${CONDA_INSTALL_PATH}; \
         fi \
         && . ${CONDA_INSTALL_PATH}/etc/profile.d/conda.sh \
         && conda activate base" \
