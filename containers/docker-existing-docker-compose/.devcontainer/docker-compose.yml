@@ -7,22 +7,23 @@ version: '3'
 services:
   # Update this to the name of the service you want to work with in your docker-compose.yml file
   your-service-name-here:
-    # You may want to add a non-root user to your Dockerfile and uncomment the line below
-    # to cause all processes to run as this user. Once present, you can also simply
-    # use the "remoteUser" property in devcontainer.json if you just want VS Code and
-    # its sub-processes (terminals, tasks, debugging) to execute as the user. On Linux,
-    # you may need to ensure the UID and GID of the container user you create matches your 
-    # local user. See https://aka.ms/vscode-remote/containers/non-root for details.
+    # If you want add a non-root user to your Dockerfile, you can use the "remoteUser"
+    # property in devcontainer.json to cause VS Code its sub-processes (terminals, tasks, 
+    # debugging) to execute as the user. Uncomment the next line if you want the entire 
+    # container to run as this user instead. Note that, on Linux, you may need to 
+    # ensure the UID and GID of the container user you create matches your local user. 
+    # See https://aka.ms/vscode-remote/containers/non-root for details.
+    #
     # user: vscode
 
-    # Uncomment if you want to add a different Dockerfile in the .devcontainer folder
+    # Uncomment if you want to override the service's Dockerfile to one in the .devcontainer 
+    # folder. Note that the path of the Dockerfile and context is relative to the *primary* 
+    # docker-compose.yml file (the first in the devcontainer.json "dockerComposeFile"
+    # array). The sample below assumes your primary file is in the root of your project.
+    #
     # build:
     #   context: .
-    #   dockerfile: Dockerfile
-
-    # Uncomment if you want to expose any additional ports. The snippet below exposes port 3000.
-    # ports:
-    #   - 3000:3000
+    #   dockerfile: .devcontainer/Dockerfile
     
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
