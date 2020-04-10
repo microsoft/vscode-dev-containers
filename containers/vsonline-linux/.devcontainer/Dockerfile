@@ -79,6 +79,13 @@ RUN apt-get update -yq \
     && apt-get update \
     && apt-get install -y azure-cli \
     #
+    # Install kubectl
+    && curl -sSL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+    && chmod +x /usr/local/bin/kubectl \
+    #
+    # Install Helm
+    && curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash - \
+    #
     # Setup vsonline user
     && { echo && echo "PATH=${EXTRA_PATHS_OVERRIDES}:\$PATH:${USER_EXTRA_PATHS}" ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
     && { echo && echo $BASH_PROMPT ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
