@@ -1,0 +1,28 @@
+{
+	"name": "Kubernetes & Helm wih docker-compose",
+	"dockerComposeFile": ["../docker-compose.yml"],
+	"service": "test-project",
+	"remoteEnv": {
+	},
+	"workspaceFolder": "/workspace",
+	"mounts": [],
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-azuretools.vscode-docker",
+		"ms-kubernetes-tools.vscode-kubernetes-tools"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "bash ./test-project/test.sh",
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+}
