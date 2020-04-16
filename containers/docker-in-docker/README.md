@@ -20,22 +20,29 @@ This example illustrates how you can do this by running CLI commands and using t
 
 ## How it works / adapting your existing dev container config
 
-You can adapt your own existing development container Dockerfile to support this scenario by following these steps:
+The [`.devcontainer` folder in this repository](.devcontainer) contains a complete example that **you can simply change the `FROM` statement** to another Debian/Ubuntu based image to adapt to your own use (along with adding anything else you need).
+
+However, this section will outline the how you can selectively add this functionality to your own Dockerfile in two parts: enabling access to Docker for the root user, and enabling it for a non-root user.
+
+## Enabling root user access to Docker in the container
+
+You can adapt your own existing development container Dockerfile to support this scenario when running as **root** by following these steps:
 
 1. First, install the Docker CLI in your container. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
+    ARG DOCKER_COMPOSE_VERSION=1.24.0
     RUN apt-get update \
         #
         # Install Docker CE CLI
-        && apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
+        && apt-get install -y apt-transport-https ca-certificates curl gnup-agent lsb-release \
         && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
-        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
+        && echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
         && apt-get update \
         && apt-get install -y docker-ce-cli \
         #
         # Install Docker Compose
-        && curl -sSL "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
+        && curl -sSL "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
         && chmod +x /usr/local/bin/docker-compose
     ```
 
@@ -46,6 +53,54 @@ You can adapt your own existing development container Dockerfile to support this
     ```
 
 3. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+
+### Enabling non-root access to Docker in the container
+
+To enable non-root access to Docker in the container, you use `socat` to proxy the Docker socket without affecting its permissions. This is safer than updating the permissions of the host socket itself since this would apply to all containers. You can also alias `docker` to be `sudo docker` in a `.bashrc` file, but this does not work in cases where the Docker socket is accessed directly.
+
+Follow these directions to set up non-root access using `socat`:
+
+1. Follow [the instructions in the Remote - Containers documentation]() to create a non-root user with sudo access if you do not already have one.
+
+2. Follow the [directions in the previous section](#enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI.
+
+3. Update your `devcontainer.json` to mount the Docker socket to `docker-host.sock` in the container and enable the non-root user:
+
+    ```json
+    "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
+    "overrideCommand": false,
+    "remoteUser": "vscode"
+    ```
+
+4. Copy the [docker-init.sh file](.devcontainer/docker-init.sh) from the `.devcontainer` folder in this repository to the same location in your repository.
+
+5. Next, add the following to your Dockerfile to wire up `socat`:
+
+    ```Dockerfile
+    ARG NONROOT_USER=vscode
+
+    # Copy the initialization script used as an ENTRYPOINT
+    COPY ./docker-init.sh /usr/local/share/docker-init.sh
+
+    # Default to root only access to the Docker socket, set up non-root init script
+    RUN touch /var/run/docker.socket \
+        && ln -s /var/run/docker-host.socket /var/run/docker.socket
+        && apt-get update \
+        && apt-get -y install socat
+        && chmod +x /usr/local/share/docker-init.sh
+
+    # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to
+    # the Docker socket if "overrideCommand": false is set in devcontainer.json.
+    # The script will also execute CMD if you need to alter startup behaviors.
+    ENV DOCKER_INIT_ENABLE_NONROOT="true"
+    ENV DOCKER_INIT_SOURCE_SOCKET="/var/run/docker-host.socket"
+    ENV DOCKER_INIT_TARGET_SOCKET="/var/run/docker.socket"
+    ENV DOCKER_INIT_NONROOT_USER="${NONROOT_USER}"
+    ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+    CMD [ "sleep", "infinity" ]
+    ```
+
+6. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
