@@ -9,7 +9,7 @@
 | *Contributors* | The VS Online and VS Code teams |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:linux |
-| *Languages, platforms* | Python, Node, C++, C#, .NET Core, PHP, Java |
+| *Languages, platforms* | Python, Node.js, C++, C#, .NET Core, PHP, Java, JavaScript |
 
 ## Description
 
