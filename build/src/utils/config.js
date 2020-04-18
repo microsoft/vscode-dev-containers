@@ -69,6 +69,8 @@ async function loadConfig(repoPath) {
             })
         }
     }
+    config.needsDedicatedPage = config.needsDedicatedPage || [];
+    config.definitionsToSkip = config.definitionsToSkip || [];
 }
 
 // Get a value from the config file or a similarly named env var
@@ -194,7 +196,7 @@ function getSortedDefinitionBuildList(page, pageTotal) {
     const noParentList = [];
     let total = 0;
     for (let definitionId in config.definitionBuildSettings) {
-        if (typeof config.definitionBuildSettings[definitionId] === 'object') {
+        if (typeof config.definitionBuildSettings[definitionId] === 'object' && config.definitionsToSkip.indexOf(definitionId) < 0) {
             const parentId = config.definitionBuildSettings[definitionId].parent;
             // TODO: Handle parents that have parents
             if (typeof parentId !== 'undefined') {
@@ -216,18 +218,20 @@ function getSortedDefinitionBuildList(page, pageTotal) {
     const allPages = [];
     let pageTotalMinusDedicatedPages = pageTotal;
     // Remove items that need their own buckets and add the buckets
-    if (pageTotal > config.needsDedicatedPage.length) {
-        pageTotalMinusDedicatedPages = pageTotal - config.needsDedicatedPage.length;
-        config.needsDedicatedPage.forEach((definition) => {
-            allPages.push([definition]);
-            const definitionIndex = noParentList.indexOf(definition);
-            if(definitionIndex > -1) {
-                noParentList.splice(definitionIndex, 1);
-                total--;
-            }
-        });
-    } else {
-        console.log(`(!) Not enough pages to give dedicated pages to ${JSON.stringify(config.needsDedicatedPage, null, 4)}. Adding them to other pages.`);
+    if(config.needsDedicatedPage) {
+        if (pageTotal > config.needsDedicatedPage.length) {
+            pageTotalMinusDedicatedPages = pageTotal - config.needsDedicatedPage.length;
+            config.needsDedicatedPage.forEach((definitionId) => {
+                allPages.push([definitionId]);
+                const definitionIndex = noParentList.indexOf(definitionId);
+                if(definitionIndex > -1) {
+                    noParentList.splice(definitionIndex, 1);
+                    total--;
+                }
+            });
+        } else {
+            console.log(`(!) Not enough pages to give dedicated pages to ${JSON.stringify(config.needsDedicatedPage, null, 4)}. Adding them to other pages.`);
+        }    
     }
 
     // Create pages and distribute entries with no parents
