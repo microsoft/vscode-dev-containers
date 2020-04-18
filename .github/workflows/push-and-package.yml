@@ -11,8 +11,8 @@ jobs:
     name: Build and push
     strategy:
       matrix:
-        page: [1, 2, 3]
-        page-total: [3]
+        page: [1, 2, 3, 4]
+        page-total: [4]
       fail-fast: true
     runs-on: ubuntu-latest
     steps:

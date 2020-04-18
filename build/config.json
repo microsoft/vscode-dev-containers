@@ -12,6 +12,10 @@
 		".npmignore"
 	],
 
+	"needsDedicatedPage": [ 
+		"vsonline-linux" 
+	],
+
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",
 	"scriptLibraryPathInRepo": "script-library",

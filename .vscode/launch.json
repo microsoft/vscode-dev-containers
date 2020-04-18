@@ -11,7 +11,8 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"args": [
 				"push",
-				"python-3",
+				"--page", "1",
+				"--pageTotal", "4",
 				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",

@@ -213,9 +213,25 @@ function getSortedDefinitionBuildList(page, pageTotal) {
         }
     }
 
-    // Create pages and distribute entries with no parents
-    const pageSize = Math.ceil(total / pageTotal);
     const allPages = [];
+    let pageTotalMinusDedicatedPages = pageTotal;
+    // Remove items that need their own buckets and add the buckets
+    if (pageTotal > config.needsDedicatedPage.length) {
+        pageTotalMinusDedicatedPages = pageTotal - config.needsDedicatedPage.length;
+        config.needsDedicatedPage.forEach((definition) => {
+            allPages.push([definition]);
+            const definitionIndex = noParentList.indexOf(definition);
+            if(definitionIndex > -1) {
+                noParentList.splice(definitionIndex, 1);
+                total--;
+            }
+        });
+    } else {
+        console.log(`(!) Not enough pages to give dedicated pages to ${JSON.stringify(config.needsDedicatedPage, null, 4)}. Adding them to other pages.`);
+    }
+
+    // Create pages and distribute entries with no parents
+    const pageSize = Math.ceil(total / pageTotalMinusDedicatedPages);
     for (let bucketId in parentBuckets) {
         let bucket = parentBuckets[bucketId];
         if (typeof bucket === 'object') {
