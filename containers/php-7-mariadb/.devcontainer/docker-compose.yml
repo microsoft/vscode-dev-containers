@@ -1,0 +1,23 @@
+version: "3"
+
+services: 
+    php:
+        build: .
+        volumes:
+            - ..:/workspace:cached
+        ports:
+            # For use with PHP (e.g. `php -S localhost:8080`)
+            - "8080:8080"
+        command: sleep infinity
+    mariadb:
+        image: mariadb:10.4
+        expose:
+            # Expose mariadb port to php service (Access as hostname "mariadb" from within php container)
+            - "3306"
+        # Uncomment to allow access to mariadb from external tools
+        # ports:
+        #     - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: just-for-testing
+            MYSQL_DATABASE: VscodeDev
+
