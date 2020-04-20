@@ -34,6 +34,10 @@ jobs:
       id: build_and_push
       run: |
         set -e
+
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
         
         # ACR login
         ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
