@@ -65,8 +65,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: git",
-                    "Version": "1:2.11.0-3+deb9u5",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.11.0-3+deb9u5_amd64.deb"
+                    "Version": "1:2.11.0-3+deb9u7",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/g/git/git_2.11.0-3+deb9u7_amd64.deb"
                 }
             }
         },
@@ -302,8 +302,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: git",
-                    "Version": "2.22.2-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/git-2.22.2-r0.apk"
+                    "Version": "2.22.3-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/git-2.22.3-r0.apk"
                 }
             }
         },
@@ -412,8 +412,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: ca-certificates",
-                    "Version": "20190108-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/ca-certificates-20190108-r0.apk"
+                    "Version": "20191127-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/ca-certificates-20191127-r0.apk"
                 }
             }
         },
@@ -582,8 +582,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: git",
-                    "Version": "1:2.20.1-2+deb10u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.20.1-2+deb10u1_amd64.deb"
+                    "Version": "1:2.20.1-2+deb10u3",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/g/git/git_2.20.1-2+deb10u3_amd64.deb"
                 }
             }
         },
@@ -662,8 +662,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: libssl1.1",
-                    "Version": "1.1.1d-0+deb10u2",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1d-0+deb10u2_amd64.deb"
+                    "Version": "1.1.1d-0+deb10u3",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u3_amd64.deb"
                 }
             }
         },
@@ -840,7 +840,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "autopep8",
-                    "Version": "1.5.1"
+                    "Version": "1.5.2"
                 }
             }
         },
@@ -912,7 +912,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.0.17"
+                    "Version": "20.0.18"
                 }
             }
         },
