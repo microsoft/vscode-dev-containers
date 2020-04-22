@@ -8,7 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | Any |
+| *Languages, platforms* | Azure |
 
 ## Using this definition with an existing folder
 

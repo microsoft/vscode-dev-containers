@@ -8,7 +8,7 @@
 |----------|-------|
 | *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | Terraform |
+| *Languages, platforms* | Azure, Terraform |
 
 ## Using this definition with an existing folder
 

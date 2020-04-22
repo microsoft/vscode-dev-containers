@@ -8,7 +8,7 @@ Salesforce Extension for VS Code supports remote development and allows you to u
 |----------|-------|
 | *Contributors* | Salesforce Developer Experience Teams  |
 | *Definition type* | Dockerfile |
-| *Languages, Platforms* | Salesforce CLI, Lightning Web Components, Apex, Aura, Java, node.js, Javascript, HTML, CSS, Git |
+| *Languages, Platforms* | Salesforce CLI, Lightning Web Components, Apex, Aura, Java, Node.js, JavaScript, HTML, CSS, Git |
 
 ## Description
 

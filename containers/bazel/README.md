@@ -8,7 +8,7 @@
 |----------|-------|
 | *Contributors* | William Phetsinorath <deva.shikanime@protonmail.com> |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | All platforms |
+| *Languages, platforms* | Any |
 
 ## Using this definition with an existing folder
 
