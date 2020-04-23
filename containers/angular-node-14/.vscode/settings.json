@@ -1,0 +1,7 @@
+{
+    "prettier.packageManager": "yarn",
+    "eslint.packageManager": "yarn",
+    "npm.packageManager": "yarn",
+    "tslint.packageManager": "yarn",
+    "debug.javascript.usePreview": true,
+}

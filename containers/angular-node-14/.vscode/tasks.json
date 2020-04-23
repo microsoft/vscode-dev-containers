@@ -1,0 +1,47 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "npm",
+            "script": "start",
+            "isBackground": true,
+            "options": {
+                "cwd": "${cwd}"
+            },
+            "runOptions": {
+              "runOn": "folderOpen",
+              "instanceLimit": 1
+            },
+            "presentation": {
+              "focus": true,
+              "panel": "dedicated",
+              "clear": true
+            },
+            "group": {
+              "kind": "build",
+              "isDefault": true
+            },
+            "problemMatcher": {
+              "owner": "typescript",
+              "source": "ts",
+              "applyTo": "closedDocuments",
+              "fileLocation": [
+                "relative",
+                "${cwd}"
+              ],
+              "pattern": "$tsc",
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": {
+                  "regexp": "(.*?)"
+                },
+                "endsPattern": {
+                  "regexp": "Compiled |Failed to compile."
+                }
+              }
+            }
+          }
+    ]
+}

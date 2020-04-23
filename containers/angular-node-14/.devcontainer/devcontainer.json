@@ -1,0 +1,45 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.106.0/containers/docker-existing-dockerfile
+{
+	"name": "Angular with Node 14",
+	// Make sure the dockerfile runs the 'DevStage'
+	"dockerFile": "Dockerfile",
+	"build": {
+		"args": {},
+		"target": "DevStage"
+	},
+	// Forward all ports used during development
+	"forwardPorts": [
+		4000,
+		4200,
+		4433,
+		5000,
+		8080, // ng serve
+		9876  // ng test
+	],
+	// Mount the current workspace folder to '/workspace' in the container.
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+	// Make VSCode open the '/workspace' folder after launching the container
+	"workspaceFolder": "/workspace",
+	// Set bash terminal since container is based on linux
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		// Required
+		"msjsdiag.debugger-for-chrome",
+		"ms-vscode.js-debug-nightly",
+
+		// Optional
+		"dbaeumer.vscode-eslint",
+		"ms-vscode.vscode-typescript-tslint-plugin",
+		"visualstudioexptteam.vscodeintellicode",
+		"christian-kohler.path-intellisense",
+		"leizongmin.node-module-intellisense",
+		"pmneo.tsimporter",
+		"loiane.ts-extension-pack",
+		"johnpapa.angular-essentials",
+      	"gkalpak.aio-docs-utils"
+	]
+}
