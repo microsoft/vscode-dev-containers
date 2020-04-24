@@ -11,8 +11,6 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"args": [
 				"push",
-				"--page", "1",
-				"--pageTotal", "4",
 				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
@@ -29,6 +27,7 @@
 			"args": [
 				"pack",
 				"--no-clean",
+				"--prep-and-package-only",
 				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",

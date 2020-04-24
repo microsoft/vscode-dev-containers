@@ -129,7 +129,6 @@ FROM python:${VARIANT}
 
 > **Note:** You may want to customize the "stub" Dockerfile that is actually used by developers rather than using the default one.  [See below for details](#creating-an-alternate-stub-dockerfile).
 
-
 This configuration would cause separate image variants, each with a different `VARIANT` build argument value passed in, that are then tagged as follows:
 
 - mcr.microsoft.com/vscode/devcontainers/python:3
@@ -150,7 +149,7 @@ However, in some cases you may want to include some special instructions for dev
 
 You can then reference `base.Dockerfile` in `devcontainer.json` to make editing the file that is used to create the image easy.
 
-When the definitions are packaged up for use, `base.Dockerfile` is excluded and the `devcontainer.json` file is automatically updated to `Dockerfile`. Any comment links are also modified appropriatley.
+When the definitions are packaged up for use, `base.Dockerfile` is excluded and the `devcontainer.json` file is automatically updated to `Dockerfile`. Any comment links are also modified appropriately.
 
 If you're using the [variants property](#the-variants-property), you can set up the custom stub so that you can specify the variant from `devcontainer.json` by adding an argument called `VARIANT` right before the `FROM` statement that uses it.
 
@@ -168,7 +167,7 @@ In `devcontainer.json`:
     "args": {
         "VARIANT": "3.8"
     }
-}    
+}
 ```
 
 ### The dependencies property
@@ -241,11 +240,11 @@ Once you're happy with the result, you can also verify that the `devcontainer.js
     ```bash
     build/vscdc pack --prep-and-package-only --release master
     ```
-      
+
     A new file called `vscode-dev-containers-<version>-dev.tgz` should be in the root of the repository once this is done.
-    
+
 2. Unzip generated the `tgz` somewhere in your filesystem.
-    
+
 3. Start VS Code and use  **Remote-Containers: Open Folder in Container...**  on the unzipped definition in the `package/containers` folder and verify everything starts correctly.
 
 That's it!
@@ -290,7 +289,7 @@ This has a few advantages:
 3. Upstream changes that break existing images can be handled as needed.
 4. Developers can opt to use the image tag 0.35 to get the latest break fix version if desired or 0 to always get the latest non-breaking update.
 
-When necissary, a specific version can also be specified for an individual image using a `definitionVersion` property, but this is generally the exception.
+When necessary, a specific version can also be specified for an individual image using a `definitionVersion` property, but this is generally the exception.
 
 ### Deprecation of container definitions
 
@@ -357,7 +356,7 @@ The process also automatically swaps out referenced MCR images for MAJOR version
 
 Another problem the build solves is mass updates - there's a set of things we want in every image and right now it requires ~54 changes to add things. With this new process, images use a tagged version of scripts in `script-library`. The build generates a SHA for script so they can be safely used in Dockerfiles that are not built into images while still allowing people to just grab `.devcontainer` from master and use it if they prefer.
 
-When a release is cut, this SHA is generated and the source code for the related Git tag is updated to include source files with these values set. Conseuqently, you may need to run `git fetch --tags --force` to update a tag that already exists on your system.
+When a release is cut, this SHA is generated and the source code for the related Git tag is updated to include source files with these values set. Consequently, you may need to run `git fetch --tags --force` to update a tag that already exists on your system.
 
 #### Release process
 
@@ -372,7 +371,14 @@ When a release is cut, the contents of vscode-dev-containers repo are staged. Th
     ```Dockerfile
     # For information on the contents of the image referenced below, see the Dockerfile at
     # https://github.com/microsoft/vscode-dev-containers/tree/v0.35.0/containers/javascript-node-10/.devcontainer/base.Dockerfile
-    FROM mcr.microsoft.com/vs/devcontainer/javascript-node:0-10 replaced with an appropriate stub for the type of OS in the container.
+    FROM mcr.microsoft.com/vscode/devcontainer/javascript-node:0-10
+    ```
+
+    This also works when the `VARIANT` ARG is used. The MAJOR part of the release version is placed in front of the argument in the FROM statement:
+
+    ```Dockerfile
+    ARG VARIANT="3"
+    FROM mcr.microsoft.com/vscode/devcontainer/python:0-${VARIANT}
     ```
 
 4. `devcontainer.json` is updated to point to `Dockerfile` instead of `base.Dockerfile` (if required) and a comment is added that points to the definition in this repository (along with its associated README for this specific version).
@@ -389,7 +395,34 @@ When a release is cut, the contents of vscode-dev-containers repo are staged. Th
     }
     ```
 
-These modified contents are then archived in an npm package exactly as they are today and shipped with the extension (and over time we could dynamically update this between extension releases).
+After everything builds successfully, the packaging process kicks off and performs the following:
+
+1. Runs through all Dockerfiles in the `containers` folder and makes sure any references to `mcr.microsoft.com/vscode/devcontainers` in other non-built dockerfiles reference the MAJOR version as described in step 3 above.
+
+2. Runs through all Dockerfiles and looks for [common script](#common-scripts) references and updates the URL to the tagged version and adds the expected SHA as another arg. The result is that sections of the Dockerfile that look like this:
+
+    ```Dockerfile
+    ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
+    ARG COMMON_SCRIPT_SHA="dev-mode"
+    ```
+
+    are transformed into this:
+
+    ```Dockerfile
+    ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.112.0/script-library/common-debian.sh"
+    ARG COMMON_SCRIPT_SHA="28e3d552a08e0d82935ad7335837f354809bec9856a3e0c2855f17bfe3a19523"
+    ```
+
+    so that it sections later in the Dockerfile anchors to a specific version of the script and can verify the script SHA before running it:
+
+    ```Dockerfile
+    RUN curl -sSL  $COMMON_SCRIPT_SOURCE -o /tmp/common-setup.sh\
+        && if [ "$COMMON_SCRIPT_SHA" != "dev-mode" ]; then echo "$COMMON_SCRIPT_SHA /tmp/common-setup.sh" | sha256sum -c - ; fi \
+        && /bin/bash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
+        && rm /tmp/common-setup.sh
+    ```
+
+3. These modified contents are then archived in an npm package exactly as they are today and shipped with the extension (and over time we could dynamically update this between extension releases).
 
 ```text
 📁 .devcontainer

@@ -47,16 +47,17 @@ async function loadConfig(repoPath) {
     // Populate image variants and tag lookup
     for (let definitionId in config.definitionBuildSettings) {
         const buildSettings = config.definitionBuildSettings[definitionId];
-        const variants = buildSettings.variants || [undefined];
         const dependencies = config.definitionDependencies[definitionId]; 
- 
+    
         // Populate images list for variants
         dependencies.imageVariants = buildSettings.variants ? 
-            variants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
+            buildSettings.variants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
             [dependencies.image];
 
         // Populate image tag lookup
         if (buildSettings.tags) {
+            // Variants can be used as a VARAINT arg in tags, so support that too
+            const variants = buildSettings.variants ? buildSettings.variants.concat(['${VARIANT}', '$VARIANT']) : [undefined];
             variants.forEach((variant) => {
                 const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag) => {
@@ -126,7 +127,8 @@ function getLatestTag(definitionId, registry, registryPath) {
 }
 
 function getVariants(definitionId) {
-    return config.definitionBuildSettings[definitionId].variants;
+    const buildSettings = config.definitionBuildSettings[definitionId];
+    return buildSettings ? buildSettings.variants : null;
 }
 
 // Create all the needed variants of the specified version identifier for a given definition
@@ -277,8 +279,24 @@ function getParentTagForVersion(definitionId, version, registry, registryPath, v
 function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updatedVersion, updatedRegistry, updatedRegistryPath, variant) {
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
-    const captureGroups = new RegExp(`${currentRegistry}/${currentRegistryPath}/(.+:.+)`).exec(currentTag);
-    const updatedTags = getTagsForVersion(definitionTagLookup[`ANY/ANY/${captureGroups[1]}`], updatedVersion, updatedRegistry, updatedRegistryPath, variant);
+
+    const captureGroups = new RegExp(`${currentRegistry}/${currentRegistryPath}/(.+):(.+)`).exec(currentTag);
+    const definitionId =  definitionTagLookup[`ANY/ANY/${captureGroups[1]}:${captureGroups[2]}`];
+    
+    // See if no variant passed in, see definition has any and use one if it matches
+    if (!variant) {
+        let variants = getVariants(definitionId);
+        if(variants) {
+            // The variant may be passed in as an ARG instead, support that too
+            variants = variants.concat(['${VARIANT}', '$VARIANT']);
+            // Find the best match if any exist
+            variant = variants.reduce((prev, current) => {
+                return new RegExp(`^.*-?${current.replace('$','\\$')}$`).exec(captureGroups[2]) ? current :  prev;
+            }, false);    
+        }
+    }
+
+    const updatedTags = getTagsForVersion(definitionId, updatedVersion, updatedRegistry, updatedRegistryPath, variant);
     if (updatedTags && updatedTags.length > 0) {
         console.log(`      Updating ${currentTag}\n      to ${updatedTags[0]}`);
         return updatedTags[0];

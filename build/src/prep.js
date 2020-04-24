@@ -33,7 +33,7 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
         // If building, update FROM to target registry and version if definition has a parent
         const parentTag = configUtils.getParentTagForVersion(definitionId, version, registry, registryPath, variant);
         if (parentTag) {
-            devContainerDockerfileModified = devContainerDockerfileModified.replace(/FROM .+:.+/, `FROM ${parentTag}`)
+            devContainerDockerfileModified = devContainerDockerfileModified.replace(/FROM\s+.+:.+/, `FROM ${parentTag}`)
         }
     } else {
         // Otherwise update any Dockerfiles that refer to an un-versioned tag of another dev container
@@ -46,9 +46,10 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
                 fromCaptureGroups[1], 
                 expectedRegistry,
                 expectedRegistryPath,
-                version, 
+                version,
                 stubRegistry,
-                stubRegistryPath);
+                stubRegistryPath,
+                variant);
             devContainerDockerfileModified = devContainerDockerfileModified
                 .replace(fromCaptureGroups[0], `FROM ${fromDefinitionTag}`);
         }
@@ -89,8 +90,8 @@ async function updateStub(dotDevContainerPath, definitionId, repo, release, base
 
     const devContainerImageVersion = configUtils.majorFromRelease(release, definitionId);
     const imageTag = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath)[0];
-    const hasVariantArg = (userDockerFile.indexOf('ARG VARIANT=') >= 0);
-    const userDockerFileModified = userDockerFile.replace(/(ARG VARIANT=.+\n)?(FROM .+:.+)/,
+    const hasVariantArg = (/ARG\s+VARIANT\s*=/.exec(userDockerFile) != null);
+    const userDockerFileModified = userDockerFile.replace(/(ARG\s+VARIANT\s*=\s*.+\n)?(FROM\s+.+:.+)/,
         getFromSnippet(definitionId, imageTag, repo, release, baseDockerFileExists, hasVariantArg));
     await asyncUtils.writeFile(userDockerFilePath, userDockerFileModified);
 }
@@ -123,10 +124,10 @@ async function updateScriptSources(devContainerDockerfileRaw, repo, release, upd
         // Replace script URL and generate SHA if applicable
         const scriptCaptureGroups = new RegExp(`${scriptArg}\\s*=\\s*"(.+)/${scriptLibraryPathInRepo.replace('.', '\\.')}/(.+)"`).exec(devContainerDockerfileModified);
         if (scriptCaptureGroups) {
-            console.log(`(*) Common script source found.`);
+            console.log(`(*) Script library source found.`);
             const scriptName = scriptCaptureGroups[2];
             const scriptSource = `https://raw.githubusercontent.com/${repo}/${release}/${scriptLibraryPathInRepo}/${scriptName}`;
-            console.log(`    New common script source URL: ${scriptSource}`);
+            console.log(`    Updated script source URL: ${scriptSource}`);
             let sha = scriptSHA[scriptName];
             if (updateScriptSha && typeof sha === 'undefined') {
                 const scriptRaw = await asyncUtils.getUrlAsString(scriptSource);
