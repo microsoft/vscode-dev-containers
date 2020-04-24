@@ -8,7 +8,8 @@
 |----------|-------|
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
 | *Definition type* | Dockerfile |
-| *Languages, platforms* | Python |
+| *Container host OS support* | Linux, macOS, Windows |
+| *Languages, platforms* | Python, Anaconda |
 
 ## Using this definition with an existing folder
 

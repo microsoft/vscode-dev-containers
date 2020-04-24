@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | [Your name, email and/or GitHub profile] |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | [Languages and platforms the container supports] |
 
 ## [Optional] Description

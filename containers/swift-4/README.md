@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Swift |
 
 ## Using this definition with an existing folder

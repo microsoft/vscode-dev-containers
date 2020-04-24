@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The Visual Studio Container Tools team |
 | *Definition type* | Docker Compose |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Node.js, TypeScript, Dapr |
 
 ## Dapr Notes

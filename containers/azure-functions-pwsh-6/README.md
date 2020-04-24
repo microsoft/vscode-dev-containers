@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | [brettmillerb](https://github.com/brettmillerb) |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Azure Functions, .NET Core, PowerShell |
 
 ## Using this definition with an existing folder

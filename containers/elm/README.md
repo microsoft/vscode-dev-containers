@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | xWiiLLz, @andys8 |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Elm |
 
 ## Using this definition with an existing folder

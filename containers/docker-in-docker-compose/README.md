@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code team |
 | *Definition type* | Docker Compose |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |
 
 > **Note:** There is also a single [Dockerfile](../docker-in-docker) variation of this same definition.

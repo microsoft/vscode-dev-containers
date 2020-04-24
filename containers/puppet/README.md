@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | Puppet |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Puppet |
 
 ## Description

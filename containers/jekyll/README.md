@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Ruby, Jekyll |
 
 ## Using this definition with an existing folder

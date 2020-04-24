@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code team and Phetsinorath William |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |
 
 ## Description

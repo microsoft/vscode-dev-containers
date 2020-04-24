@@ -2,12 +2,13 @@
 
 ## Summary
 
-Salesforce Extension for VS Code supports remote development and allows you to use a docker container as a full-featured development environment. 
+Salesforce Extension for VS Code supports remote development and allows you to use a docker container as a full-featured development environment.
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | Salesforce Developer Experience Teams  |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, Platforms* | Salesforce CLI, Lightning Web Components, Apex, Aura, Java, Node.js, JavaScript, HTML, CSS, Git |
 
 ## Description

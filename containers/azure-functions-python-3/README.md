@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | [Anthony Chu](https://github.com/anthonychu) |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Azure Functions, Python |
 
 ## Using this definition with an existing folder

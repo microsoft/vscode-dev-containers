@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | [Mehant](mailto:kmehant@gmail.com) |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Perl |
 
 ## Using this definition with an existing folder

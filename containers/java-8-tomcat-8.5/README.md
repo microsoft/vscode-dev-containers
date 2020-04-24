@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code Java Team |
 | *Definition type* | Dockerfile |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Tomcat, Java, Maven |
 
 ## Using this definition with an existing folder
