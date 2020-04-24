@@ -302,8 +302,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: git",
-                    "Version": "2.22.3-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/git-2.22.3-r0.apk"
+                    "Version": "2.22.4-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/git-2.22.4-r0.apk"
                 }
             }
         },
@@ -443,7 +443,7 @@
                 "Other": {
                     "Name": "Alpine Package: libssl1.1",
                     "Version": "1.1.1d-r2",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/libssl1.1-1.1.1d-r2.apk"
+                    "DownloadUrl": "1.1.1g-r0:/x86_64/libssl1.1-1.1.1d-r2.apk"
                 }
             }
         },
@@ -867,7 +867,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "yapf",
-                    "Version": "0.29.0"
+                    "Version": "0.30.0"
                 }
             }
         },
