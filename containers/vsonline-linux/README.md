@@ -9,6 +9,8 @@
 | *Contributors* | The VS Online and VS Code teams |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:linux |
+| *Published image architecture(s)* | x86-64 |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Python, Node.js, JavaScript, TypeScript, C++, Java, C#, .NET Core, PHP, PowerShell |
 
 ## Description
@@ -21,16 +23,24 @@ The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can
 
 ## Using this definition with an existing folder
 
-To use the container, just follow these steps:
+While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to:
+
+` mcr.microsoft.com/vscode/devcontainers/universal:linux`
+
+Alternatively, you can use the contents of the `Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+
+### Adding the definition to your project
+
+Just follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
-2. To use VS Code's copy of this definition:
+2. To use the pre-built image:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the General Purpose Multi-Language Development Container (VS Online) definition.
 
-3. To use latest-and-greatest copy of this definition from the repository:
+3. To use the Dockerfile for this definition (*rather than the pre-built image*):
    1. Clone this repository.
    2. Copy the `.devcontainer` folder from the `containers/vsonline-linux` folder in the cloned repository to the root of your project folder.
    3. Start VS Code and open your project folder.

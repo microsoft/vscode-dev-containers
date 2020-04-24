@@ -10,6 +10,8 @@
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/python:3 |
 | *Available image variants* |  mcr.microsoft.com/vscode/devcontainers/python:3.8 <br />  mcr.microsoft.com/vscode/devcontainers/python:3.7<br /> mcr.microsoft.com/vscode/devcontainers/python:3.6 |
+| *Published image architecture(s)* | x86-64 |
+| *Container Host OS Support* | Linux, macOS, Windows |
 | *Languages, platforms* | Python |
 
 ## Using this definition with an existing folder
@@ -22,14 +24,16 @@ While the definition itself works unmodified, you can select the version of Pyth
 "args": { "VARIANT": "3.7" }
 ```
 
-You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your `Dockerfile` with one of the following:
+You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own `Dockerfile` with one of the following:
 
 - `mcr.microsoft.com/vscode/devcontainers/python:3` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/python:3.6`
 - `mcr.microsoft.com/vscode/devcontainers/python:3.7`
 - `mcr.microsoft.com/vscode/devcontainers/python:3.8`
 
-Alternatively, you can use the contents of `base.Dockerfile` to fully customize the your container's contents.
+Alternatively, you can use the contents of `base.Dockerfile` to fully customize the your container's contents or build for a container architecture the image does not support.
+
+Beyond Python and `git`, this image / `Dockerfile` includes a number of Python tools, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
 
 #### Installing or updating Python utilities
 
@@ -100,16 +104,18 @@ RUN mkdir -p ${PIP_TARGET} \
     && echo "$SNIPPET" | tee -a /root/.zshrc >> /home/vscode/.zshrc
 ```
 
-### Adding the definition to your folder
+### Adding the definition to your project
+
+Just follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
-2. To use VS Code's copy of this definition:
+2. To use the pre-built image:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the Python 3 definition.
 
-3. To use latest-and-greatest copy of this definition from the repository:
+3. To use the Dockerfile for this definition (*rather than the pre-built image*):
    1. Clone this repository.
    2. Copy the contents of `containers/python-3/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.

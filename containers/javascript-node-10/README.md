@@ -9,20 +9,32 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/javascript-node:10 |
+| *Published image architecture(s)* | x86-64 |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Node.js, JavaScript |
 
 ## Using this definition with an existing folder
 
-This definition does not require any special steps to use. Just follow these steps:
+While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to:
+
+`mcr.microsoft.com/vscode/devcontainers/javascript-node:10`
+
+Alternatively, you can use the contents of the `Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+
+Beyond Node.js and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
+
+### Adding the definition to your project
+
+Just follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
-2. To use VS Code's copy of this definition:
+2. To use the pre-built image:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the Node.js 10 definition.
 
-3. To use latest-and-greatest copy of this definition from the repository:
+3. To use the Dockerfile for this definition (*rather than the pre-built image*):
    1. Clone this repository.
    2. Copy the contents of `containers/javascript-node-10/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
