@@ -25,7 +25,7 @@ The [`.devcontainer` folder in this repository](.devcontainer) contains a comple
 
 However, this section will outline the how you can selectively add this functionality to your own Dockerfile in two parts: enabling access to Docker for the root user, and enabling it for a non-root user.
 
-## Enabling root user access to Docker in the container
+### Enabling root user access to Docker in the container
 
 You can adapt your own existing development container Dockerfile to support this scenario when running as **root** by following these steps:
 
@@ -61,7 +61,7 @@ To enable non-root access to Docker in the container, you use `socat` to proxy t
 
 Follow these directions to set up non-root access using `socat`:
 
-1. Follow [the instructions in the Remote - Containers documentation]() to create a non-root user with sudo access if you do not already have one.
+1. Follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one.
 
 2. Follow the [directions in the previous section](#enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI.
 
@@ -73,9 +73,7 @@ Follow these directions to set up non-root access using `socat`:
     "remoteUser": "vscode"
     ```
 
-4. Copy the [docker-init.sh file](.devcontainer/docker-init.sh) from the `.devcontainer` folder in this repository to the same location in your repository.
-
-5. Next, add the following to your Dockerfile to wire up `socat`:
+4. Next, add the following to your `Dockerfile` to wire up `socat`:
 
     ```Dockerfile
     ARG NONROOT_USER=vscode
@@ -100,7 +98,7 @@ Follow these directions to set up non-root access using `socat`:
     CMD [ "sleep", "infinity" ]
     ```
 
-1. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+5. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
