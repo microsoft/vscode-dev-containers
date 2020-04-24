@@ -9,11 +9,12 @@ import DaprClient from './daprClient';
 const router = express.Router();
 
 const daprClient = new DaprClient();
+const store = 'statestore';
 
 router.use(express.json({ strict: false }));
 
 router.get('/:id', async (req, res) => {
-    const balance = await daprClient.getState<number>(req.params.id);
+    const balance = await daprClient.getState<number>(store, req.params.id);
 
     if (balance !== undefined) {
         res.status(200).header('Content-Type', 'application/json').send(JSON.stringify(balance));
@@ -23,21 +24,21 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/:id/deposit', async (req, res) => {
-    let balance = await daprClient.getState<number>(req.params.id) ?? 0;
+    let balance = await daprClient.getState<number>(store, req.params.id) ?? 0;
 
     balance += req.body as number;
 
-    await daprClient.setState(req.params.id, balance);
+    await daprClient.setState(store, req.params.id, balance);
 
     res.status(200).header('Content-Type', 'application/json').send(JSON.stringify(balance));
 });
 
 router.post('/:id/withdraw', async (req, res) => {
-    let balance = await daprClient.getState<number>(req.params.id) ?? 0;
+    let balance = await daprClient.getState<number>(store, req.params.id) ?? 0;
 
     balance -= req.body as number;
 
-    await daprClient.setState(req.params.id, balance);
+    await daprClient.setState(store, req.params.id, balance);
 
     res.status(200).header('Content-Type', 'application/json').send(JSON.stringify(balance));
 });
