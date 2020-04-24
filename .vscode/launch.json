@@ -58,7 +58,7 @@
 			"program": "${workspaceFolder}/build/vscdc",
 			"cwd": "${workspaceFolder}/build",
 			"args": [
-				"update-script-urls",
+				"update-script-sources",
 				"v0.100.0",
 				"--github-repo", "microsoft/vscode-dev-containers"
 			]

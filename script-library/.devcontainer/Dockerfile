@@ -7,7 +7,21 @@ ARG IMAGE_TO_TEST=debian:9
 FROM ${IMAGE_TO_TEST}
 
 ARG DISTRO="debian"
-COPY common-${DISTRO}.sh /tmp/common-script.sh
-RUN if [ "${DISTRO}" = "debian" ]; then apt-get update; fi \
-    && chmod +x /tmp/common-script.sh \
-    && /tmp/common-script.sh true vscode 1000 1000
+
+COPY *.sh /tmp/
+
+RUN if [ "${DISTRO}" = "debian" ]; then apt-get update; fi
+
+RUN chmod +x /tmp/*.sh
+
+RUN /tmp/common-${DISTRO}.sh true vscode 1000 1000
+
+RUN if [ "${DISTRO}" = "debian" ]; then \
+        /tmp/docker-${DISTRO}.sh true /var/run/docker-host.sock /var/run/docker.sock vscode; \
+    fi
+
+# Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
+# the Docker socket if "overrideCommand": false is set in devcontainer.json. 
+# The script will also execute CMD if you need to alter startup behaviors.
+ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+CMD [ "sleep", "infinity" ]

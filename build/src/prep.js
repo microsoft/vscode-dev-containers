@@ -27,7 +27,7 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
     const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
     
     // Replace script URL and generate SHA if applicable
-    let devContainerDockerfileModified = await updateScriptSource(devContainerDockerfileRaw, repo, release, true);
+    let devContainerDockerfileModified = await updateScriptSources(devContainerDockerfileRaw, repo, release, true);
 
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
@@ -113,36 +113,41 @@ async function updateConfigForRelease(definitionPath, definitionId, repo, releas
     }
 }
 
-// Replace script URL and generate SHA if applicable
-async function updateScriptSource(devContainerDockerfileRaw, repo, release, updateScriptSha) {
+// Replace script URLs and generate SHAs if applicable
+async function updateScriptSources(devContainerDockerfileRaw, repo, release, updateScriptSha) {
     updateScriptSha = typeof updateScriptSha === 'undefined' ? true : updateScriptSha;
-    
-    // Replace script URL and generate SHA if applicable
-    const scriptCaptureGroups = new RegExp(`COMMON_SCRIPT_SOURCE="(.+)/${scriptLibraryPathInRepo.replace('.', '\\.')}/(.+)"`).exec(devContainerDockerfileRaw);
-    if (scriptCaptureGroups) {
-        console.log(`(*) Common script source found.`);
-        const scriptName = scriptCaptureGroups[2];
-        const scriptSource = `https://raw.githubusercontent.com/${repo}/${release}/${scriptLibraryPathInRepo}/${scriptName}`;
-        console.log(`    New common script source URL: ${scriptSource}`);
-        let sha = scriptSHA[scriptName];
-        if (updateScriptSha && typeof sha === 'undefined') {
-            const scriptRaw = await asyncUtils.getUrlAsString(scriptSource);
-            sha = await asyncUtils.shaForString(scriptRaw);
-            scriptSHA[scriptName] = sha;
-        }
-        console.log(`    Script SHA: ${sha}`);
-        return devContainerDockerfileRaw
-            .replace(/COMMON_SCRIPT_SHA=".+"/, `COMMON_SCRIPT_SHA="${updateScriptSha ? sha : 'dev-mode'}"`)
-            .replace(/COMMON_SCRIPT_SOURCE=".+"/, `COMMON_SCRIPT_SOURCE="${scriptSource}"`);
+    let devContainerDockerfileModified = devContainerDockerfileRaw;
 
-    }
-    return devContainerDockerfileRaw;
+    const scriptArgs = /ARG\s+.+_SCRIPT_SOURCE/.exec(devContainerDockerfileRaw) || [];
+    await asyncUtils.forEach(scriptArgs, async (scriptArg) => {
+        // Replace script URL and generate SHA if applicable
+        const scriptCaptureGroups = new RegExp(`${scriptArg}\\s*=\\s*"(.+)/${scriptLibraryPathInRepo.replace('.', '\\.')}/(.+)"`).exec(devContainerDockerfileModified);
+        if (scriptCaptureGroups) {
+            console.log(`(*) Common script source found.`);
+            const scriptName = scriptCaptureGroups[2];
+            const scriptSource = `https://raw.githubusercontent.com/${repo}/${release}/${scriptLibraryPathInRepo}/${scriptName}`;
+            console.log(`    New common script source URL: ${scriptSource}`);
+            let sha = scriptSHA[scriptName];
+            if (updateScriptSha && typeof sha === 'undefined') {
+                const scriptRaw = await asyncUtils.getUrlAsString(scriptSource);
+                sha = await asyncUtils.shaForString(scriptRaw);
+                scriptSHA[scriptName] = sha;
+            }
+            console.log(`    Script SHA: ${sha}`);
+            const shaArg = scriptArg.replace('_SOURCE', '_SHA');
+            devContainerDockerfileModified = devContainerDockerfileModified
+                .replace(new RegExp(`${scriptArg}\\s*=\\s*".+"`), `${scriptArg}="${scriptSource}"`)
+                .replace(new RegExp(`${shaArg}\\s*=\\s*".+"`), `${shaArg}="${updateScriptSha ? sha : 'dev-mode'}"`);
+
+        }
+    })
+    return devContainerDockerfileModified;
 }
 
 // Update script URL in a Dockerfile to be release specific (or not) and optionally update the SHA to lock to this version
 async function updateScriptSourcesInDockerfile(devContainerDockerfilePath, repo, release, updateScriptSha) {
     const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
-    const devContainerDockerfileModified = await updateScriptSource(devContainerDockerfileRaw, repo, release, updateScriptSha);
+    const devContainerDockerfileModified = await updateScriptSources(devContainerDockerfileRaw, repo, release, updateScriptSha);
     await asyncUtils.writeFile(devContainerDockerfilePath, devContainerDockerfileModified);
 }
 
