@@ -12,8 +12,8 @@ export default class DaprClient {
         this.daprEndpoint = daprEndpoint ?? `http://localhost:${process.env.DAPR_HTTP_PORT ?? 3500 }/v1.0`;
     }
 
-    public async getState<T>(key: string): Promise<T | undefined> {
-        const response = await fetch(`${this.daprEndpoint}/state/${key}`);
+    public async getState<T>(store: string, key: string): Promise<T | undefined> {
+        const response = await fetch(`${this.daprEndpoint}/state/${store}/${key}`);
 
         if (!response.ok) {
             throw new Error('Could not get state.');
@@ -30,9 +30,9 @@ export default class DaprClient {
         return JSON.parse(value);
     }
 
-    public async setState<T>(key: string, value: T): Promise<void> {
+    public async setState<T>(store: string, key: string, value: T): Promise<void> {
         const response = await fetch(
-            `${this.daprEndpoint}/state`,
+            `${this.daprEndpoint}/state/${store}`,
             {
                 body: JSON.stringify([{ key, value }]),
                 headers: {
