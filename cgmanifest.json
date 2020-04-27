@@ -274,7 +274,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint",
-                    "Version": "6.1.1"
+                    "Version": "6.1.2"
                 }
             }
         },
@@ -822,7 +822,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.4.4"
+                    "Version": "2.5.0"
                 }
             }
         },
