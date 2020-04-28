@@ -2,7 +2,6 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-FROM buildpack-deps:stretch@sha256:d095aae2ecefdc786823e02b2cb0abc62b432202a49abd716c12cce37aee702b as builddeps
 FROM mcr.microsoft.com/oryx/build:20200114.13 as kitchensink
 
 ARG BASH_PROMPT="PS1='\[\e]0;\u: \w\a\]\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '"
@@ -25,9 +24,6 @@ ARG DeveloperBuild
 ENV SHELL=/bin/bash
 
 ENV ORYX_ENV_TYPE=vsonline-present
-
-# Copy back python into the Oryx image from builddeps.
-COPY --from=builddeps /usr/bin/py* /usr/bin/
 
 # Add script to fix .NET Core pathing
 ADD symlinkDotNetCore.sh /tmp/vsonline/symlinkDotNetCore.sh
