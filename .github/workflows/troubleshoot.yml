@@ -37,3 +37,6 @@ jobs:
         az acr login --name devcon
         echo Role assignment list
         az role assignment list
+        echo attempt delete
+        az acr repository delete --yes --name devcon --image public/vscode/devcontainers/base@sha256:38edbad16fb659c5635b0d4691aa562b30e660be44fe411be36f5ca21129a38d || echo "No workey!"
+
