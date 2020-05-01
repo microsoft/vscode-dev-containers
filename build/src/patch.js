@@ -189,6 +189,8 @@ async function patchAll(registry, registryPath) {
             } catch (ex) {
                 console.log(`(!) Patch ${patchEntry.name} failed - ${ex}.`);
                 patchStatus.failed[patchEntry.name] = JSON.stringify(ex, undefined, 4);
+                await asyncUtils.writeFile(patchStatusFilePath, JSON.stringify(patchStatus, undefined, 4))
+                throw ex;
             }
         }
     });

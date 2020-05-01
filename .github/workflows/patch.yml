@@ -28,6 +28,11 @@ jobs:
       run: |
         set -e
 
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
         # ACR login
         ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
         az acr login --name $ACR_REGISTRY_NAME

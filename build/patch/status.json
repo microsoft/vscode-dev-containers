@@ -1,11 +1,11 @@
 {
     "complete": {
-        "DSA-4613-1": true,
-        "DSA-4614-1": true,
-        "USN-4256-1": true,
-        "USN-4269-1": true,
-        "sample": false,
-        "CVE-2019-10131": true
+        "2020-02-07-1": true,
+        "2020-02-07-2": true,
+        "2020-02-14-1": true,
+        "2020-02-14-2": true,
+        "2020-04-2": true,
+        "sample": true
     },
     "failed": {}
 }
