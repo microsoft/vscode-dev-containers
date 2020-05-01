@@ -46,6 +46,9 @@ RUN apt-get update -yq \
         software-properties-common \
         unzip \
     #
+    # Be sure git is up to date due to DSA 4659-1, DSA 4657-1
+    && apt-get ugprade -yq git \
+    #
     # Optionally install debugger for development of VSO
     && if [ -z $DeveloperBuild ]; then \
         echo "not including debugger" ; \
