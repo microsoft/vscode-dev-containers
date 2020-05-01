@@ -7,7 +7,7 @@ version: '3.2'
 services:
   test-project:
     build: 
-      context: .devcontainer
+      context: .
       dockerfile: Dockerfile
 
     volumes:

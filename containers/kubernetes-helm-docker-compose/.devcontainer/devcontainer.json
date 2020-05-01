@@ -1,6 +1,11 @@
 {
 	"name": "Kubernetes & Helm wih docker-compose",
-	"dockerComposeFile": ["../docker-compose.yml"],
+	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
+	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+	"dockerComposeFile": [
+		//"../docker-compose.yml", //This could be used to point at an existing docker-compose.yaml in the top directory
+		"docker-compose.yml"
+	],
 	"service": "test-project",
 	"remoteEnv": {
 	},

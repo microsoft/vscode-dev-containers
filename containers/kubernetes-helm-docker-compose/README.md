@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code team and Phetsinorath William |
+| *Contributors* | The VS Code team, Phetsinorath William and [Allan Makura](https://twitter.com/allanmakura)|
 | *Definition type* | Docker Compose & Dockerfile|
 | *Languages, platforms* | Any |
 
