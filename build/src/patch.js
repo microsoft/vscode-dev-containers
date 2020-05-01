@@ -105,6 +105,7 @@ async function deleteUntaggedImages(imageIds, registry) {
             'repository',
             'delete',
             '--yes',
+            '--debug',
             '--name', registryName,
             '--image', fullImageId
         ], spawnOpts);
