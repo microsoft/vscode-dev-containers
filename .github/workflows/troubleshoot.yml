@@ -35,3 +35,5 @@ jobs:
         az account set --subscription $SUB
         echo ACR login...
         az acr login --name devcon
+        echo Role assignment list
+        az role assignment list
