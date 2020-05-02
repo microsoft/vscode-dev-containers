@@ -25,16 +25,16 @@ This CLI is used in the GitHub Actions workflows in this repository.
 >
 > However, if you have your own pre-built image or build process, you can simply reference it directly in you contributed container.
 
-Image build/push to MCR is managed using config in `definition-build.json` files that are located in the container definition folder. The config lets you set dependencies between definitions and map actual image tags to multiple definitions. So, the steps to onboard an image are:
+Image build/push to MCR is managed using config in `definition-manifest.json` files that are located in the container definition folder. The config lets you set dependencies between definitions and map actual image tags to multiple definitions. So, the steps to onboard an image are:
 
-1. Create a `definition-build.json` file
+1. Create a `definition-manifest.json` file
 2. Update the `vscode` config files for MCR as appropriate (MS internal only).
 
-Let's run through the `definition-build.json` file.
+Let's run through the `definition-manifest.json` file.
 
 ### The build property
 
-The `build` property defines how the definition maps to image tags and what type of "stub" should be used. Consider the Debian 9 [definition-build.json](../containers/debian-9-git/definition-build.json) file.
+The `build` property defines how the definition maps to image tags and what type of "stub" should be used. Consider the Debian 9 [definition-manifest.json](../containers/debian-9-git/definition-manifest.json) file.
 
 ```json
 "build": {
@@ -98,7 +98,7 @@ Finally, there is a **`parent`** property that can be used to specify if the con
 
 While in most cases it makes sense to version the contents of a definition with the repository, there may be scenarios where you want to be able to version independantly. A good example of this [is the `vsonline-linux` defintion](../containers/vsonline-linux) where upstream edits could cause breaking changes in this image. Rather than increasing the major version of the extension and all defintions whenever this happens, the definition has its own version number.
 
-When this is necisary, the `definitionVersion` property in the `definition-build.json` file can be set.
+When this is necisary, the `definitionVersion` property in the `definition-manifest.json` file can be set.
 
 ```json
 "definitionVersion": "0.1.0"
@@ -108,7 +108,7 @@ When this is necisary, the `definitionVersion` property in the `definition-build
 
 In many cases, you will only need to create one image per dev container definition. Even if there is only one or two versions of a given runtime available at a given time, it can be useful to simply have different definitions to aid discoverability.
 
-In other cases, you may want to generate multiple images from the same definition but with one small change. This is where the variants property comes in. Consider this `definition-build.json`:
+In other cases, you may want to generate multiple images from the same definition but with one small change. This is where the variants property comes in. Consider this `definition-manifest.json`:
 
 ```json
 "build": {
@@ -172,7 +172,7 @@ In `devcontainer.json`:
 
 ### The dependencies property
 
-The dependencies property is used for dependency and version tracking. Consider the Debian 9 [definition-build.json](../containers/debian-9-git/definition-build.json) file.
+The dependencies property is used for dependency and version tracking. Consider the Debian 9 [definition-manifest.json](../containers/debian-9-git/definition-manifest.json) file.
 
 ```json
 "dependencies": {
@@ -334,11 +334,11 @@ Consequently, this user stub Dockerfile needs to be versioned with the `devconta
      📄 devcontainer.json
      📄 Dockerfile
 📁 test-project
-📄 definition-build.json
+📄 definition-manifest.json
 📄 README.md
 ```
 
-The `definition-build.json` file dictates how the build process should behave as [dscribed above](#setting-up-a-container-to-be-built). In this case, `devcontainer.json` points to `base.Dockerfile`, but this is the Dockerfile used to generate the actual image rather than the stub Dockerfile. The stub that references the image is in `base.Dockerfile`.  To make things easy, we can also automatically generate this stub at release time if only a Dockerfile is present. If no `base.Dockerfile` is found, the build process falls back to using `Dockerfile`.
+The `definition-manifest.json` file dictates how the build process should behave as [dscribed above](#setting-up-a-container-to-be-built). In this case, `devcontainer.json` points to `base.Dockerfile`, but this is the Dockerfile used to generate the actual image rather than the stub Dockerfile. The stub that references the image is in `base.Dockerfile`.  To make things easy, we can also automatically generate this stub at release time if only a Dockerfile is present. If no `base.Dockerfile` is found, the build process falls back to using `Dockerfile`.
 
 Testing, then, is as simple as it is now - open the folder in `vscode-dev-containers` in a container and edit / test as required. Anyone simply copying the folder contents then gets a fully working version of the container even if in-flight and there is no image for it yet.
 
@@ -364,7 +364,7 @@ When a release is cut, the contents of vscode-dev-containers repo are staged. Th
 
 1. Build an image using the `base.Dockerfile` and push it to a container registry with the appropriate version tags. If no `base.Dockerfile` is found, `Dockerfile` is used instead.  If the `variants` property is set, one image is built per variant, with the variant value being passed in as the `VARIANT` build argument.
 
-2. After the image is built and pushed, `base.Dockerfile` is deleted from staging if present. If no `base.Dockerrfile`, a `Dockerfile` is replaced with stub is used based on the configured rootDistro in `definition-build.json` (Alpine vs Debian).
+2. After the image is built and pushed, `base.Dockerfile` is deleted from staging if present. If no `base.Dockerrfile`, a `Dockerfile` is replaced with stub is used based on the configured rootDistro in `definition-manifest.json` (Alpine vs Debian).
 
 3. Next, `Dockerfile` is updated to point to the correct MAJOR version and a link is added to the Dockerfile used to build the referenced image.
 

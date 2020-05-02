@@ -12,6 +12,7 @@ const config = require('../../config.json');
 config.definitionDependencies = config.definitionDependencies || {};
 config.definitionBuildSettings = config.definitionBuildSettings || {};
 config.definitionVersions = config.definitionVersions || {};
+config.definitionVariants = config.definitionVariants || {};
 
 const stagingFolders = {};
 const definitionTagLookup = {};
@@ -28,10 +29,13 @@ async function loadConfig(repoPath) {
             return;
         }
         const definitionId = definitionFolder.name;
-        // If definition-build.json exists, load it
-        const possibleDefinitionBuildJson = path.join(containersPath, definitionId, getConfig('definitionBuildConfigFile', 'definition-build.json'));
+        // If definition-manifest.json exists, load it
+        const possibleDefinitionBuildJson = path.join(containersPath, definitionId, getConfig('definitionBuildConfigFile', 'definition-manifest.json'));
         if (await asyncUtils.exists(possibleDefinitionBuildJson)) {
             const buildJson = await jsonc.read(possibleDefinitionBuildJson);
+            if (buildJson.variants) {
+                config.definitionVariants[definitionId] = buildJson.variants;
+            }
             if (buildJson.build) {
                 config.definitionBuildSettings[definitionId] = buildJson.build;
             }
@@ -47,17 +51,18 @@ async function loadConfig(repoPath) {
     // Populate image variants and tag lookup
     for (let definitionId in config.definitionBuildSettings) {
         const buildSettings = config.definitionBuildSettings[definitionId];
+        const definitionVariants = config.definitionVariants[definitionId];
         const dependencies = config.definitionDependencies[definitionId]; 
     
         // Populate images list for variants
-        dependencies.imageVariants = buildSettings.variants ? 
-            buildSettings.variants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
+        dependencies.imageVariants = definitionVariants ? 
+        definitionVariants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
             [dependencies.image];
 
         // Populate image tag lookup
         if (buildSettings.tags) {
             // Variants can be used as a VARAINT arg in tags, so support that too
-            const variants = buildSettings.variants ? buildSettings.variants.concat(['${VARIANT}', '$VARIANT']) : [undefined];
+            const variants = definitionVariants ? definitionVariants.concat(['${VARIANT}', '$VARIANT']) : [undefined];
             variants.forEach((variant) => {
                 const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag) => {
@@ -127,8 +132,7 @@ function getLatestTag(definitionId, registry, registryPath) {
 }
 
 function getVariants(definitionId) {
-    const buildSettings = config.definitionBuildSettings[definitionId];
-    return buildSettings ? buildSettings.variants : null;
+    return config.definitionVariants[definitionId] || null;
 }
 
 // Create all the needed variants of the specified version identifier for a given definition

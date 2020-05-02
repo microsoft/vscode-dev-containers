@@ -14,7 +14,7 @@
 		"repository-containers"
 	],
 	"scripts": {
-		"prepack": "rimraf containers-readmes && copyfiles --up 1 containers/**/README.md containers-readmes"
+		"prepack": "rimraf containers-readmes && copyfiles --up 1 containers/**/README.md containers-readmes && rimraf manifests && copyfiles containers/**/definition-manifest.json manifests"
 	},
 	"devDependencies": {
 		"copyfiles": "^2.1.1",
