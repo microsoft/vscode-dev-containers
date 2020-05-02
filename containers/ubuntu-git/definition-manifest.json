@@ -1,13 +1,22 @@
 {
+	"variants": ["20.04", "18.04"],
 	"build": {
 		"rootDistro": "debian",
 		"tags": [
-			"base:${VERSION}-ubuntu-18.04",
-			"base:${VERSION}-bionic"
-		]
+			"base:${VERSION}-ubuntu-${VARIANT}",
+			"base:${VERSION}-ubuntu${VARIANT}"
+		],
+		"variantTags": {
+			"20.04": [
+				"base:${VERSION}-focal"	
+			],
+			"18.04": [
+				"base:${VERSION}-bionic"	
+			]
+		}
 	},
 	"dependencies": {
-		"image": "ubuntu:18.04",
+		"image": "ubuntu:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/ubuntu",
 		"manual": [
 			{
