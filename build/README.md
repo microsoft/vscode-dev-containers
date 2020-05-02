@@ -230,7 +230,7 @@ Once you have your build configuration setup, you can use the `vscdc` CLI to tes
 3. Finally, test cgmanifest generation by running:
 
    ```bash
-   build/vscdc cg --registry mcr.microsoft.com --registry-path vscode/devcontainers --release master <you-definition-id-here>
+   build/vscdc cg --no-build --registry mcr.microsoft.com --registry-path vscode/devcontainers --release master <you-definition-id-here>
    ```
 
 Once you're happy with the result, you can also verify that the `devcontainer.json` and the associated concent that will be generated for your definition is correct.
