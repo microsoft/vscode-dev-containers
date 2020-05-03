@@ -92,16 +92,15 @@ async function updateStub(dotDevContainerPath, definitionId, repo, release, base
 
 async function processStub(userDockerFile, definitionId, repo, release, baseDockerFileExists, registry, registryPath) {
     const devContainerImageVersion = configUtils.majorFromRelease(release, definitionId);
-    const imageTag = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath)[0];
-
     let fromSection = `# ${configUtils.getConfig('dockerFilePreamble')}\n` +
         `# https://github.com/${repo}/tree/${release}/${containersPathInRepo}/${definitionId}/.devcontainer/${baseDockerFileExists ? 'base.' : ''}Dockerfile\n`;
     // The VARIANT arg allows this value to be set from devcontainer.json, handle it if found
-    if (/ARG\s+VARIANT\s*=/.exec(userDockerFile) != null) {
-        const variant = configUtils.getDefinitionFromTag(imageTag).variant;
+    if (/ARG\s+VARIANT\s*=/.exec(userDockerFile) !== null) {
+        const variant = configUtils.getVariants(definitionId)[0];
         const tagWithVariant = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath, '${VARIANT}')[0];        
         fromSection += `ARG VARIANT="${variant}"\nFROM ${tagWithVariant}`;
     } else {
+        const imageTag = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath)[0];
         fromSection += `FROM ${imageTag}`;
     }
 

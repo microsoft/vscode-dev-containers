@@ -98,7 +98,7 @@ Finally, there is a **`parent`** property that can be used to specify if the con
 
 While in most cases it makes sense to version the contents of a definition with the repository, there may be scenarios where you want to be able to version independantly. A good example of this [is the `vsonline-linux` defintion](../containers/vsonline-linux) where upstream edits could cause breaking changes in this image. Rather than increasing the major version of the extension and all defintions whenever this happens, the definition has its own version number.
 
-When this is necisary, the `definitionVersion` property in the `definition-manifest.json` file can be set.
+When this is necessary, the `definitionVersion` property in the `definition-manifest.json` file can be set.
 
 ```json
 "definitionVersion": "0.1.0"
@@ -119,6 +119,8 @@ In other cases, you may want to generate multiple images from the same definitio
     "variants": [ "3", "3.6", "3.7", "3.8" ]
 }
 ```
+
+The **left-most** item in the list is the one that will have the `latest` tag applied if applicable.
 
 And in its corresponding Dockerfile:
 

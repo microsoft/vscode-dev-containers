@@ -130,8 +130,13 @@ function getLatestTag(definitionId, registry, registryPath) {
     if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
         return null;
     }
+
+    // Given there could be multiple registries in the tag list, get all the different latest variations
     return config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
-        list.push(`${registry}/${registryPath}/${tag.replace(/:.+/, ':latest')}`);
+        const latest = `${registry}/${registryPath}/${tag.replace(/:.+/, ':latest')}`
+        if(list.indexOf(latest) < 0) {
+            list.push(latest);
+        }
         return list;
     }, []);
 
@@ -205,8 +210,15 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
             `${versionParts[0]}.${versionParts[1]}`
         ];
 
-    // If this variant should actually be the latest tag, use it
-    let tagList = (updateLatest && config.definitionBuildSettings[definitionId].latest) ? getLatestTag(definitionId, registry, registryPath) : [];
+    // If this variant should actually be the latest tag (it's the left most in the list), use it
+    const allVariants = getVariants(definitionId);
+    const firstVariant = allVariants ? allVariants[0] : variant;
+    let tagList = (updateLatest
+        && config.definitionBuildSettings[definitionId].latest
+        && variant === firstVariant)
+            ? getLatestTag(definitionId, registry, registryPath)
+            : [];
+    
     versionList.forEach((tagVersion) => {
         tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
     });
