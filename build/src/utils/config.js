@@ -66,11 +66,17 @@ async function loadConfig(repoPath) {
             variants.forEach((variant) => {
                 const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag) => {
-                    definitionTagLookup[blankTag] = definitionId;
+                    definitionTagLookup[blankTag] = { 
+                        id: definitionId,
+                        variant: variant
+                    };
                 });
                 const devTagList = getTagsForVersion(definitionId, 'dev', 'ANY', 'ANY', variant);
                 devTagList.forEach((devTag) => {
-                    definitionTagLookup[devTag] = definitionId;
+                    definitionTagLookup[devTag] = { 
+                        id: definitionId,
+                        variant: variant
+                    }
                 });
             })
         }
@@ -147,7 +153,8 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
         variant = variants ? variants[0] : 'NOVARIANT';
     }
     let tags  = config.definitionBuildSettings[definitionId].tags;
-    // See if there are any variant specific tags
+
+    // See if there are any variant specific tags that should be added to the output
     const variantTags = config.definitionBuildSettings[definitionId].variantTags;
     if(variantTags) {
         // ${VARIANT} or $VARIANT may be passed in as a way to do lookups. Add all in this case.
@@ -295,13 +302,13 @@ function getParentTagForVersion(definitionId, version, registry, registryPath, v
     return parentId ? getTagsForVersion(parentId, version, registry, registryPath, variant)[0] : null;
 }
 
+// Takes an existing tag and updates it with a new registry version and optionally a variant
 function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updatedVersion, updatedRegistry, updatedRegistryPath, variant) {
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
-
-    const captureGroups = new RegExp(`${currentRegistry}/${currentRegistryPath}/(.+):(.+)`).exec(currentTag);
-    const definitionId =  definitionTagLookup[`ANY/ANY/${captureGroups[1]}:${captureGroups[2]}`];
     
+    const definitionId =  getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath).id;
+
     // See if no variant passed in, see definition has any and use one if it matches
     if (!variant) {
         let variants = getVariants(definitionId);
@@ -309,20 +316,29 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
             // The variant may be passed in as an ARG instead, support that too
             variants = variants.concat(['${VARIANT}', '$VARIANT']);
             // Find the best match if any exist
+            const tagPart = /.+:(.+)/.exec(currentTag)[1];
             variant = variants.reduce((prev, current) => {
-                return new RegExp(`^.*-?${current.replace('$','\\$')}$`).exec(captureGroups[2]) ? current :  prev;
-            }, false);    
+                return new RegExp(`^.*-?${current.replace('$','\\$')}$`).exec(tagPart) ? current : prev;
+            }, false);
         }
     }
 
     const updatedTags = getTagsForVersion(definitionId, updatedVersion, updatedRegistry, updatedRegistryPath, variant);
     if (updatedTags && updatedTags.length > 0) {
-        console.log(`      Updating ${currentTag}\n      to ${updatedTags[0]}`);
+        console.log(`    Updating ${currentTag}\n    to ${updatedTags[0]}`);
         return updatedTags[0];
     }
     // In the case where this is already a tag with a version number in it,
     // we won't get an updated tag returned, so we'll just reuse the current tag.
     return currentTag;
+}
+
+// Lookup definition from a tag
+function getDefinitionFromTag(tag, registry, registryPath) {
+    registry = registry || '.+';
+    registryPath = registryPath || '.+';
+    const captureGroups = new RegExp(`${registry}/${registryPath}/(.+):(.+)`).exec(tag);
+    return definitionTagLookup[`ANY/ANY/${captureGroups[1]}:${captureGroups[2]}`];
 }
 
 // Return just the major version of a release number
@@ -372,6 +388,7 @@ module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
     getVariants: getVariants,
+    getDefinitionFromTag: getDefinitionFromTag,
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,
     getParentTagForVersion: getParentTagForVersion,
     getUpdatedTag: getUpdatedTag,

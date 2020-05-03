@@ -8,7 +8,8 @@
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Published images* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu18.04 <br /> mcr.microsoft.com/vscode/devcontainers/base:ubuntu20.04 |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu |
+| *Available image variants* |   mcr.microsoft.com/vscode/devcontainers/base:ubuntu18.04 <br /> mcr.microsoft.com/vscode/devcontainers/base:ubuntu20.04 |
 | *Published image architecture(s)* | x86-64 |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |
@@ -17,8 +18,9 @@
 
 While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following:
 
-- `mcr.microsoft.com/vscode/devcontainers/base:ubuntu18.04`
+- `mcr.microsoft.com/vscode/devcontainers/base:ubuntu`
 - `mcr.microsoft.com/vscode/devcontainers/base:ubuntu20.04`
+- `mcr.microsoft.com/vscode/devcontainers/base:ubuntu18.04`
 
 Alternatively, you can use the contents of the `Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
