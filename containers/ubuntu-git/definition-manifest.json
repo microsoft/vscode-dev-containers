@@ -3,15 +3,16 @@
 	"build": {
 		"rootDistro": "debian",
 		"tags": [
-			"base:${VERSION}-ubuntu-${VARIANT}",
-			"base:${VERSION}-ubuntu${VARIANT}"
+			"base:${VERSION}-ubuntu${VARIANT}",
+			"base:${VERSION}-ubuntu-${VARIANT}"
 		],
 		"variantTags": {
 			"20.04": [
-				"base:${VERSION}-focal"	
+				"base:${VERSION}-focal",
+				"base:${VERSION}-ubuntu"
 			],
 			"18.04": [
-				"base:${VERSION}-bionic"	
+				"base:${VERSION}-bionic"
 			]
 		}
 	},

@@ -1,8 +1,8 @@
 {
 	"build": {
-		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
+			"base:${VERSION}-debian9",
 			"base:${VERSION}-debian-9",
 			"base:${VERSION}-stretch"
 		]

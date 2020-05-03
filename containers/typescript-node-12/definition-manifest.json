@@ -1,6 +1,6 @@
 {
-	"latest": true,
 	"build": {
+		"latest": true,
 		"rootDistro": "debian",
 		"parent": "javascript-node-12",
 		"tags": [

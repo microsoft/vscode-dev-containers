@@ -1,6 +1,7 @@
 {
 	"variants": ["3", "3.8", "3.7", "3.6"],
 	"build": {
+		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"python:${VERSION}-${VARIANT}"

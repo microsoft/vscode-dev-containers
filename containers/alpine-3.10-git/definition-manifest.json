@@ -2,7 +2,9 @@
 	"build": {
 		"rootDistro": "alpine",
 		"tags": [
-			 "base:${VERSION}-alpine-3.10"
+			"base:${VERSION}-alpine3.10",
+			"base:${VERSION}-alpine-3.10",
+			"base:${VERSION}-alpine"
 		]
 	},
 	"dependencies": {
