@@ -36,12 +36,12 @@ function createLinks() {
     done
 }
 
-createLinks "3.1.201" "3.1.0"
+createLinks "3.1.201" "3.1.3"
 echo
-createLinks "3.0.103" "3.0.1"
+createLinks "3.0.103" "3.0.3"
 echo
 createLinks "2.2.402" "2.2.7"
 echo
-createLinks "2.1.805" "2.1.13"
+createLinks "2.1.805" "2.1.17"
 echo
 createLinks "1.1.14" "1.1.13"
