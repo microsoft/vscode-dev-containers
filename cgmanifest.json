@@ -781,6 +781,16 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "14",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Docker Image: python",
                     "Version": "3",
                     "DownloadUrl": "https://hub.docker.com/_/python"
@@ -912,7 +922,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.0.19"
+                    "Version": "20.0.20"
                 }
             }
         },
