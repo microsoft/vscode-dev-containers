@@ -38,9 +38,9 @@ checkExtension() {
 
 # -- Actual tests - add more here --
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
-check "non-root-user" "id vsonline"
-check "/home/vsonline" [ -d "/home/vsonline" ]
-check "sudo" sudo -u vsonline echo "sudo works."
+check "non-root-user" "id codespace"
+check "/home/codespace" [ -d "/home/codespace" ]
+check "sudo" sudo -u codespace echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
 

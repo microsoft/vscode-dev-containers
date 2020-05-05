@@ -8,7 +8,7 @@ set -ex
 
 splitSdksDir="/opt/dotnet/sdks"
 
-allSdksDir="/home/vsonline/.dotnet"
+allSdksDir="/home/codespace/.dotnet"
 mkdir -p "$allSdksDir"
 
 # Copy latest muxer and license files
