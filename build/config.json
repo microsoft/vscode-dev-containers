@@ -13,7 +13,7 @@
 	],
 
 	"needsDedicatedPage": [ 
-		"vsonline-linux" 
+		"codespace-linux" 
 	],
 
 	"githubRepoName": "microsoft/vscode-dev-containers",
