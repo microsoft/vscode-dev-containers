@@ -1,5 +1,6 @@
 {
 	"build": {
+		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"python:${VERSION}-${VARIANT}"

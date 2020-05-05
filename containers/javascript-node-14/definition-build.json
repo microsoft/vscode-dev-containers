@@ -1,12 +1,13 @@
 {
 	"build": {
+		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
-			"javascript-node:${VERSION}-12"
+			"javascript-node:${VERSION}-14"
 		]
 	}, 
 	"dependencies": {
-		"image": "node:12",
+		"image": "node:14",
 		"imageLink": "https://hub.docker.com/_/node",
 		"debian": [
 			"apt-utils", 
