@@ -18,6 +18,9 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Ensure apt is in non-interactive to avoid prompts
+export DEBIAN_FRONTEND=noninteractive
+
 # Install Docker CLI
 apt-get -y install  --no-install-recommends apt-transport-https ca-certificates curl gnupg2 lsb-release
 curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT)

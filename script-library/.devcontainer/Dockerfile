@@ -7,6 +7,7 @@ ARG IMAGE_TO_TEST=debian:9
 FROM ${IMAGE_TO_TEST}
 
 ARG DISTRO="debian"
+ARG USERNAME="vscode"
 
 COPY *.sh /tmp/
 
@@ -14,10 +15,10 @@ RUN if [ "${DISTRO}" = "debian" ]; then apt-get update; fi
 
 RUN chmod +x /tmp/*.sh
 
-RUN /tmp/common-${DISTRO}.sh true vscode 1000 1000
+RUN /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000
 
 RUN if [ "${DISTRO}" = "debian" ]; then \
-        /tmp/docker-${DISTRO}.sh true /var/run/docker-host.sock /var/run/docker.sock vscode; \
+        /tmp/docker-${DISTRO}.sh true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}; \
     fi
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
