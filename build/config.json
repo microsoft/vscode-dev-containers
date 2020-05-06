@@ -13,7 +13,7 @@
 	],
 
 	"needsDedicatedPage": [ 
-		"codespace-linux" 
+		"codespaces-linux" 
 	],
 
 	"githubRepoName": "microsoft/vscode-dev-containers",
