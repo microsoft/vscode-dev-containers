@@ -11,6 +11,7 @@
 * dart
 * debian-9-git
 * debian-10-git
+* docker-in-docker-compose
 * dotnetcore-2.1
 * dotnetcore-2.1-fsharp
 * dotnetcore-3.0
@@ -59,20 +60,19 @@ The following work when using VS Code to connect to a Codespace, but not from th
 * azure-functions-java-8
 * azure-functions-node-10
 * azure-functions-node-12
+* azure-functions-python-3
 * azure-functions-pwsh-6
+* azure-machine-learning-python-3
+* azure-terraform-0.11
+* azure-terraform-0.12
 
 ## Not currently working
 
 * alpine-3.10-git - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
-* azure-ansible - Due to an issue with using Docker from with a Docker container.
-* azure-functions-python-3
-* azure-machine-learning-python-3
-* azure-terraform-0.11 - Due to an issue with using Docker from with a Docker container.
-* azure-terraform-0.12 - Due to an issue with using Docker from with a Docker container.
+* azure-ansible
 * dapr-dotnetcore-3.1 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
 * dapr-typescript-node-12 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
-* docker-in-docker - Due to an issue with using Docker from with a Docker container.
-* docker-in-docker-compose - Due to an issue with using Docker from with a Docker container.
-* kubernetes-helm - Due to an issue with using Docker from with a Docker container.
+* docker-in-docker - Due to [#459](https://github.com/MicrosoftDocs/vsonline/issues/459)
+* kubernetes-helm - Due to [#459](https://github.com/MicrosoftDocs/vsonline/issues/459)
 * reasonml - Build fails, but builds successfully locally. Something about the use of PPAs for fish
-* r - Language server crash
+* r - Language server crash. More investigation needed.
