@@ -1,12 +1,12 @@
-# VS Online (Linux Universal)
+# Visual Studio Codespaces (Linux Universal)
 
 ## Summary
 
-*Use or extend the large, universal, multi-language development container for VS Online.*
+*Use or extend the large, universal, multi-language development container for Visual Studio Codespaces.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Online and VS Code teams |
+| *Contributors* | The Visual Studio Codespaces and VS Code teams |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:linux |
 | *Published image architecture(s)* | x86-64 |
@@ -17,7 +17,7 @@
 
 While language specific development containers can be useful, in some cases you may want to use more than one in a project without having to set them all up. In other cases you may be looking to create a general "sandbox" container you intend to use with multiple projects or repositories. The large container image generated here (`mcr.microsoft.com/vscode/devcontainers/universal:linux`) includes a number of runtime versions for popular languages lke Python, Node, PHP, Java, C++, and .NET Core/C# - many of which are [inherited from the Oryx build image](https://github.com/microsoft/oryx#supported-platforms) it is based on.
 
-If you use Visual Studio Online, this is the "universal" image that is used by default if no custom Dockerfile or image is specified. If you like what you see but want to make a few additions or changes, you can use a custom Dockerfile to extend it and add whatever you need.
+If you use Visual Studio Codespaces, this is the "universal" image that is used by default if no custom Dockerfile or image is specified. If you like what you see but want to make a few additions or changes, you can use a custom Dockerfile to extend it and add whatever you need.
 
 The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can opt into using instead of the default `bash`. It also includes [nvm](https://github.com/nvm-sh/nvm) and [nvs](https://github.com/jasongin/nvs) if you need to install a different version of Node.js than those that are in the container by default.
 
@@ -38,11 +38,11 @@ Just follow these steps:
 2. To use the pre-built image:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the General Purpose Multi-Language Development Container (VS Online) definition.
+   3. Select the General Purpose Multi-Language Development Container (Visual Studio Codespaces) definition.
 
 3. To use the Dockerfile for this definition (*rather than the pre-built image*):
    1. Clone this repository.
-   2. Copy the `.devcontainer` folder from the `containers/vsonline-linux` folder in the cloned repository to the root of your project folder.
+   2. Copy the `.devcontainer` folder from the `containers/codespaces-linux` folder in the cloned repository to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.

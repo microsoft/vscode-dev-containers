@@ -16,7 +16,7 @@ ARG EXTRA_PATHS_OVERRIDES="~/.dotnet"
 # ~/.npm-global/bin - For npm global bin directory in user directory
 ARG USER_EXTRA_PATHS="${EXTRA_PATHS}:~/.local/bin:~/.npm-global/bin"
 
-ARG NVS_HOME="/home/vsonline/.nvs"
+ARG NVS_HOME="/home/codespace/.nvs"
 
 ARG DeveloperBuild
 
@@ -26,9 +26,9 @@ ENV SHELL=/bin/bash
 ENV ORYX_ENV_TYPE=vsonline-present
 
 # Add script to fix .NET Core pathing
-ADD symlinkDotNetCore.sh /tmp/vsonline/symlinkDotNetCore.sh
+ADD symlinkDotNetCore.sh /tmp/codespace/symlinkDotNetCore.sh
 
- # Install packages, setup vsonline user
+ # Install packages, setup codespace user
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -yq \
     && apt-get -yq install --no-install-recommends apt-utils dialog 2>&1 \
@@ -85,39 +85,39 @@ RUN apt-get update -yq \
     # Install Helm
     && curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash - \
     #
-    # Setup vsonline user
+    # Setup codespace user
     && { echo && echo "PATH=${EXTRA_PATHS_OVERRIDES}:\$PATH:${USER_EXTRA_PATHS}" ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
     && { echo && echo $BASH_PROMPT ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
     && printf "$FISH_PROMPT" >> /etc/fish/conf.d/fish_prompt.fish \
     && { echo && echo $ZSH_PROMPT ; } | tee -a /etc/zsh/zshrc >> /etc/skel/.zshrc \
-    && useradd --create-home --shell /bin/bash vsonline \
+    && useradd --create-home --shell /bin/bash codespace \
     && mkdir -p /etc/sudoers.d \
-    && echo "vsonline ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd \
+    && echo "codespace ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd \
     && echo "Defaults secure_path=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:${EXTRA_PATHS}\"" >> /etc/sudoers.d/securepath \
-    && sudo -u vsonline mkdir /home/vsonline/.vsonline \
+    && sudo -u codespace mkdir /home/codespace/.vsonline \
     && groupadd -g 800 docker \
-    && usermod -a -G docker vsonline \
+    && usermod -a -G docker codespace \
     #
     # Setup .NET Core
     # Hack to get dotnet core sdks in the right place - Oryx images do not put dotnet on the path because it will break AppService.
-    # The following script will put the dotnet's at /home/vsonline/.dotnet folder where dotnet will look by default.
-    && mv /tmp/vsonline/symlinkDotNetCore.sh /home/vsonline/symlinkDotNetCore.sh \
-    && sudo -u vsonline /bin/bash /home/vsonline/symlinkDotNetCore.sh 2>&1 \
-    && rm /home/vsonline/symlinkDotNetCore.sh \
+    # The following script will put the dotnet's at /home/codespace/.dotnet folder where dotnet will look by default.
+    && mv /tmp/codespace/symlinkDotNetCore.sh /home/codespace/symlinkDotNetCore.sh \
+    && sudo -u codespace /bin/bash /home/codespace/symlinkDotNetCore.sh 2>&1 \
+    && rm /home/codespace/symlinkDotNetCore.sh \
     #
     # Setup Node.js
-    && sudo -u vsonline npm config set prefix /home/vsonline/.npm-global \
-    && npm config -g set prefix /home/vsonline/.npm-global \
+    && sudo -u codespace npm config set prefix /home/codespace/.npm-global \
+    && npm config -g set prefix /home/codespace/.npm-global \
     # Install nvm (popular Node.js version-management tool)
-    && sudo -u vsonline curl -s -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | sudo -u vsonline bash 2>&1 \
-    && rm -rf /home/vsonline/.nvm/.git \
+    && sudo -u codespace curl -s -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | sudo -u codespace bash 2>&1 \
+    && rm -rf /home/codespace/.nvm/.git \
     # Install nvs (alternate cross-platform Node.js version-management tool)
-    && sudo -u vsonline git clone -b v1.5.4 -c advice.detachedHead=false --depth 1 https://github.com/jasongin/nvs ${NVS_HOME} 2>&1 \
-    && sudo -u vsonline /bin/bash ${NVS_HOME}/nvs.sh install \
+    && sudo -u codespace git clone -b v1.5.4 -c advice.detachedHead=false --depth 1 https://github.com/jasongin/nvs ${NVS_HOME} 2>&1 \
+    && sudo -u codespace /bin/bash ${NVS_HOME}/nvs.sh install \
     && rm -rf ${NVS_HOME}/.git \
     # Clear the nvs cache and link to an existing node binary to reduce the size of the image.
     && rm ${NVS_HOME}/cache/* \
-    && sudo -u vsonline ln -s /opt/nodejs/10.17.0/bin/node ${NVS_HOME}/cache/node \
+    && sudo -u codespace ln -s /opt/nodejs/10.17.0/bin/node ${NVS_HOME}/cache/node \
     && sed -i "s/node\/[0-9.]\+/node\/10.17.0/" ${NVS_HOME}/defaults.json \
     #
     # Remove 'imagemagick imagemagick-6-common' due to http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10131
@@ -128,4 +128,4 @@ RUN apt-get update -yq \
     && apt-get clean -y
 ENV DEBIAN_FRONTEND=dialog
 
-USER vsonline
+USER codespace

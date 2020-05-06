@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "0.4.0",
+	"definitionVersion": "0.5.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -9,7 +9,7 @@
 		]
 	}, 
 	"dependencies": {
-		"image": "mcr.microsoft.com/oryx/build:20200114.13",
+		"image": "mcr.microsoft.com/oryx/build:vso-20200417.5",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"debian": [
 			"default-jdk",
