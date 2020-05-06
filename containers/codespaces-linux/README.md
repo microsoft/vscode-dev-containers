@@ -1,12 +1,12 @@
-# Codespaces (Linux Universal)
+# Visual Studio Codespaces (Linux Universal)
 
 ## Summary
 
-*Use or extend the large, universal, multi-language development container for VS Codespaces.*
+*Use or extend the large, universal, multi-language development container for Visual Studio Codespaces.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Codespaces and VS Code teams |
+| *Contributors* | The Visual Studio Codespaces and VS Code teams |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:linux |
 | *Published image architecture(s)* | x86-64 |
@@ -38,7 +38,7 @@ Just follow these steps:
 2. To use the pre-built image:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the General Purpose Multi-Language Development Container (Codespaces) definition.
+   3. Select the General Purpose Multi-Language Development Container (Visual Studio Codespaces) definition.
 
 3. To use the Dockerfile for this definition (*rather than the pre-built image*):
    1. Clone this repository.
