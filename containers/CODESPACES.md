@@ -6,6 +6,7 @@
 
 * azure-cli
 * bazel
+* codespaces-linux
 * cpp
 * dart
 * debian-9-git
