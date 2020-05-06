@@ -4,7 +4,6 @@
 
 ## Expected to work (Alphabetical)
 
-* azure-blockchain
 * azure-cli
 * bazel
 * cpp
@@ -55,6 +54,7 @@
 
 The following work when using VS Code to connect to a Codespace, but not from the Codespaces web-based editor due to an Azure Account extension bug.
 
+* azure-blockchain
 * azure-functions-dotnetcore-2.1
 * azure-functions-dotnetcore-3.1
 * azure-functions-java-8
