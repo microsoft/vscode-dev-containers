@@ -64,8 +64,8 @@
 ## Not currently working
 
 * alpine-3.10-git - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
-* azure-ansible
-* azure-machine-learning-python-3
+* azure-ansible - [#469](https://github.com/MicrosoftDocs/vsonline/issues/469))
+* azure-machine-learning-python-3 - [#469](https://github.com/MicrosoftDocs/vsonline/issues/469))
 * dapr-dotnetcore-3.1 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
 * dapr-typescript-node-12 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
 * docker-in-docker - Due to [#459](https://github.com/MicrosoftDocs/vsonline/issues/459)

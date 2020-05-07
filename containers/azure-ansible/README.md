@@ -8,7 +8,7 @@
 |----------|-------|
 | *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
 | *Definition type* | Dockerfile |
-| *Works in Codespaces* | No |
+| *Works in Codespaces* | No ([#469](https://github.com/MicrosoftDocs/vsonline/issues/469)) |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Azure, Ansible |
 

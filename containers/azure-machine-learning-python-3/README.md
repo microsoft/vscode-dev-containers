@@ -8,7 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Works in Codespaces* | No |
+| *Works in Codespaces* | No ([#469](https://github.com/MicrosoftDocs/vsonline/issues/469)) |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Azure Machine Learning, Python, Anaconda |
 
