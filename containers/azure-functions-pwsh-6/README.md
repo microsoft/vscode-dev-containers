@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | [brettmillerb](https://github.com/brettmillerb) |
 | *Definition type* | Dockerfile |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Azure Functions, .NET Core, PowerShell |
 

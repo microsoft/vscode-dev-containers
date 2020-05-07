@@ -10,6 +10,7 @@
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/typescript-node:10 |
 | *Published image architecture(s)* | x86-64 |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Node.js, TypeScript |
 

@@ -10,6 +10,7 @@
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/base:alpine-3.10 |
 | *Published image architecture(s)* | x86-64 |
+| *Works in Codespaces* | No ([#458](https://github.com/MicrosoftDocs/vsonline/issues/458)) |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |
 

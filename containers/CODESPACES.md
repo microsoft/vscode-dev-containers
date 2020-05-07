@@ -4,7 +4,17 @@
 
 ## Expected to work (Alphabetical)
 
+* azure-blockchain
 * azure-cli
+* azure-functions-dotnetcore-2.1
+* azure-functions-dotnetcore-3.1
+* azure-functions-java-8
+* azure-functions-node-10
+* azure-functions-node-12
+* azure-functions-python-3
+* azure-functions-pwsh-6
+* azure-terraform-0.11
+* azure-terraform-0.12
 * bazel
 * codespaces-linux
 * cpp
@@ -51,26 +61,11 @@
 * typescript-node-12
 * ubuntu-18.04-git
 
-## Work with limitations
-
-The following work when using VS Code to connect to a Codespace, but not from the Codespaces web-based editor due to an Azure Account extension bug.
-
-* azure-blockchain
-* azure-functions-dotnetcore-2.1
-* azure-functions-dotnetcore-3.1
-* azure-functions-java-8
-* azure-functions-node-10
-* azure-functions-node-12
-* azure-functions-python-3
-* azure-functions-pwsh-6
-* azure-machine-learning-python-3
-* azure-terraform-0.11
-* azure-terraform-0.12
-
 ## Not currently working
 
 * alpine-3.10-git - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
 * azure-ansible
+* azure-machine-learning-python-3
 * dapr-dotnetcore-3.1 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
 * dapr-typescript-node-12 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
 * docker-in-docker - Due to [#459](https://github.com/MicrosoftDocs/vsonline/issues/459)

@@ -10,6 +10,7 @@
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu-18.04 |
 | *Published image architecture(s)* | x86-64 |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |
 
