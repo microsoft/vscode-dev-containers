@@ -33,8 +33,8 @@ ARG USER_GID=$USER_UID
 ARG INSTALL_ZSH="true"
 
 # Location and expected SHA for common setup script - SHA generated on release
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
-ARG COMMON_SCRIPT_SHA="dev-mode"
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.117.0/script-library/common-debian.sh"
+ARG COMMON_SCRIPT_SHA="7fb5c8120574bab581b436d8523a57fb6c1d4a47f3aa990a25fc63dbd9c81b5b"
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
