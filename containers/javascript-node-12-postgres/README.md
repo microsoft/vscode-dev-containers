@@ -10,6 +10,7 @@
 | *Definition type* | Docker Compose |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/javascript-node:12 |
 | *Published image architecture(s)* | x86-64 |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Node.js, JavaScript, Postgres DB |
 

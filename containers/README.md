@@ -4,6 +4,8 @@ This folder contains a set of development container configuration files or "defi
 
 Each folder contains a README with more details on the contents of the definition and how to use it.
 
+See [CODESPACES.md](CODESPACES.md) for information on which are expected to work with Visual Studio Codespaces. 
+
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing to this repository.
 
 ## License

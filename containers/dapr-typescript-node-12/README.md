@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The Visual Studio Container Tools team |
 | *Definition type* | Docker Compose |
+| *Works in Codespaces* | No ([#457](https://github.com/MicrosoftDocs/vsonline/issues/457)) |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Node.js, TypeScript, Dapr |
 

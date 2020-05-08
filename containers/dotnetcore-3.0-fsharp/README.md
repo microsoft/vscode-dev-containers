@@ -1,4 +1,4 @@
-# F# (.NET Core 3.1)
+# F# (.NET Core 3.0)
 
 ## Summary
 
@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code Team, F# team |
 | *Definition type* | Dockerfile |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | .NET Core, F# |
 

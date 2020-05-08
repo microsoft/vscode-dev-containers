@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | The VS Code team |
 | *Definition type* | Dockerfile |
+| *Works in Codespaces* | No ([#459](https://github.com/MicrosoftDocs/vsonline/issues/459)) |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |
 

@@ -11,6 +11,7 @@
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu |
 | *Available image variants* |   mcr.microsoft.com/vscode/devcontainers/base:ubuntu18.04 <br /> mcr.microsoft.com/vscode/devcontainers/base:ubuntu20.04 |
 | *Published image architecture(s)* | x86-64 |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |
 

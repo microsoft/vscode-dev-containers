@@ -6,17 +6,20 @@
 
 # Syntax: ./common-debian.sh <install zsh flag> <username> <user UID> <user GID>
 
-INSTALL_ZSH=$1
-USERNAME=$2
-USER_UID=$3
-USER_GID=$4
-
 set -e
+
+INSTALL_ZSH=${1:-"true"}
+USERNAME=${2:-"$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)"}
+USER_UID=${3:-1000}
+USER_GID=${4:-1000}
 
 if [ "$(id -u)" -ne 0 ]; then
     echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
     exit 1
 fi
+
+# Ensure apt is in non-interactive to avoid prompts
+export DEBIAN_FRONTEND=noninteractive
 
 # Get to latest versions of all packages
 apt-get -y upgrade
@@ -40,7 +43,13 @@ apt-get -y install --no-install-recommends \
     libicu[0-9][0-9] \
     liblttng-ust0 \
     libstdc++6 \
-    zlib1g
+    zlib1g \
+    locales
+
+# Ensure at least the en_US.UTF-8 UTF-8 locale is available.
+# Common need for both applications and things like the agnoster ZSH theme.
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
+locale-gen
 
 # Install libssl1.1 if available
 if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
@@ -60,18 +69,6 @@ if [ "$(echo "$LIBSSL" | grep -o 'libssl1\.0\.[0-9]:' | uniq | sort | wc -l)" -e
 fi
 
 # Create or update a non-root user to match UID/GID - see https://aka.ms/vscode-remote/containers/non-root-user.
-if [ "$USER_UID" = "" ]; then
-    USER_UID=1000
-fi 
-
-if [ "$USER_GID" = "" ]; then
-    USER_GID=1000
-fi 
-
-if [ "$USERNAME" = "" ]; then
-    USERNAME=$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)
-fi
-
 if id -u $USERNAME > /dev/null 2>&1; then
     # User exists, update if needed
     if [ "$USER_GID" != "$(id -G $USERNAME)" ]; then 

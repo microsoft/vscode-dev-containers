@@ -13,6 +13,8 @@ A **development container** is a running [Docker](https://www.docker.com) contai
 
 This repository contains a set of **dev container definitions** to help get you up and running with a containerized environment. The definitions describe the appropriate container image, runtime arguments for starting the container, and VS Code extensions that should be installed. Each provides a container configuration file (`devcontainer.json`) and other needed files that you can drop into any existing folder as a starting point for containerizing your project. (The [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) repositories may also be of interest if you are looking for complete sample projects.)
 
+> **Note:** While many of these definitions are also expected to work in **[Visual Studio Codespaces](https://aka.ms/vso)**, a few are not yet working. See [here for a list of known issues](containers/CODESPACES.md).
+
 ## Using a definition
 
 To add a dev container definition in your project, you can either:

@@ -8,6 +8,7 @@
 |----------|-------|
 | *Contributors* | xWiiLLz, @andys8 |
 | *Definition type* | Dockerfile |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Elm |
 
