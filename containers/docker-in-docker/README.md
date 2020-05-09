@@ -86,10 +86,10 @@ Follow these directions to set up non-root access using `socat`:
         && apt-get -y install socat
 
     # Create docker-init.sh to spin up socat
-    RUN echo "#!/bin/sh\n\
+    RUN echo '#!/bin/sh\n\
         sudo rm -rf /var/run/docker-host.socket\n\
         ((sudo socat UNIX-LISTEN:/var/run/docker.socket,fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:/var/run/docker-host.socket) 2>&1 >> /tmp/vscr-dind-socat.log) & > /dev/null\n\
-        \$@" >> /usr/local/share/docker-init.sh
+        "$@"' >> /usr/local/share/docker-init.sh
         && chmod +x /usr/local/share/docker-init.sh
 
     # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to
