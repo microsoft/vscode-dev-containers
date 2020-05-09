@@ -1,8 +1,8 @@
-# Ubuntu & Git
+# Ubuntu
 
 ## Summary
 
-*Simple Ubuntu container with Git installed.*
+*A simple Ubuntu container with Git and other common utilities installed.*
 
 | Metadata | Value |  
 |----------|-------|

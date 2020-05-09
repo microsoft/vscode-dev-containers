@@ -5,6 +5,8 @@
 		"context": "..",
 		"args": {
 			"IMAGE_TO_TEST": "ubuntu:18.04",
+			"INSTALL_DOCKER": "false",
+			"UPGRADE_PACKAGES": "true",
 			"USERNAME": "vscode",
 			// DISTRO = alpine, debian, or redhat
 			"DISTRO": "debian"

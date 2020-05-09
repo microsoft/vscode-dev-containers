@@ -12,6 +12,7 @@ INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)"}
 USER_UID=${3:-1000}
 USER_GID=${4:-1000}
+UPGRADE_PACKAGES=${5:-true}
 
 if [ "$(id -u)" -ne 0 ]; then
     echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
@@ -21,8 +22,13 @@ fi
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
+# Install apt-utils to avoid debconf warning
+apt-get -y install --no-install-recommends apt-utils 2> >( grep -v 'debconf: delaying package configuration, since apt-utils is not installed' >&2 )
+
 # Get to latest versions of all packages
-apt-get -y upgrade
+if [ "${UPGRADE_PACKAGES}" = "true" ]; then
+    apt-get -y upgrade --no-install-recommends
+fi
 
 # Install common dependencies
 apt-get -y install --no-install-recommends \
@@ -34,9 +40,12 @@ apt-get -y install --no-install-recommends \
     curl \
     wget \
     unzip \
+    nano \
+    jq \
     lsb-release \
     ca-certificates \
     apt-transport-https \
+    gnupg2 \
     libc6 \
     libgcc1 \
     libgssapi-krb5-2 \
@@ -89,15 +98,15 @@ apt-get install -y sudo
 echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME
 chmod 0440 /etc/sudoers.d/$USERNAME
 
-# Ensure ~/.local/bin is in the PATH for root and non-root users for bash
-echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.bashrc >> /home/$USERNAME/.bashrc
+# Ensure ~/.local/bin is in the PATH for root and non-root users for bash. (zsh is later)
+echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.bashrc >> /home/$USERNAME/.bashrc 
 chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
 
 # Optionally install and configure zsh
 if [ "$INSTALL_ZSH" = "true" ]; then 
     apt-get install -y zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.zshrc
+    echo "export PATH=\$PATH:\$HOME/.local/bin" >> /root/.zshrc
     cp -R /root/.oh-my-zsh /home/$USERNAME
     cp /root/.zshrc /home/$USERNAME
     sed -i -e "s/\/root\/.oh-my-zsh/\/home\/$USERNAME\/.oh-my-zsh/g" /home/$USERNAME/.zshrc

@@ -1,5 +1,5 @@
 {
-	"name": "Ubuntu & Git",
+	"name": "Ubuntu",
 	"build": {
 		"dockerfile": "base.Dockerfile",
 		// Update 'VARIANT' to pick an Ubuntu version. Rebuild the container 
