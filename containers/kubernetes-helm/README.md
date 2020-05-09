@@ -21,6 +21,12 @@ The dev container also syncs your local Kubernetes config (`~/.kube/config` or `
 
 ## How it works / adapting your existing dev container config
 
+The [`.devcontainer` folder in this repository](.devcontainer) contains a complete example that **you can simply change the `FROM` statement** to another Debian/Ubuntu based image to adapt to your own use (along with adding anything else you need).
+
+However, this section will outline the how you can selectively add this functionality to your own Dockerfile in two parts: installing kubectl and enabling access to Docker for the root user, and enabling it for a non-root user.
+
+### Setting up kubectl and enabling root user access to Docker in the container
+
 You can adapt your own existing development container Dockerfile to support this scenario by following these steps:
 
 1. First, update your `devcontainer.json` to forward the local Docker socket and mount the local `.kube` folder in the container so its contents can be reused. From `.devcontainer/devcontainer.json`:
@@ -28,7 +34,7 @@ You can adapt your own existing development container Dockerfile to support this
     ```json
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock",
-        "source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost,type=bind"
+        "source=${env:HOME}${env:USERPROFILE}/.kube,target=/usr/local/share/kube-localhost,type=bind"
     ],
     "remoteEnv": {
         "SYNC_LOCALHOST_KUBECONFIG": "true"
@@ -40,37 +46,15 @@ You can adapt your own existing development container Dockerfile to support this
     ```json
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock",
-        "source=${env:HOME}${env:USERPROFILE}/.kube,target=/root/.kube-localhost,type=bind",
-        "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost,type=bind"
+        "source=${env:HOME}${env:USERPROFILE}/.kube,target=/usr/local/share/kube-localhost,type=bind",
+        "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/usr/local/share/minikube-localhost,type=bind"
     ],
     "remoteEnv": {
         "SYNC_LOCALHOST_KUBECONFIG": "true"
     }
     ```
 
-2. Next, update your Dockerfile so the default shell is `bash`, and then add a script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates to `.bashrc`. From `.devcontainer/Dockerfile`:
-
-    ```Dockerfile
-    RUN echo '\n\
-    if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then\n\
-        mkdir -p $HOME/.kube\n\
-        cp -r $HOME/.kube-localhost/* $HOME/.kube\n\
-        sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
-    \n\
-        if [ -d "$HOME/.minikube-localhost" ]; then\n\
-            mkdir -p $HOME/.minikube\n\
-            cp -r $HOME/.minikube-localhost/ca.crt $HOME/.minikube\n\
-            sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
-            cp -r $HOME/.minikube-localhost/client.crt $HOME/.minikube\n\
-            sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
-            cp -r $HOME/.minikube-localhost/client.key $HOME/.minikube\n\
-            sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
-        fi\n\
-    fi' \
-    >> $HOME/.bashrc
-    ```
-
-3. Finally, update your Dockerfile to install all of the needed CLIs in the container. From `.devcontainer/Dockerfile`:
+2. Next, update your Dockerfile to install all of the needed CLIs in the container:
 
     ```Dockerfile
     RUN apt-get update \
@@ -90,7 +74,96 @@ You can adapt your own existing development container Dockerfile to support this
         curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
     ```
 
+
+2. Finally, update your Dockerfile to add a script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates into your `/root/.bashrc`.
+
+    ```Dockerfile
+    RUN echo '\n\
+    if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ] && [ -d "/usr/local/share/kube-localhost" ];; then\n\
+        mkdir -p $HOME/.kube\n\
+        cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
+        sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
+    \n\
+        if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
+            mkdir -p $HOME/.minikube\n\
+            cp -r /usr/local/share/minikube-localhost/ca.crt $HOME/.minikube\n\
+            cp -r /usr/local/share/minikube-localhost/client.crt $HOME/.minikube\n\
+            cp -r /usr/local/share/minikube-localhost/client.key $HOME/.minikube\n\
+            sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
+            sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
+            sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
+        fi\n\
+    fi' >> /root/.bashrc
+    ```
+
 4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+
+### Enabling non-root access in the container
+
+To enable non-root access, you can use `socat` to proxy the Docker socket without affecting its permissions. This is safer than updating the permissions of the host socket itself since this would apply to all containers. You then also need to copy the `.bashrc` script into the non-root user's home folder as well.
+
+Follow these directions to set up non-root access using `socat`:
+
+1. Follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one.
+
+2. Follow the [directions in the previous section](#setting-up-kubectl-and-enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI, kubectl, and Helm.
+
+3. Update your `devcontainer.json` to mount the Docker socket to `docker-host.sock` in the container and enable the non-root user:
+
+    ```json
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind",
+        //..
+    ],
+    "overrideCommand": false,
+    "remoteUser": "vscode"
+    ```
+
+4. Next, tweak the `.bashrc` script and and add some other steps in your `Dockerfile` to wire up `socat`:
+
+    ```Dockerfile
+    ARG NONROOT_USER=vscode
+
+    RUN echo '\n\
+        if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ] && [ -d "/usr/local/share/kube-localhost" ]; then\n\
+            mkdir -p $HOME/.kube\n\
+            sudo cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
+            sudo chown -R $(id -u) $HOME/.kube\n\
+            sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
+        \n\
+            if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
+                mkdir -p $HOME/.minikube\n\
+                sudo cp -r /usr/local/share/minikube-localhost/ca.crt $HOME/.minikube\n\
+                sudo cp -r /usr/local/share/minikube-localhost/client.crt $HOME/.minikube\n\
+                sudo cp -r /usr/local/share/minikube-localhost/client.key $HOME/.minikube\n\
+                sudo chown -R $(id -u) $HOME/.minikube\n\
+                sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
+                sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
+                sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
+            fi\n\
+        fi' | tee /root/.bashrc >> /home/${NONROOT_USER}/.bashrc
+
+    # Default to root only access to the Docker socket, set up non-root init script
+    RUN touch /var/run/docker.socket \
+        && ln -s /var/run/docker-host.socket /var/run/docker.socket
+        && apt-get update \
+        && apt-get -y install socat
+
+    # Create docker-init.sh to spin up socat
+    RUN echo "#!/bin/sh\n\
+        sudo rm -rf /var/run/docker-host.socket\n\
+        ((sudo socat UNIX-LISTEN:/var/run/docker.socket,fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:/var/run/docker-host.socket) 2>&1 >> /tmp/vscr-dind-socat.log) & > /dev/null\n\
+        \"\$@\"" >> /usr/local/share/docker-init.sh
+        && chmod +x /usr/local/share/docker-init.sh
+
+    # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to
+    # the Docker socket if "overrideCommand": false is set in devcontainer.json.
+    # The script will also execute CMD if you need to alter startup behaviors.
+    ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+    CMD [ "sleep", "infinity" ]
+    ```
+
+6. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
@@ -107,7 +180,7 @@ A few notes on the definition:
 * If you also want to sync your Minikube certificates, open `.devcontainer/devcontainer.json` and uncomment this line in the `mount` property :
 
     ```json
-    "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost,type=bind",
+    "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/usr/local/share/minikube-localhost,type=bind",
     ```
 
 * If you want to **disable sync'ing** local Kubernetes config / Minikube certs into the container, remove `"SYNC_LOCALHOST_KUBECONFIG": "true",` from `remoteEnv` in `.devcontainer/devcontainer.json`.
@@ -129,7 +202,7 @@ See the section below for your operating system for more detailed setup instruct
 
 5. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/docker-in-docker-compose/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/kubernetes-helm/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -155,7 +228,7 @@ See the section below for your operating system for more detailed setup instruct
 
 5. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/docker-in-docker-compose/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/kubernetes-helm/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -163,7 +236,7 @@ See the section below for your operating system for more detailed setup instruct
 7. Open `.devcontainer/devcontainer.json` and uncomment this line in the `runArgs` array:
 
     ```json
-    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/root/.minikube-localhost",
+    "--mount", "type=bind,source=${env:HOME}${env:USERPROFILE}/.minikube,target=/usr/local/share/minikube-localhost",
     ```
 
 8. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
