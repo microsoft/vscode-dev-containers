@@ -5,13 +5,7 @@
 
 # Update the VARIANT arg in devcontainer.json to pick an Ubuntu version: 20.04, 18.04 
 ARG VARIANT="20.04"
-FROM ubuntu:${VARIANT}
-
-# You can opt to use the "buildpack-deps" image instead as a base if you want
-# a broader set of initial dependencies. Replace the ARG and FROM statments
-# above with the following to do so.
-# ARG VARIANT="20.04"
-# FROM buildpack-deps:${VARIANT}
+FROM buildpack-deps:${VARIANT}-curl
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
