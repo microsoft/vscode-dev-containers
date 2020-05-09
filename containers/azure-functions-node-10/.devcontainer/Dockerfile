@@ -14,8 +14,8 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
-ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     #
     # Install Azure Functions, .NET Core, and Azure CLI
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \

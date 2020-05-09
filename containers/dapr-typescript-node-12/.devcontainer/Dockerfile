@@ -17,8 +17,8 @@ ARG USER_GID=$USER_UID
 ARG COMPOSE_VERSION=1.24.0
 
 # Configure apt and install packages
-ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \ 
     #
     # Verify git and needed tools are installed

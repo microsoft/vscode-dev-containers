@@ -25,8 +25,8 @@ ENV PATH=${CONDA_INSTALL_PATH}/bin:${PATH}
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Configure apt and install packages
-ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     #
     # Alter vscode user as needed
     && if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \

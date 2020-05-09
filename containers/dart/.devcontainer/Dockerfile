@@ -17,8 +17,8 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
-ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed

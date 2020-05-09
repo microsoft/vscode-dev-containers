@@ -19,8 +19,8 @@ ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
 # Configure apt and install packages
-ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     #
     # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
     && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
@@ -39,7 +39,4 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog
 

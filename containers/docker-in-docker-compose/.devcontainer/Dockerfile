@@ -21,8 +21,8 @@ ARG ENABLE_NONROOT_DOCKER="true"
 ARG SOURCE_SOCKET=/var/run/docker-host.sock
 ARG TARGET_SOCKET=/var/run/docker.sock
 
-ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     # Verify common dependencies and utilities are installed
     && apt-get -y install --no-install-recommends apt-utils dialog git openssh-client curl less iproute2 procps 2>&1 \
     #

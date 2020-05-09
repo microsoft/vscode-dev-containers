@@ -6,11 +6,10 @@
 FROM mcr.microsoft.com/vscode/devcontainers/python:3.8
 
 # Configure apt and install packages
-ARG DEBIAN_FRONTEND=noninteractive
-RUN \
+RUN export DEBIAN_FRONTEND=noninteractive \
     #
     # Install Azure Functions, .NET Core, and Azure CLI
-    echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
+    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list \
     && curl -sL https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
     && apt-get update \

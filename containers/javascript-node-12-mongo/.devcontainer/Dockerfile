@@ -22,7 +22,7 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
-# ARG DEBIAN_FRONTEND=noninteractive
 # RUN apt-get update \
+#     && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 

@@ -14,8 +14,8 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Configure apt
-ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
@@ -33,11 +33,12 @@ RUN apt-get update \
 # ARG MAVEN_VERSION=3.6.3
 # ARG MAVEN_SHA=c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0
 # RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
-#   && curl -fsSL -o /tmp/apache-maven.tar.gz https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
-#   && echo "${MAVEN_SHA} /tmp/apache-maven.tar.gz" | sha512sum -c - \
-#   && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
-#   && rm -f /tmp/apache-maven.tar.gz \
-#   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && curl -fsSL -o /tmp/apache-maven.tar.gz https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+#     && echo "${MAVEN_SHA} /tmp/apache-maven.tar.gz" | sha512sum -c - \
+#     && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
+#     && rm -f /tmp/apache-maven.tar.gz \
+#     && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 # COPY maven-settings.xml /usr/share/maven/ref/
 # ENV MAVEN_HOME /usr/share/maven
 # ENV MAVEN_CONFIG /root/.m2
@@ -48,6 +49,7 @@ RUN apt-get update \
 # ENV GRADLE_VERSION 5.4.1
 # ARG GRADLE_DOWNLOAD_SHA256=7bdbad1e4f54f13c8a78abc00c26d44dd8709d4aedb704d913fb1bb78ac025dc
 # RUN curl -sSL --output gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
+#     && export DEBIAN_FRONTEND=noninteractive \
 #     && echo "${GRADLE_DOWNLOAD_SHA256} *gradle.zip" | sha256sum --check - \
 #     && unzip gradle.zip \
 #     && rm gradle.zip \
@@ -56,7 +58,8 @@ RUN apt-get update \
 #-------------------------------------------------------------------------------------------------------------
 
 # Clean up
-RUN apt-get autoremove -y \
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
