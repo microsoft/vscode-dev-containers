@@ -1,7 +1,4 @@
-FROM debian:latest
-
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
+FROM mcr.microsoft.com/vscode/devcontainers/base:debian-10
 
 # This Dockerfile adds a non-root 'vscode' user with sudo access. However, for Linux,
 # this user's GID/UID must match your local user UID/GID to avoid permission issues
@@ -12,6 +9,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
@@ -45,6 +43,3 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog

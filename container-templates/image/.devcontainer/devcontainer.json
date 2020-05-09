@@ -2,7 +2,7 @@
 	"name": "Dev Container Definition Template - Container Image",
 
 	// Update the 'image' property with your Docker image name.
-	"image": "ubuntu:18.04",
+	"image": "mcr.microsoft.com/vscode/devcontainers/base:debian-10",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 

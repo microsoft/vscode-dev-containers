@@ -21,13 +21,11 @@ ENV NVM_DIR=/home/vscode/.nvm
 # [Optional] Install the Azure CLI
 ARG INSTALL_AZURE_CLI="false"
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Docker Compose version
 ARG COMPOSE_VERSION=1.24.0
 
 # Configure apt and install packages
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #

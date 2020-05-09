@@ -6,12 +6,13 @@
 
 # Syntax: ./common-redhat.sh <install zsh flag> <username> <user UID> <user GID>
 
-INSTALL_ZSH=$1
-USERNAME=$2
-USER_UID=$3
-USER_GID=$4
-
 set -e
+
+INSTALL_ZSH=${1:-"true"}
+USERNAME=${2:-"$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)"}
+USER_UID=${3:-1000}
+USER_GID=${4:-1000}
+UPGRADE_PACKAGES=${5:-true}
 
 if [ "$(id -u)" -ne 0 ]; then
     echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
@@ -19,7 +20,9 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Update to latest versions of packages
-yum upgrade -y
+if [ "${UPGRADE_PACKAGES}" = "true" ]; then
+    yum upgrade -y
+fi
 
 # Install common dependencies
 yum install -y \
@@ -32,6 +35,8 @@ yum install -y \
     wget \
     procps \
     unzip \
+    nano \
+    jq \
     ca-certificates \
     openssl-libs \
     krb5-libs \
@@ -44,18 +49,6 @@ if yum -q list compat-openssl10 >/dev/null 2>&1; then
 fi
 
 # Create or update a non-root user to match UID/GID - see https://aka.ms/vscode-remote/containers/non-root-user.
-if [ "$USER_UID" = "" ]; then
-    USER_UID=1000
-fi 
-
-if [ "$USER_GID" = "" ]; then
-    USER_GID=1000
-fi 
-
-if [ "$USERNAME" = "" ]; then
-    USERNAME=$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)
-fi
-
 if id -u $USERNAME > /dev/null 2>&1; then
     # User exists, update if needed
     if [ "$USER_GID" != "$(id -G $USERNAME)" ]; then 
@@ -76,17 +69,18 @@ yum install -y sudo
 echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME
 chmod 0440 /etc/sudoers.d/$USERNAME
 
-# Ensure ~/.local/bin is in the PATH for root and non-root users for bash
-echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.bashrc >> /home/$USERNAME/.bashrc
+# Ensure ~/.local/bin is in the PATH for root and non-root users for bash. (zsh is later)
+echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.bashrc >> /home/$USERNAME/.bashrc 
 chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
 
 # Optionally install and configure zsh
 if [ "$INSTALL_ZSH" = "true" ]; then 
     yum install -y zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.zshrc
+    echo "export PATH=\$PATH:\$HOME/.local/bin" >> /root/.zshrc
     cp -R /root/.oh-my-zsh /home/$USERNAME
     cp /root/.zshrc /home/$USERNAME
     sed -i -e "s/\/root\/.oh-my-zsh/\/home\/$USERNAME\/.oh-my-zsh/g" /home/$USERNAME/.zshrc
     chown -R $USER_UID:$USER_GID /home/$USERNAME/.oh-my-zsh /home/$USERNAME/.zshrc
 fi
+

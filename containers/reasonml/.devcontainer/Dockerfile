@@ -23,7 +23,7 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
     #
     && sudo -u ${USERNAME} npm install -g bs-platform esy@latest
 
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
    && apt-get -y install --no-install-recommends software-properties-common ocaml \
    && apt-add-repository ppa:fish-shell/release-3 \
@@ -33,7 +33,3 @@ RUN apt-get update \
    && apt-get autoremove -y \
    && apt-get clean -y \
    && rm -rf /var/lib/apt/lists/*
-ENV DEBIAN_FRONTEND=dialog
-
-# Uncomment to default to non-root user
-# USER $USER_UID

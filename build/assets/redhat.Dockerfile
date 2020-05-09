@@ -7,7 +7,4 @@ FROM REPLACE-ME
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
-# RUN yum -y install <your-package-list-here> \
-#     # 
-#     # Clean up
-#     && yum clean all
+# RUN yum -y install <your-package-list-here>

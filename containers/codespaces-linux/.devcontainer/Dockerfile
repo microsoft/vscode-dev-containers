@@ -29,7 +29,7 @@ ENV ORYX_ENV_TYPE=vsonline-present
 ADD symlinkDotNetCore.sh /tmp/codespace/symlinkDotNetCore.sh
 
  # Install packages, setup codespace user
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -yq \
     && apt-get -yq install --no-install-recommends apt-utils dialog 2>&1 \
     && apt-get install -yq \
@@ -126,6 +126,5 @@ RUN apt-get update -yq \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y
-ENV DEBIAN_FRONTEND=dialog
 
 USER codespace

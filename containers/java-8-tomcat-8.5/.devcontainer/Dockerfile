@@ -14,7 +14,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Configure apt
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
@@ -56,4 +56,4 @@ ENV MAVEN_CONFIG /root/.m2
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-ENV DEBIAN_FRONTEND=dialog
+

@@ -5,9 +5,6 @@
 
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:10
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # The javascript-node image includes a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
 # will be updated to match your local UID/GID (when using the dockerFile property).
@@ -17,6 +14,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     #
     # Install Azure Functions, .NET Core, and Azure CLI
@@ -41,6 +39,3 @@ RUN apt-get update \
 
 # Azure Functions Core Tools needs a place to save data
 ENV XDG_DATA_HOME=/home/$USERNAME/.local/share
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog

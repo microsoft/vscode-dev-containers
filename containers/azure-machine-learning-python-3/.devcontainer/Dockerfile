@@ -24,10 +24,8 @@ ARG CONDA_INSTALL_PATH=/opt/conda
 ENV PATH=${CONDA_INSTALL_PATH}/bin:${PATH}
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Configure apt and install packages
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     #
     # Alter vscode user as needed
@@ -74,6 +72,3 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog

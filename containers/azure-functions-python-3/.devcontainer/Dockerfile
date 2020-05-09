@@ -5,10 +5,8 @@
 
 FROM mcr.microsoft.com/vscode/devcontainers/python:3.8
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Configure apt and install packages
+ARG DEBIAN_FRONTEND=noninteractive
 RUN \
     #
     # Install Azure Functions, .NET Core, and Azure CLI
@@ -34,6 +32,3 @@ RUN \
 
 # Azure Functions Core Tools needs a place to save data
 ENV XDG_DATA_HOME=/home/vscode/.local/share
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog

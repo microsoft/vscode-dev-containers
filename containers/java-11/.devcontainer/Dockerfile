@@ -14,7 +14,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Configure apt
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
@@ -59,7 +59,6 @@ RUN apt-get update \
 RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-ENV DEBIAN_FRONTEND=dialog
 
 # Allow for a consistant java home location for settings - image is changing over time
 RUN if [ ! -d "/docker-java-home" ]; then ln -s "${JAVA_HOME}" /docker-java-home; fi

@@ -25,20 +25,10 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
     # Install tslint, typescript. eslint is installed by javascript image
     && sudo -u ${USERNAME} npm install -g tslint typescript
 
-# *********************************************************************
-# * Uncomment this section to use RUN to install other dependencies.  *
-# * See https://aka.ms/vscode-remote/containers/dockerfile-run        *
-# *********************************************************************
-# ENV DEBIAN_FRONTEND=noninteractive
+# ** [Optional] Uncomment this section to install additional packages. **
+#
+# ARG DEBIAN_FRONTEND=noninteractive
 # RUN apt-get update \
-#    && apt-get -y install --no-install-recommends <your-package-list-here> \
-#    #
-#    # Clean up
-#    && apt-get autoremove -y \
-#    && apt-get clean -y \
-#    && rm -rf /var/lib/apt/lists/*
-# ENV DEBIAN_FRONTEND=dialog
+#     && apt-get -y install --no-install-recommends <your-package-list-here>
 
-# Uncomment to default to non-root user
-# USER $USER_UID
 
