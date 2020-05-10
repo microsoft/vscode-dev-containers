@@ -37,7 +37,7 @@ RUN apt-get update \
     && curl -fSsL -o bazel-installer.sh https://github.com/bazelbuild/bazel/releases/download/0.25.2/bazel-0.25.2-installer-linux-x86_64.sh \
     && echo "${BAZEL_SHA256} *bazel-installer.sh" | sha256sum --check - \
     && chmod +x bazel-installer.sh \
-    && ./bazel-installer.sh --base=/usr/local \
+    && ./bazel-installer.sh --base=/usr/local/bazel \
     && rm ./bazel-installer.sh \
     #
     # Clean up
