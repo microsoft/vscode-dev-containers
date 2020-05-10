@@ -23,6 +23,6 @@ RUN apk update \
     # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
     && apk add --no-cache curl ca-certificates \
     && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
-    && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} /tmp/common-setup.sh" | sha256sum -c -)) \
+    && if [ "${COMMON_SCRIPT_SHA}" = "dev-mode" ]; then echo "${COMMON_SCRIPT_SHA} /tmp/common-setup.sh" | sha256sum -c - ; fi \
     && /bin/ash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" \
     && rm /tmp/common-setup.sh
