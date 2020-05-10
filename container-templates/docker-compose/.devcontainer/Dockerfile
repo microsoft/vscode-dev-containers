@@ -8,7 +8,7 @@
 # * Compose but has been included here for completeness.   *
 # **********************************************************
 
-FROM mcr.microsoft.com/vscode/devcontainers/base:debian-10
+FROM debian:10
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
