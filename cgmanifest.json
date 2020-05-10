@@ -255,7 +255,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "6.8.0"
+                    "Version": "7.0.0"
                 }
             }
         },
@@ -562,8 +562,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: git-lfs",
-                    "Version": "2.10.0",
-                    "DownloadUrl": "https://packagecloud.io/github/git-lfs/debian/pool/stretch/main/g/git-lfs/git-lfs_2.10.0_amd64.deb"
+                    "Version": "2.11.0",
+                    "DownloadUrl": "https://packagecloud.io/github/git-lfs/debian/pool/stretch/main/g/git-lfs/git-lfs_2.11.0_amd64.deb"
                 }
             }
         },
@@ -693,7 +693,7 @@
                 "Other": {
                     "Name": "Debian Package: curl",
                     "Version": "7.64.0-4+deb10u1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/c/curl/curl_7.64.0-4+deb10u1_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/curl/curl_7.64.0-4+deb10u1_amd64.deb"
                 }
             }
         },
@@ -713,7 +713,7 @@
                 "Other": {
                     "Name": "Debian Package: git",
                     "Version": "1:2.20.1-2+deb10u3",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/g/git/git_2.20.1-2+deb10u3_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.20.1-2+deb10u3_amd64.deb"
                 }
             }
         },
@@ -773,7 +773,7 @@
                 "Other": {
                     "Name": "Debian Package: libicu63",
                     "Version": "63.1-6+deb10u1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/i/icu/libicu63_63.1-6+deb10u1_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/icu/libicu63_63.1-6+deb10u1_amd64.deb"
                 }
             }
         },
@@ -793,7 +793,7 @@
                 "Other": {
                     "Name": "Debian Package: libssl1.1",
                     "Version": "1.1.1d-0+deb10u3",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u3_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1d-0+deb10u3_amd64.deb"
                 }
             }
         },
@@ -998,7 +998,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pytest",
-                    "Version": "5.4.1"
+                    "Version": "5.4.2"
                 }
             }
         },
