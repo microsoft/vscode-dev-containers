@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/vscode/devcontainers/base:debian-9
+FROM debian:9
 
 # Bazel version and hash
 ENV BAZEL_VERSION=0.25.2 
@@ -24,18 +24,6 @@ RUN apt-get update \
     # Verifty git, process tools, lsb-release (common in install instructions for CLIs) installed
     && apt-get -y install git iproute2 procps lsb-release \
     #
-    # Install Bazel
-    && apt-get -y install curl pkg-config zip g++ zlib1g-dev unzip python \
-    && curl -fSsL -o bazel-installer.sh https://github.com/bazelbuild/bazel/releases/download/0.25.2/bazel-0.25.2-installer-linux-x86_64.sh \
-    && echo "${BAZEL_SHA256} *bazel-installer.sh" | sha256sum --check - \
-    && chmod +x bazel-installer.sh \
-    && ./bazel-installer.sh \
-    && rm ./bazel-installer.sh \
-    && echo '\n\
-        export PATH="$PATH:$HOME/bin" \n\
-        '\
-        >> $HOME/.bashrc \
-    #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
@@ -43,6 +31,14 @@ RUN apt-get update \
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
     && chmod 0440 /etc/sudoers.d/$USERNAME \
+    #
+    # Install Bazel
+    && apt-get -y install curl pkg-config zip g++ zlib1g-dev unzip python \
+    && curl -fSsL -o bazel-installer.sh https://github.com/bazelbuild/bazel/releases/download/0.25.2/bazel-0.25.2-installer-linux-x86_64.sh \
+    && echo "${BAZEL_SHA256} *bazel-installer.sh" | sha256sum --check - \
+    && chmod +x bazel-installer.sh \
+    && ./bazel-installer.sh --base=/usr/local \
+    && rm ./bazel-installer.sh \
     #
     # Clean up
     && apt-get autoremove -y \

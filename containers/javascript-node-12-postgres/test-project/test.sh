@@ -40,7 +40,7 @@ checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$H
 checkExtension "dbaeumer.vscode-eslint"
 check "non-root-user" "id node"
 check "/home/node" [ -d "/home/node" ]
-check "sudo" sudo -u node echo "sudo works."
+check "sudo" sudo echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
 check "node" "node --version"

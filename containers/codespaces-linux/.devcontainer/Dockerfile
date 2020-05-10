@@ -29,8 +29,8 @@ ENV ORYX_ENV_TYPE=vsonline-present
 ADD symlinkDotNetCore.sh /tmp/codespace/symlinkDotNetCore.sh
 
  # Install packages, setup codespace user
-RUN apt-get update \
-    export DEBIAN_FRONTEND=noninteractive -yq \
+RUN apt-get update -yq\
+    && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -yq install --no-install-recommends apt-utils dialog 2>&1 \
     && apt-get install -yq \
         default-jdk \

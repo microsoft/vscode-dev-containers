@@ -15,7 +15,8 @@ ARG USER_GID=$USER_UID
 
 # install git iproute2, process tools
 RUN apt-get update \
-    export DEBIAN_FRONTEND=noninteractive && apt-get -y install git openssh-client less iproute2 procps \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install git openssh-client less iproute2 procps \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \

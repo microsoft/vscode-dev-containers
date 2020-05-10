@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------------------------------------------
 
 # Pick any base image, but if you select node, skip installing node. 😊
-FROM mcr.microsoft.com/vscode/devcontainers/base:debian-9
+FROM debian:9
 
 # Terraform and tflint versions
 ARG TERRAFORM_VERSION=0.12.16
