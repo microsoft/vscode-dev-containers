@@ -6,8 +6,8 @@
 ARG ORIGINAL_IMAGE=mcr.microsoft.com/vscode/devcontainers/universal@sha256:36418523e2c261a47d081990475fe63fed88b5e8693b73c4f550b1025e30b89e
 FROM ${ORIGINAL_IMAGE}
 
-ENV DEBIAN_FRONTEND=noninteractive
 RUN sudo apt-get update  \
+    && export DEBIAN_FRONTEND=noninteractive \
     # Always upgrade git
     && sudo apt-get upgrade -y git \
     # See if libssl-dev installed, upgrade if so
@@ -17,4 +17,4 @@ RUN sudo apt-get update  \
     && sudo apt-get autoremove -y \
     && sudo apt-get clean -y \
     && sudo rm -rf /var/lib/apt/lists/*
-ENV DEBIAN_FRONTEND=dialog
+

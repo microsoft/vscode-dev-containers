@@ -44,7 +44,7 @@ checkExtension "ms-azuretools.vscode-docker"
 checkExtension "ms-kubernetes-tools.vscode-kubernetes-tools"
 check "non-root-user" "id vscode"
 check "/home/vscode" [ -d "/home/vscode" ]
-check "sudo" sudo -u vscode echo "sudo works."
+check "sudo" sudo echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
 check "docker" docker ps -a

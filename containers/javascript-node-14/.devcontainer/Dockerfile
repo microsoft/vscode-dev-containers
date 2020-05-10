@@ -13,26 +13,23 @@ ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Set to false to skip installing zsh and Oh My ZSH!
-ARG INSTALL_ZSH="true"
+ENV PATH=${PATH}:/usr/local/share/npm-global/bin
 
-# Location and expected SHA for common setup script - SHA generated on release
+# Options for common package install script
+ARG INSTALL_ZSH="true"
+ARG UPGRADE_PACKAGES="true"
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
-ENV PATH=${PATH}:/usr/local/share/npm-global/bin
-
 # Configure apt and install packages
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils dialog wget ca-certificates 2>&1 \
+    && export DEBIAN_FRONTEND=noninteractive \
     #
     # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
-    && wget -q -O /tmp/common-setup.sh $COMMON_SCRIPT_SOURCE \
-    && if [ "$COMMON_SCRIPT_SHA" != "dev-mode" ]; then echo "$COMMON_SCRIPT_SHA /tmp/common-setup.sh" | sha256sum -c - ; fi \
-    && /bin/bash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
+    && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
+    && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
+    && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} /tmp/common-setup.sh" | sha256sum -c -)) \
+    && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     && rm /tmp/common-setup.sh \
     #
     # Remove outdated yarn from /opt and install via package 
@@ -63,6 +60,3 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog

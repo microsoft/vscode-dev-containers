@@ -21,10 +21,8 @@ ARG ENABLE_NONROOT_DOCKER="true"
 ARG SOURCE_SOCKET=/var/run/docker-host.sock
 ARG TARGET_SOCKET=/var/run/docker.sock
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     # Verify common dependencies and utilities are installed
     && apt-get -y install --no-install-recommends apt-utils dialog git openssh-client curl less iproute2 procps 2>&1 \
     #
@@ -48,7 +46,7 @@ RUN apt-get update \
     #
     # Use Docker script from script library to set things up
     && curl -sSL $DOCKER_SCRIPT_SOURCE -o /tmp/docker-setup.sh \
-    && if [ "$DOCKER_SCRIPT_SHA" != "dev-mode" ]; then echo "$DOCKER_SCRIPT_SHA /tmp/docker-setup.sh" | sha256sum -c - ; fi \
+    && ([ "${DOCKER_SCRIPT_SHA}" = "dev-mode" ] || (echo "${DOCKER_SCRIPT_SHA} /tmp/docker-setup.sh" | sha256sum -c -)) \
     && /bin/bash /tmp/docker-setup.sh "${ENABLE_NONROOT_DOCKER}" "${SOURCE_SOCKET}" "${TARGET_SOCKET}" "${USERNAME}" \
     && rm /tmp/docker-setup.sh \
     #
@@ -56,9 +54,6 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
 # the Docker socket if "overrideCommand": false is set in devcontainer.json. 

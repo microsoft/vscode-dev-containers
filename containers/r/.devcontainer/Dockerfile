@@ -5,9 +5,6 @@
 
 FROM rocker/r-apt:bionic
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # The r-apt image comes with a base non-root 'docker' user which this Dockerfile
 # gives sudo access. However, for Linux, this user's GID/UID must match your local
 # user UID/GID to avoid permission issues with bind mounts. Update USER_UID / USER_GID 
@@ -17,6 +14,7 @@ ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
 RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # install git iproute2, process tools, lsb-release (common in install instructions for CLIs) and libzip for R Tools extension
@@ -44,6 +42,3 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog

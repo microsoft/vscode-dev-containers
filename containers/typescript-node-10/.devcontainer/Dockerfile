@@ -19,27 +19,17 @@ ARG USER_GID=$USER_UID
 RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
         groupmod --gid $USER_GID $USERNAME \
         && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
-        && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
+        && chown -R $USER_UID:$USER_GID /home/$USERNAME \
+        && chown -R $USERNAME:root /usr/local/share/npm-global; \
     fi \
     #
     # Install tslint, typescript. eslint is installed by javascript image
     && sudo -u ${USERNAME} npm install -g tslint typescript
 
-# *********************************************************************
-# * Uncomment this section to use RUN to install other dependencies.  *
-# * See https://aka.ms/vscode-remote/containers/dockerfile-run        *
-# *********************************************************************
-# ENV DEBIAN_FRONTEND=noninteractive
+# ** [Optional] Uncomment this section to install additional packages. **
+#
 # RUN apt-get update \
-#    && apt-get -y install --no-install-recommends <your-package-list-here> \
-#    #
-#    # Clean up
-#    && apt-get autoremove -y \
-#    && apt-get clean -y \
-#    && rm -rf /var/lib/apt/lists/*
-# ENV DEBIAN_FRONTEND=dialog
-
-# Uncomment to default to non-root user
-# USER $USER_UID
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 

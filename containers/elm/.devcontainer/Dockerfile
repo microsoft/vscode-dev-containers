@@ -5,9 +5,6 @@
 
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:12
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Configuring Elm version
 ARG ELM_VERSION=latest-0.19.1
 ARG ELM_TEST_VERSION=latest-0.19.1
@@ -22,7 +19,8 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Install elm, elm-test and elm-format
-RUN sudo -u ${USERNAME} npm install --global \
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && sudo -u ${USERNAME} npm install --global \
     elm@${ELM_VERSION} \
     elm-test@${ELM_TEST_VERSION} \
     elm-format@${ELM_FORMAT_VERSION} \
@@ -33,6 +31,3 @@ RUN sudo -u ${USERNAME} npm install --global \
         && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
         && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
     fi
-
-# Switch back to dialog for any ad-hoc use of apt-get
-ENV DEBIAN_FRONTEND=dialog

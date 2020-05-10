@@ -12,19 +12,17 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Set to false to skip installing zsh and Oh My ZSH!
+# Options for common package install script - SHA updated on release
 ARG INSTALL_ZSH="true"
-
-# Location and expected SHA for common setup script - SHA generated on release
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-alpine.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
 # Install git, bash, dependencies, and add a non-root user
 RUN apk update \
-    && apk add --no-cache wget coreutils ca-certificates \
     #
     # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
-    && wget -q -O /tmp/common-setup.sh $COMMON_SCRIPT_SOURCE \
-    && if [ "$COMMON_SCRIPT_SHA" != "dev-mode" ]; then echo "$COMMON_SCRIPT_SHA /tmp/common-setup.sh" | sha256sum -c - ; fi \
-    && /bin/ash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
+    && apk add --no-cache curl ca-certificates \
+    && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
+    && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} /tmp/common-setup.sh" | sha256sum -c -)) \
+    && /bin/ash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" \
     && rm /tmp/common-setup.sh

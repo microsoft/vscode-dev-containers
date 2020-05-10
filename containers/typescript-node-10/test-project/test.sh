@@ -41,14 +41,14 @@ checkExtension "ms-vscode.vscode-typescript-tslint-plugin"
 checkExtension "dbaeumer.vscode-eslint"
 check "non-root-user" "id node"
 check "/home/node" [ -d "/home/node" ]
-check "sudo" sudo -u node echo "sudo works."
+check "sudo" sudo echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
 check "node" "node --version"
 check "yarn" yarn install
 check "npm" npm install
 check "tslint" "tslint src/server.ts"
-check "eslint" "eslint src/server.ts"
+check "eslint" "eslint --no-eslintrc -c .eslintrc.json src/server.ts"
 check "typescript" npm run compile
 check "test-project" npm run test
 
