@@ -1,14 +1,14 @@
 {
 	"build": {
-		"latest": false,
+		"latest": true,
 		"rootDistro": "debian",
-		"parent": "javascript-node-10",
+		"parent": "javascript-node-14",
 		"tags": [
-			"typescript-node:${VERSION}-10"
+			"typescript-node:${VERSION}-14"
 		]
 	},
 	"dependencies": {
-		"image": "node:10",
+		"image": "node:14",
 		"imageLink": "https://hub.docker.com/_/node",
 		"debian": [
 			"apt-utils", 
@@ -54,5 +54,4 @@
 			}
 		]
 	}
-
 }
