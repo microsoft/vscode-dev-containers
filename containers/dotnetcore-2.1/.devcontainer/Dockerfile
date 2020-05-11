@@ -15,7 +15,7 @@ ARG USER_GID=$USER_UID
 # [Optional] Version of Node.js to install.
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
-ENV NVM_DIR=/home/vscode/.nvm
+ENV NVM_DIR=/home/${USERNAME}/.nvm
 
 # [Optional] Install the Azure CLI
 ARG INSTALL_AZURE_CLI="false"
@@ -42,12 +42,12 @@ RUN apt-get update \
         # Install nvm and Node
         mkdir ${NVM_DIR} \
         && curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 2>&1 \
-        && chown -R vscode:vscode ${NVM_DIR} \
+        && chown -R ${USER_UID}:${USER_GID} ${NVM_DIR} \
         && /bin/bash -c "source $NVM_DIR/nvm.sh \
             && nvm install ${NODE_VERSION} \
             && nvm alias default ${NODE_VERSION}" 2>&1 \
         && echo '[ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"  && [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion"' \ 
-        | tee -a /home/vscode/.bashrc /home/vscode/.zshrc >> /root/.zshrc \
+        | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc >> /root/.zshrc \
         #
         # Install yarn
         && curl -sS https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/pubkey.gpg | apt-key add - 2>/dev/null \
