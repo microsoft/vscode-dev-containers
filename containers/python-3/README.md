@@ -100,7 +100,7 @@ ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
 ENV PATH=${PIP_TARGET}/bin:${PATH}
 RUN mkdir -p ${PIP_TARGET} \
     && chown vscode:root ${PIP_TARGET} \
-    && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then chown -R vscode:root ${PIP_TARGET}; fi" \
+    && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then sudo chown -R vscode:root ${PIP_TARGET}; fi" \
     | tee -a /root/.bashrc /root/.zshrc /home/vscode/.bashrc >> /home/vscode/.zshrc \
 ```
 
