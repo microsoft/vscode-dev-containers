@@ -8,7 +8,7 @@
 		]
 	}, 
 	"dependencies": {
-		"image": "debian:10",
+		"image": "buildpack-deps:buster-curl",
 		"imageLink": "https://hub.docker.com/_/debian",
 		"debian": [
 			"apt-utils", 
@@ -20,6 +20,9 @@
 			"curl",
 			"openssh-client",
 			"less",
+			"nano",
+			"gnupg",
+			"jq",
 			"wget",
 			"unzip",
 			"lsb-release",
@@ -27,8 +30,7 @@
 			"libc6",
 			"libgcc1",
 			"libgssapi-krb5-2",
-			"libicu63",
-			"liblttng-ust0",
+			"libicu57",
 			"libssl1.1",
 			"libstdc++6",
 			"zlib1g",
