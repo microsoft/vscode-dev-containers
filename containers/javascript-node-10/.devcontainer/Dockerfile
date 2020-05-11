@@ -59,11 +59,11 @@ RUN apt-get update \
         && nvm alias default system" 2>&1 \
     && echo '[ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"  && [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion"' \ 
     | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc >> /root/.zshrc \
-    && chown -R ${USER_UID}:root ${NVM_DIR} \
     && chown ${USER_UID}:${USER_GID} /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc \
+    && chown -R ${USER_UID}:root ${NVM_DIR} \
     #
     # Handle scenarios where GID/UID is changed
-    && echo "if [ \"\$(stat -c '%U' ${NPM_GLOBAL})\" != \"${USERNAME}\" ]; then chown -R ${USER_UID}:root ${NPM_GLOBAL} ${NVM_DIR}; fi" \
+    && echo "if [ \"\$(stat -c '%U' ${NPM_GLOBAL})\" != \"${USERNAME}\" ]; then sudo chown -R ${USER_UID}:root ${NPM_GLOBAL} ${NVM_DIR}; fi" \
     | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \
     #
     # Tactically remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
