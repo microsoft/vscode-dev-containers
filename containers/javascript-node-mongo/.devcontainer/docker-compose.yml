@@ -16,7 +16,9 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    
+      args:
+        VARIANT: 12
+  
     volumes:
       - ..:/workspace:cached
 

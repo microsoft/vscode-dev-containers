@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:10
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:14
 
 # The javascript-node image includes a non-root node user with sudo access. Use 
 # the "remoteUser" property in devcontainer.json to use it. On Linux, the container 

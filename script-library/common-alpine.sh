@@ -31,6 +31,7 @@ apk add --no-cache \
     unzip \
     nano \
     jq \
+    gnupg \
     procps \
     coreutils \
     ca-certificates \

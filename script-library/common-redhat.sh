@@ -37,6 +37,7 @@ yum install -y \
     unzip \
     nano \
     jq \
+    gnupg \
     ca-certificates \
     openssl-libs \
     krb5-libs \

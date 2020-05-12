@@ -13,7 +13,9 @@ ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-ENV PATH=${PATH}:/usr/local/share/npm-global/bin
+ARG NPM_GLOBAL=/usr/local/share/npm-global
+ENV PATH=${PATH}:${NPM_GLOBAL}/bin
+ENV NVM_DIR=/usr/local/share/nvm
 
 # Options for common package install script
 ARG INSTALL_ZSH="true"
@@ -44,10 +46,25 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends yarn \
     #
     # Set alternate global install location that both users have rights to access
-    && mkdir -p /usr/local/share/npm-global \
-    && chown ${USERNAME}:root /usr/local/share/npm-global \
-    && npm config -g set prefix /usr/local/share/npm-global \
-    && sudo -u ${USERNAME} npm config -g set prefix /usr/local/share/npm-global \
+    && mkdir -p ${NPM_GLOBAL} \
+    && chown ${USERNAME}:root ${NPM_GLOBAL} \
+    && npm config -g set prefix ${NPM_GLOBAL} \
+    && sudo -u ${USERNAME} npm config -g set prefix ${NPM_GLOBAL} \
+    #
+    # Install NVM to allow installing alternate versions of Node.js as needed
+    && mkdir -p ${NVM_DIR} \
+    && export NODE_VERSION= \
+    && curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 2>&1 \
+    && /bin/bash -c "source $NVM_DIR/nvm.sh \
+        && nvm alias default system" 2>&1 \
+    && echo '[ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"  && [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion"' \ 
+    | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc >> /root/.zshrc \
+    && chown ${USER_UID}:${USER_GID} /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc \
+    && chown -R ${USER_UID}:root ${NVM_DIR} \
+    #
+    # Handle scenarios where GID/UID is changed
+    && echo "if [ \"\$(stat -c '%U' ${NPM_GLOBAL})\" != \"${USERNAME}\" ]; then sudo chown -R ${USER_UID}:root ${NPM_GLOBAL} ${NVM_DIR}; fi" \
+    | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \
     #
     # Tactically remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
     # Can leave in Dockerfile once upstream base image moves to > 7.0.7-28.
