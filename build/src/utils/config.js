@@ -254,8 +254,9 @@ function getSortedDefinitionBuildList(page, pageTotal) {
 
     if (allPages.length > pageTotal) {
         // If too many pages, add extra pages to last one
+        console.log(`(!) Not enough pages to dedicate one page per parent. Adding excess definitions to last page.`);
         for (let i = pageTotal; i < allPages.length; i++) {
-            allPages[allPages.length - 2] = allPages[allPages.length - 2].concat(allPages[i]);
+            allPages[pageTotal - 1] = allPages[pageTotal - 1].concat(allPages[i]);
             allPages[i] = [];
         }
     } else if (allPages.length < pageTotal) {
