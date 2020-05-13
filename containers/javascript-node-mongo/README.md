@@ -1,4 +1,4 @@
-# Node.js 12 & Mongo DB
+# Node.js & Mongo DB
 
 ## Summary
 
