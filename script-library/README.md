@@ -11,7 +11,7 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definition
 To use a script, simply download it using `curl` or `wget` and execute it. For example:
 
 ```Dockerfile
-RUN apt-get update \
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
     && curl -sSL -o- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh" | bash -
 ```
