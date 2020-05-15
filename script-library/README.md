@@ -12,7 +12,7 @@ To use a script, simply download it using `curl` or `wget` and execute it. For e
 
 ```Dockerfile
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
-    && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
+    && apt-get -y install --no-install-recommends curl ca-certificates \
     && curl -sSL -o- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh" | bash -
 ```
 
@@ -30,8 +30,6 @@ ARG COMMON_SCRIPT_SHA="dev-mode"
 # Configure apt and install packages
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    #
-    # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
     && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
     && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
     && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} /tmp/common-setup.sh" | sha256sum -c -)) \
