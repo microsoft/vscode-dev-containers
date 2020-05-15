@@ -33,7 +33,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
     && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
     && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} /tmp/common-setup.sh" | sha256sum -c -)) \
-    && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
+    && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "vscode" "1000" "1000" "${UPGRADE_PACKAGES}" \
     && rm /tmp/common-setup.sh
 ```
 
