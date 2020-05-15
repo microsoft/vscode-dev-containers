@@ -3,31 +3,23 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM mcr.microsoft.com/vscode/devcontainers/python:3.8
+# Find the Dockerfile for mcr.microsoft.com/azure-functions/python:3.0-python3.8-core-tools at this URL
+# https://github.com/Azure/azure-functions-docker/blob/master/host/3.0/buster/amd64/python/python38/python38-core-tools.Dockerfile
+FROM mcr.microsoft.com/azure-functions/python:3.0-python3.8-core-tools
 
-# Configure apt and install packages
-RUN export DEBIAN_FRONTEND=noninteractive \
-    #
-    # Install Azure Functions, .NET Core, and Azure CLI
-    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
-    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list \
-    && curl -sL https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
-    && apt-get update \
-    && apt-get install -y azure-cli dotnet-sdk-3.1 azure-functions-core-tools-3 \
-    #
-    # Install Docker CE CLI (needed for publish with --build-native-deps)
-    && apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
-    && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
-    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
-    && apt-get update \
-    && apt-get install -y docker-ce-cli \
-    #
-    # Clean up
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* \
-    && mkdir -p /home/vscode/.local/share \
-    && chown -R vscode /home/vscode
+# Uncomment following lines If you want to enable Development Container Script
+# For more details https://github.com/microsoft/vscode-dev-containers/tree/master/script-library
 
-# Azure Functions Core Tools needs a place to save data
-ENV XDG_DATA_HOME=/home/vscode/.local/share
+# Avoid warnings by switching to noninteractive
+# ENV DEBIAN_FRONTEND=noninteractive
+
+# # Comment out these lines if you want to use zsh.
+
+# ARG INSTALL_ZSH=true
+# ARG USERNAME=vscode
+# ARG USER_UID=1000
+# ARG USER_GID=$USER_UID
+
+# RUN apt-get update && curl -ssL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh -o /tmp/common-script.sh \
+#     && /bin/bash /tmp/common-script.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
+#     && rm /tmp/common-script.sh 
