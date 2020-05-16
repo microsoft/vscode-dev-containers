@@ -1,12 +1,11 @@
 {
 	"name": "Script Tester",
 	"build": {
-		"dockerfile": "Dockerfile",
-		"context": "..",
+		"dockerfile": "../Dockerfile",
+		"context": "../../",
 		"args": {
-			"IMAGE_TO_TEST": "ubuntu:18.04",
+			"IMAGE_TO_TEST": "debian:10",
 			"USERNAME": "vscode",
-			// DISTRO = alpine, debian, or redhat
 			"DISTRO": "debian"
 		}
 	},

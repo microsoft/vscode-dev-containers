@@ -15,10 +15,15 @@ RUN if [ "${DISTRO}" = "debian" ]; then apt-get update; fi
 
 RUN chmod +x /tmp/*.sh
 
-RUN /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000
+RUN export DEBIAN_FRONTEND=noninteractive && /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000
 
-RUN if [ "${DISTRO}" = "debian" ]; then \
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && if [ "${DISTRO}" = "debian" ]; then \
         /tmp/docker-${DISTRO}.sh true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}; \
+    else \
+        echo -e '#!/bin/bash\n"$@"' | tee /usr/local/share/docker-init.sh \
+        && chown ${USERNAME} /usr/local/share/docker-init.sh \
+        && chmod +x /usr/local/share/docker-init.sh; \
     fi
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
