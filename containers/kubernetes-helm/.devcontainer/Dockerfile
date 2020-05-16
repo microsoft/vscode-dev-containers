@@ -60,7 +60,7 @@ RUN apt-get update \
     # Copy localhost's ~/.kube/config file into the container and swap out localhost
     # for host.docker.internal whenever a new shell starts to keep them in sync.
     && echo '\n\
-        if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ] && [ -d "/usr/local/share/kube-localhost" ]; then\n\
+        if [ "$SYNC_LOCALHOST_KUBECONFIG" = "true" ] && [ -d "/usr/local/share/kube-localhost" ]; then\n\
             mkdir -p $HOME/.kube\n\
             sudo cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
             sudo chown -R $(id -u) $HOME/.kube\n\

@@ -41,7 +41,10 @@ check "non-root-user" "id vscode"
 check "/home/vscode" [ -d "/home/vscode" ]
 check "sudo" sudo echo "sudo works."
 check "git" git --version
-check "command-line-tools" which top ip lsb_release
+check "command-line-tools" which top ip lsb_release wget curl jq less nano unzip
+check "zsh" zsh --version
+check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
+
 
 # Report result
 if [ ${#FAILED[@]} -ne 0 ]; then

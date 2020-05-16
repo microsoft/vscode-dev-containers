@@ -43,7 +43,9 @@ check "non-root-user" "id node"
 check "/home/node" [ -d "/home/node" ]
 check "sudo" sudo echo "sudo works."
 check "git" git --version
-check "command-line-tools" which top ip lsb_release
+check "command-line-tools" which top ip lsb_release wget curl less unzip
+check "zsh" zsh --version
+check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
 check "node" "node --version"
 check "yarn" yarn install
 check "npm" npm install

@@ -35,8 +35,12 @@ checkExtension() {
     checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]"
 }
 
+# Run Docker init script
+/usr/local/share/docker-init.sh
+
 # Source .bashrc with the SYNC_LOCALHOST_KUBECONFIG set
-SYNC_LOCALHOST_KUBECONFIG=true source $HOME/.bashrc
+export SYNC_LOCALHOST_KUBECONFIG=true 
+bash $HOME/.bashrc
 
 # Actual tests
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
@@ -47,8 +51,10 @@ check "/home/vscode" [ -d "/home/vscode" ]
 check "sudo" sudo echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
+check "docker-socket" ls -l /var/run/docker.sock 
 check "docker" docker ps -a
-check "kubernetes-config" [ -d "$HOME/.kube" ]
+check "kube-config-mount" ls -l /usr/local/share/kube-localhost
+check "kube-config" ls -l "$HOME/.kube"
 check "kubectl" kubectl version --client
 check "helm" helm version --client
 
