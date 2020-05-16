@@ -45,9 +45,9 @@ check "git" git --version
 check "command-line-tools" which top ip lsb_release curl
 check "java" java -version
 check "build-and-test-jar" mvn package
-mv target/mywebapp-0.0.1-SNAPSHOT.war $CATALINA_HOME/webapps/mywebapp.war
-echo "" >  $CATALINA_HOME/logs/catalina.out
-check "tomcat-startup" $CATALINA_HOME/bin/startup.sh
+sudo mv target/mywebapp-0.0.1-SNAPSHOT.war $CATALINA_HOME/webapps/mywebapp.war
+sudo touch $CATALINA_HOME/logs/catalina.out
+check "tomcat-startup" sudo $CATALINA_HOME/bin/startup.sh
 STARTED=0
 while [ "$STARTED" == "0" ]; do
     echo "Waiting for deployment to be done..."
@@ -55,11 +55,11 @@ while [ "$STARTED" == "0" ]; do
     sleep 2
 done
 check "test-project" [ "$(curl -o /dev/null -sSLI -w '%{http_code}\n' 'http://localhost:8080/mywebapp')" == "200" ]
-check "tomcat-shutdown" $CATALINA_HOME/bin/shutdown.sh
+check "tomcat-shutdown" sudo $CATALINA_HOME/bin/shutdown.sh
 
 # Cleanup
-rm $CATALINA_HOME/webapps/mywebapp.war
-rm -rf $CATALINA_HOME/webapps/mywebapp
+sudo rm $CATALINA_HOME/webapps/mywebapp.war
+sudo rm -rf $CATALINA_HOME/webapps/mywebapp
 
 # Report result
 if [ ${#FAILED[@]} -ne 0 ]; then
