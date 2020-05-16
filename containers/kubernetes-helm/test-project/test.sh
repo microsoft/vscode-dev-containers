@@ -35,12 +35,12 @@ checkExtension() {
     checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]"
 }
 
+# Execute .bashrc with the SYNC_LOCALHOST_KUBECONFIG set
+export SYNC_LOCALHOST_KUBECONFIG=true 
+exec bash
+
 # Run Docker init script
 /usr/local/share/docker-init.sh
-
-# Source .bashrc with the SYNC_LOCALHOST_KUBECONFIG set
-export SYNC_LOCALHOST_KUBECONFIG=true 
-bash $HOME/.bashrc
 
 # Actual tests
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"

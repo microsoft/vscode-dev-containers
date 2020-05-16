@@ -60,6 +60,36 @@
 						"commitHash": "b6a607d9c36840ea8051586695d57a644402273c"
 					}
 				}
+			},
+			{
+				"Component": {
+					"Type": "git",
+					"git": {
+						"Name": "Oh My Zsh!",
+						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
+						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
+					}
+				}
+			},
+			{
+				"Component": {
+					"Type": "other",
+					"Other": {
+						"Name": "kubectl",
+						"Version": "1.18.2",
+						"DownloadUrl": "https://storage.googleapis.com/kubernetes-release/release/v1.18.2/bin/linux/amd64/kubectl"
+					}
+				}
+			},
+			{
+				"Component": {
+					"Type": "other",
+					"Other": {
+						"Name": "Helm",
+						"Version": "3.2.1",
+						"DownloadUrl": "https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz"
+					}
+				}
 			}
 		]
 	}

@@ -44,7 +44,7 @@ check "sudo" sudo echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
 check "php" php --version
-check "mariadb" mariadb -h mariadb -P 3306 -u root --password=just-for-testing -Bse exit
+check "mariadb" mariadb -h mariadb -P 3306 -u root --password=just-for-testing -D VscodeDev -Bse exit
 
 # -- Report results --
 if [ ${#FAILED[@]} -ne 0 ]; then
