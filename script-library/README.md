@@ -6,13 +6,18 @@ Note that this folder contains a dev container that can be used to test the scri
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definitions to this repository.
 
+## Scripts
+
+- `common-debian.sh`, `common-alpine.sh`, `common-redhat.sh` - Installs common packages and utilities, creates a non-root user, and optionally upgrades packages, and installs zsh and Oh My Zsh!
+- `docker-debian.sh` - Installs the Docker CLI and wires up a script thatt can enable non-root access to the Docker socket. See [Docker in Docker](../containers/docker-in-docker) for an example.
+
 ## Using a script
 
 To use a script, simply download it using `curl` or `wget` and execute it. For example:
 
 ```Dockerfile
-RUN apt-get update \
-    && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
+    && apt-get -y install --no-install-recommends curl ca-certificates \
     && curl -sSL -o- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh" | bash -
 ```
 
@@ -30,12 +35,10 @@ ARG COMMON_SCRIPT_SHA="dev-mode"
 # Configure apt and install packages
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    #
-    # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
     && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
     && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
     && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} /tmp/common-setup.sh" | sha256sum -c -)) \
-    && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
+    && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "vscode" "1000" "1000" "${UPGRADE_PACKAGES}" \
     && rm /tmp/common-setup.sh
 ```
 
