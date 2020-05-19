@@ -23,12 +23,13 @@
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
 
-	// Uncomment this like if you want to keep your containers running after VS Code shuts down.
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
 	// "shutdownAction": "none",
 
-	// Use 'postCreateCommand' to run commands after the container is created.
+	// Uncomment the next line to use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
 
-	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// Uncomment the next line to connect as a non-root user.
+	// See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
 }
