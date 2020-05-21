@@ -78,6 +78,22 @@ async function loadConfig(repoPath) {
                         variant: variant
                     }
                 });
+                /*
+                if (!definitionVariants) {
+                    // Add lookups for $VARIANT and ${VARIANT}
+                    const repoistoryAndTag = /(.+):(.+)/.exec(blankTagList[0]);
+                    ['${VARIANT}', '$VARIANT'].forEach((tag) => {
+                        definitionTagLookup[`${repoistoryAndTag[1]}:${tag}`] = { 
+                            id: definitionId,
+                            variant: "${VARIANT}"
+                        }
+                        definitionTagLookup[`${repoistoryAndTag[1]}:dev-${tag}`] = { 
+                            id: definitionId,
+                            variant: "dev-${VARIANT}"
+                        }
+                    });
+                }
+                */
             })
         }
     }
@@ -161,13 +177,15 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
 
     // See if there are any variant specific tags that should be added to the output
     const variantTags = config.definitionBuildSettings[definitionId].variantTags;
-    if(variantTags) {
-        // ${VARIANT} or $VARIANT may be passed in as a way to do lookups. Add all in this case.
-        if(['${VARIANT}', '$VARIANT'].indexOf(variant) > -1 ) {
-            for(let variantEntry in variantTags) {
+    // ${VARIANT} or $VARIANT may be passed in as a way to do lookups. Add all in this case.
+    if (['${VARIANT}', '$VARIANT'].indexOf(variant) > -1 ) {
+        if(variantTags) {
+            for (let variantEntry in variantTags) {
                 tags = tags.concat(variantTags[variantEntry]);
-            }
-        } else {
+            }    
+        } 
+    } else {
+        if(variantTags) {
             tags = tags.concat(variantTags[variant]);
         }
     }
@@ -320,11 +338,19 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
     
-    const definitionId =  getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath).id;
+    const definition =  getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath);
+
+    // If definition not found, fall back on swapping out more generic logic - e.g. for when a image is referenced by ${VARIANT}
+    if (!definition) {
+        const repository = new RegExp(`${currentRegistry}/${currentRegistryPath}/(.+):`).exec(currentTag)[1];
+        const updatedTag = currentTag.replace(new RegExp(`${currentRegistry}/${currentRegistryPath}/${repository}:(dev-)?`), `${updatedRegistry}/${updatedRegistryPath}/${repository}:${updatedVersion}-`);
+        console.log(`    Using RegEx to update ${currentTag}\n    to ${updatedTag}`);
+        return updatedTag;
+    }
 
     // See if no variant passed in, see definition has any and use one if it matches
     if (!variant) {
-        let variants = getVariants(definitionId);
+        let variants = getVariants(definition.id);
         if(variants) {
             // The variant may be passed in as an ARG instead, support that too
             variants = variants.concat(['${VARIANT}', '$VARIANT']);
@@ -336,7 +362,7 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
         }
     }
 
-    const updatedTags = getTagsForVersion(definitionId, updatedVersion, updatedRegistry, updatedRegistryPath, variant);
+    const updatedTags = getTagsForVersion(definition.id, updatedVersion, updatedRegistry, updatedRegistryPath, variant);
     if (updatedTags && updatedTags.length > 0) {
         console.log(`    Updating ${currentTag}\n    to ${updatedTags[0]}`);
         return updatedTags[0];
@@ -351,7 +377,8 @@ function getDefinitionFromTag(tag, registry, registryPath) {
     registry = registry || '.+';
     registryPath = registryPath || '.+';
     const captureGroups = new RegExp(`${registry}/${registryPath}/(.+):(.+)`).exec(tag);
-    return definitionTagLookup[`ANY/ANY/${captureGroups[1]}:${captureGroups[2]}`];
+    const definition = definitionTagLookup[`ANY/ANY/${captureGroups[1]}:${captureGroups[2]}`];
+    return definition;
 }
 
 // Return just the major version of a release number

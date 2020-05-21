@@ -40,12 +40,12 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
         // to the MAJOR version from this release.
         const expectedRegistry = configUtils.getConfig('stubRegistry', 'mcr.microsoft.com');
         const expectedRegistryPath = configUtils.getConfig('stubRegistryPath', 'vscode/devcontainers');
-        const fromCaptureGroups = new RegExp(`FROM (${expectedRegistry}/${expectedRegistryPath}/.+:.+)`).exec(devContainerDockerfileRaw);
+        const fromCaptureGroups = new RegExp(`FROM ((${registry}|${expectedRegistry})/(${registryPath}|${expectedRegistryPath})/.+:.+)`).exec(devContainerDockerfileRaw);
         if (fromCaptureGroups && fromCaptureGroups.length > 0) {
             const fromDefinitionTag = configUtils.getUpdatedTag(
                 fromCaptureGroups[1], 
-                expectedRegistry,
-                expectedRegistryPath,
+                fromCaptureGroups[2],
+                fromCaptureGroups[3],
                 version,
                 stubRegistry,
                 stubRegistryPath,
@@ -58,27 +58,11 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
     await asyncUtils.writeFile(devContainerDockerfilePath, devContainerDockerfileModified)
 }
 
-function getFromSnippet(definitionId, imageTag, repo, release, baseDockerFileExists, useVariantArg, registry, registryPath) {
-    if (useVariantArg) {
-        // The VARIANT arg allows this value to be set from devcontainer.json
-        const version = configUtils.getVersionFromRelease(release);
-        const variant = configUtils.getDefinitionFromTag(imageTag).variant;
-        const tagWithVariant = configUtils.getTagsForVersion(definitionId, version, registry, registryPath, '${VARIANT}')[0];        
-        return  `# ${configUtils.getConfig('dockerFilePreamble')}\n` +
-            `# https://github.com/${repo}/tree/${release}/${containersPathInRepo}/${definitionId}/.devcontainer/${baseDockerFileExists ? 'base.' : ''}Dockerfile\n` +
-            `ARG VARIANT="${variant}"\n` +
-            `FROM ${tagWithVariant}`;
-    }
-    return `# ${configUtils.getConfig('dockerFilePreamble')}\n` +
-        `# https://github.com/${repo}/tree/${release}/${containersPathInRepo}/${definitionId}/.devcontainer/${baseDockerFileExists ? 'base.' : ''}Dockerfile\n` +
-        `FROM ${imageTag}`;
-}
-
 async function createStub(dotDevContainerPath, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRegistryPath) {
     const userDockerFilePath = path.join(dotDevContainerPath, 'Dockerfile');
     console.log('(*) Generating user Dockerfile...');
     const templateDockerfile = await configUtils.objectByDefinitionLinuxDistro(definitionId, stubPromises);
-    const userDockerFile = processStub(templateDockerfile, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRegistryPath);
+    const userDockerFile = await processStub(templateDockerfile, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRegistryPath);
     await asyncUtils.writeFile(userDockerFilePath, userDockerFile);
 }
 
@@ -86,7 +70,7 @@ async function updateStub(dotDevContainerPath, definitionId, repo, release, base
     console.log('(*) Updating user Dockerfile...');
     const userDockerFilePath = path.join(dotDevContainerPath, 'Dockerfile');
     const userDockerFile = await asyncUtils.readFile(userDockerFilePath);
-    const userDockerFileModified = processStub(userDockerFile, definitionId, repo, release, baseDockerFileExists, registry, registryPath);
+    const userDockerFileModified = await processStub(userDockerFile, definitionId, repo, release, baseDockerFileExists, registry, registryPath);
     await asyncUtils.writeFile(userDockerFilePath, userDockerFileModified);
 }
 
@@ -97,14 +81,14 @@ async function processStub(userDockerFile, definitionId, repo, release, baseDock
     // The VARIANT arg allows this value to be set from devcontainer.json, handle it if found
     if (/ARG\s+VARIANT\s*=/.exec(userDockerFile) !== null) {
         const variant = configUtils.getVariants(definitionId)[0];
-        const tagWithVariant = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath, '${VARIANT}')[0];        
+        const tagWithVariant = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath, '${VARIANT}')[0];
         fromSection += `ARG VARIANT="${variant}"\nFROM ${tagWithVariant}`;
     } else {
         const imageTag = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath)[0];
         fromSection += `FROM ${imageTag}`;
     }
 
-    return userDockerFile.replace(/(ARG\s+VARIANT\s*=\s*.+\n)?(FROM\s+.+:.+)/, fromSection);
+    return userDockerFile.replace(/(ARG\s+VARIANT\s*=\s*.+\n)?(FROM\s+.+\n)/, `${fromSection}\n`);
 }
 
 async function updateConfigForRelease(definitionPath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath) {
