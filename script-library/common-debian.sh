@@ -45,7 +45,7 @@ apt-get -y install --no-install-recommends \
     lsb-release \
     ca-certificates \
     apt-transport-https \
-    gnupg2 \
+    gnupg \
     libc6 \
     libgcc1 \
     libgssapi-krb5-2 \
