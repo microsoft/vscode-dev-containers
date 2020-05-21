@@ -40,12 +40,13 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
         // to the MAJOR version from this release.
         const expectedRegistry = configUtils.getConfig('stubRegistry', 'mcr.microsoft.com');
         const expectedRegistryPath = configUtils.getConfig('stubRegistryPath', 'vscode/devcontainers');
-        const fromCaptureGroups = new RegExp(`FROM ((${registry}|${expectedRegistry})/(${registryPath}|${expectedRegistryPath})/.+:.+)`).exec(devContainerDockerfileRaw);
+        const fromCaptureGroups = new RegExp(`FROM (${expectedRegistry}/${expectedRegistryPath}/.+:.+)`).exec(devContainerDockerfileRaw);
+//        const fromCaptureGroups = new RegExp(`FROM ((${registry}|${expectedRegistry})/(${registryPath}|${expectedRegistryPath})/.+:.+)`).exec(devContainerDockerfileRaw);
         if (fromCaptureGroups && fromCaptureGroups.length > 0) {
             const fromDefinitionTag = configUtils.getUpdatedTag(
                 fromCaptureGroups[1], 
-                fromCaptureGroups[2],
-                fromCaptureGroups[3],
+                expectedRegistry,
+                expectedRegistryPath,
                 version,
                 stubRegistry,
                 stubRegistryPath,
