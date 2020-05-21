@@ -17,13 +17,13 @@
 
 ## Using this definition with an existing folder
 
-While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following:
+While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following:
 
 - `mcr.microsoft.com/vscode/devcontainers/base:ubuntu`
 - `mcr.microsoft.com/vscode/devcontainers/base:ubuntu20.04`
 - `mcr.microsoft.com/vscode/devcontainers/base:ubuntu18.04`
 
-Alternatively, you can use the contents of the `Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+Alternatively, you can use the contents of the `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
 Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
 
