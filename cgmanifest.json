@@ -1001,16 +1001,6 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
                     "Name": "Docker Image: python",
                     "Version": "3",
                     "DownloadUrl": "https://hub.docker.com/_/python"
@@ -1431,6 +1421,16 @@
                 "Other": {
                     "Name": "Docker Image: node",
                     "Version": "12",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "14",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
