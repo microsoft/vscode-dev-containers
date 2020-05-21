@@ -17,8 +17,35 @@
 		}
 	},
 	"dependencies": {
-		"image": "ubuntu:${VARIANT}",
-		"imageLink": "https://hub.docker.com/_/ubuntu",
+		"image": "buildpack-deps:${VARIANT}-curl",
+		"imageLink": "https://hub.docker.com/_/buildpack-deps",
+		"debian": [
+			"apt-utils", 
+			"dialog", 
+			"ca-certificates",
+			"git",
+			"iproute2",
+			"procps",
+			"curl",
+			"openssh-client",
+			"less",
+			"nano",
+			"gnupg",
+			"jq",
+			"wget",
+			"unzip",
+			"lsb-release",
+			"apt-transport-https",
+			"libc6",
+			"libgcc1",
+			"libgssapi-krb5-2",
+			"libicu[0-9][0-9]",
+			"libssl1.1",
+			"libstdc++6",
+			"zlib1g",
+			"sudo",
+			"zsh"
+		],
 		"manual": [
 			{
 				"Component": {
