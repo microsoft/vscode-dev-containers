@@ -45,6 +45,7 @@ apt-get -y install --no-install-recommends \
     lsb-release \
     ca-certificates \
     apt-transport-https \
+    dialog \
     gnupg \
     libc6 \
     libgcc1 \
@@ -103,7 +104,7 @@ echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.bashrc >> /home/$USE
 chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
 
 # Optionally install and configure zsh
-if [ "$INSTALL_ZSH" = "true" ]; then 
+if [ "$INSTALL_ZSH" = "true" ] && [ ! -d "/root/.oh-my-zsh" ]; then 
     apt-get install -y zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     echo "export PATH=\$PATH:\$HOME/.local/bin" >> /root/.zshrc

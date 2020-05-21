@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 cd $(dirname "$0")
 
+# -- Ensure ~/.bashrc fires --
+exec bash
+
 # -- Utility functions --
 if [ -z $HOME ]; then
     HOME="/root"

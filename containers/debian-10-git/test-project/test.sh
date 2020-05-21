@@ -39,9 +39,12 @@ checkExtension() {
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
 check "non-root-user" "id vscode"
 check "/home/vscode" [ -d "/home/vscode" ]
-check "sudo" sudo -u vscode echo "sudo works."
+check "sudo" sudo echo "sudo works."
 check "git" git --version
-check "command-line-tools" which top ip lsb_release
+check "command-line-tools" which top ip lsb_release wget curl jq less nano unzip
+check "zsh" zsh --version
+check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
+
 
 # Report result
 if [ ${#FAILED[@]} -ne 0 ]; then

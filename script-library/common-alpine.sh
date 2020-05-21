@@ -31,6 +31,7 @@ apk add --no-cache \
     unzip \
     nano \
     jq \
+    gnupg \
     procps \
     coreutils \
     ca-certificates \
@@ -69,7 +70,7 @@ echo "export PATH=\$PATH:\$HOME/.local/bin" | tee -a /root/.bashrc >> /home/$USE
 chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
 
 # Optionally install and configure zsh
-if [ "$INSTALL_ZSH" = "true" ]; then 
+if [ "$INSTALL_ZSH" = "true" ] && [ ! -d "/root/.oh-my-zsh" ]; then 
     apk add --no-cache zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     echo "export PATH=\$PATH:\$HOME/.local/bin" >> /root/.zshrc

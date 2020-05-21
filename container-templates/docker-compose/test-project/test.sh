@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 cd $(dirname "$0")
 
+# -- Ensure ~/.bashrc fires --
+exec bash
+
 # -- Utility functions --
 if [ -z $HOME ]; then
     HOME="/root"
@@ -36,11 +39,14 @@ checkExtension() {
     checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]"
 }
 
+# -- chown the test-project folder to make sure non-root can access it --
+sudo chown -R $(id -u) .
+
 # -- Actual tests - add more here --
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
 check "non-root-user" "id vscode"
 check "/home/vscode" [ -d "/home/vscode" ]
-check "sudo" sudo -u vscode echo "sudo works."
+check "sudo" sudo echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
 

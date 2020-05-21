@@ -21,19 +21,15 @@ RUN chmod +x /tmp/*.sh \
 # Run common script
 RUN /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}
 
-# Optionally run docker script
-RUN if [ "${DISTRO}" = "debian" ] && [ "${INSTALL_DOCKER}" = "true" ]; then \
+RUN export DEBIAN_FRONTEND=noninteractive && /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && if [ "${DISTRO}" = "debian" ]; then \
         /tmp/docker-${DISTRO}.sh true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}; \
     else \
-        echo "#!/bin/bash\n\$@" > /usr/local/share/docker-init.sh \
-        && chmod +x /usr/local/share/docker-init.sh \
-        && chown ${USERNAME} /usr/local/share/docker-init.sh; \
-    fi
-
-RUN if [ "${DISTRO}" = "debian" ]; then \
-        apt-get autoremove -y \
-        && apt-get clean -y \
-        && rm -rf /var/lib/apt/lists/*; \
+        echo -e '#!/bin/bash\n"$@"' | tee /usr/local/share/docker-init.sh \
+        && chown ${USERNAME} /usr/local/share/docker-init.sh \
+        && chmod +x /usr/local/share/docker-init.sh; \
     fi
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 

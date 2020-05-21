@@ -4,6 +4,7 @@
 
 ## Expected to work (Alphabetical)
 
+* azure-ansible
 * azure-blockchain
 * azure-cli
 * azure-functions-dotnetcore-2.1
@@ -15,12 +16,14 @@
 * azure-functions-pwsh-6
 * azure-terraform-0.11
 * azure-terraform-0.12
+* azure-machine-learning-python-3
 * bazel
 * codespaces-linux
 * cpp
 * dart
 * debian-9-git
 * debian-10-git
+* docker-in-docker
 * docker-in-docker-compose
 * dotnetcore-2.1
 * dotnetcore-2.1-fsharp
@@ -40,6 +43,7 @@
 * javascript-node-12-postgres
 * javascript-node-14
 * jekyll
+* kubernetes-helm
 * markdown
 * perl
 * php-7
@@ -64,11 +68,8 @@
 ## Not currently working
 
 * alpine-3.10-git - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
-* azure-ansible - [#469](https://github.com/MicrosoftDocs/vsonline/issues/469))
-* azure-machine-learning-python-3 - [#469](https://github.com/MicrosoftDocs/vsonline/issues/469))
 * dapr-dotnetcore-3.1 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
 * dapr-typescript-node-12 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
-* docker-in-docker - Due to [#459](https://github.com/MicrosoftDocs/vsonline/issues/459)
-* kubernetes-helm - Due to [#459](https://github.com/MicrosoftDocs/vsonline/issues/459)
 * reasonml - Build fails, but builds successfully locally. Something about the use of PPAs for fish
 * r - Language server crash. More investigation needed.
+

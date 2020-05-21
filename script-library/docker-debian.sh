@@ -37,13 +37,14 @@ chmod +x /usr/local/bin/docker-compose \
 if [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ]; then
     touch "${SOURCE_SOCKET}"
     ln -s "${SOURCE_SOCKET}" "${TARGET_SOCKET}"
+    chown -h "${NONROOT_USER}" "${TARGET_SOCKET}"
 fi
 
 # If enabling non-root access, setup socat
 if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
     apt-get -y install socat
     tee /usr/local/share/docker-init.sh << EOF 
-#!/bin/sh
+#!/usr/bin/env bash
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
@@ -51,38 +52,63 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
 
 set -e
 
-echo "(*) Ensuring ${NONROOT_USER} has access to ${SOURCE_SOCKET} via ${TARGET_SOCKET}"
+SOCAT_PATH_BASE=/tmp/vscr-dind-socat
+SOCAT_LOG=\${SOCAT_PATH_BASE}.log
+SOCAT_PID=\${SOCAT_PATH_BASE}.pid
 
 # Wrapper function to only use sudo if not already root
 sudoIf()
 {
     if [ "\$(id -u)" -ne 0 ]; then
-        sudo \$@
+        sudo "\$@"
     else
-        \$@
+        "\$@"
     fi
 }
 
-SOCAT_LOG_PATH=/tmp/vscr-dind-socat.log
+# Log messages
+log()
+{
+    echo -e "[\$(date)] \$@" | sudoIf tee -a \${SOCAT_LOG} > /dev/null
+}
 
-# If enabled, use socat to forward the docker socket to another unix socket 
-# so that we can set permissions on it without affecting the host.
+echo -e "\n** \$(date) **" | sudoIf tee -a \${SOCAT_LOG} > /dev/null
+log "Ensuring ${NONROOT_USER} has access to ${SOURCE_SOCKET} via ${TARGET_SOCKET}"
+
+# If enabled, try to add a docker group with the right GID. If the group is root, 
+# fall back on using socat to forward the docker socket to another unix socket so 
+# that we can set permissions on it without affecting the host.
 if [ "${ENABLE_NONROOT_DOCKER}" = "true" ] && [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ] && [ "${NONROOT_USER}" != "root" ] && [ "${NONROOT_USER}" != "0" ]; then
-    echo "(*) Enabling proxy..."
-    date >> \${SOCAT_LOG_PATH}
-    echo "Proxying ${SOURCE_SOCKET} to ${TARGET_SOCKET} for ${NONROOT_USER}" >> \${SOCAT_LOG_PATH}
-    sudoIf rm -rf ${TARGET_SOCKET}
-    ((sudoIf socat UNIX-LISTEN:${TARGET_SOCKET},fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:${SOURCE_SOCKET}) 2>&1 >> \${SOCAT_LOG_PATH}) & > /dev/null
+    SOCKET_GID=\$(stat -c '%g' ${SOURCE_SOCKET})
+    if [ "\${SOCKET_GID}" != "0" ]; then
+        log "Adding user to group with GID \${SOCKET_GID}."
+        if [ "\$(cat /etc/group | grep :\${SOCKET_GID}:)" = "" ]; then
+            sudoIf groupadd --gid \${SOCKET_GID} docker
+        fi
+        # Add user to group if not already in it
+        if [ "\$(id ${NONROOT_USER} | grep -E 'groups=.+\${SOCKET_GID}\(')" = "" ]; then
+            sudoIf usermod -aG \${SOCKET_GID} ${NONROOT_USER}
+        fi
+    else
+        # Enable proxy if not already running
+        if [ ! -f "\${SOCAT_PID}" ] || ! ps -p \$(cat \${SOCAT_PID}) > /dev/null; then
+            log "Enabling socket proxy."
+            log "Proxying ${SOURCE_SOCKET} to ${TARGET_SOCKET} for vscode"
+            sudoIf rm -rf ${TARGET_SOCKET}
+            (sudoIf socat UNIX-LISTEN:${TARGET_SOCKET},fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:${SOURCE_SOCKET} 2>&1 | sudoIf tee -a \${SOCAT_LOG} > /dev/null & echo "\$!" | sudoIf tee \${SOCAT_PID} > /dev/null)
+        else
+            log "Socket proxy already running."
+        fi
+    fi
+    log "Success"
 fi
-
-echo "(*) Success"
 
 # Execute whatever commands were passed in (if any). This allows us 
 # to set this script to ENTRYPOINT while still executing the default CMD.
-\$@
+set +e
+"\$@"
 EOF
 else 
-    echo "#!/bin/sh\necho '(*) Skipping proxy setup'" > /usr/local/share/docker-init.sh
+    echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
 fi
 chmod +x /usr/local/share/docker-init.sh
-

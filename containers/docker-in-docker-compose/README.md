@@ -36,16 +36,16 @@ You can adapt your own existing development container Dockerfile to support this
     RUN apt-get update \
         #
         # Install Docker CE CLI
-        && apt-get install -y apt-transport-https ca-certificates curl gunpg2 lsb-release \
+        && apt-get install -y apt-transport-https ca-certificates curl gnupg2 lsb-release \
         && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
         && echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
         && apt-get update \
         && apt-get install -y docker-ce-cli \
         #
         # Install Docker Compose
-        LATEST_COMPOSE_VERSION=$(curl -sSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -o -P '(?<="tag_name": ").+(?=")')
-        curl -sSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-        chmod +x /usr/local/bin/docker-compose
+        && export LATEST_COMPOSE_VERSION=$(curl -sSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -o -P '(?<="tag_name": ").+(?=")') \
+        && curl -sSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
+        && chmod +x /usr/local/bin/docker-compose
     ```
 
 2. Then just forward the Docker socket by mounting it in the container in your Docker Compose config. From `.devcontainer/docker-compose.yml`:
@@ -84,10 +84,10 @@ Follow these directions to set up non-root access using `socat`:
         && ln -s /var/run/docker-host.socket /var/run/docker.socket
         && apt-get update \
         && apt-get -y install socat \
-        && echo "#!/bin/sh\n\
+        && echo '#!/bin/sh\n\
         sudo rm -rf /var/run/docker-host.socket\n\
         ((sudo socat UNIX-LISTEN:/var/run/docker.socket,fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:/var/run/docker-host.socket) 2>&1 >> /tmp/vscr-dind-socat.log) & > /dev/null\n\
-        \$@" >> /usr/local/share/docker-init.sh
+        "$@"' >> /usr/local/share/docker-init.sh \
         && chmod +x /usr/local/share/docker-init.sh
 
     # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to

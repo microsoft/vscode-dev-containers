@@ -41,7 +41,7 @@ checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$H
 checkExtension "ms-vscode.powershell"
 check "non-root-user" "id vscode"
 check "/home/vscode" [ -d "/home/vscode" ]
-check "sudo" sudo -u vscode echo "sudo works."
+check "sudo" sudo echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip
 check "powershell" pwsh hello.ps1
