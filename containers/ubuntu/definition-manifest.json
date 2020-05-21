@@ -1,15 +1,24 @@
 {
-	"latest": false,
+	"variants": ["20.04", "18.04"],
 	"build": {
 		"rootDistro": "debian",
-		"parent": "javascript-node-12",
 		"tags": [
-			"typescript-node:${VERSION}-12"
-		]
+			"base:${VERSION}-ubuntu${VARIANT}",
+			"base:${VERSION}-ubuntu-${VARIANT}"
+		],
+		"variantTags": {
+			"20.04": [
+				"base:${VERSION}-focal",
+				"base:${VERSION}-ubuntu"
+			],
+			"18.04": [
+				"base:${VERSION}-bionic"
+			]
+		}
 	},
 	"dependencies": {
-		"image": "node:12",
-		"imageLink": "https://hub.docker.com/_/node",
+		"image": "buildpack-deps:${VARIANT}-curl",
+		"imageLink": "https://hub.docker.com/_/buildpack-deps",
 		"debian": [
 			"apt-utils", 
 			"dialog", 
@@ -30,19 +39,12 @@
 			"libc6",
 			"libgcc1",
 			"libgssapi-krb5-2",
-			"libicu57",
+			"libicu[0-9][0-9]",
 			"libssl1.1",
 			"libstdc++6",
 			"zlib1g",
-			"libssl1.0.2",
 			"sudo",
-			"yarn",
 			"zsh"
-		],
-		"npm": [
-			"eslint",
-			"tslint",
-			"typescript"
 		],
 		"manual": [
 			{
@@ -52,16 +54,6 @@
 						"Name": "Oh My Zsh!",
 						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
 						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
-					}
-				}
-			},
-			{
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Nvm",
-						"repositoryUrl": "https://github.com/nvm-sh/nvm",
-						"commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
 					}
 				}
 			}

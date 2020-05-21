@@ -3,17 +3,23 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-ARG IMAGE_TO_TEST=debian:9
+ARG IMAGE_TO_TEST=debian:10
 FROM ${IMAGE_TO_TEST}
 
 ARG DISTRO="debian"
 ARG USERNAME="vscode"
+ARG INSTALL_DOCKER="true"
+ARG UPGRADE_PACKAGES="true"
+ARG DEBIAN_FRONTEND=noninteractive
 
 COPY *.sh /tmp/
+RUN chmod +x /tmp/*.sh \
+    && if [ "${DISTRO}" = "debian" ]; then \
+      apt-get update; \
+    fi
 
-RUN if [ "${DISTRO}" = "debian" ]; then apt-get update; fi
-
-RUN chmod +x /tmp/*.sh
+# Run common script
+RUN /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}
 
 RUN export DEBIAN_FRONTEND=noninteractive && /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000
 

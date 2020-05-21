@@ -1,6 +1,11 @@
 {
-	"name": "Ubuntu 18.04 & Git",
-	"dockerFile": "Dockerfile",
+	"name": "Ubuntu",
+	"build": {
+		"dockerfile": "base.Dockerfile",
+		// Update 'VARIANT' to pick an Ubuntu version. Rebuild the container 
+		// if it already exists to update. Available variants: 18.04, 20.04
+		"args": { "VARIANT": "20.04" }
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 

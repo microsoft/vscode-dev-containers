@@ -3,7 +3,9 @@
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
+			"base:${VERSION}-debian10",
 			"base:${VERSION}-debian-10",
+			"base:${VERSION}-debian",
 			"base:${VERSION}-buster"
 		]
 	}, 

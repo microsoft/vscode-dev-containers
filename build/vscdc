@@ -169,7 +169,7 @@ require('yargs')
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
-                    default: configUtils.getConfig('vscodeDevContainersRepo', 'https://github.com/microsoft/vscode-dev-containers')
+                    default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'build': {
                     describe: 'whether to to build the image first step',

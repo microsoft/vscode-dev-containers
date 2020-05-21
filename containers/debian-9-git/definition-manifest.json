@@ -1,15 +1,15 @@
 {
 	"build": {
-		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
-			"python:${VERSION}-${VARIANT}"
-		],
-		"variants": ["3", "3.8", "3.7", "3.6"]
-	},
+			"base:${VERSION}-debian9",
+			"base:${VERSION}-debian-9",
+			"base:${VERSION}-stretch"
+		]
+	}, 
 	"dependencies": {
-		"image": "python:${VARIANT}",
-		"imageLink": "https://hub.docker.com/_/python",
+		"image": "buildpack-deps:stretch-curl",
+		"imageLink": "https://hub.docker.com/_/debian",
 		"debian": [
 			"apt-utils", 
 			"dialog", 
@@ -18,6 +18,11 @@
 			"iproute2",
 			"procps",
 			"curl",
+			"openssh-client",
+			"less",
+			"nano",
+			"gnupg",
+			"jq",
 			"wget",
 			"unzip",
 			"lsb-release",
@@ -25,26 +30,13 @@
 			"libc6",
 			"libgcc1",
 			"libgssapi-krb5-2",
-			"libicu63",
+			"libicu57",
 			"libssl1.1",
 			"libstdc++6",
 			"zlib1g",
+			"libssl1.0.2",
 			"sudo",
 			"zsh"
-		],
-		"pipx": [
-			"pylint",
-			"flake8",
-			"autopep8",
-			"black",
-			"pytest",
-			"yapf",
-			"mypy",
-			"pydocstyle",
-			"pycodestyle",
-			"bandit",
-			"virtualenv",
-			"pipx"
 		],
 		"manual": [
 			{

@@ -1,14 +1,15 @@
-# Ubuntu 18.04 & Git
+# Ubuntu
 
 ## Summary
 
-*Simple Ubuntu 18.04 container with Git installed.*
+*A simple Ubuntu container with Git and other common utilities installed.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
-| *Published image* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu-18.04 |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu |
+| *Available image variants* |   mcr.microsoft.com/vscode/devcontainers/base:ubuntu18.04 <br /> mcr.microsoft.com/vscode/devcontainers/base:ubuntu20.04 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -16,11 +17,13 @@
 
 ## Using this definition with an existing folder
 
-While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to:
+While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following:
 
-`mcr.microsoft.com/vscode/devcontainers/base:ubuntu-18.04`
+- `mcr.microsoft.com/vscode/devcontainers/base:ubuntu`
+- `mcr.microsoft.com/vscode/devcontainers/base:ubuntu20.04`
+- `mcr.microsoft.com/vscode/devcontainers/base:ubuntu18.04`
 
-Alternatively, you can use the contents of the `Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+Alternatively, you can use the contents of the `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
 Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
 
@@ -37,7 +40,7 @@ Just follow these steps:
 
 3. To use the Dockerfile for this definition (*rather than the pre-built image*):
    1. Clone this repository.
-   2. Copy the contents of `containers/ubuntu-18.04-git/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/ubuntu-git/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -51,8 +54,8 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/ubuntu-18.04-git` folder.
-5. Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd> and type the following command to verify installation: `apt-get update && apt-get install -y lsb-release && git --version && lsb_release -a`
+4. Select the `containers/ubuntu-git` folder.
+5. Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd> and type the following command to verify installation: `git --version && lsb_release -a`
 6. After lsb_release installs, you should see the Git version and details about the version of Linux in the container.
 
 ## License

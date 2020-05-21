@@ -12,6 +12,7 @@ const config = require('../../config.json');
 config.definitionDependencies = config.definitionDependencies || {};
 config.definitionBuildSettings = config.definitionBuildSettings || {};
 config.definitionVersions = config.definitionVersions || {};
+config.definitionVariants = config.definitionVariants || {};
 
 const stagingFolders = {};
 const definitionTagLookup = {};
@@ -28,10 +29,13 @@ async function loadConfig(repoPath) {
             return;
         }
         const definitionId = definitionFolder.name;
-        // If definition-build.json exists, load it
-        const possibleDefinitionBuildJson = path.join(containersPath, definitionId, getConfig('definitionBuildConfigFile', 'definition-build.json'));
+        // If definition-manifest.json exists, load it
+        const possibleDefinitionBuildJson = path.join(containersPath, definitionId, getConfig('definitionBuildConfigFile', 'definition-manifest.json'));
         if (await asyncUtils.exists(possibleDefinitionBuildJson)) {
             const buildJson = await jsonc.read(possibleDefinitionBuildJson);
+            if (buildJson.variants) {
+                config.definitionVariants[definitionId] = buildJson.variants;
+            }
             if (buildJson.build) {
                 config.definitionBuildSettings[definitionId] = buildJson.build;
             }
@@ -47,25 +51,32 @@ async function loadConfig(repoPath) {
     // Populate image variants and tag lookup
     for (let definitionId in config.definitionBuildSettings) {
         const buildSettings = config.definitionBuildSettings[definitionId];
+        const definitionVariants = config.definitionVariants[definitionId];
         const dependencies = config.definitionDependencies[definitionId]; 
     
         // Populate images list for variants
-        dependencies.imageVariants = buildSettings.variants ? 
-            buildSettings.variants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
+        dependencies.imageVariants = definitionVariants ? 
+        definitionVariants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
             [dependencies.image];
 
         // Populate image tag lookup
         if (buildSettings.tags) {
             // Variants can be used as a VARAINT arg in tags, so support that too
-            const variants = buildSettings.variants ? buildSettings.variants.concat(['${VARIANT}', '$VARIANT']) : [undefined];
+            const variants = definitionVariants ? definitionVariants.concat(['${VARIANT}', '$VARIANT']) : [undefined];
             variants.forEach((variant) => {
                 const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag) => {
-                    definitionTagLookup[blankTag] = definitionId;
+                    definitionTagLookup[blankTag] = { 
+                        id: definitionId,
+                        variant: variant
+                    };
                 });
                 const devTagList = getTagsForVersion(definitionId, 'dev', 'ANY', 'ANY', variant);
                 devTagList.forEach((devTag) => {
-                    definitionTagLookup[devTag] = definitionId;
+                    definitionTagLookup[devTag] = { 
+                        id: definitionId,
+                        variant: variant
+                    }
                 });
             })
         }
@@ -119,16 +130,20 @@ function getLatestTag(definitionId, registry, registryPath) {
     if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
         return null;
     }
+
+    // Given there could be multiple registries in the tag list, get all the different latest variations
     return config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
-        list.push(`${registry}/${registryPath}/${tag.replace(/:.+/, ':latest')}`);
+        const latest = `${registry}/${registryPath}/${tag.replace(/:.+/, ':latest')}`
+        if(list.indexOf(latest) < 0) {
+            list.push(latest);
+        }
         return list;
     }, []);
 
 }
 
 function getVariants(definitionId) {
-    const buildSettings = config.definitionBuildSettings[definitionId];
-    return buildSettings ? buildSettings.variants : null;
+    return config.definitionVariants[definitionId] || null;
 }
 
 // Create all the needed variants of the specified version identifier for a given definition
@@ -136,19 +151,35 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
     if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
         return null;
     }
+    
     // Use the first variant if none passed in, unless there isn't one
     if (!variant) {
         const variants = getVariants(definitionId);
         variant = variants ? variants[0] : 'NOVARIANT';
     }
-    return config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
+    let tags  = config.definitionBuildSettings[definitionId].tags;
+
+    // See if there are any variant specific tags that should be added to the output
+    const variantTags = config.definitionBuildSettings[definitionId].variantTags;
+    if(variantTags) {
+        // ${VARIANT} or $VARIANT may be passed in as a way to do lookups. Add all in this case.
+        if(['${VARIANT}', '$VARIANT'].indexOf(variant) > -1 ) {
+            for(let variantEntry in variantTags) {
+                tags = tags.concat(variantTags[variantEntry]);
+            }
+        } else {
+            tags = tags.concat(variantTags[variant]);
+        }
+    }
+
+    return tags.reduce((list, tag) => {
         // One of the tags that needs to be supported is one where there is no version, but there
         // are other attributes. For example, python:3 in addition to python:0.35.0-3. So, a version
         // of '' is allowed. However, there are also instances that are just the version, so in 
         // these cases latest would be used instead. However, latest is passed in separately.
         let baseTag = tag.replace('${VERSION}', version)
             .replace(':-', ':')
-            .replace('${VARIANT}', variant || 'NOVARIANT')
+            .replace(/\$\{?VARIANT\}?/, variant || 'NOVARIANT')
             .replace('-NOVARIANT', '');
         if (baseTag.charAt(baseTag.length - 1) !== ':') {
             list.push(`${registry}/${registryPath}/${baseTag}`);
@@ -179,8 +210,15 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
             `${versionParts[0]}.${versionParts[1]}`
         ];
 
-    // If this variant should actually be the latest tag, use it
-    let tagList = (updateLatest && config.definitionBuildSettings[definitionId].latest) ? getLatestTag(definitionId, registry, registryPath) : [];
+    // If this variant should actually be the latest tag (it's the left most in the list), use it
+    const allVariants = getVariants(definitionId);
+    const firstVariant = allVariants ? allVariants[0] : variant;
+    let tagList = (updateLatest
+        && config.definitionBuildSettings[definitionId].latest
+        && variant === firstVariant)
+            ? getLatestTag(definitionId, registry, registryPath)
+            : [];
+    
     versionList.forEach((tagVersion) => {
         tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
     });
@@ -277,13 +315,13 @@ function getParentTagForVersion(definitionId, version, registry, registryPath, v
     return parentId ? getTagsForVersion(parentId, version, registry, registryPath, variant)[0] : null;
 }
 
+// Takes an existing tag and updates it with a new registry version and optionally a variant
 function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updatedVersion, updatedRegistry, updatedRegistryPath, variant) {
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
-
-    const captureGroups = new RegExp(`${currentRegistry}/${currentRegistryPath}/(.+):(.+)`).exec(currentTag);
-    const definitionId =  definitionTagLookup[`ANY/ANY/${captureGroups[1]}:${captureGroups[2]}`];
     
+    const definitionId =  getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath).id;
+
     // See if no variant passed in, see definition has any and use one if it matches
     if (!variant) {
         let variants = getVariants(definitionId);
@@ -291,20 +329,29 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
             // The variant may be passed in as an ARG instead, support that too
             variants = variants.concat(['${VARIANT}', '$VARIANT']);
             // Find the best match if any exist
+            const tagPart = /.+:(.+)/.exec(currentTag)[1];
             variant = variants.reduce((prev, current) => {
-                return new RegExp(`^.*-?${current.replace('$','\\$')}$`).exec(captureGroups[2]) ? current :  prev;
-            }, false);    
+                return new RegExp(`^.*-?${current.replace('$','\\$')}$`).exec(tagPart) ? current : prev;
+            }, false);
         }
     }
 
     const updatedTags = getTagsForVersion(definitionId, updatedVersion, updatedRegistry, updatedRegistryPath, variant);
     if (updatedTags && updatedTags.length > 0) {
-        console.log(`      Updating ${currentTag}\n      to ${updatedTags[0]}`);
+        console.log(`    Updating ${currentTag}\n    to ${updatedTags[0]}`);
         return updatedTags[0];
     }
     // In the case where this is already a tag with a version number in it,
     // we won't get an updated tag returned, so we'll just reuse the current tag.
     return currentTag;
+}
+
+// Lookup definition from a tag
+function getDefinitionFromTag(tag, registry, registryPath) {
+    registry = registry || '.+';
+    registryPath = registryPath || '.+';
+    const captureGroups = new RegExp(`${registry}/${registryPath}/(.+):(.+)`).exec(tag);
+    return definitionTagLookup[`ANY/ANY/${captureGroups[1]}:${captureGroups[2]}`];
 }
 
 // Return just the major version of a release number
@@ -354,6 +401,7 @@ module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
     getVariants: getVariants,
+    getDefinitionFromTag: getDefinitionFromTag,
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,
     getParentTagForVersion: getParentTagForVersion,
     getUpdatedTag: getUpdatedTag,

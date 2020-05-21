@@ -19,7 +19,7 @@
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",
 	"scriptLibraryPathInRepo": "script-library",
-	"definitionBuildConfigFile": "definition-build.json",
+	"definitionBuildConfigFile": "definition-manifest.json",
 
 	"devContainerJsonPreamble": "For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:",
 	"dockerFilePreamble": "To fully customize the contents of this image, use the following Dockerfile instead:"
