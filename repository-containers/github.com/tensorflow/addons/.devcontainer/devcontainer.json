@@ -2,6 +2,9 @@
 	"name": "Tensorflow Addons SIG Dev Container",
 
 	"dockerFile": "Dockerfile",
+	
+    	// Uncomment this to enable Nvidia support
+	// "runArgs": ["--runtime=nvidia"],
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
