@@ -15,7 +15,7 @@ ARG USER_GID=$USER_UID
 
 # Options for common package install script - SHA updated on release
 ARG INSTALL_ZSH="false"
-ARG UPGRADE_PACKAGES="true"
+ARG UPGRADE_PACKAGES="false"
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
