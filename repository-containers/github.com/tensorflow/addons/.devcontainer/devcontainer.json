@@ -10,6 +10,7 @@
 	"settings": { 
 		"terminal.integrated.shell.linux": null,
 		"python.formatting.provider": "black",
+		"python.testing.pytestEnabled": true,
 		"C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
 		"C_Cpp.default.includePath": [
 			"${workspaceFolder}/**",
