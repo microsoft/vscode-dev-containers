@@ -7,7 +7,7 @@
 	"settings": { 
 		"terminal.integrated.shell.linux": null,
 		"python.formatting.provider": "black",
-		"C_Cpp.clang_format_style": "{BasedOnStyle: Google}"
+		"C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
 		"C_Cpp.default.includePath": [
 			"${workspaceFolder}/**",
 			"/usr/local/lib/python3.6/dist-packages/tensorflow/include/"
