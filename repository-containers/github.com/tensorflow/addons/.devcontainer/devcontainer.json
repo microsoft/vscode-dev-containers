@@ -3,7 +3,7 @@
 
 	"dockerFile": "Dockerfile",
 	
-    	// Uncomment this to enable Nvidia support
+    	// Uncomment to enable Nvidia support
 	// "runArgs": ["--runtime=nvidia"],
 
 	// Set *default* container specific settings.json values on container create.
