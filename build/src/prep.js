@@ -155,12 +155,12 @@ async function updateAllScriptSourcesInRepo(repo, release, updateScriptSha) {
     await asyncUtils.forEach(allDefinitions, async (currentDefinitionId) => {
         const dockerFileBasePath = path.join(definitionFolder, currentDefinitionId, '.devcontainer', 'base.Dockerfile');
         if (await asyncUtils.exists(dockerFileBasePath)) {
-            console.log('(*) Looking for script source in base.Dockerfile for ${currentDefinitionId}.');
+            console.log(`(*) Looking for script source in base.Dockerfile for ${currentDefinitionId}.`);
             await updateScriptSourcesInDockerfile(dockerFileBasePath, repo, release, updateScriptSha);
         }
         const dockerFilePath = path.join(definitionFolder, currentDefinitionId, '.devcontainer', 'Dockerfile');
         if (await asyncUtils.exists(dockerFilePath)) {
-            console.log('(*) Looking for script source in Dockerfile for ${currentDefinitionId}.');
+            console.log(`(*) Looking for script source in Dockerfile for ${currentDefinitionId}.`);
             await updateScriptSourcesInDockerfile(dockerFilePath, repo, release, updateScriptSha);
         }
     });
