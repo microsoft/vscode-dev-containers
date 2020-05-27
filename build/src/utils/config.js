@@ -78,22 +78,6 @@ async function loadConfig(repoPath) {
                         variant: variant
                     }
                 });
-                /*
-                if (!definitionVariants) {
-                    // Add lookups for $VARIANT and ${VARIANT}
-                    const repoistoryAndTag = /(.+):(.+)/.exec(blankTagList[0]);
-                    ['${VARIANT}', '$VARIANT'].forEach((tag) => {
-                        definitionTagLookup[`${repoistoryAndTag[1]}:${tag}`] = { 
-                            id: definitionId,
-                            variant: "${VARIANT}"
-                        }
-                        definitionTagLookup[`${repoistoryAndTag[1]}:dev-${tag}`] = { 
-                            id: definitionId,
-                            variant: "dev-${VARIANT}"
-                        }
-                    });
-                }
-                */
             })
         }
     }
@@ -343,7 +327,7 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
     // If definition not found, fall back on swapping out more generic logic - e.g. for when a image is referenced by ${VARIANT}
     if (!definition) {
         const repository = new RegExp(`${currentRegistry}/${currentRegistryPath}/(.+):`).exec(currentTag)[1];
-        const updatedTag = currentTag.replace(new RegExp(`${currentRegistry}/${currentRegistryPath}/${repository}:(dev-)?`), `${updatedRegistry}/${updatedRegistryPath}/${repository}:${updatedVersion}-`);
+        const updatedTag = currentTag.replace(new RegExp(`${currentRegistry}/${currentRegistryPath}/${repository}:(dev-|${updatedVersion}-)?`), `${updatedRegistry}/${updatedRegistryPath}/${repository}:${updatedVersion}-`);
         console.log(`    Using RegEx to update ${currentTag}\n    to ${updatedTag}`);
         return updatedTag;
     }
