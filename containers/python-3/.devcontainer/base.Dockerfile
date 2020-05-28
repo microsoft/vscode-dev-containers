@@ -35,7 +35,6 @@ ARG DEFAULT_UTILS="\
     flake8 \
     autopep8 \
     black \
-    pytest \
     yapf \
     mypy \
     pydocstyle \
