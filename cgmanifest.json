@@ -285,7 +285,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.0.0"
+                    "Version": "7.1.0"
                 }
             }
         },
@@ -1051,7 +1051,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "flake8",
-                    "Version": "3.8.1"
+                    "Version": "3.8.2"
                 }
             }
         },
@@ -1141,7 +1141,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pipx",
-                    "Version": "0.15.3.1"
+                    "Version": "0.15.4.0"
                 }
             }
         },
