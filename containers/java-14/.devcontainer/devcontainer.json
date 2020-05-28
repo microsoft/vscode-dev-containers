@@ -1,11 +1,11 @@
 {
-	"name": "Java 12",
+	"name": "Java 14",
 	"dockerFile": "Dockerfile",
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
+	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
-		"java.home": "/usr/java/openjdk-12",
+		"java.home": "/usr/java/openjdk-14",
 		"git.ignoreLegacyWarning": true
 	},
 
