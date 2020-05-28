@@ -1,10 +1,10 @@
-# Java 12
+# Java 14
 
 ## Summary
 
-*Develop Java 12 applications. Includes JDK 12 and Java extensions.*
+*Develop Java 14 applications. Includes JDK 14 and Java extensions.*
 
-| Metadata | Value |  
+| Metadata | Value |
 |----------|-------|
 | *Contributors* | The VS Code Java Team |
 | *Definition type* | Dockerfile |
@@ -27,18 +27,18 @@ Beyond that, just follow these steps to use the definition:
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Java 12 definition.
+   3. Select the Java 14 definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/java-12/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/java-14/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
-6. If you want to include maven or gradle build tools into your dev container, please uncomment the corresponding steps from the `containers/java-12/.devcontainer/Dockerfile`, and run **Remote-Containers: Rebuild Container** to rebuild the dev container.
+6. If you want to include maven or gradle build tools into your dev container, please uncomment the corresponding steps from the `containers/java-14/.devcontainer/Dockerfile`, and run **Remote-Containers: Rebuild Container** to rebuild the dev container.
 
 ## Testing the definition
 
@@ -47,7 +47,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/java-12` folder.
+4. Select the `containers/java-14` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
 6. You should see "Hello Weekday" in the Debug Console after the program executes.
 7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.

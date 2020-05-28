@@ -9,8 +9,8 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <maven.compiler.source>12</maven.compiler.source>
-    <maven.compiler.target>12</maven.compiler.target>
+    <maven.compiler.source>14</maven.compiler.source>
+    <maven.compiler.target>14</maven.compiler.target>
     <argLine>--enable-preview</argLine>
   </properties>
 
@@ -39,8 +39,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
           <configuration>
-            <source>12</source>
-            <target>12</target>
+            <source>14</source>
+            <target>14</target>
             <compilerArgs>--enable-preview</compilerArgs>
           </configuration>
         </plugin>

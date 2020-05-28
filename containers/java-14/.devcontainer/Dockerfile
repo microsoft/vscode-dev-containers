@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM openjdk:12-jdk
+FROM openjdk:14-jdk
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
@@ -18,7 +18,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     # [Optional] Add sudo support for the non-root user
     && yum install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME 
+    && chmod 0440 /etc/sudoers.d/$USERNAME
 
 # Verify git, needed tools installed
 RUN yum install -y git openssh-clients less net-tools which curl procps unzip
