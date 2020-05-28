@@ -10,7 +10,11 @@
 	"settings": { 
 		"terminal.integrated.shell.linux": null,
 		"python.formatting.provider": "black",
-		"python.testing.pytestEnabled": true,
+		// Before you uncomment python.testing.* check if these bugs are resolved
+		// https://github.com/microsoft/vscode-python/issues/8678
+		// https://github.com/microsoft/vscode-python/issues/9553
+		// "python.testing.pytestEnabled": true,
+		// "python.testing.cwd": "${workspaceFolder}/tensorflow_addons",
 		"C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
 		"C_Cpp.default.includePath": [
 			"${workspaceFolder}/**",
