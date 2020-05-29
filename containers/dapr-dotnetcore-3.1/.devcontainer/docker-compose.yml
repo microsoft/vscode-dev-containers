@@ -5,7 +5,7 @@
 
 version: '3.5'
 services:
-  docker-in-docker:
+  docker-from-docker:
     # Uncomment the next line to use a non-root user for all processes. You can also
     # simply use the "remoteUser" property in devcontainer.json if you just want VS Code
     # and its sub-processes (terminals, tasks, debugging) to execute as the user. On Linux,
