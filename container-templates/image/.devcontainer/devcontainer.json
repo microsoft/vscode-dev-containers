@@ -19,7 +19,7 @@
 	// Uncomment to run commands after the container is created - like installing git
 	// "postCreateCommand": "apt-get update && apt-get install -y git",
 
-	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-in-docker.
+	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
 
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust

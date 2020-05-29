@@ -1,7 +1,7 @@
 {
 	"name": "Dapr with Node.js 12 & TypeScript",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "docker-in-docker",
+	"service": "docker-from-docker",
 	"workspaceFolder": "/workspace",
 
 	// Set *default* container specific settings.json values on container create.

@@ -23,8 +23,8 @@
 * dart
 * debian-9-git
 * debian-10-git
-* docker-in-docker
-* docker-in-docker-compose
+* docker-from-docker
+* docker-from-docker-compose
 * dotnetcore-2.1
 * dotnetcore-2.1-fsharp
 * dotnetcore-3.0
