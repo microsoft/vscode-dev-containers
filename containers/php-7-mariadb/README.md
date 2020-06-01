@@ -2,7 +2,7 @@
 
 ## Summary
 
-Develop PHP 7 based applications with MariaDB (MySQL Compatible).  Includes necessary extensions and tools for both PHP and Mariadb.
+Develop PHP 7 based applications with MariaDB (MySQL Compatible).  Includes necessary extensions and tools for both PHP and MariaDB.
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | Richard Morrill [github.com/ThoolooExpress](https://github.com/ThoolooExpress) |
@@ -30,9 +30,9 @@ Just follow these steps:
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Php 7 & Mariadb definition.
+   3. Select the PHP 7 & MariaDB definition.
 
-3. To use latest-and-greatest copy of this definition from the repository:
+3. To use the latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
    2. Copy the contents of this folder in the cloned repository to the root of your project folder.
    3. Start VS Code and open your project folder.
