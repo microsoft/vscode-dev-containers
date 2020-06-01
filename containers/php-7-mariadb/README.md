@@ -14,7 +14,7 @@ Develop PHP 7 based applications with MariaDB (MySQL Compatible).  Includes nece
 ## Description
 
 This definition creates two containers, one for PHP and one for MariaDB.  Code will attach to the PHP container, and from within that container the
-MariaDB container will be availible with the hostname `mariadb`.  The MariaDB instance can be managed via the automatically installed SQLTools extension,
+MariaDB container will be available with the hostname `mariadb`.  The MariaDB instance can be managed via the automatically installed SQLTools extension,
 or from the container's command line with
 
 ```$ mariadb -h mariadb -u root -p```
