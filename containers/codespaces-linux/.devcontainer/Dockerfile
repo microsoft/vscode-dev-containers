@@ -10,7 +10,7 @@ ARG ZSH_PROMPT="autoload -Uz promptinit\npromptinit\nprompt adam2"
 
 # Define extra paths:
 # Language executables provided by Oryx -  see https://github.com/microsoft/Oryx/blob/master/images/build/slim.Dockerfile#L223
-ARG EXTRA_PATHS="/opt/oryx:/opt/nodejs/lts/bin:/opt/python/latest/bin:/opt/yarn/stable/bin:/home/codespace/.dotnet/tools"
+ARG EXTRA_PATHS="/opt/oryx:/opt/nodejs/lts/bin:/opt/python/latest/bin:/opt/yarn/stable/bin:/home/codespace/.dotnet/tools:/opt/php/lts/bin"
 ARG EXTRA_PATHS_OVERRIDES="~/.dotnet"
 # ~/.local/bin - For 'pip install --user'
 # ~/.npm-global/bin - For npm global bin directory in user directory
