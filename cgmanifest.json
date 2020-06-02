@@ -1060,7 +1060,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "autopep8",
-                    "Version": "1.5.2"
+                    "Version": "1.5.3"
                 }
             }
         },
@@ -1181,8 +1181,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: ca-certificates",
-                    "Version": "20190110ubuntu1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/c/ca-certificates/ca-certificates_20190110ubuntu1_all.deb"
+                    "Version": "20190110ubuntu1.1",
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/c/ca-certificates/ca-certificates_20190110ubuntu1.1_all.deb"
                 }
             }
         },
