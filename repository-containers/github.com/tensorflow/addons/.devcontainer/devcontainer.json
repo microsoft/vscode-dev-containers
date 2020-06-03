@@ -1,17 +1,27 @@
 {
 	"name": "Tensorflow Addons SIG Dev Container",
 
+	// Uncomment this for GPU image
+	// "build": { 
+	// 		"args": { 
+	//			"IMAGE_TYPE": "latest"
+	//		} 
+	//	},
+
 	"dockerFile": "Dockerfile",
 	
-    	// Uncomment to enable Nvidia support
+    // Uncomment to enable Nvidia support
 	// "runArgs": ["--runtime=nvidia"],
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": null,
 		"python.formatting.provider": "black",
-		"python.testing.pytestEnabled": true,
-		"python.testing.pytestArgs": ["./tensorflow_addons"],
+		// Before you uncomment python.testing.* check if these bugs are resolved
+		// https://github.com/microsoft/vscode-python/issues/8678
+		// https://github.com/microsoft/vscode-python/issues/9553
+		// "python.testing.pytestEnabled": true,
+		// "python.testing.pytestArgs": ["./tensorflow_addons"],
 		"C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
 		"C_Cpp.default.includePath": [
 			"${workspaceFolder}/**",

@@ -3,7 +3,8 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM tfaddons/dev_container:latest
+ARG IMAGE_TYPE=latest-cpu
+FROM tfaddons/dev_container:$IMAGE_TYPE
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
