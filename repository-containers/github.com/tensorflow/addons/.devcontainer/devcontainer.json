@@ -17,6 +17,7 @@
 	"settings": { 
 		"terminal.integrated.shell.linux": null,
 		"python.formatting.provider": "black",
+		"python.linting.flake8Enabled": true,
 		// Before you uncomment python.testing.* check if these bugs are resolved
 		// https://github.com/microsoft/vscode-python/issues/8678
 		// https://github.com/microsoft/vscode-python/issues/9553
