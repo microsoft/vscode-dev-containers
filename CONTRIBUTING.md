@@ -22,14 +22,14 @@ Since devcontainer.json can be commited to a source code repository, the definit
 
 1. How different is the scenario you are interested in from other dev container definitions in the repository? 
     - Does it drive significantly different extension, runtime, configuration requirements? 
-    - Are the requirements cumbersome install or are they typically things added by a package manager (pip, npm, etc) using an project's manifest file (`package.json`, `requirements.txt`, etc)?
-2. How likely are other developers to find the definition useful on its own? Could the scenario be broaded to help more people?
+    - Are the requirements cumbersome to install or are they typically things added by a package manager (pip, npm, etc) using a project's manifest file (`package.json`, `requirements.txt`, etc)?
+2. How likely are other developers to find the definition useful on its own? Could the scenario be broadened to help more people?
 
 If the definition is too similar to others, consider contributing a PR to improve an existing one instead. If the scenario is too specific consider generalizing it and making it more broadly applicable.
 
 ### Anatomy of a Dev Container Definition
 
-The contents of the folders in the `containers` directory ultimately populate the available definitions list shown in the **Remote-Containers: Add Development Container Configuration Files...** command. To make this work, each folder consists of up to three things:
+The contents of the folders in the `containers` directory ultimately populate the available definitions list shown in the **Remote-Containers: Add Development Container Configuration Files...** command. To make this work, each folder consists of up to three elements:
 
 1. **The container definition itself** - These are the files and folders that will be added to a user's existing project / folder if they select the definition. Typically these files are stored in a `.devcontainer` folder.
 2. **Test assets** - While you are creating your definition, you may need to use a test project to make sure it works as expected. Contributing these files back will also help others that want to contribute to your definition in the future. These files are typically located in a `test-project` folder.
@@ -69,7 +69,7 @@ To create a new definition:
 
     See the [VS Code Remote Development documentation](https://aka.ms/vscode-remote/docker) for information on the expected contents of `devcontainer.json` and how it relates to other files listed above.
 
-    Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Keeping these files in the `.devcontainer` folder should reduce the chances of something conflicting but note that any command that are run are relative to the root of the project, so you'll need to include `.devcontainer` in any path references.
+    Note that any additional assets can be included as needed, but keep in mind that these will overlay on top of an existing project. Keeping these files in the `.devcontainer` folder should reduce the chances of something conflicting but note that any commands that are run are relative to the root of the project, so you'll need to include `.devcontainer` in any path references.
 
     Finally, create a `README.md` in the folder with a brief description of the purpose of the container definition and any manual steps required to use it.
 
@@ -77,7 +77,7 @@ To create a new definition:
 
 ### Developing and testing a definition
 
-VS Code Remote provides a straight forward development loop for creating and editing container definitions. Just follow these steps to get started:
+VS Code Remote provides a straightforward development loop for creating and editing container definitions. Just follow these steps to get started:
 
 1. Create a definition folder and open it in VS Code
 2. Edit the contents of the definition
@@ -92,7 +92,7 @@ VS Code Remote provides a straight forward development loop for creating and edi
       2. <kbd>F1</kbd> > **Remote-Containers: Rebuild Container**.
       3. On failure: Follow the same workflow above.
 
-Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy
+Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy.
 
 After you get your container up and running, you can test it by adding test assets / projects into the definition folder and then adding their locations to the `.npmignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form relative to the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `.npmignore` files.
 
