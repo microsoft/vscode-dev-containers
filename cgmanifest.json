@@ -482,8 +482,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: ca-certificates",
-                    "Version": "20191127-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/ca-certificates-20191127-r0.apk"
+                    "Version": "20191127-r2",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/ca-certificates-20191127-r2.apk"
                 }
             }
         },
@@ -1087,7 +1087,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "mypy",
-                    "Version": "0.770"
+                    "Version": "0.780"
                 }
             }
         },
