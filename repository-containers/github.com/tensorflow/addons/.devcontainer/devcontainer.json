@@ -3,10 +3,10 @@
 
 	// Uncomment this for GPU image
 	// "build": { 
-	// 		"args": { 
+	//		"args": { 
 	//			"IMAGE_TYPE": "latest"
 	//		} 
-	//	},
+	//},
 
 	"dockerFile": "Dockerfile",
 	
