@@ -1,7 +1,7 @@
 {
 	"name": "Tensorflow Addons SIG Dev Container",
 
-	// Uncomment this for GPU image
+	// Uncomment this for GPU images
 	// "build": { 
 	//		"args": { 
 	//			"IMAGE_TYPE": "latest"
