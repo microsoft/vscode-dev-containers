@@ -35,8 +35,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: ca-certificates",
-                    "Version": "20161130+nmu1+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20161130+nmu1+deb9u1_all.deb"
+                    "Version": "20200601~deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20200601~deb9u1_all.deb"
                 }
             }
         },
@@ -285,7 +285,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.1.0"
+                    "Version": "7.2.0"
                 }
             }
         },
@@ -762,8 +762,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: ca-certificates",
-                    "Version": "20190110",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20190110_all.deb"
+                    "Version": "20200601~deb10u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20200601~deb10u1_all.deb"
                 }
             }
         },
@@ -1042,7 +1042,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.5.2"
+                    "Version": "2.5.3"
                 }
             }
         },
@@ -1051,7 +1051,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "flake8",
-                    "Version": "3.8.2"
+                    "Version": "3.8.3"
                 }
             }
         },
