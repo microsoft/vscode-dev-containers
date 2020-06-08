@@ -15,8 +15,8 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Docker script args, location, and expected SHA - SHA generated on release
-ARG DOCKER_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/docker-debian.sh"
-ARG DOCKER_SCRIPT_SHA="dev-mode"
+ARG DOCKER_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.121.0/script-library/docker-debian.sh"
+ARG DOCKER_SCRIPT_SHA="dde4c419e3a8d9ed15f8d11d366fc7ce29817e451b949d5d7c41432d86ae3b59"
 ARG ENABLE_NONROOT_DOCKER="true"
 ARG SOURCE_SOCKET=/var/run/docker-host.sock
 ARG TARGET_SOCKET=/var/run/docker.sock
