@@ -20,8 +20,8 @@ ENV NVM_DIR=/usr/local/share/nvm
 # Options for common package install script
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
-ARG COMMON_SCRIPT_SHA="dev-mode"
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.122.0/script-library/common-debian.sh"
+ARG COMMON_SCRIPT_SHA="da956c699ebef75d3d37d50569b5fbd75d6363e90b3f5d228807cff1f7fa211c"
 
 # Configure apt and install packages
 RUN apt-get update \
