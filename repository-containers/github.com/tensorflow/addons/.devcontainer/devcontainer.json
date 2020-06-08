@@ -6,7 +6,7 @@
 	//		"args": { 
 	//			"IMAGE_TYPE": "latest"
 	//		} 
-	//},
+	// },
 
 	"dockerFile": "Dockerfile",
 	
@@ -31,24 +31,15 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		// Before you enable bazel integration check https://github.com/bazelbuild/bazel/issues/10226
-		//"BazelBuild.vscode-bazel",
+		// "BazelBuild.vscode-bazel",
         	"ms-python.python",
         	"ms-vscode.cpptools"
     	],
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
-
-	// Uncomment to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-in-docker.
-	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
-
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	"runArgs": [ 
 		// Uncomment to enable Nvidia support for GPU images
-		// "--runtime=nvidia"],
+		// "--runtime=nvidia",
 		"--cap-add=SYS_PTRACE",
 		"--security-opt",
 		"seccomp=unconfined" 
