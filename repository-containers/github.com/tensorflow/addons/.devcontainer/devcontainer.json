@@ -10,16 +10,17 @@
 
 	"dockerFile": "Dockerfile",
 	
+	"remoteEnv": {
+		TF_CPP_MIN_LOG_LEVEL": "1"
+	},
+	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": null,
 		"python.formatting.provider": "black",
 		"python.linting.flake8Enabled": true,
-		// Before you uncomment python.testing.* check if these bugs are resolved
-		// https://github.com/microsoft/vscode-python/issues/8678
-		// https://github.com/microsoft/vscode-python/issues/9553
-		// "python.testing.pytestEnabled": true,
-		// "python.testing.pytestArgs": ["./tensorflow_addons"],
+		"python.testing.pytestEnabled": true,
+		"python.testing.pytestArgs": ["./tensorflow_addons"],
 		"C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
 		"C_Cpp.default.includePath": [
 			"${workspaceFolder}/**",
@@ -29,10 +30,10 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-	// Before you enable bazel integration check https://github.com/bazelbuild/bazel/issues/10226
-	//"BazelBuild.vscode-bazel",
-        "ms-python.python",
-        "ms-vscode.cpptools"
+		// Before you enable bazel integration check https://github.com/bazelbuild/bazel/issues/10226
+		//"BazelBuild.vscode-bazel",
+        	"ms-python.python",
+        	"ms-vscode.cpptools"
     	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -46,7 +47,7 @@
 
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	"runArgs": [ 
-		// Uncomment to enable Nvidia support
+		// Uncomment to enable Nvidia support for GPU images
 		// "--runtime=nvidia"],
 		"--cap-add=SYS_PTRACE",
 		"--security-opt",
