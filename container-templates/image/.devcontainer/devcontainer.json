@@ -16,8 +16,8 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	// Uncomment to run commands after the container is created - like installing git
-	// "postCreateCommand": "apt-get update && apt-get install -y git",
+	// Uncomment to run commands after the container is created - like installing curl
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
 
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
