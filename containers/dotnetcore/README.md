@@ -1,8 +1,8 @@
-# C# (.NET Core 3.1)
+# C# (.NET Core)
 
 ## Summary
 
-*Develop C# and .NET Core 3.1 based applications. Includes all needed SDKs, extensions, and dependencies.*
+*Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -14,11 +14,25 @@
 
 ## Using this definition with an existing folder
 
-While the definition itself works unmodified, there are some tips that can help you deal with some of the defaults .NET Core uses.
+While this definition should work unmodified, you can select the version of .NET Core the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+
+```json
+"args": { "VARIANT": "3.1-bionic" }
+```
+
+In addition there are a number of options that can be set to customize your environment.
+
+### Debug Configuration
+
+Only the integrated terminal is supported by the Remote - Containers extension. You may need to modify your `.vscode/launch.json` configurations to include the following:
+
+```json
+"console": "integratedTerminal"
+```
 
 ### Using the forwardPorts property
 
-By default, ASP.NET Core only listens to localhost inside the container. As a result, we recommend using the `forwardPorts` property (available in v0.98.0+) to make these ports available locally.
+By default, ASP.NET Core only listens to localhost inside the container. As a result, we recommend using the `forwardPorts` property in `.devcontainer/devcontainer.json` (available in v0.98.0+) to make these ports available locally.
 
 ```json
 "forwardPorts": [5000, 5001]
@@ -63,27 +77,27 @@ Next, add the following in to `.devcontainer/devcontainer.json` (assuming port 5
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
-### Debug Configuration
-
-Only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
-
-```json
-"console": "integratedTerminal"
-```
-
 ### Installing Node.js or the Azure CLI
 
-Given how frequently ASP.NET applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating these lines in `.devcontainer/Dockerfile`.
+Given how frequently ASP.NET applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```Dockerfile
-ARG INSTALL_NODE="true"
-ARG NODE_VERSION="10"
+```json
+"args": {
+    "VARIANT": "3.1-bionic",
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10",
+}
 ```
 
-If you would like to install the Azure CLI update this line in `.devcontainer/Dockerfile`:
+If you would like to install the Azure CLI update you can set the `INSTALL_AZURE_CLI` argument line in `.devcontainer/devcontainer.json`:
 
 ```Dockerfile
-ARG INSTALL_AZURE_CLI="true"
+"args": {
+    "VARIANT": "3.1-bionic",
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10",
+    "INSTALL_AZURE_CLI": "true"
+}
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
