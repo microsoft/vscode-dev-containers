@@ -109,11 +109,11 @@ If you've already opened your folder in a container, rebuild the container using
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the C# (.NET Core Latest) definition.
+   3. Select the C# (.NET Core) definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/dotnetcore-latest/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/dotnetcore/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -127,7 +127,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/dotnetcore-latest` folder.
+4. Select the `containers/dotnetcore` folder.
 5. After the folder has opened in the container, if prompted to restore packages in a notification, click "Restore".
 6. After packages are restored, press <kbd>F5</kbd> to start the project.
 7. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
