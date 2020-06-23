@@ -9,7 +9,8 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definition
 ## Scripts
 
 - `common-debian.sh`, `common-alpine.sh`, `common-redhat.sh` - Installs common packages and utilities, creates a non-root user, and optionally upgrades packages, and installs zsh and Oh My Zsh!
-- `docker-debian.sh` - Installs the Docker CLI and wires up a script thatt can enable non-root access to the Docker socket. See [Docker from Docker](../containers/docker-from-docker) for an example.
+- `docker-debian.sh` - Installs the Docker CLI and wires up a script that can enable non-root access to the Docker socket. See [Docker from Docker](../containers/docker-from-docker) for an example. Generally assumes `common-debian.sh` has been run.
+- `node-debian.sh` - Installs the [Node Version Manager](https://github.com/nvm-sh/nvm) (nvm), the specified version of Node.js (if any) using nvm, ensures the specified non-root user can access everything. See [.NET Core](../containers/dotnet) for an example. Generally assumes `common-debian.sh` has been run.
 
 ## Using a script
 
