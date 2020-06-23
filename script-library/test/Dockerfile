@@ -10,7 +10,6 @@ ARG DISTRO="debian"
 ARG USERNAME="vscode"
 ARG INSTALL_DOCKER="true"
 ARG UPGRADE_PACKAGES="true"
-ARG DEBIAN_FRONTEND=noninteractive
 
 COPY *.sh /tmp/
 RUN chmod +x /tmp/*.sh \
@@ -21,10 +20,10 @@ RUN chmod +x /tmp/*.sh \
 # Run common script
 RUN /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}
 
-RUN export DEBIAN_FRONTEND=noninteractive && /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000
-
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && if [ "${DISTRO}" = "debian" ]; then \
+RUN if [ "${DISTRO}" = "debian" ]; then \
+        # Run Node script
+        /tmp/node-${DISTRO}.sh "/usr/local/share/nvm" 12 ${USERNAME}; \
+        # Run Docker script
         /tmp/docker-${DISTRO}.sh true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}; \
     else \
         echo -e '#!/bin/bash\n"$@"' | tee /usr/local/share/docker-init.sh \
