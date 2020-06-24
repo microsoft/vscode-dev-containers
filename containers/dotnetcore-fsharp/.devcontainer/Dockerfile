@@ -19,8 +19,10 @@ ARG UPGRADE_PACKAGES="true"
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
-# [Optional] Version of Node.js to install.
+# [Optional] Settings for installing Node.js.
 ARG INSTALL_NODE="false"
+ARG NODE_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/node-debian.sh"
+ARG NODE_SCRIPT_SHA="dev-mode"
 ARG NODE_VERSION="lts/*"
 ENV NVM_DIR=/usr/local/share/nvm
 
@@ -36,29 +38,12 @@ RUN apt-get update \
     && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
     && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/common-setup.sh" | sha256sum -c -)) \
     && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
-    && rm /tmp/common-setup.sh \
     #
     # [Optional] Install Node.js for ASP.NET Core Web Applicationss
     && if [ "$INSTALL_NODE" = "true" ]; then \
-        #
-        # Install nvm and Node
-        mkdir -p ${NVM_DIR} \
-        && curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 2>&1 \
-        && chown -R ${USER_UID}:${USER_GID} ${NVM_DIR} \
-        && /bin/bash -c "source $NVM_DIR/nvm.sh \
-            && nvm alias default ${NODE_VERSION}" 2>&1 \
-        && echo '[ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"  && [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion"' \ 
-        | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc >> /root/.zshrc \
-        && echo "if [ \"\$(stat -c '%U' ${NVM_DIR})\" != \"${USERNAME}\" ]; then sudo chown -R ${USER_UID}:root ${NVM_DIR}; fi" \
-        | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \
-        && chown ${USER_UID}:${USER_GID} /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc \
-        && chown -R ${USER_UID}:root ${NVM_DIR} \
-        #
-        # Install yarn
-        && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - 2>/dev/null \
-        && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-        && apt-get update \
-        && apt-get -y install --no-install-recommends yarn; \
+        curl -sSL ${NODE_SCRIPT_SOURCE} -o /tmp/node-setup.sh \
+        && ([ "${NODE_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/node-setup.sh" | sha256sum -c -)) \
+        && /bin/bash /tmp/node-setup.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; \
     fi \
     #
     # [Optional] Install the Azure CLI
@@ -72,4 +57,5 @@ RUN apt-get update \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
+    && rm -f /tmp/common-setup.sh /tmp/node-setup.sh \
     && rm -rf /var/lib/apt/lists/*
