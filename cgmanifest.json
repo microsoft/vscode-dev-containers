@@ -285,7 +285,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.2.0"
+                    "Version": "7.3.1"
                 }
             }
         },
@@ -1087,7 +1087,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "mypy",
-                    "Version": "0.780"
+                    "Version": "0.782"
                 }
             }
         },
@@ -1123,7 +1123,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.0.21"
+                    "Version": "20.0.25"
                 }
             }
         },
@@ -1341,8 +1341,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: openssh-client",
-                    "Version": "1:8.2p1-4",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/o/openssh/openssh-client_8.2p1-4_amd64.deb"
+                    "Version": "1:8.2p1-4ubuntu0.1",
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/o/openssh/openssh-client_8.2p1-4ubuntu0.1_amd64.deb"
                 }
             }
         },
