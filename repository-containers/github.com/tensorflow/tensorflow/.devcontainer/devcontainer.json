@@ -21,7 +21,13 @@
 		"C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
 		"C_Cpp.default.includePath": [
 			"${workspaceFolder}/**",
-        ],
+        	],
+		"files.watcherExclude": {
+			"**/bazel-*/**": true
+		},
+		"search.exclude": {
+			"**/bazel-*/**": true
+		}
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
