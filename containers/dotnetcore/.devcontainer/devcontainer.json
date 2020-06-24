@@ -1,6 +1,18 @@
 {
-	"name": "C# (.NET Core 2.1)",
-	"dockerFile": "Dockerfile",
+	"name": "C# (.NET Core)",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			// Update 'VARIANT' to pick a .NET Core version. Rebuild the container if
+			// it already exists to update. Example variants: 2.1-bionic, 3.1-bionic
+			"VARIANT": "3.1-bionic",
+			// Options
+			"INSTALL_NODE": "true",
+			"NODE_VERSION": "lts/*",
+			"INSTALL_AZURE_CLI": "false",
+			"UPGRADE_PACKAGES": "false"
+		}
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
@@ -29,13 +41,12 @@
 	],
 	"remoteEnv": {
 		// "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
-		// "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx"
+		// "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
 	}
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore"
+	// "postCreateCommand": "dotnet restore",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
-
 }

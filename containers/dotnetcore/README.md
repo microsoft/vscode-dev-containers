@@ -1,8 +1,8 @@
-# C# (.NET Core 3.0)
+# C# (.NET Core)
 
 ## Summary
 
-*Develop C# and .NET Core 3.0 based applications. Includes all needed SDKs, extensions, and dependencies.*
+*Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -14,11 +14,25 @@
 
 ## Using this definition with an existing folder
 
-While the definition itself works unmodified, there are some tips that can help you deal with some of the defaults .NET Core uses.
+While this definition should work unmodified, you can select the version of .NET Core the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+
+```json
+"args": { "VARIANT": "3.1-bionic" }
+```
+
+In addition there are a number of options that can be set to customize your environment.
+
+### Debug Configuration
+
+Only the integrated terminal is supported by the Remote - Containers extension. You may need to modify your `.vscode/launch.json` configurations to include the following:
+
+```json
+"console": "integratedTerminal"
+```
 
 ### Using the forwardPorts property
 
-By default, ASP.NET Core only listens to localhost inside the container. As a result, we recommend using the `forwardPorts` property (available in v0.98.0+) to make these ports available locally.
+By default, ASP.NET Core only listens to localhost inside the container. As a result, we recommend using the `forwardPorts` property in `.devcontainer/devcontainer.json` (available in v0.98.0+) to make these ports available locally.
 
 ```json
 "forwardPorts": [5000, 5001]
@@ -63,27 +77,27 @@ Next, add the following in to `.devcontainer/devcontainer.json` (assuming port 5
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
-### Debug Configuration
-
-Only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
-
-```json
-"console": "integratedTerminal"
-```
-
 ### Installing Node.js or the Azure CLI
 
-Given how frequently ASP.NET applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating these lines in `.devcontainer/Dockerfile`.
+Given how frequently ASP.NET applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```Dockerfile
-ARG INSTALL_NODE="true"
-ARG NODE_VERSION="10"
+```json
+"args": {
+    "VARIANT": "3.1-bionic",
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10",
+}
 ```
 
-If you would like to install the Azure CLI update this line in `.devcontainer/Dockerfile`:
+If you would like to install the Azure CLI update you can set the `INSTALL_AZURE_CLI` argument line in `.devcontainer/devcontainer.json`:
 
 ```Dockerfile
-ARG INSTALL_AZURE_CLI="true"
+"args": {
+    "VARIANT": "3.1-bionic",
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10",
+    "INSTALL_AZURE_CLI": "true"
+}
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
@@ -95,11 +109,11 @@ If you've already opened your folder in a container, rebuild the container using
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the C# (.NET Core Latest) definition.
+   3. Select the C# (.NET Core) definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/dotnetcore-latest/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/dotnetcore/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -113,7 +127,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/dotnetcore-latest` folder.
+4. Select the `containers/dotnetcore` folder.
 5. After the folder has opened in the container, if prompted to restore packages in a notification, click "Restore".
 6. After packages are restored, press <kbd>F5</kbd> to start the project.
 7. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
