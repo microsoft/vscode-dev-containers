@@ -47,6 +47,7 @@ check "command-line-tools" which top ip lsb_release
 
 # Check platforms
 check "dotnet" dotnet --info
+check "nuget" dotnet restore
 check "msbuild" dotnet msbuild
 check "nvm" nvm --version
 check "node" node --version
