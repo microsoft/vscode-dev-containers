@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash -i
 cd $(dirname "$0")
 
 if [ -z $HOME ]; then

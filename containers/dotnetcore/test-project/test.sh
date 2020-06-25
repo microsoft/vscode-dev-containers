@@ -41,7 +41,7 @@ EXPECTED_USER=vscode
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
 check "non-root-user" "id ${EXPECTED_USER}"
 check "/home/${EXPECTED_USER}" [ -d "/home/${EXPECTED_USER}" ]
-check "sudo" sudo -u ${EXPECTED_USER} echo "sudo works."
+check "sudo" sudo echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
 

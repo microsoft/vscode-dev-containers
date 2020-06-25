@@ -1,8 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash -i
 cd $(dirname "$0")
-
-# -- Ensure ~/.bashrc fires --
-exec bash
 
 # -- Utility functions --
 if [ -z $HOME ]; then

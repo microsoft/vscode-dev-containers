@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash -i
 cd $(dirname "$0")
 
 # -- Utility functions --
@@ -44,6 +44,7 @@ check "sudo" sudo echo "sudo works."
 check "git" git --version
 check "command-line-tools" which top ip lsb_release
 check "php" php --version
+sleep 10 # Sleep to be sure MariaDB is running.
 check "mariadb" mariadb -h mariadb -P 3306 -u root --password=just-for-testing -D VscodeDev -Bse exit
 
 # -- Report results --
