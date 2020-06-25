@@ -20,17 +20,15 @@
 * bazel
 * codespaces-linux
 * cpp
+* dapr-dotnetcore-3.1
+* dapr-typescript-node-12
 * dart
 * debian-9-git
 * debian-10-git
 * docker-from-docker
 * docker-from-docker-compose
-* dotnetcore-2.1
-* dotnetcore-2.1-fsharp
-* dotnetcore-3.0
-* dotnetcore-3.0-fsharp
-* dotnetcore-3.1
-* dotnetcore-3.1-fsharp
+* dotnetcore
+* dotnetcore-fsharp
 * elm
 * go
 * java-8
@@ -63,13 +61,12 @@
 * swift-4
 * typescript-node-10
 * typescript-node-12
-* ubuntu-18.04-git
+* typescript-node-14
+* ubuntu
 
 ## Not currently working
 
 * alpine-3.10-git - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
-* dapr-dotnetcore-3.1 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
-* dapr-typescript-node-12 - Due to [#457](https://github.com/MicrosoftDocs/vsonline/issues/457).
 * reasonml - Build fails, but builds successfully locally. Something about the use of PPAs for fish
 * r - Language server crash. More investigation needed.
 
