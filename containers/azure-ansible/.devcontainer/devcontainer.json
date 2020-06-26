@@ -1,15 +1,15 @@
 {
 	"name": "Azure Ansible",
 	"dockerFile": "Dockerfile",
-	"mounts": [ 
+	"mounts": [
+		// [Optional] Anisble Collections: Uncomment if you want to mount your local .ansible/collections folder.
+		// "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ansible/collections,target=/root/.ansible/collections,type=bind,consistency=cached",
 		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
 	],
-
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
-	
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"vscoss.vscode-ansible",
@@ -17,17 +17,12 @@
 		"ms-vscode.azurecli",
 		"ms-azuretools.vscode-docker"
 	]
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "ansible --version",
-
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
-
 }
