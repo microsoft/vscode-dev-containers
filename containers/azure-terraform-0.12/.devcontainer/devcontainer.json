@@ -10,7 +10,7 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"mauve.terraform",
+		"hashicorp.terraform",
 		"ms-azuretools.vscode-azureterraform",
 		"ms-vscode.azurecli",
 		"ms-azuretools.vscode-docker"
