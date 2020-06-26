@@ -16,6 +16,9 @@ ARG USER_GID=$USER_UID
 ARG NPM_GLOBAL=/usr/local/share/npm-global
 ENV PATH=${PATH}:${NPM_GLOBAL}/bin
 ENV NVM_DIR=/usr/local/share/nvm
+# Have nvm create a "current" symlink and add to path to work around https://github.com/microsoft/vscode-remote-release/issues/3224
+ENV NVM_SYMLINK_CURRENT=true 
+ENV PATH=${NVM_DIR}/current/bin:${PATH}
 
 # Options for common package install script
 ARG INSTALL_ZSH="true"

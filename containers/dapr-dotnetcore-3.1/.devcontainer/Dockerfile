@@ -17,6 +17,9 @@ ARG USER_GID=$USER_UID
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
 ENV NVM_DIR=/home/vscode/.nvm
+# Have nvm create a "current" symlink and add to path to work around https://github.com/microsoft/vscode-remote-release/issues/3224
+ENV NVM_SYMLINK_CURRENT=true 
+ENV PATH=${NVM_DIR}/current/bin:${PATH}
 
 # [Optional] Install the Azure CLI
 ARG INSTALL_AZURE_CLI="false"
