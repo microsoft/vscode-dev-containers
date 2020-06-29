@@ -32,6 +32,12 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/python:3.7`
 - `mcr.microsoft.com/vscode/devcontainers/python:3.8`
 
+Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+
+- `mcr.microsoft.com/vscode/devcontainers/python:0-3`
+- `mcr.microsoft.com/vscode/devcontainers/python:0.123-3`
+- `mcr.microsoft.com/vscode/devcontainers/python:0.123.0-3`
+
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize the your container's contents or build for a container architecture the image does not support.
 
 Beyond Python and `git`, this image / `Dockerfile` includes a number of Python tools, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.

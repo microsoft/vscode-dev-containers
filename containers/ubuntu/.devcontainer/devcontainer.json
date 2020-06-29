@@ -2,9 +2,9 @@
 	"name": "Ubuntu",
 	"build": {
 		"dockerfile": "base.Dockerfile",
-		// Update 'VARIANT' to pick an Ubuntu version. Rebuild the container 
-		// if it already exists to update. Available variants: 18.04, 20.04
-		"args": { "VARIANT": "20.04" }
+		// Update 'VARIANT' to pick an Ubuntu version. Rebuild the container if it already
+		// exists to update. Available variants: focal (or ubuntu-20.04), bionic (or ubuntu-18.04)
+		"args": { "VARIANT": "focal" }
 	},
 
 	// Set *default* container specific settings.json values on container create.
