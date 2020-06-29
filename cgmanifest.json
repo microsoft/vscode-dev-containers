@@ -332,6 +332,26 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: alpine",
+                    "Version": "3.12",
+                    "DownloadUrl": "https://hub.docker.com/_/alpine"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: alpine",
+                    "Version": "3.11",
+                    "DownloadUrl": "https://hub.docker.com/_/alpine"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: alpine",
                     "Version": "3.10",
                     "DownloadUrl": "https://hub.docker.com/_/alpine"
                 }
@@ -342,8 +362,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: git",
-                    "Version": "2.22.4-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/git-2.22.4-r0.apk"
+                    "Version": "2.26.2-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/git-2.26.2-r0.apk"
                 }
             }
         },
@@ -352,8 +372,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: bash",
-                    "Version": "5.0.0-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/bash-5.0.0-r0.apk"
+                    "Version": "5.0.17-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/bash-5.0.17-r0.apk"
                 }
             }
         },
@@ -362,8 +382,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: libgcc",
-                    "Version": "8.3.0-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/libgcc-8.3.0-r0.apk"
+                    "Version": "9.3.0-r2",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/libgcc-9.3.0-r2.apk"
                 }
             }
         },
@@ -372,8 +392,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: libstdc++",
-                    "Version": "8.3.0-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/libstdc++-8.3.0-r0.apk"
+                    "Version": "9.3.0-r2",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/libstdc++-9.3.0-r2.apk"
                 }
             }
         },
@@ -382,8 +402,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: curl",
-                    "Version": "7.66.0-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/curl-7.66.0-r0.apk"
+                    "Version": "7.69.1-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/curl-7.69.1-r0.apk"
                 }
             }
         },
@@ -392,8 +412,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: openssh-client",
-                    "Version": "8.1_p1-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/openssh-client-8.1_p1-r0.apk"
+                    "Version": "8.3_p1-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/openssh-client-8.3_p1-r0.apk"
                 }
             }
         },
@@ -403,7 +423,7 @@
                 "Other": {
                     "Name": "Alpine Package: less",
                     "Version": "551-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/less-551-r0.apk"
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/less-551-r0.apk"
                 }
             }
         },
@@ -412,8 +432,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: wget",
-                    "Version": "1.20.3-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/wget-1.20.3-r0.apk"
+                    "Version": "1.20.3-r1",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/wget-1.20.3-r1.apk"
                 }
             }
         },
@@ -422,8 +442,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: nano",
-                    "Version": "4.3-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/nano-4.3-r0.apk"
+                    "Version": "4.9.3-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/nano-4.9.3-r0.apk"
                 }
             }
         },
@@ -432,8 +452,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: jq",
-                    "Version": "1.6-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/jq-1.6-r0.apk"
+                    "Version": "1.6-r1",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/jq-1.6-r1.apk"
                 }
             }
         },
@@ -442,8 +462,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: gnupg",
-                    "Version": "2.2.19-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/gnupg-2.2.19-r0.apk"
+                    "Version": "2.2.20-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/gnupg-2.2.20-r0.apk"
                 }
             }
         },
@@ -452,8 +472,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: unzip",
-                    "Version": "6.0-r6",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/unzip-6.0-r6.apk"
+                    "Version": "6.0-r7",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/unzip-6.0-r7.apk"
                 }
             }
         },
@@ -462,8 +482,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: procps",
-                    "Version": "3.3.15-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/procps-3.3.15-r0.apk"
+                    "Version": "3.3.16-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/procps-3.3.16-r0.apk"
                 }
             }
         },
@@ -472,8 +492,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: coreutils",
-                    "Version": "8.31-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/coreutils-8.31-r0.apk"
+                    "Version": "8.32-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/coreutils-8.32-r0.apk"
                 }
             }
         },
@@ -482,8 +502,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: ca-certificates",
-                    "Version": "20191127-r2",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/ca-certificates-20191127-r2.apk"
+                    "Version": "20191127-r4",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/ca-certificates-20191127-r4.apk"
                 }
             }
         },
@@ -492,8 +512,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: krb5-libs",
-                    "Version": "1.17-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/krb5-libs-1.17-r0.apk"
+                    "Version": "1.18.2-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/krb5-libs-1.18.2-r0.apk"
                 }
             }
         },
@@ -502,8 +522,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: libintl",
-                    "Version": "0.19.8.1-r4",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/libintl-0.19.8.1-r4.apk"
+                    "Version": "0.20.2-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/libintl-0.20.2-r0.apk"
                 }
             }
         },
@@ -513,7 +533,7 @@
                 "Other": {
                     "Name": "Alpine Package: libssl1.1",
                     "Version": "1.1.1g-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/libssl1.1-1.1.1g-r0.apk"
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/libssl1.1-1.1.1g-r0.apk"
                 }
             }
         },
@@ -522,8 +542,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: lttng-ust",
-                    "Version": "2.10.3-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/lttng-ust-2.10.3-r0.apk"
+                    "Version": "2.12.0-r1",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/lttng-ust-2.12.0-r1.apk"
                 }
             }
         },
@@ -533,7 +553,7 @@
                 "Other": {
                     "Name": "Alpine Package: tzdata",
                     "Version": "2020a-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/tzdata-2020a-r0.apk"
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/tzdata-2020a-r0.apk"
                 }
             }
         },
@@ -542,8 +562,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: userspace-rcu",
-                    "Version": "0.11.0-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/userspace-rcu-0.11.0-r0.apk"
+                    "Version": "0.12.1-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/userspace-rcu-0.12.1-r0.apk"
                 }
             }
         },
@@ -552,8 +572,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: zlib",
-                    "Version": "1.2.11-r1",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/zlib-1.2.11-r1.apk"
+                    "Version": "1.2.11-r3",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/zlib-1.2.11-r3.apk"
                 }
             }
         },
@@ -562,8 +582,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: shadow",
-                    "Version": "4.6-r2",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/community/x86_64/shadow-4.6-r2.apk"
+                    "Version": "4.8.1-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/community/x86_64/shadow-4.8.1-r0.apk"
                 }
             }
         },
@@ -572,8 +592,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: sudo",
-                    "Version": "1.8.27-r2",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/sudo-1.8.27-r2.apk"
+                    "Version": "1.9.0-r0",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/sudo-1.9.0-r0.apk"
                 }
             }
         },
@@ -582,8 +602,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Alpine Package: zsh",
-                    "Version": "5.7.1-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/zsh-5.7.1-r0.apk"
+                    "Version": "5.8-r1",
+                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/zsh-5.8-r1.apk"
                 }
             }
         },
@@ -733,7 +753,17 @@
                 "Other": {
                     "Name": "Docker Image: buildpack-deps",
                     "Version": "buster-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/debian"
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "stretch-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
         },
@@ -991,16 +1021,6 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "stretch-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/debian"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
                     "Name": "Docker Image: python",
                     "Version": "3",
                     "DownloadUrl": "https://hub.docker.com/_/python"
@@ -1141,7 +1161,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: buildpack-deps",
-                    "Version": "20.04-curl",
+                    "Version": "focal-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
@@ -1151,7 +1171,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: buildpack-deps",
-                    "Version": "18.04-curl",
+                    "Version": "bionic-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
