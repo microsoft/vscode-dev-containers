@@ -7,6 +7,7 @@ FROM mcr.microsoft.com/oryx/build:vso-20200601.2 as kitchensink
 ARG BASH_PROMPT="PS1='\[\e]0;\u: \w\a\]\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '"
 ARG FISH_PROMPT="function fish_prompt\n    set_color green\n    echo -n (whoami)\n    set_color normal\n    echo -n \":\"\n    set_color blue\n    echo -n (pwd)\n    set_color normal\n    echo -n \"> \"\nend\n"
 ARG ZSH_PROMPT="autoload -Uz promptinit\npromptinit\nprompt adam2"
+ARG CODE_ALIAS="if [[ $(which code-insiders) && ! $(which code) ]]; then alias code=code-insiders; fi"
 
 # Define extra paths:
 # Language executables provided by Oryx -  see https://github.com/microsoft/Oryx/blob/master/images/build/slim.Dockerfile#L223
@@ -99,6 +100,8 @@ RUN apt-get update -yq\
     && { echo && echo $BASH_PROMPT ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
     && printf "$FISH_PROMPT" >> /etc/fish/conf.d/fish_prompt.fish \
     && { echo && echo $ZSH_PROMPT ; } | tee -a /etc/zsh/zshrc >> /etc/skel/.zshrc \
+    && { echo && echo $CODE_ALIAS ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
+    && { echo && echo $CODE_ALIAS ; } | tee -a /etc/zsh/zshrc >> /etc/skel/.zshrc \
     && useradd --create-home --shell /bin/bash codespace \
     && mkdir -p /etc/sudoers.d \
     && echo "codespace ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd \
@@ -131,6 +134,9 @@ RUN apt-get update -yq\
     #
     # Remove 'imagemagick imagemagick-6-common' due to http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10131
     && apt-get purge -y imagemagick imagemagick-6-common \
+    #
+    # Configure VSCode as the default editor for git commits
+    && git config --global core.editor "code --wait" \
     #
     # Clean up
     && apt-get autoremove -y \
