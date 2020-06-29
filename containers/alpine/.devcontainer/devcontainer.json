@@ -1,6 +1,11 @@
 {
-	"name": "Alpine 3.10",
-	"dockerFile": "Dockerfile",
+	"name": "Alpine",
+	"build": {
+		"dockerfile": "base.Dockerfile",
+		// Update 'VARIANT' to pick an Alpine version. Rebuild the container 
+		// if it already exists to update. Available variants: 3.10, 3.11, 3.12
+		"args": { "VARIANT": "3.12" }
+	},
 	
 	// Set *default* container specific settings.json values on container create. 
 	"settings": {

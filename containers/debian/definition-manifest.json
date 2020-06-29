@@ -1,17 +1,26 @@
 {
+	"variants": ["buster", "stretch"],
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
-			"base:${VERSION}-debian10",
-			"base:${VERSION}-debian-10",
-			"base:${VERSION}-debian",
-			"base:${VERSION}-buster"
-		]
-	}, 
+			"base:${VERSION}-${VARIANT}"
+		],
+		"variantTags": {
+			"buster": [
+				"base:${VERSION}-debian-10",
+				"base:${VERSION}-debian10",
+				"base:${VERSION}-debian"
+			],
+			"stretch": [
+				"base:${VERSION}-debian9",
+				"base:${VERSION}-debian-9"
+			]
+		}
+	},
 	"dependencies": {
-		"image": "buildpack-deps:buster-curl",
-		"imageLink": "https://hub.docker.com/_/debian",
+		"image": "buildpack-deps:${VARIANT}-curl",
+		"imageLink": "https://hub.docker.com/_/buildpack-deps",
 		"debian": [
 			"apt-utils", 
 			"dialog", 
@@ -32,7 +41,7 @@
 			"libc6",
 			"libgcc1",
 			"libgssapi-krb5-2",
-			"libicu63",
+			"libicu[0-9][0-9]",
 			"libssl1.1",
 			"libstdc++6",
 			"zlib1g",

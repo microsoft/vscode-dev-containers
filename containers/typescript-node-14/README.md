@@ -18,7 +18,13 @@
 
 While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to:
 
-`mcr.microsoft.com/vscode/devcontainers/typescript-node:14`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:14`
+
+Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0-14`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.123-14`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.123.0-14`
 
 Alternatively, you can use the contents of the `Dockerfile` or the [JavaScript and Node.js `Dockerfile`](../javascript-node-14/.devcontainer/Dockerfile) to fully customize your container's contents.
 

@@ -20,6 +20,12 @@ While the definition itself works unmodified, you can also directly reference pr
 
 `mcr.microsoft.com/vscode/devcontainers/typescript-node:10`
 
+Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0-10`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.123-10`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.123.0-10`
+
 Alternatively, you can use the contents of the `Dockerfile` or the [JavaScript and Node.js `Dockerfile`](../javascript-node-10/.devcontainer/Dockerfile) to fully customize your container's contents.
 
 Beyond TypeScript, Node.js, and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. It also installs `tslint` globally and includes the VS Code TSLint extension for backwards compatibility, but [TSLint has been deprecated](https://github.com/palantir/tslint/issues/4534) in favor of ESLint, so `eslint` and its corresponding extension has been included as well.

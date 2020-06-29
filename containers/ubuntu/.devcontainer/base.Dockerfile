@@ -3,8 +3,8 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Update the VARIANT arg in devcontainer.json to pick an Ubuntu version: 20.04, 18.04 
-ARG VARIANT="20.04"
+# Update the VARIANT arg in devcontainer.json to pick an Ubuntu version: focal (or ubuntu-20.04), bionic (or ubuntu-18.04)
+ARG VARIANT="focal"
 FROM buildpack-deps:${VARIANT}-curl
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
