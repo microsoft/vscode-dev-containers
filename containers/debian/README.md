@@ -35,7 +35,7 @@ Version specific tags tied to [releases in this repository](https://github.com/m
 - `mcr.microsoft.com/vscode/devcontainers/base:0.123-buster`
 - `mcr.microsoft.com/vscode/devcontainers/base:0.123.0-buster`
 
-Alternatively, you can use the contents of the `Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
 Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
 
