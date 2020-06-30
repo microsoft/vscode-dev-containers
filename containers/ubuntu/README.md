@@ -17,7 +17,13 @@
 
 ## Using this definition with an existing folder
 
-While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following:
+While the definition itself works unmodified, you can select the version of Ubuntu the container uses by updating the VARIANT arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+
+```
+"args": { "VARIANT": "bionic" }
+```
+
+You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/base:ubuntu` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/base:focal` (or `ubuntu-20.04`)
