@@ -1,9 +1,10 @@
+FROM golang:1.13-alpine
+
 # VARIANT can be either 'hugo' for the standard version or 'hugo_extended' for the extended version.
 ARG VARIANT=hugo_extended
 # VERSION can be either 'latest' or a specific version number
 ARG VERSION=latest
 
-FROM golang:1.13-alpine
 RUN apk add --update --no-cache ca-certificates openssl git curl && \
     case ${VERSION} in \
     latest) \
