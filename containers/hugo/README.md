@@ -8,7 +8,7 @@
 |----------|-------|
 | *Contributors* | [Aaryn Smith](https://gitlab.com/aarynsmith) |
 | *Definition type* | Dockerfile |
-| *Works in Codespaces* | Yes / No |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Hugo |
 
