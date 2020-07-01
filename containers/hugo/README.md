@@ -4,13 +4,13 @@
 
 *Develop static sites with Hugo, includes everything you need to get up and running.*
 
-| Metadata | Value |  
-|----------|-------|
-| *Contributors* | [Aaryn Smith](https://gitlab.com/aarynsmith) |
-| *Definition type* | Dockerfile |
-| *Works in Codespaces* | Yes |
-| *Container host OS support* | Linux, macOS, Windows |
-| *Languages, platforms* | Hugo |
+|          Metadata           |                    Value                     |
+| --------------------------- | -------------------------------------------- |
+| *Contributors*              | [Aaryn Smith](https://gitlab.com/aarynsmith) |
+| *Definition type*           | Dockerfile                                   |
+| *Works in Codespaces*       | Yes                                          |
+| *Container host OS support* | Linux, macOS, Windows                        |
+| *Languages, platforms*      | Hugo                                         |
 
 ## Using this definition with an existing folder
 
@@ -21,7 +21,7 @@ Just follow these steps:
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Dart definition.
+   3. Select the Hugo definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
