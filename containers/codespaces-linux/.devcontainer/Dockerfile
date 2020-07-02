@@ -31,6 +31,8 @@ ENV DOTNET_ROOT=/home/codespace/.dotnet
 # Add script to fix .NET Core pathing
 ADD symlinkDotNetCore.sh /tmp/codespace/symlinkDotNetCore.sh
 
+ADD git-ed.sh /tmp/codespace/git-ed.sh
+
  # Install packages, setup codespace user
 RUN apt-get update -yq\
     && export DEBIAN_FRONTEND=noninteractive \
@@ -131,6 +133,11 @@ RUN apt-get update -yq\
     #
     # Remove 'imagemagick imagemagick-6-common' due to http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10131
     && apt-get purge -y imagemagick imagemagick-6-common \
+    #
+    # Configure VSCode as the default editor for git commits
+    && sudo -u codespace mkdir -p /home/codespace/.local/bin \
+    && install -o codespace -g codespace -m 755 /tmp/codespace/git-ed.sh /home/codespace/.local/bin/git-ed.sh \
+    && sudo -u codespace git config --global core.editor "/home/codespace/.local/bin/git-ed.sh" \
     #
     # Clean up
     && apt-get autoremove -y \
