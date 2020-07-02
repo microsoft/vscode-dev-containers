@@ -17,22 +17,8 @@ RUN apk add --update --no-cache ca-certificates openssl git curl && \
     go get github.com/yaegashi/muslstack && \
     muslstack -s 0x800000 /usr/bin/hugo
 
-FROM alpine:edge
-# This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
-# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
-# will be updated to match your local UID/GID (when using the dockerFile property).
-# See https://aka.ms/vscode-remote/containers/non-root-user for details.
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-
+FROM mcr.microsoft.com/vscode/devcontainers/base:alpine
 COPY --from=0 /usr/bin/hugo /usr/bin
-RUN apk add --update --no-cache libc6-compat libstdc++ sudo git openssh-client &&\
-    rm -rf /var/cache/apk/*
-RUN addgroup -g ${USER_GID} ${USERNAME} && \
-    adduser -s /bin/ash -u ${USER_UID} -D -G ${USERNAME} ${USERNAME} && \
-    echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME}&& \
-    chmod 0440 /etc/sudoers.d/${USERNAME}
 EXPOSE 1313
 WORKDIR /src
 CMD ["/usr/bin/hugo server"]
