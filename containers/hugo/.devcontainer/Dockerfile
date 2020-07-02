@@ -27,7 +27,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 COPY --from=0 /usr/bin/hugo /usr/bin
-RUN apk add --update --no-cache libc6-compat libstdc++ sudo git &&\
+RUN apk add --update --no-cache libc6-compat libstdc++ sudo git openssh-client &&\
     rm -rf /var/cache/apk/*
 RUN addgroup -g ${USER_GID} ${USERNAME} && \
     adduser -s /bin/ash -u ${USER_UID} -D -G ${USERNAME} ${USERNAME} && \
