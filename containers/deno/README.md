@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Deno applications. Includes the latest Deno runtime and extension.
+*Develop Deno applications. Includes the latest Deno runtime and extension.*
 
 | Metadata | Value |  
 |----------|-------|
