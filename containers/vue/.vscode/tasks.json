@@ -13,5 +13,15 @@
 			},
 			"isBackground": true,
 		},
+		{
+			"label": "Build Project",
+			"type": "shell",
+			"command": "npm run build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"isBackground": true,
+		},
 	]
 }
