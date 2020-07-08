@@ -35,7 +35,7 @@ To add a dev container definition in your project, you can either:
 
 You can share a customized dev container definition for your project by adding the files under `.devcontainer` to source control.
 
-Anyone who then opens a local copy of your repo in VS Code will be prompted to reopen the folder in a container, provided they have the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension pack installed.
+Anyone who then opens a local copy of your repo in VS Code will be prompted to reopen the folder in a container, provided they have the [Remote - Containers](https://aka.ms/vscode-remote/download/containers) extension installed.
 
 Additionally, if you reference your Git repository when creating a Codespace in [Visual Studio Codespaces](https://visualstudio.microsoft.com/services/visual-studio-codespaces/) or [Codespaces in GitHub](https://github.com/features/codespaces), the container definition will be used.
 
