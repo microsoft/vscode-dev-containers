@@ -67,6 +67,7 @@
 ## Not currently working
 
 * alpine-3.10-git - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
+* bash - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
+* hugo - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
 * reasonml - Build fails, but builds successfully locally. Something about the use of PPAs for fish
 * r - Language server crash. More investigation needed.
-
