@@ -52,24 +52,16 @@ The **`rootDistro`** property can be `debian`, `alpine`, or `redhat` currently. 
 The **`latest`** and **`tags`** properties affect how tags are applied. For example, here is how several dev container folders map:
 
 ```text
-debian-9-git => mcr.microsoft.com/vscode/devcontainers/base:debian-9
-alpine-3.10-git => mcr.microsoft.com/vscode/devcontainers/base:alpine-3.10
-ubnutu-18.04-git => mcr.microsoft.com/vscode/devcontainers/base:ubuntu-18.04
-javascript-node-12 => mcr.microsoft.com/vscode/devcontainers/javascript-node:12
-    typescript-node-10 => mcr.microsoft.com/vscode/devcontainers/typescript-node:12
-javascript-node-10 => mcr.microsoft.com/vscode/devcontainers/javascript-node:10
-    typescript-node-10 => mcr.microsoft.com/vscode/devcontainers/typescript-node:10
+debian => mcr.microsoft.com/vscode/devcontainers/base:debian
+alpine => mcr.microsoft.com/vscode/devcontainers/base:alpine
+ubnutu => mcr.microsoft.com/vscode/devcontainers/base:ubuntu
 ```
 
-This results in just three "repositories" in the registry much like you would see for other images in Docker Hub.
+This results in just one "repository" in the registry much like you would see for other images in Docker Hub.
 
 - mcr.microsoft.com/vscode/devcontainers/base
-- mcr.microsoft.com/vscode/devcontainers/javascript-node
-- mcr.microsoft.com/vscode/devcontainers/typescript-node
 
 The package version is then automatically added to these various tags in the `${VERSION}` location for an item in the `tags` property array as a part of the release. For example, release 0.40.0 would result in:
-
-mcr.microsoft.com/vscode/devcontainers/base
 
 - 0.40.0-debian-9
 - 0.40-debian-9
@@ -157,14 +149,14 @@ If you're using the [variants property](#the-variants-property), you can set up 
 
 In your `Dockerfile`:
 
-```
+```Dockerfile
 ARG VARIANT=3
 FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
 ```
 
 In `devcontainer.json`:
 
-```
+```json
 "build": {
     "args": {
         "VARIANT": "3.8"

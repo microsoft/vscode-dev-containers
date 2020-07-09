@@ -23,8 +23,7 @@
 * dapr-dotnetcore-3.1
 * dapr-typescript-node-12
 * dart
-* debian-9-git
-* debian-10-git
+* debian
 * docker-from-docker
 * docker-from-docker-compose
 * dotnetcore
@@ -35,11 +34,9 @@
 * java-8-tomcat-8.5
 * java-11
 * java-12
-* javascript-node-10
-* javascript-node-12
-* javascript-node-12-mongo
-* javascript-node-12-postgres
-* javascript-node-14
+* javascript-node
+* javascript-node-mongo
+* javascript-node-postgres
 * jekyll
 * kubernetes-helm
 * markdown
@@ -59,14 +56,13 @@
 * rust
 * sfdx-project
 * swift-4
-* typescript-node-10
-* typescript-node-12
-* typescript-node-14
+* typescript-node
 * ubuntu
 
 ## Not currently working
 
 * alpine-3.10-git - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
+* bash - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
+* hugo - Due to [#458](https://github.com/MicrosoftDocs/vsonline/issues/458).
 * reasonml - Build fails, but builds successfully locally. Something about the use of PPAs for fish
 * r - Language server crash. More investigation needed.
-

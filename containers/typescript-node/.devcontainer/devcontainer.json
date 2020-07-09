@@ -1,6 +1,11 @@
 {
-	"name": "Node.js 14 & TypeScript",
-	"dockerFile": "Dockerfile",
+	"name": "Node.js & TypeScript",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick a Node version. Rebuild the container 
+		// if it already exists to update. Available variants: 10, 12, 14
+		"args": { "VARIANT": "14" }
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
