@@ -11,7 +11,7 @@
 				"kind": "test",
 				"isDefault": true
 			},
-			"isBackground": true,
+			"isBackground": true
 		},
 		{
 			"label": "Build Project",
@@ -21,7 +21,14 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"isBackground": true,
+			"isBackground": true
 		},
+		{
+			"label": "Create New Project",
+			"type": "shell",
+			"command": "vue create .",
+			"isBackground": false,
+			"problemMatcher": []
+		}
 	]
 }
