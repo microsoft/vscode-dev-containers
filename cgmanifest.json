@@ -285,7 +285,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.3.1"
+                    "Version": "7.4.0"
                 }
             }
         },
@@ -1143,7 +1143,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.0.25"
+                    "Version": "20.0.26"
                 }
             }
         },
