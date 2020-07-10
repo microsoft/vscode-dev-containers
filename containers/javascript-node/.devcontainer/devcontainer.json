@@ -1,7 +1,7 @@
 {
 	"name": "Node.js",
 	"build": {
-		"dockerfile": "Dockerfile",
+		"dockerfile": "base.Dockerfile",
 		// Update 'VARIANT' to pick a Node version. Rebuild the container 
 		// if it already exists to update. Available variants: 10, 12, 14
 		"args": { "VARIANT": "14" }
