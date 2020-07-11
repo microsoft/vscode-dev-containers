@@ -78,11 +78,11 @@ In this case, Debian is also the one that is used for `latest` for the `base` re
 
 There's a special "dev" version that can be used to build master on CI - I ended up needing this to test and others would if they base an image off of one of the MCR images.  e.g. `dev-debian-9`.
 
-Finally, there is a **`parent`** property that can be used to specify if the container depends an image created as a part of another container build. For example, `typescript-node-10` uses the image from `javascript-node-10` and therefore includes the following:
+Finally, there is a **`parent`** property that can be used to specify if the container depends an image created as a part of another container build. For example, `typescript-node` uses the image from `javascript-node` and therefore includes the following:
 
 ```json
 "build" {
-    "parent": "javascript-node-10"
+    "parent": "javascript-node"
 }
 ```
 
