@@ -1,0 +1,37 @@
+{
+  "name": "exercism-javascript",
+  "version": "1.1.0",
+  "description": "Exercism exercises in Javascript.",
+  "author": "Katrina Owen",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exercism/javascript"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-syntax-bigint": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.5.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.2",
+    "jest": "^25.5.2"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "package.json"
+    ]
+  },
+  "scripts": {
+    "test": "jest --no-cache ./*",
+    "watch": "jest --no-cache --watch ./*",
+    "lint": "eslint .",
+    "lint-test": "eslint . && jest --no-cache ./* "
+  },
+  "license": "MIT",
+  "dependencies": {}
+}
