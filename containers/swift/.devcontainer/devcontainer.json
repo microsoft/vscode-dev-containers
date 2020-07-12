@@ -1,14 +1,29 @@
 {
-	"name": "Swift 4",
-	"dockerFile": "Dockerfile",
-	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+	"name": "Swift",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Update the VARIANT arg to pick a Swift version 
+			"VARIANT": "5.2",
+			// Options
+			"INSTALL_NODE": "false",
+			"NODE_VERSION": "lts/*",
+			"UPGRADE_PACKAGES": "false"
+		}
+	},
+	"runArgs": [
+		"--cap-add=SYS_PTRACE",
+		"--security-opt",
+		"seccomp=unconfined"
+	],
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
+	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
 		"lldb.adapterType": "bundled",
 		"lldb.executable": "/usr/bin/lldb",
-		"swift.path.sourcekite": "/sourcekite/.build/x86_64-unknown-linux/release/sourcekite"
+		"sde.languageservermode": "sourcekite",
+		"swift.path.sourcekite": "/usr/local/bin/sourcekite"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
