@@ -1,0 +1,68 @@
+{
+	"variants": ["14", "12", "10"],
+	"build": {
+		"latest": true,
+		"rootDistro": "debian",
+		"tags": [
+			"javascript-node:${VERSION}-${VARIANT}"
+		]
+	}, 
+	"dependencies": {
+		"image": "node:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/node",
+		"debian": [
+			"apt-utils", 
+			"dialog", 
+			"ca-certificates",
+			"git",
+			"iproute2",
+			"procps",
+			"curl",
+			"openssh-client",
+			"less",
+			"nano",
+			"gnupg",
+			"jq",
+			"wget",
+			"unzip",
+			"lsb-release",
+			"apt-transport-https",
+			"libc6",
+			"libgcc1",
+			"libgssapi-krb5-2",
+			"libicu57",
+			"libssl1.1",
+			"libstdc++6",
+			"zlib1g",
+			"libssl1.0.2",
+			"sudo",
+			"yarn",
+			"zsh"
+		],
+		"npm": [
+			"eslint"
+		],
+		"manual": [
+			{
+				"Component": {
+					"Type": "git",
+					"git": {
+						"Name": "Oh My Zsh!",
+						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
+						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
+					}
+				}
+			},
+			{
+				"Component": {
+					"Type": "git",
+					"git": {
+						"Name": "Nvm",
+						"repositoryUrl": "https://github.com/nvm-sh/nvm",
+						"commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
+					}
+				}
+			}
+		]
+	}
+}

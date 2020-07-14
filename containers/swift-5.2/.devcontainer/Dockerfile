@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM rust:1
+FROM swift:5.2
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
@@ -13,20 +13,21 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Configure apt and install packages
 RUN apt-get update \
-    && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
-    # Verify git, needed tools installed
-    && apt-get -y install git openssh-client cmake less iproute2 procps lsb-release \
+    # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
+    && apt-get -y install git openssh-client less iproute2 procps lsb-release curl libcurl4-openssl-dev \
     #
-    # Install lldb, vadimcn.vscode-lldb VSCode extension dependencies
-    && apt-get install -y lldb python3-minimal libpython3.7 \
-    #
-    # Install Rust components
-    && rustup update 2>&1 \
-    && rustup component add rls rust-analysis rust-src rustfmt clippy 2>&1 \
+    # Install SourceKite, see https://github.com/vknabel/vscode-swift-development-environment/blob/master/README.md#installation
+    && git clone https://github.com/vknabel/sourcekite \
+    && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/swift:/usr/lib \
+    && ln -s /usr/lib/libsourcekitdInProc.so /usr/lib/sourcekitdInProc \
+    && cd sourcekite && make install PREFIX=/usr/local -j2 \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
@@ -40,3 +41,6 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+# Switch back to dialog for any ad-hoc use of apt-get
+ENV DEBIAN_FRONTEND=dialog
