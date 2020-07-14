@@ -62,6 +62,11 @@ RUN apt-get update \
     && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     && rm /tmp/common-setup.sh \
     #
+    # Uncomment the following lines and the corresponding COPY line above if you wish to include your 
+    # requirements in the image itself. Only do this if your requirements rarely change. 
+    # && pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
+    # && rm -rf /tmp/pip-tmp \
+    #
     # Setup default python tools in a venv via pipx to avoid conflicts
     && mkdir -p ${PIPX_BIN_DIR} \
     && export PYTHONUSERBASE=/tmp/pip-tmp \
