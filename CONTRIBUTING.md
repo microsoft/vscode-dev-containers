@@ -75,6 +75,53 @@ To create a new definition:
 
 4. Update [`.npmignore`](https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package) if you've added new folders that should be excluded if used. Add anything you don't want copied in to a user's existing project / folder into this file in [glob](https://facelessuser.github.io/wcmatch/glob/) form.
 
+### Why do definitions have larger RUN statements with && to separate commands?
+
+Each `RUN` statement creates a Docker image "layer". If one `RUN` statement adds in temporary contents, these contents remain in this layer in the image even if they are deleted in a subsequent `RUN`. This means the image takes more storage locally and slow the image download if you publish the image to a registry.
+
+So, in short, you want to clean up after you install or configure anything in the same `RUN` statement. To do this, you can either:
+
+1. Use a string of commands that cleans up at the end. e.g.: 
+
+    ```Dockerfile
+    RUN apt-get update && apt-get -y install --no-install-recommends git && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+    ```
+
+    ... or across multiple lines (note the `\` at the end escaping the newline):
+
+    ```Dockerfile
+    RUN apt-get update \
+        && apt-get -y install git \
+        && apt-get autoremove -y \
+        && apt-get clean -y \
+        && rm -rf /var/lib/apt/lists/*
+    ```
+
+2. Put the commands in a script, temporarily copy it into the container, then remove it. e.g.:
+
+    ```Dockerfile
+    COPY ./my-script.sh /tmp/my-script.sh
+    RUN bash /tmp/my-script.sh \
+        && rm -f /tmp/my-script.sh
+    ```
+
+Some other tips:
+
+1. You'd be suprised [how big package lists](https://askubuntu.com/questions/179955/var-lib-apt-lists-is-huge) can get, so be sure to clean these up too. Most Docker images that use Debian / Ubuntu use the following command to clean these up:
+
+    ```
+    rm -rf /var/lib/apt/lists/*
+    ```
+
+    The only downside of doing this is that `apt-get update` has to be executed before you install a packages. However, in most cases adding this package to a Dockerfile and rebuilding is a better choice anyway since this will survive a "rebuild". 
+
+2. Use the scripts in the [script library](./script-library) in this repository where appropriate. You do not even need to copy the script into your `.devcontainer` folder to use it. See the [README](./script-library) for details. Most existing definitions use the "common" script to ensure things like `git`, a non-root user, and useful command line utilities like `ps`, `ip`, `jq` are present.
+
+3. In all cases, you'll want to pay attention to package caching since this can also take up image space. Typically there is an option for a package manager to not cache when installing that you can use to minimize the size of the image. For example, for Alpine Linux, there's `apk --no-cache`
+
+4. Watch out for the installation of "recommended" packages you don't need. By default, Debian / Ubuntu's `apt-get` installs packages that are commonly used with the one you specified - which in many cases isn't required. You can use `apt-get -y install --no-install recommends` to avoid this problem.
+
 ### Developing and testing a definition
 
 VS Code Remote provides a straightforward development loop for creating and editing container definitions. Just follow these steps to get started:
