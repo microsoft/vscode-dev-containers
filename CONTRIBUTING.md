@@ -75,9 +75,9 @@ To create a new definition:
 
 4. Update [`.npmignore`](https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package) if you've added new folders that should be excluded if used. Add anything you don't want copied in to a user's existing project / folder into this file in [glob](https://facelessuser.github.io/wcmatch/glob/) form.
 
-### Why do definitions have larger RUN statements with && to separate commands?
+### Why do Dockerfiles in this repository use RUN statements with commands separated by &&?
 
-Each `RUN` statement creates a Docker image "layer". If one `RUN` statement adds in temporary contents, these contents remain in this layer in the image even if they are deleted in a subsequent `RUN`. This means the image takes more storage locally and slow the image download if you publish the image to a registry.
+Each `RUN` statement creates a Docker image "layer". If one `RUN` statement adds in temporary contents, these contents remain in this layer in the image even if they are deleted in a subsequent `RUN`. This means the image takes more storage locally and results in slower image download times if you publish the image to a registry.
 
 So, in short, you want to clean up after you install or configure anything in the same `RUN` statement. To do this, you can either:
 
