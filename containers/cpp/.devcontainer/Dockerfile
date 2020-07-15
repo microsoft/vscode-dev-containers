@@ -1,3 +1,5 @@
+# To fully customize the contents of this image, use the following Dockerfile as a base and add the RUN statement from this file:
+# https://github.com/microsoft/vscode-dev-containers/blob/master/containers/debian/.devcontainer/base.Dockerfile
 FROM mcr.microsoft.com/vscode/devcontainers/base:debian-9
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser" property in
@@ -14,17 +16,8 @@ RUN apt-get update \
         && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
         && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
     fi \
-    #
     # Install C++ tools
     && apt-get -y install build-essential cmake cppcheck valgrind \
-    #
-    # [Optional] Update UID/GID if needed
-    && if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
-        groupmod --gid $USER_GID $USERNAME \
-        && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
-        && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
-    fi \
-    #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
