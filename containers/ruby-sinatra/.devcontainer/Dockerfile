@@ -3,9 +3,9 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Update the VARIANT arg in devcontainer.json to pick a .NET Core version: 3.1-bionic, 2.1-bionic 
-ARG VARIANT="3.1-bionic"
-FROM mcr.microsoft.com/dotnet/core/sdk:${VARIANT}
+# Update the VARIANT arg in devcontainer.json to pick a Ruby version: 2, 2.7, 2.6, 2.5
+ARG VARIANT=2
+FROM ruby:${VARIANT}
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
@@ -31,9 +31,6 @@ ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true
 ENV PATH=${NVM_DIR}/current/bin:${PATH}
 
-# [Optional] Install the Azure CLI
-ARG INSTALL_AZURE_CLI="false"
-
 # Configure apt and install packages
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -44,23 +41,36 @@ RUN apt-get update \
     && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/common-setup.sh" | sha256sum -c -)) \
     && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     #
-    # [Optional] Install Node.js for ASP.NET Core Web Applicationss
+    # [Optional] Install Node.js for use with web applications
     && if [ "$INSTALL_NODE" = "true" ]; then \
         curl -sSL ${NODE_SCRIPT_SOURCE} -o /tmp/node-setup.sh \
         && ([ "${NODE_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/node-setup.sh" | sha256sum -c -)) \
         && /bin/bash /tmp/node-setup.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; \
     fi \
     #
-    # [Optional] Install the Azure CLI
-    && if [ "$INSTALL_AZURE_CLI" = "true" ]; then \
-        echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
-        && curl -sL https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 2>/dev/null \
-        && apt-get update \
-        && apt-get install -y azure-cli; \
-    fi \
+    # Install Ruby tools, Sinatra, and dependencies
+    && apt-get install -y build-essential libsqlite3-dev \
+    && gem install \
+        rake \
+        ruby-debug-ide \
+        debase \
+        sinatra \
+        sinatra-reloader \
+        thin \
+        data_mapper \
+        dm-sqlite-adapter \
     #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -f /tmp/common-setup.sh /tmp/node-setup.sh \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /tmp/common-setup.sh /tmp/node-setup.sh 
+
+# ** [Optional] Uncomment this section to install additional OS packages. **
+#
+# RUN apt-get update \
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>
+
+# ** [Optional] Uncomment this section to install additional Ruby gems packages. **
+#
+# RUN gem install <your gem names here>
