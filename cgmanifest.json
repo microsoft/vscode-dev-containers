@@ -5,6 +5,26 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
+                    "Version": "14",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "12",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
                     "Version": "10",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
@@ -306,6 +326,36 @@
                     "Name": "Nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm",
                     "commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "14",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "12",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "10",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },
@@ -1423,26 +1473,6 @@
                     "Name": "Debian Package: zsh",
                     "Version": "5.8-3ubuntu1",
                     "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/z/zsh/zsh_5.8-3ubuntu1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "12",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         }
