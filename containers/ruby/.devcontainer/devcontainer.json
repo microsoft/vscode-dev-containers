@@ -1,6 +1,17 @@
 {
-	"name": "Ruby 2 Sinatra",
-	"dockerFile": "Dockerfile",
+	"name": "Ruby",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			// Update 'VARIANT' to pick a Ruby version. Rebuild the container if
+			// it already exists to update. Example variants: 2, 2.7, 2.6, 2.5
+			"VARIANT": "2",
+			// Options
+			"INSTALL_NODE": "false",
+			"NODE_VERSION": "lts/*",
+			"UPGRADE_PACKAGES": "false"
+		}
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
@@ -11,13 +22,14 @@
 	"extensions": [
 		"rebornix.Ruby"
 	]
-
+	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [4567],
+	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "",
+	// "postCreateCommand": "ruby --version",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
+
 }
