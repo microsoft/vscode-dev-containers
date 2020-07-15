@@ -110,6 +110,19 @@ RUN mkdir -p ${PIP_TARGET} \
     | tee -a /root/.bashrc /root/.zshrc /home/vscode/.bashrc >> /home/vscode/.zshrc \
 ```
 
+#### [Optional] Installing multiple versions of Python in the same image
+
+If you would prefer to have multiple Python versions in your container, use `base.Dockerfile` and update `FROM` statement:
+
+```Dockerfile
+FROM ubuntu:bionic
+ARG PYTHON_PACKAGES="python3.5 python3.6 python3.7 python3.8 python3 python3-pip python3-venv"
+RUN apt-get update && apt-get install --no-install-recommends -yq software-properties-common \
+     && add-apt-repository ppa:deadsnakes/ppa && apt-get update \
+     && apt-get install -yq --no-install-recommends ${PYTHON_PACKAGES} \
+     && pip3 install --no-cache-dir --upgrade pip setuptools wheel
+```
+
 ### Adding the definition to your project
 
 Just follow these steps:
