@@ -1193,7 +1193,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.0.26"
+                    "Version": "20.0.27"
                 }
             }
         },
