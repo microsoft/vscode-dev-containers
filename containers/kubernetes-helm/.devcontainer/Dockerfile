@@ -1,15 +1,8 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
-
 # Note: You can use any Debian/Ubuntu based image you want. 
 FROM mcr.microsoft.com/vscode/devcontainers/base:debian-10
 
-# This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
-# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
-# will be updated to match your local UID/GID (when using the dockerFile property).
-# See https://aka.ms/vscode-remote/containers/non-root-user for details.
+# This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
+# devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -82,6 +75,11 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update \
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
 # the Docker socket if "overrideCommand": false is set in devcontainer.json. 

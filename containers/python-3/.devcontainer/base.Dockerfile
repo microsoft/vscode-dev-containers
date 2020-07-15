@@ -1,8 +1,3 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
-
 # Update the VARIANT arg in devcontainer.json to pick a Python version: 3, 3.8, 3.7, 3.6 
 ARG VARIANT=3
 FROM python:${VARIANT}
@@ -17,10 +12,8 @@ FROM python:${VARIANT}
 #     && apt-get install -yq --no-install-recommends ${PYTHON_PACKAGES} \
 #     && pip3 install --no-cache-dir --upgrade pip setuptools wheel
 
-# This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
-# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
-# will be updated to match your local UID/GID (when using the dockerFile property).
-# See https://aka.ms/vscode-remote/containers/non-root-user for details.
+# This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
+# devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -41,17 +34,15 @@ ENV PIPX_HOME=/usr/local/py-utils
 ENV PIPX_BIN_DIR=${PIPX_HOME}/bin
 ENV PATH=${PATH}:${PIPX_BIN_DIR}
 
-# Options for common package install script
+# Options for common setup script
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
-# Configure apt and install packages
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    #
-    # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
     && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
     && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
     && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/common-setup.sh" | sha256sum -c -)) \
@@ -77,13 +68,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
-#
 # COPY requirements.txt /tmp/pip-tmp/
 # RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
 #    && rm -rf /tmp/pip-tmp
 
 # [Optional] Uncomment this section to install additional OS packages.
-#
 # RUN apt-get update \
 #     && export DEBIAN_FRONTEND=noninteractive \
 #    && apt-get -y install --no-install-recommends <your-package-list-here>

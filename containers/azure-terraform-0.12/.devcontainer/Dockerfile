@@ -1,8 +1,3 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
-
 # Pick any base image, but if you select node, skip installing node. 😊
 FROM debian:9
 
@@ -10,15 +5,13 @@ FROM debian:9
 ARG TERRAFORM_VERSION=0.12.16
 ARG TFLINT_VERSION=0.8.2
 
-# This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
-# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
-# will be updated to match your local UID/GID (when using the dockerFile property).
-# See https://aka.ms/vscode-remote/containers/non-root-user for details.
+# This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
+# devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Configure apt and install packages
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
@@ -82,3 +75,8 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update \
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>

@@ -1,15 +1,8 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
-
 ARG VARIANT=14
 FROM node:${VARIANT}
 
-# The node image includes a non-root user with sudo access. Use the "remoteUser"
-# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
-# will be updated to match your local UID/GID (when using the dockerFile property).
-# See https://aka.ms/vscode-remote/containers/non-root-user for details.
+# This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
+# devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
 ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -17,21 +10,18 @@ ARG USER_GID=$USER_UID
 ARG NPM_GLOBAL=/usr/local/share/npm-global
 ENV PATH=${PATH}:${NPM_GLOBAL}/bin
 ENV NVM_DIR=/usr/local/share/nvm
-# Have nvm create a "current" symlink and add to path to work around https://github.com/microsoft/vscode-remote-release/issues/3224
-ENV NVM_SYMLINK_CURRENT=true 
+ENV NVM_SYMLINK_CURRENT=true  
 ENV PATH=${NVM_DIR}/current/bin:${PATH}
 
-# Options for common package install script
+# Options for common setup script
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
-# Configure apt and install packages
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    #
-    # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
     && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
     && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
     && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/common-setup.sh" | sha256sum -c -)) \
@@ -45,12 +35,6 @@ RUN apt-get update \
     && apt-get update \
     && apt-get -y install --no-install-recommends yarn \
     #
-    # Set alternate global install location that both users have rights to access
-    && mkdir -p ${NPM_GLOBAL} \
-    && chown ${USERNAME}:root ${NPM_GLOBAL} \
-    && npm config -g set prefix ${NPM_GLOBAL} \
-    && sudo -u ${USERNAME} npm config -g set prefix ${NPM_GLOBAL} \
-    #
     # Install NVM to allow installing alternate versions of Node.js as needed
     && mkdir -p ${NVM_DIR} \
     && export NODE_VERSION= \
@@ -62,7 +46,11 @@ RUN apt-get update \
     && chown ${USER_UID}:${USER_GID} /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc \
     && chown -R ${USER_UID}:root ${NVM_DIR} \
     #
-    # Handle scenarios where GID/UID is changed
+    # Configure Node
+    && mkdir -p ${NPM_GLOBAL} \
+    && chown ${USERNAME}:root ${NPM_GLOBAL} \
+    && npm config -g set prefix ${NPM_GLOBAL} \
+    && sudo -u ${USERNAME} npm config -g set prefix ${NPM_GLOBAL} \
     && echo "if [ \"\$(stat -c '%U' ${NPM_GLOBAL})\" != \"${USERNAME}\" ]; then sudo chown -R ${USER_UID}:root ${NPM_GLOBAL} ${NVM_DIR}; fi" \
     | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \
     #
@@ -79,8 +67,14 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # [Optional] Uncomment this section to install additional OS packages.
-#
 # RUN apt-get update \
 #     && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
+
+# [Optional] Uncomment if you want to install an additional version of node using nvm
+# ARG EXTRA_NODE_VERSION=10
+# RUN sudo -u node bash -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
+
+# [Optional] Uncomment if you want to install more global node packages
+# RUN sudo -u node npm install -g <your-package-list -here>
 

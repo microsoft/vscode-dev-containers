@@ -18,6 +18,14 @@ While the definition itself works unmodified, it uses the `mcr.microsoft.com/vsc
 
 You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` with one of the following: 10, 12, or 14.
 
+```yaml
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VARIANT: 14
+```
+
 ### Adding the definition to your project
 
 Just follow these steps:

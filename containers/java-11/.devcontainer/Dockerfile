@@ -1,29 +1,20 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
-
 FROM openjdk:11-jdk
 
-# This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
-# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
-# will be updated to match your local UID/GID (when using the dockerFile property).
-# See https://aka.ms/vscode-remote/containers/non-root-user for details.
+# This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
+# devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Options for common package install script
+# Options for common setup script
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
-# Configure apt
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    #
-    # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
     && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
     && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
     && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/common-setup.sh" | sha256sum -c -)) \
@@ -66,3 +57,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 # Allow for a consistant java home location for settings - image is changing over time
 RUN if [ ! -d "/docker-java-home" ]; then ln -s "${JAVA_HOME}" /docker-java-home; fi
+
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update \
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>

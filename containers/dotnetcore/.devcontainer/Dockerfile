@@ -7,15 +7,13 @@
 ARG VARIANT="3.1-bionic"
 FROM mcr.microsoft.com/dotnet/core/sdk:${VARIANT}
 
-# This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
-# property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
-# will be updated to match your local UID/GID (when using the dockerFile property).
-# See https://aka.ms/vscode-remote/containers/non-root-user for details.
+# This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
+# devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Options for common package install script
+# Options for common setup script
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
@@ -27,18 +25,15 @@ ARG NODE_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-c
 ARG NODE_SCRIPT_SHA="dev-mode"
 ARG NODE_VERSION="lts/*"
 ENV NVM_DIR=/usr/local/share/nvm
-# Have nvm create a "current" symlink and add to path to work around https://github.com/microsoft/vscode-remote-release/issues/3224
-ENV NVM_SYMLINK_CURRENT=true
+ENV NVM_SYMLINK_CURRENT=true 
 ENV PATH=${NVM_DIR}/current/bin:${PATH}
 
 # [Optional] Install the Azure CLI
 ARG INSTALL_AZURE_CLI="false"
 
-# Configure apt and install packages
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    #
-    # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh
     && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
     && curl -sSL ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
     && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/common-setup.sh" | sha256sum -c -)) \
@@ -64,3 +59,8 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -f /tmp/common-setup.sh /tmp/node-setup.sh \
     && rm -rf /var/lib/apt/lists/*
+
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update \
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>
