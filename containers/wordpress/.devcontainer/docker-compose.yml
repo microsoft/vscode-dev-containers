@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  nginx:
+    image: "nginx:latest"
+    ports:
+      - "8080:80"
+    depends_on:
+      - phpfpm
+    volumes:
+      - wordpress:/var/www/html
+      - "../:/var/www/html/wp-content/${PROJECT_TYPE}s/${SLUG}"
+      - "./config/nginx/default.conf:/etc/nginx/conf.d/default.conf:cached"
+    networks:
+      - default
+    restart: unless-stopped
+  phpfpm:
+    image: "10up/wp-php-fpm-dev:7.3"
+    environment:
+      ENABLE_XDEBUG: "${ENABLE_XDEBUG}"
+    volumes:
+      - wordpress:/var/www/html
+      - "../:/var/www/html/wp-content/${PROJECT_TYPE}s/${SLUG}"
+      - "./config/php-fpm/docker-php-ext-xdebug.ini:/etc/php.d/docker-php-ext-xdebug.ini:cached"
+    depends_on:
+      - db
+    networks:
+      - default
+    restart: unless-stopped
+    env_file:
+      - ../.env
+  db:
+    image: mariadb:10.4
+    expose:
+      - "3306"
+    tty: true
+    environment:
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    volumes:
+      - data:/var/lib/mysql
+    networks:
+      - default
+    restart: unless-stopped
+volumes:
+  wordpress:
+  data:
+networks:
+  default:

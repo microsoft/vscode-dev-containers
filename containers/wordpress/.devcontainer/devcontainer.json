@@ -1,0 +1,19 @@
+{
+	"name": "${localWorkspaceFolderBasename}",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "phpfpm",
+	"forwardPorts": [
+    8080
+	],
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"php.suggest.basic": false
+	},
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [],
+	"workspaceFolder": "/var/www/html/",
+	"postCreateCommand": "/var/www/html/wp-content/${PROJECT_TYPE}s/${localWorkspaceFolderBasename}/.devcontainer/setup.sh",
+	"initializeCommand": "bash .devcontainer/createEnv.sh ${localWorkspaceFolderBasename}",
+	"remoteUser": "www-data"
+}
