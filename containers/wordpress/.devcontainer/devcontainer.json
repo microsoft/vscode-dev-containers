@@ -11,7 +11,12 @@
 		"php.suggest.basic": false
 	},
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [],
+	"extensions": [
+		"bmewburn.vscode-intelephense-client",
+		// "felixfbecker.php-debug",
+		// "mtxr.sqltools",
+		// "mtxr.sqltools-driver-mysql"
+	],
 	"workspaceFolder": "/var/www/html/",
 	"postCreateCommand": "/var/www/html/wp-content/${PROJECT_TYPE}s/${localWorkspaceFolderBasename}/.devcontainer/setup.sh",
 	"initializeCommand": "bash .devcontainer/createEnv.sh ${localWorkspaceFolderBasename}",

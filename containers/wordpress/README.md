@@ -35,13 +35,30 @@ Just follow these steps:
 
 ## Notes
 
-1. There is a `setup.log` file in the root of WordPress folder inside the container (not theme/plugin root folder) to help you debug if any error occurs.
+- This definition works for both plugin and theme, without any addition configuration.
 
-2. By default, the latest LTS version of node.js will be installed, you can changed this version by update `NODE_VERSION` in `.devcontainer/createEnv.sh` file.
+- There is a `setup.log` file in the root of WordPress folder inside the container (not theme/plugin root folder) to help you debug if any error occurs.
 
-3. By default, PHP 7.3 is installed. Same as node.js, you can change the PHP version by changing `PHP_VERSION` in `.devcontainer/createEnv.sh` file.
+- By default, the latest LTS version of node.js will be installed, you can changed this version by update `NODE_VERSION` in `.devcontainer/createEnv.sh` file.
 
-4. This definition works for both plugin and theme, without any addition configuration.
+- By default, PHP 7.3 is installed. Same as node.js, you can change the PHP version by changing `PHP_VERSION` in `.devcontainer/createEnv.sh` file.
+
+- This definition supports xDebug but it's disabled by default. To enable xDebug, uncomment `felixfbecker.php-debug` extension in the `.devcontainer/devcontainer.json` file and change `ENABLE_XDEBUG` to true in `.devcontainer/createEnv.sh`. Please use `9001` as the port for the `launch.json` configuration.
+  ```
+  {
+   "version": "0.2.0",
+   "configurations": [
+      {
+         "name": "Listen for XDebug",
+         "type": "php",
+         "request": "launch",
+         "port": 9001,
+      },
+   ]
+  }
+  ```
+
+- Don't forget to rebuild the container to make the above changes effect.
 
 ## License
 
