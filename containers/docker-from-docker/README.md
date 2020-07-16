@@ -81,15 +81,15 @@ Follow these directions to set up non-root access using `socat`:
 
     # Default to root only access to the Docker socket, set up non-root init script
     RUN touch /var/run/docker-host.sock \
-        && ln -s /var/run/docker-host.sock /var/run/docker.sock
+        && ln -s /var/run/docker-host.sock /var/run/docker.sock \
         && apt-get update \
         && apt-get -y install socat
 
     # Create docker-init.sh to spin up socat
-    RUN echo '#!/bin/sh\n\
+    RUN echo "#!/bin/sh\n\
         sudo rm -rf /var/run/docker.sock\n\
         ((sudo socat UNIX-LISTEN:/var/run/docker.sock,fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:/var/run/docker-host.sock) 2>&1 >> /tmp/vscr-dind-socat.log) & > /dev/null\n\
-        "$@"' >> /usr/local/share/docker-init.sh \
+        \"\$@\"" >> /usr/local/share/docker-init.sh \
         && chmod +x /usr/local/share/docker-init.sh
 
     # VS Code by default overrides ENTRYPOINT and CMD with default values when executing `docker run`.
