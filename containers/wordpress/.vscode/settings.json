@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "wordpress",
+            "dialect": "MariaDB",
+            "name": "WordPress",
+            "password": "password",
+            "port": 3306,
+            "server": "db",
+            "username": "root"
+        }
+    ]
+}
