@@ -15,7 +15,7 @@ services:
       - default
     restart: unless-stopped
   phpfpm:
-    image: "10up/wp-php-fpm-dev:7.3"
+    image: "10up/wp-php-fpm-dev:${PHP_VERSION}"
     environment:
       ENABLE_XDEBUG: "${ENABLE_XDEBUG}"
     volumes:
