@@ -32,6 +32,8 @@ Just follow these steps:
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
+6. With the default definition, your WordPress site will be available at http://localhost:8080. The WordPress admin `username:password` is `admin:password` respectively.
+
 
 ## Notes
 
