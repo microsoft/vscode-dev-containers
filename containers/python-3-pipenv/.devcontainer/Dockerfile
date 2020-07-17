@@ -2,9 +2,13 @@
 ARG VARIANT=3.8
 FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
 
-# Create venv for device simulator
-RUN python3 -m venv /opt/vscode/extensions/ms-python.devicesimulatorexpress/venv \
-    && chown -R vscode:root /opt/vscode/extensions/ms-python.devicesimulatorexpress
+# Install Pipenv
+RUN /usr/local/py-utils/bin/pipx install \
+        --system-site-packages \
+        --pip-args=--no-cache-dir \
+        --pip-args=--force-reinstall \
+        pipenv \
+    && chown -R ${USER_UID}:${USER_GID} ${PIPX_HOME}
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/
