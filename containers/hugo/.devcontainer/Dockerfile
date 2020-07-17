@@ -5,6 +5,7 @@ ARG VARIANT=hugo
 # VERSION can be either 'latest' or a specific version number
 ARG VERSION=latest
 
+# Download and patch selected Hugo binary
 RUN apt-get update && apt-get install -y ca-certificates openssl git curl && \
     rm -rf /var/lib/apt/lists/* && \
     case ${VERSION} in \
@@ -18,6 +19,14 @@ RUN apt-get update && apt-get install -y ca-certificates openssl git curl && \
     go get github.com/yaegashi/muslstack && \
     muslstack -s 0x800000 /usr/bin/hugo
 
+# Copy patched hugo binary from build stage
 FROM mcr.microsoft.com/vscode/devcontainers/base
 COPY --from=0 /usr/bin/hugo /usr/bin
 EXPOSE 1313
+
+# [Optional] Uncomment this section to install additional OS packages you may want.
+#
+# RUN apt-get update \
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>
+
