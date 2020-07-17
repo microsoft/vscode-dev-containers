@@ -2,16 +2,16 @@
 
 ## Summary
 
-*Develop for circuit boards, with or without a physical device using Python 3 and [Device Simulator Express](https://www.microsoft.com/en-us/garage/profiles/device-simulator-express/)*
+_Develop for circuit boards, with or without a physical device using Python 3 and [Device Simulator Express](https://www.microsoft.com/en-us/garage/profiles/device-simulator-express/)_
 
-| Metadata | Value |
-|----------|-------|
-| *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
-| *Definition type* | Dockerfile |
-| *Published image architecture(s)* | x86-64 |
-| *Works in Codespaces* | Yes |
-| *Container Host OS Support* | Linux, macOS, Windows |
-| *Languages, platforms* | Python |
+| Metadata                          | Value                                           |
+| --------------------------------- | ----------------------------------------------- |
+| _Contributors_                    | [Carlos Mendible](https://github.com/cmendible) |
+| _Definition type_                 | Dockerfile                                      |
+| _Published image architecture(s)_ | x86-64                                          |
+| _Works in Codespaces_             | Yes                                             |
+| _Container Host OS Support_       | Linux, macOS, Windows                           |
+| _Languages, platforms_            | Python                                          |
 
 ## Using this definition with an existing folder
 
@@ -108,11 +108,13 @@ Just follow these steps:
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
 2. To use the pre-built image:
+
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the Python 3 definition.
 
-3. To use the Dockerfile for this definition (*rather than the pre-built image*):
+3. To use the Dockerfile for this definition (_rather than the pre-built image_):
+
    1. Clone this repository.
    2. Copy the contents of `containers/python-3/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
@@ -130,7 +132,7 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/python-3-device-simulator-express` folder.
 5. After the folder has opened in the container, `open the test-project/circuit.py` file.
-6. Open the Command Palette (<kbd>Ctrl+Shift+P</kbd>) and select Device Simulator Express: Open Simulator command. 
+6. Open the Command Palette (<kbd>Ctrl+Shift+P</kbd>) and select Device Simulator Express: Open Simulator command.
 7. You should see a prompt to select the circuit board. Select "Circuit Playground Express".
 8. After the simulator has opened, click on the play (green button) and you should see the leds blinking.
 
