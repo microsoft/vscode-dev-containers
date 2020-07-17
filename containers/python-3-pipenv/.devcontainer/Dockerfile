@@ -1,4 +1,4 @@
-# Update the VARIANT arg in devcontainer.json to pick a Python version: 3.7, 3.8 or higher
+# Update the VARIANT arg in devcontainer.json to pick a Python version: 3 (latest), 3.6, 3.7, 3.8
 ARG VARIANT=3.8
 FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
 

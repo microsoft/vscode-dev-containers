@@ -3,12 +3,14 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "..",
-		// Update 'VARIANT' to pick a Python version. Rebuild the container 
-		// if it already exists to update. Available variants: 3.7 or higher.
+
+		// Update 'VARIANT' to pick a Python version. Rebuild the container
+		// if it already exists to update. Available variants: 3 (latest), 3.6, 3.7, 3.8
 		"args": {
-			"VARIANT": "3.8"
+			"VARIANT": "3"
 		}
 	},
+
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
@@ -39,12 +41,12 @@
 		"python.linting.pydocstylePath": "~/.local/share/pipenv/bin/pydocstyle",
 		"python.linting.pylintPath": "~/.local/share/pipenv/bin/pylint"
 	},
-	
+
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"ms-python.python",
-		"ms-python.devicesimulatorexpress"
-	]
+		"ms-python.python"
+	],
+
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
