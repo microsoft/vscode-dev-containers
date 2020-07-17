@@ -13,8 +13,22 @@
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
 		"python.pythonPath": "~/.local/share/pipenv/bin/python",
+		"python.pipenvPath": "/usr/local/py-utils/bin/pipenv",
 		"python.linting.enabled": true,
+
+		// Pick a formatter to use
+		"python.formatting.provider": "autopep8",
+		// "python.formatting.provider": "black",
+		// "python.formatting.provider": "yapf",
+
+		// Pick which linters to enable
+		// "python.linting.banditEnabled": true,
+		// "python.linting.flake8Enabled": true,
+		// "python.linting.mypyEnabled": true,
+		// "python.linting.pycodestyleEnabled": true,
+		// "python.linting.pydocstyleEnabled": true,
 		"python.linting.pylintEnabled": true,
+
 		"python.formatting.autopep8Path": "~/.local/share/pipenv/bin/autopep8",
 		"python.formatting.blackPath": "~/.local/share/pipenv/bin/black",
 		"python.formatting.yapfPath": "~/.local/share/pipenv/bin/yapf",
