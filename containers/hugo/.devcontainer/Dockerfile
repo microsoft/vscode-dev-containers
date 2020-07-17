@@ -1,11 +1,12 @@
-FROM golang:1.13-alpine
+FROM golang:1.13
 
 # VARIANT can be either 'hugo' for the standard version or 'hugo_extended' for the extended version.
-ARG VARIANT=hugo_extended
+ARG VARIANT=hugo
 # VERSION can be either 'latest' or a specific version number
 ARG VERSION=latest
 
-RUN apk add --update --no-cache ca-certificates openssl git curl && \
+RUN apt-get update && apt-get install -y ca-certificates openssl git curl && \
+    rm -rf /var/lib/apt/lists/* && \
     case ${VERSION} in \
     latest) \
     export VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4)}') ;;\
@@ -17,8 +18,6 @@ RUN apk add --update --no-cache ca-certificates openssl git curl && \
     go get github.com/yaegashi/muslstack && \
     muslstack -s 0x800000 /usr/bin/hugo
 
-FROM mcr.microsoft.com/vscode/devcontainers/base:alpine
+FROM mcr.microsoft.com/vscode/devcontainers/base
 COPY --from=0 /usr/bin/hugo /usr/bin
 EXPOSE 1313
-WORKDIR /src
-CMD ["/usr/bin/hugo server"]
