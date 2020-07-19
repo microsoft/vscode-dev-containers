@@ -14,11 +14,38 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Install Prerequisites
-yum -y install  ca-certificates curl gnupg2 dnf net-tools redhat-lsb-core dialog git openssh-clients curl less  procps
-curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg > /tmp/docker.gpg && \
+yum -y install deltarpm
+yum -y install  ca-certificates curl gnupg2 dnf net-tools  dialog git openssh-clients curl less  procps 
+
+# Try to load os-release
+. /etc/os-release 2>/dev/null
+
+# If unable to load OS Name and Verstion from os-release, install lsb_release
+if [ $? -ne 0 ] || [ "${NAME}" = "" ] || [ "${VERSION_ID}" = "" ]; then
+
+    yum -y install redhat-lsb-core
+
+    OSNAME=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
+    RHEL_COMPAT_VER=${VERSION_ID:-`lsb_release -rs | cut -d. -f1`}
+
+else
+    OSNAME=`echo $NAME | cut -d" " -f1 | tr '[:upper:]' '[:lower:]'`
+    if [ "${OSNAME}" = "amazon" ]; then
+        if [ "${VERSION_ID}" = "2" ]; then
+            RHEL_COMPAT_VER=7
+        else
+            echo "Incompatible Operative System. Exiting..."
+            exit
+        fi
+    else
+        RHEL_COMPAT_VER=$VERSION_ID
+    fi
+fi
+
+curl -fsSL https://download.docker.com/linux/${OSNAME}/gpg > /tmp/docker.gpg && \
 rpm --import /tmp/docker.gpg
 
-yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-${RHEL_COMPAT_VER}.noarch.rpm
 yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
