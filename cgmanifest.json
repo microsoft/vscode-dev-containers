@@ -36,7 +36,7 @@
                 "Other": {
                     "Name": "Debian Package: apt-transport-https",
                     "Version": "1.4.10",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/a/apt/apt-transport-https_1.4.10_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-transport-https_1.4.10_amd64.deb"
                 }
             }
         },
@@ -46,7 +46,7 @@
                 "Other": {
                     "Name": "Debian Package: apt-utils",
                     "Version": "1.4.10",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/a/apt/apt-utils_1.4.10_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-utils_1.4.10_amd64.deb"
                 }
             }
         },
@@ -66,7 +66,7 @@
                 "Other": {
                     "Name": "Debian Package: curl",
                     "Version": "7.52.1-5+deb9u10",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/c/curl/curl_7.52.1-5+deb9u10_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/curl/curl_7.52.1-5+deb9u10_amd64.deb"
                 }
             }
         },
@@ -86,7 +86,7 @@
                 "Other": {
                     "Name": "Debian Package: git",
                     "Version": "1:2.11.0-3+deb9u7",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/g/git/git_2.11.0-3+deb9u7_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.11.0-3+deb9u7_amd64.deb"
                 }
             }
         },
@@ -166,7 +166,7 @@
                 "Other": {
                     "Name": "Debian Package: libicu57",
                     "Version": "57.1-6+deb9u4",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/i/icu/libicu57_57.1-6+deb9u4_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/icu/libicu57_57.1-6+deb9u4_amd64.deb"
                 }
             }
         },
@@ -305,7 +305,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.4.0"
+                    "Version": "7.5.0"
                 }
             }
         },
@@ -373,7 +373,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "3.9.6"
+                    "Version": "3.9.7"
                 }
             }
         },
@@ -1321,8 +1321,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: less",
-                    "Version": "551-1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/l/less/less_551-1_amd64.deb"
+                    "Version": "551-1ubuntu0.1",
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/l/less/less_551-1ubuntu0.1_amd64.deb"
                 }
             }
         },
