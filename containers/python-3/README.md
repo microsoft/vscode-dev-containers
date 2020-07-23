@@ -107,7 +107,7 @@ ENV PATH=${PIP_TARGET}/bin:${PATH}
 RUN mkdir -p ${PIP_TARGET} \
     && chown vscode:root ${PIP_TARGET} \
     && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then sudo chown -R vscode:root ${PIP_TARGET}; fi" \
-    | tee -a /root/.bashrc /root/.zshrc /home/vscode/.bashrc >> /home/vscode/.zshrc \
+    | tee -a /root/.bashrc /root/.zshrc /home/vscode/.bashrc >> /home/vscode/.zshrc
 ```
 
 #### [Optional] Installing multiple versions of Python in the same image
