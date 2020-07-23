@@ -114,13 +114,13 @@ Some other tips:
     rm -rf /var/lib/apt/lists/*
     ```
 
-    The only downside of doing this is that `apt-get update` has to be executed before you install a packages. However, in most cases adding this package to a Dockerfile and rebuilding is a better choice anyway since this will survive a "rebuild". 
+    The only downside of doing this is that `apt-get update` has to be executed before you install a packages. However, in most cases adding this package to a Dockerfile is a better choice anyway since this will survive a "rebuild" of the image and the creation of an updated container. 
 
 2. Use the scripts in the [script library](./script-library) in this repository where appropriate. You do not even need to copy the script into your `.devcontainer` folder to use it. See the [README](./script-library) for details. Most existing definitions use the "common" script to ensure things like `git`, a non-root user, and useful command line utilities like `ps`, `ip`, `jq` are present.
 
 3. In all cases, you'll want to pay attention to package caching since this can also take up image space. Typically there is an option for a package manager to not cache when installing that you can use to minimize the size of the image. For example, for Alpine Linux, there's `apk --no-cache`
 
-4. Watch out for the installation of "recommended" packages you don't need. By default, Debian / Ubuntu's `apt-get` installs packages that are commonly used with the one you specified - which in many cases isn't required. You can use `apt-get -y install --no-install recommends` to avoid this problem.
+4. Watch out for the installation of "recommended" packages you don't need. By default, Debian / Ubuntu's `apt-get` installs packages that are commonly used with the one you specified - which in many cases isn't required. You can use `apt-get -y install --no-install-recommends` to avoid this problem.
 
 ### Developing and testing a definition
 
