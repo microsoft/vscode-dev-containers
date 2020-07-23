@@ -17,7 +17,7 @@
 While the definition itself works unmodified, you can select the version of Go the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
-"args": { "VARIANT": "1.13" }
+"args": { "VARIANT": "1.14" }
 ```
 
 ### Adding the definition to your project
