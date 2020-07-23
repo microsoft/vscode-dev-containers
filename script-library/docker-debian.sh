@@ -83,7 +83,7 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "true" ] && [ "${SOURCE_SOCKET}" != "${TARGET_
     if [ "\${SOCKET_GID}" != "0" ]; then
         log "Adding user to group with GID \${SOCKET_GID}."
         if [ "\$(cat /etc/group | grep :\${SOCKET_GID}:)" = "" ]; then
-            sudoIf groupadd --gid \${SOCKET_GID} docker
+            sudoIf groupadd --gid \${SOCKET_GID} docker-host
         fi
         # Add user to group if not already in it
         if [ "\$(id ${NONROOT_USER} | grep -E 'groups=.+\${SOCKET_GID}\(')" = "" ]; then
