@@ -57,8 +57,8 @@ RUN mkdir -p /tmp/gotools \
     && (echo "${GO_TOOLS_WITH_MODULES}" | xargs -n 1 go get -x )2>&1 \
     # gocode-gomod
     && export GO111MODULE=auto \
-    && GOPATH=/tmp/gotools go get -x -d github.com/stamblerre/gocode 2>&1 \
-    && GOPATH=/tmp/gotools go build -o gocode-gomod github.com/stamblerre/gocode \
+    && go get -x -d github.com/stamblerre/gocode 2>&1 \
+    && go build -o gocode-gomod github.com/stamblerre/gocode \
     # golangci-lint
     && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /usr/local/bin 2>&1 \
     # Move Go tools into path and clean up
