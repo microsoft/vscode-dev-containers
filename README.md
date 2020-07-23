@@ -64,15 +64,15 @@ If you want to try a sample project which already has a dev container, check out
 
 ### Can I just reuse an existing container image or Docker / Docker Compose configuration?
 
-Yes, if you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Add Development Container Configuration Files...** from the Command Palette (<kbd>F1</kbd>). You'll be prompted to select a Dockerfile or Docker Compose file and customize from there. If you prefer, you can also start up the container and [attach to it](https://aka.ms/vscode-remote/containers/attach).
+Yes, if you want to use an existing Dockerfile as a starting point, use the [Remote - Containers extension](https://aka.ms/vscode-remote/download/containers), open a folder, and then run **Remote-Containers: Add Development Container Configuration Files...** from the Command Palette (<kbd>F1</kbd>). You'll be prompted to select a Dockerfile or Docker Compose file and customize from there. If you then commit these files to a Git repository, you can use it with [VS Codespaces](https://visualstudio.microsoft.com/services/visual-studio-codespaces/) or [Codespaces in GitHub](https://github.com/features/codespaces as well. If you prefer, you can also start up the container manually and [attach to it](https://aka.ms/vscode-remote/containers/attach).
 
 ### What is the goal of `devcontainer.json`?
 
 A `devcontainer.json` file is similar to `launch.json` for debugging, but designed to launch (or attach to) a development container instead. At its simplest, all you need is a `.devcontainer/devcontainer.json` file in your project that references an image, `Dockerfile`, or `docker-compose.yml`, and a few properties. You can [adapt it for use](https://aka.ms/vscode-remote/containers/folder-setup) in a wide variety of situations.
 
-### Why do Dockerfiles in this repository use RUN statements with commands separated by &&?
+### Why do Dockerfiles in this repo use `RUN` statements with commands separated by `&&`?
 
-Each `RUN` statement creates a Docker image "layer". If one `RUN` statement adds temporary contents, these contents remain in this layer in the image even if they are deleted in a subsequent `RUN`. This means the image takes more storage locally and results in slower image download times if you publish the image to a registry. You can resolve this problem by using a `RUN` statement that includes any clean up steps (separated by &&) after a given operation. See [CONTRIBUTING.md](./CONTRIBUTING.md#why-do-dockerfiles-in-this-repository-use-run-statements-with-commands-separated-by-) for more tips.
+Each `RUN` statement creates a Docker image "layer". If one `RUN` statement adds temporary contents, these contents remain in this layer in the image even if they are deleted in a subsequent `RUN`. This means the image takes more storage locally and results in slower image download times if you publish the image to a registry. You can resolve this problem by using a `RUN` statement that includes any clean up steps (separated by `&&`) after a given operation. See [CONTRIBUTING.md](./CONTRIBUTING.md#why-do-dockerfiles-in-this-repository-use-run-statements-with-commands-separated-by-) for more tips.
 
 ## Contributing and feedback
 
