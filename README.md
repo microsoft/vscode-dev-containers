@@ -64,7 +64,7 @@ If you want to try a sample project which already has a dev container, check out
 
 ### Can I just reuse an existing container image or Docker / Docker Compose configuration?
 
-Yes, if you want to use an existing Dockerfile as a starting point, use the [Remote - Containers extension](https://aka.ms/vscode-remote/download/containers), open a folder, and then run **Remote-Containers: Add Development Container Configuration Files...** from the Command Palette (<kbd>F1</kbd>). You'll be prompted to select a Dockerfile or Docker Compose file and customize from there. If you then commit these files to a Git repository, you can use it with [VS Codespaces](https://visualstudio.microsoft.com/services/visual-studio-codespaces/) or [Codespaces in GitHub](https://github.com/features/codespaces as well. If you prefer, you can also start up the container manually and [attach to it](https://aka.ms/vscode-remote/containers/attach).
+Yes, if you want to use an existing Dockerfile as a starting point, use the [Remote - Containers extension](https://aka.ms/vscode-remote/download/containers), open a folder, and then run **Remote-Containers: Add Development Container Configuration Files...** from the Command Palette (<kbd>F1</kbd>). You'll be prompted to select a Dockerfile or Docker Compose file and customize from there. If you then commit these files to a Git repository, you can use it with [VS Codespaces](https://visualstudio.microsoft.com/services/visual-studio-codespaces/) or [Codespaces in GitHub](https://github.com/features/codespaces) as well. If you prefer, you can also start up the container manually and [attach to it](https://aka.ms/vscode-remote/containers/attach).
 
 ### What is the goal of `devcontainer.json`?
 
