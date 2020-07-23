@@ -10,6 +10,7 @@
 		}
 	},
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
+	"overrideCommand": false,
 
 	"settings": { 
 		"terminal.integrated.shell.linux": null
@@ -19,6 +20,5 @@
 		"ms-azuretools.vscode-docker"
 	],
 
-	"overrideCommand": false,
 	"remoteUser": "vscode"
 }

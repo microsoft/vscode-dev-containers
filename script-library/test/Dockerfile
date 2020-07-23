@@ -23,6 +23,9 @@ RUN /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}
 RUN if [ "${DISTRO}" = "debian" ]; then \
         # Run Node script
         /tmp/node-${DISTRO}.sh "/usr/local/share/nvm" 12 ${USERNAME}; \
+    fi
+
+RUN if  [ "${DISTRO}" != "alpine" ]; then\
         # Run Docker script
         /tmp/docker-${DISTRO}.sh true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}; \
     else \
