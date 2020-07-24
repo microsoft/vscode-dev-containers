@@ -54,11 +54,13 @@ RUN apt-get update -yq\
     # Be sure git is up to date due to DSA 4659-1, DSA 4657-1
     && apt-get upgrade -yq git \
     #
-    # Install Git CLI v 0.11.0
-    && echo "Downloading github CLI" \
+    # Install GitHub CLI v 0.11.0
+    && echo "Downloading github CLI..." \
     && curl -OL https://github.com/cli/cli/releases/download/v0.11.0/gh_0.11.0_linux_amd64.deb \
-    && echo "Installing github CLI" \
+    && echo "Installing github CLI..." \
     && apt install ./gh_0.11.0_linux_amd64.deb \
+	&& echo "Removing github CLI deb file after installation..." \
+	&& rm -rf ./gh_0.11.0_linux_amd64.deb \
 	#
     # Optionally install debugger for development of VSO
     && if [ -z $DeveloperBuild ]; then \
