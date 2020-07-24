@@ -38,31 +38,31 @@ RUN apt-get update -yq\
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -yq install --no-install-recommends apt-utils dialog 2>&1 \
     && apt-get install -yq \
-    default-jdk \
-    vim \
-    sudo \
-    xtail \
-    fish \
-    zsh \
-    curl \
-    gnupg \
-    apt-transport-https \
-    lsb-release \
-    software-properties-common \
-    unzip \
+		default-jdk \
+		vim \
+		sudo \
+		xtail \
+		fish \
+		zsh \
+		curl \
+		gnupg \
+		apt-transport-https \
+		lsb-release \
+		software-properties-common \
+		unzip \
     #
     # Be sure git is up to date due to DSA 4659-1, DSA 4657-1
     && apt-get upgrade -yq git \
     #
     # Install Git CLI v 0.11.0
     && echo "Downloading github CLI" \
-    && curl --progress-bar -OL https://github.com/cli/cli/releases/download/v0.11.0/gh_0.11.0_linux_amd64.deb \
+    && curl -OL https://github.com/cli/cli/releases/download/v0.11.0/gh_0.11.0_linux_amd64.deb \
     && echo "Installing github CLI" \
-    && sudo apt install ./gh_0.11.0_linux_amd64.deb \
+    && apt install ./gh_0.11.0_linux_amd64.deb \
     #
     # Optionally install debugger for development of VSO
     && if [ -z $DeveloperBuild ]; then \
-    echo "not including debugger" ; \
+		echo "not including debugger" ; \
     else \
     curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
     fi \
