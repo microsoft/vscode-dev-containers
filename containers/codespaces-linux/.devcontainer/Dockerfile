@@ -59,12 +59,15 @@ RUN apt-get update -yq\
     && curl -OL https://github.com/cli/cli/releases/download/v0.11.0/gh_0.11.0_linux_amd64.deb \
     && echo "Installing github CLI" \
     && apt install ./gh_0.11.0_linux_amd64.deb \
+	#
+    # Be sure git is up to date due to DSA 4659-1, DSA 4657-1
+    && apt-get upgrade -yq git \
     #
     # Optionally install debugger for development of VSO
     && if [ -z $DeveloperBuild ]; then \
-		echo "not including debugger" ; \
+        echo "not including debugger" ; \
     else \
-		curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
+        curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
     fi \
     #
     # Install Live Share dependencies
