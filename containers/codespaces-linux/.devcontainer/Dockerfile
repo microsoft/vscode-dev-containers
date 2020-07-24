@@ -60,9 +60,6 @@ RUN apt-get update -yq\
     && echo "Installing github CLI" \
     && apt install ./gh_0.11.0_linux_amd64.deb \
 	#
-    # Be sure git is up to date due to DSA 4659-1, DSA 4657-1
-    && apt-get upgrade -yq git \
-    #
     # Optionally install debugger for development of VSO
     && if [ -z $DeveloperBuild ]; then \
         echo "not including debugger" ; \
