@@ -59,9 +59,9 @@ RUN apt-get update -yq\
     && curl -OL https://github.com/cli/cli/releases/download/v0.11.0/gh_0.11.0_linux_amd64.deb \
     && echo "Installing github CLI..." \
     && apt install ./gh_0.11.0_linux_amd64.deb \
-	&& echo "Removing github CLI deb file after installation..." \
-	&& rm -rf ./gh_0.11.0_linux_amd64.deb \
-	#
+    && echo "Removing github CLI deb file after installation..." \
+    && rm -rf ./gh_0.11.0_linux_amd64.deb \
+    #
     # Optionally install debugger for development of VSO
     && if [ -z $DeveloperBuild ]; then \
         echo "not including debugger" ; \
