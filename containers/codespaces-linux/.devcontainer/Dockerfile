@@ -33,32 +33,38 @@ ADD symlinkDotNetCore.sh /tmp/codespace/symlinkDotNetCore.sh
 
 ADD git-ed.sh /tmp/codespace/git-ed.sh
 
- # Install packages, setup codespace user
+# Install packages, setup codespace user
 RUN apt-get update -yq\
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -yq install --no-install-recommends apt-utils dialog 2>&1 \
     && apt-get install -yq \
-        default-jdk \
-        vim \
-        sudo \
-        xtail \
-        fish \
-        zsh \
-        curl \
-        gnupg \
-        apt-transport-https \
-        lsb-release \
-        software-properties-common \
-        unzip \
+    default-jdk \
+    vim \
+    sudo \
+    xtail \
+    fish \
+    zsh \
+    curl \
+    gnupg \
+    apt-transport-https \
+    lsb-release \
+    software-properties-common \
+    unzip \
     #
     # Be sure git is up to date due to DSA 4659-1, DSA 4657-1
     && apt-get upgrade -yq git \
     #
+    # Install Git CLI v 0.11.0
+    && echo "Downloading github CLI" \
+    && curl --progress-bar -OL https://github.com/cli/cli/releases/download/v0.11.0/gh_0.11.0_linux_amd64.deb \
+    && echo "Installing github CLI" \
+    && sudo apt install ./gh_0.11.0_linux_amd64.deb \
+    #
     # Optionally install debugger for development of VSO
     && if [ -z $DeveloperBuild ]; then \
-        echo "not including debugger" ; \
+    echo "not including debugger" ; \
     else \
-        curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
+    curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
     fi \
     #
     # Install Live Share dependencies
@@ -119,13 +125,16 @@ RUN apt-get update -yq\
     # Setup Node.js
     && sudo -u codespace npm config set prefix /home/codespace/.npm-global \
     && npm config -g set prefix /home/codespace/.npm-global \
+    #
     # Install nvm (popular Node.js version-management tool)
     && sudo -u codespace curl -s -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | sudo -u codespace bash 2>&1 \
     && rm -rf /home/codespace/.nvm/.git \
+    # 
     # Install nvs (alternate cross-platform Node.js version-management tool)
     && sudo -u codespace git clone -b v1.5.4 -c advice.detachedHead=false --depth 1 https://github.com/jasongin/nvs ${NVS_HOME} 2>&1 \
     && sudo -u codespace /bin/bash ${NVS_HOME}/nvs.sh install \
     && rm -rf ${NVS_HOME}/.git \
+    #
     # Clear the nvs cache and link to an existing node binary to reduce the size of the image.
     && rm ${NVS_HOME}/cache/* \
     && sudo -u codespace ln -s /opt/nodejs/10.17.0/bin/node ${NVS_HOME}/cache/node \
