@@ -38,18 +38,18 @@ RUN apt-get update -yq\
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -yq install --no-install-recommends apt-utils dialog 2>&1 \
     && apt-get install -yq \
-		default-jdk \
-		vim \
-		sudo \
-		xtail \
-		fish \
-		zsh \
-		curl \
-		gnupg \
-		apt-transport-https \
-		lsb-release \
-		software-properties-common \
-		unzip \
+        default-jdk \
+        vim \
+        sudo \
+        xtail \
+        fish \
+        zsh \
+        curl \
+        gnupg \
+        apt-transport-https \
+        lsb-release \
+        software-properties-common \
+        unzip \
     #
     # Be sure git is up to date due to DSA 4659-1, DSA 4657-1
     && apt-get upgrade -yq git \
@@ -64,7 +64,7 @@ RUN apt-get update -yq\
     && if [ -z $DeveloperBuild ]; then \
 		echo "not including debugger" ; \
     else \
-    curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
+		curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
     fi \
     #
     # Install Live Share dependencies
