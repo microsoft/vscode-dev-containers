@@ -14,7 +14,13 @@
 
 ## Using this definition with an existing folder
 
-This definition does not require any special steps to use. Just follow these steps:
+While the definition itself works unmodified, you can select the version of Go the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+
+```json
+"args": { "VARIANT": "1.14" }
+```
+
+### Adding the definition to your project
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
