@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  elixir:
+    build: .
+    volumes:
+      - ..:/workspace:cached
+    ports:
+      # For use with elixir (e.g. `iex -S mix phx.server`)
+      - "4000:4000"
+      - "4001:4001"
+    command: sleep infinity
+    links:
+      - postgres
+  postgres:
+    image: postgres:11
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
