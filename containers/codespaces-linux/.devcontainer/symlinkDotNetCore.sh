@@ -32,7 +32,7 @@ function createLinks() {
         mkdir -p "$linkFromParentDir"
 
         linkTo="$installedDir/$subPath"
-        ln -s $linkTo $linkFrom
+        ln -sTf $linkTo $linkFrom
     done
 }
 
