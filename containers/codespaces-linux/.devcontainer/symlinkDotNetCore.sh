@@ -23,7 +23,7 @@ function createLinks() {
     cd "$installedDir"
 
     # Find folders with the name being a version number like 3.1.0 or 3.1.301
-    find . -type d -regex '.*/[0-9]\.[0-9]\.[0-9]+' | while read subPath; do
+    find . -maxdepth 3 -type d -regex '.*/[0-9]\.[0-9]\.[0-9]+' | while read subPath; do
         # Trim beginning 2 characters from the line which currently looks like, for example, './sdk/2.2.402'
         subPath="${subPath:2}"
         
