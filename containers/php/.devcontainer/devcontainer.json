@@ -1,6 +1,14 @@
 {
-	"name": "PHP 7",
-	"dockerFile": "Dockerfile",
+	"name": "PHP",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			// Update VARIANT to pick a PHP version
+			"VARIANT": "7",
+			"INSTALL_NODE": "true",
+			"NODE_VERSION": "lts/*"
+		}
+	},
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
