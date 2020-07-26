@@ -28,10 +28,11 @@ wp core install --url="$SITE_HOST:8080" --title="$(getTitleFromSlug) Development
 
 echo "Install project dependencies"
 
+source ~/.nvm/nvm.sh
+
 # Install required node version
 if [[ ! -z "$NODE_VERSION" ]] && [[ "$NODE_VERSION" != "latest" ]]
 then
-    source ~/.nvm/nvm.sh
     nvm install $NODE_VERSION
     nvm use $NODE_VERSION
     nvm alias default $NODE_VERSION
