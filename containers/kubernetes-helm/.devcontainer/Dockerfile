@@ -62,8 +62,8 @@ RUN apt-get update \
             if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
                 mkdir -p $HOME/.minikube\n\
                 sudo cp -r /usr/local/share/minikube-localhost/ca.crt $HOME/.minikube\n\
-                sudo cp -r /usr/local/share/minikube-localhost/client.crt $HOME/.minikube\n\
-                sudo cp -r /usr/local/share/minikube-localhost/client.key $HOME/.minikube\n\
+                sudo cp -r /usr/local/share/minikube-localhost/profiles/minikube/client.crt $HOME/.minikube\n\
+                sudo cp -r /usr/local/share/minikube-localhost/profiles/minikube/client.key $HOME/.minikube\n\
                 sudo chown -R $(id -u) $HOME/.minikube\n\
                 sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
                 sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
