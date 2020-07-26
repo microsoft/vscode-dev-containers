@@ -2,19 +2,45 @@
 
 ## Summary
 
-*Develop C++ applications on Linux. Includes Debian 9 C++ build tools, but can be updated to use other Linux base containers.*
+*Develop C++ applications on Linux. Includes Debian C++ build tools.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/cpp |
+| *Available image variants* | mcr.microsoft.com/vscode/devcontainers/cpp:stretch <br /> mcr.microsoft.com/vscode/devcontainers/cpp:buster |
+| *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | C++ |
 
 ## Using this definition with an existing folder
 
-This definition does not require any special steps to use. Just follow these steps:
+While the definition itself works unmodified, you can select the version of Debian the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+
+```json
+"args": { "VARIANT": "stretch" }
+```
+
+You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
+
+- `mcr.microsoft.com/vscode/devcontainers/cpp` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/cpp:debian` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/cpp:buster` (or `debian-10`)
+- `mcr.microsoft.com/vscode/devcontainers/cpp:stretch` (or `debian-9`)
+
+Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0`
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0.130`
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0.130.0`
+
+Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+
+Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
+
+### Adding the definition to your project
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
