@@ -22,9 +22,8 @@ RUN apt-get update \
     # Install ruby
     && apt-get install -y \
         make \
-        build-essential \
-        ruby \
-        ruby-dev \
+        ruby-full \
+		build-essential \ 
     #
     # Install jekyll
     && gem install \
