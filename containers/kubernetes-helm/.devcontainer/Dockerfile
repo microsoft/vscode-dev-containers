@@ -57,7 +57,7 @@ RUN apt-get update \
             mkdir -p $HOME/.kube\n\
             sudo cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
             sudo chown -R $(id -u) $HOME/.kube\n\
-            sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
+            sed -i -e "s/127.0.0.1/host.docker.internal/g" $HOME/.kube/config\n\
         \n\
             if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
                 mkdir -p $HOME/.minikube\n\
