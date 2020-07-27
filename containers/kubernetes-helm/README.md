@@ -75,26 +75,11 @@ You can adapt your own existing development container Dockerfile to support this
         && curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
     ```
 
-
-2. Finally, update your Dockerfile to add a script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates into your `/root/.bashrc`.
+3. Finally, we need to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. Manually copy the [`copy-kube-config.sh` script](.devcontainer/copy-kube-config.sh) from the `.devcontainer` folder in this repo folder into the same folder as your `Dockerfile` and then update your `Dockerfile` to use it from your `/root/.bashrc` and/or `/root/.zshrc`. 
 
     ```Dockerfile
-    RUN echo '\n\
-    if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ] && [ -d "/usr/local/share/kube-localhost" ];; then\n\
-        mkdir -p $HOME/.kube\n\
-        cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
-        sed -i -e "s/127.0.0.1/host.docker.internal/g" $HOME/.kube/config\n\
-    \n\
-        if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
-            mkdir -p $HOME/.minikube\n\
-            cp -r /usr/local/share/minikube-localhost/ca.crt $HOME/.minikube\n\
-            cp -r /usr/local/share/minikube-localhost/profiles/minikube/client.crt $HOME/.minikube\n\
-            cp -r /usr/local/share/minikube-localhost/profiles/minikube/client.key $HOME/.minikube\n\
-            sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
-            sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
-            sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
-        fi\n\
-    fi' >> /root/.bashrc
+    COPY copy-kube-config.sh /usr/local/share/
+    RUN echo "source /usr/local/share/copy-kube-config.sh" | tee -a /root/.bashrc >> /root/.zshrc
     ```
 
 4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
@@ -125,24 +110,9 @@ Follow these directions to set up non-root access using `socat`:
     ```Dockerfile
     ARG NONROOT_USER=vscode
 
-    RUN echo '\n\
-        if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ] && [ -d "/usr/local/share/kube-localhost" ]; then\n\
-            mkdir -p $HOME/.kube\n\
-            sudo cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
-            sudo chown -R $(id -u) $HOME/.kube\n\
-            sed -i -e "s/127.0.0.1/host.docker.internal/g" $HOME/.kube/config\n\
-        \n\
-            if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
-                mkdir -p $HOME/.minikube\n\
-                sudo cp -r /usr/local/share/minikube-localhost/ca.crt $HOME/.minikube\n\
-                sudo cp -r /usr/local/share/minikube-localhost/profiles/minikube/client.crt $HOME/.minikube\n\
-                sudo cp -r /usr/local/share/minikube-localhost/profiles/minikube/client.key $HOME/.minikube\n\
-                sudo chown -R $(id -u) $HOME/.minikube\n\
-                sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
-                sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
-                sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
-            fi\n\
-        fi' | tee /root/.bashrc >> /home/${NONROOT_USER}/.bashrc
+    COPY copy-kube-config.sh /usr/local/share/
+    RUN chown ${NONROOT_USER}:root /usr/local/share/copy-kube-config.sh \
+        && echo "source /usr/local/share/copy-kube-config.sh" | tee -a /root/.bashrc /root/.zshrc /home/${NONROOT_USER}/.bashrc >> /home/${NONROOT_USER}/.zshrc
 
     # Default to root only access to the Docker socket, set up non-root init script
     RUN touch /var/run/docker.socket \
@@ -164,7 +134,7 @@ Follow these directions to set up non-root access using `socat`:
     CMD [ "sleep", "infinity" ]
     ```
 
-6. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+5. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
 
