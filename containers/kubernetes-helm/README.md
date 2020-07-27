@@ -83,7 +83,7 @@ You can adapt your own existing development container Dockerfile to support this
     if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ] && [ -d "/usr/local/share/kube-localhost" ];; then\n\
         mkdir -p $HOME/.kube\n\
         cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
-        sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
+        sed -i -e "s/127.0.0.1/host.docker.internal/g" $HOME/.kube/config\n\
     \n\
         if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
             mkdir -p $HOME/.minikube\n\
@@ -130,7 +130,7 @@ Follow these directions to set up non-root access using `socat`:
             mkdir -p $HOME/.kube\n\
             sudo cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
             sudo chown -R $(id -u) $HOME/.kube\n\
-            sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
+            sed -i -e "s/127.0.0.1/host.docker.internal/g" $HOME/.kube/config\n\
         \n\
             if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
                 mkdir -p $HOME/.minikube\n\
