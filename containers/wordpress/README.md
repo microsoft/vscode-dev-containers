@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop WordPress theme/plugins. Auto install and configure WordPress environment with PHP-FPM, Nginx and MariaDB to help you get up and running quickly.*
+*Develop WordPress theme/plugins. Auto-install and configure WordPress environment with PHP-FPM, Nginx, and MariaDB to help you get up and running quickly.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -19,11 +19,11 @@ Just follow these steps:
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
 2. To use VS Code's copy of this definition:
-   1. Start VS Code and open your project folder. The project folder must be theme/plugin root folder.
+   1. Start VS Code and open your project folder. The project folder must be the theme/plugin root folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the WordPress definition.
 
-3. To use latest-and-greatest copy of this definition from the repository:
+3. To use the latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
    2. Copy the contents of this folder in the cloned repository to the root of your project folder.
    3. Start VS Code and open your project folder.
@@ -37,11 +37,11 @@ Just follow these steps:
 
 ## Notes
 
-- This definition works for both plugin and theme, without any addition configuration.
+- This definition works for both plugin and theme, without any additional configuration.
 
-- There is a `setup.log` file in the root of WordPress folder inside the container (not theme/plugin root folder) to help you debug if any error occurs.
+- There is a `setup.log` file in the root of the WordPress folder inside the container (not theme/plugin root folder) to help you debug if any error occurs.
 
-- By default, the latest LTS version of node.js will be installed, you can changed this version by update `NODE_VERSION` in `.devcontainer/createEnv.sh` file.
+- By default, the latest LTS version of node.js will be installed, you can change this version by update `NODE_VERSION` in `.devcontainer/createEnv.sh` file.
 
 - By default, PHP 7.3 is installed. Same as node.js, you can change the PHP version by changing `PHP_VERSION` in `.devcontainer/createEnv.sh` file.
 
@@ -60,7 +60,7 @@ Just follow these steps:
   }
   ```
 
-- Don't forget to rebuild the container to make the above changes effect.
+- Don't forget to rebuild the container for the above changes to take effect.
 
 ## License
 
