@@ -186,7 +186,7 @@ See the section below for your operating system for more detailed setup instruct
 
 7. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
-## Linux / Minikube Setup
+### Linux / Minikube Setup
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
