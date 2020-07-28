@@ -66,7 +66,7 @@
                 "Other": {
                     "Name": "Debian Package: curl",
                     "Version": "7.52.1-5+deb9u10",
-                    "DownloadUrl": ""
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/c/curl/curl_7.52.1-5+deb9u10_amd64.deb"
                 }
             }
         },
