@@ -81,6 +81,11 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
 
     // For each image variant...
     await asyncUtils.forEach(dependencies.imageVariants, (async (imageTag) => {
+
+        // Pull base images
+        console.log(`(*) Pulling image ${imageTag}...`);
+        await asyncUtils.spawn('docker', ['pull', imageTag]);
+
         const digest = await getImageDigest(imageTag);
         // Add Docker image registration
         if (typeof alreadyRegistered[imageTag] === 'undefined') {
@@ -121,9 +126,9 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
     const componentList = [];
     console.log(`(*) Generating Linux package registrations for ${imageTag}...`);
 
-    // Pull if not building
+    // Pull if not building...
     if (!buildFirst) {
-        console.log(`(*) Pulling image...`);
+        console.log(`(*) Pulling image ${imageTag}...`);
         await asyncUtils.spawn('docker', ['pull', imageTag]);
     }
 
