@@ -44,7 +44,7 @@ RUN if [ "$INSTALL_NODE" = "true" ]; then \
         curl -sSL ${NODE_SCRIPT_SOURCE} -o /tmp/node-setup.sh \
         && ([ "${NODE_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/node-setup.sh" | sha256sum -c -)) \
         && /bin/bash /tmp/node-setup.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
-        rm -rf /tmp/node-setup.sh; \
+        && rm -rf /var/lib/apt/lists/* /tmp/node-setup.sh; \
     fi
 
 # [Optional] Uncomment this section to install additional packages.
