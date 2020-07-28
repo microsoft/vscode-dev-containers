@@ -81,6 +81,13 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
 
     // For each image variant...
     await asyncUtils.forEach(dependencies.imageVariants, (async (imageTag) => {
+
+        // Pull if not building
+        if (!buildFirst) {
+            console.log(`(*) Pulling image ${imageTag}...`);
+            await asyncUtils.spawn('docker', ['pull', imageTag]);
+        }
+
         const digest = await getImageDigest(imageTag);
         // Add Docker image registration
         if (typeof alreadyRegistered[imageTag] === 'undefined') {
@@ -104,16 +111,16 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
 
     // Run commands in the package to pull out needed versions
     return registrations.concat(
-        await generatePackageComponentList(dependencyLookupConfig.debian, dependencies.debian, imageTag, alreadyRegistered, buildFirst),
-        await generatePackageComponentList(dependencyLookupConfig.ubuntu, dependencies.ubuntu, imageTag, alreadyRegistered, buildFirst),
-        await generatePackageComponentList(dependencyLookupConfig.alpine, dependencies.alpine, imageTag, alreadyRegistered, buildFirst),
+        await generatePackageComponentList(dependencyLookupConfig.debian, dependencies.debian, imageTag, alreadyRegistered),
+        await generatePackageComponentList(dependencyLookupConfig.ubuntu, dependencies.ubuntu, imageTag, alreadyRegistered),
+        await generatePackageComponentList(dependencyLookupConfig.alpine, dependencies.alpine, imageTag, alreadyRegistered),
         await generateNpmComponentList(dependencies.npm, alreadyRegistered),
         await generatePipComponentList(dependencies.pip, imageTag, alreadyRegistered),
         await generatePipComponentList(dependencies.pipx, imageTag, alreadyRegistered, true),
         filteredManualComponentRegistrations(dependencies.manual, alreadyRegistered));
 }
 
-async function generatePackageComponentList(config, packageList, imageTag, alreadyRegistered, buildFirst) {
+async function generatePackageComponentList(config, packageList, imageTag, alreadyRegistered) {
     if (!packageList) {
         return [];
     }
@@ -121,11 +128,7 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
     const componentList = [];
     console.log(`(*) Generating Linux package registrations for ${imageTag}...`);
 
-    // Pull if not building
-    if (!buildFirst) {
-        console.log(`(*) Pulling image...`);
-        await asyncUtils.spawn('docker', ['pull', imageTag]);
-    }
+
 
     // Generate and exec command to get installed package versions
     console.log('(*) Getting package versions...');
