@@ -80,23 +80,24 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
     const registrations = [];
 
     // For each image variant...
-    dependencies.imageVariants.forEach((imageTag) => {
+    await asyncUtils.forEach(dependencies.imageVariants, (async (imageTag) => {
+        const digest = await getImageDigest(imageTag);
         // Add Docker image registration
         if (typeof alreadyRegistered[imageTag] === 'undefined') {
             const [image, imageVersion] = imageTag.split(':');
             registrations.push({
                 "Component": {
-                    "Type": "other",
-                    "Other": {
-                        "Name": `Docker Image: ${image}`,
-                        "Version": imageVersion,
-                        "DownloadUrl": dependencies.imageLink
-                    }
+                    "Type": "DockerImage",
+                    "DockerImage": {
+                        "Name": image,
+                        "Digest": digest,
+                        "Tag":imageVersion
+                      }
                 }
             });
             alreadyRegistered[dependencies.image] = [imageVersion];
         }
-    })
+    }));
 
     // Docker image to use to determine installed package versions
     const imageTag = configUtils.getTagsForVersion(definitionId, 'dev', registry, registryPath)[0]
@@ -286,6 +287,14 @@ async function generatePipComponentList(packageList, imageTag, alreadyRegistered
     });
 
     return componentList;
+}
+
+async function getImageDigest(imageTag) {
+    const commandOutput = await asyncUtils.spawn('docker',
+        ['inspect', "--format='{{index .RepoDigests 0}}'", imageTag],
+        { shell: true, stdio: 'pipe' });
+    // Example output: ruby@sha256:0b503bc5b8cbe2a1e24f122abb4d6c557c21cb7dae8adff1fe0dcad76d606215
+    return commandOutput.split('@')[1].trim();
 }
 
 async function getPipVersionLookup(imageTag) {
