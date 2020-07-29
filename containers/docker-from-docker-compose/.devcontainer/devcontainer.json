@@ -1,4 +1,3 @@
-// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
 {
 	"name": "Docker from Docker Compose",
 	"dockerComposeFile": "docker-compose.yml",
