@@ -4,6 +4,11 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "docker-from-docker",
 	"workspaceFolder": "/workspace",
+
+	// Use this environment variable if you need to bind mount your local source code into a new container.
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	},
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
