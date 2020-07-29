@@ -9,7 +9,7 @@
 set -e
 
 export NVM_DIR=${1:-"/usr/local/share/nvm"}
-export NODE_VERSION=${2:-"lts/*"}
+export NODE_VERSION=${2:-"none"}
 NONROOT_USER=${3:-"vscode"}
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -19,6 +19,10 @@ fi
 
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
+
+if [ "${NODE_VERSION}" = "none" ]; then
+    export NODE_VERSION=
+fi
 
 # Install NVM
 mkdir -p ${NVM_DIR}
