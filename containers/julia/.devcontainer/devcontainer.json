@@ -1,0 +1,6 @@
+{
+	"name": "Julia",
+	"image": "julia",
+	"extensions": ["julialang.language-julia"],
+	"postCreateCommand": "julia --project=. -e 'using Pkg; if (isfile(joinpath(pwd(),\"Manifest.toml\")) || isfile(joinpath(pwd(),\"JuliaManifest.toml\"))) && (isfile(joinpath(pwd(),\"Project.toml\")) || isfile(joinpath(pwd(),\"JuliaProject.toml\"))); Pkg.instantiate(); end'"
+}
