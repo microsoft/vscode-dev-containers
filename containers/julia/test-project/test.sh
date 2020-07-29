@@ -36,9 +36,9 @@ checkExtension() {
     checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]"
 }
 
-# -- Actual tests - add more here --
+# -- Actual tests --
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
-
+check "julia" julia --version
 
 # -- Report results --
 if [ ${#FAILED[@]} -ne 0 ]; then
