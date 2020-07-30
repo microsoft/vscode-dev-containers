@@ -25,7 +25,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:b4e82c233f97966cfe57e328d55794c602c2f0bb2e3f77e0931f62b73a86ec3d",
+                    "Digest": "sha256:45ce6645bb55155699292c9f8f203203a77b05fb90b65dd29b7bf91ec4c9e168",
                     "Tag": "10"
                 }
             }
@@ -354,7 +354,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:b4e82c233f97966cfe57e328d55794c602c2f0bb2e3f77e0931f62b73a86ec3d",
+                    "Digest": "sha256:45ce6645bb55155699292c9f8f203203a77b05fb90b65dd29b7bf91ec4c9e168",
                     "Tag": "10"
                 }
             }
