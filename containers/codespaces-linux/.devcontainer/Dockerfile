@@ -155,6 +155,9 @@ RUN apt-get update -yq\
     #
     # Clean up
     && apt-get autoremove -y \
-    && apt-get clean -y
+    && apt-get clean -y \
+    #
+    # Remove buster source list
+    && rm /etc/apt/sources.list.d/buster.list
 
 USER codespace
