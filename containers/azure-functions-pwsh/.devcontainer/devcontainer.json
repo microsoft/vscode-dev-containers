@@ -1,5 +1,5 @@
 {
-	"name": "Azure Functions & PowerShell 7",
+	"name": "Azure Functions & PowerShell",
 	"build": {
 		"dockerFile": "Dockerfile",
 		"args": {
