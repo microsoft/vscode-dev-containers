@@ -32,7 +32,7 @@ RUN apt-get update \
     #
     # Install Node.js for front end development
     && curl -sSL ${NODE_SCRIPT_SOURCE} -o /tmp/node-setup.sh \
-    && ([ "${NODE_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/node-setup.sh" | sha256sum -c -)) \
+    && ([ "${NODE_SCRIPT_SHA}" = "dev-mode" ] || (echo "${NODE_SCRIPT_SHA} */tmp/node-setup.sh" | sha256sum -c -)) \
     && /bin/bash /tmp/node-setup.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
     #
     # Install gems and dependencies
