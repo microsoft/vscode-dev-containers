@@ -9,7 +9,7 @@
 set -e
 
 export NVM_DIR=${1:-"/usr/local/share/nvm"}
-export NODE_VERSION=${2:-"none"}
+export NODE_VERSION=${2:-"lts/*"}
 NONROOT_USER=${3:-"vscode"}
 
 if [ "$(id -u)" -ne 0 ]; then
