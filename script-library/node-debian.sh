@@ -20,6 +20,10 @@ fi
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
+if [ "${NODE_VERSION}" = "none" ]; then
+    export NODE_VERSION=
+fi
+
 # Install NVM
 mkdir -p ${NVM_DIR}
 curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 2>&1
@@ -44,4 +48,3 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - 2>/dev/null
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt-get update
 apt-get -y install --no-install-recommends yarn
-
