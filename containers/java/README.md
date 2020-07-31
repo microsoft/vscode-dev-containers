@@ -1,8 +1,8 @@
-# Java 11
+# Java
 
 ## Summary
 
-*Develop Java 11 applications. Includes JDK 11 and Java extensions.*
+*Develop Java applications. Includes the JDK and Java extensions.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -14,24 +14,70 @@
 
 ## Using this definition with an existing folder
 
+While this definition should work unmodified, you can select the version of Java the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+
+```json
+"args": { "VARIANT": "14" }
+```
+
+### Debug Configuration
+
 Note that only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
 
 ```json
 "console": "integratedTerminal"
 ```
 
-Beyond that, just follow these steps to use the definition:
+### Installing Maven or Gradle
+
+You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "true"` or `"INSTALL_GRADLE: "true"` to build args in `devcontainer.json`. For example:
+
+```json
+"args": { 
+   "VARIANT": "11",
+   "INSTALL_GRADLE": "true",
+   "INSTALL_MAVEN": "true"
+}
+```
+
+You can specify the verison of Gradle or Maven if needed.
+
+```json
+"args": { 
+   "VARIANT": "11",
+   "INSTALL_GRADLE": "true",
+   "MAVEN_VERSION": "3.6.3",
+   "INSTALL_MAVEN": "true",
+   "GRADLE_VERSION": "5.4.1"
+}
+```
+
+And if you'd like the download SHA to be checked, you can add it as well.
+
+```json
+"args": {
+   "VARIANT": "11",
+   "INSTALL_MAVEN": "true",
+   "MAVEN_VERSION": "3.6.3",
+   "MAVEN_DOWNLOAD_SHA": "c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0",
+   "INSTALL_GRADLE": "true",
+   "GRADLE_VERSION": "5.4.1",
+   "GRADLE_DOWNLOAD_SHA": "7bdbad1e4f54f13c8a78abc00c26d44dd8709d4aedb704d913fb1bb78ac025dc"
+}
+```
+
+### Adding the definition to your folder
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Java 11 definition.
+   3. Select the Java definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/java-11/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/java/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -47,7 +93,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/java-11` folder.
+4. Select the `containers/java` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
 6. You should see "Hello Remote World!" in the a Debug Console after the program executes.
 7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
