@@ -18,17 +18,22 @@ const stubPromises = {
 
 const containersPathInRepo = configUtils.getConfig('containersPathInRepo');
 const scriptLibraryPathInRepo = configUtils.getConfig('scriptLibraryPathInRepo');
+const scriptLibraryFolderNameInDefinition = configUtils.getConfig('scriptLibraryFolderNameInDefinition');
 
+// Prepares dockerfile for building or packaging
 async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, isForBuild, variant) {
     // Use exact version of building, MAJOR if not
     const version = isForBuild ? configUtils.getVersionFromRelease(release, definitionId) : configUtils.majorFromRelease(release, definitionId);
+
+    // Copy any scripts from the script library into the appropriate definition specific folder
+    await copyLibraryScriptsForDefinition(path.dirname(devContainerDockerfilePath));
 
     // Read Dockerfile
     const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
     
     // Replace script URL and generate SHA if applicable
     let devContainerDockerfileModified = await updateScriptSources(devContainerDockerfileRaw, repo, release, true);
-
+    
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
         const parentTag = configUtils.getParentTagForVersion(definitionId, version, registry, registryPath, variant);
@@ -55,7 +60,7 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
         }
     }
 
-    await asyncUtils.writeFile(devContainerDockerfilePath, devContainerDockerfileModified)
+    await asyncUtils.writeFile(devContainerDockerfilePath, devContainerDockerfileModified);
 }
 
 async function createStub(dotDevContainerPath, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRegistryPath) {
@@ -137,32 +142,73 @@ async function updateScriptSources(devContainerDockerfileRaw, repo, release, upd
 
         }
     })
+    
     return devContainerDockerfileModified;
 }
 
-// Update script URL in a Dockerfile to be release specific (or not) and optionally update the SHA to lock to this version
+// Update script files and URLs in a Dockerfile to be release specific (or not) and optionally update the SHA to lock to this version
 async function updateScriptSourcesInDockerfile(devContainerDockerfilePath, repo, release, updateScriptSha) {
     const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
     const devContainerDockerfileModified = await updateScriptSources(devContainerDockerfileRaw, repo, release, updateScriptSha);
     await asyncUtils.writeFile(devContainerDockerfilePath, devContainerDockerfileModified);
+    await copyLibraryScriptsForDefinition(path.dirname(devContainerDockerfilePath));
 }
 
 // Update all script URLS in the entire repo (not staging folder)
 async function updateAllScriptSourcesInRepo(repo, release, updateScriptSha) {
     const definitionFolder = path.join(__dirname, '..', '..', 'containers');
     // Update script versions in definition Dockerfiles for release
-    const allDefinitions = await asyncUtils.readdir(definitionFolder);
-    await asyncUtils.forEach(allDefinitions, async (currentDefinitionId) => {
-        const dockerFileBasePath = path.join(definitionFolder, currentDefinitionId, '.devcontainer', 'base.Dockerfile');
+    const allDefinitions = await asyncUtils.readdir(definitionFolder, { withFileTypes: true });
+    await asyncUtils.forEach(allDefinitions, async (currentDefinition) => {
+        if (!currentDefinition.isDirectory()) {
+            return;
+        }
+
+        const dockerFileBasePath = path.join(definitionFolder, currentDefinition.name, '.devcontainer', 'base.Dockerfile');
         if (await asyncUtils.exists(dockerFileBasePath)) {
-            console.log(`(*) Looking for script source in base.Dockerfile for ${currentDefinitionId}.`);
+            console.log(`(*) Looking for script source in base.Dockerfile for ${currentDefinition.name}.`);
             await updateScriptSourcesInDockerfile(dockerFileBasePath, repo, release, updateScriptSha);
         }
-        const dockerFilePath = path.join(definitionFolder, currentDefinitionId, '.devcontainer', 'Dockerfile');
+        const dockerFilePath = path.join(definitionFolder, currentDefinition.name, '.devcontainer', 'Dockerfile');
         if (await asyncUtils.exists(dockerFilePath)) {
-            console.log(`(*) Looking for script source in Dockerfile for ${currentDefinitionId}.`);
+            console.log(`(*) Looking for script source in Dockerfile for ${currentDefinition.name}.`);
             await updateScriptSourcesInDockerfile(dockerFilePath, repo, release, updateScriptSha);
         }
+    });
+}
+
+// Copy contents of script library to folder 
+async function copyLibraryScriptsForDefinition(definitionDevContainerJsonFolder) 
+{
+    const libraryScriptsFolder = path.join(definitionDevContainerJsonFolder, scriptLibraryFolderNameInDefinition);
+    if (await asyncUtils.exists(libraryScriptsFolder)) {
+        await asyncUtils.forEach(await asyncUtils.readdir(libraryScriptsFolder), async (script) => {
+            // Only copy files that end in .sh
+            if (path.extname(script) !== '.sh') {
+                return;
+            }
+            const possibleScriptSource = path.join(scriptLibraryPathInRepo, script);
+            if(await asyncUtils.exists(possibleScriptSource)) {
+                const targetScriptPath = path.join(libraryScriptsFolder, script);
+                console.log(`(*) Copying ${script} to ${libraryScriptsFolder}...`);
+                await asyncUtils.copyFile(possibleScriptSource, targetScriptPath);
+            }
+        });
+    }
+}
+
+// For CI of the script library folder
+async function copyLibraryScriptsForAllDefinitions() {
+    const definitionFolder = path.join(__dirname, '..', '..', 'containers');
+    // Update script versions in definition Dockerfiles for release
+    const allDefinitions = await asyncUtils.readdir(definitionFolder, { withFileTypes: true });
+    await asyncUtils.forEach(allDefinitions, async (currentDefinition) => {
+        if (!currentDefinition.isDirectory()) {
+            return;
+        }
+    const definitionDevContainerJsonFolder = path.join(definitionFolder, currentDefinition.name, '.devcontainer');
+        console.log(`(*) Checking ${currentDefinition.name} for ${scriptLibraryFolderNameInDefinition} folder...`)
+        await copyLibraryScriptsForDefinition(definitionDevContainerJsonFolder);
     });
 }
 
@@ -171,6 +217,7 @@ module.exports = {
     updateStub: updateStub,
     updateConfigForRelease: updateConfigForRelease,
     prepDockerFile: prepDockerFile,
+    copyLibraryScriptsForAllDefinitions: copyLibraryScriptsForAllDefinitions,
     updateScriptSourcesInDockerfile: updateScriptSourcesInDockerfile,
     updateAllScriptSourcesInRepo: updateAllScriptSourcesInRepo
 }

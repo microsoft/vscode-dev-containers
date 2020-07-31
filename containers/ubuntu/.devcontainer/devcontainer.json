@@ -2,8 +2,7 @@
 	"name": "Ubuntu",
 	"build": {
 		"dockerfile": "base.Dockerfile",
-		// Update 'VARIANT' to pick an Ubuntu version. Rebuild the container if it already
-		// exists to update. Available variants: focal (or ubuntu-20.04), bionic (or ubuntu-18.04)
+		// Update 'VARIANT' to pick an Ubuntu version: focal, bionic
 		"args": { "VARIANT": "focal" }
 	},
 
@@ -20,9 +19,6 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
-
-	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
-	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
 
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
