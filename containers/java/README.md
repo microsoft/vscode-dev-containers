@@ -1,8 +1,8 @@
-# Java 11
+# Java
 
 ## Summary
 
-*Develop Java 11 applications. Includes JDK 11 and Java extensions.*
+*Develop Java applications. Includes the JDK and Java extensions.*
 
 | Metadata | Value |  
 |----------|-------|
