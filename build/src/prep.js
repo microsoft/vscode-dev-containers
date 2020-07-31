@@ -16,6 +16,7 @@ const stubPromises = {
     redhat: asyncUtils.readFile(path.join(assetsPath, 'redhat.Dockerfile'))
 }
 
+const dockerFilePreamble = configUtils.getConfig('dockerFilePreamble');
 const containersPathInRepo = configUtils.getConfig('containersPathInRepo');
 const scriptLibraryPathInRepo = configUtils.getConfig('scriptLibraryPathInRepo');
 const scriptLibraryFolderNameInDefinition = configUtils.getConfig('scriptLibraryFolderNameInDefinition');
@@ -81,8 +82,7 @@ async function updateStub(dotDevContainerPath, definitionId, repo, release, base
 
 async function processStub(userDockerFile, definitionId, repo, release, baseDockerFileExists, registry, registryPath) {
     const devContainerImageVersion = configUtils.majorFromRelease(release, definitionId);
-    let fromSection = `# ${configUtils.getConfig('dockerFilePreamble')}\n` +
-        `# https://github.com/${repo}/tree/${release}/${containersPathInRepo}/${definitionId}/.devcontainer/${baseDockerFileExists ? 'base.' : ''}Dockerfile\n`;
+    let fromSection = `# ${dockerFilePreamble}https://github.com/${repo}/tree/${release}/${containersPathInRepo}/${definitionId}/.devcontainer/${baseDockerFileExists ? 'base.' : ''}Dockerfile\n`;
     // The VARIANT arg allows this value to be set from devcontainer.json, handle it if found
     if (/ARG\s+VARIANT\s*=/.exec(userDockerFile) !== null) {
         const variant = configUtils.getVariants(definitionId)[0];
@@ -103,7 +103,7 @@ async function updateConfigForRelease(definitionPath, definitionId, repo, releas
     const devContainerJsonPath = path.join(dotDevContainerPath, 'devcontainer.json');
     const devContainerJsonRaw = await asyncUtils.readFile(devContainerJsonPath);
     const devContainerJsonModified =
-        `// ${configUtils.getConfig('devContainerJsonPreamble')}\n// https://github.com/${repo}/tree/${release}/${containersPathInRepo}/${definitionId}\n` +
+        `// ${configUtils.getConfig('devContainerJsonPreamble')}https://github.com/${repo}/tree/${release}/${containersPathInRepo}/${definitionId}\n` +
         devContainerJsonRaw;
     await asyncUtils.writeFile(devContainerJsonPath, devContainerJsonModified);
 

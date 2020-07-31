@@ -1,4 +1,3 @@
-# Update the VARIANT arg in devcontainer.json to pick an Ubuntu version: focal, bionic
 ARG VARIANT=focal
 FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 
