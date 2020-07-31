@@ -33,7 +33,7 @@ ARG INSTALL_ZSH="true"
 # Download script and run it with the option above
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get -y install --no-install-recommends curl ca-certificates \
-    && curl -sSL -o- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.130.0/script-library/common-debian.sh" | bash -s -- "${INSTALL_ZSH}" "vscode" "1000" "1000" "true"
+    && curl -sSL -o- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh" | bash -s -- "${INSTALL_ZSH}" "vscode" "1000" "1000" "true"
 ```
 
 ### Validating a file's checksum for security
