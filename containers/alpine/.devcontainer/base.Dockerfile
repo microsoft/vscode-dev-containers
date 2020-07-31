@@ -10,8 +10,8 @@ ARG USER_GID=$USER_UID
 
 # Options for common setup script
 ARG INSTALL_ZSH="true"
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-alpine.sh"
-ARG COMMON_SCRIPT_SHA="dev-mode"
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.130.0/script-library/common-alpine.sh"
+ARG COMMON_SCRIPT_SHA="9e7c903decb7d2da5ceb6885202c39bc77f24e76e527c69e0b74d9c82380456e"
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apk update \
