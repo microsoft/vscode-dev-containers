@@ -1,7 +1,16 @@
 {
-	"name": "Azure Terraform 0.12",
-	"dockerFile": "Dockerfile",
-	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+	"name": "Azure Terraform",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			"TERRAFORM_VERSION": "0.12.16",
+			"TFLINT_VERSION": "0.8.2",
+			"INSTALL_AZURE_CLI": "true",
+			"INSTALL_DOCKER": "true",
+			"INSTALL_NODE": "true"		 
+		}
+	},
+	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
@@ -22,9 +31,7 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "terraform --version",
 
-	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
-	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "overrideCommand": false,
 	// "remoteUser": "vscode"
 }
