@@ -1,12 +1,12 @@
-# Azure Functions & Node.js 12
+# Azure Functions & Node.js
 
 ## Summary
 
-*Develop Azure Functions in Node.js. Includes Node.js 12, eslint, the Azure Functions SDK, and related extensions and dependencies.*
+*Develop Azure Functions in Node.js. Includes Node.js, eslint, the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team |
+| *Contributors* | The Azure Functions Team |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -14,7 +14,17 @@
 
 ## Using this definition with an existing folder
 
-This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/) and learn more about using [Azure Functions with VS Code here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code). Once you have an Azure account, follow these steps:
+This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/) and learn more about using [Azure Functions with VS Code here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code).
+
+While this definition should work unmodified, you can select the version of Node.js the container uses by updating the `VARIANT` arg in the included `devcontainer.json` to a supported major Node.js release version.
+
+```json
+"args": { "VARIANT": "10" }
+```
+
+### Adding the definition to your folder
+
+Once you have an Azure account, follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
@@ -25,7 +35,7 @@ This definition requires an Azure subscription to use. You can create a [free ac
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/azure-functions-node-12/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/azure-functions-node/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -39,7 +49,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/azure-functions-node-12` folder.
+4. Select the `containers/azure-functions-node` folder.
 5. After the folder has opened in the container, press <kbd>F1</kbd> and select **Azure Functions: Create Function...**.
 6. Enter these options:
    1. Yes (when prompted to create a new project)
