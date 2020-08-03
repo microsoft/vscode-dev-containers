@@ -7,7 +7,7 @@
 const push = require('./src/push').push;
 const patch = require('./src/patch');
 const package = require('./src/package').package;
-const updateAllScriptSourcesInRepo = require('./src/prep').updateAllScriptSourcesInRepo;
+const prep = require('./src/prep');
 const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
 const configUtils = require('./src/utils/config');
 const packageJson = require('../package.json');
@@ -199,6 +199,7 @@ require('yargs')
                 }
             })
     }, patchCommand)
+    .command('copy-library-scripts', 'copy files from script-library folder into appropriate definitions', () => {}, copyLibraryScriptsCommand)
     .demandCommand()
     .help()
     .argv;
@@ -222,12 +223,21 @@ function packCommand(argv) {
 }
 
 function updateScriptSourcesCommand(argv) {
-    updateAllScriptSourcesInRepo(argv.githubRepo, argv.release, argv.updateSha)
+    prep.updateAllScriptSourcesInRepo(argv.githubRepo, argv.release, argv.updateSha)
         .catch((reason) => {
-            console.error(`(!) Stub generation failed - ${reason}`);
+            console.error(`(!) Failed to update script sources - ${reason}`);
             process.exit(1);
         });
 }
+
+function copyLibraryScriptsCommand() {
+    prep.copyLibraryScriptsForAllDefinitions()
+        .catch((reason) => {
+            console.error(`(!) Failed to copy library scripts to definitions  - ${reason}`);
+            process.exit(1);
+        });
+}
+
 
 function cgCommand(argv) {
     generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build, argv.devcontainer)

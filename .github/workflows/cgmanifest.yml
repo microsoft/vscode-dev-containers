@@ -49,6 +49,6 @@ jobs:
         git config --global user.email "vscr-feedback@microsoft.com"
         git config --global user.name "CI"
         git add cgmanifest.json
-        git commit -m 'Automated update' \
+        git commit -m 'Automated update for CG' \
           && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
           || echo 'No updates to cgmanifest.json'
