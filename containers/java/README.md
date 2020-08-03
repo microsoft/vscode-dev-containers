@@ -30,7 +30,7 @@ Note that only the integrated terminal is supported by the Remote - Containers e
 
 ### Installing Maven or Gradle
 
-You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "true"` or `"INSTALL_GRADLE: "true"` to build args in `devcontainer.json`. For example:
+You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "true"` or `"INSTALL_GRADLE: "true"` to build args in `.devcontainer/devcontainer.json`. Both of these are set by default. For example:
 
 ```json
 "args": { 
@@ -40,7 +40,9 @@ You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "
 }
 ```
 
-You can specify the verison of Gradle or Maven if needed.
+Remove the appropriate arg or set its value to `"false"` to skip installing the specified tool.
+
+You can also specify the verison of Gradle or Maven if needed.
 
 ```json
 "args": { 
@@ -63,6 +65,18 @@ And if you'd like the download SHA to be checked, you can add it as well.
    "INSTALL_GRADLE": "true",
    "GRADLE_VERSION": "5.4.1",
    "GRADLE_DOWNLOAD_SHA": "7bdbad1e4f54f13c8a78abc00c26d44dd8709d4aedb704d913fb1bb78ac025dc"
+}
+```
+
+### Installing Node.js
+
+Given how frequently web applications use Node.js for front end code, this container also includes an optional install of Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+
+```json
+"args": {
+   "VARIANT": "11",
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10",
 }
 ```
 
