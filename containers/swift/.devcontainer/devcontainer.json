@@ -7,8 +7,7 @@
 			"VARIANT": "5.2",
 			// Options
 			"INSTALL_NODE": "false",
-			"NODE_VERSION": "lts/*",
-			"UPGRADE_PACKAGES": "false"
+			"NODE_VERSION": "lts/*"
 		}
 	},
 	"runArgs": [
