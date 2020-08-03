@@ -117,7 +117,7 @@ jobs:
         git add -u
         git commit -m 'Automated update for script library changes' \
           && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
-          || echo 'No updates to script-library
+          || echo 'No updates to script-library'
 
   cgmanifest:
     name: Trigger CG generation
