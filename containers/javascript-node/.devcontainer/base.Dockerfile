@@ -2,44 +2,29 @@
 ARG VARIANT=14
 FROM node:${VARIANT}
 
-# Options for common setup script
+# Options for setup scripts
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
-
-# This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
-# devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
 ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-
-# Script sources
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
-ARG COMMON_SCRIPT_SHA="dev-mode"
-ARG NVM_YARN_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/node-debian.sh"
-ARG NVM_YARN_SCRIPT_SHA="dev-mode"
 
 ENV NVM_DIR=/usr/local/share/nvm \
     NVM_SYMLINK_CURRENT=true \ 
     PATH=${NVM_DIR}/current/bin:${PATH}
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
-RUN apt-get update \
-    && export DEBIAN_FRONTEND=noninteractive \
-    # Tactically remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
+COPY library-scripts/*.sh /tmp/library-scripts/
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
     && apt-get purge -y imagemagick imagemagick-6-common \
-    # Install common packages
-    && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
-    && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/common-setup.sh" | sha256sum -c -)) \
-    && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
+    # Install common packages, non-root user
+    && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     # Update yarn and install nvm
     && rm -rf /opt/yarn-* /usr/local/bin/yarn /usr/local/bin/yarnpkg \
-    && curl -sSL ${NVM_YARN_SCRIPT_SOURCE} -o /tmp/nvm-setup.sh \
-    && ([ "${NVM_YARN_SCRIPT_SHA}" = "dev-mode" ] || (echo "${NVM_YARN_SCRIPT_SHA} */tmp/nvm-setup.sh" | sha256sum -c -)) \
-    && /bin/bash /tmp/nvm-setup.sh "${NVM_DIR}" "none" "${USERNAME}" \
+    && /bin/bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     # Clean up
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* /root/.gnupg /tmp/common-setup.sh /tmp/nvm-setup.sh
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /root/.gnupg /tmp/library-scripts
 
 # Configure global npm install location
 ARG NPM_GLOBAL=/usr/local/share/npm-global
@@ -65,4 +50,3 @@ RUN sudo -u ${USERNAME} npm install -g eslint
 
 # [Optional] Uncomment if you want to install more global node modules
 # RUN sudo -u node npm install -g <your-package-list -here>
-
