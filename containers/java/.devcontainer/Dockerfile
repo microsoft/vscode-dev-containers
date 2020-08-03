@@ -48,6 +48,19 @@ RUN if [ "${INSTALL_GRADLE}" = "true" ]; then \
 # Allow for a consistant java home location for settings - image is changing over time
 RUN if [ ! -d "/docker-java-home" ]; then ln -s "${JAVA_HOME}" /docker-java-home; fi
 
+# [Optional] Install Node.js for use with web applications - update the INSTALL_NODE arg in devcontainer.json to enable.
+ARG INSTALL_NODE="false"
+ARG NODE_VERSION="lts/*"
+ENV NVM_DIR=/usr/local/share/nvm \
+    NVM_SYMLINK_CURRENT=true \
+    PATH=${NVM_DIR}/current/bin:${PATH}
+COPY library-scripts/node-debian.sh /tmp/library-scripts/
+RUN if [ "$INSTALL_NODE" = "true" ]; then \
+        /bin/bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
+        && apt-get clean -y && rm -rf /var/lib/apt/lists/*; \
+    fi \
+    && rm -rf /tmp/library-scripts
+
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update \
 #     && export DEBIAN_FRONTEND=noninteractive \

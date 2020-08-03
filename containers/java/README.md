@@ -68,6 +68,18 @@ And if you'd like the download SHA to be checked, you can add it as well.
 }
 ```
 
+### Installing Node.js
+
+Given how frequently web applications use Node.js for front end code, this container also includes an optional install of Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+
+```json
+"args": {
+   "VARIANT": "11",
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10",
+}
+```
+
 ### Adding the definition to your folder
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
