@@ -30,7 +30,7 @@ Note that only the integrated terminal is supported by the Remote - Containers e
 
 ### Installing Maven or Gradle
 
-You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "true"` or `"INSTALL_GRADLE: "true"` to build args in `devcontainer.json`. For example:
+You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "true"` or `"INSTALL_GRADLE: "true"` to build args in `.devcontainer/devcontainer.json`. Both of these are set by default. For example:
 
 ```json
 "args": { 
@@ -40,7 +40,9 @@ You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "
 }
 ```
 
-You can specify the verison of Gradle or Maven if needed.
+Remove the appropriate arg or set its value to `"false"` to skip installing the specified tool.
+
+You can also specify the verison of Gradle or Maven if needed.
 
 ```json
 "args": { 
