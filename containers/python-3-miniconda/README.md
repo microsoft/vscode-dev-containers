@@ -18,14 +18,11 @@ While the definition itself works unmodified, there are some tips that can help 
 
 ### Adding the contents of environment.yml to the image
 
-For convenience, this definition will automatically install dependencies from the `environment.yml` file in the parent folder when the container is built. However, note that `environment.yml` in the root of this definition folder is **only present for testing** and is not used or required by the definition itself.
-
-You can change this behavior by altering this line in the `.devcontainer/Dockerfile`:
+For convenience, this definition will automatically install dependencies from the `environment.yml` file in the parent folder when the container is built.You can change this behavior by altering this line in the `.devcontainer/Dockerfile`:
 
 ```Dockerfile
-# Update Python environment based on environment.yml (if present)
-&& if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
-&& rm -rf /tmp/conda-tmp \
+RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
+    && rm -rf /tmp/conda-tmp \
 ```
 
 ### Debug Configuration
