@@ -21,7 +21,7 @@ RUN yes | pecl install xdebug \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini
 
-# [Optional] Install Node.js for use with web applications - update the INSTALL_NODE arg in devcontainer.json to enable.
+# [Optional] Install Node.js for use with web applications - update the INSTALL_NODE arg in docker-compose.yml to enable.
 ARG INSTALL_NODE="false"
 ARG NODE_VERSION="lts/*"
 ENV NVM_DIR=/usr/local/share/nvm \
