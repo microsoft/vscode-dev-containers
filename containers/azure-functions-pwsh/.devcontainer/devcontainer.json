@@ -1,7 +1,7 @@
 {
 	"name": "Azure Functions & PowerShell",
 	"build": {
-		"dockerFile": "Dockerfile",
+		"dockerfile": "Dockerfile",
 		"args": {
 			// Update the VARIANT arg to pick a supported PowerShell version: 7, 6
 			"VARIANT": "7"
