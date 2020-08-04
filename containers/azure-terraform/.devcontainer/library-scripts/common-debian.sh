@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./common-debian.sh <install zsh flag> <username> <user UID> <user GID>
+# Syntax: ./common-debian.sh <install zsh flag> <username> <user UID> <user GID> <upgrade packages flag>
 
 set -e
 
@@ -12,11 +12,18 @@ INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)"}
 USER_UID=${3:-1000}
 USER_GID=${4:-1000}
-UPGRADE_PACKAGES=${5:-true}
+UPGRADE_PACKAGES=${5:-"true"}
 
 if [ "$(id -u)" -ne 0 ]; then
     echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
     exit 1
+fi
+
+# Treat a user name of "none" as root
+if [ "${USERNAME}" = "none" ] || [ "${USERNAME}" = "root" ]; then
+    USERNAME=root
+    USER_UID=0
+    USER_GID=0
 fi
 
 # Ensure apt is in non-interactive to avoid prompts
@@ -30,7 +37,7 @@ if [ "${UPGRADE_PACKAGES}" = "true" ]; then
     apt-get -y upgrade --no-install-recommends
 fi
 
-# Install common dependencies
+# Install common developer tools and dependencies
 apt-get -y install --no-install-recommends \
     git \
     openssh-client \
