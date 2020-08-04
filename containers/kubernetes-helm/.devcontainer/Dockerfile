@@ -15,8 +15,8 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Script sources
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
-ARG COMMON_SCRIPT_SHA="dev-mode"
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.131.0/script-library/common-debian.sh"
+ARG COMMON_SCRIPT_SHA="9b6a503f53aa12acee60fbbc6fd0be0309e4cdb289c0303b820fec0a974cd44f"
 ARG DOCKER_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/docker-debian.sh"
 ARG DOCKER_SCRIPT_SHA="dev-mode"
 
