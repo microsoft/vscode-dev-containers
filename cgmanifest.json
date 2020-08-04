@@ -802,7 +802,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "buildpack-deps",
-                    "Digest": "sha256:be2893a1baa97eb258d0e00151d0c25f03cb74c604839ca5d27e2125c17992b3",
+                    "Digest": "sha256:57e4a884b48620e854c49313867514e603b9627da295272ef3abcadc3afeaec7",
                     "Tag": "buster-curl"
                 }
             }
@@ -1072,7 +1072,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:c771865c1d02066d36748c97fcc98984fbaf86f5dde9d49e67e6ba882746c9bc",
+                    "Digest": "sha256:8855fbc848b4d59d6171cb930eba52948881fcdad7df23d2b2ffe8ba5f0919e0",
                     "Tag": "3"
                 }
             }
@@ -1082,7 +1082,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:c771865c1d02066d36748c97fcc98984fbaf86f5dde9d49e67e6ba882746c9bc",
+                    "Digest": "sha256:8855fbc848b4d59d6171cb930eba52948881fcdad7df23d2b2ffe8ba5f0919e0",
                     "Tag": "3.8"
                 }
             }
@@ -1092,7 +1092,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:e5e361e98022e4425b1272888ca59e2bf6fe518a59b43bcfcf206a709f9fc5e6",
+                    "Digest": "sha256:b5efdd0d6200ee23381106f7facab4a4968c599ad99a4691dd69bd6a44f70147",
                     "Tag": "3.7"
                 }
             }
@@ -1102,7 +1102,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:61aaf7a0ae69997cf041c4f41b405ff6365e73f2709cebbaf443902cf2871baa",
+                    "Digest": "sha256:d691d6ff81d81fb27ca1bc28f200c1c7cb089bf33f9ec26604f9ae2dfe2344d6",
                     "Tag": "3.6"
                 }
             }
