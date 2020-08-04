@@ -9,8 +9,7 @@
 			// Options
 			"INSTALL_NODE": "true",
 			"NODE_VERSION": "lts/*",
-			"INSTALL_AZURE_CLI": "false",
-			"UPGRADE_PACKAGES": "false"
+			"INSTALL_AZURE_CLI": "false"
 		}
 	},
 
