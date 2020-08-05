@@ -8,6 +8,14 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# ENV Variables required by Jekyll
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV TZ=America/Chicago
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US
+
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -22,9 +30,16 @@ RUN apt-get update \
     # Install ruby
     && apt-get install -y \
         make \
-        build-essential \
-        ruby \
-        ruby-dev \
+        ruby-full \
+		build-essential \
+        zlib1g-dev \
+        locales \
+    #
+    # Add en_US.UTF-8 locale
+    && echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen \
+    #
+    # Generate locale files
+    && locale-gen \
     #
     # Install jekyll
     && gem install \

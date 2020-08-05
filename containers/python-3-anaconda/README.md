@@ -21,9 +21,8 @@ While the definition itself works unmodified, there are some tips that can help 
 For convenience, this definition will automatically install dependencies from the `environment.yml` file in the parent folder when the container is built. You can change this behvior by altering this line in the `.devcontainer/Dockerfile`:
 
 ```Dockerfile
-# Update Python environment based on environment.yml (if present)
-&& if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
-&& rm -rf /tmp/conda-tmp \
+RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
+    && rm -rf /tmp/conda-tmp \
 ```
 
 ### Debug Configuration

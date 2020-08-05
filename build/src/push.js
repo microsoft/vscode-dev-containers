@@ -81,7 +81,8 @@ async function pushImage(definitionPath, definitionId, repo, release, updateLate
             console.log(`(*) Tags:${versionTags.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
 
             if (replaceImage || !await isImageVersionAlreadyPublished(definitionId, release, registry, registryPath, variant)) {
-                const workingDir = path.resolve(dotDevContainerPath, devContainerJson.context || '.');
+                const context = devContainerJson.build ? devContainerJson.build.context || '.' : devContainerJson.context || '.';
+                const workingDir = path.resolve(dotDevContainerPath, context);
                 const buildParams = (variant ? ['--build-arg', `VARIANT=${variant}`] : [])
                     .concat(versionTags.reduce((prev, current) => prev.concat(['-t', current]), []));
                 const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };

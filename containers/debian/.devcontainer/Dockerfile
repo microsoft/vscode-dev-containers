@@ -1,4 +1,3 @@
-# Update the VARIANT arg in devcontainer.json to pick an Debian version: buster (or debian-10), stretch (or debian-9)
 ARG VARIANT=buster
 FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 

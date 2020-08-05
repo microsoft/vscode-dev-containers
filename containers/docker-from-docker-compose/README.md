@@ -33,17 +33,16 @@ You can adapt your own existing development container Dockerfile to support this
 1. First, install the Docker CLI in your dev container. From `.devcontainer/Dockerfile`:
 
     ```Dockerfile
+    # Install Docker CE CLI
     RUN apt-get update \
-        #
-        # Install Docker CE CLI
         && apt-get install -y apt-transport-https ca-certificates curl gnupg2 lsb-release \
         && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
         && echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
         && apt-get update \
         && apt-get install -y docker-ce-cli \
-        #
-        # Install Docker Compose
-        && export LATEST_COMPOSE_VERSION=$(curl -sSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -o -P '(?<="tag_name": ").+(?=")') \
+    
+    # Install Docker Compose
+    RUN export LATEST_COMPOSE_VERSION=$(curl -sSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -o -P '(?<="tag_name": ").+(?=")') \
         && curl -sSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
         && chmod +x /usr/local/bin/docker-compose
     ```
@@ -90,9 +89,8 @@ Follow these directions to set up non-root access using `socat`:
         "$@"' >> /usr/local/share/docker-init.sh \
         && chmod +x /usr/local/share/docker-init.sh
 
-    # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to
-    # the Docker socket if "overrideCommand": false is set in devcontainer.json.
-    # The script will also execute CMD if you need to alter startup behaviors.
+    # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to the Docker
+    # socket. The script will also execute CMD if you need to alter startup behaviors.
     ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
     CMD [ "sleep", "infinity" ]
     ```
@@ -106,6 +104,22 @@ Follow these directions to set up non-root access using `socat`:
 6. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
+
+## Using bind mounts when working with Docker inside the container
+
+A common question that comes up is how you can use `bind` mounts from the Docker CLI from within the Codespace itself (e.g. via `-v`). The trick is that, since you're acutally using Docker sitting outside of the container, the paths will be different than those in the container. You need to use the **host**'s paths instead. A simple way to do this is to put `${localWorkspaceFolder}` in an environment variable that you then use when doing bind mounts inside the container. 
+
+Add the following to `devcontainer.json`:
+
+```
+"remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" }
+```
+
+Then reference the env var when running Docker commands from the terminal inside the container.
+
+```bash
+docker run -it --rm -v ${LOCAL_WORKSPACE_FOLDER}:/workspace debian bash
+```
 
 ## Using this definition with an existing folder
 
