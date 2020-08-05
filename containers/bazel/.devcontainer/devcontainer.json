@@ -1,6 +1,12 @@
 {
 	"name": "Bazel",
-	"dockerFile": "Dockerfile",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"BAZEL_VERSION": "3.4.1",
+			"BAZEL_DOWNLOAD_SHA": "9808adad931ac652e8ff5022a74507c532250c2091d21d6aebc7064573669cc5"
+		}
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 

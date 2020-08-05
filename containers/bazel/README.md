@@ -14,7 +14,24 @@
 
 ## Using this definition with an existing folder
 
-Just follow these steps:
+While this definition works unmodified, you can set the Bazel verison by updating the `BAZEL_VERSION` argument in `devcontainer.json`.
+
+```json
+"args": {
+   "BAZEL_VERSION": "3.4.1"
+}
+```
+
+Optionally, you can validate the SHA256 checksum for `bazel-installer.sh` by adding it to the `BAZEL_DOWNLOAD_SHA` argument:
+
+```json
+"args": {
+   "BAZEL_VERSION": "3.4.1",
+   "BAZEL_DOWNLOAD_SHA": "9808adad931ac652e8ff5022a74507c532250c2091d21d6aebc7064573669cc5"
+}
+```
+
+### Adding the definition to your folder
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 

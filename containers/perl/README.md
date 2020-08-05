@@ -14,7 +14,12 @@
 
 ## Using this definition with an existing folder
 
-This definition does not require any special steps to use. Just follow these steps:
+While the definition itself works unmodified, you can select the version of Perl the container uses by updating the `VARIANT` arg in the included `devcontainer.json`:
+
+```json
+"args": { "VARIANT": "5" }
+
+### Adding the definition to your project
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
