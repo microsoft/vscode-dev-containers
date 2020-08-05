@@ -5,7 +5,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:521df806339e2e60dfdee6e00e75656e69798c141bd2cff88c0c9a9c50ad4de5",
+                    "Digest": "sha256:94a00394bc5a8ef503fb59db0a7d0ae9e1119866e8aee8ba40cd864cea69ea1a",
                     "Tag": "14"
                 }
             }
@@ -15,7 +15,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:f0b04f08e276f6c9ed1b369163a098a4b7b71522004b14cebc365c3532a86d21",
+                    "Digest": "sha256:d0738468dfc7cedb7d260369e0546fd7ee8731cfd67136f6023d070ad9679090",
                     "Tag": "12"
                 }
             }
@@ -25,7 +25,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:45ce6645bb55155699292c9f8f203203a77b05fb90b65dd29b7bf91ec4c9e168",
+                    "Digest": "sha256:cf3ee6a5a1b1916c7a2e4fb51eb7ecba1afe186739677d62e9c1bb2cb1c7d6b0",
                     "Tag": "10"
                 }
             }
@@ -334,7 +334,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:521df806339e2e60dfdee6e00e75656e69798c141bd2cff88c0c9a9c50ad4de5",
+                    "Digest": "sha256:94a00394bc5a8ef503fb59db0a7d0ae9e1119866e8aee8ba40cd864cea69ea1a",
                     "Tag": "14"
                 }
             }
@@ -344,7 +344,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:f0b04f08e276f6c9ed1b369163a098a4b7b71522004b14cebc365c3532a86d21",
+                    "Digest": "sha256:d0738468dfc7cedb7d260369e0546fd7ee8731cfd67136f6023d070ad9679090",
                     "Tag": "12"
                 }
             }
@@ -354,7 +354,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:45ce6645bb55155699292c9f8f203203a77b05fb90b65dd29b7bf91ec4c9e168",
+                    "Digest": "sha256:cf3ee6a5a1b1916c7a2e4fb51eb7ecba1afe186739677d62e9c1bb2cb1c7d6b0",
                     "Tag": "10"
                 }
             }
@@ -802,7 +802,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "buildpack-deps",
-                    "Digest": "sha256:c3746ca66ce9ec84d39082896a8ff1f4c77b3e7ca918e51a30250b63e2d667a7",
+                    "Digest": "sha256:8712ca8db6f8c35f35078ab8956f09f354e2fbd0ff00915e747be0caaa64ea13",
                     "Tag": "buster-curl"
                 }
             }
@@ -812,7 +812,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "buildpack-deps",
-                    "Digest": "sha256:a3529686d9532b2eb258f48b0ff0c9ccd481b440ca2c542b22cea3536672c493",
+                    "Digest": "sha256:2193be425c380339d06ec9e3f50fefac4f0927ad0b0f64b58e6872b6b7f3a51a",
                     "Tag": "stretch-curl"
                 }
             }
@@ -1072,7 +1072,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:408d94ad1716ada5200f60b50c101d0303301c48a9b5b12bebf235762e3c2093",
+                    "Digest": "sha256:b04db6093bb158affaa89ac5af1281e748092433442e8ae0096ba8fbe37f00cc",
                     "Tag": "3"
                 }
             }
@@ -1082,7 +1082,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:408d94ad1716ada5200f60b50c101d0303301c48a9b5b12bebf235762e3c2093",
+                    "Digest": "sha256:b04db6093bb158affaa89ac5af1281e748092433442e8ae0096ba8fbe37f00cc",
                     "Tag": "3.8"
                 }
             }
@@ -1092,7 +1092,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:988ece08adf5a219c97491f5b0ae3bc8673cac03945d9f3b21493d82089bfeaa",
+                    "Digest": "sha256:45a9d9059c9a83066f66d0c7ef7f344bd55f2a41c7a32ca73b2b7bad363ed2b9",
                     "Tag": "3.7"
                 }
             }
@@ -1102,7 +1102,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:11ce5e24289743bb4b68f73722eb7b368709a4af18edf690b8508439ba4a81ac",
+                    "Digest": "sha256:a396ca2b3933dd497ab82f32982a746bfa20952948bd9681eb19c8d26f80faf0",
                     "Tag": "3.6"
                 }
             }
@@ -1193,7 +1193,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.0.29"
+                    "Version": "20.0.30"
                 }
             }
         },
