@@ -33,8 +33,8 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
 
 - `mcr.microsoft.com/vscode/devcontainers/cpp:0`
-- `mcr.microsoft.com/vscode/devcontainers/cpp:0.130`
-- `mcr.microsoft.com/vscode/devcontainers/cpp:0.130.0`
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0.132`
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0.132.0`
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
