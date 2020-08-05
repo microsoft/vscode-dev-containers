@@ -19,11 +19,30 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definition
 
 The easiest way to use a script is to simply copy it into a `.devcontainers/library-scripts` folder. From here you can then use the script as follows in your `Dockerfile`:
 
+**Debian/Ubuntu**
+
 ```Dockerfile
 COPY library-scripts/*.sh /tmp/library-scripts/
 RUN apt-get update \
     && /bin/bash /tmp/library-scripts/common-debian.sh \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+```
+
+**Alpine**
+
+```Dockerfile
+COPY library-scripts/*.sh /tmp/library-scripts/
+RUN apk update \
+    && /bin/ash /tmp/library-scripts/common-alpine.sh \
+    && rm -rf /tmp/library-scripts
+```
+
+**CentOS/RedHat/Oracle Linux**
+
+```Dockerfile
+COPY library-scripts/*.sh /tmp/library-scripts/
+RUN /bin/bash /tmp/library-scripts/common-redhat.sh \
+    && yum clean all && rm -rf /tmp/library-scripts
 ```
 
 The last line is technically optional, but minimizes the size of the layer by removing temporary contents.  
