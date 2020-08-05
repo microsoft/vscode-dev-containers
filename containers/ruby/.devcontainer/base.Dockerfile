@@ -20,8 +20,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN gem install rake ruby-debug-ide debase
 
 # [Optional] Install Node.js for use with web applications - update the INSTALL_NODE arg in devcontainer.json to enable.
-ARG INSTALL_NODE="false"
-ARG NODE_VERSION="lts/*"
+ARG INSTALL_NODE="true"
+ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm \
     NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
