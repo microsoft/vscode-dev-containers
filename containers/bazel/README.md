@@ -18,12 +18,11 @@ While this definition works unmodified, you can set the Bazel verison by updatin
 
 ```json
 "args": {
-   "BAZEL_VERSION": "3.4.1",
-   "BAZEL_DOWNLOAD_SHA": "9808adad931ac652e8ff5022a74507c532250c2091d21d6aebc7064573669cc5"
+   "BAZEL_VERSION": "3.4.1"
 }
 ```
 
-Optionally, you can add the SHA256 checksum `bazel-installer.sh` using the `BAZEL_DOWNLOAD_SHA` argument:
+Optionally, you can validate the SHA256 checksum for `bazel-installer.sh` by adding it to the `BAZEL_DOWNLOAD_SHA` argument:
 
 ```json
 "args": {

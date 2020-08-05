@@ -4,7 +4,7 @@ FROM rust:${VARIANT}
 
 # Options for setup script
 ARG INSTALL_ZSH="true"
-ARG UPGRADE_PACKAGES="true"
+ARG UPGRADE_PACKAGES="false"
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
