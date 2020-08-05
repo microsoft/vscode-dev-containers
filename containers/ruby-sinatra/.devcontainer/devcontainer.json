@@ -3,13 +3,11 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 
-			// Update 'VARIANT' to pick a Ruby version. Rebuild the container if
-			// it already exists to update. Example variants: 2, 2.7, 2.6, 2.5
+			// Update 'VARIANT' to pick a Ruby version: 2, 2.7, 2.6, 2.5
 			"VARIANT": "2",
 			// Options
 			"INSTALL_NODE": "false",
-			"NODE_VERSION": "lts/*",
-			"UPGRADE_PACKAGES": "false"
+			"NODE_VERSION": "lts/*"
 		}
 	},
 

@@ -96,10 +96,33 @@ jobs:
         name: ${{ steps.package.outputs.package_name }}
         path: ./${{ steps.package.outputs.package_name }}
 
+  copy-scripts:
+    name: Copy and commit script-library updates
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    needs: [build-and-push]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Copy and commit script-library updates
+      id: copy-scripts
+      run: |
+        set -e
+        yarn install
+        build/vscdc copy-library-scripts
+        git config --global user.email "vscr-feedback@microsoft.com"
+        git config --global user.name "CI"
+        git add -u
+        git commit -m 'Automated update for script library changes' \
+          && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
+          || echo 'No updates to script-library'
+
   cgmanifest:
     name: Trigger CG generation
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    needs: [build-and-push]
+    needs: [copy-scripts]
     runs-on: ubuntu-latest
     steps:
     - name: Trigger CG generation 

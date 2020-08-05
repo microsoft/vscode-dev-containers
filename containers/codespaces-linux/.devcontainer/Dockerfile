@@ -151,10 +151,13 @@ RUN apt-get update -yq\
     && sudo -u codespace git config --global core.editor "/home/codespace/.local/bin/git-ed.sh" \
     #
     # Alias code-insiders to code for easy terminal file editing
-    && echo $'\nif [[ $(which code-insiders) && ! $(which code) ]]; then alias code=code-insiders; fi' >> /home/codespace/.bashrc \
+    && /bin/bash -c "echo $'\nif [[ \$(which code-insiders) && ! \$(which code) ]]; then alias code=code-insiders; fi' >> /home/codespace/.bashrc" \
     #
     # Clean up
     && apt-get autoremove -y \
-    && apt-get clean -y
+    && apt-get clean -y \
+    #
+    # Remove buster source list
+    && rm /etc/apt/sources.list.d/buster.list
 
 USER codespace

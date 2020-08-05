@@ -2,31 +2,31 @@
     "Registrations": [
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "node",
+                    "Digest": "sha256:94a00394bc5a8ef503fb59db0a7d0ae9e1119866e8aee8ba40cd864cea69ea1a",
+                    "Tag": "14"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "12",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "node",
+                    "Digest": "sha256:d0738468dfc7cedb7d260369e0546fd7ee8731cfd67136f6023d070ad9679090",
+                    "Tag": "12"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "10",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "node",
+                    "Digest": "sha256:cf3ee6a5a1b1916c7a2e4fb51eb7ecba1afe186739677d62e9c1bb2cb1c7d6b0",
+                    "Tag": "10"
                 }
             }
         },
@@ -65,8 +65,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: curl",
-                    "Version": "7.52.1-5+deb9u10",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/curl/curl_7.52.1-5+deb9u10_amd64.deb"
+                    "Version": "7.52.1-5+deb9u11",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/c/curl/curl_7.52.1-5+deb9u11_amd64.deb"
                 }
             }
         },
@@ -305,7 +305,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.5.0"
+                    "Version": "7.6.0"
                 }
             }
         },
@@ -331,31 +331,31 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "node",
+                    "Digest": "sha256:94a00394bc5a8ef503fb59db0a7d0ae9e1119866e8aee8ba40cd864cea69ea1a",
+                    "Tag": "14"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "12",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "node",
+                    "Digest": "sha256:d0738468dfc7cedb7d260369e0546fd7ee8731cfd67136f6023d070ad9679090",
+                    "Tag": "12"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "10",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "node",
+                    "Digest": "sha256:cf3ee6a5a1b1916c7a2e4fb51eb7ecba1afe186739677d62e9c1bb2cb1c7d6b0",
+                    "Tag": "10"
                 }
             }
         },
@@ -364,7 +364,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint",
-                    "Version": "6.1.2"
+                    "Version": "6.1.3"
                 }
             }
         },
@@ -379,31 +379,31 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: alpine",
-                    "Version": "3.12",
-                    "DownloadUrl": "https://hub.docker.com/_/alpine"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "alpine",
+                    "Digest": "sha256:185518070891758909c9f839cf4ca393ee977ac378609f700f60a771a2dfe321",
+                    "Tag": "3.12"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: alpine",
-                    "Version": "3.11",
-                    "DownloadUrl": "https://hub.docker.com/_/alpine"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "alpine",
+                    "Digest": "sha256:9a839e63dad54c3a6d1834e29692c8492d93f90c59c978c1ed79109ea4fb9a54",
+                    "Tag": "3.11"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: alpine",
-                    "Version": "3.10",
-                    "DownloadUrl": "https://hub.docker.com/_/alpine"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "alpine",
+                    "Digest": "sha256:f0e9534a598e501320957059cb2a23774b4d4072e37c7b2cf7e95b241f019e35",
+                    "Tag": "3.10"
                 }
             }
         },
@@ -659,11 +659,11 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: mcr.microsoft.com/oryx/build",
-                    "Version": "vso-20200417.5",
-                    "DownloadUrl": "https://github.com/microsoft/oryx"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "mcr.microsoft.com/oryx/build",
+                    "Digest": "sha256:f928fd4ed0a1c4b927bf0e1383b40426c42991e5746270e3f1423cc8c567cd48",
+                    "Tag": "vso-20200417.5"
                 }
             }
         },
@@ -799,21 +799,21 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "buster-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "buildpack-deps",
+                    "Digest": "sha256:8712ca8db6f8c35f35078ab8956f09f354e2fbd0ff00915e747be0caaa64ea13",
+                    "Tag": "buster-curl"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "stretch-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "buildpack-deps",
+                    "Digest": "sha256:2193be425c380339d06ec9e3f50fefac4f0927ad0b0f64b58e6872b6b7f3a51a",
+                    "Tag": "stretch-curl"
                 }
             }
         },
@@ -823,7 +823,7 @@
                 "Other": {
                     "Name": "Debian Package: apt-transport-https",
                     "Version": "1.8.2.1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/a/apt/apt-transport-https_1.8.2.1_all.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-transport-https_1.8.2.1_all.deb"
                 }
             }
         },
@@ -833,7 +833,7 @@
                 "Other": {
                     "Name": "Debian Package: apt-utils",
                     "Version": "1.8.2.1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/a/apt/apt-utils_1.8.2.1_amd64.deb"
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-utils_1.8.2.1_amd64.deb"
                 }
             }
         },
@@ -1069,41 +1069,41 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: python",
-                    "Version": "3",
-                    "DownloadUrl": "https://hub.docker.com/_/python"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "python",
+                    "Digest": "sha256:b04db6093bb158affaa89ac5af1281e748092433442e8ae0096ba8fbe37f00cc",
+                    "Tag": "3"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: python",
-                    "Version": "3.8",
-                    "DownloadUrl": "https://hub.docker.com/_/python"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "python",
+                    "Digest": "sha256:b04db6093bb158affaa89ac5af1281e748092433442e8ae0096ba8fbe37f00cc",
+                    "Tag": "3.8"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: python",
-                    "Version": "3.7",
-                    "DownloadUrl": "https://hub.docker.com/_/python"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "python",
+                    "Digest": "sha256:45a9d9059c9a83066f66d0c7ef7f344bd55f2a41c7a32ca73b2b7bad363ed2b9",
+                    "Tag": "3.7"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: python",
-                    "Version": "3.6",
-                    "DownloadUrl": "https://hub.docker.com/_/python"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "python",
+                    "Digest": "sha256:a396ca2b3933dd497ab82f32982a746bfa20952948bd9681eb19c8d26f80faf0",
+                    "Tag": "3.6"
                 }
             }
         },
@@ -1130,7 +1130,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "autopep8",
-                    "Version": "1.5.3"
+                    "Version": "1.5.4"
                 }
             }
         },
@@ -1193,7 +1193,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.0.28"
+                    "Version": "20.0.30"
                 }
             }
         },
@@ -1208,21 +1208,21 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "focal-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "buildpack-deps",
+                    "Digest": "sha256:d0e02fa5f765fa3575d90d5d8a05ffcf8ee176161df0435090e25464361691e2",
+                    "Tag": "focal-curl"
                 }
             }
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "bionic-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "buildpack-deps",
+                    "Digest": "sha256:bd7ff2d4d288156cd7df6bc6cf87d247ac386ebe81f29031eaf0fc0727e2f1a6",
+                    "Tag": "bionic-curl"
                 }
             }
         },

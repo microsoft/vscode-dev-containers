@@ -1,5 +1,4 @@
-# Update the VARIANT arg in devcontainer.json to pick a Ruby version: 2, 2.7, 2.6, 2.5
-ARG VARIANT=14
+ARG VARIANT=2
 FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 
 # [Optional] Install a version of Node.js using nvm

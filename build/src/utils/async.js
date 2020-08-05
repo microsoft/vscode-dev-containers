@@ -95,6 +95,20 @@ module.exports = {
         });
     },
 
+    // async copyfile
+    copyFile: async (src, dest) => {
+        return new Promise((resolve, reject) => {
+            fs.copyFile(src, dest, (err) => err ? reject(err) : resolve());
+        });
+    },
+
+    // async chmod
+    chmod: async (src, mod) => {
+        return new Promise((resolve, reject) => {
+            fs.chmod(src, mod, (err) => err ? reject(err) : resolve());
+        });
+    },
+
     // async readdir
     readdir: async (dirPath, opts) => {
         opts = opts || {};

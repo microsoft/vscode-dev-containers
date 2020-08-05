@@ -58,21 +58,20 @@ You can adapt your own existing development container Dockerfile to support this
 2. Next, update your Dockerfile to install all of the needed CLIs in the container:
 
     ```Dockerfile
+    # Install Docker CE CLI
     RUN apt-get update \
-        #
-        # Install Docker CE CLI
         && apt-get install -y apt-transport-https ca-certificates curl gnupg2 lsb-release \
         && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
         && echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
         && apt-get update \
-        && apt-get install -y docker-ce-cli \
-        #
-        # Install kubectl
-        && curl -sSL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
-        && chmod +x /usr/local/bin/kubectl \
-        #
-        # Install Helm
-        && curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
+        && apt-get install -y docker-ce-cli
+
+    # Install kubectl
+    RUN curl -sSL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+        && chmod +x /usr/local/bin/kubectl
+
+    # Install Helm
+    RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
     ```
 
 3. Finally, we need to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. Manually copy the [`copy-kube-config.sh` script](.devcontainer/copy-kube-config.sh) from the `.devcontainer` folder in this repo folder into the same folder as your `Dockerfile` and then update your `Dockerfile` to use it from your `/root/.bashrc` and/or `/root/.zshrc`. 
@@ -186,7 +185,7 @@ See the section below for your operating system for more detailed setup instruct
 
 7. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
-## Linux / Minikube Setup
+### Linux / Minikube Setup
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
