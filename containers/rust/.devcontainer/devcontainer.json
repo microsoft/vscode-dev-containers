@@ -1,6 +1,10 @@
 {
 	"name": "Rust",
-	"dockerFile": "Dockerfile",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update VARIANT to pick a Rust version
+		"args": { "VARIANT": "1" }
+	},
 	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 
 	// Set *default* container specific settings.json values on container create.
