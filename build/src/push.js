@@ -83,6 +83,7 @@ async function pushImage(definitionPath, definitionId, repo, release, updateLate
             if (replaceImage || !await isImageVersionAlreadyPublished(definitionId, release, registry, registryPath, variant)) {
                 const context = devContainerJson.build ? devContainerJson.build.context || '.' : devContainerJson.context || '.';
                 const workingDir = path.resolve(dotDevContainerPath, context);
+                // Note: build.args in devcontainer.json is intentionally ignored so you can vary image contents and defaults as needed
                 const buildParams = (variant ? ['--build-arg', `VARIANT=${variant}`] : [])
                     .concat(versionTags.reduce((prev, current) => prev.concat(['-t', current]), []));
                 const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };
