@@ -51,12 +51,12 @@ The CI process for this repository will automatically keep scripts in the `.devc
 
 ### Downloading the script with curl instead
 
-If you prefer, you can download the script using `curl` or `wget` and execute it instead. This is generally best to do with your own scripts rather than definitions in this repository. For example:
+If you prefer, you can download the script using `curl` or `wget` and execute it instead. This can convienent to do with your own `Dockerfile`, but is generally avoided for definitions in this repository. To avoid unexpected issues, you should reference a release specific version of the script, rather than using master. For example:
 
 ```Dockerfile
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get -y install --no-install-recommends curl ca-certificates \
-    && curl -sSL -o- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh" | bash - \
+    && curl -sSL -o- "https://github.com/microsoft/vscode-dev-containers/blob/v0.131.0/script-library/common-debian.sh" | bash - \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
@@ -106,7 +106,7 @@ For example:
 ARG INSTALL_ZSH="true"
 
 # Script source
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
+ARG COMMON_SCRIPT_SOURCE="https://github.com/microsoft/vscode-dev-containers/blob/v0.131.0/script-library/common-debian.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
 # Download script, validate its checksum, and run it with the options above
