@@ -14,9 +14,22 @@
 
 ## Using this definition with an existing folder
 
-While technically optional, this definition includes the Ansible extension. You may need an Azure account for your operations. You can create a [free trial account here](https://azure.microsoft.com/en-us/free/) and find out more about using [Ansible with Azure here](https://docs.microsoft.com/en-us/azure/ansible/ansible-overview).  If you plan to use the Azure Cloud Shell for all of your Ansible operations, you can comment out the installation of the Docker CLI in `.devcontainer/Dockerfile`. Conversely, if you do not plan to use Cloud Shell, you can comment out the installation of Node.js. The definition has been setup so you can do either as it makes sense.
+While technically optional, this definition includes the Ansible extension. You may need an Azure account for your operations. You can create a [free trial account here](https://azure.microsoft.com/en-us/free/) and find out more about using [Ansible with Azure here](https://docs.microsoft.com/en-us/azure/ansible/ansible-overview).
 
-Next, follow these steps:
+There are a few options you can pick from  by updating the following line in `.devcontainer/devcontainer.json`:
+
+```Dockerfile
+"arg": {
+   "INSTALL_AZURE_CLI": "true",
+   "INSTALL_DOCKER": "true",
+   "INSTALL_NODE": "true"
+}
+`
+If you plan to use the Azure Cloud Shell for all of your Ansible operations, you can set `"INSTALL_DOCKER": "false"`. Conversely, if you do not plan to use Cloud Shell, you can set `"INSTALL_DOCKER": "false"`. By default, both are installed so you can decide later.
+
+Beyond `git`, this `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
+
+### Adding the definition to your project
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
