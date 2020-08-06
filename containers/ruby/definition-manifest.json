@@ -36,7 +36,7 @@
 			"zlib1g",
 			"sudo",
 			"zsh",
-			"build-essentials",
+			"build-essential",
 			"yarn"
 		],
 		"manual": [
