@@ -1,36 +1,13 @@
-# Update the VARIANT arg in devcontainer.json to pick a Ruby version: 2, 2.7, 2.6, 2.5
+# See here for image contents: https://github.com/microsoft/vscode-dev-containers/blob/master/containers/ruby/.devcontainer/base.Dockerfile
 ARG VARIANT=2
-FROM ruby:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 
-# Options for setup script
-ARG INSTALL_ZSH="true"
-ARG UPGRADE_PACKAGES="false"
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+# Install Rails
+RUN gem install rails webdrivers 
 
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
-COPY library-scripts/common-debian.sh /tmp/library-scripts/
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
-    && apt-get install -y build-essential libsqlite3-dev zlib1g-dev libxml2  \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/library-scripts
-
-# Install Ruby tools, rails
-RUN gem install rake ruby-debug-ide debase rails webdrivers 
-
-# [Optional] Install Node.js for use with web applications - update the INSTALL_NODE arg in devcontainer.json to enable.
-ARG INSTALL_NODE="false"
+# Install a version of Node.js using nvm
 ARG NODE_VERSION="lts/*"
-ENV NVM_DIR=/usr/local/share/nvm \
-    NVM_SYMLINK_CURRENT=true \
-    PATH=${NVM_DIR}/current/bin:${PATH}
-COPY library-scripts/node-debian.sh /tmp/library-scripts/
-RUN if [ "$INSTALL_NODE" = "true" ]; then \
-        /bin/bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
-        && apt-get clean -y && rm -rf /var/lib/apt/lists/*; \
-    fi \
-    && rm -rf /tmp/library-scripts
+RUN sudo -u vscode bash -c "source /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION}" 2>&1
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update \
@@ -39,3 +16,4 @@ RUN if [ "$INSTALL_NODE" = "true" ]; then \
 
 # [Optional] Uncomment this line to install additional gems.
 # RUN gem install <your-gem-names-here>
+
