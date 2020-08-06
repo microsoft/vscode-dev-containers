@@ -1,4 +1,3 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/blob/master/containers/ruby/.devcontainer/base.Dockerfile
 ARG VARIANT=2
 FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 
