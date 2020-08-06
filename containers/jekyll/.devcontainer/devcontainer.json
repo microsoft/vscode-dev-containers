@@ -1,6 +1,11 @@
 {
 	"name": "Jekyll",
-	"dockerFile": "Dockerfile",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"NODE_VERSION": "lts/*"
+		}	
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 

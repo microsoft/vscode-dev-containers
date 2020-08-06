@@ -5,8 +5,6 @@
 		"args": { 
 			// Update 'VARIANT' to pick a Ruby version: 2, 2.7, 2.6, 2.5
 			"VARIANT": "2",
-			// Options
-			"INSTALL_NODE": "false",
 			"NODE_VERSION": "lts/*"
 		}
 	},
