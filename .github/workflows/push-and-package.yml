@@ -83,13 +83,17 @@ jobs:
         git fetch --tags --force
         git branch ${{ steps.get_tag_name.outputs.tag }}-temp-branch
         git add -u
-        git commit -m 'Automated update of common script sources and hash'
+        git commit -m 'Automated update of common script sources and hash' || export NO_UPDATES="true"
 
         # Re-tag and push to origin
-        git tag -d ${{ steps.get_tag_name.outputs.tag }}
-        git tag ${{ steps.get_tag_name.outputs.tag }}
-        git push --delete origin ${{ steps.get_tag_name.outputs.tag }}
-        git push origin ${{ steps.get_tag_name.outputs.tag }}
+        if [ "${NO_UPDATES}" != "true" ]; then 
+            git tag -d ${{ steps.get_tag_name.outputs.tag }}
+            git tag ${{ steps.get_tag_name.outputs.tag }}
+            git push --delete origin ${{ steps.get_tag_name.outputs.tag }}
+            git push origin ${{ steps.get_tag_name.outputs.tag }}
+        else 
+            echo "No updates to re-tag."
+        fi
 
     - name: Package
       id: package
