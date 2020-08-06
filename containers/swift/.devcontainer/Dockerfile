@@ -35,7 +35,6 @@ RUN if [ "$INSTALL_NODE" = "true" ]; then \
     fi \
     && rm -rf /tmp/library-scripts
 
-
 # [Optional] Uncomment this section to install additional OS packages you may want.
 # RUN apt-get update \
 #     && export DEBIAN_FRONTEND=noninteractive \
