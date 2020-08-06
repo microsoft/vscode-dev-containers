@@ -6,7 +6,14 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
-		"java.home": "/usr/lib/jvm/zulu-8-azure-amd64"
+		"java.home": "/usr/lib/jvm/zulu-11-azure-amd64",
+		"java.configuration.runtimes": [
+			{
+			  "default": true,
+			  "name": "JavaSE-1.8",
+			  "path": "/usr/lib/jvm/zulu-8-amd64",
+			}
+		],
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
