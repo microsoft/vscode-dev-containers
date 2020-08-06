@@ -1,7 +1,7 @@
 {
 	"name": "Alpine",
 	"build": {
-		"dockerfile": "base.Dockerfile",
+		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick an Alpine version: 3.10, 3.11, 3.12
 		"args": { "VARIANT": "3.12" }
 	},
