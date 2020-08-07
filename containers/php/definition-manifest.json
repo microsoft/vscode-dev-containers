@@ -36,7 +36,6 @@
 			"zlib1g",
 			"sudo",
 			"zsh",
-			"build-essential",
 			"yarn"
 		],
 		"manual": [
@@ -60,16 +59,14 @@
 				}
 			}, {
 				"Component": {
-					"Type": "git",
-					"git": {
+					"Type": "other",
+					"Other": {
 						"Name": "Xdebug",
-						"repositoryUrl": "https://github.com/xdebug/xdebug",
-						"commitHash": "b554fd406b365a0cec09e81200f16a2d30d59693"
+						"Version": "2.9.6",
+						"DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
 					}
 				}
 			}
 		]
 	}
 }
-
-
