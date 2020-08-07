@@ -6,8 +6,8 @@ ARG UPGRADE_PACKAGES="false"
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-ENV NVM_DIR=/usr/local/share/nvm \
-    NVM_SYMLINK_CURRENT=true \ 
+ENV NVM_DIR=/usr/local/share/nvm
+ENV NVM_SYMLINK_CURRENT=true \ 
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/*.sh /tmp/library-scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
