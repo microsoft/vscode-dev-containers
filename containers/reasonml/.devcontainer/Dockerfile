@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:12
 
-RUN sudo -u ${USERNAME} npm install -g bs-platform esy@latest
+RUN sudo -u node npm install -g bs-platform esy@latest
 
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
