@@ -5,7 +5,6 @@ ARG VARIANT=12
 FROM mcr.microsoft.com/azure-functions/node:3.0-node${VARIANT}-core-tools
 
 # [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update \
-#     && export DEBIAN_FRONTEND=noninteractive \
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
