@@ -1,0 +1,15 @@
+{
+	"name": "Clojure",
+
+	// Update the 'image' property with your Docker image name.
+	"image": "clojure:openjdk-8-lein",
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		// If you are using an Alpine-based image, change this to /bin/ash
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": ["betterthantomorrow.calva"]
+}
