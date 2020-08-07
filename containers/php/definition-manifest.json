@@ -1,0 +1,72 @@
+{
+	"variants": ["7", "7.4", "7.3"],
+	"build": {
+		"latest": "true",
+		"rootDistro": "debian",
+		"tags": [
+			"php:${VERSION}-${VARIANT}"
+		]
+	},
+	"dependencies": {
+		"image": "php:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/php",
+		"debian": [
+			"apt-utils", 
+			"dialog", 
+			"ca-certificates",
+			"git",
+			"iproute2",
+			"procps",
+			"curl",
+			"openssh-client",
+			"less",
+			"nano",
+			"gnupg",
+			"jq",
+			"wget",
+			"unzip",
+			"lsb-release",
+			"apt-transport-https",
+			"libc6",
+			"libgcc1",
+			"libgssapi-krb5-2",
+			"libicu[0-9][0-9]",
+			"libssl1.1",
+			"libstdc++6",
+			"zlib1g",
+			"sudo",
+			"zsh",
+			"yarn"
+		],
+		"manual": [
+			{
+				"Component": {
+					"Type": "git",
+					"git": {
+						"Name": "Oh My Zsh!",
+						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
+						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
+					}
+				}
+			}, {
+				"Component": {
+					"Type": "git",
+					"git": {
+						"Name": "Nvm",
+						"repositoryUrl": "https://github.com/nvm-sh/nvm",
+						"commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
+					}
+				}
+			}, {
+				"Component": {
+					"Type": "other",
+					"Other": {
+						"Name": "Xdebug",
+						"Version": "2.9.6",
+						"DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+					}
+				}
+			}
+		]
+	}
+}

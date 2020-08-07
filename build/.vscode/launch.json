@@ -8,7 +8,7 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Run Push Script",
-			"program": "${workspaceFolder}/build/vscdc",
+			"program": "${workspaceFolder}/vscdc",
 			"args": [
 				"push",
 				"--no-push",
@@ -24,7 +24,7 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Run Pack Script",
-			"program": "${workspaceFolder}/build/vscdc",
+			"program": "${workspaceFolder}/vscdc",
 			"args": [
 				"pack",
 				"--no-clean",
@@ -40,7 +40,7 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Run CG Manifest Script",
-			"program": "${workspaceFolder}/build/vscdc",
+			"program": "${workspaceFolder}",
 			"args": [
 				"cg",
 				"--release", "master",
@@ -53,8 +53,8 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Run Update Script URLs",
-			"program": "${workspaceFolder}/build/vscdc",
-			"cwd": "${workspaceFolder}/build",
+			"program": "${workspaceFolder}/vscdc",
+			"cwd": "${workspaceFolder}",
 			"args": [
 				"update-script-sources",
 				"v0.100.0",
@@ -65,8 +65,8 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Run Patch",
-			"program": "${workspaceFolder}/build/vscdc",
-			"cwd": "${workspaceFolder}/build",
+			"program": "${workspaceFolder}/vscdc",
+			"cwd": "${workspaceFolder}",
 			"args": [
 				"patch",
 				"--patch-path", "patch/sample",
@@ -78,8 +78,8 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Run Patch All",
-			"program": "${workspaceFolder}/build/vscdc",
-			"cwd": "${workspaceFolder}/build",
+			"program": "${workspaceFolder}/vscdc",
+			"cwd": "${workspaceFolder}",
 			"args": [
 				"patch",
 				"--all",
