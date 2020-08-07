@@ -2,6 +2,7 @@ README.md
 test-project
 definition-manifest.json
 .devcontainer/library-scripts/README.md
+target
 .vscode
 .npmignore
 Cargo.lock

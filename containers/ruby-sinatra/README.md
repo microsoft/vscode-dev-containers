@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Ruby & Sinatra applications. Includes everything you need to get up and running.*
+*Develop Ruby and Sinatra applications. Includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|
