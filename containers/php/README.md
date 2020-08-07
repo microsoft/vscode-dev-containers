@@ -8,6 +8,8 @@
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/php |
+| *Available image variants* | mcr.microsoft.com/vscode/devcontainers/php:7 <br /> mcr.microsoft.com/vscode/devcontainers/php:7.4 <br /> mcr.microsoft.com/vscode/devcontainers/php:7.3 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | PHP |
@@ -20,13 +22,30 @@ While the definition itself works unmodified, you can select the version of PHP 
 "args": { "VARIANT": "7" }
 ```
 
-Given how frequently web applications use Node.js for front end code, this container also includes an optional install of Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
+
+- `mcr.microsoft.com/vscode/devcontainers/php` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/php:7`
+- `mcr.microsoft.com/vscode/devcontainers/php:7.4`
+- `mcr.microsoft.com/vscode/devcontainers/php:7.3`
+
+Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+
+- `mcr.microsoft.com/vscode/devcontainers/php:0-7`
+- `mcr.microsoft.com/vscode/devcontainers/php:0.134-7`
+- `mcr.microsoft.com/vscode/devcontainers/php:0.134.0-7`
+
+Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+
+### Installing Node.js
+
+Given how frequently Ruby-based web applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
 ```json
 "args": {
     "VARIANT": "7",
     "INSTALL_NODE": "true",
-    "NODE_VERSION": "10",
+    "NODE_VERSION": "10"
 }
 ```
 
