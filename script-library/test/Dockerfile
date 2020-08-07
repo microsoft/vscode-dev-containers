@@ -12,18 +12,10 @@ ARG INSTALL_DOCKER="true"
 ARG UPGRADE_PACKAGES="true"
 
 COPY *.sh /tmp/
-RUN chmod +x /tmp/*.sh \
-    && if [ "${DISTRO}" = "debian" ]; then \
-      apt-get update; \
-    fi
+RUN chmod +x /tmp/*.sh
 
 # Run common script
 RUN /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}
-
-RUN if [ "${DISTRO}" = "debian" ]; then \
-        # Run Node script
-        /tmp/node-${DISTRO}.sh "/usr/local/share/nvm" 12 ${USERNAME}; \
-    fi
 
 RUN if  [ "${DISTRO}" != "alpine" ]; then\
         # Run Docker script
@@ -32,6 +24,11 @@ RUN if  [ "${DISTRO}" != "alpine" ]; then\
         echo -e '#!/bin/bash\n"$@"' | tee /usr/local/share/docker-init.sh \
         && chown ${USERNAME} /usr/local/share/docker-init.sh \
         && chmod +x /usr/local/share/docker-init.sh; \
+    fi
+
+RUN if [ "${DISTRO}" = "debian" ]; then \
+        # Run Node script
+        /tmp/node-${DISTRO}.sh "/usr/local/share/nvm" 12 ${USERNAME}; \
     fi
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
