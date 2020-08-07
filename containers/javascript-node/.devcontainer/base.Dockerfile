@@ -9,8 +9,8 @@ ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-ENV NVM_DIR=/usr/local/share/nvm \
-    NVM_SYMLINK_CURRENT=true \ 
+ENV NVM_DIR=/usr/local/share/nvm
+ENV NVM_SYMLINK_CURRENT=true \ 
     PATH=${NVM_DIR}/current/bin:${PATH}
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
@@ -40,13 +40,9 @@ RUN mkdir -p ${NPM_GLOBAL} \
 RUN sudo -u ${USERNAME} npm install -g eslint
 
 # [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update \
-#     && export DEBIAN_FRONTEND=noninteractive \
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 # [Optional] Uncomment if you want to install an additional version of node using nvm
 # ARG EXTRA_NODE_VERSION=10
-# RUN sudo -u node bash -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
-
-# [Optional] Uncomment if you want to install more global node modules
-# RUN sudo -u node npm install -g <your-package-list -here>
+# RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"

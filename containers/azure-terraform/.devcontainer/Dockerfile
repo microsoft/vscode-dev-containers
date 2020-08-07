@@ -20,8 +20,8 @@ ARG INSTALL_AZURE_CLI="true"
 ARG INSTALL_DOCKER="true"
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
-ENV NVM_DIR=/usr/local/share/nvm \
-    NVM_SYMLINK_CURRENT=true \
+ENV NVM_DIR=/usr/local/share/nvm
+ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -58,6 +58,5 @@ ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
 CMD [ "sleep", "infinity" ]
 
 # [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update \
-#     && export DEBIAN_FRONTEND=noninteractive \
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>

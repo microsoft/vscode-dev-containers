@@ -983,6 +983,93 @@
             "Component": {
                 "Type": "DockerImage",
                 "DockerImage": {
+                    "Name": "ruby",
+                    "Digest": "sha256:4cdd89e947cc52c78c273953e42a6e9d94ca4cd182875fd50745550580b772f4",
+                    "Tag": "2"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "ruby",
+                    "Digest": "sha256:4cdd89e947cc52c78c273953e42a6e9d94ca4cd182875fd50745550580b772f4",
+                    "Tag": "2.7"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "ruby",
+                    "Digest": "sha256:d9fec6ed7ded90f6e14930884a6d6e385645d346d02f46cedbde8af563e4bb19",
+                    "Tag": "2.6"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "ruby",
+                    "Digest": "sha256:d92df757786a564fae990d6893db5e1c96f5a8a037d05bc282985f5168fd63d2",
+                    "Tag": "2.5"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: yarn",
+                    "Version": "1.22.4-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "rake",
+                    "Version": "13.0.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "ruby-debug-ide",
+                    "Version": "0.7.2"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "debase",
+                    "Version": "0.2.4.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "Nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
+                    "commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
                     "Name": "buildpack-deps",
                     "Digest": "sha256:d0e02fa5f765fa3575d90d5d8a05ffcf8ee176161df0435090e25464361691e2",
                     "Tag": "focal-curl"
@@ -1461,30 +1548,10 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: yarn",
-                    "Version": "1.22.4-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
                     "Version": "7.6.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "Nvm",
-                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
-                    "commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
                 }
             }
         },

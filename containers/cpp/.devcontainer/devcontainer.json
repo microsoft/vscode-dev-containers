@@ -1,7 +1,7 @@
 {
 	"name": "C++",
 	"build": {
-		"dockerfile": "base.Dockerfile",
+		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick an Debian OS version: buster, stretch
 		"args": { "VARIANT": "buster" }
 	},

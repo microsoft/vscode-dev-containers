@@ -23,6 +23,5 @@ RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env up
 RUN /opt/conda/bin/pip install pylint
 
 # [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update \
-#     && export DEBIAN_FRONTEND=noninteractive \
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>

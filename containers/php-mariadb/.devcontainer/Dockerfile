@@ -25,18 +25,14 @@ RUN yes | pecl install xdebug \
 # [Optional] Install Node.js for use with web applications - update the INSTALL_NODE arg in docker-compose.yml to enable.
 ARG INSTALL_NODE="false"
 ARG NODE_VERSION="lts/*"
-ENV NVM_DIR=/usr/local/share/nvm \
-    NVM_SYMLINK_CURRENT=true \
+ENV NVM_DIR=/usr/local/share/nvm
+ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/node-debian.sh /tmp/library-scripts/
-RUN if [ "$INSTALL_NODE" = "true" ]; then \
-        /bin/bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
-        && apt-get clean -y && rm -rf /var/lib/apt/lists/*; \
-    fi \
-    && rm -rf /tmp/library-scripts
+RUN if [ "$INSTALL_NODE" = "true" ]; then /bin/bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
+    && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # [Optional] Uncomment this section to install additional packages.
-# RUN apt-get update \
-#     && export DEBIAN_FRONTEND=noninteractive \
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
