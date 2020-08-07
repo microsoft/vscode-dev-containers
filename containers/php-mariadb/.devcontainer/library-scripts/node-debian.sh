@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
@@ -24,27 +24,51 @@ if [ "${NODE_VERSION}" = "none" ]; then
     export NODE_VERSION=
 fi
 
-# Install NVM
-mkdir -p ${NVM_DIR}
-curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 2>&1
-if [ "${NODE_VERSION}" != "" ]; then
-    /bin/bash -c "source $NVM_DIR/nvm.sh && nvm alias default ${NODE_VERSION}" 2>&1
+# Install curl, apt-get dependencies if missing
+if ! type curl > /dev/null 2>&1; then
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        apt-get update
+    fi
+    apt-get -y install --no-install-recommends apt-transport-https ca-certificates curl gnupg2
 fi
 
-echo -e "export NVM_DIR=\"${NVM_DIR}\"\n\
-[ -s \"\$NVM_DIR/nvm.sh\" ] && \\. \"\$NVM_DIR/nvm.sh\"\n\
-[ -s \"\$NVM_DIR/bash_completion\" ] && \\. \"\$NVM_DIR/bash_completion\"" \
-| tee -a /home/${NONROOT_USER}/.bashrc /home/${NONROOT_USER}/.zshrc >> /root/.zshrc
+# Install NVM
+if [ ! -d "${NVM_DIR}" ]; then
+    mkdir -p ${NVM_DIR}
+    curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 2>&1
+    if [ "${NODE_VERSION}" != "" ]; then
+        /bin/bash -c "source $NVM_DIR/nvm.sh && nvm alias default ${NODE_VERSION}" 2>&1
+    fi
 
-echo -e "if [ \"\$(stat -c '%U' \$NVM_DIR)\" != \"${NONROOT_USER}\" ]; then\n\
-    sudo chown -R ${NONROOT_USER}:root \$NVM_DIR\n\
-fi" | tee -a /root/.bashrc /root/.zshrc /home/${NONROOT_USER}/.bashrc >> /home/${NONROOT_USER}/.zshrc
+    if id -u $NONROOT_USER > /dev/null 2>&1; then
+        echo -e "export NVM_DIR=\"${NVM_DIR}\"\n\
+        [ -s \"\$NVM_DIR/nvm.sh\" ] && \\. \"\$NVM_DIR/nvm.sh\"\n\
+        [ -s \"\$NVM_DIR/bash_completion\" ] && \\. \"\$NVM_DIR/bash_completion\"" \
+        | tee -a /home/${NONROOT_USER}/.bashrc /home/${NONROOT_USER}/.zshrc >> /root/.zshrc
 
-chown ${NONROOT_USER}:${NONROOT_USER} /home/${NONROOT_USER}/.bashrc /home/${NONROOT_USER}/.zshrc
-chown -R ${NONROOT_USER}:root ${NVM_DIR}
+        echo -e "if [ \"\$(stat -c '%U' \$NVM_DIR)\" != \"${NONROOT_USER}\" ]; then\n\
+            sudo chown -R ${NONROOT_USER}:root \$NVM_DIR\n\
+        fi" | tee -a /root/.bashrc /root/.zshrc /home/${NONROOT_USER}/.bashrc >> /home/${NONROOT_USER}/.zshrc
+
+        chown ${NONROOT_USER}:${NONROOT_USER} /home/${NONROOT_USER}/.bashrc /home/${NONROOT_USER}/.zshrc
+        chown -R ${NONROOT_USER}:root ${NVM_DIR}
+    else
+        echo "Non-root user ${NONROOT_USER} not found. Skipping setup for this user."
+    fi
+else
+    echo "NVM already installed."
+    if [ "${NODE_VERSION}" != "" ]; then
+        nvm install "${NODE_VERSION}"
+    fi
+fi
+
 
 # Install yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - 2>/dev/null
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-apt-get update
-apt-get -y install --no-install-recommends yarn
+if ! type yarn > /dev/null 2>&1; then
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - 2>/dev/null
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    apt-get update
+    apt-get -y install --no-install-recommends yarn
+else
+    echo "Yarn already installed."
+fi
