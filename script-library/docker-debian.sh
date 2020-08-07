@@ -6,6 +6,16 @@
 
 # Syntax: ./docker-debian.sh <enable non-root docker socket access flag> <source socket> <target socket> <non-root user>
 
+apt-get-update-if-needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
 set -e
 
 ENABLE_NONROOT_DOCKER=${1:-"true"}
@@ -14,36 +24,49 @@ TARGET_SOCKET=${3:-"/var/run/docker.sock"}
 NONROOT_USER=${4:-"vscode"}
 
 if [ "$(id -u)" -ne 0 ]; then
-    echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
+    echo 'Script must be run a root. Use sudo or set "USER root" in your Dockerfile before running the script.'
     exit 1
 fi
 
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
-# Install Docker CLI
-apt-get -y install  --no-install-recommends apt-transport-https ca-certificates curl gnupg2 lsb-release
-curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT)
-echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list
-apt-get update
-apt-get -y install --no-install-recommends docker-ce-cli
-
-# Install Docker Compose
-LATEST_COMPOSE_VERSION=$(curl -sSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -o -P '(?<="tag_name": ").+(?=")')
-curl -sSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose \
-
-# By default, make the source and target sockets the same
-if [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ]; then
-    touch "${SOURCE_SOCKET}"
-    ln -s "${SOURCE_SOCKET}" "${TARGET_SOCKET}"
-    chown -h "${NONROOT_USER}" "${TARGET_SOCKET}"
+# Install Docker CLI if not already installed
+if ! type docker > /dev/null 2>&1; then
+    if ! type curl > /dev/null 2>&1; then
+        apt-get-update-if-needed
+        apt-get -y install --no-install-recommends apt-transport-https ca-certificates curl gnupg2 lsb-release
+    fi
+    curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT)
+    echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list
+    apt-get update
+    apt-get -y install --no-install-recommends docker-ce-cli
+else
+    echo "Docker CLI already installed."
 fi
 
-# If enabling non-root access, setup socat
-if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
-    apt-get -y install socat
-    tee /usr/local/share/docker-init.sh << EOF 
+# Install Docker Compose if not already installed 
+if ! type docker-compose > /dev/null 2>&1; then
+    LATEST_COMPOSE_VERSION=$(curl -sSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -o -P '(?<="tag_name": ").+(?=")')
+    curl -sSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+else
+    echo "Docker Compose already installed."
+fi
+
+if [ ! -f "/usr/local/share/docker-init.sh" ]; then
+    # By default, make the source and target sockets the same
+    if [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ]; then
+        touch "${SOURCE_SOCKET}"
+        ln -s "${SOURCE_SOCKET}" "${TARGET_SOCKET}"
+        chown -h "${NONROOT_USER}" "${TARGET_SOCKET}"
+    fi
+
+    # If enabling non-root access and specified user is found, setup socat and add script
+    if [ "${ENABLE_NONROOT_DOCKER}" = "true" ] && id -u ${NONROOT_USER} > /dev/null 2>&1; then
+        apt-get-update-if-needed
+        apt-get -y install socat
+        tee /usr/local/share/docker-init.sh << EOF 
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -108,7 +131,8 @@ fi
 set +e
 "\$@"
 EOF
-else 
-    echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
+    else 
+        echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
+    fi
+    chmod +x /usr/local/share/docker-init.sh
 fi
-chmod +x /usr/local/share/docker-init.sh
