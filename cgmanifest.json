@@ -844,6 +844,66 @@
             "Component": {
                 "Type": "DockerImage",
                 "DockerImage": {
+                    "Name": "php",
+                    "Digest": "sha256:cafdf0646de416f5c0efa7020749c29b313f03481cafecb20cbfbb09602cdfb5",
+                    "Tag": "7"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "php",
+                    "Digest": "sha256:cafdf0646de416f5c0efa7020749c29b313f03481cafecb20cbfbb09602cdfb5",
+                    "Tag": "7.4"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "php",
+                    "Digest": "sha256:f60c54c62c2115e16bb486002cb10a9c3598cfea9e7043d47ffaa9af3ea3c522",
+                    "Tag": "7.3"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: yarn",
+                    "Version": "1.22.4-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "Nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
+                    "commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Xdebug",
+                    "Version": "2.9.6",
+                    "DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
                     "Name": "python",
                     "Digest": "sha256:b04db6093bb158affaa89ac5af1281e748092433442e8ae0096ba8fbe37f00cc",
                     "Tag": "3"
@@ -1021,16 +1081,6 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: yarn",
-                    "Version": "1.22.4-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "rake",
@@ -1053,16 +1103,6 @@
                 "RubyGems": {
                     "Name": "debase",
                     "Version": "0.2.4.1"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "Nvm",
-                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
-                    "commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
                 }
             }
         },
