@@ -1,9 +1,7 @@
 {
 	"name": "Rust",
 	"build": {
-		"dockerfile": "Dockerfile",
-		// Update VARIANT to pick a Rust version
-		"args": { "VARIANT": "1" }
+		"dockerfile": "base.Dockerfile"
 	},
 	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 
@@ -22,7 +20,6 @@
 		"rust-lang.rust",
 		"bungcip.better-toml",
 		"vadimcn.vscode-lldb",
-		// (Optional) Displays the current CPU stats, memory/disk consumption, clock freq. etc. of the container host in the VS Code status bar.
 		"mutantdino.resourcemonitor"
 	]
 

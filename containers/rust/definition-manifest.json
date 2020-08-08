@@ -1,0 +1,89 @@
+{
+	"build": {
+		"latest": "true",
+		"rootDistro": "debian",
+		"tags": [
+			"rust:${VERSION}-1",
+			"rust:${VERSION}"
+		]
+	},
+	"dependencies": {
+		"image": "rust:1",
+		"imageLink": "https://hub.docker.com/_/rust",
+		"debian": [
+			"apt-utils", 
+			"dialog", 
+			"ca-certificates",
+			"git",
+			"iproute2",
+			"procps",
+			"curl",
+			"openssh-client",
+			"less",
+			"nano",
+			"gnupg",
+			"jq",
+			"wget",
+			"unzip",
+			"lsb-release",
+			"apt-transport-https",
+			"libc6",
+			"libgcc1",
+			"libgssapi-krb5-2",
+			"libicu[0-9][0-9]",
+			"libssl1.1",
+			"libstdc++6",
+			"zlib1g",
+			"sudo",
+			"zsh",
+			"lldb",
+			"python3-minimal", 
+			"libpython3.7"
+		],
+		"manual": [
+			{
+				"Component": {
+					"Type": "git",
+					"git": {
+						"Name": "Oh My Zsh!",
+						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
+						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
+					}
+				}
+			}, {
+				"Component": {
+					"Type": "cargo",
+					"Cargo": {
+						"Name": "rls",
+						"Version": "1.41.0"
+					}
+				}
+			}, {
+				"Component": {
+					"Type": "cargo",
+					"Cargo": {
+						"Name": "rustfmt",
+						"Version": "1.4.17-stable"
+					}
+				}
+			},  {
+				"Component": {
+					"Type": "cargo",
+					"Cargo": {
+						"Name": "clippy",
+						"Version": "1.44.0"
+					}
+				}
+			}, {
+				"Component": {
+					"Type": "other",
+					"Other": {
+						"Name": "rust-analyzer",
+						"Version": "2.9.6",
+						"DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+					}
+				}
+			}
+		]
+	}
+}

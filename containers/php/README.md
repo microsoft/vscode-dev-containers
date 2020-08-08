@@ -10,6 +10,7 @@
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/php |
 | *Available image variants* | mcr.microsoft.com/vscode/devcontainers/php:7 <br /> mcr.microsoft.com/vscode/devcontainers/php:7.4 <br /> mcr.microsoft.com/vscode/devcontainers/php:7.3 |
+| *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | PHP |
