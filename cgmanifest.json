@@ -1110,6 +1110,83 @@
             "Component": {
                 "Type": "DockerImage",
                 "DockerImage": {
+                    "Name": "rust",
+                    "Digest": "sha256:582bedbe2d3b7ada087ba37cd22ab266f085e58f019201d95972d4413e1e4651",
+                    "Tag": "1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libpython3.7",
+                    "Version": "3.7.3-2+deb10u2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/p/python3.7/libpython3.7_3.7.3-2+deb10u2_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: lldb",
+                    "Version": "1:7.0-47",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/llvm-defaults/lldb_7.0-47_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: python3-minimal",
+                    "Version": "3.7.3-1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/p/python3-defaults/python3-minimal_3.7.3-1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rls",
+                    "Version": "1.41.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rustfmt",
+                    "Version": "1.4.17-stable"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "clippy",
+                    "Version": "1.44.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "rust-analyzer",
+                    "Version": "2.9.6",
+                    "DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
                     "Name": "buildpack-deps",
                     "Digest": "sha256:d0e02fa5f765fa3575d90d5d8a05ffcf8ee176161df0435090e25464361691e2",
                     "Tag": "focal-curl"
