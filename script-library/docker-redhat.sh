@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # Syntax: ./docker-redhat.sh <enable non-root docker socket access flag> <source socket> <target socket> <non-root user>
 
-set -e
-
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 SOURCE_SOCKET=${2:-"/var/run/docker-host.sock"}
 TARGET_SOCKET=${3:-"/var/run/docker.sock"}
 NONROOT_USER=${4:-"vscode"}
 
+set -e
+
 if [ "$(id -u)" -ne 0 ]; then
-    echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
+    echo -e 'Script must be run a root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
 
@@ -67,7 +67,8 @@ fi
 # If enabling non-root access, setup socat
 if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
     yum -y install socat
-    tee /usr/local/share/docker-init.sh << EOF 
+    tee /usr/local/share/docker-init.sh \
+<< EOF 
 #!/usr/bin/env bash
 set -e
 

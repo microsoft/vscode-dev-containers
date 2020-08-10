@@ -6,16 +6,16 @@
 
 # Syntax: ./common-redhat.sh <install zsh flag> <username> <user UID> <user GID>
 
-set -e
-
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)"}
 USER_UID=${3:-1000}
 USER_GID=${4:-1000}
 UPGRADE_PACKAGES=${5:-true}
 
+set -e
+
 if [ "$(id -u)" -ne 0 ]; then
-    echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
+    echo -e 'Script must be run a root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
 
@@ -77,7 +77,7 @@ chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
 # Optionally install and configure zsh
 if [ "$INSTALL_ZSH" = "true" ] && [ ! -d "/root/.oh-my-zsh" ]; then 
     yum install -y zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    curl -fsSLo- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash 2>&1
     echo "export PATH=\$PATH:\$HOME/.local/bin" >> /root/.zshrc
     cp -R /root/.oh-my-zsh /home/$USERNAME
     cp /root/.zshrc /home/$USERNAME

@@ -1,19 +1,26 @@
 # Development Container Scripts
 
-This folder contains a set of scripts that can be referenced by Dockerfiles in development container "definitions" that are found under the [`containers` directory](../containers). When referenced properly, a hash is generated upon release that ensures that only the expected version of this script is executed. See [this Dockerfile](../container-templates/dockerfile/.devcontainer/Dockerfile) for an example.
+This folder contains a set of scripts that can be referenced by Dockerfiles in development container "definitions" that are found under the [`containers` directory](../containers). You are also free to use them in your own dev container configurations.
 
 The `test` sub-folder includes Debian, Alpine, and RedHat based dev containers that can be used to test the scripts.
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definitions to this repository.
-
 ## Scripts
 
-- `common-debian.sh`, `common-alpine.sh`, `common-redhat.sh` - Installs common packages and utilities, creates a non-root user, and optionally upgrades packages, and installs zsh and Oh My Zsh!
-- `docker-debian.sh`, `docker-redhat.sh` - Installs the Docker CLI and wires up a script that can enable non-root access to the Docker socket. See [Docker from Docker](../containers/docker-from-docker) for an example. Generally assumes `common-debian.sh` has been run.
-- `node-debian.sh` - Installs the [Node Version Manager](https://github.com/nvm-sh/nvm) (nvm), the specified version of Node.js (if any) using nvm, ensures the specified non-root user can access everything. See [.NET Core](../containers/dotnet) for an example. Generally assumes `common-debian.sh` has been run.
+Script names end in the Linux distribution "tree" they support.
+
+- `-debian` - Debian or Ubuntu
+- `-redhat` - CentOS, RHEL, Oracle Linux
+- `-alpine` - Alpine Linux
+
+| Script | Arguments | Purpose |
+|--------|---------|-----------|
+| `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` | `[INSTALL ZSH FLAG] [USERNAME] [USER UID] [USER GID] [UPGRADE PACKAGES FLAG]`<br /><br /> Defaults to `true vscode 1000 1000 true`. Set `USERNAME` to `none` to skip setting up a non-root user. | Installs common packages and utilities, creates a non-root user, and optionally upgrades packages, and installs zsh and Oh My Zsh! |
+| `docker-debian.sh`<br />`docker-redhat.sh` | `[ENABLE NON-ROOT ACCESS] [SOURCE SOCKET] [TARGET SOCKET] [USERNAME]`<br /><br /> Defaults to `true /var/run/docker-host.sock /var/run/docker.sock vscode`. Only sets up `USERNAME` if the user exists on the system.| Installs the Docker CLI and wires up a script that can enable non-root access to the Docker socket. See the [docker-from-docker](../containers/docker-from-docker) definition for an example. |
+| `node-debian.sh` | `[NVM INSTALL DIRECTORY] [NODE VERSION TO INSTALL] [USERNAME]`<br /><br />Defaults to `/usr/local/share/nvm lts/* vscode`. Only sets up `USERNAME` if the user exists on the system. | Installs the [Node Version Manager](https://github.com/nvm-sh/nvm) (nvm), the specified version of Node.js (if any) using nvm, ensures the specified non-root user can access everything. See the [dotnetcore](../containers/dotnetcore) definition for an example. |
+| `maven-debian.sh` | `<MAVEN VERSION> [MAVEN INSTALL DIRECTORY] [USERNAME] [DOWNLOAD SHA512]`<br /><br />`MAVEN VERSION` is required. Other arguments default to `/usr/local/share/maven vscode dev-mode`. Only sets up `USERNAME` if the user exists on the system. Download checksum is skipped if set to `dev-mode`. | Installs [Apache Maven](https://github.com/nvm-sh/nvm) and ensures the specified non-root user can access everything. See the [java](../containers/java) definition for an example. |
+| `gradle-debian.sh` | `<GRADLE VERSION> [GRADLE INSTALL DIRECTORY] [USERNAME] [DOWNLOAD SHA256]`<br /><br />`GRADLE VERSION` is required. Other arguments default to `/usr/local/share/gradle vscode no-check`. Only sets up `USERNAME` if the user exists on the system. Download checksum is skipped if set to `no-check`. | Installs the [Gradle](https://github.com/nvm-sh/nvm) and ensures the specified non-root user can access everything. See the [java](../containers/java) definition for an example. |
 
 ## Using a script
-
 
 ### Copying the script to .devcontainer/library-scripts
 
@@ -23,17 +30,22 @@ The easiest way to use a script is to simply copy it into a `.devcontainers/libr
 
 ```Dockerfile
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN apt-get update \
-    && /bin/bash /tmp/library-scripts/common-debian.sh \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+RUN /tmp/library-scripts/common-debian.sh
+```
+
+Generally it's also good to clean up after running a script in the same `RUN` statement to keep the "layer" small.
+
+```Dockerfile
+COPY library-scripts/*.sh /tmp/library-scripts/
+RUN /tmp/library-scripts/common-debian.sh
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 ```
 
 **Alpine**
 
 ```Dockerfile
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN apk update \
-    && /bin/ash /tmp/library-scripts/common-alpine.sh \
+RUN /bin/ash /tmp/library-scripts/common-alpine.sh \
     && rm -rf /tmp/library-scripts
 ```
 
@@ -45,22 +57,27 @@ RUN /bin/bash /tmp/library-scripts/common-redhat.sh \
     && yum clean all && rm -rf /tmp/library-scripts
 ```
 
-The last line is technically optional, but minimizes the size of the layer by removing temporary contents.  
-
-The CI process for this repository will automatically keep scripts in the `.devcontainers/library-scripts` folder up to date for each definition in the `containers` folder.
+Note that the CI process for this repository will automatically keep scripts in the `.devcontainers/library-scripts` folder up to date for each definition in the `containers` folder.
 
 ### Downloading the script with curl instead
 
-If you prefer, you can download the script using `curl` or `wget` and execute it instead. This can convienent to do with your own `Dockerfile`, but is generally avoided for definitions in this repository. To avoid unexpected issues, you should reference a release specific version of the script, rather than using master. For example:
+If you prefer, you can download the script using `curl` or `wget` and execute it instead. This can convenient to do with your own `Dockerfile`, but is generally avoided for definitions in this repository. To avoid unexpected issues, you should reference a release specific version of the script, rather than using master. For example:
+
+```Dockerfile
+RUN curl -sSL -o- "https://github.com/microsoft/vscode-dev-containers/blob/v0.131.0/script-library/common-debian.sh" | bash -
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+```
+
+Or if you're not sure if `curl` is installed:
 
 ```Dockerfile
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get -y install --no-install-recommends curl ca-certificates \
     && curl -sSL -o- "https://github.com/microsoft/vscode-dev-containers/blob/v0.131.0/script-library/common-debian.sh" | bash - \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
-The last line is technically optional, but minimizes the size of the layer by removing temporary contents.  
+As before, the last line is technically optional, but minimizes the size of the layer by removing temporary contents.  
 
 ### Arguments
 
@@ -75,9 +92,8 @@ In this case, you can simply pass in the arguments to the script.
 ARG INSTALL_ZSH="true"
 
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN apt-get update \
-    && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "vscode" "1000" "1000" "true" \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+RUN /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "vscode" "1000" "1000" "true" \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 ```
 
 #### Using arguments when downloading with curl
@@ -92,43 +108,12 @@ ARG INSTALL_ZSH="true"
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get -y install --no-install-recommends curl ca-certificates \
     && curl -sSL -o- "https://github.com/microsoft/vscode-dev-containers/blob/v0.131.0/script-library/common-debian.sh" | bash -s -- "${INSTALL_ZSH}" "vscode" "1000" "1000" "true" \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
-### [Optional] Validating a file's checksum for security when using curl
+## Contributing
 
-If for some reason you cannot copy the script you want to use into the `.devcontainer/library-scripts` folder, you can improve security using a checksum. The CI process will automatically generate a checksum on release if you add two related `ARG`s that end in `_SCRIPT_SOURCE` and `_SCRIPT_SHA`.
-
-For example:
-
-```Dockerfile
-# Options for script
-ARG INSTALL_ZSH="true"
-
-# Script source
-ARG COMMON_SCRIPT_SOURCE="https://github.com/microsoft/vscode-dev-containers/blob/v0.131.0/script-library/common-debian.sh"
-ARG COMMON_SCRIPT_SHA="dev-mode"
-
-# Download script, validate its checksum, and run it with the options above
-RUN apt-get update \
-    && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends curl ca-certificates 2>&1 \
-    && curl -sSL  ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
-    && ([ "${COMMON_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/common-setup.sh" | sha256sum -c -)) \
-    && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "vscode" "1000" "1000" "true" \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/common-setup.sh
-```
-
-When a release is created, the SHA will be automatically added to the tagged source code. e.g. in v1.30.0, these updates are applied:
-
-```Dockerfile
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.130.0/script-library/common-debian.sh"
-ARG COMMON_SCRIPT_SHA="a6bfacc5c9c6c3706adc8788bf70182729767955b7a5509598ac205ce6847e1e"
-```
-
-This locks the version of the script to v1.30.0 and will verify that the script has not been modified before running it.
-
-Check out the [v1.30.0 tag for the Ubuntu definition](https://github.com/microsoft/vscode-dev-containers/blob/v0.130.0/containers/ubuntu/.devcontainer/base.Dockerfile) to see a real world example of the script doing this for you.
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definitions to this repository.
 
 ## License
 
