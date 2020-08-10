@@ -60,17 +60,16 @@ mkdir -p ${NVM_DIR}
 
 # Set up non-root user if applicable
 if [ "${USERNAME}" != "root" ] && id -u $USERNAME > /dev/null 2>&1; then
-    # Add NVM init to non-root user
     tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc >> /root/.zshrc \
 << EOF
+EOF
+    
+    # Add NVM init and add code to update NVM ownership if UID/GID changes
+    tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \
+<<EOF
             export NVM_DIR="${NVM_DIR}"
             [ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
             [ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
-EOF
-    
-    # Add code to update NVM ownership if UID/GID changes
-    tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \
-<<EOF
             if [ "\$(stat -c '%U' \$NVM_DIR)" != "${USERNAME}" ]; then
                 sudo chown -R ${USERNAME}:root \$NVM_DIR
             fi
