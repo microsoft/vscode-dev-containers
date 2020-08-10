@@ -2,15 +2,13 @@
 ARG VARIANT=12
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 
-# This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
-# devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
-ARG USERNAME=node
+# Update args in docker-compose.yaml to set the UID/GID of the "node" user.
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
-        groupmod --gid $USER_GID $USERNAME \
-        && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
-        && chmod -R $USER_UID:$USER_GID /home/$USERNAME \
+        groupmod --gid $USER_GID node \
+        && usermod --uid $USER_UID --gid $USER_GID node \
+        && chmod -R $USER_UID:$USER_GID /home/node \
         && chmod -R $USER_UID:root /usr/local/share/nvm /usr/local/share/npm-global; \
     fi
 
