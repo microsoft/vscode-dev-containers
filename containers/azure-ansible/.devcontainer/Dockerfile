@@ -1,71 +1,54 @@
-# Pick any base image, but if you select node, skip installing node. 😊
-FROM debian:9
+# You can pick any Debian/Ubuntu-based image. 😊
+FROM mcr.microsoft.com/vscode/devcontainers/base:buster
 
-# This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
-# devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
+COPY library-scripts/*.sh /tmp/library-scripts/
+
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
+ARG INSTALL_ZSH="true"
+ARG UPGRADE_PACKAGES="false"
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
-    #
-    # Verify git, required tools installed
-    && apt-get install -y \
-        git \
-        openssh-client \
-        less \
-        iproute2 \
-        curl \
-        procps \
-        unzip \
-        apt-transport-https \
-        ca-certificates \
-        gnupg-agent \
-        software-properties-common \
-        lsb-release 2>&1 \
-    #
-    # [Optional] Install Node.js for Azure Cloud Shell support 
-    # Change the "lts/*" in the two lines below to pick a different version
-    && curl -so- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash 2>&1 \
-    && /bin/bash -c "source $HOME/.nvm/nvm.sh \
-        && nvm install lts/* \
-        && nvm alias default lts/*" 2>&1 \
-    #
-    # [Optional] For local testing instead of cloud shell
-    # Install Docker CE CLI. 
-    && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
-    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
-    && apt-get update \
-    && apt-get install -y docker-ce-cli \
-    #
-    # [Optional] For local testing instead of cloud shell
-    # Install the Azure CLI
-    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
-    && curl -sL https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 2>/dev/null \
-    && apt-get update \
-    && apt-get install -y azure-cli \
-    #
-    # Install Ansible
-    && apt-get install -y libssl-dev libffi-dev python-dev python-pip \
-    && pip install ansible[azure] \
-    #
-    # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
-    && groupadd --gid $USER_GID $USERNAME \
-    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    # [Optional] Add sudo support for the non-root user
-    && apt-get install -y sudo \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
-    && chmod 0440 /etc/sudoers.d/$USERNAME \
-    #
-    # Clean up
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
+    && apt-get install -y libssl-dev libffi-dev python3-dev python3-pip \
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+# Optional installs. Use a separate RUN statement to add your own dependencies.
+ARG INSTALL_AZURE_CLI="true"
+ARG INSTALL_DOCKER="true"
+ARG INSTALL_NODE="true"
+ARG NODE_VERSION="lts/*"
+ENV NVM_DIR=/usr/local/share/nvm
+ENV NVM_SYMLINK_CURRENT=true \
+    PATH=${NVM_DIR}/current/bin:${PATH}
+RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
+    # Install Azure CLI
+    && if [ "${INSTALL_AZURE_CLI}" = "true" ]; then \
+        echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
+        && curl -sL https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 2>/dev/null \
+        && apt-get update \
+        && apt-get install -y azure-cli; \
+    fi \
+    # Install Node.js
+    && if [ "${INSTALL_AZURE_CLI}" = "true" ]; then bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
+    # Install Docker CLI
+    && if [ "${INSTALL_DOCKER}" = "true" ]; then \
+        bash /tmp/library-scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}"; \
+    else \
+        echo '#!/bin/bash\n"$@"' > /usr/local/share/docker-init.sh \
+        && chmod +x /usr/local/share/docker-init.sh; \
+    fi \
+    && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+
+# Install Ansible
+RUN pip3 install ansible[azure]
+
+ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+CMD [ "sleep", "infinity" ]
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
-
