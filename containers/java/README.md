@@ -98,8 +98,6 @@ Given how frequently web applications use Node.js for front end code, this conta
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
-6. If you want to include maven or gradle build tools into your dev container, please uncomment the corresponding steps from the `containers/java-11/.devcontainer/Dockerfile`, and run **Remote-Containers: Rebuild Container** to rebuild the dev container.
-
 ## Testing the definition
 
 This definition includes some test code that will help you verify it is working as expected on your system. Follow these steps:
