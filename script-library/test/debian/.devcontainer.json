@@ -1,16 +1,18 @@
 {
-	"name": "Script Tester",
+	"name": "Script Tester - Debian",
 	"build": {
 		"dockerfile": "../Dockerfile",
 		"context": "../../",
 		"args": {
 			"IMAGE_TO_TEST": "debian:10",
-			"USERNAME": "vscode",
-			"DISTRO": "debian"
+			"DISTRO": "debian",
+			"USERNAME": "tester",
+			"USE_DEFAULTS": "false"
 		}
 	},
+	"remoteUser": "tester",
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
-	"overrideCommand": false,
+	"overrideCommand": true,
 
 	"settings": { 
 		"terminal.integrated.shell.linux": null
@@ -18,7 +20,5 @@
 
 	"extensions": [
 		"ms-azuretools.vscode-docker"
-	],
-
-	"remoteUser": "vscode"
+	]
 }

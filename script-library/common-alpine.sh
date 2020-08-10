@@ -6,15 +6,15 @@
 
 # Syntax: ./common-alpine.sh <install zsh flag> <username> <user UID> <user GID> 
 
-set -e
-
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)"}
 USER_UID=${3:-1000}
 USER_GID=${4:-1000}
 
+set -e
+
 if [ "$(id -u)" -ne 0 ]; then
-    echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
+    echo -e 'Script must be run a root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
 
