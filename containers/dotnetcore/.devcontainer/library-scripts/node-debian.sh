@@ -6,23 +6,19 @@
 
 # Syntax: ./node-debian.sh <directory to install nvm> <node version to install (use "none" to skip)> <non-root user>
 
-set -e
-
 export NVM_DIR=${1:-"/usr/local/share/nvm"}
 export NODE_VERSION=${2:-"lts/*"}
-NONROOT_USER=${3:-"vscode"}
+USERNAME=${3:-"vscode"}
+
+set -e
 
 if [ "$(id -u)" -ne 0 ]; then
-    echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
+    echo -e 'Script must be run a root. Use sudo, su, or add "USER root" to\nyour Dockerfile before running this script.'
     exit 1
 fi
 
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
-
-if [ "${NODE_VERSION}" = "none" ]; then
-    export NODE_VERSION=
-fi
 
 # Install curl, apt-get dependencies if missing
 if ! type curl > /dev/null 2>&1; then
@@ -32,43 +28,76 @@ if ! type curl > /dev/null 2>&1; then
     apt-get -y install --no-install-recommends apt-transport-https ca-certificates curl gnupg2
 fi
 
-# Install NVM
-if [ ! -d "${NVM_DIR}" ]; then
-    mkdir -p ${NVM_DIR}
-    curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 2>&1
-    if [ "${NODE_VERSION}" != "" ]; then
-        /bin/bash -c "source $NVM_DIR/nvm.sh && nvm alias default ${NODE_VERSION}" 2>&1
-    fi
-
-    if id -u $NONROOT_USER > /dev/null 2>&1; then
-        echo -e "export NVM_DIR=\"${NVM_DIR}\"\n\
-        [ -s \"\$NVM_DIR/nvm.sh\" ] && \\. \"\$NVM_DIR/nvm.sh\"\n\
-        [ -s \"\$NVM_DIR/bash_completion\" ] && \\. \"\$NVM_DIR/bash_completion\"" \
-        | tee -a /home/${NONROOT_USER}/.bashrc /home/${NONROOT_USER}/.zshrc >> /root/.zshrc
-
-        echo -e "if [ \"\$(stat -c '%U' \$NVM_DIR)\" != \"${NONROOT_USER}\" ]; then\n\
-            sudo chown -R ${NONROOT_USER}:root \$NVM_DIR\n\
-        fi" | tee -a /root/.bashrc /root/.zshrc /home/${NONROOT_USER}/.bashrc >> /home/${NONROOT_USER}/.zshrc
-
-        chown ${NONROOT_USER}:${NONROOT_USER} /home/${NONROOT_USER}/.bashrc /home/${NONROOT_USER}/.zshrc
-        chown -R ${NONROOT_USER}:root ${NVM_DIR}
-    else
-        echo "Non-root user ${NONROOT_USER} not found. Skipping setup for this user."
-    fi
-else
-    echo "NVM already installed."
-    if [ "${NODE_VERSION}" != "" ]; then
-        nvm install "${NODE_VERSION}"
-    fi
+# Treat a user name of "none" as root
+if [ "${USERNAME}" = "none" ]; then
+    USERNAME=root
 fi
 
+if [ "${NODE_VERSION}" = "none" ]; then
+    export NODE_VERSION=
+fi
 
 # Install yarn
-if ! type yarn > /dev/null 2>&1; then
+if type yarn > /dev/null 2>&1; then
+    echo "Yarn already installed."
+else
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - 2>/dev/null
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
     apt-get update
     apt-get -y install --no-install-recommends yarn
-else
-    echo "Yarn already installed."
 fi
+
+# Install the specified node version if NVM directory already exists, then exit
+if [ -d "${NVM_DIR}" ]; then
+    echo "NVM already installed."
+    if [ "${NODE_VERSION}" != "" ]; then
+       suIf "nvm install ${NODE_VERSION}"
+    fi
+    exit 0
+fi
+
+mkdir -p ${NVM_DIR}
+
+# Set up non-root user if applicable
+if [ "${USERNAME}" != "root" ] && id -u $USERNAME > /dev/null 2>&1; then
+    # Add NVM init to non-root user
+    tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc >> /root/.zshrc \
+<< EOF
+            export NVM_DIR="${NVM_DIR}"
+            [ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
+            [ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
+EOF
+    
+    # Add code to update NVM ownership if UID/GID changes
+    tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \
+<<EOF
+            if [ "\$(stat -c '%U' \$NVM_DIR)" != "${USERNAME}" ]; then
+                sudo chown -R ${USERNAME}:root \$NVM_DIR
+            fi
+EOF
+    
+    # Update ownership
+    chown ${USERNAME} ${NVM_DIR} /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc
+fi
+
+# Function to su if user exists and is not root
+suIf() {
+    if [ "${USERNAME}" != "root" ] && id -u ${USERNAME} > /dev/null 2>&1; then
+        su ${USERNAME} -c "$@"
+    else
+        "$@"
+    fi
+
+}
+
+# Run NVM installer as non-root if needed
+suIf "$(cat \
+<< EOF
+        curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
+        if [ "${NODE_VERSION}" != "" ]; then
+            source $NVM_DIR/nvm.sh
+            nvm alias default ${NODE_VERSION}
+        fi
+EOF
+)" 2>&1
+

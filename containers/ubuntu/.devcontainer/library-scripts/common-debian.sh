@@ -4,28 +4,18 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./common-debian.sh <install zsh flag> <username> <user UID> <user GID> <upgrade packages flag>
-
-apt-get-update-if-needed()
-{
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        echo "Running apt-get update..."
-        apt-get update
-    else
-        echo "Skipping apt-get update."
-    fi
-}
-
-set -e
+# Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag]
 
 INSTALL_ZSH=${1:-"true"}
-USERNAME=${2:-"$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)"}
+USERNAME=${2:-"vscode"}
 USER_UID=${3:-1000}
 USER_GID=${4:-1000}
 UPGRADE_PACKAGES=${5:-"true"}
 
+set -e
+
 if [ "$(id -u)" -ne 0 ]; then
-    echo 'Script must be run a root. Use sudo or set "USER root" in your Dockerfile before running the script.'
+    echo -e 'Script must be run a root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
 
@@ -46,6 +36,17 @@ fi
 
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
+
+# Function to call apt-get if needed
+apt-get-update-if-needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
 
 # Run install apt-utils to avoid debconf warning then verify presence of other common developer tools and dependencies
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
@@ -132,10 +133,10 @@ else
 fi
 
 # Add add sudo support for non-root user
-if [ "${NON_ROOT_USER}" != "${USERNAME}" ]; then
+if [ "${EXISTING_NON_ROOT_USER}" != "${USERNAME}" ]; then
     echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME
     chmod 0440 /etc/sudoers.d/$USERNAME
-    NON_ROOT_USER="${USERNAME}"
+    EXISTING_NON_ROOT_USER="${USERNAME}"
 fi
 
 # Ensure ~/.local/bin is in the PATH for root and non-root users for bash. (zsh is later)
@@ -149,12 +150,14 @@ fi
 if [ "${INSTALL_ZSH}" = "true" ] && [ ! -d "/root/.oh-my-zsh" ] && [ "${ZSH_ALREADY_INSTALLED}" != "true" ]; then
     apt-get-update-if-needed
     apt-get install -y zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    curl -fsSLo- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash 2>&1
     echo "export PATH=\$PATH:\$HOME/.local/bin" >> /root/.zshrc
-    cp -R /root/.oh-my-zsh /home/$USERNAME
-    cp /root/.zshrc /home/$USERNAME
-    sed -i -e "s/\/root\/.oh-my-zsh/\/home\/$USERNAME\/.oh-my-zsh/g" /home/$USERNAME/.zshrc
-    chown -R $USER_UID:$USER_GID /home/$USERNAME/.oh-my-zsh /home/$USERNAME/.zshrc
+    if [ "${USERNAME}" != "root" ]; then
+        cp -fR /root/.oh-my-zsh /home/$USERNAME
+        cp -f /root/.zshrc /home/$USERNAME
+        sed -i -e "s/\/root\/.oh-my-zsh/\/home\/$USERNAME\/.oh-my-zsh/g" /home/$USERNAME/.zshrc
+        chown -R $USER_UID:$USER_GID /home/$USERNAME/.oh-my-zsh /home/$USERNAME/.zshrc
+    fi
     ZSH_ALREADY_INSTALLED="true"
 fi
 
@@ -163,6 +166,6 @@ mkdir -p "$(dirname "${MARKER_FILE}")"
 echo -e "\
     PACKAGES_ALREADY_INSTALLED=${PACKAGES_ALREADY_INSTALLED}\n\
     LOCALE_ALREADY_SET=${LOCALE_ALREADY_SET}\n\
-    NON_ROOT_USER=${NON_ROOT_USER}\n\
+    EXISTING_NON_ROOT_USER=${EXISTING_NON_ROOT_USER}\n\
     DOT_LOCAL_ALREADY_ADDED=${DOT_LOCAL_ALREADY_ADDED}\n\
     ZSH_ALREADY_INSTALLED=${ZSH_ALREADY_INSTALLED}" > "${MARKER_FILE}"
