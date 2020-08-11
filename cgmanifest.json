@@ -1408,8 +1408,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: sudo",
-                    "Version": "1.8.31-1ubuntu1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/s/sudo/sudo_1.8.31-1ubuntu1_amd64.deb"
+                    "Version": "1.8.31-1ubuntu1.1",
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/s/sudo/sudo_1.8.31-1ubuntu1.1_amd64.deb"
                 }
             }
         },
