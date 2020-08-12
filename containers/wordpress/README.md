@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | [Tung Du](https://github.com/dinhtungdu), [10up](https://github.com/10up) |
+| *Contributors* | [10up](https://github.com/10up), [Tung Du](https://github.com/dinhtungdu), [Jeffrey Paul](https://github.com/jeffpaul) |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | No |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -37,6 +37,8 @@ Just follow these steps:
 ## Notes
 
 - This definition works for both plugin and theme, without any additional configuration.
+
+- WP CLI is installed and registered as `wp` command.
 
 - There is a `setup.log` file in the root of the WordPress folder inside the container (not theme/plugin root folder) to help you debug any errors that may occur.
 
