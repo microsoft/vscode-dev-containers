@@ -96,3 +96,5 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 Copyright (c) Microsoft Corporation. All rights reserved. <br />
 Licensed under the MIT License. See [LICENSE](LICENSE).
+
+For images generated from this repository, see [LICENSE](https://github.com/microsoft/containerregistry/blob/master/legal/Container-Images-Legal-Notice.md) and [NOTICE.txt](NOTICE.txt).
