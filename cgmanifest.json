@@ -1719,7 +1719,15 @@
                     "Version": "3.9.7"
                 }
             }
-        }
+        }, {
+			"Component": {
+			   "Type": "go",
+			   "Go": {
+				 "Name": "golang.org/x/tools/gopls",
+				 "Version": "latest"
+			   }
+			 }
+		}
     ],
     "Version": 1
 }
