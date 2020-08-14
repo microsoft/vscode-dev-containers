@@ -8,6 +8,9 @@
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/go |
+| *Available image variants* | 1, 1.15, 1.14, 1.13 |
+| *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Go |
@@ -18,6 +21,34 @@ While the definition itself works unmodified, you can select the version of Go t
 
 ```json
 "args": { "VARIANT": "1.14" }
+```
+
+You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
+
+- `mcr.microsoft.com/vscode/devcontainers/go` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/go:1`
+- `mcr.microsoft.com/vscode/devcontainers/go:1.15`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:1.14`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:1.13`
+
+Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+
+- `mcr.microsoft.com/vscode/devcontainers/go:0-1`
+- `mcr.microsoft.com/vscode/devcontainers/go:0.135-1`
+- `mcr.microsoft.com/vscode/devcontainers/go:0.135.0-1`
+
+Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+
+### Installing Node.js
+
+Given how frequently Ruby-based web applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+
+```json
+"args": {
+    "VARIANT": "2",
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10"
+}
 ```
 
 ### Adding the definition to your project
