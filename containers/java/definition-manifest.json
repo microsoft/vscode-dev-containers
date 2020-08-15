@@ -1,5 +1,5 @@
 {
-	"variants": ["8", "11", "14"],
+	"variants": ["11", "14"],
 	"build": {
 		"latest": "true",
 		"rootDistro": "debian",
@@ -9,7 +9,7 @@
 	},
 	"dependencies": {
 		"image": "openjdk:${VARIANT}-jdk-buster",
-		"imageLink": "https://hub.docker.com/_/ruby",
+		"imageLink": "https://hub.docker.com/_/java",
 		"debian": [
 			"apt-utils", 
 			"dialog", 
