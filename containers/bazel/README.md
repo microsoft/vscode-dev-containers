@@ -14,7 +14,7 @@
 
 ## Using this definition with an existing folder
 
-While this definition works unmodified, you can set the Bazel verison by updating the `BAZEL_VERSION` argument in `devcontainer.json`.
+While this definition works unmodified, you can set the Bazel version by updating the `BAZEL_VERSION` argument in `devcontainer.json`.
 
 ```json
 "args": {
