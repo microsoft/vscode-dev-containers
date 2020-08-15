@@ -905,7 +905,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:b04db6093bb158affaa89ac5af1281e748092433442e8ae0096ba8fbe37f00cc",
+                    "Digest": "sha256:2c1045587e4452d49544c6dce92efe21c3b4b33864cfb56fdee66a2c8585c769",
                     "Tag": "3"
                 }
             }
@@ -915,7 +915,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:b04db6093bb158affaa89ac5af1281e748092433442e8ae0096ba8fbe37f00cc",
+                    "Digest": "sha256:2c1045587e4452d49544c6dce92efe21c3b4b33864cfb56fdee66a2c8585c769",
                     "Tag": "3.8"
                 }
             }
@@ -925,7 +925,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:45a9d9059c9a83066f66d0c7ef7f344bd55f2a41c7a32ca73b2b7bad363ed2b9",
+                    "Digest": "sha256:6ca82c8d96a24523a71f40bb38f5682b18ca74a7a19586927c79e714b1b906c4",
                     "Tag": "3.7"
                 }
             }
@@ -935,7 +935,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:a396ca2b3933dd497ab82f32982a746bfa20952948bd9681eb19c8d26f80faf0",
+                    "Digest": "sha256:4ec64894c98dd0de6804e046359be6ae0820699d89a98ed4b2f62ccbea37f044",
                     "Tag": "3.6"
                 }
             }
@@ -1458,7 +1458,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:94a00394bc5a8ef503fb59db0a7d0ae9e1119866e8aee8ba40cd864cea69ea1a",
+                    "Digest": "sha256:8b6401f8d15c900736a54a870994277b3de19ebd28cc483c497bf00d608e2a90",
                     "Tag": "14"
                 }
             }
@@ -1668,7 +1668,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.6.0"
+                    "Version": "7.7.0"
                 }
             }
         },
@@ -1677,7 +1677,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:94a00394bc5a8ef503fb59db0a7d0ae9e1119866e8aee8ba40cd864cea69ea1a",
+                    "Digest": "sha256:8b6401f8d15c900736a54a870994277b3de19ebd28cc483c497bf00d608e2a90",
                     "Tag": "14"
                 }
             }
@@ -1719,15 +1719,7 @@
                     "Version": "3.9.7"
                 }
             }
-        }, {
-			"Component": {
-			   "Type": "go",
-			   "Go": {
-				 "Name": "golang.org/x/tools/gopls",
-				 "Version": "latest"
-			   }
-			 }
-		}
+        }
     ],
     "Version": 1
 }
