@@ -25,6 +25,7 @@ While this definition should work unmodified, you can select the version of Java
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
+- `mcr.microsoft.com/vscode/devcontainers/java` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/java:11`
 - `mcr.microsoft.com/vscode/devcontainers/java:14`
 
