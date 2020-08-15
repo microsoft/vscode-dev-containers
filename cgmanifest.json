@@ -814,6 +814,16 @@
             "Component": {
                 "Type": "git",
                 "git": {
+                    "Name": "Github CLI",
+                    "repositoryUrl": "https://github.com/cli/cli",
+                    "commitHash": "58bd549de5db008e9dd92cb6673b9ed85449d778"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
                     "Name": "Nvs",
                     "repositoryUrl": "https://github.com/jasongin/nvs",
                     "commitHash": "b6a607d9c36840ea8051586695d57a644402273c"
@@ -844,6 +854,263 @@
             "Component": {
                 "Type": "DockerImage",
                 "DockerImage": {
+                    "Name": "golang",
+                    "Digest": "sha256:d747644bd96d5d060ddf6a32db4c23fbaac7c36c3aab1d16d14fd8068a7843bc",
+                    "Tag": "1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "golang",
+                    "Digest": "sha256:d747644bd96d5d060ddf6a32db4c23fbaac7c36c3aab1d16d14fd8068a7843bc",
+                    "Tag": "1.15"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "golang",
+                    "Digest": "sha256:1364cfbbcd1a5f38bdf8c814f02ebbd2170c93933415480480104834341f283e",
+                    "Tag": "1.14"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: yarn",
+                    "Version": "1.22.4-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "golang.org/x/tools/gopls",
+                "Go": {
+                    "Name": "gopls",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "honnef.co/go/tools",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/cmd/gorename",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/cmd/goimports",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/cmd/guru",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/lint/golint",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mdempsky/gocode",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/cweill/gotests",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/haya14busa/goplay/cmd/goplay",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/sqs/goreturns",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/josharian/impl",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/davidrjenni/reftools/cmd/fillstruct",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/ramya-rao-a/go-outline",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/acroca/go-symbols",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/godoctor/godoctor",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/rogpeppe/godef",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/zmb3/gogetdoc",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/fatih/gomodifytags",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mgechev/revive",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/go-delve/delve/cmd/dlv",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/stamblerre/gocode",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/golangci/golangci-lint",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "Nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
+                    "commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
                     "Name": "php",
                     "Digest": "sha256:cafdf0646de416f5c0efa7020749c29b313f03481cafecb20cbfbb09602cdfb5",
                     "Tag": "7"
@@ -867,26 +1134,6 @@
                     "Name": "php",
                     "Digest": "sha256:f60c54c62c2115e16bb486002cb10a9c3598cfea9e7043d47ffaa9af3ea3c522",
                     "Tag": "7.3"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: yarn",
-                    "Version": "1.22.4-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "Nvm",
-                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
-                    "commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
                 }
             }
         },
