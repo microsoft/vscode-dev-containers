@@ -50,6 +50,7 @@ RUN apt-get update -yq\
         lsb-release \
         software-properties-common \
         unzip \
+        less \
     #
     # Be sure git is up to date due to DSA 4659-1, DSA 4657-1
     && apt-get upgrade -yq git \
