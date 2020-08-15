@@ -814,6 +814,16 @@
             "Component": {
                 "Type": "git",
                 "git": {
+                    "Name": "Github CLI",
+                    "repositoryUrl": "https://github.com/cli/cli",
+                    "commitHash": "58bd549de5db008e9dd92cb6673b9ed85449d778"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
                     "Name": "Nvs",
                     "repositoryUrl": "https://github.com/jasongin/nvs",
                     "commitHash": "b6a607d9c36840ea8051586695d57a644402273c"
@@ -837,6 +847,263 @@
                     "Name": "Helm",
                     "Version": "3.2.1",
                     "DownloadUrl": "https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "golang",
+                    "Digest": "sha256:d747644bd96d5d060ddf6a32db4c23fbaac7c36c3aab1d16d14fd8068a7843bc",
+                    "Tag": "1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "golang",
+                    "Digest": "sha256:d747644bd96d5d060ddf6a32db4c23fbaac7c36c3aab1d16d14fd8068a7843bc",
+                    "Tag": "1.15"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "DockerImage",
+                "DockerImage": {
+                    "Name": "golang",
+                    "Digest": "sha256:1364cfbbcd1a5f38bdf8c814f02ebbd2170c93933415480480104834341f283e",
+                    "Tag": "1.14"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: yarn",
+                    "Version": "1.22.4-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "golang.org/x/tools/gopls",
+                "Go": {
+                    "Name": "gopls",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "honnef.co/go/tools",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/cmd/gorename",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/cmd/goimports",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/cmd/guru",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/lint/golint",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mdempsky/gocode",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/cweill/gotests",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/haya14busa/goplay/cmd/goplay",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/sqs/goreturns",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/josharian/impl",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/davidrjenni/reftools/cmd/fillstruct",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/ramya-rao-a/go-outline",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/acroca/go-symbols",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/godoctor/godoctor",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/rogpeppe/godef",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/zmb3/gogetdoc",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/fatih/gomodifytags",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mgechev/revive",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/go-delve/delve/cmd/dlv",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/stamblerre/gocode",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/golangci/golangci-lint",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "Nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
+                    "commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
                 }
             }
         },
@@ -874,26 +1141,6 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: yarn",
-                    "Version": "1.22.4-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "Nvm",
-                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
-                    "commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
                     "Name": "Xdebug",
                     "Version": "2.9.6",
                     "DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
@@ -905,7 +1152,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:b04db6093bb158affaa89ac5af1281e748092433442e8ae0096ba8fbe37f00cc",
+                    "Digest": "sha256:2c1045587e4452d49544c6dce92efe21c3b4b33864cfb56fdee66a2c8585c769",
                     "Tag": "3"
                 }
             }
@@ -915,7 +1162,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:b04db6093bb158affaa89ac5af1281e748092433442e8ae0096ba8fbe37f00cc",
+                    "Digest": "sha256:2c1045587e4452d49544c6dce92efe21c3b4b33864cfb56fdee66a2c8585c769",
                     "Tag": "3.8"
                 }
             }
@@ -925,7 +1172,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:45a9d9059c9a83066f66d0c7ef7f344bd55f2a41c7a32ca73b2b7bad363ed2b9",
+                    "Digest": "sha256:6ca82c8d96a24523a71f40bb38f5682b18ca74a7a19586927c79e714b1b906c4",
                     "Tag": "3.7"
                 }
             }
@@ -935,7 +1182,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "python",
-                    "Digest": "sha256:a396ca2b3933dd497ab82f32982a746bfa20952948bd9681eb19c8d26f80faf0",
+                    "Digest": "sha256:4ec64894c98dd0de6804e046359be6ae0820699d89a98ed4b2f62ccbea37f044",
                     "Tag": "3.6"
                 }
             }
@@ -1408,8 +1655,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: sudo",
-                    "Version": "1.8.31-1ubuntu1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/s/sudo/sudo_1.8.31-1ubuntu1_amd64.deb"
+                    "Version": "1.8.31-1ubuntu1.1",
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/s/sudo/sudo_1.8.31-1ubuntu1.1_amd64.deb"
                 }
             }
         },
@@ -1458,7 +1705,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:94a00394bc5a8ef503fb59db0a7d0ae9e1119866e8aee8ba40cd864cea69ea1a",
+                    "Digest": "sha256:8b6401f8d15c900736a54a870994277b3de19ebd28cc483c497bf00d608e2a90",
                     "Tag": "14"
                 }
             }
@@ -1668,7 +1915,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.6.0"
+                    "Version": "7.7.0"
                 }
             }
         },
@@ -1677,7 +1924,7 @@
                 "Type": "DockerImage",
                 "DockerImage": {
                     "Name": "node",
-                    "Digest": "sha256:94a00394bc5a8ef503fb59db0a7d0ae9e1119866e8aee8ba40cd864cea69ea1a",
+                    "Digest": "sha256:8b6401f8d15c900736a54a870994277b3de19ebd28cc483c497bf00d608e2a90",
                     "Tag": "14"
                 }
             }
