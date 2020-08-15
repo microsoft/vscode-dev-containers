@@ -3,7 +3,7 @@
 	"build": {
 		"dockerfile": "base.Dockerfile",
 		"args": {
-			// Update the VARIANT arg to pick a version of Go: 1, 1.15, 1.14, 1.13
+			// Update the VARIANT arg to pick a version of Go: 1, 1.15, 1.14
 			"VARIANT": "1",
 			// Options
 			"INSTALL_NODE": "false",

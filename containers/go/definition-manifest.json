@@ -1,5 +1,5 @@
 {
-	"variants": ["1", "1.15", "1.14", "1.13"],
+	"variants": ["1", "1.15", "1.14"],
 	"build": {
 		"latest": "true",
 		"rootDistro": "debian",

@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/go |
-| *Available image variants* | 1, 1.15, 1.14, 1.13 |
+| *Available image variants* | 1, 1.15, 1.14 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -28,8 +28,7 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/go` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/go:1`
 - `mcr.microsoft.com/vscode/devcontainers/go:1.15`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:1.14`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:1.13`
+- `mcr.microsoft.com/vscode/devcontainers/go:1.14`
 
 Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
 
@@ -45,7 +44,7 @@ Given how frequently Ruby-based web applications use Node.js for front end code,
 
 ```json
 "args": {
-    "VARIANT": "2",
+    "VARIANT": "1",
     "INSTALL_NODE": "true",
     "NODE_VERSION": "10"
 }
