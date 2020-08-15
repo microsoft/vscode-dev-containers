@@ -66,7 +66,7 @@ echo "Downloading Maven..."
 suIf "$(cat \
 << EOF
     curl -fsSL -o /tmp/maven.tar.gz https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
-    ([ "${MAVEN_DOWNLOAD_SHA}" = "dev-mode" ] || echo "${MAVEN_DOWNLOAD_SHA} */tmp/maven.tar.gz" | sha512sum -c - )
+    ([ "${MAVEN_DOWNLOAD_SHA}" = "no-check" ] || echo "${MAVEN_DOWNLOAD_SHA} */tmp/maven.tar.gz" | sha512sum -c - )
     tar -xzf /tmp/maven.tar.gz -C ${MAVEN_HOME} --strip-components=1
     rm -f /tmp/maven.tar.gz
 EOF
