@@ -16,7 +16,7 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, apt-transport-https, lsb-release, or gpg if missing
-if ! dpkg -s apt-transport-https curl ca-certificates lsb-release > /dev/null 2>&1; || ! type gpg > /dev/null 2>&1; then
+if ! dpkg -s apt-transport-https curl ca-certificates lsb-release > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
