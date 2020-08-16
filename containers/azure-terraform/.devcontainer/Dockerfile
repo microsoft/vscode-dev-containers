@@ -35,7 +35,7 @@ RUN if [ "${INSTALL_AZURE_CLI}" = "true" ]; then bash /tmp/library-scripts/azcli
 ARG TERRAFORM_VERSION=0.12.16
 ARG TFLINT_VERSION=0.8.2
 RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLINT_VERSION}" \
-    && rm /tmp/library-scripts
+    && rm -rf /tmp/library-scripts
 
 
 ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
