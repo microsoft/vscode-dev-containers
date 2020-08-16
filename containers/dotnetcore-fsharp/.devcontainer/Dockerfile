@@ -23,7 +23,7 @@ ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/node-debian.sh /tmp/library-scripts/
 RUN if [ "$INSTALL_NODE" = "true" ]; then /bin/bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
-    && rm -rf rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+    && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # [Optional] Install the Azure CLI - update the INSTALL_AZURE_CLI arg in devcontainer.json to enable.
 ARG INSTALL_AZURE_CLI="false"
