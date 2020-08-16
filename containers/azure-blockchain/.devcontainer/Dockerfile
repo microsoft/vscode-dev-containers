@@ -10,22 +10,18 @@ ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \ 
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
+RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     # Install Node
-    &&  bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "12" "${USERNAME}" \
+    && bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "10" "${USERNAME}" \
     # Install Azure CLI
-    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
-    && curl -sL https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 2>/dev/null \
-    && apt-get update \
-    && apt-get install -y azure-cli \
+    && bash /tmp/library-scripts/azcli-debian.sh \
     # Clean up
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install Truffle Suite and Ganache CLI
-RUN sudo -u ${USERNAME} bash -c "source ${NVM_DIR}/nvm.sh \
+RUN su ${USERNAME} -c "source ${NVM_DIR}/nvm.sh \
     && npm i --unsafe-perm -g truffle \
-    && npm i -g ganache-cli"
+    && npm i -g ganache-cli" 2>&1
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
