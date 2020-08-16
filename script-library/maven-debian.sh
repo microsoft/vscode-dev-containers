@@ -33,13 +33,13 @@ if [ "${USERNAME}" = "none" ] && ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-# Install curl, apt-get dependencies if missing
-if ! type curl > /dev/null 2>&1; then
+# Install curl, tar if missing
+if ! dpkg -s curl ca-certificates tar > /dev/null 2>&1; then
     export DEBIAN_FRONTEND=noninteractive
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends ca-certificates curl
+    apt-get -y install --no-install-recommends curl ca-certificates tar
 fi
 
 # Function to su if user exists and is not root

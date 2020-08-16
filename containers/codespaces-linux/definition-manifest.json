@@ -55,6 +55,16 @@
 				"Component": {
 					"Type": "git",
 					"git": {
+						"Name": "Github CLI",
+						"repositoryUrl": "https://github.com/cli/cli",
+						"commitHash": "58bd549de5db008e9dd92cb6673b9ed85449d778"
+					}
+				}
+			},
+			{
+				"Component": {
+					"Type": "git",
+					"git": {
 						"Name": "Nvs",
 						"repositoryUrl": "https://github.com/jasongin/nvs",
 						"commitHash": "b6a607d9c36840ea8051586695d57a644402273c"
