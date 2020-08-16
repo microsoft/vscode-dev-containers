@@ -50,9 +50,9 @@
 				}
 			}, {
 				"Component": {
-				   "Type": "golang.org/x/tools/gopls",
+				   "Type": "go",
 				   "Go": {
-					 "Name": "gopls",
+					 "Name": "golang.org/x/tools/gopls",
 					 "Version": "latest"
 				   }
 				 }
