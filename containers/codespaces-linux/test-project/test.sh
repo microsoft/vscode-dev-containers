@@ -1,7 +1,6 @@
 #!/bin/bash -i
 cd $(dirname "$0")
 
-# -- Utility functions --
 if [ -z $HOME ]; then
     HOME="/root"
 fi
@@ -12,7 +11,7 @@ check() {
     LABEL=$1
     shift
     echo -e "\n🧪  Testing $LABEL: $@"
-    if $@; then 
+    if "$@"; then 
         echo "🏆  Passed!"
     else
         echo "💥  $LABEL check failed."
@@ -32,32 +31,55 @@ checkMultiple() {
     check "$LABEL" [ $PASSED -ge $MINIMUMPASSED ]
 }
 
+checkOSPackages() {
+    LABEL="$1"
+    shift
+    check "$LABEL" dpkg-query --show -f='${Package}: ${Version}\n' "$@"
+}
+
 checkExtension() {
     checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]"
 }
 
-# -- Actual tests - add more here --
-checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
-check "non-root-user" "id codespace"
-check "/home/codespace" [ -d "/home/codespace" ]
-check "sudo" sudo -u codespace echo "sudo works."
-check "git" git --version
-check "command-line-tools" which top ip lsb_release
+# Actual tests
+USERNAME=codespace
+if ! ./test-common.sh ${USERNAME}; then
+    FAILED+=("common-tests")
+fi
 
 # Check platforms
 check "oryx" oryx platforms
-check "python" python --version
 check "dotnet" dotnet --info
+check "python" python --version
+check "pip" pip3 --version
+check "java" java --version
+
+# Node
 check "node" node --version
 check "nvm" nvm --version
 check "nvs" nvs --version
 check "yarn" yarn --version
 check "npm" npm --version
+
+# PHP
 check "php" php --version
-check "rustup" rustup --version
+
+# Rust
 check "cargo" cargo --version
-check "java" java --version
-check "python" python --version
+check "rustup" rustup --version
+check "rls" rls --version
+check "rustfmt" rustfmt --version
+check "clippy" cargo-clippy --version
+check "lldb" which lldb
+
+# Check utilities
+checkOSPackages "additional-os-packages" vim xtail software-properties-common
+check "az" az --version
+check "gh" gh --version
+check "git-lfs" git-lfs --version
+check "docker" docker --version
+check "kubectl" kubectl version --client
+check "helm" helm version
 
 # Check expected shells
 check "bash" bash --version
