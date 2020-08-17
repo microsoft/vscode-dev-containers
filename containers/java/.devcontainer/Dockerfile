@@ -20,7 +20,7 @@ ARG INSTALL_GRADLE="false"
 ARG GRADLE_VERSION=5.4.1
 ARG GRADLE_DOWNLOAD_SHA="no-check"
 ENV GRADLE_HOME=/usr/local/share/gradle
-COPY library-scripts/maven-gradle.sh /tmp/library-scripts/
+COPY library-scripts/gradle-debian.sh /tmp/library-scripts/
 RUN if [ "${INSTALL_GRADLE}" = "true" ]; then /bin/bash /tmp/library-scripts/gradle-debian.sh ${GRADLE_VERSION} ${GRADLE_HOME} ${USERNAME} ${GRADLE_DOWNLOAD_SHA}; fi \
     && rm -f /tmp/library-scripts
 
