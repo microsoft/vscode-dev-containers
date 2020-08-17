@@ -140,21 +140,24 @@ if [ "${USERNAME}" != "root" ] && [ "${EXISTING_NON_ROOT_USER}" != "${USERNAME}"
 fi
 
 # .bashrc/.zshrc snippet
-RC_SNIPPET=$(cat << EOF
-    export USER=\$(whoami)
+RC_SNIPPET="$(cat << EOF
+export USER=\$(whoami)
 
-    export PATH=\$PATH:\$HOME/.local/bin
+export PATH=\$PATH:\$HOME/.local/bin
 
-    if [[ \$(which code-insiders 2>&1) && ! \$(which code 2>&1) ]]; then 
-        alias code=code-insiders
-    fi
+if [[ \$(which code-insiders 2>&1) && ! \$(which code 2>&1) ]]; then 
+    alias code=code-insiders
+fi
 EOF
-)
+)"
 
 # Ensure ~/.local/bin is in the PATH for root and non-root users for bash. (zsh is later)
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
-    echo "${RC_SNIPPET}" | tee -a /root/.bashrc /etc/skel/.bashrc >> /home/$USERNAME/.bashrc \
-    chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
+    echo "${RC_SNIPPET}" | tee -a /root/.bashrc  >> /etc/skel/.bashrc 
+    if [ "${USERNAME}" != "root" ]; then
+        echo "${RC_SNIPPET}" >> /home/$USERNAME/.bashrc
+        chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
+    fi
     RC_SNIPPET_ALREADY_ADDED="true"
 fi
 

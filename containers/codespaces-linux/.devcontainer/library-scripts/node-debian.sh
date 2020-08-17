@@ -17,8 +17,8 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Treat a user name of "none" as root
-if [ "${USERNAME}" = "none" ]; then
+# Treat a user name of "none" or non-existant user as root
+if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
@@ -51,46 +51,39 @@ fi
 if [ -d "${NVM_DIR}" ]; then
     echo "NVM already installed."
     if [ "${NODE_VERSION}" != "" ]; then
-       suIf "nvm install ${NODE_VERSION}"
+       su ${USERNAME} -c "nvm install ${NODE_VERSION}"
     fi
     exit 0
 fi
 
 mkdir -p ${NVM_DIR}
 
-# Set up non-root user if applicable
-if [ "${USERNAME}" != "root" ] && id -u $USERNAME > /dev/null 2>&1; then   
-    # Add NVM init and add code to update NVM ownership if UID/GID changes
-    tee -a /root/.bashrc /root/.zshrc /etc/skel/.bashrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \
-<<EOF
-        export NVM_DIR="${NVM_DIR}"
-        [ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
-        [ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
-        if [ "\$(stat -c '%U' \$NVM_DIR)" != "${USERNAME}" ]; then
-            sudo chown -R ${USERNAME}:root \$NVM_DIR
-        fi
+NVM_INIT=$(cat <<EOF
+export NVM_DIR="${NVM_DIR}"
+[ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
+[ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
+if [ "\$(stat -c '%U' \$NVM_DIR)" != "${USERNAME}" ]; then
+    sudo chown -R ${USERNAME}:root \$NVM_DIR
+fi
 EOF
-    # Update ownership
+)
+
+echo "${NVM_INIT}" | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
+# Set up non-root user if applicable
+if [ "${USERNAME}" != "root" ]; then   
+    # Add NVM init and add code to update NVM ownership if UID/GID changes
+    echo "${NVM_INIT}" | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc
     chown ${USERNAME} ${NVM_DIR} /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc
 fi
 
-# Function to su if user exists and is not root
-suIf() {
-    if [ "${USERNAME}" != "root" ] && id -u ${USERNAME} > /dev/null 2>&1; then
-        su ${USERNAME} -c "$@"
-    else
-        "$@"
-    fi
-}
-
 # Run NVM installer as non-root if needed
-suIf "$(cat \
-<< EOF
-        curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
-        if [ "${NODE_VERSION}" != "" ]; then
-            source $NVM_DIR/nvm.sh
-            nvm alias default ${NODE_VERSION}
-        fi
+su ${USERNAME} -c "$(cat << EOF
+    set -e
+    curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
+    if [ "${NODE_VERSION}" != "" ]; then
+        source $NVM_DIR/nvm.sh
+        nvm alias default ${NODE_VERSION}
+    fi
 EOF
 )" 2>&1
 

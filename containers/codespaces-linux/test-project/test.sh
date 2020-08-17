@@ -49,7 +49,15 @@ check "oryx" oryx platforms
 check "python" python --version
 check "dotnet" dotnet --info
 check "node" node --version
+check "nvm" nvm --version
+check "nvs" nvs --version
+check "yarn" yarn --version
+check "npm" npm --version
 check "php" php --version
+check "rustup" rustup --version
+check "cargo" cargo --version
+check "java" java --version
+check "python" python --version
 
 # Check expected shells
 check "bash" bash --version

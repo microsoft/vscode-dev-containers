@@ -139,11 +139,26 @@ if [ "${USERNAME}" != "root" ] && [ "${EXISTING_NON_ROOT_USER}" != "${USERNAME}"
     EXISTING_NON_ROOT_USER="${USERNAME}"
 fi
 
+# .bashrc/.zshrc snippet
+RC_SNIPPET="$(cat << EOF
+export USER=\$(whoami)
+
+export PATH=\$PATH:\$HOME/.local/bin
+
+if [[ \$(which code-insiders 2>&1) && ! \$(which code 2>&1) ]]; then 
+    alias code=code-insiders
+fi
+EOF
+)"
+
 # Ensure ~/.local/bin is in the PATH for root and non-root users for bash. (zsh is later)
-if [ "${DOT_LOCAL_ALREADY_ADDED}" != "true" ]; then
-    echo -e "export PATH=\$PATH:\$HOME/.local/bin\n\nexport USER=\$(id -un)" | tee -a /root/.bashrc /etc/skel/.bashrc >> /home/$USERNAME/.bashrc 
-    chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
-    DOT_LOCAL_ALREADY_ADDED="true"
+if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
+    echo "${RC_SNIPPET}" | tee -a /root/.bashrc  >> /etc/skel/.bashrc 
+    if [ "${USERNAME}" != "root" ]; then
+        echo "${RC_SNIPPET}" >> /home/$USERNAME/.bashrc
+        chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
+    fi
+    RC_SNIPPET_ALREADY_ADDED="true"
 fi
 
 # Optionally install and configure zsh
@@ -151,13 +166,12 @@ if [ "${INSTALL_ZSH}" = "true" ] && [ ! -d "/root/.oh-my-zsh" ] && [ "${ZSH_ALRE
     apt-get-update-if-needed
     apt-get install -y zsh
     curl -fsSLo- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash 2>&1
-    echo -e "export PATH=\$PATH:\$HOME/.local/bin\n\nexport USER=\$(id -un)\nDEFAULT_USER=\$USER\nprompt_context(){}" >> /root/.zshrc
-    sed -i -e "s/\/root\/.oh-my-zsh/\/home\/\$(id -un)\/.oh-my-zsh/g" /root/.zshrc
+    echo -e "${RC_SNIPPET}\nDEFAULT_USER=\$USER\nprompt_context(){}" >> /root/.zshrc
     cp -fR /root/.oh-my-zsh /etc/skel
     cp -f /root/.zshrc /etc/skel
+    sed -i -e "s/\/root\/.oh-my-zsh/\/home\/\$(whoami)\/.oh-my-zsh/g" /etc/skel/.zshrc
     if [ "${USERNAME}" != "root" ]; then
-        cp -fR /root/.oh-my-zsh /home/$USERNAME
-        cp -f /root/.zshrc /home/$USERNAME
+        cp -fR /etc/skel/.oh-my-zsh /etc/skel/.zshrc /home/$USERNAME
         chown -R $USER_UID:$USER_GID /home/$USERNAME/.oh-my-zsh /home/$USERNAME/.zshrc
     fi
     ZSH_ALREADY_INSTALLED="true"
@@ -169,5 +183,5 @@ echo -e "\
     PACKAGES_ALREADY_INSTALLED=${PACKAGES_ALREADY_INSTALLED}\n\
     LOCALE_ALREADY_SET=${LOCALE_ALREADY_SET}\n\
     EXISTING_NON_ROOT_USER=${EXISTING_NON_ROOT_USER}\n\
-    DOT_LOCAL_ALREADY_ADDED=${DOT_LOCAL_ALREADY_ADDED}\n\
+    RC_SNIPPET_ALREADY_ADDED=${RC_SNIPPET_ALREADY_ADDED}\n\
     ZSH_ALREADY_INSTALLED=${ZSH_ALREADY_INSTALLED}" > "${MARKER_FILE}"

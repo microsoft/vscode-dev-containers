@@ -4,9 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./ghcli-debian.sh <version>
-
-CLI_VERSION=${1:-"0.11.0"}
+# Syntax: ./git-lfs-debian.sh
 
 set -e
 
@@ -17,19 +15,18 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, apt-transport-https or gpg if missing
-if ! dpkg -s curl ca-certificates > /dev/null 2>&1; then
+# Install git and curl if missing
+if ! dpkg -s git curl ca-certificates > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates
+    apt-get -y install --no-install-recommends git curl ca-certificates
 fi
 
-# Install the GitHub CLI
-echo "Downloading github CLI..."
-curl -OsSL https://github.com/cli/cli/releases/download/v${CLI_VERSION}/gh_${CLI_VERSION}_linux_amd64.deb
-echo "Installing github CLI..."
-apt-get install ./gh_${CLI_VERSION}_linux_amd64.deb
-echo "Removing github CLI deb file after installation..."
-rm -rf ./gh_${CLI_VERSION}_linux_amd64.deb
+# Install Git LFS
+echo "Downloading Git LFS..."
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+echo "Installing Git LFS..."
+apt-get install -yq git-lfs
+git lfs install
 

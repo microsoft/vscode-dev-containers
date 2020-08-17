@@ -4,49 +4,51 @@
 #-------------------------------------------------------------------------------------------------------------
 FROM mcr.microsoft.com/oryx/build:vso-20200706.2 as kitchensink
 
-# Default to bash shell (other shells available at /usr/bin/fish and /usr/bin/zsh)
-ENV SHELL=/bin/bash \
-    ORYX_ENV_TYPE=vsonline-present
-
-# Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=codespace
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-ARG GITHUB_CLI_VERSION=0.11.0
-COPY library-scripts/*.sh setup-user.sh /tmp/scripts/
+
+# Default to bash shell (other shells available at /usr/bin/fish and /usr/bin/zsh)
+ENV SHELL=/bin/bash \
+    ORYX_ENV_TYPE=vsonline-present \
+    DOTNET_ROOT="/home/${USERNAME}/.dotnet"
+
+# Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
+COPY library-scripts/azcli-debian.sh library-scripts/common-debian.sh library-scripts/git-lfs-debian.sh library-scripts/github-debian.sh library-scripts/kubectl-helm-debian.sh setup-user.sh /tmp/scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove buster list to avoid unexpected errors given base image is stretch
     && rm /etc/apt/sources.list.d/buster.list \
     # Run common script and setup user
     && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "false" \
-    && bash /tmp/scripts/setup-user.sh "${USERNAME}" \
+    && bash /tmp/scripts/setup-user.sh "${USERNAME}" "${DOTNET_ROOT}" \
     # Upgrade git to avoid security issue
     && apt-get upgrade -yq git \
     # Remove 'imagemagick imagemagick-6-common' due to http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10131
     && apt-get purge -y imagemagick imagemagick-6-common \
     # Install tools and shells not in common script
     && apt-get install -yq vim xtail software-properties-common \
-    && bash /tmp/scripts/gitlfs-debian.sh \
-    && bash /tmp/scripts/ghcli-debian.sh ${GITHUB_CLI_VERSION}\
+    && bash /tmp/scripts/git-lfs-debian.sh \
+    && bash /tmp/scripts/github-debian.sh ${GITHUB_CLI_VERSION}\
     && bash /tmp/scripts/azcli-debian.sh \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
     # Clean up
-    && apt-get autoremove -y && apt-get clean -y
+    && rm -rf /tmp/scripts/ && apt-get autoremove -y && apt-get clean -y
 
 # Install PowerShell and setup .NET Core
-ENV DOTNET_ROOT=/home/${USERNAME}/.dotnet
 COPY symlinkDotNetCore.sh /home/${USERNAME}/symlinkDotNetCore.sh
+COPY library-scripts/powershell-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/powershell-debian.sh \
     # Hack to get dotnet core sdks in the right place - Oryx images do not put dotnet on the path because it will break AppService.
     # The following script will put the dotnet's at /home/codespace/.dotnet folder where dotnet will look by default.
     && sudo -u ${USERNAME} /bin/bash /home/${USERNAME}/symlinkDotNetCore.sh 2>&1 \
-    && apt-get clean -y && rm /home/${USERNAME}/symlinkDotNetCore.sh
+    && apt-get clean -y && rm -rf /home/${USERNAME}/symlinkDotNetCore.sh /tmp/scripts/
 
 # Setup Node.js, install NVM and NVS
 ARG NVS_HOME="/home/${USERNAME}/.nvs"
 ENV NVM_DIR="/home/${USERNAME}/.nvm"
 ENV NVM_SYMLINK_CURRENT=true \
-    PATH=${NVM_DIR}/current/bin:${PATH}
+    PATH="${NVM_DIR}/current/bin:${PATH}"
+COPY library-scripts/node-debian.sh /tmp/scripts/
 RUN sudo -u ${USERNAME} npm config set prefix /home/${USERNAME}/.npm-global \
     && npm config -g set prefix /home/${USERNAME}/.npm-global \
     # Install nvm
@@ -59,36 +61,37 @@ RUN sudo -u ${USERNAME} npm config set prefix /home/${USERNAME}/.npm-global \
     && sudo -u codespace ln -s /opt/nodejs/10.17.0/bin/node ${NVS_HOME}/cache/node \
     && sed -i "s/node\/[0-9.]\+/node\/10.17.0/" ${NVS_HOME}/defaults.json \
     # Clean up
-    && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
+    && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git /tmp/scripts/
 
 # Install OpenJDK 8 and 11
-RUN mkdir -p /opt/java/openjdk-11 \
-    && echo "Downloading JDK 11..." \
-    && curl -fsSL -o /tmp/openjdk11.tar.gz https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.8%2B10/OpenJDK11U-jdk_x64_linux_11.0.8_10.tar.gz \
-    && echo "Installing JDK 11..." \
-    && tar -xzf /tmp/openjdk11.tar.gz -C /opt/java/openjdk-11 --strip-components=1 \ 
-    && chown -R ${USERNAME} /opt/java/openjdk-11 \
-    && rm -f /tmp/openjdk11.tar.gz \
+ENV JAVA_HOME="/opt/java/openjdk-11"
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+COPY library-scripts/java-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/java-debian.sh 11 "${JAVA_HOME}" "${USERNAME}" "true" \
     && echo "Installing JDK 8..." \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -yq openjdk-8-jdk \
     && ln -s /opt/java/usr/lib/jvm/java-8-openjdk-amd64 /opt/java/openjdk-8 \
-    && apt-get clean -y
+    && rm -rf /tmp/scripts && apt-get clean -y
 
 # Install Rust
 ENV CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup"
 ENV PATH="${PATH}:${CARGO_HOME}/bin"
-RUN bash /tmp/scripts/rust-debian.sh \
-    && apt-get clean -y
+COPY library-scripts/rust-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
+    && rm -rf /tmp/scripts && apt-get clean -y
 
 # [Optional] Install Docker - Not in resulting image by default
 ARG INSTALL_DOCKER="false"
+COPY library-scripts/docker-debian.sh /tmp/scripts/
 RUN if [ "${INSTALL_DOCKER}" = "true" ]; then \
         bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}"; \
     else \
         echo '#!/bin/bash\n"$@"' > /usr/local/share/docker-init.sh && chmod +x /usr/local/share/docker-init.sh; \
-    fi
+    fi \
+    && rm -rf /tmp/scripts && apt-get clean -y
+
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
 # the Docker socket if "overrideCommand": false is set in devcontainer.json. 
@@ -102,7 +105,6 @@ RUN if [ -z $DeveloperBuild ]; then \
     echo "not including debugger" ; \
 else \
     curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
-fi \
-&& rm -rf /tmp/scripts
+fi
 
 USER ${USERNAME}
