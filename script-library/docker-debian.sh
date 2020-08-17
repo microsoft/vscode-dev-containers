@@ -145,8 +145,7 @@ fi
 
 # Execute whatever commands were passed in (if any). This allows us 
 # to set this script to ENTRYPOINT while still executing the default CMD.
-set +e
-"\$@"
+exec "\$@"
 EOF
 chmod +x /usr/local/share/docker-init.sh
 chown ${USERNAME}:root /usr/local/share/docker-init.sh
