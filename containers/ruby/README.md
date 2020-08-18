@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/ruby |
-| *Available image variants* | mcr.microsoft.com/vscode/devcontainers/ruby:2 <br /> mcr.microsoft.com/vscode/devcontainers/ruby:2.7 <br /> mcr.microsoft.com/vscode/devcontainers/ruby:2.6<br /> mcr.microsoft.com/vscode/devcontainers/ruby:2.5 |
+| *Available image variants* | 2, 2.7, 2.6, 2.5 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

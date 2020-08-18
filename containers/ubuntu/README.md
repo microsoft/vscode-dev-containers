@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu |
-| *Available image variants* |   mcr.microsoft.com/vscode/devcontainers/base:bionic <br /> mcr.microsoft.com/vscode/devcontainers/base:focal |
+| *Available image variants* | bionic, focal |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

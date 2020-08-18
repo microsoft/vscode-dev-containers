@@ -8,6 +8,9 @@
 |----------|-------|
 | *Contributors* | [brettmillerb](https://github.com/brettmillerb) |
 | *Definition type* | Dockerfile |
+| *Published images* | mcr.microsoft.com/azure-functions/powershell |
+| *Available image variants* | 6, 7 |
+| *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Azure Functions, .NET Core, PowerShell |
