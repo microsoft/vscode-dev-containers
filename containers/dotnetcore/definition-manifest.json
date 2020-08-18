@@ -4,7 +4,7 @@
 		"latest": "true",
 		"rootDistro": "debian",
 		"tags": [
-			"donetcore:${VERSION}-${VARIANT}"
+			"dotnetcore:${VERSION}-${VARIANT}"
 		]
 	},
 	"dependencies": {
