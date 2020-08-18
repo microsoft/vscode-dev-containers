@@ -6,11 +6,13 @@
 		"args": {
 			"IMAGE_TO_TEST": "debian:10",
 			"DISTRO": "debian",
-			"USERNAME": "tester",
-			"USE_DEFAULTS": "false"
+			"USERNAME": "vscode",
+			"UPGRADE_PACKAGES": "false",
+			"RUN_COMMON_SCRIPT": "true",
+			"USE_DEFAULTS": "true"
 		}
 	},
-	"remoteUser": "tester",
+	"remoteUser": "vscode",
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 	"overrideCommand": true,
 
