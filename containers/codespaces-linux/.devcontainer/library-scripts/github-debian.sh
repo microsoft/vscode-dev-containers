@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./github-debian.sh <version>
+# Syntax: ./github-debian.sh [version]
 
 CLI_VERSION=${1:-"0.11.0"}
 

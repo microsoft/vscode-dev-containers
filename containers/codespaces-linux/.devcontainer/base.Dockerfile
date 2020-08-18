@@ -34,6 +34,13 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Clean up
     && rm -rf /tmp/scripts/ && apt-get autoremove -y && apt-get clean -y
 
+# Build git 2.27.0 from source
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get install -y gettext \
+    && curl -sL https://github.com/git/git/archive/v2.27.0.tar.gz | tar -xzC /tmp \
+    && (cd /tmp/git-2.27.0 && make -s prefix=/usr/local all && make -s prefix=/usr/local install) \
+    && rm -rf /tmp/git-2.27.0
+
 # Install PowerShell and setup .NET Core
 COPY symlinkDotNetCore.sh /home/${USERNAME}/symlinkDotNetCore.sh
 COPY library-scripts/powershell-debian.sh /tmp/scripts/
@@ -77,9 +84,18 @@ RUN bash /tmp/scripts/java-debian.sh 11 "${JAVA_HOME}" "${USERNAME}" "true" \
 # Install Rust
 ENV CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup"
-ENV PATH="${PATH}:${CARGO_HOME}/bin"
+ENV PATH="${CARGO_HOME}/bin:${PATH}"
 COPY library-scripts/rust-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
+    && rm -rf /tmp/scripts && apt-get clean -y
+
+# Install Go
+ARG GOLANG_VERSION="1.15"
+ENV GOROOT="/usr/local/go" \
+    GOPATH="/go"
+ENV PATH="${GOROOT}/bin:${PATH}"
+COPY library-scripts/go-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/go-debian.sh "${GOLANG_VERSION}" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
     && rm -rf /tmp/scripts && apt-get clean -y
 
 # [Optional] Install Docker - Not in resulting image by default

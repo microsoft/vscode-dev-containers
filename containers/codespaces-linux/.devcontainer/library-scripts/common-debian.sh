@@ -61,6 +61,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         curl \
         wget \
         unzip \
+        zip \
         nano \
         jq \
         lsb-release \
