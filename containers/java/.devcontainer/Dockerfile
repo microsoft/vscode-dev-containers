@@ -12,8 +12,8 @@ ARG MAVEN_VERSION=3.6.3
 ARG MAVEN_DOWNLOAD_SHA="no-check"
 ENV MAVEN_HOME=/usr/local/share/maven
 COPY library-scripts/maven-debian.sh /tmp/library-scripts/
-RUN if [ "${INSTALL_MAVEN}" = "true" ]; then /bin/bash /tmp/library-scripts/maven-debian.sh ${MAVEN_VERSION} ${MAVEN_HOME} ${USERNAME} ${MAVEN_DOWNLOAD_SHA}; fi \
-    && rm -f /tmp/library-scripts
+RUN if [ "${INSTALL_MAVEN}" = "true" ]; then bash /tmp/library-scripts/maven-debian.sh ${MAVEN_VERSION} ${MAVEN_HOME} ${USERNAME} ${MAVEN_DOWNLOAD_SHA}; fi \
+    && rm -f /tmp/library-scripts/maven-debian.sh
 
 # [Optional] Install Gradle
 ARG INSTALL_GRADLE="false"
@@ -21,8 +21,8 @@ ARG GRADLE_VERSION=5.4.1
 ARG GRADLE_DOWNLOAD_SHA="no-check"
 ENV GRADLE_HOME=/usr/local/share/gradle
 COPY library-scripts/gradle-debian.sh /tmp/library-scripts/
-RUN if [ "${INSTALL_GRADLE}" = "true" ]; then /bin/bash /tmp/library-scripts/gradle-debian.sh ${GRADLE_VERSION} ${GRADLE_HOME} ${USERNAME} ${GRADLE_DOWNLOAD_SHA}; fi \
-    && rm -f /tmp/library-scripts
+RUN if [ "${INSTALL_GRADLE}" = "true" ]; then bash /tmp/library-scripts/gradle-debian.sh ${GRADLE_VERSION} ${GRADLE_HOME} ${USERNAME} ${GRADLE_DOWNLOAD_SHA}; fi \
+    && rm -f /tmp/library-scripts/gradle-debian.sh
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
