@@ -31,6 +31,7 @@ fi
 
 if [ "${DISTRO}" = "debian" ]; then
     runScript ${SCRIPT_DIR}/azcli-${DISTRO}.sh
+    runScript ${SCRIPT_DIR}/git-from-src-${DISTRO}.sh "2.26.2"
     runScript ${SCRIPT_DIR}/git-lfs-${DISTRO}.sh
     runScript ${SCRIPT_DIR}/github-${DISTRO}.sh
     runScript ${SCRIPT_DIR}/go-${DISTRO}.sh "1.14 /opt/go /go ${USERNAME} false"
