@@ -47,8 +47,8 @@ GO_INSTALL_SCRIPT="$(cat <<EOF
 EOF
 )"
 if ! type go > /dev/null 2>&1; then
-    mkdir -p "${TARGET_GOROOT}" "${GOPATH}" 
-    chown ${USERNAME}:root "${TARGET_GOROOT}" "${GOPATH}"
+    mkdir -p "${TARGET_GOROOT}" "${TARGET_GOPATH}" 
+    chown ${USERNAME}:root "${TARGET_GOROOT}" "${TARGET_GOPATH}"
     su ${USERNAME} -c "${GO_INSTALL_SCRIPT}"
 else
     echo "Go already installed. Skipping."
@@ -109,7 +109,6 @@ if [ "${UPDATE_RC}" = "true" ]; then
     if [ "${USERNAME}" != "root" ]; then
         echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc 
     fi
-else
-    echo "Done! Be sure to add ${GO_HOME}/bin to the PATH."
 fi
+echo "Done!"
 
