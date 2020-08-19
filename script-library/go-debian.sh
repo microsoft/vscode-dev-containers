@@ -6,9 +6,9 @@
 
 # Syntax: ./go-debian.sh [Go version] [Go install path] [GOPATH] [non-root user] [Add GOPATH, GOROOT to rc files flag] [install tools]
 
-export GOLANG_VERSION=${1:-"1.15"}
-export GOROOT=${2:-"/usr/local/go"}
-export GOPATH=${3:-"/go"}
+TARGET_GO_VERSION=${1:-"1.15"}
+TARGET_GOROOT=${2:-"/usr/local/go"}
+TARGET_GOPATH=${3:-"/go"}
 USERNAME=${4:-"vscode"}
 UPDATE_RC=${5:-"true"}
 INSTALL_GO_TOOLS=${6:-"true"}
@@ -39,16 +39,16 @@ fi
 # Install Go
 GO_INSTALL_SCRIPT="$(cat <<EOF
     set -e
-    echo "Downloading Go ${GOLANG_VERSION}..."
-    curl -sSL -o /tmp/go.tar.gz "https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz"
-    echo "Extracting Go ${GOLANG_VERSION}..."
-    tar -xzf /tmp/go.tar.gz -C "${GOROOT}" --strip-components=1
+    echo "Downloading Go ${TARGET_GO_VERSION}..."
+    curl -sSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-amd64.tar.gz"
+    echo "Extracting Go ${TARGET_GO_VERSION}..."
+    tar -xzf /tmp/go.tar.gz -C "${TARGET_GOROOT}" --strip-components=1
     rm -f /tmp/go.tar.gz
 EOF
 )"
 if ! type go > /dev/null 2>&1; then
-    mkdir -p "${GOROOT}" "${GOPATH}" 
-    chown ${USERNAME}:root "${GOROOT}" "${GOPATH}"
+    mkdir -p "${TARGET_GOROOT}" "${TARGET_GOPATH}" 
+    chown ${USERNAME}:root "${TARGET_GOROOT}" "${TARGET_GOPATH}"
     su ${USERNAME} -c "${GO_INSTALL_SCRIPT}"
 else
     echo "Go already installed. Skipping."
@@ -79,7 +79,7 @@ GO_TOOLS_WITH_MODULES="\
     github.com/go-delve/delve/cmd/dlv"
 if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     echo "Installing common Go tools..."
-    export PATH=${GOROOT}/bin:${PATH}
+    export PATH=${TARGET_GOROOT}/bin:${PATH}
     mkdir -p /tmp/gotools
     cd /tmp/gotools
     export GOPATH=/tmp/gotools
@@ -104,11 +104,12 @@ fi
 
 # Add GOPATH variable and bin directory into PATH in bashrc/zshrc files (unless disabled)
 if [ "${UPDATE_RC}" = "true" ]; then
-    RC_SNIPPET="export GOPATH=\"${GOPATH}\"\nexport GOROOT=\"${GOROOT}\"\nexport PATH=\"\${GOROOT}/bin:\${PATH}\""
+    RC_SNIPPET="export GOPATH=\"${TARGET_GOPATH}\"\nexport GOROOT=\"${TARGET_GOROOT}\"\nexport PATH=\"\${GOROOT}/bin:\${PATH}\""
     echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
     if [ "${USERNAME}" != "root" ]; then
         echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc 
     fi
+    echo "Done!"
 else
     echo "Done! Be sure to add ${GO_HOME}/bin to the PATH."
 fi
