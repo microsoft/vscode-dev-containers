@@ -29,7 +29,7 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Treat a user name of "none" or non-existant user as root
-if [ "${USERNAME}" = "none" ] && ! id -u ${USERNAME} > /dev/null 2>&1; then
+if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
@@ -42,19 +42,11 @@ if ! dpkg -s curl ca-certificates unzip > /dev/null 2>&1; then
     apt-get -y install --no-install-recommends curl ca-certificates unzip
 fi
 
-# Function to su if user exists and is not root
-suIf() {
-    if [ "${USERNAME}" != "root" ]; then
-        su ${USERNAME} -c "$@"
-    else
-        "$@"
-    fi
-}
 
 # Install Gradle
 echo "Downloading Gradle..."
-suIf "$(cat \
-<< EOF
+su ${USERNAME} -c "$(cat << EOF
+    set -e
     mkdir -p /tmp/downloads
     curl -sSL --output /tmp/downloads/archive-gradle.zip https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
     ([ "${GRADLE_DOWNLOAD_SHA}" = "no-check" ] || echo "${GRADLE_DOWNLOAD_SHA} */tmp/downloads/archive-gradle.zip" | sha256sum --check - )
@@ -65,6 +57,6 @@ mv -f /tmp/downloads/gradle* ${GRADLE_HOME}
 chown ${USERNAME}:root ${GRADLE_HOME}
 ln -s ${GRADLE_HOME}/bin/gradle /usr/local/bin/gradle
 rm -rf /tmp/downloads
-echo "Done."
+echo "Done!"
 
 

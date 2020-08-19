@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./azcli-debian.sh
+# Syntax: ./powershell-debian.sh
 
 set -e
 
@@ -23,9 +23,11 @@ if ! dpkg -s apt-transport-https curl ca-certificates lsb-release > /dev/null 2>
     apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lsb-release gnupg2 
 fi
 
-# Install the Azure CLI
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list
-curl -sL https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT)
-apt-get update
-apt-get install -y azure-cli
+# Use correct source for distro (Ubuntu/Debian) and Codename (stretch, buster, bionic, focal)
+DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
+CODENAME=$(lsb_release -cs)
+curl -s https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT)
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-${DISTRO}-${CODENAME}-prod ${CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+apt-get update -yq
+apt-get install -yq powershell
 echo "Done!"
