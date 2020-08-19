@@ -30,4 +30,4 @@ chmod +x /usr/local/bin/kubectl
 # Install Helm
 echo "Installing Helm..."
 curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
-
+echo "Done!"

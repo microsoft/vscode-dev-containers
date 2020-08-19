@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:debian |
-| *Available image variants* |   mcr.microsoft.com/vscode/devcontainers/base:stretch <br /> mcr.microsoft.com/vscode/devcontainers/base:buster |
+| *Available image variants* | stretch, buster |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -19,7 +19,7 @@
 
 While the definition itself works unmodified, you can select the version of Debian the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
-```
+```json
 "args": { "VARIANT": "stretch" }
 ```
 

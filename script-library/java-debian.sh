@@ -4,13 +4,12 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./java-debian.sh <JDK major version> <JAVA_HOME> <non-root user> <add path to rc files flag>
+# Syntax: ./java-debian.sh [JDK major version] [JAVA_HOME] [non-root user] [Add JAVA_HOME to rc files flag]
 
 export JAVA_VERSION=${1:-"11"}
 export JAVA_HOME=${2:-"/opt/java/openjdk-${JAVA_VERSION}"}
 USERNAME=${3:-"vscode"}
 UPDATE_RC=${4:-"true"}
-
 
 set -e
 
@@ -62,7 +61,7 @@ su ${USERNAME} -c "$(cat << EOF
     curl -fsSL -o /tmp/openjdk.tar.gz ${JAVA_URI}
     echo "Installing JDK ${JAVA_VERSION}..."
     tar -xzf /tmp/openjdk.tar.gz -C ${JAVA_HOME} --strip-components=1
-    rm -f /tmp/openjdk11.tar.gz
+    rm -f /tmp/openjdk.tar.gz
 EOF
 )"
 
@@ -73,6 +72,7 @@ if [ "${UPDATE_RC}" = "true" ]; then
     if [ "${USERNAME}" != "root" ]; then
         echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc 
     fi
+    echo "Done!"
 else
     echo "Done! Be sure to add ${JAVA_HOME}/bin to the PATH."
 fi

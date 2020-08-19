@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:alpine |
-| *Available image variants* |   mcr.microsoft.com/vscode/devcontainers/base:alpine-3.10 <br /> mcr.microsoft.com/vscode/devcontainers/base:alpine-3.11 <br /> mcr.microsoft.com/vscode/devcontainers/base:alpine-3.12 |
+| *Available image variants* |  3.10, 3.11, 3.12 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | No ([#458](https://github.com/MicrosoftDocs/vsonline/issues/458)) |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -19,7 +19,7 @@
 
  While the definition itself works unmodified, you can select the version of Alpine the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
-```
+```json
 "args": { "VARIANT": "3.10" }
 ```
 

@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./node-debian.sh <directory to install nvm> <node version to install (use "none" to skip)> <non-root user>
+# Syntax: ./node-debian.sh [directory to install nvm] [node version to install (use "none" to skip)] [non-root user]
 
 export NVM_DIR=${1:-"/usr/local/share/nvm"}
 export NODE_VERSION=${2:-"lts/*"}
@@ -87,3 +87,4 @@ su ${USERNAME} -c "$(cat << EOF
 EOF
 )" 2>&1
 
+echo "Done!"

@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./rust-debian.sh <CARGO_HOME> <RUSTUP_HOME> <non-root user>
+# Syntax: ./rust-debian.sh [CARGO_HOME] [RUSTUP_HOME] [non-root user] [add CARGO/RUSTUP_HOME to rc files flag]
 
 export CARGO_HOME=${1:-"/usr/local/cargo"}
 export RUSTUP_HOME=${2:-"/usr/local/rustup"}
@@ -40,7 +40,10 @@ if ! type rustup > /dev/null 2>&1; then
     mkdir -p "${CARGO_HOME}" "${RUSTUP_HOME}"
     chown ${USERNAME}:root "${CARGO_HOME}" "${RUSTUP_HOME}"
     su ${USERNAME} -c "curl --tlsv1.2 https://sh.rustup.rs -sSf | bash -s -- -y --no-modify-path 2>&1"
+else 
+    echo "Rust already installed. Skipping."
 fi
+
 echo "Installing common Rust dependencies..."
 su ${USERNAME} -c "$(cat << EOF
     set -e
@@ -57,6 +60,7 @@ if [ "${UPDATE_RC}" = "true" ]; then
     if [ "${USERNAME}" != "root" ]; then
         echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc 
     fi
+    echo "Done!"
 else
     echo "Done! Be sure to add ${CARGO_HOME}/bin to the PATH."
 fi

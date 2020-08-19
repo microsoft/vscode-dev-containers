@@ -8,6 +8,9 @@
 |----------|-------|
 | *Contributors* | The VS Code Java Team |
 | *Definition type* | Dockerfile |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/java |
+| *Available image variants* | 11, 14 |
+| *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Java |
@@ -19,6 +22,20 @@ While this definition should work unmodified, you can select the version of Java
 ```json
 "args": { "VARIANT": "14" }
 ```
+
+You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
+
+- `mcr.microsoft.com/vscode/devcontainers/java` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/java:11`
+- `mcr.microsoft.com/vscode/devcontainers/java:14`
+
+Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+
+- `mcr.microsoft.com/vscode/devcontainers/java:0-11`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0.135-11`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0.135.0-11`
+
+Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
 ### Debug Configuration
 
@@ -42,7 +59,7 @@ You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "
 
 Remove the appropriate arg or set its value to `"false"` to skip installing the specified tool.
 
-You can also specify the verison of Gradle or Maven if needed.
+You can also specify the version of Gradle or Maven if needed.
 
 ```json
 "args": { 

@@ -8,8 +8,8 @@
 |----------|-------|
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
 | *Definition type* | Dockerfile |
-| *Published image* | mcr.microsoft.com/vscode/devcontainers/python:3 |
-| *Available image variants* |  mcr.microsoft.com/vscode/devcontainers/python:3.8 <br />  mcr.microsoft.com/vscode/devcontainers/python:3.7<br /> mcr.microsoft.com/vscode/devcontainers/python:3.6 |
+| *Published image* | mcr.microsoft.com/vscode/devcontainers/python |
+| *Available image variants* | 3, 3.6, 3.7, 3.8 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container Host OS Support* | Linux, macOS, Windows |

@@ -61,6 +61,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         curl \
         wget \
         unzip \
+        zip \
         nano \
         jq \
         lsb-release \
@@ -185,3 +186,5 @@ echo -e "\
     EXISTING_NON_ROOT_USER=${EXISTING_NON_ROOT_USER}\n\
     RC_SNIPPET_ALREADY_ADDED=${RC_SNIPPET_ALREADY_ADDED}\n\
     ZSH_ALREADY_INSTALLED=${ZSH_ALREADY_INSTALLED}" > "${MARKER_FILE}"
+
+echo "Done!"

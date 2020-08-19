@@ -8,6 +8,9 @@
 |----------|-------|
 | *Contributors* | The Azure Functions Team |
 | *Definition type* | Dockerfile |
+| *Published images* | mcr.microsoft.com/azure-functions/node |
+| *Available image variants* | 10, 12 |
+| *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Azure Functions, Node.js, JavaScript |

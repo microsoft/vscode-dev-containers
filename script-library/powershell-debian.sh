@@ -30,3 +30,4 @@ curl -s https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add -
 echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-${DISTRO}-${CODENAME}-prod ${CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
 apt-get update -yq
 apt-get install -yq powershell
+echo "Done!"

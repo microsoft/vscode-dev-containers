@@ -57,6 +57,6 @@ mv -f /tmp/downloads/gradle* ${GRADLE_HOME}
 chown ${USERNAME}:root ${GRADLE_HOME}
 ln -s ${GRADLE_HOME}/bin/gradle /usr/local/bin/gradle
 rm -rf /tmp/downloads
-echo "Done."
+echo "Done!"
 
 
