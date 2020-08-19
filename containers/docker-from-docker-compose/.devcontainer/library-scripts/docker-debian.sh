@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./docker-debian.sh <enable non-root docker socket access flag> <source socket> <target socket> <non-root user>
+# Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user]
 
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 SOURCE_SOCKET=${2:-"/var/run/docker-host.sock"}
@@ -145,7 +145,9 @@ fi
 
 # Execute whatever commands were passed in (if any). This allows us 
 # to set this script to ENTRYPOINT while still executing the default CMD.
+set +e
 exec "\$@"
 EOF
 chmod +x /usr/local/share/docker-init.sh
 chown ${USERNAME}:root /usr/local/share/docker-init.sh
+echo "Done!"

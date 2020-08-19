@@ -21,6 +21,9 @@
 	// Uncomment the line below if you want to keep your containers running after VS Code shuts down.
 	// "shutdownAction": "none",
 
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "yarn install",
 
