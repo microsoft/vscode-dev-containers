@@ -28,3 +28,4 @@ echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_rel
 curl -sL https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT)
 apt-get update
 apt-get install -y azure-cli
+echo "Done!"

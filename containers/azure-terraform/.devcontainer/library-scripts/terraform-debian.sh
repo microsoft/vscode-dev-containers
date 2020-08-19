@@ -45,4 +45,4 @@ if [ "${TFLINT_VERSION}" != "none" ]; then
 fi
 
 rm -rf /tmp/tf-downloads
-echo "Done."
+echo "Done!"
