@@ -35,11 +35,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && rm -rf /tmp/scripts/ && apt-get autoremove -y && apt-get clean -y
 
 # Build git 2.27.0 from source
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -y gettext \
-    && curl -sL https://github.com/git/git/archive/v2.27.0.tar.gz | tar -xzC /tmp \
-    && (cd /tmp/git-2.27.0 && make -s prefix=/usr/local all && make -s prefix=/usr/local install) \
-    && rm -rf /tmp/git-2.27.0
+COPY library-scripts/git-from-src-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/git-from-src-debian.sh "2.27.0" \
+    && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install PowerShell and setup .NET Core
 COPY symlinkDotNetCore.sh /home/${USERNAME}/symlinkDotNetCore.sh
@@ -74,29 +72,26 @@ RUN sudo -u ${USERNAME} npm config set prefix /home/${USERNAME}/.npm-global \
 ENV JAVA_HOME="/opt/java/openjdk-11"
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 COPY library-scripts/java-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/java-debian.sh 11 "${JAVA_HOME}" "${USERNAME}" "true" \
+RUN bash /tmp/scripts/java-debian.sh 11 "${JAVA_HOME}" "${USERNAME}" "false" \
     && echo "Installing JDK 8..." \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -yq openjdk-8-jdk \
     && ln -s /opt/java/usr/lib/jvm/java-8-openjdk-amd64 /opt/java/openjdk-8 \
     && rm -rf /tmp/scripts && apt-get clean -y
 
-# Install Rust
+# Copy other bootstrapping scripts into container
 ENV CARGO_HOME="/usr/local/cargo" \
-    RUSTUP_HOME="/usr/local/rustup"
-ENV PATH="${CARGO_HOME}/bin:${PATH}"
-COPY library-scripts/rust-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
-    && rm -rf /tmp/scripts && apt-get clean -y
-
-# Install Go
-ARG GOLANG_VERSION="1.15"
-ENV GOROOT="/usr/local/go" \
+    RUSTUP_HOME="/usr/local/rustup" \
+    GOROOT="/usr/local/go" \
     GOPATH="/go"
-ENV PATH="${GOROOT}/bin:${PATH}"
-COPY library-scripts/go-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/go-debian.sh "${GOLANG_VERSION}" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
-    && rm -rf /tmp/scripts && apt-get clean -y
+ENV PATH="${CARGO_HOME}/bin:${GOROOT}/bin:${PATH}"
+COPY library-scripts/go-debian.sh library-scripts/rust-debian.sh /home/${USERNAME}/install-scripts/scripts/
+RUN cd /home/${USERNAME}/install-scripts \
+    && echo "sudo /bin/bash \$(dirname \$0)/scripts/go-debian.sh \"\${1:-1.15}\" \${GOROOT} \${GOPATH} ${USERNAME} false true" > install-go \
+    && echo "sudo /bin/bash \$(dirname \$0)/scripts/rust-debian.sh \${CARGO_HOME} \${RUSTUP_HOME} ${USERNAME} false" > install-rust \
+    && echo "export PATH=\"\${PATH}:/home/${USERNAME}/install-scripts\"" | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \ 
+    && chown -R ${USERNAME} . \
+    && chmod +x install-go install-rust
 
 # [Optional] Install Docker - Not in resulting image by default
 ARG INSTALL_DOCKER="false"
@@ -107,7 +102,6 @@ RUN if [ "${INSTALL_DOCKER}" = "true" ]; then \
         echo '#!/bin/bash\n"$@"' > /usr/local/share/docker-init.sh && chmod +x /usr/local/share/docker-init.sh; \
     fi \
     && rm -rf /tmp/scripts && apt-get clean -y
-
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
 # the Docker socket if "overrideCommand": false is set in devcontainer.json. 

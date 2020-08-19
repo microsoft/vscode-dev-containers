@@ -60,7 +60,6 @@ if [ "${UPDATE_RC}" = "true" ]; then
     if [ "${USERNAME}" != "root" ]; then
         echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc 
     fi
-else
-    echo "Done! Be sure to add ${CARGO_HOME}/bin to the PATH."
 fi
+echo "Done!"
 
