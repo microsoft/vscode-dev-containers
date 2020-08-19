@@ -87,3 +87,4 @@ su ${USERNAME} -c "$(cat << EOF
 EOF
 )" 2>&1
 
+echo "Done!"

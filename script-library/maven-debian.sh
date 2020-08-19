@@ -63,4 +63,4 @@ su ${USERNAME} -c "$(cat << EOF
 EOF
 )"
 ln -s ${MAVEN_HOME}/bin/mvn /usr/local/bin/mvn
-echo "Done."
+echo "Done!"

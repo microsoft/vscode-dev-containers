@@ -32,4 +32,4 @@ echo "Installing github CLI..."
 apt-get install ./gh_${CLI_VERSION}_linux_amd64.deb
 echo "Removing github CLI deb file after installation..."
 rm -rf ./gh_${CLI_VERSION}_linux_amd64.deb
-
+echo "Done!"
