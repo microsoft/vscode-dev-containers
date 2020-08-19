@@ -84,14 +84,15 @@ ENV CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup" \
     GOROOT="/usr/local/go" \
     GOPATH="/go"
-ENV PATH="${CARGO_HOME}/bin:${GOROOT}/bin:${PATH}"
-COPY library-scripts/go-debian.sh library-scripts/rust-debian.sh /home/${USERNAME}/install-scripts/scripts/
-RUN cd /home/${USERNAME}/install-scripts \
-    && echo "sudo /bin/bash \$(dirname \$0)/scripts/go-debian.sh \"\${1:-1.15}\" \${GOROOT} \${GOPATH} ${USERNAME} false true" > install-go \
-    && echo "sudo /bin/bash \$(dirname \$0)/scripts/rust-debian.sh \${CARGO_HOME} \${RUSTUP_HOME} ${USERNAME} false" > install-rust \
+ENV PATH="${CARGO_HOME}/bin:${GOROOT}/bin:${PATH}:/usr/local/share/vscode-dev-containers/bin"
+COPY library-scripts/go-debian.sh library-scripts/rust-debian.sh /usr/local/share/vscode-dev-containers/script-library/
+RUN mkdir -p /usr/local/share/vscode-dev-containers/bin \
+    && cd /usr/local/share/vscode-dev-containers/bin \
+    && echo "sudo /bin/bash \$(dirname \$0)/../script-library/go-debian.sh \"\${1:-1.15}\" \${GOROOT} \${GOPATH} ${USERNAME} false true" > install-go \
+    && echo "sudo /bin/bash \$(dirname \$0)/../script-library/rust-debian.sh \${CARGO_HOME} \${RUSTUP_HOME} ${USERNAME} false" > install-rust \
     && echo "export PATH=\"\${PATH}:/home/${USERNAME}/install-scripts\"" | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \ 
-    && chown -R ${USERNAME} . \
-    && chmod +x install-go install-rust
+    && chmod +x install-go install-rust \
+    && chown -R ${USERNAME} /usr/local/share/vscode-dev-containers
 
 # [Optional] Install Docker - Not in resulting image by default
 ARG INSTALL_DOCKER="false"
