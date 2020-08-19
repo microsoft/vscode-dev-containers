@@ -125,9 +125,11 @@ fi
 
 # Execute whatever commands were passed in (if any). This allows us 
 # to set this script to ENTRYPOINT while still executing the default CMD.
+set +e
 exec "\$@"
 EOF
 else 
     echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
 fi
 chmod +x /usr/local/share/docker-init.sh
+echo "Done!"

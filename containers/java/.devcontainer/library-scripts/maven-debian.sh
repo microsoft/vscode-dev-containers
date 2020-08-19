@@ -29,7 +29,7 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Treat a user name of "none" or non-existant user as root
-if [ "${USERNAME}" = "none" ] && ! id -u ${USERNAME} > /dev/null 2>&1; then
+if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
@@ -41,15 +41,6 @@ if ! dpkg -s curl ca-certificates tar > /dev/null 2>&1; then
     fi
     apt-get -y install --no-install-recommends curl ca-certificates tar
 fi
-
-# Function to su if user exists and is not root
-suIf() {
-    if [ "${USERNAME}" != "root" ]; then
-        su ${USERNAME} -c "$@"
-    else
-        "$@"
-    fi
-}
 
 # Creat folder, add maven settings
 mkdir -p ${MAVEN_HOME} ${MAVEN_HOME}/ref
@@ -63,8 +54,8 @@ chown -R ${USERNAME}:root ${MAVEN_HOME}
 
 # Install Maven
 echo "Downloading Maven..."
-suIf "$(cat \
-<< EOF
+su ${USERNAME} -c "$(cat << EOF
+    set -e
     curl -fsSL -o /tmp/maven.tar.gz https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
     ([ "${MAVEN_DOWNLOAD_SHA}" = "no-check" ] || echo "${MAVEN_DOWNLOAD_SHA} */tmp/maven.tar.gz" | sha512sum -c - )
     tar -xzf /tmp/maven.tar.gz -C ${MAVEN_HOME} --strip-components=1
@@ -72,4 +63,4 @@ suIf "$(cat \
 EOF
 )"
 ln -s ${MAVEN_HOME}/bin/mvn /usr/local/bin/mvn
-echo "Done."
+echo "Done!"

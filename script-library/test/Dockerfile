@@ -14,7 +14,9 @@ RUN chmod +x /tmp/*.sh
 ARG DISTRO="debian"
 ARG USE_DEFAULTS="true"
 ARG USERNAME="vscode"
-RUN /tmp/run-scripts.sh /tmp ${DISTRO} ${USE_DEFAULTS} ${USERNAME} false false 10
+ARG RUN_COMMON_SCRIPT="true"
+ARG UPGRADE_PACKAGES="false"
+RUN /tmp/run-scripts.sh /tmp ${DISTRO} ${USE_DEFAULTS} ${USERNAME} ${RUN_COMMON_SCRIPT} ${UPGRADE_PACKAGES}
 
 ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
 CMD [ "sleep", "infinity" ]
