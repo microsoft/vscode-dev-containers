@@ -166,7 +166,7 @@ fi
 if [ "${INSTALL_ZSH}" = "true" ] && [ ! -d "/root/.oh-my-zsh" ] && [ "${ZSH_ALREADY_INSTALLED}" != "true" ]; then
     apt-get-update-if-needed
     apt-get install -y zsh
-    curl -fsSLo- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash 2>&1
+    curl -fsSLo- https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash 2>&1
     echo -e "${RC_SNIPPET}\nDEFAULT_USER=\$USER\nprompt_context(){}" >> /root/.zshrc
     cp -fR /root/.oh-my-zsh /etc/skel
     cp -f /root/.zshrc /etc/skel
