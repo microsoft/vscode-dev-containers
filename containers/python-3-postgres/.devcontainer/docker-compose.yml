@@ -12,8 +12,14 @@ services:
       args:
         # Update VARIANT to pick a python version: 3, 3.8, 3.7, 3.6
         VARIANT: 3
+        # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
         USER_UID: 1000
         USER_GID: 1000
+
+    # Use "ports" to publish your app port locally. However, "forwardPorts" in devcontainer.json
+    # works better with framework defaults that only allow connections from localhost (e.g. Flask)
+    # ports:
+    #   - 5000:5000
 
     volumes:
       - ..:/workspace:cached
@@ -27,7 +33,11 @@ services:
   db:
     image: postgres
     restart: unless-stopped
-    ports: 
-      - 5432:5432
     environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
       POSTGRES_PASSWORD: LocalPassword
+
+    # Uncomment to allow access to PostgreSQL from external tools
+    # ports: 
+    #  - 5432:5432
