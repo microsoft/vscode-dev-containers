@@ -20,8 +20,9 @@ if ! dpkg -s build-essential curl ca-certificates tar gettext libssl-dev zlib1g-
 fi
 
 echo "Downloading source for ${GIT_VERSION}..."
-curl -sL https://github.com/git/git/archive/v${GIT_VERSION}.tar.gz | tar -xzC /tmp
+curl -sL https://github.com/git/git/archive/v${GIT_VERSION}.tar.gz | tar -xzC /tmp 2>&1
 echo "Building..."
-(cd /tmp/git-${GIT_VERSION} && make -s prefix=/usr/local all && make -s prefix=/usr/local install)
+cd /tmp/git-${GIT_VERSION}
+make -s prefix=/usr/local all && make -s prefix=/usr/local install 2>&1
 rm -rf /tmp/git-${GIT_VERSION}
 echo "Done!"

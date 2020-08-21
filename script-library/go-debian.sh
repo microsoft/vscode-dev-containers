@@ -35,7 +35,6 @@ if ! dpkg -s curl ca-certificates tar git g++ gcc libc6-dev make pkg-config > /d
     apt-get -y install --no-install-recommends curl ca-certificates tar git g++ gcc libc6-dev make pkg-config
 fi
 
-
 # Install Go
 GO_INSTALL_SCRIPT="$(cat <<EOF
     set -e
@@ -107,7 +106,7 @@ if [ "${UPDATE_RC}" = "true" ]; then
     RC_SNIPPET="export GOPATH=\"${TARGET_GOPATH}\"\nexport GOROOT=\"${TARGET_GOROOT}\"\nexport PATH=\"\${GOROOT}/bin:\${PATH}\""
     echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
     if [ "${USERNAME}" != "root" ]; then
-        echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc 
+        echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
     fi
 fi
 echo "Done!"

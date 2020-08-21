@@ -58,7 +58,7 @@ if [ "${UPDATE_RC}" = "true" ]; then
     RC_SNIPPET="export CARGO_HOME=\"${CARGO_HOME}\"\nexport RUSTUP_HOME=\"${RUSTUP_HOME}\"\nexport PATH=\"\${CARGO_HOME}/bin:\${PATH}\""
     echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
     if [ "${USERNAME}" != "root" ]; then
-        echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc 
+        echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
     fi
 fi
 echo "Done!"

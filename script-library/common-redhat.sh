@@ -77,7 +77,7 @@ chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
 # Optionally install and configure zsh
 if [ "$INSTALL_ZSH" = "true" ] && [ ! -d "/root/.oh-my-zsh" ]; then 
     yum install -y zsh
-    curl -fsSLo- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash 2>&1
+    curl -fsSLo- https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash 2>&1
     echo "export PATH=\$PATH:\$HOME/.local/bin" >> /root/.zshrc
     cp -R /root/.oh-my-zsh /home/$USERNAME
     cp /root/.zshrc /home/$USERNAME
