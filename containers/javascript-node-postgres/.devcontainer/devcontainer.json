@@ -1,4 +1,5 @@
-// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+// NOTE: Use "db" as the host name to connect to the database and update the 
+// VARIANT arg in docker-compose.yml to pick a Node.js version: 10, 12, 14 
 {
 	"name": "Node.js & PostgreSQL",
 	"dockerComposeFile": "docker-compose.yml",
@@ -7,22 +8,31 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"sqltools.connections": [{
+			"name": "Container database",
+			"driver": "PostgreSQL",
+			"previewLimit": 50,
+			"server": "db",
+			"port": 5432,
+			"database": "postgres",
+			"username": "postgres",
+			"password": "LocalPassword",
+		}]
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"dbaeumer.vscode-eslint"
+		"dbaeumer.vscode-eslint",
+		"mtxr.sqltools",
+		"mtxr.sqltools-driver-pg"
 	]
-
-	// Uncomment the next line if you want start specific services in your Docker Compose config.
-	// "runServices": [],
 
 	// Uncomment the line below if you want to keep your containers running after VS Code shuts down.
 	// "shutdownAction": "none",
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	// "forwardPorts": [3000],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "yarn install",

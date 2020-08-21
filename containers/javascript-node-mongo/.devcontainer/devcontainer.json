@@ -1,4 +1,5 @@
-// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+// NOTE: Use "mongo" as the host name to connect to the database and update the 
+// VARIANT arg in docker-compose.yml to pick a Node.js version: 10, 12, 14 
 {
 	"name": "Node.js & Mongo DB",
 	"dockerComposeFile": "docker-compose.yml",
@@ -12,17 +13,15 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"dbaeumer.vscode-eslint"
+		"dbaeumer.vscode-eslint",
+		"mongodb.mongodb-vscode" 
 	]
-
-	// Uncomment the next line if you want start specific services in your Docker Compose config.
-	// "runServices": [],
 
 	// Uncomment the line below if you want to keep your containers running after VS Code shuts down.
 	// "shutdownAction": "none",
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	// "forwardPorts": [3000],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "yarn install",

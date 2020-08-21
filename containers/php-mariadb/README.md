@@ -3,6 +3,7 @@
 ## Summary
 
 Develop PHP based applications with MariaDB (MySQL Compatible).  Includes necessary extensions and tools for both PHP and MariaDB.
+
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | Richard Morrill [github.com/ThoolooExpress](https://github.com/ThoolooExpress) |
@@ -13,13 +14,15 @@ Develop PHP based applications with MariaDB (MySQL Compatible).  Includes necess
 
 ## Description
 
+> **Note:** Inside the container, you will find PostgreSQL running at `mariadb:3306` rather than localhost.
+
 This definition creates two containers, one for PHP and one for MariaDB.  Code will attach to the PHP container, and from within that container the MariaDB container will be available with the hostname `mariadb`.  The MariaDB instance can be managed via the automatically installed SQLTools extension, or from the container's command line with:
 
 ```bash
 mariadb -h mariadb -u root -p
 ```
 
-The password is defined by default as `just-for-testing`, and if desired this may be changed in `docker-compose.yml`.
+The default database is called `mariadb` with a `root` user password of `just-for-testing`, and if desired this may be changed in `docker-compose.yml`.
 
 ## Using this definition with an existing folder
 

@@ -1,8 +1,8 @@
-# Node.js & PostgresSQL
+# Node.js & PostgreSQL
 
 ## Summary
 
-*Develop applications in Node.js and Postgres. Includes Node.js, eslint, and yarn in a container linked to a Postgres DB container*
+*Develop applications in Node.js and PostgreSQL. Includes Node.js, eslint, and yarn in a container linked to a Postgres DB container*
 
 | Metadata | Value |  
 |----------|-------|
@@ -10,20 +10,29 @@
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Languages, platforms* | Node.js, JavaScript, Postgres DB |
+| *Languages, platforms* | Node.js, JavaScript, PostgreSQL DB |
 
-## Using this definition with an existing folder
+## Description
 
-While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. [Node Version Manager](https://github.com/nvm-sh/nvm) (`nvm`) is also included in case you need to use a different version of Node.js than the one included in the image.
+> **Note:** Inside the container, you will find PostgreSQL running at `db:5432` rather than localhost.
 
-You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` with one of the following: 10, 12, or 14.
+This definition creates two containers, one for Node.js and one for PostgreSQL. VS Code will attach to the Node.js container, and from within that container the PostgreSQL container will be available with the hostname `db`. The default database is named `postgres` with a user of `postgres` whose password is `LocalPassword`, and if desired this may be changed in `docker-compose.yml`.
+
+While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Node.js version 10, 12, or 14.
 
 ```yaml
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        VARIANT: 14
+build:
+  context: .
+  dockerfile: Dockerfile
+  args:
+    VARIANT: 12
+```
+
+The PostgreSQL instance can be managed via the automatically installed SQLTools extension, or you can expose the database to your local machine by uncommenting the following line in `.devcontainer/docker-compose.yaml`:
+
+```yaml
+ports:
+  - 5432:5432
 ```
 
 ### Adding the definition to your project
