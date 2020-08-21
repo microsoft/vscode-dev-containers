@@ -4,24 +4,18 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./java-debian.sh [JDK major version] [JAVA_HOME] [non-root user] [Add JAVA_HOME to rc files flag]
+# Syntax: ./java-debian.sh [JDK version] [SDKMAN_DIR] [non-root user] [Add to rc files flag]
 
-export JAVA_VERSION=${1:-"11"}
-export JAVA_HOME=${2:-"/opt/java/openjdk-${JAVA_VERSION}"}
+JAVA_VERSION=${1:-"lts"}
+export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
 USERNAME=${3:-"vscode"}
 UPDATE_RC=${4:-"true"}
 
 set -e
 
-JDK_11_URI="https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.8%2B10/OpenJDK11U-jdk_x64_linux_11.0.8_10.tar.gz"
-JDK_8_URI="https://github.com/AdoptOpenJDK/openjdk8-upstream-binaries/releases/download/jdk8u265-b01/OpenJDK8U-jdk_x64_linux_8u265b01.tar.gz"
-
-JAVA_URI_VAR="JDK_${JAVA_VERSION}_URI"
-JAVA_URI=${!JAVA_URI_VAR} 
-
-if [ "${JAVA_URI}" = "" ]; then
-    echo 'Only Java versions 8 and 11 are supported by this script.'
-    exit 1
+ # Blank will install latest AdoptOpenJDK version
+if [ "${JAVA_VERSION}" = "lts" ]; then
+    JAVA_VERSION=""
 fi
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -36,42 +30,30 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl if missing
-if ! dpkg -s curl ca-certificates > /dev/null 2>&1; then
+# Install curl, zip, unzip if missing
+if ! dpkg -s curl ca-certificates zip unzip sed > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates 
+    apt-get -y install --no-install-recommends curl ca-certificates zip unzip sed
 fi
 
-# Install Java
-if [ -d "${JAVA_HOME}" ]; then
-    echo "${JAVA_HOME} already exists. Assuming Java is already installed."
-    exit 0
-fi
-
-mkdir -p "${JAVA_HOME}"
-chown "${USERNAME}" "${JAVA_HOME}"
-
-
-
-su ${USERNAME} -c "$(cat << EOF
-    set -e
-    echo "Downloading JDK ${JAVA_VERSION}..."
-    curl -fsSL -o /tmp/openjdk.tar.gz ${JAVA_URI}
-    echo "Installing JDK ${JAVA_VERSION}..."
-    tar -xzf /tmp/openjdk.tar.gz -C ${JAVA_HOME} --strip-components=1
-    rm -f /tmp/openjdk.tar.gz
-EOF
-)"
-
-# Add JAVA_HOME and bin directory into bashrc/zshrc files (unless disabled)
-if [ "${UPDATE_RC}" = "true" ]; then
-    RC_SNIPPET="export JAVA_HOME=\"${JAVA_HOME}\"\nexport PATH=\"\${JAVA_HOME}/bin:\${PATH}\""
-    echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-    if [ "${USERNAME}" != "root" ]; then
-        echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc 
+# Install sdkman if not installed
+if [ ! -d "${SDKMAN_DIR}" ]; then
+    curl -sSL "https://get.sdkman.io?rcupdate=false" | bash
+    chown -R "${USERNAME}" "${SDKMAN_DIR}"
+    # Add sourcing of sdkman into bashrc/zshrc files (unless disabled)
+    if [ "${UPDATE_RC}" = "true" ]; then
+        RC_SNIPPET="export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
+        echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
+        if [ "${USERNAME}" != "root" ]; then
+            echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
+        fi
     fi
-else
-    echo "Done! Be sure to add ${JAVA_HOME}/bin to the PATH."
 fi
+
+if [ "${JAVA_VERSION}" != "none" ]; then
+    su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install java ${JAVA_VERSION}"
+fi
+
+echo "Done!"

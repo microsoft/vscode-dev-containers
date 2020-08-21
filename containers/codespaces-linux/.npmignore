@@ -1,8 +1,7 @@
 README.md
 test-project
 definition-manifest.json
-.devcontainer/library-scripts/*
-!.devcontainer/library-scripts/docker-debian.sh
+.devcontainer/library-scripts
 setup-user.sh
 symlinkDotNetCore.sh
 .vscode

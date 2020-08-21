@@ -14,7 +14,8 @@ ENV SHELL=/bin/bash \
     DOTNET_ROOT="/home/${USERNAME}/.dotnet"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
-COPY library-scripts/azcli-debian.sh library-scripts/common-debian.sh library-scripts/git-lfs-debian.sh library-scripts/github-debian.sh library-scripts/kubectl-helm-debian.sh setup-user.sh /tmp/scripts/
+COPY library-scripts/azcli-debian.sh library-scripts/common-debian.sh library-scripts/git-lfs-debian.sh library-scripts/github-debian.sh \
+    library-scripts/kubectl-helm-debian.sh setup-user.sh /tmp/scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove buster list to avoid unexpected errors given base image is stretch
     && rm /etc/apt/sources.list.d/buster.list \
@@ -68,31 +69,58 @@ RUN sudo -u ${USERNAME} npm config set prefix /home/${USERNAME}/.npm-global \
     # Clean up
     && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git /tmp/scripts/
 
-# Install OpenJDK 8 and 11
-ENV JAVA_HOME="/opt/java/openjdk-11"
-ENV PATH="${JAVA_HOME}/bin:${PATH}"
-COPY library-scripts/java-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/java-debian.sh 11 "${JAVA_HOME}" "${USERNAME}" "false" \
+# Install OpenJDK 8, latest Java LTS (11), gradle, maven
+ENV SDKMAN_DIR="/usr/local/sdkman"
+ENV PATH="${PATH}:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/maven/current/bin"
+COPY library-scripts/java-debian.sh library-scripts/maven-debian.sh library-scripts/gradle-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/java-debian.sh "lts" "${SDKMAN_DIR}" "${USERNAME}" "true" \
+    && bash /tmp/scripts/gradle-debian.sh "lts" "${SDKMAN_DIR}" "${USERNAME}" "true" \
+    && bash /tmp/scripts/maven-debian.sh "lts" "${SDKMAN_DIR}" "${USERNAME}" "true" \
     && echo "Installing JDK 8..." \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -yq openjdk-8-jdk \
-    && ln -s /opt/java/usr/lib/jvm/java-8-openjdk-amd64 /opt/java/openjdk-8 \
     && rm -rf /tmp/scripts && apt-get clean -y
 
-# Copy other bootstrapping scripts into container
+# Install Rust
 ENV CARGO_HOME="/usr/local/cargo" \
-    RUSTUP_HOME="/usr/local/rustup" \
-    GOROOT="/usr/local/go" \
+    RUSTUP_HOME="/usr/local/rustup"
+ENV PATH="${CARGO_HOME}/bin:${PATH}"
+COPY library-scripts/rust-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "false" \
+    && rm -rf /tmp/scripts && apt-get clean -y
+
+# Install Go
+ARG GOLANG_VERSION="1.15"
+ENV GOROOT="/usr/local/go" \
     GOPATH="/go"
-ENV PATH="${CARGO_HOME}/bin:${GOROOT}/bin:${PATH}:/usr/local/share/vscode-dev-containers/bin"
-COPY library-scripts/go-debian.sh library-scripts/rust-debian.sh /usr/local/share/vscode-dev-containers/script-library/
-RUN mkdir -p /usr/local/share/vscode-dev-containers/bin \
-    && cd /usr/local/share/vscode-dev-containers/bin \
-    && echo "sudo /bin/bash \$(dirname \$0)/../script-library/go-debian.sh \"\${1:-1.15}\" \${GOROOT} \${GOPATH} ${USERNAME} false true" > install-go \
-    && echo "sudo /bin/bash \$(dirname \$0)/../script-library/rust-debian.sh \${CARGO_HOME} \${RUSTUP_HOME} ${USERNAME} false" > install-rust \
-    && echo "export PATH=\"\${PATH}:/home/${USERNAME}/install-scripts\"" | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \ 
-    && chmod +x install-go install-rust \
-    && chown -R ${USERNAME} /usr/local/share/vscode-dev-containers
+ENV PATH="${GOROOT}/bin:${PATH}"
+COPY library-scripts/go-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/go-debian.sh "${GOLANG_VERSION}" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
+    && rm -rf /tmp/scripts && apt-get clean -y
+
+# Install rvm, Ruby, base gems
+COPY library-scripts/ruby-debian.sh /tmp/scripts/
+ENV PATH="${PATH}:/usr/local/rvm/bin"
+RUN bash /tmp/scripts/ruby-debian.sh "stable" "${USERNAME}" "true" \
+    && rm -rf /tmp/scripts && apt-get clean -y
+
+# Install Python tools
+ENV PIPX_HOME="/usr/local/py-utils" \
+    PIPX_BIN_DIR="/usr/local/py-utils/bin"
+ENV PATH="${PATH}:${PIPX_BIN_DIR}"
+COPY library-scripts/python-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/python-debian.sh "stable" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "false" \
+    && rm -rf /tmp/scripts && apt-get clean -y
+
+# Remove old versions
+# RUN rm -rf \
+#     /opt/nodejs/4* \
+#     /opt/nodejs/5* \
+#     /opt/nodejs/6* \
+#     /opt/nodejs/9* \
+#     /opt/dotnet/all/sdk/1* \
+#     /opt/dotnet/sdks/1* \
+#     /opt/dotnet/runtimes/1*
 
 # [Optional] Install Docker - Not in resulting image by default
 ARG INSTALL_DOCKER="false"

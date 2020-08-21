@@ -47,14 +47,37 @@ if ! ./test-common.sh ${USERNAME}; then
     FAILED+=("common-tests")
 fi
 
-# Check platforms
+# Check Oryx
 check "oryx" oryx platforms
+
+# Check .NET
 check "dotnet" dotnet --info
+
+# Check Python
 check "python" python --version
 check "pip" pip3 --version
-check "java" java --version
+check "pipx" pipx --version
+check "pylint" pylint --version
+check "flake8" flake8 --version
+check "autopep8" autopep8 --version
+check "yapf" yapf --version
+check "mypy" mypy --version
+check "pydocstyle" pydocstyle --version
+check "bandit" bandit --version
+check "virtualenv" virtualenv --version
 
-# Node
+# Check Java tools
+check "java" java --version
+check "sdkman" sdk --version
+check "gradle" gradle --version
+check "maven" maven --version
+
+# Check Ruby tools
+check "ruby" ruby --version
+check "rvm" rvm --version
+check "rake" rake --version
+
+# Node.js
 check "node" node --version
 check "nvm" nvm --version
 check "nvs" nvs --version
