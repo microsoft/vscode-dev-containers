@@ -1,13 +1,23 @@
-// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.112.0/containers/php-7
+// NOTE: Use "mariadb" as the host name to connect to the database and update 
+// the VARIANT arg in docker-compose.yml to pick a PHP version: 7, 7.3, 7.4 
 {
 	"name": "PHP & MariaDB",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "php",
+	"workspaceFolder": "/workspace",
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"sqltools.connections": [{
+			"name": "Container database",
+			"driver": "MariaDB",
+			"server": "mariadb",
+			"port": 3306,
+			"database": "mariadb",
+			"username": "root",
+			"password": " just-for-testing",
+		}]
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -18,14 +28,12 @@
 		"mtxr.sqltools-driver-mysql"
 	],
 
-	"workspaceFolder": "/workspace",
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	// For use with PHP (e.g.php -S localhost:8080)
+	"forwardPorts": [8080]
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "php -v",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode",
+	// "remoteUser": "vscode"
 }
