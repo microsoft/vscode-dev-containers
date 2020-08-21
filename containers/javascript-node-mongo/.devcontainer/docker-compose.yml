@@ -9,11 +9,16 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # Update VARIANT to pick a node version: 14, 12, 10
+        # Update VARIANT to pick a node version: 10, 12, 14
         VARIANT: 12
         # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
         USER_UID: 1000
         USER_GID: 1000
+
+    # Use "ports" to publish your web port locally. Consider "forwardPorts" in
+    # devcontainer.json instead if your app only allows connections from localhost. 
+    # ports:
+    #   - 3000:3000
 
     volumes:
       - ..:/workspace:cached
@@ -24,9 +29,14 @@ services:
     links:
       - mongo
 
+  # Note: The MongoDB host name is "mongo", not "localhost"
   mongo:
     image: mongo
     restart: unless-stopped
     volumes:
       - /data/db
- 
+
+    # Uncomment to allow access to mongodb from external tools
+    # ports:
+    #   - 27017:27017
+

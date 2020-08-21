@@ -14,16 +14,45 @@
 
 ## Using this definition with an existing folder
 
+> **Note:** Inside the container, you will find MongoDB running at `mongo:27017` rather than localhost.
+
+This definition creates two containers, one for Node.js and one for MongoDB. VS Code will attach to the Node.js container, and from within that container the MongoDB container will be available with the hostname `mongo`.
+
+While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Node.js version 10, 12, or 14.
+
+```yaml
+build:
+  context: .
+  dockerfile: Dockerfile
+  args:
+    VARIANT: 12
+```
+
+The MongoDB instance can be managed via the automatically installed MongoDB extension, or you can expose the database to your local machine by uncommenting the following line in `.devcontainer/docker-compose.yaml`:
+
+```yaml
+ports:
+  - 27017:27017
+```
+
+
 While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. [Node Version Manager](https://github.com/nvm-sh/nvm) (`nvm`) is also included in case you need to use a different version of Node.js than the one included in the image.
 
 You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Node.js version 10, 12, or 14.
 
 ```yaml
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        VARIANT: 14
+build:
+  context: .
+  dockerfile: Dockerfile
+  args:
+    VARIANT: 14
+```
+
+You can also expose MongoDB to your local machine by uncommenting the following lines in `.devcontainer/docker-compose.yml`:
+
+```yaml
+ports:
+  - 27017:27017
 ```
 
 ### Adding the definition to your project

@@ -25,12 +25,12 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, lldb, python3-minimal if missing
-if ! dpkg -s curl ca-certificates lldb python3-minimal > /dev/null 2>&1; then
+# Install curl, lldb, python3-minimal,and rust dependencies if missing
+if ! dpkg -s curl ca-certificates lldb python3-minimal gcc libc6-dev > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates 
+    apt-get -y install --no-install-recommends curl ca-certificates gcc libc6-dev
     apt-get -y install lldb python3-minimal libpython3.?
 fi
 
