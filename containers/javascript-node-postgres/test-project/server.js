@@ -14,9 +14,9 @@ const HOST = '0.0.0.0';
 const cn = {
 	host: 'db', // host of db container
 	port: 5432, // 5432 is the default;
-	database: 'data', // database name
-	user: 'user', // database user name
-	password: 'pass' // database password
+	database: 'postgres', // database name
+	user: 'postgres', // database user name
+	password: 'LocalPassword' // database password
 };
 const initOptions = {
 	promiseLib: promise

@@ -9,12 +9,17 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # Update VARIANT to pick a node version: 14, 12, 10
+        # Update VARIANT to pick a node version: 10, 12, 14
         VARIANT: 12
         # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
         USER_UID: 1000
         USER_GID: 1000
-    
+
+    # Use "ports" to publish your web port locally. Consider "forwardPorts" in
+    # devcontainer.json instead if your app only allows connections from localhost. 
+    # ports:
+    #   - 3000:3000
+
     volumes:
       - ..:/workspace:cached
       
@@ -24,13 +29,15 @@ services:
     links:
       - db
 
+  # Note: The PostgreSQL host name is "db", not "localhost"
   db:
     image: postgres
     restart: unless-stopped
-    ports: 
-      - 5432:5432
     environment:
-      POSTGRES_PASSWORD: pass
-      POSTGRES_USER: user
-      POSTGRES_DB: data
- 
+      POSTGRES_PASSWORD: LocalPassword
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    
+    # Uncomment to allow access to PostgreSQL from external tools
+    # ports: 
+    #  - 5432:5432
