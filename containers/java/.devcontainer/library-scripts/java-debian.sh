@@ -11,8 +11,6 @@ export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
 USERNAME=${3:-"vscode"}
 UPDATE_RC=${4:-"true"}
 
-echo $JAVA_VERSION
-
 set -e
 
  # Blank will install latest AdoptOpenJDK version

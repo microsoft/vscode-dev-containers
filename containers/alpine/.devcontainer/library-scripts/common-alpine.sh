@@ -72,7 +72,7 @@ chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
 # Optionally install and configure zsh
 if [ "$INSTALL_ZSH" = "true" ] && [ ! -d "/root/.oh-my-zsh" ]; then 
     apk add --no-cache zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     echo "export PATH=\$PATH:\$HOME/.local/bin" >> /root/.zshrc
     cp -R /root/.oh-my-zsh /home/$USERNAME
     cp /root/.zshrc /home/$USERNAME
