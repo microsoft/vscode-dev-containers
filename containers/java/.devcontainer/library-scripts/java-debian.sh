@@ -4,18 +4,20 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./gradle-debian.sh [gradle version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
+# Syntax: ./java-debian.sh [JDK version] [SDKMAN_DIR] [non-root user] [Add to rc files flag]
 
-GRADLE_VERSION=${1:-"lts"}
+JAVA_VERSION=${1:-"lts"}
 export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
 USERNAME=${3:-"vscode"}
 UPDATE_RC=${4:-"true"}
 
+echo $JAVA_VERSION
+
 set -e
 
- # Blank will install latest maven version
-if [ "${GRADLE_VERSION}" = "lts" ]; then
-    GRADLE_VERSION=""
+ # Blank will install latest AdoptOpenJDK version
+if [ "${JAVA_VERSION}" = "lts" ]; then
+    JAVA_VERSION=""
 fi
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -27,16 +29,6 @@ fi
 if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
-
-function updaterc() {
-    if [ "${UPDATE_RC}" = "true" ]; then
-        RC_SNIPPET="$1"
-        echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-        if [ "${USERNAME}" != "root" ]; then
-            echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
-        fi
-    fi
-}
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -53,10 +45,17 @@ if [ ! -d "${SDKMAN_DIR}" ]; then
     curl -sSL "https://get.sdkman.io?rcupdate=false" | bash
     chown -R "${USERNAME}" "${SDKMAN_DIR}"
     # Add sourcing of sdkman into bashrc/zshrc files (unless disabled)
-    updaterc "export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
+    if [ "${UPDATE_RC}" = "true" ]; then
+        RC_SNIPPET="export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
+        echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
+        if [ "${USERNAME}" != "root" ]; then
+            echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
+        fi
+    fi
 fi
 
-# Install gradle
-su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install gradle ${GRADLE_VERSION}"
-updaterc "export GRADLER_USER_HOME=\${HOME}/.gradle"
+if [ "${JAVA_VERSION}" != "none" ]; then
+    su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install java ${JAVA_VERSION}"
+fi
+
 echo "Done!"
