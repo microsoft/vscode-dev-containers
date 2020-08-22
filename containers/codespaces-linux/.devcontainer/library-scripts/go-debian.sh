@@ -27,12 +27,12 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, tar, git if missing
-if ! dpkg -s curl ca-certificates tar git > /dev/null 2>&1; then
+# Install curl, tar, git, other dependencies if missing
+if ! dpkg -s curl ca-certificates tar git g++ gcc libc6-dev make pkg-config > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates tar git
+    apt-get -y install --no-install-recommends curl ca-certificates tar git g++ gcc libc6-dev make pkg-config
 fi
 
 # Install Go
