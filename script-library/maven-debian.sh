@@ -4,23 +4,18 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./maven-debian.sh <maven version> [maven home]  [non-root user] [maven SHA 512]
+# Syntax: ./maven-debian.sh [maven version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
 
-MAVEN_VERSION=$1
-MAVEN_HOME=${2:-"/usr/local/share/maven"}
+MAVEN_VERSION=${1:-"lts"}
+export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
 USERNAME=${3:-"vscode"}
-MAVEN_DOWNLOAD_SHA=${4:-"no-check"}
+UPDATE_RC=${4:-"true"}
 
 set -e
 
-if [ -d "${MAVEN_HOME}" ]; then
-    echo "Maven already installed."
-    exit 0
-fi
-
-if [ -z "$1" ]; then
-    echo -e "Required argument missing.\n\nmaven-debian.sh <maven version> [maven home]  [non-root user] [maven SHA 512]"
-    exit 1
+ # Blank will install latest maven version
+if [ "${MAVEN_VERSION}" = "lts" ]; then
+    MAVEN_VERSION=""
 fi
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -33,34 +28,35 @@ if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-# Install curl, tar if missing
-if ! dpkg -s curl ca-certificates tar > /dev/null 2>&1; then
-    export DEBIAN_FRONTEND=noninteractive
+function updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        RC_SNIPPET="$1"
+        echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
+        if [ "${USERNAME}" != "root" ]; then
+            echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
+        fi
+    fi
+}
+
+export DEBIAN_FRONTEND=noninteractive
+
+# Install curl, zip, unzip if missing
+if ! dpkg -s curl ca-certificates zip unzip sed > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates tar
+    apt-get -y install --no-install-recommends curl ca-certificates zip unzip sed
 fi
 
-# Creat folder, add maven settings
-mkdir -p ${MAVEN_HOME} ${MAVEN_HOME}/ref
-tee ${MAVEN_HOME}/ref/maven-settings.xml > /dev/null \
-<< EOF 
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <localRepository>${MAVEN_HOME}/ref/repository</localRepository>
-</settings>
-EOF
-chown -R ${USERNAME}:root ${MAVEN_HOME}
+# Install sdkman if not installed
+if [ ! -d "${SDKMAN_DIR}" ]; then
+    curl -sSL "https://get.sdkman.io?rcupdate=false" | bash
+    chown -R "${USERNAME}" "${SDKMAN_DIR}"
+    # Add sourcing of sdkman into bashrc/zshrc files (unless disabled)
+    updaterc "export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
+fi
 
 # Install Maven
-echo "Downloading Maven..."
-su ${USERNAME} -c "$(cat << EOF
-    set -e
-    curl -fsSL -o /tmp/maven.tar.gz https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
-    ([ "${MAVEN_DOWNLOAD_SHA}" = "no-check" ] || echo "${MAVEN_DOWNLOAD_SHA} */tmp/maven.tar.gz" | sha512sum -c - )
-    tar -xzf /tmp/maven.tar.gz -C ${MAVEN_HOME} --strip-components=1
-    rm -f /tmp/maven.tar.gz
-EOF
-)"
-ln -s ${MAVEN_HOME}/bin/mvn /usr/local/bin/mvn
+su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install maven ${MAVEN_VERSION}"
+updaterc "export M2=\$HOME/.m2"
 echo "Done!"

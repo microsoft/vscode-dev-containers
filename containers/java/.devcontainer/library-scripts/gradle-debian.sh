@@ -4,23 +4,18 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./gradle-debian.sh <gradle version> [gradle home] [non-root-user] [gradle SHA 256]
+# Syntax: ./gradle-debian.sh [gradle version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
 
-GRADLE_VERSION=$1
-GRADLE_HOME=${2:-"/usr/local/share/gradle"}
+GRADLE_VERSION=${1:-"lts"}
+export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
 USERNAME=${3:-"vscode"}
-GRADLE_DOWNLOAD_SHA=${4:-"no-check"}
+UPDATE_RC=${4:-"true"}
 
 set -e
 
-if [ -d "${GRADLE_HOME}" ]; then
-    echo "Gradle already installed."
-    exit 0
-fi
-
-if [ -z "$1" ]; then
-    echo -e "Required argument missing.\n\ngradle-debian.sh <gradle version> [gradle home] [non-root-user] [gradle SHA 256]"
-    exit 1
+ # Blank will install latest maven version
+if [ "${GRADLE_VERSION}" = "lts" ]; then
+    GRADLE_VERSION=""
 fi
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -33,30 +28,35 @@ if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-# Install curl, unzip if missing
-if ! dpkg -s curl ca-certificates unzip > /dev/null 2>&1; then
-    export DEBIAN_FRONTEND=noninteractive
+function updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        RC_SNIPPET="$1"
+        echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
+        if [ "${USERNAME}" != "root" ]; then
+            echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
+        fi
+    fi
+}
+
+export DEBIAN_FRONTEND=noninteractive
+
+# Install curl, zip, unzip if missing
+if ! dpkg -s curl ca-certificates zip unzip sed > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates unzip
+    apt-get -y install --no-install-recommends curl ca-certificates zip unzip sed
 fi
 
+# Install sdkman if not installed
+if [ ! -d "${SDKMAN_DIR}" ]; then
+    curl -sSL "https://get.sdkman.io?rcupdate=false" | bash
+    chown -R "${USERNAME}" "${SDKMAN_DIR}"
+    # Add sourcing of sdkman into bashrc/zshrc files (unless disabled)
+    updaterc "export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
+fi
 
-# Install Gradle
-echo "Downloading Gradle..."
-su ${USERNAME} -c "$(cat << EOF
-    set -e
-    mkdir -p /tmp/downloads
-    curl -sSL --output /tmp/downloads/archive-gradle.zip https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
-    ([ "${GRADLE_DOWNLOAD_SHA}" = "no-check" ] || echo "${GRADLE_DOWNLOAD_SHA} */tmp/downloads/archive-gradle.zip" | sha256sum --check - )
-    unzip -q /tmp/downloads/archive-gradle.zip -d /tmp/downloads/
-EOF
-)"
-mv -f /tmp/downloads/gradle* ${GRADLE_HOME}
-chown ${USERNAME}:root ${GRADLE_HOME}
-ln -s ${GRADLE_HOME}/bin/gradle /usr/local/bin/gradle
-rm -rf /tmp/downloads
+# Install gradle
+su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install gradle ${GRADLE_VERSION}"
+updaterc "export GRADLER_USER_HOME=\${HOME}/.gradle"
 echo "Done!"
-
-
