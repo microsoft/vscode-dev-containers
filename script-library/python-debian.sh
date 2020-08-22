@@ -7,7 +7,7 @@
 # Syntax: ./python-debian.sh [Python Version] [Python intall path] [PIPX_HOME] [non-root user] [Update rc files flag] [install tools]
 
 PYTHON_VERSION=${1:-"3.8.3"}
-PYTHON_INSTALL_PATH=${2:-"/usr/local/python"}
+PYTHON_INSTALL_PATH=${2:-"/usr/local/python${PYTHON_VERSION}"}
 export PIPX_HOME=${3:-"/usr/local/py-utils"}
 USERNAME=${4:-"vscode"}
 UPDATE_RC=${5:-"true"}
@@ -37,29 +37,40 @@ function updaterc() {
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, tar if missing
-if ! dpkg -s curl ca-certificates tar > /dev/null 2>&1; then
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        apt-get update
-    fi
-    apt-get -y install --no-install-recommends curl ca-certificates tar
-fi
-
-PYTHON_INSTALL_SCRIPT="$(cat << EOF
-    set -e
-    curl -sSL -o /tmp/python-dl.tgz "https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz"
-    tar -xzf /tmp/python-dl.tgz -C ${PYTHON_INSTALL_PATH} --strip-components=1
-    rm -f /tmp/python-dl.tgz
-EOF
-)"
-
+# Install python from source if needed
 if [ "${PYTHON_VERSION}" != "none" ]; then
+
     if [ -d "${PYTHON_INSTALL_PATH}" ]; then
         echo "Path ${PYTHON_INSTALL_PATH} already exists. Assuming Python already installed."
     else
-        mkdir -p "${PYTHON_INSTALL_PATH}"
-        chown ${USERNAME} "${PYTHON_INSTALL_PATH}"
-        su ${USERNAME} -c "${PYTHON_INSTALL_SCRIPT}"
+        echo "Building Python ${PYTHON_VERSION} from source..."
+        # Install prereqs if missing
+        PREREQ_PKGS="curl ca-certificates tar make build-essential libffi-dev \
+            libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+            libncurses5-dev libncursesw5-dev xz-utils tk-dev"
+        if ! dpkg -s ${PREREQ_PKGS} > /dev/null 2>&1; then
+            if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+                apt-get update
+            fi
+            apt-get -y install --no-install-recommends ${PREREQ_PKGS}
+        fi
+
+        # Download and build from src
+        mkdir -p /tmp/python-src "${PYTHON_INSTALL_PATH}"
+        cd /tmp/python-src
+        curl -sSL -o /tmp/python-dl.tgz "https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz"
+        tar -xzf /tmp/python-dl.tgz -C "/tmp/python-src" --strip-components=1
+        ./configure --prefix="${PYTHON_INSTALL_PATH}" --enable-optimizations --with-ensurepip=install
+        make -j 8
+        make install
+        rm -rf /tmp/python-dl.tgz /tmp/python-src
+        cd /tmp
+        chown -R ${USERNAME} "${PYTHON_INSTALL_PATH}"
+        ln -s ${PYTHON_INSTALL_PATH}/bin/python3 ${PYTHON_INSTALL_PATH}/bin/python
+        ln -s ${PYTHON_INSTALL_PATH}/bin/pip3 ${PYTHON_INSTALL_PATH}/bin/pip
+        ln -s ${PYTHON_INSTALL_PATH}/bin/idle3 ${PYTHON_INSTALL_PATH}/bin/idle
+        ln -s ${PYTHON_INSTALL_PATH}/bin/pydoc3 ${PYTHON_INSTALL_PATH}/bin/pydoc
+        ln -s ${PYTHON_INSTALL_PATH}/bin/python3-config ${PYTHON_INSTALL_PATH}/bin/python-config
         updaterc "export PATH=${PYTHON_INSTALL_PATH}/bin:\${PATH}"
     fi
 fi
@@ -84,14 +95,16 @@ DEFAULT_UTILS="\
     virtualenv"
 
 export PIPX_BIN_DIR=${PIPX_HOME}/bin
+export PATH=${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:${PATH}
 mkdir -p ${PIPX_BIN_DIR}
 chown -R ${USERNAME} ${PIPX_HOME} ${PIPX_BIN_DIR}
 su ${USERNAME} -c "$(cat << EOF
     set -e
-    export PATH=${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:\${PATH}
+    echo "Installing Python tools..."
     export PIPX_HOME=${PIPX_HOME}
     export PIPX_BIN_DIR=${PIPX_BIN_DIR}
     export PYTHONUSERBASE=/tmp/pip-tmp
+    export PATH=${PATH}
     pip3 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user pipx
     /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir pipx
     echo "${DEFAULT_UTILS}" | xargs -n 1 /tmp/pip-tmp/bin/pipx install --system-site-packages --pip-args=--no-cache-dir --pip-args=--force-reinstall
@@ -99,4 +112,4 @@ su ${USERNAME} -c "$(cat << EOF
     rm -rf /tmp/pip-tmp
 EOF
 )"
-updaterc "export PIPX_HOME=${PIPX_HOME}\nexport PIPX_BIN_DIR=${PIPX_BIN_DIR}\nexport PATH=${PATH}:${PYTHON_INSTALL_PATH}/bin\${PIPX_BIN_DIR}"
+updaterc "export PIPX_HOME=${PIPX_HOME}\nexport PIPX_BIN_DIR=${PIPX_BIN_DIR}\nexport PATH=\${PATH}:\${PIPX_BIN_DIR}"
