@@ -1,7 +1,7 @@
 {
 	"name": "Java",
 	"build": {
-		"dockerfile": "base.Dockerfile",
+		"dockerfile": "Dockerfile",
 		"args": {
 			// Update the VARIANT arg to pick a Java version: 11, 14
 			"VARIANT": "11",
