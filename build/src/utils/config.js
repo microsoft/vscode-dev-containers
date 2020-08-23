@@ -82,7 +82,6 @@ async function loadConfig(repoPath) {
         }
     }
     config.needsDedicatedPage = config.needsDedicatedPage || [];
-    config.definitionsToSkip = config.definitionsToSkip || [];
 }
 
 // Get a value from the config file or a similarly named env var
@@ -232,6 +231,7 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
 function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
     page = page || 1;
     pageTotal = pageTotal || 1;
+    definitionsToSkip = definitionsToSkip || [];
 
     // Bucket definitions by parent
     const parentBuckets = {}
@@ -239,16 +239,20 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
     let total = 0;
     for (let definitionId in config.definitionBuildSettings) {
         // If paged build, ensure this definition should be included
-        if (typeof config.definitionBuildSettings[definitionId] === 'object' && definitionsToSkip.indexOf(definitionId) < 0) {
-            const parentId = config.definitionBuildSettings[definitionId].parent;
-            // TODO: Handle parents that have parents
-            if (typeof parentId !== 'undefined') {
-                parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
-                parentBuckets[parentId].push(definitionId);
+        if (typeof config.definitionBuildSettings[definitionId] === 'object') {
+            if (definitionsToSkip.indexOf(definitionId) < 0) {
+                const parentId = config.definitionBuildSettings[definitionId].parent;
+                // TODO: Handle parents that have parents
+                if (typeof parentId !== 'undefined') {
+                    parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
+                    parentBuckets[parentId].push(definitionId);
+                } else {
+                    noParentList.push(definitionId);
+                }
+                total++;
             } else {
-                noParentList.push(definitionId);
+                console.log(`(*) Skipping ${definitionId}.`)
             }
-            total++;
         }
     }
     // Remove parents from no parent list - they are in their buckets already
@@ -262,9 +266,11 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
     let pageTotalMinusDedicatedPages = pageTotal;
     // Remove items that need their own buckets and add the buckets
     if(config.needsDedicatedPage) {
-        if (pageTotal > config.needsDedicatedPage.length) {
-            pageTotalMinusDedicatedPages = pageTotal - config.needsDedicatedPage.length;
-            config.needsDedicatedPage.forEach((definitionId) => {
+        // Remove skipped items from list that needs dedicated page
+        const filteredNeedsDedicatedPage = config.needsDedicatedPage.reduce((prev, current) => (definitionsToSkip.indexOf(current) < 0 ? prev.concat(current) : prev), []);
+        if (pageTotal > filteredNeedsDedicatedPage.length) {
+            pageTotalMinusDedicatedPages = pageTotal - filteredNeedsDedicatedPage.length;
+            filteredNeedsDedicatedPage.forEach((definitionId) => {
                 allPages.push([definitionId]);
                 const definitionIndex = noParentList.indexOf(definitionId);
                 if(definitionIndex > -1) {
@@ -273,7 +279,7 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
                 }
             });
         } else {
-            console.log(`(!) Not enough pages to give dedicated pages to ${JSON.stringify(config.needsDedicatedPage, null, 4)}. Adding them to other pages.`);
+            console.log(`(!) Not enough pages to give dedicated pages to ${JSON.stringify(filteredNeedsDedicatedPage, null, 4)}. Adding them to other pages.`);
         }    
     }
 

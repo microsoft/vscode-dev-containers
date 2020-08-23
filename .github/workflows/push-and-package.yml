@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-push:
-    name: Build and push
+    name: Build and push images
     strategy:
       matrix:
         page: [1, 2, 3, 4]
@@ -16,6 +16,15 @@ jobs:
       fail-fast: true
     runs-on: ubuntu-latest
     steps:
+    - name: Free more space
+      id: free_space 
+      run: |
+        set -e
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
     - name: Checkout
       id: checkout
       uses: actions/checkout@v2
@@ -35,10 +44,6 @@ jobs:
       run: |
         set -e
 
-        # Ensure enough space is available for build
-        sudo apt-get autoremove -y
-        sudo apt-get clean -y
-        
         # ACR login
         ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
         az acr login --name $ACR_REGISTRY_NAME
