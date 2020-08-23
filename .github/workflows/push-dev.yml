@@ -1,12 +1,23 @@
-name: CI & Push "dev"
+name: Build and push "dev" images
 
 on: 
   #repository_dispatch:
   push:
     branches: [master]
     paths:
-      - 'containers/**'
-      - 'script-library/**'
+      - 'containers/alpine/**'
+      - 'containers/debian/**'
+      - 'containers/cpp/**'
+      - 'containers/dotnetcore/**'
+      - 'containers/go/**'
+      - 'containers/java/**'
+      - 'containers/javascript-node/**'
+      - 'containers/php/**'
+      - 'containers/python/**'
+      - 'containers/ruby/**'
+      - 'containers/rust/**'
+      - 'containers/typescript-node/**'
+      - 'containers/ubuntu/**'
 
 jobs:
   build-and-push:
@@ -19,6 +30,15 @@ jobs:
       fail-fast: true
     runs-on: ubuntu-latest
     steps:
+    - name: Free more space
+      id: free_space 
+      run: |
+        set -e
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
     - name: Checkout
       id: checkout
       uses: actions/checkout@v1
@@ -33,10 +53,6 @@ jobs:
       id: build_and_push
       run: |
         set -e
-
-        # Ensure enough space is available for build
-        sudo apt-get autoremove -y
-        sudo apt-get clean -y
 
         # ACR login
         ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
@@ -55,7 +71,8 @@ jobs:
                           --registry ${{ secrets.REGISTRY }} \
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
-                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
+                          --skip codespaces-linux
 
   package:
     name: Package
@@ -96,33 +113,10 @@ jobs:
         name: ${{ steps.package.outputs.package_name }}
         path: ./${{ steps.package.outputs.package_name }}
 
-  copy-scripts:
-    name: Copy and commit script-library updates
-    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    needs: [build-and-push]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      id: checkout
-      uses: actions/checkout@v1
-
-    - name: Copy and commit script-library updates
-      id: copy-scripts
-      run: |
-        set -e
-        yarn install
-        build/vscdc copy-library-scripts
-        git config --global user.email "vscr-feedback@microsoft.com"
-        git config --global user.name "CI"
-        git add -u
-        git commit -m 'Automated update for script library changes' \
-          && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
-          || echo 'No updates to script-library'
-
   cgmanifest:
     name: Trigger CG generation
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    needs: [copy-scripts]
+    needs: [package]
     runs-on: ubuntu-latest
     steps:
     - name: Trigger CG generation 

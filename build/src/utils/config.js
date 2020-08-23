@@ -42,7 +42,7 @@ async function loadConfig(repoPath) {
             if (buildJson.dependencies) {
                 config.definitionDependencies[definitionId] = buildJson.dependencies;
             }
-            if(buildJson.definitionVersion) {
+            if (buildJson.definitionVersion) {
                 config.definitionVersions[definitionId] = buildJson.definitionVersion;
             }
         }
@@ -52,11 +52,11 @@ async function loadConfig(repoPath) {
     for (let definitionId in config.definitionBuildSettings) {
         const buildSettings = config.definitionBuildSettings[definitionId];
         const definitionVariants = config.definitionVariants[definitionId];
-        const dependencies = config.definitionDependencies[definitionId]; 
-    
+        const dependencies = config.definitionDependencies[definitionId];
+
         // Populate images list for variants
-        dependencies.imageVariants = definitionVariants ? 
-        definitionVariants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
+        dependencies.imageVariants = definitionVariants ?
+            definitionVariants.map((variant) => dependencies.image.replace('${VARIANT}', variant)) :
             [dependencies.image];
 
         // Populate image tag lookup
@@ -66,14 +66,14 @@ async function loadConfig(repoPath) {
             variants.forEach((variant) => {
                 const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag) => {
-                    definitionTagLookup[blankTag] = { 
+                    definitionTagLookup[blankTag] = {
                         id: definitionId,
                         variant: variant
                     };
                 });
                 const devTagList = getTagsForVersion(definitionId, 'dev', 'ANY', 'ANY', variant);
                 devTagList.forEach((devTag) => {
-                    definitionTagLookup[devTag] = { 
+                    definitionTagLookup[devTag] = {
                         id: definitionId,
                         variant: variant
                     }
@@ -82,7 +82,6 @@ async function loadConfig(repoPath) {
         }
     }
     config.needsDedicatedPage = config.needsDedicatedPage || [];
-    config.definitionsToSkip = config.definitionsToSkip || [];
 }
 
 // Get a value from the config file or a similarly named env var
@@ -134,7 +133,7 @@ function getLatestTag(definitionId, registry, registryPath) {
     // Given there could be multiple registries in the tag list, get all the different latest variations
     return config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
         const latest = `${registry}/${registryPath}/${tag.replace(/:.+/, ':latest')}`
-        if(list.indexOf(latest) < 0) {
+        if (list.indexOf(latest) < 0) {
             list.push(latest);
         }
         return list;
@@ -151,25 +150,25 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
     if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
         return null;
     }
-    
+
     // Use the first variant if none passed in, unless there isn't one
     if (!variant) {
         const variants = getVariants(definitionId);
         variant = variants ? variants[0] : 'NOVARIANT';
     }
-    let tags  = config.definitionBuildSettings[definitionId].tags;
+    let tags = config.definitionBuildSettings[definitionId].tags;
 
     // See if there are any variant specific tags that should be added to the output
     const variantTags = config.definitionBuildSettings[definitionId].variantTags;
     // ${VARIANT} or $VARIANT may be passed in as a way to do lookups. Add all in this case.
-    if (['${VARIANT}', '$VARIANT'].indexOf(variant) > -1 ) {
-        if(variantTags) {
+    if (['${VARIANT}', '$VARIANT'].indexOf(variant) > -1) {
+        if (variantTags) {
             for (let variantEntry in variantTags) {
                 tags = tags.concat(variantTags[variantEntry]);
-            }    
-        } 
+            }
+        }
     } else {
-        if(variantTags) {
+        if (variantTags) {
             tags = tags.concat(variantTags[variant]);
         }
     }
@@ -218,9 +217,9 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
     let tagList = (updateLatest
         && config.definitionBuildSettings[definitionId].latest
         && variant === firstVariant)
-            ? getLatestTag(definitionId, registry, registryPath)
-            : [];
-    
+        ? getLatestTag(definitionId, registry, registryPath)
+        : [];
+
     versionList.forEach((tagVersion) => {
         tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
     });
@@ -229,25 +228,31 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
 }
 
 // Walk the image build config and paginate and sort list so parents build before (and with) children
-function getSortedDefinitionBuildList(page, pageTotal) {
+function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
     page = page || 1;
     pageTotal = pageTotal || 1;
+    definitionsToSkip = definitionsToSkip || [];
 
     // Bucket definitions by parent
     const parentBuckets = {}
     const noParentList = [];
     let total = 0;
     for (let definitionId in config.definitionBuildSettings) {
-        if (typeof config.definitionBuildSettings[definitionId] === 'object' && config.definitionsToSkip.indexOf(definitionId) < 0) {
-            const parentId = config.definitionBuildSettings[definitionId].parent;
-            // TODO: Handle parents that have parents
-            if (typeof parentId !== 'undefined') {
-                parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
-                parentBuckets[parentId].push(definitionId);
+        // If paged build, ensure this definition should be included
+        if (typeof config.definitionBuildSettings[definitionId] === 'object') {
+            if (definitionsToSkip.indexOf(definitionId) < 0) {
+                const parentId = config.definitionBuildSettings[definitionId].parent;
+                // TODO: Handle parents that have parents
+                if (typeof parentId !== 'undefined') {
+                    parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
+                    parentBuckets[parentId].push(definitionId);
+                } else {
+                    noParentList.push(definitionId);
+                }
+                total++;
             } else {
-                noParentList.push(definitionId);
+                console.log(`(*) Skipping ${definitionId}.`)
             }
-            total++;
         }
     }
     // Remove parents from no parent list - they are in their buckets already
@@ -260,20 +265,22 @@ function getSortedDefinitionBuildList(page, pageTotal) {
     const allPages = [];
     let pageTotalMinusDedicatedPages = pageTotal;
     // Remove items that need their own buckets and add the buckets
-    if(config.needsDedicatedPage) {
-        if (pageTotal > config.needsDedicatedPage.length) {
-            pageTotalMinusDedicatedPages = pageTotal - config.needsDedicatedPage.length;
-            config.needsDedicatedPage.forEach((definitionId) => {
+    if (config.needsDedicatedPage) {
+        // Remove skipped items from list that needs dedicated page
+        const filteredNeedsDedicatedPage = config.needsDedicatedPage.reduce((prev, current) => (definitionsToSkip.indexOf(current) < 0 ? prev.concat(current) : prev), []);
+        if (pageTotal > filteredNeedsDedicatedPage.length) {
+            pageTotalMinusDedicatedPages = pageTotal - filteredNeedsDedicatedPage.length;
+            filteredNeedsDedicatedPage.forEach((definitionId) => {
                 allPages.push([definitionId]);
                 const definitionIndex = noParentList.indexOf(definitionId);
-                if(definitionIndex > -1) {
+                if (definitionIndex > -1) {
                     noParentList.splice(definitionIndex, 1);
                     total--;
                 }
             });
         } else {
-            console.log(`(!) Not enough pages to give dedicated pages to ${JSON.stringify(config.needsDedicatedPage, null, 4)}. Adding them to other pages.`);
-        }    
+            console.log(`(!) Not enough pages to give dedicated pages to ${JSON.stringify(filteredNeedsDedicatedPage, null, 4)}. Adding them to other pages.`);
+        }
     }
 
     // Create pages and distribute entries with no parents
@@ -321,8 +328,8 @@ function getParentTagForVersion(definitionId, version, registry, registryPath, v
 function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updatedVersion, updatedRegistry, updatedRegistryPath, variant) {
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
-    
-    const definition =  getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath);
+
+    const definition = getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath);
 
     // If definition not found, fall back on swapping out more generic logic - e.g. for when a image is referenced by ${VARIANT}
     if (!definition) {
@@ -335,13 +342,13 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
     // See if no variant passed in, see definition has any and use one if it matches
     if (!variant) {
         let variants = getVariants(definition.id);
-        if(variants) {
+        if (variants) {
             // The variant may be passed in as an ARG instead, support that too
             variants = variants.concat(['${VARIANT}', '$VARIANT']);
             // Find the best match if any exist
             const tagPart = /.+:(.+)/.exec(currentTag)[1];
             variant = variants.reduce((prev, current) => {
-                return new RegExp(`^.*-?${current.replace('$','\\$')}$`).exec(tagPart) ? current : prev;
+                return new RegExp(`^.*-?${current.replace('$', '\\$')}$`).exec(tagPart) ? current : prev;
             }, false);
         }
     }
@@ -408,6 +415,10 @@ async function getStagingFolder(release) {
     return stagingFolders[release];
 }
 
+function shouldFlattenDefinitionBaseImage(definitionId) {
+    return (getConfig('flattenBaseImage', []).indexOf(definitionId) >= 0)
+}
+
 module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
@@ -424,5 +435,6 @@ module.exports = {
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
     getVersionFromRelease: getVersionFromRelease,
     getTagsForVersion: getTagsForVersion,
-    getConfig: getConfig
+    getConfig: getConfig,
+    shouldFlattenDefinitionBaseImage: shouldFlattenDefinitionBaseImage
 };

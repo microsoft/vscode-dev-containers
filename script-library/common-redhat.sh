@@ -7,10 +7,10 @@
 # Syntax: ./common-redhat.sh <install zsh flag> <username> <user UID> <user GID>
 
 INSTALL_ZSH=${1:-"true"}
-USERNAME=${2:-"$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)"}
+USERNAME=${2:-"vscode"}
 USER_UID=${3:-1000}
 USER_GID=${4:-1000}
-UPGRADE_PACKAGES=${5:-true}
+UPGRADE_PACKAGES=${5:-"true"}
 
 set -e
 

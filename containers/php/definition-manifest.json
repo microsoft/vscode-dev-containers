@@ -66,6 +66,15 @@
 						"DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
 					}
 				}
+			}, {
+				"Component": {
+					"Type": "other",
+					"Other": {
+						"Name": "Composer",
+						"Version": "1.10.10",
+						"DownloadUrl": "https://getcomposer.org/installer"
+					}
+				}
 			}
 		]
 	}

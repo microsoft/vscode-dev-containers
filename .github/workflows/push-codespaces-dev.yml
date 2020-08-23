@@ -1,19 +1,18 @@
-name: Run Patches
+name: Build and push "dev" for universal image
 
 on: 
   #repository_dispatch:
   push:
     branches: [master]
     paths:
-      - 'build/patch/**'
+      - 'containers/codespaces-linux/**'
 
 jobs:
-  patch-all:
-    name: Run Patches
+  build-and-push:
+    name: Build and push universal image
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     runs-on: ubuntu-latest
     steps:
-
     - name: Free more space
       id: free_space 
       run: |
@@ -33,8 +32,8 @@ jobs:
       with:
         creds: ${{ secrets.AZ_ACR_CREDS }}
 
-    - name: Run patches
-      id: run_all_patches
+    - name: Build and push dev tag
+      id: build_and_push
       run: |
         set -e
 
@@ -42,16 +41,18 @@ jobs:
         ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
         az acr login --name $ACR_REGISTRY_NAME
 
-        # Execute patching
+        # Build and push dev images
         yarn install
-        build/vscdc patch --all \
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        build/vscdc push  codespaces-linux
+                          --release $GIT_BRANCH \
+                          --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \
-                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }}
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
 
-        # Add resulting status.json file back to source control
-        git config --global user.email "vscr-feedback@microsoft.com"
-        git config --global user.name "CI"
-        git add build/patch/status.json
-        git commit -m 'Automated update' \
-          && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
-          || echo 'No updates to status.json'
+
