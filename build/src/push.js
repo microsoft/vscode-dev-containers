@@ -10,7 +10,7 @@ const configUtils = require('./utils/config');
 const prep = require('./prep');
 
 async function push(repo, release, updateLatest, registry, registryPath, stubRegistry,
-    stubRegistryPath, pushImages, prepOnly, page, pageTotal, replaceImages, definitionsToSkip, definitionId) {
+    stubRegistryPath, pushImages, prepOnly, definitionsToSkip, page, pageTotal, replaceImages, definitionId) {
 
     // Optional argument defaults
     prepOnly = typeof prepOnly === 'undefined' ? false : prepOnly;

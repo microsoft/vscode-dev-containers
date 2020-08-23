@@ -36,7 +36,7 @@ jobs:
         set -e
         cd script-library
         if [ "${{ matrix.os }}" = "redhat" ]; then
-          IMAGE_TO_TEST=centos
+          IMAGE_TO_TEST="centos:7"
         else
           IMAGE_TO_TEST=${{ matrix.os }}
         fi
