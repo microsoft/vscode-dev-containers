@@ -45,7 +45,7 @@ jobs:
   copy-scripts:
     name: Copy and commit script-library updates
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    needs: [test_script_library]
+    needs: [test-script-library]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
