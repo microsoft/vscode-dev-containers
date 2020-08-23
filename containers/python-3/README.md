@@ -42,6 +42,18 @@ Alternatively, you can use the contents of `base.Dockerfile` to fully customize 
 
 Beyond Python and `git`, this image / `Dockerfile` includes a number of Python tools, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
 
+### Installing Node.js
+
+Given how frequently Python-based web applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+
+```json
+"args": {
+    "VARIANT": "3",
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10"
+}
+```
+
 #### Installing or updating Python utilities
 
 This container installs all Python development utilities using [pipx](https://pipxproject.github.io/pipx/) to avoid impacting the global Python environment. You can use this same utility add additional utilities in an isolated environment. For example:

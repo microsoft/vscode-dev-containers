@@ -3,8 +3,13 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "..",
-		// Update 'VARIANT' to pick a Python version: 3, 3.6, 3.7, 3.8 
-		"args": { "VARIANT": "3" }
+		"args": { 
+			// Update 'VARIANT' to pick a Python version: 3, 3.6, 3.7, 3.8 
+			"VARIANT": "3",
+			// Options
+			"INSTALL_NODE": "true",
+			"NODE_VERSION": "lts/*"
+		}
 	},
 
 	// Set *default* container specific settings.json values on container create.
