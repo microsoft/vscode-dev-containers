@@ -11,6 +11,8 @@
 	},
 
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
+	"workspaceMount": "source=${localWorkspaceFolder}/../..,target=/workspace,type=bind",
+	"workspaceFolder": "/workspace",
 	"overrideCommand": false,
 
 	"settings": { 
