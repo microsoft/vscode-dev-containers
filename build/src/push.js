@@ -74,7 +74,7 @@ async function pushImage(definitionPath, definitionId, repo, release, updateLate
         if (prepOnly) {
             console.log(`(*) Skipping build and push to registry.`);
         } else {
-            if(prepResult.shouldFlattenBaseImage) {
+            if (prepResult.shouldFlattenBaseImage) {
                 console.log(`(*) Flattening base image...`);
                 await flattenBaseImage(prepResult.baseImageTag, prepResult.flattenedBaseImageTag, pushImages);
             }
@@ -137,16 +137,16 @@ async function flattenBaseImage(baseImageTag, flattenedBaseImageTag, pushImages)
     const processOpts = { stdio: 'inherit', shell: true };
     console.log('(*) Preparing base image...');
     await asyncUtils.spawn('docker', ['run', '-d', '--name', 'vscode-dev-containers-build-flatten', baseImageTag, 'bash'], processOpts);
-    const containerInspectOutput = await asyncUtils.spawn('docker', ['inspect','vscode-dev-containers-build-flatten'], { shell: true, stdio: 'pipe' });
+    const containerInspectOutput = await asyncUtils.spawn('docker', ['inspect', 'vscode-dev-containers-build-flatten'], { shell: true, stdio: 'pipe' });
     console.log('(*) Flattening (this could take a while)...');
     const config = JSON.parse(containerInspectOutput)[0].Config;
     const envString = config.Env.reduce((prev, current) => prev + ' ' + current, '');
     const importArgs = `-c 'ENV ${envString}' -c 'ENTRYPOINT ${JSON.stringify(config.Entrypoint)}' -c 'CMD ${JSON.stringify(config.Cmd)}'`;
     await asyncUtils.exec(`docker export vscode-dev-containers-build-flatten | docker import ${importArgs} - ${flattenedBaseImageTag}`, processOpts);
-    await asyncUtils.spawn('docker', ['container', 'rm', '-f', 'vscode-dev-containers-build-flatten'], processOpts);    
+    await asyncUtils.spawn('docker', ['container', 'rm', '-f', 'vscode-dev-containers-build-flatten'], processOpts);
 
     // Push if enabled
-    if(pushImages) {
+    if (pushImages) {
         console.log('(*) Pushing...');
         await asyncUtils.spawn('docker', ['push', flattenedBaseImageTag], processOpts);
     } else {
@@ -159,13 +159,13 @@ async function isDefinitionVersionAlreadyPublished(definitionId, release, regist
     const tagsToCheck = configUtils.getTagList(definitionId, release, false, registry, registryPath, variant);
     const tagParts = tagsToCheck[0].split(':');
     const registryName = registry.replace(/\..*/, '');
-    return await isImageAlreadyPublished(registryName, tagParts[0].replace(/[^\/]+\//,''), tagParts[1]);
+    return await isImageAlreadyPublished(registryName, tagParts[0].replace(/[^\/]+\//, ''), tagParts[1]);
 }
 
-async function isImageAlreadyPublished(registryName, repositoryName, tagName) {    
+async function isImageAlreadyPublished(registryName, repositoryName, tagName) {
     registryName = registryName.replace(/\.azurecr\.io.*/, '');
     // Check if repository exists
-    const repositoriesOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'list', '--name', registryName ], { shell: true, stdio: 'pipe' });
+    const repositoriesOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'list', '--name', registryName], { shell: true, stdio: 'pipe' });
     const repositories = JSON.parse(repositoriesOutput);
     if (repositories.indexOf(repositoryName) < 0) {
         console.log('(*) Repository does not exist. Image version has not been published yet.')

@@ -62,10 +62,10 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
     await asyncUtils.forEach(definitions, async (current) => {
         cgManifest.Registrations = cgManifest.Registrations.concat(
             await getDefinitionManifest(registry, registryPath, current, alreadyRegistered, buildFirst));
-            // Prune images if setting enabled
-            if(pruneBetweenDefinitions) {
-                await asyncUtils.spawn('docker', ['image', 'prune', '-a']);
-            }
+        // Prune images if setting enabled
+        if (pruneBetweenDefinitions) {
+            await asyncUtils.spawn('docker', ['image', 'prune', '-a']);
+        }
     });
 
     console.log('(*) Writing manifest...');
@@ -85,7 +85,7 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
 
     // For each image variant...
     await asyncUtils.forEach(dependencies.imageVariants, (async (imageTag) => {
-        
+
         /* Old logic for DockerImage type
         // Pull base images
         console.log(`(*) Pulling image ${imageTag}...`);
@@ -105,7 +105,7 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
                 }
             });
             */
-           if (typeof alreadyRegistered[imageTag] === 'undefined') {
+        if (typeof alreadyRegistered[imageTag] === 'undefined') {
             const [image, imageVersion] = imageTag.split(':');
             registrations.push({
                 "Component": {
@@ -114,7 +114,7 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
                         "Name": `Docker Image: ${image}`,
                         "Version": imageVersion,
                         "DownloadUrl": dependencies.imageLink
-                    }                
+                    }
                 }
             });
             alreadyRegistered[dependencies.image] = [imageVersion];
@@ -340,12 +340,12 @@ async function getPipxVersionLookup(imageTag) {
 
     const packageVersionListOutputLines = packageVersionListOutput.split('\n');
     return packageVersionListOutputLines.reduce((prev, current) => {
-            const versionCaptureGroup = /package\s(.+)\s(.+),/.exec(current);
-            if(versionCaptureGroup) {
-                prev[versionCaptureGroup[1]] = versionCaptureGroup[2];
-            }
-            return prev;
-        }, {});
+        const versionCaptureGroup = /package\s(.+)\s(.+),/.exec(current);
+        if (versionCaptureGroup) {
+            prev[versionCaptureGroup[1]] = versionCaptureGroup[2];
+        }
+        return prev;
+    }, {});
 }
 
 module.exports = {

@@ -71,7 +71,7 @@ jobs:
                           --registry ${{ secrets.REGISTRY }} \
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
-                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
                           --skip codespaces-linux
 
   package:

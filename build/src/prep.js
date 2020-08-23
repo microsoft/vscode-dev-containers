@@ -32,28 +32,28 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
 
     // Read Dockerfile
     const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
-    
-    const prepResult = { 
+
+    const prepResult = {
         shouldFlattenBaseImage: false,
         baseImage: null,
         flattenedBaseImage: null,
         devContainerDockerfileModified: await updateScriptSources(devContainerDockerfileRaw, repo, release, true)
     };
 
-    
+
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
         const parentTag = configUtils.getParentTagForVersion(definitionId, version, registry, registryPath, variant);
         if (parentTag) {
-            prepResult.devContainerDockerfileModified = replaceFrom(prepResult.devContainerDockerfileModified,`FROM ${parentTag}`);
+            prepResult.devContainerDockerfileModified = replaceFrom(prepResult.devContainerDockerfileModified, `FROM ${parentTag}`);
         }
 
         prepResult.shouldFlattenBaseImage = configUtils.shouldFlattenDefinitionBaseImage(definitionId);
-        if(prepResult.shouldFlattenBaseImage) {
+        if (prepResult.shouldFlattenBaseImage) {
             // Determine base image
             const baseImageFromCaptureGroups = /FROM\s+(.+):([^\s\n]+)?/.exec(prepResult.devContainerDockerfileModified);
             let registryPath = baseImageFromCaptureGroups[1].replace('${VARIANT}', variant).replace('$VARIANT', variant);
-            const tagName = (baseImageFromCaptureGroups.length > 2) ? 
+            const tagName = (baseImageFromCaptureGroups.length > 2) ?
                 baseImageFromCaptureGroups[2].replace('${VARIANT}', variant).replace('$VARIANT', variant) :
                 null;
             prepResult.baseImageTag = registryPath + (tagName ? ':' + tagName : '');
@@ -63,8 +63,8 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
             if (registrySlashIndex > -1) {
                 registryPath = registryPath.substring(registrySlashIndex + 1);
             }
-            prepResult.flattenedBaseImageTag = `${registry}/${registryPath}:${tagName ? tagName + '-' : ''}flattened`; 
-            
+            prepResult.flattenedBaseImageTag = `${registry}/${registryPath}:${tagName ? tagName + '-' : ''}flattened`;
+
             // Modify Dockerfile contents to use flattened image tag
             prepResult.devContainerDockerfileModified = replaceFrom(prepResult.devContainerDockerfileModified, `FROM ${prepResult.flattenedBaseImageTag}`);
         }
@@ -76,7 +76,7 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
         const fromCaptureGroups = new RegExp(`FROM\s+(${expectedRegistry}/${expectedRegistryPath}/.+:.+)`).exec(devContainerDockerfileRaw);
         if (fromCaptureGroups && fromCaptureGroups.length > 0) {
             const fromDefinitionTag = configUtils.getUpdatedTag(
-                fromCaptureGroups[1], 
+                fromCaptureGroups[1],
                 expectedRegistry,
                 expectedRegistryPath,
                 version,
@@ -206,8 +206,7 @@ async function updateAllScriptSourcesInRepo(repo, release, updateScriptSha) {
 }
 
 // Copy contents of script library to folder 
-async function copyLibraryScriptsForDefinition(definitionDevContainerJsonFolder) 
-{
+async function copyLibraryScriptsForDefinition(definitionDevContainerJsonFolder) {
     const libraryScriptsFolder = path.join(definitionDevContainerJsonFolder, scriptLibraryFolderNameInDefinition);
     if (await asyncUtils.exists(libraryScriptsFolder)) {
         await asyncUtils.forEach(await asyncUtils.readdir(libraryScriptsFolder), async (script) => {
@@ -216,7 +215,7 @@ async function copyLibraryScriptsForDefinition(definitionDevContainerJsonFolder)
                 return;
             }
             const possibleScriptSource = path.join(scriptLibraryPathInRepo, script);
-            if(await asyncUtils.exists(possibleScriptSource)) {
+            if (await asyncUtils.exists(possibleScriptSource)) {
                 const targetScriptPath = path.join(libraryScriptsFolder, script);
                 console.log(`(*) Copying ${script} to ${libraryScriptsFolder}...`);
                 await asyncUtils.copyFile(possibleScriptSource, targetScriptPath);
@@ -234,7 +233,7 @@ async function copyLibraryScriptsForAllDefinitions() {
         if (!currentDefinition.isDirectory()) {
             return;
         }
-    const definitionDevContainerJsonFolder = path.join(definitionFolder, currentDefinition.name, '.devcontainer');
+        const definitionDevContainerJsonFolder = path.join(definitionFolder, currentDefinition.name, '.devcontainer');
         console.log(`(*) Checking ${currentDefinition.name} for ${scriptLibraryFolderNameInDefinition} folder...`)
         await copyLibraryScriptsForDefinition(definitionDevContainerJsonFolder);
     });

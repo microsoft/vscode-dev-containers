@@ -11,7 +11,7 @@ const configUtils = require('./utils/config');
 const packageJson = require('../../package.json');
 
 async function package(repo, release, updateLatest, registry, registryPath, stubRegistry,
-     stubRegistryPath, prepAndPackageOnly, packageOnly, cleanWhenDone, definitionsToSkipPush) {
+    stubRegistryPath, prepAndPackageOnly, packageOnly, cleanWhenDone, definitionsToSkipPush) {
 
     // Optional argument defaults
     packageOnly = typeof packageOnly === 'undefined' ? false : packageOnly;
