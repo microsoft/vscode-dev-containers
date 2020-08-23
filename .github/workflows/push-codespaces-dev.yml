@@ -47,7 +47,7 @@ jobs:
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
         fi
-        build/vscdc push  codespaces-linux
+        build/vscdc push  codespaces-linux \
                           --release $GIT_BRANCH \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \
