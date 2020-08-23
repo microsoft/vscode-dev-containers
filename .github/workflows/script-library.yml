@@ -34,13 +34,13 @@ jobs:
       id: test_script_library
       run: |
         set -e
-        cd script-library/test
+        cd script-library
         if [ "${{ matrix.os }}" = "redhat" ]; then
           IMAGE_TO_TEST=centos
         else
           IMAGE_TO_TEST=${{ matrix.os }}
         fi
-        docker build --build-arg DISTRO=${{ matrix.os }} --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST .
+        docker build --build-arg DISTRO=${{ matrix.os }} --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST -f test/Dockerfile .
 
   copy-scripts:
     name: Copy and commit script-library updates
