@@ -11,8 +11,12 @@
 		"yarn.lock",
 		".npmignore"
 	],
-
+	
 	"needsDedicatedPage": [ 
+		"codespaces-linux" 
+	],
+
+	"flattenBaseImage": [
 		"codespaces-linux" 
 	],
 

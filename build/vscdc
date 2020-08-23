@@ -63,6 +63,11 @@ require('yargs')
                     describe: 'whether to clean up staging folder when done',
                     type: 'boolean',
                     default: true
+                },
+                'skip-push': {
+                    describe: 'A space separated list of definition IDs to skip build and push.',
+                    type: 'array',
+                    default: []
                 }
             })
     }, packCommand)
@@ -128,6 +133,11 @@ require('yargs')
                     describe: 'Whether to replace released images. Does not apply to dev tag.',
                     type: 'boolean',
                     default: false
+                },
+                'skip': {
+                    describe: 'A space separated list of definition IDs to skip building and pushing.',
+                    type: 'array',
+                    default: []
                 }
             })
     }, pushCommand)
@@ -174,6 +184,10 @@ require('yargs')
                 'build': {
                     describe: 'whether to to build the image first step',
                     default: true
+                },
+                'prune': {
+                    describe: 'whether to prune images between definitions',
+                    default: false
                 }
             })
     }, cgCommand)
@@ -206,7 +220,7 @@ require('yargs')
 
 function pushCommand(argv) {
     push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry,
-        argv.stubRegistryPath, argv.push, argv.prepOnly, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer)
+        argv.stubRegistryPath, argv.push, argv.prepOnly, argv.page, argv.pageTotal, argv.replaceImages, argv.skip, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
             process.exit(1);
@@ -215,7 +229,7 @@ function pushCommand(argv) {
 
 function packCommand(argv) {
     package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath,
-        argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean)
+        argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean, argv.skipPush)
         .catch((reason) => {
             console.error(`(!) Packaging failed - ${reason}`);
             process.exit(1);
@@ -240,7 +254,7 @@ function copyLibraryScriptsCommand() {
 
 
 function cgCommand(argv) {
-    generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build, argv.devcontainer)
+    generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build, argv.prune, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Component governance manifest generation failed - ${reason}`);
             process.exit(1);

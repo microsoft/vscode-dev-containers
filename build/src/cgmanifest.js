@@ -39,7 +39,7 @@ const dependencyLookupConfig = {
     }
 }
 
-async function generateComponentGovernanceManifest(repo, release, registry, registryPath, buildFirst, definitionId) {
+async function generateComponentGovernanceManifest(repo, release, registry, registryPath, buildFirst, pruneBetweenDefinitions, definitionId) {
     // Load config files
     await configUtils.loadConfig();
 
@@ -62,6 +62,10 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
     await asyncUtils.forEach(definitions, async (current) => {
         cgManifest.Registrations = cgManifest.Registrations.concat(
             await getDefinitionManifest(registry, registryPath, current, alreadyRegistered, buildFirst));
+            // Prune images if setting enabled
+            if(pruneBetweenDefinitions) {
+                await asyncUtils.spawn('docker', ['image', 'prune', '-a']);
+            }
     });
 
     console.log('(*) Writing manifest...');
@@ -81,11 +85,11 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
 
     // For each image variant...
     await asyncUtils.forEach(dependencies.imageVariants, (async (imageTag) => {
-
+        
+        /* Old logic for DockerImage type
         // Pull base images
         console.log(`(*) Pulling image ${imageTag}...`);
         await asyncUtils.spawn('docker', ['pull', imageTag]);
-
         const digest = await getImageDigest(imageTag);
         // Add Docker image registration
         if (typeof alreadyRegistered[imageTag] === 'undefined') {
@@ -98,6 +102,19 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
                         "Digest": digest,
                         "Tag":imageVersion
                       }
+                }
+            });
+            */
+           if (typeof alreadyRegistered[imageTag] === 'undefined') {
+            const [image, imageVersion] = imageTag.split(':');
+            registrations.push({
+                "Component": {
+                    "Type": "other",
+                    "Other": {
+                        "Name": `Docker Image: ${image}`,
+                        "Version": imageVersion,
+                        "DownloadUrl": dependencies.imageLink
+                    }                
                 }
             });
             alreadyRegistered[dependencies.image] = [imageVersion];

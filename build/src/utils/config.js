@@ -229,7 +229,7 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
 }
 
 // Walk the image build config and paginate and sort list so parents build before (and with) children
-function getSortedDefinitionBuildList(page, pageTotal) {
+function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
     page = page || 1;
     pageTotal = pageTotal || 1;
 
@@ -238,7 +238,8 @@ function getSortedDefinitionBuildList(page, pageTotal) {
     const noParentList = [];
     let total = 0;
     for (let definitionId in config.definitionBuildSettings) {
-        if (typeof config.definitionBuildSettings[definitionId] === 'object' && config.definitionsToSkip.indexOf(definitionId) < 0) {
+        // If paged build, ensure this definition should be included
+        if (typeof config.definitionBuildSettings[definitionId] === 'object' && definitionsToSkip.indexOf(definitionId) < 0) {
             const parentId = config.definitionBuildSettings[definitionId].parent;
             // TODO: Handle parents that have parents
             if (typeof parentId !== 'undefined') {
@@ -408,6 +409,10 @@ async function getStagingFolder(release) {
     return stagingFolders[release];
 }
 
+function shouldFlattenDefinitionBaseImage(definitionId) {
+    return (getConfig('flattenBaseImage', []).indexOf(definitionId) >= 0)
+}
+
 module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
@@ -424,5 +429,6 @@ module.exports = {
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
     getVersionFromRelease: getVersionFromRelease,
     getTagsForVersion: getTagsForVersion,
-    getConfig: getConfig
+    getConfig: getConfig,
+    shouldFlattenDefinitionBaseImage: shouldFlattenDefinitionBaseImage
 };
