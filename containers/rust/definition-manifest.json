@@ -76,11 +76,10 @@
 				}
 			}, {
 				"Component": {
-					"Type": "other",
-					"Other": {
+					"Type": "cargo",
+					"Cargo": {
 						"Name": "rust-analyzer",
-						"Version": "2.9.6",
-						"DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+						"Version": "2020-08-24"
 					}
 				}
 			}
