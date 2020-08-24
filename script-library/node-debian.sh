@@ -51,7 +51,7 @@ fi
 if [ -d "${NVM_DIR}" ]; then
     echo "NVM already installed."
     if [ "${NODE_VERSION}" != "" ]; then
-       su ${USERNAME} -c "nvm install ${NODE_VERSION}"
+       su ${USERNAME} -c "source $NVM_DIR/nvm.sh && nvm install ${NODE_VERSION} && nvm clear-cache"
     fi
     exit 0
 fi
@@ -80,10 +80,11 @@ fi
 su ${USERNAME} -c "$(cat << EOF
     set -e
     curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
+    source ${NVM_DIR}/nvm.sh
     if [ "${NODE_VERSION}" != "" ]; then
-        source $NVM_DIR/nvm.sh
         nvm alias default ${NODE_VERSION}
     fi
+    nvm clear-cache 
 EOF
 )" 2>&1
 

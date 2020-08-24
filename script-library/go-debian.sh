@@ -82,6 +82,7 @@ if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     mkdir -p /tmp/gotools
     cd /tmp/gotools
     export GOPATH=/tmp/gotools
+    export GOCACHE=/tmp/gotools/cache
 
     # Go tools w/module support
     export GO111MODULE=on

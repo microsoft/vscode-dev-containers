@@ -53,7 +53,7 @@ if [ ! -d "${SDKMAN_DIR}" ]; then
 fi
 
 if [ "${JAVA_VERSION}" != "none" ]; then
-    su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install java ${JAVA_VERSION}"
+    su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install java ${JAVA_VERSION} && sdk flush archives && sdk flush temp"
 fi
 
 echo "Done!"

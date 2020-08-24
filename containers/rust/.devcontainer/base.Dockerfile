@@ -15,7 +15,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Install common packages, non-root user, updated lldb, dependencies
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     && apt-get install -y lldb python3-minimal libpython3.7 \
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install Rust components
 RUN rustup update 2>&1 \
