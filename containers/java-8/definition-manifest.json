@@ -2,6 +2,7 @@
 	"build": {
 		"latest": "false",
 		"rootDistro": "debian",
+		"parent": "java",
 		"tags": [
 			"java:${VERSION}-8"
 		]
