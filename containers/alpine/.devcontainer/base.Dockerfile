@@ -10,8 +10,7 @@ ARG USER_GID=$USER_UID
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN apk update \
-    && /bin/ash /tmp/library-scripts/common-alpine.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" \
+RUN apk update && ash /tmp/library-scripts/common-alpine.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" \
     && rm -rf /tmp/library-scripts
 
 # ** [Optional] Uncomment this section to install additional packages. **

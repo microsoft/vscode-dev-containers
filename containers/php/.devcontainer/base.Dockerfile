@@ -12,13 +12,14 @@ ARG USER_GID=$USER_UID
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/common-debian.sh /tmp/library-scripts/
 RUN apt-get update && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/* &&  rm -rf /tmp/library-scripts
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install xdebug
 RUN yes | pecl install xdebug \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini
+    && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && rm -rf /tmp/pear
 
 # Install composer
 RUN curl -sSL https://getcomposer.org/installer | php \
@@ -33,7 +34,7 @@ ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/node-debian.sh /tmp/library-scripts/
 RUN if [ "$INSTALL_NODE" = "true" ]; then /bin/bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
-    && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # [Optional] Uncomment this section to install additional packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

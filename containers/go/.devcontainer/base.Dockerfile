@@ -39,6 +39,7 @@ ARG GO_TOOLS_WITH_MODULES="\
 RUN mkdir -p /tmp/gotools \
     && cd /tmp/gotools \
     && export GOPATH=/tmp/gotools \
+    && export GOCACHE=/tmp/gotools/cache \
     # Go tools w/module support
     && export GO111MODULE=on \
     && (echo "${GO_TOOLS_WITH_MODULES}" | xargs -n 1 go get -x )2>&1 \
@@ -63,7 +64,7 @@ ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/node-debian.sh /tmp/library-scripts/
 RUN if [ "$INSTALL_NODE" = "true" ]; then bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
-    && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # [Optional] Uncomment the next line to use go get to install anything else you need
 # RUN go get -x <your-dependency-or-tool>

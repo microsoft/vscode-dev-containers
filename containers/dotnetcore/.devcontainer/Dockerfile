@@ -10,7 +10,7 @@ RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "source /usr/local/shar
 ARG INSTALL_AZURE_CLI="false"
 COPY library-scripts/azcli-debian.sh /tmp/library-scripts/
 RUN if [ "$INSTALL_AZURE_CLI" = "true" ]; then bash /tmp/library-scripts/azcli-debian.sh; fi \
-    && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

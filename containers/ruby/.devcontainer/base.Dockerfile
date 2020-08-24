@@ -17,7 +17,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Install common packages, non-root user, core build tools
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     && apt-get install -y build-essential \
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/library-scripts
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install Ruby tools
 RUN gem install rake ruby-debug-ide debase
@@ -30,7 +30,7 @@ ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/node-debian.sh /tmp/library-scripts/
 RUN if [ "$INSTALL_NODE" = "true" ]; then /bin/bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
-    && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
