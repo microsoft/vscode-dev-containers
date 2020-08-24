@@ -14,7 +14,7 @@ UPDATE_RC=${4:-"true"}
 set -e
 
  # Blank will install latest maven version
-if [ "${MAVEN_VERSION}" = "lts" ]; then
+if [ "${MAVEN_VERSION}" = "lts" ] || [ "${MAVEN_VERSION}" = "current" ] || [ "${MAVEN_VERSION}" = "latest" ]; then
     MAVEN_VERSION=""
 fi
 

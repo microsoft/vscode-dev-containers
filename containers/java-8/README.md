@@ -2,14 +2,13 @@
 
 ## Summary
 
-*Develop Java applications. Includes the JDK and Java extensions.*
+*Develop Java applications. Includes the JDK 8 (and 11) and Java extensions.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Java Team |
 | *Definition type* | Dockerfile |
-| *Published images* | mcr.microsoft.com/vscode/devcontainers/java |
-| *Available image variants* | 11, 14 |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/java:8 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -17,25 +16,19 @@
 
 ## Using this definition with an existing folder
 
-> **Note:** [A version of this [definition for **JDK 8**](../java-8) is also available!
+> **Note:** A version of this [definition for **newer JDKs**]](../java) is also available](../java)!
 
-While this definition should work unmodified, you can select the version of Java the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
-
-```json
-"args": { "VARIANT": "14" }
-```
+This definition includes both JDK 8 and JDK 11 due to the fact that the VS Code Java extension requires JDK 11+. The needed `devcontainer.json` settings are present to enable you to work with projects targeting Java 8.
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
-- `mcr.microsoft.com/vscode/devcontainers/java` (latest)
-- `mcr.microsoft.com/vscode/devcontainers/java:11`
-- `mcr.microsoft.com/vscode/devcontainers/java:14`
+- `mcr.microsoft.com/vscode/devcontainers/java:8`
 
 Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
 
-- `mcr.microsoft.com/vscode/devcontainers/java:0-11`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.135-11`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.135.0-11`
+- `mcr.microsoft.com/vscode/devcontainers/java:0-8`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0.136-8`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0.136.0-8`
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
@@ -53,7 +46,6 @@ You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "
 
 ```json
 "args": {
-   "VARIANT": "11",
    "INSTALL_GRADLE": "true",
    "INSTALL_MAVEN": "true"
 }
@@ -65,7 +57,6 @@ You can also specify the version of Gradle or Maven if needed.
 
 ```json
 "args": {
-   "VARIANT": "11",
    "INSTALL_GRADLE": "true",
    "MAVEN_VERSION": "3.6.3",
    "INSTALL_MAVEN": "true",
@@ -79,9 +70,8 @@ Given how frequently web applications use Node.js for front end code, this conta
 
 ```json
 "args": {
-   "VARIANT": "11",
     "INSTALL_NODE": "true",
-    "NODE_VERSION": "10",
+    "NODE_VERSION": "10"
 }
 ```
 
