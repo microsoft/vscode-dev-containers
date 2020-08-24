@@ -1228,7 +1228,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analyzer",
-                    "Version": "2020-08-24"
+                    "Version": "latest"
                 }
             }
         },
