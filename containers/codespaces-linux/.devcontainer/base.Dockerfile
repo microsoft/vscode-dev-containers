@@ -71,7 +71,7 @@ RUN sudo -u ${USERNAME} npm config set prefix /home/${USERNAME}/.npm-global \
 
 # Install OpenJDK 8, latest Java LTS (11), gradle, maven
 ENV SDKMAN_DIR="/usr/local/sdkman"
-ENV PATH="${PATH}:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/maven/current/bin"
+ENV PATH="${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${PATH}"
 COPY library-scripts/java-debian.sh library-scripts/maven-debian.sh library-scripts/gradle-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/java-debian.sh "lts" "${SDKMAN_DIR}" "${USERNAME}" "true" \
     && bash /tmp/scripts/gradle-debian.sh "lts" "${SDKMAN_DIR}" "${USERNAME}" "true" \
