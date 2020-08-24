@@ -37,14 +37,13 @@
 			"zlib1g",
 			"sudo",
 			"zsh",
-			"yarn",
-			"default-jdk",
 			"vim", 
 			"xtail",
 			"fish", 
 			"git-lfs",
 			"debian-archive-keyring",
-			"software-properties-common"
+			"software-properties-common",
+			"openjdk-8-jdk"
 		],
 		"pipx": [
 			"pylint",
