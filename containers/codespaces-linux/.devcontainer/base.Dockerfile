@@ -79,7 +79,7 @@ RUN bash /tmp/scripts/java-debian.sh "lts" "${SDKMAN_DIR}" "${USERNAME}" "true" 
     && echo "Installing JDK 8..." \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -yq openjdk-8-jdk \
-    && rm -rf /tmp/scripts && apt-get clean -y
+    && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install Rust
 ENV CARGO_HOME="/usr/local/cargo" \
@@ -87,7 +87,7 @@ ENV CARGO_HOME="/usr/local/cargo" \
 ENV PATH="${CARGO_HOME}/bin:${PATH}"
 COPY library-scripts/rust-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "false" \
-    && rm -rf /tmp/scripts && apt-get clean -y
+    && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install Go
 ARG GOLANG_VERSION="1.15"
@@ -96,31 +96,30 @@ ENV GOROOT="/usr/local/go" \
 ENV PATH="${GOROOT}/bin:${PATH}"
 COPY library-scripts/go-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/go-debian.sh "${GOLANG_VERSION}" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
-    && rm -rf /tmp/scripts && apt-get clean -y
+    && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install rvm, Ruby, base gems
 COPY library-scripts/ruby-debian.sh /tmp/scripts/
 ENV PATH="${PATH}:/usr/local/rvm/bin"
 RUN bash /tmp/scripts/ruby-debian.sh "stable" "${USERNAME}" "true" \
-    && rm -rf /tmp/scripts && apt-get clean -y
+    && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install Python tools
 ENV PIPX_HOME="/usr/local/py-utils" \
     PIPX_BIN_DIR="/usr/local/py-utils/bin"
 ENV PATH="${PATH}:${PIPX_BIN_DIR}"
 COPY library-scripts/python-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/python-debian.sh "stable" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "false" \
-    && rm -rf /tmp/scripts && apt-get clean -y
+RUN bash /tmp/scripts/python-debian.sh "stable" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "false" \ 
+    && apt-get clean -y && rm -rf /tmp/scripts
 
-# Remove old versions
-# RUN rm -rf \
-#     /opt/nodejs/4* \
-#     /opt/nodejs/5* \
-#     /opt/nodejs/6* \
-#     /opt/nodejs/9* \
-#     /opt/dotnet/all/sdk/1* \
-#     /opt/dotnet/sdks/1* \
-#     /opt/dotnet/runtimes/1*
+# Install xdebug, link composer
+RUN yes | pecl install xdebug \
+    && export PHP_LOCATION=$(dirname $(dirname $(which php))) \
+    && echo "zend_extension=$(find ${PHP_LOCATION}/lib/php/extensions/ -name xdebug.so)" >  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=on" >>  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && rm -rf /tmp/pear \
+    && ln -s $(which composer.phar) /usr/local/bin/composer
 
 # [Optional] Install Docker - Not in resulting image by default
 ARG INSTALL_DOCKER="false"
@@ -128,14 +127,12 @@ COPY library-scripts/docker-debian.sh /tmp/scripts/
 RUN if [ "${INSTALL_DOCKER}" = "true" ]; then \
         bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}"; \
     else \
-        echo '#!/bin/bash\n"$@"' > /usr/local/share/docker-init.sh && chmod +x /usr/local/share/docker-init.sh; \
+        echo '#!/bin/bash\nexec "$@"' > /usr/local/share/docker-init.sh && chmod +x /usr/local/share/docker-init.sh; \
     fi \
     && rm -rf /tmp/scripts && apt-get clean -y
 
-# Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
-# the Docker socket if "overrideCommand": false is set in devcontainer.json. 
-# The script will also execute CMD if you need to alter startup behaviors.
-ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+# Fire Docker script if needed along with Oryx's benv
+ENTRYPOINT [ "/usr/local/share/docker-init.sh", "benv" ]
 CMD [ "sleep", "infinity" ]
 
 # [Optional] Install debugger for development of Codespaces - Not in resulting image by default

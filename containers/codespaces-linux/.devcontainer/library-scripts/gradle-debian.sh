@@ -57,6 +57,6 @@ if [ ! -d "${SDKMAN_DIR}" ]; then
 fi
 
 # Install gradle
-su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install gradle ${GRADLE_VERSION}"
+su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install gradle ${GRADLE_VERSION}  && sdk flush archives && sdk flush temp"
 updaterc "export GRADLER_USER_HOME=\${HOME}/.gradle"
 echo "Done!"
