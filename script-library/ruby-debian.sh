@@ -35,7 +35,10 @@ fi
 # Just install Ruby if RVM already installed
 if [ -d "/usr/local/rvm" ]; then
     echo "Ruby Version Manager already exists. Installing specified Ruby version."
-    su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm install ${RUBY_VERSION} && rvm cleanup all"
+    su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm install ${RUBY_VERSION}"
+    source /usr/local/rvm/scripts/rvm
+    rvm cleanup all 
+    gem cleanup
     exit 0
 fi
 
@@ -50,6 +53,9 @@ curl -sSL https://get.rvm.io | bash -s "${RUBY_VERSION}" --ruby --with-default-g
 usermod -aG rvm ${USERNAME}
 su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm fix-permissions system && rvm cleanup all && gem cleanup"
 rm -rf ${GNUPGHOME}
+source /usr/local/rvm/scripts/rvm
+rvm cleanup all 
+gem cleanup
 
 # Add sourcing of rvm into bashrc/zshrc files (unless disabled)
 if [ "${UPDATE_RC}" = "true" ]; then
