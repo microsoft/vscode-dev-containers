@@ -36,6 +36,9 @@ fi
 if [ -d "/usr/local/rvm" ]; then
     echo "Ruby Version Manager already exists. Installing specified Ruby version."
     su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm install ${RUBY_VERSION}"
+    source /usr/local/rvm/scripts/rvm
+    rvm cleanup all 
+    gem cleanup
     exit 0
 fi
 
@@ -48,11 +51,11 @@ gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703
 # Install RVM
 curl -sSL https://get.rvm.io | bash -s "${RUBY_VERSION}" --ruby --with-default-gems="rake ruby-debug-ide debase" 2>&1
 usermod -aG rvm ${USERNAME}
-su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm fix-permissions system"
-source /usr/local/rvm/scripts/rvm
-rvm cleanup all
-gem cleanup
+su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm fix-permissions system && rvm cleanup all && gem cleanup"
 rm -rf ${GNUPGHOME}
+source /usr/local/rvm/scripts/rvm
+rvm cleanup all 
+gem cleanup
 
 # Add sourcing of rvm into bashrc/zshrc files (unless disabled)
 if [ "${UPDATE_RC}" = "true" ]; then
