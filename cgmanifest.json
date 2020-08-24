@@ -2,21 +2,21 @@
     "Registrations": [
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "buildpack-deps",
-                    "Digest": "sha256:8712ca8db6f8c35f35078ab8956f09f354e2fbd0ff00915e747be0caaa64ea13",
-                    "Tag": "buster-curl"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "buster-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "buildpack-deps",
-                    "Digest": "sha256:2193be425c380339d06ec9e3f50fefac4f0927ad0b0f64b58e6872b6b7f3a51a",
-                    "Tag": "stretch-curl"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "stretch-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
         },
@@ -282,21 +282,21 @@
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "buildpack-deps",
-                    "Digest": "sha256:8712ca8db6f8c35f35078ab8956f09f354e2fbd0ff00915e747be0caaa64ea13",
-                    "Tag": "buster-curl"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "buster-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "buildpack-deps",
-                    "Digest": "sha256:2193be425c380339d06ec9e3f50fefac4f0927ad0b0f64b58e6872b6b7f3a51a",
-                    "Tag": "stretch-curl"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "stretch-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
         },
@@ -342,31 +342,31 @@
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "alpine",
-                    "Digest": "sha256:185518070891758909c9f839cf4ca393ee977ac378609f700f60a771a2dfe321",
-                    "Tag": "3.12"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: alpine",
+                    "Version": "3.12",
+                    "DownloadUrl": "https://hub.docker.com/_/alpine"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "alpine",
-                    "Digest": "sha256:9a839e63dad54c3a6d1834e29692c8492d93f90c59c978c1ed79109ea4fb9a54",
-                    "Tag": "3.11"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: alpine",
+                    "Version": "3.11",
+                    "DownloadUrl": "https://hub.docker.com/_/alpine"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "alpine",
-                    "Digest": "sha256:f0e9534a598e501320957059cb2a23774b4d4072e37c7b2cf7e95b241f019e35",
-                    "Tag": "3.10"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: alpine",
+                    "Version": "3.10",
+                    "DownloadUrl": "https://hub.docker.com/_/alpine"
                 }
             }
         },
@@ -622,11 +622,11 @@
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "mcr.microsoft.com/oryx/build",
-                    "Digest": "sha256:f928fd4ed0a1c4b927bf0e1383b40426c42991e5746270e3f1423cc8c567cd48",
-                    "Tag": "vso-20200417.5"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: mcr.microsoft.com/oryx/build",
+                    "Version": "vso-20200417.5",
+                    "DownloadUrl": "https://github.com/microsoft/oryx"
                 }
             }
         },
@@ -637,6 +637,26 @@
                     "Name": "Debian Package: apt-transport-https",
                     "Version": "1.4.10",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-transport-https_1.4.10_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: apt-utils",
+                    "Version": "1.4.10",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-utils_1.4.10_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: ca-certificates",
+                    "Version": "20200601~deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20200601~deb9u1_all.deb"
                 }
             }
         },
@@ -664,9 +684,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: default-jdk",
-                    "Version": "2:1.8-58+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/j/java-common/default-jdk_1.8-58+deb9u1_amd64.deb"
+                    "Name": "Debian Package: dialog",
+                    "Version": "1.3-20160828-2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/d/dialog/dialog_1.3-20160828-2_amd64.deb"
                 }
             }
         },
@@ -677,6 +697,16 @@
                     "Name": "Debian Package: fish",
                     "Version": "2.4.0-1",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/f/fish/fish_2.4.0-1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: git",
+                    "Version": "1:2.11.0-3+deb9u7",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.11.0-3+deb9u7_amd64.deb"
                 }
             }
         },
@@ -704,6 +734,66 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Debian Package: iproute2",
+                    "Version": "4.9.0-1+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/iproute2/iproute2_4.9.0-1+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: jq",
+                    "Version": "1.5+dfsg-1.3",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/j/jq/jq_1.5+dfsg-1.3_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: less",
+                    "Version": "481-2.1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/less/less_481-2.1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libc6",
+                    "Version": "2.24-11+deb9u4",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/glibc/libc6_2.24-11+deb9u4_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libgcc1",
+                    "Version": "1:6.3.0-18+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-6/libgcc1_6.3.0-18+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libgssapi-krb5-2",
+                    "Version": "1.15-1+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/k/krb5/libgssapi-krb5-2_1.15-1+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Debian Package: libicu57",
                     "Version": "57.1-6+deb9u4",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/icu/libicu57_57.1-6+deb9u4_amd64.deb"
@@ -714,9 +804,19 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: libkrb5-3",
-                    "Version": "1.15-1+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/k/krb5/libkrb5-3_1.15-1+deb9u1_amd64.deb"
+                    "Name": "Debian Package: libssl1.1",
+                    "Version": "1.1.0l-1~deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.0l-1~deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: libstdc++6",
+                    "Version": "6.3.0-18+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-6/libstdc++6_6.3.0-18+deb9u1_amd64.deb"
                 }
             }
         },
@@ -734,9 +834,39 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: openssl",
-                    "Version": "1.1.0l-1~deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/openssl_1.1.0l-1~deb9u1_amd64.deb"
+                    "Name": "Debian Package: nano",
+                    "Version": "2.7.4-1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/n/nano/nano_2.7.4-1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: openjdk-8-jdk",
+                    "Version": "8u265-b01-0+deb9u1",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/o/openjdk-8/openjdk-8-jdk_8u265-b01-0+deb9u1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: openssh-client",
+                    "Version": "1:7.4p1-10+deb9u7",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssh/openssh-client_7.4p1-10+deb9u7_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: procps",
+                    "Version": "2:3.3.12-3+deb9u1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/p/procps/procps_3.3.12-3+deb9u1_amd64.deb"
                 }
             }
         },
@@ -745,8 +875,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: software-properties-common",
-                    "Version": "0.96.20.2-1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/software-properties/software-properties-common_0.96.20.2-1_all.deb"
+                    "Version": "0.96.20.2-1+deb9u1",
+                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/s/software-properties/software-properties-common_0.96.20.2-1+deb9u1_all.deb"
                 }
             }
         },
@@ -764,9 +894,29 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Debian Package: unzip",
+                    "Version": "6.0-21+deb9u2",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/u/unzip/unzip_6.0-21+deb9u2_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Debian Package: vim",
                     "Version": "2:8.0.0197-4+deb9u3",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/v/vim/vim_8.0.0197-4+deb9u3_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: wget",
+                    "Version": "1.18-5+deb9u3",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/w/wget/wget_1.18-5+deb9u3_amd64.deb"
                 }
             }
         },
@@ -797,6 +947,105 @@
                     "Name": "Debian Package: zsh",
                     "Version": "5.3.1-4+b3",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/z/zsh/zsh_5.3.1-4+b3_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pylint",
+                    "Version": "2.6.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "flake8",
+                    "Version": "3.8.3"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "autopep8",
+                    "Version": "1.5.4"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "black",
+                    "Version": "19.10b0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "yapf",
+                    "Version": "0.30.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "mypy",
+                    "Version": "0.782"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pydocstyle",
+                    "Version": "5.1.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pycodestyle",
+                    "Version": "2.6.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "bandit",
+                    "Version": "1.6.2"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "virtualenv",
+                    "Version": "20.0.31"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pipx",
+                    "Version": "0.15.5.0"
                 }
             }
         },
@@ -852,21 +1101,361 @@
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "mcr.microsoft.com/dotnet/core/sdk",
-                    "Digest": "sha256:c6d4246852f11785f0459d499d4d5a48b4de05e5685c718137acea294ecf899e",
-                    "Tag": "3.1-bionic"
+                "Type": "git",
+                "git": {
+                    "Name": "SDKMAN!",
+                    "repositoryUrl": "https://github.com/sdkman/sdkman-cli",
+                    "commitHash": "716ab5e4b2148fd193aa5ed6b11aaba07bbad897"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "mcr.microsoft.com/dotnet/core/sdk",
-                    "Digest": "sha256:d6ee59a3745deef84a87eda04bc42626033f18b357efd214e0fcc043fd3784de",
-                    "Tag": "2.1-bionic"
+                "Type": "other",
+                "Other": {
+                    "Name": "AdoptOpenJDK",
+                    "Version": "jdk-11.0.8+10",
+                    "DownloadUrl": "https://adoptopenjdk.net/"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Xdebug",
+                    "Version": "2.9.6",
+                    "DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "rvm",
+                    "repositoryUrl": "https://github.com/rvm/rvm",
+                    "commitHash": "cc69ed9c377df6a6b01c095613719164fdf72882"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Other",
+                "Other": {
+                    "Name": "ruby",
+                    "Version": "2.7.0",
+                    "DownloadUrl": "https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0.tar.gz"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "rake",
+                    "Version": "13.0.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "ruby-debug-ide",
+                    "Version": "0.7.2"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "debase",
+                    "Version": "0.2.4.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "go",
+                    "Version": "1.15",
+                    "DownloadUrl": "https://golang.org/dl/go1.15.linux-amd64.tar.gz"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "rust",
+                    "repositoryUrl": "https://github.com/rust-lang/rust",
+                    "commitHash": "d3fb005a39e62501b8b0b356166e515ae24e2e54"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rls",
+                    "Version": "1.41.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rustfmt",
+                    "Version": "1.4.17-stable"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "clippy",
+                    "Version": "1.44.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rust-analyzer",
+                    "Version": "2020-08-24"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/gopls",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "honnef.co/go/tools",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/cmd/gorename",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/cmd/goimports",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/cmd/guru",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/lint/golint",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mdempsky/gocode",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/cweill/gotests",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/haya14busa/goplay/cmd/goplay",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/sqs/goreturns",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/josharian/impl",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/davidrjenni/reftools/cmd/fillstruct",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/ramya-rao-a/go-outline",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/acroca/go-symbols",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/godoctor/godoctor",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/rogpeppe/godef",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/zmb3/gogetdoc",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/fatih/gomodifytags",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mgechev/revive",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/go-delve/delve/cmd/dlv",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/stamblerre/gocode",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/golangci/golangci-lint",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: mcr.microsoft.com/dotnet/core/sdk",
+                    "Version": "3.1-bionic",
+                    "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-core-sdk"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: mcr.microsoft.com/dotnet/core/sdk",
+                    "Version": "2.1-bionic",
+                    "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-core-sdk"
                 }
             }
         },
@@ -905,8 +1494,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: curl",
-                    "Version": "7.58.0-2ubuntu3.9",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/c/curl/curl_7.58.0-2ubuntu3.9_amd64.deb"
+                    "Version": "7.58.0-2ubuntu3.10",
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/c/curl/curl_7.58.0-2ubuntu3.10_amd64.deb"
                 }
             }
         },
@@ -1142,288 +1731,11 @@
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "golang",
-                    "Digest": "sha256:d747644bd96d5d060ddf6a32db4c23fbaac7c36c3aab1d16d14fd8068a7843bc",
-                    "Tag": "1"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "golang",
-                    "Digest": "sha256:d747644bd96d5d060ddf6a32db4c23fbaac7c36c3aab1d16d14fd8068a7843bc",
-                    "Tag": "1.15"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "golang",
-                    "Digest": "sha256:1364cfbbcd1a5f38bdf8c814f02ebbd2170c93933415480480104834341f283e",
-                    "Tag": "1.14"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "golang.org/x/tools/gopls",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "honnef.co/go/tools",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "golang.org/x/tools/cmd/gorename",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "golang.org/x/tools/cmd/goimports",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "golang.org/x/tools/cmd/guru",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "golang.org/x/lint/golint",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/mdempsky/gocode",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/cweill/gotests",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/haya14busa/goplay/cmd/goplay",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/sqs/goreturns",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/josharian/impl",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/davidrjenni/reftools/cmd/fillstruct",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/ramya-rao-a/go-outline",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/acroca/go-symbols",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/godoctor/godoctor",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/rogpeppe/godef",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/zmb3/gogetdoc",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/fatih/gomodifytags",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/mgechev/revive",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/go-delve/delve/cmd/dlv",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/stamblerre/gocode",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/golangci/golangci-lint",
-                    "Version": "latest"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "openjdk",
-                    "Digest": "sha256:39b8040fcb319c3c53e3558cca15a5c0792637ea6c02df9688785b4e7a413b2b",
-                    "Tag": "14-jdk-buster"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "openjdk",
-                    "Digest": "sha256:aaab9fa95bae5708d979a0035e5c617fa44c94bcd0d3cbbdf90b84f2ac323fad",
-                    "Tag": "11-jdk-buster"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "php",
-                    "Digest": "sha256:cafdf0646de416f5c0efa7020749c29b313f03481cafecb20cbfbb09602cdfb5",
-                    "Tag": "7"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "php",
-                    "Digest": "sha256:cafdf0646de416f5c0efa7020749c29b313f03481cafecb20cbfbb09602cdfb5",
-                    "Tag": "7.4"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "php",
-                    "Digest": "sha256:f60c54c62c2115e16bb486002cb10a9c3598cfea9e7043d47ffaa9af3ea3c522",
-                    "Tag": "7.3"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: golang",
+                    "Version": "1",
+                    "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
         },
@@ -1431,225 +1743,169 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Xdebug",
-                    "Version": "2.9.6",
-                    "DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+                    "Name": "Docker Image: golang",
+                    "Version": "1.15",
+                    "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "python",
-                    "Digest": "sha256:2c1045587e4452d49544c6dce92efe21c3b4b33864cfb56fdee66a2c8585c769",
-                    "Tag": "3"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: golang",
+                    "Version": "1.14",
+                    "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "python",
-                    "Digest": "sha256:2c1045587e4452d49544c6dce92efe21c3b4b33864cfb56fdee66a2c8585c769",
-                    "Tag": "3.8"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: openjdk",
+                    "Version": "14-jdk-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/java"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "python",
-                    "Digest": "sha256:0bb57c218e452ace5a4d55ee3c56e3c57e29c7f43cf55192acf7289becff4b0e",
-                    "Tag": "3.7"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: openjdk",
+                    "Version": "11-jdk-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/java"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "python",
-                    "Digest": "sha256:ed4141f76f901c193856a8946283218c67e8dbfc258480fb6947829982913939",
-                    "Tag": "3.6"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: php",
+                    "Version": "7",
+                    "DownloadUrl": "https://hub.docker.com/_/php"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "pylint",
-                    "Version": "2.5.3"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: php",
+                    "Version": "7.4",
+                    "DownloadUrl": "https://hub.docker.com/_/php"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "flake8",
-                    "Version": "3.8.3"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: php",
+                    "Version": "7.3",
+                    "DownloadUrl": "https://hub.docker.com/_/php"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "autopep8",
-                    "Version": "1.5.4"
+                "Type": "other",
+                "Other": {
+                    "Name": "Composer",
+                    "Version": "1.10.10",
+                    "DownloadUrl": "https://getcomposer.org/installer"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "black",
-                    "Version": "19.10b0"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "yapf",
-                    "Version": "0.30.0"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.8",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "mypy",
-                    "Version": "0.782"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.7",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "pydocstyle",
-                    "Version": "5.0.2"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.6",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "pycodestyle",
-                    "Version": "2.6.0"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: ruby",
+                    "Version": "2",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "bandit",
-                    "Version": "1.6.2"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: ruby",
+                    "Version": "2.7",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "virtualenv",
-                    "Version": "20.0.31"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: ruby",
+                    "Version": "2.6",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "pipx",
-                    "Version": "0.15.4.0"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: ruby",
+                    "Version": "2.5",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "ruby",
-                    "Digest": "sha256:4cdd89e947cc52c78c273953e42a6e9d94ca4cd182875fd50745550580b772f4",
-                    "Tag": "2"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "ruby",
-                    "Digest": "sha256:4cdd89e947cc52c78c273953e42a6e9d94ca4cd182875fd50745550580b772f4",
-                    "Tag": "2.7"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "ruby",
-                    "Digest": "sha256:d9fec6ed7ded90f6e14930884a6d6e385645d346d02f46cedbde8af563e4bb19",
-                    "Tag": "2.6"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "ruby",
-                    "Digest": "sha256:d92df757786a564fae990d6893db5e1c96f5a8a037d05bc282985f5168fd63d2",
-                    "Tag": "2.5"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "RubyGems",
-                "RubyGems": {
-                    "Name": "rake",
-                    "Version": "13.0.1"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "RubyGems",
-                "RubyGems": {
-                    "Name": "ruby-debug-ide",
-                    "Version": "0.7.2"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "RubyGems",
-                "RubyGems": {
-                    "Name": "debase",
-                    "Version": "0.2.4.1"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "rust",
-                    "Digest": "sha256:582bedbe2d3b7ada087ba37cd22ab266f085e58f019201d95972d4413e1e4651",
-                    "Tag": "1"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: rust",
+                    "Version": "1",
+                    "DownloadUrl": "https://hub.docker.com/_/rust"
                 }
             }
         },
@@ -1685,28 +1941,11 @@
         },
         {
             "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "rls",
-                    "Version": "1.41.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "rustfmt",
-                    "Version": "1.4.17-stable"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "clippy",
-                    "Version": "1.44.0"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "focal-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
         },
@@ -1714,29 +1953,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "rust-analyzer",
-                    "Version": "2.9.6",
-                    "DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "buildpack-deps",
-                    "Digest": "sha256:d0e02fa5f765fa3575d90d5d8a05ffcf8ee176161df0435090e25464361691e2",
-                    "Tag": "focal-curl"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "buildpack-deps",
-                    "Digest": "sha256:bd7ff2d4d288156cd7df6bc6cf87d247ac386ebe81f29031eaf0fc0727e2f1a6",
-                    "Tag": "bionic-curl"
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "bionic-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
         },
@@ -1775,8 +1994,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: curl",
-                    "Version": "7.68.0-1ubuntu2.1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/c/curl/curl_7.68.0-1ubuntu2.1_amd64.deb"
+                    "Version": "7.68.0-1ubuntu2.2",
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/c/curl/curl_7.68.0-1ubuntu2.2_amd64.deb"
                 }
             }
         },
@@ -1992,31 +2211,11 @@
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "node",
-                    "Digest": "sha256:8b6401f8d15c900736a54a870994277b3de19ebd28cc483c497bf00d608e2a90",
-                    "Tag": "14"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "node",
-                    "Digest": "sha256:d0738468dfc7cedb7d260369e0546fd7ee8731cfd67136f6023d070ad9679090",
-                    "Tag": "12"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "node",
-                    "Digest": "sha256:cf3ee6a5a1b1916c7a2e4fb51eb7ecba1afe186739677d62e9c1bb2cb1c7d6b0",
-                    "Tag": "10"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "14",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },
@@ -2024,9 +2223,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: apt-utils",
-                    "Version": "1.4.10",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-utils_1.4.10_amd64.deb"
+                    "Name": "Docker Image: node",
+                    "Version": "12",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },
@@ -2034,89 +2233,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: ca-certificates",
-                    "Version": "20200601~deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20200601~deb9u1_all.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: dialog",
-                    "Version": "1.3-20160828-2",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/d/dialog/dialog_1.3-20160828-2_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: git",
-                    "Version": "1:2.11.0-3+deb9u7",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/git/git_2.11.0-3+deb9u7_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: iproute2",
-                    "Version": "4.9.0-1+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/i/iproute2/iproute2_4.9.0-1+deb9u1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: jq",
-                    "Version": "1.5+dfsg-1.3",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/j/jq/jq_1.5+dfsg-1.3_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: less",
-                    "Version": "481-2.1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/less/less_481-2.1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: libc6",
-                    "Version": "2.24-11+deb9u4",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/glibc/libc6_2.24-11+deb9u4_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: libgcc1",
-                    "Version": "1:6.3.0-18+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-6/libgcc1_6.3.0-18+deb9u1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: libgssapi-krb5-2",
-                    "Version": "1.15-1+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/k/krb5/libgssapi-krb5-2_1.15-1+deb9u1_amd64.deb"
+                    "Name": "Docker Image: node",
+                    "Version": "10",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },
@@ -2132,76 +2251,6 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: libssl1.1",
-                    "Version": "1.1.0l-1~deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.0l-1~deb9u1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: libstdc++6",
-                    "Version": "6.3.0-18+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/g/gcc-6/libstdc++6_6.3.0-18+deb9u1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: nano",
-                    "Version": "2.7.4-1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/n/nano/nano_2.7.4-1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: openssh-client",
-                    "Version": "1:7.4p1-10+deb9u7",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssh/openssh-client_7.4p1-10+deb9u7_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: procps",
-                    "Version": "2:3.3.12-3+deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/p/procps/procps_3.3.12-3+deb9u1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: unzip",
-                    "Version": "6.0-21+deb9u2",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/u/unzip/unzip_6.0-21+deb9u2_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: wget",
-                    "Version": "1.18-5+deb9u3",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/w/wget/wget_1.18-5+deb9u3_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
@@ -2211,31 +2260,31 @@
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "node",
-                    "Digest": "sha256:8b6401f8d15c900736a54a870994277b3de19ebd28cc483c497bf00d608e2a90",
-                    "Tag": "14"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "14",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "node",
-                    "Digest": "sha256:d0738468dfc7cedb7d260369e0546fd7ee8731cfd67136f6023d070ad9679090",
-                    "Tag": "12"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "12",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },
         {
             "Component": {
-                "Type": "DockerImage",
-                "DockerImage": {
-                    "Name": "node",
-                    "Digest": "sha256:cf3ee6a5a1b1916c7a2e4fb51eb7ecba1afe186739677d62e9c1bb2cb1c7d6b0",
-                    "Tag": "10"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "10",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },
@@ -2253,7 +2302,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "3.9.7"
+                    "Version": "4.0.2"
                 }
             }
         }
