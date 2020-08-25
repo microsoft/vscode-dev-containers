@@ -1,5 +1,5 @@
 ARG VARIANT=11
-FROM mcr.microsoft.com/vscode/devcontainers/java:dev-${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/java:${VARIANT}
 
 # [Optional] Install Maven or Gradle
 ARG INSTALL_MAVEN="false"

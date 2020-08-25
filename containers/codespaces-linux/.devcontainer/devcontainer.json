@@ -1,7 +1,7 @@
 {
 	"name": "Codespaces",
 	"build": {
-		"dockerfile": "base.Dockerfile",
+		"dockerfile": "Dockerfile",
 		"args": {
 			"INSTALL_DOCKER": "true"
 		}
