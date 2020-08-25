@@ -70,7 +70,7 @@ check "virtualenv" virtualenv --version
 check "java" java --version
 check "sdkman" sdk --version
 check "gradle" gradle --version
-check "maven" maven --version
+check "maven" mvn --version
 
 # Check Ruby tools
 check "ruby" ruby --version
