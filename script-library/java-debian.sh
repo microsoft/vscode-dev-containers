@@ -13,7 +13,7 @@ UPDATE_RC=${4:-"true"}
 
 set -e
 
- # Blank will install latest AdoptOpenJDK version
+# Blank will install latest AdoptOpenJDK version
 if [ "${JAVA_VERSION}" = "lts" ]; then
     JAVA_VERSION=""
 fi
@@ -27,6 +27,21 @@ fi
 if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
+
+function updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        local -r sh_name="$1"
+        local -r rc_snippet="$2"
+        local -r profile_snippet=". /etc/profile"
+        if ! grep -q "${profile_snippet}" /etc/bash.bashrc; then
+            echo -e "${profile_snippet}\n$(cat /etc/bash.bashrc)" > /etc/bash.bashrc
+        fi
+        if ! grep -q "${profile_snippet}" /etc/zsh/zshrc; then
+            echo -e "${profile_snippet}\n$(cat /etc/zsh/zshrc)" > /etc/zsh/zshrc
+        fi
+        echo -e "${rc_snippet}" >> "/etc/profile.d/${sh_name}.sh"
+    fi
+}
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -42,14 +57,7 @@ fi
 if [ ! -d "${SDKMAN_DIR}" ]; then
     curl -sSL "https://get.sdkman.io?rcupdate=false" | bash
     chown -R "${USERNAME}" "${SDKMAN_DIR}"
-    # Add sourcing of sdkman into bashrc/zshrc files (unless disabled)
-    if [ "${UPDATE_RC}" = "true" ]; then
-        RC_SNIPPET="export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
-        echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-        if [ "${USERNAME}" != "root" ]; then
-            echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
-        fi
-    fi
+    updaterc sdkman "export SDKMAN_DIR=${SDKMAN_DIR}\n. \${SDKMAN_DIR}/bin/sdkman-init.sh"
 fi
 
 if [ "${JAVA_VERSION}" != "none" ]; then

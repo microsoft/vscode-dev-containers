@@ -27,11 +27,16 @@ fi
 
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
-        RC_SNIPPET="$1"
-        echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-        if [ "${USERNAME}" != "root" ]; then
-            echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
+        local -r sh_name="$1"
+        local -r rc_snippet="$2"
+        local -r profile_snippet=". /etc/profile"
+        if ! grep -q "${profile_snippet}" /etc/bash.bashrc; then
+            echo -e "${profile_snippet}\n$(cat /etc/bash.bashrc)" > /etc/bash.bashrc
         fi
+        if ! grep -q "${profile_snippet}" /etc/zsh/zshrc; then
+            echo -e "${profile_snippet}\n$(cat /etc/zsh/zshrc)" > /etc/zsh/zshrc
+        fi
+        echo -e "${rc_snippet}" >> "/etc/profile.d/${sh_name}.sh"
     fi
 }
 
@@ -71,7 +76,7 @@ if [ "${PYTHON_VERSION}" != "none" ]; then
         ln -s ${PYTHON_INSTALL_PATH}/bin/idle3 ${PYTHON_INSTALL_PATH}/bin/idle
         ln -s ${PYTHON_INSTALL_PATH}/bin/pydoc3 ${PYTHON_INSTALL_PATH}/bin/pydoc
         ln -s ${PYTHON_INSTALL_PATH}/bin/python3-config ${PYTHON_INSTALL_PATH}/bin/python-config
-        updaterc "export PATH=${PYTHON_INSTALL_PATH}/bin:\${PATH}"
+        updaterc python "export PATH=${PYTHON_INSTALL_PATH}/bin:\${PATH}"
     fi
 fi
 
@@ -113,4 +118,4 @@ su ${USERNAME} -c "$(cat << EOF
     rm -rf /tmp/pip-tmp
 EOF
 )"
-updaterc "export PIPX_HOME=${PIPX_HOME}\nexport PIPX_BIN_DIR=${PIPX_BIN_DIR}\nexport PATH=\${PATH}:\${PIPX_BIN_DIR}"
+updaterc python "export PIPX_HOME=${PIPX_HOME}\nexport PIPX_BIN_DIR=${PIPX_BIN_DIR}\nexport PATH=\${PATH}:\${PIPX_BIN_DIR}"
