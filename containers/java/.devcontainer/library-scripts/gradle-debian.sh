@@ -6,15 +6,15 @@
 
 # Syntax: ./gradle-debian.sh [gradle version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
 
-GRADLE_VERSION=${1:-"lts"}
+GRADLE_VERSION=${1:-"latest"}
 export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
 USERNAME=${3:-"vscode"}
 UPDATE_RC=${4:-"true"}
 
 set -e
 
- # Blank will install latest maven version
-if [ "${GRADLE_VERSION}" = "lts" ]; then
+ # Blank will install latest gradle version
+if [ "${GRADLE_VERSION}" = "lts" ] || [ "${GRADLE_VERSION}" = "latest" ] || [ "${GRADLE_VERSION}" = "current" ]; then
     GRADLE_VERSION=""
 fi
 

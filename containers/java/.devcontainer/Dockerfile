@@ -1,11 +1,11 @@
 ARG VARIANT=11
-FROM mcr.microsoft.com/vscode/devcontainers/java:dev-${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/java:${VARIANT}
 
-# [Optional] Install Maven or Gradle
+# [Optional] Install Maven or Gradle - version of "" installs latest
 ARG INSTALL_MAVEN="false"
-ARG MAVEN_VERSION=3.6.3
+ARG MAVEN_VERSION=""
 ARG INSTALL_GRADLE="false"
-ARG GRADLE_VERSION=5.4.1
+ARG GRADLE_VERSION=""
 RUN if [ "${INSTALL_MAVEN}" = "true" ]; then su vscode -c "source /usr/local/sdkman/bin/sdkman-init.sh && sdk install maven \"${MAVEN_VERSION}\""; fi \
     && if [ "${INSTALL_GRADLE}" = "true" ]; then su vscode -c "source /usr/local/sdkman/bin/sdkman-init.sh && sdk install gradle \"${GRADLE_VERSION}\""; fi
 
