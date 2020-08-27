@@ -26,8 +26,7 @@ services:
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
     
-    links:
-      - mongo
+    network_mode: service:mongo
 
   # Note: The MongoDB host name is "mongo", not "localhost"
   mongo:
