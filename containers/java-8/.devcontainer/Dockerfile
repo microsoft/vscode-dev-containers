@@ -1,5 +1,4 @@
-ARG VARIANT=11
-FROM mcr.microsoft.com/vscode/devcontainers/java:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/java:dev-8
 
 # [Optional] Install Maven or Gradle - version of "" installs latest
 ARG INSTALL_MAVEN="false"

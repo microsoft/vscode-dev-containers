@@ -6,7 +6,7 @@
 
 # Syntax: ./maven-debian.sh [maven version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
 
-MAVEN_VERSION=${1:-"lts"}
+MAVEN_VERSION=${1:-"latest"}
 export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
 USERNAME=${3:-"vscode"}
 UPDATE_RC=${4:-"true"}
@@ -14,7 +14,7 @@ UPDATE_RC=${4:-"true"}
 set -e
 
  # Blank will install latest maven version
-if [ "${MAVEN_VERSION}" = "lts" ]; then
+if [ "${MAVEN_VERSION}" = "lts" ] || [ "${MAVEN_VERSION}" = "current" ] || [ "${MAVEN_VERSION}" = "latest" ]; then
     MAVEN_VERSION=""
 fi
 

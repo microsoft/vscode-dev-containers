@@ -1,14 +1,14 @@
 {
-	"variants": [ "14", "11" ],
 	"build": {
-		"latest": "true",
+		"latest": "false",
 		"rootDistro": "debian",
+		"parent": "java",
 		"tags": [
-			"java:${VERSION}-${VARIANT}"
+			"java:${VERSION}-8"
 		]
 	},
 	"dependencies": {
-		"image": "openjdk:${VARIANT}-jdk-buster",
+		"image": "openjdk:11-jdk-buster",
 		"imageLink": "https://hub.docker.com/_/java",
 		"debian": [
 			"apt-utils", 
@@ -24,7 +24,6 @@
 			"gnupg",
 			"jq",
 			"wget",
-			"zip",
 			"unzip",
 			"lsb-release",
 			"apt-transport-https",
@@ -65,6 +64,15 @@
 						"Name": "SDKMAN!",
 						"repositoryUrl": "https://github.com/sdkman/sdkman-cli",
 						"commitHash": "716ab5e4b2148fd193aa5ed6b11aaba07bbad897"
+					}
+				}
+			}, {
+				"Component": {
+					"Type": "other",
+					"Other": {
+						"Name": "AdoptOpenJDK",
+						"Version": "jdk8u265-b01",
+						"DownloadUrl": "https://adoptopenjdk.net/"
 					}
 				}
 			}

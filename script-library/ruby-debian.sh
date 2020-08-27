@@ -24,12 +24,12 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, software-properties-common if missing
-if ! dpkg -s curl ca-certificates software-properties-common > /dev/null 2>&1; then
+# Install curl, software-properties-common, gnupg2 if missing
+if ! dpkg -s curl ca-certificates software-properties-common gnupg2 > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates software-properties-common
+    apt-get -y install --no-install-recommends curl ca-certificates software-properties-common gnupg2
 fi
 
 # Just install Ruby if RVM already installed
