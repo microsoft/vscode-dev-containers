@@ -14,9 +14,7 @@
 
 ## Using this definition with an existing folder
 
-> **Note:** Inside the container, you will find MongoDB running at `mongo:27017` rather than localhost.
-
-This definition creates two containers, one for Node.js and one for MongoDB. VS Code will attach to the Node.js container, and from within that container the MongoDB container will be available with the hostname `mongo`.
+This definition creates two containers, one for Node.js and one for MongoDB. VS Code will attach to the Node.js container, and from within that container the MongoDB container will be available on on **`localhost`** port 27017 The MongoDB instance can be managed in VS Code via the automatically installed MongoDB extension. Database options can be configured in `.devcontainer/docker-compose.yml` and data is persisted in a volume called `mongo-data`.
 
 While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Node.js version 10, 12, or 14.
 
@@ -28,31 +26,19 @@ build:
     VARIANT: 12
 ```
 
-The MongoDB instance can be managed via the automatically installed MongoDB extension, or you can expose the database to your local machine by uncommenting the following line in `.devcontainer/docker-compose.yaml`:
+You also can connect to MongoDB from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
 
-```yaml
-ports:
-  - 27017:27017
+```json
+"forwardPorts": [ "27017" ]
 ```
 
+### Adding another service
 
-While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. [Node Version Manager](https://github.com/nvm-sh/nvm) (`nvm`) is also included in case you need to use a different version of Node.js than the one included in the image.
-
-You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Node.js version 10, 12, or 14.
-
-```yaml
-build:
-  context: .
-  dockerfile: Dockerfile
-  args:
-    VARIANT: 14
-```
-
-You can also expose MongoDB to your local machine by uncommenting the following lines in `.devcontainer/docker-compose.yml`:
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentaiton](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
 
 ```yaml
-ports:
-  - 27017:27017
+# Runs the service on the same network as the app container, allows "forwardPorts" in devcontainer.json function.
+network_mode: service:app
 ```
 
 ### Adding the definition to your project

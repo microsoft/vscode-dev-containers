@@ -1,9 +1,8 @@
-// NOTE: Use "mariadb" as the host name to connect to the database and update 
-// the VARIANT arg in docker-compose.yml to pick a PHP version: 7, 7.3, 7.4 
+// Update the VARIANT arg in docker-compose.yml to pick a PHP version: 7, 7.3, 7.4 
 {
 	"name": "PHP & MariaDB",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "php",
+	"service": "app",
 	"workspaceFolder": "/workspace",
 	
 	// Set *default* container specific settings.json values on container create.
@@ -12,11 +11,12 @@
 		"sqltools.connections": [{
 			"name": "Container database",
 			"driver": "MariaDB",
-			"server": "mariadb",
+			"server": "localhost",
+			"previewLimit": 50,
 			"port": 3306,
 			"database": "mariadb",
 			"username": "root",
-			"password": " just-for-testing",
+			"password": "mariadb"
 		}]
 	},
 
@@ -29,7 +29,7 @@
 	],
 
 	// For use with PHP (e.g.php -S localhost:8080)
-	"forwardPorts": [8080]
+	"forwardPorts": [8080, 3306]
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "php -v",

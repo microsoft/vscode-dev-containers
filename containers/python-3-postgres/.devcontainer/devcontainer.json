@@ -1,5 +1,4 @@
-// NOTE: Use "db" as the host name to connect to the database and update the 
-// VARIANT arg in docker-compose.yml to pick a Python version: 3, 3.8, 3.7, 3.6 
+// Update the VARIANT arg in docker-compose.yml to pick a Python version: 3, 3.8, 3.7, 3.6 
 {
 	"name": "Python 3 & PostgreSQL",
 	"dockerComposeFile": "docker-compose.yml",
@@ -13,11 +12,11 @@
 			"name": "Container database",
 			"driver": "PostgreSQL",
 			"previewLimit": 50,
-			"server": "db",
+			"server": "localhost",
 			"port": 5432,
 			"database": "postgres",
 			"username": "postgres",
-			"password": "LocalPassword",
+			"password": "postgres"
 		}],
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.enabled": true,
@@ -41,11 +40,8 @@
 		"mtxr.sqltools-driver-pg"
 	]
 
-	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
-	// "shutdownAction": "none",
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [5000],
+	// "forwardPorts": [5000, 5432],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "pip install --user -r requirements.txt",
