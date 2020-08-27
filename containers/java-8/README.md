@@ -16,7 +16,7 @@
 
 ## Using this definition with an existing folder
 
-> **Note:** A version of this [definition for **newer JDKs**](../java) is also available](../java)!
+> **Note:** A version of this [definition for **newer JDKs**](../java) is also available!
 
 This definition includes both JDK 8 and JDK 11 due to the fact that the VS Code Java extension requires JDK 11+. The needed `devcontainer.json` settings are present to enable you to work with projects targeting Java 8.
 
