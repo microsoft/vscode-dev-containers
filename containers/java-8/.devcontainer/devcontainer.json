@@ -18,7 +18,7 @@
 		"java.configuration.runtimes": [{
 			"default": true,
 			"name": "JavaSE-1.8",
-			"path": "/usr/local/sdkman/candidates/java/current",
+			"path": "/usr/local/sdkman/candidates/java/current"
 		}]
 	},
 	
