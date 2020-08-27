@@ -8,6 +8,7 @@ RUN curl -sSL "https://www.mongodb.org/static/pgp/server-${MONGO_TOOLS_VERSION}.
     && echo "deb http://repo.mongodb.org/apt/debian $(lsb_release -cs)/mongodb-org/${MONGO_TOOLS_VERSION} main" | tee /etc/apt/sources.list.d/mongodb-org-${MONGO_TOOLS_VERSION}.list \
     && apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install mongodb-org-tools \
+    && apt-get install mongodb-org-shell \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Update args in docker-compose.yaml to set the UID/GID of the "node" user.
