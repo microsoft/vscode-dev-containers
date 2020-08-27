@@ -14,23 +14,24 @@ Develop PHP based applications with MariaDB (MySQL Compatible).  Includes necess
 
 ## Description
 
-> **Note:** Inside the container, you will find PostgreSQL running at `mariadb:3306` rather than localhost.
-
-This definition creates two containers, one for PHP and one for MariaDB.  Code will attach to the PHP container, and from within that container the MariaDB container will be available with the hostname `mariadb`.  The MariaDB instance can be managed via the automatically installed SQLTools extension, or from the container's command line with:
+This definition creates two containers, one for PHP and one for MariaDB.  Code will attach to the PHP container, and from within that container the MariaDB container will be available on **`localhost`** port 3306. The MariaDB instance can be managed via the automatically installed SQLTools extension, or from the container's command line with:
 
 ```bash
-mariadb -h mariadb -u root -p
+mariadb -h localhost -u root -p
 ```
 
-The default database is called `mariadb` with a `root` user password of `just-for-testing`, and if desired this may be changed in `docker-compose.yml`.
+The default database is called `mariadb` with a `mariadb` user whose password is `mariadb`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `mariadb-data`.
 
 ## Using this definition with an existing folder
 
 While the definition itself works unmodified, you can select the version of PHP the container uses by updating the `VARIANT` arg in the included `.devcontainer/docker-compose.yml` (and rebuilding if you've already created the container).
 
 ```yaml
-args:
-  VARIANT: "7"
+build:
+  context: .
+  dockerfile: Dockerfile
+  args:
+    VARIANT: "7"
 ```
 
 Given how frequently web applications use Node.js for front end code, this container also includes an optional install of Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/docker-compose.yml`.
@@ -40,6 +41,21 @@ args:
   VARIANT: "7"
   INSTALL_NODE: "true"
   NODE_VERSION: "10"
+```
+
+You also can connect to MariaDB from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
+
+```json
+"forwardPorts": [ "3306" ]
+```
+
+### Adding another service
+
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentaiton](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
+
+```yaml
+# Runs the service on the same network as the app container, allows "forwardPorts" in devcontainer.json function.
+network_mode: service:app
 ```
 
 ### Adding the definition to your project

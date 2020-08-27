@@ -1,11 +1,7 @@
-version: "3"
+version: '3'
 
 services: 
-  php:
-    # Uncomment the next line to use a non-root user for all processes.
-    # See https://aka.ms/vscode-remote/containers/non-root for details.
-    # user: vscode
-
+  app:
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,26 +17,31 @@ services:
     volumes:
       - ..:/workspace:cached
 
-    # Use "ports" to publish your web port locally. Consider "forwardPorts" in
-    # devcontainer.json instead if your app only allows connections from localhost. 
-    # ports:
-    #   - 8080:8080
-
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
 
-    links:
-      - mariadb
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: vscode
 
-  # Note: The MariaDB host name is "db", not "localhost"
-  mariadb:
-      image: mariadb:10.4
-      restart: unless-stopped
-      environment:
-          MYSQL_ROOT_PASSWORD: just-for-testing
-          MYSQL_DATABASE: mariadb
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
 
-      # Uncomment to allow access to mariadb from external tools
-      # ports:
-      #   - "3306:3306"
+  db:
+    image: mariadb:10.4
+    restart: unless-stopped
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+      MYSQL_DATABASE: mariadb
+      MYSQL_USER: mariadb
+      MYSQL_PASSWORD: mariadb
 
+    # Runs MariaDB on the same network as the app container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:app
+
+    # Add "forwardPorts": ["3306"] to **devcontainer.json** to forward MongoDB locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+  
+volumes:
+  mariadb-data:

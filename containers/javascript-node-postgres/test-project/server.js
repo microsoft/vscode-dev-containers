@@ -12,11 +12,11 @@ const promise = require('bluebird');
 const PORT = 3000;
 const HOST = '0.0.0.0';
 const cn = {
-	host: 'db', // host of db container
+	host: 'localhost', // host of db container
 	port: 5432, // 5432 is the default;
 	database: 'postgres', // database name
 	user: 'postgres', // database user name
-	password: 'LocalPassword' // database password
+	password: 'postgres' // database password
 };
 const initOptions = {
 	promiseLib: promise

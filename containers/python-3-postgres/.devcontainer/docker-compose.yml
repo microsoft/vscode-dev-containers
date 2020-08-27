@@ -2,10 +2,6 @@ version: '3'
 
 services:
   app:
-    # Uncomment the next line to use a non-root user for all processes.
-    # See https://aka.ms/vscode-remote/containers/non-root for details.
-    # user: vscode
-
     build: 
       context: ..
       dockerfile: .devcontainer/Dockerfile
@@ -16,28 +12,33 @@ services:
         USER_UID: 1000
         USER_GID: 1000
 
-    # Use "ports" to publish your app port locally. However, "forwardPorts" in devcontainer.json
-    # works better with framework defaults that only allow connections from localhost (e.g. Flask)
-    # ports:
-    #   - 5000:5000
-
     volumes:
       - ..:/workspace:cached
       
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
     
-    links: 
-      - db
-    
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: vscode
+
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
   db:
-    image: postgres
+    image: postgres:latest
     restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: LocalPassword
+      POSTGRES_PASSWORD: postgres
 
-    # Uncomment to allow access to PostgreSQL from external tools
-    # ports: 
-    #  - 5432:5432
+    # Runs PostgreSQL on the same network as the app container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:app
+
+    # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward MongoDB locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+volumes:
+  postgres-data:
