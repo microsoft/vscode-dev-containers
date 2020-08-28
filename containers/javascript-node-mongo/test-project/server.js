@@ -16,7 +16,7 @@ const HOST = '0.0.0.0';
 
 (async function() {
 	// Use connect to mongo server
-	const client = new MongoClient(MONGO_URL, { useNewUrlParser: true });
+	const client = new MongoClient(MONGO_URL, { useUnifiedTopology: true });
 	await client.connect();
 	console.log('Connected successfully to Mongo DB');
 	const db = client.db(DB_NAME);
