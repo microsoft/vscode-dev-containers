@@ -13,7 +13,7 @@ ENV NVM_DIR=/home/vscode/.nvm
 ENV NVM_SYMLINK_CURRENT=true 
 ENV PATH=${NVM_DIR}/current/bin:${PATH}
 
-# [Optional] Install the Azure CLI
+# [Optional] Install Azure CLI
 ARG INSTALL_AZURE_CLI="false"
 
 # Docker Compose version
@@ -71,7 +71,7 @@ RUN apt-get update \
         && apt-get -y install --no-install-recommends yarn; \
     fi \
     #
-    # [Optional] Install the Azure CLI
+    # [Optional] Install Azure CLI
     && if [ "$INSTALL_AZURE_CLI" = "true" ]; then \
         echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \
         && curl -sL https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 2>/dev/null \

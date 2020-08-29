@@ -223,6 +223,9 @@ function pushCommand(argv) {
         argv.stubRegistryPath, argv.push, argv.prepOnly, argv.skip, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
             process.exit(1);
         });
 }
@@ -232,6 +235,9 @@ function packCommand(argv) {
         argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean, argv.skipPush)
         .catch((reason) => {
             console.error(`(!) Packaging failed - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
             process.exit(1);
         });
 }
@@ -240,6 +246,9 @@ function updateScriptSourcesCommand(argv) {
     prep.updateAllScriptSourcesInRepo(argv.githubRepo, argv.release, argv.updateSha)
         .catch((reason) => {
             console.error(`(!) Failed to update script sources - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
             process.exit(1);
         });
 }
@@ -248,6 +257,9 @@ function copyLibraryScriptsCommand() {
     prep.copyLibraryScriptsForAllDefinitions()
         .catch((reason) => {
             console.error(`(!) Failed to copy library scripts to definitions  - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
             process.exit(1);
         });
 }
@@ -257,6 +269,9 @@ function cgCommand(argv) {
     generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build, argv.prune, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Component governance manifest generation failed - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
             process.exit(1);
         });
 }
@@ -266,12 +281,18 @@ function patchCommand(argv) {
         patch.patchAll(argv.registry, argv.registryPath)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
+                if(reason.stack) {
+                    console.error(`    ${reason.stack}`);
+                }    
                 process.exit(1);
             });
     } else {
         patch.patch(argv.patchPath, argv.registry, argv.registryPath)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
+                if(reason.stack) {
+                    console.error(`    ${reason.stack}`);
+                }    
                 process.exit(1);
             });
     }

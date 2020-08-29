@@ -100,7 +100,7 @@ Given how frequently ASP.NET applications use Node.js for front end code, this c
 
 ```json
 "args": {
-    "VARIANT": "3.1-bionic",
+    "VARIANT": "3.1",
     "INSTALL_NODE": "true",
     "NODE_VERSION": "10",
 }
@@ -110,7 +110,7 @@ If you would like to install the Azure CLI update you can set the `INSTALL_AZURE
 
 ```Dockerfile
 "args": {
-    "VARIANT": "3.1-bionic",
+    "VARIANT": "3.1",
     "INSTALL_NODE": "true",
     "NODE_VERSION": "10",
     "INSTALL_AZURE_CLI": "true"

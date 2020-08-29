@@ -1,5 +1,5 @@
 {
-	"name": "Bazel",
+	"name": "Bazel (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {

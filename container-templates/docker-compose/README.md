@@ -27,6 +27,14 @@ args:
   VARIANT: buster
 ```
 
+### Adding another service
+
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentaiton](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
+
+```yaml
+# Runs the service on the same network as the app container, allows "forwardPorts" in devcontainer.json function.
+network_mode: service:app
+
 ### Adding the definition to your project
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.

@@ -86,7 +86,7 @@ ENV CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup"
 ENV PATH="${CARGO_HOME}/bin:${PATH}"
 COPY library-scripts/rust-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "false" \
+RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install Go
@@ -109,7 +109,7 @@ ENV PIPX_HOME="/usr/local/py-utils" \
     PIPX_BIN_DIR="/usr/local/py-utils/bin"
 ENV PATH="${PATH}:${PIPX_BIN_DIR}"
 COPY library-scripts/python-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/python-debian.sh "stable" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "false" \ 
+RUN bash /tmp/scripts/python-debian.sh "stable" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "true" \ 
     && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install xdebug, link composer
@@ -121,7 +121,7 @@ RUN yes | pecl install xdebug \
     && rm -rf /tmp/pear \
     && ln -s $(which composer.phar) /usr/local/bin/composer
 
-# [Optional] Install Docker - Not in resulting image by default
+# [Option] Install Docker CLI
 ARG INSTALL_DOCKER="false"
 COPY library-scripts/docker-debian.sh /tmp/scripts/
 RUN if [ "${INSTALL_DOCKER}" = "true" ]; then \

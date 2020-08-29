@@ -1,5 +1,5 @@
 {
-    "name": "Salesforce Project",
+    "name": "Salesforce Project (Community)",
     "dockerFile": "Dockerfile",
     "extensions": [
       "salesforce.salesforcedx-vscode",
