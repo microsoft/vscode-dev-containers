@@ -11,7 +11,7 @@ ENV LANG=en_US.UTF-8 \
     # Install jekyll
 RUN gem install bundler jekyll
 
-# Install a version of Node.js using nvm for dynamic front end content
+# [Option] Install Node.js
 ARG NODE_VERSION="lts/*"
 RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"
 

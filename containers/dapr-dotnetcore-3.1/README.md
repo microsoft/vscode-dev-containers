@@ -47,17 +47,21 @@ Only the integrated terminal is supported by the Remote - Containers extension. 
 
 ### Installing Node.js or the Azure CLI
 
-Given how frequently ASP.NET applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating these lines in `.devcontainer/Dockerfile`.
+Given how frequently ASP.NET applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating these lines in `.devcontainer/docker-compose.yml`.
 
-```Dockerfile
-ARG INSTALL_NODE="true"
-ARG NODE_VERSION="10"
+```yaml
+arg:
+  INSTALL_NODE: "true"
+  ARG NODE_VERSION: "10"
 ```
 
-If you would like to install the Azure CLI update this line in `.devcontainer/Dockerfile`:
+If you would like to install the Azure CLI update this line in `.devcontainer/docker-compose.yml`:
 
-```Dockerfile
-ARG INSTALL_AZURE_CLI="true"
+```yaml
+arg:
+  INSTALL_AZURE_CLI: "true"
+  INSTALL_NODE: "true"
+  ARG NODE_VERSION: "10"
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.

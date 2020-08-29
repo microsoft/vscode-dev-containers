@@ -56,7 +56,7 @@ RUN mkdir -p /tmp/gotools \
 
 ENV GO111MODULE=auto
 
-# [Optional] Install Node.js - update the INSTALL_NODE arg in devcontainer.json to enable.
+# [Option] Install Node.js 
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
