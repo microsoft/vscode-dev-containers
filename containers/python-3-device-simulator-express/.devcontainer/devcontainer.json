@@ -1,5 +1,5 @@
 {
-	"name": "Python 3 & Device Simulator Express",
+	"name": "Python 3 & Device Simulator Express (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "..",

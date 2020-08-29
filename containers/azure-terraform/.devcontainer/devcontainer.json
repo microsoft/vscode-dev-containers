@@ -1,5 +1,5 @@
 {
-	"name": "Azure Terraform",
+	"name": "Azure Terraform (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 

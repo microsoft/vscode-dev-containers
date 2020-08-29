@@ -1,5 +1,5 @@
 {
-	"name": "Azure Blockchain",
+	"name": "Azure Blockchain (Community)",
 	"dockerFile": "Dockerfile",
 
 	// Set *default* container specific settings.json values on container create.

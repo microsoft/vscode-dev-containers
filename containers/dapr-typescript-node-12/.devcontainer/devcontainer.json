@@ -1,5 +1,5 @@
 {
-	"name": "Dapr with Node.js 12 & TypeScript",
+	"name": "Dapr with Node.js & TypeScript (Community)",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "docker-from-docker",
 	"workspaceFolder": "/workspace",

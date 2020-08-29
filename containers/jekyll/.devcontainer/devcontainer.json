@@ -1,5 +1,5 @@
 {
-	"name": "Jekyll",
+	"name": "Jekyll (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
