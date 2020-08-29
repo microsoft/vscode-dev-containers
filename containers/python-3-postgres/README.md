@@ -14,25 +14,31 @@
 
 ## Using this definition with an existing folder
 
-> **Note:** Inside the container, you will find PostgreSQL running at `db:5432` rather than localhost.
-
-This definition creates two containers, one for Python and one for PostgreSQL. VS Code will attach to the Python container, and from within that container the PostgreSQL container will be available with the hostname `db`. The default database is named `postgres` with a user of `postgres` whose password is `LocalPassword`, and if desired this may be changed in `docker-compose.yml`.
+This definition creates two containers, one for Python and one for PostgreSQL. VS Code will attach to the Python container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `postgres-data`.
 
 While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/python` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies and Python tools for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Python version 3, 3.8, 3.7, or 3.6.
 
 ```yaml
 build:
-  context: .
-  dockerfile: Dockerfile
+  context: ..
+  dockerfile: .devcontainer/Dockerfile
   args:
     VARIANT: 3.7
 ```
 
-The PostgreSQL instance can be managed via the automatically installed SQLTools extension, or you can expose the database to your local machine by uncommenting the following line in `.devcontainer/docker-compose.yaml`:
+You also can connect to PostgreSQL from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
+
+```json
+"forwardPorts": [ "5432" ]
+```
+
+### Adding another service
+
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentaiton](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
 
 ```yaml
-ports:
-  - 5432:5432
+# Runs the service on the same network as the app container, allows "forwardPorts" in devcontainer.json function.
+network_mode: service:app
 ```
 
 ### Installing or updating Python utilities

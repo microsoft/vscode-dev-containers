@@ -10,7 +10,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 // Constants
 const PORT = 3000;
-const MONGO_URL = 'mongodb://mongo:27017';
+const MONGO_URL = 'mongodb://localhost:27017';
 const DB_NAME = 'test-project';
 const HOST = '0.0.0.0';
 
