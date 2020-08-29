@@ -40,7 +40,7 @@ RUN mkdir -p ${PIPX_BIN_DIR} \
     && chown -R ${USER_UID}:${USER_GID} ${PIPX_HOME} \
     && rm -rf /tmp/pip-tmp
 
-# [Optional] Install Node.js for use with web applications - update the INSTALL_NODE arg in devcontainer.json to enable.
+# [Option] Install Node.js
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm

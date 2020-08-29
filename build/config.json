@@ -26,6 +26,6 @@
 	"scriptLibraryFolderNameInDefinition": "library-scripts",
 	"definitionBuildConfigFile": "definition-manifest.json",
 
-	"devContainerJsonPreamble": "// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:\n// ",
+	"devContainerJsonPreamble": "For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:\n// ",
 	"dockerFilePreamble": "See here for image contents: "
 }

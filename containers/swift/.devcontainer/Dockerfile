@@ -22,7 +22,7 @@ RUN git clone https://github.com/vknabel/sourcekite \
     && ln -s /usr/lib/libsourcekitdInProc.so /usr/lib/sourcekitdInProc \
     && cd sourcekite && make install PREFIX=/usr/local -j2
 
-# [Optional] Install Node.js for use with web applications - update the INSTALL_NODE arg in devcontainer.json to enable.
+# [Option] Install Node.js
 ARG INSTALL_NODE="false"
 ARG NODE_VERSION="lts/*"
 ENV NVM_DIR=/usr/local/share/nvm

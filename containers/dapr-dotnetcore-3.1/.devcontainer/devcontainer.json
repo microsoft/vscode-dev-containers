@@ -1,5 +1,5 @@
 {
-	"name": "Dapr with C# (.NET Core 3.1)",
+	"name": "Dapr with C# (Community)",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "docker-from-docker",
 	"workspaceFolder": "/workspace",

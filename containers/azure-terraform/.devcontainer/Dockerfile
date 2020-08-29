@@ -14,9 +14,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y graphviz \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# Optional installs. Use a separate RUN statement to add your own dependencies.
+# [Option] Install Azure CLI
 ARG INSTALL_AZURE_CLI="true"
+# [Option] Install Docker CLI
 ARG INSTALL_DOCKER="true"
+# [Option] Install Node.js
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
 ENV NVM_DIR=/usr/local/share/nvm

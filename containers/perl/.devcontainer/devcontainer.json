@@ -1,5 +1,5 @@
 {
-	"name": "Perl",
+	"name": "Perl (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update VARIANT to pick a Perl version

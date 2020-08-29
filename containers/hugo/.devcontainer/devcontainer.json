@@ -1,5 +1,5 @@
 {
-	"name": "Hugo",
+	"name": "Hugo (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {

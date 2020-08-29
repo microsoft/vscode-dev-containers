@@ -1,12 +1,12 @@
 ARG VARIANT=3.1
 FROM mcr.microsoft.com/vscode/devcontainers/dotnetcore:${VARIANT}
 
-# [Optional] Install a version of Node.js using nvm for front end dev
+# [Option] Install Node.js
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
 RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "source /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
-# [Optional] Install the Azure CLI - update the INSTALL_AZURE_CLI arg in devcontainer.json to enable.
+# [Option] Install Azure CLI
 ARG INSTALL_AZURE_CLI="false"
 COPY library-scripts/azcli-debian.sh /tmp/library-scripts/
 RUN if [ "$INSTALL_AZURE_CLI" = "true" ]; then bash /tmp/library-scripts/azcli-debian.sh; fi \

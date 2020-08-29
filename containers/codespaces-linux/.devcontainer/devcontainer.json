@@ -1,5 +1,5 @@
 {
-	"name": "Codespaces",
+	"name": "GitHub Codespaces (Default)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
