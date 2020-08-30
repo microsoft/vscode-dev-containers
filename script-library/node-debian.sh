@@ -75,11 +75,24 @@ EOF
 if [ "${UPDATE_RC}" = "true" ]; then
 (cat <<EOF
 export NVM_DIR="${NVM_DIR}"
+sudoIf()
+{
+    if [ "\$(id -u)" -ne 0 ]; then
+        sudo "\$@"
+    else
+        "\$@"
+    fi
+}
+if [ "\$(stat -c '%U' \$NVM_DIR)" != "${USERNAME}" ]; then
+    if [ "\$(id -u)" -eq 0 ] || type sudo > /dev/null 2>&1; then
+        echo "Fixing permissions of \"\$NVM_DIR\"...
+        sudoIf chown -R ${USERNAME}:root \$NVM_DIR
+    else
+        echo "Warning: NVM directory is not owned by ${USERNAME} and sudo is not installed. Unable to correct permissions."
+    fi
+fi
 [ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
 [ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
-if [ "\$(stat -c '%U' \$NVM_DIR)" != "${USERNAME}" ]; then
-    sudo chown -R ${USERNAME}:root \$NVM_DIR
-fi
 EOF
 ) | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc 
 fi 
