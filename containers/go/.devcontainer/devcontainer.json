@@ -16,7 +16,10 @@
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
 		"go.useGoProxyToCheckForToolUpdates": false,
-		"go.gopath": "/go"
+		"go.useLanguageServer": true,
+		"go.gopath": "/go",
+		"go.goroot": "/usr/local/go",
+		"go.toolsGopath": "/go/bin"
 	},
 	
 	// Add the IDs of extensions you want installed when the container is created.
