@@ -154,11 +154,7 @@ EOF
 
 # Ensure ~/.local/bin is in the PATH for root and non-root users for bash. (zsh is later)
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
-    echo "${RC_SNIPPET}" | tee -a /root/.bashrc  >> /etc/skel/.bashrc 
-    if [ "${USERNAME}" != "root" ]; then
-        echo "${RC_SNIPPET}" >> /home/$USERNAME/.bashrc
-        chown $USER_UID:$USER_GID /home/$USERNAME/.bashrc
-    fi
+    echo "${RC_SNIPPET}" >> /etc/bash.bashrc
     RC_SNIPPET_ALREADY_ADDED="true"
 fi
 
@@ -167,7 +163,8 @@ if [ "${INSTALL_ZSH}" = "true" ] && [ ! -d "/root/.oh-my-zsh" ] && [ "${ZSH_ALRE
     apt-get-update-if-needed
     apt-get install -y zsh
     curl -fsSLo- https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash 2>&1
-    echo -e "${RC_SNIPPET}\nDEFAULT_USER=\$USER\nprompt_context(){}" >> /root/.zshrc
+    echo "${RC_SNIPPET}" >> /etc/zsh/zshrc
+    echo -e "DEFAULT_USER=\$USER\nprompt_context(){}" >> /root/.zshrc
     cp -fR /root/.oh-my-zsh /etc/skel
     cp -f /root/.zshrc /etc/skel
     sed -i -e "s/\/root\/.oh-my-zsh/\/home\/\$(whoami)\/.oh-my-zsh/g" /etc/skel/.zshrc
