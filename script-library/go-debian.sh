@@ -6,7 +6,7 @@
 
 # Syntax: ./go-debian.sh [Go version] [Go install path] [GOPATH] [non-root user] [Add GOPATH, GOROOT to rc files flag] [install tools]
 
-TARGET_GO_VERSION=${1:-"1.15"}
+TARGET_GO_VERSION=${1:-"latest"}
 TARGET_GOROOT=${2:-"/usr/local/go"}
 TARGET_GOPATH=${3:-"/go"}
 USERNAME=${4:-"vscode"}
@@ -25,6 +25,12 @@ if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
+function updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+    fi
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, tar, git, other dependencies if missing
@@ -33,6 +39,11 @@ if ! dpkg -s curl ca-certificates tar git g++ gcc libc6-dev make pkg-config > /d
         apt-get update
     fi
     apt-get -y install --no-install-recommends curl ca-certificates tar git g++ gcc libc6-dev make pkg-config
+fi
+
+# Get latest version number if latest is specified
+if [ "${TARGET_GO_VERSION}" = "latest" ] ||  [ "${TARGET_GO_VERSION}" = "current" ] ||  [ "${TARGET_GO_VERSION}" = "lts" ]; then
+    TARGET_GO_VERSION=$(curl -sSL "https://golang.org/VERSION?m=text" | sed -n '/^go/s///p' )
 fi
 
 # Install Go
@@ -103,12 +114,6 @@ if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
 fi
 
 # Add GOPATH variable and bin directory into PATH in bashrc/zshrc files (unless disabled)
-if [ "${UPDATE_RC}" = "true" ]; then
-    RC_SNIPPET="export GOPATH=\"${TARGET_GOPATH}\"\nexport GOROOT=\"${TARGET_GOROOT}\"\nexport PATH=\"\${GOROOT}/bin:\${PATH}\""
-    echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-    if [ "${USERNAME}" != "root" ]; then
-        echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
-    fi
-fi
+updaterc "export GOPATH=\"${TARGET_GOPATH}\"\nexport GOROOT=\"${TARGET_GOROOT}\"\nexport PATH=\"\${GOROOT}/bin:\${PATH}\""
 echo "Done!"
 

@@ -45,10 +45,7 @@ if [ ! -d "${SDKMAN_DIR}" ]; then
     # Add sourcing of sdkman into bashrc/zshrc files (unless disabled)
     if [ "${UPDATE_RC}" = "true" ]; then
         RC_SNIPPET="export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
-        echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-        if [ "${USERNAME}" != "root" ]; then
-            echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
-        fi
+        echo -e ${RC_SNIPPET} | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
     fi
 fi
 
