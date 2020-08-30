@@ -6,7 +6,7 @@
 
 # Syntax: ./github-debian.sh [version]
 
-CLI_VERSION=${1:-"0.11.0"}
+CLI_VERSION=${1:-"latest"}
 
 set -e
 
@@ -23,6 +23,12 @@ if ! dpkg -s curl ca-certificates > /dev/null 2>&1; then
         apt-get update
     fi
     apt-get -y install --no-install-recommends curl ca-certificates
+fi
+
+# Get latest release number if latest is specified
+if [ "${CLI_VERSION}" = "latest" ] ||  [ "${CLI_VERSION}" = "current" ] ||  [ "${CLI_VERSION}" = "lts" ]; then
+    LATEST_RELEASE=$(curl -sSL -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/cli/cli/releases?per_page=1&page=1")
+    CLI_VERSION=$(echo ${LATEST_RELEASE} | grep -oE 'tag_name":\s*"v[^"]+' | sed -n '/tag_name":\s*"v/s///p')
 fi
 
 # Install the GitHub CLI

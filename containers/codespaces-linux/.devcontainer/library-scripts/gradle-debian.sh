@@ -6,15 +6,15 @@
 
 # Syntax: ./gradle-debian.sh [gradle version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
 
-GRADLE_VERSION=${1:-"lts"}
+GRADLE_VERSION=${1:-"latest"}
 export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
 USERNAME=${3:-"vscode"}
 UPDATE_RC=${4:-"true"}
 
 set -e
 
- # Blank will install latest maven version
-if [ "${GRADLE_VERSION}" = "lts" ]; then
+ # Blank will install latest gradle version
+if [ "${GRADLE_VERSION}" = "lts" ] || [ "${GRADLE_VERSION}" = "latest" ] || [ "${GRADLE_VERSION}" = "current" ]; then
     GRADLE_VERSION=""
 fi
 
@@ -30,11 +30,7 @@ fi
 
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
-        RC_SNIPPET="$1"
-        echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-        if [ "${USERNAME}" != "root" ]; then
-            echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
-        fi
+        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
     fi
 }
 
@@ -58,5 +54,5 @@ fi
 
 # Install gradle
 su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install gradle ${GRADLE_VERSION} && sdk flush archives && sdk flush temp"
-updaterc "export GRADLE_USER_HOME=\${HOME}/.gradle"
+updaterc "export GRADLER_USER_HOME=\${HOME}/.gradle"
 echo "Done!"

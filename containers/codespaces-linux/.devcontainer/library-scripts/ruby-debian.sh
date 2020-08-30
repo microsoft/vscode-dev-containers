@@ -22,14 +22,20 @@ if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
+function updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+    fi
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, software-properties-common if missing
-if ! dpkg -s curl ca-certificates software-properties-common > /dev/null 2>&1; then
+# Install curl, software-properties-common, gnupg2 if missing
+if ! dpkg -s curl ca-certificates software-properties-common gnupg2 > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates software-properties-common
+    apt-get -y install --no-install-recommends curl ca-certificates software-properties-common gnupg2
 fi
 
 # Just install Ruby if RVM already installed
@@ -56,13 +62,5 @@ rm -rf ${GNUPGHOME}
 source /usr/local/rvm/scripts/rvm
 rvm cleanup all 
 gem cleanup
-
-# Add sourcing of rvm into bashrc/zshrc files (unless disabled)
-if [ "${UPDATE_RC}" = "true" ]; then
-    RC_SNIPPET="source /usr/local/rvm/scripts/rvm"
-    echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-    if [ "${USERNAME}" != "root" ]; then
-        echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
-    fi
-fi
+updaterc "source /usr/local/rvm/scripts/rvm"
 echo "Done!"

@@ -9,6 +9,7 @@
 export NVM_DIR=${1:-"/usr/local/share/nvm"}
 export NODE_VERSION=${2:-"lts/*"}
 USERNAME=${3:-"vscode"}
+UPDATE_RC=${4:-"true"}
 
 set -e
 
@@ -56,27 +57,10 @@ if [ -d "${NVM_DIR}" ]; then
     exit 0
 fi
 
-mkdir -p ${NVM_DIR}
-
-NVM_INIT=$(cat <<EOF
-export NVM_DIR="${NVM_DIR}"
-[ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
-[ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
-if [ "\$(stat -c '%U' \$NVM_DIR)" != "${USERNAME}" ]; then
-    sudo chown -R ${USERNAME}:root \$NVM_DIR
-fi
-EOF
-)
-
-echo "${NVM_INIT}" | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-# Set up non-root user if applicable
-if [ "${USERNAME}" != "root" ]; then   
-    # Add NVM init and add code to update NVM ownership if UID/GID changes
-    echo "${NVM_INIT}" | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc
-    chown ${USERNAME} ${NVM_DIR} /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc
-fi
 
 # Run NVM installer as non-root if needed
+mkdir -p ${NVM_DIR}
+chown ${USERNAME} ${NVM_DIR}
 su ${USERNAME} -c "$(cat << EOF
     set -e
     curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
@@ -87,5 +71,17 @@ su ${USERNAME} -c "$(cat << EOF
     nvm clear-cache 
 EOF
 )" 2>&1
+
+if [ "${UPDATE_RC}" = "true" ]; then
+(cat <<EOF
+export NVM_DIR="${NVM_DIR}"
+[ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
+[ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
+if [ "\$(stat -c '%U' \$NVM_DIR)" != "${USERNAME}" ]; then
+    sudo chown -R ${USERNAME}:root \$NVM_DIR
+fi
+EOF
+) | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc 
+fi 
 
 echo "Done!"

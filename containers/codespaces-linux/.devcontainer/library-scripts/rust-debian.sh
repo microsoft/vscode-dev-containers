@@ -23,6 +23,12 @@ if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
+function updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+    fi
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, lldb, python3-minimal,and rust dependencies if missing
@@ -54,12 +60,6 @@ EOF
 )"
 
 # Add CARGO_HOME, RUSTUP_HOME and bin directory into bashrc/zshrc files (unless disabled)
-if [ "${UPDATE_RC}" = "true" ]; then
-    RC_SNIPPET="export CARGO_HOME=\"${CARGO_HOME}\"\nexport RUSTUP_HOME=\"${RUSTUP_HOME}\"\nexport PATH=\"\${CARGO_HOME}/bin:\${PATH}\""
-    echo -e ${RC_SNIPPET} | tee -a /root/.bashrc /root/.zshrc >> /etc/skel/.bashrc 
-    if [ "${USERNAME}" != "root" ]; then
-        echo -e ${RC_SNIPPET} | tee -a /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc 
-    fi
-fi
+updaterc "export CARGO_HOME=\"${CARGO_HOME}\"\nexport RUSTUP_HOME=\"${RUSTUP_HOME}\"\nexport PATH=\"\${CARGO_HOME}/bin:\${PATH}\""
 echo "Done!"
 
