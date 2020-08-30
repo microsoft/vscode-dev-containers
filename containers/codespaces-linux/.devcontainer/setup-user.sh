@@ -7,7 +7,7 @@ BASH_PROMPT="PS1='\[\e]0;\u: \w\a\]\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]
 FISH_PROMPT="function fish_prompt\n    set_color green\n    echo -n (whoami)\n    set_color normal\n    echo -n \":\"\n    set_color blue\n    echo -n (pwd)\n    set_color normal\n    echo -n \"> \"\nend\n"
 
 { echo && echo $BASH_PROMPT ; } | tee -a /root/.bashrc /home/${USERNAME}/.bashrc  >> /etc/skel/.bashrc
-{ echo && echo -e "export PATH=\$HOME/.dotnet:\$PATH:\$HOME/.npm-global/bin" ; } | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+{ echo && echo -e "export PATH=\$HOME/.dotnet:${SECURE_PATH_BASE}:\$PATH:\$HOME/.npm-global/bin" ; } | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
 echo "Defaults secure_path=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:${SECURE_PATH_BASE}\"" >> /etc/sudoers.d/securepath
 
 # Install and setup fish
