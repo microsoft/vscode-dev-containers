@@ -28,6 +28,13 @@ if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
+function updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
+        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+    fi
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, zip, unzip if missing
@@ -43,10 +50,7 @@ if [ ! -d "${SDKMAN_DIR}" ]; then
     curl -sSL "https://get.sdkman.io?rcupdate=false" | bash
     chown -R "${USERNAME}" "${SDKMAN_DIR}"
     # Add sourcing of sdkman into bashrc/zshrc files (unless disabled)
-    if [ "${UPDATE_RC}" = "true" ]; then
-        RC_SNIPPET="export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
-        echo -e ${RC_SNIPPET} | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
-    fi
+    updaterc "export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
 fi
 
 if [ "${JAVA_VERSION}" != "none" ]; then

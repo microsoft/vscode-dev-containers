@@ -23,7 +23,7 @@ ENV SHELL=/bin/bash \
     CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup" \
     SDKMAN_DIR="/usr/local/sdkman"
-ENV PATH="${NVM_DIR}/current/bin:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${CARGO_HOME}/bin:${GOROOT}/bin:${PATH}:${PIPX_BIN_DIR}"
+ENV PATH="${NVM_DIR}/current/bin:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PATH}:${PIPX_BIN_DIR}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/azcli-debian.sh library-scripts/common-debian.sh library-scripts/git-lfs-debian.sh library-scripts/github-debian.sh \
@@ -96,14 +96,9 @@ COPY library-scripts/go-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
-# Install rvm, Ruby, base gems
-COPY library-scripts/ruby-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/ruby-debian.sh "stable" "${USERNAME}" "true" \
-    && apt-get clean -y && rm -rf /tmp/scripts
-
 # Install Python tools
 COPY library-scripts/python-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/python-debian.sh "stable" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "true" \ 
+RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "true" \ 
     && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install xdebug, link composer
@@ -114,6 +109,11 @@ RUN yes | pecl install xdebug \
     && echo "xdebug.remote_autostart=on" >>  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
     && rm -rf /tmp/pear \
     && ln -s $(which composer.phar) /usr/local/bin/composer
+
+# Install rvm, Ruby, base gems
+COPY library-scripts/ruby-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/ruby-debian.sh "latest" "${USERNAME}" "true" \
+    && apt-get clean -y && rm -rf /tmp/scripts
 
 # [Option] Install Docker CLI
 ARG INSTALL_DOCKER="false"

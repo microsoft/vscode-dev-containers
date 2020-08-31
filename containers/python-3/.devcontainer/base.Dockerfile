@@ -17,28 +17,12 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Setup default python tools in a venv via pipx to avoid conflicts
-ARG DEFAULT_UTILS="\
-    pylint \
-    flake8 \
-    autopep8 \
-    black \
-    yapf \
-    mypy \
-    pydocstyle \
-    pycodestyle \
-    bandit \
-    virtualenv"
-ENV PIPX_HOME=/usr/local/py-utils
-ENV PIPX_BIN_DIR=${PIPX_HOME}/bin
+ENV PIPX_HOME=/usr/local/py-utils \
+    PIPX_BIN_DIR=/usr/local/py-utils/bin
 ENV PATH=${PATH}:${PIPX_BIN_DIR}
-RUN mkdir -p ${PIPX_BIN_DIR} \
-    && export PYTHONUSERBASE=/tmp/pip-tmp \
-    && export PIP_CACHE_DIR=/tmp/pip-tmp/cache \
-    && pip3 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user pipx \
-    && /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir pipx \
-    && echo "${DEFAULT_UTILS}" | xargs -n 1 /tmp/pip-tmp/bin/pipx install --system-site-packages --pip-args=--no-cache-dir --pip-args=--force-reinstall \
-    && chown -R ${USER_UID}:${USER_GID} ${PIPX_HOME} \
-    && rm -rf /tmp/pip-tmp
+COPY .devcontainer/library-scripts/python-debian.sh /tmp/library-scripts/
+RUN bash /tmp/library-scripts/python-debian.sh "none" "/usr/local" "${PIPX_HOME}" "${USERNAME}" "false" \ 
+    && apt-get clean -y && rm -rf /tmp/library-scripts
 
 # [Option] Install Node.js
 ARG INSTALL_NODE="true"

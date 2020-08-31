@@ -4,12 +4,13 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./rust-debian.sh [CARGO_HOME] [RUSTUP_HOME] [non-root user] [add CARGO/RUSTUP_HOME to rc files flag]
+# Syntax: ./rust-debian.sh [CARGO_HOME] [RUSTUP_HOME] [non-root user] [add CARGO/RUSTUP_HOME to rc files flag] [whether to update rust]
 
 export CARGO_HOME=${1:-"/usr/local/cargo"}
 export RUSTUP_HOME=${2:-"/usr/local/rustup"}
 USERNAME=${3:-"vscode"}
 UPDATE_RC=${4:-"true"}
+UPDATE_RUST=${5:-"true"}
 
 set -e
 
@@ -25,6 +26,7 @@ fi
 
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
+        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
         echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
     fi
 }
@@ -50,11 +52,14 @@ else
     echo "Rust already installed. Skipping."
 fi
 
-echo "Installing common Rust dependencies..."
 su ${USERNAME} -c "$(cat << EOF
     set -e
     export PATH=${PATH}:${CARGO_HOME}/bin
-    rustup update 2>&1
+    if [ "${UPDATE_RUST}" = "true" ]; then
+        echo "Updating Rust..."
+        rustup update 2>&1
+    fi
+    echo "Installing common Rust dependencies..."
     rustup component add rls rust-analysis rust-src rustfmt clippy 2>&1
 EOF
 )"
