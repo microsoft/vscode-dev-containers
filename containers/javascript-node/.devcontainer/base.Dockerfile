@@ -32,7 +32,7 @@ RUN mkdir -p ${NPM_GLOBAL} \
     && npm config -g set prefix ${NPM_GLOBAL} \
     && sudo -u ${USERNAME} npm config -g set prefix ${NPM_GLOBAL} \
     && echo "if [ \"\$(stat -c '%U' ${NPM_GLOBAL})\" != \"${USERNAME}\" ]; then sudo chown -R ${USER_UID}:root ${NPM_GLOBAL} ${NVM_DIR}; fi" \
-    | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc
+    | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
 
 # Install eslint globally
 RUN sudo -u ${USERNAME} npm install -g eslint

@@ -63,6 +63,10 @@ mkdir -p ${NVM_DIR}
 chown ${USERNAME} ${NVM_DIR}
 su ${USERNAME} -c "$(cat << EOF
     set -e
+
+    # Do not update profile - we'll do this manually
+    export PROFILE=/dev/null
+
     curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
     source ${NVM_DIR}/nvm.sh
     if [ "${NODE_VERSION}" != "" ]; then
@@ -73,6 +77,7 @@ EOF
 )" 2>&1
 
 if [ "${UPDATE_RC}" = "true" ]; then
+    echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc with NVM scripts..."
 (cat <<EOF
 export NVM_DIR="${NVM_DIR}"
 sudoIf()
@@ -85,7 +90,7 @@ sudoIf()
 }
 if [ "\$(stat -c '%U' \$NVM_DIR)" != "${USERNAME}" ]; then
     if [ "\$(id -u)" -eq 0 ] || type sudo > /dev/null 2>&1; then
-        echo "Fixing permissions of \"\$NVM_DIR\"...
+        echo "Fixing permissions of \"\$NVM_DIR\"..."
         sudoIf chown -R ${USERNAME}:root \$NVM_DIR
     else
         echo "Warning: NVM directory is not owned by ${USERNAME} and sudo is not installed. Unable to correct permissions."

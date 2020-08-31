@@ -27,6 +27,7 @@ fi
 
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
+        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
         echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
     fi
 }
@@ -56,7 +57,7 @@ GO_INSTALL_SCRIPT="$(cat <<EOF
     rm -f /tmp/go.tar.gz
 EOF
 )"
-if ! type go > /dev/null 2>&1; then
+if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
     mkdir -p "${TARGET_GOROOT}" "${TARGET_GOPATH}" 
     chown ${USERNAME}:root "${TARGET_GOROOT}" "${TARGET_GOPATH}"
     su ${USERNAME} -c "${GO_INSTALL_SCRIPT}"
@@ -105,15 +106,15 @@ if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     go build -o gocode-gomod github.com/stamblerre/gocode
 
     # golangci-lint
-    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /usr/local/bin 2>&1
+    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b ${TARGET_GOPATH}/bin 2>&1
 
     # Move Go tools into path and clean up
-    mv /tmp/gotools/bin/* /usr/local/bin/
-    mv gocode-gomod /usr/local/bin/
+    mv /tmp/gotools/bin/* ${TARGET_GOPATH}/bin/
+    mv gocode-gomod ${TARGET_GOPATH}/bin/
     rm -rf /tmp/gotools
 fi
 
 # Add GOPATH variable and bin directory into PATH in bashrc/zshrc files (unless disabled)
-updaterc "export GOPATH=\"${TARGET_GOPATH}\"\nexport GOROOT=\"${TARGET_GOROOT}\"\nexport PATH=\"\${GOROOT}/bin:\${PATH}\""
+updaterc "export GOPATH=\"${TARGET_GOPATH}\"\nexport GOROOT=\"${TARGET_GOROOT}\"\nexport PATH=\"\${GOROOT}/bin:\${GOPATH}/bin:\${PATH}\""
 echo "Done!"
 
