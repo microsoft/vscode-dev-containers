@@ -40,9 +40,10 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Run CG Manifest Script",
-			"program": "${workspaceFolder}",
+			"program": "${workspaceFolder}/vscdc",
 			"args": [
 				"cg",
+				"codespaces-linux",
 				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",

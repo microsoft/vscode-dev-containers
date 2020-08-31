@@ -39,35 +39,15 @@
 			"zsh",
 			"yarn"
 		],
-		"manual": [
-			{
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Oh My Zsh!",
-						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
-						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
-					}
-				}
-			}, {
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Nvm",
-						"repositoryUrl": "https://github.com/nvm-sh/nvm",
-						"commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
-					}
-				}
-			}, {
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "SDKMAN!",
-						"repositoryUrl": "https://github.com/sdkman/sdkman-cli",
-						"commitHash": "716ab5e4b2148fd193aa5ed6b11aaba07bbad897"
-					}
-				}
+		"git": {
+			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"nvm": "/root/.nvm"
+		},
+		"other": {
+			"SDKMAN!": {
+				"versionCommand": "sdk version | sed -n '/.*SDKMAN\\s/s///p'",
+				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
 			}
-		]
+		}
 	}
 }
