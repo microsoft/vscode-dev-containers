@@ -6,15 +6,17 @@
 		"tags": [
 			"javascript-node:${VERSION}-${VARIANT}"
 		],
-		"14-buster": [
-			"14"
-		],
-		"12-buster": [
-			"12"
-		],
-		"10-buster": [
-			"10"
-		]
+		"variantTags": {
+			"14-buster": [
+				"14"
+			],
+			"12-buster": [
+				"12"
+			],
+			"10-buster": [
+				"10"
+			]
+		}
 	}, 
 	"dependencies": {
 		"image": "node:${VARIANT}",
