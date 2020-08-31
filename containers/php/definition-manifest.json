@@ -38,44 +38,19 @@
 			"zsh",
 			"yarn"
 		],
-		"manual": [
-			{
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Oh My Zsh!",
-						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
-						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
-					}
-				}
-			}, {
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Nvm",
-						"repositoryUrl": "https://github.com/nvm-sh/nvm",
-						"commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
-					}
-				}
-			}, {
-				"Component": {
-					"Type": "other",
-					"Other": {
-						"Name": "Xdebug",
-						"Version": "2.9.6",
-						"DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
-					}
-				}
-			}, {
-				"Component": {
-					"Type": "other",
-					"Other": {
-						"Name": "Composer",
-						"Version": "1.10.10",
-						"DownloadUrl": "https://getcomposer.org/installer"
-					}
-				}
+		"git": {
+			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm"
+		},
+		"other": {
+			"Xdebug": {
+				"versionCommand": "php --version | grep -oE 'Xdebug\\sv[^,]+' | sed -n '/Xdebug\\sv/s///p'",
+				"downloadUrl":"https://xdebug.org/"
+			},
+			"Composer": {
+				"versionCommand": "composer --version | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
+				"downloadUrl": "https://getcomposer.org/installer"
 			}
-		]
+		}
 	}
 }

@@ -19,6 +19,7 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
     pageTotal = pageTotal || 1;
     stubRegistry = stubRegistry || registry;
     stubRegistryPath = stubRegistryPath || registryPath;
+    definitionsToSkip = definitionsToSkip || [];
 
     // Always replace images when building and pushing the "dev" tag
     replaceImages = (configUtils.getVersionFromRelease(release, definitionId) == 'dev') || replaceImages;

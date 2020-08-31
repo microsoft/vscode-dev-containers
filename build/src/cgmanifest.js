@@ -43,14 +43,6 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
     // Load config files
     await configUtils.loadConfig();
 
-    if (buildFirst) {
-        // Build but don't push images
-        console.log('(*) Building images...');
-        await push(repo, release, false, registry, registryPath, registry, registryPath, false, false, 1, 1, false, definitionId);
-    } else {
-        console.log('(*) Using existing local images...');
-    }
-
     const alreadyRegistered = {};
     const cgManifest = {
         "Registrations": [],
@@ -61,7 +53,7 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
     const definitions = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList();
     await asyncUtils.forEach(definitions, async (current) => {
         cgManifest.Registrations = cgManifest.Registrations.concat(
-            await getDefinitionManifest(registry, registryPath, current, alreadyRegistered, buildFirst));
+            await getDefinitionManifest(repo, release, registry, registryPath, current, alreadyRegistered, buildFirst));
         // Prune images if setting enabled
         if (pruneBetweenDefinitions) {
             await asyncUtils.spawn('docker', ['image', 'prune', '-a']);
@@ -75,10 +67,22 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
     console.log('(*) Done!');
 }
 
-async function getDefinitionManifest(registry, registryPath, definitionId, alreadyRegistered, buildFirst) {
+async function getDefinitionManifest(repo, release, registry, registryPath, definitionId, alreadyRegistered, buildFirst) {
     const dependencies = configUtils.getDefinitionDependencies(definitionId);
     if (typeof dependencies !== 'object') {
         return [];
+    }
+
+    // Docker image to use to determine installed package versions
+    const imageTag = configUtils.getTagsForVersion(definitionId, 'dev', registry, registryPath)[0]
+
+    if (buildFirst) {
+        // Build but don't push images
+        console.log('(*) Building images...');
+        await push(repo, release, false, registry, registryPath, registry, registryPath, false, false, [], 1, 1, false, definitionId);
+    } else {
+        console.log(`(*) Pulling image ${imageTag}...`);
+        await asyncUtils.spawn('docker', ['pull', imageTag]);
     }
 
     const registrations = [];
@@ -121,33 +125,28 @@ async function getDefinitionManifest(registry, registryPath, definitionId, alrea
         }
     }));
 
-    // Docker image to use to determine installed package versions
-    const imageTag = configUtils.getTagsForVersion(definitionId, 'dev', registry, registryPath)[0]
-
     // Run commands in the package to pull out needed versions
     return registrations.concat(
-        await generatePackageComponentList(dependencyLookupConfig.debian, dependencies.debian, imageTag, alreadyRegistered, buildFirst),
-        await generatePackageComponentList(dependencyLookupConfig.ubuntu, dependencies.ubuntu, imageTag, alreadyRegistered, buildFirst),
-        await generatePackageComponentList(dependencyLookupConfig.alpine, dependencies.alpine, imageTag, alreadyRegistered, buildFirst),
+        await generatePackageComponentList(dependencyLookupConfig.debian, dependencies.debian, imageTag, alreadyRegistered),
+        await generatePackageComponentList(dependencyLookupConfig.ubuntu, dependencies.ubuntu, imageTag, alreadyRegistered),
+        await generatePackageComponentList(dependencyLookupConfig.alpine, dependencies.alpine, imageTag, alreadyRegistered),
+        await generateGitComponentList(dependencies.git, imageTag, alreadyRegistered),
         await generateNpmComponentList(dependencies.npm, alreadyRegistered),
         await generatePipComponentList(dependencies.pip, imageTag, alreadyRegistered),
         await generatePipComponentList(dependencies.pipx, imageTag, alreadyRegistered, true),
+        await generateGemComponentList(dependencies.gem, imageTag, alreadyRegistered),
+        await generateCargoComponentList(dependencies.cargo, imageTag, alreadyRegistered),
+        await generateOtherComponentList(dependencies.other, imageTag, alreadyRegistered),
         filteredManualComponentRegistrations(dependencies.manual, alreadyRegistered));
 }
 
-async function generatePackageComponentList(config, packageList, imageTag, alreadyRegistered, buildFirst) {
+async function generatePackageComponentList(config, packageList, imageTag, alreadyRegistered) {
     if (!packageList) {
         return [];
     }
 
     const componentList = [];
     console.log(`(*) Generating Linux package registrations for ${imageTag}...`);
-
-    // Pull if not building...
-    if (!buildFirst) {
-        console.log(`(*) Pulling image ${imageTag}...`);
-        await asyncUtils.spawn('docker', ['pull', imageTag]);
-    }
 
     // Generate and exec command to get installed package versions
     console.log('(*) Getting package versions...');
@@ -185,6 +184,18 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
     return componentList;
 }
 
+/* Generate "Other" entry for linux packages. E.g.
+{
+    "Component": {
+        "Type": "other",
+        "Other": {
+            "Name": "Debian Package: apt-transport-https",
+            "Version": "1.8.2.1",
+            "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-transport-https_1.8.2.1_all.deb"
+        }
+    }
+}
+*/
 function createEntryForLinuxPackage(packageUriCommandOutput, entryNamePrefix, package, version, alreadyRegistered, uriMatchRegex, uriSuffix) {
     const uniquePackageName = `${entryNamePrefix} ${package}`;
     if (typeof alreadyRegistered[uniquePackageName] === 'undefined'
@@ -223,27 +234,23 @@ function createEntryForLinuxPackage(packageUriCommandOutput, entryNamePrefix, pa
     return null;
 }
 
-function filteredManualComponentRegistrations(manualRegistrations, alreadyRegistered) {
-    if (!manualRegistrations) {
-        return [];
-    }
-    const componentList = [];
-    manualRegistrations.forEach((component) => {
-        const key = JSON.stringify(component);
-        if (typeof alreadyRegistered[key] === 'undefined') {
-            componentList.push(component);
-            alreadyRegistered[key] = [key];
+/* Generate "Npm" entries. E.g.
+{
+    "Component": {
+        "Type": "npm",
+        "Npm": {
+            "Name": "eslint",
+            "Version": "7.7.0"
         }
-    });
-    return componentList;
+    }
 }
-
+*/
 async function generateNpmComponentList(packageList, alreadyRegistered) {
     if (!packageList) {
         return [];
     }
 
-    console.log(`(*) Generating npm registrations...`);
+    console.log(`(*) Generating "npm" registrations...`);
 
     const componentList = [];
     await asyncUtils.forEach(packageList, async (package) => {
@@ -255,35 +262,38 @@ async function generateNpmComponentList(packageList, alreadyRegistered) {
             const npmInfo = JSON.parse(npmInfoRaw);
             version = npmInfo['dist-tags'].latest;
         }
-        const uniquePackageName = `npm-${package}`;
-        if (typeof alreadyRegistered[uniquePackageName] === 'undefined'
-            || alreadyRegistered[uniquePackageName].indexOf(version) < 0) {
-            componentList.push({
-                "Component": {
-                    "Type": "npm",
-                    "Npm": {
-                        "Name": package,
-                        "Version": version
-                    }
+        addIfUnique(`${package}-npm`, version, componentList, alreadyRegistered, {
+            "Component": {
+                "Type": "npm",
+                "Npm": {
+                    "Name": package,
+                    "Version": version
                 }
-            });
-            alreadyRegistered[uniquePackageName] = alreadyRegistered[uniquePackageName] || [];
-            alreadyRegistered[uniquePackageName].push(version);
-        }
+            }
+        });
     });
     return componentList;
 }
 
+
+/* Generate "Pip" entries. E.g.
+{
+    "Component": {
+        "Type": "Pip",
+        "Pip": {
+            "Name": "pylint",
+            "Version": "2.6.0"
+        }
+    }
+}
+*/
 async function generatePipComponentList(packageList, imageTag, alreadyRegistered, pipx) {
     if (!packageList) {
         return [];
     }
 
     const componentList = [];
-    console.log(`(*) Generating Pip registries...`);
-
-    console.log(`(*) Pulling image...`);
-    await asyncUtils.spawn('docker', ['pull', imageTag]);
+    console.log(`(*) Generating "Pip" registries...`);
 
     // Generate and exec command to get installed package versions
     console.log('(*) Getting package versions...');
@@ -292,31 +302,18 @@ async function generatePipComponentList(packageList, imageTag, alreadyRegistered
     packageList.forEach((package) => {
         const version = versionLookup[package];
         const uniquePackageName = `pip-${package}`;
-        if (typeof alreadyRegistered[uniquePackageName] === 'undefined'
-            || alreadyRegistered[uniquePackageName].indexOf(version) < 0) {
-            componentList.push({
-                "Component": {
-                    "Type": "Pip",
-                    "Pip": {
-                        "Name": package,
-                        "Version": version
-                    }
+        addIfUnique(uniquePackageName, version, componentList, alreadyRegistered, {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": package,
+                    "Version": version
                 }
-            });
-            alreadyRegistered[uniquePackageName] = alreadyRegistered[uniquePackageName] || [];
-            alreadyRegistered[uniquePackageName].push(version);
-        }
+            }
+        });
     });
 
     return componentList;
-}
-
-async function getImageDigest(imageTag) {
-    const commandOutput = await asyncUtils.spawn('docker',
-        ['inspect', "--format='{{index .RepoDigests 0}}'", imageTag],
-        { shell: true, stdio: 'pipe' });
-    // Example output: ruby@sha256:0b503bc5b8cbe2a1e24f122abb4d6c557c21cb7dae8adff1fe0dcad76d606215
-    return commandOutput.split('@')[1].trim();
 }
 
 async function getPipVersionLookup(imageTag) {
@@ -346,6 +343,218 @@ async function getPipxVersionLookup(imageTag) {
         }
         return prev;
     }, {});
+}
+
+/* Generate "Git" entries. E.g.
+{
+    "Component": {
+        "Type": "git",
+        "Git": {
+            "Name": "Oh My Zsh!",
+            "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh.git",
+            "commitHash": "cddac7177abc358f44efb469af43191922273705"
+        }
+    }
+}
+*/
+async function generateGitComponentList(gitRepoPath, imageTag, alreadyRegistered) {
+    if (!gitRepoPath) {
+        return [];
+    }
+
+    const componentList = [];
+    console.log(`(*) Generating "git" registrations...`);
+
+    for(let repoName in gitRepoPath) {
+        const repoPath = gitRepoPath[repoName];
+        if (typeof repoPath === 'string') {
+            console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
+            // Go to the specified folder, see if the commands have already been run, if not run them and get output
+            const remoteAndCommitOutput = await asyncUtils.spawn('docker',
+                ['run', '--rm', imageTag, `bash -c "set -e && cd \"${repoPath}\" && if [ -f ".git-remote-and-commit" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi"`],
+                { shell: true, stdio: 'pipe' });
+            const remoteAndCommit = remoteAndCommitOutput.split('\n');
+            const gitRemote = remoteAndCommit[0];
+            const gitCommit = remoteAndCommit[1];
+            addIfUnique(`${gitRemote}-git`, gitCommit, componentList, alreadyRegistered, {
+                "Component": {
+                    "Type": "git",
+                    "Git": {
+                        "Name": repoName,
+                        "repositoryUrl": gitRemote,
+                        "commitHash": gitCommit
+                    }
+                }
+            });
+        }
+    }
+
+    return componentList;
+}
+
+/* Generate "Other" entries. E.g.
+{
+    "Component": {
+        "Type": "other",
+        "Other": {
+            "Name": "Xdebug",
+            "Version": "2.9.6",
+            "DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+        }
+    }
+}
+*/
+async function generateOtherComponentList(otherComponents, imageTag, alreadyRegistered) {
+    if (!otherComponents) {
+        return [];
+    }
+
+    const componentList = [];
+    console.log(`(*) Generating "other" registrations...`);
+
+    for(let otherName in otherComponents) {
+        const otherSettings = otherComponents[otherName];
+        if (typeof otherSettings === 'object') {
+            console.log(`(*) Getting version for ${otherName}...`);
+            // Run specified command to get the version number
+            const otherVersion = (await asyncUtils.spawn('docker',
+                ['run', '--rm', imageTag, `bash -c "set -e && ${otherSettings.versionCommand}"`],
+                { shell: true, stdio: 'pipe' })).trim();
+            addIfUnique(`${otherName}-other`, otherVersion, componentList, alreadyRegistered, {
+                "Component": {
+                    "Type": "other",
+                    "Other": {
+                        "Name": otherName,
+                        "Version": otherVersion,
+                        "DownloadUrl": otherSettings.downloadUrl
+                    }
+                }
+            });
+        }
+    }
+
+    return componentList;
+}
+
+/* Generate "RubyGems" entries. E.g.
+{
+    "Component": {
+        "Type": "RubyGems",
+        "RubyGems": {
+            "Name": "rake",
+            "Version": "13.0.1"
+        }
+    }
+}
+*/
+async function generateGemComponentList(gems, imageTag, alreadyRegistered) {
+    if (!gems) {
+        return [];
+    }
+
+    const componentList = [];
+    console.log(`(*) Generating "RubyGems" registrations...`);
+
+    const gemListOutput = await asyncUtils.spawn('docker',
+        ['run', '--rm', imageTag, 'bash -i -c "set -e && gem list -d --local"'],
+        { shell: true, stdio: 'pipe' });
+
+    asyncUtils.forEach(gems, (gem) => {
+        if (typeof gem === 'string') {
+            console.log(`(*) Getting version for ${gem}...`);
+            const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\)]+)`,'m').exec(gemListOutput);
+            const gemVersion = gemVersionCaptureGroup[1];
+            addIfUnique(`${gem}-gem`, gemVersion, componentList, alreadyRegistered, {
+                "Component": {
+                    "Type": "RubyGems",
+                    "RubyGems": {
+                        "Name": gem,
+                        "Version": gemVersion,
+                    }
+                }
+            });
+        }
+    });
+
+    return componentList;
+}
+
+/* Generate "Cargo" entries. E.g.
+{
+    "Component": {
+        "Type": "cargo",
+        "Cargo": {
+            "Name": "rustfmt",
+            "Version": "1.4.17-stable"
+        }
+    }
+}
+*/
+async function generateCargoComponentList(crates, imageTag, alreadyRegistered) {
+    if (!crates) {
+        return [];
+    }
+
+    const componentList = [];
+    console.log(`(*) Generating "Cargo" registrations...`);
+
+    for(let crate in crates) {
+        const versionCommand = crates[crate] || `echo ${crate} \\$(rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p')`;
+        if (typeof versionCommand === 'string') {
+            console.log(`(*) Getting version for ${crate}...`);
+            const versionOutput = await asyncUtils.spawn('docker',
+                ['run', '--rm', imageTag, `bash -c "set -e && ${versionCommand}"`],
+                { shell: true, stdio: 'pipe' });
+            const crateVersionCaptureGroup = new RegExp(`^${crate}\\s([^\\s]+)`,'m').exec(versionOutput);
+            const version = crateVersionCaptureGroup[1];
+            addIfUnique(`${crate}-cargo`, version, componentList, alreadyRegistered, {
+                "Component": {
+                    "Type": "cargo",
+                    "Cargo": {
+                        "Name": crate,
+                        "Version": version
+                    }
+                }
+            });
+        }
+    }
+
+    return componentList;
+}
+
+
+
+function addIfUnique(uniqueName, uniqueVersion, componentList, alreadyRegistered, componentJson) {
+    if (typeof alreadyRegistered[uniqueName] === 'undefined' || alreadyRegistered[uniqueName].indexOf(uniqueVersion) < 0) {
+            componentList.push(componentJson);
+            alreadyRegistered[uniqueName] = alreadyRegistered[uniqueName] || [];
+            alreadyRegistered[uniqueName].push(uniqueVersion);    
+    }
+    return componentList;
+}
+
+
+function filteredManualComponentRegistrations(manualRegistrations, alreadyRegistered) {
+    if (!manualRegistrations) {
+        return [];
+    }
+    const componentList = [];
+    manualRegistrations.forEach((component) => {
+        const key = JSON.stringify(component);
+        if (typeof alreadyRegistered[key] === 'undefined') {
+            componentList.push(component);
+            alreadyRegistered[key] = [key];
+        }
+    });
+    return componentList;
+}
+
+async function getImageDigest(imageTag) {
+    const commandOutput = await asyncUtils.spawn('docker',
+        ['inspect', "--format='{{index .RepoDigests 0}}'", imageTag],
+        { shell: true, stdio: 'pipe' });
+    // Example output: ruby@sha256:0b503bc5b8cbe2a1e24f122abb4d6c557c21cb7dae8adff1fe0dcad76d606215
+    return commandOutput.split('@')[1].trim();
 }
 
 module.exports = {
