@@ -41,7 +41,7 @@
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
-			"nvm": "/root/.nvm"
+			"nvm": "/usr/local/share/nvm"
 		},
 		"other": {
 			"SDKMAN!": {
