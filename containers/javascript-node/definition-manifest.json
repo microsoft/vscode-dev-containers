@@ -1,10 +1,19 @@
 {
-	"variants": ["14", "12", "10"],
+	"variants": ["14-buster", "12-buster", "10-buster","14-stretch", "12-stretch", "10-stretch"],
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"javascript-node:${VERSION}-${VARIANT}"
+		],
+		"14-buster": [
+			"14"
+		],
+		"12-buster": [
+			"12"
+		],
+		"10-buster": [
+			"10"
 		]
 	}, 
 	"dependencies": {

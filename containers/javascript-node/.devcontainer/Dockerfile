@@ -1,4 +1,4 @@
-ARG VARIANT=14
+ARG VARIANT=14-buster
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 
 # [Optional] Uncomment this section to install additional OS packages.
