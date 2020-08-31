@@ -273,10 +273,10 @@
         {
             "Component": {
                 "Type": "git",
-                "git": {
+                "Git": {
                     "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
-                    "commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh.git",
+                    "commitHash": "2fada6d20318c65a0f4c90cda14f20f00dd57288"
                 }
             }
         },
@@ -952,6 +952,26 @@
         },
         {
             "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
+                    "commitHash": "258938ef66a2a49a4a400554a6dce890226ae34c"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "nvs",
+                    "repositoryUrl": "https://github.com/jasongin/nvs",
+                    "commitHash": "66fa8b97ef887645f701244682ef0eed42720a88"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
@@ -982,7 +1002,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "black",
-                    "Version": "19.10b0"
+                    "Version": "20.8b1"
                 }
             }
         },
@@ -1009,7 +1029,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pydocstyle",
-                    "Version": "5.1.0"
+                    "Version": "5.1.1"
                 }
             }
         },
@@ -1045,107 +1065,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pipx",
-                    "Version": "0.15.5.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "Nvm",
-                    "repositoryUrl": "https://github.com/nvm-sh/nvm",
-                    "commitHash": "8093dbeacdfde0f4740ea6d5becb234dea9eb430"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "Github CLI",
-                    "repositoryUrl": "https://github.com/cli/cli",
-                    "commitHash": "58bd549de5db008e9dd92cb6673b9ed85449d778"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "Nvs",
-                    "repositoryUrl": "https://github.com/jasongin/nvs",
-                    "commitHash": "b6a607d9c36840ea8051586695d57a644402273c"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "kubectl",
-                    "Version": "1.18.2",
-                    "DownloadUrl": "https://storage.googleapis.com/kubernetes-release/release/v1.18.2/bin/linux/amd64/kubectl"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Helm",
-                    "Version": "3.2.1",
-                    "DownloadUrl": "https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "SDKMAN!",
-                    "repositoryUrl": "https://github.com/sdkman/sdkman-cli",
-                    "commitHash": "716ab5e4b2148fd193aa5ed6b11aaba07bbad897"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "AdoptOpenJDK",
-                    "Version": "jdk-11.0.8+10",
-                    "DownloadUrl": "https://adoptopenjdk.net/"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Xdebug",
-                    "Version": "2.9.6",
-                    "DownloadUrl": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "rvm",
-                    "repositoryUrl": "https://github.com/rvm/rvm",
-                    "commitHash": "cc69ed9c377df6a6b01c095613719164fdf72882"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Other",
-                "Other": {
-                    "Name": "ruby",
-                    "Version": "2.7.0",
-                    "DownloadUrl": "https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0.tar.gz"
+                    "Version": "0.15.5.1"
                 }
             }
         },
@@ -1178,26 +1098,6 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "go",
-                    "Version": "1.15",
-                    "DownloadUrl": "https://golang.org/dl/go1.15.linux-amd64.tar.gz"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "rust",
-                    "repositoryUrl": "https://github.com/rust-lang/rust",
-                    "commitHash": "d3fb005a39e62501b8b0b356166e515ae24e2e54"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rls",
@@ -1210,7 +1110,25 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rustfmt",
-                    "Version": "1.4.17-stable"
+                    "Version": "1.4.18-stable"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rust-analysis",
+                    "Version": "1.46.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rust-src",
+                    "Version": "1.46.0"
                 }
             }
         },
@@ -1219,16 +1137,117 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.44.0"
+                    "Version": "1.46.0"
                 }
             }
         },
         {
             "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "rust-analyzer",
-                    "Version": "0.0.1"
+                "Type": "other",
+                "Other": {
+                    "Name": "Xdebug",
+                    "Version": "2.9.6",
+                    "DownloadUrl": "https://xdebug.org/"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Composer",
+                    "Version": "1.9.3",
+                    "DownloadUrl": "https://getcomposer.org/"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "kubectl",
+                    "Version": "1.19.0",
+                    "DownloadUrl": "https://github.com/kubernetes/kubectl"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Helm",
+                    "Version": "3.3.0",
+                    "DownloadUrl": "https://github.com/helm/helm"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "SDKMAN!",
+                    "Version": "bash: sdk: command not found",
+                    "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "AdoptOpenJDK",
+                    "Version": "11.0.8+10",
+                    "DownloadUrl": "https://adoptopenjdk.net/"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "GitHubCLI",
+                    "Version": "0.11.1",
+                    "DownloadUrl": "https://github.com/cli/cli"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Go",
+                    "Version": "1.15",
+                    "DownloadUrl": "https://golang.org/dl"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Rust",
+                    "Version": "1.46.0",
+                    "DownloadUrl": "https://github.com/rust-lang/rust"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "rvm",
+                    "Version": "bash: rvm: command not found",
+                    "DownloadUrl": "https://github.com/rvm/rvm"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Ruby",
+                    "Version": "bash: ruby: command not found",
+                    "DownloadUrl": "https://www.ruby-lang.org/en/downloads/"
                 }
             }
         },
@@ -1694,8 +1713,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: yarn",
-                    "Version": "1.22.4-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.4_all.deb"
+                    "Version": "1.22.5-1",
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.5_all.deb"
                 }
             }
         },
@@ -1716,6 +1735,16 @@
                     "Name": "Debian Package: zsh",
                     "Version": "5.4.2-3ubuntu3.1",
                     "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/z/zsh/zsh_5.4.2-3ubuntu3.1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
+                    "commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
                 }
             }
         },
@@ -1761,21 +1790,11 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: openjdk",
-                    "Version": "14-jdk-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: openjdk",
-                    "Version": "11-jdk-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
+                "Type": "git",
+                "Git": {
+                    "Name": "nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
+                    "commitHash": "2fada6d20318c65a0f4c90cda14f20f00dd57288"
                 }
             }
         },
@@ -2213,8 +2232,58 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Docker Image: openjdk",
+                    "Version": "14-jdk-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/java"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: openjdk",
+                    "Version": "11-jdk-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/java"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: zip",
+                    "Version": "3.0-11+b1",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/z/zip/zip_3.0-11+b1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: openjdk",
+                    "Version": "11-jdk-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/java"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "AdoptOpenJDK",
+                    "Version": "14.0.2+12-46",
+                    "DownloadUrl": "https://adoptopenjdk.net/"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Docker Image: node",
-                    "Version": "14",
+                    "Version": "14-buster",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
@@ -2224,7 +2293,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
-                    "Version": "12",
+                    "Version": "12-buster",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
@@ -2234,7 +2303,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
-                    "Version": "10",
+                    "Version": "10-buster",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
@@ -2243,9 +2312,29 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Debian Package: libssl1.0.2",
-                    "Version": "1.0.2u-1~deb9u1",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/o/openssl1.0/libssl1.0.2_1.0.2u-1~deb9u1_amd64.deb"
+                    "Name": "Docker Image: node",
+                    "Version": "14-stretch",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "12-stretch",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "10-stretch",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },
@@ -2263,7 +2352,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
-                    "Version": "14",
+                    "Version": "14-buster",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
@@ -2273,7 +2362,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
-                    "Version": "12",
+                    "Version": "12-buster",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
@@ -2283,7 +2372,37 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
-                    "Version": "10",
+                    "Version": "10-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "14-stretch",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "12-stretch",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "10-stretch",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
