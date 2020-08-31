@@ -7,15 +7,9 @@
 			"javascript-node:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"14-buster": [
-				"14"
-			],
-			"12-buster": [
-				"12"
-			],
-			"10-buster": [
-				"10"
-			]
+			"14-buster": [ "javascript-node:${VERSION}-14" ],
+			"12-buster": [ "javascript-node:${VERSION}-12" ],
+			"10-buster": [ "javascript-node:${VERSION}-10" ]
 		}
 	}, 
 	"dependencies": {

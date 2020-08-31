@@ -164,12 +164,12 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
     if (['${VARIANT}', '$VARIANT'].indexOf(variant) > -1) {
         if (variantTags) {
             for (let variantEntry in variantTags) {
-                tags = tags.concat(variantTags[variantEntry]);
+                tags = tags.concat(variantTags[variantEntry] || []);
             }
         }
     } else {
         if (variantTags) {
-            tags = tags.concat(variantTags[variant]);
+            tags = tags.concat(variantTags[variant] || []);
         }
     }
 
