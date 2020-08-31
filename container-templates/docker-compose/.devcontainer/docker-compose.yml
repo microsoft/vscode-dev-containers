@@ -32,11 +32,12 @@ services:
     # Overrides default command so things don't shut down after the process ends.
     command: /bin/sh -c "while sleep 1000; do :; done"  
     
-    # You can include other services not opened by VS Code as well
-    another-service:
-      image: debian:latest
-      restart: unless-stopped
-  
-      # This causes the service to run on the same network as the app container, allows "forwardPorts" in devcontainer.json function.
-      network_mode: service:your-service-name-here
-    
+  # You can include other services not opened by VS Code as well
+  another-service:
+    image: mongo:latest
+    restart: unless-stopped
+
+    # This causes the service to run on the same network as the app container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:app
+
+    # As in the "app" service, use "forwardPorts" in **devcontainer.json** to forward an app port locally.

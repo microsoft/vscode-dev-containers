@@ -17,10 +17,10 @@ Develop PHP based applications with MariaDB (MySQL Compatible).  Includes necess
 This definition creates two containers, one for PHP and one for MariaDB.  Code will attach to the PHP container, and from within that container the MariaDB container will be available on **`localhost`** port 3306. The MariaDB instance can be managed via the automatically installed SQLTools extension, or from the container's command line with:
 
 ```bash
-mariadb -h localhost -u root -p
+mariadb -h localhost -P 3306  --protocol=tcp -u root --password=mariadb -D mariadb
 ```
 
-The default database is called `mariadb` with a `mariadb` user whose password is `mariadb`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `mariadb-data`.
+The default database is called `mariadb` with a `mariadb` user whose password is `mariadb`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `mariadb-data`. Note that you will **not** be able to access the MariaDB socket, so be sure to specify `--protocol=tcp` when using the command line.
 
 ## Using this definition with an existing folder
 
