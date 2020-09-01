@@ -1,10 +1,14 @@
-# Update the VARIANT arg in devcontainer.json to pick a Java version: 8, 11, 14
+# [Choice] Java version: 11, 14
 ARG VARIANT=11
 FROM openjdk:${VARIANT}-jdk-buster
 
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
+
+# [Option] Install zsh
 ARG INSTALL_ZSH="true"
+# [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="true"
+
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID

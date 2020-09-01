@@ -1,15 +1,20 @@
-# Add your image here
+# Use the [Choice] comment to indicate option arguments that should appear in VS Code UX
+#
+# [Choice] Debian OS version: buster, stretch
 ARG VARIANT="buster"
 FROM buildpack-deps:${VARIANT}-curl
 
-# Options for setup script
+# Use the [Option] comment to specify true/false arguments that should appear in VS Code UX
+#
+# [Option] Install zsh
 ARG INSTALL_ZSH="true"
+# [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="false"
+
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/*.sh /tmp/library-scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \

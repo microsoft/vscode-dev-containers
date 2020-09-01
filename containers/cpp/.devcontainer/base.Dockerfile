@@ -1,5 +1,4 @@
-# To fully customize the contents of this image, use the following Dockerfile as a base and add the RUN statement from this file:
-# https://github.com/microsoft/vscode-dev-containers/blob/master/containers/debian/.devcontainer/base.Dockerfile
+# [Choice] Debian OS version: buster, stretch
 ARG VARIANT=buster
 FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 

@@ -1,15 +1,16 @@
-# Update the VARIANT arg in devcontainer.json to pick a .NET Core version: 3.1, 2.1 
+# [Choice] .NET Core version: 3.1, 2.1
 ARG VARIANT="3.1"
 FROM mcr.microsoft.com/dotnet/core/sdk:${VARIANT}-bionic
 
-# Options for setup script
+# [Option] Install zsh
 ARG INSTALL_ZSH="true"
-ARG UPGRADE_PACKAGES="false"
+# [Option] Upgrade OS packages to their latest versions
+ARG UPGRADE_PACKAGES="true"
+
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/common-debian.sh /tmp/library-scripts/
 RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts

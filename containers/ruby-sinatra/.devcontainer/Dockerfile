@@ -1,10 +1,10 @@
+# [Choice] Ruby version: 2, 2.7, 2.6, 2.5
 ARG VARIANT=2
 FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 
 # Install Sinatra
 RUN gem install sinatra sinatra-reloader thin data_mapper dm-sqlite-adapter 
 
-# [Option] Install Node.js
 ARG NODE_VERSION="lts/*"
 RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"
 

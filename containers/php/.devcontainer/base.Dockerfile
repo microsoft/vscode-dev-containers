@@ -1,4 +1,4 @@
-# Update the VARIANT arg in devcontainer.json to pick a PHP version: 7, 7.4, 7.3
+# [Choice] PHP version: 7, 7.4, 7.3
 ARG VARIANT=7
 FROM php:${VARIANT}-cli
 

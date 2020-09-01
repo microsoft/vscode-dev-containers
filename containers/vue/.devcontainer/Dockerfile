@@ -1,4 +1,4 @@
-# Update the VARIANT arg in devcontainer.json to pick a Node.js version: 14, 12, 10 
+# [Choice] Node.js version: 14, 12, 10
 ARG VARIANT=14
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 

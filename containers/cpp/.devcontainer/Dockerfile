@@ -1,3 +1,4 @@
+# [Choice] Debian OS version: buster, stretch
 ARG VARIANT=buster
 FROM mcr.microsoft.com/vscode/devcontainers/cpp:${VARIANT}
 
