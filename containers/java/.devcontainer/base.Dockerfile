@@ -2,7 +2,6 @@
 ARG VARIANT=11
 FROM openjdk:${VARIANT}-jdk-buster
 
-
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
 # [Option] Upgrade OS packages to their latest versions
