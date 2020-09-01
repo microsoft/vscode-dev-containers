@@ -1,4 +1,4 @@
-# Update the VARIANT arg in devcontainer.json to pick an Ubuntu version: buster, stretch
+# [Choice] Debian version: buster, stretch
 ARG VARIANT="buster"
 FROM buildpack-deps:${VARIANT}-curl
 
