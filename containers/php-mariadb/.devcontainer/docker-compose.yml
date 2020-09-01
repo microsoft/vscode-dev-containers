@@ -6,8 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # Update VARIANT to pick a PHP version: 7, 7.4, 7.3
+        # [Choice] PHP version: 7, 7.4, 7.3
         VARIANT: "7"
+        # [Option] Install Node.js
         INSTALL_NODE: "true"
         NODE_VERSION: "lts/*"
         # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
