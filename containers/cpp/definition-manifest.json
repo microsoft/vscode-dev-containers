@@ -1,5 +1,5 @@
 {
-	"variants": ["buster", "stretch"],
+	"variants": ["buster", "stretch", "bionic", "focal"],
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -16,6 +16,15 @@
 			"stretch": [
 				"cpp:${VERSION}-debian9",
 				"cpp:${VERSION}-debian-9"
+			],
+			"focal": [
+				"cpp:${VERSION}-ubuntu-20.04",
+				"cpp:${VERSION}-ubuntu20.04",
+				"cpp:${VERSION}-ubuntu"
+			],
+			"bionic": [
+				"cpp:${VERSION}-ubuntu-18.04",
+				"cpp:${VERSION}-ubuntu18.04"
 			]
 		}
 	},
@@ -51,7 +60,10 @@
 			"build-essential",
 			"cmake",
 			"cppcheck",
-			"valgrind"
+			"valgrind",
+			"lldb",
+			"llvm",
+			"clang"
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh"
