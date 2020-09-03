@@ -1,5 +1,5 @@
 {
-	"variants": ["buster", "stretch", "bionic", "focal"],
+	"variants": ["buster", "stretch"],
 	"build": {
 		"latest": true,
 		"parent": "ubuntu",
