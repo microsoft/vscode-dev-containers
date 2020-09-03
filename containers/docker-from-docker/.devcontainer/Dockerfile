@@ -1,17 +1,16 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
 FROM mcr.microsoft.com/vscode/devcontainers/base:buster
 
-# [Option] Enable Docker for non-root user
-ARG ENABLE_NONROOT_DOCKER="true"
-
 # Options
-ARG SOURCE_SOCKET=/var/run/docker-host.sock
-ARG TARGET_SOCKET=/var/run/docker.sock
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="false"
+ARG ENABLE_NONROOT_DOCKER="true"
+ARG SOURCE_SOCKET=/var/run/docker-host.sock
+ARG TARGET_SOCKET=/var/run/docker.sock
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/*.sh /tmp/library-scripts/
 RUN apt-get update \

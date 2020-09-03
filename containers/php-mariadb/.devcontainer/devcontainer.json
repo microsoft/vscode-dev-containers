@@ -24,16 +24,15 @@
 	"extensions": [
 		"felixfbecker.php-debug",
 		"felixfbecker.php-intellisense",
-		"mrmlnc.vscode-apache",
 		"mtxr.sqltools",
 		"mtxr.sqltools-driver-mysql"
 	],
 
-	// For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
+	// For use with PHP (e.g.php -S localhost:8080)
 	"forwardPorts": [8080, 3306]
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "sudo rm -rf /var/www/html && sudo ln -s . /var/www/html",
+	// "postCreateCommand": "php -v",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"

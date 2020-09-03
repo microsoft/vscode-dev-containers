@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/cpp |
-| *Available image variants* | buster, stretch, bionic, focal |
+| *Available image variants* | mcr.microsoft.com/vscode/devcontainers/cpp:stretch <br /> mcr.microsoft.com/vscode/devcontainers/cpp:buster |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -29,9 +29,6 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/cpp:debian` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:buster` (or `debian-10`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:stretch` (or `debian-9`)
-- `mcr.microsoft.com/vscode/devcontainers/cpp:ubuntu` (latest LTS)
-- `mcr.microsoft.com/vscode/devcontainers/cpp:focal` (or `ubuntu-20.04`)
-- `mcr.microsoft.com/vscode/devcontainers/cpp:bionic` (or `ubuntu-18.04`)
 
 Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
 
