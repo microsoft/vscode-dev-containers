@@ -1,0 +1,4 @@
+{
+    "Id": "clantz-test-exp1",
+    "Scope": "/subscriptions/546ac631-883f-4fb4-bff0-b8639ed6e7c8/resourceGroups/clantz-test-ml/providers/Microsoft.MachineLearningServices/workspaces/clantz-test-ml/experiments/clantz-test-exp1"
+}
