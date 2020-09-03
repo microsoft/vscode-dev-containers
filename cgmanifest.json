@@ -276,7 +276,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh.git",
-                    "commitHash": "b95e95ba24ffc558123cbd27aacd357618ef97b4"
+                    "commitHash": "0f0901d6ffbbfddbf8b0cd22d420238ba20dacac"
                 }
             }
         },
@@ -1844,7 +1844,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "b95e95ba24ffc558123cbd27aacd357618ef97b4"
+                    "commitHash": "0f0901d6ffbbfddbf8b0cd22d420238ba20dacac"
                 }
             }
         },
