@@ -1,0 +1,31 @@
+{
+    "script": "test.py",
+    "arguments": [],
+    "framework": "Python",
+    "communicator": "None",
+    "target": "local",
+    "environment": {
+        "python": {
+            "userManagedDependencies": true,
+            "interpreterPath": "/opt/miniconda/bin/python"
+        },
+        "environmentVariables": {},
+        "docker": {
+            "baseImage": "mcr.microsoft.com/azureml/base:0.2.4",
+            "enabled": false,
+            "baseImageRegistry": {
+                "address": null,
+                "username": null,
+                "password": null
+            },
+            "sharedVolumes": false
+        }
+    },
+    "history": {
+        "outputCollection": true,
+        "snapshotProject": false,
+        "directoriesToWatch": [
+            "logs"
+        ]
+    }
+}

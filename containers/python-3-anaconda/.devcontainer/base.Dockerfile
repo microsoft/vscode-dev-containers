@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/miniconda3
+# [Choice] Anaconda version: 2020.07, 2020.02, 2019.10, 2019.07
+ARG VARIANT="2020.07"
+FROM continuumio/anaconda3:${VARIANT}
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
