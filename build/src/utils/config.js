@@ -241,12 +241,25 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
         // If paged build, ensure this definition should be included
         if (typeof config.definitionBuildSettings[definitionId] === 'object') {
             if (definitionsToSkip.indexOf(definitionId) < 0) {
-                const parentId = config.definitionBuildSettings[definitionId].parent;
-                // TODO: Handle parents that have parents
+                let parentId = config.definitionBuildSettings[definitionId].parent;
                 if (typeof parentId !== 'undefined') {
+
+                    // Handle parents that have parents
+                    if(config.definitionBuildSettings[parentId].parent) {
+                        const oldParentId=parentId;
+                        parentId=config.definitionBuildSettings[parentId].parent;
+                        parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
+                        if(parentBuckets[parentId].indexOf(oldParentId) < 0) {
+                            parentBuckets[parentId].push(oldParentId); 
+                        }
+                    }
+
+                    // Add to parent bucket
                     parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
-                    parentBuckets[parentId].push(definitionId);
-                } else {
+                    if(parentBuckets[parentId].indexOf(definitionId) < 0) {
+                        parentBuckets[parentId].push(definitionId);    
+                    }
+            } else {
                     noParentList.push(definitionId);
                 }
                 total++;
