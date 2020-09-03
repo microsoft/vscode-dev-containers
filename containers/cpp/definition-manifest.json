@@ -2,7 +2,7 @@
 	"variants": ["buster", "stretch"],
 	"build": {
 		"latest": true,
-		"parent": "ubuntu",
+		"parent": "debian",
 		"rootDistro": "debian",
 		"tags": [
 			"cpp:${VERSION}-${VARIANT}"
