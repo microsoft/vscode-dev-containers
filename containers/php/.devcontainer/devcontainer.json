@@ -1,7 +1,7 @@
 {
 	"name": "PHP",
 	"build": {
-		"dockerfile": "Dockerfile",
+		"dockerfile": "base.Dockerfile",
 		"args": { 
 			// Update VARIANT to pick a PHP version: 7, 7.4, 7.3
 			"VARIANT": "7",
@@ -25,7 +25,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "php -v",
+	// "postCreateCommand": "sudo rm -rf /var/www/html && sudo ln -s $(pwd) /var/www/html",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
