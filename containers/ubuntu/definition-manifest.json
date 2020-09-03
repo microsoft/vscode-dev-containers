@@ -1,7 +1,6 @@
 {
 	"variants": ["focal", "bionic"],
 	"build": {
-		"parent": "debian",
 		"rootDistro": "debian",
 		"tags": [
 			"base:${VERSION}-${VARIANT}"
