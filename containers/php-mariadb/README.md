@@ -66,6 +66,8 @@ This dev container includes Apache in addition to the PHP CLI. While you can use
 apache2ctl start
 ```
 
+Apache will be available on port `8080`.
+
 If you want to wire in something directly from your source code into the `www` folder, you can add a symlink as follows to `postCreateCommand`:
 
 ```bash
