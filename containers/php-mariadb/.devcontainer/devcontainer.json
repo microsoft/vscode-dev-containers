@@ -28,11 +28,11 @@
 		"mtxr.sqltools-driver-mysql"
 	],
 
-	// For use with PHP (e.g.php -S localhost:8080)
+	// For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
 	"forwardPorts": [8080, 3306]
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "php -v",
+	// "postCreateCommand": "sudo rm -rf /var/www/html && sudo ln -s . /var/www/html",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
