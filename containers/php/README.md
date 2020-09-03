@@ -50,6 +50,22 @@ Given how frequently Ruby-based web applications use Node.js for front end code,
 }
 ```
 
+### Starting / stopping Apache
+
+This dev container includes Apache in addition to the PHP CLI. While you can use PHP's built in CLI (e.g. `php -S 0.0.0.0:8080`), you can start Apache by running:
+
+```bash
+apache2ctl start
+```
+
+Apache will be available on port `8080`.
+
+If you want to wire in something directly from your source code into the `www` folder, you can add a symlink as follows to `postCreateCommand`:
+
+```bash
+sudo rm -rf /var/www/html && sudo ln -s . /var/www/html
+```
+
 ### Adding the definition to your project
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
