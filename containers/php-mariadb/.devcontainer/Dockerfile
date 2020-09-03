@@ -1,6 +1,6 @@
 # Update the VARIANT arg in docker-compose.yml to pick a PHP version: 7, 7.4, 7.3
 ARG VARIANT=7
-FROM mcr.microsoft.com/vscode/devcontainers/php:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/php:dev-${VARIANT}
 
 # Install MariaDB client
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
