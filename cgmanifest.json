@@ -276,7 +276,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh.git",
-                    "commitHash": "2fada6d20318c65a0f4c90cda14f20f00dd57288"
+                    "commitHash": "b95e95ba24ffc558123cbd27aacd357618ef97b4"
                 }
             }
         },
@@ -304,9 +304,39 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "bionic-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "focal-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Debian Package: build-essential",
                     "Version": "12.6",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/b/build-essential/build-essential_12.6_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: clang",
+                    "Version": "1:7.0-47",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/llvm-defaults/clang_7.0-47_amd64.deb"
                 }
             }
         },
@@ -327,6 +357,26 @@
                     "Name": "Debian Package: cppcheck",
                     "Version": "1.86-1",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/c/cppcheck/cppcheck_1.86-1_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: lldb",
+                    "Version": "1:7.0-47",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/llvm-defaults/lldb_7.0-47_amd64.deb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: llvm",
+                    "Version": "1:7.0-47",
+                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/llvm-defaults/llvm_7.0-47_amd64.deb"
                 }
             }
         },
@@ -716,7 +766,7 @@
                 "Other": {
                     "Name": "Debian Package: git-lfs",
                     "Version": "2.11.0",
-                    "DownloadUrl": "https://packagecloud.io/github/git-lfs/debian/pool/stretch/main/g/git-lfs/git-lfs_2.11.0_amd64.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -1794,7 +1844,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "2fada6d20318c65a0f4c90cda14f20f00dd57288"
+                    "commitHash": "b95e95ba24ffc558123cbd27aacd357618ef97b4"
                 }
             }
         },
@@ -1935,16 +1985,6 @@
                     "Name": "Debian Package: libpython3.7",
                     "Version": "3.7.3-2+deb10u2",
                     "DownloadUrl": "http://deb.debian.org/debian/pool/main/p/python3.7/libpython3.7_3.7.3-2+deb10u2_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: lldb",
-                    "Version": "1:7.0-47",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/l/llvm-defaults/lldb_7.0-47_amd64.deb"
                 }
             }
         },
@@ -2343,7 +2383,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.7.0"
+                    "Version": "7.8.1"
                 }
             }
         },
