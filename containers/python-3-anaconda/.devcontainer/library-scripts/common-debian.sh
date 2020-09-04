@@ -77,7 +77,8 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         libstdc++6 \
         zlib1g \
         locales \
-        sudo"
+        sudo \
+        man-db"
 
     # Install libssl1.1 if available
     if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then

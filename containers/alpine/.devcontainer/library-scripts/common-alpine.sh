@@ -19,6 +19,7 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Install git, bash, dependencies, and add a non-root user
+apk update
 apk add --no-cache \
     git \
     openssh-client \
@@ -43,6 +44,13 @@ apk add --no-cache \
     userspace-rcu \
     zlib \
     shadow
+
+# Install man pages - package name varies between 3.12 and earlier versions
+if apk info man > /dev/null 2>&1; then
+    apk add man man-pages
+else 
+    apk add mandoc man-pages
+fi
 
 # Create or update a non-root user to match UID/GID - see https://aka.ms/vscode-remote/containers/non-root-user.
 if id -u $USERNAME > /dev/null 2>&1; then
