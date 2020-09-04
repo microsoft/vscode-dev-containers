@@ -42,7 +42,8 @@ yum install -y \
     openssl-libs \
     krb5-libs \
     libicu \
-    zlib
+    zlib \
+    man-db
 
 # Install OpenSSL 1.0 compat if needed
 if yum -q list compat-openssl10 >/dev/null 2>&1; then
