@@ -109,6 +109,9 @@ check "bash" bash --version
 check "fish" fish --version
 check "zsh" zsh --version
 
+# Check expected commands
+check "git-ed" test "$(cat $(which git-ed.sh))" = "$(cat ./git-ed-expected.txt)"
+
 # -- Report results --
 if [ ${#FAILED[@]} -ne 0 ]; then
     echo -e "\n💥  Failed tests: ${FAILED[@]}"

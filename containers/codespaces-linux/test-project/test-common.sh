@@ -78,6 +78,7 @@ check "locale" [ $(locale -a | grep en_US.utf8) ]
 check "sudo" sudo echo "sudo works."
 check "zsh" zsh --version
 check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
+check "code" bash -i -c "code --version"
 
 # Report result
 if [ ${#FAILED[@]} -ne 0 ]; then
