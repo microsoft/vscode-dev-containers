@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Use or extend the default large, multi-language "universal" container for GitHub Codespaces.*
+*Use or extend the default large, multi-language universal container for GitHub Codespaces.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -39,7 +39,7 @@ Just follow these steps:
 2. To use the pre-built image:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the General Purpose Multi-Language Development Container (Visual Studio Codespaces) definition.
+   3. Select the **GitHub Codespaces (Default)** definition.
 
 3. To use the Dockerfile for this definition (*rather than the pre-built image*):
    1. Clone this repository.
