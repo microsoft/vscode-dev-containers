@@ -55,20 +55,26 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     PACKAGE_LIST="apt-utils \
         git \
         openssh-client \
-        less \
+        gnupg2 \
         iproute2 \
         procps \
+        lsof \
+        htop \
+        net-tools \
+        psmisc \
         curl \
         wget \
+        rsync \
+        ca-certificates \
         unzip \
         zip \
         nano \
+        vim-tiny \
+        less \
         jq \
         lsb-release \
-        ca-certificates \
         apt-transport-https \
         dialog \
-        gnupg2 \
         libc6 \
         libgcc1 \
         libgssapi-krb5-2 \
@@ -78,7 +84,8 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         zlib1g \
         locales \
         sudo \
-        man-db"
+        ncdu \
+        man-db" 
 
     # Install libssl1.1 if available
     if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
