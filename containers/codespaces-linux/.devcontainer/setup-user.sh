@@ -29,7 +29,7 @@ else
   GIT_ED="code"
 fi
 
-$GIT_ED --wait \$@
+\$GIT_ED --wait \$@
 EOF
 
 sudo -u ${USERNAME} mkdir -p /home/${USERNAME}/.local/bin
