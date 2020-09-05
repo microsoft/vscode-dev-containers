@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:alpine
+FROM mcr.microsoft.com/vscode/devcontainers/base:buster
 WORKDIR /src
 
 # [Optional] Uncomment this section to install additional OS packages you may want.
