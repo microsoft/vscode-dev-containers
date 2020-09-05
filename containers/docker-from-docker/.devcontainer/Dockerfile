@@ -1,17 +1,19 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
 FROM mcr.microsoft.com/vscode/devcontainers/base:buster
 
-# Options
+# [Option] Install zsh
 ARG INSTALL_ZSH="true"
+# [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="false"
+# [Option] Enable non-root Docker access in container
 ARG ENABLE_NONROOT_DOCKER="true"
-ARG SOURCE_SOCKET=/var/run/docker-host.sock
-ARG TARGET_SOCKET=/var/run/docker.sock
+
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
+ARG SOURCE_SOCKET=/var/run/docker-host.sock
+ARG TARGET_SOCKET=/var/run/docker.sock
 COPY library-scripts/*.sh /tmp/library-scripts/
 RUN apt-get update \
     && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \

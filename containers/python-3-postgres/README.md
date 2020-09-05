@@ -41,6 +41,17 @@ You can add other services to your `docker-compose.yml` file [as described in Do
 network_mode: service:db
 ```
 
+### Installing Node.js
+
+Given how frequently Python-based web applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/docker-compose.yml`.
+
+```json
+args:
+  VARIANT: 3.7
+  INSTALL_NODE: "true",
+  NODE_VERSION: "10"
+```
+
 ### Installing or updating Python utilities
 
 This container installs all Python development utilities using [pipx](https://pipxproject.github.io/pipx/) to avoid impacting the global Python environment. You can use this same utility add additional utilities in an isolated environment. For example:
@@ -101,13 +112,11 @@ If you prefer, you can add the following to your `Dockerfile` to cause global in
 
 ```Dockerfile
 ENV PIP_TARGET=/usr/local/pip-global
-ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
-ENV PATH=${PIP_TARGET}/bin:${PATH}
+ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH} \
+    PATH=${PIP_TARGET}/bin:${PATH}
 RUN mkdir -p ${PIP_TARGET} \
     && chown vscode:root ${PIP_TARGET} \
-    && export SNIPPET="if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then chown -R vscode:root ${PIP_TARGET}; fi" \
-    && echo "$SNIPPET" | tee -a /root/.bashrc >> /home/vscode/.bashrc \
-    && echo "$SNIPPET" | tee -a /root/.zshrc >> /home/vscode/.zshrc
+    && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then sudo chown -R vscode:root ${PIP_TARGET}; fi" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
 ```
 
 ### Adding the definition to your folder

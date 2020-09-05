@@ -17,6 +17,7 @@
 * azure-functions-python-3
 * azure-machine-learning-python-3
 * azure-terraform
+* bash
 * bazel
 * codespaces-linux
 * cpp

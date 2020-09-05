@@ -1,7 +1,7 @@
 {
 	"name": "Docker from Docker Compose",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "docker-from-docker",
+	"service": "app",
 	"workspaceFolder": "/workspace",
 
 	// Use this environment variable if you need to bind mount your local source code into a new container.
@@ -19,11 +19,8 @@
 		"ms-azuretools.vscode-docker"
 	]
 
-	// Uncomment the next line if you want start specific services in your Docker Compose config.
-	// "runServices": [],
-
-	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
-	// "shutdownAction": "none",
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "docker --version",

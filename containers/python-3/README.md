@@ -114,12 +114,11 @@ If you prefer, you can add the following to your `Dockerfile` to cause global in
 
 ```Dockerfile
 ENV PIP_TARGET=/usr/local/pip-global
-ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
-ENV PATH=${PIP_TARGET}/bin:${PATH}
+ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH} \
+    PATH=${PIP_TARGET}/bin:${PATH}
 RUN mkdir -p ${PIP_TARGET} \
     && chown vscode:root ${PIP_TARGET} \
-    && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then sudo chown -R vscode:root ${PIP_TARGET}; fi" \
-    | tee -a /root/.bashrc /root/.zshrc /home/vscode/.bashrc >> /home/vscode/.zshrc
+    && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then sudo chown -R vscode:root ${PIP_TARGET}; fi" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
 ```
 
 #### [Optional] Installing multiple versions of Python in the same image
