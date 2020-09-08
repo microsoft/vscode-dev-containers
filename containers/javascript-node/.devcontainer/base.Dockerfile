@@ -28,7 +28,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # Configure global npm install location
 ARG NPM_GLOBAL=/usr/local/share/npm-global
-ENV PATH=${PATH}:${NPM_GLOBAL}/bin
+ENV PATH=${NPM_GLOBAL}/bin:${PATH}
 RUN mkdir -p ${NPM_GLOBAL} \
     && chown ${USERNAME}:root ${NPM_GLOBAL} \
     && npm config -g set prefix ${NPM_GLOBAL} \
