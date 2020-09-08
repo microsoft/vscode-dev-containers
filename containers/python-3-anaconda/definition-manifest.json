@@ -1,15 +1,14 @@
 {
-	"variants": ["3", "3.8", "3.7", "3.6"],
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
-			"python:${VERSION}-${VARIANT}"
+			"anaconda:${VERSION}-3"
 		]
 	},
 	"dependencies": {
-		"image": "python:${VARIANT}",
-		"imageLink": "https://hub.docker.com/_/python",
+		"image": "anaconda3:${VARIANT}",
+		"imageLink": "https://hub.docker.com/r/continuumio/anaconda3",
 		"debian": [
 			"apt-utils",
 			"git",
@@ -52,19 +51,6 @@
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
-		},
-		"pipx": [
-			"pylint",
-			"flake8",
-			"autopep8",
-			"black",
-			"yapf",
-			"mypy",
-			"pydocstyle",
-			"pycodestyle",
-			"bandit",
-			"virtualenv",
-			"pipx"
-		]
+		}
 	}
 }
