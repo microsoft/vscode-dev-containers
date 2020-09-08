@@ -11,53 +11,47 @@
 		"image": "mcr.microsoft.com/dotnet/core/sdk:${VARIANT}-bionic",
 		"imageLink": "https://hub.docker.com/_/microsoft-dotnet-core-sdk",
 		"debian": [
-			"apt-utils", 
-			"dialog", 
-			"ca-certificates",
+			"apt-utils",
 			"git",
+			"openssh-client",
+			"gnupg2",
 			"iproute2",
 			"procps",
+			"lsof",
+			"htop",
+			"net-tools",
+			"psmisc",
 			"curl",
-			"openssh-client",
-			"less",
-			"nano",
-			"gnupg",
-			"jq",
 			"wget",
+			"rsync",
+			"ca-certificates",
 			"unzip",
+			"zip",
+			"tar",
+			"nano",
+			"vim-tiny",
+			"less",
+			"jq",
 			"lsb-release",
 			"apt-transport-https",
+			"dialog",
 			"libc6",
 			"libgcc1",
 			"libgssapi-krb5-2",
 			"libicu[0-9][0-9]",
-			"libssl1.1",
+			"liblttng-ust0",
 			"libstdc++6",
 			"zlib1g",
+			"locales",
 			"sudo",
+			"ncdu",
+			"man-db",
 			"zsh",
 			"yarn"
 		],
-		"manual": [
-			{
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Oh My Zsh!",
-						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
-						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
-					}
-				}
-			}, {
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Nvm",
-						"repositoryUrl": "https://github.com/nvm-sh/nvm",
-						"commitHash": "f355b327d6a2a4e8020e943974086d53f00f9a02"
-					}
-				}
-			}
-		]
+		"git": {
+			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm"
+		}
 	}
 }

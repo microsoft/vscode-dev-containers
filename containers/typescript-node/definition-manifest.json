@@ -17,41 +17,52 @@
 		"image": "node:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/node",
 		"debian": [
-			"apt-utils", 
-			"dialog", 
-			"ca-certificates",
+			"apt-utils",
 			"git",
+			"openssh-client",
+			"gnupg2",
 			"iproute2",
 			"procps",
+			"lsof",
+			"htop",
+			"net-tools",
+			"psmisc",
 			"curl",
-			"openssh-client",
-			"less",
-			"nano",
-			"gnupg",
-			"jq",
 			"wget",
+			"rsync",
+			"ca-certificates",
 			"unzip",
+			"zip",
+			"tar",
+			"nano",
+			"vim-tiny",
+			"less",
+			"jq",
 			"lsb-release",
 			"apt-transport-https",
+			"dialog",
 			"libc6",
 			"libgcc1",
 			"libgssapi-krb5-2",
 			"libicu[0-9][0-9]",
-			"libssl1.1",
+			"liblttng-ust0",
 			"libstdc++6",
 			"zlib1g",
+			"locales",
 			"sudo",
-			"yarn",
-			"zsh"
-		],
-		"npm": [
-			"eslint",
-			"tslint",
-			"typescript"
+			"ncdu",
+			"man-db",
+			"zsh",
+			"yarn"
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
-		}
+		},
+		"npm": [
+			"eslint",
+			"tslint",
+			"typescript"
+		]
 	}
 }
