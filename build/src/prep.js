@@ -110,11 +110,16 @@ async function updateStub(dotDevContainerPath, definitionId, repo, release, base
 
 async function processStub(userDockerFile, definitionId, repo, release, baseDockerFileExists, registry, registryPath) {
     const devContainerImageVersion = configUtils.majorFromRelease(release, definitionId);
-    let fromSection = `# ${dockerFilePreamble}https://github.com/${repo}/tree/${release}/${containersPathInRepo}/${definitionId}/.devcontainer/${baseDockerFileExists ? 'base.' : ''}Dockerfile\n`;
+    let fromSection = `# ${dockerFilePreamble}https://github.com/${repo}/tree/${release}/${containersPathInRepo}/${definitionId}/.devcontainer/${baseDockerFileExists ? 'base.' : ''}Dockerfile\n\n`;
     // The VARIANT arg allows this value to be set from devcontainer.json, handle it if found
     if (/ARG\s+VARIANT\s*=/.exec(userDockerFile) !== null) {
         const variant = configUtils.getVariants(definitionId)[0];
         const tagWithVariant = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath, '${VARIANT}')[0];
+        // Handle scenario where "# [Choice]" comment exists
+        const choiceCaptureGroup=/(#\s+\[Choice\].+\n)ARG\s+VARIANT\s*=/.exec(userDockerFile);
+        if (choiceCaptureGroup) {
+            fromSection += choiceCaptureGroup[1];
+        }
         fromSection += `ARG VARIANT="${variant}"\nFROM ${tagWithVariant}`;
     } else {
         const imageTag = configUtils.getTagsForVersion(definitionId, devContainerImageVersion, registry, registryPath)[0];
@@ -240,7 +245,7 @@ async function copyLibraryScriptsForAllDefinitions() {
 }
 
 function replaceFrom(dockerFileContents, newFromSection) {
-    return dockerFileContents.replace(/(ARG\s+VARIANT\s*=\s*.+\n)?(FROM\s+[^\s\n]+)/, newFromSection);
+    return dockerFileContents.replace(/(#\s+\[Choice\].+\n)?(ARG\s+VARIANT\s*=\s*.+\n)?(FROM\s+[^\s\n]+)/, newFromSection);
 }
 
 module.exports = {
