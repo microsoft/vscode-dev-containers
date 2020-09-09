@@ -41,7 +41,7 @@ services:
       MYSQL_USER: mariadb
       MYSQL_PASSWORD: mariadb
 
-    # Add "forwardPorts": ["3306"] to **devcontainer.json** to forward MongoDB locally.
+    # Add "forwardPorts": ["3306"] to **devcontainer.json** to forward MariaDB locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
   
 volumes:
