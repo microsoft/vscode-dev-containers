@@ -14,22 +14,34 @@ _Develop Elixir/Phoenix based applications. includes everything you need to get 
 
 ## Using this definition with an existing folder
 
-While this definition should work unmodified, you can select the version of Elixir the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+While this definition should work unmodified, you can select the version of Elixir the container uses by updating the `VARIANT` arg in the included `docker-compose.yml`. In the same way you can specify a Phoenix Version.
 
-```json
-"args": { "VARIANT": "1.10" }
+```yml
+services:
+  elixir:
+    build: .
+    args:
+      # Elixir Version: 1.9, 1.10, 1.10.4, ...
+      VARIANT: 1.10
+      # Phoenix Version: 1.4.17, 1.5.4, ...
+      PHOENIX_VERSION: 1.5.4
+      # ...
 ```
 
 ### Installing Node.js
 
-Given that Phoenix/Elixir web applications use Node.js for compiling assets, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+Given that Phoenix/Elixir web applications use Node.js for compiling assets, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/docker-compose.yml`.
 
-```json
-"args": {
-    "VARIANT": "2",
-    "INSTALL_NODE": "true",
-    "NODE_VERSION": "10",
-}
+```yml
+services:
+  elixir:
+    build: .
+    args:
+      # ...
+      # Node Version: 10, 11, ...
+      INSTALL_NODE: true
+      NODE_VERSION: 10
+      # ...
 ```
 
 ### Adding the definition to your folder

@@ -41,13 +41,13 @@ checkExtension "jakebecker.elixir-ls"
 check "elixir" iex --version
 check "sudo" sudo echo "sudo works."
 check "git" git --version
-check "command-line-tools" which top ip lsb_release wget curl jq less nano unzip
 check "zsh" zsh --version
 check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
 check "node" node --version
 check "npm" npm install
 check "build test project" echo yes | mix phx.new example --live
 check "download deps" cd ./example && mix deps.get && mix deps.compile
+check "phoenix" mix test
 
 # Report result
 if [ ${#FAILED[@]} -ne 0 ]; then

@@ -1,4 +1,4 @@
-# Update the VARIANT arg in devcontainer.json to pick a Ruby version: 2, 2.7, 2.6, 2.5
+# Update the VARIANT arg in devcontainer.json to pick an Elixir version: 1.9, 1.10, 1.10.4
 ARG VARIANT=1.10
 FROM elixir:${VARIANT}
 

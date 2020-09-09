@@ -3,6 +3,15 @@ version: "3"
 services:
   elixir:
     build: .
+    args:
+      # Elixir Version: 1.9, 1.10, 1.10.4, ...
+      VARIANT: 1.10
+      # Phoenix Version: 1.4.17, 1.5.4, ...
+      PHOENIX_VERSION: 1.5.4
+      # Node Version: 10, 11, ...
+      INSTALL_NODE: true
+      NODE_VERSION: 10
+
     volumes:
       - ..:/workspace:cached
     ports:
