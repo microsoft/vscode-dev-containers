@@ -5,9 +5,8 @@
 #-------------------------------------------------------------------------------------------------------------
 
 # Syntax: ./sshd-debian.sh [SSH Port (don't use 22)] [non-root user] [start sshd now flag] [new password for user]
-#
-# Note: Run "sudo passwd $(whoami)" to set your password (or just "passwd" if running as root)
 
+# Note: You can change your user's password with "sudo passwd $(whoami)" (or just "passwd" if running as root).
 
 SSHD_PORT=${1:-"2222"}
 USERNAME=${2:-"vscode"}
@@ -46,11 +45,13 @@ if ! dpkg -s openssh-server openssh-client > /dev/null 2>&1; then
     apt-get -y install --no-install-recommends openssh-server openssh-client 
 fi
 
+# Generate password if new password set to the word "random"
 if [ "${NEW_PASSWORD}" = "random" ]; then
     NEW_PASSWORD="$(openssl rand -hex 16)"
     EMIT_PASSWORD="true"
 fi
 
+# If new password not set to skip, set it for the specified user
 if [ "${NEW_PASSWORD}" != "skip" ]; then
     echo "${USERNAME}:${NEW_PASSWORD}" | chpasswd
     if [ "${NEW_PASSWORD}" != "root" ]; then
@@ -58,11 +59,13 @@ if [ "${NEW_PASSWORD}" != "skip" ]; then
     fi
 fi
 
+# Setup sshd
 mkdir -p /var/run/sshd
 sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
 sed -i 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
 
+# Write out a script that can be referenced as an ENTRYPOINT to auto-start sshd
 tee /usr/local/share/ssh-init.sh > /dev/null \
 << EOF 
 #!/usr/bin/env bash
@@ -80,10 +83,12 @@ EOF
 chmod +x /usr/local/share/ssh-init.sh
 chown ${USERNAME}:ssh /usr/local/share/ssh-init.sh
 
+# If we should start sshd now, do so
 if [ "${START_SSHD}" = "true" ]; then
     /usr/local/share/ssh-init.sh
 fi
 
+# Write out result
 echo -e "Done!\n\n- Port: ${SSHD_PORT}\n- User: ${USERNAME}"
 if [ "${EMIT_PASSWORD}" = "true" ]; then
     echo "- Password: ${NEW_PASSWORD}"
