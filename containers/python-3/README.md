@@ -44,7 +44,7 @@ Beyond Python and `git`, this image / `Dockerfile` includes a number of Python t
 
 ### Installing Node.js
 
-Given how frequently Python-based web applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+Given how frequently Node.js is used for CLIs and front-end code, this container also includes the option to install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
 ```json
 "args": {
