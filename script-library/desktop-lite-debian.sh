@@ -219,7 +219,7 @@ sudoIf()
 # Use sudo to run as non-root user if not already running
 sudoUserIf()
 {
-    if [ "\$(id -u)" -eq 0 ]; then
+    if [ "\$(id -u)" -eq 0 ] && [ "\${USERNAME}" != "root" ]; then
         sudo -u \${USERNAME} "\$@"
     else
         "\$@"
