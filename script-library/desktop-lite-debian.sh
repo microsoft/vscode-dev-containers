@@ -12,9 +12,10 @@
 #
 # 2. Add the following to your .devcontainer/Dockerfile:
 #
-#    ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
 #    COPY library-scripts/desktop-lite-debian.sh /tmp/library-scripts/
-#    RUN bash /tmp/library-scripts/dekstop-lite-debian.sh
+#    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#        && bash /tmp/library-scripts/dekstop-lite-debian.sh
+#    ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8" LC_ALL="en_US.UTF-8"
 #    ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
 #    CMD ["sleep", "infinity"]
 #
@@ -32,6 +33,14 @@
 # 5. Default password: vscode
 #
 # The Window manager is Fluxbox (http://fluxbox.org/). Right-click to see the application menu.
+#
+# If you want to install the full version of Chrome, add the following to your Dockerfile:
+# 
+#    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#        && curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb \
+#        && apt-get -y install /tmp/chrome.deb \
+#        && rm -rf /tmp/chrome.deb
+
 
 USERNAME=${1:-"vscode"}
 VNC_PASSWORD=${2:-"vscode"}
@@ -64,6 +73,9 @@ BASE_PACKAGES="
     fonts-noto \
     fonts-wqy-microhei \
     fonts-droid-fallback \
+	curl \
+	ca-certificates\
+	unzip \
     nano \
 	locales"
 
