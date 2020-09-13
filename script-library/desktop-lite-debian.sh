@@ -45,6 +45,7 @@
 USERNAME=${1:-"vscode"}
 VNC_PASSWORD=${2:-"vscode"}
 INSTALL_NOVNC=${3:-"true"}
+INSTALL_WEBSOCKETIFY=${4:-"false"}
 
 BASE_PACKAGES="
     xvfb \
@@ -134,11 +135,14 @@ if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
 	curl -sSL https://github.com/novnc/noVNC/archive/v${NOVNC_VERSION}.zip -o /tmp/novnc-install.zip
 	unzip /tmp/novnc-install.zip -d /usr/local/novnc
 	cp /usr/local/novnc/noVNC-${NOVNC_VERSION}/vnc_lite.html /usr/local/novnc/noVNC-${NOVNC_VERSION}/index.html
-	curl -sSL https://github.com/novnc/websockify/archive/v${WEBSOCKETIFY_VERSION}.zip -o /tmp/websockify-install.zip
-	unzip /tmp/websockify-install.zip -d /usr/local/novnc
-	apt-get -y install --no-install-recommends python-numpy
-	ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
-	rm /tmp/websockify-install.zip /tmp/novnc-install.zip
+	# Install websocketify if needed - only required for versions of x11vnc < 0.9.9
+	if [ "${INSTALL_WEBSOCKETIFY}" = "true" ]; then 
+		curl -sSL https://github.com/novnc/websockify/archive/v${WEBSOCKETIFY_VERSION}.zip -o /tmp/websockify-install.zip
+		unzip /tmp/websockify-install.zip -d /usr/local/novnc
+		apt-get -y install --no-install-recommends python-numpy
+		ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
+	fi
+	rm -f /tmp/websockify-install.zip /tmp/novnc-install.zip
 fi 
 
 # Set up folders for scripts and init files
