@@ -41,11 +41,9 @@
 #        && apt-get -y install /tmp/chrome.deb \
 #        && rm -rf /tmp/chrome.deb
 
-
 USERNAME=${1:-"vscode"}
 VNC_PASSWORD=${2:-"vscode"}
 INSTALL_NOVNC=${3:-"true"}
-INSTALL_WEBSOCKETIFY=${4:-"false"}
 
 BASE_PACKAGES="
     xvfb \
@@ -74,6 +72,7 @@ BASE_PACKAGES="
     fonts-noto \
     fonts-wqy-microhei \
     fonts-droid-fallback \
+	python3-numpy \
 	curl \
 	ca-certificates\
 	unzip \
@@ -135,13 +134,11 @@ if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
 	curl -sSL https://github.com/novnc/noVNC/archive/v${NOVNC_VERSION}.zip -o /tmp/novnc-install.zip
 	unzip /tmp/novnc-install.zip -d /usr/local/novnc
 	cp /usr/local/novnc/noVNC-${NOVNC_VERSION}/vnc_lite.html /usr/local/novnc/noVNC-${NOVNC_VERSION}/index.html
-	# Install websocketify if needed - only required for versions of x11vnc < 0.9.9
-	if [ "${INSTALL_WEBSOCKETIFY}" = "true" ]; then 
-		curl -sSL https://github.com/novnc/websockify/archive/v${WEBSOCKETIFY_VERSION}.zip -o /tmp/websockify-install.zip
-		unzip /tmp/websockify-install.zip -d /usr/local/novnc
-		apt-get -y install --no-install-recommends python-numpy
-		ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
-	fi
+	curl -sSL https://github.com/novnc/websockify/archive/v${WEBSOCKETIFY_VERSION}.zip -o /tmp/websockify-install.zip
+	unzip /tmp/websockify-install.zip -d /usr/local/novnc
+	ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
+	# Tweak websocketify to use python3 since python 2 may not be installed
+	sed -i -E "s/^python\s/\/usr\/bin\/python3 /g" /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
 	rm -f /tmp/websockify-install.zip /tmp/novnc-install.zip
 fi 
 
