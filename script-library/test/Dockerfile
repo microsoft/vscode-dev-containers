@@ -18,5 +18,5 @@ ARG RUN_COMMON_SCRIPT="true"
 ARG UPGRADE_PACKAGES="false"
 RUN /tmp/run-scripts.sh /tmp ${DISTRO} ${USE_DEFAULTS} ${USERNAME} ${RUN_COMMON_SCRIPT} ${UPGRADE_PACKAGES}
 
-ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/sshd-init.sh", "/usr/local/share/desktop-init.sh" ]
 CMD [ "sleep", "infinity" ]
