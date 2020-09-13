@@ -15,7 +15,7 @@
 #    COPY library-scripts/desktop-lite-debian.sh /tmp/library-scripts/
 #    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #        && bash /tmp/library-scripts/dekstop-lite-debian.sh
-#    ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8" LC_ALL="en_US.UTF-8"
+#    ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
 #    ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
 #    CMD ["sleep", "infinity"]
 #
@@ -32,10 +32,13 @@
 #
 # 5. Default password: vscode
 #
-# The Window manager is Fluxbox (http://fluxbox.org/). Right-click to see the application menu.
+# The Window manager is Fluxbox (http://fluxbox.org/). Right-click to see the application menu. For a 
+# browser, you can install Firefox ESR by adding the following to your Dockerfile:
 #
-# If you want to install the full version of Chrome, add the following to your Dockerfile:
+#    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get install -y firefox-esr
 # 
+# Or if you want the full version of Google Chrome, add the following to your Dockerfile instead:
+#
 #    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #        && curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb \
 #        && apt-get -y install /tmp/chrome.deb \
@@ -45,7 +48,7 @@ USERNAME=${1:-"vscode"}
 VNC_PASSWORD=${2:-"vscode"}
 INSTALL_NOVNC=${3:-"true"}
 
-BASE_PACKAGES="
+PACKAGES_TO_INSTALL="
     xvfb \
     x11vnc \
     fluxbox \
@@ -58,6 +61,7 @@ BASE_PACKAGES="
     eterm \
     gnome-terminal \
     gnome-keyring \
+    gedit \
     seahorse \
     nautilus \
     libx11-dev \
@@ -72,12 +76,12 @@ BASE_PACKAGES="
     fonts-noto \
     fonts-wqy-microhei \
     fonts-droid-fallback \
-	python3-numpy \
-	curl \
-	ca-certificates\
-	unzip \
+    python3-numpy \
+    curl \
+    ca-certificates\
+    unzip \
     nano \
-	locales"
+    locales"
 
 set -e
 
@@ -106,40 +110,40 @@ apt-get-update-if-needed()
 export DEBIAN_FRONTEND=noninteractive
 
 # Install X11, fluxbox and VS Code dependencies
-if ! dpkg -s ${BASE_PACKAGES} > /dev/null 2>&1; then
+if ! dpkg -s ${PACKAGES_TO_INSTALL} > /dev/null 2>&1; then
     apt-get-update-if-needed
-    apt-get -y install --no-install-recommends ${BASE_PACKAGES}
+    apt-get -y install --no-install-recommends ${PACKAGES_TO_INSTALL}
 fi
 
 # Check at least one locale exists
 if ! grep -o -E '^\s*en_US.UTF-8\s+UTF-8' /etc/locale.gen > /dev/null; then
-	echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
     locale-gen
 fi
 
 # Install the Cascadia Code fonts - https://github.com/microsoft/cascadia-code
 if [ ! -d "/usr/share/fonts/truetype/cascadia" ]; then
-	curl -sSL https://github.com/microsoft/cascadia-code/releases/download/v2008.25/CascadiaCode-2008.25.zip -o /tmp/cascadia-fonts.zip
-	unzip /tmp/cascadia-fonts.zip -d /tmp/cascadia-fonts
-	mkdir -p /usr/share/fonts/truetype/cascadia
-	mv /tmp/cascadia-fonts/ttf/* /usr/share/fonts/truetype/cascadia/
-	rm -rf /tmp/cascadia-fonts.zip /tmp/cascadia-fonts
+    curl -sSL https://github.com/microsoft/cascadia-code/releases/download/v2008.25/CascadiaCode-2008.25.zip -o /tmp/cascadia-fonts.zip
+    unzip /tmp/cascadia-fonts.zip -d /tmp/cascadia-fonts
+    mkdir -p /usr/share/fonts/truetype/cascadia
+    mv /tmp/cascadia-fonts/ttf/* /usr/share/fonts/truetype/cascadia/
+    rm -rf /tmp/cascadia-fonts.zip /tmp/cascadia-fonts
 fi
 
 # Install noVNC
 NOVNC_VERSION=1.2.0
 WEBSOCKETIFY_VERSION=0.9.0
 if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
-	mkdir -p /usr/local/novnc
-	curl -sSL https://github.com/novnc/noVNC/archive/v${NOVNC_VERSION}.zip -o /tmp/novnc-install.zip
-	unzip /tmp/novnc-install.zip -d /usr/local/novnc
-	cp /usr/local/novnc/noVNC-${NOVNC_VERSION}/vnc_lite.html /usr/local/novnc/noVNC-${NOVNC_VERSION}/index.html
-	curl -sSL https://github.com/novnc/websockify/archive/v${WEBSOCKETIFY_VERSION}.zip -o /tmp/websockify-install.zip
-	unzip /tmp/websockify-install.zip -d /usr/local/novnc
-	ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
-	# Tweak websocketify to use python3 since python 2 may not be installed
-	sed -i -E "s/^python\s/\/usr\/bin\/python3 /g" /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
-	rm -f /tmp/websockify-install.zip /tmp/novnc-install.zip
+    mkdir -p /usr/local/novnc
+    curl -sSL https://github.com/novnc/noVNC/archive/v${NOVNC_VERSION}.zip -o /tmp/novnc-install.zip
+    unzip /tmp/novnc-install.zip -d /usr/local/novnc
+    cp /usr/local/novnc/noVNC-${NOVNC_VERSION}/vnc_lite.html /usr/local/novnc/noVNC-${NOVNC_VERSION}/index.html
+    curl -sSL https://github.com/novnc/websockify/archive/v${WEBSOCKETIFY_VERSION}.zip -o /tmp/websockify-install.zip
+    unzip /tmp/websockify-install.zip -d /usr/local/novnc
+    ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
+    # Tweak websocketify to use python3 since python 2 may not be installed
+    sed -i -E "s/^python\s/\/usr\/bin\/python3 /g" /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
+    rm -f /tmp/websockify-install.zip /tmp/novnc-install.zip
 fi 
 
 # Set up folders for scripts and init files
@@ -152,23 +156,23 @@ tee /usr/local/bin/set-resolution > /dev/null \
 RESOLUTION=\${1:-\${VNC_RESOLUTION:-1920x1080}}
 DPI=\${2:-\${VNC_DPI:-72}}
 if [ -z "\$1" ]; then
-	echo -e "**Current Settings **\n"
-	xrandr
-	echo -n -e "\nEnter new resolution (WIDTHxHEIGHT, blank for ${RESOLUTION}, Ctrl+C to abort).\n> "
-	read NEW_RES
-	if [ "\${NEW_RES}" != "" ]; then
-		RESOLUTION=\${NEW_RES}
-	fi
-	if [ -z "\$2" ]; then
-		echo -n -e "\nEnter new DPI (blank for \${DPI}, Ctrl+C to abort).\n> "
-		read NEW_DPI
-		if [ "\${NEW_DPI}" != "" ]; then
-			DPI=\${NEW_DPI}
-		fi
-	fi
+    echo -e "**Current Settings **\n"
+    xrandr
+    echo -n -e "\nEnter new resolution (WIDTHxHEIGHT, blank for ${RESOLUTION}, Ctrl+C to abort).\n> "
+    read NEW_RES
+    if [ "\${NEW_RES}" != "" ]; then
+        RESOLUTION=\${NEW_RES}
+    fi
+    if [ -z "\$2" ]; then
+        echo -n -e "\nEnter new DPI (blank for \${DPI}, Ctrl+C to abort).\n> "
+        read NEW_DPI
+        if [ "\${NEW_DPI}" != "" ]; then
+            DPI=\${NEW_DPI}
+        fi
+    fi
 fi
 
-xrandr --fb \${RESOLUTION} --dpi \${DPI} > /dev/null 2>&1
+xrandr --fb \${RESOLUTION} --dpi \${DPI} > /dev/null 2>&1 || echo -e "\nFAILED TO SET RESOLUTION!"
 
 echo -e "\n**New Settings **\n"
 xrandr
@@ -186,24 +190,24 @@ LOG=/tmp/container-init.log
 # Execute the command it not already running
 startInBackgroundIfNotRunning()
 {
-	log "Starting \$1."
-	echo -e "\n** \$(date) **" | sudoIf tee -a /tmp/\$1.log > /dev/null
-	if ! pidof \$1 > /dev/null; then
-		keepRunningInBackground "\$@"
-		while ! pidof \$1 > /dev/null; do
-			sleep 1
-		done
-		log "\$1 started."
-	else
-		echo "\$1 is already running." | sudoIf tee -a /tmp/\$1.log > /dev/null
-		log "\$1 is already running."
-	fi
+    log "Starting \$1."
+    echo -e "\n** \$(date) **" | sudoIf tee -a /tmp/\$1.log > /dev/null
+    if ! pidof \$1 > /dev/null; then
+        keepRunningInBackground "\$@"
+        while ! pidof \$1 > /dev/null; do
+            sleep 1
+        done
+        log "\$1 started."
+    else
+        echo "\$1 is already running." | sudoIf tee -a /tmp/\$1.log > /dev/null
+        log "\$1 is already running."
+    fi
 }
 
 # Keep command running in background
 keepRunningInBackground()
 {
-	(\$2 sh -c "while :; do echo [\\\$(date)] Process started.; \$3; echo [\\\$(date)] Process exited!; sleep 5; done 2>&1" | sudoIf tee -a /tmp/\$1.log > /dev/null & echo "\$!" | sudoIf tee /tmp/\$1.pid > /dev/null)
+    (\$2 sh -c "while :; do echo [\\\$(date)] Process started.; \$3; echo [\\\$(date)] Process exited!; sleep 5; done 2>&1" | sudoIf tee -a /tmp/\$1.log > /dev/null & echo "\$!" | sudoIf tee /tmp/\$1.pid > /dev/null)
 }
 
 # Use sudo to run as root when required
@@ -237,11 +241,11 @@ log "** SCRIPT START **"
 # Start dbus.
 log 'Running "/etc/init.d/dbus start".'
 if [ -f "/var/run/dbus/pid" ] && ! pidof dbus-daemon  > /dev/null; then
-	sudoIf rm -f /var/run/dbus/pid
+    sudoIf rm -f /var/run/dbus/pid
 fi
 sudoIf /etc/init.d/dbus start 2>&1 | sudoIf tee -a /tmp/dbus-daemon-system.log > /dev/null
 while ! pidof dbus-daemon > /dev/null; do
-	sleep 1
+    sleep 1
 done
 
 # Set up Xvfb.
@@ -258,10 +262,10 @@ startInBackgroundIfNotRunning "x11vnc" sudoIf "x11vnc -display \${DISPLAY:-:1} -
 
 # Spin up noVNC if installed and not runnning.
 if [ -d "/usr/local/novnc" ] && [ "\$(ps -ef | grep /usr/local/novnc/noVNC*/utils/launch.sh | grep -v grep)" = "" ]; then
-	keepRunningInBackground "noVNC" sudoIf "/usr/local/novnc/noVNC*/utils/launch.sh --listen \${NOVNC_PORT:-6080} --vnc localhost:\${VNC_PORT:-5901}"
-	log "noVNC started."
+    keepRunningInBackground "noVNC" sudoIf "/usr/local/novnc/noVNC*/utils/launch.sh --listen \${NOVNC_PORT:-6080} --vnc localhost:\${VNC_PORT:-5901}"
+    log "noVNC started."
 else
-	log "noVNC is already running or not installed."
+    log "noVNC is already running or not installed."
 fi
 
 # Run whatever was passed in
@@ -299,22 +303,22 @@ EOF
 tee /root/.fluxbox/menu > /dev/null \
 <<EOF
 [begin] (  Application Menu  )
-	[exec] (File Manager) { nautilus ~ } <>
-	[exec] (Text Editor) { editor } <>
-	[exec] (Web Browser) { x-www-browser } <>
-	[exec] (Terminal) { gnome-terminal --working-directory=~ } <>
-	[submenu] (System >) {}
-		[exec] (Set Resolution) { x-terminal-emulator -T "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
-		[exec] (Top Processes) { x-terminal-emulator -T "Top" -e htop } <>
-		[exec] (Disk Utilization) { x-terminal-emulator -T "Top" -e ncdu / } <>
-		[exec] (Passwords and Keys) { seahorse } <>
-		[exec] (Editres) {editres} <>
-		[exec] (Xfontsel) {xfontsel} <>
-		[exec] (Xkill) {xkill} <>
-		[exec] (Xrefresh) {xrefresh} <>
-	[end]
-	[config] (Configuration >)
-	[workspaces] (Workspaces >)
+    [exec] (File Manager) { nautilus ~ } <>
+    [exec] (Text Editor) { editor } <>
+    [exec] (Web Browser) { x-www-browser } <>
+    [exec] (Terminal) { gnome-terminal --working-directory=~ } <>
+    [submenu] (System >) {}
+        [exec] (Set Resolution) { x-terminal-emulator -T "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
+        [exec] (Top Processes) { x-terminal-emulator -T "Top" -e htop } <>
+        [exec] (Disk Utilization) { x-terminal-emulator -T "Top" -e ncdu / } <>
+        [exec] (Passwords and Keys) { seahorse } <>
+        [exec] (Editres) {editres} <>
+        [exec] (Xfontsel) {xfontsel} <>
+        [exec] (Xkill) {xkill} <>
+        [exec] (Xrefresh) {xrefresh} <>
+    [end]
+    [config] (Configuration >)
+    [workspaces] (Workspaces >)
 [end]
 EOF
 
@@ -323,5 +327,5 @@ if [ "${USERNAME}" != "root" ]; then
     touch /home/${USERNAME}/.Xmodmap
     cp -R /root/.fluxbox /home/${USERNAME}
     chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox
-	chown ${USERNAME}:root /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution /usr/local/etc/vscode-dev-containers/vnc-passwd
+    chown ${USERNAME}:root /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution /usr/local/etc/vscode-dev-containers/vnc-passwd
 fi
