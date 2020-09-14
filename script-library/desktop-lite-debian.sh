@@ -49,7 +49,7 @@ USERNAME=${1:-"vscode"}
 VNC_PASSWORD=${2:-"vscode"}
 INSTALL_NOVNC=${3:-"true"}
 
-PACKAGES_TO_INSTALL="
+PACKAGE_LIST="
     xvfb \
     x11vnc \
     fluxbox \
@@ -60,9 +60,9 @@ PACKAGES_TO_INSTALL="
     fbautostart \
     xterm \
     eterm \
-    xfce4-terminal \
-	thunar\
-	mousepad \
+    tilix \
+    nautilus\
+    mousepad \
     seahorse \
     gnome-icon-theme \
     gnome-keyring \
@@ -72,6 +72,7 @@ PACKAGES_TO_INSTALL="
     libnotify4 \
     libnss3 \
     libxss1 \
+    libgdm1 \
     libasound2 \
     xfonts-base \
     xfonts-terminus \
@@ -113,10 +114,23 @@ apt-get-update-if-needed()
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
+apt-get-update-if-needed
+
+# On older Ubuntu, Tilix is in a PPA. On Debian Strech, its in backports
+if [[ -z $(apt-cache --names-only search ^tilix$) ]]; then
+    apt-get install -y --no-install-recommends lsb-release
+    if [ "$(lsb_release -is)" = "Ubuntu" ]; then
+        apt-get install -y --no-install-recommends apt-transport-https software-properties-common
+        add-apt-repository -y ppa:webupd8team/terminix
+    else
+        echo "deb http://deb.debian.org/debian $(lsb_release -cs)-backports main" > /etc/apt/sources.list.d/$(lsb_release -cs)-backports.list
+    fi
+    apt-get update
+fi
+
 # Install X11, fluxbox and VS Code dependencies
-if ! dpkg -s ${PACKAGES_TO_INSTALL} > /dev/null 2>&1; then
-    apt-get-update-if-needed
-    apt-get -y install --no-install-recommends ${PACKAGES_TO_INSTALL}
+if ! dpkg -s ${PACKAGE_LIST} > /dev/null 2>&1; then
+    apt-get -y install --no-install-recommends ${PACKAGE_LIST}
 fi
 
 # Check at least one locale exists
@@ -218,7 +232,7 @@ startInBackgroundIfNotRunning()
 # Keep command running in background
 keepRunningInBackground()
 {
-    (\$2 sh -c "while :; do echo [\\\$(date)] Process started.; \$3; echo [\\\$(date)] Process exited!; sleep 5; done 2>&1" | sudoIf tee -a /tmp/\$1.log > /dev/null & echo "\$!" | sudoIf tee /tmp/\$1.pid > /dev/null)
+    (\$2 sh -l -c "while :; do echo [\\\$(date)] Process started.; \$3; echo [\\\$(date)] Process exited!; sleep 5; done 2>&1" | sudoIf tee -a /tmp/\$1.log > /dev/null & echo "\$!" | sudoIf tee /tmp/\$1.pid > /dev/null)
 }
 
 # Use sudo to run as root when required
@@ -289,6 +303,14 @@ echo "${VNC_PASSWORD}" > /usr/local/etc/vscode-dev-containers/vnc-passwd
 touch /root/.Xmodmap 
 chmod +x /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution
 
+tee /root/.fluxbox/apps > /dev/null \
+<<EOF
+[transient] (role=GtkFileChooserDialog)
+  [Dimensions]	{70% 70%}
+  [Position]	(CENTER)	{0 0}
+[end]
+EOF
+
 tee /root/.fluxbox/init > /dev/null \
 <<EOF
 session.configVersion:	13
@@ -298,21 +320,22 @@ session.styleFile: /usr/share/fluxbox/styles/qnx-photon
 session.screen0.workspaces: 1
 session.screen0.workspacewarping: false
 session.screen0.toolbar.widthPercent: 100
-session.screen0.strftimeFormat: %a, %b %d, %I:%M %p
-session.screen0.toolbar.tools: prevworkspace, workspacename, nextworkspace, clock, prevwindow, nextwindow, iconbar, systemtray
+session.screen0.strftimeFormat: %a %l:%M %p
+session.screen0.toolbar.tools: prevworkspace, workspacename, nextworkspace, clock, iconbar, systemtray
+session.screen0.workspaceNames: One,
 EOF
 
 tee /root/.fluxbox/menu > /dev/null \
 <<EOF
 [begin] (  Application Menu  )
-    [exec] (File Manager) { thunar ~ } <>
+    [exec] (File Manager) { nautilus ~ } <>
     [exec] (Text Editor) { mousepad } <>
-    [exec] (Terminal) { xfce4-terminal --working-directory=~ } <>
+    [exec] (Terminal) { tilix -w ~ -e $(readlink -f /proc/$$/exe) -il } <>
     [exec] (Web Browser) { x-www-browser } <>
     [submenu] (System) {}
-        [exec] (Set Resolution) { xfce4-terminal -T "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
-        [exec] (Top Processes) { xfce4-terminal -T "Top" -e htop } <>
-        [exec] (Disk Utilization) { xfce4-terminal -T "Top" -e ncdu / } <>
+        [exec] (Set Resolution) { tilix -t "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
+        [exec] (Top Processes) { tilix -t "Top" -e htop } <>
+        [exec] (Disk Utilization) { tilix -t "Disk Utilization" -e ncdu / } <>
         [exec] (Passwords and Keys) { seahorse } <>
         [exec] (Editres) {editres} <>
         [exec] (Xfontsel) {xfontsel} <>
@@ -331,3 +354,5 @@ if [ "${USERNAME}" != "root" ]; then
     chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox
     chown ${USERNAME}:root /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution /usr/local/etc/vscode-dev-containers/vnc-passwd
 fi
+
+echo "Done!"
