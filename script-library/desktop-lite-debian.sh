@@ -177,6 +177,7 @@ tee /usr/local/bin/set-resolution > /dev/null \
 #!/bin/bash
 RESOLUTION=\${1:-\${VNC_RESOLUTION:-1920x1080}}
 DPI=\${2:-\${VNC_DPI:-96}}
+IGNORE_ERROR=\${3:-"false"}
 if [ -z "\$1" ]; then
     echo -e "**Current Settings **\n"
     xrandr
@@ -200,7 +201,7 @@ fi
 
 xrandr --fb \${RESOLUTION} --dpi \${DPI} > /dev/null 2>&1
 
-if [ \$? -ne 0 ]; then 
+if [ \$? -ne 0 ] && [ IGNORE_ERROR != "true" ]; then 
     echo -e "\nFAILED TO SET RESOLUTION!\n"
     exit 1
 fi
@@ -287,7 +288,7 @@ startInBackgroundIfNotRunning "fluxbox" sudoUserIf "dbus-launch startfluxbox"
 startInBackgroundIfNotRunning "x11vnc" sudoIf "x11vnc -display \${DISPLAY:-:1} -rfbport \${VNC_PORT:-5901} -localhost -no6 -xkb -shared -forever -passwdfile /usr/local/etc/vscode-dev-containers/vnc-passwd"
 
 # Set resolution
-/usr/local/bin/set-resolution \${VNC_RESOLUTION:-1440x768} \${VNC_DPI:-96}
+/usr/local/bin/set-resolution \${VNC_RESOLUTION:-1440x768} \${VNC_DPI:-96} true
 
 # Spin up noVNC if installed and not runnning.
 if [ -d "/usr/local/novnc" ] && [ "\$(ps -ef | grep /usr/local/novnc/noVNC*/utils/launch.sh | grep -v grep)" = "" ]; then
