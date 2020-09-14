@@ -60,11 +60,12 @@ PACKAGES_TO_INSTALL="
     fbautostart \
     xterm \
     eterm \
-    gnome-terminal \
-    gnome-keyring \
-    gedit \
+    xfce4-terminal \
+	thunar\
+	mousepad \
     seahorse \
-    nautilus \
+    gnome-icon-theme \
+    gnome-keyring \
     libx11-dev \
     libxkbfile-dev \
     libsecret-1-dev \
@@ -78,11 +79,14 @@ PACKAGES_TO_INSTALL="
     fonts-wqy-microhei \
     fonts-droid-fallback \
     python3-numpy \
+    htop \
+    ncdu \
     curl \
     ca-certificates\
     unzip \
     nano \
     locales"
+
 set -e
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -285,47 +289,38 @@ echo "${VNC_PASSWORD}" > /usr/local/etc/vscode-dev-containers/vnc-passwd
 touch /root/.Xmodmap 
 chmod +x /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution
 
-# Add fluxbox init files
-tee /root/.fluxbox/apps > /dev/null \
-<<EOF
-[transient] (role=GtkFileChooserDialog)
-  [Dimensions]	{70% 70%}
-  [Position]	(CENTER)	{0 0}
-[end]
-EOF
-
 tee /root/.fluxbox/init > /dev/null \
 <<EOF
+session.configVersion:	13
 session.menuFile:	~/.fluxbox/menu
 session.keyFile: ~/.fluxbox/keys
-session.styleFile: /usr/share/fluxbox/styles//Squared_for_Debian
-session.configVersion:	13
+session.styleFile: /usr/share/fluxbox/styles/qnx-photon
 session.screen0.workspaces: 1
 session.screen0.workspacewarping: false
 session.screen0.toolbar.widthPercent: 100
-session.screen0.strftimeFormat: %d %b, %a %02k:%M:%S
+session.screen0.strftimeFormat: %a, %b %d, %I:%M %p
 session.screen0.toolbar.tools: prevworkspace, workspacename, nextworkspace, clock, prevwindow, nextwindow, iconbar, systemtray
 EOF
 
 tee /root/.fluxbox/menu > /dev/null \
 <<EOF
 [begin] (  Application Menu  )
-    [exec] (File Manager) { nautilus ~ } <>
-    [exec] (Text Editor) { gedit } <>
+    [exec] (File Manager) { thunar ~ } <>
+    [exec] (Text Editor) { mousepad } <>
+    [exec] (Terminal) { xfce4-terminal --working-directory=~ } <>
     [exec] (Web Browser) { x-www-browser } <>
-    [exec] (Terminal) { gnome-terminal --working-directory=~ } <>
-    [submenu] (System >) {}
-        [exec] (Set Resolution) { x-terminal-emulator -T "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
-        [exec] (Top Processes) { x-terminal-emulator -T "Top" -e htop } <>
-        [exec] (Disk Utilization) { x-terminal-emulator -T "Top" -e ncdu / } <>
+    [submenu] (System) {}
+        [exec] (Set Resolution) { xfce4-terminal -T "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
+        [exec] (Top Processes) { xfce4-terminal -T "Top" -e htop } <>
+        [exec] (Disk Utilization) { xfce4-terminal -T "Top" -e ncdu / } <>
         [exec] (Passwords and Keys) { seahorse } <>
         [exec] (Editres) {editres} <>
         [exec] (Xfontsel) {xfontsel} <>
         [exec] (Xkill) {xkill} <>
         [exec] (Xrefresh) {xrefresh} <>
     [end]
-    [config] (Configuration >)
-    [workspaces] (Workspaces >)
+    [config] (Configuration)
+    [workspaces] (Workspaces)
 [end]
 EOF
 
