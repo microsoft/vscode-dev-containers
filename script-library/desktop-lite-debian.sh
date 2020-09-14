@@ -19,8 +19,7 @@
 #    ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
 #    CMD ["sleep", "infinity"]
 #
-#  Note: If you select a different locale, add it to /etc/locale.gen and run locale-gen. The ENTRYPOINT
-#  script can also be chained with another script by adding it to the array after desktop-init.sh.
+#  The ENTRYPOINT script can be chained with another script by adding it to the array after desktop-init.sh.
 #
 # 3. And the following to devcontainer.json:
 #
@@ -28,12 +27,12 @@
 #    "forwardPorts": [6080, 5901],
 #    "overrideCommand": false
 # 
-# 4. You'll be able to use a web based desktop viewer on port 6080 or connect a VNC viewer to port 5901.
+# 4. You'll be able to use a web based desktop viewer on port **6080** or connect a VNC viewer to port **5901**.
 #
-# 5. Default password: vscode
+# 5. Default **password**: vscode 
 #
-# The Window manager is Fluxbox (http://fluxbox.org/). Right-click to see the application menu. For a 
-# browser, you can install Firefox ESR by adding the following to your Dockerfile:
+# The window manager is Fluxbox (http://fluxbox.org/). **Right-click** to see the application menu. If you need
+# a browser, you can install Firefox ESR by adding the following to your Dockerfile:
 #
 #    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get install -y firefox-esr
 # 
@@ -43,6 +42,8 @@
 #        && curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb \
 #        && apt-get -y install /tmp/chrome.deb \
 #        && rm -rf /tmp/chrome.deb
+#
+# Finally, if you need to select a different locale, be sure to add it to /etc/locale.gen and run locale-gen. 
 
 USERNAME=${1:-"vscode"}
 VNC_PASSWORD=${2:-"vscode"}
@@ -82,7 +83,6 @@ PACKAGES_TO_INSTALL="
     unzip \
     nano \
     locales"
-
 set -e
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -154,14 +154,18 @@ tee /usr/local/bin/set-resolution > /dev/null \
 << EOF 
 #!/bin/bash
 RESOLUTION=\${1:-\${VNC_RESOLUTION:-1920x1080}}
-DPI=\${2:-\${VNC_DPI:-72}}
+DPI=\${2:-\${VNC_DPI:-96}}
 if [ -z "\$1" ]; then
     echo -e "**Current Settings **\n"
     xrandr
-    echo -n -e "\nEnter new resolution (WIDTHxHEIGHT, blank for ${RESOLUTION}, Ctrl+C to abort).\n> "
+    echo -n -e "\nEnter new resolution (WIDTHxHEIGHT, blank for \${RESOLUTION}, Ctrl+C to abort).\n> "
     read NEW_RES
     if [ "\${NEW_RES}" != "" ]; then
         RESOLUTION=\${NEW_RES}
+    fi
+    if ! echo "\${RESOLUTION}" | grep -E '[0-9]+x[0-9]+' > /dev/null; then
+        echo -e "\nInvalid resolution format!\n"
+        exit 1
     fi
     if [ -z "\$2" ]; then
         echo -n -e "\nEnter new DPI (blank for \${DPI}, Ctrl+C to abort).\n> "
@@ -172,11 +176,14 @@ if [ -z "\$1" ]; then
     fi
 fi
 
-xrandr --fb \${RESOLUTION} --dpi \${DPI} > /dev/null 2>&1 || echo -e "\nFAILED TO SET RESOLUTION!"
+xrandr --fb \${RESOLUTION} --dpi \${DPI} > /dev/null 2>&1
 
-echo -e "\n**New Settings **\n"
-xrandr
-echo
+if [ \$? -ne 0 ]; then 
+    echo -e "\nFAILED TO SET RESOLUTION!\n"
+    exit 1
+fi
+
+echo -e "\nSuccess!\n"
 EOF
 
 # Container ENTRYPOINT script
@@ -258,7 +265,7 @@ startInBackgroundIfNotRunning "fluxbox" sudoUserIf "dbus-launch startfluxbox"
 startInBackgroundIfNotRunning "x11vnc" sudoIf "x11vnc -display \${DISPLAY:-:1} -rfbport \${VNC_PORT:-5901} -localhost -no6 -xkb -shared -forever -passwdfile /usr/local/etc/vscode-dev-containers/vnc-passwd"
 
 # Set resolution
-/usr/local/bin/set-resolution \${VNC_RESOLUTION:-1280x720} \${VNC_DPI:-72}
+/usr/local/bin/set-resolution \${VNC_RESOLUTION:-1440x768} \${VNC_DPI:-96}
 
 # Spin up noVNC if installed and not runnning.
 if [ -d "/usr/local/novnc" ] && [ "\$(ps -ef | grep /usr/local/novnc/noVNC*/utils/launch.sh | grep -v grep)" = "" ]; then
@@ -282,8 +289,8 @@ chmod +x /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution
 tee /root/.fluxbox/apps > /dev/null \
 <<EOF
 [transient] (role=GtkFileChooserDialog)
-  [Position]	(CENTER)	{0 0}
   [Dimensions]	{70% 70%}
+  [Position]	(CENTER)	{0 0}
 [end]
 EOF
 
@@ -304,7 +311,7 @@ tee /root/.fluxbox/menu > /dev/null \
 <<EOF
 [begin] (  Application Menu  )
     [exec] (File Manager) { nautilus ~ } <>
-    [exec] (Text Editor) { editor } <>
+    [exec] (Text Editor) { gedit } <>
     [exec] (Web Browser) { x-www-browser } <>
     [exec] (Terminal) { gnome-terminal --working-directory=~ } <>
     [submenu] (System >) {}
