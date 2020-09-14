@@ -19,7 +19,8 @@
 #    ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
 #    CMD ["sleep", "infinity"]
 #
-#  The ENTRYPOINT script can be chained with another script by adding it to the array after desktop-init.sh.
+#    The ENTRYPOINT script can be chained with another script by adding it to the array after desktop-init.sh.
+#    If you need to select a different locale, be sure to add it to /etc/locale.gen and run locale-gen. 
 #
 # 3. And the following to devcontainer.json:
 #
@@ -36,14 +37,17 @@
 #
 #    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get install -y firefox-esr
 # 
-# Or if you want the full version of Google Chrome, add the following to your Dockerfile instead:
+# If you want the full version of Google Chrome in the desktop:
+#
+# 1. Add the following to your Dockerfile instead:
 #
 #    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #        && curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb \
 #        && apt-get -y install /tmp/chrome.deb \
 #        && rm -rf /tmp/chrome.deb
 #
-# Finally, if you need to select a different locale, be sure to add it to /etc/locale.gen and run locale-gen. 
+# 2. Chrome Sandbox support requires you set up and run as a non-root user (or you need to run google-chrome --no-sandbox). 
+#    The debian-common.sh script can do this for you, or you can follow https://aka.ms/vscode-remote/containers/non-root
 
 USERNAME=${1:-"vscode"}
 VNC_PASSWORD=${2:-"vscode"}
