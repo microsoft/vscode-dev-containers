@@ -16,7 +16,8 @@
 	"workspaceMount": "source=${localWorkspaceFolder}/../..,target=/workspace,type=bind",
 	"workspaceFolder": "/workspace",
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
-	"overrideCommand": true,
+	"runArgs": ["--init", "--security-opt", "seccomp=unconfined"],
+	"overrideCommand": false,
 
 	"settings": { 
 		"terminal.integrated.shell.linux": null

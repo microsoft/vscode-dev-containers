@@ -45,6 +45,8 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript ${SCRIPT_DIR}/ruby-${DISTRO}.sh "2.5 ${USERNAME} false"
     runScript ${SCRIPT_DIR}/rust-${DISTRO}.sh "/opt/rust/cargo /opt/rust/rustup ${USERNAME} false"
     runScript ${SCRIPT_DIR}/terraform-${DISTRO}.sh "0.12.16" "0.8.2"
+    runScript ${SCRIPT_DIR}/sshd-${DISTRO}.sh "2223 ${USERNAME} true random"
+    runScript ${SCRIPT_DIR}/desktop-lite-${DISTRO}.sh "${USERNAME} changeme false"
 fi
 
 # Run Docker script
