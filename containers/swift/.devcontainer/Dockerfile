@@ -1,4 +1,4 @@
-# [Choice] Swift version: 5, 5.2, 5.1, 4.2
+# [Choice] Swift version: 5.2, 5.1, 4.2
 ARG VARIANT=5.2
 FROM swift:${VARIANT}
 
