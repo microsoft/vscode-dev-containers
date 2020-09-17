@@ -13,6 +13,7 @@ echo "Defaults secure_path=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
 # Install and setup fish
 apt-get install -yq fish
 printf "$FISH_PROMPT" >> /etc/fish/conf.d/fish_prompt.fish
+printf "if type code-insiders > /dev/null 2>&1 and ! type code > /dev/null 2>&1\n  alias code=code-insiders\nend" >> /etc/fish/conf.d/code_alias.fish
 
 # Add user to a Docker group
 sudo -u ${USERNAME} mkdir /home/${USERNAME}/.vsonline
