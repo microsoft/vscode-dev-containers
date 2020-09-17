@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "0.16.1",
+	"definitionVersion": "0.17.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -48,7 +48,6 @@
 			"ncdu",
 			"man-db",
 			"zsh",
-			"yarn",
 			"vim", 
 			"xtail",
 			"fish", 

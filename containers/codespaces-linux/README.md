@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Use or extend the default large, multi-language universal container for GitHub Codespaces.*
+*Use or extend the default, large, multi-language universal container for GitHub Codespaces.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -20,7 +20,35 @@ While language specific development containers can be useful, in some cases you 
 
 If you use GitHub Codespaces, this is the "universal" image that is used by default if no custom Dockerfile or image is specified. If you like what you see but want to make a few additions or changes, you can use a custom Dockerfile to extend it and add whatever you need.
 
-The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can opt into using instead of the default `bash`. It also includes [nvm](https://github.com/nvm-sh/nvm) and [nvs](https://github.com/jasongin/nvs) if you need to install a different version of Node.js than those that are in the container by default.
+The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can opt into using instead of the default `bash`. It also includes [nvm](https://github.com/nvm-sh/nvm), [rvm](https://rvm.io/), and [SDKMAN!](https://sdkman.io/) if you need to install a different version Node, Ruby, or Java tools than the container defaults. You can also set things up to access the container [via SSH](#accessing-the-container-using-ssh-scp-or-sshfs).
+
+## Accessing the container using SSH, SCP, or SSHFS
+
+This container also includes a running SSH server that you can use to access the contents if needed. To use it:
+
+1. Create a codespace in [GitHub Codespaces](https://github.com/features/codespaces) (this is the default image) or open this container in Remote - Containers.
+
+2. If you created a codespace using a web browser in GitHub Codespaces, setup the [VS Code extension and connect to it from your local VS Code](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code).
+
+3. When connected to the codespace, use a terminal in VS Code to set a password when connecting:
+
+   ```bash
+   sudo passwd $(whoami)
+   ```
+
+4. Press <kbd>F1</kbd> and select **Forward a Port...** and enter port `2222`.
+
+5. You're all set! You can connect using SSH as follows:
+
+   ```bash
+   ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null codespace@localhost
+   ```
+
+   The `-o` arguments are not required, but will avoid errors about the "known host" signature changing when doing this from multiple codespaces.
+
+6. Enter the password you set in step 3.
+
+That's it! Use similar arguments to those in step 5 when executing `scp` or configuring SSHFS.
 
 ## Using this definition with an existing folder
 
