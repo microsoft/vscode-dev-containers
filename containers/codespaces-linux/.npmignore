@@ -15,6 +15,7 @@ definition-manifest.json
 .devcontainer/library-scripts/python-debian.sh
 .devcontainer/library-scripts/ruby-debian.sh
 .devcontainer/library-scripts/rust-debian.sh
+.devcontainer/library-scripts/sshd-debian.sh
 .devcontainer/library-scripts/README.md
 setup-user.sh
 symlinkDotNetCore.sh

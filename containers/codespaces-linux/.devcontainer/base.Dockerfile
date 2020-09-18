@@ -27,12 +27,12 @@ ENV PATH="${NVM_DIR}/current/bin:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/azcli-debian.sh library-scripts/common-debian.sh library-scripts/git-lfs-debian.sh library-scripts/github-debian.sh \
-    library-scripts/kubectl-helm-debian.sh setup-user.sh /tmp/scripts/
+    library-scripts/kubectl-helm-debian.sh library-scripts/sshd-debian.sh setup-user.sh /tmp/scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove buster list to avoid unexpected errors given base image is stretch
     && rm /etc/apt/sources.list.d/buster.list \
     # Run common script and setup user
-    && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "false" \
+    && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "false" "true" \
     && bash /tmp/scripts/setup-user.sh "${USERNAME}" "${PATH}" \
     # Upgrade git to avoid security issue
     && apt-get upgrade -yq git \
@@ -40,8 +40,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get purge -y imagemagick imagemagick-6-common \
     # Install tools and shells not in common script
     && apt-get install -yq vim xtail software-properties-common \
+    && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/git-lfs-debian.sh \
-    && bash /tmp/scripts/github-debian.sh ${GITHUB_CLI_VERSION}\
+    && bash /tmp/scripts/github-debian.sh \
     && bash /tmp/scripts/azcli-debian.sh \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
     # Clean up
@@ -104,7 +105,7 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/stable" "${PIPX_HOME}
 # Install xdebug, link composer
 RUN yes | pecl install xdebug \
     && export PHP_LOCATION=$(dirname $(dirname $(which php))) \
-    && echo "zend_extension=$(find ${PHP_LOCATION}/lib/php/extensions/ -name xdebug.so)" >  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "zend_extension=$(find ${PHP_LOCATION}/lib/php/extensions/ -name xdebug.so)" > ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
     && echo "xdebug.remote_enable=on" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
     && echo "xdebug.remote_autostart=on" >>  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
     && rm -rf /tmp/pear \
@@ -126,7 +127,7 @@ RUN if [ "${INSTALL_DOCKER}" = "true" ]; then \
     && rm -rf /tmp/scripts && apt-get clean -y
 
 # Fire Docker script if needed along with Oryx's benv
-ENTRYPOINT [ "/usr/local/share/docker-init.sh", "benv" ]
+ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh" ,"benv" ]
 CMD [ "sleep", "infinity" ]
 
 # [Optional] Install debugger for development of Codespaces - Not in resulting image by default
