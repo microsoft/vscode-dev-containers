@@ -4,13 +4,28 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag]
+# Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My *! flag]
+#
+# Usage: 
+#
+# 1. Add this file to .devcontainer/library-scripts
+#
+# 2. Add the following to .devcontainer/Dockerfile:
+#
+#    COPY library-scripts/*.sh /tmp/library-scripts/
+#    RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
+#        && bash /tmp/library-scripts/common-debian.sh \
+#        && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+#
+# You can optionally pass in arguments described above to common-debian.sh. Flags are a value of "true" or "false. 
+# Pass in "none" for the username to skip the creation or modification of a non-root user while setting other arguments.
 
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"vscode"}
 USER_UID=${3:-1000}
 USER_GID=${4:-1000}
 UPGRADE_PACKAGES=${5:-"true"}
+INSTALL_OH_MYS=${6:-"true"}
 
 set -e
 
@@ -85,7 +100,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         locales \
         sudo \
         ncdu \
-        man-db" 
+        man-db"
 
     # Install libssl1.1 if available
     if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
@@ -119,7 +134,7 @@ fi
 
 # Ensure at least the en_US.UTF-8 UTF-8 locale is available.
 # Common need for both applications and things like the agnoster ZSH theme.
-if [ "${LOCALE_ALREADY_SET}" != "true" ]; then
+if [ "${LOCALE_ALREADY_SET}" != "true" ] && ! grep -o -E '^\s*en_US.UTF-8\s+UTF-8' /etc/locale.gen > /dev/null; then
     echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
     locale-gen
     LOCALE_ALREADY_SET="true"
@@ -148,6 +163,13 @@ if [ "${USERNAME}" != "root" ] && [ "${EXISTING_NON_ROOT_USER}" != "${USERNAME}"
     EXISTING_NON_ROOT_USER="${USERNAME}"
 fi
 
+# ** Shell customization section **
+if [ "${USERNAME}" = "root" ]; then 
+    USER_RC_PATH="/root"
+else
+    USER_RC_PATH="/home/${USERNAME}"
+fi
+
 # .bashrc/.zshrc snippet
 RC_SNIPPET="$(cat << EOF
 export USER=\$(whoami)
@@ -160,27 +182,111 @@ fi
 EOF
 )"
 
-# Ensure ~/.local/bin is in the PATH for root and non-root users for bash. (zsh is later)
+# Codespaces themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
+CODESPACES_BASH="$(cat \
+<<EOF
+#!/usr/bin/env bash
+prompt() {
+    if [ ! -z "\${GITHUB_USER}" ]; then
+        local USERNAME="gh:@\${GITHUB_USER}"
+    else
+        local USERNAME="\$(whoami)"
+    fi
+    local cwd="\$(pwd | sed "s|^\${HOME}|~|")"
+    if [ "\$?" != "0" ]; then
+        local arrow_color=\${bold_red}
+    else
+        local arrow_color=\${reset_color}
+    fi
+    PS1="\${green}\${USERNAME} \${arrow_color}➜ \${blue}\${cwd}\${reset_color} \$(scm_prompt_info)$ "
+}
+SCM_THEME_PROMPT_PREFIX="\${cyan}(\${bold_red}"
+SCM_THEME_PROMPT_SUFFIX="\${reset_color} "
+SCM_THEME_PROMPT_DIRTY=" \${yellow}✗\${cyan})"
+SCM_THEME_PROMPT_CLEAN="\${cyan})"
+SCM_GIT_SHOW_MINIMAL_INFO="true"
+safe_append_prompt_command prompt
+EOF
+)"
+CODESPACES_ZSH="$(cat \
+<<EOF
+prompt() {
+    if [ ! -z "\${GITHUB_USER}" ]; then
+        local USERNAME="gh:@\${GITHUB_USER}"
+    else
+        local USERNAME="\$(whoami)"
+    fi
+    PROMPT="%{\$fg[green]%}\${USERNAME} %(?:%{\$reset_color%}➜ :%{\$fg_bold[red]%}➜ )"
+    PROMPT+='%{\$fg[blue]%}%~%{\$reset_color%} \$(git_prompt_info)$ '
+}
+ZSH_THEME_GIT_PROMPT_PREFIX="%{\$fg[cyan]%}(%{\$fg_bold[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{\$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{\$fg[yellow]%}✗%{\$fg[cyan]%})"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{\$fg[cyan]%})"
+prompt
+EOF
+)"
+
+# Adapted Oh My Zsh! install step to work with both "Oh Mys" rather than relying on an installer script
+# See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
+install-oh-my()
+{
+    local OH_MY=$1
+    local OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-${OH_MY}"
+    local TEMPLATE="${OH_MY_INSTALL_DIR}/templates/$2"
+    local OH_MY_GIT_URL=$3
+    local USER_RC_FILE="${USER_RC_PATH}/.${OH_MY}rc"
+
+    if [ -d "${OH_MY_INSTALL_DIR}" ] || [ "${INSTALL_OH_MYS}" != "true" ]; then
+        return 0
+    fi
+
+    umask g-w,o-w
+    mkdir -p ${OH_MY_INSTALL_DIR}
+    git clone --depth=1 \
+        -c core.eol=lf \
+        -c core.autocrlf=false \
+        -c fsck.zeroPaddedFilemode=ignore \
+        -c fetch.fsck.zeroPaddedFilemode=ignore \
+        -c receive.fsck.zeroPaddedFilemode=ignore \
+        ${OH_MY_GIT_URL} ${OH_MY_INSTALL_DIR} 2>&1
+    echo -e "$(cat "${TEMPLATE}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
+    if [ "${OH_MY}" = "bash" ]; then
+        sed -i -e 's/OSH_THEME=.*/OSH_THEME="codespaces"/g' ${USER_RC_FILE}
+        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes/codespaces
+        echo "${CODESPACES_BASH}" > ${OH_MY_INSTALL_DIR}/custom/themes/codespaces/codespaces.theme.sh
+    else
+        sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
+        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
+        echo "${CODESPACES_ZSH}" > ${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme
+    fi
+    # Shrink git while still enabling updates
+    cd ${OH_MY_INSTALL_DIR} 
+    git repack -a -d -f --depth=1 --window=1
+
+    if [ "${USERNAME}" != "root" ]; then
+        cp -rf ${USER_RC_FILE} ${OH_MY_INSTALL_DIR} /root
+        chown -R ${USERNAME}:${USERNAME} ${USER_RC_PATH}
+    fi
+}
+
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
     echo "${RC_SNIPPET}" >> /etc/bash.bashrc
     RC_SNIPPET_ALREADY_ADDED="true"
 fi
+install-oh-my bash bashrc.osh-template https://github.com/ohmybash/oh-my-bash
 
-# Optionally install and configure zsh
-if [ "${INSTALL_ZSH}" = "true" ] && [ ! -d "/root/.oh-my-zsh" ] && [ "${ZSH_ALREADY_INSTALLED}" != "true" ]; then
-    apt-get-update-if-needed
-    apt-get install -y zsh
-    curl -fsSLo- https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash 2>&1
-    echo "${RC_SNIPPET}" >> /etc/zsh/zshrc
-    echo -e "DEFAULT_USER=\$USER\nprompt_context(){}" >> /root/.zshrc
-    cp -fR /root/.oh-my-zsh /etc/skel
-    cp -f /root/.zshrc /etc/skel
-    sed -i -e "s/\/root\/.oh-my-zsh/\/home\/\$(whoami)\/.oh-my-zsh/g" /etc/skel/.zshrc
-    if [ "${USERNAME}" != "root" ]; then
-        cp -fR /etc/skel/.oh-my-zsh /etc/skel/.zshrc /home/$USERNAME
-        chown -R $USER_UID:$USER_GID /home/$USERNAME/.oh-my-zsh /home/$USERNAME/.zshrc
+# Optionally install and configure zsh and Oh My Zsh!
+if [ "${INSTALL_ZSH}" = "true" ]; then
+    if ! type zsh > /dev/null 2>&1; then
+        apt-get-update-if-needed
+        apt-get install -y zsh
     fi
-    ZSH_ALREADY_INSTALLED="true"
+    if [ "${ZSH_ALREADY_INSTALLED}" != "true" ]; then
+        echo "${RC_SNIPPET}" >> /etc/zsh/zshrc
+        ZSH_ALREADY_INSTALLED="true"
+    fi
+    install-oh-my zsh zshrc.zsh-template https://github.com/ohmyzsh/ohmyzsh
 fi
 
 # Write marker file
