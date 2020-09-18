@@ -182,44 +182,42 @@ fi
 EOF
 )"
 
-# Codespaces Oh My Bash! theme - based off https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
+# Codespaces themes - based off https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
 <<EOF
 #!/usr/bin/env bash
 prompt() {
-    if [ ! -z "${GITHUB_USER}" ]; then
-        local USERNAME="gh:@${GITHUB_USER}"
+    if [ ! -z "\${GITHUB_USER}" ]; then
+        local USERNAME="gh:@\${GITHUB_USER}"
     else
-        local USERNAME="$(whoami)"
+        local USERNAME="\$(whoami)"
     fi
-    local cwd="$(pwd | sed "s|^${HOME}|~|")"
-    if [ "$?" != "0" ]; then
-        local arrow_color=${bold_red}
+    local cwd="\$(pwd | sed "s|^\${HOME}|~|")"
+    if [ "\$?" != "0" ]; then
+        local arrow_color=\${bold_red}
     else
-        local arrow_color=${reset_color}
+        local arrow_color=\${reset_color}
     fi
-    PS1="${green}${USERNAME} ${arrow_color}➜ ${blue}${cwd}${reset_color} $(scm_prompt_info)$ "
+    PS1="\${green}\${USERNAME} \${arrow_color}➜ \${blue}\${cwd}\${reset_color} \$(scm_prompt_info)$ "
 }
-SCM_THEME_PROMPT_PREFIX="${cyan}(${bold_red}"
-SCM_THEME_PROMPT_SUFFIX="${reset_color} "
-SCM_THEME_PROMPT_DIRTY=" ${yellow}✗${cyan})"
-SCM_THEME_PROMPT_CLEAN="${cyan})"
+SCM_THEME_PROMPT_PREFIX="\${cyan}(\${bold_red}"
+SCM_THEME_PROMPT_SUFFIX="\${reset_color} "
+SCM_THEME_PROMPT_DIRTY=" \${yellow}✗\${cyan})"
+SCM_THEME_PROMPT_CLEAN="\${cyan})"
 SCM_GIT_SHOW_MINIMAL_INFO="true"
 safe_append_prompt_command prompt
 EOF
 )"
-
-# Same Oh My Zsh theme
 CODESPACES_ZSH="$(cat \
 <<EOF
 prompt() {
-    if [ ! -z "${GITHUB_USER}" ]; then
-        local USERNAME="gh:@${GITHUB_USER}"
+    if [ ! -z "\${GITHUB_USER}" ]; then
+        local USERNAME="gh:@\${GITHUB_USER}"
     else
-        local USERNAME="$(whoami)"
+        local USERNAME="\$(whoami)"
     fi
-    PROMPT="%{$fg[green]%}${USERNAME} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )"
-    PROMPT+='%{$fg[blue]%}%~%{$reset_color%} $(git_prompt_info)$ '
+    PROMPT="%{$fg[green]%}\${USERNAME} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )"
+    PROMPT+='%{$fg[blue]%}%~%{$reset_color%} \$(git_prompt_info)$ '
 }
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}(%{$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
