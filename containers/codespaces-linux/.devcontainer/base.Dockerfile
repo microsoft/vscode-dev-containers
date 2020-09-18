@@ -42,7 +42,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -yq vim xtail software-properties-common \
     && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/git-lfs-debian.sh \
-    && bash /tmp/scripts/github-debian.sh ${GITHUB_CLI_VERSION}\
+    && bash /tmp/scripts/github-debian.sh \
     && bash /tmp/scripts/azcli-debian.sh \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
     # Clean up
