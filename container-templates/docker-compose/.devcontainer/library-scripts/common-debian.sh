@@ -15,7 +15,7 @@ USER_GID=${4:-1000}
 UPGRADE_PACKAGES=${5:-"true"}
 
 if [ "$(id -u)" -ne 0 ]; then
-    echo 'Script must be run a root. Use sudo or set "USER root" before running the script.'
+    echo 'Script must be run as root. Use sudo or set "USER root" before running the script.'
     exit 1
 fi
 
