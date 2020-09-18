@@ -182,7 +182,7 @@ fi
 EOF
 )"
 
-# Codespaces themes - based off https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
+# Codespaces themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
 <<EOF
 #!/usr/bin/env bash
@@ -216,17 +216,19 @@ prompt() {
     else
         local USERNAME="\$(whoami)"
     fi
-    PROMPT="%{$fg[green]%}\${USERNAME} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )"
-    PROMPT+='%{$fg[blue]%}%~%{$reset_color%} \$(git_prompt_info)$ '
+    PROMPT="%{\$fg[green]%}\${USERNAME} %(?:%{\$reset_color%}➜ :%{\$fg_bold[red]%}➜ )"
+    PROMPT+='%{\$fg[blue]%}%~%{\$reset_color%} \$(git_prompt_info)$ '
 }
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}(%{$fg_bold[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}✗%{$fg[cyan]%})"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[cyan]%})"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{\$fg[cyan]%}(%{\$fg_bold[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{\$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{\$fg[yellow]%}✗%{\$fg[cyan]%})"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{\$fg[cyan]%})"
 prompt
 EOF
 )"
 
+# Adapted Oh My Zsh! install step to work with both "Oh Mys" rather than relying on an installer script
+# See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
 install-oh-my()
 {
     local OH_MY=$1
@@ -258,6 +260,7 @@ install-oh-my()
         mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
         echo "${CODESPACES_ZSH}" > ${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme
     fi
+    # Shrink git while still enabling updates
     cd ${OH_MY_INSTALL_DIR} 
     git repack -a -d -f --depth=1 --window=1
 
