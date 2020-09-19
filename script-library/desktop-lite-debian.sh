@@ -45,9 +45,19 @@
 #        && curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb \
 #        && apt-get -y install /tmp/chrome.deb \
 #        && rm -rf /tmp/chrome.deb
+#        && ALIASES="alias google-chrome='google-chrome --disable-dev-shm-usage'\nalias google-chrome-stable='google-chrome-stable --disable-dev-shm-usage'\n\alias x-www-browser='x-www-browser --disable-dev-shm-usage'\nalias gnome-www-browser='gnome-www-browser --disable-dev-shm-usage'" \
+#        && echo "${ALIASES}" >> /etc/bash.bashrc \
+#        && if type zsh > /dev/null 2>&1; then echo "${ALIASES}" >> /etc/zsh/zshrc; fi
 #
-# 2. Chrome Sandbox support requires you set up and run as a non-root user (or you need to run google-chrome --no-sandbox). 
-#    The debian-common.sh script can do this for you, or you can follow https://aka.ms/vscode-remote/containers/non-root
+# 2. Chrome sandbox support requires you set up and run as a non-root user. The [`debian-common.sh`](common.md) 
+#    script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). 
+#    Alternativley you can start Chrome using `google-chrome --no-sandbox --disable-dev-shm-usage`
+#
+# 3. While Chrome should be aliased correctly with the instructions above, if you run into crashes, start it with
+#    the `--disable-dev-shm-usage` argument: `google-chrome --disable-dev-shm-usage`
+#
+# That's it!
+
 
 USERNAME=${1:-"vscode"}
 VNC_PASSWORD=${2:-"vscode"}
@@ -237,7 +247,7 @@ startInBackgroundIfNotRunning()
 # Keep command running in background
 keepRunningInBackground()
 {
-    (\$2 sh -l -c "while :; do echo [\\\$(date)] Process started.; \$3; echo [\\\$(date)] Process exited!; sleep 5; done 2>&1" | sudoIf tee -a /tmp/\$1.log > /dev/null & echo "\$!" | sudoIf tee /tmp/\$1.pid > /dev/null)
+    (\$2 bash -li -c "while :; do echo [\\\$(date)] Process started.; \$3; echo [\\\$(date)] Process exited!; sleep 5; done 2>&1" | sudoIf tee -a /tmp/\$1.log > /dev/null & echo "\$!" | sudoIf tee /tmp/\$1.pid > /dev/null)
 }
 
 # Use sudo to run as root when required
@@ -326,7 +336,7 @@ session.screen0.workspaces: 1
 session.screen0.workspacewarping: false
 session.screen0.toolbar.widthPercent: 100
 session.screen0.strftimeFormat: %a %l:%M %p
-session.screen0.toolbar.tools: prevworkspace, workspacename, nextworkspace, clock, iconbar, systemtray
+session.screen0.toolbar.tools: RootMenu, clock, iconbar, systemtray
 session.screen0.workspaceNames: One,
 EOF
 
@@ -336,12 +346,13 @@ tee /root/.fluxbox/menu > /dev/null \
     [exec] (File Manager) { nautilus ~ } <>
     [exec] (Text Editor) { mousepad } <>
     [exec] (Terminal) { tilix -w ~ -e $(readlink -f /proc/$$/exe) -il } <>
-    [exec] (Web Browser) { x-www-browser } <>
+    [exec] (Web Browser) { x-www-browser --disable-dev-shm-usage } <>
     [submenu] (System) {}
         [exec] (Set Resolution) { tilix -t "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
+        [exec] (Edit Application Menu) { mousepad ~/.fluxbox/menu } <>
+        [exec] (Passwords and Keys) { seahorse } <>
         [exec] (Top Processes) { tilix -t "Top" -e htop } <>
         [exec] (Disk Utilization) { tilix -t "Disk Utilization" -e ncdu / } <>
-        [exec] (Passwords and Keys) { seahorse } <>
         [exec] (Editres) {editres} <>
         [exec] (Xfontsel) {xfontsel} <>
         [exec] (Xkill) {xkill} <>
