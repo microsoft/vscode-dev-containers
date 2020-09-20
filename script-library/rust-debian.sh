@@ -58,7 +58,7 @@ fi
 if ! type rustup > /dev/null 2>&1; then
     echo "Installing Rust..."
     mkdir -p "${CARGO_HOME}" "${RUSTUP_HOME}"
-    chown ${USERNAME}:root "${CARGO_HOME}" "${RUSTUP_HOME}"
+    chown ${USERNAME} "${CARGO_HOME}" "${RUSTUP_HOME}"
     su ${USERNAME} -c "curl --tlsv1.2 https://sh.rustup.rs -sSf | bash -s -- -y --no-modify-path --profile minimal 2>&1"
 else 
     echo "Rust already installed. Skipping."

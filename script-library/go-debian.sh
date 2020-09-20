@@ -71,7 +71,7 @@ EOF
 )"
 if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
     mkdir -p "${TARGET_GOROOT}" "${TARGET_GOPATH}" 
-    chown ${USERNAME}:root "${TARGET_GOROOT}" "${TARGET_GOPATH}"
+    chown -R ${USERNAME} "${TARGET_GOROOT}" "${TARGET_GOPATH}"
     su ${USERNAME} -c "${GO_INSTALL_SCRIPT}"
 else
     echo "Go already installed. Skipping."
@@ -124,6 +124,7 @@ if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     mv /tmp/gotools/bin/* ${TARGET_GOPATH}/bin/
     mv gocode-gomod ${TARGET_GOPATH}/bin/
     rm -rf /tmp/gotools
+    chown -R ${USERNAME} "${TARGET_GOPATH}"
 fi
 
 # Add GOPATH variable and bin directory into PATH in bashrc/zshrc files (unless disabled)
