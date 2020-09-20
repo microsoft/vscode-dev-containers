@@ -9,7 +9,7 @@
 TARGET_GO_VERSION=${1:-"latest"}
 TARGET_GOROOT=${2:-"/usr/local/go"}
 TARGET_GOPATH=${3:-"/go"}
-USERNAME=${4:-"vscode"}
+USERNAME=${4:-"automatic"}
 UPDATE_RC=${5:-"true"}
 INSTALL_GO_TOOLS=${6:-"true"}
 
@@ -20,8 +20,20 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Treat a user name of "none" or non-existant user as root
-if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
+# Determine the appropriate non-root user
+if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
+    USERNAME=""
+    POSSIBLE_USERS=("vscode", "node", "codespace", "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
+    for CURRENT_USER in ${POSSIBLE_USERS[@]}; do
+        if id -u ${CURRENT_USER} > /dev/null 2>&1; then
+            USERNAME=${CURRENT_USER}
+            break
+        fi
+    done
+    if [ "${USERNAME}" = "" ]; then
+        USERNAME=root
+    fi
+elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 

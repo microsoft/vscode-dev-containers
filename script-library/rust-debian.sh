@@ -8,7 +8,7 @@
 
 export CARGO_HOME=${1:-"/usr/local/cargo"}
 export RUSTUP_HOME=${2:-"/usr/local/rustup"}
-USERNAME=${3:-"vscode"}
+USERNAME=${3:-"automatic"}
 UPDATE_RC=${4:-"true"}
 UPDATE_RUST=${5:-"true"}
 
@@ -19,8 +19,20 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Treat a user name of "none" or non-existant user as root
-if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
+# Determine the appropriate non-root user
+if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
+    USERNAME=""
+    POSSIBLE_USERS=("vscode", "node", "codespace", "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
+    for CURRENT_USER in ${POSSIBLE_USERS[@]}; do
+        if id -u ${CURRENT_USER} > /dev/null 2>&1; then
+            USERNAME=${CURRENT_USER}
+            break
+        fi
+    done
+    if [ "${USERNAME}" = "" ]; then
+        USERNAME=root
+    fi
+elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
