@@ -21,9 +21,9 @@
 # Pass in "none" for the username to skip the creation or modification of a non-root user while setting other arguments.
 
 INSTALL_ZSH=${1:-"true"}
-USERNAME=${2:-"vscode"}
-USER_UID=${3:-1000}
-USER_GID=${4:-1000}
+USERNAME=${2:-"automatic"}
+USER_UID=${3:-"automatic"}
+USER_GID=${4:-"automatic"}
 UPGRADE_PACKAGES=${5:-"true"}
 INSTALL_OH_MYS=${6:-"true"}
 
@@ -34,8 +34,20 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Treat a user name of "none" as root
-if [ "${USERNAME}" = "none" ] || [ "${USERNAME}" = "root" ]; then
+# If in automatic mode, determine if a user already exists, if not use vscode
+if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
+    USERNAME=""
+    POSSIBLE_USERS=("vscode", "node", "codespace", "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
+    for CURRENT_USER in ${POSSIBLE_USERS[@]}; do
+        if id -u ${CURRENT_USER} > /dev/null 2>&1; then
+            USERNAME=${CURRENT_USER}
+            break
+        fi
+    done
+    if [ "${USERNAME}" = "" ]; then
+        USERNAME=vscode
+    fi
+elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
     USER_UID=0
     USER_GID=0
@@ -140,20 +152,28 @@ if [ "${LOCALE_ALREADY_SET}" != "true" ] && ! grep -o -E '^\s*en_US.UTF-8\s+UTF-
     LOCALE_ALREADY_SET="true"
 fi
 
-# Create or update a non-root user to match UID/GID - see https://aka.ms/vscode-remote/containers/non-root-user.
+# Create or update a non-root user to match UID/GID.
 if id -u $USERNAME > /dev/null 2>&1; then
     # User exists, update if needed
-    if [ "$USER_GID" != "$(id -G $USERNAME)" ]; then 
+    if [ "${USER_GID}" != "automatic" ] && [ "$USER_GID" != "$(id -G $USERNAME)" ]; then 
         groupmod --gid $USER_GID $USERNAME 
         usermod --gid $USER_GID $USERNAME
     fi
-    if [ "$USER_UID" != "$(id -u $USERNAME)" ]; then 
+    if [ "${USER_UID}" != "automatic" ] && [ "$USER_UID" != "$(id -u $USERNAME)" ]; then 
         usermod --uid $USER_UID $USERNAME
     fi
 else
     # Create user
-    groupadd --gid $USER_GID $USERNAME
-    useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
+    if [ "${USER_GID}" = "automatic" ]; then
+        groupadd $USERNAME
+    else
+        groupadd --gid $USER_GID $USERNAME
+    fi
+    if [ "${USER_UID}" = "automatic" ]; then 
+        useradd -s /bin/bash --gid $USERNAME -m $USERNAME
+    else
+        useradd -s /bin/bash --uid $USER_UID --gid $USERNAME -m $USERNAME
+    fi
 fi
 
 # Add add sudo support for non-root user
@@ -187,23 +207,23 @@ CODESPACES_BASH="$(cat \
 <<EOF
 #!/usr/bin/env bash
 prompt() {
+    if [ "\$?" != "0" ]; then
+        local arrow_color=\${bold_red}
+    else
+        local arrow_color=\${reset_color}
+    fi
     if [ ! -z "\${GITHUB_USER}" ]; then
         local USERNAME="gh:@\${GITHUB_USER}"
     else
         local USERNAME="\$(whoami)"
     fi
     local cwd="\$(pwd | sed "s|^\${HOME}|~|")"
-    if [ "\$?" != "0" ]; then
-        local arrow_color=\${bold_red}
-    else
-        local arrow_color=\${reset_color}
-    fi
-    PS1="\${green}\${USERNAME} \${arrow_color}➜ \${blue}\${cwd}\${reset_color} \$(scm_prompt_info)$ "
+    PS1="\${green}\${USERNAME} \${arrow_color}➜\${reset_color} \${bold_blue}\${cwd}\${reset_color} \$(scm_prompt_info)\${white}$ \${reset_color}"
 }
-SCM_THEME_PROMPT_PREFIX="\${cyan}(\${bold_red}"
+SCM_THEME_PROMPT_PREFIX="\${reset_color}\${cyan}(\${bold_red}"
 SCM_THEME_PROMPT_SUFFIX="\${reset_color} "
-SCM_THEME_PROMPT_DIRTY=" \${yellow}✗\${cyan})"
-SCM_THEME_PROMPT_CLEAN="\${cyan})"
+SCM_THEME_PROMPT_DIRTY=" \${bold_yellow}✗\${reset_color}\${cyan})"
+SCM_THEME_PROMPT_CLEAN="\${reset_color}\${cyan})"
 SCM_GIT_SHOW_MINIMAL_INFO="true"
 safe_append_prompt_command prompt
 EOF
@@ -217,12 +237,12 @@ prompt() {
         local USERNAME="\$(whoami)"
     fi
     PROMPT="%{\$fg[green]%}\${USERNAME} %(?:%{\$reset_color%}➜ :%{\$fg_bold[red]%}➜ )"
-    PROMPT+='%{\$fg[blue]%}%~%{\$reset_color%} \$(git_prompt_info)$ '
+    PROMPT+='%{\$fg_bold[blue]%}%~%{\$reset_color%} \$(git_prompt_info)%{\$fg[white]%}$ %{\$reset_color%}'
 }
-ZSH_THEME_GIT_PROMPT_PREFIX="%{\$fg[cyan]%}(%{\$fg_bold[red]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{\$fg_bold[cyan]%}(%{\$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{\$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{\$fg[yellow]%}✗%{\$fg[cyan]%})"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{\$fg[cyan]%})"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{\$fg_bold[yellow]%}✗%{\$fg_bold[cyan]%})"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{\$fg_bold[cyan]%})"
 prompt
 EOF
 )"
