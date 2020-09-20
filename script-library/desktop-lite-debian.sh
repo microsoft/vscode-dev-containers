@@ -59,7 +59,7 @@
 # That's it!
 
 
-USERNAME=${1:-"vscode"}
+USERNAME=${1:-"automatic"}
 VNC_PASSWORD=${2:-"vscode"}
 INSTALL_NOVNC=${3:-"true"}
 
@@ -72,6 +72,7 @@ PACKAGE_LIST="
     x11-xserver-utils \
     xdg-utils \
     fbautostart \
+    at-spi2-core \
     xterm \
     eterm \
     tilix \
@@ -93,7 +94,8 @@ PACKAGE_LIST="
     fonts-noto \
     fonts-wqy-microhei \
     fonts-droid-fallback \
-    python3-numpy \
+    python-minimal \
+    python-numpy \
     htop \
     ncdu \
     curl \
@@ -109,8 +111,20 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Treat a user name of "none" or non-existant user as root
-if [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
+# Determine the appropriate non-root user
+if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
+    USERNAME=""
+    POSSIBLE_USERS=("vscode", "node", "codespace", "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
+    for CURRENT_USER in ${POSSIBLE_USERS[@]}; do
+        if id -u ${CURRENT_USER} > /dev/null 2>&1; then
+            USERNAME=${CURRENT_USER}
+            break
+        fi
+    done
+    if [ "${USERNAME}" = "" ]; then
+        USERNAME=root
+    fi
+elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
@@ -169,12 +183,10 @@ if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
     mkdir -p /usr/local/novnc
     curl -sSL https://github.com/novnc/noVNC/archive/v${NOVNC_VERSION}.zip -o /tmp/novnc-install.zip
     unzip /tmp/novnc-install.zip -d /usr/local/novnc
-    cp /usr/local/novnc/noVNC-${NOVNC_VERSION}/vnc_lite.html /usr/local/novnc/noVNC-${NOVNC_VERSION}/index.html
+    cp /usr/local/novnc/noVNC-${NOVNC_VERSION}/vnc.html /usr/local/novnc/noVNC-${NOVNC_VERSION}/index.html
     curl -sSL https://github.com/novnc/websockify/archive/v${WEBSOCKETIFY_VERSION}.zip -o /tmp/websockify-install.zip
     unzip /tmp/websockify-install.zip -d /usr/local/novnc
     ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
-    # Tweak websocketify to use python3 since python 2 may not be installed
-    sed -i -E "s/^python\s/\/usr\/bin\/python3 /g" /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
     rm -f /tmp/websockify-install.zip /tmp/novnc-install.zip
 fi 
 
