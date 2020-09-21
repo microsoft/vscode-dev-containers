@@ -48,9 +48,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Clean up
     && rm -rf /tmp/scripts/ && apt-get autoremove -y && apt-get clean -y
 
-# Build git 2.27.0 from source
+# Build latest git from source
 COPY library-scripts/git-from-src-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/git-from-src-debian.sh "2.27.0" \
+RUN bash /tmp/scripts/git-from-src-debian.sh "latest" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install PowerShell and setup .NET Core
