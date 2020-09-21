@@ -6,22 +6,39 @@ The `test` sub-folder includes Debian, Alpine, and RedHat based dev containers t
 
 ## Scripts
 
-Script names end in the Linux distribution "tree" they support.
+Script names end in the Linux distribution "tree" they support. The majority are for Ubuntu/Debian.
 
-- `-debian` - Debian or Ubuntu
-- `-redhat` - CentOS, RHEL, Oracle Linux
-- `-alpine` - Alpine Linux
+- **Debian or Ubuntu**: `-debian`
+- **CentOS, RHEL, Oracle Linux**: `-redhat`
+- **Alpine Linux**: `-alpine`
 
-| Script | Arguments | Purpose |
-|--------|---------|-----------|
-| `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` | `[INSTALL ZSH FLAG] [USERNAME] [USER UID] [USER GID] [UPGRADE PACKAGES FLAG]`<br /><br /> Defaults to `true vscode 1000 1000 true`. Set `USERNAME` to `none` to skip setting up a non-root user. | Installs common packages and utilities, creates a non-root user, and optionally upgrades packages, and installs zsh and Oh My Zsh! |
-| `docker-debian.sh`<br />`docker-redhat.sh` | `[ENABLE NON-ROOT ACCESS] [SOURCE SOCKET] [TARGET SOCKET] [USERNAME]`<br /><br /> Defaults to `true /var/run/docker-host.sock /var/run/docker.sock vscode`. Only sets up `USERNAME` if the user exists on the system.| Installs the Docker CLI and wires up a script that can enable non-root access to the Docker socket. See the [docker-from-docker](../containers/docker-from-docker) definition for an example. |
-| `maven-debian.sh` | `<MAVEN VERSION> [MAVEN INSTALL DIRECTORY] [USERNAME] [DOWNLOAD SHA512]`<br /><br />`MAVEN VERSION` is required. Other arguments default to `/usr/local/share/maven vscode dev-mode`. Only sets up `USERNAME` if the user exists on the system. Download checksum is skipped if set to `dev-mode`. | Installs [Apache Maven](https://github.com/nvm-sh/nvm) and ensures the specified non-root user can access everything. See the [java](../containers/java) definition for an example. |
-| `gradle-debian.sh` | `<GRADLE VERSION> [GRADLE INSTALL DIRECTORY] [USERNAME] [DOWNLOAD SHA256]`<br /><br />`GRADLE VERSION` is required. Other arguments default to `/usr/local/share/gradle vscode no-check`. Only sets up `USERNAME` if the user exists on the system. Download checksum is skipped if set to `no-check`. | Installs the [Gradle](https://github.com/nvm-sh/nvm) and ensures the specified non-root user can access everything. See the [java](../containers/java) definition for an example. |
-| `node-debian.sh` | `[NVM INSTALL DIRECTORY] [NODE VERSION TO INSTALL] [USERNAME]`<br /><br />Defaults to `/usr/local/share/nvm lts/* vscode`. Only sets up `USERNAME` if the user exists on the system. | Installs the [Node Version Manager](https://github.com/nvm-sh/nvm) (nvm), the specified version of Node.js (if any) using nvm, ensures the specified non-root user can access everything. See the [dotnetcore](../containers/dotnetcore) definition for an example. |
-| `terraform-debian.sh` | `<TERRAFORM VERSION> [TFLINT VERSION]`<br /><br />Only installs [tflint](https://github.com/terraform-linters/tflint) if `[TFLINT VESION]` is specified. | Installs the specified version of [Terraform](https://www.terraform.io/) in the container. Can be combined with `docker-debian.sh` to enable local testing via Docker. See the [azure-terraform](../azure-terraform) definition for an example. |
+Some scripts have special installation instructions (like `desktop-lite-debian.sh`). Consult the following documents for more information (in order of the script name):
+
+| Document | Script |
+|----------|--------|
+| [Azure CLI Install Script](docs/azcli.md) | `azcli-debian.sh` |
+| [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` |
+| [Desktop (Lightweight) Install Script](docs/desktop-lite.md) | `desktop-lite-debian.sh` |
+| [Docker-from-Docker Install Script](docs/docker.md) | `docker-debian.sh`<br />`docker-redhat.sh` |
+| [Git Build/Install from Source Script](docs/git-from-src.md) | `git-from-src-debian.sh` |
+| [Git LFS Install Script](docs/git-lfs.md) | `git-lfs-debian.sh` |
+| [GitHub CLI Install Script](docs/github.md) | `github-debian.sh` |
+| [Go (golang) Install Script](docs/go.md) | `go-debian.sh` |
+| [Gradle Install Script](docs/gradle.md) | `gradle-debian.sh` |
+| [Java Install Script](docs/java.md) | `java-debian.sh` |
+| [Kubectl and Helm Install Script](docs/kubectl-helm.md) | `kubectl-helm-debian.sh` |
+| [Maven Install Script](docs/maven.md) | `maven-debian.sh` |
+| [Node.js Install Script](docs/node.md) | `node-debian.sh` |
+| [PowerShell Install Script](docs/powershell.md) | `powershell-debian.sh` |
+| [Python Install Script](docs/python.md) | `python-debian.sh` |
+| [Ruby Install Script](docs/ruby.md) | `ruby-debian.sh` |
+| [Rust (rustlang) Install Script](docs/rust.md) | `rust-debian.sh` |
+| [SSH Server Install Script](docs/sshd.md) | `sshd-debian.sh` |
+| [Terraform CLI Install Script](docs/terraform.md) | `terraform-debian.sh` |
 
 ## Using a script
+
+*See the [documentation above](#scripts) for specific instructions on individual scripts. This section will outline some general tips for alternate ways to reference the scripts in your Dockerfile.*
 
 ### Copying the script to .devcontainer/library-scripts
 
@@ -31,14 +48,14 @@ The easiest way to use a script is to simply copy it into a `.devcontainers/libr
 
 ```Dockerfile
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN /tmp/library-scripts/common-debian.sh
+RUN bash /tmp/library-scripts/common-debian.sh
 ```
 
 Generally it's also good to clean up after running a script in the same `RUN` statement to keep the "layer" small.
 
 ```Dockerfile
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN /tmp/library-scripts/common-debian.sh
+RUN bash /tmp/library-scripts/common-debian.sh
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 ```
 
@@ -46,7 +63,7 @@ RUN /tmp/library-scripts/common-debian.sh
 
 ```Dockerfile
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN /bin/ash /tmp/library-scripts/common-alpine.sh \
+RUN ash /tmp/library-scripts/common-alpine.sh \
     && rm -rf /tmp/library-scripts
 ```
 
@@ -54,13 +71,13 @@ RUN /bin/ash /tmp/library-scripts/common-alpine.sh \
 
 ```Dockerfile
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN /bin/bash /tmp/library-scripts/common-redhat.sh \
+RUN bash /tmp/library-scripts/common-redhat.sh \
     && yum clean all && rm -rf /tmp/library-scripts
 ```
 
 Note that the CI process for this repository will automatically keep scripts in the `.devcontainers/library-scripts` folder up to date for each definition in the `containers` folder.
 
-### Downloading the script with curl instead
+### Downloading the script with curl / wget instead
 
 If you prefer, you can download the script using `curl` or `wget` and execute it instead. This can convenient to do with your own `Dockerfile`, but is generally avoided for definitions in this repository. To avoid unexpected issues, you should reference a release specific version of the script, rather than using master. For example:
 
@@ -83,7 +100,9 @@ As before, the last line is technically optional, but minimizes the size of the 
 You can also use `wget`:
 
 ```Dockerfile
-RUN bash -c "$(wget -qO- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.131.0/script-library/common-debian.sh")" \
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
+    && apt-get -y install --no-install-recommends wget ca-certificates \
+    && bash -c "$(wget -qO- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.131.0/script-library/common-debian.sh")" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
@@ -128,4 +147,3 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definition
 Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE)
-

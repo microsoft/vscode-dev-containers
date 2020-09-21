@@ -1,12 +1,23 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+#-------------------------------------------------------------------------------------------------------------
+
 # Syntax: ./git-from-src-debian.sh [version]
 
-GIT_VERSION=${1:-"2.27.0"}
+GIT_VERSION=${1:-"latest"}
 
 set -e
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
+fi
+
+if [ "${GIT_VERSION}" = "latest" ] || [ "${GIT_VERSION}" = "lts" ] || [ "${GIT_VERSION}" = "current" ]; then
+    RECENT_TAGS=$(curl -sSL -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/git/git/tags")
+    GIT_VERSION=$(echo ${RECENT_TAGS} | grep -oE 'name":\s*"v[0-9]+\.[0-9]+\.[0-9]+"' | head -n 1 | sed 's/^name":\s*"v\(.*\)"$/\1/')
 fi
 
 export DEBIAN_FRONTEND=noninteractive
