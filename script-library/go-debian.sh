@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./go-debian.sh [Go version] [Go install path] [GOPATH] [non-root user] [Add GOPATH, GOROOT to rc files flag] [install tools]
+# Syntax: ./go-debian.sh [Go version] [GOROOT] [GOPATH] [non-root user] [Add GOPATH, GOROOT to rc files flag] [Install tools flag]
 
 TARGET_GO_VERSION=${1:-"latest"}
 TARGET_GOROOT=${2:-"/usr/local/go"}

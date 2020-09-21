@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Syntax: ./gradle-debian.sh [gradle version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
+# Syntax: ./gradle-debian.sh [Gradle version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
 
 GRADLE_VERSION=${1:-"latest"}
 export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
