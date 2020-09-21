@@ -47,7 +47,7 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     if [ "${USERNAME}" = "" ]; then
         USERNAME=vscode
     fi
-elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
+elif [ "${USERNAME}" = "none" ]; then
     USERNAME=root
     USER_UID=0
     USER_GID=0
@@ -153,7 +153,7 @@ if [ "${LOCALE_ALREADY_SET}" != "true" ] && ! grep -o -E '^\s*en_US.UTF-8\s+UTF-
 fi
 
 # Create or update a non-root user to match UID/GID.
-if id -u $USERNAME > /dev/null 2>&1; then
+if id -u ${USERNAME} > /dev/null 2>&1; then
     # User exists, update if needed
     if [ "${USER_GID}" != "automatic" ] && [ "$USER_GID" != "$(id -G $USERNAME)" ]; then 
         groupmod --gid $USER_GID $USERNAME 
