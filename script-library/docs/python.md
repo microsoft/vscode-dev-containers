@@ -9,7 +9,8 @@
 ## Syntax
 
 ```text
- ./python-debian.sh [Python Version] [Python install path] [PIPX_HOME] [Non-root user] [Update rc files flag] [Install tools]```
+ ./python-debian.sh [Python Version] [Install path] [PIPX_HOME] [Non-root user] [Update rc files flag] [Install tools]
+```
 
 |Argument|Default|Description|
 |--------|-------|-----------|
