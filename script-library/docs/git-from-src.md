@@ -9,7 +9,7 @@
 ## Syntax
 
 ```text
-./github-debian.sh [Version]
+./git-from-src-debian.sh [Version]
 ```
 
 |Argument|Default|Description|
@@ -23,7 +23,7 @@
 2. Add the following to your `.devcontainer/Dockerfile`:
 
     ```Dockerfile
-    COPY library-scripts/github-debian.sh /tmp/library-scripts/
+    COPY library-scripts/git-from-src-debian.sh /tmp/library-scripts/
     RUN bash /tmp/library-scripts/git-from-src-debian.sh
     ```
 
