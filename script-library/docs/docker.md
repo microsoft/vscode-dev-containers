@@ -10,6 +10,7 @@
 
 ```text
 ./docker-debian.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user]
+./docker-redhat.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user]
 ```
 
 |Argument|Default|Description|
@@ -23,7 +24,7 @@
 
 See the [`docker-from-docker`](../containers/docker-from-docker) and [`docker-from-docker-compose`](../containers/docker-from-docker) definition for a complete working example. However, here are the general steps to use the script:
 
-1. Add [`docker-debian.sh`](../docker-debian.sh) to `.devcontainer/library-scripts`
+1. Add [`docker-debian.sh`](../docker-debian.sh) or [`docker-redhat.sh`](../docker-redhat.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:
 
@@ -34,7 +35,13 @@ See the [`docker-from-docker`](../containers/docker-from-docker) and [`docker-fr
     CMD ["sleep", "infinity"]
     ```
 
-    The `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
+    For CentOS/RedHat, simply replace the `RUN` above with:
+
+    ```Dockerfile
+    RUN bash /tmp/library-scripts/docker-redhat.sh
+    ```
+
+    Note that the `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
 
 3. And the following to `.devcontainer/devcontainer.json`:
 

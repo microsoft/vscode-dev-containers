@@ -4,12 +4,14 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 16.04+, CentOS/RHEL 7+, Alpine 3.9+ and downstream distros.
 
 ## Syntax
 
 ```text
 ./common-debian.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My *! flag]
+./common-redhat.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My *! flag]
+./common-alpine.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Install Oh My *! flag]
 ```
 
 |Argument|Default|Description|
@@ -23,15 +25,35 @@
 
 ## Usage
 
-Usage:
+**Ubuntu / Debian:**
 
 1. Add [`common-debian.sh`](../common-debian.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:
 
     ```Dockerfile
-    COPY library-scripts/common.sh /tmp/library-scripts/
+    COPY library-scripts/common-debian.sh /tmp/library-scripts/
     RUN apt-get update && bash /tmp/library-scripts/common-debian.sh
     ```
+
+**RedHat:**
+
+1. Add [`common-redhat.sh`](../common-redhat.sh) to `.devcontainer/library-scripts`
+
+2. Add the following to your `.devcontainer/Dockerfile`:
+
+    ```Dockerfile
+    COPY library-scripts/common-redhat.sh /tmp/library-scripts/
+    RUN bash /tmp/library-scripts/common-redhat.sh
+
+**Alpine:**
+
+1. Add [`common-alpine.sh`](../common-redhat.sh) to `.devcontainer/library-scripts`
+
+2. Add the following to your `.devcontainer/Dockerfile`:
+
+    ```Dockerfile
+    COPY library-scripts/common-alpine.sh /tmp/library-scripts/
+    RUN ash /tmp/library-scripts/common-alpine.sh
 
 That's it!

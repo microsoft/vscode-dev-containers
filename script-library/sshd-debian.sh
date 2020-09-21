@@ -3,9 +3,11 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-
+#
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/sshd.md
+#
 # Syntax: ./sshd-debian.sh [SSH Port (don't use 22)] [non-root user] [start sshd now flag] [new password for user]
-
+#
 # Note: You can change your user's password with "sudo passwd $(whoami)" (or just "passwd" if running as root).
 
 SSHD_PORT=${1:-"2222"}

@@ -4,60 +4,9 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/desktop-lite.md
+#
 # Syntax: ./desktop-lite-debian.sh [non-root user] [vnc password] [install no vnc flag]
-#
-# Usage:
-#
-# 1. Add this file to .devcontainer/library-scripts
-#
-# 2. Add the following to your .devcontainer/Dockerfile:
-#
-#    COPY library-scripts/desktop-lite-debian.sh /tmp/library-scripts/
-#    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#        && bash /tmp/library-scripts/dekstop-lite-debian.sh
-#    ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
-#    ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
-#    CMD ["sleep", "infinity"]
-#
-#    The ENTRYPOINT script can be chained with another script by adding it to the array after desktop-init.sh.
-#    If you need to select a different locale, be sure to add it to /etc/locale.gen and run locale-gen. 
-#
-# 3. And the following to devcontainer.json:
-#
-#    "runArgs": ["--init", "--security-opt", "seccomp=unconfined"],
-#    "forwardPorts": [6080, 5901],
-#    "overrideCommand": false
-# 
-# 4. You'll be able to use a web based desktop viewer on port **6080** or connect a VNC viewer to port **5901**.
-#
-# 5. Default **password**: vscode 
-#
-# The window manager is Fluxbox (http://fluxbox.org/). **Right-click** to see the application menu. If you need
-# a browser, you can install Firefox ESR by adding the following to your Dockerfile:
-#
-#    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get install -y firefox-esr
-# 
-# If you want the full version of Google Chrome in the desktop:
-#
-# 1. Add the following to your Dockerfile instead:
-#
-#    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#        && curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb \
-#        && apt-get -y install /tmp/chrome.deb \
-#        && rm -rf /tmp/chrome.deb
-#        && ALIASES="alias google-chrome='google-chrome --disable-dev-shm-usage'\nalias google-chrome-stable='google-chrome-stable --disable-dev-shm-usage'\n\alias x-www-browser='x-www-browser --disable-dev-shm-usage'\nalias gnome-www-browser='gnome-www-browser --disable-dev-shm-usage'" \
-#        && echo "${ALIASES}" >> /etc/bash.bashrc \
-#        && if type zsh > /dev/null 2>&1; then echo "${ALIASES}" >> /etc/zsh/zshrc; fi
-#
-# 2. Chrome sandbox support requires you set up and run as a non-root user. The [`debian-common.sh`](common.md) 
-#    script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). 
-#    Alternativley you can start Chrome using `google-chrome --no-sandbox --disable-dev-shm-usage`
-#
-# 3. While Chrome should be aliased correctly with the instructions above, if you run into crashes, start it with
-#    the `--disable-dev-shm-usage` argument: `google-chrome --disable-dev-shm-usage`
-#
-# That's it!
-
 
 USERNAME=${1:-"automatic"}
 VNC_PASSWORD=${2:-"vscode"}

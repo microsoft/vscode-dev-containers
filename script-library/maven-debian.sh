@@ -3,7 +3,9 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-
+#
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/maven.md
+#
 # Syntax: ./maven-debian.sh [maven version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
 
 MAVEN_VERSION=${1:-"latest"}

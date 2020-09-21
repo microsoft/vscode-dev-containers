@@ -2,14 +2,12 @@
 
 This folder contains a set of scripts that can be referenced by Dockerfiles in development container "definitions" that are found under the [`containers` directory](../containers). You are also free to use them in your own dev container configurations.
 
-The `test` sub-folder includes Debian, Alpine, and RedHat based dev containers that can be used to test the scripts.
-
 ## Scripts
 
 Script names end in the Linux distribution "tree" they support. The majority are for Ubuntu/Debian.
 
 - **Debian or Ubuntu**: `-debian`
-- **CentOS, RHEL, Oracle Linux**: `-redhat`
+- **CentOS, RHEL**: `-redhat` (when the `yum` package manager is available)
 - **Alpine Linux**: `-alpine`
 
 Some scripts have special installation instructions (like `desktop-lite-debian.sh`). Consult the following documents for more information (in order of the script name):
@@ -137,6 +135,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.131.0/script-library/common-debian.sh")" -- "${INSTALL_ZSH}" "vscode" "1000" "1000" "true" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
+
+## Testing
+
+The `test` sub-folder includes Debian, Alpine, and RedHat based dev containers that can be used to test the scripts.
 
 ## Contributing
 

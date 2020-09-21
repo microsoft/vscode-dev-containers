@@ -3,7 +3,9 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-
+#
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/go.md
+#
 # Syntax: ./go-debian.sh [Go version] [GOROOT] [GOPATH] [non-root user] [Add GOPATH, GOROOT to rc files flag] [Install tools flag]
 
 TARGET_GO_VERSION=${1:-"latest"}
