@@ -3,8 +3,10 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-
-# Syntax: ./gradle-debian.sh [gradle version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
+#
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/gradle.md
+#
+# Syntax: ./gradle-debian.sh [Gradle version] [SDKMAN_DIR] [non-root user] [Update rc files flag]
 
 GRADLE_VERSION=${1:-"latest"}
 export SDKMAN_DIR=${2:-"/usr/local/sdkman"}

@@ -3,7 +3,9 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-
+#
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/java.md
+#
 # Syntax: ./java-debian.sh [JDK version] [SDKMAN_DIR] [non-root user] [Add to rc files flag]
 
 JAVA_VERSION=${1:-"lts"}

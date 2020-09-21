@@ -3,22 +3,10 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-
+#
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
+#
 # Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My *! flag]
-#
-# Usage: 
-#
-# 1. Add this file to .devcontainer/library-scripts
-#
-# 2. Add the following to .devcontainer/Dockerfile:
-#
-#    COPY library-scripts/*.sh /tmp/library-scripts/
-#    RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
-#        && bash /tmp/library-scripts/common-debian.sh \
-#        && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
-#
-# You can optionally pass in arguments described above to common-debian.sh. Flags are a value of "true" or "false. 
-# Pass in "none" for the username to skip the creation or modification of a non-root user while setting other arguments.
 
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"automatic"}

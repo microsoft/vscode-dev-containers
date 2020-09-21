@@ -3,8 +3,10 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-
-# Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add rvm to rc files flag]
+#
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/ruby.md
+#
+# Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add rvm to rc files flag] [Install tools flag]
 
 RUBY_VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}

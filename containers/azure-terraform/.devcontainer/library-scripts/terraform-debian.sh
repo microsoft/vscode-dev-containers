@@ -3,22 +3,28 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
+#
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/terraform.md
+#
+# Syntax: ./terraform-debian.sh [terraform version] [tflint version]
 
-# Syntax: ./terraform-debian.sh <terraform version> [tflint version]
-
-TERRAFORM_VERSION=$1
-TFLINT_VERSION=${2:-"none"}
+TERRAFORM_VERSION=${1:-"latest"}
+TFLINT_VERSION=${2:-"latest"}
 
 set -e
-
-if [ -z "$1" ]; then
-    echo -e "Required argument missing.\n\nterraform-debian.sh <terraform version> [tflint version]"
-    exit 1
-fi
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
+fi
+
+if [ "${TERRAFORM_VERSION}" = "latest" ] || [ "${TERRAFORM_VERSION}" = "lts" ] || [ "${TERRAFORM_VERSION}" = "current" ]; then
+    TERRAFORM_VERSION=$(curl -sSL https://releases.hashicorp.com/terraform/ | grep -m1 -oE '>terraform_[0-9]+\.[0-9]+\.[0-9]+<' | sed 's/^>terraform_\(.*\)<$/\1/')
+fi
+
+if [ "${TFLINT_VERSION}" = "latest" ] || [ "${TFLINT_VERSION}" = "lts" ] || [ "${TFLINT_VERSION}" = "current" ]; then
+    LATEST_RELEASE=$(curl -sSL -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/terraform-linters/tflint/releases?per_page=1&page=1")
+    TFLINT_VERSION=$(echo ${LATEST_RELEASE} | grep -oE 'tag_name":\s*"v[^"]+' | sed -n '/tag_name":\s*"v/s///p')
 fi
 
 # Install curl, unzip if missing
