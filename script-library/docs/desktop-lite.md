@@ -1,4 +1,4 @@
-# Lightweight Desktop
+# Desktop (Lightweight) Install Script
 
 *Adds a lightweight [Fluxbox](http://fluxbox.org/) based desktop to the container that can be accessed using a VNC viewer or the web. UI-based commands executed from the built in VS code terminal will open on the desktop automatically.*
 

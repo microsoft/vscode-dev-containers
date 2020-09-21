@@ -1,4 +1,4 @@
-# SSHD
+# SSHD Install Script
 
 *Adds a SSH server into a container so that you can use an external terminal, scp, sftp, or SSHFS to interact with it.*
 
@@ -77,13 +77,13 @@ If you already have a running container, you can use the script to spin up SSH i
 2. Open a terminal in VS Code and run the following if you're connected as a non-root user and `sudo` is installed:
 
     ```bash
-    curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true random
+    sudo bash -c "$(curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh)" -- 2222 $(whoami) true random
     ```
 
     Or if running as root:
 
     ```bash
-    curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | bash -s -- 2222 $(whoami) true random
+    bash -c "$(curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh)" -- 2222 $(whoami) true random
     ```
 
 3. Take note of the password that was generated and the SSH command.
