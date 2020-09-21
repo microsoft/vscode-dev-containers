@@ -33,8 +33,7 @@ Usage:
 
     ```Dockerfile
     COPY library-scripts/sshd-debian.sh /tmp/library-scripts/
-    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-        && bash /tmp/library-scripts/sshd-debian.sh
+    RUN apt-get update && bash /tmp/library-scripts/sshd-debian.sh
     ENTRYPOINT ["/usr/local/share/ssh-init.sh"]
     CMD ["sleep", "infinity"]
     ```

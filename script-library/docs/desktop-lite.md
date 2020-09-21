@@ -26,8 +26,7 @@
 
     ```Dockerfile
     COPY library-scripts/desktop-lite-debian.sh /tmp/library-scripts/
-    RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-        && bash /tmp/library-scripts/dekstop-lite-debian.sh
+    RUN apt-get update && bash /tmp/library-scripts/dekstop-lite-debian.sh
     ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
     ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
     CMD ["sleep", "infinity"]
@@ -77,7 +76,7 @@ If you want the full version of **Google Chrome** in the desktop:
         && if type zsh > /dev/null 2>&1; then echo "${ALIASES}" >> /etc/zsh/zshrc; fi
     ```
 
-2. Chrome sandbox support requires you set up and run as a non-root user. The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). Alternativley you can start Chrome using `google-chrome --no-sandbox --disable-dev-shm-usage`
+2. Chrome sandbox support requires you set up and run as a non-root user. The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). Alternatively, you can start Chrome using `google-chrome --no-sandbox --disable-dev-shm-usage`
 
 3. While Chrome should be aliased correctly with the instructions above, if you run into crashes, pass `--disable-dev-shm-usage` in as an argument when starting it: `google-chrome --disable-dev-shm-usage`
 

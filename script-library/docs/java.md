@@ -29,7 +29,7 @@
     ENV SDKMAN_DIR="/usr/local/sdkman"
     ENV PATH=${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}
     COPY library-scripts/java-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/java-debian.sh "lts" "${SDKMAN_DIR}"
+    RUN apt-get update && bash /tmp/library-scripts/java-debian.sh "lts" "${SDKMAN_DIR}"
     ```
 
 That's it!

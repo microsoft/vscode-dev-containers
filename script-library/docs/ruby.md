@@ -29,7 +29,7 @@ Usage:
 
     ```Dockerfile
     COPY library-scripts/ruby-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/ruby-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}"
+    RUN apt-get update && bash /tmp/library-scripts/ruby-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}"
     ```
 
 That's it!

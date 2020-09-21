@@ -24,7 +24,7 @@
 
     ```Dockerfile
     COPY library-scripts/git-from-src-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/git-from-src-debian.sh
+    RUN apt-get update && bash /tmp/library-scripts/git-from-src-debian.sh
     ```
 
 That's it!

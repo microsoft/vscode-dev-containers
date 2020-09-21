@@ -29,7 +29,7 @@
     ENV SDKMAN_DIR="/usr/local/sdkman"
     ENV PATH=${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}
     COPY library-scripts/gradle-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}"
+    RUN apt-get update && bash /tmp/library-scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}"
     ```
 
 That's it!

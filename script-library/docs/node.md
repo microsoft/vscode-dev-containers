@@ -30,7 +30,7 @@
     ENV NVM_SYMLINK_CURRENT=true \
         PATH=${NVM_DIR}/current/bin:${PATH}
     COPY library-scripts/node-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}"
+    RUN apt-get update && bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}"
     ```
 
 ### Using nvm from a Dockerfile or postCreateCommand

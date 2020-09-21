@@ -24,7 +24,7 @@
 
     ```Dockerfile
     COPY library-scripts/github-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/github-debian.sh
+    RUN apt-get update && bash /tmp/library-scripts/github-debian.sh
     ```
 
 That's it!

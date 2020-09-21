@@ -20,7 +20,7 @@
 
     ```Dockerfile
     COPY library-scripts/azcli-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/azcli-debian.sh
+    RUN apt-get update && bash /tmp/library-scripts/azcli-debian.sh
     ```
 
 That's it!

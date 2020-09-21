@@ -20,7 +20,7 @@
 
     ```Dockerfile
     COPY library-scripts/git-lfs-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/git-lfs-debian.sh
+    RUN apt-get update && bash /tmp/library-scripts/git-lfs-debian.sh
     ```
 
 That's it!

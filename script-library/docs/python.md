@@ -33,8 +33,7 @@
         PIPX_BIN_DIR=/usr/local/py-utils/bin
     ENV PATH=${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}
     COPY .devcontainer/library-scripts/python-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/python-debian.sh "3.8.3" "${PYTHON_PATH}" "${PIPX_HOME}" \
-        && apt-get clean -y && rm -rf /tmp/library-scripts
+    RUN apt-get update && bash /tmp/library-scripts/python-debian.sh "3.8.3" "${PYTHON_PATH}" "${PIPX_HOME}" \
     ```
 
 That's it!
