@@ -252,8 +252,7 @@ install-oh-my bash bashrc.osh-template https://github.com/ohmybash/oh-my-bash
 # Optionally install and configure zsh and Oh My Zsh!
 if [ "${INSTALL_ZSH}" = "true" ]; then
     if ! type zsh > /dev/null 2>&1; then
-        apt-get-update-if-needed
-        apt-get install -y zsh
+        apk add zsh
     fi
     if [ "${ZSH_ALREADY_INSTALLED}" != "true" ]; then
         echo "${RC_SNIPPET}" >> /etc/zsh/zshrc
