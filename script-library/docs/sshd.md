@@ -15,7 +15,7 @@
 |Argument|Default|Description|
 |--------|-------|-----------|
 | SSH port |`2222`| Port to host SSH server on. `22` is frequently in use, so using a different port is recommended. |
-| Non-root user |`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+| Non-root user |`automatic`| Specifies a user in the container other than root that will use SSH. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 |Start SSHD now flag |`false`| Flag (`true`/`false`) that specifies whether the SSH server should be started after the script runs.|
 |New password for user|`skip`| Sets a new password for the specified non-root user. A value of `skip` will skip this step. A value of `random` will generate a random password and print it out when the script finishes. |
 

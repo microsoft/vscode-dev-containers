@@ -16,7 +16,7 @@
 |--------|-------|-----------|
 |CARGO_HOME|`/usr/local/cargo`| Location to install Cargo. |
 |RUSTUP_HOME|`/usr/local/rustup`| Location to install rustup. |
-|Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|Non-root user|`automatic`| Specifies a user in the container other than root that will use Rust. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 | Add to rc files flag | `true` | A `true`/`false` flag that indicates whether the `PATH` should be updated and `CARGO_HOME` and `RUSTUP_HOME` set via `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
 | Update Rust flag | `true` | A `true`/`false` flag that indicates whether the script should update Rust (e.g. if it was already installed). |
 

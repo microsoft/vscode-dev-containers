@@ -18,8 +18,6 @@
 
 ## Usage
 
-Usage:
-
 1. Add [`github-debian.sh`](../github-debian.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:

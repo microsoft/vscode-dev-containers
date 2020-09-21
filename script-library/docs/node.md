@@ -16,23 +16,37 @@
 |--------|-------|-----------|
 |Location to install nvm|`/usr/local/share/nvm`| Location to install the [Node Version Manager (nvm)](http://nvm.sh) along with Node.js and Node modules. |
 |Node version to install|`lts/*`| Node.js version to install. Use `none` to skip installing anything and just install nvm and yarn. |
-|Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|Non-root user|`automatic`| Specifies a user in the container other than root that will use Node.js. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 | Add to rc files flag | `true` | A `true`/`false` flag that indicates whether sourcing the nvm script should be added to `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
 
 ## Usage
 
-Usage:
-
-1. Add [`rust-debian.sh`](../rust-debian.sh) to `.devcontainer/library-scripts`
+1. Add [`node-debian.sh`](../node-debian.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:
 
     ```Dockerfile
-    ENV CARGO_HOME=/usr/local/cargo \
-        RUSTUP_HOME=/usr/local/rustup
-    ENV PATH=${CARGO_HOME}/bin:${RUSTUP_HOME}/bin:${PATH}
-    COPY library-scripts/go-debian.sh /tmp/library-scripts/
-    RUN bash /tmp/library-scripts/go-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}"
+    ENV NVM_DIR="/usr/local/share/nvm"
+    ENV NVM_SYMLINK_CURRENT=true \
+        PATH=${NVM_DIR}/current/bin:${PATH}
+    COPY library-scripts/node-debian.sh /tmp/library-scripts/
+    RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}"
     ```
+
+### Using nvm from a Dockerfile or postCreateCommand
+
+Certain operations like `postCreateCommand` run non-interactive, non-login shells. Unfortunately, `nvm` is really particular that it needs to be "sourced" before it is used - which can only be done from interactive or login shells (via an rc or profile file).
+
+Try doing the following instead:
+
+```json
+"postCreateCommand": "bash -i -c 'nvm install --lts'"
+```
+
+Or you can source the file before using nvm:
+
+```json
+"postCreateCommand": "source ${NVM_DIR}/nvm.sh && nvm install --lts"
+```
 
 That's it!

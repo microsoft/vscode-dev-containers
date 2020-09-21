@@ -20,8 +20,6 @@
 
 ## Usage
 
-Usage:
-
 1. Add [`desktop-lite-debian.sh`](../desktop-lite-debian.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:

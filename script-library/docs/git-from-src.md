@@ -18,8 +18,6 @@
 
 ## Usage
 
-Usage:
-
 1. Add [`git-from-src-debian.sh`](../git-from-src-debian.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:

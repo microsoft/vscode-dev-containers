@@ -14,8 +14,6 @@
 
 ## Usage
 
-Usage:
-
 1. Add [`git-lfs-debian.sh`](../git-lfs-debian.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:

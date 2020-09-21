@@ -17,13 +17,11 @@
 |Go version|`latest`| Version of Go to install. Use `latest` to install the latest released version. |
 |GOROOT|`/usr/local/go`| Location to install Go. |
 |GOPATH|`/go`| Location to use as the `GOPATH`. Tools are installed under `${GOPATH}/bin` |
-|Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|Non-root user|`automatic`| Specifies a user in the container other than root. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 | Add to rc files flag | `true` | A `true`/`false` flag that indicates whether the `PATH` should be updated and `GOPATH` and `GOROOT` set via `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
 | Install tools flag | `true` | A `true`/`false` flag that indicates whether to install common Go utilities. |
 
 ## Usage
-
-Usage:
 
 1. Add [`go-debian.sh`](../go-debian.sh) to `.devcontainer/library-scripts`
 
