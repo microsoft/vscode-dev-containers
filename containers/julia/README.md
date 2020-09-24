@@ -9,7 +9,7 @@
 | *Contributors* | David Anthoff, github.com/davidanthoff |
 | *Definition type* | Image |
 | *Works in Codespaces* | Yes |
-| *Container host OS support* | Linux |
+| *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Julia |
 
 ## Using this definition with an existing folder
