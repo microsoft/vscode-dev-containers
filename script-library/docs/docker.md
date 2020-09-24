@@ -51,6 +51,8 @@ See the [`docker-from-docker`](../containers/docker-from-docker) and [`docker-fr
     "overrideCommand": false
     ```
 
+    While technically optional, using `--init` will ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up which is a bit more likely when you are using Docker in this way.
+
 4. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
 
 ### Supporting bind mounts from the workspace folder
@@ -91,13 +93,15 @@ if [ "${CODESPACES}" != "true" ]; then
 fi
 
 WORKSPACE_PATH_IN_CONTAINER=${1:-"$HOME/workspace"}
+shift
 WORKSPACE_PATH_ON_HOST=${2:-"/var/lib/docker/vsonlinemount/workspace"}
+shift
 VM_CONTAINER_WORKSPACE_PATH=/vm-host/$WORKSPACE_PATH_IN_CONTAINER
 VM_CONTAINER_WORKSPACE_BASE_FOLDER=$(dirname $VM_CONTAINER_WORKSPACE_PATH)
 VM_HOST_WORKSPACE_PATH=/vm-host/$WORKSPACE_PATH_ON_HOST
 
 echo -e "Workspace path in container: ${WORKSPACE_PATH_IN_CONTAINER}\nWorkspace path on host: ${WORKSPACE_PATH_ON_HOST}"
-docker run -v /:/vm-host alpine sh -c "\
+docker run --rm -v /:/vm-host alpine sh -c "\
     if [ -d "${VM_CONTAINER_WORKSPACE_PATH}" ]; then echo \"${WORKSPACE_PATH_IN_CONTAINER} already exists on host. Aborting.\" && return 0; fi
     apk add coreutils > /dev/null \
     && mkdir -p $VM_CONTAINER_WORKSPACE_BASE_FOLDER \
