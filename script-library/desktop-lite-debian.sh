@@ -33,10 +33,10 @@ PACKAGE_LIST="
     libx11-dev \
     libxkbfile-dev \
     libsecret-1-dev \
+    libgdm-dev \
     libnotify4 \
     libnss3 \
     libxss1 \
-    libgdm1 \
     libasound2 \
     xfonts-base \
     xfonts-terminus \
