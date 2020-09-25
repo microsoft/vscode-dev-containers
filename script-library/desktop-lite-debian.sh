@@ -33,7 +33,7 @@ PACKAGE_LIST="
     libx11-dev \
     libxkbfile-dev \
     libsecret-1-dev \
-    libgdm-dev \
+    libgbm-dev \
     libnotify4 \
     libnss3 \
     libxss1 \
