@@ -65,6 +65,16 @@
 		{
 			"type": "node",
 			"request": "launch",
+			"name": "Run Copy Library Scripts",
+			"program": "${workspaceFolder}/vscdc",
+			"cwd": "${workspaceFolder}",
+			"args": [
+				"copy-library-scripts"
+			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
 			"name": "Run Patch",
 			"program": "${workspaceFolder}/vscdc",
 			"cwd": "${workspaceFolder}",

@@ -5,6 +5,7 @@
 
 const os = require('os');
 const path = require('path');
+const glob = require('glob');
 const asyncUtils = require('./async');
 const jsonc = require('jsonc').jsonc;
 const config = require('../../config.json');
@@ -16,36 +17,44 @@ config.definitionVariants = config.definitionVariants || {};
 
 const stagingFolders = {};
 const definitionTagLookup = {};
+const allDefinitionPaths = {};
 
 // Must be called first
 async function loadConfig(repoPath) {
     repoPath = repoPath || path.join(__dirname, '..', '..', '..');
+    const definitionBuildConfigFile = getConfig('definitionBuildConfigFile', 'definition-manifest.json');
 
-    const containersPath = path.join(repoPath, getConfig('containersPathInRepo', 'containers'));
     // Get list of definition folders
+    const containersPath = path.join(repoPath, getConfig('containersPathInRepo', 'containers'));
     const definitions = await asyncUtils.readdir(containersPath, { withFileTypes: true });
     await asyncUtils.forEach(definitions, async (definitionFolder) => {
         if (!definitionFolder.isDirectory()) {
             return;
         }
         const definitionId = definitionFolder.name;
+        const definitionPath = path.resolve(path.join(containersPath, definitionId));
+        allDefinitionPaths[definitionId] = {
+            path: definitionPath,
+            relativeToRootPath: path.relative(repoPath, definitionPath)
+       }
         // If definition-manifest.json exists, load it
-        const possibleDefinitionBuildJson = path.join(containersPath, definitionId, getConfig('definitionBuildConfigFile', 'definition-manifest.json'));
-        if (await asyncUtils.exists(possibleDefinitionBuildJson)) {
-            const buildJson = await jsonc.read(possibleDefinitionBuildJson);
-            if (buildJson.variants) {
-                config.definitionVariants[definitionId] = buildJson.variants;
-            }
-            if (buildJson.build) {
-                config.definitionBuildSettings[definitionId] = buildJson.build;
-            }
-            if (buildJson.dependencies) {
-                config.definitionDependencies[definitionId] = buildJson.dependencies;
-            }
-            if (buildJson.definitionVersion) {
-                config.definitionVersions[definitionId] = buildJson.definitionVersion;
-            }
+        const manifestPath =  path.join(definitionPath, definitionBuildConfigFile);
+       if (await asyncUtils.exists(manifestPath)) {
+            await loadDefinitionManifest(manifestPath, definitionId);
+       }   
+    });
+
+    // Load repo containers to build
+    const repoContainersToBuildPath = path.join(repoPath, getConfig('repoContainersToBuildPath', 'repository-containers/build'));
+    const repoContainerManifestFiles = glob.sync(`${repoContainersToBuildPath}/**/${definitionBuildConfigFile}`);
+    await asyncUtils.forEach(repoContainerManifestFiles, async (manifestFilePath) => {
+        const definitionPath = path.resolve(path.dirname(manifestFilePath));
+        const definitionId = path.relative(repoContainersToBuildPath, definitionPath);
+        allDefinitionPaths[definitionId] = {
+            path: definitionPath,
+            relativeToRootPath: path.relative(repoPath, definitionPath)
         }
+        await loadDefinitionManifest(manifestFilePath, definitionId);
     });
 
     // Populate image variants and tag lookup
@@ -99,6 +108,31 @@ function getConfig(property, defaultVal) {
     return process.env[envVar] || config[property] || defaultVal;
 }
 
+// Loads definition-manifest.json and adds it to config
+async function loadDefinitionManifest(manifestPath, definitionId)  {
+    const buildJson = await jsonc.read(manifestPath);
+    if (buildJson.variants) {
+        config.definitionVariants[definitionId] = buildJson.variants;
+    }
+    if (buildJson.build) {
+        config.definitionBuildSettings[definitionId] = buildJson.build;
+    }
+    if (buildJson.dependencies) {
+        config.definitionDependencies[definitionId] = buildJson.dependencies;
+    }
+    if (buildJson.definitionVersion) {
+        config.definitionVersions[definitionId] = buildJson.definitionVersion;
+    }
+}
+
+// Returns location of the definition based on Id
+function getDefinitionPath(definitionId, relative) {
+    return relative ? allDefinitionPaths[definitionId].relativeToRootPath : allDefinitionPaths[definitionId].path 
+}
+
+function getAllDefinitionPaths() {
+    return allDefinitionPaths;
+}
 
 // Convert a release string (v1.0.0) or branch (master) into a version. If a definitionId and 
 // release string is passed in, use the version specified in defintion-build.json if one exists.
@@ -436,7 +470,9 @@ module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
     getVariants: getVariants,
+    getAllDefinitionPaths: getAllDefinitionPaths,
     getDefinitionFromTag: getDefinitionFromTag,
+    getDefinitionPath: getDefinitionPath,
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,
     getParentTagForVersion: getParentTagForVersion,
     getUpdatedTag: getUpdatedTag,

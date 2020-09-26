@@ -22,6 +22,7 @@
 
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",
+	"repoContainersToBuildPath": "repository-containers/build",
 	"scriptLibraryPathInRepo": "script-library",
 	"scriptLibraryFolderNameInDefinition": "library-scripts",
 	"definitionBuildConfigFile": "definition-manifest.json",
