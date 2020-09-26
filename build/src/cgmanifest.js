@@ -418,7 +418,7 @@ async function generateOtherComponentList(otherComponents, imageTag, alreadyRegi
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
             const otherVersion = (await asyncUtils.spawn('docker',
-                ['run', '--rm', imageTag, `bash -c "set -e && ${otherSettings.versionCommand}"`],
+                ['run', '--rm', imageTag, `bash -l -c "set -e && ${otherSettings.versionCommand}"`],
                 { shell: true, stdio: 'pipe' })).trim();
             addIfUnique(`${otherName}-other`, otherVersion, componentList, alreadyRegistered, {
                 "Component": {
@@ -456,7 +456,7 @@ async function generateGemComponentList(gems, imageTag, alreadyRegistered) {
     console.log(`(*) Generating "RubyGems" registrations...`);
 
     const gemListOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', imageTag, 'bash -i -c "set -e && gem list -d --local"'],
+        ['run', '--rm', imageTag, 'bash -l -c "set -e && gem list -d --local"'],
         { shell: true, stdio: 'pipe' });
 
     asyncUtils.forEach(gems, (gem) => {
@@ -549,6 +549,7 @@ function filteredManualComponentRegistrations(manualRegistrations, alreadyRegist
     return componentList;
 }
 
+/*
 async function getImageDigest(imageTag) {
     const commandOutput = await asyncUtils.spawn('docker',
         ['inspect', "--format='{{index .RepoDigests 0}}'", imageTag],
@@ -556,6 +557,7 @@ async function getImageDigest(imageTag) {
     // Example output: ruby@sha256:0b503bc5b8cbe2a1e24f122abb4d6c557c21cb7dae8adff1fe0dcad76d606215
     return commandOutput.split('@')[1].trim();
 }
+*/
 
 module.exports = {
     generateComponentGovernanceManifest: generateComponentGovernanceManifest

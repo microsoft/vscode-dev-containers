@@ -1,6 +1,6 @@
 # Pre-built Repository Development Container Images
 
-This folder contains Dockerfiles for images that are pre-built and published and then used for a repository container either here or in directly in the repository.
+This folder contains Dockerfiles for images that are pre-built and published and then used for a repository container either here or in directly in the repository. These can only be on-boarded by the VS Code and GitHub Codespaces teams.
 
 ## License
 

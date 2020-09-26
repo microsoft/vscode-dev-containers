@@ -1,13 +1,3 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
-
-# **********************************************************************************************************
-# ** This file generates the "mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode" image that's **
-# ** referenced in devcontainer.json. To iterate on it, change devcontainer.json to use this Dockerfile.  **
-# **********************************************************************************************************
-
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-12
 
 ARG INSTALL_FIREFOX="true"

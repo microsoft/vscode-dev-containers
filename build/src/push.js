@@ -44,6 +44,7 @@ async function pushImage(definitionId, repo, release, updateLatest,
     const definitionPath = configUtils.getDefinitionPath(definitionId);
     const dotDevContainerPath = path.join(definitionPath, '.devcontainer');
     // Use base.Dockerfile for image build if found, otherwise use Dockerfile
+    const dockerFileExists = await asyncUtils.exists(path.join(dotDevContainerPath, 'Dockerfile'));
     const baseDockerFileExists = await asyncUtils.exists(path.join(dotDevContainerPath, 'base.Dockerfile'));
     const dockerFilePath = path.join(dotDevContainerPath, `${baseDockerFileExists ? 'base.' : ''}Dockerfile`);
 
@@ -108,7 +109,7 @@ async function pushImage(definitionId, repo, release, updateLatest,
     }
 
     // If base.Dockerfile found, update stub/devcontainer.json, otherwise create - just use the default (first) variant if one exists
-    if (baseDockerFileExists) {
+    if (baseDockerFileExists && dockerFileExists) {
         await prep.updateStub(
             dotDevContainerPath, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRegistryPath);
         console.log('(*) Updating devcontainer.json...');
