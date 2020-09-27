@@ -21,6 +21,7 @@ on:
       - 'containers/rust/**'
       - 'containers/typescript-node/**'
       - 'containers/ubuntu/**'
+      - 'repository-containers/images/**'
 
 jobs:
   build-and-push:
