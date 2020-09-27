@@ -1,6 +1,8 @@
 /*--------------------------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+ *  File: async.js
+ *  File Path: vscode-dev-containers/build/src/utils/async.js
  *-------------------------------------------------------------------------------------------------------------*/
 
 const fs = require('fs');
