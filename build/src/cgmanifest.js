@@ -154,7 +154,7 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
         return prev += ` ${current}`;
     }, config.listCommand);
     const packageVersionListOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', '-u', 'root', imageTag, packageVersionListCommand],
+        ['run', '--init', '--rm', '-u', 'root', imageTag, packageVersionListCommand],
         { shell: true, stdio: 'pipe' });
 
     // Generate and exec command to extract download URIs
@@ -163,7 +163,7 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
         return prev += ` ${current}`;
     }, config.getUriCommand);
     const packageUriCommandOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', '-u', 'root', imageTag, `sh -c '${packageUriCommand}'`],
+        ['run', '--init', '--rm', '-u', 'root', imageTag, `sh -c '${packageUriCommand}'`],
         { shell: true, stdio: 'pipe' });
 
     const packageVersionList = packageVersionListOutput.split('\n');
@@ -318,7 +318,7 @@ async function generatePipComponentList(packageList, imageTag, alreadyRegistered
 
 async function getPipVersionLookup(imageTag) {
     const packageVersionListOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', imageTag, 'pip list --format json'],
+        ['run', '--init', '--rm', imageTag, 'pip list --format json'],
         { shell: true, stdio: 'pipe' });
 
     const packageVersionList = JSON.parse(packageVersionListOutput);
@@ -332,7 +332,7 @@ async function getPipVersionLookup(imageTag) {
 async function getPipxVersionLookup(imageTag) {
     // --format json doesn't work with pipx, so have to do text parsing
     const packageVersionListOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', imageTag, 'pipx list'],
+        ['run', '--init', '--rm', imageTag, 'pipx list'],
         { shell: true, stdio: 'pipe' });
 
     const packageVersionListOutputLines = packageVersionListOutput.split('\n');
@@ -371,7 +371,7 @@ async function generateGitComponentList(gitRepoPath, imageTag, alreadyRegistered
             console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
             const remoteAndCommitOutput = await asyncUtils.spawn('docker',
-                ['run', '--rm', imageTag, `bash -c "set -e && cd \"${repoPath}\" && if [ -f ".git-remote-and-commit" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi"`],
+                ['run', '--init', '--rm', imageTag, `bash -c "set -e && cd \\"${repoPath}\\" && if [ -f ".git-remote-and-commit" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi"`],
                 { shell: true, stdio: 'pipe' });
             const remoteAndCommit = remoteAndCommitOutput.split('\n');
             const gitRemote = remoteAndCommit[0];
@@ -418,7 +418,7 @@ async function generateOtherComponentList(otherComponents, imageTag, alreadyRegi
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
             const otherVersion = (await asyncUtils.spawn('docker',
-                ['run', '--rm', imageTag, `bash -l -c "set -e && ${otherSettings.versionCommand}"`],
+                ['run', '--init', '--rm', imageTag, `bash -l -c "set -e && ${otherSettings.versionCommand}"`],
                 { shell: true, stdio: 'pipe' })).trim();
             addIfUnique(`${otherName}-other`, otherVersion, componentList, alreadyRegistered, {
                 "Component": {
@@ -456,7 +456,7 @@ async function generateGemComponentList(gems, imageTag, alreadyRegistered) {
     console.log(`(*) Generating "RubyGems" registrations...`);
 
     const gemListOutput = await asyncUtils.spawn('docker',
-        ['run', '--rm', imageTag, 'bash -l -c "set -e && gem list -d --local"'],
+        ['run', '--init', '--rm', imageTag, 'bash -l -c "set -e && gem list -d --local"'],
         { shell: true, stdio: 'pipe' });
 
     asyncUtils.forEach(gems, (gem) => {
