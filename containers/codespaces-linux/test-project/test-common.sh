@@ -40,7 +40,7 @@ checkOSPackages() {
 }
 
 checkExtension() {
-    checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]"
+    checkMultiple "$1" 1 checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-remote/extensions/$1*"" ]"
 }
 
 # Settings
@@ -71,7 +71,7 @@ PACKAGE_LIST="apt-utils \
 
 # Actual tests
 checkOSPackages "common-os-packages" ${PACKAGE_LIST}
-checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
+checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]" "[ -d ""$HOME/.vscode-remote/bin"" ]" "[ -d ""$HOME/.vscode-remote/bin"" ]"
 check "non-root-user" id ${USERNAME}
 check "/home/vscode" [ -d "/home/${USERNAME}" ]
 check "locale" [ $(locale -a | grep en_US.utf8) ]
