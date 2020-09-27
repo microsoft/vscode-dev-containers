@@ -43,7 +43,9 @@
     "overrideCommand": false
     ```
 
-4. Once you've started the container / codespace, tou'll be able to use a web based desktop viewer on port **6080** from anywhere or connect a [VNC viewer](https://www.realvnc.com/en/connect/download/viewer/) to port **5901** when accessing the codespace from VS Code.
+    The `runArgs` allows the container to take advantage of an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle application and process signals in a desktop environment.
+
+4. Once you've started the container / codespace, you'll be able to use a web based desktop viewer on port **6080** from anywhere or connect a [VNC viewer](https://www.realvnc.com/en/connect/download/viewer/) to port **5901** when accessing the codespace from VS Code.
 
 5. Default **password**: `vscode`
 

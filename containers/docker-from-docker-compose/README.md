@@ -40,7 +40,7 @@ You can adapt your own existing development container Dockerfile to support this
         && echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
         && apt-get update \
         && apt-get install -y docker-ce-cli \
-    
+
     # Install Docker Compose
     RUN export LATEST_COMPOSE_VERSION=$(curl -sSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -o -P '(?<="tag_name": ").+(?=")') \
         && curl -sSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
@@ -50,6 +50,7 @@ You can adapt your own existing development container Dockerfile to support this
 2. Then just forward the Docker socket by mounting it in the container in your Docker Compose config. From `.devcontainer/docker-compose.yml`:
 
     ```yaml
+    init: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ```
@@ -69,9 +70,12 @@ Follow these directions to set up non-root access using `socat`:
 3. Update your `docker-compose.yml` to mount the Docker socket to `docker-host.sock` in the container:
 
     ```yaml
+    init: true
     volumes:
       - /var/run/docker.sock:/var/run/docker-host.sock
     ```
+
+    While technically optional, `init: true` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.
 
 4. Next, add the following to your `Dockerfile` to wire up `socat`:
 

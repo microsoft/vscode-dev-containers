@@ -50,8 +50,11 @@ You can adapt your own existing development container Dockerfile to support this
 2. Then just forward the Docker socket by mounting it in the container using the `mounts` property. From `.devcontainer/devcontainer.json`:
 
     ```json
+    "runArgs": ["--init"],
     "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ]
     ```
+
+    While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.
 
 3. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
@@ -68,6 +71,7 @@ Follow these directions to set up non-root access using `socat`:
 3. Update your `devcontainer.json` to mount the Docker socket to `docker-host.sock` in the container and enable the non-root user:
 
     ```json
+    "runArgs": ["--init"],
     "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
     "overrideCommand": false,
     "remoteUser": "vscode"

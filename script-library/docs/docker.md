@@ -22,7 +22,7 @@
 
 ## Usage
 
-See the [`docker-from-docker`](../containers/docker-from-docker) and [`docker-from-docker-compose`](../containers/docker-from-docker) definition for a complete working example. However, here are the general steps to use the script:
+See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker-from-docker-compose`](....//containers/docker-from-docker) definition for a complete working example. However, here are the general steps to use the script:
 
 1. Add [`docker-debian.sh`](../docker-debian.sh) or [`docker-redhat.sh`](../docker-redhat.sh) to `.devcontainer/library-scripts`
 
@@ -51,7 +51,7 @@ See the [`docker-from-docker`](../containers/docker-from-docker) and [`docker-fr
     "overrideCommand": false
     ```
 
-    While technically optional, using `--init` will ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up which is a bit more likely when you are using Docker in this way.
+    While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.
 
 4. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
 
