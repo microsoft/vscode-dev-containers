@@ -11,7 +11,7 @@ const dependencyLookupConfig = {
         // Output: <package>    <version>
         // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
         namePrefix: 'Debian Package:',
-        listCommand: "dpkg-query --show -f='${Package}\t${Version}\n'",
+        listCommand: "dpkg-query --show -f='${Package}\\t${Version}\\n'",
         lineRegEx: /(.+)\t(.+)/,
         getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
         uriMatchRegex: "'(.+)'\\s*${PACKAGE}_${VERSION}"
@@ -21,7 +21,7 @@ const dependencyLookupConfig = {
         // Output: <package>    <version>
         // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
         namePrefix: 'Ubuntu Package:',
-        listCommand: "dpkg-query --show -f='${Package}\t${Version}\n'",
+        listCommand: "dpkg-query --show -f='${Package}\\t${Version}\\n'",
         lineRegEx: /(.+)\t(.+)/,
         getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
         uriMatchRegex: "'(.+)'\\s*${PACKAGE}_${VERSION}"

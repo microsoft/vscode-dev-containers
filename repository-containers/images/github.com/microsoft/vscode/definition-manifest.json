@@ -10,50 +10,67 @@
 		"image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:12",
 		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
 		"debian": [
-			"apt-utils",
-			"git",
-			"openssh-client",
-			"gnupg2",
-			"iproute2",
-			"procps",
-			"lsof",
-			"htop",
-			"net-tools",
-			"psmisc",
-			"curl",
-			"wget",
-			"rsync",
-			"ca-certificates",
-			"unzip",
-			"zip",
-			"tar",
-			"nano",
-			"vim-tiny",
-			"less",
-			"jq",
-			"lsb-release",
-			"apt-transport-https",
-			"dialog",
-			"libc6",
-			"libgcc1",
-			"libgssapi-krb5-2",
-			"libicu[0-9][0-9]",
-			"liblttng-ust0",
-			"libstdc++6",
-			"zlib1g",
-			"locales",
-			"sudo",
-			"ncdu",
-			"man-db",
-			"zsh",
-			"yarn"
+			"xvfb",
+			"x11vnc",
+			"fluxbox",
+			"dbus-x11",
+			"x11-utils",
+			"x11-xserver-utils",
+			"xdg-utils",
+			"fbautostart",
+			"at-spi2-core",
+			"xterm",
+			"eterm",
+			"tilix",
+			"nautilus",
+			"mousepad",
+			"seahorse",
+			"gnome-icon-theme",
+			"gnome-keyring",
+			"libx11-dev",
+			"libxkbfile-dev",
+			"libsecret-1-dev",
+			"libgbm-dev",
+			"libnotify4",
+			"libnss3",
+			"libxss1",
+			"libasound2",
+			"xfonts-base",
+			"xfonts-terminus",
+			"fonts-noto",
+			"fonts-wqy-microhei",
+			"fonts-droid-fallback",
+			"python-minimal",
+			"python-numpy",
+			"firefox-esr"
 		],
-		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
-			"nvm": "/usr/local/share/nvm"
-		},
-		"npm": [
-			"eslint"
-		]
+		"manual": [{
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Cascadia Code",
+                    "repositoryUrl": "https://github.com/microsoft/cascadia-code",
+                    "commitHash": "678eea921b0c8b921b9fb009bb16d3d2ca5b8112"
+                }
+            }
+        }, {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "noVNC",
+                    "repositoryUrl": "https://github.com/novnc/noVNC",
+                    "commitHash": "9142f8f0f7b4a53447f5cfec3a797cbf0d6204a9"
+                }
+            }
+        }, {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "websockify",
+                    "repositoryUrl": "https://github.com/novnc/websockify",
+                    "commitHash": "654cbac77ea07819ed3bcf1ce6410be0211c0f1a"
+                }
+            }
+        }]
 	}
 }

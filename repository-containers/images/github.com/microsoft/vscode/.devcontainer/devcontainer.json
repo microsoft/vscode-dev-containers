@@ -3,7 +3,7 @@
 
 	"dockerFile": "base.Dockerfile",
 	// Uncomment this line and comment out the "image" to iterate on the container
-	// "image": "ghcr.io/chuxel/devcontainers/code-oss:latest",
+	// "image": "mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:latest",
 
 	"workspaceMount": "source=${localWorkspaceFolder},target=/home/node/workspace/vscode,type=bind,consistency=cached",
 	"workspaceFolder": "/home/node/workspace/vscode",
