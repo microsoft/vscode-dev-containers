@@ -24,29 +24,27 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
     // Always replace images when building and pushing the "dev" tag
     replaceImages = (configUtils.getVersionFromRelease(release, definitionId) == 'dev') || replaceImages;
 
-    // Load config files
-    await configUtils.loadConfig();
-
     // Stage content
     const stagingFolder = await configUtils.getStagingFolder(release);
-    const definitionStagingFolder = path.join(stagingFolder, 'containers');
+    await configUtils.loadConfig(stagingFolder);
 
     // Build and push subset of images
     const definitionsToPush = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip);
     await asyncUtils.forEach(definitionsToPush, async (currentDefinitionId) => {
         console.log(`**** Pushing ${currentDefinitionId} ${release} ****`);
         await pushImage(
-            path.join(definitionStagingFolder, currentDefinitionId),
             currentDefinitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, pushImages, replaceImages);
     });
 
     return stagingFolder;
 }
 
-async function pushImage(definitionPath, definitionId, repo, release, updateLatest,
+async function pushImage(definitionId, repo, release, updateLatest,
     registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, pushImages, replaceImage) {
+    const definitionPath = configUtils.getDefinitionPath(definitionId);
     const dotDevContainerPath = path.join(definitionPath, '.devcontainer');
     // Use base.Dockerfile for image build if found, otherwise use Dockerfile
+    const dockerFileExists = await asyncUtils.exists(path.join(dotDevContainerPath, 'Dockerfile'));
     const baseDockerFileExists = await asyncUtils.exists(path.join(dotDevContainerPath, 'base.Dockerfile'));
     const dockerFilePath = path.join(dotDevContainerPath, `${baseDockerFileExists ? 'base.' : ''}Dockerfile`);
 
@@ -54,7 +52,6 @@ async function pushImage(definitionPath, definitionId, repo, release, updateLate
     if (!await asyncUtils.exists(dockerFilePath)) {
         throw `Invalid path ${dockerFilePath}`;
     }
-
 
     // Look for context in devcontainer.json and use it to build the Dockerfile
     console.log('(*) Reading devcontainer.json...');
@@ -112,7 +109,7 @@ async function pushImage(definitionPath, definitionId, repo, release, updateLate
     }
 
     // If base.Dockerfile found, update stub/devcontainer.json, otherwise create - just use the default (first) variant if one exists
-    if (baseDockerFileExists) {
+    if (baseDockerFileExists && dockerFileExists) {
         await prep.updateStub(
             dotDevContainerPath, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRegistryPath);
         console.log('(*) Updating devcontainer.json...');
@@ -187,7 +184,6 @@ async function isImageAlreadyPublished(registryName, repositoryName, tagName) {
     console.log('(*) Image version has not been published yet.')
     return false;
 }
-
 
 module.exports = {
     push: push

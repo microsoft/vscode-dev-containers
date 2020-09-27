@@ -105,8 +105,15 @@ DEFAULT_UTILS="\
     pipenv \
     virtualenv"
 
+
 export PIPX_BIN_DIR=${PIPX_HOME}/bin
 export PATH=${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:${PATH}
+
+# Update pip
+echo "Updating pip..."
+python3 -m pip install --no-cache-dir --upgrade pip
+
+# Install tools
 mkdir -p ${PIPX_BIN_DIR}
 chown -R ${USERNAME} ${PIPX_HOME} ${PIPX_BIN_DIR}
 su ${USERNAME} -c "$(cat << EOF
@@ -117,9 +124,9 @@ su ${USERNAME} -c "$(cat << EOF
     export PYTHONUSERBASE=/tmp/pip-tmp
     export PIP_CACHE_DIR=/tmp/pip-tmp/cache
     export PATH=${PATH}
-    pip3 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user pipx
+    pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
     /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir pipx
-    echo "${DEFAULT_UTILS}" | xargs -n 1 /tmp/pip-tmp/bin/pipx install --system-site-packages --pip-args=--no-cache-dir --pip-args=--force-reinstall
+    echo "${DEFAULT_UTILS}" | xargs -n 1 /tmp/pip-tmp/bin/pipx install --system-site-packages --pip-args '--no-cache-dir --force-reinstall'
     chown -R ${USERNAME} ${PIPX_HOME}
     rm -rf /tmp/pip-tmp
 EOF
