@@ -172,7 +172,7 @@ fi
 
 xrandr --fb \${RESOLUTION} --dpi \${DPI} > /dev/null 2>&1
 
-if [ \$? -ne 0 ] && [ IGNORE_ERROR != "true" ]; then 
+if [ \$? -ne 0 ] && [ "${IGNORE_ERROR}" != "true" ]; then 
     echo -e "\nFAILED TO SET RESOLUTION!\n"
     exit 1
 fi
