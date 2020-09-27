@@ -183,12 +183,29 @@ RC_SNIPPET="$(cat << EOF
 export USER=\$(whoami)
 
 export PATH=\$PATH:\$HOME/.local/bin
-
-if type code-insiders > /dev/null 2>&1 && ! type code > /dev/null 2>&1; then 
-    alias code=code-insiders
-fi
 EOF
 )"
+
+# code shim, it fallbacks to code-insiders if code is not available
+cat << 'EOF' > /usr/local/bin/code
+#!/bin/sh
+
+get_in_path_except_current() {
+  which -a "$1" | grep -v "$0" | head -1
+}
+
+code="$(get_in_path_except_current code)"
+
+if [ -n "$code" ]; then
+  exec "$code" "$@"
+elif [ "$(command -v code-insiders)" ]; then
+  exec code-insiders "$@"
+else
+  echo "code or code-insiders is not installed" >&2
+  exit 127
+fi
+EOF
+chmod +x /usr/local/bin/code
 
 # Codespaces themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
@@ -201,9 +218,9 @@ prompt() {
         local arrow_color=\${reset_color}
     fi
     if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="gh:@\${GITHUB_USER}"
+        local USERNAME="@\${GITHUB_USER}"
     else
-        local USERNAME="\$(whoami)"
+        local USERNAME="\\u"
     fi
     local cwd="\$(pwd | sed "s|^\${HOME}|~|")"
     PS1="\${green}\${USERNAME} \${arrow_color}➜\${reset_color} \${bold_blue}\${cwd}\${reset_color} \$(scm_prompt_info)\${white}$ \${reset_color}"
@@ -220,9 +237,9 @@ CODESPACES_ZSH="$(cat \
 <<EOF
 prompt() {
     if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="gh:@\${GITHUB_USER}"
+        local USERNAME="@\${GITHUB_USER}"
     else
-        local USERNAME="\$(whoami)"
+        local USERNAME="%n"
     fi
     PROMPT="%{\$fg[green]%}\${USERNAME} %(?:%{\$reset_color%}➜ :%{\$fg_bold[red]%}➜ )"
     PROMPT+='%{\$fg_bold[blue]%}%~%{\$reset_color%} \$(git_prompt_info)%{\$fg[white]%}$ %{\$reset_color%}'
