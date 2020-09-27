@@ -201,9 +201,9 @@ prompt() {
         local arrow_color=\${reset_color}
     fi
     if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="gh:@\${GITHUB_USER}"
+        local USERNAME="@\${GITHUB_USER}"
     else
-        local USERNAME="\$(whoami)"
+        local USERNAME="\\u"
     fi
     local cwd="\$(pwd | sed "s|^\${HOME}|~|")"
     PS1="\${green}\${USERNAME} \${arrow_color}➜\${reset_color} \${bold_blue}\${cwd}\${reset_color} \$(scm_prompt_info)\${white}$ \${reset_color}"
@@ -220,9 +220,9 @@ CODESPACES_ZSH="$(cat \
 <<EOF
 prompt() {
     if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="gh:@\${GITHUB_USER}"
+        local USERNAME="@\${GITHUB_USER}"
     else
-        local USERNAME="\$(whoami)"
+        local USERNAME="%n"
     fi
     PROMPT="%{\$fg[green]%}\${USERNAME} %(?:%{\$reset_color%}➜ :%{\$fg_bold[red]%}➜ )"
     PROMPT+='%{\$fg_bold[blue]%}%~%{\$reset_color%} \$(git_prompt_info)%{\$fg[white]%}$ %{\$reset_color%}'
