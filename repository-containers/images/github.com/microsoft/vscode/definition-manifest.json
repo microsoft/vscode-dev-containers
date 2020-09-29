@@ -2,7 +2,7 @@
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
-		"parent": "javascript-node",
+		"parent": "typescript-node",
 		"tags": [
 			"repos/microsoft/vscode:${VERSION}"
 		]
