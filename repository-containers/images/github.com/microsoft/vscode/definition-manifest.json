@@ -1,4 +1,5 @@
 {
+	"variants": ["12"],
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -8,7 +9,7 @@
 		]
 	}, 
 	"dependencies": {
-		"image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:12",
+		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:12",
 		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
 		"debian": [
 			"xvfb",
