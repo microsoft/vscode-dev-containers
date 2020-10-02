@@ -33,28 +33,12 @@ checkMultiple() {
 }
 
 checkExtension() {
-    checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-remote/extensions/$1*"" ]"
+    checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-remote/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-remote/extensions/$1*"" ]"
 }
 
-# -- Actual tests  --
-EXPECTED_USER=vscode
+# -- Actual tests - add more here --
 checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]" "[ -d ""$HOME/.vscode-remote/bin"" ]"
-check "non-root-user" "id ${EXPECTED_USER}"
-check "/home/${EXPECTED_USER}" [ -d "/home/${EXPECTED_USER}" ]
-check "sudo" sudo echo "sudo works."
-check "git" git --version
-check "command-line-tools" which top ip lsb_release
 
-# Check platforms
-check "dotnet" dotnet --info
-check "nuget" dotnet restore
-check "msbuild" dotnet msbuild
-check "nvm" nvm --version
-check "node" node --version
-
-# Check expected shells
-check "bash" bash --version
-check "zsh" zsh --version
 
 # -- Report results --
 if [ ${#FAILED[@]} -ne 0 ]; then

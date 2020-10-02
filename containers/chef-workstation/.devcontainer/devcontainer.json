@@ -1,0 +1,31 @@
+{
+	"name": "Dev Container Definition Template - Container Image",
+
+	// Update the 'image' property with your Docker image name.
+	"image": "mcr.microsoft.com/vscode/devcontainers/base:debian-10",
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		// If you are using an Alpine-based image, change this to /bin/ash
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": []
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment to run commands after the container is created - like installing curl
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+
+	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+
+	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+
+}
