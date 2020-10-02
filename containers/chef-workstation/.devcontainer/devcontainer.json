@@ -1,10 +1,13 @@
 {
 	"name": "Chef Workstation (Community)",
 	"dockerFile": "Dockerfile",
-
-	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash"
+	"args": {
+		"CHANNEL": "stable"
 	},
-
-	"extensions": ["chef-software.chef"]
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+	},
+	"extensions": [
+		"chef-software.chef"
+	]
 }

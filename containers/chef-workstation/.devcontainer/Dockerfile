@@ -1,1 +1,2 @@
-FROM chef/chefworkstation:stable
+ARG CHANNEL=stable
+FROM chef/chefworkstation:${CHANNEL}}
