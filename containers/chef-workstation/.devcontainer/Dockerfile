@@ -1,0 +1,1 @@
+FROM chef/chefworkstation:stable
