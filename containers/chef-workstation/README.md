@@ -1,35 +1,31 @@
-# [Name of Definition Here]
+# Chef Workstation Docker Container
 
 ## Summary
 
-*[A short description of the the purpose of the definition goes here.]*
+_Everything you need to get started using Chef products._
 
-| Metadata | Value |  
-|----------|-------|
-| *Contributors* | [Your name, email and/or GitHub profile] |
-| *Definition type* | Image |
-| *Works in Codespaces* | Yes / No |
-| *Container host OS support* | Linux, macOS, Windows |
-| *Languages, platforms* | [Languages and platforms the container supports] |
-
-## [Optional] Description
-
-**[Give a more detailed description of the container if the summary does not provide enough info.]**
+| Metadata                    | Value                                                                                                                       |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| _Contributors_              | [Eammon Hanlon](https://gitlab.com/ehanlon)                                                                                 |
+| _Definition type_           | Dockerfile                                                                                                                  |
+| _Works in Codespaces_       | Yes                                                                                                                         |
+| _Container host OS support_ | Linux, macOS, Windows                                                                                                       |
+| _Languages, platforms_      | Chef Infra Client, Chef InSpec, Chef Command Line Tool, Test Kitchen, and Various Test Kitchen and Knife plugins for clouds |
 
 ## Using this definition with an existing folder
-
-**[Optional] Include any special setup requirements here.**
 
 Just follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
 2. To use VS Code's copy of this definition:
+
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the Dart definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
+
    1. Clone this repository.
    2. Copy the contents of this folder in the cloned repository to the root of your project folder.
    3. Start VS Code and open your project folder.
@@ -47,10 +43,6 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select this folder from the cloned repository.
 5. **[Provide any information on steps required to test the definition.]**
-
-## [Optional] How it works
-
-**[If the definition provides a pattern you think will be useful for others, describe the it here.]**
 
 ## License
 
