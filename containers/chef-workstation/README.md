@@ -7,7 +7,7 @@ _Everything you need to get started using Chef products._
 | Metadata                    | Value                                                                                                                       |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | _Contributors_              | [Eammon Hanlon](https://gitlab.com/ehanlon)                                                                                 |
-| _Definition type_           | Dockerfile                                                                                                                  |
+| _Definition type_           | Image                                                                                                                       |
 | _Works in Codespaces_       | Yes                                                                                                                         |
 | _Container host OS support_ | Linux, macOS, Windows                                                                                                       |
 | _Languages, platforms_      | Chef Infra Client, Chef InSpec, Chef Command Line Tool, Test Kitchen, and Various Test Kitchen and Knife plugins for clouds |

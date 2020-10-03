@@ -1,9 +1,6 @@
 {
 	"name": "Chef Workstation (Community)",
-	"dockerFile": "Dockerfile",
-	"args": {
-		"CHANNEL": "stable"
-	},
+	"image": "chef/chefworkstation:stable",
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
 	},
