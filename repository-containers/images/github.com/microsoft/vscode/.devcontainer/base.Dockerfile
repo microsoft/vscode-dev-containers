@@ -6,7 +6,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 	&& sed -i -E 's/.*Terminal.*/    [exec] (Terminal) { tilix -w ~ -e $(readlink -f \/proc\/$$\/exe) -il } <>\n    [exec] (Start Code - OSS) { tilix -t "Code - OSS Build" -e bash \/home\/node\/workspace\/vscode*\/scripts\/code.sh  } <>/' /home/node/.fluxbox/menu \
 	&& apt-get -y install firefox-esr \
 	&& bash -c "source /usr/local/share/nvm/nvm.sh && nvm alias 12 system" \
-ls	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
+	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 # Core environment variables for X11, VNC, and fluxbox
 ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" \
