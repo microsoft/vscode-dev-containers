@@ -2,15 +2,15 @@
 
 ## Summary
 
-*[A short description of the the purpose of the definition goes here.]*
+_[A short description of the the purpose of the definition goes here.]_
 
-| Metadata | Value |  
-|----------|-------|
-| *Contributors* | [Your name, email and/or GitHub profile] |
-| *Definition type* | Docker Compose |
-| *Works in Codespaces* | Yes / No |
-| *Container host OS support* | Linux, macOS, Windows |
-| *Languages, platforms* | [Languages and platforms the container supports] |
+| Metadata                    | Value                                            |
+| --------------------------- | ------------------------------------------------ |
+| _Contributors_              | [Your name, email and/or GitHub profile]         |
+| _Definition type_           | Docker Compose                                   |
+| _Works in Codespaces_       | Yes / No                                         |
+| _Container host OS support_ | Linux, macOS, Windows                            |
+| _Languages, platforms_      | [Languages and platforms the container supports] |
 
 ## [Optional] Description
 
@@ -29,22 +29,25 @@ args:
 
 ### Adding another service
 
-You can add other services to your `docker-compose.yml` file [as described in Docker's documentaiton](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentation](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
 
 ```yaml
 # Runs the service on the same network as the app container, allows "forwardPorts" in devcontainer.json function.
 network_mode: service:app
+```
 
 ### Adding the definition to your project
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
 2. To use VS Code's copy of this definition:
+
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the **YOUR NAME HERE** definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
+
    1. Clone this repository.
    2. Copy the contents of this folder in the cloned repository to the root of your project folder.
    3. Start VS Code and open your project folder.
