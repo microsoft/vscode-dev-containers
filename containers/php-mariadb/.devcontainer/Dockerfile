@@ -13,8 +13,8 @@ ARG USER_GID=$USER_UID
 RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
         groupmod --gid $USER_GID vscode \
         && usermod --uid $USER_UID --gid $USER_GID vscode \
-        && chmod -R $USER_UID:$USER_GID /home/vscode \
-        && chmod -R $USER_UID:root /usr/local/share/nvm; \
+        && chown -R $USER_UID:$USER_GID /home/vscode \
+        && chown -R $USER_UID:root /usr/local/share/nvm; \
     fi
 
 # [Optional] Install a version of Node.js using nvm for front end dev
