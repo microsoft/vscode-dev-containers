@@ -1,25 +1,25 @@
-# Azure Functions & Node.js
+# Azure Static Web Apps
 
 ## Summary
 
-*Develop Azure Static Web Apps & Azure Functions in Node.js. Includes Node.js, eslint, the Azure Functions SDK, and related extensions and dependencies.*
+*Develop Azure Static Web Apps & Azure Functions in Node.js. Includes Node.js, eslint, Python, .NET Core, the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The Azure Functions Team & alvaro.videla@microsoft.com |
 | *Definition type* | Dockerfile |
-| *Published images* | mcr.microsoft.com/azure-functions/node |
-| *Available image variants* | 10, 12 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Languages, platforms* | Azure Functions, Node.js, JavaScript |
+| *Languages, platforms* | Azure Functions, Python, C#, Node.js, JavaScript |
 
 ## Using this definition with an existing folder
 
 This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/) and learn more about using [Azure Functions with VS Code here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code).
 
-While this definition should work unmodified, you can select the version of Node.js the container uses by updating the `VARIANT` arg in the included `devcontainer.json` to a supported major Node.js release version.
+This definition includes Python, .NET Core, and Node.js
+
+While this definition should work unmodified, you can select the version of Node.js the container uses by updating the `VARIANT` arg in the included `devcontainer.json` to a supported major Node.js release version: 10 or 12.
 
 ```json
 "args": { "VARIANT": "10" }
