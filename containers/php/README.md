@@ -62,8 +62,14 @@ Apache will be available on port `8080`.
 
 If you want to wire in something directly from your source code into the `www` folder, you can add a symlink as follows to `postCreateCommand`:
 
+```json
+"postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
+```
+
+...or execute this from a terminal window once the container is up:
+
 ```bash
-sudo rm -rf /var/www/html && sudo ln -s . /var/www/html
+sudo chmod a+x "$(pwd)" && sudo rm -rf /var/www/html && sudo ln -s "$(pwd)" /var/www/html
 ```
 
 ### Adding the definition to your project
