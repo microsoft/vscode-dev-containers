@@ -17,13 +17,7 @@
 
 This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/) and learn more about using [Azure Functions with VS Code here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code).
 
-This definition includes Python, .NET Core, and Node.js
-
-While this definition should work unmodified, you can select the version of Node.js the container uses by updating the `VARIANT` arg in the included `devcontainer.json` to a supported major Node.js release version: 10 or 12.
-
-```json
-"args": { "VARIANT": "10" }
-```
+This definition includes Python, .NET Core, and Node.js. Node.js is installed using [nvm](https://github.com/nvm-sh/nvm), so you can use it to pick a different version if needed.
 
 ### Adding the definition to your folder
 
