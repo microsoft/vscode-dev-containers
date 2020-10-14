@@ -11,6 +11,7 @@
 		}
 	},
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
+	"overrideCommand": false,
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
@@ -23,7 +24,7 @@
 		"ms-azuretools.vscode-azureterraform",
 		"ms-vscode.azurecli",
 		"ms-azuretools.vscode-docker"
-	]
+	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -31,7 +32,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "terraform --version",
 
-	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
-	// "overrideCommand": false,
-	// "remoteUser": "vscode"
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
 }
