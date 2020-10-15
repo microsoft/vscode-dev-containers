@@ -39,7 +39,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove 'imagemagick imagemagick-6-common' due to http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10131
     && apt-get purge -y imagemagick imagemagick-6-common \
     # Install tools and shells not in common script
-    && apt-get install -yq vim xtail software-properties-common \
+    && apt-get install -yq vim xtail software-properties-common libsecret-1-dev \
     && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/git-lfs-debian.sh \
     && bash /tmp/scripts/github-debian.sh \
