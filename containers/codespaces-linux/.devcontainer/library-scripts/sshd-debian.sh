@@ -86,9 +86,9 @@ tee /usr/local/share/ssh-init.sh > /dev/null \
 set -e 
 
 if [ "\$(id -u)" -ne 0 ]; then
-    sudo /etc/init.d/ssh restart
+    sudo /etc/init.d/ssh start
 else
-    /etc/init.d/ssh restart
+    /etc/init.d/ssh start
 fi
 
 set +e
