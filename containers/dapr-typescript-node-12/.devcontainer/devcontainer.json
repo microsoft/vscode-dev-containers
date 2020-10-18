@@ -18,7 +18,7 @@
 		"ms-azuretools.vscode-dapr",
 		"ms-azuretools.vscode-docker",
 		"ms-vscode.vscode-typescript-tslint-plugin"
-	]
+	],
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],

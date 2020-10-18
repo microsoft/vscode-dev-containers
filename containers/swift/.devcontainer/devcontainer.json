@@ -29,7 +29,7 @@
 	"extensions": [
 		"vknabel.vscode-swift-development-environment",
 		"vadimcn.vscode-lldb"
-	]
+	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

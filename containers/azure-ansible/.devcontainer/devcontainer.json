@@ -25,7 +25,7 @@
 		"redhat.vscode-yaml",
 		"ms-vscode.azurecli",
 		"ms-azuretools.vscode-docker"
-	]
+	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
