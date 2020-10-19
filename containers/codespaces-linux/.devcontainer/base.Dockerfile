@@ -38,6 +38,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get upgrade -yq git \
     # Remove 'imagemagick imagemagick-6-common' due to http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10131
     && apt-get purge -y imagemagick imagemagick-6-common \
+    # Verify expected build and debug tools are present
+    && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb \
     # Install tools and shells not in common script
     && apt-get install -yq vim xtail software-properties-common libsecret-1-dev \
     && bash /tmp/scripts/sshd-debian.sh \

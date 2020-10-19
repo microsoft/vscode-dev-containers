@@ -81,7 +81,8 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         sed \
         grep \
         which \
-        man-db"
+        man-db \
+        strace"
 
     # Install OpenSSL 1.0 compat if needed
     if yum -q list compat-openssl10 >/dev/null 2>&1; then

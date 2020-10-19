@@ -93,7 +93,8 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         grep \
         which \
         ncdu \
-        shadow
+        shadow \
+        strace
 
     # Install man pages - package name varies between 3.12 and earlier versions
     if apk info man > /dev/null 2>&1; then
