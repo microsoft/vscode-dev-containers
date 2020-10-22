@@ -12,6 +12,8 @@
 			"args": [
 				"push",
 				"--no-push",
+				"--page", "4",
+				"--page-total", "4",
 				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
