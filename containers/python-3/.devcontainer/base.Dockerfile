@@ -19,13 +19,16 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
+ARG INSTALL_PYUTILS="true"
 # Setup default python tools in a venv via pipx to avoid conflicts
+if [ "${INSTALL_PYUTILS}" = "true" ]; then
 ENV PIPX_HOME=/usr/local/py-utils \
     PIPX_BIN_DIR=/usr/local/py-utils/bin
 ENV PATH=${PATH}:${PIPX_BIN_DIR}
 COPY .devcontainer/library-scripts/python-debian.sh /tmp/library-scripts/
 RUN bash /tmp/library-scripts/python-debian.sh "none" "/usr/local" "${PIPX_HOME}" "${USERNAME}" "false" \ 
     && apt-get clean -y && rm -rf /tmp/library-scripts
+fi
 
 # [Option] Install Node.js
 ARG INSTALL_NODE="true"
