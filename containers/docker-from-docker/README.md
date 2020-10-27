@@ -10,6 +10,7 @@
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian (though Ubuntu could be used instead) |
 | *Languages, platforms* | Any |
 
 > **Note:** There is also a [Docker Compose](../docker-from-docker-compose) variation of this same definition.

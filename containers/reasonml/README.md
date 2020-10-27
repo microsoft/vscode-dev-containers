@@ -10,6 +10,7 @@
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | No |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | ReasonML |
 
 This image contains the development environment to work with [ReasonML](https://reasonml.github.io/) applications. It also includes [fish shell](https://fishshell.com/) to improve the CLI experience.

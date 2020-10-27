@@ -13,6 +13,7 @@
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container Host OS Support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Python |
 
 ## Using this definition with an existing folder
