@@ -1,0 +1,57 @@
+{
+	"variants": ["3.1","2.1"],
+	"build": {
+		"latest": "true",
+		"rootDistro": "debian",
+		"tags": [
+			"dotnetcore:${VERSION}-${VARIANT}"
+		]
+	},
+	"dependencies": {
+		"image": "mcr.microsoft.com/dotnet/core/sdk:${VARIANT}-bionic",
+		"imageLink": "https://hub.docker.com/_/microsoft-dotnet-core-sdk",
+		"debian": [
+			"apt-utils",
+			"git",
+			"openssh-client",
+			"gnupg2",
+			"iproute2",
+			"procps",
+			"lsof",
+			"htop",
+			"net-tools",
+			"psmisc",
+			"curl",
+			"wget",
+			"rsync",
+			"ca-certificates",
+			"unzip",
+			"zip",
+			"tar",
+			"nano",
+			"vim-tiny",
+			"less",
+			"jq",
+			"lsb-release",
+			"apt-transport-https",
+			"dialog",
+			"libc6",
+			"libgcc1",
+			"libgssapi-krb5-2",
+			"libicu[0-9][0-9]",
+			"liblttng-ust0",
+			"libstdc++6",
+			"zlib1g",
+			"locales",
+			"sudo",
+			"ncdu",
+			"man-db",
+			"zsh",
+			"yarn"
+		],
+		"git": {
+			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm"
+		}
+	}
+}
