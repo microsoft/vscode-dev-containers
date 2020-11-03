@@ -16,7 +16,7 @@ then
     apt-get -y install libunwind8
     apt-get -y install libicu60
     apt-get -y install unzip
-    wget -O sqlpackage.zip "https://go.microsoft.com/fwlink?linkid=2143497"
+    wget -O sqlpackage.zip "https://aka.ms/sqlpackage-linux"
     mkdir sqlpackage
     unzip sqlpackage.zip -d ./sqlpackage 
     sleep 60s
