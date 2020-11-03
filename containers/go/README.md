@@ -41,7 +41,7 @@ Alternatively, you can use the contents of `base.Dockerfile` to fully customize 
 
 ### Installing Node.js
 
-Given how frequently Ruby-based web applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+Given Node.js is often used with front end code used in conjunction with a Go back-end, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
 ```json
 "args": {
