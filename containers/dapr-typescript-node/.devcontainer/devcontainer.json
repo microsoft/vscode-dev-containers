@@ -1,16 +1,18 @@
 {
 	"name": "Dapr with Node.js & TypeScript (Community)",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "docker-from-docker",
+	"service": "app",
 	"workspaceFolder": "/workspace",
+
+	// Use this environment variable if you need to bind mount your local source code into a new container.
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
-
-	// Ensure Dapr is running on opening the container
-	"postCreateCommand": "dapr init",
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
@@ -18,14 +20,14 @@
 		"ms-azuretools.vscode-dapr",
 		"ms-azuretools.vscode-docker",
 		"ms-vscode.vscode-typescript-tslint-plugin"
-	]
+	],
 
-	// Uncomment the next line if you want start specific services in your Docker Compose config.
-	// "runServices": [],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
 
-	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
-	// "shutdownAction": "none",
+	// Ensure Dapr is running on opening the container
+	"postCreateCommand": "dapr init",
 
-	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "node"
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node"
 }
