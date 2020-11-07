@@ -12,7 +12,7 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 ENV SHELL="/bin/zsh" \
-    DOTNET_ROOT="/home/${USERNAME}/.dotnet" \ 
+    DOTNET_ROOT="/usr/share/dotnet" \ 
     NVM_SYMLINK_CURRENT=true \
     NVM_DIR="/home/${USERNAME}/.nvm" \
     NVS_HOME="/home/${USERNAME}/.nvs" \
@@ -43,7 +43,7 @@ RUN apt-get update \
 # Install dotnet 5 and powershell
 RUN mkdir -p ${DOTNET_ROOT}/install \
     && curl -H 'Cache-Control: no-cache' -L https://aka.ms/install-dotnet-preview -o ${DOTNET_ROOT}/install/install-dotnet-preview.sh \
-    && sudo bash /home/${USERNAME}/.dotnet/install/install-dotnet-preview.sh \
+    && sudo bash ${DOTNET_ROOT}/install/install-dotnet-preview.sh \
     && dotnet tool install -g powershell
 
 # Install nodejs and global NPM packages
