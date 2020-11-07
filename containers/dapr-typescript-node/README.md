@@ -1,8 +1,8 @@
-# Dapr with Node.js 12 & TypeScript
+# Dapr with Node.js & TypeScript
 
 ## Summary
 
-*Develop Dapr applications using Node.js 12 and TypeScript. Includes Dapr, Node.js, eslint, yarn, and the TypeScript compiler.*
+*Develop Dapr applications using Node.js and TypeScript. Includes Dapr, Node.js, eslint, yarn, and the TypeScript compiler.*
 
 | Metadata | Value |  
 |----------|-------|

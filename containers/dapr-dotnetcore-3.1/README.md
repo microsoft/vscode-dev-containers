@@ -98,7 +98,7 @@ This definition includes some test code that will help you verify it is working 
 
     ```bash
     $ cd test-project
-    $ dapr run --app-id test --app-port 5000 --port 3500 dotnet run
+    $ dapr run --app-id test --app-port 5000 --dapr-http-port 3500 --components-path ./components dotnet run
     ```
 
 7. In a separate terminal, invoke the application via Dapr:
