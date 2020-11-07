@@ -18,7 +18,7 @@ ENV SHELL="/bin/zsh" \
     NVS_HOME="/home/${USERNAME}/.nvs" \
     GOROOT="/usr/local/go" \
     GOPATH="/go" \
-    PATH="${NVM_DIR}/current/bin:${DOTNET_ROOT}/tools:${GOROOT}/bin:${GOPATH}/bin:${PATH}"
+    PATH="${NVM_DIR}/current/bin:/home/${USERNAME}/tools:${GOROOT}/bin:${GOPATH}/bin:${PATH}"
 
 COPY library-scripts/*.sh /tmp/library-scripts/
 
