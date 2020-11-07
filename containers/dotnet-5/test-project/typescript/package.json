@@ -1,0 +1,25 @@
+{
+	"name": "docker_web_app",
+	"private": true,
+	"version": "1.0.0",
+	"description": "Node.js on Docker",
+	"author": "First Last <first.last@example.com>",
+	"main": "out/server.js",
+	"scripts": {
+		"compile": "tsc -p tsconfig.json",
+		"start": "node out/server.js",
+		"test": " REGRESSION_TESTING=true npm start"
+	},
+	"dependencies": {
+		"express": "^4.16.1"
+	},
+	"devDependencies": {
+		"@types/express": "^4.16.0",
+		"@types/node": "^8.0.0",
+		"@typescript-eslint/eslint-plugin": "^2.31.0",
+		"@typescript-eslint/parser": "^2.31.0",
+		"vscode-nls-dev": "^3.3.1",
+		"eslint": "^6.0.0",
+		"typescript": "^3.8.3"
+	}
+}
