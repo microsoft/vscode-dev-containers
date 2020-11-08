@@ -20,17 +20,22 @@
     },
     // Add the IDs of extensions you want installed when the container is created
     "extensions": [
-        "dbaeumer.vscode-eslint",
-        "ms-vscode.vscode-typescript-tslint-plugin",
-        "ms-vscode.powershell",
-        "ms-vscode.azurecli",
-        "ms-dotnettools.csharp",
-        "golang.Go",
-        "ms-azuretools.vscode-docker",
-        "ms-kubernetes-tools.vscode-kubernetes-tools",
-	"GitHub.vscode-pull-request-github",
-	"MS-vsliveshare.vsliveshare",
-	"VisualStudioExptTeam.vscodeintellicode"
+		"ms-vscode.powershell",
+		"ms-vscode.azurecli",
+		"ms-dotnettools.csharp",
+		"golang.go",
+		"ms-azuretools.vscode-docker",
+		"ms-kubernetes-tools.vscode-kubernetes-tools",
+		"GitHub.vscode-pull-request-github",
+		"dbaeumer.vscode-eslint",
+		"ms-vscode.vscode-typescript-tslint-plugin",
+		"visualstudioexptteam.vscodeintellicode",
+		"ms-vsliveshare.vsliveshare",
+		"github.github-vscode-theme",
+		"eamodio.gitlens",
+		"amoosbr.markdown-nomnoml",
+		"davidanson.vscode-markdownlint",
+		"vscodevim.vim"
     ],
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
