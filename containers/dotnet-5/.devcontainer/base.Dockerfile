@@ -28,7 +28,7 @@ RUN apt-get update \
     # Install common utils
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     # Install Docker
-    && bash /tmp/library-scripts/docker-debian.sh \
+    && bash /tmp/library-scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}" \
     # Install Github CLI 
     && bash /tmp/library-scripts/github-debian.sh \
     # Install Azure CLI
@@ -79,3 +79,7 @@ RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg
 # Cleanup
 RUN apt-get autoremove -y && apt-get clean -y \
     && bash -c "rm -rf /dotnet-*.gz /var/lib/apt/lists/* /tmp/library-scripts"
+
+# Fire Docker script if needed along with Oryx's benv
+ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+CMD [ "sleep", "infinity" ]
