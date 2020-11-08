@@ -3,13 +3,12 @@
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
-            "VARIANT": "focal",
+            "VARIANT": "focal"
         }
     },
-    "workspaceFolder": "/workspace",
-    "remoteEnv": {
-        "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
-    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/workspace,type=bind,consistency=cached",
+    "workspaceFolder": "/home/vscode/workspace",
+    "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"]
     // Set *default* container specific settings.json values on container create
     "settings": {
         "terminal.integrated.shell.linux": "/bin/zsh",
@@ -28,7 +27,10 @@
         "ms-dotnettools.csharp",
         "golang.Go",
         "ms-azuretools.vscode-docker",
-        "ms-kubernetes-tools.vscode-kubernetes-tools"
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+	"GitHub.vscode-pull-request-github",
+	"MS-vsliveshare.vsliveshare",
+	"VisualStudioExptTeam.vscodeintellicode"
     ],
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
