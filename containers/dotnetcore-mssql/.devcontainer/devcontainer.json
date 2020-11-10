@@ -9,7 +9,7 @@
 		"terminal.integrated.shell.linux": "/bin/bash",
 		"mssql.connections": [
 			{
-				"server": "localhost,61433",
+				"server": "localhost,1433",
 				"database": "",
 				"authenticationType": "SqlLogin",
 				"user": "sa",
