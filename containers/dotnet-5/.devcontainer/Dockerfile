@@ -1,1 +1,1 @@
-FROM gruffta/dev-container-net5:linux
+FROM gruffta/dev-container-netfx:5.0
