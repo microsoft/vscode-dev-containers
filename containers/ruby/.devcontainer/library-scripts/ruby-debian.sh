@@ -6,7 +6,7 @@
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/ruby.md
 #
-# Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add rvm to rc files flag] [Install tools flag]
+# Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add to rc files flag] [Install tools flag]
 
 RUBY_VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}
@@ -57,8 +57,12 @@ fi
 
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
-        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+        echo "Updating /etc/bash.bashrc..."
+        echo -e "$1" >> /etc/bash.bashrc
+        if [ -d "/etc/zsh" ]; then
+            echo "Updating /etc/zsh/zshrc..."
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
     fi
 }
 
@@ -92,12 +96,41 @@ else
     su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm fix-permissions system"
     rm -rf ${GNUPGHOME}
 fi
+
 if [ "${INSTALL_RUBY_TOOLS}" = "true" ] && [ "${SKIP_GEM_INSTALL}" != "true" ]; then
-    su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && gem install ${DEFAULT_GEMS}"
+    # Non-root user may not have "gem" in path when script is run and no ruby version
+    # is installed by rvm, so handle this by using root's default gem in this case
+    ROOT_GEM="$(which gem)"
+    su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && \"$(which gem || ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
 fi
 
 # VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it
 updaterc "if ! grep rvm_silence_path_mismatch_check_flag \$HOME/.rvmrc > /dev/null 2>&1; then echo 'rvm_silence_path_mismatch_check_flag=1' >> \$HOME/.rvmrc; fi\nsource /usr/local/rvm/scripts/rvm"
+
+# Install rbenv/ruby-build for good measure
+git clone --depth=1 \
+    -c core.eol=lf \
+    -c core.autocrlf=false \
+    -c fsck.zeroPaddedFilemode=ignore \
+    -c fetch.fsck.zeroPaddedFilemode=ignore \
+    -c receive.fsck.zeroPaddedFilemode=ignore \
+    https://github.com/rbenv/rbenv.git /usr/local/share/rbenv
+ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
+updaterc 'eval "$(rbenv init -)"'
+git clone --depth=1 \
+    -c core.eol=lf \
+    -c core.autocrlf=false \
+    -c fsck.zeroPaddedFilemode=ignore \
+    -c fetch.fsck.zeroPaddedFilemode=ignore \
+    -c receive.fsck.zeroPaddedFilemode=ignore \
+    https://github.com/rbenv/ruby-build.git /usr/local/share/ruby-build
+mkdir -p /root/.rbenv/plugins
+ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
+if [ "${USERNAME}" != "root" ]; then
+    mkdir -p /home/${USERNAME}/.rbenv/plugins
+    chown -R ${USERNAME} /home/${USERNAME}/.rbenv
+    ln -s /usr/local/share/ruby-build /home/${USERNAME}/.rbenv/plugins/ruby-build
+fi
 
 # Clean up
 source /usr/local/rvm/scripts/rvm
