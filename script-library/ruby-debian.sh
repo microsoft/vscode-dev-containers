@@ -57,8 +57,12 @@ fi
 
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
-        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+        echo "Updating /etc/bash.bashrc..."
+        echo -e "$1" >> /etc/bash.bashrc
+        if [ -d "/etc/zsh" ]; then
+            echo "Updating /etc/zsh/zshrc..."
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
     fi
 }
 
@@ -92,8 +96,12 @@ else
     su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm fix-permissions system"
     rm -rf ${GNUPGHOME}
 fi
+
 if [ "${INSTALL_RUBY_TOOLS}" = "true" ] && [ "${SKIP_GEM_INSTALL}" != "true" ]; then
-    su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && gem install ${DEFAULT_GEMS}"
+    # Non-root user may not have "gem" in path when script is run and no ruby version
+    # is installed by rvm, so handle this by using root's default gem in this case
+    ROOT_GEM="$(which gem)"
+    su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && \"$(which gem || ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
 fi
 
 # VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it

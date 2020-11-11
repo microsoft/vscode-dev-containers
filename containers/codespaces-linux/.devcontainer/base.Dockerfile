@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/oryx/build:vso-20200706.2 as kitchensink
+FROM mcr.microsoft.com/oryx/build:vso-focal-20201110.1 as kitchensink
 
 ARG USERNAME=codespace
 ARG USER_UID=1000
@@ -23,21 +23,15 @@ ENV SHELL=/bin/bash \
     CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup" \
     SDKMAN_DIR="/usr/local/sdkman"
-ENV PATH="${NVM_DIR}/current/bin:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PATH}:${PIPX_BIN_DIR}"
+ENV PATH="${NVM_DIR}/current/bin:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PATH}:${PIPX_BIN_DIR}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/azcli-debian.sh library-scripts/common-debian.sh library-scripts/git-lfs-debian.sh library-scripts/github-debian.sh \
     library-scripts/kubectl-helm-debian.sh library-scripts/sshd-debian.sh setup-user.sh /tmp/scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    # Remove buster list to avoid unexpected errors given base image is stretch
-    && rm /etc/apt/sources.list.d/buster.list \
     # Run common script and setup user
     && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "false" "true" \
     && bash /tmp/scripts/setup-user.sh "${USERNAME}" "${PATH}" \
-    # Upgrade git to avoid security issue
-    && apt-get upgrade -yq git \
-    # Remove 'imagemagick imagemagick-6-common' due to http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10131
-    && apt-get purge -y imagemagick imagemagick-6-common \
     # Verify expected build and debug tools are present
     && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb \
     # Install tools and shells not in common script
@@ -50,18 +44,25 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Clean up
     && rm -rf /tmp/scripts/ && apt-get autoremove -y && apt-get clean -y
 
+# Install rvm, base gems
+COPY library-scripts/ruby-debian.sh /tmp/scripts/
+RUN chown -R ${USERNAME} /opt/ruby/*/lib /opt/ruby/*/bin \
+    && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
+    && apt-get clean -y && rm -rf /tmp/scripts
+
 # Build latest git from source
 COPY library-scripts/git-from-src-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/git-from-src-debian.sh "latest" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
-# Install PowerShell and setup .NET Core
+# Install PowerShell and setup .NET Core - PowerShell does not have a native package for Ubuntu 20.04, so use .net to do it
 COPY symlinkDotNetCore.sh /home/${USERNAME}/symlinkDotNetCore.sh
 COPY library-scripts/powershell-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/powershell-debian.sh \
-    # Hack to get dotnet core sdks in the right place - Oryx images do not put dotnet on the path because it will break AppService.
-    # The following script will put the dotnet's at /home/codespace/.dotnet folder where dotnet will look by default.
-    && sudo -u ${USERNAME} /bin/bash /home/${USERNAME}/symlinkDotNetCore.sh 2>&1 \
+RUN su ${USERNAME} -c 'bash /home/${USERNAME}/symlinkDotNetCore.sh' 2>&1 \
+    #TODO: Switch back to powershell-debian.sh once 7.1 GA is released
+    && su ${USERNAME} -c '/opt/dotnet/lts/dotnet tool install -g powershell' \
+    # && bash /tmp/scripts/powershell-debian.sh \
+    #
     && apt-get clean -y && rm -rf /home/${USERNAME}/symlinkDotNetCore.sh /tmp/scripts/
 
 # Setup Node.js, install NVM and NVS
@@ -79,11 +80,9 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     # Clean up
     && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git /tmp/scripts/
 
-# Install OpenJDK 8, latest Java LTS (11), gradle, maven
-COPY library-scripts/java-debian.sh library-scripts/maven-debian.sh library-scripts/gradle-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/java-debian.sh "lts" "${SDKMAN_DIR}" "${USERNAME}" "true" \
-    && bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
-    && bash /tmp/scripts/maven-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
+# Install OpenJDK 8, SDKMAN, gradle
+COPY library-scripts/gradle-debian.sh /tmp/scripts/
+RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
     && echo "Installing JDK 8..." \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -yq openjdk-8-jdk \
@@ -101,7 +100,10 @@ RUN bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}
 
 # Install Python tools
 COPY library-scripts/python-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "true" \ 
+#RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "true" \
+# TODO: Remove workaround
+RUN apt-get update && apt-get -y install python3-venv \
+    && bash /tmp/scripts/python-debian.sh "none" "/usr" "${PIPX_HOME}" "${USERNAME}" "true" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install xdebug, link composer
@@ -112,11 +114,6 @@ RUN yes | pecl install xdebug \
     && echo "xdebug.remote_autostart=on" >>  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
     && rm -rf /tmp/pear \
     && ln -s $(which composer.phar) /usr/local/bin/composer
-
-# Install rvm, Ruby, base gems
-COPY library-scripts/ruby-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/ruby-debian.sh "latest" "${USERNAME}" "true" \
-    && apt-get clean -y && rm -rf /tmp/scripts
 
 # [Option] Install Docker CLI
 ARG INSTALL_DOCKER="false"

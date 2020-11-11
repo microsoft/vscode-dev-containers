@@ -67,7 +67,7 @@ check "bandit" bandit --version
 check "virtualenv" virtualenv --version
 
 # Check Java tools
-check "java" java --version
+check "java" java -version
 check "sdkman" sdk --version
 check "gradle" gradle --version
 check "maven" mvn --version
