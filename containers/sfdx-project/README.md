@@ -10,6 +10,7 @@ Salesforce Extension for VS Code supports remote development and allows you to u
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Ubuntu |
 | *Languages, Platforms* | Salesforce CLI, Lightning Web Components, Apex, Aura, Java, Node.js, JavaScript, HTML, CSS, Git |
 
 ## Description

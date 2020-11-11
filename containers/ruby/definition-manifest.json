@@ -53,7 +53,9 @@
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
-			"nvm": "/usr/local/share/nvm"
+			"nvm": "/usr/local/share/nvm",
+			"rbenv": "/usr/local/share/rbenv",
+			"ruby-build": "/usr/local/share/ruby-build"
 		},
 		"gem": [
 			"rake",

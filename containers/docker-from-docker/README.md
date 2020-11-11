@@ -10,6 +10,7 @@
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian (though Ubuntu could be used instead) |
 | *Languages, platforms* | Any |
 
 > **Note:** There is also a [Docker Compose](../docker-from-docker-compose) variation of this same definition.
@@ -23,6 +24,8 @@ This example illustrates how you can do this by running CLI commands and using t
 ## How it works / adapting your existing dev container config
 
 The [`.devcontainer` folder in this repository](.devcontainer) contains a complete example that **you can simply change the `FROM` statement** to another Debian/Ubuntu based image to adapt to your own use (along with adding anything else you need).
+
+In addition, we recommend just **using [docker script](../../script-library/docs/docker.md) from the script library** as an easy way to get this running in your own existing container.
 
 However, this section will outline the how you can selectively add this functionality to your own Dockerfile in two parts: enabling access to Docker for the root user, and enabling it for a non-root user.
 
@@ -60,7 +63,41 @@ You can adapt your own existing development container Dockerfile to support this
 
 ### Enabling non-root access to Docker in the container
 
-To enable non-root access to Docker in the container, you use `socat` to proxy the Docker socket without affecting its permissions. This is safer than updating the permissions of the host socket itself since this would apply to all containers. You can also alias `docker` to be `sudo docker` in a `.bashrc` file, but this does not work in cases where the Docker socket is accessed directly.
+This can be a bit trickier than it might first seem if you're looking to ensure things run locally on macOS, Windows, and Linux as well as in Codespaces. The **[docker script](../../script-library/docs/docker.md)** used in this container **automatically detects the right thing** to do to enable this scenario, but it uses the following two approaches to accomplish it.
+
+In short, you can ignore this if you use the script, but here's what it does.
+
+#### Adding the user to a Docker group
+
+In some environments like Codespaces, this is relatively simple to achieve if the Docker socket already has a group other than root on it. To see if this is the case, open a terminal in VS Code when connected to the container to check:
+
+```bash
+stat -c '%g' /var/run/docker.sock
+```
+
+If you get a number other than `0`, you can simply add your non-root user to right user group. To do so:
+
+1. As before, follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one.
+
+2. Follow the [directions in the previous section](#enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI.
+
+3. Update your Dockerfile as follows to create a group with the right group ID and be sure the user is in it:
+
+    ```Dockerfile
+    ARG NONROOT_USER=vscode
+
+    RUN export SOCKET_GID=$(stat -c '%g' /var/run/docker.sock) \
+        && if [ "$(cat /etc/group | grep :${SOCKET_GID}:)" = "" ]; then \
+            groupadd --gid ${SOCKET_GID} docker-host; \
+        fi \
+        && if [ "$(id ${NONROOT_USER} | grep -E 'groups=.+\${SOCKET_GID}\(')" = "" ]; then \
+            usermod -aG ${SOCKET_GID} ${NONROOT_USER};
+        fi
+    ```
+
+#### Final fallback: socat
+
+However, if the host's socket is owned by the root user and root group (`root` `root`), you'll need to either change the group on the socket on the host or use `socat` to proxy the Docker socket without affecting its permissions. The `socat` option can be safer than updating the permissions of the host socket itself since this would apply to all containers. You can also alias `docker` to be `sudo docker` in a `.bashrc` file, but this does not work in cases where the Docker socket is accessed directly.
 
 Follow these directions to set up non-root access using `socat`:
 
@@ -109,11 +146,17 @@ That's it!
 
 ## Using bind mounts when working with Docker inside the container
 
-A common question that comes up is how you can use `bind` mounts from the Docker CLI from within the Codespace itself (e.g. via `-v`). The trick is that, since you're acutally using Docker sitting outside of the container, the paths will be different than those in the container. You need to use the **host**'s paths instead. A simple way to do this is to put `${localWorkspaceFolder}` in an environment variable that you then use when doing bind mounts inside the container. 
+> **Note:** Currently it is not possible to easily access container contents outside of the workspace folder when using this approach. You can, however, access workspace folder contents.
+
+In some cases, you may want to be able to mount the local workspace folder into a container you create while running from inside the dev container (e.g. using `-v` from the Docker CLI). The issue is that, with "Docker from Docker", containers are always created on the host. So, when you bind mount a folder into any container, you'll need to use the **host**'s paths.
+
+In GitHub Codespaces, the workspace folder is **available in the same place on the host as it is in the container,** so you can bind workspace contents as you would normally.
+
+However, for Remote - Containers, this is typically not the case. A simple way to work around this is to put `${localWorkspaceFolder}` in an environment variable that you then use when doing bind mounts inside the container.
 
 Add the following to `devcontainer.json`:
 
-```
+```json
 "remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" }
 ```
 

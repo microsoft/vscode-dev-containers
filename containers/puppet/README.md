@@ -10,6 +10,7 @@
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Ubuntu |
 | *Languages, platforms* | Puppet |
 
 ## Description

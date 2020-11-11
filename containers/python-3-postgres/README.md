@@ -10,6 +10,7 @@
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Python |
 
 ## Using this definition with an existing folder
@@ -43,7 +44,7 @@ network_mode: service:db
 
 ### Installing Node.js
 
-Given how frequently Python-based web applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/docker-compose.yml`.
+Given JavaScript front-end web client code written for use in conjunction with a Python back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/docker-compose.yml`.
 
 ```json
 args:

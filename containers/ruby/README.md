@@ -13,6 +13,7 @@
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Ruby |
 
 ## Using this definition with an existing folder
@@ -41,7 +42,7 @@ Alternatively, you can use the contents of `base.Dockerfile` to fully customize 
 
 ### Installing Node.js
 
-Given how frequently Ruby-based web applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+Given JavaScript front-end web client code written for use in conjunction with a Ruby back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
 ```json
 "args": {

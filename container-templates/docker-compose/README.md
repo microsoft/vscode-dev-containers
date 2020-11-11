@@ -10,6 +10,7 @@ _[A short description of the the purpose of the definition goes here.]_
 | _Definition type_           | Docker Compose                                   |
 | _Works in Codespaces_       | Yes / No                                         |
 | _Container host OS support_ | Linux, macOS, Windows                            |
+| _Container OS_              | Debian                                           |
 | _Languages, platforms_      | [Languages and platforms the container supports] |
 
 ## [Optional] Description

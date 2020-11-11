@@ -1,8 +1,13 @@
 {
-	"variants": ["buster", "stretch"],
+	"variants": ["buster", "focal", "bionic", "stretch"],
 	"build": {
 		"latest": true,
-		"parent": "debian",
+		"parent": {
+			"buster": "debian", 
+			"stretch": "debian", 
+			"focal": "ubuntu",
+			"bionic": "ubuntu"
+		},
 		"rootDistro": "debian",
 		"tags": [
 			"cpp:${VERSION}-${VARIANT}"

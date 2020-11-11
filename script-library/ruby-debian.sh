@@ -6,7 +6,7 @@
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/ruby.md
 #
-# Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add rvm to rc files flag] [Install tools flag]
+# Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add to rc files flag] [Install tools flag]
 
 RUBY_VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}
@@ -106,6 +106,31 @@ fi
 
 # VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it
 updaterc "if ! grep rvm_silence_path_mismatch_check_flag \$HOME/.rvmrc > /dev/null 2>&1; then echo 'rvm_silence_path_mismatch_check_flag=1' >> \$HOME/.rvmrc; fi\nsource /usr/local/rvm/scripts/rvm"
+
+# Install rbenv/ruby-build for good measure
+git clone --depth=1 \
+    -c core.eol=lf \
+    -c core.autocrlf=false \
+    -c fsck.zeroPaddedFilemode=ignore \
+    -c fetch.fsck.zeroPaddedFilemode=ignore \
+    -c receive.fsck.zeroPaddedFilemode=ignore \
+    https://github.com/rbenv/rbenv.git /usr/local/share/rbenv
+ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
+updaterc 'eval "$(rbenv init -)"'
+git clone --depth=1 \
+    -c core.eol=lf \
+    -c core.autocrlf=false \
+    -c fsck.zeroPaddedFilemode=ignore \
+    -c fetch.fsck.zeroPaddedFilemode=ignore \
+    -c receive.fsck.zeroPaddedFilemode=ignore \
+    https://github.com/rbenv/ruby-build.git /usr/local/share/ruby-build
+mkdir -p /root/.rbenv/plugins
+ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
+if [ "${USERNAME}" != "root" ]; then
+    mkdir -p /home/${USERNAME}/.rbenv/plugins
+    chown -R ${USERNAME} /home/${USERNAME}/.rbenv
+    ln -s /usr/local/share/ruby-build /home/${USERNAME}/.rbenv/plugins/ruby-build
+fi
 
 # Clean up
 source /usr/local/rvm/scripts/rvm

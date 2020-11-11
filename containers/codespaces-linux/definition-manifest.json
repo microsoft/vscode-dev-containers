@@ -73,7 +73,9 @@
 			"Oh My Zsh!": "/home/codespace/.oh-my-zsh",
 			"Oh My Bash!": "/home/codespace/.oh-my-bash",
 			"nvm": "/home/codespace/.nvm",
-			"nvs": "/home/codespace/.nvs"
+			"nvs": "/home/codespace/.nvs",
+			"rbenv": "/usr/local/share/rbenv",
+			"ruby-build": "/usr/local/share/ruby-build"
 		},
 		"gem": [
 			"rake",
@@ -127,10 +129,6 @@
 			"rvm": {
 				"versionCommand": "rvm --version | grep -oE -m 1 'rvm\\s[^ ]+' | sed -n '/^rvm\\s/s///p'",
 				"downloadUrl": "https://github.com/rvm/rvm"
-			},
-			"Ruby": {
-				"versionCommand": "ruby --version | grep -oE 'ruby\\s[^ ]+' | sed -n '/ruby\\s/s///p'",
-				"downloadUrl": "https://www.ruby-lang.org/en/downloads/"
 			}
 		},
 		"manual": [{

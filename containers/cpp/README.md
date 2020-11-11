@@ -9,18 +9,19 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/cpp |
-| *Available image variants* | mcr.microsoft.com/vscode/devcontainers/cpp:stretch <br /> mcr.microsoft.com/vscode/devcontainers/cpp:buster |
+| *Available image variants* | stretch, buster, bionic, focal |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian, Ubuntu |
 | *Languages, platforms* | C++ |
 
 ## Using this definition with an existing folder
 
-While the definition itself works unmodified, you can select the version of Debian the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+While the definition itself works unmodified, you can select the version of Debian or Ubuntu the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
-"args": { "VARIANT": "stretch" }
+"args": { "VARIANT": "focal" }
 ```
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
@@ -29,6 +30,8 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/cpp:debian` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:buster` (or `debian-10`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:stretch` (or `debian-9`)
+- `mcr.microsoft.com/vscode/devcontainers/cpp:bionic` (or `ubuntu-18.04`)
+- `mcr.microsoft.com/vscode/devcontainers/cpp:focal` (or `ubuntu-20.04`)
 
 Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
 

@@ -10,6 +10,7 @@ Develop PHP based applications with MariaDB (MySQL Compatible).  Includes necess
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | PHP, MariaDB (MySQL Compatible) |
 
 ## Description

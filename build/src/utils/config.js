@@ -36,12 +36,12 @@ async function loadConfig(repoPath) {
         allDefinitionPaths[definitionId] = {
             path: definitionPath,
             relativeToRootPath: path.relative(repoPath, definitionPath)
-       }
+        }
         // If definition-manifest.json exists, load it
-        const manifestPath =  path.join(definitionPath, definitionBuildConfigFile);
-       if (await asyncUtils.exists(manifestPath)) {
+        const manifestPath = path.join(definitionPath, definitionBuildConfigFile);
+        if (await asyncUtils.exists(manifestPath)) {
             await loadDefinitionManifest(manifestPath, definitionId);
-       }   
+        }
     });
 
     // Load repo containers to build
@@ -109,7 +109,7 @@ function getConfig(property, defaultVal) {
 }
 
 // Loads definition-manifest.json and adds it to config
-async function loadDefinitionManifest(manifestPath, definitionId)  {
+async function loadDefinitionManifest(manifestPath, definitionId) {
     const buildJson = await jsonc.read(manifestPath);
     if (buildJson.variants) {
         config.definitionVariants[definitionId] = buildJson.variants;
@@ -127,7 +127,7 @@ async function loadDefinitionManifest(manifestPath, definitionId)  {
 
 // Returns location of the definition based on Id
 function getDefinitionPath(definitionId, relative) {
-    return relative ? allDefinitionPaths[definitionId].relativeToRootPath : allDefinitionPaths[definitionId].path 
+    return relative ? allDefinitionPaths[definitionId].relativeToRootPath : allDefinitionPaths[definitionId].path
 }
 
 function getAllDefinitionPaths() {
@@ -268,7 +268,8 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
     definitionsToSkip = definitionsToSkip || [];
 
     // Bucket definitions by parent
-    const parentBuckets = {}
+    const parentBuckets = {};
+    const dupeBuckets = [];
     const noParentList = [];
     let total = 0;
     for (let definitionId in config.definitionBuildSettings) {
@@ -276,24 +277,13 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
         if (typeof config.definitionBuildSettings[definitionId] === 'object') {
             if (definitionsToSkip.indexOf(definitionId) < 0) {
                 let parentId = config.definitionBuildSettings[definitionId].parent;
-                if (typeof parentId !== 'undefined') {
-
-                    // Handle parents that have parents
-                    if(config.definitionBuildSettings[parentId].parent) {
-                        const oldParentId=parentId;
-                        parentId=config.definitionBuildSettings[parentId].parent;
-                        parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
-                        if(parentBuckets[parentId].indexOf(oldParentId) < 0) {
-                            parentBuckets[parentId].push(oldParentId); 
-                        }
+                if (parentId) {
+                    // if multi-parent, merge the buckets
+                    if (typeof parentId !== 'string') {
+                        parentId = createMultiParentBucket(parentId, parentBuckets, dupeBuckets);
                     }
-
-                    // Add to parent bucket
-                    parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
-                    if(parentBuckets[parentId].indexOf(definitionId) < 0) {
-                        parentBuckets[parentId].push(definitionId);    
-                    }
-            } else {
+                    bucketDefinition(definitionId, parentId, parentBuckets);
+                } else {
                     noParentList.push(definitionId);
                 }
                 total++;
@@ -302,9 +292,13 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
             }
         }
     }
+    // Remove duplicate buckets that are no longer needed
+    dupeBuckets.forEach((currentBucketId) => {
+        parentBuckets[currentBucketId] = undefined;
+    });
     // Remove parents from no parent list - they are in their buckets already
     for (let parentId in parentBuckets) {
-        if (typeof parentId !== 'undefined') {
+        if (parentId) {
             noParentList.splice(noParentList.indexOf(parentId), 1);
         }
     }
@@ -365,10 +359,61 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
     return allPages[page - 1];
 }
 
+// Handle multi-parent definitions
+function createMultiParentBucket(variantParentMap, parentBuckets, dupeBuckets) {
+    // Get parent of first variant
+    const parentId = variantParentMap[Object.keys(variantParentMap)[0]];
+    const firstParentBucket =  parentBuckets[parentId] || [parentId];
+    // Merge other parent buckets into the first parent
+    for (let currentVariant in variantParentMap) {
+        const currentParentId = variantParentMap[currentVariant];
+        if (currentParentId !== parentId) {
+            const currentParentBucket = parentBuckets[currentParentId];
+            // Merge buckets if not already merged
+            if (currentParentBucket && dupeBuckets.indexOf(currentParentId) < 0) {
+                currentParentBucket.forEach((current) => firstParentBucket.push(current));
+            } else if (firstParentBucket.indexOf(currentParentId)<0) {
+                firstParentBucket.push(currentParentId);
+            }
+            dupeBuckets.push(currentParentId);
+            parentBuckets[currentParentId]=firstParentBucket;
+        }
+    }
+    parentBuckets[parentId] = firstParentBucket;
+    return parentId;
+}
+
+// Add definition to correct parent bucket when sorting
+function bucketDefinition(definitionId, parentId, parentBuckets) {
+    // Handle parents that have parents
+    // TODO: Recursive parents rather than just parents-of-parents
+    if (config.definitionBuildSettings[parentId].parent) {
+        const oldParentId = parentId;
+        parentId = config.definitionBuildSettings[parentId].parent;
+        parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
+        if (parentBuckets[parentId].indexOf(oldParentId) < 0) {
+            parentBuckets[parentId].push(oldParentId);
+        }
+    }
+
+    // Add to parent bucket
+    parentBuckets[parentId] = parentBuckets[parentId] || [parentId];
+    if (parentBuckets[parentId].indexOf(definitionId) < 0) {
+        parentBuckets[parentId].push(definitionId);
+    }
+}
+
 // Get parent tag for a given child definition
 function getParentTagForVersion(definitionId, version, registry, registryPath, variant) {
-    const parentId = config.definitionBuildSettings[definitionId].parent;
-    return parentId ? getTagsForVersion(parentId, version, registry, registryPath, variant)[0] : null;
+    let parentId = config.definitionBuildSettings[definitionId].parent;
+    if (parentId) {
+        if(typeof parentId !== 'string') {
+            // Use variant to figure out correct parent, or return first if no variant
+            parentId = variant ? parentId[variant] : parentId[Object.keys(parentId)[0]];
+        }
+        return getTagsForVersion(parentId, version, registry, registryPath, variant)[0];
+    }
+    return null;
 }
 
 // Takes an existing tag and updates it with a new registry version and optionally a variant

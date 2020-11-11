@@ -1,15 +1,16 @@
-# Dapr with Node.js 12 & TypeScript
+# Dapr with Node.js & TypeScript
 
 ## Summary
 
-*Develop Dapr applications using Node.js 12 and TypeScript. Includes Dapr, Node.js, eslint, yarn, and the TypeScript compiler.*
+*Develop Dapr applications using Node.js and TypeScript. Includes Dapr, Node.js, eslint, yarn, and the TypeScript compiler.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The Visual Studio Container Tools team |
 | *Definition type* | Docker Compose |
-| *Works in Codespaces* | No ([#457](https://github.com/MicrosoftDocs/vsonline/issues/457)) |
+| *Works in Codespaces* | No |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Node.js, TypeScript, Dapr |
 
 ## Dapr Notes

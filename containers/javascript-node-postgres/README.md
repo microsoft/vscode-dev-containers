@@ -10,6 +10,7 @@
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Node.js, JavaScript, PostgreSQL DB |
 
 ## Description

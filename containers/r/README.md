@@ -10,6 +10,7 @@
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | No |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Ubuntu |
 | *Languages, platforms* | R |
 
 ## Using this definition with an existing folder

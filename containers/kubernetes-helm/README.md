@@ -8,8 +8,9 @@
 |----------|-------|
 | *Contributors* | The VS Code team and Phetsinorath William |
 | *Definition type* | Dockerfile |
-| *Works in Codespaces* | No |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Any |
 
 ## Description
@@ -18,7 +19,7 @@ Dev containers can be useful for all types of applications including those that 
 
 This example illustrates how you can do this by using CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker), the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) right from inside your dev container.  This definition builds up from the [docker-from-docker](../docker-from-docker) container definition to add Kubernetes and Helm support.  It installs the Docker and Kubernetes extensions inside the container so you can use its full feature set with your project.
 
-The dev container also syncs your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container with the necessary modifications to allow it to interact with anything running on your local machine whenever the container or a terminal window is started. This includes interacting with a Kubernetes cluster managed through Docker Desktop or a local Minikube install.
+When using Remote - Containers, the dev container also syncs your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container with the necessary modifications to allow it to interact with anything running on your local machine whenever the container or a terminal window is started. This includes interacting with a Kubernetes cluster managed through Docker Desktop or a local Minikube install. (Note that this does **not** happen when using **GitHub Codespaces**.)
 
 ## How it works / adapting your existing dev container config
 
@@ -74,7 +75,7 @@ You can adapt your own existing development container Dockerfile to support this
     RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
     ```
 
-3. Finally, we need to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. Manually copy the [`copy-kube-config.sh` script](.devcontainer/copy-kube-config.sh) from the `.devcontainer` folder in this repo folder into the same folder as your `Dockerfile` and then update your `Dockerfile` to use it from your `/root/.bashrc` and/or `/root/.zshrc`. 
+3. Finally, we need to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. Manually copy the [`copy-kube-config.sh` script](.devcontainer/copy-kube-config.sh) from the `.devcontainer` folder in this repo folder into the same folder as your `Dockerfile` and then update your `Dockerfile` to use it from your `/root/.bashrc` and/or `/root/.zshrc`.
 
     ```Dockerfile
     COPY copy-kube-config.sh /usr/local/share/
@@ -83,9 +84,43 @@ You can adapt your own existing development container Dockerfile to support this
 
 4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
-### Enabling non-root access in the container
+### Enabling non-root access to Docker in the container
 
-To enable non-root access, you can use `socat` to proxy the Docker socket without affecting its permissions. This is safer than updating the permissions of the host socket itself since this would apply to all containers. You then also need to copy the `.bashrc` script into the non-root user's home folder as well.
+This can be a bit trickier than it might first seem if you're looking to ensure things run locally on macOS, Windows, and Linux as well as in Codespaces. The **[docker script](../../script-library/docs/docker.md)** used in this container **automatically detects the right thing** to do to enable this scenario, but it uses the following two approaches to accomplish it.
+
+In short, you can ignore this if you use the script, but here's what it does.
+
+#### Adding the user to a Docker group
+
+In some environments like Codespaces, this is relatively simple to achieve if the Docker socket already has a group other than root on it. To see if this is the case, open a terminal in VS Code when connected to the container to check:
+
+```bash
+stat -c '%g' /var/run/docker.sock
+```
+
+If you get a number other than `0`, you can simply add your non-root user to right user group. To do so:
+
+1. As before, follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one.
+
+2. Follow the [directions in the previous section](#enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI.
+
+3. Update your Dockerfile as follows to create a group with the right group ID and be sure the user is in it:
+
+    ```Dockerfile
+    ARG NONROOT_USER=vscode
+
+    RUN export SOCKET_GID=$(stat -c '%g' /var/run/docker.sock) \
+        && if [ "$(cat /etc/group | grep :${SOCKET_GID}:)" = "" ]; then \
+            groupadd --gid ${SOCKET_GID} docker-host; \
+        fi \
+        && if [ "$(id ${NONROOT_USER} | grep -E 'groups=.+\${SOCKET_GID}\(')" = "" ]; then \
+            usermod -aG ${SOCKET_GID} ${NONROOT_USER};
+        fi
+    ```
+
+#### Final fallback: socat
+
+However, if the host's socket is owned by the root user and root group (`root` `root`), you'll need to either change the group on the socket on the host or use `socat` to proxy the Docker socket without affecting its permissions. The `socat` option can be safer than updating the permissions of the host socket itself since this would apply to all containers. You can also alias `docker` to be `sudo docker` in a `.bashrc` file, but this does not work in cases where the Docker socket is accessed directly.
 
 Follow these directions to set up non-root access using `socat`:
 

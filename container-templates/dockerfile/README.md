@@ -2,15 +2,16 @@
 
 ## Summary
 
-*[A short description of the the purpose of the definition goes here.]*
+_[A short description of the the purpose of the definition goes here.]_
 
-| Metadata | Value |  
-|----------|-------|
-| *Contributors* | [Your name, email and/or GitHub profile] |
-| *Definition type* | Dockerfile |
-| *Works in Codespaces* | Yes / No |
-| *Container host OS support* | Linux, macOS, Windows |
-| *Languages, platforms* | [Languages and platforms the container supports] |
+| Metadata                    | Value                                            |
+| --------------------------- | ------------------------------------------------ |
+| _Contributors_              | [Your name, email and/or GitHub profile]         |
+| _Definition type_           | Dockerfile                                       |
+| _Works in Codespaces_       | Yes / No                                         |
+| _Container host OS support_ | Linux, macOS, Windows                            |
+| _Container OS_              | [OS used by continer - e.g. Debian]              |
+| _Languages, platforms_      | [Languages and platforms the container supports] |
 
 ## [Optional] Description
 

@@ -9,10 +9,11 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:alpine |
-| *Available image variants* |  3.10, 3.11, 3.12 |
+| *Available image variants* | 3.10, 3.11, 3.12 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | No ([#458](https://github.com/MicrosoftDocs/vsonline/issues/458)) |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Alpine Linux |
 | *Languages, platforms* | Any |
 
 ## Using this definition with an existing folder
