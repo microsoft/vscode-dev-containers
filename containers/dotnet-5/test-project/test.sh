@@ -37,7 +37,6 @@ checkExtension() {
 
 # Execute .bashrc with the SYNC_LOCALHOST_KUBECONFIG set
 export SYNC_LOCALHOST_KUBECONFIG=true 
-exec bash
 
 # Run Docker init script
 /usr/local/share/docker-init.sh
@@ -57,7 +56,7 @@ check "/home/vscode" [ -d "/home/vscode" ]
 # docker and kubernetes tests
 checkExtension "ms-azuretools.vscode-docker"
 checkExtension "ms-kubernetes-tools.vscode-kubernetes-tools"
-check "docker" docker ps -a
+check "docker" sudo docker ps -a
 check "docker-compose" docker-compose --version
 check "docker-socket" ls -l /var/run/docker.sock 
 check "kube-config-mount" ls -l /usr/local/share/kube-localhost
@@ -74,23 +73,23 @@ checkExtension "ms-vscode.powershell"
 check "powershell" pwsh hello.ps1
 # Go Tests
 checkExtension "golang.Go"
-check "go" go --version
+check "go" go version
 # NodeJS tests
 checkExtension "dbaeumer.vscode-eslint"
 check "node" node --version
 check "nvm" nvm --version
 check "yarn" yarn install --cd-datadir ./nodejs
-check "npm" (cd nodejs; npm install)
+check "npm" "bash -c cd nodejs && npm install"
 check "eslint" "eslint nodejs/server.js"
-check "test-project/nodejs" (cd nodejs; npm run test)
+check "test-project/nodejs" "bash -c cd nodejs && npm run test"
 # TypeScript tests
 checkExtension "ms-vscode.vscode-typescript-tslint-plugin"
 check "yarn" yarn install --cd-datadir ./typescript
-check "npm" (cd typescript; npm install)
+check "npm" "bash -c cd typescript && npm install"
 check "tslint" "tslint typescript/src/server.ts"
 check "eslint" "eslint --no-eslintrc -c typescript/.eslintrc.json typescript/src/server.ts"
-check "typescript" (cd typescript; npm run compile)
-check "test-project/typescript" (cd typescript; npm run test)
+check "typescript" "bash -c cd typescript && npm run compile"
+check "test-project/typescript" "bash -c cd typescript && npm run test"
 
 
 # Report result
