@@ -1,8 +1,8 @@
-# .Net 5 (Release Candidate) [WIP]
+# .Net 5 
 
 ## Summary
 
-*A Ubuntu container with .net core 5 RC, Git, docker, nodejs, typescript, go and other common utilities installed.*
+*A Ubuntu container with .net 5 GA, also contains Git, docker, nodejs, typescript, go and other common utilities installed.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -25,7 +25,7 @@ While the definition itself works unmodified, you can select the version of Ubun
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
-- `gruffta/dev-container-net5:linux` (latest)
+- `gruffta/dev-container-netfx:5.0` (latest)
 
 Alternatively, you can use the contents of the `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
