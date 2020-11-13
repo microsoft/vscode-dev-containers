@@ -114,7 +114,7 @@ git clone --depth=1 \
     -c fsck.zeroPaddedFilemode=ignore \
     -c fetch.fsck.zeroPaddedFilemode=ignore \
     -c receive.fsck.zeroPaddedFilemode=ignore \
-    https://github.com/rbenv/rbenv.git /usr/local/share/rbenv 2>&1
+    https://github.com/rbenv/rbenv.git /usr/local/share/rbenv
 ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
 updaterc 'eval "$(rbenv init -)"'
 git clone --depth=1 \
@@ -123,7 +123,7 @@ git clone --depth=1 \
     -c fsck.zeroPaddedFilemode=ignore \
     -c fetch.fsck.zeroPaddedFilemode=ignore \
     -c receive.fsck.zeroPaddedFilemode=ignore \
-    https://github.com/rbenv/ruby-build.git /usr/local/share/ruby-build 2>&1
+    https://github.com/rbenv/ruby-build.git /usr/local/share/ruby-build
 mkdir -p /root/.rbenv/plugins
 ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
 if [ "${USERNAME}" != "root" ]; then

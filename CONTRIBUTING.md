@@ -147,7 +147,7 @@ Finally, commit your changes and submit a PR - we'll take a look at it, provide 
 
 ### Speeding up container provisioning
 
-While using a `Dockerfile` is a convenient way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image to be built by anyone using it.  If your definition is stable, we strongly recommend building and publishing your image to [DockerHub](https://hub.docker.com) or [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) instead. 
+While using a `Dockerfile` is a convenient way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image to be built by anyone using it.  If your definition is stable, we strongly recommend building and publishing your image to [GitHub Container Registry](https://docs.github.com/en/free-pro-team@latest/packages/getting-started-with-github-container-registry/about-github-container-registry) instead. 
 
 Once you've published your container image, just update `devcontainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
 
