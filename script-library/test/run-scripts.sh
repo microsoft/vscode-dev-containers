@@ -5,7 +5,7 @@ DISTRO=${2:-"debian"}
 USE_DEFAULTS=${3:-"true"}
 USERNAME=${4:-"vscode"}
 RUN_COMMON_SCRIPT=${5:-"true"}
-UPGRADE_PAGKES=${6:-"true"}
+UPGRADE_PACKAGES=${6:-"true"}
 
 set -e
 
