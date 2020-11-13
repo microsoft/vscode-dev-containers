@@ -59,10 +59,7 @@ RUN bash /tmp/scripts/git-from-src-debian.sh "latest" \
 COPY symlinkDotNetCore.sh /home/${USERNAME}/symlinkDotNetCore.sh
 COPY library-scripts/powershell-debian.sh /tmp/scripts/
 RUN su ${USERNAME} -c 'bash /home/${USERNAME}/symlinkDotNetCore.sh' 2>&1 \
-    #TODO: Switch back to powershell-debian.sh once 7.1 GA is released
-    && su ${USERNAME} -c '/opt/dotnet/lts/dotnet tool install -g powershell' \
-    # && bash /tmp/scripts/powershell-debian.sh \
-    #
+    && bash /tmp/scripts/powershell-debian.sh \
     && apt-get clean -y && rm -rf /home/${USERNAME}/symlinkDotNetCore.sh /tmp/scripts/
 
 # Setup Node.js, install NVM and NVS
@@ -81,7 +78,7 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git /tmp/scripts/
 
 # Install OpenJDK 8, SDKMAN, gradle
-COPY library-scripts/gradle-debian.sh /tmp/scripts/
+COPY library-scripts/java-debian.sh library-scripts/gradle-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
     && echo "Installing JDK 8..." \
     && export DEBIAN_FRONTEND=noninteractive \
