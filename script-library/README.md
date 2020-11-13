@@ -7,8 +7,8 @@ This folder contains a set of scripts that can be referenced by Dockerfiles in d
 Script names end in the Linux distribution "tree" they support. The majority are for Ubuntu/Debian.
 
 - **Debian or Ubuntu**: `-debian`
-- **CentOS, RHEL**: `-redhat` (when the `yum` package manager is available)
 - **Alpine Linux**: `-alpine`
+- **CentOS, RHEL**: `-redhat` (when the `yum` package manager is available - usually community supported).
 
 Some scripts have special installation instructions (like `desktop-lite-debian.sh`). Consult the following documents for more information (in order of the script name):
 
