@@ -6,6 +6,8 @@
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/docker.md
 #
+# Community supported RedHat based version of docker-debian.sh
+#
 # Syntax: ./docker-redhat.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user]
 
 ENABLE_NONROOT_DOCKER=${1:-"true"}

@@ -4,7 +4,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, CentOS/RHEL 7+, Alpine 3.9+ and downstream distros.
+**OS support**: Debian 9+, Ubuntu 16.04+, Alpine 3.9+, CentOS/RHEL 7+ (community supported) and downstream distros.
 
 ## Syntax
 
@@ -13,6 +13,8 @@
 ./common-redhat.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My *! flag]
 ./common-alpine.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Install Oh My *! flag]
 ```
+
+*Note that `common-redhat.sh` is community supported.*
 
 |Argument|Default|Description|
 |--------|-------|-----------|

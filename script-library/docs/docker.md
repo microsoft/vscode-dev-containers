@@ -4,14 +4,16 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 16.04+, CentOS/RHEL 7+ (community supported) and downstream distros.
 
 ## Syntax
 
 ```text
-./docker-debian.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user]
+./docker-debian.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user] [Use Moby]
 ./docker-redhat.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user]
 ```
+
+*Note that `docker-redhat.sh` is community supported.*
 
 |Argument|Default|Description|
 |--------|-------|-----------|
@@ -19,6 +21,7 @@
 |Source socket|`/var/run/docker-host.sock`| Location that the host's Docker socket has been mounted in the container.|
 |Target socket|`/var/run/docker.sock`| Location within the container that the Docker CLI will expect to find the Docker socket with permissions that allow the non-root user to access it.|
 |Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|Use Moby|`true`| Specifies that a build of the open source [Moby CLI](https://github.com/moby/moby/tree/master/cli) should be used instead of the Docker CLI distribution of it. |
 
 ## Usage
 

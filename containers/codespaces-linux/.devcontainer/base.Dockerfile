@@ -112,14 +112,10 @@ RUN yes | pecl install xdebug \
     && rm -rf /tmp/pear \
     && ln -s $(which composer.phar) /usr/local/bin/composer
 
-# [Option] Install Docker CLI
-ARG INSTALL_DOCKER="false"
+# Install Docker (Moby) CLI
+ARG INSTALL_DOCKER="true"
 COPY library-scripts/docker-debian.sh /tmp/scripts/
-RUN if [ "${INSTALL_DOCKER}" = "true" ]; then \
-        bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}"; \
-    else \
-        echo '#!/bin/bash\nexec "$@"' > /usr/local/share/docker-init.sh && chmod +x /usr/local/share/docker-init.sh; \
-    fi \
+RUN bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}" "true"; \
     && rm -rf /tmp/scripts && apt-get clean -y
 
 # Fire Docker script if needed along with Oryx's benv
