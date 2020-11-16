@@ -57,9 +57,13 @@ See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker
 
 ### Supporting bind mounts from the workspace folder
 
-A common question that comes up is how you can use `bind` mounts from the Docker CLI from within the Codespace itself (e.g. via `-v`). The trick is that, since you're acutally using Docker sitting outside of the container, the paths will be different than those in the container. You need to use the **host**'s paths instead.
+A common question that comes up is how you can use `bind` mounts from the Docker CLI from within the Codespace itself (e.g. via `-v`). The trick is that, since you're actually using Docker sitting outside of the container, the paths will be different than those in the container. You need to use the **host**'s paths instead.
 
 > **Note:** The docker-from-docker approach does not currently enable bind mounting locations outside of the workspace folder.
+
+#### GitHub Codespaces
+
+In GitHub Codespaces, the workspace folder should work with bind mounts by default, so no further action is required.
 
 #### Remote - Containers
 
@@ -76,44 +80,3 @@ Then reference the env var when running Docker commands from the terminal inside
 ```bash
 docker run -it --rm -v ${LOCAL_WORKSPACE_FOLDER}:/workspace debian bash
 ```
-
-#### GitHub Codespaces
-
-In GitHub Codespaces, you can make this a bit more transparent so that just bind mounting the workspace folder functions without problem.
-
-> **Note:** This is a short term workaround that should be resolved in the core GitHub Codespaces service over time.
-
-Create file called `.devcontainer/fix-bind-mount.sh` in your codespace with the following contents:
-
-```bash
-#!/bin/bash
-if [ "${CODESPACES}" != "true" ]; then
-    echo 'Not in a codespace. Aborting.'
-    exit 0
-fi
-
-WORKSPACE_PATH_IN_CONTAINER=${1:-"$HOME/workspace"}
-shift
-WORKSPACE_PATH_ON_HOST=${2:-"/var/lib/docker/vsonlinemount/workspace"}
-shift
-VM_CONTAINER_WORKSPACE_PATH=/vm-host/$WORKSPACE_PATH_IN_CONTAINER
-VM_CONTAINER_WORKSPACE_BASE_FOLDER=$(dirname $VM_CONTAINER_WORKSPACE_PATH)
-VM_HOST_WORKSPACE_PATH=/vm-host/$WORKSPACE_PATH_ON_HOST
-
-echo -e "Workspace path in container: ${WORKSPACE_PATH_IN_CONTAINER}\nWorkspace path on host: ${WORKSPACE_PATH_ON_HOST}"
-docker run --rm -v /:/vm-host alpine sh -c "\
-    if [ -d "${VM_CONTAINER_WORKSPACE_PATH}" ]; then echo \"${WORKSPACE_PATH_IN_CONTAINER} already exists on host. Aborting.\" && return 0; fi
-    apk add coreutils > /dev/null \
-    && mkdir -p $VM_CONTAINER_WORKSPACE_BASE_FOLDER \
-    && cd $VM_CONTAINER_WORKSPACE_BASE_FOLDER \
-    && ln -s \$(realpath --relative-to='.' $VM_HOST_WORKSPACE_PATH) .\
-    && echo 'Symlink created!'"
-```
-
-Each time you **start** your codespace, run the script:
-
-```bash
-bash .devcontainer/fix-bind-mount.sh
-```
-
-That's it!

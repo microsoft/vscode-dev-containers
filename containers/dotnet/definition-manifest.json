@@ -1,15 +1,16 @@
 {
-	"variants": ["3.1","2.1"],
+	"variants": ["5.0", "3.1", "2.1"],
 	"build": {
 		"latest": "true",
 		"rootDistro": "debian",
 		"tags": [
-			"dotnetcore:${VERSION}-${VARIANT}"
+			"dotnetcore:${VERSION}-${VARIANT}",
+			"dotnet:${VERSION}-${VARIANT}"
 		]
 	},
 	"dependencies": {
-		"image": "mcr.microsoft.com/dotnet/core/sdk:${VARIANT}-bionic",
-		"imageLink": "https://hub.docker.com/_/microsoft-dotnet-core-sdk",
+		"image": "mcr.microsoft.com/dotnet/sdk:${VARIANT}-focal",
+		"imageLink": "https://hub.docker.com/_/microsoft-dotnet-sdk",
 		"debian": [
 			"apt-utils",
 			"git",
