@@ -39,13 +39,6 @@ done
 
 if [ $sqlfiles == "true" ]
 then
-    echo "installing mssql-tools"
-    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-    curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list | tee /etc/apt/sources.list.d/msprod.list
-    apt-get update
-    apt-get -y install unixodbc-dev
-    ACCEPT_EULA=Y apt-get -y install msodbcsql17
-    ACCEPT_EULA=Y apt-get -y install mssql-tools
     for f in $sqlpath/*
     do
         if [ $f == $sqlpath/*".sql" ]
@@ -58,16 +51,6 @@ fi
 
 if [ $dacpac == "true" ] 
 then
-    echo "installing sqlpackage"
-    apt-get -y install wget
-    apt-get -y install libunwind8
-    apt-get -y install libicu60
-    apt-get -y install unzip
-    wget -O sqlpackage.zip "https://aka.ms/sqlpackage-linux"
-    mkdir /opt/sqlpackage
-    unzip sqlpackage.zip -d /opt/sqlpackage 
-    rm sqlpackage.zip
-    chmod a+x /opt/sqlpackage/sqlpackage
     for f in $dacpath/*
     do
         if [ $f == $dacpath/*".dacpac" ]
