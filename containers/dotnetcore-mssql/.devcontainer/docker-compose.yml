@@ -32,9 +32,8 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    build:
-      context: ./mssql
-      dockerfile: Dockerfile
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: unless-stopped
     environment:
       SA_PASSWORD: P@ssw0rd
       ACCEPT_EULA: Y
