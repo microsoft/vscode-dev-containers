@@ -16,9 +16,7 @@
 		"codespaces-linux" 
 	],
 
-	"flattenBaseImage": [
-		"codespaces-linux" 
-	],
+	"flattenBaseImage": [],
 
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",

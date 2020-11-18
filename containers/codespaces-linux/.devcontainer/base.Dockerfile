@@ -15,6 +15,7 @@ ENV SHELL=/bin/bash \
     NVM_SYMLINK_CURRENT=true \
     NVM_DIR="/home/${USERNAME}/.nvm" \
     NVS_HOME="/home/${USERNAME}/.nvs" \
+    NPM_GLOBAL="/home/${USERNAME}/.npm-global" \
     PIPX_HOME="/usr/local/py-utils" \
     PIPX_BIN_DIR="/usr/local/py-utils/bin" \
     RVM_PATH="/usr/local/rvm" \
@@ -23,11 +24,10 @@ ENV SHELL=/bin/bash \
     CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup" \
     SDKMAN_DIR="/usr/local/sdkman"
-ENV PATH="${NVM_DIR}/current/bin:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PATH}:${PIPX_BIN_DIR}"
+ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PATH}:${PIPX_BIN_DIR}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
-COPY library-scripts/azcli-debian.sh library-scripts/common-debian.sh library-scripts/git-lfs-debian.sh library-scripts/github-debian.sh \
-    library-scripts/kubectl-helm-debian.sh library-scripts/sshd-debian.sh setup-user.sh /tmp/scripts/
+COPY library-scripts/* setup-user.sh /tmp/scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Run common script and setup user
     && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "false" "true" \
@@ -41,29 +41,23 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/scripts/github-debian.sh \
     && bash /tmp/scripts/azcli-debian.sh \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
+    # Build latest git from source
+    && bash /tmp/scripts/git-from-src-debian.sh "latest" \
     # Clean up
-    && rm -rf /tmp/scripts/ && apt-get autoremove -y && apt-get clean -y
+    && apt-get autoremove -y && apt-get clean -y
 
-# Install rvm, base gems
-COPY library-scripts/ruby-debian.sh /tmp/scripts/
+# Install rvm, rbenv, base gems
 RUN chown -R ${USERNAME} /opt/ruby/*/lib /opt/ruby/*/bin \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
-    && apt-get clean -y && rm -rf /tmp/scripts
-
-# Build latest git from source
-COPY library-scripts/git-from-src-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/git-from-src-debian.sh "latest" \
-    && apt-get clean -y && rm -rf /tmp/scripts
+    && apt-get clean -y
 
 # Install PowerShell and setup .NET Core - PowerShell does not have a native package for Ubuntu 20.04, so use .net to do it
 COPY symlinkDotNetCore.sh /home/${USERNAME}/symlinkDotNetCore.sh
-COPY library-scripts/powershell-debian.sh /tmp/scripts/
 RUN su ${USERNAME} -c 'bash /home/${USERNAME}/symlinkDotNetCore.sh' 2>&1 \
     && bash /tmp/scripts/powershell-debian.sh \
-    && apt-get clean -y && rm -rf /home/${USERNAME}/symlinkDotNetCore.sh /tmp/scripts/
+    && apt-get clean -y && rm -rf /home/${USERNAME}/symlinkDotNetCore.sh
 
 # Setup Node.js, install NVM and NVS
-COPY library-scripts/node-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     && (cd ${NVM_DIR} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVM_DIR}/.git-remote-and-commit \
     # Install nvs (alternate cross-platform Node.js version-management tool)
@@ -72,36 +66,28 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     && sudo -u ${USERNAME} bash ${NVS_HOME}/nvs.sh install \
     && rm ${NVS_HOME}/cache/* \
     # Set npm global location
-    && sudo -u ${USERNAME} npm config set prefix /home/${USERNAME}/.npm-global \
-    && npm config -g set prefix /root/.npm-global \
+    && sudo -u ${USERNAME} npm config set prefix ${NPM_GLOBAL} \
+    && npm config -g set prefix ${NPM_GLOBAL} \
     # Clean up
-    && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git /tmp/scripts/
+    && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
 
 # Install OpenJDK 8, SDKMAN, gradle
-COPY library-scripts/java-debian.sh library-scripts/gradle-debian.sh /tmp/scripts/
 RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
     && echo "Installing JDK 8..." \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -yq openjdk-8-jdk \
-    && apt-get clean -y && rm -rf /tmp/scripts
+    && apt-get clean -y
 
-# Install Rust
-COPY library-scripts/rust-debian.sh /tmp/scripts/
+# Install Rust, Go
 RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
-    && apt-get clean -y && rm -rf /tmp/scripts
-
-# Install Go
-COPY library-scripts/go-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
-    && apt-get clean -y && rm -rf /tmp/scripts
+    && bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
+    && apt-get clean -y 
 
 # Install Python tools
-COPY library-scripts/python-debian.sh /tmp/scripts/
 #RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "true" \
 # TODO: Remove workaround
 RUN apt-get update && apt-get -y install python3-venv \
-    && bash /tmp/scripts/python-debian.sh "none" "/usr" "${PIPX_HOME}" "${USERNAME}" "true" \
-    && apt-get clean -y && rm -rf /tmp/scripts
+    && bash /tmp/scripts/python-debian.sh "none" "/usr" "${PIPX_HOME}" "${USERNAME}" "true" && apt-get clean -y
 
 # Install xdebug, link composer
 RUN yes | pecl install xdebug \
@@ -112,11 +98,9 @@ RUN yes | pecl install xdebug \
     && rm -rf /tmp/pear \
     && ln -s $(which composer.phar) /usr/local/bin/composer
 
-# Install Docker (Moby) CLI
-ARG INSTALL_DOCKER="true"
-COPY library-scripts/docker-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}" "true"; \
-    && rm -rf /tmp/scripts && apt-get clean -y
+# Install Docker (Moby) CLI, remove  scripts now that we're done with them
+RUN bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}" "true" \
+    && apt-get clean -y && rm -rf /tmp/scripts
 
 # Fire Docker script if needed along with Oryx's benv
 ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh" ,"benv" ]
