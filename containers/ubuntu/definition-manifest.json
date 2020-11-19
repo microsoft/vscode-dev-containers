@@ -60,7 +60,7 @@
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
-			"nvm": "/usr/local/share/nvm"
+			"Oh My Bash!": "/root/.oh-my-bash"
 		}
 	}
 }
