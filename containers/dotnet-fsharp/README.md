@@ -1,24 +1,22 @@
-# C# (.NET Core)
+# F# (.NET)
 
 ## Summary
 
-*Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, and dependencies.*
+*Develop F# and .NET based applications. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team |
+| *Contributors* | The VS Code Team, F# team |
 | *Definition type* | Dockerfile |
-| *Published images* | mcr.microsoft.com/vscode/devcontainers/dotnetcore |
-| *Available image variants* | 2.1, 3.1 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Ubuntu |
-| *Languages, platforms* | .NET Core, C# |
+| *Languages, platforms* | .NET, .NET Core, F# |
 
 ## Using this definition with an existing folder
 
-While this definition should work unmodified, you can select the version of .NET Core the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+While this definition should work unmodified, you can select the version of .NET / .NET Core the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
 "args": { "VARIANT": "3.1" }
@@ -26,17 +24,18 @@ While this definition should work unmodified, you can select the version of .NET
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
-- `mcr.microsoft.com/vscode/devcontainers/dotnetcore` (latest)
-- `mcr.microsoft.com/vscode/devcontainers/dotnetcore:2.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnetcore:3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:2.1` (or `dotnetcore:2.1`)
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:3.1` (or `dotnetcore:3.1`)
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:5.0`
 
 Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
 
-- `mcr.microsoft.com/vscode/devcontainers/dotnetcore:0-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnetcore:0.135-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnetcore:0.135.0-3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:0-3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.149-3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.149.0-3.1`
 
-Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+Alternatively, you can use the [contents of this `base.Dockerfile`](../dotnetcore/..devcontainer/base.Dockerfile) to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
 ### Debug Configuration
 
@@ -45,6 +44,8 @@ Only the integrated terminal is supported by the Remote - Containers extension. 
 ```json
 "console": "integratedTerminal"
 ```
+
+**Note:** Currently the Ionide-fsharp extension appears to force the use of an external console when clicking on the Debug icon in the F# Solution Explorer. You can configure a .NET application launch [in `launch.json`](https://code.visualstudio.com/Docs/editor/debugging#_launch-configurations) with the property above instead.
 
 ### Using the forwardPorts property
 
@@ -55,7 +56,6 @@ By default, ASP.NET Core only listens to localhost inside the container. As a re
 ```
 
 The `appPort` property [publishes](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwards the port, so applications need to listen to `*` or `0.0.0.0` for the application to be accessible externally. This conflicts with ASP.NET Core's defaults, but fortunately the `forwardPorts` property does not have this limitation.
-
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
 ### Enabling HTTPS in ASP.NET Core
@@ -138,11 +138,11 @@ If you've already opened your folder in a container, rebuild the container using
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the C# (.NET Core) definition.
+   3. Select the F# (.NET Core) definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
-   2. Copy the contents of `containers/dotnetcore/.devcontainer` to the root of your project folder.
+   2. Copy the contents of `containers/dotnetcore-fsharp/.devcontainer` to the root of your project folder.
    3. Start VS Code and open your project folder.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
@@ -156,13 +156,11 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/dotnetcore` folder.
-5. After the folder has opened in the container, if prompted to restore packages in a notification, click "Restore".
-6. After packages are restored, press <kbd>F5</kbd> to start the project.
-7. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
-8. Select port 8090 and click the "Open Browser" button in the notification that appears.
-9. You should see "Hello remote world from ASP.NET Core!" after the page loads.
-10. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+4. Select the `containers/dotnetcore-fsharp` folder.
+5. When prompted click "Restore" in the notification to restore packages.
+6. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
+7. You should see "Hello Remote World from the F# Container!" in a terminal window after the program executes.
+8. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 

@@ -1,6 +1,6 @@
-# [Choice] .NET Core version: 3.1, 2.1
+# [Choice] .NET version: 5.0, 3.1, 2.1
 ARG VARIANT="3.1"
-FROM mcr.microsoft.com/dotnet/core/sdk:${VARIANT}-bionic
+FROM mcr.microsoft.com/dotnet/sdk:${VARIANT}-focal
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"

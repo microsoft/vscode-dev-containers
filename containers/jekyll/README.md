@@ -13,6 +13,11 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | Ruby, Jekyll |
 
+In addition to Ruby and Bundler, this development container installs Jekyll and the required tools at startup:
+
+- If your Jekyll project contains a `Gemfile` in the root folder, the development container will install all gems at startup by running `bundle install`. This is the [recommended](https://jekyllrb.com/docs/step-by-step/10-deployment/#gemfile) approach as it allows you to specify the exact Jekyll version your project requires and list all additional Jekyll plugins.
+- If there's no `Gemfile`, the development container will install Jekyll automatically, picking the latest version. You might need to manually install the other dependencies your project relies on, including all relevant Jekyll plugins.
+
 ## Using this definition with an existing folder
 
 Follow these steps:
