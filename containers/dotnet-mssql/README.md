@@ -1,4 +1,4 @@
-# C# (.NET Core) and MS SQL
+# C# (.NET) and MS SQL
 
 ## Summary
 
@@ -16,7 +16,7 @@
 | *Languages, platforms* | .NET, .NET Core, C#, Microsoft SQL |
 
 ## Description
-This definition creates two containers, one for C# (.NET Core) and one for Microsoft SQL.  VS Code will attach to the .NET Core container, and from within that container the Microsoft SQL container will be available on **`localhost`** port 1433. By default, the `sa` user password is `P@ssw0rd`. For more on the configuration of MS SQL, see the section [MS SQL Configuration](#MS-SQL-Configuration)
+This definition creates two containers, one for C# (.NET) and one for Microsoft SQL.  VS Code will attach to the .NET Core container, and from within that container the Microsoft SQL container will be available on **`localhost`** port 1433. By default, the `sa` user password is `P@ssw0rd`. For more on the configuration of MS SQL, see the section [MS SQL Configuration](#MS-SQL-Configuration)
 
 ## Using this definition with an existing folder
 
