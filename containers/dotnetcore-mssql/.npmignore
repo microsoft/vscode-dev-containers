@@ -1,0 +1,7 @@
+README.md
+test-project
+.devcontainer/library-scripts/README.md
+.devcontainer/library-scripts/common-debian.sh
+.devcontainer/library-scripts/node-debian.sh
+.vscode
+.npmignore
