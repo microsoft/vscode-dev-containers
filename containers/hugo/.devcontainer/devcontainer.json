@@ -11,6 +11,8 @@
 			// Example versions: latest, 0.73.0, 0,71.1
 			// Rebuild the container if it already exists to update.
 			"VERSION": "latest",
+			// Update NODE_VERSION to pick the Node.js version: 12, 14
+			"NODE_VERSION": "14",
 		}
 	},
 
