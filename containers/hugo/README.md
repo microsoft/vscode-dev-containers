@@ -13,6 +13,16 @@
 | *Container OS*              | Debian                                       |
 | *Languages, platforms*      | Hugo                                         |
 
+This development container includes the Hugo static site generator as well as Node.js (to help with working on themes).
+
+There are 3 configuration options in the `devcontainer.json` file:
+
+- `VARIANT`: the default value is `hugo`. Set this to `hugo_extended` if you want to use SASS/SCSS
+- `VERSION`: version of Hugo to download, e.g. `0.71.1`. The default value is `latest`, which always picks the latest version available.
+- `NODE_VERSION`: version of Node.js to use, for example `14` (the default value)
+
+The `.vscode` folder additionally contains a sample `tasks.json` file that can be used to set up Visual Studio Code [tasks](https://code.visualstudio.com/docs/editor/tasks) for working with Hugo sites.
+
 ## Using this definition with an existing folder
 
 Just follow these steps:

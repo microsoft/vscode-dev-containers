@@ -12,6 +12,7 @@
                 "isDefault": true
             },
             "isBackground": true,
+            "problemMatcher": []
         },
         {
             "label": "Build",
@@ -21,6 +22,7 @@
                 "kind": "build",
                 "isDefault": true
             },
+            "problemMatcher": []
         }
     ]
 }

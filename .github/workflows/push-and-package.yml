@@ -31,7 +31,7 @@ jobs:
 
     - name: Get tag name
       id: get_tag_name  
-      uses: olegtarasov/get-tag@v1
+      uses: little-core-labs/get-git-tag@v3.0.2
 
     - name: Azure CLI login
       id: az_login
@@ -71,7 +71,7 @@ jobs:
 
     - name: Get tag name
       id: get_tag_name  
-      uses: olegtarasov/get-tag@v1
+      uses: little-core-labs/get-git-tag@v3.0.2
 
     - name: Update Dockerfile common script sources and re-tag
       id: update_script_source
