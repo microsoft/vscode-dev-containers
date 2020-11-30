@@ -4,6 +4,7 @@
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
+			"universal:${VERSION}-focal",
 			"universal:${VERSION}-linux",
 			"universal:${VERSION}"
 		]
@@ -52,6 +53,7 @@
 			"xtail",
 			"fish", 
 			"git-lfs",
+			"docker",
 			"debian-archive-keyring",
 			"software-properties-common",
 			"openjdk-8-jdk"
@@ -105,6 +107,10 @@
 			"Helm": {
 				"versionCommand": "helm version | grep -oE 'Version:\\\"v[^\\\"]+' | sed -n '/Version:\\\"v/s///p'",
 				"downloadUrl": "https://github.com/helm/helm"
+			},
+			"Docker Compose": {
+				"versionCommand": "docker-compose version | grep -oE 'version\\s[^,]+' | sed -n '/version\\s/s///p'",
+				"downloadUrl": "https://github.com/docker/compose"
 			},
 			"SDKMAN!": {
 				"versionCommand": "sdk version | sed -n '/.*SDKMAN\\s/s///p'",

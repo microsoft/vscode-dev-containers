@@ -37,11 +37,11 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"GitHub.vscode-pull-request-github"
-	]
+	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a"
+	// "oryx build" will automatically install your dependencies and attempt to build your project
+	"postCreateCommand": "oryx build || echo 'Could not auto-build. Skipping.'"
 }

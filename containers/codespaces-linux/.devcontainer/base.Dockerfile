@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/oryx/build:vso-focal-20201110.1 as kitchensink
+FROM mcr.microsoft.com/oryx/build:vso-focal-20201121.1 as kitchensink
 
 ARG USERNAME=codespace
 ARG USER_UID=1000
@@ -24,7 +24,7 @@ ENV SHELL=/bin/bash \
     CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup" \
     SDKMAN_DIR="/usr/local/sdkman"
-ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PATH}:${PIPX_BIN_DIR}"
+ENV PATH="${ORIGINAL_PATH}:${NVM_DIR}/current/bin:${NPM_GLOBAL}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${ORYX_PATHS}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/* setup-user.sh /tmp/scripts/
@@ -41,17 +41,29 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/scripts/github-debian.sh \
     && bash /tmp/scripts/azcli-debian.sh \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
+    # Install Moby CLI
+    && bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}" "true" \
     # Build latest git from source
     && bash /tmp/scripts/git-from-src-debian.sh "latest" \
     # Clean up
     && apt-get autoremove -y && apt-get clean -y
 
-# Install rvm, rbenv, base gems
-RUN chown -R ${USERNAME} /opt/ruby/*/lib /opt/ruby/*/bin \
+# Install Python, PHP, Ruby utilities
+RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
+    # Install rvm, rbenv, base gems
+    && chown -R ${USERNAME} /opt/ruby/*/lib /opt/ruby/*/bin \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
+    # Install xdebug, link composer
+    && yes | pecl install xdebug \
+    && export PHP_LOCATION=$(dirname $(dirname $(which php))) \
+    && echo "zend_extension=$(find ${PHP_LOCATION}/lib/php/extensions/ -name xdebug.so)" > ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=on" >>  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && rm -rf /tmp/pear \
+    && ln -s $(which composer.phar) /usr/local/bin/composer \
     && apt-get clean -y
 
-# Install PowerShell and setup .NET Core - PowerShell does not have a native package for Ubuntu 20.04, so use .net to do it
+# Install PowerShell and setup .NET Core
 COPY symlinkDotNetCore.sh /home/${USERNAME}/symlinkDotNetCore.sh
 RUN su ${USERNAME} -c 'bash /home/${USERNAME}/symlinkDotNetCore.sh' 2>&1 \
     && bash /tmp/scripts/powershell-debian.sh \
@@ -78,32 +90,13 @@ RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "t
     && apt-get install -yq openjdk-8-jdk \
     && apt-get clean -y
 
-# Install Rust, Go
+# Install Rust, Go, remove scripts now that we're done with them
 RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
     && bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
-    && apt-get clean -y 
-
-# Install Python tools
-#RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/stable" "${PIPX_HOME}" "${USERNAME}" "true" \
-# TODO: Remove workaround
-RUN apt-get update && apt-get -y install python3-venv \
-    && bash /tmp/scripts/python-debian.sh "none" "/usr" "${PIPX_HOME}" "${USERNAME}" "true" && apt-get clean -y
-
-# Install xdebug, link composer
-RUN yes | pecl install xdebug \
-    && export PHP_LOCATION=$(dirname $(dirname $(which php))) \
-    && echo "zend_extension=$(find ${PHP_LOCATION}/lib/php/extensions/ -name xdebug.so)" > ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=on" >>  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
-    && rm -rf /tmp/pear \
-    && ln -s $(which composer.phar) /usr/local/bin/composer
-
-# Install Docker (Moby) CLI, remove  scripts now that we're done with them
-RUN bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}" "true" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
-# Fire Docker script if needed along with Oryx's benv
-ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh" ,"benv" ]
+# Fire Docker/Moby script if needed along with Oryx's benv
+ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh", "benv" ]
 CMD [ "sleep", "infinity" ]
 
 # [Optional] Install debugger for development of Codespaces - Not in resulting image by default

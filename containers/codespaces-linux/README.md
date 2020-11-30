@@ -2,17 +2,17 @@
 
 ## Summary
 
-*Use or extend the default, large, multi-language universal container for GitHub Codespaces.*
+*Use or extend the new Ubuntu-based default, large, multi-language universal container for GitHub Codespaces.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The GitHub Codespaces and VS Code teams |
 | *Definition type* | Dockerfile |
-| *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:linux |
+| *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:linux<br />mcr.microsoft.com/vscode/devcontainers/universal:focal |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Debian |
+| *Container OS* | Ubuntu |
 | *Languages, platforms* | Python, Node.js, JavaScript, TypeScript, C++, Java, C#, F#, .NET Core, PHP, PowerShell, Go, Ruby, Rust |
 
 ## Description
@@ -22,6 +22,8 @@ While language specific development containers can be useful, in some cases you 
 If you use GitHub Codespaces, this is the "universal" image that is used by default if no custom Dockerfile or image is specified. If you like what you see but want to make a few additions or changes, you can use a custom Dockerfile to extend it and add whatever you need.
 
 The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can opt into using instead of the default `bash`. It also includes [nvm](https://github.com/nvm-sh/nvm), [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), and [SDKMAN!](https://sdkman.io/) if you need to install a different version Node, Ruby, or Java tools than the container defaults. You can also set things up to access the container [via SSH](#accessing-the-container-using-ssh-scp-or-sshfs).
+
+> **Note:** This is the latest image based on Ubuntu 20.04/Focal. See the [codespaces-linux-stretch definition](../codespaces-linux-stretch) for the legacy Debian 9/Stretch based image.
 
 ## Accessing the container using SSH, SCP, or SSHFS
 
