@@ -33,3 +33,12 @@ sudo -u ${USERNAME} mkdir -p /home/${USERNAME}/.local/bin
 install -o ${USERNAME} -g ${USERNAME} -m 755 /tmp/scripts/git-ed.sh /home/${USERNAME}/.local/bin/git-ed.sh
 sudo -u ${USERNAME} git config --global core.editor "/home/${USERNAME}/.local/bin/git-ed.sh"
 rm -f /tmp/scripts/git-ed.sh
+
+# Add one time notice
+tee -a /etc/bash.bashrc /etc/zsh/zshrc << EOF
+if [ -t 1 ] && [ ! -f \$HOME/.config/vscode-dev-containers/first-run-notice ]; then
+  echo -e "Welcome to Codespaces! Note that the default Codespaces image is now Ubuntu 20.04-based!\nIf you need to use the old image (or a custom one) see https://aka.ms/ghcs-default-focal."
+  mkdir -p \$HOME/.config/vscode-dev-containers
+  touch \$HOME/.config/vscode-dev-containers/first-run-notice
+fi
+EOF
