@@ -76,7 +76,7 @@ jobs:
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
                           --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
-                          --skip codespaces-linux
+                          --skip codespaces-linux codespaces-linux-stretch
 
   package:
     name: Package

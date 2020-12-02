@@ -2,7 +2,6 @@ README.md
 test-project
 definition-manifest.json
 .devcontainer/library-scripts
-.devcontainer/setup-user.sh
-.devcontainer/symlinkDotNetCore.sh
+symlinkDotNetCore.sh
 .vscode
 .npmignore

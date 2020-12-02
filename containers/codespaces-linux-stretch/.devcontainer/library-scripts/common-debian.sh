@@ -6,9 +6,7 @@
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
 #
-# Community supported RedHat based version of common-debian.sh
-#
-# Syntax: ./common-redhat.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My *! flag]
+# Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My *! flag]
 
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"automatic"}
@@ -51,54 +49,96 @@ if [ -f "${MARKER_FILE}" ]; then
     source "${MARKER_FILE}"
 fi
 
-# Install common dependencies
-if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
+# Ensure apt is in non-interactive to avoid prompts
+export DEBIAN_FRONTEND=noninteractive
 
-    PACKAGE_LIST="\
+# Function to call apt-get if needed
+apt-get-update-if-needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
+# Run install apt-utils to avoid debconf warning then verify presence of other common developer tools and dependencies
+if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
+    apt-get-update-if-needed
+
+    PACKAGE_LIST="apt-utils \
         git \
-        openssh-clients \
+        openssh-client \
         gnupg2 \
-        iproute \
+        iproute2 \
         procps \
         lsof \
+        htop \
         net-tools \
         psmisc \
         curl \
         wget \
-        ca-certificates \
         rsync \
+        ca-certificates \
         unzip \
         zip \
         nano \
-        vim-minimal \
+        vim-tiny \
         less \
         jq \
-        redhat-lsb-core \
-        openssl-libs \
-        krb5-libs \
-        libicu \
-        zlib \
+        lsb-release \
+        apt-transport-https \
+        dialog \
+        libc6 \
+        libgcc1 \
+        libgssapi-krb5-2 \
+        libicu[0-9][0-9] \
+        liblttng-ust0 \
+        libstdc++6 \
+        zlib1g \
+        locales \
         sudo \
-        coreutils \
-        sed \
-        grep \
-        which \
+        ncdu \
         man-db \
         strace"
 
-    # Install OpenSSL 1.0 compat if needed
-    if yum -q list compat-openssl10 >/dev/null 2>&1; then
-        PACKAGE_LIST="${PACKAGE_LIST}       compat-openssl10"
+    # Install libssl1.1 if available
+    if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
+        PACKAGE_LIST="${PACKAGE_LIST}       libssl1.1"
+    fi
+    
+    # Install appropriate version of libssl1.0.x if available
+    LIBSSL=$(dpkg-query -f '${db:Status-Abbrev}\t${binary:Package}\n' -W 'libssl1\.0\.?' 2>&1 || echo '')
+    if [ "$(echo "$LIBSSL" | grep -o 'libssl1\.0\.[0-9]:' | uniq | sort | wc -l)" -eq 0 ]; then
+        if [[ ! -z $(apt-cache --names-only search ^libssl1.0.2$) ]]; then
+            # Debian 9
+            PACKAGE_LIST="${PACKAGE_LIST}       libssl1.0.2"
+        elif [[ ! -z $(apt-cache --names-only search ^libssl1.0.0$) ]]; then
+            # Ubuntu 18.04, 16.04, earlier
+            PACKAGE_LIST="${PACKAGE_LIST}       libssl1.0.0"
+        fi
     fi
 
-    yum -y install ${PACKAGE_LIST}
-
+    echo "Packages to verify are installed: ${PACKAGE_LIST}"
+    apt-get -y install --no-install-recommends ${PACKAGE_LIST} 2> >( grep -v 'debconf: delaying package configuration, since apt-utils is not installed' >&2 )
+        
     PACKAGES_ALREADY_INSTALLED="true"
 fi
 
-# Update to latest versions of packages
+# Get to latest versions of all packages
 if [ "${UPGRADE_PACKAGES}" = "true" ]; then
-    yum upgrade -y
+    apt-get-update-if-needed
+    apt-get -y upgrade --no-install-recommends
+    apt-get autoremove -y
+fi
+
+# Ensure at least the en_US.UTF-8 UTF-8 locale is available.
+# Common need for both applications and things like the agnoster ZSH theme.
+if [ "${LOCALE_ALREADY_SET}" != "true" ] && ! grep -o -E '^\s*en_US.UTF-8\s+UTF-8' /etc/locale.gen > /dev/null; then
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
+    locale-gen
+    LOCALE_ALREADY_SET="true"
 fi
 
 # Create or update a non-root user to match UID/GID.
@@ -139,17 +179,34 @@ else
     USER_RC_PATH="/home/${USERNAME}"
 fi
 
-# bashrc/zshrc snippet
+# .bashrc/.zshrc snippet
 RC_SNIPPET="$(cat << EOF
 export USER=\$(whoami)
 
 export PATH=\$PATH:\$HOME/.local/bin
-
-if type code-insiders > /dev/null 2>&1 && ! type code > /dev/null 2>&1; then 
-    alias code=code-insiders
-fi
 EOF
 )"
+
+# code shim, it fallbacks to code-insiders if code is not available
+cat << 'EOF' > /usr/local/bin/code
+#!/bin/sh
+
+get_in_path_except_current() {
+  which -a "$1" | grep -v "$0" | head -1
+}
+
+code="$(get_in_path_except_current code)"
+
+if [ -n "$code" ]; then
+  exec "$code" "$@"
+elif [ "$(command -v code-insiders)" ]; then
+  exec code-insiders "$@"
+else
+  echo "code or code-insiders is not installed" >&2
+  exit 127
+fi
+EOF
+chmod +x /usr/local/bin/code
 
 # Codespaces themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
@@ -162,13 +219,21 @@ prompt() {
         local arrow_color=\${reset_color}
     fi
     if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="gh:@\${GITHUB_USER}"
+        local USERNAME="@\${GITHUB_USER}"
     else
-        local USERNAME="\$(whoami)"
+        local USERNAME="\\u"
     fi
     local cwd="\$(pwd | sed "s|^\${HOME}|~|")"
     PS1="\${green}\${USERNAME} \${arrow_color}➜\${reset_color} \${bold_blue}\${cwd}\${reset_color} \$(scm_prompt_info)\${white}$ \${reset_color}"
+    
+    # Prepend Python virtual env version to prompt
+    if [[ -n \$VIRTUAL_ENV ]]; then
+        if [ -z "\${VIRTUAL_ENV_DISABLE_PROMPT:-}" ]; then
+            PS1="(\`basename \"\$VIRTUAL_ENV\"\`) \${PS1:-}"
+        fi
+    fi
 }
+
 SCM_THEME_PROMPT_PREFIX="\${reset_color}\${cyan}(\${bold_red}"
 SCM_THEME_PROMPT_SUFFIX="\${reset_color} "
 SCM_THEME_PROMPT_DIRTY=" \${bold_yellow}✗\${reset_color}\${cyan})"
@@ -181,9 +246,9 @@ CODESPACES_ZSH="$(cat \
 <<EOF
 prompt() {
     if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="gh:@\${GITHUB_USER}"
+        local USERNAME="@\${GITHUB_USER}"
     else
-        local USERNAME="\$(whoami)"
+        local USERNAME="%n"
     fi
     PROMPT="%{\$fg[green]%}\${USERNAME} %(?:%{\$reset_color%}➜ :%{\$fg_bold[red]%}➜ )"
     PROMPT+='%{\$fg_bold[blue]%}%~%{\$reset_color%} \$(git_prompt_info)%{\$fg[white]%}$ %{\$reset_color%}'
@@ -240,7 +305,7 @@ install-oh-my()
 }
 
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
-    echo "${RC_SNIPPET}" >> /etc/bashrc
+    echo "${RC_SNIPPET}" >> /etc/bash.bashrc
     RC_SNIPPET_ALREADY_ADDED="true"
 fi
 install-oh-my bash bashrc.osh-template https://github.com/ohmybash/oh-my-bash
@@ -248,10 +313,11 @@ install-oh-my bash bashrc.osh-template https://github.com/ohmybash/oh-my-bash
 # Optionally install and configure zsh and Oh My Zsh!
 if [ "${INSTALL_ZSH}" = "true" ]; then
     if ! type zsh > /dev/null 2>&1; then
-        yum install -y zsh
+        apt-get-update-if-needed
+        apt-get install -y zsh
     fi
     if [ "${ZSH_ALREADY_INSTALLED}" != "true" ]; then
-        echo "${RC_SNIPPET}" >> /etc/zshrc
+        echo "${RC_SNIPPET}" >> /etc/zsh/zshrc
         ZSH_ALREADY_INSTALLED="true"
     fi
     install-oh-my zsh zshrc.zsh-template https://github.com/ohmyzsh/ohmyzsh
@@ -261,6 +327,7 @@ fi
 mkdir -p "$(dirname "${MARKER_FILE}")"
 echo -e "\
     PACKAGES_ALREADY_INSTALLED=${PACKAGES_ALREADY_INSTALLED}\n\
+    LOCALE_ALREADY_SET=${LOCALE_ALREADY_SET}\n\
     EXISTING_NON_ROOT_USER=${EXISTING_NON_ROOT_USER}\n\
     RC_SNIPPET_ALREADY_ADDED=${RC_SNIPPET_ALREADY_ADDED}\n\
     ZSH_ALREADY_INSTALLED=${ZSH_ALREADY_INSTALLED}" > "${MARKER_FILE}"

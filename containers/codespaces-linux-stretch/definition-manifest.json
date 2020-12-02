@@ -1,16 +1,17 @@
 {
-	"definitionVersion": "1.0.0",
+	"definitionVersion": "0.22.0",
 	"build": {
-		"latest": true,
+		"latest": false,
+		"versionedTagsOnly": true,
 		"rootDistro": "debian",
 		"tags": [
-			"universal:${VERSION}-focal",
+			"universal:${VERSION}-stretch",
 			"universal:${VERSION}-linux",
 			"universal:${VERSION}"
 		]
 	}, 
 	"dependencies": {
-		"image": "mcr.microsoft.com/oryx/build:vso-focal-20201110.1",
+		"image": "mcr.microsoft.com/oryx/build:vso-20200417.5",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"debian": [
 			"apt-utils",
@@ -52,8 +53,8 @@
 			"vim", 
 			"xtail",
 			"fish", 
-			"git-lfs",
 			"docker",
+			"git-lfs",
 			"debian-archive-keyring",
 			"software-properties-common",
 			"openjdk-8-jdk"
@@ -135,6 +136,10 @@
 			"rvm": {
 				"versionCommand": "rvm --version | grep -oE -m 1 'rvm\\s[^ ]+' | sed -n '/^rvm\\s/s///p'",
 				"downloadUrl": "https://github.com/rvm/rvm"
+			},
+			"Ruby": {
+				"versionCommand": "ruby --version | grep -oE 'ruby\\s[^ ]+' | sed -n '/ruby\\s/s///p'",
+				"downloadUrl": "https://www.ruby-lang.org/en/downloads/"
 			}
 		},
 		"manual": [{

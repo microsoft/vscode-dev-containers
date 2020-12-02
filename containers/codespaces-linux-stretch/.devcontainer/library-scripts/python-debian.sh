@@ -105,6 +105,7 @@ DEFAULT_UTILS="\
     pipenv \
     virtualenv"
 
+
 export PIPX_BIN_DIR=${PIPX_HOME}/bin
 export PATH=${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:${PATH}
 

@@ -6,15 +6,15 @@
 
 set -ex
 
-splitSdksDir="/opt/dotnet"
+splitSdksDir="/opt/dotnet/sdks"
 
 allSdksDir="/home/codespace/.dotnet"
 mkdir -p "$allSdksDir"
 
 # Copy latest muxer and license files
-cp -f "$splitSdksDir/lts/dotnet" "$allSdksDir"
-cp -f "$splitSdksDir/lts/LICENSE.txt" "$allSdksDir"
-cp -f "$splitSdksDir/lts/ThirdPartyNotices.txt" "$allSdksDir"
+cp -f "$splitSdksDir/3/dotnet" "$allSdksDir"
+cp -f "$splitSdksDir/3/LICENSE.txt" "$allSdksDir"
+cp -f "$splitSdksDir/3/ThirdPartyNotices.txt" "$allSdksDir"
 
 function createLinks() {
     local sdkVersion="$1"
@@ -36,8 +36,12 @@ function createLinks() {
     done
 }
 
-createLinks "3.1.404"
+createLinks "3.1.301"
 echo
-createLinks "2.1.811"
+createLinks "3.0.103"
 echo
-createLinks "5.0.100"
+createLinks "2.2.402"
+echo
+createLinks "2.1.807"
+echo
+createLinks "1.1.14"

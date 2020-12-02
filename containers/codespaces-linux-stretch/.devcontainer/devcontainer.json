@@ -1,5 +1,5 @@
 {
-	"name": "GitHub Codespaces (Default)",
+	"name": "GitHub Codespaces - Stretch (Legacy)",
 	"build": {
 		"dockerfile": "base.Dockerfile"
 	},

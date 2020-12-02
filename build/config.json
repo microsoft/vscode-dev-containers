@@ -13,12 +13,11 @@
 	],
 	
 	"needsDedicatedPage": [ 
-		"codespaces-linux" 
+		"codespaces-linux",
+		"codespaces-linux-stretch" 
 	],
 
-	"flattenBaseImage": [
-		"codespaces-linux" 
-	],
+	"flattenBaseImage": [],
 
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",

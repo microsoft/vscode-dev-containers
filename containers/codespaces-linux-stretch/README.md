@@ -1,29 +1,29 @@
-# GitHub Codespaces (Default Linux Universal)
+# GitHub Codespaces - Stretch (Legacy)
 
 ## Summary
 
-*Use or extend the new Ubuntu-based default, large, multi-language universal container for GitHub Codespaces.*
+*Legacy Debian 9 / Stretch based Codespaces universal default image. Use or extend the default, large, multi-language universal container for GitHub Codespaces.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The GitHub Codespaces and VS Code teams |
 | *Definition type* | Dockerfile |
-| *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:linux<br />mcr.microsoft.com/vscode/devcontainers/universal:focal |
+| *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:stretch<br />mcr.microsoft.com/vscode/devcontainers/universal:0-linux |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Ubuntu |
+| *Container OS* | Debian |
 | *Languages, platforms* | Python, Node.js, JavaScript, TypeScript, C++, Java, C#, F#, .NET Core, PHP, PowerShell, Go, Ruby, Rust |
 
 ## Description
+
+> **Note:** This is the legacy Debian 9/Strech based image. See the [codespaces-linux definition](../codespaces-linux) for the current Ubuntu 20.04/Focal based image.
 
 While language specific development containers can be useful, in some cases you may want to use more than one in a project without having to set them all up. In other cases you may be looking to create a general "sandbox" container you intend to use with multiple projects or repositories. The large container image generated here (`mcr.microsoft.com/vscode/devcontainers/universal:linux`) includes a number of runtime versions for popular languages lke Python, Node, PHP, Java, Go, C++, Ruby, Go, Rust and .NET Core/C# - many of which are [inherited from the Oryx build image](https://github.com/microsoft/oryx#supported-platforms) it is based on.
 
 If you use GitHub Codespaces, this is the "universal" image that is used by default if no custom Dockerfile or image is specified. If you like what you see but want to make a few additions or changes, you can use a custom Dockerfile to extend it and add whatever you need.
 
 The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can opt into using instead of the default `bash`. It also includes [nvm](https://github.com/nvm-sh/nvm), [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), and [SDKMAN!](https://sdkman.io/) if you need to install a different version Node, Ruby, or Java tools than the container defaults. You can also set things up to access the container [via SSH](#accessing-the-container-using-ssh-scp-or-sshfs).
-
-> **Note:** This is the latest image based on Ubuntu 20.04/Focal. See the [codespaces-linux-stretch definition](../codespaces-linux-stretch) for the legacy Debian 9/Stretch based image.
 
 ## Accessing the container using SSH, SCP, or SSHFS
 
@@ -57,7 +57,7 @@ That's it! Use similar arguments to those in step 5 when executing `scp` or conf
 
 While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to:
 
-`mcr.microsoft.com/vscode/devcontainers/universal:linux`
+`mcr.microsoft.com/vscode/devcontainers/universal:0-linux`
 
 Alternatively, you can use the contents of the `Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

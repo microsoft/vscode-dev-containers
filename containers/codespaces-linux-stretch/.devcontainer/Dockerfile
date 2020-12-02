@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/universal:1-linux
+FROM mcr.microsoft.com/vscode/devcontainers/universal:0-linux
 
 # ** [Optional] Uncomment this section to install additional packages. **
 # USER root
@@ -7,3 +7,4 @@ FROM mcr.microsoft.com/vscode/devcontainers/universal:1-linux
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 #
 # USER codespace
+
