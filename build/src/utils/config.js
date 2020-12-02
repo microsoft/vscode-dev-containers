@@ -228,16 +228,23 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
 // Generate complete list of tags for a given definition
 function getTagList(definitionId, release, updateLatest, registry, registryPath, variant) {
     const version = getVersionFromRelease(release, definitionId);
+    const versionedTagsOnly = config.definitionBuildSettings[definitionId].versionedTagsOnly;
     if (version === 'dev') {
-        return getTagsForVersion(definitionId, 'dev', registry, registryPath, variant);
+        // If we are only returning versioned tags and the version is 'dev', add the definition Id to ensure that  
+        // we do not incorrectly hijack a tag from another definition, then return the tag list.
+        const tagVersion = versionedTagsOnly ? `dev-${definitionId.replace(/-/mg,'')}` : 'dev';
+        return getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant);
     }
 
+    // If this is a release version, split it out into the three parts of the semver
     const versionParts = version.split('.');
     if (versionParts.length !== 3) {
         throw (`Invalid version format in ${version}.`);
     }
-
-    const versionList = config.definitionBuildSettings[definitionId].versionedTagsOnly ? [
+    // Normally, we also want to return a tag without a version number, but for
+    // some definitions that exist in the same repository as others, we may
+    // only want to return a list of tags with part of the version number in it
+    const versionList = versionedTagsOnly ? [
             version,
             `${versionParts[0]}.${versionParts[1]}`,
             `${versionParts[0]}`
@@ -248,7 +255,7 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
             '' // This is the equivalent of latest for qualified tags- e.g. python:3 instead of python:0.35.0-3
         ];
 
-    // If this variant should actually be the latest tag (it's the left most in the list), use it
+    // If this variant should also be used for the the latest tag (it's the left most in the list), add it
     const allVariants = getVariants(definitionId);
     const firstVariant = allVariants ? allVariants[0] : variant;
     let tagList = (updateLatest 
