@@ -8,7 +8,7 @@
 |----------|-------|
 | *Contributors* | The GitHub Codespaces and VS Code teams |
 | *Definition type* | Dockerfile |
-| *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:stretch<br />mcr.microsoft.com/vscode/devcontainers/universal:0-linux |
+| *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:0-stretch<br />mcr.microsoft.com/vscode/devcontainers/universal:0-linux |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
