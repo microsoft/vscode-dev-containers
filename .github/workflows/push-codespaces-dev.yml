@@ -6,11 +6,16 @@ on:
     branches: [master]
     paths:
       - 'containers/codespaces-linux/**'
+      - 'containers/codespaces-linux-stretch/**'
 
 jobs:
   build-and-push:
     name: Build and push universal image
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    strategy:
+      matrix:
+        definitionId: ["codespaces-linux", "codespaces-linux-stretch"]
+      fail-fast: true
     runs-on: ubuntu-latest
     steps:
     - name: Free more space
@@ -47,7 +52,7 @@ jobs:
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
         fi
-        build/vscdc push  codespaces-linux \
+        build/vscdc push  ${{ matrix.definitionId }} \
                           --release $GIT_BRANCH \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \

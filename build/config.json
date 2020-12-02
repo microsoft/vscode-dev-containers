@@ -13,7 +13,8 @@
 	],
 	
 	"needsDedicatedPage": [ 
-		"codespaces-linux" 
+		"codespaces-linux",
+		"codespaces-linux-stretch" 
 	],
 
 	"flattenBaseImage": [],
