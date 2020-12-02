@@ -43,7 +43,7 @@ async function package(repo, release, updateLatest, registry, registryPath, stub
     // Update all definition config files for release (devcontainer.json, Dockerfile, library-scripts)
     const allDefinitions = configUtils.getAllDefinitionPaths();
     for (let currentDefinitionId in allDefinitions) {
-        if (typeof currentDefinitionId === 'object') {
+        if (typeof currentDefinitionId === 'string') {
             await prep.updateConfigForRelease(currentDefinitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath);
         }
     }
