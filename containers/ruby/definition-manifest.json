@@ -1,7 +1,7 @@
 {
 	"variants": ["2", "2.7", "2.6", "2.5"],
 	"build": {
-		"latest": "true",
+		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"ruby:${VERSION}-${VARIANT}"

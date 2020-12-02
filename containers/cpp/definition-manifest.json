@@ -16,7 +16,8 @@
 			"buster": [
 				"cpp:${VERSION}-debian-10",
 				"cpp:${VERSION}-debian10",
-				"cpp:${VERSION}-debian"
+				"cpp:${VERSION}-debian",
+				"cpp:${VERSION}"
 			],
 			"stretch": [
 				"cpp:${VERSION}-debian9",

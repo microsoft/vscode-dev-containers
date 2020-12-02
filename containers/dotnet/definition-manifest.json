@@ -1,7 +1,7 @@
 {
 	"variants": ["5.0", "3.1", "2.1"],
 	"build": {
-		"latest": "true",
+		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"dotnetcore:${VERSION}-${VARIANT}",
