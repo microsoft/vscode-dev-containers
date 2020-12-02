@@ -1,6 +1,6 @@
 {
 	"build": {
-		"latest": "false",
+		"latest": false,
 		"rootDistro": "debian",
 		"parent": "java",
 		"tags": [
@@ -8,7 +8,7 @@
 		]
 	},
 	"dependencies": {
-		"image": "openjdk:11-jdk-buster",
+		"image": "openjdk:8-jdk-buster",
 		"imageLink": "https://hub.docker.com/_/java",
 		"debian": [
 			"apt-utils",

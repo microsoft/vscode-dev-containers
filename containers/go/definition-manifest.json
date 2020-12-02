@@ -1,7 +1,7 @@
 {
 	"variants": ["1", "1.15", "1.14"],
 	"build": {
-		"latest": "true",
+		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"go:${VERSION}-${VARIANT}"

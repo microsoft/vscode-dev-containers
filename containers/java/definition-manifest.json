@@ -1,7 +1,7 @@
 {
 	"variants": [ "15", "11" ],
 	"build": {
-		"latest": "true",
+		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"java:${VERSION}-${VARIANT}"

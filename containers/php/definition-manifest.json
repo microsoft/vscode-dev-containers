@@ -1,7 +1,7 @@
 {
 	"variants": ["7", "7.4", "7.3"],
 	"build": {
-		"latest": "true",
+		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"php:${VERSION}-${VARIANT}"

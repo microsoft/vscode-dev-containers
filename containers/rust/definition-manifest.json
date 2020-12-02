@@ -1,6 +1,6 @@
 {
 	"build": {
-		"latest": "true",
+		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"rust:${VERSION}-1",
