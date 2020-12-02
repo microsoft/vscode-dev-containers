@@ -10,7 +10,8 @@
 			"buster": [
 				"base:${VERSION}-debian-10",
 				"base:${VERSION}-debian10",
-				"base:${VERSION}-debian"
+				"base:${VERSION}-debian",
+				"base:${VERSION}"
 			],
 			"stretch": [
 				"base:${VERSION}-debian9",

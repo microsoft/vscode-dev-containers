@@ -2,6 +2,7 @@
 	"definitionVersion": "0.22.0",
 	"build": {
 		"latest": false,
+		"versionedTagsOnly": true,
 		"rootDistro": "debian",
 		"tags": [
 			"universal:${VERSION}-stretch",
