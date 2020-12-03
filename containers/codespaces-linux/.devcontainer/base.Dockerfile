@@ -24,7 +24,7 @@ ENV SHELL=/bin/bash \
     CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup" \
     SDKMAN_DIR="/usr/local/sdkman"
-ENV PATH="${ORIGINAL_PATH}:${NVM_DIR}/current/bin:${NPM_GLOBAL}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${ORYX_PATHS}"
+ENV PATH="${ORIGINAL_PATH}:${NVM_DIR}/current/bin:${NPM_GLOBAL}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/java/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${ORYX_PATHS}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/* setup-user.sh /tmp/scripts/
@@ -83,12 +83,13 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     # Clean up
     && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
 
-# Install OpenJDK 8, SDKMAN, gradle
+# Install SDKMAN, OpenJDK8 (JDK 11 already present), gradle (maven already present)
 RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
-    && echo "Installing JDK 8..." \
-    && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -yq openjdk-8-jdk \
-    && apt-get clean -y
+    && bash /tmp/scripts/java-debian.sh "8.0.275.hs-adpt" "${SDKMAN_DIR}" "${USERNAME}" "true" \
+    && su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh \
+        && sdk install java opt-java-11 /opt/java/11.0 \
+        && sdk install java opt-java-lts /opt/java/lts \
+        && sdk default java opt-java-lts"
 
 # Install Rust, Go, remove scripts now that we're done with them
 RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
