@@ -92,6 +92,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         dialog \
         libc6 \
         libgcc1 \
+        libkrb5-3 \
         libgssapi-krb5-2 \
         libicu[0-9][0-9] \
         liblttng-ust0 \
