@@ -6,6 +6,8 @@
 
 **OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
 
+> **Note:** When using a VNC Viewer client, you may need to set the quality level to get high color since it can default to "low" with some clients.
+
 ## Syntax
 
 ```text
@@ -33,7 +35,7 @@
     ```
 
     The `ENTRYPOINT` script can be chained with another script by adding it to the array after `desktop-init.sh`.
-    If you need to select a different locale, be sure to add it to `/etc/locale.gen` and run `locale-gen`. 
+    If you need to select a different locale, be sure to add it to `/etc/locale.gen` and run `locale-gen`.
 
 3. And the following to `.devcontainer/devcontainer.json`:
 

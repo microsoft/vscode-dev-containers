@@ -13,8 +13,8 @@ VNC_PASSWORD=${2:-"vscode"}
 INSTALL_NOVNC=${3:-"true"}
 
 PACKAGE_LIST="
-    xvfb \
-    x11vnc \
+    tigervnc-standalone-server \
+    tigervnc-common \
     fluxbox \
     dbus-x11 \
     x11-utils \
@@ -249,17 +249,9 @@ while ! pidof dbus-daemon > /dev/null; do
     sleep 1
 done
 
-# Set up Xvfb.
-startInBackgroundIfNotRunning "Xvfb" sudoIf "Xvfb \${DISPLAY:-:1} +extension RANDR -screen 0 \${MAX_VNC_RESOLUTION:-1920x1080x16}"
-
-# Start fluxbox as a light weight window manager.
-startInBackgroundIfNotRunning "fluxbox" sudoUserIf "dbus-launch startfluxbox"
-
-# Start x11vnc
-startInBackgroundIfNotRunning "x11vnc" sudoIf "x11vnc -display \${DISPLAY:-:1} -rfbport \${VNC_PORT:-5901} -localhost -no6 -xkb -shared -forever -passwdfile /usr/local/etc/vscode-dev-containers/vnc-passwd"
-
-# Set resolution
-/usr/local/bin/set-resolution \${VNC_RESOLUTION:-1440x768} \${VNC_DPI:-96} true > /dev/null 2>&1
+# Startup tigervnc server and fluxbox
+if [ "\$(echo "\${VNC_RESOLUTION}" | tr -cd 'x' | wc -c)" = "1" ]; then VNC_RESOLUTION=\${VNC_RESOLUTION}x16; fi
+startInBackgroundIfNotRunning "tigervncserver" sudoIf "tigervncserver -screen \${DISPLAY:-:1} \${VNC_RESOLUTION:-1440x768x16} -rfbport \${VNC_PORT:-5901} -dpi \${VNC_DPI:-96} -AutoSelect=\${VNC_QUALITY_AUTOSELECT:-0} -localhost -desktop fluxbox -passwd /usr/local/etc/vscode-dev-containers/vnc-passwd"
 
 # Spin up noVNC if installed and not runnning.
 if [ -d "/usr/local/novnc" ] && [ "\$(ps -ef | grep /usr/local/novnc/noVNC*/utils/launch.sh | grep -v grep)" = "" ]; then
@@ -275,7 +267,7 @@ exec "\$@"
 log "** SCRIPT EXIT **"
 EOF
 
-echo "${VNC_PASSWORD}" > /usr/local/etc/vscode-dev-containers/vnc-passwd
+echo "${VNC_PASSWORD}" | vncpasswd -f > /usr/local/etc/vscode-dev-containers/vnc-passwd
 touch /root/.Xmodmap 
 chmod +x /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution
 
