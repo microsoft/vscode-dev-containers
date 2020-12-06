@@ -1,5 +1,5 @@
 # Update the VARIANT arg in devcontainer.json to pick an Elixir version: 1.9, 1.10, 1.10.4
-ARG VARIANT=1.10
+ARG VARIANT=latest
 FROM elixir:${VARIANT}
 
 # This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
@@ -45,12 +45,12 @@ RUN apt-get update \
   && apt-get install -y build-essential \
   && mix local.hex --force \
   && mix local.rebar --force \
-  && mix archive.install hex phx_new ${PHOENIX_VERSION} \
+  && mix archive.install --force hex phx_new ${PHOENIX_VERSION} \
   #
   # Clean up
   && apt-get autoremove -y \
   && apt-get clean -y \
-  && rm -rf /var/lib/apt/lists/* /tmp/common-setup.sh /tmp/node-setup.sh 
+  && rm -rf /var/lib/apt/lists/* /tmp/common-setup.sh /tmp/node-setup.sh
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update \
@@ -58,4 +58,4 @@ RUN apt-get update \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 # [Optional] Uncomment this line to install additional gems.
-# RUN gem install <your-gem-names-here>
+# RUN  mix ...
