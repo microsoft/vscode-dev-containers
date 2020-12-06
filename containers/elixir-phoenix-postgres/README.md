@@ -1,4 +1,4 @@
-# Ruby
+# Elixir, Phoenix & Postgres
 
 ## Summary
 
@@ -6,15 +6,15 @@ _Develop Elixir/Phoenix based applications. includes everything you need to get 
 
 | Metadata                    | Value                 |
 | --------------------------- | --------------------- |
-| _Contributors_              | [idyll]               |
+| _Contributors_              | [idyll, Talk2MeGooseman]|
 | _Definition type_           | Dockerfile            |
 | _Works in Codespaces_       | Yes                   |
 | _Container host OS support_ | Linux, macOS, Windows |
-| _Languages, platforms_      | Elixir                |
+| _Languages, platforms_      | Elixir, Postgres DB   |
 
 ## Using this definition with an existing folder
 
-While this definition should work unmodified, you can select the version of Elixir the container uses by updating the `VARIANT` arg in the included `docker-compose.yml`. In the same way you can specify a Phoenix Version.
+While this definition should work unmodified, you can select the version of Elixir the container uses by updating the `VARIANT` arg in the included `docker-compose.yml`. In the same way you can specify a Phoenix Version by modifying the `PHOENIX_VERSION`.
 
 ```yml
 services:
