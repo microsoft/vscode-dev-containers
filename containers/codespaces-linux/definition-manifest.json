@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "1.0.0",
+	"definitionVersion": "1.0.1",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -10,7 +10,7 @@
 		]
 	}, 
 	"dependencies": {
-		"image": "mcr.microsoft.com/oryx/build:vso-focal-20201110.1",
+		"image": "mcr.microsoft.com/oryx/build:vso-focal-20201204.1",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"debian": [
 			"apt-utils",

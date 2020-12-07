@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/oryx/build:vso-focal-20201121.1 as kitchensink
+FROM mcr.microsoft.com/oryx/build:vso-focal-20201204.1 as kitchensink
 
 ARG USERNAME=codespace
 ARG USER_UID=1000
@@ -45,13 +45,14 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}" "true" \
     # Build latest git from source
     && bash /tmp/scripts/git-from-src-debian.sh "latest" \
+    # Change owner of opt contents since Oryx can dynamically install and will run as "codespace"
+    && echo "Changing ownership of /opt..." && chown -R ${USERNAME} /opt \
     # Clean up
     && apt-get autoremove -y && apt-get clean -y
 
 # Install Python, PHP, Ruby utilities
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install rvm, rbenv, base gems
-    && chown -R ${USERNAME} /opt/ruby/*/lib /opt/ruby/*/bin \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
     # Install xdebug, link composer
     && yes | pecl install xdebug \
