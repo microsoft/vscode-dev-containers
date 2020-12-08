@@ -29,13 +29,17 @@ ENV PATH="${ORIGINAL_PATH}:${NVM_DIR}/current/bin:${NPM_GLOBAL}:${DOTNET_ROOT}:$
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/* setup-user.sh /tmp/scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    # Restore man command
+    && yes | unminimize 2>&1 \ 
     # Run common script and setup user
     && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "false" "true" \
     && bash /tmp/scripts/setup-user.sh "${USERNAME}" "${PATH}" \
+    # Change owner of opt contents since Oryx can dynamically install and will run as "codespace"
+    && chown codespace /opt/* \
     # Verify expected build and debug tools are present
     && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb \
     # Install tools and shells not in common script
-    && apt-get install -yq vim xtail software-properties-common libsecret-1-dev \
+    && apt-get install -yq vim vim-doc xtail software-properties-common libsecret-1-dev \
     && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/git-lfs-debian.sh \
     && bash /tmp/scripts/github-debian.sh \
@@ -45,14 +49,13 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}" "true" \
     # Build latest git from source
     && bash /tmp/scripts/git-from-src-debian.sh "latest" \
-    # Change owner of opt contents since Oryx can dynamically install and will run as "codespace"
-    && echo "Changing ownership of /opt..." && chown -R ${USERNAME} /opt \
     # Clean up
     && apt-get autoremove -y && apt-get clean -y
 
 # Install Python, PHP, Ruby utilities
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install rvm, rbenv, base gems
+    && chown -R ${USERNAME} /opt/ruby/*/lib /opt/ruby/*/bin \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
     # Install xdebug, link composer
     && yes | pecl install xdebug \
