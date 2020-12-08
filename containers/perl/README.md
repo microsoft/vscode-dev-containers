@@ -19,6 +19,7 @@ While the definition itself works unmodified, you can select the version of Perl
 
 ```json
 "args": { "VARIANT": "5" }
+```
 
 ### Adding the definition to your project
 
