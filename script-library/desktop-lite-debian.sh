@@ -142,13 +142,19 @@ if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
     rm -f /tmp/websockify-install.zip /tmp/novnc-install.zip
 
     # noVNC works best with Python 2 right now. Install the right package and use it - Ubuntu 20.04+ uses python2 package
-    if dpkg-query -W 'python2-minimal' > /dev/null 2>&1; then
-        NOVNC_PYTHON_PACKAGES="python2-minimal python2-numpy"
+    if apt-cache --names-only search ^python2-minimal$ > /dev/null 2>&1; then
+        NOVNC_PYTHON_PACKAGE="python2-minimal"
     else
-        NOVNC_PYTHON_PACKAGES="python-minimal python-numpy"
+        NOVNC_PYTHON_PACKAGE="python-minimal"
     fi
-    if ! dpkg -s ${NOVNC_PYTHON_PACKAGES} > /dev/null 2>&1; then
-        apt-get -y install --no-install-recommends ${NOVNC_PYTHON_PACKAGES}
+    # Debian 10 has python2-minimal but python-numpy, Ubuntu 20.04 is python2-numpy
+    if apt-cache --names-only search ^python2-numpy$ > /dev/null 2>&1; then
+        NOVNC_NUMPY_PACKAGE="python2-numpy"
+    else
+        NOVNC_NUMPY_PACKAGE="python-numpy"
+    fi
+    if ! dpkg -s ${NOVNC_PYTHON_PACKAGE} ${NOVNC_NUMPY_PACKAGE} > /dev/null 2>&1; then
+        apt-get -y install --no-install-recommends ${NOVNC_PYTHON_PACKAGE} ${NOVNC_NUMPY_PACKAGE}
     fi
     sed -i -E 's/^python /python2 /' /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
 fi 
