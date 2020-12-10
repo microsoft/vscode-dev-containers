@@ -1,8 +1,8 @@
-# Elixir, Phoenix & Postgres
+# Elixir, Phoenix, Node.js & PostgresSQL
 
 ## Summary
 
-_Develop Elixir/Phoenix based applications. includes everything you need to get up and running._
+_Develop Elixir/Phoenix based applications. Includes everything you need to get up and running._
 
 | Metadata                    | Value                 |
 | --------------------------- | --------------------- |
@@ -52,7 +52,7 @@ services:
 
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Ruby definition.
+   3. Select the Elixir, Phoenix, Node.js & PostgresSQL definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
 
