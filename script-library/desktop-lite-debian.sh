@@ -43,8 +43,6 @@ PACKAGE_LIST="
     fonts-noto \
     fonts-wqy-microhei \
     fonts-droid-fallback \
-    python-minimal \
-    python-numpy \
     htop \
     ncdu \
     curl \
@@ -110,6 +108,11 @@ if ! dpkg -s ${PACKAGE_LIST} > /dev/null 2>&1; then
     apt-get -y install --no-install-recommends ${PACKAGE_LIST}
 fi
 
+# Install Emoji font if available in distro - Available in Debian 10+, Ubuntu 18.04+
+if dpkg-query -W fonts-noto-color-emoji > /dev/null 2>&1 && ! dpkg -s fonts-noto-color-emoji > /dev/null 2>&1; then
+    apt-get -y install --no-install-recommends fonts-noto-color-emoji
+fi
+
 # Check at least one locale exists
 if ! grep -o -E '^\s*en_US.UTF-8\s+UTF-8' /etc/locale.gen > /dev/null; then
     echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
@@ -137,6 +140,17 @@ if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
     unzip /tmp/websockify-install.zip -d /usr/local/novnc
     ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
     rm -f /tmp/websockify-install.zip /tmp/novnc-install.zip
+
+    # noVNC works best with Python 2 right now. Install the right package and use it - Ubuntu 20.04+ uses python2 package
+    if dpkg-query -W 'python2-minimal' > /dev/null 2>&1; then
+        NOVNC_PYTHON_PACKAGES="python2-minimal python2-numpy"
+    else
+        NOVNC_PYTHON_PACKAGES="python-minimal python-numpy"
+    fi
+    if ! dpkg -s ${NOVNC_PYTHON_PACKAGES} > /dev/null 2>&1; then
+        apt-get -y install --no-install-recommends ${NOVNC_PYTHON_PACKAGES}
+    fi
+    sed -i -E 's/^python /python2 /' /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
 fi 
 
 # Set up folders for scripts and init files
