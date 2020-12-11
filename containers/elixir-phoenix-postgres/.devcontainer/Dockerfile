@@ -41,22 +41,17 @@ RUN apt-get update \
   && /bin/bash /tmp/node-setup.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; \
   fi \
   #
-  # Install rake, ruby-debug-ide, and debase, and dependencies
+  # Install dependencies
   && apt-get install -y build-essential \
-
   #
   # Clean up
   && apt-get autoremove -y \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/* /tmp/common-setup.sh /tmp/node-setup.sh
 
-# Switch to non-root user to install elixir dependencies
-USER $USERNAME
-
-# Install hex & rebar package managers & Phoenix framework
-RUN mix local.hex --force \
+RUN su ${USERNAME} -c "mix local.hex --force \
   && mix local.rebar --force \
-  && mix archive.install --force hex phx_new ${PHOENIX_VERSION}
+  && mix archive.install --force hex phx_new ${PHOENIX_VERSION}"
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update \
