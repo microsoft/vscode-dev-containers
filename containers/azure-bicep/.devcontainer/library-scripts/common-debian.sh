@@ -22,6 +22,9 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Ensure that login shells get the correct path if the user updated the PATH using ENV.
+echo "export PATH=${PATH//$(bash -lc 'echo $PATH')/\${PATH}}" > /etc/profile.d/00-vscdc-restore-env.sh
+
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""

@@ -22,6 +22,10 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# SSH uses a login shells, so we need to ensure these get the same initial PATH as non-login shells. 
+# /etc/profile wipes out the path which is a problem when the PATH was modified using the ENV directive in a Dockerfile.
+echo "export PATH=${PATH//$(bash -lc 'echo $PATH')/\${PATH}}" > /etc/profile.d/00-vscdc-restore-env.sh
+
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""

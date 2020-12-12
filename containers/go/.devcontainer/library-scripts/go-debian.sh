@@ -22,6 +22,9 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Ensure that login shells get the correct path if the user updated the PATH using ENV.
+echo "export PATH=${PATH//$(bash -lc 'echo $PATH')/\${PATH}}" > /etc/profile.d/00-vscdc-restore-env.sh
+
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
@@ -131,5 +134,6 @@ fi
 
 # Add GOPATH variable and bin directory into PATH in bashrc/zshrc files (unless disabled)
 updaterc "export GOPATH=\"${TARGET_GOPATH}\"\nexport GOROOT=\"${TARGET_GOROOT}\"\nexport PATH=\"\${GOROOT}/bin:\${GOPATH}/bin:\${PATH}\""
+
 echo "Done!"
 

@@ -1,57 +1,19 @@
-#!/bin/bash -i
+#!/bin/bash
 cd $(dirname "$0")
 
-if [ -z $HOME ]; then
-    HOME="/root"
-fi
+source test-utils.sh codespace
 
-FAILED=()
+# Run common tests
+checkCommon
 
-check() {
-    LABEL=$1
-    shift
-    echo -e "\n🧪  Testing $LABEL: $@"
-    if "$@"; then 
-        echo "🏆  Passed!"
-    else
-        echo "💥  $LABEL check failed."
-        FAILED+=("$LABEL")
-    fi
-}
-
-checkMultiple() {
-    PASSED=0
-    LABEL="$1"
-    shift; MINIMUMPASSED=$1
-    shift; EXPRESSION="$1"
-    while [ "$EXPRESSION" != "" ]; do
-        if $EXPRESSION; then ((PASSED++)); fi
-        shift; EXPRESSION=$1
-    done
-    check "$LABEL" [ $PASSED -ge $MINIMUMPASSED ]
-}
-
-checkOSPackages() {
-    LABEL="$1"
-    shift
-    check "$LABEL" dpkg-query --show -f='${Package}: ${Version}\n' "$@"
-}
-
-checkExtension() {
-    checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-remote/extensions/$1*"" ]"
-}
-
-# Actual tests
-USERNAME=codespace
-if ! ./test-common.sh ${USERNAME}; then
-    FAILED+=("common-tests")
-fi
+# Check default extensions
+checkExtension "gitHub.vscode-pull-request-github"
 
 # Check Oryx
-check "oryx" oryx platforms
+check "oryx" oryx --version
 
 # Check .NET
-check "dotnet" dotnet --info
+check "dotnet" dotnet --list-sdks
 
 # Check Python
 check "python" python --version
@@ -67,8 +29,8 @@ check "bandit" bandit --version
 check "virtualenv" virtualenv --version
 
 # Check Java tools
-check "java" java --version
-check "sdkman" sdk --version
+check "java" java -version
+check "sdkman" bash -c "source /usr/local/sdkman/bin/sdkman-init.sh && sdk --version"
 check "gradle" gradle --version
 check "maven" mvn --version
 
@@ -79,7 +41,7 @@ check "rake" rake --version
 
 # Node.js
 check "node" node --version
-check "nvm" nvm --version
+check "nvm" bash -c "source /home/codespace/.nvm/nvm.sh && nvm --version"
 check "nvs" nvs --version
 check "yarn" yarn --version
 check "npm" npm --version
@@ -110,13 +72,8 @@ check "fish" fish --version
 check "zsh" zsh --version
 
 # Check expected commands
-check "git-ed" test "$(cat $(which git-ed.sh))" = "$(cat ./git-ed-expected.txt)"
+check "git-ed" bash -c 'which git-ed.sh && [ "$(cat $(which git-ed.sh))" = "$(cat ./git-ed-expected.txt)" ]'
 
-# -- Report results --
-if [ ${#FAILED[@]} -ne 0 ]; then
-    echo -e "\n💥  Failed tests: ${FAILED[@]}"
-    exit 1
-else 
-    echo -e "\n💯  All passed!"
-    exit 0
-fi
+# Report result
+reportResults
+
