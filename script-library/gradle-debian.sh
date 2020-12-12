@@ -25,6 +25,9 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Ensure that login shells get the correct path if the user updated the PATH using ENV.
+echo "export PATH=${PATH//$(bash -lc 'echo $PATH')/\${PATH}}" > /etc/profile.d/00-vscdc-restore-env.sh
+
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
@@ -70,4 +73,5 @@ fi
 # Install gradle
 su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install gradle ${GRADLE_VERSION} && sdk flush archives && sdk flush temp"
 updaterc "export GRADLE_USER_HOME=\${HOME}/.gradle"
+
 echo "Done!"

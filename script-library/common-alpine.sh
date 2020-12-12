@@ -21,6 +21,9 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Ensure that login shells get the correct path if the user updated the PATH using ENV.
+echo "export PATH=${PATH//$(bash -lc 'echo $PATH')/\${PATH}}" > /etc/profile.d/00-vscdc-restore-env.sh
+
 # Switch to bash right away
 if [ "${SWITCHED_TO_BASH}" != "true" ]; then
     apk add bash
