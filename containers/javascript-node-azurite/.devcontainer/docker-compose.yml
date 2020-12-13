@@ -28,10 +28,11 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   storage:
+    container_name: azurite
     image: mcr.microsoft.com/azure-storage/azurite:latest
     restart: unless-stopped
     volumes:
-      - storage-data:/data/db
+      - storage-data:/data
 
     # Add "forwardPorts": ["10000", "10001"] to **devcontainer.json** to forward Azurite locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
