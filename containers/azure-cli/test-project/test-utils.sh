@@ -118,8 +118,8 @@ checkCommon()
     check "sudo" sudo echo "sudo works."
     check "zsh" zsh --version
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
-    check "login-shell-path" [ "$(bash -c 'echo $PATH')" = "$(bash -lc 'echo $PATH')" ]
-    check "code" bash -i -c "code --version"
+    check "login-shell-path" [ -f "/etc/profile.d/00-vscdc-restore-env.sh" ]
+    check "code" which code
 }
 
 reportResults() {

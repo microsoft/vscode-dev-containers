@@ -126,12 +126,11 @@ checkCommon()
     checkOSPackages "common-os-packages" ${PACKAGE_LIST}
     checkMultiple "vscode-server" 1 "[ -d $HOME/.vscode-server/bin ]" "[ -d $HOME/.vscode-server-insiders/bin ]" "[ -d $HOME/.vscode-test-server/bin ]" "[ -d $HOME/.vscode-remote/bin ]" "[ -d $HOME/.vscode-remote/bin ]"
     check "non-root-user" id ${USERNAME}
-    check "locale" [ $(locale -a | grep en_US.utf8) ]
     check "sudo" sudo echo "sudo works."
     check "zsh" zsh --version
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
-    check "login-shell-path" [ "$(bash -c 'echo $PATH')" = "$(bash -lc 'echo $PATH')" ]
-    check "code" bash -i -c "code --version"
+    check "login-shell-path" [ -f "/etc/profile.d/00-vscdc-restore-env.sh" ]
+    check "code" which code
 }
 
 reportResults() {

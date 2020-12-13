@@ -22,7 +22,9 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Ensure that login shells get the correct path if the user updated the PATH using ENV.
-echo "export PATH=${PATH//$(bash -lc 'echo $PATH')/\${PATH}}" > /etc/profile.d/00-vscdc-restore-env.sh
+rm -f /etc/profile.d/00-vscdc-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\${PATH}}" > /etc/profile.d/00-vscdc-restore-env.sh
+chmod +x /etc/profile.d/00-vscdc-restore-env.sh
 
 # Switch to bash right away
 if [ "${SWITCHED_TO_BASH}" != "true" ]; then
@@ -158,6 +160,27 @@ if type code-insiders > /dev/null 2>&1 && ! type code > /dev/null 2>&1; then
 fi
 EOF
 )"
+
+# code shim, it fallbacks to code-insiders if code is not available
+cat << 'EOF' > /usr/local/bin/code
+#!/bin/sh
+
+get_in_path_except_current() {
+  which -a "$1" | grep -v "$0" | head -1
+}
+
+code="$(get_in_path_except_current code)"
+
+if [ -n "$code" ]; then
+  exec "$code" "$@"
+elif [ "$(command -v code-insiders)" ]; then
+  exec code-insiders "$@"
+else
+  echo "code or code-insiders is not installed" >&2
+  exit 127
+fi
+EOF
+chmod +x /usr/local/bin/code
 
 # Codespaces themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
