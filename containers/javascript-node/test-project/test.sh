@@ -14,7 +14,7 @@ check "npm" npm install
 check "eslint" eslint server.js
 check "test-project" npm run test
 check "nvm" bash -c ". /usr/local/share/nvm/nvm.sh && nvm install 8"
-check "node" bash -c ". /usr/local/share/nvm/nvm.sh && node --version"
+check "nvm-node" bash -c ". /usr/local/share/nvm/nvm.sh && node --version"
 
 # Report result
 reportResults
