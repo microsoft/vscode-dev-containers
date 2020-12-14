@@ -35,14 +35,14 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
 
 - `mcr.microsoft.com/vscode/devcontainers/typescript-node:0-14`
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.123-14`
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.123.0-14`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.155-14`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.155.0-14`
 
 Alternatively, you can use the contents of the `Dockerfile` or the [JavaScript and Node.js `Dockerfile`](../javascript-node/.devcontainer/base.Dockerfile) to fully customize your container's contents.
 
-Beyond TypeScript, Node.js, and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. It also installs `tslint` globally and includes the VS Code TSLint extension for backwards compatibility, but [TSLint has been deprecated](https://github.com/palantir/tslint/issues/4534) in favor of ESLint, so `eslint` and its corresponding extension has been included as well.
+Beyond TypeScript, Node.js, and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. Since `tslint` is [now fully depreicated](https://github.com/palantir/tslint/issues/4534), the definition includes `tslint-to-eslint` globally to help you migrate.
 
-Note that, while `eslint`and `typescript` are installed globally for convenance, but [as of ESLint 6](https://eslint.org/docs/user-guide/migrating-to-6.0.0#-plugins-and-shareable-configs-are-no-longer-affected-by-eslints-location), you will need to install the following packages locally to lint TypeScript code: `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser`, `eslint`, `typescript`.
+Note that, while `eslint`and `typescript` are installed globally for convenance, [as of ESLint 6](https://eslint.org/docs/user-guide/migrating-to-6.0.0#-plugins-and-shareable-configs-are-no-longer-affected-by-eslints-location), you will need to install the following packages locally to lint TypeScript code: `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser`, `eslint`, `typescript`.
 
 ### Adding the definition to your project
 

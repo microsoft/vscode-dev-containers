@@ -13,10 +13,10 @@ check "yarn" yarn install
 check "npm" npm install
 check "eslint" "eslint server.js"
 check "test-project" npm run test
-check "nvm" bash -c "source /usr/local/share/nvm/nvm.sh && nvm install 8"
-check "node" bash -c "source /usr/local/share/nvm/nvm.sh && node --version"
-check "tslint" "tslint src/server.ts"
-check "eslint" "eslint --no-eslintrc -c .eslintrc.json src/server.ts"
+check "nvm" bash -c ". /usr/local/share/nvm/nvm.sh && nvm install 8"
+check "node" bash -c ". /usr/local/share/nvm/nvm.sh && node --version"
+check "tslint" tslint src/server.ts
+check "eslint" eslint --no-eslintrc -c .eslintrc.json src/server.ts
 check "typescript" npm run compile
 check "test-project" npm run test
 
