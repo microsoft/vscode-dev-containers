@@ -22,7 +22,7 @@ RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "$
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install Truffle Suite and Ganache CLI
-RUN su ${USERNAME} -c "source ${NVM_DIR}/nvm.sh \
+RUN su ${USERNAME} -c ". ${NVM_DIR}/nvm.sh \
     && npm i --unsafe-perm -g truffle \
     && npm i -g ganache-cli" 2>&1
 

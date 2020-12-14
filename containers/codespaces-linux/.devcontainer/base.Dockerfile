@@ -90,7 +90,7 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
 # Install SDKMAN, OpenJDK8 (JDK 11 already present), gradle (maven already present)
 RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
     && bash /tmp/scripts/java-debian.sh "8.0.275.hs-adpt" "${SDKMAN_DIR}" "${USERNAME}" "true" \
-    && su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh \
+    && su ${USERNAME} -c ". ${SDKMAN_DIR}/bin/sdkman-init.sh \
         && sdk install java opt-java-11 /opt/java/11.0 \
         && sdk install java opt-java-lts /opt/java/lts \
         && sdk default java opt-java-lts"

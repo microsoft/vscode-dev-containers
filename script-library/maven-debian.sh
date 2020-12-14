@@ -73,7 +73,7 @@ if [ ! -d "${SDKMAN_DIR}" ]; then
 fi
 
 # Install Maven
-su ${USERNAME} -c "source ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install maven ${MAVEN_VERSION} && sdk flush archives && sdk flush temp"
+su ${USERNAME} -c ". ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install maven ${MAVEN_VERSION} && sdk flush archives && sdk flush temp"
 updaterc "export M2=\$HOME/.m2"
 
 echo "Done!"

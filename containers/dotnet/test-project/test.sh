@@ -11,8 +11,8 @@ checkExtension "ms-dotnettools.csharp"
 check "dotnet" dotnet --info
 check "nuget" dotnet restore
 check "msbuild" dotnet msbuild
-check "nvm" bash -c "source /usr/local/share/nvm/nvm.sh && nvm install 10"
-check "node" bash -c "source /usr/local/share/nvm/nvm.sh && node --version"
+check "nvm" bash -c ". /usr/local/share/nvm/nvm.sh && nvm install 10"
+check "node" bash -c ". /usr/local/share/nvm/nvm.sh && node --version"
 check "yarn" yarn install
 
 # Report result
