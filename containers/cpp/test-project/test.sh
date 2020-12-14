@@ -8,7 +8,7 @@ checkCommon
 
 # Run definition specific tests
 checkExtension "ms-vscode.cpptools"
-check "command-line-tools" g++ gcc cmake cppcheck valgrind 
+checkOSPackages "command-line-tools" build-essential cmake cppcheck valgrind clang lldb llvm gdb
 check "g++"  g++ -g main.cpp -o main.out
 rm main.out
 mkdir -p build
