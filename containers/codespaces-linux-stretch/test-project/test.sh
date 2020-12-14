@@ -35,10 +35,10 @@ check "gradle" gradle --version
 check "maven" mvn --version
 
 # Check Ruby tools
-check "ruby" ruby --version
 check "rvm" bash -c ". /usr/local/rvm/scripts/rvm && rvm --version"
+check "ruby" bash -c ". /usr/local/rvm/scripts/rvm && ruby --version"
+check "rake" bash -c ". /usr/local/rvm/scripts/rvm && rake --version"
 check "rbenv" bash -c 'eval "$(rbenv init -)" && rbenv --version'
-check "rake" rake --version
 
 # Node.js
 check "node" node --version

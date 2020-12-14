@@ -122,3 +122,12 @@ checkCommon()
     check "code" which code
 }
 
+reportResults() {
+    if [ ${#FAILED[@]} -ne 0 ]; then
+        echo -e "\n💥  Failed tests: ${FAILED[@]}"
+        exit 1
+    else 
+        echo -e "\n💯  All passed!"
+        exit 0
+    fi
+}
