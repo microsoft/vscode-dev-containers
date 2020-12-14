@@ -11,9 +11,10 @@ ARG UPGRADE_PACKAGES="true"
 ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+ARG NPM_GLOBAL=/usr/local/share/npm-global
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \ 
-    PATH=${NVM_DIR}/current/bin:${PATH}
+    PATH=${NPM_GLOBAL}/bin:${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/*.sh /tmp/library-scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
@@ -23,22 +24,18 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Install yarn, nvm
     && rm -rf /opt/yarn-* /usr/local/bin/yarn /usr/local/bin/yarnpkg \
     && bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
-    # Clean up
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /root/.gnupg /tmp/library-scripts
-
-# Configure global npm install location
-ARG NPM_GLOBAL=/usr/local/share/npm-global
-ENV PATH=${NPM_GLOBAL}/bin:${PATH}
-RUN mkdir -p ${NPM_GLOBAL} \
+    # Configure global npm install location
+    && mkdir -p ${NPM_GLOBAL} \
     && chown ${USERNAME}:root ${NPM_GLOBAL} \
     && npm config -g set prefix ${NPM_GLOBAL} \
     && sudo -u ${USERNAME} npm config -g set prefix ${NPM_GLOBAL} \
-    && echo "if [ \"\$(stat -c '%U' ${NPM_GLOBAL})\" != \"${USERNAME}\" ]; then sudo chown -R ${USERNAME}:root ${NPM_GLOBAL} ${NVM_DIR}; fi" \
-    | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
-
-# Install eslint
-RUN sudo -u ${USERNAME} npm install -g eslint \
-    && npm cache clean --force > /dev/null 2>&1
+    && echo "if [ \"\$(stat -c '%U' ${NPM_GLOBAL})\" != \"\$USER\" ]; then sudo chown -R \$USER:root ${NPM_GLOBAL} \${NVM_DIR}; fi" \
+    | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc \
+    # Install eslint
+    && su ${USERNAME} -c "npm install -g eslint" \
+    && npm cache clean --force > /dev/null 2>&1 \
+    # Clean up
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /root/.gnupg /tmp/library-scripts
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

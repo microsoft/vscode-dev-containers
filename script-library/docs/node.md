@@ -46,7 +46,7 @@ Try doing the following instead:
 Or you can source the file before using nvm:
 
 ```json
-"postCreateCommand": "source ${NVM_DIR}/nvm.sh && nvm install --lts"
+"postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install --lts"
 ```
 
 That's it!

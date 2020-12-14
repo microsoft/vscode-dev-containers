@@ -20,6 +20,11 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Ensure that login shells get the correct path if the user updated the PATH using ENV.
+rm -f /etc/profile.d/00-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\${PATH}" > /etc/profile.d/00-restore-env.sh
+chmod +x /etc/profile.d/00-restore-env.sh
+
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
@@ -81,7 +86,7 @@ if [ -d "/usr/local/rvm" ]; then
     echo "Ruby Version Manager already exists."
     if [ "${RUBY_VERSION}" != "none" ]; then
         echo "Installing specified Ruby version."
-        su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm install ruby ${RUBY_VERSION}"
+        su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && rvm install ruby ${RUBY_VERSION}"
     fi
     SKIP_GEM_INSTALL="false"
 else
@@ -93,7 +98,7 @@ else
     # Install RVM
     curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles ${RVM_INSTALL_ARGS} --with-default-gems="${DEFAULT_GEMS}" 2>&1
     usermod -aG rvm ${USERNAME}
-    su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && rvm fix-permissions system"
+    su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && rvm fix-permissions system"
     rm -rf ${GNUPGHOME}
 fi
 
@@ -101,7 +106,7 @@ if [ "${INSTALL_RUBY_TOOLS}" = "true" ] && [ "${SKIP_GEM_INSTALL}" != "true" ]; 
     # Non-root user may not have "gem" in path when script is run and no ruby version
     # is installed by rvm, so handle this by using root's default gem in this case
     ROOT_GEM="$(which gem)"
-    su ${USERNAME} -c "source /usr/local/rvm/scripts/rvm && \"$(which gem || ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
+    su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && \"$(which gem || ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
 fi
 
 # VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it

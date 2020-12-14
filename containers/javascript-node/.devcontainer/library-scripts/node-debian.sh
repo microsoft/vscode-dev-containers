@@ -20,6 +20,11 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Ensure that login shells get the correct path if the user updated the PATH using ENV.
+rm -f /etc/profile.d/00-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\${PATH}" > /etc/profile.d/00-restore-env.sh
+chmod +x /etc/profile.d/00-restore-env.sh
+
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
@@ -66,7 +71,7 @@ fi
 if [ -d "${NVM_DIR}" ]; then
     echo "NVM already installed."
     if [ "${NODE_VERSION}" != "" ]; then
-       su ${USERNAME} -c "source $NVM_DIR/nvm.sh && nvm install ${NODE_VERSION} && nvm clear-cache"
+       su ${USERNAME} -c ". $NVM_DIR/nvm.sh && nvm install ${NODE_VERSION} && nvm clear-cache"
     fi
     exit 0
 fi
