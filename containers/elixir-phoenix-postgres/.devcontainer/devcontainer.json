@@ -1,5 +1,5 @@
 {
-	"name": "Elixir, Phoenix, Node.js & PostgresSQL",
+	"name": "Elixir, Phoenix, Node.js & PostgresSQL (Community)",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "elixir",
 	"workspaceFolder": "/workspace",
