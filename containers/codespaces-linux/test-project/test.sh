@@ -30,19 +30,20 @@ check "virtualenv" virtualenv --version
 
 # Check Java tools
 check "java" java -version
-check "sdkman" bash -c "source /usr/local/sdkman/bin/sdkman-init.sh && sdk --version"
+check "sdkman" bash -c ". /usr/local/sdkman/bin/sdkman-init.sh && sdk --version"
 check "gradle" gradle --version
 check "maven" mvn --version
 
 # Check Ruby tools
 check "ruby" ruby --version
-check "rvm" rvm --version
+check "rvm" bash -c ". /usr/local/rvm/scripts/rvm && rvm --version"
+check "rbenv" bash -c 'eval "$(rbenv init -)" && rbenv --version'
 check "rake" rake --version
 
 # Node.js
 check "node" node --version
-check "nvm" bash -c "source /home/codespace/.nvm/nvm.sh && nvm --version"
-check "nvs" nvs --version
+check "nvm" bash -c ". /home/codespace/.nvm/nvm.sh && nvm --version"
+check "nvs" bash -c ". /home/codespace/.nvs/nvs.sh && nvs --version"
 check "yarn" yarn --version
 check "npm" npm --version
 
@@ -72,7 +73,7 @@ check "fish" fish --version
 check "zsh" zsh --version
 
 # Check expected commands
-check "git-ed" bash -c 'which git-ed.sh && [ "$(cat $(which git-ed.sh))" = "$(cat ./git-ed-expected.txt)" ]'
+check "git-ed" [ "$(cat /home/codespace/.local/bin/git-ed.sh)" = "$(cat ./git-ed-expected.txt)" ]
 
 # Report result
 reportResults
