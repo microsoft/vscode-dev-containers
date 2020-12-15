@@ -11,11 +11,11 @@ checkExtension "dbaeumer.vscode-eslint"
 check "node" node --version
 check "yarn" yarn install
 check "npm" npm install
-check "nvm" bash -c ". /usr/local/share/nvm/nvm.sh && nvm install 8"
-check "nvm-node" bash -c ". /usr/local/share/nvm/nvm.sh && node --version"
 check "eslint" eslint --no-eslintrc -c .eslintrc.json src/server.ts
 check "typescript" npm run compile
 check "test-project" npm run test
+check "nvm" bash -c ". /usr/local/share/nvm/nvm.sh && nvm install 8"
+check "nvm-node" bash -c ". /usr/local/share/nvm/nvm.sh && node --version"
 
 # Report result
 reportResults
