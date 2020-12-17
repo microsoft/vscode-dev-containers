@@ -8,6 +8,11 @@ fi
 
 FAILED=()
 
+echoStderr()
+{
+    echo "$@" 1>&2
+}
+
 check() {
     LABEL=$1
     shift
@@ -16,7 +21,7 @@ check() {
         echo "✅  Passed!"
         return 0
     else
-        echo "❌ $LABEL check failed."
+        echoStderr "❌ $LABEL check failed."
         FAILED+=("$LABEL")
         return 1
     fi
@@ -36,7 +41,7 @@ checkMultiple() {
         echo "✅ Passed!"
         return 0
     else
-        echo "❌ $LABEL check failed."
+        echoStderr "❌ $LABEL check failed."
         FAILED+=("$LABEL")
         return 1
     fi
@@ -50,7 +55,7 @@ checkOSPackages() {
         echo "✅  Passed!"
         return 0
     else
-        echo "❌ $LABEL check failed."
+        echoStderr "❌ $LABEL check failed."
         FAILED+=("$LABEL")
         return 1
     fi
@@ -77,7 +82,7 @@ checkExtension() {
         echo -e "\n✅ Passed!"
         return 0
     else
-        echo -e "\n❌ Extension $EXTN_ID not found."
+        echoStderr -e "\n❌ Extension $EXTN_ID not found."
         FAILED+=("$LABEL")
         return 1
     fi
@@ -135,10 +140,22 @@ checkCommon()
 
 reportResults() {
     if [ ${#FAILED[@]} -ne 0 ]; then
-        echo -e "\n💥  Failed tests: ${FAILED[@]}"
+        echoStderr -e "\n💥  Failed tests: ${FAILED[@]}"
         exit 1
     else 
         echo -e "\n💯  All passed!"
         exit 0
+    fi
+}
+
+# Useful for scenarios where UID/GID is not automatically updated - happens in GitHub Actions w/Docker Compose
+fixTestProjectFolderPrivs() {
+    if [ "${USERNAME}" != "root" ]; then
+        TEST_PROJECT_FOLDER="${1:-$SCRIPT_FOLDER}"
+        FOLDER_USER="$(stat -c '%U' "${TEST_PROJECT_FOLDER}")"
+        if [ "${FOLDER_USER}" != "${USERNAME}" ]; then
+            echoStderr "WARNING: Test project folder is owned by ${FOLDER_USER}. Updating to ${USERNAME}."
+            chown -R ${USERNAME} "${TEST_PROJECT_FOLDER}"
+        fi
     fi
 }

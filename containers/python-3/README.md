@@ -116,11 +116,13 @@ If you prefer, you can add the following to your `Dockerfile` to cause global in
 
 ```Dockerfile
 ENV PIP_TARGET=/usr/local/pip-global
-ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH} \
-    PATH=${PIP_TARGET}/bin:${PATH}
-RUN mkdir -p ${PIP_TARGET} \
-    && chown vscode:root ${PIP_TARGET} \
-    && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then sudo chown -R vscode:root ${PIP_TARGET}; fi" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
+ENV PATH=${PIP_TARGET}/bin:${PATH}
+RUN if ! cat /etc/group | grep -e "^pip-global:" > /dev/null 2>&1; then groupadd -r pip-global; fi \
+    && usermod -a -G pip-global vscode \
+    && umask 0002 && mkdir -p ${PIP_TARGET} \
+    && chown :pip-global ${PIP_TARGET} \
+    && ( [ ! -f "/etc/profile.d/00-restore-env.sh" ] || sed -i -e "s/export PATH=/export PATH=\/usr\/local\/pip-global:/" /etc/profile.d/00-restore-env.sh )
 ```
 
 #### [Optional] Installing multiple versions of Python in the same image
