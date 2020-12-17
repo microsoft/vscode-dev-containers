@@ -1,8 +1,8 @@
 # [Choice] Node.js version: 14, 12, 10
 ARG VARIANT=14
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-${VARIANT}
 
-RUN sudo -u node npm install -g http-server @vue/cli @vue/cli-service-global
+RUN su node -c "umask 0002 && npm install -g http-server @vue/cli @vue/cli-service-global"
 WORKDIR /app
 
 EXPOSE 8080

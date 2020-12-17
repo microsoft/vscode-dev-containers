@@ -27,7 +27,7 @@ fi
 
 # Ensure that login shells get the correct path if the user updated the PATH using ENV.
 rm -f /etc/profile.d/00-restore-env.sh
-echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\${PATH}" > /etc/profile.d/00-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
 chmod +x /etc/profile.d/00-restore-env.sh
 
 # Determine the appropriate non-root user
@@ -66,14 +66,22 @@ fi
 
 # Install sdkman if not installed
 if [ ! -d "${SDKMAN_DIR}" ]; then
+    # Create sdkman group, dir, and set sticky bit
+    if ! cat /etc/group | grep -e "^sdkman:" > /dev/null 2>&1; then
+        groupadd -r sdkman
+    fi
+    usermod -a -G sdkman ${USERNAME}
+    umask 0002
+    # Install SDKMAN
     curl -sSL "https://get.sdkman.io?rcupdate=false" | bash
-    chown -R "${USERNAME}" "${SDKMAN_DIR}"
+    chown -R :sdkman ${SDKMAN_DIR}
+    find ${SDKMAN_DIR} -type d | xargs -d '\n' chmod g+s
     # Add sourcing of sdkman into bashrc/zshrc files (unless disabled)
-    updaterc "export SDKMAN_DIR=${SDKMAN_DIR}\nsource \${SDKMAN_DIR}/bin/sdkman-init.sh"
+    updaterc "export SDKMAN_DIR=${SDKMAN_DIR}\n. \${SDKMAN_DIR}/bin/sdkman-init.sh"
 fi
 
 if [ "${JAVA_VERSION}" != "none" ]; then
-    su ${USERNAME} -c ". ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install java ${JAVA_VERSION} && sdk flush archives && sdk flush temp"
+    su ${USERNAME} -c "umask 0002 && . ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install java ${JAVA_VERSION} && sdk flush archives && sdk flush temp"
 fi
 
 echo "Done!"

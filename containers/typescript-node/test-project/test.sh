@@ -16,6 +16,7 @@ check "typescript" npm run compile
 check "test-project" npm run test
 check "nvm" bash -c ". /usr/local/share/nvm/nvm.sh && nvm install 8"
 check "nvm-node" bash -c ". /usr/local/share/nvm/nvm.sh && node --version"
+sudo rm -rf node_modules out
 
 # Report result
 reportResults

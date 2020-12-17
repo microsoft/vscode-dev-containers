@@ -24,15 +24,17 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Install yarn, nvm
     && rm -rf /opt/yarn-* /usr/local/bin/yarn /usr/local/bin/yarnpkg \
     && bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
-    # Configure global npm install location
+    # Configure global npm install location, use group to adapt to UID/GID changes
+    && if ! cat /etc/group | grep -e "^npm:" > /dev/null 2>&1; then groupadd -r npm; fi \
+    && usermod -a -G npm ${USERNAME} \
+    && umask 0002 \
     && mkdir -p ${NPM_GLOBAL} \
-    && chown ${USERNAME}:root ${NPM_GLOBAL} \
+    && chown ${USERNAME}:npm ${NPM_GLOBAL} \
+    && chmod g+s ${NPM_GLOBAL} \
     && npm config -g set prefix ${NPM_GLOBAL} \
     && sudo -u ${USERNAME} npm config -g set prefix ${NPM_GLOBAL} \
-    && echo "if [ \"\$(stat -c '%U' ${NPM_GLOBAL})\" != \"\$USER\" ]; then sudo chown -R \$USER:root ${NPM_GLOBAL} \${NVM_DIR}; fi" \
-    | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc \
     # Install eslint
-    && su ${USERNAME} -c "npm install -g eslint" \
+    && su ${USERNAME} -c "umask 0002 && npm install -g eslint" \
     && npm cache clean --force > /dev/null 2>&1 \
     # Clean up
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /root/.gnupg /tmp/library-scripts
@@ -44,3 +46,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # [Optional] Uncomment if you want to install an additional version of node using nvm
 # ARG EXTRA_NODE_VERSION=10
 # RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
+
+# [Optional] Uncomment if you want to install more global node modules
+# RUN su node -c "npm install -g <your-package-list-here>""

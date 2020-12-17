@@ -21,6 +21,11 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Ensure that login shells get the correct path if the user updated the PATH using ENV.
+rm -f /etc/profile.d/00-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
+chmod +x /etc/profile.d/00-restore-env.sh
+
 # Switch to bash right away
 if [ "${SWITCHED_TO_BASH}" != "true" ]; then
     apk add bash
@@ -28,11 +33,6 @@ if [ "${SWITCHED_TO_BASH}" != "true" ]; then
     exec /bin/bash "$0" "$@"
     exit $?
 fi
-
-# Ensure that login shells get the correct path if the user updated the PATH using ENV.
-rm -f /etc/profile.d/00-restore-env.sh
-echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\${PATH}" > /etc/profile.d/00-restore-env.sh
-chmod +x /etc/profile.d/00-restore-env.sh
 
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -163,7 +163,7 @@ EOF
 
 # code shim, it fallbacks to code-insiders if code is not available
 cat << 'EOF' > /usr/local/bin/code
-#!/bin/bash
+#!/bin/sh
 
 get_in_path_except_current() {
   which -a "$1" | grep -v "$0" | head -1

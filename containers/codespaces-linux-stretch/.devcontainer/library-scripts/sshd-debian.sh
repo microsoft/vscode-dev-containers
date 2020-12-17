@@ -24,7 +24,9 @@ fi
 
 # SSH uses a login shells, so we need to ensure these get the same initial PATH as non-login shells. 
 # /etc/profile wipes out the path which is a problem when the PATH was modified using the ENV directive in a Dockerfile.
-echo "export PATH=${PATH//$(bash -lc 'echo $PATH')/\${PATH}}" > /etc/profile.d/00-restore-env.sh
+rm -f /etc/profile.d/00-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
+chmod +x /etc/profile.d/00-restore-env.sh
 
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then

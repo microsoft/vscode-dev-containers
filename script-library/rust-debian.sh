@@ -23,7 +23,7 @@ fi
 
 # Ensure that login shells get the correct path if the user updated the PATH using ENV.
 rm -f /etc/profile.d/00-restore-env.sh
-echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\${PATH}" > /etc/profile.d/00-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
 chmod +x /etc/profile.d/00-restore-env.sh
 
 # Determine the appropriate non-root user
@@ -85,6 +85,14 @@ EOF
 
 # Add CARGO_HOME, RUSTUP_HOME and bin directory into bashrc/zshrc files (unless disabled)
 updaterc "export CARGO_HOME=\"${CARGO_HOME}\"\nexport RUSTUP_HOME=\"${RUSTUP_HOME}\"\nexport PATH=\"\${CARGO_HOME}/bin:\${PATH}\""
+
+updaterc "$(cat << EOF
+export RUSTUP_HOME="${RUSTUP_HOME}"
+export CARGO_HOME="${CARGO_HOME}"
+if [[ "\${PATH}" != *"\${CARGO_HOME}/bin"* ]]; then export PATH="\${PATH}:\${CARGO_HOME}/bin"; fi
+EOF
+)"
+
 
 echo "Done!"
 

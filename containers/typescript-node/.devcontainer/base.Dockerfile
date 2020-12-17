@@ -3,8 +3,8 @@ ARG VARIANT=14-buster
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 
 # Install tslint, typescript. eslint is installed by javascript image
-ARG USERNAME=node
-RUN sudo -u ${USERNAME} npm install -g tslint-to-eslint-config typescript \
+ARG NODE_MODULES="tslint-to-eslint-config typescript"
+RUN su node -c "umask 0002 && npm install -g ${NODE_MODULES}" \
     && npm cache clean --force > /dev/null 2>&1
 
 # [Optional] Uncomment this section to install additional OS packages.
