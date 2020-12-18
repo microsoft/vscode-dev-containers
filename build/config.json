@@ -17,7 +17,9 @@
 		"codespaces-linux-stretch" 
 	],
 
-	"flattenBaseImage": [],
+	"flattenBaseImage": [
+		"codespaces-linux-stretch"
+	],
 
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",
