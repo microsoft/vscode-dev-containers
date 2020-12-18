@@ -155,7 +155,7 @@ fixTestProjectFolderPrivs() {
         FOLDER_USER="$(stat -c '%U' "${TEST_PROJECT_FOLDER}")"
         if [ "${FOLDER_USER}" != "${USERNAME}" ]; then
             echoStderr "WARNING: Test project folder is owned by ${FOLDER_USER}. Updating to ${USERNAME}."
-            chown -R ${USERNAME} "${TEST_PROJECT_FOLDER}"
+            sudo chown -R ${USERNAME} "${TEST_PROJECT_FOLDER}"
         fi
     fi
 }
