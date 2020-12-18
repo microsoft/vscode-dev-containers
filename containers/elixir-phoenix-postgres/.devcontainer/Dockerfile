@@ -11,8 +11,8 @@ ARG USER_GID=$USER_UID
 # Options for common package install script
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
-ARG COMMON_SCRIPT_SHA="dev-mode"
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/v0.154.1/script-library/common-debian.sh"
+ARG COMMON_SCRIPT_SHA="b6817164475f46f016ada5139948f740ab10d999076ae5b4ffc80ba21c76a55b"
 
 # Optional Settings for Phoenix
 ARG PHOENIX_VERSION="1.5.4"
