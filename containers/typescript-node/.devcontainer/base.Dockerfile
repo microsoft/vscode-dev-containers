@@ -1,6 +1,6 @@
 # [Choice] Node.js version: 14, 12, 10
 ARG VARIANT=14-buster
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-${VARIANT}
 
 # Install tslint, typescript. eslint is installed by javascript image
 ARG NODE_MODULES="tslint-to-eslint-config typescript"

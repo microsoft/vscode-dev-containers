@@ -1,6 +1,6 @@
 # [Choice] .NET Core version: 3.1, 2.1
 ARG VARIANT=3.1
-FROM mcr.microsoft.com/vscode/devcontainers/dotnetcore:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/dotnet:dev-${VARIANT}
 
 COPY library-scripts/azcli-debian.sh /tmp/library-scripts/
 RUN bash /tmp/library-scripts/azcli-debian.sh \
