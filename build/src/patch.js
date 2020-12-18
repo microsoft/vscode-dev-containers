@@ -140,16 +140,6 @@ async function getImageManifests(registryName, imageIds) {
         manifests = manifests.concat(registryManifestList);
     });
 
-    // Scan for duplicate hashes and error if detected - indicates same hash 
-    // is in multiple repos, so update would be ambiguous. Unlikely, but it 
-    // is important to not accidentally update/delete the wrong image.
-    manifests.forEach((manifest) => {
-        const manifestsWithDigest = manifests.filter((manifestToCheck) => manifestToCheck.digest === manifest.digest)
-        if (manifestsWithDigest.length > 1) {
-            throw `Duplicate manifest detected for ${manifest.digest}. Duplicates: ${JSON.stringify(manifestsWithDigest, undefined, 4)}`
-        }
-    });
-
     return manifests;
 }
 
