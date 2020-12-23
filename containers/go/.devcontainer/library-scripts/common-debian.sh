@@ -113,7 +113,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
         PACKAGE_LIST="${PACKAGE_LIST}       libssl1.1"
     fi
-    
+
     # Install appropriate version of libssl1.0.x if available
     LIBSSL=$(dpkg-query -f '${db:Status-Abbrev}\t${binary:Package}\n' -W 'libssl1\.0\.?' 2>&1 || echo '')
     if [ "$(echo "$LIBSSL" | grep -o 'libssl1\.0\.[0-9]:' | uniq | sort | wc -l)" -eq 0 ]; then
@@ -128,7 +128,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
 
     echo "Packages to verify are installed: ${PACKAGE_LIST}"
     apt-get -y install --no-install-recommends ${PACKAGE_LIST} 2> >( grep -v 'debconf: delaying package configuration, since apt-utils is not installed' >&2 )
-        
+
     PACKAGES_ALREADY_INSTALLED="true"
 fi
 
@@ -142,7 +142,7 @@ fi
 # Ensure at least the en_US.UTF-8 UTF-8 locale is available.
 # Common need for both applications and things like the agnoster ZSH theme.
 if [ "${LOCALE_ALREADY_SET}" != "true" ] && ! grep -o -E '^\s*en_US.UTF-8\s+UTF-8' /etc/locale.gen > /dev/null; then
-    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
     locale-gen
     LOCALE_ALREADY_SET="true"
 fi
@@ -150,11 +150,11 @@ fi
 # Create or update a non-root user to match UID/GID.
 if id -u ${USERNAME} > /dev/null 2>&1; then
     # User exists, update if needed
-    if [ "${USER_GID}" != "automatic" ] && [ "$USER_GID" != "$(id -G $USERNAME)" ]; then 
-        groupmod --gid $USER_GID $USERNAME 
+    if [ "${USER_GID}" != "automatic" ] && [ "$USER_GID" != "$(id -G $USERNAME)" ]; then
+        groupmod --gid $USER_GID $USERNAME
         usermod --gid $USER_GID $USERNAME
     fi
-    if [ "${USER_UID}" != "automatic" ] && [ "$USER_UID" != "$(id -u $USERNAME)" ]; then 
+    if [ "${USER_UID}" != "automatic" ] && [ "$USER_UID" != "$(id -u $USERNAME)" ]; then
         usermod --uid $USER_UID $USERNAME
     fi
 else
@@ -164,7 +164,7 @@ else
     else
         groupadd --gid $USER_GID $USERNAME
     fi
-    if [ "${USER_UID}" = "automatic" ]; then 
+    if [ "${USER_UID}" = "automatic" ]; then
         useradd -s /bin/bash --gid $USERNAME -m $USERNAME
     else
         useradd -s /bin/bash --uid $USER_UID --gid $USERNAME -m $USERNAME
@@ -179,7 +179,7 @@ if [ "${USERNAME}" != "root" ] && [ "${EXISTING_NON_ROOT_USER}" != "${USERNAME}"
 fi
 
 # ** Shell customization section **
-if [ "${USERNAME}" = "root" ]; then 
+if [ "${USERNAME}" = "root" ]; then
     USER_RC_PATH="/root"
 else
     USER_RC_PATH="/home/${USERNAME}"
@@ -230,7 +230,7 @@ prompt() {
     fi
     local cwd="\$(pwd | sed "s|^\${HOME}|~|")"
     PS1="\${green}\${USERNAME} \${arrow_color}➜\${reset_color} \${bold_blue}\${cwd}\${reset_color} \$(scm_prompt_info)\${white}$ \${reset_color}"
-    
+
     # Prepend Python virtual env version to prompt
     if [[ -n \$VIRTUAL_ENV ]]; then
         if [ -z "\${VIRTUAL_ENV_DISABLE_PROMPT:-}" ]; then
@@ -300,7 +300,7 @@ install-oh-my()
         echo "${CODESPACES_ZSH}" > ${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme
     fi
     # Shrink git while still enabling updates
-    cd ${OH_MY_INSTALL_DIR} 
+    cd ${OH_MY_INSTALL_DIR}
     git repack -a -d -f --depth=1 --window=1
 
     if [ "${USERNAME}" != "root" ]; then

@@ -4,7 +4,7 @@
 
 *Develop Go based applications. Includes appropriate runtime args, Go, common tools, extensions, and dependencies.*
 
-| Metadata | Value |  
+| Metadata | Value |
 |----------|-------|
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
