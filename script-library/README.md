@@ -23,6 +23,7 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 | [GitHub CLI Install Script](docs/github.md) | `github-debian.sh` |
 | [Go (golang) Install Script](docs/go.md) | `go-debian.sh` |
 | [Gradle Install Script](docs/gradle.md) | `gradle-debian.sh` |
+| [Homebrew Install Script](docs/homebrew.md) | `homebrew-debian.sh` |
 | [Java Install Script](docs/java.md) | `java-debian.sh` |
 | [Kubectl and Helm Install Script](docs/kubectl-helm.md) | `kubectl-helm-debian.sh` |
 | [Maven Install Script](docs/maven.md) | `maven-debian.sh` |
