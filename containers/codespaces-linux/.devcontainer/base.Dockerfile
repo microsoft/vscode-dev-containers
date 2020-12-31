@@ -45,7 +45,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/scripts/github-debian.sh \
     && bash /tmp/scripts/azcli-debian.sh \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
-    # Install Moby CLI
+    # Install Moby CLI and Engine
     && bash /tmp/scripts/docker-in-docker-debian.sh "true" "${USERNAME}" "true" \
     # Build latest git from source
     && bash /tmp/scripts/git-from-src-debian.sh "latest" \
@@ -101,7 +101,8 @@ RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAM
     && apt-get clean -y && rm -rf /tmp/scripts
 
 
-# Enable "docker-in-docker"
+# Install moby engine and its dependencies
+# Enables "docker-in-docker" behavior
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
