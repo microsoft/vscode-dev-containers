@@ -15,7 +15,7 @@
 				"server": "localhost",
 				"port": 5432,
 
-				// update this to match config/database.yaml
+				// update this to match config/database.yml
 				"database": "app_development",
 				"username": "vscode"
 			},
@@ -26,26 +26,26 @@
 				"server": "localhost",
 				"port": 5432,
 
-				// update this to match config/database.yaml
+				// update this to match config/database.yml
 				"database": "app_test",
 				"username": "vscode"
 			}
 		]
 	},
 
-		// Add the IDs of extensions you want installed when the container is created.
-		"extensions": [
-			"rebornix.Ruby",
-			"mtxr.sqltools",
-			"mtxr.sqltools-driver-pg"
-		],
-		
-		// Use 'forwardPorts' to make a list of ports inside the container available locally.
-		// "forwardPorts": [3000, 5432],
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"rebornix.Ruby",
+		"mtxr.sqltools",
+		"mtxr.sqltools-driver-pg"
+	],
 
-		// Use 'postCreateCommand' to run commands after the container is created.
-		// "postCreateCommand": "bundle install && rake db:setup",
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [3000, 5432],
 
-		// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-		"remoteUser": "vscode"
-	}
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "bundle install && rake db:setup",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

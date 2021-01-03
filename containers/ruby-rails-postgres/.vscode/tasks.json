@@ -11,7 +11,7 @@
         {
             "label": "Delete test-project",
             "type": "shell",
-            "command": "cd test-project && rm -rf * && rm -f .ruby-version .browserlistrc"
+            "command": "cd test-project && rm -rf * && rm -f .ruby-version .browserslistrc"
         }, 
     ],
 }

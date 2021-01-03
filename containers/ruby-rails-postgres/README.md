@@ -29,7 +29,7 @@ build:
 
 To get the best experience, you'll need to update the [SQLTools configuration][sqltools] in `.devcontainer/devcontainer.json` to match the database names used by your application:
 
-```json
+```jsonc
 "settings": { 
    "sqltools.connections": [
       {
