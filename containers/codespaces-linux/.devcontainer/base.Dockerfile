@@ -100,17 +100,6 @@ RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAM
     && bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
-
-# Install moby engine and its dependencies
-# Enables "docker-in-docker" behavior
-RUN apt-get update && apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    lxc \
-    iptables \
-    moby-engine
-
 VOLUME /var/lib/docker
 
 # Fire Docker/Moby script if needed along with Oryx's benv
