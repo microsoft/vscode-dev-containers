@@ -42,7 +42,7 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript ${SCRIPT_DIR}/node-${DISTRO}.sh "/usr/local/share/nvm 10 ${USERNAME}"
     runScript ${SCRIPT_DIR}/powershell-${DISTRO}.sh
     runScript ${SCRIPT_DIR}/python-${DISTRO}.sh "3.4.10 /opt/python ${USERNAME} false false"
-    runScript ${SCRIPT_DIR}/ruby-${DISTRO}.sh "2.5 ${USERNAME} false"
+    runScript ${SCRIPT_DIR}/ruby-${DISTRO}.sh "${USERNAME} false" "2.5.8"
     runScript ${SCRIPT_DIR}/rust-${DISTRO}.sh "/opt/rust/cargo /opt/rust/rustup ${USERNAME} false"
     runScript ${SCRIPT_DIR}/terraform-${DISTRO}.sh "0.12.16" "0.8.2"
     runScript ${SCRIPT_DIR}/sshd-${DISTRO}.sh "2223 ${USERNAME} true random"
