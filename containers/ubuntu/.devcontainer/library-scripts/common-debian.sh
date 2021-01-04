@@ -197,18 +197,18 @@ cat << 'EOF' > /usr/local/bin/code
 #!/bin/sh
 
 get_in_path_except_current() {
-  which -a "$1" | grep -v "$0" | head -1
+    which -a "$1" | grep -A1 "$0" | grep -v "$0"
 }
 
 code="$(get_in_path_except_current code)"
 
 if [ -n "$code" ]; then
-  exec "$code" "$@"
+    exec "$code" "$@"
 elif [ "$(command -v code-insiders)" ]; then
-  exec code-insiders "$@"
+    exec code-insiders "$@"
 else
-  echo "code or code-insiders is not installed" >&2
-  exit 127
+    echo "code or code-insiders is not installed" >&2
+    exit 127
 fi
 EOF
 chmod +x /usr/local/bin/code
