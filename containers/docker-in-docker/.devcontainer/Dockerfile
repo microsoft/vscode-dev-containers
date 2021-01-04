@@ -18,7 +18,7 @@ RUN apt-get update \
     # Use Docker script from script library to set things up
     && /bin/bash /tmp/library-scripts/docker-in-docker-debian.sh "${ENABLE_NONROOT_DOCKER}" "${USERNAME}" \
     # Add this user to the docker group
-    sudo usermod -aG docker ${USERNAME} \
+    && sudo usermod -aG docker ${USERNAME} \
     # Clean up
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
