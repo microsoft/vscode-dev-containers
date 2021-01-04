@@ -9,8 +9,6 @@ services:
 
     environment:
       DAPR_NETWORK: dapr-dev-container
-      DAPR_REDIS_HOST: dapr_redis
-      DAPR_PLACEMENT_HOST: dapr_placement
 
     init: true
     volumes:
@@ -34,11 +32,6 @@ services:
 
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
     # (Adding the "ports" property to this file will not forward from a Codespace.)
-
-  # Dapr will not initialize a Redis host if a custom redis host name is specified, so start one manually.
-  # https://github.com/dapr/cli/issues/418
-  dapr_redis:
-    image: 'redis:latest'
 
 networks: 
   default:

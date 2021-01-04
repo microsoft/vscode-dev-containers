@@ -50,14 +50,7 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/dapr-typescript-node-12` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `npm install` and compile the source before starting it.
-6. Start the application with Dapr:
-
-    ```bash
-    $ cd test-project
-    $ npm run dapr
-    ```
-
-7. In a separate terminal, invoke the application via Dapr:
+6. In a separate terminal, invoke the application via Dapr:
 
     ```bash
     # Deposit funds to the account (creating the account if not exists)
