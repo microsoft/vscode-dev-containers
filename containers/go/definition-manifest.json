@@ -48,11 +48,11 @@
 			"man-db",
 			"zsh",
 			"yarn",
-			"tar", 
+			"tar",
 			"g++",
 			"gcc",
 			"libc6-dev",
-			"make", 
+			"make",
 			"pkg-config"
 		],
 		"git": {
