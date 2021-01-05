@@ -95,11 +95,12 @@ fi
 
 echo "docker-init doesnt exist..."
 
-# Add a stub if not adding non-root user access, user is root
-if [ "${ENABLE_NONROOT_DOCKER}" = "false" ] || [ "${USERNAME}" = "root" ]; then
-    echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
-    chmod +x /usr/local/share/docker-init.sh
-    exit 0
+# Add user to the docker group
+if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
+    if ! getent group docker > /dev/null 2>&1; then
+        groupadd docker
+    fi
+        usermod -aG docker ${USERNAME}
 fi
 
 tee /usr/local/share/docker-init.sh > /dev/null \
@@ -119,17 +120,18 @@ sudoIf()
     fi
 }
 
-set -e
-
 # explicitly remove Docker's default PID file to ensure that it can start properly if it was stopped uncleanly
 find /run /var/run -iname 'docker*.pid' -delete || :
+
+set -e
 
 # Start docker/moby engine
 sudoIf dockerd &
 
+set +e
+
 # Execute whatever commands were passed in (if any). This allows us 
 # to set this script to ENTRYPOINT while still executing the default CMD.
-set +e
 exec "\$@"
 EOF
 
