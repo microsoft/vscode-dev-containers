@@ -115,7 +115,7 @@ RUN yes | pecl install xdebug \
 
 # Install rvm, Ruby, base gems
 COPY library-scripts/ruby-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/ruby-debian.sh "latest" "${USERNAME}" "true" \
+RUN bash /tmp/scripts/ruby-debian.sh "2.7.2" "${USERNAME}" "true" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install Moby CLI
