@@ -12,8 +12,8 @@
 		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:12",
 		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
 		"debian": [
-			"xvfb",
-			"x11vnc",
+			"tigervnc-standalone-server",
+			"tigervnc-common",
 			"fluxbox",
 			"dbus-x11",
 			"x11-utils",
