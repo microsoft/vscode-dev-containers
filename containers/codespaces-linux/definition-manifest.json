@@ -53,8 +53,7 @@
 			"xtail",
 			"fish", 
 			"git-lfs",
-			"docker",
-			"debian-archive-keyring",
+			"moby-cli",
 			"software-properties-common"
 		],
 		"pipx": [
