@@ -171,12 +171,15 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
         packageVersion = packageVersion.trim();
         if (packageVersion !== '') {
             const versionCaptureGroup = new RegExp(config.lineRegEx).exec(packageVersion);
-            const package = versionCaptureGroup[1];
-            const version = versionCaptureGroup[2];
-
-            const entry = createEntryForLinuxPackage(packageUriCommandOutput, config.namePrefix, package, version, alreadyRegistered, config.uriMatchRegex, config.uriSuffix)
-            if (entry) {
-                componentList.push(entry);
+            if (!versionCaptureGroup) {
+                console.log(`(!) Warning: Unable to parse output "${packageVersion}". Likely not from command. Skipping.`);
+            } else {
+                const package = versionCaptureGroup[1];
+                const version = versionCaptureGroup[2];    
+                const entry = createEntryForLinuxPackage(packageUriCommandOutput, config.namePrefix, package, version, alreadyRegistered, config.uriMatchRegex, config.uriSuffix)
+                if (entry) {
+                    componentList.push(entry);
+                }    
             }
         }
     });
