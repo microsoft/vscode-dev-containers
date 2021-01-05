@@ -53,9 +53,8 @@
 			"vim", 
 			"xtail",
 			"fish", 
-			"docker",
+			"moby-cli",
 			"git-lfs",
-			"debian-archive-keyring",
 			"software-properties-common",
 			"openjdk-8-jdk"
 		],
