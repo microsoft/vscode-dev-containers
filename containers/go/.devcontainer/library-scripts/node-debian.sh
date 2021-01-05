@@ -88,7 +88,7 @@ chmod g+s ${NVM_DIR}
 # Do not update profile - we'll do this later
 export PROFILE=/dev/null
 # Install nvm
-curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
 source ${NVM_DIR}/nvm.sh
 if [ "${NODE_VERSION}" != "" ]; then
     nvm alias default ${NODE_VERSION}
@@ -102,7 +102,7 @@ export NVM_DIR="${NVM_DIR}"
 [ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
 [ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
 EOF
-) | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
-fi
+) | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc 
+fi 
 
 echo "Done!"
