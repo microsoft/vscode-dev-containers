@@ -56,7 +56,7 @@ if ! dpkg -s apt-transport-https curl ca-certificates lsb-release lxc iptables >
     apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lsb-release lxc iptables gnupg2 
 fi
 
-# Swap to legacy iptables to compatibility
+# Swap to legacy iptables for compatibility
 update-alternatives --set iptables /usr/sbin/iptables-legacy
 update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
