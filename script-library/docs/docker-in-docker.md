@@ -1,8 +1,8 @@
 # Docker-in-Docker Install Script
 
-> Interested in running docker commands from inside a container?  Chances are the[Docker-from-Docker](./docker.md) technique may suit your needs better.
+> Interested in running docker commands from inside a container?  Chances are the [Docker-from-Docker](./docker.md) technique may suit your needs better.
 
-*Installs and executes the `dockerd` inside a constainer to enable nested "child" docker containers* 
+*Create child containers _inside_ a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.* 
 
 **OS support**: Debian 9+, Ubuntu 20.04+, and downstream distros.
 
@@ -38,7 +38,7 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
 3. And the following to `.devcontainer/devcontainer.json`:
 
     ```json
-    "runArgs": ["--init", "privileged=true"],
+    "runArgs": ["--init", "--privileged"],
     "overrideCommand": false
     ```
 

@@ -1,7 +1,7 @@
 {
 	"name": "Docker in Docker",
 	"dockerFile": "Dockerfile",
-	"runArgs": ["--init", "--privileged=true"],
+	"runArgs": ["--init", "--privileged"],
 	"overrideCommand": false,
 	
 	// Use this environment variable if you need to bind mount your local source code into a new container.

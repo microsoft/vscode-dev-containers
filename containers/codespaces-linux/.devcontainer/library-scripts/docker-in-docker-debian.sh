@@ -56,6 +56,10 @@ if ! dpkg -s apt-transport-https curl ca-certificates lsb-release lxc iptables >
     apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lsb-release lxc iptables gnupg2 
 fi
 
+# Swap to legacy iptables to compatibility
+update-alternatives --set iptables /usr/sbin/iptables-legacy
+update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+
 # Install Docker / Moby CLI if not already installed
 if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then
     echo "Docker / Moby CLI and Engine already installed."
