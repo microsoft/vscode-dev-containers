@@ -76,7 +76,7 @@ check "zsh" zsh --version
 check "git-ed" [ "$(cat /home/codespace/.local/bin/git-ed.sh)" = "$(cat ./git-ed-expected.txt)" ]
 
 # Check that we can run a puppeteer node app.
-yarn add puppeteer
+yarn
 check "run-puppeteer" node puppeteer.js
 check "img-puppeteer" type ./example.png
 
