@@ -124,8 +124,9 @@ sudoIf()
     fi
 }
 
-# explicitly remove Docker's default PID file to ensure that it can start properly if it was stopped uncleanly
-find /run /var/run -iname 'docker*.pid' -delete || :
+# explicitly remove Docker and containerd's PIDs file to ensure that it can start properly if it was stopped uncleanly
+sudoIf find /run /var/run -iname 'docker*.pid' -delete || :
+sudoIf find /run /var/run -iname 'containerd*.pid' -delete || :
 
 set -e
 
@@ -143,7 +144,7 @@ fi
 
 # Mount /tmp (conditionally)
 if ! sudoIf mountpoint -q /tmp; then
-	sudoIf mount -t tmpfs none /tmp
+	sudoIf mount -t tmpfs none /tmp || echo >&2 'Error conditionally mounting /tmp'
 fi
 
 # cgroup v2: enable nesting
