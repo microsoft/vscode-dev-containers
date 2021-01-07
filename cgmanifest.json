@@ -386,7 +386,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "00582001cc5c1c3dc73443cd040401adbf754ecc"
+                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
                 }
             }
         },
@@ -776,7 +776,7 @@
                 "Git": {
                     "Name": "Oh My Bash!",
                     "repositoryUrl": "https://github.com/ohmybash/oh-my-bash",
-                    "commitHash": "00582001cc5c1c3dc73443cd040401adbf754ecc"
+                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
                 }
             }
         },
@@ -2403,7 +2403,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "00582001cc5c1c3dc73443cd040401adbf754ecc"
+                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
                 }
             }
         },
@@ -2653,7 +2653,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "00582001cc5c1c3dc73443cd040401adbf754ecc"
+                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
                 }
             }
         },
@@ -2663,7 +2663,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "00582001cc5c1c3dc73443cd040401adbf754ecc"
+                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
                 }
             }
         },
