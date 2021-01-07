@@ -80,20 +80,24 @@ fi
 if ! cat /etc/group | grep -e "^nvm:" > /dev/null 2>&1; then
     groupadd -r nvm
 fi
-usermod -a -G nvm ${USERNAME}
 umask 0002
+usermod -a -G nvm ${USERNAME}
 mkdir -p ${NVM_DIR}
 chown :nvm ${NVM_DIR}
 chmod g+s ${NVM_DIR}
-# Do not update profile - we'll do this later
-export PROFILE=/dev/null
-# Install nvm
-curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
-source ${NVM_DIR}/nvm.sh
-if [ "${NODE_VERSION}" != "" ]; then
-    nvm alias default ${NODE_VERSION}
-fi
-nvm clear-cache
+su ${USERNAME} -c "$(cat << EOF
+    set -e
+    umask 0002
+    # Do not update profile - we'll do this manually
+    export PROFILE=/dev/null
+    curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
+    source ${NVM_DIR}/nvm.sh
+    if [ "${NODE_VERSION}" != "" ]; then
+        nvm alias default ${NODE_VERSION}
+    fi
+    nvm clear-cache 
+EOF
+)" 2>&1
 # Update rc files
 if [ "${UPDATE_RC}" = "true" ]; then
     echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc with NVM scripts..."
