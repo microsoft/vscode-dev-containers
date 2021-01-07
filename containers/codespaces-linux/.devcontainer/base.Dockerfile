@@ -100,7 +100,8 @@ RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAM
     && bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
-VOLUME /var/lib/docker
+# Mount for docker-in-docker 
+VOLUME [ "/var/lib/docker" ]
 
 # Fire Docker/Moby script if needed along with Oryx's benv
 ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh", "benv" ]

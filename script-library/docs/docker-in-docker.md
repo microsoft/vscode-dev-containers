@@ -30,10 +30,11 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
     COPY library-scripts/*.sh /tmp/library-scripts/
     RUN apt-get update && /bin/bash /tmp/library-scripts/docker-in-docker-debian.sh
     ENTRYPOINT ["/usr/local/share/docker-init.sh"]
+    VOLUME [ "/var/lib/docker" ]
     CMD ["sleep", "infinity"]
     ```
 
-    Note that the `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
+Note that the `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
 
 3. And the following to `.devcontainer/devcontainer.json`:
 
@@ -45,3 +46,7 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
     While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.
 
 4. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
+
+## Resources
+
+This docker-in-docker definition is roughly based on the [official docker-in-docker wrapper script](https://github.com/moby/moby/blob/master/hack/dind).  The original blog post on this concept can be [found here](https://blog.docker.com/2013/09/docker-can-now-run-within-docker/).

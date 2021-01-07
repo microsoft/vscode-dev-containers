@@ -19,6 +19,8 @@ RUN apt-get update \
     && /bin/bash /tmp/library-scripts/docker-in-docker-debian.sh "${ENABLE_NONROOT_DOCKER}" "${USERNAME}" \
     # Clean up
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
+    
+VOLUME [ "/var/lib/docker" ]
 
 # You may add parameters to ENTRYPOINT, which will execute after docker-init is finished
 ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]

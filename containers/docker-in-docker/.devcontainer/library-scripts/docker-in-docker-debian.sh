@@ -51,12 +51,12 @@ apt-get-update-if-needed()
 export DEBIAN_FRONTEND=noninteractive
 
 # Install docker/dockerd dependencies if missing
-if ! dpkg -s apt-transport-https curl ca-certificates lsb-release lxc iptables > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
+if ! dpkg -s apt-transport-https curl ca-certificates lsb-release lxc pigz iptables > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
     apt-get-update-if-needed
-    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lsb-release lxc iptables gnupg2 
+    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lsb-release lxc pigz iptables gnupg2 
 fi
 
-# Swap to legacy iptables to compatibility
+# Swap to legacy iptables for compatibility
 update-alternatives --set iptables /usr/sbin/iptables-legacy
 update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
@@ -90,7 +90,6 @@ else
     chmod +x /usr/local/bin/docker-compose
 fi
 
-
 # If init file already exists, exit
 if [ -f "/usr/local/share/docker-init.sh" ]; then
     echo "/usr/local/share/docker-init.sh already exists, so exiting."
@@ -105,7 +104,6 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
     fi
         usermod -aG docker ${USERNAME}
 fi
-
 
 tee /usr/local/share/docker-init.sh > /dev/null \
 << EOF 
@@ -124,9 +122,10 @@ sudoIf()
     fi
 }
 
-# explicitly remove Docker and containerd's PIDs file to ensure that it can start properly if it was stopped uncleanly
-sudoIf find /run /var/run -iname 'docker*.pid' -delete || :
-sudoIf find /run /var/run -iname 'containerd*.pid' -delete || :
+# explicitly remove dockerd and containerd PID file to ensure that it can start properly if it was stopped uncleanly
+# ie: docker kill <ID>
+find /run /var/run -iname 'docker*.pid' -delete || :
+find /run /var/run -iname 'container*.pid' -delete || :
 
 set -e
 
@@ -144,7 +143,7 @@ fi
 
 # Mount /tmp (conditionally)
 if ! sudoIf mountpoint -q /tmp; then
-	sudoIf mount -t tmpfs none /tmp || echo >&2 'Error conditionally mounting /tmp'
+	sudoIf mount -t tmpfs none /tmp
 fi
 
 # cgroup v2: enable nesting
@@ -160,7 +159,7 @@ fi
 ## Dind wrapper over.
 
 # Start docker/moby engine
-sudoIf dockerd &
+( sudoIf dockerd > /tmp/dockerd.log 2>&1 ) &
 
 set +e
 
