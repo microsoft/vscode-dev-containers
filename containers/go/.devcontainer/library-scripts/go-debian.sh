@@ -77,7 +77,7 @@ GO_INSTALL_SCRIPT="$(cat <<EOF
 EOF
 )"
 if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
-    mkdir -p "${TARGET_GOROOT}" "${TARGET_GOPATH}"
+    mkdir -p "${TARGET_GOROOT}" "${TARGET_GOPATH}" 
     chown -R ${USERNAME} "${TARGET_GOROOT}" "${TARGET_GOPATH}"
     su ${USERNAME} -c "${GO_INSTALL_SCRIPT}"
 else
