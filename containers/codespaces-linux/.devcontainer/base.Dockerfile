@@ -48,8 +48,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/scripts/github-debian.sh \
     && bash /tmp/scripts/azcli-debian.sh \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
-    # Install Moby CLI
-    && bash /tmp/scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}" "true" \
+    # Install Moby CLI and Engine
+    && bash /tmp/scripts/docker-in-docker-debian.sh "true" "${USERNAME}" "true" \
     # Build latest git from source
     && bash /tmp/scripts/git-from-src-debian.sh "latest" \
     # Clean up
@@ -102,6 +102,9 @@ RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "t
 RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
     && bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /tmp/scripts
+
+# Mount for docker-in-docker 
+VOLUME [ "/var/lib/docker" ]
 
 # Fire Docker/Moby script if needed along with Oryx's benv
 ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh", "benv" ]
