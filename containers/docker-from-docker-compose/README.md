@@ -13,7 +13,7 @@
 | *Container OS* | Debian (though Ubuntu could be used instead) |
 | *Languages, platforms* | Any |
 
-> **Note:** There is also a single [Dockerfile](../docker-from-docker) variation of this same definition.
+> **Note:** There is also a single [Dockerfile](../docker-from-docker) variation of this same definition. If you need to mount folders within the dev container into your own containers, you may find [Docker in Docker](../docker-in-docker) meets your needs better, though with a potential performance penalty.
 
 ## Description
 
@@ -146,7 +146,7 @@ That's it!
 
 ## Using bind mounts when working with Docker inside the container
 
-> **Note:** Currently it is not possible to easily access container contents outside of the workspace folder when using this approach. You can, however, access workspace folder contents.
+> **Note:** If you need to mount folders within the dev container into your own containers using docker-from-docker, so you may find [Docker in Docker](../docker-in-docker) meets your needs better in some cases (despite a potential performance penalty).
 
 In some cases, you may want to be able to mount the local workspace folder into a container you create while running from inside the dev container (e.g. using `-v` from the Docker CLI). The issue is that, with "Docker from Docker", containers are always created on the host. So, when you bind mount a folder into any container, you'll need to use the **host**'s paths.
 
@@ -168,10 +168,10 @@ docker run -it --rm -v ${LOCAL_WORKSPACE_FOLDER}:/workspace debian bash
 
 ## Using this definition with an existing folder
 
-There are no special setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. Just, update the `FROM` statement to reference the new base image. For example:
+There are no special setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. Just, update the `FROM` statement to reference the new base image. For example, you could use the pre-built `mcr.microsoft.com/vscode/devcontainers/python:3` image:
 
 ```Dockerfile
-FROM node:lts
+FROM mcr.microsoft.com/vscode/devcontainers/python:3
 ```
 
 Beyond that, just follow these steps to use the definition:
