@@ -158,4 +158,20 @@ else
     echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
 fi
 chmod +x /usr/local/share/docker-init.sh
+
+# localpath utility
+cat << 'EOF' > /usr/local/bin/localpath
+#!/bin/bash
+
+# fail on error and on variable unset
+set -eu
+
+# expand relative path
+path="$(realpath "$1")"
+
+# replace the /workspaces prefix with the parent folder of $LOCAL_WORKSPACE_FOLDER
+echo "${path/#"/workspaces"/"$(dirname "$LOCAL_WORKSPACE_FOLDER")"}"
+EOF
+chmod +x /usr/local/bin/localpath
+
 echo "Done!"
