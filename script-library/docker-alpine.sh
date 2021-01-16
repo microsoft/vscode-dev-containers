@@ -37,24 +37,21 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-# Function to run apt-get if needed
-apt-get-update-if-needed()
+# Function to run apk update if needed
+apk-update-if-needed()
 {
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        echo "Running apt-get update..."
-        apt-get update
+    if [ ! -d "/var/cache/apk" ] || [ "$(ls /var/cache/apk | wc -l)" = "0" ]; then
+        echo "Running apk update..."
+        apk update
     else
-        echo "Skipping apt-get update."
+        echo "Skipping apk update."
     fi
 }
 
-# Ensure apt is in non-interactive to avoid prompts
-export DEBIAN_FRONTEND=noninteractive
-
-# Install apt-transport-https, curl, lsb-release, gpg if missing
-if ! dpkg -s apt-transport-https curl ca-certificates lsb-release > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
-    apt-get-update-if-needed
-    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lsb-release gnupg2 
+# Install curl,  ca-certificates, gpg if missing
+if ! apk info curl ca-certificates gnupg > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
+    apk-update-if-needed
+    apk add curl ca-certificates gnupg 
 fi
 
 # Install Docker CLI if not already installed
@@ -93,9 +90,9 @@ fi
 
 # If enabling non-root access and specified user is found, setup socat and add script
 chown -h "${USERNAME}":root "${TARGET_SOCKET}"        
-if ! dpkg -s socat > /dev/null 2>&1; then
-    apt-get-update-if-needed
-    apt-get -y install socat
+if ! apk info socat > /dev/null 2>&1; then
+    apk-update-if-needed
+    apk add socat
 fi
 tee /usr/local/share/docker-init.sh > /dev/null \
 << EOF 
