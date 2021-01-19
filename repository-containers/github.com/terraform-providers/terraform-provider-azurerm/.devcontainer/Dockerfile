@@ -1,4 +1,4 @@
-FROM golang:1.13-buster
+FROM golang:1.15-buster
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -12,7 +12,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Terraform and tflint versions
-ARG TERRAFORM_VERSION=0.12.26
+ARG TERRAFORM_VERSION=0.14.4
 
 ENV GO111MODULE=on
 
@@ -51,11 +51,13 @@ RUN git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prom
 # Install Go tools
 RUN \
     # --> Delve for debugging
-    go get github.com/go-delve/delve/cmd/dlv@v1.4.1 \
+    go get github.com/go-delve/delve/cmd/dlv@v1.5.0 \
     # --> Go language server
-    && go get golang.org/x/tools/gopls@v0.4.1 \
+    && go get golang.org/x/tools/gopls@v0.6.3 \
     # --> Go symbols and outline for go to symbol support and test support 
-    && go get github.com/acroca/go-symbols@v0.1.1 && go get github.com/ramya-rao-a/go-outline@7182a932836a71948db4a81991a494751eccfe77
+    && go get github.com/acroca/go-symbols@v0.1.1 && go get github.com/ramya-rao-a/go-outline@7182a932836a71948db4a81991a494751eccfe77 \
+    # --> Linting
+    && go get golang.org/x/lint/golint
 
 RUN \
     # Install Terraform
