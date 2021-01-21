@@ -87,11 +87,11 @@ stat -c '%g' /var/run/docker.sock
 
 If you get a number other than `0`, you can simply add your non-root user to right user group. To do so:
 
-1. As before, follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one.
+1. As before, follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one (though sudo is not required if you start the container itself as root as shown here).
 
 2. Follow the [directions in the section on root access](#enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI.
 
-3. Update your `devcontainer.json` from above so VS Code doesn't override the container's entrypoint, and use the non-root user as follows:
+3. Update your `devcontainer.json` from above so VS Code doesn't override the container's entrypoint and enables the non-root user:
 
     ```json
     "runArgs": ["--init"],
@@ -123,24 +123,25 @@ If you get a number other than `0`, you can simply add your non-root user to rig
     CMD [ "sleep", "infinity" ]
     ```
 
+5. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+
 #### Final fallback: socat
 
 However, if the host's socket is owned by the root user and root group (`root` `root`), you'll need to either change the group on the socket on the host or use `socat` to proxy the Docker socket without affecting its permissions. The `socat` option can be safer than updating the permissions of the host socket itself since this would apply to all containers. You can also alias `docker` to be `sudo docker` in a `.bashrc` file, but this does not work in cases where the Docker socket is accessed directly.
 
 Follow these directions to set up non-root access using `socat`:
 
-1. Follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one.
+1. Follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one (though sudo is not required if you start the container itself as root as shown here).
 
 2. Follow the [directions in the section on root access](#enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI.
 
-3. Update your `devcontainer.json` to mount the Docker socket to `docker-host.sock` in the container and enable the non-root user:
+3. Update your `devcontainer.json` to mount the Docker socket to `docker-host.sock` in the container and ensure VS Code enables the non-root user, but does not override the entrypoint:
 
     ```json
     "runArgs": ["--init"],
     "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
     "remoteUser": "vscode",
     "overrideCommand": false
-    
     ```
 
 4. Next, add the following to your `Dockerfile` to wire up `socat`:
@@ -193,7 +194,7 @@ Add the following to `devcontainer.json`:
 Then reference the env var when running Docker commands from the terminal inside the container.
 
 ```bash
-docker run -it --rm -v ${LOCAL_WORKSPACE_FOLDER//\\/\/}:/workspace debian bash
+docker run -it --rm -v "${LOCAL_WORKSPACE_FOLDER//\\/\/}:/workspace" debian bash
 ```
 
 ## Using this definition with an existing folder

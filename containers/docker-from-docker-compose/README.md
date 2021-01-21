@@ -84,7 +84,7 @@ stat -c '%g' /var/run/docker.sock
 
 If you get a number other than `0`, you can simply add your non-root user to right user group. To do so:
 
-1. As before, follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one.
+1. As before, follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one (though sudo is not required if you start the container itself as root as shown here).
 
 2. Follow the [directions in the previous section](#enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI.
 
@@ -108,6 +108,8 @@ If you get a number other than `0`, you can simply add your non-root user to rig
     ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
     CMD [ "sleep", "infinity" ]
     ```
+
+4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 #### Final fallback: socat
 
@@ -144,7 +146,7 @@ Follow these directions to set up non-root access using `socat`:
     RUN echo "#!/bin/sh\n\
         sudoIf() { if [ \"\$(id -u)\" -ne 0 ]; then sudo \"\$@\"; else \"\$@\"; fi }\n\
         sudoIf rm -rf /var/run/docker.sock\n\
-        ((sudoIf socat UNIX-LISTEN:/var/run/docker.sock,fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:/var/run/docker-host.sock) 2>&1 >> /tmp/vscr-dind-socat.log) & > /dev/null\n\
+        ((sudoIf socat UNIX-LISTEN:/var/run/docker.sock,fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:/var/run/docker-host.sock) 2>&1 >> /tmp/vscr-docker-from-docker.log) & > /dev/null\n\
         \"\$@\"" >> /usr/local/share/docker-init.sh \
         && chmod +x /usr/local/share/docker-init.sh
 
@@ -185,7 +187,7 @@ Add the following to `devcontainer.json`:
 Then reference the env var when running Docker commands from the terminal inside the container.
 
 ```bash
-docker run -it --rm -v ${LOCAL_WORKSPACE_FOLDER//\\/\/}:/workspace debian bash
+docker run -it --rm -v "${LOCAL_WORKSPACE_FOLDER//\\/\/}:/workspace" debian bash
 ```
 
 ## Using this definition with an existing folder
