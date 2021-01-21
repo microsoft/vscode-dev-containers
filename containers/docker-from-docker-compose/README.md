@@ -21,13 +21,23 @@ Dev containers can be useful for all types of applications including those that 
 
 This example illustrates how you can do this by running CLI commands and using the [Docker VS Code extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) right from inside your dev container.  It installs the Docker extension inside the container so you can use its full feature set with your project.
 
-## How it works / adapting your existing dev container config
+> **Note:** If preferred, you can use the related [docker/moby install script](../../script-library/docs/docker.md) in your own existing Dockerfiles instead.
 
-The [`.devcontainer` folder in this repository](.devcontainer) contains a complete example that **you can simply change the `FROM` statement** to another Debian/Ubuntu based image to adapt to your own use (along with adding anything else you need).
+The included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. You'll also need to update `remoteUser` in `.devcontainer/devcontainer.json` in cases where a `vscode` user does not exist in the image you select. For example, to use `mcr.microsoft.com/vscode/devcontainers/javascript-node`, update the `Dockerfile` as follows:
 
-In addition, we recommend just **using [docker script](../../script-library/docs/docker.md) from the script library** as an easy way to get this running in your own existing container.
+```Dockerfile
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:14
+```
 
-However, this section will outline the how you can selectively add this functionality to your own Dockerfile in two parts: enabling access to Docker for the root user, and enabling it for a non-root user.
+...and since the user in this container is `node`, update `devcontainer.json` as follows:
+
+```json
+"remoteUser": "node"
+```
+
+## How it works
+
+While recommend just **using [docker/moby script](../../script-library/docs/docker.md) from the script library** as an easy way to get this running in your own existing container, this section will outline the how you can selectively add this functionality to your own Dockerfile in two parts: enabling access to Docker for the root user, and enabling it for a non-root user.
 
 ### Enabling root user access to Docker in the container
 
@@ -83,13 +93,20 @@ If you get a number other than `0`, you can simply add your non-root user to rig
     ```Dockerfile
     ARG NONROOT_USER=vscode
 
-    RUN export SOCKET_GID=$(stat -c '%g' /var/run/docker.sock) \
-        && if [ "$(cat /etc/group | grep :${SOCKET_GID}:)" = "" ]; then \
-            groupadd --gid ${SOCKET_GID} docker-host; \
-        fi \
-        && if [ "$(id ${NONROOT_USER} | grep -E 'groups=.+\${SOCKET_GID}\(')" = "" ]; then \
-            usermod -aG ${SOCKET_GID} ${NONROOT_USER};
-        fi
+    RUN echo "#!/bin/sh\n\
+        sudoIf() { if [ \"\$(id -u)\" -ne 0 ]; then sudo \"\$@\"; else \"\$@\"; fi }\n\
+        SOCKET_GID=\$(stat -c '%g' /var/run/docker.sock) \n\
+        if [ \"${SOCKET_GID}\" != '0' ]; then\n\
+            if [ \"\$(cat /etc/group | grep :\${SOCKET_GID}:)\" = '' ]; then sudoIf groupadd --gid \${SOCKET_GID} docker-host; fi \n\
+            if [ \"\$(id ${NONROOT_USER} | grep -E \"groups=.*(=|,)\${SOCKET_GID}\(\")\" = '' ]; then sudoIf usermod -aG \${SOCKET_GID} ${NONROOT_USER}; fi\n\
+        fi\n\
+        exec \"\$@\"" > /usr/local/share/docker-init.sh \
+        && chmod +x /usr/local/share/docker-init.sh
+
+    # Setting the ENTRYPOINT to docker-init.sh will configure non-root access 
+    # to the Docker socket. The script will also execute CMD as needed.
+    ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+    CMD [ "sleep", "infinity" ]
     ```
 
 #### Final fallback: socat
@@ -118,18 +135,23 @@ Follow these directions to set up non-root access using `socat`:
     ARG NONROOT_USER=vscode
 
     # Default to root only access to the Docker socket, set up non-root init script
-    RUN touch /var/run/docker.socket \
-        && ln -s /var/run/docker-host.socket /var/run/docker.socket
+    RUN touch /var/run/docker-host.sock \
+        && ln -s /var/run/docker-host.sock /var/run/docker.sock \
         && apt-get update \
-        && apt-get -y install socat \
-        && echo '#!/bin/sh\n\
-        sudo rm -rf /var/run/docker-host.socket\n\
-        ((sudo socat UNIX-LISTEN:/var/run/docker.socket,fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:/var/run/docker-host.socket) 2>&1 >> /tmp/vscr-dind-socat.log) & > /dev/null\n\
-        "$@"' >> /usr/local/share/docker-init.sh \
+        && apt-get -y install socat
+
+    # Create docker-init.sh to spin up socat
+    RUN echo "#!/bin/sh\n\
+        sudoIf() { if [ \"\$(id -u)\" -ne 0 ]; then sudo \"\$@\"; else \"\$@\"; fi }\n\
+        sudoIf rm -rf /var/run/docker.sock\n\
+        ((sudoIf socat UNIX-LISTEN:/var/run/docker.sock,fork,mode=660,user=${NONROOT_USER} UNIX-CONNECT:/var/run/docker-host.sock) 2>&1 >> /tmp/vscr-dind-socat.log) & > /dev/null\n\
+        \"\$@\"" >> /usr/local/share/docker-init.sh \
         && chmod +x /usr/local/share/docker-init.sh
 
-    # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to the Docker
-    # socket. The script will also execute CMD if you need to alter startup behaviors.
+    # VS Code overrides ENTRYPOINT and CMD when executing `docker run` by default.
+    # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to
+    # the Docker socket if "overrideCommand": false is set in devcontainer.json.
+    # The script will also execute CMD if you need to alter startup behaviors.
     ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
     CMD [ "sleep", "infinity" ]
     ```
@@ -163,18 +185,12 @@ Add the following to `devcontainer.json`:
 Then reference the env var when running Docker commands from the terminal inside the container.
 
 ```bash
-docker run -it --rm -v ${LOCAL_WORKSPACE_FOLDER}:/workspace debian bash
+docker run -it --rm -v ${LOCAL_WORKSPACE_FOLDER//\\/\/}:/workspace debian bash
 ```
 
 ## Using this definition with an existing folder
 
-There are no special setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. Just, update the `FROM` statement to reference the new base image. For example, you could use the pre-built `mcr.microsoft.com/vscode/devcontainers/python:3` image:
-
-```Dockerfile
-FROM mcr.microsoft.com/vscode/devcontainers/python:3
-```
-
-Beyond that, just follow these steps to use the definition:
+Just follow these steps to use the definition:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 

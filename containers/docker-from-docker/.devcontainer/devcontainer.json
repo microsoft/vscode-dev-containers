@@ -27,5 +27,5 @@
 	// "postCreateCommand": "docker --version",
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "1000"
+	"remoteUser": "vscode"
 }

@@ -21,6 +21,8 @@ In many cases, the best approach to solve this problem is by bind mounting the d
 
 This definition's approach creates pure "child" containers by hosting its own instance of the docker daemon inside this container.  This is compared to the forementioned "docker-_from_-docker" method (sometimes called docker-outside-of-docker) that bind mounts the host's docker socket, creating "sibling" containers to the current container.
 
+> **Note:** If preferred, you can use the related [docker-in-docker/moby-in-moby install script](../../script-library/docs/docker-in-docker.md) in your own existing Dockerfiles instead.
+
 Running "Docker in Docker" requires the parent container to be run as `--privileged`.  This definition also adds a `/usr/local/share/docker-init.sh` ENTRYPOINT script that, spawns the `dockerd` process, so `overrideCommand: false` also needs to be set in `devcontainer.json`. For example:
 
 ```json
@@ -28,14 +30,18 @@ Running "Docker in Docker" requires the parent container to be run as `--privile
 "overrideCommand": false
 ```
 
-> Note that if you are switching from using the the [docker-from-docker](../docker-from-docker) definition, you no longer need the `mount` property from that definition.
-
 ## Using this definition with an existing folder
 
-There are no special setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. Just, update the `FROM` statement to reference the new base image. For example, you could use the pre-built `mcr.microsoft.com/vscode/devcontainers/python:3` image:
+The included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. You'll also need to update `remoteUser` in `.devcontainer/devcontainer.json` in cases where a `vscode` user does not exist in the image you select. For example, to use `mcr.microsoft.com/vscode/devcontainers/javascript-node`, update the `Dockerfile` as follows:
 
 ```Dockerfile
-FROM mcr.microsoft.com/vscode/devcontainers/python:3
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:14
+```
+
+...and since the user in this container is `node`, update `devcontainer.json` as follows:
+
+```json
+"remoteUser": "node"
 ```
 
 Beyond that, just follow these steps to use the definition:
