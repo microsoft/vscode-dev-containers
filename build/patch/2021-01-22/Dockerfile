@@ -17,7 +17,6 @@ libgssapi-krb5-2 \
 tzdata \
 "
 
-# Script to iterate through the above list and update packages
 ARG PATCH_SCRIPT="\
     export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
@@ -25,7 +24,20 @@ ARG PATCH_SCRIPT="\
         echo \"Checking \$PKG...\" \
         && if [ \"\$PKG\" != '' ] && dpkg -s \$PKG >/dev/null 2>&1; then apt-get install -yq --only-upgrade \$PKG; fi; \
     done \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*"
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* \
+    && if type go > /dev/null 2>&1; then \
+        GOVERSION=\"\$(go version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')\" \
+        && GOMINOR=\$(echo \$GOVERSION | grep -oE '\.[0-9]+\.' | tr -d '.') \
+        && GOFIX=\$(echo \$GOVERSION | grep -oE '\.[0-9]+$' | tr -d '.') \
+        && TARGETGO='none' \
+        && if [ \$GOMINOR = '14' ] && [ \$GOFIX -lt 14 ]; then TARGETGO=1.14.14; fi \
+        && if [ \$GOMINOR = '15' ] && [ \$GOFIX -lt 7 ]; then TARGETGO=1.15.7; fi \
+        && if [ \$TARGETGO != 'none' ]; then \
+            curl -sSL https://golang.org/dl/go\${TARGETGO}.linux-amd64.tar.gz -o /tmp/golang.tar.gz \
+            && tar -C /usr/local -xzf /tmp/golang.tar.gz \
+            && rm -f /tmp/golang.tar.gz; \
+        fi; \
+    fi"
 
 RUN echo "${PATCH_SCRIPT}" \
     && if [ "$(id -u)" -ne 0 ]; then \
