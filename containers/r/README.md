@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | [Mehant](mailto:kmehant@gmail.com) |
+| *Contributors* | [kmehant](mailto:kmehant@gmail.com) |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | No |
 | *Container host OS support* | Linux, macOS, Windows |
