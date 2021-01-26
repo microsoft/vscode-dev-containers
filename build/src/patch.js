@@ -31,15 +31,31 @@ async function patch(patchPath, registry, registryPath) {
         const newTag = patchConfig.bumpVersion ? updateVersionTag(tag, registryPath) : tag;
         console.log(`\n(*) Patching ${tag}...`);
 
-        // Pull and build patched tag
-        await asyncUtils.spawn('docker', [
-            'build',
-            '--pull',
-            '--build-arg', `ORIGINAL_IMAGE=${registry}/${tag}`,
-            '--tag', `${registry}/${newTag}`,
-            '-f', `${patchPath}/${patchConfig.dockerFile || 'Dockerfile'}`,
-            patchPath
-        ], spawnOpts);
+        // Pull and build patched image for tag
+        let retry = false;
+        do {
+            try {
+                await asyncUtils.spawn('docker', [
+                    'build',
+                    '--pull',
+                    '--build-arg', `ORIGINAL_IMAGE=${registry}/${tag}`,
+                    '--tag', `${registry}/${newTag}`,
+                    '-f', `${patchPath}/${patchConfig.dockerFile || 'Dockerfile'}`,
+                    patchPath
+                ], spawnOpts);
+                done = true;
+            } catch (ex) {
+                // Try to clean out unused images and retry once if get an out of storage response
+                if (ex.result.indexOf('no space left on device') >= 0 && retry === false) {
+                    console.log(`(*) Out of space - pruning images..`);
+                    asyncUtils.spawn('docker', ['image', 'prune', '--all'], spawnOpts);
+                    console.log(`(*) Retrying..`);
+                    retry = true;
+                } else {
+                    throw ex;
+                }
+            }    
+        } while (retry);
 
         // Push update
         await asyncUtils.spawn('docker', ['push', `${registry}/${newTag}`], spawnOpts);
