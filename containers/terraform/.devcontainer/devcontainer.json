@@ -1,0 +1,55 @@
+{
+	"name": "Terraform Container",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			"TERRAFORM_VERSION": "0.13.0",
+			"TFLINT_VERSION": "0.19.0",
+		},
+	},
+	"runArgs": [
+		"--env-file", "${localWorkspaceFolder}/.env"
+	],
+	"containerEnv": {
+		// Constant environment variables used to compute other variables
+		"WDMS_APP": "wdms",
+		"WDMS_CONTAINER": "infrax",
+		"istio_version": "1.7.2"
+	},
+	"remoteEnv": {
+		// Sets computed environment variables required for terrafom remote backend
+		"TF_BACKEND_RESOURCE_GROUP" : "rg-${containerEnv:WDMS_APP}-trfrm-${containerEnv:WDMS_ENV}-${containerEnv:WDMS_LOCATION_SHORT}",
+		"TF_BACKEND_LOCATION": "${containerEnv:WDMS_LOCATION}",
+		"TF_BACKEND_STORAGE_ACCOUNT" : "st${containerEnv:WDMS_APP}trfrm${containerEnv:WDMS_ENV}${containerEnv:WDMS_LOCATION_SHORT}",                
+		"TF_BACKEND_CONTAINER" : "${containerEnv:WDMS_CONTAINER}",
+		"TF_BACKEND_KEY" : "master.tfstate",
+		
+		// Sets computed input variables for terraform templates
+		"TF_VAR_env" : "${containerEnv:WDMS_ENV}",
+		"TF_VAR_location" : "${containerEnv:WDMS_LOCATION}",
+		"TF_VAR_location_suffix" : "${containerEnv:WDMS_LOCATION_SHORT}",
+		"TF_VAR_app": "${containerEnv:WDMS_APP}",
+		"TF_VAR_acr" : "${containerEnv:WDMS_ACR_NAME}",
+		"TF_VAR_acr_rg" : "${containerEnv:WDMS_ACR_RG_NAME}"
+	},
+
+	// Logs into configured azure tenant 
+	// Sets the configured subscription as the default subscription
+	// Grants execute on create-backend.sh script
+	"postCreateCommand": "az login -t $ARM_TENANT_ID -u $ARM_USERNAME -p $ARM_PASSWORD && az account set -s $ARM_SUBSCRIPTION_ID && chmod +x ./create-backend.sh",
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"terraform.languageServer": {
+			"enabled": true,
+			"args": []
+		},
+		"terraform.indexing": {
+			"enabled": false,
+			"liveIndexing": false
+		},
+	},
+	"extensions": [
+		"hashicorp.terraform",
+		"ms-vscode.azurecli"		
+	],
+}
