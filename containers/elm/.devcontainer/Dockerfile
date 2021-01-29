@@ -26,5 +26,5 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     fi \
     # Create the elm cache directory where we can mount a volume. If we don't create it like this
     # it is auto created by docker on volume creation but with root as owner which makes it unusable.
-    && mkdir /home/node/.elm \
-    && chown node:node /home/node/.elm
+    && mkdir /home/$USERNAME/.elm \
+    && chown $USERNAME:$USERNAME /home/$USERNAME/.elm
