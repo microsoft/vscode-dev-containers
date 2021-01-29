@@ -4,20 +4,20 @@
 		"dockerfile": "Dockerfile",
 		"args": { 
 			"TERRAFORM_VERSION": "0.13.0",
-			"TFLINT_VERSION": "0.19.0"
+			"TFLINT_VERSION": "0.19.0",
+			"INSTALL_AZURE_CLI": "true",
+			"INSTALL_DOCKER": "true",
+			"INSTALL_NODE": "true"
 		}
 	},
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 	"overrideCommand": false,
+	"runArgs": [
+		"--env-file", "${localWorkspaceFolder}/.env"
+	],
 	"containerEnv": {
-		"ARM_TENANT_ID": "",
-		"ARM_SUBSCRIPTION_ID": "",
-		"LOCATION": "eastus",
-		"RESOURCE_GROUP": "rg-trfrm-recipe",
-		"STORAGE_ACCOUNT": "sttrfrmrecipe",
 		"CONTAINER": "infrax",
-		"KEY": "infrax.tfstate",
-		"RG_NAME": "rg-sample"
+		"KEY": "infrax.tfstate"
 	},
     "remoteEnv": {
 		// Sets environment variables required for terrafom remote backend
@@ -27,8 +27,8 @@
 		"TF_BACKEND_CONTAINER" : "${containerEnv:CONTAINER}",
 		"TF_BACKEND_KEY" : "${containerEnv:KEY}",
 		
-		// Sets computed input variables for terraform templates
-		"TF_VAR_rg_name" : "${containerEnv:RG_NAME}"
+		// Sets input variables for terraform templates
+		"TF_VAR_RG_NAME" : "${containerEnv:RG_NAME}"
 	},
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
