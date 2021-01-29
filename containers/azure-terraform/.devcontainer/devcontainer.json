@@ -3,19 +3,44 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 
-			"TERRAFORM_VERSION": "0.12.29",
-			"TFLINT_VERSION": "0.18.0",
-			"INSTALL_AZURE_CLI": "true",
-			"INSTALL_DOCKER": "true",
-			"INSTALL_NODE": "true"
+			"TERRAFORM_VERSION": "0.13.0",
+			"TFLINT_VERSION": "0.19.0"
 		}
 	},
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 	"overrideCommand": false,
-
+	"containerEnv": {
+		"ARM_TENANT_ID": "",
+		"ARM_SUBSCRIPTION_ID": "",
+		"LOCATION": "eastus",
+		"RESOURCE_GROUP": "rg-trfrm-recipe",
+		"STORAGE_ACCOUNT": "sttrfrmrecipe",
+		"CONTAINER": "infrax",
+		"KEY": "infrax.tfstate",
+		"RG_NAME": "rg-sample"
+	},
+    "remoteEnv": {
+		// Sets environment variables required for terrafom remote backend
+		"TF_BACKEND_RESOURCE_GROUP" : "${containerEnv:RESOURCE_GROUP}",
+		"TF_BACKEND_LOCATION": "${containerEnv:LOCATION}",
+		"TF_BACKEND_STORAGE_ACCOUNT" : "${containerEnv:STORAGE_ACCOUNT}",                
+		"TF_BACKEND_CONTAINER" : "${containerEnv:CONTAINER}",
+		"TF_BACKEND_KEY" : "${containerEnv:KEY}",
+		
+		// Sets computed input variables for terraform templates
+		"TF_VAR_rg_name" : "${containerEnv:RG_NAME}"
+	},
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"terraform.languageServer": {
+			"enabled": true,
+			"args": []
+		},
+		"terraform.indexing": {
+			"enabled": false,
+			"liveIndexing": false
+		}
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
