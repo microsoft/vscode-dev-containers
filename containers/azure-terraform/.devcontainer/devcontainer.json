@@ -28,7 +28,7 @@
 		"TF_BACKEND_KEY" : "${containerEnv:KEY}",
 		
 		// Sets input variables for terraform templates
-		"TF_VAR_RG_NAME" : "${containerEnv:RG_NAME}"
+		"TF_VAR_rg_name" : "${containerEnv:RG_NAME}"
 	},
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
