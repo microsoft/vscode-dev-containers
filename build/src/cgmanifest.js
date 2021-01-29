@@ -410,7 +410,7 @@ async function generateOtherComponentList(otherComponents, imageTag, alreadyRegi
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
-            const otherVersion = (await getDockerRunCommandOutput(imageTag, `bash -c "set -e && ${otherSettings.versionCommand}"`)).trim();
+            const otherVersion = (await getDockerRunCommandOutput(imageTag, `bash -l -c "set -e && ${otherSettings.versionCommand}"`)).trim();
             addIfUnique(`${otherName}-other`, otherVersion, componentList, alreadyRegistered, {
                 "Component": {
                     "Type": "other",
@@ -446,7 +446,7 @@ async function generateGemComponentList(gems, imageTag, alreadyRegistered) {
     const componentList = [];
     console.log(`(*) Generating "RubyGems" registrations...`);
 
-    const gemListOutput = await getDockerRunCommandOutput(imageTag, 'bash -c "set -e && gem list -d --local"');
+    const gemListOutput = await getDockerRunCommandOutput(imageTag, 'bash -l -c "set -e && gem list -d --local"');
 
     asyncUtils.forEach(gems, (gem) => {
         if (typeof gem === 'string') {
