@@ -111,7 +111,7 @@
 				"downloadUrl": "https://github.com/docker/compose"
 			},
 			"SDKMAN!": {
-				"versionCommand": "sdk version | sed -n '/.*SDKMAN\\s/s///p'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | sed -n '/.*SDKMAN\\s/s///p'",
 				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
 			},
 			"AdoptOpenJDK": {
@@ -131,7 +131,7 @@
 				"downloadUrl": "https://github.com/rust-lang/rust"
 			},
 			"rvm": {
-				"versionCommand": "rvm --version | grep -oE -m 1 'rvm\\s[^ ]+' | sed -n '/^rvm\\s/s///p'",
+				"versionCommand": ". /usr/local/rvm/scripts/rvm > /dev/null 2>&1 && rvm --version | grep -oE -m 1 'rvm\\s[^ ]+' | sed -n '/^rvm\\s/s///p'",
 				"downloadUrl": "https://github.com/rvm/rvm"
 			}
 		},

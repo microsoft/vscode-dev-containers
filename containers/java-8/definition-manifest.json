@@ -55,7 +55,7 @@
 		},
 		"other": {
 			"SDKMAN!": {
-				"versionCommand": "sdk version | sed -n '/.*SDKMAN\\s/s///p'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | sed -n '/.*SDKMAN\\s/s///p'",
 				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
 			},
 			"AdoptOpenJDK": {
