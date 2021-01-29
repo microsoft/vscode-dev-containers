@@ -306,7 +306,7 @@
                 "Other": {
                     "Name": "Debian Package: sudo",
                     "Version": "1.8.27-1+deb10u2",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/sudo/sudo_1.8.27-1+deb10u2_amd64.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -386,7 +386,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
+                    "commitHash": "ab6851c8fb11b470cc2f6aeff8ba17a49c7bacd3"
                 }
             }
         },
@@ -416,7 +416,7 @@
                 "Other": {
                     "Name": "Debian Package: apt-transport-https",
                     "Version": "2.0.2ubuntu0.2",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/universe/a/apt/apt-transport-https_2.0.2ubuntu0.2_all.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -426,7 +426,7 @@
                 "Other": {
                     "Name": "Debian Package: apt-utils",
                     "Version": "2.0.2ubuntu0.2",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/a/apt/apt-utils_2.0.2ubuntu0.2_amd64.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -506,7 +506,7 @@
                 "Other": {
                     "Name": "Debian Package: jq",
                     "Version": "1.6-1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/universe/j/jq/jq_1.6-1_amd64.deb"
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/universe/j/jq/jq_1.6-1ubuntu0.20.04.1_amd64.deb"
                 }
             }
         },
@@ -526,7 +526,7 @@
                 "Other": {
                     "Name": "Debian Package: libc6",
                     "Version": "2.31-0ubuntu9.1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.31-0ubuntu9.1_amd64.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -586,7 +586,7 @@
                 "Other": {
                     "Name": "Debian Package: locales",
                     "Version": "2.31-0ubuntu9.1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/locales_2.31-0ubuntu9.1_all.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -606,7 +606,7 @@
                 "Other": {
                     "Name": "Debian Package: lsof",
                     "Version": "4.93.2+dfsg-1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/l/lsof/lsof_4.93.2+dfsg-1_amd64.deb"
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/l/lsof/lsof_4.93.2+dfsg-1ubuntu0.20.04.1_amd64.deb"
                 }
             }
         },
@@ -696,7 +696,7 @@
                 "Other": {
                     "Name": "Debian Package: sudo",
                     "Version": "1.8.31-1ubuntu1.1",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/s/sudo/sudo_1.8.31-1ubuntu1.1_amd64.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -706,7 +706,7 @@
                 "Other": {
                     "Name": "Debian Package: tar",
                     "Version": "1.30+dfsg-7",
-                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/t/tar/tar_1.30+dfsg-7_amd64.deb"
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/t/tar/tar_1.30+dfsg-7ubuntu0.20.04.1_amd64.deb"
                 }
             }
         },
@@ -776,7 +776,7 @@
                 "Git": {
                     "Name": "Oh My Bash!",
                     "repositoryUrl": "https://github.com/ohmybash/oh-my-bash",
-                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
+                    "commitHash": "ab6851c8fb11b470cc2f6aeff8ba17a49c7bacd3"
                 }
             }
         },
@@ -1156,7 +1156,7 @@
                 "Other": {
                     "Name": "Alpine Package: sudo",
                     "Version": "1.9.0-r0",
-                    "DownloadUrl": "http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/sudo-1.9.0-r0.apk"
+                    "DownloadUrl": "1.9.5p2-r0:/x86_64/sudo-1.9.0-r0.apk"
                 }
             }
         },
@@ -1177,6 +1177,16 @@
                     "Name": "Docker Image: mcr.microsoft.com/oryx/build",
                     "Version": "vso-focal-20201204.1",
                     "DownloadUrl": "https://github.com/microsoft/oryx"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Debian Package: apt-utils",
+                    "Version": "2.0.4",
+                    "DownloadUrl": "http://archive.ubuntu.com/ubuntu/pool/main/a/apt/apt-utils_2.0.4_amd64.deb"
                 }
             }
         },
@@ -1206,7 +1216,7 @@
                 "Other": {
                     "Name": "Debian Package: git-lfs",
                     "Version": "2.13.1",
-                    "DownloadUrl": "https://packagecloud.io/github/git-lfs/ubuntu/pool/focal/main/g/git-lfs/git-lfs_2.13.1_amd64.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -1254,9 +1264,39 @@
             "Component": {
                 "Type": "git",
                 "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": " * Starting OpenBSD Secure Shell server sshd",
-                    "commitHash": "   ...done."
+                    "Name": "nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
+                    "commitHash": "258938ef66a2a49a4a400554a6dce890226ae34c"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "nvs",
+                    "repositoryUrl": "https://github.com/jasongin/nvs",
+                    "commitHash": "729ae6fd4ffb3562d67330218019bec134621648"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "rbenv",
+                    "repositoryUrl": "https://github.com/rbenv/rbenv.git",
+                    "commitHash": "ab6851c8fb11b470cc2f6aeff8ba17a49c7bacd3"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "ruby-build",
+                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
+                    "commitHash": "ab6851c8fb11b470cc2f6aeff8ba17a49c7bacd3"
                 }
             }
         },
@@ -1436,7 +1476,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n3.0.2",
+                    "Version": "3.0.2",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -1446,7 +1486,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n1.9.3",
+                    "Version": "1.9.3",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -1456,7 +1496,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n1.20.1",
+                    "Version": "1.20.1",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -1466,7 +1506,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Helm",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n3.4.2",
+                    "Version": "3.4.2",
                     "DownloadUrl": "https://github.com/helm/helm"
                 }
             }
@@ -1476,7 +1516,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Compose",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n1.27.4",
+                    "Version": "1.27.4",
                     "DownloadUrl": "https://github.com/docker/compose"
                 }
             }
@@ -1486,7 +1526,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\nbash: sdk: command not found",
+                    "Version": "5.9.1+575\u001b[0m\nis available...\u001b[0m",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -1496,7 +1536,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "AdoptOpenJDK",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n1.8.0_275-b01",
+                    "Version": "1.8.0_275-b01",
                     "DownloadUrl": "https://adoptopenjdk.net/"
                 }
             }
@@ -1506,7 +1546,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHubCLI",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n1.4.0",
+                    "Version": "1.4.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -1516,7 +1556,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n1.15.6",
+                    "Version": "1.15.7",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -1526,7 +1566,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n1.49.0",
+                    "Version": "1.49.0",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -1536,7 +1576,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "rvm",
-                    "Version": "* Starting OpenBSD Secure Shell server sshd\n   ...done.\n1.29.11",
+                    "Version": "1.29.11",
                     "DownloadUrl": "https://github.com/rvm/rvm"
                 }
             }
@@ -2084,7 +2124,7 @@
                 "Other": {
                     "Name": "Debian Package: sudo",
                     "Version": "1.8.19p1-2.1+deb9u2",
-                    "DownloadUrl": "http://deb.debian.org/debian/pool/main/s/sudo/sudo_1.8.19p1-2.1+deb9u2_amd64.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -2292,7 +2332,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "Starting OpenBSD Secure Shell server: sshd.\nbash: sdk: command not found",
+                    "Version": "Starting OpenBSD Secure Shell server: sshd.\n5.9.1+575\u001b[0m\nis available...\u001b[0m",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -2322,7 +2362,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "Starting OpenBSD Secure Shell server: sshd.\n1.15.6",
+                    "Version": "Starting OpenBSD Secure Shell server: sshd.\n1.15.7",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -2403,7 +2443,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
+                    "commitHash": "ab6851c8fb11b470cc2f6aeff8ba17a49c7bacd3"
                 }
             }
         },
@@ -2514,16 +2554,6 @@
                     "Name": "Docker Image: php",
                     "Version": "7.3",
                     "DownloadUrl": "https://hub.docker.com/_/php"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Xdebug",
-                    "Version": "3.0.2",
-                    "DownloadUrl": "https://xdebug.org/"
                 }
             }
         },
@@ -2649,26 +2679,6 @@
         },
         {
             "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "rbenv",
-                    "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "ruby-build",
-                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "47b5814845b70a97c76b29b97ff703411877522a"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "rake",
@@ -2721,7 +2731,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "bash: sdk: command not found",
+                    "Version": "5.9.1+575\u001b[0m",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -2811,7 +2821,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.17.0"
+                    "Version": "7.18.0"
                 }
             }
         },
@@ -2948,8 +2958,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: firefox-esr",
-                    "Version": "78.6.0esr-1~deb10u1",
-                    "DownloadUrl": "http://security.debian.org/debian-security/pool/updates/main/f/firefox-esr/firefox-esr_78.6.0esr-1~deb10u1_amd64.deb"
+                    "Version": "78.6.1esr-1~deb10u1",
+                    "DownloadUrl": ""
                 }
             }
         },
