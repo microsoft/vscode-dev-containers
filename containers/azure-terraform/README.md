@@ -2,11 +2,13 @@
 
 ## Summary
 
-*Get going quickly with Terraform in Azure. Includes Terraform, the Azure CLI, the Docker CLI (for testing locally), Node.js for Cloud Shell, and related extensions and dependencies.*
+[Terraform](https://www.terraform.io/) is an open-source tool that provides the ability to build, change, and version infrastructure as code using declarative configuration files with HashiCorp Configuration Language (HCL).
+
+This recipe allows you to get going quickly with Terraform in Azure. Includes Terraform, the Azure CLI, the Docker CLI (for testing locally), Node.js for Cloud Shell, and related extensions and dependencies.
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
+| *Contributors* | [Carlos Mendible](https://github.com/cmendible), [Charles Zipp](https://github.com/charleszipp), [Lila Molyva](https://github.com/norelina), [Tas Devani](https://github.com/tasdevani21)  |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -15,7 +17,15 @@
 
 ## Using this definition with an existing folder
 
-While technically optional, this definition includes the Azure Terraform extension which requires an Azure account to use. You can create a [free trial account here](https://azure.microsoft.com/en-us/free/) and find out more about using [Teraform with Azure here](https://docs.microsoft.com/en-us/azure/terraform/terraform-overview).  
+While technically optional, this definition includes the Azure Terraform extension which requires a few pre-requisites:
+
+- [Azure Subscription](https://azure.microsoft.com): A current Azure subscription or a free trail account needed.
+
+- [Terraform](https://www.terraform.io/downloads.html): Download the latest version of Terraform that is appropriate for your environment.
+
+- [Terraform Linter](https://github.com/terraform-linters/tflint): Install latest version of tflint.
+
+- [Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform): This optional HashiCorp Terraform VS Code extension adds syntax highlighting and other editing features for Terraform files using the Terraform Language Server.
 
 You can also choose the specific version of Terraform installed by updating the following line in `.devcontainer/devcontainer.json`:
 
@@ -27,7 +37,8 @@ You can also choose the specific version of Terraform installed by updating the 
    "INSTALL_DOCKER": "true",
    "INSTALL_NODE": "true"
 }
-`
+```
+
 If you plan to use the Azure Cloud Shell for all of your Terraform operations, you can set `"INSTALL_DOCKER": "false"`. Conversely, if you do not plan to use Cloud Shell, you can set `"INSTALL_DOCKER": "false"`. By default, both are installed so you can decide later.
 
 Beyond `git`, this `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
@@ -49,6 +60,12 @@ Beyond `git`, this `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/),
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+
+## References
+
+- [Terraform Overview](https://www.terraform.io/intro/index.html)
+- [Terraform Tutorials](https://learn.hashicorp.com/terraform?utm_source=terraform_io)
+- [Terraform with Azure](https://docs.microsoft.com/en-us/azure/terraform/terraform-overview).
 
 ## License
 
