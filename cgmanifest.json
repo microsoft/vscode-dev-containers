@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "f1a7e4311dcaf4542a64223005ad1e6366e0bd8a"
+                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
                 }
             }
         },
@@ -36,7 +36,7 @@
                 "Git": {
                     "Name": "Oh My Bash!",
                     "repositoryUrl": "https://github.com/ohmybash/oh-my-bash",
-                    "commitHash": "f1a7e4311dcaf4542a64223005ad1e6366e0bd8a"
+                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
                 }
             }
         },
@@ -162,16 +162,6 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: moby-engine",
-                    "Version": "19.03.14+azure-1",
-                    "DownloadUrl": ""
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "git",
                 "Git": {
                     "Name": "nvm",
@@ -196,7 +186,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "f1a7e4311dcaf4542a64223005ad1e6366e0bd8a"
+                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
                 }
             }
         },
@@ -206,7 +196,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "f1a7e4311dcaf4542a64223005ad1e6366e0bd8a"
+                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
                 }
             }
         },
@@ -803,7 +793,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "f1a7e4311dcaf4542a64223005ad1e6366e0bd8a"
+                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
                 }
             }
         },
@@ -872,7 +862,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.0.9",
+                    "Version": "Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9000 (through xdebug.client_host/xdebug.client_port) :-(\n2.0.9",
                     "DownloadUrl": "https://getcomposer.org/installer"
                 }
             }
@@ -952,6 +942,26 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: ruby",
+                    "Version": "3",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: ruby",
+                    "Version": "3.0",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: ruby",
                     "Version": "2",
                     "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
@@ -984,15 +994,6 @@
                     "Name": "Docker Image: ruby",
                     "Version": "2.5",
                     "DownloadUrl": "https://hub.docker.com/_/ruby"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "RubyGems",
-                "RubyGems": {
-                    "Name": "rake",
-                    "Version": "13.0.3, 13.0.1"
                 }
             }
         },
