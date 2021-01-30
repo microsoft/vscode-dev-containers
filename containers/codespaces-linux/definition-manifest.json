@@ -14,8 +14,7 @@
 		"imageLink": "https://github.com/microsoft/oryx",
 		"debian": [
 			"git-lfs",
-			"moby-cli",
-			"moby-engine"
+			"moby-cli"
 		],
 		"pipx": [
 			"pylint",
