@@ -12,35 +12,9 @@
 	"dependencies": {
 		"image": "alpine:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/alpine",
-		"alpine": [
-			"git",
-			"bash",
-			"libgcc",
-			"libstdc++",
-			"curl",
-			"openssh-client",
-			"less",
-			"wget",
-			"nano",
-			"jq",
-			"gnupg",
-			"unzip",
-			"procps",
-			"coreutils",
-			"ca-certificates",
-			"krb5-libs",
-			"libintl",
-			"libssl1.1",
-			"lttng-ust",
-			"tzdata",
-			"userspace-rcu",
-			"zlib",
-			"shadow",
-			"sudo",
-			"zsh"
-		],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh"
+			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Bash!": "/root/.oh-my-bash"
 		}
 	}
 }

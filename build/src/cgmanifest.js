@@ -410,7 +410,7 @@ async function generateOtherComponentList(otherComponents, imageTag, alreadyRegi
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
-            const otherVersion = (await getDockerRunCommandOutput(imageTag, `bash -l -c "set -e && ${otherSettings.versionCommand}"`)).trim();
+            const otherVersion = (await getDockerRunCommandOutput(imageTag, `bash -c "set -e && ${otherSettings.versionCommand}"`)).trim();
             addIfUnique(`${otherName}-other`, otherVersion, componentList, alreadyRegistered, {
                 "Component": {
                     "Type": "other",
@@ -543,9 +543,10 @@ async function getDockerRunCommandOutput(imageTag, command, forceRoot) {
     const result = await asyncUtils.spawn('docker', runArgs, { shell: true, stdio: 'pipe' });
     // Commands that start on entrypoint can use init.d which outputs in the format ' * <something>\n...done\n', 
     // so filter these out along with unicode or escape / color code characters
-    const filteredResult = result.replace(/^(\s\*\s.+\n(.+done.\n)?)+/m,'').replace(/[^\w\W\s]/gi,'').replace(/\\u\w\w\w\w(\[\d+m)?/g, '');
-    console.log(filteredResult);
-    return filteredResult
+    const filteredResult = result.toString()
+        .replace(/^(\s\*\s.+\n(.+done.\n)?)+/m,'')
+        .replace(/[^\w\W\s]/gm,'');
+    return filteredResult;
 }
 
 /*

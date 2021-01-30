@@ -14,49 +14,8 @@
 		"image": "mcr.microsoft.com/oryx/build:vso-20200417.5",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"debian": [
-			"apt-utils",
-			"git",
-			"openssh-client",
-			"gnupg2",
-			"iproute2",
-			"procps",
-			"lsof",
-			"htop",
-			"net-tools",
-			"psmisc",
-			"curl",
-			"wget",
-			"rsync",
-			"ca-certificates",
-			"unzip",
-			"zip",
-			"tar",
-			"nano",
-			"vim-tiny",
-			"less",
-			"jq",
-			"lsb-release",
-			"apt-transport-https",
-			"dialog",
-			"libc6",
-			"libgcc1",
-			"libgssapi-krb5-2",
-			"libicu[0-9][0-9]",
-			"liblttng-ust0",
-			"libstdc++6",
-			"zlib1g",
-			"locales",
-			"sudo",
-			"ncdu",
-			"man-db",
-			"zsh",
-			"vim", 
-			"xtail",
-			"fish", 
-			"moby-cli",
 			"git-lfs",
-			"software-properties-common",
-			"openjdk-8-jdk"
+			"moby-cli"
 		],
 		"pipx": [
 			"pylint",
@@ -92,6 +51,10 @@
 			"clippy": null
 		},
 		"other": {
+			"git": {
+				"versionCommand": "git --version | sed -n '/git version /s///p'",
+				"downloadUrl":"https://github.com/git/git"
+			},
 			"Xdebug": {
 				"versionCommand": "php --version | grep -oE 'Xdebug\\sv[^,]+' | sed -n '/Xdebug\\sv/s///p'",
 				"downloadUrl":"https://xdebug.org/"
