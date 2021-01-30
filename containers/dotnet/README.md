@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
+| *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/dotnet <br/> mcr.microsoft.com/vscode/devcontainers/dotnetcore |
 | *Available image variants* | 2.1, 3.1, 5.0 |

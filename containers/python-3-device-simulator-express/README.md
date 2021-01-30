@@ -7,6 +7,7 @@
 | Metadata | Value |
 |----------|-------|
 | *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
+| *Categories* | Community, Other |
 | *Definition type* | Dockerfile |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |

@@ -7,6 +7,7 @@
 | Metadata | Value |
 |----------|-------|
 | *Contributors* | Diullei Gomes ([@diullei](https://github.com/diullei)) |
+| *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | No |
 | *Container host OS support* | Linux, macOS, Windows |

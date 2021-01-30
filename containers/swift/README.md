@@ -6,7 +6,8 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team, [cloudnull](https://github.com/cloudnull) |
+| *Contributors* | [cloudnull](https://github.com/cloudnull) |
+| *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

@@ -7,6 +7,7 @@
 | Metadata | Value |
 |----------|-------|
 | *Contributors* | Puppet |
+| *Categories* | Community, Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

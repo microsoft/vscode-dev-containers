@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The Visual Studio Container Tools team |
+| *Categories* | Community, Frameworks |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | No |
 | *Container host OS support* | Linux, macOS, Windows |

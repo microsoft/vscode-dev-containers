@@ -7,6 +7,7 @@ _Develop Elixir/Phoenix based applications. Includes everything you need to get 
 | Metadata                    | Value                 |
 | --------------------------- | --------------------- |
 | _Contributors_              | [idyll](https://github.com/idyll), [Talk2MeGooseman](https://github.com/talk2MeGooseman)|
+| _Category_                  | Community, Languages, Frameworks  |
 | _Definition type_           | Dockerfile            |
 | _Works in Codespaces_       | Yes                   |
 | _Container host OS support_ | Linux, macOS, Windows |

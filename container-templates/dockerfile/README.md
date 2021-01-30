@@ -4,15 +4,15 @@
 
 *[A short description of the the purpose of the definition goes here.]*
 
-| Metadata                    | Value                                            |
-| --------------------------- | ------------------------------------------------ |
-| *Contributors*              | [Your name, email and/or GitHub profile]         |
-| *Definition type*           | Dockerfile                                       |
-| *Definition category*       | [Base images, Languages, Platforms, Azure, AWS, GCP, DevOps], Community |
-| *Works in Codespaces*       | Yes / No                                         |
-| *Container host OS support* | Linux, macOS, Windows                            |
-| *Container OS*              | [OS used by continer - e.g. Debian]              |
-| *Languages, platforms*      | [Languages and platforms the container supports] |
+| Metadata                    | Value                                                                              |
+|---------------------------- | -----------------------------------------------------------------------------------|
+| *Contributors*              | [Your name, GitHub profile ]                                                       |
+| *Categories*                | Community, [Core, Languages, Frameworks, Services, Azure, GCP, AWS, GitHub, Other] |
+| *Definition type*           | Dockerfile                                                                         |
+| *Works in Codespaces*       | Yes / No                                                                           |
+| *Container host OS support* | Linux, macOS, Windows                                                              |
+| *Container OS*              | [OS used by continer - e.g. Debian]                                                |
+| *Languages, platforms*      | [Languages and platforms the container supports]                                   |
 
 ## [Optional] Description
 
