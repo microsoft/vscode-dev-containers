@@ -48,7 +48,7 @@ async function patch(patchPath, registry, registryPath) {
                 // Try to clean out unused images and retry once if get an out of storage response
                 if (ex.result.indexOf('no space left on device') >= 0 && retry === false) {
                     console.log(`(*) Out of space - pruning images..`);
-                    asyncUtils.spawn('docker', ['image', 'prune', '--all'], spawnOpts);
+                    asyncUtils.spawn('docker', ['image', 'prune', '--all', '--force'], spawnOpts);
                     console.log(`(*) Retrying..`);
                     retry = true;
                 } else {
