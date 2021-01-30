@@ -1,5 +1,6 @@
 {
 	"variants": ["buster", "focal", "bionic", "stretch"],
+	"definitionVersion": "0.200.0",
 	"build": {
 		"latest": true,
 		"parent": {

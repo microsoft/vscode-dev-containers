@@ -1,5 +1,6 @@
 {
 	"variants": ["buster", "stretch"],
+	"definitionVersion": "0.200.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",

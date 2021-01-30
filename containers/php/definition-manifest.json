@@ -1,5 +1,6 @@
 {
 	"variants": ["7", "7.4", "7.3"],
+	"definitionVersion": "0.200.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
