@@ -44,6 +44,7 @@ if grep -q 'Ubuntu' < /etc/os-release; then
     apt-add-repository ppa:fish-shell/release-3
     apt-get update
     apt-get -y install --no-install-recommends fish
+    apt-get autoremove -y
 elif grep -q 'Debian' < /etc/os-release; then
     if grep -q 'stretch' < /etc/os-release; then
         echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_9.0/ /' | tee /etc/apt/sources.list.d/shells:fish:release:3.list
@@ -54,6 +55,7 @@ elif grep -q 'Debian' < /etc/os-release; then
     fi
     apt update
     apt install -y fish
+    apt autoremove -y
 fi
 
 # Install Fisher
