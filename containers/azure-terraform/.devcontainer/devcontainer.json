@@ -12,9 +12,7 @@
 	},
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 	"overrideCommand": false,
-	"runArgs": [
-		"--env-file", "${localWorkspaceFolder}/.env"
-	],
+	"runArgs": ["--env-file",".devcontainer/devcontainer.env"],
 	"containerEnv": {
 		"CONTAINER": "infrax",
 		"KEY": "infrax.tfstate"

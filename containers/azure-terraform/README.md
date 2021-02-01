@@ -63,8 +63,7 @@ This definition includes some test code that will help you verify it is working 
 
 1. If this is your first time using a development container, follow [these steps](https://code.visualstudio.com/docs/remote/containers#_getting-started) to setup your machine.
 2. Clone this repository
-3. Go to the `containers/azure-terraform` folder and make a copy of the .env-sample and rename it to `.env` and fill in the values for the environment variables.
-
+3. Fill in the values for the environment variables in the `.devcontainer/devcontainer.env` file
    - This file allows customization of the environment variables and the values needed for the terraform tasks.
 
 4. Start VS Code, press <kbd>F1</kbd>, and select Remote-Containers: Open Folder in Container...and select the `containers/azure-terraform` folder
@@ -79,7 +78,7 @@ Once the settings are configured, you can begin executing terraform commands. A 
 
 ## Running the Tasks
 
-Once the environment settings are configured with the .env, you can begin executing terraform commands. VS Code tasks have been configured to run each of the commonly used terraform commands. These can be accessed via `CTRL/CMD+SHIFT+P` > `Tasks: Run Tasks`.
+Once the environment settings are configured with the `.devcontainer/devcontainer.env`, you can begin executing terraform commands. VS Code tasks have been configured to run each of the commonly used terraform commands. These can be accessed via `CTRL/CMD+SHIFT+P` > `Tasks: Run Tasks`.
 
 - `az login`: login to Azure and set your default subscription
 - `terraform create backend`: create (if it does not exists) a remote azurerm backend (storage account)
