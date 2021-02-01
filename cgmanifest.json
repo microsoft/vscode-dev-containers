@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
+                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
                 }
             }
         },
@@ -36,7 +36,7 @@
                 "Git": {
                     "Name": "Oh My Bash!",
                     "repositoryUrl": "https://github.com/ohmybash/oh-my-bash",
-                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
+                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
                 }
             }
         },
@@ -186,7 +186,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
+                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
                 }
             }
         },
@@ -196,7 +196,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
+                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
                 }
             }
         },
@@ -396,7 +396,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "1.9.3",
+                    "Version": "Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9000 (through xdebug.client_host/xdebug.client_port) :-(\n1.9.3",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -732,7 +732,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "AdoptOpenJDK",
-                    "Version": "11.0.9.1+1",
+                    "Version": "11.0.10+9",
                     "DownloadUrl": "https://adoptopenjdk.net/"
                 }
             }
@@ -793,7 +793,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "e2b3fa2a97c132bd0289a2330def2efd2736632d"
+                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
                 }
             }
         },
@@ -824,6 +824,26 @@
                     "Name": "Docker Image: golang",
                     "Version": "1.14",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: php",
+                    "Version": "8",
+                    "DownloadUrl": "https://hub.docker.com/_/php"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: php",
+                    "Version": "8.0",
+                    "DownloadUrl": "https://hub.docker.com/_/php"
                 }
             }
         },
@@ -914,6 +934,15 @@
                     "Name": "Docker Image: python",
                     "Version": "3.6",
                     "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "virtualenv",
+                    "Version": "20.4.2"
                 }
             }
         },
@@ -1112,7 +1141,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.18.0"
+                    "Version": "7.19.0"
                 }
             }
         },
