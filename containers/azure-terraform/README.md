@@ -43,7 +43,7 @@ Beyond `git`, this `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/),
 
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
+   2. Open the Command Palette with `Ctrl/CMD+Shift+P` or press <kbd>F1</kbd> and select and **Remote-Containers: Add Development Container Configuration Files.
    3. Select the Azure Terraform definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
@@ -65,8 +65,7 @@ This definition includes some test code that will help you verify it is working 
 
 3. Open the Command Palette with `Ctrl/CMD+Shift+P` or press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
-4. Execute the basic Terraform configuration that will provision a new Azure Resource Group. VS Code tasks have been configured to run commonly used commands. These can be accessed via `Ctrl/CMD+Shift+P` > `Tasks: Run Tasks`.
-
+4. VS Code tasks have been configured to run commonly used Terraform commands. The `test-project` folder includes a Terraform template that provisions a new Azure Resource Group and the commands can be run via `Ctrl/CMD+Shift+P` > `Tasks: Run Tasks`.
    ![Run Terraform Tasks](test-project/assets/Terraform_tasks.png)
 
 A more detailed explanation of the tasks can be found in the next [section](#running-the-tasks).
