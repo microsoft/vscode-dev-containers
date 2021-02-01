@@ -25,6 +25,14 @@ The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can
 
 > **Note:** This is the latest image based on Ubuntu 20.04/Focal. See the [codespaces-linux-stretch definition](../codespaces-linux-stretch) for the legacy Debian 9/Stretch based image.
 
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. However, **note that only the most recent image is pre-cached in Codespaces**. For example:
+
+- `mcr.microsoft.com/vscode/devcontainers/universal:1-focal`
+- `mcr.microsoft.com/vscode/devcontainers/universal:1.1-focal`
+- `mcr.microsoft.com/vscode/devcontainers/universal:1.1.1-focal`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/universal/tags/list).
+
 ## Accessing the container using SSH, SCP, or SSHFS
 
 This container also includes a running SSH server that you can use to access the contents if needed. To use it:

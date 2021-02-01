@@ -25,6 +25,14 @@ If you use GitHub Codespaces, this is the "universal" image that is used by defa
 
 The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can opt into using instead of the default `bash`. It also includes [nvm](https://github.com/nvm-sh/nvm), [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), and [SDKMAN!](https://sdkman.io/) if you need to install a different version Node, Ruby, or Java tools than the container defaults. You can also set things up to access the container [via SSH](#accessing-the-container-using-ssh-scp-or-sshfs).
 
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. However, **note that only the most recent image is pre-cached in Codespaces which is currently the [Ubuntu 20.04 based image](../codespaces-linux)**. For example:
+
+- `mcr.microsoft.com/vscode/devcontainers/universal:0-stretch`
+- `mcr.microsoft.com/vscode/devcontainers/universal:0.22-stretch`
+- `mcr.microsoft.com/vscode/devcontainers/universal:0.22.3-stretch`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/universal/tags/list).
+
 ## Accessing the container using SSH, SCP, or SSHFS
 
 This container also includes a running SSH server that you can use to access the contents if needed. To use it:
