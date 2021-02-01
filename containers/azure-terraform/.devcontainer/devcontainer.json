@@ -14,19 +14,19 @@
 	"overrideCommand": false,
 	"runArgs": ["--env-file",".devcontainer/devcontainer.env"],
 	"containerEnv": {
-		"CONTAINER": "infrax",
-		"KEY": "infrax.tfstate"
+		"TF_BACKEND_CONTAINER": "infrax",
+		"TF_BACKEND_KEY": "infrax.tfstate"
 	},
     "remoteEnv": {
 		// Sets environment variables required for terrafom remote backend
-		"TF_BACKEND_RESOURCE_GROUP" : "${containerEnv:RESOURCE_GROUP}",
-		"TF_BACKEND_LOCATION": "${containerEnv:LOCATION}",
-		"TF_BACKEND_STORAGE_ACCOUNT" : "${containerEnv:STORAGE_ACCOUNT}",                
-		"TF_BACKEND_CONTAINER" : "${containerEnv:CONTAINER}",
-		"TF_BACKEND_KEY" : "${containerEnv:KEY}",
+		"TF_BACKEND_RESOURCE_GROUP" : "${containerEnv:TF_BACKEND_RESOURCE_GROUP}",
+		"TF_BACKEND_LOCATION": "${containerEnv:TF_BACKEND_LOCATION}",
+		"TF_BACKEND_STORAGE_ACCOUNT" : "${containerEnv:TF_BACKEND_STORAGE_ACCOUNT}",                
+		"TF_BACKEND_CONTAINER" : "${containerEnv:TF_BACKEND_CONTAINER}",
+		"TF_BACKEND_KEY" : "${containerEnv:TF_BACKEND_KEY}",
 		
 		// Sets input variables for terraform templates
-		"TF_VAR_rg_name" : "${containerEnv:RG_NAME}"
+		"TF_VAR_rg_name" : "${containerEnv:TF_VAR_RG_NAME}"
 	},
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
