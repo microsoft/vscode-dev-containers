@@ -1,7 +1,7 @@
 {
 	"name": "GitHub Codespaces - Stretch (Legacy)",
 	"build": {
-		"dockerfile": "base.Dockerfile"
+		"dockerfile": "Dockerfile"
 	},
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
