@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Java Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/java |
-| *Available image variants* | 11, 15 |
+| *Available image variants* | 11, 15 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -32,11 +32,13 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/java:11`
 - `mcr.microsoft.com/vscode/devcontainers/java:15`
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/java:0-11`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.135-11`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.135.0-11`
+- `mcr.microsoft.com/vscode/devcontainers/java:0.200-11`
+- `mcr.microsoft.com/vscode/devcontainers/java:0.200.0-11`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

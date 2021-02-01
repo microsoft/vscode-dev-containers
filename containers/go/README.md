@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/go |
-| *Available image variants* | 1, 1.15, 1.14 |
+| *Available image variants* | 1, 1.15, 1.14 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/go/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -31,11 +31,13 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/go:1.15`
 - `mcr.microsoft.com/vscode/devcontainers/go:1.14`
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/go:0-1`
-- `mcr.microsoft.com/vscode/devcontainers/go:0.135-1`
-- `mcr.microsoft.com/vscode/devcontainers/go:0.135.0-1`
+- `mcr.microsoft.com/vscode/devcontainers/go:0-1.15`
+- `mcr.microsoft.com/vscode/devcontainers/go:0.200-1.15`
+- `mcr.microsoft.com/vscode/devcontainers/go:0.200.0-1.15`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/go/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

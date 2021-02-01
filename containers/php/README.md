@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/php |
-| *Available image variants* | 7, 7.3, 7.4 |
+| *Available image variants* | 8, 8.0, 7, 7.3, 7.4 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -27,15 +27,19 @@ While the definition itself works unmodified, you can select the version of PHP 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/php` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/php:8`
+- `mcr.microsoft.com/vscode/devcontainers/php:8.0`
 - `mcr.microsoft.com/vscode/devcontainers/php:7`
 - `mcr.microsoft.com/vscode/devcontainers/php:7.4`
 - `mcr.microsoft.com/vscode/devcontainers/php:7.3`
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/php:0-7`
-- `mcr.microsoft.com/vscode/devcontainers/php:0.134-7`
-- `mcr.microsoft.com/vscode/devcontainers/php:0.134.0-7`
+- `mcr.microsoft.com/vscode/devcontainers/php:0.200-7`
+- `mcr.microsoft.com/vscode/devcontainers/php:0.200.0-7`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

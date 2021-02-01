@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:alpine |
-| *Available image variants* | 3.10, 3.11, 3.12 |
+| *Available image variants* | 3.10, 3.11, 3.12 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | No ([#458](https://github.com/MicrosoftDocs/vsonline/issues/458)) |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -31,11 +31,13 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/base:alpine-3.11`
 - `mcr.microsoft.com/vscode/devcontainers/base:alpine-3.12`
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/base:0-alpine-3.10`
-- `mcr.microsoft.com/vscode/devcontainers/base:0.123-alpine-3.10`
-- `mcr.microsoft.com/vscode/devcontainers/base:0.123.0-alpine-3.10`
+- `mcr.microsoft.com/vscode/devcontainers/base:0-alpine`
+- `mcr.microsoft.com/vscode/devcontainers/base:0.200-alpine`
+- `mcr.microsoft.com/vscode/devcontainers/base:0.200.0-alpine`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

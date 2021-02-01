@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/cpp |
-| *Available image variants* | stretch, buster, bionic, focal |
+| *Available image variants* | stretch, buster, bionic, focal ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/cpp/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -33,11 +33,13 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/cpp:bionic` (or `ubuntu-18.04`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:focal` (or `ubuntu-20.04`)
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/cpp:0`
-- `mcr.microsoft.com/vscode/devcontainers/cpp:0.132`
-- `mcr.microsoft.com/vscode/devcontainers/cpp:0.132.0`
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0-focal`
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0.200-focal`
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0.200.0-focal`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/cpp/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

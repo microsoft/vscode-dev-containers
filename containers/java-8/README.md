@@ -25,11 +25,13 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 
 - `mcr.microsoft.com/vscode/devcontainers/java:8`
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/java:0-8`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.136-8`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.136.0-8`
+- `mcr.microsoft.com/vscode/devcontainers/java:0.200-8`
+- `mcr.microsoft.com/vscode/devcontainers/java:0.200.0-8`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

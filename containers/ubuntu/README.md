@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu |
-| *Available image variants* | bionic, focal |
+| *Available image variants* | bionic, focal ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -20,7 +20,7 @@
 
 While the definition itself works unmodified, you can select the version of Ubuntu the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
-```
+```json
 "args": { "VARIANT": "bionic" }
 ```
 
@@ -30,11 +30,13 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/base:focal` (or `ubuntu-20.04`)
 - `mcr.microsoft.com/vscode/devcontainers/base:bionic` (or `ubuntu-18.04`)
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/base:0-bionic`
-- `mcr.microsoft.com/vscode/devcontainers/base:0.123-bionic`
-- `mcr.microsoft.com/vscode/devcontainers/base:0.123.0-bionic`
+- `mcr.microsoft.com/vscode/devcontainers/base:0-focal`
+- `mcr.microsoft.com/vscode/devcontainers/base:0.200-focal`
+- `mcr.microsoft.com/vscode/devcontainers/base:0.200.0-focal`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list).
 
 Alternatively, you can use the contents of the `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

@@ -9,7 +9,7 @@
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/python |
-| *Available image variants* | 3, 3.6, 3.7, 3.8, 3.9 |
+| *Available image variants* | 3, 3.6, 3.7, 3.8, 3.9 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/python/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container Host OS Support* | Linux, macOS, Windows |
@@ -34,11 +34,13 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/python:3.8`
 - `mcr.microsoft.com/vscode/devcontainers/python:3.9`
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/python:0-3`
-- `mcr.microsoft.com/vscode/devcontainers/python:0.123-3`
-- `mcr.microsoft.com/vscode/devcontainers/python:0.123.0-3`
+- `mcr.microsoft.com/vscode/devcontainers/python:0-3.9`
+- `mcr.microsoft.com/vscode/devcontainers/python:0.200-3.9`
+- `mcr.microsoft.com/vscode/devcontainers/python:0.200.0-3.9`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/python/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize the your container's contents or build for a container architecture the image does not support.
 

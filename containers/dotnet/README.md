@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/dotnet <br/> mcr.microsoft.com/vscode/devcontainers/dotnetcore |
-| *Available image variants* | 2.1, 3.1, 5.0 |
+| *Available image variants* | 2.1, 3.1, 5.0 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -31,11 +31,13 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/dotnet:3.1` (or `dotnetcore:3.1`)
 - `mcr.microsoft.com/vscode/devcontainers/dotnet:5.0`
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/dotnet:0-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.149-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.149.0-3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.200-3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.200.0-3.1`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

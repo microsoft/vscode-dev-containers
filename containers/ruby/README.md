@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/ruby |
-| *Available image variants* | 2, 2.7, 2.6, 2.5 |
+| *Available image variants* | 3, 3.0, 2, 2.7, 2.6, 2.5 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -27,16 +27,20 @@ While this definition should work unmodified, you can select the version of Ruby
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/ruby` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/ruby:3`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:3.0`
 - `mcr.microsoft.com/vscode/devcontainers/ruby:2`
 - `mcr.microsoft.com/vscode/devcontainers/ruby:2.7`
 - `mcr.microsoft.com/vscode/devcontainers/ruby:2.6`
 - `mcr.microsoft.com/vscode/devcontainers/ruby:2.5`
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0-2`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.132-2`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.132.0-2`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0-3`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0.200-3`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0.200.0-3`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
