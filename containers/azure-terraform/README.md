@@ -21,18 +21,14 @@ While technically optional, this definition includes the Azure Terraform extensi
 
 - [Azure Subscription](https://azure.microsoft.com): A current Azure subscription or a free trail account needed.
 
-- [Terraform](https://www.terraform.io/downloads.html): Download the latest version of Terraform that is appropriate for your environment.
-
-- [Terraform Linter](https://github.com/terraform-linters/tflint): Install latest version of tflint.
-
 - [Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform): This optional HashiCorp Terraform VS Code extension adds syntax highlighting and other editing features for Terraform files using the Terraform Language Server.
 
 You can also choose the specific version of Terraform installed by updating the following line in `.devcontainer/devcontainer.json`:
 
 ```Dockerfile
 "arg": {
-   "TERRAFORM_VERSION": "0.12.16"
-   "TFLINT_VERSION": "0.8.2",
+   "TERRAFORM_VERSION": "0.13.0"
+   "TFLINT_VERSION": "0.19.0",
    "INSTALL_AZURE_CLI": "true",
    "INSTALL_DOCKER": "true",
    "INSTALL_NODE": "true"
@@ -60,6 +56,40 @@ Beyond `git`, this `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/),
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+
+## Testing the Definition
+
+This definition includes some test code that will help you verify it is working as expected on your system. Follow these steps:
+
+1. If this is your first time using a development container, follow [these steps](https://code.visualstudio.com/docs/remote/containers#_getting-started) to setup your machine.
+2. Clone this repository
+3. Go to the `containers/azure-terraform` folder and make a copy of the .env-sample and rename it to `.env` and fill in the values for the environment variables.
+
+   - This file allows customization of the environment variables and the values needed for the terraform tasks.
+
+4. Start VS Code, press <kbd>F1</kbd>, and select Remote-Containers: Open Folder in Container...and select the `containers/azure-terraform` folder
+
+   - A sample test-project in the `containers/azure-terraform/test-project` folder has been added where we create and execute the basic Terraform configuration that will provision a new Azure Resource Group.
+
+5. VS Code tasks have been configured to run commonly used commands. These can be accessed via `CTRL/CMD+SHIFT+P` > `Tasks: Run Tasks`.
+
+   ![Run Terraform Tasks](test-project/assets/Terraform_tasks.png)
+
+Once the settings are configured, you can begin executing terraform commands. A more detailed explanation of the tasks can be found in the next [section](#running-the-tasks).
+
+## Running the Tasks
+
+Once the environment settings are configured with the .env, you can begin executing terraform commands. VS Code tasks have been configured to run each of the commonly used terraform commands. These can be accessed via `CTRL/CMD+SHIFT+P` > `Tasks: Run Tasks`.
+
+- `az login`: login to Azure and set your default subscription
+- `terraform create backend`: create (if it does not exists) a remote azurerm backend (storage account)
+- `terraform init`: installs plugins and connect to terraform remote backend
+- `terraform format`: fix formatting issues
+- `terraform lint`: fix linting issues
+- `terraform validate`: check templates for syntax errors
+- `terraform plan`: report what would be done with apply without actually deploying any resources
+- `terraform apply`: deploy the terraform templates
+- `terraform destroy`: destroy resources deployed with the templates
 
 ## References
 
