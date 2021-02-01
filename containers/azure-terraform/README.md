@@ -63,7 +63,7 @@ This definition includes some test code that will help you verify it is working 
 
 1. If this is your first time using a development container, follow [these steps](https://code.visualstudio.com/docs/remote/containers#_getting-started) to setup your machine.
 2. Clone this repository
-3. Fill in the values for the environment variables in the `.devcontainer/devcontainer.env` file
+3. Fill in the values for the environment variables in the [`.devcontainer/devcontainer.env` file](https://code.visualstudio.com/docs/remote/containers-advanced#_option-2-use-an-env-file)
    - This file allows customization of the environment variables and the values needed for the terraform tasks.
 
 4. Start VS Code, press <kbd>F1</kbd>, and select Remote-Containers: Open Folder in Container...and select the `containers/azure-terraform` folder
