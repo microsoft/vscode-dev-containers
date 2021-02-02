@@ -124,8 +124,8 @@ sudoIf()
 
 # explicitly remove dockerd and containerd PID file to ensure that it can start properly if it was stopped uncleanly
 # ie: docker kill <ID>
-find /run /var/run -iname 'docker*.pid' -delete || :
-find /run /var/run -iname 'container*.pid' -delete || :
+sudoIf find /run /var/run -iname 'docker*.pid' -delete || :
+sudoIf find /run /var/run -iname 'container*.pid' -delete || :
 
 set -e
 
