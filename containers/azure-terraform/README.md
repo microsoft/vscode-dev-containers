@@ -25,8 +25,8 @@ You can also choose the specific version of Terraform installed by updating the 
 
 ```Dockerfile
 "arg": {
-   "TERRAFORM_VERSION": "0.13.0"
-   "TFLINT_VERSION": "0.19.0",
+   "TERRAFORM_VERSION": "0.14.5"
+   "TFLINT_VERSION": "0.24.1",
    "INSTALL_AZURE_CLI": "true",
    "INSTALL_DOCKER": "true",
    "INSTALL_NODE": "true"
