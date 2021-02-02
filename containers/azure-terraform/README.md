@@ -43,8 +43,8 @@ Beyond `git`, this `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/),
 
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
-   2. Open the Command Palette with `Ctrl/CMD+Shift+P` or press <kbd>F1</kbd> and select and **Remote-Containers: Add Development Container Configuration Files.
-   3. Select the Azure Terraform definition.
+   2. Open the Command Palette with `Ctrl/CMD+Shift+P` or press <kbd>F1</kbd> and select **Remote-Containers: Add Development Container Configuration Files.
+   3. Select the **Azure Terraform** definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
