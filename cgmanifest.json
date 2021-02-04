@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
+                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
                 }
             }
         },
@@ -36,7 +36,7 @@
                 "Git": {
                     "Name": "Oh My Bash!",
                     "repositoryUrl": "https://github.com/ohmybash/oh-my-bash",
-                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
+                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
                 }
             }
         },
@@ -186,7 +186,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
+                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
                 }
             }
         },
@@ -196,7 +196,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
+                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
                 }
             }
         },
@@ -793,7 +793,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
+                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
                 }
             }
         },
@@ -934,6 +934,15 @@
                     "Name": "Docker Image: python",
                     "Version": "3.6",
                     "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "autopep8",
+                    "Version": "1.5.5"
                 }
             }
         },
