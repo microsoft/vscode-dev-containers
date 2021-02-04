@@ -13,7 +13,7 @@
 ./docker-redhat.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user]
 ```
 
-*Note that `docker-redhat.sh` is community supported.*
+> **Note:** `docker-redhat.sh` is community supported.
 
 |Argument|Default|Description|
 |--------|-------|-----------|

@@ -60,6 +60,7 @@ jobs:
         build/vscdc copy-library-scripts
         git config --global user.email "vscr-feedback@microsoft.com"
         git config --global user.name "CI"
+        git pull
         git add -u
         git commit -m 'Automated update for script library changes' \
           && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
