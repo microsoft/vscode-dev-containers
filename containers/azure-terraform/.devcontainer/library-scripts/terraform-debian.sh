@@ -6,10 +6,11 @@
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/terraform.md
 #
-# Syntax: ./terraform-debian.sh [terraform version] [tflint version]
+# Syntax: ./terraform-debian.sh [terraform version] [tflint version] [terragrunt version]
 
 TERRAFORM_VERSION=${1:-"latest"}
 TFLINT_VERSION=${2:-"latest"}
+TERRAGRUNT_VERSION=${3:-"latest"}
 
 set -e
 
@@ -27,6 +28,11 @@ if [ "${TFLINT_VERSION}" = "latest" ] || [ "${TFLINT_VERSION}" = "lts" ] || [ "$
     TFLINT_VERSION=$(echo ${LATEST_RELEASE} | grep -oE 'tag_name":\s*"v[^"]+' | sed -n '/tag_name":\s*"v/s///p')
 fi
 
+if [ "${TERRAGRUNT_VERSION}" = "latest" ] || [ "${TERRAGRUNT_VERSION}" = "lts" ] || [ "${TERRAGRUNT_VERSION}" = "current" ]; then
+    LATEST_RELEASE=$(curl -sSL -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/gruntwork-io/terragrunt/releases?per_page=1&page=1")
+    TERRAGRUNT_VERSION=$(echo ${LATEST_RELEASE} | grep -oE 'tag_name":\s*"v[^"]+' | sed -n '/tag_name":\s*"v/s///p')
+fi
+
 # Install curl, unzip if missing
 if ! dpkg -s curl ca-certificates unzip > /dev/null 2>&1; then
     export DEBIAN_FRONTEND=noninteractive
@@ -36,7 +42,7 @@ if ! dpkg -s curl ca-certificates unzip > /dev/null 2>&1; then
     apt-get -y install --no-install-recommends curl ca-certificates unzip
 fi
 
-# Install Terraform, tflint
+# Install Terraform, tflint, Terragrunt
 echo "Downloading terraform..."
 mkdir -p /tmp/tf-downloads
 curl -sSL -o /tmp/tf-downloads/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
@@ -48,6 +54,13 @@ if [ "${TFLINT_VERSION}" != "none" ]; then
     curl -sSL -o /tmp/tf-downloads/tflint.zip https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip
     unzip /tmp/tf-downloads/tflint.zip
     mv -f tflint /usr/local/bin/
+fi
+
+if [ "${TERRAGRUNT_VERSION}" != "none" ]; then
+    echo "Downloading Terragrunt..."
+    curl -sSL -o /tmp/tf-downloads/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64
+    chmod a+x /tmp/tf-downloads/terragrunt
+    mv -f /tmp/tf-downloads/terragrunt /usr/local/bin/
 fi
 
 rm -rf /tmp/tf-downloads
