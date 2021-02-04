@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
+                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
                 }
             }
         },
@@ -36,7 +36,7 @@
                 "Git": {
                     "Name": "Oh My Bash!",
                     "repositoryUrl": "https://github.com/ohmybash/oh-my-bash",
-                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
+                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
                 }
             }
         },
@@ -156,7 +156,7 @@
                 "Other": {
                     "Name": "Debian Package: moby-cli",
                     "Version": "19.03.14+azure-1",
-                    "DownloadUrl": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod/pool/main/m/moby-cli/moby-cli_19.03.14+azure-1_amd64.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -186,7 +186,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
+                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
                 }
             }
         },
@@ -196,7 +196,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
+                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
                 }
             }
         },
@@ -714,7 +714,7 @@
                 "Other": {
                     "Name": "Debian Package: moby-cli",
                     "Version": "19.03.14+azure-2",
-                    "DownloadUrl": "https://packages.microsoft.com/repos/microsoft-debian-stretch-prod/pool/main/m/moby-cli/moby-cli_19.03.14+azure-2_amd64.deb"
+                    "DownloadUrl": ""
                 }
             }
         },
@@ -793,7 +793,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "62bff1fe7ce0d5588d86ba9365f8592de53fbbfb"
+                    "commitHash": "562c2e251ab2bda8aa1dd57824aba9c070f8b5d4"
                 }
             }
         },
