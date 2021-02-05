@@ -70,9 +70,9 @@ async function patchImage(imageId, patchPath, dockerFilePath, bumpVersion, regis
         } catch (ex) {
             // Try to clean out unused images and retry once if get an out of storage response
             if (ex.result && ex.result.indexOf('no space left on device') >= 0 && retry === false) {
-                console.log(`(*) Out of space - pruning images..`);
-                asyncUtils.spawn('docker', ['image', 'prune', '--all', '--force'], spawnOpts);
-                console.log(`(*) Retrying..`);
+                console.log(`(*) Out of space - pruning images...`);
+                await asyncUtils.spawn('docker', ['image', 'prune', '--all', '--force'], spawnOpts);
+                console.log(`(*) Retrying...`);
                 retry = true;
             } else {
                 throw ex;
