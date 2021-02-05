@@ -1,4 +1,4 @@
-# [Name of Definition Here]
+# [Name of Definition Here] (Community)
 
 ## Summary
 
