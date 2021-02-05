@@ -170,14 +170,14 @@ async function isImageAlreadyPublished(registryName, repositoryName, tagName) {
         return false;
     }
 
-    // See if manifest exists
-    const manifestsOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'show-manifests',
+    // Assuming repository exists, check if tag exists
+    const tagListOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'show-tags',
         '--name', registryName,
         '--repository', repositoryName,
-        '--query', `"[?contains(tags,'${tagName}')]"`
+        '--query', `"[?contains(@,'${tagName}')]"`
     ], { shell: true, stdio: 'pipe' });
-    const manifests = JSON.parse(manifestsOutput);
-    if (manifests.length > 0) {
+    const tagList = JSON.parse(tagListOutput);
+    if (tagList.length > 0) {
         console.log('(*) Image version has already been published.')
         return true;
     }
