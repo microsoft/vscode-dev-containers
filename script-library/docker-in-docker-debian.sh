@@ -160,7 +160,7 @@ fi
 
 # Handle DNS
 set +e
-cat /etc/resolv.conf | grep -i '^nameserver 127.0.0.53'
+cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
 if [ $? -eq 0 ]
 then
   echo "Setting Azure DNS."
