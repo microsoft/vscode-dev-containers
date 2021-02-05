@@ -159,7 +159,7 @@ fi
 ## Dind wrapper over.
 
 # Start docker/moby engine
-( sudoIf dockerd > /tmp/dockerd.log 2>&1 ) &
+( sudoIf dockerd --dns 168.63.129.16 > /tmp/dockerd.log 2>&1 ) &
 
 set +e
 
