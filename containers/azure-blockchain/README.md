@@ -1,4 +1,4 @@
-# Azure Blockchain
+# Azure Blockchain (Community)
 
 ## Summary
 

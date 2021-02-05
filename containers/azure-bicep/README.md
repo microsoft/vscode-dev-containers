@@ -1,4 +1,4 @@
-# Azure Bicep
+# Azure Bicep (Community)
 
 ## Summary
 

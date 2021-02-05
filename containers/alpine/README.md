@@ -7,7 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
-| *Categories* | Core |
+| *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:alpine |
 | *Available image variants* | 3.10, 3.11, 3.12 |

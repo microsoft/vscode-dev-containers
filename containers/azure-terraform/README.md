@@ -1,4 +1,4 @@
-# Azure Terraform
+# Azure Terraform (Community)
 
 ## Summary
 

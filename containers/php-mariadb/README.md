@@ -1,4 +1,4 @@
-# PHP & MariaDB
+# PHP & MariaDB (Community)
 
 ## Summary
 

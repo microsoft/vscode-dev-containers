@@ -1,4 +1,4 @@
-# Ruby & Sinatra
+# Ruby & Sinatra (Community)
 
 ## Summary
 

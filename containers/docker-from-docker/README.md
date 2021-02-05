@@ -2,12 +2,12 @@
 
 ## Summary
 
-*Access your local Docker install from inside a dev container. Installs Docker extension in the container along with needed CLIs.*
+*Access your host's Docker install from inside a dev container. Installs Docker extension in the container along with needed CLIs.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code team |
-| *Categories* | Core |
+| *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

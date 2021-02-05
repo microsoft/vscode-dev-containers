@@ -2,12 +2,12 @@
 
 ## Summary
 
-*Use Docker Compose to configure access to your local Docker install from inside a container. Installs Docker extension in the container along with needed CLIs.*
+*Acess your host's Docker install from inside a container when using Docker Compose. Installs Docker extension in the container along with needed CLIs.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code team |
-| *Categories* | Core |
+| *Categories* | Core, Other |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

@@ -7,7 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code team and Phetsinorath William |
-| *Categories* | Core, Other |
+| *Categories* | Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

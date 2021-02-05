@@ -1,4 +1,4 @@
-# Puppet Development Kit Docker Container
+# Puppet Development Kit Docker Container (Community)
 
 ## Summary
 

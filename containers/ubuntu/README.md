@@ -7,7 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
-| *Categories* | Core |
+| *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu |
 | *Available image variants* | bionic, focal |

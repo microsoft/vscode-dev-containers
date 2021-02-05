@@ -1,4 +1,4 @@
-# SFDX Project
+# SFDX Project (Community)
 
 ## Summary
 

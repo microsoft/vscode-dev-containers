@@ -1,4 +1,4 @@
-# Dapr with C# (.NET Core 3.1)
+# Dapr with C# (Community)
 
 ## Summary
 

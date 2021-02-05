@@ -1,4 +1,4 @@
-# Dapr with Node.js & TypeScript
+# Dapr with Node.js & TypeScript (Community)
 
 ## Summary
 

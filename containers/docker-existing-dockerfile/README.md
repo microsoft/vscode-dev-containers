@@ -7,7 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code team |
-| *Categories* | Core |
+| *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |

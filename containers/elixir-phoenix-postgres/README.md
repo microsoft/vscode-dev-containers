@@ -1,4 +1,4 @@
-# Elixir, Phoenix, Node.js & PostgresSQL
+# Elixir, Phoenix, Node.js & PostgresSQL (Community)
 
 ## Summary
 

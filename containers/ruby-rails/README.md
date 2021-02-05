@@ -1,4 +1,4 @@
-# Ruby on Rails
+# Ruby on Rails (Community)
 
 ## Summary
 
