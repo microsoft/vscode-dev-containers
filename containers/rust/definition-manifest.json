@@ -4,8 +4,7 @@
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
-			"rust:${VERSION}-1",
-			"rust:${VERSION}"
+			"rust:${VERSION}-1"
 		]
 	},
 	"dependencies": {
