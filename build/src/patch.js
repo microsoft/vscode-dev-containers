@@ -70,7 +70,7 @@ async function patchImage(imageId, patchPath, dockerFilePath, bumpVersion, regis
         } catch (ex) {
             // Try to clean out unused images and retry once if get an out of storage response
             if (ex.result && ex.result.indexOf('no space left on device') >= 0 && retry === false) {
-                console.log(`(*) Out of space - pruning images...`);
+                console.log(`(*) Out of space - pruning all unused images...`);
                 await asyncUtils.spawn('docker', ['image', 'prune', '--all', '--force'], spawnOpts);
                 console.log(`(*) Retrying...`);
                 retry = true;
@@ -84,6 +84,10 @@ async function patchImage(imageId, patchPath, dockerFilePath, bumpVersion, regis
     await asyncUtils.forEach(repoAndTagList, async (repoAndTag) => {
         await asyncUtils.spawn('docker', ['push', `${registry}/${repoAndTag.repository}:${repoAndTag.tag}`], spawnOpts);
     });
+
+    // Prune proactively to reduce space use
+    console.log(`(*) Pruning dangling images...`);
+    await asyncUtils.spawn('docker', ['image', 'prune', '--force'], spawnOpts);
 }
 
 function updateVersionTags(repoAndTagList) {
