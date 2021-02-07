@@ -1,5 +1,5 @@
 {
-	"name": "Azure Functions & C# (.NET Core 3.1)",
+	"name": "Azure Functions & C# - .NET Core 3.1",
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 

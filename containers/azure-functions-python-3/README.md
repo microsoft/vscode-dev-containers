@@ -6,7 +6,8 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | [Anthony Chu](https://github.com/anthonychu) |
+| *Contributors* | The Azure Functions Team, [Anthony Chu](https://github.com/anthonychu) |
+| *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
+| *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:debian |
 | *Available image variants* | stretch, buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |

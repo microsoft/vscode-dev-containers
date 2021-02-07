@@ -7,6 +7,7 @@
 |          Metadata           |                    Value                     |
 | --------------------------- | -------------------------------------------- |
 | *Contributors*              | [Aaryn Smith](https://gitlab.com/aarynsmith) |
+| *Categories*                | Community, Frameworks                        |
 | *Definition type*           | Dockerfile                                   |
 | *Works in Codespaces*       | Yes                                          |
 | *Container host OS support* | Linux, macOS, Windows                        |

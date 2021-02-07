@@ -6,7 +6,8 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The GitHub Codespaces and VS Code teams |
+| *Contributors* | The GitHub Codespaces team |
+| *Categories* | Services, GitHub |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/universal:linux<br />mcr.microsoft.com/vscode/devcontainers/universal:focal |
 | *Published image architecture(s)* | x86-64 |

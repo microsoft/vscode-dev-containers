@@ -1,4 +1,4 @@
-# Puppet Development Kit Docker Container
+# Puppet Development Kit Docker Container (Community)
 
 ## Summary
 
@@ -7,6 +7,7 @@
 | Metadata | Value |
 |----------|-------|
 | *Contributors* | Puppet |
+| *Categories* | Community, Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

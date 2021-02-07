@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
+| *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/ruby |
 | *Available image variants* | 3, 3.0, 2, 2.7, 2.6, 2.5 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list)) |

@@ -1,4 +1,4 @@
-# Julia
+# Julia (Community)
 
 ## Summary
 
@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | David Anthoff, github.com/davidanthoff |
+| *Categories* | Community, Languages |
 | *Definition type* | Image |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
+| *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/typescript-node |
 | *Available image variants* | 10, 12, 14 (([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/typescript-node/tags/list)) |

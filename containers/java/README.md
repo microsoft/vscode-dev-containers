@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Java Team |
+| *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/java |
 | *Available image variants* | 11, 15 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
