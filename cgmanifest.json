@@ -1281,6 +1281,18 @@
                     "commitHash": "654cbac77ea07819ed3bcf1ce6410be0211c0f1a"
                 }
             }
+        },
+		{
+            "Component": {
+                "Type": "linux",
+                "Other": {
+                    "Name": "yarn",
+                    "Version": "1.22.5-1",
+					"Distribution": "Debian",
+					"Pool-URL": "https://dl.yarnpkg.com/debian",
+					"Key-URL": "https://dl.yarnpkg.com/debian/pubkey.gpg"
+                }
+            }
         }
     ],
     "Version": 1
