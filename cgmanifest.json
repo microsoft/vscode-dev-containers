@@ -1289,6 +1289,7 @@
                     "Name": "yarn",
                     "Version": "1.22.5-1",
 					"Distribution": "Debian",
+					"Release": "10",
 					"Pool-URL": "https://dl.yarnpkg.com/debian",
 					"Key-URL": "https://dl.yarnpkg.com/debian/pubkey.gpg"
                 }
