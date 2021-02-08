@@ -742,7 +742,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Ruby",
-                    "Version": "",
+                    "Version": "3.0.0p0",
                     "DownloadUrl": "https://www.ruby-lang.org/en/downloads/"
                 }
             }
