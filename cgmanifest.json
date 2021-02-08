@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
+                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
                 }
             }
         },
@@ -36,7 +36,7 @@
                 "Git": {
                     "Name": "Oh My Bash!",
                     "repositoryUrl": "https://github.com/ohmybash/oh-my-bash",
-                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
+                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
                 }
             }
         },
@@ -146,7 +146,7 @@
                 "Other": {
                     "Name": "Debian Package: git-lfs",
                     "Version": "2.13.2",
-                    "DownloadUrl": "https://packagecloud.io/github/git-lfs/ubuntu/pool/focal/main/g/git-lfs/git-lfs_2.13.2_amd64.deb"
+                    "DownloadUrl": "https://packagecloud.io/github/git-lfs/ubuntu/pool/focal/main/g/git-lfs/git-lfs_2.13.2_amd64.debhttps://no-uri-returned"
                 }
             }
         },
@@ -156,7 +156,7 @@
                 "Other": {
                     "Name": "Debian Package: moby-cli",
                     "Version": "19.03.14+azure-1",
-                    "DownloadUrl": ""
+                    "DownloadUrl": "https://no-uri-returned"
                 }
             }
         },
@@ -186,7 +186,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
+                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
                 }
             }
         },
@@ -196,7 +196,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
+                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
                 }
             }
         },
@@ -396,7 +396,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9000 (through xdebug.client_host/xdebug.client_port) :-(\n1.9.3",
+                    "Version": "1.9.3",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -436,7 +436,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.10.0+617\u001b[0m",
+                    "Version": "5.10.0+617\u001b[0m\nis available...\u001b[0m",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -714,7 +714,7 @@
                 "Other": {
                     "Name": "Debian Package: moby-cli",
                     "Version": "19.03.14+azure-2",
-                    "DownloadUrl": ""
+                    "DownloadUrl": "https://no-uri-returned"
                 }
             }
         },
@@ -742,7 +742,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Ruby",
-                    "Version": "bash: ruby: command not found",
+                    "Version": "",
                     "DownloadUrl": "https://www.ruby-lang.org/en/downloads/"
                 }
             }
@@ -783,7 +783,7 @@
                 "Other": {
                     "Name": "Debian Package: yarn",
                     "Version": "1.22.5-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.5_all.deb"
+                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.5_all.debhttps://no-uri-returned"
                 }
             }
         },
@@ -793,7 +793,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "fc291a458d605974b1b92d867b9b31a208bf6d8b"
+                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
                 }
             }
         },
@@ -882,7 +882,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9000 (through xdebug.client_host/xdebug.client_port) :-(\n2.0.9",
+                    "Version": "2.0.9",
                     "DownloadUrl": "https://getcomposer.org/installer"
                 }
             }
@@ -1062,6 +1062,16 @@
                     "Name": "Docker Image: openjdk",
                     "Version": "11-jdk-buster",
                     "DownloadUrl": "https://hub.docker.com/_/java"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "SDKMAN!",
+                    "Version": "5.10.0+617\u001b[0m",
+                    "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
         },

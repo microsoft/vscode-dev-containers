@@ -55,7 +55,7 @@
 				"downloadUrl":"https://github.com/git/git"
 			},
 			"Xdebug": {
-				"versionCommand": "php --version | grep -oE 'Xdebug\\sv[^,]+' | sed -n '/Xdebug\\sv/s///p'",
+				"versionCommand": "php --version | grep -oE 'with Xdebug\\sv[^,]+'| sed -n '/with Xdebug\\sv/s///p'",
 				"downloadUrl":"https://xdebug.org/"
 			},
 			"Composer": {

@@ -224,7 +224,7 @@ function createEntryForLinuxPackage(packageUriCommandOutput, entryNamePrefix, pa
                     "Version": version,
                     "DownloadUrl": `${uriString}${uriSuffix ?
                         uriSuffix.replace('${PACKAGE}', package).replace('${VERSION}', version)
-                        : ''}`
+                        : 'https://no-uri-returned'}`
                 }
             }
         }
@@ -410,7 +410,7 @@ async function generateOtherComponentList(otherComponents, imageTag, alreadyRegi
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
-            const otherVersion = (await getDockerRunCommandOutput(imageTag, `bash -c "set -e && ${otherSettings.versionCommand}"`)).trim();
+            const otherVersion = (await getDockerRunCommandOutput(imageTag, `bash -c "set -e && ${otherSettings.versionCommand}" 2>/dev/null`)).trim();
             addIfUnique(`${otherName}-other`, otherVersion, componentList, alreadyRegistered, {
                 "Component": {
                     "Type": "other",
