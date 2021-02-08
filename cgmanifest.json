@@ -1285,7 +1285,7 @@
 		{
             "Component": {
                 "Type": "linux",
-                "Other": {
+                "Linux": {
                     "Name": "yarn",
                     "Version": "1.22.5-1",
 					"Distribution": "Debian",
