@@ -23,4 +23,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         groupmod --gid $USER_GID $USERNAME \
         && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
         && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
-    fi
+    fi \
+    # Create the elm cache directory where we can mount a volume. If we don't create it like this
+    # it is auto created by docker on volume creation but with root as owner which makes it unusable.
+    && mkdir /home/$USERNAME/.elm \
+    && chown $USERNAME:$USERNAME /home/$USERNAME/.elm
