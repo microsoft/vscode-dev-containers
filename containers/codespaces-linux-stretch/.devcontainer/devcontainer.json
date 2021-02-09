@@ -5,11 +5,10 @@
 	},
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
-		"go.useGoProxyToCheckForToolUpdates": false,
+		"go.toolsManagement.checkForUpdates": "off",
 		"go.useLanguageServer": true,
 		"go.gopath": "/go",
 		"go.goroot": "/usr/local/go",
-		"go.toolsGopath": "/go/bin",
 		"python.pythonPath": "/opt/python/latest/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
