@@ -84,28 +84,16 @@ else
     echo "Go already installed. Skipping."
 fi
 
-# Install Go tools
+# Install Go tools that are isImportant && !replacedByGopls based on
+# https://github.com/golang/vscode-go/blob/0c6dce4a96978f61b022892c1376fe3a00c27677/src/goTools.ts#L188
 GO_TOOLS_WITH_MODULES="\
     golang.org/x/tools/gopls \
     honnef.co/go/tools/... \
-    golang.org/x/tools/cmd/gorename \
-    golang.org/x/tools/cmd/goimports \
-    golang.org/x/tools/cmd/guru \
     golang.org/x/lint/golint \
-    github.com/mdempsky/gocode \
-    github.com/cweill/gotests/... \
-    github.com/haya14busa/goplay/cmd/goplay \
-    github.com/sqs/goreturns \
-    github.com/josharian/impl \
-    github.com/davidrjenni/reftools/cmd/fillstruct \
+    github.com/golangci/golangci-lint/cmd/golangci-lint \
+    github.com/mgechev/revive \
     github.com/uudashr/gopkgs/v2/cmd/gopkgs \
     github.com/ramya-rao-a/go-outline \
-    github.com/acroca/go-symbols \
-    github.com/godoctor/godoctor \
-    github.com/rogpeppe/godef \
-    github.com/zmb3/gogetdoc \
-    github.com/fatih/gomodifytags \
-    github.com/mgechev/revive \
     github.com/go-delve/delve/cmd/dlv"
 if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     echo "Installing common Go tools..."
