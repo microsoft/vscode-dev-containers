@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
+| *Categories* | Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/php |
 | *Available image variants* | 8, 8.0, 7, 7.3, 7.4 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list)) |

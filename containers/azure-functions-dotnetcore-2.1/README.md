@@ -1,4 +1,4 @@
-# Azure Functions & C# (.NET Core 2.1)
+# Azure Functions & C# - .NET Core 2.1
 
 ## Summary
 
@@ -6,7 +6,8 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team |
+| *Contributors* | The Azure Functions Team, @brandonh-msft |
+| *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

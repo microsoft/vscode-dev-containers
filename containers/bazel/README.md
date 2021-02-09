@@ -1,4 +1,4 @@
-# Bazel
+# Bazel (Community)
 
 ## Summary
 
@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | William Phetsinorath <deva.shikanime@protonmail.com> |
+| *Categories* | Community, Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

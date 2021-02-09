@@ -1,17 +1,18 @@
-# [Name of Definition Here]
+# [Name of Definition Here] (Community)
 
 ## Summary
 
-_[A short description of the the purpose of the definition goes here.]_
+*[A short description of the the purpose of the definition goes here.]*
 
-| Metadata                    | Value                                            |
-| --------------------------- | ------------------------------------------------ |
-| _Contributors_              | [Your name, email and/or GitHub profile]         |
-| _Definition type_           | Docker Compose                                   |
-| _Works in Codespaces_       | Yes / No                                         |
-| _Container host OS support_ | Linux, macOS, Windows                            |
-| _Container OS_              | Debian                                           |
-| _Languages, platforms_      | [Languages and platforms the container supports] |
+| Metadata                    | Value                                                                        |
+|---------------------------- | -----------------------------------------------------------------------------|
+| *Contributors*              | [Your name, GitHub profile]                                                  |
+| *Categories*                | Community, [Languages, Frameworks, Services, Azure, GCP, AWS, GitHub, Other] |
+| *Definition type*           | Docker Compose                                                               |
+| *Works in Codespaces*       | Yes / No                                                                     |
+| *Container host OS support* | Linux, macOS, Windows                                                        |
+| *Container OS*              | [OS used by container - e.g. Debian]                                          |
+| *Languages, platforms*      | [Languages and platforms the container supports]                             |
 
 ## [Optional] Description
 

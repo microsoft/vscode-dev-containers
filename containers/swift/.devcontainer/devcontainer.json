@@ -1,5 +1,5 @@
 {
-	"name": "Swift",
+	"name": "Swift (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {

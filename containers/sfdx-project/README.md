@@ -1,4 +1,4 @@
-# SFDX Project
+# SFDX Project (Community)
 
 ## Summary
 
@@ -6,7 +6,8 @@ Salesforce Extension for VS Code supports remote development and allows you to u
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | Salesforce Developer Experience Teams  |
+| *Contributors* | Salesforce Developer Experience Teams |
+| *Categories* | Community, Services |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

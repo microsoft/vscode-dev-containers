@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code team |
+| *Categories* | Core, Other |
 | *Definition type* | Docker Compose |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |

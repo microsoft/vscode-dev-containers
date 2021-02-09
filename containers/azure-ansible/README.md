@@ -1,4 +1,4 @@
-# Azure Ansible
+# Azure Ansible (Community)
 
 ## Summary
 
@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
+| *Categories* | Community, Azure, Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
