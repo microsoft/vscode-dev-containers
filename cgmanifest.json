@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
+                    "commitHash": "f97250db699497f59a2f07c845532631113ec35b"
                 }
             }
         },
@@ -36,7 +36,7 @@
                 "Git": {
                     "Name": "Oh My Bash!",
                     "repositoryUrl": "https://github.com/ohmybash/oh-my-bash",
-                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
+                    "commitHash": "f97250db699497f59a2f07c845532631113ec35b"
                 }
             }
         },
@@ -155,8 +155,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Debian Package: moby-cli",
-                    "Version": "19.03.14+azure-1",
-                    "DownloadUrl": "https://no-uri-returned"
+                    "Version": "19.03.15+azure-1",
+                    "DownloadUrl": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod/pool/main/m/moby-cli/moby-cli_19.03.15+azure-1_amd64.debhttps://no-uri-returned"
                 }
             }
         },
@@ -164,39 +164,9 @@
             "Component": {
                 "Type": "git",
                 "Git": {
-                    "Name": "nvm",
-                    "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "258938ef66a2a49a4a400554a6dce890226ae34c"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "nvs",
-                    "repositoryUrl": "https://github.com/jasongin/nvs",
-                    "commitHash": "729ae6fd4ffb3562d67330218019bec134621648"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "rbenv",
-                    "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "ruby-build",
-                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net",
+                    "commitHash": "Setting Azure DNS."
                 }
             }
         },
@@ -223,7 +193,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "autopep8",
-                    "Version": "1.5.4"
+                    "Version": "1.5.5"
                 }
             }
         },
@@ -286,7 +256,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.4.0"
+                    "Version": "20.4.2"
                 }
             }
         },
@@ -376,7 +346,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "git",
-                    "Version": "2.30.0",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n2.30.1",
                     "DownloadUrl": "https://github.com/git/git"
                 }
             }
@@ -386,7 +356,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.0.2",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n3.0.2",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -396,7 +366,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "1.9.3",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n1.9.3",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -406,7 +376,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.20.2",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n1.20.2",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -416,7 +386,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Helm",
-                    "Version": "3.5.1",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n3.5.2",
                     "DownloadUrl": "https://github.com/helm/helm"
                 }
             }
@@ -426,7 +396,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Compose",
-                    "Version": "1.28.2",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n1.28.2",
                     "DownloadUrl": "https://github.com/docker/compose"
                 }
             }
@@ -436,7 +406,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.10.0+617\u001b[0m\nis available...\u001b[0m",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n5.11.0+644\u001b[0m",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -446,7 +416,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "AdoptOpenJDK",
-                    "Version": "1.8.0_275-b01",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n1.8.0_275-b01",
                     "DownloadUrl": "https://adoptopenjdk.net/"
                 }
             }
@@ -456,7 +426,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHubCLI",
-                    "Version": "1.6.0-pre.3",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n1.6.0-pre.3",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -466,7 +436,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.15.7",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n1.15.8",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -476,7 +446,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.49.0",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n1.49.0",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -486,7 +456,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "rvm",
-                    "Version": "1.29.12",
+                    "Version": "search rhe2fb3pwbne3bkeedjygdinhh.cx.internal.cloudapp.net\nSetting Azure DNS.\n1.29.12",
                     "DownloadUrl": "https://github.com/rvm/rvm"
                 }
             }
@@ -710,11 +680,41 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: moby-cli",
-                    "Version": "19.03.14+azure-2",
-                    "DownloadUrl": "https://no-uri-returned"
+                "Type": "git",
+                "Git": {
+                    "Name": "nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
+                    "commitHash": "258938ef66a2a49a4a400554a6dce890226ae34c"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "nvs",
+                    "repositoryUrl": "https://github.com/jasongin/nvs",
+                    "commitHash": "5a2b954f5e6dc7cb6b416b97435ecb4036e682b5"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "rbenv",
+                    "repositoryUrl": "https://github.com/rbenv/rbenv.git",
+                    "commitHash": "f97250db699497f59a2f07c845532631113ec35b"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "ruby-build",
+                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
+                    "commitHash": "f97250db699497f59a2f07c845532631113ec35b"
                 }
             }
         },
@@ -724,6 +724,76 @@
                 "RubyGems": {
                     "Name": "rake",
                     "Version": "13.0.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "git",
+                    "Version": "2.30.1",
+                    "DownloadUrl": "https://github.com/git/git"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Xdebug",
+                    "Version": "3.0.2",
+                    "DownloadUrl": "https://xdebug.org/"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Composer",
+                    "Version": "1.9.3",
+                    "DownloadUrl": "https://getcomposer.org/"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "kubectl",
+                    "Version": "1.20.2",
+                    "DownloadUrl": "https://github.com/kubernetes/kubectl"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Helm",
+                    "Version": "3.5.2",
+                    "DownloadUrl": "https://github.com/helm/helm"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Compose",
+                    "Version": "1.28.2",
+                    "DownloadUrl": "https://github.com/docker/compose"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "SDKMAN!",
+                    "Version": "5.11.0+644\u001b[0m",
+                    "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
         },
@@ -741,8 +811,48 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "GitHubCLI",
+                    "Version": "1.6.0-pre.3",
+                    "DownloadUrl": "https://github.com/cli/cli"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Go",
+                    "Version": "1.15.8",
+                    "DownloadUrl": "https://golang.org/dl"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Rust",
+                    "Version": "1.49.0",
+                    "DownloadUrl": "https://github.com/rust-lang/rust"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "rvm",
+                    "Version": "1.29.12",
+                    "DownloadUrl": "https://github.com/rvm/rvm"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Ruby",
-                    "Version": "3.0.0p0",
+                    "Version": "",
                     "DownloadUrl": "https://www.ruby-lang.org/en/downloads/"
                 }
             }
@@ -793,7 +903,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "33be65d991570b915f779de6bc5408455cfbf2e2"
+                    "commitHash": "f97250db699497f59a2f07c845532631113ec35b"
                 }
             }
         },
@@ -939,24 +1049,6 @@
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "autopep8",
-                    "Version": "1.5.5"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "virtualenv",
-                    "Version": "20.4.2"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: anaconda3",
@@ -1062,16 +1154,6 @@
                     "Name": "Docker Image: openjdk",
                     "Version": "11-jdk-buster",
                     "DownloadUrl": "https://hub.docker.com/_/java"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "SDKMAN!",
-                    "Version": "5.10.0+617\u001b[0m",
-                    "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
         },
@@ -1238,7 +1320,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.1.3"
+                    "Version": "4.1.4"
                 }
             }
         },
@@ -1279,19 +1361,6 @@
                     "Name": "websockify",
                     "repositoryUrl": "https://github.com/novnc/websockify",
                     "commitHash": "654cbac77ea07819ed3bcf1ce6410be0211c0f1a"
-                }
-            }
-        },
-		{
-            "Component": {
-                "Type": "linux",
-                "Linux": {
-                    "Name": "yarn",
-                    "Version": "1.22.5-1",
-					"Distribution": "Debian",
-					"Release": "10",
-					"Pool-URL": "https://dl.yarnpkg.com/debian",
-					"Key-URL": "https://dl.yarnpkg.com/debian/pubkey.gpg"
                 }
             }
         }
