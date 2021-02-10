@@ -60,7 +60,7 @@
 				"downloadUrl":"https://xdebug.org/"
 			},
 			"Composer": {
-				"versionCommand": "composer --version | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
+				"versionCommand": "composer --version 2>/dev/null | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
 				"downloadUrl": "https://getcomposer.org/"
 			},
 			"kubectl": {

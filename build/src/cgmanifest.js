@@ -160,11 +160,12 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
     const packageUriCommand = packageList.reduce((prev, current) => {
         return prev += ` ${current}`;
     }, config.getUriCommand);
-    const packageUriCommandOutput = await getDockerRunCommandOutput(imageTag, `sh -c '${packageUriCommand}'`, true);
+    const packageUriCommandOutput = await getDockerRunCommandOutput(imageTag, packageUriCommand, true);
 
     const packageVersionList = packageVersionListOutput.split('\n');
     packageVersionList.forEach((packageVersion) => {
         packageVersion = packageVersion.trim();
+
         if (packageVersion !== '') {
             const versionCaptureGroup = new RegExp(config.lineRegEx).exec(packageVersion);
             if (!versionCaptureGroup) {
@@ -200,6 +201,8 @@ function createEntryForLinuxPackage(packageUriCommandOutput, entryNamePrefix, pa
     if (typeof alreadyRegistered[uniquePackageName] === 'undefined'
         || alreadyRegistered[uniquePackageName].indexOf(version) < 0) {
 
+        let downloadUrl = 'https://no-url-available'
+
         // Handle regex reserved charters in regex strings and that ":" is treaded as "1%3a" on Debian/Ubuntu 
         const sanitizedPackage = package.replace(/\+/g, '\\+').replace(/\./g, '\\.');
         const sanitizedVersion = version.replace(/\+/g, '\\+').replace(/\./g, '\\.').replace(/:/g, '%3a');
@@ -208,13 +211,14 @@ function createEntryForLinuxPackage(packageUriCommandOutput, entryNamePrefix, pa
             .exec(packageUriCommandOutput);
 
         if (!uriCaptureGroup) {
-            console.log(`(!) No URI found for ${package} ${version}`)
+            console.log(`(!) No URI found for ${package} ${version}`);
+        } else {
+            const uriString = uriCaptureGroup ? uriCaptureGroup[1] : '';
+            alreadyRegistered[uniquePackageName] = alreadyRegistered[uniquePackageName] || [];
+            alreadyRegistered[uniquePackageName].push(version);
+            downloadUrl = `${uriString}${uriSuffix ? uriSuffix.replace('${PACKAGE}', package).replace('${VERSION}', version) : ''}`    
         }
 
-        const uriString = uriCaptureGroup ? uriCaptureGroup[1] : '';
-
-        alreadyRegistered[uniquePackageName] = alreadyRegistered[uniquePackageName] || [];
-        alreadyRegistered[uniquePackageName].push(version);
 
         return {
             "Component": {
@@ -222,9 +226,7 @@ function createEntryForLinuxPackage(packageUriCommandOutput, entryNamePrefix, pa
                 "Other": {
                     "Name": uniquePackageName,
                     "Version": version,
-                    "DownloadUrl": `${uriString}${uriSuffix ?
-                        uriSuffix.replace('${PACKAGE}', package).replace('${VERSION}', version)
-                        : 'https://no-uri-returned'}`
+                    "DownloadUrl": downloadUrl
                 }
             }
         }
@@ -365,7 +367,7 @@ async function generateGitComponentList(gitRepoPath, imageTag, alreadyRegistered
         if (typeof repoPath === 'string') {
             console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
-            const remoteAndCommitOutput = await getDockerRunCommandOutput(imageTag, `bash -c "set -e && cd \\"${repoPath}\\" && if [ -f ".git-remote-and-commit" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi"`);
+            const remoteAndCommitOutput = await getDockerRunCommandOutput(imageTag, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi`);
             const remoteAndCommit = remoteAndCommitOutput.split('\n');
             const gitRemote = remoteAndCommit[0];
             const gitCommit = remoteAndCommit[1];
@@ -410,7 +412,7 @@ async function generateOtherComponentList(otherComponents, imageTag, alreadyRegi
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
-            const otherVersion = (await getDockerRunCommandOutput(imageTag, `bash -c "set -e && ${otherSettings.versionCommand}" 2>/dev/null`)).trim();
+            const otherVersion = (await getDockerRunCommandOutput(imageTag, otherSettings.versionCommand));
             addIfUnique(`${otherName}-other`, otherVersion, componentList, alreadyRegistered, {
                 "Component": {
                     "Type": "other",
@@ -446,9 +448,8 @@ async function generateGemComponentList(gems, imageTag, alreadyRegistered) {
     const componentList = [];
     console.log(`(*) Generating "RubyGems" registrations...`);
 
-    const gemListOutput = await getDockerRunCommandOutput(imageTag, 'bash -l -c "set -e && gem list -d --local"');
-
-    asyncUtils.forEach(gems, (gem) => {
+    const gemListOutput = await getDockerRunCommandOutput(imageTag, "bash -l -c 'set -e && gem list -d --local'");
+    await asyncUtils.forEach(gems, (gem) => {
         if (typeof gem === 'string') {
             console.log(`(*) Getting version for ${gem}...`);
             const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\)]+)`,'m').exec(gemListOutput);
@@ -488,10 +489,10 @@ async function generateCargoComponentList(crates, imageTag, alreadyRegistered) {
     console.log(`(*) Generating "Cargo" registrations...`);
 
     for(let crate in crates) {
-        const versionCommand = crates[crate] || `echo ${crate} \\$(rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p')`;
+        const versionCommand = crates[crate] || `echo ${crate} $(rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p')`;
         if (typeof versionCommand === 'string') {
             console.log(`(*) Getting version for ${crate}...`);
-            const versionOutput = await getDockerRunCommandOutput(imageTag, `bash -c "set -e && ${versionCommand}"`);
+            const versionOutput = await getDockerRunCommandOutput(imageTag, versionCommand);
             const crateVersionCaptureGroup = new RegExp(`^${crate}\\s([^\\s]+)`,'m').exec(versionOutput);
             const version = crateVersionCaptureGroup[1];
             addIfUnique(`${crate}-cargo`, version, componentList, alreadyRegistered, {
@@ -537,16 +538,14 @@ function filteredManualComponentRegistrations(manualRegistrations, alreadyRegist
 }
 
 async function getDockerRunCommandOutput(imageTag, command, forceRoot) {
+    const wrappedCommand = `bash -c "set -e && echo ~~~BEGIN~~~ && ${command.replace(/\$/g, '\\\$')} && echo ~~~END~~~"`;
     const runArgs = ['run','--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);
     runArgs.push(imageTag);
-    runArgs.push(command);
+    runArgs.push(wrappedCommand);
     const result = await asyncUtils.spawn('docker', runArgs, { shell: true, stdio: 'pipe' });
-    // Commands that start on entrypoint can use init.d which outputs in the format ' * <something>\n...done\n', 
-    // so filter these out along with unicode or escape / color code characters
-    const filteredResult = result.toString()
-        .replace(/^(\s\*\s.+\n(.+done.\n)?)+/m,'')
-        .replace(/[^\w\W\s]/gm,'');
-    return filteredResult;
+    // Filter out noise from ENTRYPOINT output
+    const filteredResult = result.substring(result.indexOf('~~~BEGIN~~~') + 11, result.indexOf('~~~END~~~'));
+    return filteredResult.trim();
 }
 
 /*

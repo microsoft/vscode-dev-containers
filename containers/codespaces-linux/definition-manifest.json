@@ -14,7 +14,8 @@
 		"imageLink": "https://github.com/microsoft/oryx",
 		"debian": [
 			"git-lfs",
-			"moby-cli"
+			"moby-cli",
+			"moby-engine"
 		],
 		"pipx": [
 			"pylint",
@@ -59,7 +60,7 @@
 				"downloadUrl":"https://xdebug.org/"
 			},
 			"Composer": {
-				"versionCommand": "composer --version | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
+				"versionCommand": "composer --version 2>/dev/null | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
 				"downloadUrl": "https://getcomposer.org/"
 			},
 			"kubectl": {
