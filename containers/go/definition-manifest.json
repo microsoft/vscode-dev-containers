@@ -20,190 +20,69 @@
 			"nvm": "/usr/local/share/nvm"
 		},
 		"manual": [{
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/tools/gopls",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "honnef.co/go/tools",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/tools/cmd/gorename",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/tools/cmd/goimports",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/tools/cmd/guru",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/lint/golint",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/mdempsky/gocode",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/cweill/gotests",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/haya14busa/goplay/cmd/goplay",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/sqs/goreturns",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/josharian/impl",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/davidrjenni/reftools/cmd/fillstruct",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/ramya-rao-a/go-outline",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/acroca/go-symbols",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/godoctor/godoctor",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/rogpeppe/godef",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/zmb3/gogetdoc",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/fatih/gomodifytags",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/mgechev/revive",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/go-delve/delve/cmd/dlv",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/stamblerre/gocode",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/golangci/golangci-lint",
-					 "Version": "latest"
-				   }
-				 }
-			}
-		]
+			"Component": {
+			   "Type": "go",
+			   "Go": {
+				 "Name": "golang.org/x/tools/gopls",
+				 "Version": "0.6.4"
+			   }
+			 }
+		}, {
+			"Component": {
+			   "Type": "go",
+			   "Go": {
+				 "Name": "honnef.co/go/tools",
+				 "Version": "0.1.1"
+			   }
+			 }
+		}, {
+			"Component": {
+			   "Type": "go",
+			   "Go": {
+				 "Name": "golang.org/x/lint/golint",
+				 "Version": "0.0.0-20201208152925-83fdc39ff7b5"
+			   }
+			 }
+		}, {
+			"Component": {
+			   "Type": "go",
+			   "Go": {
+				 "Name": "github.com/mgechev/revive",
+				 "Version": "1.0.3"
+			   }
+			 }
+		}, {
+			"Component": {
+			   "Type": "go",
+			   "Go": {
+				 "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
+				 "Version": "2.1.2"
+			   }
+			 }
+		}, {
+			"Component": {
+			   "Type": "go",
+			   "Go": {
+				 "Name": "github.com/ramya-rao-a/go-outline",
+				 "Version": "0.0.0-20200117021646-2a048b4510eb"
+			   }
+			 }
+		}, {
+			"Component": {
+			   "Type": "go",
+			   "Go": {
+				 "Name": "github.com/go-delve/delve/cmd/dlv",
+				 "Version": "1.6.0"
+			   }
+			 }
+		}, {
+			"Component": {
+			   "Type": "go",
+			   "Go": {
+				 "Name": "github.com/golangci/golangci-lint",
+				 "Version": "1.36.0"
+			   }
+			 }
+		}]
 	}
 }
