@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team, F# team |
+| *Categories* | Languages |
 | *Definition type* | Dockerfile |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |

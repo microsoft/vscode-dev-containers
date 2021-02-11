@@ -13,7 +13,7 @@ jobs:
       matrix:
         page: [1, 2, 3, 4, 5]
         page-total: [5]
-      fail-fast: true
+      fail-fast: false
     runs-on: ubuntu-latest
     steps:
     - name: Free more space

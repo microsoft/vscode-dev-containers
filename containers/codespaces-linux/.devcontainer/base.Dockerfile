@@ -64,8 +64,9 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
     && yes | pecl install xdebug \
     && export PHP_LOCATION=$(dirname $(dirname $(which php))) \
     && echo "zend_extension=$(find ${PHP_LOCATION}/lib/php/extensions/ -name xdebug.so)" > ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=on" >>  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.mode = debug" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.start_with_request = yes" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.client_port = 9000" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
     && rm -rf /tmp/pear \
     && ln -s $(which composer.phar) /usr/local/bin/composer \
     && apt-get clean -y

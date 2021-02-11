@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The Azure Functions Team |
+| *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/azure-functions/node |
 | *Available image variants* | 10, 12 |

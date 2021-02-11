@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
+| *Categories* | Community, Languages, Frameworks |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

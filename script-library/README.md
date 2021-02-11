@@ -15,9 +15,10 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 | Document | Script |
 |----------|--------|
 | [Azure CLI Install Script](docs/azcli.md) | `azcli-debian.sh` |
-| [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` |
+| [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` (Community) |
 | [Desktop (Lightweight) Install Script](docs/desktop-lite.md) | `desktop-lite-debian.sh` |
-| [Docker-from-Docker Install Script](docs/docker.md) | `docker-debian.sh`<br />`docker-redhat.sh` |
+| [Docker-from-Docker Install Script](docs/docker.md) | `docker-debian.sh`<br />`docker-redhat.sh` (Community) |
+| [Docker-in-Docker Install Script](docs/docker-in-docker.md) | `docker-in-docker-debian.sh` |
 | [Git Build/Install from Source Script](docs/git-from-src.md) | `git-from-src-debian.sh` |
 | [Git LFS Install Script](docs/git-lfs.md) | `git-lfs-debian.sh` |
 | [GitHub CLI Install Script](docs/github.md) | `github-debian.sh` |
@@ -149,3 +150,4 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definition
 Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE)
+

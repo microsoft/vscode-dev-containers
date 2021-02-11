@@ -1,4 +1,4 @@
-# [Choice] PHP version: 7, 7.4, 7.3
+# [Choice] PHP version: 8, 8.0, 7, 7.4, 7.3
 ARG VARIANT=7
 FROM mcr.microsoft.com/vscode/devcontainers/php:${VARIANT}
 

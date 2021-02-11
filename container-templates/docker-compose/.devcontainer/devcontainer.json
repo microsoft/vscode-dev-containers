@@ -1,5 +1,5 @@
 {
-	"name": "Dev Container Definition Template - Docker Compose",
+	"name": "Your Definition Name Here (Community)",
 
 	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
 	"dockerComposeFile": "docker-compose.yml",

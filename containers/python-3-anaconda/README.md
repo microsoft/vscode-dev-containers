@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
+| *Categories* | Languages |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/anaconda:3 |
 | *Published image architecture(s)* | x86-64 |
@@ -23,11 +24,13 @@ While the definition itself works unmodified, you can also directly reference pr
 
 - `mcr.microsoft.com/vscode/devcontainers/anaconda` (or `anaconda:3`)
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/anaconda:0`
-- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.141`
-- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.141.0`
+- `mcr.microsoft.com/vscode/devcontainers/anaconda:0-3`
+- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.200-3`
+- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.200.0-3`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/anaconda/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

@@ -23,7 +23,7 @@ ARG PATCH_SCRIPT="\
     && apt-get update \
     && echo \"${PACKAGE_LIST}\" | tr ' ' '\n' | while read PKG; do \
         echo \"Checking \$PKG...\" \
-        && if [ \"\$PKG\" != '' ] && dpkg -s \$PKG >/dev/null 2>&1; then apt-get install -yq --only-upgrade \$PKG; fi; \
+        && if [ \"\$PKG\" != '' ] && dpkg -s \$PKG >/dev/null 2>&1; then apt-get install -yq --only-upgrade --no-install-recommends \$PKG; fi; \
     done \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*"
 

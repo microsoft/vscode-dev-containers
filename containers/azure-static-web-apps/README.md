@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The Azure Functions Team & alvaro.videla@microsoft.com |
+| *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |

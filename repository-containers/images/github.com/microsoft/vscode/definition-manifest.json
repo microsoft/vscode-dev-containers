@@ -1,5 +1,6 @@
 {
 	"variants": ["12"],
+	"definitionVersion": "0.200.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -11,41 +12,6 @@
 	"dependencies": {
 		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:12",
 		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
-		"debian": [
-			"tigervnc-standalone-server",
-			"tigervnc-common",
-			"fluxbox",
-			"dbus-x11",
-			"x11-utils",
-			"x11-xserver-utils",
-			"xdg-utils",
-			"fbautostart",
-			"at-spi2-core",
-			"xterm",
-			"eterm",
-			"tilix",
-			"nautilus",
-			"mousepad",
-			"seahorse",
-			"gnome-icon-theme",
-			"gnome-keyring",
-			"libx11-dev",
-			"libxkbfile-dev",
-			"libsecret-1-dev",
-			"libgbm-dev",
-			"libnotify4",
-			"libnss3",
-			"libxss1",
-			"libasound2",
-			"xfonts-base",
-			"xfonts-terminus",
-			"fonts-noto",
-			"fonts-wqy-microhei",
-			"fonts-droid-fallback",
-			"python-minimal",
-			"python-numpy",
-			"firefox-esr"
-		],
 		"manual": [{
             "Component": {
                 "Type": "git",

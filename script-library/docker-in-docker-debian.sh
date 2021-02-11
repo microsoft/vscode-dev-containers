@@ -124,8 +124,8 @@ sudoIf()
 
 # explicitly remove dockerd and containerd PID file to ensure that it can start properly if it was stopped uncleanly
 # ie: docker kill <ID>
-find /run /var/run -iname 'docker*.pid' -delete || :
-find /run /var/run -iname 'container*.pid' -delete || :
+sudoIf find /run /var/run -iname 'docker*.pid' -delete || :
+sudoIf find /run /var/run -iname 'container*.pid' -delete || :
 
 set -e
 
@@ -158,8 +158,21 @@ if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
 fi
 ## Dind wrapper over.
 
+# Handle DNS
+set +e
+cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
+if [ $? -eq 0 ]
+then
+  echo "Setting Azure DNS."
+  CUSTOMDNS="--dns 168.63.129.16"
+else
+  echo "Not setting any DNS manually."
+  CUSTOMDNS=""
+fi
+set -e
+
 # Start docker/moby engine
-( sudoIf dockerd > /tmp/dockerd.log 2>&1 ) &
+( sudoIf dockerd $CUSTOMDNS > /tmp/dockerd.log 2>&1 ) &
 
 set +e
 

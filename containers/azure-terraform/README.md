@@ -1,4 +1,4 @@
-# Azure Terraform
+# Azure Terraform (Community)
 
 ## Summary
 
@@ -9,6 +9,7 @@ This recipe allows you to get going quickly with Terraform in Azure. Includes Te
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | [Carlos Mendible](https://github.com/cmendible), [Charles Zipp](https://github.com/charleszipp), [Lila Molyva](https://github.com/norelina), [Tas Devani](https://github.com/tasdevani21)  |
+| *Categories* | Community, Azure, Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -27,6 +28,7 @@ You can also choose the specific version of Terraform installed by updating the 
 "arg": {
    "TERRAFORM_VERSION": "0.14.5"
    "TFLINT_VERSION": "0.24.1",
+   "TERRAGRUNT_VERSION": "0.28.1"
    "INSTALL_AZURE_CLI": "true",
    "INSTALL_DOCKER": "true",
    "INSTALL_NODE": "true"

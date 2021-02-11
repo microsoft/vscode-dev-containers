@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
+| *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

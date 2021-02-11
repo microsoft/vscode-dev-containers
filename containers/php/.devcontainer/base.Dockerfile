@@ -1,4 +1,4 @@
-# [Choice] PHP version: 7, 7.4, 7.3
+# [Choice] PHP version: 8, 8.0, 7, 7.4, 7.3
 ARG VARIANT=7
 FROM php:${VARIANT}-apache
 
@@ -22,8 +22,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # Install xdebug
 RUN yes | pecl install xdebug \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.mode = debug" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.client_port = 9000" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && rm -rf /tmp/pear
 
 # Install composer

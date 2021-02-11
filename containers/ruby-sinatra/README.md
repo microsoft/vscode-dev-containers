@@ -1,4 +1,4 @@
-# Ruby & Sinatra
+# Ruby & Sinatra (Community)
 
 ## Summary
 
@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | [Amblizer][la] |
+| *Categories* | Community, Frameworks |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

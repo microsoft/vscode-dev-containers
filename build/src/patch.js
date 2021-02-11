@@ -10,81 +10,105 @@ const jsonc = require('jsonc').jsonc;
 async function patch(patchPath, registry, registryPath) {
     patchPath = path.resolve(patchPath);
     const patchConfig = await getPatchConfig(patchPath);
-    // ACR registry name is the registry minus .azurecr.io
-    const registryName = registry.replace(/\..*/, '');
 
     console.log(`(*) Applying patch located at "${patchPath}"...`);
-    let tagList = patchConfig.tagList || [];
-    // If imageIds specified, get the complete list of tags to update
-    if (patchConfig.imageIds) {
-        const manifests = await getImageManifests(registryName, patchConfig.imageIds);
-        tagList = tagList.concat(manifests.reduce((prev, manifest) => {
-            return prev.concat(manifest.tags.map((tag) => {
-                return `${manifest.repository}:${tag}`;
-            }));
-        }, []));
+    const dockerFilePath = `${patchPath}/${patchConfig.dockerFile || 'Dockerfile'}`;
+    if (patchConfig.tagList) {
+        throw new Error('tagList property has been deprecated.')
     }
-    console.log(`(*) Tags to patch: ${JSON.stringify(tagList, undefined, 4)}`);
 
-    const spawnOpts = { stdio: 'inherit', cwd: patchPath, shell: true };
-    await asyncUtils.forEach(tagList, async (tag) => {
-        const newTag = patchConfig.bumpVersion ? updateVersionTag(tag, registryPath) : tag;
-        console.log(`\n(*) Patching ${tag}...`);
-
-        // Pull and build patched image for tag
-        let retry = false;
-        do {
-            try {
-                await asyncUtils.spawn('docker', [
-                    'build',
-                    '--pull',
-                    '--build-arg', `ORIGINAL_IMAGE=${registry}/${tag}`,
-                    '--tag', `${registry}/${newTag}`,
-                    '-f', `${patchPath}/${patchConfig.dockerFile || 'Dockerfile'}`,
-                    patchPath
-                ], spawnOpts);
-                done = true;
-            } catch (ex) {
-                // Try to clean out unused images and retry once if get an out of storage response
-                if (ex.result.indexOf('no space left on device') >= 0 && retry === false) {
-                    console.log(`(*) Out of space - pruning images..`);
-                    asyncUtils.spawn('docker', ['image', 'prune', '--all'], spawnOpts);
-                    console.log(`(*) Retrying..`);
-                    retry = true;
-                } else {
-                    throw ex;
-                }
-            }    
-        } while (retry);
-
-        // Push update
-        await asyncUtils.spawn('docker', ['push', `${registry}/${newTag}`], spawnOpts);
+    // Update each listed imageId
+    await asyncUtils.forEach(patchConfig.imageIds, async (imageId) => {
+        await patchImage(imageId, patchPath, dockerFilePath, patchConfig.bumpVersion, registry, registryPath);
     });
 
     // If config says to delete any untagged images mentioned in the patch, do so.
     if (patchConfig.deleteUntaggedImages && patchConfig.imageIds) {
         await deleteUntaggedImages(patchConfig.imageIds, registry);
     }
-
+    
     console.log('\n(*) Done!')
 }
 
-function updateVersionTag(fullTag, registryPath) {
-    const tag = fullTag.replace(registryPath + '/', '');
-    // Get the version number section of the tag if it exists
-    const colon = tag.indexOf(':');
-    const firstDash = tag.indexOf('-', colon);
-    if (firstDash > 0) {
-        const versionSection = tag.substring(colon + 1, firstDash - 1);
-        // See if there are three digits in the version number
-        const versionParts = versionSection.split('.');
-        if (versionParts.length === 3) {
-            // If there are, update the break fix version
-            return `${tag.substring(0, colon + 1)}${versionParts[0]}.${versionParts[1]}.${versionParts[2] + 1}${tag.substring(firstDash)}`;
-        }
-        return `${registryPath}:${tag}`;
+async function patchImage(imageId, patchPath, dockerFilePath, bumpVersion, registry) {
+    console.log(`\n*** Updating Image: ${imageId} ***`);
+    const spawnOpts = { stdio: 'inherit', cwd: patchPath, shell: true };
+
+    // Get repository and tag list for imageId
+    let repoAndTagList = await getImageRepositoryAndTags(imageId, registry);
+    if(repoAndTagList.length === 0) {
+        console.log('(*) No tags to patch. Skipping.');
+        return;
     }
-    return tag;
+
+    console.log(`(*) Tags to update: ${
+            JSON.stringify(repoAndTagList.reduce((prev, repoAndTag) => { return prev + repoAndTag.repository + ':' + repoAndTag.tag + ' ' }, ''), undefined, 4)
+        }`);
+
+    // Bump breakfix number of it applies
+    if(bumpVersion) {
+        repoAndTagList = updateVersionTags(repoAndTagList);
+    }
+
+    //Generate tag arguments
+    const tagArgs = repoAndTagList.reduce((prev, repoAndTag) => {
+        return prev.concat(['--tag', `${registry}/${repoAndTag.repository}:${repoAndTag.tag}`])
+    }, []);
+
+    // Pull and build patched image for tag
+    let retry = false;
+    do {
+        try {
+            await asyncUtils.spawn('docker', [ 
+                'build',
+                '--pull',
+                '--build-arg',
+                `ORIGINAL_IMAGE=${registry}/${repoAndTagList[0].repository}@${imageId}`]
+                .concat(tagArgs)
+                .concat('-f', dockerFilePath, patchPath), spawnOpts);
+            done = true;
+        } catch (ex) {
+            // Try to clean out unused images and retry once if get an out of storage response
+            if (ex.result && ex.result.indexOf('no space left on device') >= 0 && retry === false) {
+                console.log(`(*) Out of space - pruning all unused images...`);
+                await asyncUtils.spawn('docker', ['image', 'prune', '--all', '--force'], spawnOpts);
+                console.log(`(*) Retrying...`);
+                retry = true;
+            } else {
+                throw ex;
+            }
+        }    
+    } while (retry);
+
+    // Push updates
+    await asyncUtils.forEach(repoAndTagList, async (repoAndTag) => {
+        await asyncUtils.spawn('docker', ['push', `${registry}/${repoAndTag.repository}:${repoAndTag.tag}`], spawnOpts);
+    });
+
+    // Prune proactively to reduce space use
+    console.log(`(*) Pruning dangling images...`);
+    await asyncUtils.spawn('docker', ['image', 'prune', '--force'], spawnOpts);
+}
+
+function updateVersionTags(repoAndTagList) {
+    return repoAndTagList.reduce((prev, repoAndTag) => {
+        let tag = repoAndTag.tag;
+        // Get the version number section of the tag if it exists
+        const firstDash = tag.indexOf('-');
+        if (firstDash > 0) {
+            const versionSection = tag.substring(0, firstDash - 1);
+            // See if there are three digits in the version number
+            const versionParts = versionSection.split('.');
+            if (versionParts.length === 3) {
+                // If there are, update the break fix version
+                tag = `${versionParts[0]}.${versionParts[1]}.${versionParts[2] + 1}${tag.substring(firstDash)}`;
+            }
+        }
+        return prev.push({
+            name: repoAndTag.repository,
+            tag: tag
+        });
+    }, []);
 }
 
 async function deleteUnpatchedImages(patchPath, registry) {
@@ -99,11 +123,11 @@ async function deleteUnpatchedImages(patchPath, registry) {
 
 async function deleteUntaggedImages(imageIds, registry) {
 
-    console.log(`(*) Deleting untagged images...`);
+    console.log('\n*** Deleting untagged images ***');
     // ACR registry name is the registry minus .azurecr.io
     const registryName = registry.replace(/\..*/, '');
 
-    const manifests = await getImageManifests(registryName, imageIds);
+    const manifests = await getImageManifests(imageIds, registry);
 
     console.log(`(*) Manifests to delete: ${JSON.stringify(manifests, undefined, 4)}`);
 
@@ -126,10 +150,42 @@ async function deleteUntaggedImages(imageIds, registry) {
         ], spawnOpts);
     });
 
-    console.log('\n(*) Done deleting manifests!')
+    console.log('(*) Done deleting manifests!')
 }
 
-async function getImageManifests(registryName, imageIds) {
+// Find tags for image
+async function getImageRepositoryAndTags(imageId, registry) {
+    // ACR registry name is the registry minus .azurecr.io
+    const registryName = registry.replace(/\..*/, '');
+
+    // Get list of repositories
+    console.log(`(*) Getting repository list for ACR "${registryName}"...`)
+    const repositoryListOutput = await asyncUtils.spawn('az',
+        ['acr', 'repository', 'list', '--name', registryName],
+        { shell: true, stdio: 'pipe' });
+    const repositoryList = JSON.parse(repositoryListOutput);
+
+    let repoAndTagList = [];
+    await asyncUtils.forEach(repositoryList, async (repository) => {
+        console.log(`(*) Checking in for "${imageId}" in "${repository}"...`);
+        const tagListOutput = await asyncUtils.spawn('az',
+            ['acr', 'repository', 'show-tags', '--detail', '--name', registryName, '--repository', repository, "--query", `"[?digest=='${imageId}'].name"`],
+            { shell: true, stdio: 'pipe' });
+        const additionalTags = JSON.parse(tagListOutput);
+        repoAndTagList = repoAndTagList.concat(additionalTags.map((tag) => {
+            return { 
+                repository:repository,
+                tag:tag
+            };
+        }));
+    });
+    return repoAndTagList;
+}
+
+async function getImageManifests(imageIds, registry) {
+    // ACR registry name is the registry minus .azurecr.io
+    const registryName = registry.replace(/\..*/, '');
+
     let manifests = [];
 
     // Get list of repositories

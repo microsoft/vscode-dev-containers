@@ -6,7 +6,8 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | [brettmillerb](https://github.com/brettmillerb) |
+| *Contributors* | The Azure Functions Team, [@brettmillerb](https://github.com/brettmillerb) |
+| *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/azure-functions/powershell |
 | *Available image variants* | 6, 7 |

@@ -14,7 +14,7 @@
 ./common-alpine.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Install Oh My *! flag]
 ```
 
-*Note that `common-redhat.sh` is community supported.*
+> **Note:** `common-redhat.sh` is community supported.
 
 |Argument|Default|Description|
 |--------|-------|-----------|
