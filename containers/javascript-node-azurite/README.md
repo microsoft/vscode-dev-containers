@@ -7,6 +7,7 @@ Everything you need to get started using Node with Azurite.
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | [Alexander Wennerstrøm](https://github.com/AlexanderYW)   |
+| *Categories* | Community, Azure
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
