@@ -1,4 +1,4 @@
-# Node.js & Azurite
+# Node.js & Azurite (Community)
 
 ## Summary
 
