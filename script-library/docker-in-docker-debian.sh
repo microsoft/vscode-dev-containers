@@ -161,7 +161,7 @@ fi
 # Handle DNS
 set +e
 cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
-if [ $? -eq 0 ]
+if [ "\$?" -eq 0 ]
 then
   echo "Setting Azure DNS."
   CUSTOMDNS="--dns 168.63.129.16"
@@ -172,7 +172,7 @@ fi
 set -e
 
 # Start docker/moby engine
-( sudoIf dockerd $CUSTOMDNS > /tmp/dockerd.log 2>&1 ) &
+( sudoIf dockerd "\$CUSTOMDNS" > /tmp/dockerd.log 2>&1 ) &
 
 set +e
 
