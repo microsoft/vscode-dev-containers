@@ -62,10 +62,9 @@ fi
 
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
-        echo "Updating /etc/bash.bashrc..."
+        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
         echo -e "$1" >> /etc/bash.bashrc
-        if [ -d "/etc/zsh" ]; then
-            echo "Updating /etc/zsh/zshrc..."
+        if [ -f "/etc/zsh/zshrc" ]; then
             echo -e "$1" >> /etc/zsh/zshrc
         fi
     fi
@@ -94,7 +93,26 @@ else
     export GNUPGHOME="/tmp/rvm-gnupg"
     mkdir -p ${GNUPGHOME}
     echo "disable-ipv6" >> ${GNUPGHOME}/dirmngr.conf
-    gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB 2>&1
+    # GPG key download sometimes fails for some reason and retrying fixes it.
+    RETRY_COUNT=0
+    GPG_OK="false"
+    until [ "${GPG_OK}" = "true" ] || [ "${RETRY_COUNT}" -eq "5" ]; 
+    do
+        echo "(*) Downloading GPG key..."
+        set +e
+        gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB 2>&1 && GPG_OK="true"
+        set -e
+        if [ "${GPG_OK}" != "true" ]; then
+            echo "(*) Retring in 10s..."        
+            (( RETRY_COUNT++ ))
+            sleep 10s
+        fi
+    done
+    if [ "${GPG_OK}" = "false" ]; then
+        echo "(!) Failed to install rvm."
+        exit 1
+    fi
+
     # Install RVM
     curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles ${RVM_INSTALL_ARGS} --with-default-gems="${DEFAULT_GEMS}" 2>&1
     usermod -aG rvm ${USERNAME}
