@@ -506,6 +506,12 @@ function getAllDependencies() {
     return config.definitionDependencies;
 }
 
+function getPoolKeyForPoolUrl(poolUrl) {
+    const poolKey = config.poolKeys[poolUrl];
+    console.log (`(*) Key for ${poolUrl} is ${poolKey}`);
+    return poolKey;
+}
+
 async function getStagingFolder(release) {
     if (!stagingFolders[release]) {
         const stagingFolder = path.join(os.tmpdir(), 'vscode-dev-containers', release);
@@ -544,6 +550,7 @@ module.exports = {
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
     getVersionFromRelease: getVersionFromRelease,
     getTagsForVersion: getTagsForVersion,
+    getPoolKeyForPoolUrl: getPoolKeyForPoolUrl,
     getConfig: getConfig,
     shouldFlattenDefinitionBaseImage: shouldFlattenDefinitionBaseImage
 };
