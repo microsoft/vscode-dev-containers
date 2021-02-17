@@ -7,7 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | GitHub Codespaces Team |
-| *Categories* | Core, Other |
+| *Categories* | Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
