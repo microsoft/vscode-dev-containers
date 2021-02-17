@@ -14,6 +14,8 @@ Help and questions:
 1. For help using the VS Code Remote - Containers extension, please see the [VS Code Remote Development documentation](https://code.visualstudio.com/docs/remote/remote-overview) and [StackOverflow questions with the 'vscode-remote' label](https://stackoverflow.com/questions/tagged/vscode-remote).
 2. For GitHub Codespaces, please see [GitHub documentation](https://docs.github.com/en/github/developing-online-with-codespaces/) or the [GitHub beta feedback channel](https://github.community/c/code-to-cloud/codespaces-beta/45) instead.
 
+Information on pre-built image updates and deprication [can be found in this pinned tracking issue](https://github.com/microsoft/vscode-dev-containers/issues/532#issue-689303932).
+
 ## Microsoft Support Policy
 
 Support for this project is limited to the resources listed above.
