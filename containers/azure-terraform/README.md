@@ -81,17 +81,22 @@ Once the environment settings are configured with the `.devcontainer/devcontaine
 - `terraform init`: installs plugins and connect to terraform remote backend
 - `terraform format`: fix formatting issues
 - `terraform lint`: fix linting issues
-- `terraform validate`: check templates for syntax errors
-- `terraform plan`: report what would be done with apply without actually deploying any resources
-- `terraform apply`: deploy the terraform templates
-- `terraform destroy`: destroy resources deployed with the templates
+
+For additional terraform commands, you can use the [Azure Terraform extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform). Open the Command Palette with `Ctrl/CMD+Shift+P` or press <kbd>F1</kbd> and run the following: 
+- `Azure Terraform: Validate`: check templates for syntax errors
+- `Azure Terraform: Plan`: report what would be done with apply without actually deploying any resources
+- `Azure Terraform: Apply`: deploy the terraform templates
+- `Azure Terraform: Destroy`: destroy resources deployed with the templates
+
+For a complete list of all the available commands as part of the Azure Terraform extension, please visit [this page](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform)
 
 ## References
 
 - [Terraform Overview](https://www.terraform.io/intro/index.html)
 - [Terraform Tutorials](https://learn.hashicorp.com/terraform?utm_source=terraform_io)
-- [Terraform with Azure](https://docs.microsoft.com/en-us/azure/terraform/terraform-overview).
+- [Terraform with Azure](https://docs.microsoft.com/en-us/azure/terraform/terraform-overview)
 - [Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform)
+- [Azure Terraform Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform)
 
 ## License
 

@@ -32,18 +32,6 @@
             }
         },
         {
-            "label": "terraform validate",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceFolder}/test-project/templates"
-            },
-            "command": "terraform",
-            "problemMatcher": [],
-            "args": [
-                "validate"
-            ]
-        },
-        {
             "label": "terraform format",
             "type": "shell",
             "options": {
@@ -64,42 +52,6 @@
             },
             "command": "tflint",
             "problemMatcher": []
-        },
-        {
-            "label": "terraform plan",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceFolder}/test-project/templates"
-            },
-            "command": "terraform",
-            "problemMatcher": [],
-            "args": [
-                "plan"
-            ]
-        },
-        {
-            "label": "terraform apply",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceFolder}/test-project/templates"
-            },
-            "command": "terraform",
-            "problemMatcher": [],
-            "args": [
-                "apply"
-            ]
-        },
-        {
-            "label": "terraform destroy",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceFolder}/test-project/templates"
-            },
-            "command": "terraform",
-            "problemMatcher": [],
-            "args": [
-                "destroy"
-            ]
-        },
+        }
     ]
 }

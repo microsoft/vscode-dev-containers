@@ -31,13 +31,15 @@
 		"terraform.languageServer": {
 			"enabled": true,
 			"args": []
-		}
+		},
+		"azureTerraform.terminal": "integrated"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"hashicorp.terraform",
 		"ms-vscode.azurecli",
+		"ms-azuretools.vscode-azureterraform",
 		"ms-azuretools.vscode-docker"
 	],
 
