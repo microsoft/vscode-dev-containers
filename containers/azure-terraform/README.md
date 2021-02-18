@@ -82,11 +82,13 @@ Once the environment settings are configured with the `.devcontainer/devcontaine
 - `terraform format`: fix formatting issues
 - `terraform lint`: fix linting issues
 
-For additional terraform commands, you can use the [Azure Terraform extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform). Open the Command Palette with `Ctrl/CMD+Shift+P` or press <kbd>F1</kbd> and run the following: 
-- `Azure Terraform: Validate`: check templates for syntax errors
-- `Azure Terraform: Plan`: report what would be done with apply without actually deploying any resources
-- `Azure Terraform: Apply`: deploy the terraform templates
-- `Azure Terraform: Destroy`: destroy resources deployed with the templates
+For additional terraform commands, you can use the [Azure Terraform extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform). 
+- Navigate to the directory where the templates are located (`test-project/templates`)
+- Open the Command Palette with `Ctrl/CMD+Shift+P` or press <kbd>F1</kbd> and run the following: 
+   - `Azure Terraform: Validate`: check templates for syntax errors
+   - `Azure Terraform: Plan`: report what would be done with apply without actually deploying any resources
+   - `Azure Terraform: Apply`: deploy the terraform templates
+   - `Azure Terraform: Destroy`: destroy resources deployed with the templates
 
 For a complete list of all the available commands as part of the Azure Terraform extension, please visit [this page](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform)
 
