@@ -14,11 +14,6 @@
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 	"overrideCommand": false,
 	"runArgs": ["--env-file",".devcontainer/devcontainer.env"],
-	"containerEnv": {
-		// Sets constant environment variables
-		"TF_BACKEND_CONTAINER": "infrax",
-		"TF_BACKEND_KEY": "infrax.tfstate"
-	},
     "remoteEnv": {
 		// Sets environment variables required for terrafom remote backend
 		"TF_BACKEND_RESOURCE_GROUP" : "${containerEnv:TF_BACKEND_RESOURCE_GROUP}",
@@ -36,17 +31,12 @@
 		"terraform.languageServer": {
 			"enabled": true,
 			"args": []
-		},
-		"terraform.indexing": {
-			"enabled": false,
-			"liveIndexing": false
 		}
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"hashicorp.terraform",
-		"ms-azuretools.vscode-azureterraform",
 		"ms-vscode.azurecli",
 		"ms-azuretools.vscode-docker"
 	],
