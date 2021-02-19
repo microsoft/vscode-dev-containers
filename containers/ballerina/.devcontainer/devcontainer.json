@@ -1,0 +1,19 @@
+{
+	"name": "Ballerina (Community)",
+
+	// Check docker hub for other versions https://hub.docker.com/r/gokomer/ballerina
+	"image": "gokomer/ballerina:latest",
+
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": ["ballerina.ballerina"],
+
+	// Uncomment to run commands after the container is created - like installing curl
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+
+	// Comment out connect as root instead.
+	"remoteUser": "ballerina"
+}
