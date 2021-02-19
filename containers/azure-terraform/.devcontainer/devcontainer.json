@@ -20,10 +20,10 @@
 		"TF_BACKEND_LOCATION": "${containerEnv:TF_BACKEND_LOCATION}",
 		"TF_BACKEND_STORAGE_ACCOUNT" : "${containerEnv:TF_BACKEND_STORAGE_ACCOUNT}",                
 		"TF_BACKEND_CONTAINER" : "${containerEnv:TF_BACKEND_CONTAINER}",
-		"TF_BACKEND_KEY" : "${containerEnv:TF_BACKEND_KEY}",
-		
-		// Sets input variables for terraform templates
-		"TF_VAR_rg_name" : "${containerEnv:TF_VAR_RG_NAME}"
+		"TF_BACKEND_KEY" : "${containerEnv:TF_BACKEND_KEY}"
+
+		// Use 'TF_VAR' prefix to set input variables for terraform templates
+		// "TF_VAR_rg_name":  "${containerEnv:TF_VAR_RG_NAME}"
 	},
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
