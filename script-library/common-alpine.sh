@@ -225,14 +225,24 @@ EOF
 )"
 
 # Add notice that Oh My Bash! has been removed from images and how to provide information on how to install manually
+OMB_README="$(cat \
+<<'EOF'
+"Oh My Bash!" has been removed from this image in favor of a simple shell prompt. If you still
+wish to use it, remove "~/.oh-my-bash" and install it from: https://github.com/ohmybash/oh-my-bash
+You may also want to consider "Bash-it" as an alternative: https://github.com/bash-it/bash-it
+See https://github.com/microsoft/vscode-dev-containers/issues/674#issuecomment-783474956
+EOF
+)"
 OMB_STUB="$(cat \
 <<'EOF'
 #!/usr/bin/env bash
+cd "$(dirname $0)"
 if [ -t 1 ]; then
-    echo -e '"Oh My Bash!" has been removed from this image in favor of a simple shell prompt. If you still\nwish to use it, remove "~/.oh-my-bash" and install it from: https://github.com/ohmybash/oh-my-bash\nYou may also want to consider "Bash-it" as an alternative: https://github.com/bash-it/bash-it'
+    cat README.md
 fi
 EOF
 )"
+
 
 # Adapted Oh My Zsh! install step to work with both "Oh Mys" rather than relying on an installer script
 # See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
@@ -285,9 +295,11 @@ fi
 # Add stub for Oh My Bash!
 if [ ! -d "${USER_RC_PATH}/.oh-my-bash}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
     mkdir -p "${USER_RC_PATH}/.oh-my-bash" "/root/.oh-my-bash"
+    echo "${OMB_README}" >> "${USER_RC_PATH}/.oh-my-bash/README.md"
     echo "${OMB_STUB}" >> "${USER_RC_PATH}/.oh-my-bash/oh-my-bash.sh"
     chmod +x "${USER_RC_PATH}/.oh-my-bash/oh-my-bash.sh"
     if [ "${USERNAME}" != "root" ]; then
+        echo "${OMB_README}" >> "/root/.oh-my-bash/README.md"
         echo "${OMB_STUB}" >> "/root/.oh-my-bash/oh-my-bash.sh"
         chmod +x "/root/.oh-my-bash/oh-my-bash.sh"
     fi
