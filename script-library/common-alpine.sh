@@ -281,7 +281,7 @@ install-oh-my()
     fi
 }
 
-# Add RS snippet and custom bash prompt
+# Add RC snippet and custom bash prompt
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
     echo "${RC_SNIPPET}" >> /etc/bash.bashrc
     echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
