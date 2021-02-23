@@ -187,6 +187,13 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
         return null;
     }
 
+    // If the definition states that only versioned tags are returned and the version is 'dev', 
+    // add the definition Id to ensure that we do not incorrectly hijack a tag from another definition.
+    if (version === 'dev') {
+        version = config.definitionBuildSettings[definitionId].versionedTagsOnly ? `dev-${definitionId.replace(/-/mg,'')}` : 'dev';
+    }
+
+
     // Use the first variant if none passed in, unless there isn't one
     if (!variant) {
         const variants = getVariants(definitionId);
@@ -228,12 +235,11 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
 // Generate complete list of tags for a given definition
 function getTagList(definitionId, release, updateLatest, registry, registryPath, variant) {
     const version = getVersionFromRelease(release, definitionId);
-    const versionedTagsOnly = config.definitionBuildSettings[definitionId].versionedTagsOnly;
+
+    // If version is 'dev', there's no need to generate semver tags for the version
+    // (e.g. for 1.0.2, we should also tag 1.0 and 1). So just return the tags for 'dev'.
     if (version === 'dev') {
-        // If we are only returning versioned tags and the version is 'dev', add the definition Id to ensure that  
-        // we do not incorrectly hijack a tag from another definition, then return the tag list.
-        const tagVersion = versionedTagsOnly ? `dev-${definitionId.replace(/-/mg,'')}` : 'dev';
-        return getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant);
+        return getTagsForVersion(definitionId, version, registry, registryPath, variant);
     }
 
     // If this is a release version, split it out into the three parts of the semver
@@ -244,6 +250,7 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
     // Normally, we also want to return a tag without a version number, but for
     // some definitions that exist in the same repository as others, we may
     // only want to return a list of tags with part of the version number in it
+    const versionedTagsOnly = config.definitionBuildSettings[definitionId].versionedTagsOnly;
     const versionList = versionedTagsOnly ? [
             version,
             `${versionParts[0]}.${versionParts[1]}`,
@@ -499,6 +506,12 @@ function getAllDependencies() {
     return config.definitionDependencies;
 }
 
+function getPoolKeyForPoolUrl(poolUrl) {
+    const poolKey = config.poolKeys[poolUrl];
+    console.log (`(*) Key for ${poolUrl} is ${poolKey}`);
+    return poolKey;
+}
+
 async function getStagingFolder(release) {
     if (!stagingFolders[release]) {
         const stagingFolder = path.join(os.tmpdir(), 'vscode-dev-containers', release);
@@ -537,6 +550,7 @@ module.exports = {
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
     getVersionFromRelease: getVersionFromRelease,
     getTagsForVersion: getTagsForVersion,
+    getPoolKeyForPoolUrl: getPoolKeyForPoolUrl,
     getConfig: getConfig,
     shouldFlattenDefinitionBaseImage: shouldFlattenDefinitionBaseImage
 };

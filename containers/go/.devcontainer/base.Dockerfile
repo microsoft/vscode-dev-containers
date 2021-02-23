@@ -1,4 +1,4 @@
-# [Choice] Go version: 1, 1.15, 1.14
+# [Choice] Go version: 1, 1.16, 1.15
 ARG VARIANT=1
 FROM golang:${VARIANT}
 
@@ -21,7 +21,7 @@ COPY library-scripts/go-debian.sh /tmp/library-scripts/
 RUN bash /tmp/library-scripts/go-debian.sh "none" "/usr/local/go" "${GOPATH}" "${USERNAME}" "false" \
     && apt-get clean -y && rm -rf /tmp/library-scripts
 
-# [Option] Install Node.js 
+# [Option] Install Node.js
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm

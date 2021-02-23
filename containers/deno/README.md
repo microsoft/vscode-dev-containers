@@ -1,4 +1,4 @@
-# Deno
+# Deno (Community)
 
 ## Summary
 
@@ -6,7 +6,8 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | anthonychu |
+| *Contributors* | @anthonychu |
+| *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

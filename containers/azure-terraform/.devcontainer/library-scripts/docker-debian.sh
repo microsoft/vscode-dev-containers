@@ -120,7 +120,7 @@ tee /usr/local/share/docker-init.sh > /dev/null \
 
 set -e
 
-SOCAT_PATH_BASE=/tmp/vscr-dind-socat
+SOCAT_PATH_BASE=/tmp/vscr-docker-from-docker
 SOCAT_LOG=\${SOCAT_PATH_BASE}.log
 SOCAT_PID=\${SOCAT_PATH_BASE}.pid
 
@@ -154,7 +154,7 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "true" ] && [ "${SOURCE_SOCKET}" != "${TARGET_
             sudoIf groupadd --gid \${SOCKET_GID} docker-host
         fi
         # Add user to group if not already in it
-        if [ "\$(id ${USERNAME} | grep -E 'groups=.+\${SOCKET_GID}\(')" = "" ]; then
+        if [ "\$(id ${USERNAME} | grep -E "groups.*(=|,)\${SOCKET_GID}\(")" = "" ]; then
             sudoIf usermod -aG \${SOCKET_GID} ${USERNAME}
         fi
     else

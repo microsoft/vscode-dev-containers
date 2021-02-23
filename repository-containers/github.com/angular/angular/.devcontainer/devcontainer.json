@@ -1,5 +1,0 @@
-{
-    "name": "Angular Dev Env",
-    "dockerFile": "Dockerfile",
-    "extensions": []
-}

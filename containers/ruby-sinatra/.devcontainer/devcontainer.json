@@ -1,5 +1,5 @@
 {
-	"name": "Ruby & Sinatra",
+	"name": "Ruby & Sinatra (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 

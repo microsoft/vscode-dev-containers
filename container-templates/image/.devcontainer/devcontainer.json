@@ -1,5 +1,5 @@
 {
-	"name": "Dev Container Definition Template - Container Image",
+	"name": "Your Definition Name Here (Community)",
 
 	// Update the 'image' property with your Docker image name.
 	"image": "mcr.microsoft.com/vscode/devcontainers/base:debian-10",

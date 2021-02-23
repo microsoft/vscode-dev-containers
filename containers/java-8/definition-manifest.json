@@ -1,4 +1,5 @@
 {
+	"definitionVersion": "0.200.0",
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",
@@ -11,51 +12,16 @@
 		"image": "openjdk:8-jdk-buster",
 		"imageLink": "https://hub.docker.com/_/java",
 		"debian": [
-			"apt-utils",
-			"git",
-			"openssh-client",
-			"gnupg2",
-			"iproute2",
-			"procps",
-			"lsof",
-			"htop",
-			"net-tools",
-			"psmisc",
-			"curl",
-			"wget",
-			"rsync",
-			"ca-certificates",
-			"unzip",
-			"zip",
-			"tar",
-			"nano",
-			"vim-tiny",
-			"less",
-			"jq",
-			"lsb-release",
-			"apt-transport-https",
-			"dialog",
-			"libc6",
-			"libgcc1",
-			"libgssapi-krb5-2",
-			"libicu[0-9][0-9]",
-			"liblttng-ust0",
-			"libstdc++6",
-			"zlib1g",
-			"locales",
-			"sudo",
-			"ncdu",
-			"man-db",
-			"zsh",
 			"yarn"
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Bash!": "/root/.oh-my-bash",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"other": {
 			"SDKMAN!": {
-				"versionCommand": "sdk version | sed -n '/.*SDKMAN\\s/s///p'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | sed -n '/.*SDKMAN\\s/s///p'",
 				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
 			},
 			"AdoptOpenJDK": {

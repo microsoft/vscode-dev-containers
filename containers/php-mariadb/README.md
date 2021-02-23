@@ -1,4 +1,4 @@
-# PHP & MariaDB
+# PHP & MariaDB (Community)
 
 ## Summary
 
@@ -7,6 +7,7 @@ Develop PHP based applications with MariaDB (MySQL Compatible).  Includes necess
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | Richard Morrill [github.com/ThoolooExpress](https://github.com/ThoolooExpress) |
+| *Categories* | Community, Languages |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

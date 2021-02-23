@@ -1,4 +1,4 @@
-# R
+# R (Community)
 
 ## Summary
 
@@ -6,7 +6,8 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | [Mehant](mailto:kmehant@gmail.com) |
+| *Contributors* | [kmehant](mailto:kmehant@gmail.com), [eitsupi](https://github.com/eitsupi) |
+| *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | No |
 | *Container host OS support* | Linux, macOS, Windows |

@@ -108,14 +108,15 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/stable" "${PIPX_HOME}
 RUN yes | pecl install xdebug \
     && export PHP_LOCATION=$(dirname $(dirname $(which php))) \
     && echo "zend_extension=$(find ${PHP_LOCATION}/lib/php/extensions/ -name xdebug.so)" > ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=on" >>  ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.mode = debug" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.start_with_request = yes" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
+    && echo "xdebug.client_port = 9000" >> ${PHP_LOCATION}/ini/conf.d/xdebug.ini \
     && rm -rf /tmp/pear \
     && ln -s $(which composer.phar) /usr/local/bin/composer
 
 # Install rvm, Ruby, base gems
 COPY library-scripts/ruby-debian.sh /tmp/scripts/
-RUN bash /tmp/scripts/ruby-debian.sh "latest" "${USERNAME}" "true" \
+RUN bash /tmp/scripts/ruby-debian.sh "2.7.2" "${USERNAME}" "true" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
 # Install Moby CLI

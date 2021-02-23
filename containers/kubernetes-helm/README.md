@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code team and Phetsinorath William |
+| *Categories* | Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -17,7 +18,7 @@
 
 Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into a local or remote [Kubernetes](https://kubernetes.io/) cluster without affecting your dev container.
 
-This example illustrates how you can do this by using CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker), the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) right from inside your dev container.  This definition builds up from the [docker-from-docker](../docker-from-docker) container definition to add Kubernetes and Helm support.  It installs the Docker and Kubernetes extensions inside the container so you can use its full feature set with your project.
+This example illustrates how you can do this by using CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker), the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) right from inside your dev container.  This definition builds up from the [docker-from-docker](../docker-from-docker) container definition to add Kubernetes and Helm support. It installs the Docker and Kubernetes extensions inside the container so you can use its full feature set with your project.
 
 When using Remote - Containers, the dev container also syncs your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container with the necessary modifications to allow it to interact with anything running on your local machine whenever the container or a terminal window is started. This includes interacting with a Kubernetes cluster managed through Docker Desktop or a local Minikube install. (Note that this does **not** happen when using **GitHub Codespaces**.)
 
@@ -104,19 +105,41 @@ If you get a number other than `0`, you can simply add your non-root user to rig
 
 2. Follow the [directions in the previous section](#enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI.
 
-3. Update your Dockerfile as follows to create a group with the right group ID and be sure the user is in it:
+3. Update your `devcontainer.json` from above so VS Code doesn't override the container's entrypoint and enables the non-root user:
+
+    ```json
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+        //..
+    ],
+    "remoteUser": "vscode",
+    "overrideCommand": false
+    ```
+
+4. Next, update your Dockerfile as follows to wire up an entrypoint that creates a group with the right group ID and be sure the user is in it:
 
     ```Dockerfile
     ARG NONROOT_USER=vscode
 
-    RUN export SOCKET_GID=$(stat -c '%g' /var/run/docker.sock) \
-        && if [ "$(cat /etc/group | grep :${SOCKET_GID}:)" = "" ]; then \
-            groupadd --gid ${SOCKET_GID} docker-host; \
-        fi \
-        && if [ "$(id ${NONROOT_USER} | grep -E 'groups=.+\${SOCKET_GID}\(')" = "" ]; then \
-            usermod -aG ${SOCKET_GID} ${NONROOT_USER};
-        fi
+    RUN echo "#!/bin/sh\n\
+        sudoIf() { if [ \"\$(id -u)\" -ne 0 ]; then sudo \"\$@\"; else \"\$@\"; fi }\n\
+        SOCKET_GID=\$(stat -c '%g' /var/run/docker.sock) \n\
+        if [ \"${SOCKET_GID}\" != '0' ]; then\n\
+            if [ \"\$(cat /etc/group | grep :\${SOCKET_GID}:)\" = '' ]; then sudoIf groupadd --gid \${SOCKET_GID} docker-host; fi \n\
+            if [ \"\$(id ${NONROOT_USER} | grep -E \"groups=.*(=|,)\${SOCKET_GID}\(\")\" = '' ]; then sudoIf usermod -aG \${SOCKET_GID} ${NONROOT_USER}; fi\n\
+        fi\n\
+        exec \"\$@\"" > /usr/local/share/docker-init.sh \
+        && chmod +x /usr/local/share/docker-init.sh
+
+    # VS Code overrides ENTRYPOINT and CMD when executing `docker run` by default.
+    # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to
+    # the Docker socket if "overrideCommand": false is set in devcontainer.json.
+    # The script will also execute CMD if you need to alter startup behaviors.
+    ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+    CMD [ "sleep", "infinity" ]
     ```
+
+5. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 #### Final fallback: socat
 

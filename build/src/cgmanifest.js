@@ -3,6 +3,8 @@ const push = require('./push').push;
 const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
 
+//TODO: Generate markdown of versions per image that can then be stored with the definitions on release as a different output format.
+
 // Example manifest: https://dev.azure.com/mseng/AzureDevOps/_git/Governance.Specs?path=%2Fcgmanifest.json&version=GBusers%2Fcajone%2Fcgmanifest.json
 // Docker images and native OS libraries need to be registered as "other" while others are scenario dependant
 const dependencyLookupConfig = {
@@ -135,11 +137,25 @@ async function getDefinitionManifest(repo, release, registry, registryPath, defi
         await generatePipComponentList(dependencies.pip, imageTag, alreadyRegistered),
         await generatePipComponentList(dependencies.pipx, imageTag, alreadyRegistered, true),
         await generateGemComponentList(dependencies.gem, imageTag, alreadyRegistered),
+        await generateGoComponentList(dependencies.go, imageTag, alreadyRegistered),
         await generateCargoComponentList(dependencies.cargo, imageTag, alreadyRegistered),
         await generateOtherComponentList(dependencies.other, imageTag, alreadyRegistered),
         filteredManualComponentRegistrations(dependencies.manual, alreadyRegistered));
 }
 
+/* Generate "Linux" entry for linux packages. E.g.
+{
+    "Component": {
+    "Type": "linux",
+    "Linux": {
+        "Name": "yarn",
+        "Version": "1.22.5-1",
+        "Distribution": "Debian",
+        "Pool-URL": "https://dl.yarnpkg.com/debian",
+        "Key-URL": "https://dl.yarnpkg.com/debian/pubkey.gpg"
+    }
+}
+ */   
 async function generatePackageComponentList(config, packageList, imageTag, alreadyRegistered) {
     if (!packageList) {
         return [];
@@ -153,85 +169,71 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
     const packageVersionListCommand = packageList.reduce((prev, current) => {
         return prev += ` ${current}`;
     }, config.listCommand);
-    const packageVersionListOutput = await asyncUtils.spawn('docker',
-        ['run', '--init', '--rm', '-u', 'root', imageTag, packageVersionListCommand],
-        { shell: true, stdio: 'pipe' });
+    const packageVersionListOutput = await getDockerRunCommandOutput(imageTag, packageVersionListCommand, true);
 
     // Generate and exec command to extract download URIs
     console.log('(*) Getting package download URLs...');
     const packageUriCommand = packageList.reduce((prev, current) => {
         return prev += ` ${current}`;
     }, config.getUriCommand);
-    const packageUriCommandOutput = await asyncUtils.spawn('docker',
-        ['run', '--init', '--rm', '-u', 'root', imageTag, `sh -c '${packageUriCommand}'`],
-        { shell: true, stdio: 'pipe' });
+    const packageUriCommandOutput = await getDockerRunCommandOutput(imageTag, packageUriCommand, true);
 
     const packageVersionList = packageVersionListOutput.split('\n');
     packageVersionList.forEach((packageVersion) => {
         packageVersion = packageVersion.trim();
         if (packageVersion !== '') {
             const versionCaptureGroup = new RegExp(config.lineRegEx).exec(packageVersion);
+            if (!versionCaptureGroup) {
+                console.log(`(!) Warning: Unable to parse output "${packageVersion}". Likely not from command. Skipping.`);
+                return;
+            }
             const package = versionCaptureGroup[1];
             const version = versionCaptureGroup[2];
-
-            const entry = createEntryForLinuxPackage(packageUriCommandOutput, config.namePrefix, package, version, alreadyRegistered, config.uriMatchRegex, config.uriSuffix)
-            if (entry) {
-                componentList.push(entry);
+            const uniquePackageName = `${package}-${config.distro}`;
+            if (alreadyRegistered[uniquePackageName] && alreadyRegistered[uniquePackageName].indexOf(version) > -1) {
+                return;
             }
+            alreadyRegistered[uniquePackageName] = alreadyRegistered[uniquePackageName] || [];
+            alreadyRegistered[uniquePackageName].push(version);
+            const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config, package, version)
+            componentList.push({
+                "Component": {
+                    "Type": "linux",
+                    "Linux": {
+                        "Name": package,
+                        "Version": version,
+                        "Distribution": config.distro,
+                        "Pool-URL": poolUrl,
+                        "Pool-Key": configUtils.getPoolKeyForPoolUrl(poolUrl)
+                    }
+                }
+            });
         }
     });
 
     return componentList;
 }
+function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config, package, version) {
+    // Handle regex reserved charters in regex strings and that ":" is treaded as "1%3a" on Debian/Ubuntu 
+    const sanitizedPackage = package.replace(/\+/g, '\\+').replace(/\./g, '\\.');
+    const sanitizedVersion = version.replace(/\+/g, '\\+').replace(/\./g, '\\.').replace(/:/g, '%3a');
+    const uriCaptureGroup = new RegExp(
+        config.uriMatchRegex.replace('${PACKAGE}', sanitizedPackage).replace('${VERSION}', sanitizedVersion), 'm')
+        .exec(packageUriCommandOutput);
 
-/* Generate "Other" entry for linux packages. E.g.
-{
-    "Component": {
-        "Type": "other",
-        "Other": {
-            "Name": "Debian Package: apt-transport-https",
-            "Version": "1.8.2.1",
-            "DownloadUrl": "http://deb.debian.org/debian/pool/main/a/apt/apt-transport-https_1.8.2.1_all.deb"
-        }
-    }
-}
-*/
-function createEntryForLinuxPackage(packageUriCommandOutput, entryNamePrefix, package, version, alreadyRegistered, uriMatchRegex, uriSuffix) {
-    const uniquePackageName = `${entryNamePrefix} ${package}`;
-    if (typeof alreadyRegistered[uniquePackageName] === 'undefined'
-        || alreadyRegistered[uniquePackageName].indexOf(version) < 0) {
-
-        // Handle regex reserved charters in regex strings and that ":" is treaded as "1%3a" on Debian/Ubuntu 
-        const sanitizedPackage = package.replace(/\+/g, '\\+').replace(/\./g, '\\.');
-        const sanitizedVersion = version.replace(/\+/g, '\\+').replace(/\./g, '\\.').replace(/:/g, '%3a');
-        const uriCaptureGroup = new RegExp(
-            uriMatchRegex.replace('${PACKAGE}', sanitizedPackage).replace('${VERSION}', sanitizedVersion), 'm')
-            .exec(packageUriCommandOutput);
-
-        if (!uriCaptureGroup) {
-            console.log(`(!) No URI found for ${package} ${version}`)
-        }
-
-        const uriString = uriCaptureGroup ? uriCaptureGroup[1] : '';
-
-        alreadyRegistered[uniquePackageName] = alreadyRegistered[uniquePackageName] || [];
-        alreadyRegistered[uniquePackageName].push(version);
-
-        return {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": uniquePackageName,
-                    "Version": version,
-                    "DownloadUrl": `${uriString}${uriSuffix ?
-                        uriSuffix.replace('${PACKAGE}', package).replace('${VERSION}', version)
-                        : ''}`
-                }
-            }
-        }
+    if (!uriCaptureGroup) {
+        console.log(`(!) No URI found for ${package} ${version}`);
+        throw new Error('No download URI found for package');
     }
 
-    return null;
+    // Extract URIs
+    const uriString = uriCaptureGroup ? uriCaptureGroup[1] : '';
+    const poolUrlCaptureGroup = /(.+)\/pool\//.exec(uriString);
+    if (!poolUrlCaptureGroup) {
+        console.log(`(!) No pool found for ${package} ${version}`);
+        throw new Error('No pool URL found for package');
+    }
+    return poolUrlCaptureGroup[1];
 }
 
 /* Generate "Npm" entries. E.g.
@@ -245,6 +247,7 @@ function createEntryForLinuxPackage(packageUriCommandOutput, entryNamePrefix, pa
     }
 }
 */
+//TODO: Get version info from inside container - this works for dev images as registered now, but not looking at older ones
 async function generateNpmComponentList(packageList, alreadyRegistered) {
     if (!packageList) {
         return [];
@@ -317,9 +320,7 @@ async function generatePipComponentList(packageList, imageTag, alreadyRegistered
 }
 
 async function getPipVersionLookup(imageTag) {
-    const packageVersionListOutput = await asyncUtils.spawn('docker',
-        ['run', '--init', '--rm', imageTag, 'pip list --format json'],
-        { shell: true, stdio: 'pipe' });
+    const packageVersionListOutput = await getDockerRunCommandOutput(imageTag, 'pip list --format json');
 
     const packageVersionList = JSON.parse(packageVersionListOutput);
 
@@ -331,9 +332,7 @@ async function getPipVersionLookup(imageTag) {
 
 async function getPipxVersionLookup(imageTag) {
     // --format json doesn't work with pipx, so have to do text parsing
-    const packageVersionListOutput = await asyncUtils.spawn('docker',
-        ['run', '--init', '--rm', imageTag, 'pipx list'],
-        { shell: true, stdio: 'pipe' });
+    const packageVersionListOutput = await getDockerRunCommandOutput(imageTag, 'pipx list');
 
     const packageVersionListOutputLines = packageVersionListOutput.split('\n');
     return packageVersionListOutputLines.reduce((prev, current) => {
@@ -370,9 +369,7 @@ async function generateGitComponentList(gitRepoPath, imageTag, alreadyRegistered
         if (typeof repoPath === 'string') {
             console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
-            const remoteAndCommitOutput = await asyncUtils.spawn('docker',
-                ['run', '--init', '--rm', imageTag, `bash -c "set -e && cd \\"${repoPath}\\" && if [ -f ".git-remote-and-commit" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi"`],
-                { shell: true, stdio: 'pipe' });
+            const remoteAndCommitOutput = await getDockerRunCommandOutput(imageTag, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi`);
             const remoteAndCommit = remoteAndCommitOutput.split('\n');
             const gitRemote = remoteAndCommit[0];
             const gitCommit = remoteAndCommit[1];
@@ -417,9 +414,7 @@ async function generateOtherComponentList(otherComponents, imageTag, alreadyRegi
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
-            const otherVersion = (await asyncUtils.spawn('docker',
-                ['run', '--init', '--rm', imageTag, `bash -l -c "set -e && ${otherSettings.versionCommand}"`],
-                { shell: true, stdio: 'pipe' })).trim();
+            const otherVersion = (await getDockerRunCommandOutput(imageTag, otherSettings.versionCommand));
             addIfUnique(`${otherName}-other`, otherVersion, componentList, alreadyRegistered, {
                 "Component": {
                     "Type": "other",
@@ -455,11 +450,8 @@ async function generateGemComponentList(gems, imageTag, alreadyRegistered) {
     const componentList = [];
     console.log(`(*) Generating "RubyGems" registrations...`);
 
-    const gemListOutput = await asyncUtils.spawn('docker',
-        ['run', '--init', '--rm', imageTag, 'bash -l -c "set -e && gem list -d --local"'],
-        { shell: true, stdio: 'pipe' });
-
-    asyncUtils.forEach(gems, (gem) => {
+    const gemListOutput = await getDockerRunCommandOutput(imageTag, "bash -l -c 'set -e && gem list -d --local'");
+    await asyncUtils.forEach(gems, (gem) => {
         if (typeof gem === 'string') {
             console.log(`(*) Getting version for ${gem}...`);
             const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\)]+)`,'m').exec(gemListOutput);
@@ -499,12 +491,10 @@ async function generateCargoComponentList(crates, imageTag, alreadyRegistered) {
     console.log(`(*) Generating "Cargo" registrations...`);
 
     for(let crate in crates) {
-        const versionCommand = crates[crate] || `echo ${crate} \\$(rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p')`;
+        const versionCommand = crates[crate] || `echo ${crate} $(rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p')`;
         if (typeof versionCommand === 'string') {
             console.log(`(*) Getting version for ${crate}...`);
-            const versionOutput = await asyncUtils.spawn('docker',
-                ['run', '--rm', imageTag, `bash -c "set -e && ${versionCommand}"`],
-                { shell: true, stdio: 'pipe' });
+            const versionOutput = await getDockerRunCommandOutput(imageTag, versionCommand);
             const crateVersionCaptureGroup = new RegExp(`^${crate}\\s([^\\s]+)`,'m').exec(versionOutput);
             const version = crateVersionCaptureGroup[1];
             addIfUnique(`${crate}-cargo`, version, componentList, alreadyRegistered, {
@@ -522,7 +512,47 @@ async function generateCargoComponentList(crates, imageTag, alreadyRegistered) {
     return componentList;
 }
 
+/* Generate "Go" entries. E.g.
+"Component": {
+    "Type": "go",
+    "Go": {
+        "Name": "golang.org/x/tools/gopls",
+        "Version": "0.6.4"
+    }
+}
+*/
+async function generateGoComponentList(packages, imageTag, alreadyRegistered) {
+    if (!packages) {
+        return [];
+    }
 
+    const componentList = [];
+    console.log(`(*) Generating "Go" registrations...`);
+
+    const packageInstallOutput = await getDockerRunCommandOutput(imageTag, "cat /usr/local/etc/vscode-dev-containers/go.log");
+    for(let package in packages) {
+        console.log(`(*) Getting version for ${package}...`);
+        const versionCommand = packages[package];
+        let version;
+        if(versionCommand) {
+            version = await getDockerRunCommandOutput(imageTag, versionCommand);
+        } else {
+            const versionCaptureGroup = new RegExp(`${package}\\s.*v([0-9]+\\.[0-9]+\\.[0-9]+.*)\\n`,'m').exec(packageInstallOutput);
+            version = versionCaptureGroup ? versionCaptureGroup[1] : 'latest';
+        }
+        addIfUnique(`${package}-go`, version, componentList, alreadyRegistered, {
+            "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": package,
+                    "Version": version,
+                }
+            }
+        });
+    }
+
+    return componentList;
+}
 
 function addIfUnique(uniqueName, uniqueVersion, componentList, alreadyRegistered, componentJson) {
     if (typeof alreadyRegistered[uniqueName] === 'undefined' || alreadyRegistered[uniqueName].indexOf(uniqueVersion) < 0) {
@@ -547,6 +577,17 @@ function filteredManualComponentRegistrations(manualRegistrations, alreadyRegist
         }
     });
     return componentList;
+}
+
+async function getDockerRunCommandOutput(imageTag, command, forceRoot) {
+    const wrappedCommand = `bash -c "set -e && echo ~~~BEGIN~~~ && ${command.replace(/\$/g, '\\\$')} && echo ~~~END~~~"`;
+    const runArgs = ['run','--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);
+    runArgs.push(imageTag);
+    runArgs.push(wrappedCommand);
+    const result = await asyncUtils.spawn('docker', runArgs, { shell: true, stdio: 'pipe' });
+    // Filter out noise from ENTRYPOINT output
+    const filteredResult = result.substring(result.indexOf('~~~BEGIN~~~') + 11, result.indexOf('~~~END~~~'));
+    return filteredResult.trim();
 }
 
 /*

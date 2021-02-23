@@ -1,4 +1,4 @@
-# Elm
+# Elm (Community)
 
 ## Summary
 
@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | xWiiLLz, @andys8 |
+| *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

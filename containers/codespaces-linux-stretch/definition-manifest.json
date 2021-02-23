@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "0.22.1",
+	"definitionVersion": "0.22.3",
 	"build": {
 		"latest": false,
 		"versionedTagsOnly": true,
@@ -14,50 +14,9 @@
 		"image": "mcr.microsoft.com/oryx/build:vso-20200417.5",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"debian": [
-			"apt-utils",
-			"git",
-			"openssh-client",
-			"gnupg2",
-			"iproute2",
-			"procps",
-			"lsof",
-			"htop",
-			"net-tools",
-			"psmisc",
-			"curl",
-			"wget",
-			"rsync",
-			"ca-certificates",
-			"unzip",
-			"zip",
-			"tar",
-			"nano",
-			"vim-tiny",
-			"less",
-			"jq",
-			"lsb-release",
-			"apt-transport-https",
-			"dialog",
-			"libc6",
-			"libgcc1",
-			"libgssapi-krb5-2",
-			"libicu[0-9][0-9]",
-			"liblttng-ust0",
-			"libstdc++6",
-			"zlib1g",
-			"locales",
-			"sudo",
-			"ncdu",
-			"man-db",
-			"zsh",
-			"vim", 
-			"xtail",
-			"fish", 
-			"docker",
 			"git-lfs",
-			"debian-archive-keyring",
-			"software-properties-common",
-			"openjdk-8-jdk"
+			"moby-cli",
+			"powershell"
 		],
 		"pipx": [
 			"pylint",
@@ -93,12 +52,16 @@
 			"clippy": null
 		},
 		"other": {
+			"git": {
+				"versionCommand": "git --version | sed -n '/git version /s///p'",
+				"downloadUrl":"https://github.com/git/git"
+			},
 			"Xdebug": {
 				"versionCommand": "php --version | grep -oE 'Xdebug\\sv[^,]+' | sed -n '/Xdebug\\sv/s///p'",
 				"downloadUrl":"https://xdebug.org/"
 			},
 			"Composer": {
-				"versionCommand": "composer --version | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
+				"versionCommand": "composer --version 2>/dev/null | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
 				"downloadUrl": "https://getcomposer.org/"
 			},
 			"kubectl": {
@@ -114,7 +77,7 @@
 				"downloadUrl": "https://github.com/docker/compose"
 			},
 			"SDKMAN!": {
-				"versionCommand": "sdk version | sed -n '/.*SDKMAN\\s/s///p'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | sed -n '/.*SDKMAN\\s/s///p'",
 				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
 			},
 			"AdoptOpenJDK": {
@@ -134,199 +97,23 @@
 				"downloadUrl": "https://github.com/rust-lang/rust"
 			},
 			"rvm": {
-				"versionCommand": "rvm --version | grep -oE -m 1 'rvm\\s[^ ]+' | sed -n '/^rvm\\s/s///p'",
+				"versionCommand": ". /usr/local/rvm/scripts/rvm > /dev/null 2>&1 && rvm --version | grep -oE -m 1 'rvm\\s[^ ]+' | sed -n '/^rvm\\s/s///p'",
 				"downloadUrl": "https://github.com/rvm/rvm"
 			},
 			"Ruby": {
-				"versionCommand": "ruby --version | grep -oE 'ruby\\s[^ ]+' | sed -n '/ruby\\s/s///p'",
+				"versionCommand": ". /usr/local/rvm/scripts/rvm && ruby --version | grep -oE 'ruby\\s[^ ]+' | sed -n '/ruby\\s/s///p'",
 				"downloadUrl": "https://www.ruby-lang.org/en/downloads/"
 			}
 		},
-		"manual": [{
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/tools/gopls",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "honnef.co/go/tools",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/tools/cmd/gorename",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/tools/cmd/goimports",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/tools/cmd/guru",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "golang.org/x/lint/golint",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/mdempsky/gocode",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/cweill/gotests",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/haya14busa/goplay/cmd/goplay",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/sqs/goreturns",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/josharian/impl",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/davidrjenni/reftools/cmd/fillstruct",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/ramya-rao-a/go-outline",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/acroca/go-symbols",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/godoctor/godoctor",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/rogpeppe/godef",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/zmb3/gogetdoc",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/fatih/gomodifytags",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/mgechev/revive",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/go-delve/delve/cmd/dlv",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/stamblerre/gocode",
-					 "Version": "latest"
-				   }
-				 }
-			}, {
-				"Component": {
-				   "Type": "go",
-				   "Go": {
-					 "Name": "github.com/golangci/golangci-lint",
-					 "Version": "latest"
-				   }
-				 }
-			}
-		]
+		"go": {
+			"golang.org/x/tools/gopls": null,
+			"honnef.co/go/tools/...": null,
+			"golang.org/x/lint/golint": null,
+			"github.com/mgechev/revive": null,
+			"github.com/uudashr/gopkgs/v2/cmd/gopkgs": null,
+			"github.com/ramya-rao-a/go-outline": null,
+			"github.com/go-delve/delve/cmd/dlv": null,
+			"github.com/golangci/golangci-lint/cmd/golangci-lint": null
+		}
 	}
 }
