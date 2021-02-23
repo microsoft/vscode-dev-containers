@@ -1,4 +1,4 @@
-# [Choice] R version: latest, ... ,4.0.1 , 4.0.0
+# R version: latest, ... ,4.0.1 , 4.0.0
 ARG VARIANT="latest"
 FROM rocker/r-ver:${VARIANT}
 
