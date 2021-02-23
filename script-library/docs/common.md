@@ -9,9 +9,9 @@
 ## Syntax
 
 ```text
-./common-debian.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My *! flag]
-./common-redhat.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My *! flag]
-./common-alpine.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Install Oh My *! flag]
+./common-debian.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My Zsh! flag]
+./common-redhat.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My Zsh! flag]
+./common-alpine.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Install Oh My Zsh! flag]
 ```
 
 > **Note:** `common-redhat.sh` is community supported.
@@ -23,7 +23,9 @@
 |User UID|`automatic`| A specific UID (e.g. `1000`) for the user that will be created modified. A value of `automatic` will pick a free one if the user is created. |
 |User GID|`automatic`| A specific GID (e.g. `1000`) for the user's group that will be created modified. A value of `automatic` will pick a free one if the group is created. |
 | Upgrade packages flag | `true` | A `true`/`false` flag that indicates whether packages should be upgraded to the latest for the distro. |
-| Install Oh My *! flag | `true` | A `true`/`false` flag that indicates whether Oh My Bash! and Oh My Zsh! should be installed. |
+| Install Oh My Zsh! flag | `true` | A `true`/`false` flag that indicates whether Oh My Zsh! should be installed. |
+
+> **Note:** Previous versions of this script also installed Oh My Bash! but this has been dropped in favor of a simplified, default PS1 since it conflicted with common user configuration. A stub is added to let those who referenced it in their dotfiles or other content about the change.
 
 ## Usage
 
