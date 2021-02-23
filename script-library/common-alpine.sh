@@ -6,7 +6,7 @@
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
 #
-# Syntax: ./common-alpine.sh [install zsh flag] [username] [user UID] [user GID] [install Oh My *! flag]
+# Syntax: ./common-alpine.sh [install zsh flag] [username] [user UID] [user GID] [install Oh My Zsh! flag]
 
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"automatic"}
@@ -207,20 +207,22 @@ EOF
 )"
 CODESPACES_ZSH="$(cat \
 <<'EOF'
-prompt() {
-    if [ "${GITHUB_USER}" != "" ]; then
-        local USERNAME="@${GITHUB_USER}"
+__zsh_prompt() {
+    local prompt_username
+    if [ ! -z "${GITHUB_USER}" ]; then 
+        prompt_username="@${GITHUB_USER}"
     else
-        local USERNAME="%n"
+        prompt_username="%n"
     fi
-    PROMPT="%{$fg[green]%}${USERNAME} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )"
+    PROMPT="%{$fg[green]%}${prompt_username} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )"
     PROMPT+='%{$fg_bold[blue]%}%~%{$reset_color%} $(git_prompt_info)%{$fg[white]%}$ %{$reset_color%}'
+    unset -f __zsh_prompt
 }
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}(%{$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg_bold[yellow]%}✗%{$fg_bold[cyan]%})"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[cyan]%})"
-prompt
+__zsh_prompt
 EOF
 )"
 
@@ -243,45 +245,7 @@ fi
 EOF
 )"
 
-
-# Adapted Oh My Zsh! install step to work with both "Oh Mys" rather than relying on an installer script
-# See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
-install-oh-my()
-{
-    local OH_MY=$1
-    local OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-${OH_MY}"
-    local TEMPLATE="${OH_MY_INSTALL_DIR}/templates/$2"
-    local OH_MY_GIT_URL=$3
-    local USER_RC_FILE="${USER_RC_PATH}/.${OH_MY}rc"
-
-    if [ -d "${OH_MY_INSTALL_DIR}" ] || [ "${INSTALL_OH_MYS}" != "true" ]; then
-        return 0
-    fi
-
-    umask g-w,o-w
-    mkdir -p ${OH_MY_INSTALL_DIR}
-    git clone --depth=1 \
-        -c core.eol=lf \
-        -c core.autocrlf=false \
-        -c fsck.zeroPaddedFilemode=ignore \
-        -c fetch.fsck.zeroPaddedFilemode=ignore \
-        -c receive.fsck.zeroPaddedFilemode=ignore \
-        "${OH_MY_GIT_URL}" "${OH_MY_INSTALL_DIR}" 2>&1
-    echo -e "$(cat "${TEMPLATE}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
-    sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
-    mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
-    echo "${CODESPACES_ZSH}" > "${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme"
-    # Shrink git while still enabling updates
-    cd "${OH_MY_INSTALL_DIR}"
-    git repack -a -d -f --depth=1 --window=1
-
-    if [ "${USERNAME}" != "root" ]; then
-        cp -rf "${USER_RC_FILE}" "${OH_MY_INSTALL_DIR}" /root
-        chown -R ${USERNAME}:${USERNAME} "${USER_RC_PATH}"
-    fi
-}
-
-# Add RS snippet and custom bash prompt
+# Add RC snippet and custom bash prompt
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
     echo "${RC_SNIPPET}" >> /etc/bash.bashrc
     echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
@@ -315,7 +279,35 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
         echo "${RC_SNIPPET}" >> /etc/zsh/zshrc
         ZSH_ALREADY_INSTALLED="true"
     fi
-    install-oh-my zsh zshrc.zsh-template https://github.com/ohmyzsh/ohmyzsh
+
+    # Adapted, simplified inline Oh My Zsh! install steps that adds, defaults to a codespaces theme.
+    # See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
+    OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-zsh"
+    if [ ! -d "${OH_MY_INSTALL_DIR}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
+        TEMPLATE_PATH="${OH_MY_INSTALL_DIR}/templates/zshrc.zsh-template"
+        USER_RC_FILE="${USER_RC_PATH}/.zshrc"
+        umask g-w,o-w
+        mkdir -p ${OH_MY_INSTALL_DIR}
+        git clone --depth=1 \
+            -c core.eol=lf \
+            -c core.autocrlf=false \
+            -c fsck.zeroPaddedFilemode=ignore \
+            -c fetch.fsck.zeroPaddedFilemode=ignore \
+            -c receive.fsck.zeroPaddedFilemode=ignore \
+            "https://github.com/ohmyzsh/ohmyzsh" "${OH_MY_INSTALL_DIR}" 2>&1
+        echo -e "$(cat "${TEMPLATE_PATH}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
+        sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
+        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
+        echo "${CODESPACES_ZSH}" > "${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme"
+        # Shrink git while still enabling updates
+        cd "${OH_MY_INSTALL_DIR}"
+        git repack -a -d -f --depth=1 --window=1
+        # Copy to non-root user if one is specified
+        if [ "${USERNAME}" != "root" ]; then
+            cp -rf "${USER_RC_FILE}" "${OH_MY_INSTALL_DIR}" /root
+            chown -R ${USERNAME}:${USERNAME} "${USER_RC_PATH}"
+        fi
+    fi
 fi
 
 # Write marker file
