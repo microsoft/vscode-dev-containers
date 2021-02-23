@@ -1,6 +1,6 @@
 # Common Utility and Non-Root User Install Script
 
-*Installs a set of common command line utilities, Oh My Bash!, Oh My Zsh!, and sets up a non-root user.*
+*Installs a set of common command line utilities, Oh My Zsh!, and sets up a non-root user.*
 
 **Script status**: Stable
 
