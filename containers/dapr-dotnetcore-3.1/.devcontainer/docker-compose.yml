@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3.7'
 services:
   app:
     # Uncomment the next line to use a non-root user for all processes. You can also
