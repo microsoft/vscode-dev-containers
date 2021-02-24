@@ -12,21 +12,25 @@ const dependencyLookupConfig = {
         // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
         // Output: <package>    <version>
         // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
+        // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
         namePrefix: 'Debian Package:',
         listCommand: "dpkg-query --show -f='${Package}\\t${Version}\\n'",
         lineRegEx: /(.+)\t(.+)/,
         getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
-        uriMatchRegex: "'(.+)'\\s*${PACKAGE}_${VERSION}"
+        downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
+        poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
     },
     ubuntu: {
         // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
         // Output: <package>    <version>
         // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
+        // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
         namePrefix: 'Ubuntu Package:',
         listCommand: "dpkg-query --show -f='${Package}\\t${Version}\\n'",
         lineRegEx: /(.+)\t(.+)/,
         getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
-        uriMatchRegex: "'(.+)'\\s*${PACKAGE}_${VERSION}"
+        downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
+        poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
     },
     alpine: {
         // Command to get package versions: apk info -e -v <package>
@@ -36,8 +40,9 @@ const dependencyLookupConfig = {
         listCommand: "apk info -e -v",
         lineRegEx: /(.+)-([0-9].+)/,
         getUriCommand: 'apk update && apk policy',
-        uriMatchRegex: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
-        uriSuffix: '/x86_64/${PACKAGE}-${VERSION}.apk'
+        downloadUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
+        downloadUriSuffix: '/x86_64/${PACKAGE}-${VERSION}.apk',
+        poolUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
     }
 }
 
@@ -218,22 +223,20 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config,
     const sanitizedPackage = package.replace(/\+/g, '\\+').replace(/\./g, '\\.');
     const sanitizedVersion = version.replace(/\+/g, '\\+').replace(/\./g, '\\.').replace(/:/g, '%3a');
     const uriCaptureGroup = new RegExp(
-        config.uriMatchRegex.replace('${PACKAGE}', sanitizedPackage).replace('${VERSION}', sanitizedVersion), 'm')
+        config.poolUriMatchRegEx.replace('${PACKAGE}', sanitizedPackage).replace('${VERSION}', sanitizedVersion), 'm')
         .exec(packageUriCommandOutput);
 
     if (!uriCaptureGroup) {
-        console.log(`(!) No URI found for ${package} ${version}`);
+        console.log(`(!) No URI found for ${package} ${version}. Attempting to use fallback.`);
+        const fallbackPoolUrl = configUtils.getFallbackPoolUrl(package);
+        if (fallbackPoolUrl) {
+            return fallbackPoolUrl;
+        } 
         throw new Error('No download URI found for package');
     }
 
     // Extract URIs
-    const uriString = uriCaptureGroup ? uriCaptureGroup[1] : '';
-    const poolUrlCaptureGroup = /(.+)\/pool\//.exec(uriString);
-    if (!poolUrlCaptureGroup) {
-        console.log(`(!) No pool found for ${package} ${version}`);
-        throw new Error('No pool URL found for package');
-    }
-    return poolUrlCaptureGroup[1];
+    return uriCaptureGroup[1];
 }
 
 /* Generate "Npm" entries. E.g.
@@ -261,7 +264,7 @@ async function generateNpmComponentList(packageList, alreadyRegistered) {
         if (package.indexOf('@') >= 0) {
             [package, version] = package.split('@');
         } else {
-            const npmInfoRaw = await asyncUtils.spawn('npm', ['info', package, '--json'], { shell: true, stdio: 'pipe' });
+            const npmInfoRaw = await asyncUtils.spawn('npm', ['info', package, '--json'], { shell: true, stdio: ['inherit', 'pipe', 'inherit'] });
             const npmInfo = JSON.parse(npmInfoRaw);
             version = npmInfo['dist-tags'].latest;
         }
@@ -369,7 +372,7 @@ async function generateGitComponentList(gitRepoPath, imageTag, alreadyRegistered
         if (typeof repoPath === 'string') {
             console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
-            const remoteAndCommitOutput = await getDockerRunCommandOutput(imageTag, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi`);
+            const remoteAndCommitOutput = await getDockerRunCommandOutput(imageTag, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi`,true);
             const remoteAndCommit = remoteAndCommitOutput.split('\n');
             const gitRemote = remoteAndCommit[0];
             const gitCommit = remoteAndCommit[1];
@@ -580,7 +583,7 @@ function filteredManualComponentRegistrations(manualRegistrations, alreadyRegist
 }
 
 async function getDockerRunCommandOutput(imageTag, command, forceRoot) {
-    const wrappedCommand = `bash -c "set -e && echo ~~~BEGIN~~~ && ${command.replace(/\$/g, '\\\$')} && echo ~~~END~~~"`;
+    const wrappedCommand = `bash -c "set -e && echo ~~~BEGIN~~~ && ${command} && echo ~~~END~~~"`;
     const runArgs = ['run','--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);
     runArgs.push(imageTag);
     runArgs.push(wrappedCommand);

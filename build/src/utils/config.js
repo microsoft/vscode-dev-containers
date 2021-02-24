@@ -512,6 +512,13 @@ function getPoolKeyForPoolUrl(poolUrl) {
     return poolKey;
 }
 
+function getFallbackPoolUrl(package) {
+    const poolUrl = config.poolUrlFallback[package];
+    console.log (`(*) Fallback pool URL for ${package} is ${poolUrl}`);
+    return poolUrl;
+}
+
+
 async function getStagingFolder(release) {
     if (!stagingFolders[release]) {
         const stagingFolder = path.join(os.tmpdir(), 'vscode-dev-containers', release);
@@ -550,6 +557,7 @@ module.exports = {
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
     getVersionFromRelease: getVersionFromRelease,
     getTagsForVersion: getTagsForVersion,
+    getFallbackPoolUrl: getFallbackPoolUrl,
     getPoolKeyForPoolUrl: getPoolKeyForPoolUrl,
     getConfig: getConfig,
     shouldFlattenDefinitionBaseImage: shouldFlattenDefinitionBaseImage
