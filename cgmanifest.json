@@ -26,17 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "f21e646ce6c09198f7f625c597f08af49551fdb0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Bash!",
-                    "repositoryUrl": "https://github.com/ohmybash/oh-my-bash",
-                    "commitHash": "4db7436384e0ddfa62911a101b69dd03a0df53fe"
+                    "commitHash": "0391030678f109b03f4b51d5f5538d867e7a182b"
                 }
             }
         },
@@ -105,6 +95,16 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: alpine",
+                    "Version": "3.13",
+                    "DownloadUrl": "https://hub.docker.com/_/alpine"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: alpine",
                     "Version": "3.12",
                     "DownloadUrl": "https://hub.docker.com/_/alpine"
                 }
@@ -142,36 +142,6 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: git-lfs",
-                    "Version": "2.13.2",
-                    "DownloadUrl": "https://packagecloud.io/github/git-lfs/ubuntu/pool/focal/main/g/git-lfs/git-lfs_2.13.2_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: moby-cli",
-                    "Version": "19.03.15+azure-1",
-                    "DownloadUrl": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod/pool/main/m/moby-cli/moby-cli_19.03.15+azure-1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: moby-engine",
-                    "Version": "20.10.2+azure-1",
-                    "DownloadUrl": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod/pool/main/m/moby-engine/moby-engine_20.10.2+azure-1_amd64.deb"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "git",
                 "Git": {
                     "Name": "nvm",
@@ -196,7 +166,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "62d77982700cd6f8d284524661fa7f593241e155"
+                    "commitHash": "0391030678f109b03f4b51d5f5538d867e7a182b"
                 }
             }
         },
@@ -206,7 +176,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "3b5c382552d4046bc3bec5224dde272a709ca34c"
+                    "commitHash": "0391030678f109b03f4b51d5f5538d867e7a182b"
                 }
             }
         },
@@ -215,7 +185,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.6.0"
+                    "Version": "2.7.1"
                 }
             }
         },
@@ -260,7 +230,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "mypy",
-                    "Version": "0.800"
+                    "Version": "0.812"
                 }
             }
         },
@@ -338,6 +308,78 @@
         },
         {
             "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": "golang.org/x/tools/gopls",
+                    "Version": "0.6.6"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": "honnef.co/go/tools/...",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": "golang.org/x/lint/golint",
+                    "Version": "1.0.3"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": "github.com/mgechev/revive",
+                    "Version": "1.0.3"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
+                    "Version": "0.0.0-20200117021646-2a048b4510eb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": "github.com/ramya-rao-a/go-outline",
+                    "Version": "0.0.0-20200117021646-2a048b4510eb"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": "github.com/go-delve/delve/cmd/dlv",
+                    "Version": "1.37.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": "github.com/golangci/golangci-lint/cmd/golangci-lint",
+                    "Version": "latest"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rls",
@@ -350,7 +392,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rustfmt",
-                    "Version": "1.4.25-stable"
+                    "Version": "1.4.30-stable"
                 }
             }
         },
@@ -359,7 +401,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.49.0"
+                    "Version": "1.50.0"
                 }
             }
         },
@@ -368,7 +410,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.49.0"
+                    "Version": "1.50.0"
                 }
             }
         },
@@ -377,7 +419,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.49.0"
+                    "Version": "1.50.0"
                 }
             }
         },
@@ -396,7 +438,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.0.2",
+                    "Version": "3.0.3",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -416,7 +458,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.20.2",
+                    "Version": "1.20.4",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -436,7 +478,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Compose",
-                    "Version": "1.28.2",
+                    "Version": "1.28.4",
                     "DownloadUrl": "https://github.com/docker/compose"
                 }
             }
@@ -466,7 +508,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHubCLI",
-                    "Version": "1.6.0-pre.3",
+                    "Version": "1.6.2",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -476,7 +518,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.15.8",
+                    "Version": "1.16",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -486,7 +528,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.49.0",
+                    "Version": "1.50.0",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -498,78 +540,6 @@
                     "Name": "rvm",
                     "Version": "1.29.12",
                     "DownloadUrl": "https://github.com/rvm/rvm"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.6.4"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "honnef.co/go/tools",
-                    "Version": "0.1.1"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "golang.org/x/lint/golint",
-                    "Version": "0.0.0-20201208152925-83fdc39ff7b5"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/mgechev/revive",
-                    "Version": "1.0.3"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
-                    "Version": "2.1.2"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/ramya-rao-a/go-outline",
-                    "Version": "0.0.0-20200117021646-2a048b4510eb"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/go-delve/delve/cmd/dlv",
-                    "Version": "1.6.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.36.0"
                 }
             }
         },
@@ -644,11 +614,11 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Debian Package: yarn",
-                    "Version": "1.22.5-1",
-                    "DownloadUrl": "https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.22.5_all.deb"
+                "Type": "git",
+                "Git": {
+                    "Name": "nvm",
+                    "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
+                    "commitHash": "0391030678f109b03f4b51d5f5538d867e7a182b"
                 }
             }
         },
@@ -667,7 +637,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
-                    "Version": "1.15",
+                    "Version": "1.16",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
@@ -677,7 +647,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
-                    "Version": "1.14",
+                    "Version": "1.15",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
@@ -737,7 +707,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9000 (through xdebug.client_host/xdebug.client_port) :-(\n2.0.9",
+                    "Version": "2.0.11",
                     "DownloadUrl": "https://getcomposer.org/installer"
                 }
             }
@@ -987,7 +957,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.19.0"
+                    "Version": "7.20.0"
                 }
             }
         },
@@ -1065,7 +1035,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.1.4"
+                    "Version": "4.2.2"
                 }
             }
         },
