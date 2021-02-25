@@ -24,7 +24,7 @@
 This script can be used either ad-hoc in an already running container or in a Dockerfile. 
 
 ### Usage when this script is already installed in an image 
-The SSH script is included in the default Codespaces image (codespaces-linux) that is used in Codespaces when you do not have a custom `devcontainer.json`. It maay also be in images you or your organization has created. Here's how enable SSH in these cases. 
+The SSH script is included in the default Codespaces image (codespaces-linux) that is used in Codespaces when you do not have a custom `devcontainer.json`. It may also be in images you or your organization has created. Here's how to enable SSH in these cases. 
 
 Usage:
 1. The first time you've started the codespace, you will want to set a password for your user. If running as a user other than root, and you have `sudo` installed:
