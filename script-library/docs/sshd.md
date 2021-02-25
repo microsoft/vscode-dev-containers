@@ -24,7 +24,7 @@
 This script can be used either ad-hoc in an already running container or in a Dockerfile. 
 
 ### Usage when this script is already installed in an image 
-The SSH server will be installed by default for Codespaces that are created off the default Codespaces container image (without a custom devcontainer configuration). 
+The SSH script is included in the default Codespaces image (codespaces-linux) that is used in Codespaces when you do not have a custom `devcontainer.json`. It maay also be in images you or your organization has created. Here's how enable SSH in these cases. 
 
 Usage:
 1. The first time you've started the codespace, you will want to set a password for your user. If running as a user other than root, and you have `sudo` installed:
@@ -49,8 +49,8 @@ Usage:
 
   4. Next time you connect, you can spin up the SSH server again by running `/usr/local/share/sshd-init.sh` in a terminal in the container/codespace and using the same command / password.
 
-
 ### Usage in a Dockerfile
+You can add this script to your own Dockerfile as follows.
 
 Usage:
 
