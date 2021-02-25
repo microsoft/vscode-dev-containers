@@ -21,7 +21,34 @@
 
 ## Usage
 
-This script can be used either ad-hoc in an already running container or in a Dockerfile.
+This script can be used either ad-hoc in an already running container or in a Dockerfile. 
+
+### Usage with a default container image 
+The SSH server will be installed by default for Codespaces that are created off the default container image (without a custom configuration). 
+
+Usage:
+1. The first time you've started the codespace, you will want to set a password for your user. If running as a user other than root, and you have `sudo` installed:
+
+    ```bash
+    sudo passwd $(whoami)
+    ```
+
+    Or if you are running as root:
+
+    ```bash
+    passwd
+    ```
+ 2. Press <kbd>F1</kbd>, select **Forward a Port**, and enter port `2222`.
+ 3. Your container/codespace now has a running SSH server in it. Use a **local terminal** (or other tool) to connect to it using the command and password from step 2. e.g.
+
+    ```bash
+    ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vscode@localhost
+    ```
+
+    The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
+
+  4. Next time you connect, you can spin up the SSH server again by running `/usr/local/share/sshd-init.sh` in a terminal in the container/codespace and using the same command / password.
+
 
 ### Usage in a Dockerfile
 
