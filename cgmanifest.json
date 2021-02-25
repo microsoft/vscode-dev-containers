@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "24ecb36a2f0698b4ae7d4daf9be068f4f0aacc3e"
+                    "commitHash": "071c4d199b1a0aa3391080c2e7fc2683c2a27698"
                 }
             }
         },
@@ -146,6 +146,8 @@
                 "Linux": {
                     "Name": "git-lfs",
                     "Version": "2.13.2",
+                    "Distribution": "ubuntu",
+                    "Release": "20.04",
                     "Pool-URL": "https://packagecloud.io/github/git-lfs/ubuntu",
                     "Pool-Key": "https://packagecloud.io/github/git-lfs/gpgkey"
                 }
@@ -157,6 +159,8 @@
                 "Linux": {
                     "Name": "moby-cli",
                     "Version": "20.10.3+azure-1",
+                    "Distribution": "ubuntu",
+                    "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
                     "Pool-Key": "https://packages.microsoft.com/keys/microsoft.asc"
                 }
@@ -168,6 +172,8 @@
                 "Linux": {
                     "Name": "moby-engine",
                     "Version": "20.10.3+azure-1",
+                    "Distribution": "ubuntu",
+                    "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
                     "Pool-Key": "https://packages.microsoft.com/keys/microsoft.asc"
                 }
@@ -179,6 +185,8 @@
                 "Linux": {
                     "Name": "powershell",
                     "Version": "7.1.2-1.ubuntu.20.04",
+                    "Distribution": "ubuntu",
+                    "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
                     "Pool-Key": "https://packages.microsoft.com/keys/microsoft.asc"
                 }
@@ -210,7 +218,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "24ecb36a2f0698b4ae7d4daf9be068f4f0aacc3e"
+                    "commitHash": "071c4d199b1a0aa3391080c2e7fc2683c2a27698"
                 }
             }
         },
@@ -220,7 +228,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "24ecb36a2f0698b4ae7d4daf9be068f4f0aacc3e"
+                    "commitHash": "071c4d199b1a0aa3391080c2e7fc2683c2a27698"
                 }
             }
         },
@@ -603,6 +611,8 @@
                 "Linux": {
                     "Name": "powershell",
                     "Version": "7.1.2-1.debian.9",
+                    "Distribution": "debian",
+                    "Release": "9",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-debian-stretch-prod",
                     "Pool-Key": "https://packages.microsoft.com/keys/microsoft.asc"
                 }
@@ -673,6 +683,8 @@
                 "Linux": {
                     "Name": "yarn",
                     "Version": "1.22.5-1",
+                    "Distribution": "ubuntu",
+                    "Release": "20.04",
                     "Pool-URL": "https://dl.yarnpkg.com/debian",
                     "Pool-Key": "https://dl.yarnpkg.com/debian/pubkey.gpg"
                 }
@@ -684,7 +696,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "24ecb36a2f0698b4ae7d4daf9be068f4f0aacc3e"
+                    "commitHash": "071c4d199b1a0aa3391080c2e7fc2683c2a27698"
                 }
             }
         },
