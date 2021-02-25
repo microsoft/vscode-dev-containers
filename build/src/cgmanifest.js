@@ -156,6 +156,7 @@ async function getDefinitionManifest(repo, release, registry, registryPath, defi
         "Name": "yarn",
         "Version": "1.22.5-1",
         "Distribution": "Debian",
+        "Release": "10",
         "Pool-URL": "https://dl.yarnpkg.com/debian",
         "Key-URL": "https://dl.yarnpkg.com/debian/pubkey.gpg"
     }
@@ -176,6 +177,10 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
     }, config.listCommand);
     const packageVersionListOutput = await getDockerRunCommandOutput(imageTag, packageVersionListCommand, true);
 
+    // Get OS information
+    const osInfoCommandOutput = await getDockerRunCommandOutput(imageTag, "sh -c '. /etc/os-release && echo \"\\${ID}\" && echo \"\\${VERSION_ID}\"'", true);
+    const distroAndRelease = osInfoCommandOutput.split('\n');
+   
     // Generate and exec command to extract download URIs
     console.log('(*) Getting package download URLs...');
     const packageUriCommand = packageList.reduce((prev, current) => {
@@ -207,7 +212,8 @@ async function generatePackageComponentList(config, packageList, imageTag, alrea
                     "Linux": {
                         "Name": package,
                         "Version": version,
-                        "Distribution": config.distro,
+                        "Distribution": distroAndRelease[0],
+                        "Release": distroAndRelease[1],
                         "Pool-URL": poolUrl,
                         "Pool-Key": configUtils.getPoolKeyForPoolUrl(poolUrl)
                     }
