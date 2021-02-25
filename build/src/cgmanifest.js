@@ -14,8 +14,8 @@ const dependencyLookupConfig = {
         // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
         // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
         namePrefix: 'Debian Package:',
-        listCommand: "dpkg-query --show -f='${Package}\\t${Version}\\n'",
-        lineRegEx: /(.+)\t(.+)/,
+        listCommand: "dpkg-query --show -f='\\${Package} ~~v~~ \\${Version}\n'",
+        lineRegEx: /(.+) ~~v~~ (.+)/,
         getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
         downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
         poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
@@ -26,8 +26,8 @@ const dependencyLookupConfig = {
         // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
         // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
         namePrefix: 'Ubuntu Package:',
-        listCommand: "dpkg-query --show -f='${Package}\\t${Version}\\n'",
-        lineRegEx: /(.+)\t(.+)/,
+        listCommand: "dpkg-query --show -f='\\${Package} ~~v~~ \\${Version}\n'",
+        lineRegEx: /(.+) ~~v~~ (.+)/,
         getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
         downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
         poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
