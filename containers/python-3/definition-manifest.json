@@ -16,7 +16,6 @@
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
-			"Oh My Bash!": "/root/.oh-my-bash",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"pipx": [

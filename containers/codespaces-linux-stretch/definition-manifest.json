@@ -33,7 +33,6 @@
 		],
 		"git": {
 			"Oh My Zsh!": "/home/codespace/.oh-my-zsh",
-			"Oh My Bash!": "/home/codespace/.oh-my-bash",
 			"nvm": "/home/codespace/.nvm",
 			"nvs": "/home/codespace/.nvs",
 			"rbenv": "/usr/local/share/rbenv",
