@@ -38,7 +38,7 @@ Usage:
     ```bash
     passwd
     ```
- 2. Press <kbd>F1</kbd>, select **Forward a Port**, and enter port `2222`.
+ 2. Open the ****Ports**** tab next to the Terminal tab, select Forward port and enter port `2222`.
  3. Your container/codespace now has a running SSH server in it. Use a **local terminal** (or other tool) to connect to it using the command and password from step 2. e.g.
 
     ```bash
@@ -114,7 +114,7 @@ If you already have a running container, you can use the script to spin up SSH i
 
 3. Take note of the password that was generated and the SSH command.
 
-4. Press <kbd>F1</kbd>, select **Forward a Port**, and enter port `2222`.
+4. Open the ****Ports**** tab next to the Terminal tab, select Forward port and enter port `2222`.
 
 5. Your container/codespace now has a running SSH server in it. Use a **local terminal** (or other tool) to connect to it using the command and password from step 2. e.g.
 
