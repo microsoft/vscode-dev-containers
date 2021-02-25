@@ -23,8 +23,8 @@
 
 This script can be used either ad-hoc in an already running container or in a Dockerfile. 
 
-### Usage when this script is already installed in an image (e.g. default Codespaces image)
-The SSH server will be installed by default for Codespaces that are created off the default container image (without a custom devcontainer configuration). 
+### Usage when this script is already installed in an image 
+The SSH server will be installed by default for Codespaces that are created off the default Codespaces container image (without a custom devcontainer configuration). 
 
 Usage:
 1. The first time you've started the codespace, you will want to set a password for your user. If running as a user other than root, and you have `sudo` installed:
