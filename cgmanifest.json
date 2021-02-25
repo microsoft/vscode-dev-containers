@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "0391030678f109b03f4b51d5f5538d867e7a182b"
+                    "commitHash": "24ecb36a2f0698b4ae7d4daf9be068f4f0aacc3e"
                 }
             }
         },
@@ -142,6 +142,50 @@
         },
         {
             "Component": {
+                "Type": "linux",
+                "Linux": {
+                    "Name": "git-lfs",
+                    "Version": "2.13.2",
+                    "Pool-URL": "https://packagecloud.io/github/git-lfs/ubuntu",
+                    "Pool-Key": "https://packagecloud.io/github/git-lfs/gpgkey"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "Linux": {
+                    "Name": "moby-cli",
+                    "Version": "20.10.3+azure-1",
+                    "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
+                    "Pool-Key": "https://packages.microsoft.com/keys/microsoft.asc"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "Linux": {
+                    "Name": "moby-engine",
+                    "Version": "20.10.3+azure-1",
+                    "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
+                    "Pool-Key": "https://packages.microsoft.com/keys/microsoft.asc"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "Linux": {
+                    "Name": "powershell",
+                    "Version": "7.1.2-1.ubuntu.20.04",
+                    "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
+                    "Pool-Key": "https://packages.microsoft.com/keys/microsoft.asc"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "git",
                 "Git": {
                     "Name": "nvm",
@@ -166,7 +210,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "0391030678f109b03f4b51d5f5538d867e7a182b"
+                    "commitHash": "24ecb36a2f0698b4ae7d4daf9be068f4f0aacc3e"
                 }
             }
         },
@@ -176,7 +220,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "0391030678f109b03f4b51d5f5538d867e7a182b"
+                    "commitHash": "24ecb36a2f0698b4ae7d4daf9be068f4f0aacc3e"
                 }
             }
         },
@@ -555,6 +599,17 @@
         },
         {
             "Component": {
+                "Type": "linux",
+                "Linux": {
+                    "Name": "powershell",
+                    "Version": "7.1.2-1.debian.9",
+                    "Pool-URL": "https://packages.microsoft.com/repos/microsoft-debian-stretch-prod",
+                    "Pool-Key": "https://packages.microsoft.com/keys/microsoft.asc"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "rake",
@@ -614,11 +669,22 @@
         },
         {
             "Component": {
+                "Type": "linux",
+                "Linux": {
+                    "Name": "yarn",
+                    "Version": "1.22.5-1",
+                    "Pool-URL": "https://dl.yarnpkg.com/debian",
+                    "Pool-Key": "https://dl.yarnpkg.com/debian/pubkey.gpg"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "git",
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "0391030678f109b03f4b51d5f5538d867e7a182b"
+                    "commitHash": "24ecb36a2f0698b4ae7d4daf9be068f4f0aacc3e"
                 }
             }
         },
