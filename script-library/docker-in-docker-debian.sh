@@ -106,7 +106,7 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
 fi
 
 tee /usr/local/share/docker-init.sh > /dev/null \
-<< EOF 
+<< 'EOF' 
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -115,10 +115,10 @@ tee /usr/local/share/docker-init.sh > /dev/null \
 
 sudoIf()
 {
-    if [ "\$(id -u)" -ne 0 ]; then
-        sudo "\$@"
+    if [ "$(id -u)" -ne 0 ]; then
+        sudo "$@"
     else
-        "\$@"
+        "$@"
     fi
 }
 
@@ -163,10 +163,10 @@ set +e
 cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
 if [ $? -eq 0 ]
 then
-  echo "Setting Azure DNS."
+  echo "Setting dockerd Azure DNS."
   CUSTOMDNS="--dns 168.63.129.16"
 else
-  echo "Not setting any DNS manually."
+  echo "Not setting dockerd DNS manually."
   CUSTOMDNS=""
 fi
 set -e
@@ -178,7 +178,7 @@ set +e
 
 # Execute whatever commands were passed in (if any). This allows us 
 # to set this script to ENTRYPOINT while still executing the default CMD.
-exec "\$@"
+exec "$@"
 EOF
 
 chmod +x /usr/local/share/docker-init.sh

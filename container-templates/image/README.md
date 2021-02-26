@@ -11,7 +11,7 @@
 | *Definition type*           | Image                                                                        |
 | *Works in Codespaces*       | Yes / No                                                                     |
 | *Container host OS support* | Linux, macOS, Windows                                                        |
-| *Container OS*              | [OS used by continer - e.g. Debian]                                          |
+| *Container OS*              | [OS used by container - e.g. Debian]                                          |
 | *Languages, platforms*      | [Languages and platforms the container supports]                             |
 
 ## [Optional] Description

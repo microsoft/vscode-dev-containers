@@ -11,7 +11,7 @@
 		"image": "rust:1",
 		"imageLink": "https://hub.docker.com/_/rust",
 		"git": {
-			"Oh My Bash!": "/root/.oh-my-bash",
+			
 			"Oh My Zsh!": "/root/.oh-my-zsh"
 		},
 		"cargo": {

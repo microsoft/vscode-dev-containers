@@ -37,7 +37,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Change owner of opt contents since Oryx can dynamically install and will run as "codespace"
     && chown codespace /opt/* \
     # Verify expected build and debug tools are present
-    && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb \
+    && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb python3-dev \
     # Install tools and shells not in common script
     && apt-get install -yq vim vim-doc xtail software-properties-common libsecret-1-dev \
     # Install additional tools (useful for 'puppeteer' project)

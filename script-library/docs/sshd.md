@@ -21,9 +21,36 @@
 
 ## Usage
 
-This script can be used either ad-hoc in an already running container or in a Dockerfile.
+This script can be used either ad-hoc in an already running container or in a Dockerfile. 
+
+### Usage when this script is already installed in an image 
+The SSH script is included in the default Codespaces image (codespaces-linux) that is used in Codespaces when you do not have a custom `devcontainer.json`. It may also be in images you or your organization has created. Here's how to enable SSH in these cases. 
+
+Usage:
+1. The first time you've started the codespace, you will want to set a password for your user. If running as a user other than root, and you have `sudo` installed:
+
+    ```bash
+    sudo passwd $(whoami)
+    ```
+
+    Or if you are running as root:
+
+    ```bash
+    passwd
+    ```
+ 2. Open the ****Ports**** tab next to the Terminal tab, select Forward port and enter port `2222`.
+ 3. Your container/codespace now has a running SSH server in it. Use a **local terminal** (or other tool) to connect to it using the command and password from step 2. e.g.
+
+    ```bash
+    ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vscode@localhost
+    ```
+
+    The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
+
+  4. Next time you connect, you can spin up the SSH server again by running `/usr/local/share/sshd-init.sh` in a terminal in the container/codespace and using the same command / password.
 
 ### Usage in a Dockerfile
+You can add this script to your own Dockerfile as follows.
 
 Usage:
 
@@ -87,7 +114,7 @@ If you already have a running container, you can use the script to spin up SSH i
 
 3. Take note of the password that was generated and the SSH command.
 
-4. Press <kbd>F1</kbd>, select **Forward a Port**, and enter port `2222`.
+4. Open the ****Ports**** tab next to the Terminal tab, select Forward port and enter port `2222`.
 
 5. Your container/codespace now has a running SSH server in it. Use a **local terminal** (or other tool) to connect to it using the command and password from step 2. e.g.
 

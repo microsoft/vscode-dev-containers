@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "0.200.0",
+	"definitionVersion": "0.201.0",
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",
@@ -16,7 +16,6 @@
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
-			"Oh My Bash!": "/root/.oh-my-bash",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"other": {

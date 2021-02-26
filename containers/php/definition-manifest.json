@@ -1,6 +1,6 @@
 {
 	"variants": ["8", "8.0", "7", "7.4", "7.3"],
-	"definitionVersion": "0.200.0",
+	"definitionVersion": "0.201.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -16,16 +16,15 @@
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
-			"Oh My Bash!": "/root/.oh-my-bash",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"other": {
 			"Xdebug": {
-				"versionCommand": "php --version | grep -oE 'Xdebug\\sv[^,]+' | sed -n '/Xdebug\\sv/s///p'",
+				"versionCommand": "php --version | grep -oE 'with Xdebug\\sv[^,]+'| sed -n '/with Xdebug\\sv/s///p'",
 				"downloadUrl":"https://xdebug.org/"
 			},
 			"Composer": {
-				"versionCommand": "composer --version | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
+				"versionCommand": "composer --version 2>/dev/null | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
 				"downloadUrl": "https://getcomposer.org/installer"
 			}
 		}

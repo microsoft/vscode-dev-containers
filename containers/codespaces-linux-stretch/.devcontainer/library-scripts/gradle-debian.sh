@@ -50,7 +50,10 @@ fi
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+        echo -e "$1" >> /etc/bash.bashrc
+        if [ -f "/etc/zsh/zshrc" ]; then
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
     fi
 }
 

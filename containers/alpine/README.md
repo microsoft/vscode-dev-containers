@@ -10,7 +10,7 @@
 | *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:alpine |
-| *Available image variants* | 3.10, 3.11, 3.12 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
+| *Available image variants* | 3.10, 3.11, 3.12, 3.13 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |

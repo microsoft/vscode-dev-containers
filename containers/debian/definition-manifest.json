@@ -1,6 +1,6 @@
 {
 	"variants": ["buster", "stretch"],
-	"definitionVersion": "0.200.0",
+	"definitionVersion": "0.201.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -24,8 +24,7 @@
 		"image": "buildpack-deps:${VARIANT}-curl",
 		"imageLink": "https://hub.docker.com/_/buildpack-deps",
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
-			"Oh My Bash!": "/root/.oh-my-bash"
+			"Oh My Zsh!": "/root/.oh-my-zsh"
 		}
 	}
 }

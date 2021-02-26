@@ -26,6 +26,11 @@ module.exports = {
         console.log(`(*) Spawn: ${command}${args.reduce((prev, current) => `${prev} ${current}`, '')}`);
 
         opts = opts || { stdio: 'inherit', shell: true };
+        let echo = false;
+        if (opts.stdio === 'inherit') {
+            opts.stdio = 'pipe';
+            echo = true;
+        }
         return new Promise((resolve, reject) => {
             let result = '';
             const proc = spawnCb(command, args, opts);
@@ -42,10 +47,22 @@ module.exports = {
                 resolve(result);
             });
             if (proc.stdout) {
-                proc.stdout.on('data', (chunk) => result += chunk.toString());
+                proc.stdout.on('data', (chunk) => {
+                    const stringChunk = chunk.toString();
+                    result += stringChunk;
+                    if (echo) {
+                        console.log(stringChunk);
+                    }
+                });
             }
             if (proc.stderr) {
-                proc.stderr.on('data', (chunk) => result += chunk.toString());
+                proc.stderr.on('data', (chunk) => {
+                    const stringChunk = chunk.toString();
+                    result += stringChunk;
+                    if (echo) {
+                        console.error(stringChunk);
+                    }
+                });
             }
             proc.on('error', reject);
         });
@@ -192,3 +209,4 @@ module.exports = {
         });
     }
 };
+
