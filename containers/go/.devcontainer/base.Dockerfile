@@ -11,13 +11,13 @@ ARG UPGRADE_PACKAGES="true"
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-COPY library-scripts/common-debian.sh /tmp/library-scripts/
+COPY library-scripts/common-debian.sh library-scripts/script-library.env* /tmp/library-scripts/
 RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install Go tools
 ENV GO111MODULE=auto
-COPY library-scripts/go-debian.sh /tmp/library-scripts/
+COPY library-scripts/go-debian.sh library-scripts/script-library.env* /tmp/library-scripts/
 RUN bash /tmp/library-scripts/go-debian.sh "none" "/usr/local/go" "${GOPATH}" "${USERNAME}" "false" \
     && apt-get clean -y && rm -rf /tmp/library-scripts
 
@@ -27,7 +27,7 @@ ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
-COPY library-scripts/node-debian.sh /tmp/library-scripts/
+COPY library-scripts/node-debian.sh library-scripts/script-library.env* /tmp/library-scripts/
 RUN if [ "$INSTALL_NODE" = "true" ]; then bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
