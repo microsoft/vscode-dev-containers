@@ -1,13 +1,6 @@
-version: '3.5'
+version: '3.7'
 services:
   app:
-    # Uncomment the next line to use a non-root user for all processes. You can also
-    # simply use the "remoteUser" property in devcontainer.json if you just want VS Code
-    # and its sub-processes (terminals, tasks, debugging) to execute as the user. On Linux,
-    # you may need to update USER_UID and USER_GID in .devcontainer/Dockerfile to match your
-    # user if not 1000. See https://aka.ms/vscode-remote/containers/non-root for details.
-    # user: vscode
-
     build: 
       context: .
       dockerfile: Dockerfile
@@ -34,9 +27,6 @@ services:
     #  - SYS_PTRACE
     # security_opt:
     #   - seccomp:unconfined
-
-    # Uncomment the next line to use a non-root user for all processes.
-    # user: vscode
 
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
     # (Adding the "ports" property to this file will not forward from a Codespace.)
