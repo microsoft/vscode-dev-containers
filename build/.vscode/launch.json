@@ -51,8 +51,20 @@
 				"--registry", "clantz.azurecr.io",
 				"--registryPath", "vscode/devcontainers"
 			]
-		},
-		{
+		}, {
+			"type": "node",
+			"request": "launch",
+			"name": "Run Malware Scan Script",
+			"program": "${workspaceFolder}/vscdc",
+			"args": [
+				"scan",
+				"debian",
+				"--no-always-pull",
+				"--release", "master",
+				"--registry", "mcr.microsoft.com",
+				"--registryPath", "vscode/devcontainers"
+			]
+		}, {
 			"type": "node",
 			"request": "launch",
 			"name": "Run Update Script URLs",

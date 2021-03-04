@@ -371,7 +371,7 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
         }
     }
 
-    console.log(`(*) Builds paginated as follows: ${JSON.stringify(allPages, null, 4)}\n(*) Processing page ${page} of ${pageTotal}.\n`);
+    console.log(`(*) Definitions are paginated as follows: ${JSON.stringify(allPages, null, 4)}\n(*) Processing page ${page} of ${pageTotal}.\n`);
 
     return allPages[page - 1];
 }

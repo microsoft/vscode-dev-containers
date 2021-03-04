@@ -8,6 +8,7 @@ const push = require('./src/push').push;
 const patch = require('./src/patch');
 const package = require('./src/package').package;
 const prep = require('./src/prep');
+const scanImagesForMalware = require('./src/scan-images').scanImagesForMalware;
 const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
 const configUtils = require('./src/utils/config');
 const packageJson = require('../package.json');
@@ -213,6 +214,47 @@ require('yargs')
                 }
             })
     }, patchCommand)
+    .command('scan [devcontainer]', 'scan images for malware using clamav', (yargs) => {
+        yargs
+            .positional('devcontainer', {
+                describe: 'limits scanning to single definition',
+                default: null
+            })
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or branch',
+                    default: `v${packageJson.version}`
+                },
+                'registry': {
+                    describe: 'container registry to pull images to scan',
+                    default: configUtils.getConfig('stubContainerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: configUtils.getConfig('stubContainerRegistryPath', '')
+                },
+                'always-pull': {
+                    describe: 'whether to always pull the image before scanning',
+                    type: 'boolean',
+                    default: false
+                },
+                'page': {
+                    describe: 'Page number (of total) to scan',
+                    type: 'integer',
+                    default: 1
+                },
+                'page-total': {
+                    describe: 'Total number of pages to use when parallelizing scans',
+                    type: 'integer',
+                    default: 1
+                },
+                'skip': {
+                    describe: 'A space separated list of definition IDs to not scan.',
+                    type: 'array',
+                    default: []
+                }
+            })
+    }, scanCommand)
     .command('copy-library-scripts', 'copy files from script-library folder into appropriate definitions', () => {}, copyLibraryScriptsCommand)
     .demandCommand()
     .help()
@@ -223,6 +265,17 @@ function pushCommand(argv) {
         argv.stubRegistryPath, argv.push, argv.prepOnly, argv.skip, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
+            process.exit(1);
+        });
+}
+
+function scanCommand(argv) {
+    scanImagesForMalware(argv.release, argv.registry, argv.registryPath, argv.alwaysPull, argv.page, argv.pageTotal, argv.skip, argv.devcontainer)
+        .catch((reason) => {
+            console.error(`(!) Scan failed - ${reason}`);
             if(reason.stack) {
                 console.error(`    ${reason.stack}`);
             }
