@@ -227,11 +227,11 @@ require('yargs')
                 },
                 'registry': {
                     describe: 'container registry to pull images to scan',
-                    default: configUtils.getConfig('stubContainerRegistry', 'docker.io')
+                    default: configUtils.getConfig('stubRegistry', 'docker.io')
                 },
                 'registry-path': {
                     describe: 'container registry path',
-                    default: configUtils.getConfig('stubContainerRegistryPath', '')
+                    default: configUtils.getConfig('stubRegistryPath', '')
                 },
                 'always-pull': {
                     describe: 'whether to always pull the image before scanning',

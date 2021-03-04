@@ -59,18 +59,20 @@ async function scanImagesForMalware(release, registry, registryPath, alwaysPull,
                     imageScanFailures.push(imageToScan);
                 }
             }
+            console.log();
         });
+        console.log('(*) Done!\n');
     });
 
     console.log(`(*) Scan results:\n    Images w/malware:  ${imagesWithMalware.length} ${imagesWithMalware.length > 0 ? '(' + imagesWithMalware + ')' : ''}\n    Scan failures: ${imageScanFailures.length} ${imageScanFailures.length > 0 ? '(' + imageScanFailures + ')' : ''}`);
 
     if (imagesWithMalware > 0) {
-        console.log('\n\n(!) ***** MALWARE DETECTED! *****');
+        console.log('\n(!) ***** MALWARE DETECTED! *****');
         throw('Malware detected!');
     }
 
     if (imageScanFailures > 0) {
-        console.log('\n\n(!) One or more scans hit an error or warning.');
+        console.log('\n(!) One or more scans hit an error or warning.');
         throw('One or more scans hit an error or warning.');
     }
 }
