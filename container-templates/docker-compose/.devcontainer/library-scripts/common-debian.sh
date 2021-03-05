@@ -47,7 +47,7 @@ elif [ "${USERNAME}" = "none" ]; then
 fi
 
 # Load markers to see which steps have already run
-MARKER_FILE="/usr/local/etc/vscode-dev-containers/common"
+MARKER_FILE="/usr/local/etc/vscode-dev-containers/common-script-run"
 if [ -f "${MARKER_FILE}" ]; then
     echo "Marker file found:"
     cat "${MARKER_FILE}"
@@ -186,9 +186,20 @@ else
 fi
 
 # .bashrc/.zshrc snippet
-RC_SNIPPET="$(cat << EOF
-export USER=\$(whoami)
-if [[ "\${PATH}" != *"\$HOME/.local/bin"* ]]; then export PATH="\${PATH}:\$HOME/.local/bin"; fi
+RC_SNIPPET="$(cat << 'EOF'
+
+if [ -z "${USER}"]; then export USER=$(whoami); fi
+if [[ "${PATH}" != *"$HOME/.local/bin"* ]]; then export PATH="${PATH}:$HOME/.local/bin"; fi
+
+# Display optional first run image specific notice if configured and terminal is interactive
+if [ -t 1 ] && [ -f "/usr/local/etc/vscode-dev-containers/first-run-notice.txt" ] && [ ! -f "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed" ]; then
+    cat /usr/local/etc/vscode-dev-containers/first-run-notice.txt
+    mkdir -p $HOME/.config/vscode-dev-containers
+    # Mark first run notice as displayed after 10s to avoid problems with fast terminal refreshes hiding it
+    (sleep 10s; touch "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed") & >/dev/null 2>&1
+    disown %+
+fi
+
 EOF
 )"
 
@@ -213,9 +224,11 @@ fi
 EOF
 chmod +x /usr/local/bin/code
 
-# Codespaces themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
+# Codespaces bash and OMZ themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
 <<'EOF'
+
+# Codespaces bash prompt theme
 __bash_prompt() {
     local userpart='`export XIT=$? \
         && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
@@ -234,6 +247,7 @@ __bash_prompt() {
     unset -f __bash_prompt
 }
 __bash_prompt
+
 EOF
 )"
 CODESPACES_ZSH="$(cat \
@@ -260,18 +274,17 @@ EOF
 # Add notice that Oh My Bash! has been removed from images and how to provide information on how to install manually
 OMB_README="$(cat \
 <<'EOF'
-"Oh My Bash!" has been removed from this image in favor of a simple shell prompt. If you still
-wish to use it, remove "~/.oh-my-bash" and install it from: https://github.com/ohmybash/oh-my-bash
+"Oh My Bash!" has been removed from this image in favor of a simple shell prompt. If you 
+still wish to use it, remove "~/.oh-my-bash" and install it from: https://github.com/ohmybash/oh-my-bash
 You may also want to consider "Bash-it" as an alternative: https://github.com/bash-it/bash-it
-See https://github.com/microsoft/vscode-dev-containers/issues/674#issuecomment-783474956
+See here for infomation on adding it to your image or dotfiles: https://aka.ms/codespaces/omb-remove
 EOF
 )"
 OMB_STUB="$(cat \
 <<'EOF'
 #!/usr/bin/env bash
-cd "$(dirname $0)"
 if [ -t 1 ]; then
-    cat README.md
+    cat $HOME/.oh-my-bash/README.md
 fi
 EOF
 )"

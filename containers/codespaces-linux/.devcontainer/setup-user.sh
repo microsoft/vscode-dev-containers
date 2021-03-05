@@ -35,10 +35,7 @@ sudo -u ${USERNAME} git config --global core.editor "/home/${USERNAME}/.local/bi
 rm -f /tmp/scripts/git-ed.sh
 
 # Add one time notice
-tee -a /etc/bash.bashrc /etc/zsh/zshrc << EOF
-if [ -t 1 ] && [ ! -f \$HOME/.config/vscode-dev-containers/first-run-notice ]; then
-  echo -e "Welcome to Codespaces! Note that the default Codespaces image is now Ubuntu 20.04-based!\nIf you need to use the old image (or a custom one) see https://aka.ms/ghcs-default-focal."
-  mkdir -p \$HOME/.config/vscode-dev-containers
-  touch \$HOME/.config/vscode-dev-containers/first-run-notice
-fi
+cat << 'EOF' > "/usr/local/etc/vscode-dev-containers/first-run-notice.txt"
+Welcome to Codespaces! Note that the default Codespaces image is now Ubuntu 20.04-based!
+If you need to use the old image (or a custom one) see https://aka.ms/ghcs-default-focal.
 EOF

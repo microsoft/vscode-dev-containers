@@ -1,8 +1,8 @@
-# GitHub Codespaces - Stretch (Legacy)
+# GitHub Codespaces - Stretch (Deprecated)
 
 ## Summary
 
-*Legacy Debian 9 / Stretch based Codespaces universal default image. Use or extend the default, large, multi-language universal container for GitHub Codespaces.*
+*Deprecated Debian 9 / Stretch based Codespaces universal default image. Use or extend the default, large, multi-language universal container for GitHub Codespaces.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -18,7 +18,7 @@
 
 ## Description
 
-> **Note:** This is the legacy Debian 9/Strech based image. See the [codespaces-linux definition](../codespaces-linux) for the current Ubuntu 20.04/Focal based image.
+> **Note:** This is the deprecated Debian 9/Strech based image. See the [codespaces-linux definition](../codespaces-linux) for the current Ubuntu 20.04/Focal based image.
 
 While language specific development containers can be useful, in some cases you may want to use more than one in a project without having to set them all up. In other cases you may be looking to create a general "sandbox" container you intend to use with multiple projects or repositories. The large container image generated here (`mcr.microsoft.com/vscode/devcontainers/universal:linux`) includes a number of runtime versions for popular languages lke Python, Node, PHP, Java, Go, C++, Ruby, Go, Rust and .NET Core/C# - many of which are [inherited from the Oryx build image](https://github.com/microsoft/oryx#supported-platforms) it is based on.
 
