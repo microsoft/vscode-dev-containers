@@ -238,9 +238,8 @@ EOF
 OMB_STUB="$(cat \
 <<'EOF'
 #!/usr/bin/env bash
-cd "$(dirname $0)"
 if [ -t 1 ]; then
-    cat README.md
+    cat $HOME/.oh-my-bash/README.md
 fi
 EOF
 )"
