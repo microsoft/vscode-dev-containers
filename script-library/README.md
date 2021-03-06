@@ -19,6 +19,7 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 | [Desktop (Lightweight) Install Script](docs/desktop-lite.md) | `desktop-lite-debian.sh` |
 | [Docker-from-Docker Install Script](docs/docker.md) | `docker-debian.sh`<br />`docker-redhat.sh` (Community) |
 | [Docker-in-Docker Install Script](docs/docker-in-docker.md) | `docker-in-docker-debian.sh` |
+| [fish Install Script](docs/fish.md) | `fish-debian.sh` |
 | [Git Build/Install from Source Script](docs/git-from-src.md) | `git-from-src-debian.sh` |
 | [Git LFS Install Script](docs/git-lfs.md) | `git-lfs-debian.sh` |
 | [GitHub CLI Install Script](docs/github.md) | `github-debian.sh` |
