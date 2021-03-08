@@ -4,11 +4,11 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
+# ** This script is community supported **
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
+# Maintainer: The VS Code and Codespaces Teams
 #
-# Community supported RedHat based version of common-debian.sh
-#
-# Syntax: ./common-redhat.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My *! flag]
+# Syntax: ./common-redhat.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My Zsh! flag]
 
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"automatic"}

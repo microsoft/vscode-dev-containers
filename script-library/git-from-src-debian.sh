@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/git-from-src.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./git-from-src-debian.sh [version]
 

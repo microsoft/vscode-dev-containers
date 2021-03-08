@@ -2,9 +2,11 @@
 
 *Installs Python, PIPX, and common Python utilities.*
 
-**Script status**: Draft
+**Script status**: Stable
 
 **OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+
+**Maintainer:** The VS Code and GitHub Codespaces teams
 
 ## Syntax
 

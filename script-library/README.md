@@ -12,30 +12,30 @@ Script names end in the Linux distribution "tree" they support. The majority are
 
 Some scripts have special installation instructions (like `desktop-lite-debian.sh`). Consult the following documents for more information (in order of the script name):
 
-| Document | Script |
-|----------|--------|
-| [Azure CLI Install Script](docs/azcli.md) | `azcli-debian.sh` |
-| [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` (Community) |
-| [Desktop (Lightweight) Install Script](docs/desktop-lite.md) | `desktop-lite-debian.sh` |
-| [Docker-from-Docker Install Script](docs/docker.md) | `docker-debian.sh`<br />`docker-redhat.sh` (Community) |
-| [Docker-in-Docker Install Script](docs/docker-in-docker.md) | `docker-in-docker-debian.sh` |
-| [fish Install Script](docs/fish.md) | `fish-debian.sh` |
-| [Git Build/Install from Source Script](docs/git-from-src.md) | `git-from-src-debian.sh` |
-| [Git LFS Install Script](docs/git-lfs.md) | `git-lfs-debian.sh` |
-| [GitHub CLI Install Script](docs/github.md) | `github-debian.sh` |
-| [Go (golang) Install Script](docs/go.md) | `go-debian.sh` |
-| [Gradle Install Script](docs/gradle.md) | `gradle-debian.sh` |
-| [Homebrew Install Script](docs/homebrew.md) | `homebrew-debian.sh` |
-| [Java Install Script](docs/java.md) | `java-debian.sh` |
-| [Kubectl and Helm Install Script](docs/kubectl-helm.md) | `kubectl-helm-debian.sh` |
-| [Maven Install Script](docs/maven.md) | `maven-debian.sh` |
-| [Node.js Install Script](docs/node.md) | `node-debian.sh` |
-| [PowerShell Install Script](docs/powershell.md) | `powershell-debian.sh` |
-| [Python Install Script](docs/python.md) | `python-debian.sh` |
-| [Ruby Install Script](docs/ruby.md) | `ruby-debian.sh` |
-| [Rust (rustlang) Install Script](docs/rust.md) | `rust-debian.sh` |
-| [SSH Server Install Script](docs/sshd.md) | `sshd-debian.sh` |
-| [Terraform CLI Install Script](docs/terraform.md) | `terraform-debian.sh` |
+| Document | Script | Maintainers |
+|----------|--------|------------|
+| [Azure CLI Install Script](docs/azcli.md) | `azcli-debian.sh` | VS Code and GitHub Codespaces teams |
+| [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` (Community) | VS Code and GitHub Codespaces teams |
+| [Desktop (Lightweight) Install Script](docs/desktop-lite.md) | `desktop-lite-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Docker-in-Docker Install Script](docs/docker-in-docker.md) | `docker-in-docker-debian.sh` | VS Code and GitHub Codespaces teams |
+| [Docker-from-Docker Install Script](docs/docker.md) | `docker-debian.sh`<br />`docker-redhat.sh` (Community) | VS Code and GitHub Codespaces teams, [@smankoo](https://github.com/smankoo) (`docker-redhat.sh`) |
+| [fish Install Script](docs/fish.md) | `fish-debian.sh` (Community) | [@andreiborisov](https://github.com/andreiborisov) |
+| [Git Build/Install from Source Script](docs/git-from-src.md) | `git-from-src-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Git LFS Install Script](docs/git-lfs.md) | `git-lfs-debian.sh` | VS Code and GitHub Codespaces teams|
+| [GitHub CLI Install Script](docs/github.md) | `github-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Go (golang) Install Script](docs/go.md) | `go-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Gradle Install Script](docs/gradle.md) | `gradle-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Homebrew Install Script](docs/homebrew.md) | `homebrew-debian.sh` (Community) | [@andreiborisov](https://github.com/andreiborisov) |
+| [Java Install Script](docs/java.md) | `java-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Kubectl and Helm Install Script](docs/kubectl-helm.md) | `kubectl-helm-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Maven Install Script](docs/maven.md) | `maven-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Node.js Install Script](docs/node.md) | `node-debian.sh` | VS Code and GitHub Codespaces teams|
+| [PowerShell Install Script](docs/powershell.md) | `powershell-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Python Install Script](docs/python.md) | `python-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Ruby Install Script](docs/ruby.md) | `ruby-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Rust (rustlang) Install Script](docs/rust.md) | `rust-debian.sh` | VS Code and GitHub Codespaces teams|
+| [SSH Server Install Script](docs/sshd.md) | `sshd-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Terraform CLI Install Script](docs/terraform.md) | `terraform-debian.sh` | VS Code and GitHub Codespaces teams|
 
 ## Using a script
 

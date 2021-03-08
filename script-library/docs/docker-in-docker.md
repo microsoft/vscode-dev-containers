@@ -4,7 +4,11 @@
 
 *Create child containers _inside_ a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.* 
 
+**Script status:** Stable
+
 **OS support**: Debian 9+, Ubuntu 20.04+, and downstream distros.
+
+**Maintainer:** The VS Code and GitHub Codespaces teams
 
 ## Syntax
 
