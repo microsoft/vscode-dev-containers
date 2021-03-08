@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/homebrew.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/fish.md
 #
 # Syntax: ./fish-debian.sh [whether to install Fisher] [non-root user]
 
