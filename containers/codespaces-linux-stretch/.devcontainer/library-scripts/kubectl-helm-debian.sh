@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/kubectl-helm.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./kubectl-helm-debian.sh
 
