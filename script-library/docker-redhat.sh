@@ -4,9 +4,9 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
+# ** This script is community supported **
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/docker.md
-#
-# Community supported RedHat based version of docker-debian.sh
+# Maintainer: @smankoo
 #
 # Syntax: ./docker-redhat.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user]
 
