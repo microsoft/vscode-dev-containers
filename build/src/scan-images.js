@@ -1,6 +1,7 @@
 const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
 const path = require('path');
+const packageJson = require('../../package.json');
 
 // Command to install, setup, and execute a clamav scan on the whole image
 const scanCommand = {
@@ -23,20 +24,26 @@ const scanCommand = {
         && clamscan -i -r --exclude-dir='/proc' --exclude-dir='/dev' --exclude-dir='/sys' /"
 }
 
-async function scanImagesForMalware(release, registry, registryPath, alwaysPull, page, pageTotal, definitionsToSkip, definitionId) {  
+async function scanImagesForMalware(release, registry, registryPath, alwaysPull, page, pageTotal, definitionsToSkip, pruneBetweenDefinitions, definitionId) {  
     page = page || 1;
     pageTotal = pageTotal || 1;
+    
+    // Warn if image versions might be out of sync
+    if (release.charAt(0) === 'v' && !isNaN(parseInt(release.charAt(1))) && release !== `v${packageJson.version}`) {
+        console.log(`(!) WARNING: Release specified (${release}) does not match the package.json\n    version (${packageJson.version}). Some image versions will be based on\n    local source code so this can lead to unexpected results.\n`);
+    }
+
     await configUtils.loadConfig(path.join(__dirname, '..', '..'));
     const definitionsToScan = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip);
     const imagesWithMalware = [];
     const imageScanFailures = [];
 
     await asyncUtils.forEach(definitionsToScan, async (currentDefinitionId) => {
-        console.log(`**** Scanning ${currentDefinitionId} ${release} ****`);
-        const imagesToScan = getImageListForDefinition(definitionId, release, registry, registryPath);
+        console.log(`**** Scanning images for ${currentDefinitionId} ****`);
+        const imagesToScan = getImageListForDefinition(currentDefinitionId, release, registry, registryPath);
         await asyncUtils.forEach(imagesToScan, async (imageToScan) => {
             console.log(`(*) Scanning ${imageToScan}...`);
-            const rootDistro = configUtils.getLinuxDistroForDefinition(definitionId);
+            const rootDistro = configUtils.getLinuxDistroForDefinition(currentDefinitionId);
             try {
                 await asyncUtils.spawn('docker', [
                     'run', 
@@ -59,6 +66,10 @@ async function scanImagesForMalware(release, registry, registryPath, alwaysPull,
                     imageScanFailures.push(imageToScan);
                 }
             }
+            // Prune images if setting enabled
+            if (pruneBetweenDefinitions) {
+                await asyncUtils.spawn('docker', ['image', 'prune', '-a']);
+            }
             console.log();
         });
         console.log('(*) Done!\n');
@@ -78,13 +89,12 @@ async function scanImagesForMalware(release, registry, registryPath, alwaysPull,
 }
 
 function getImageListForDefinition(definitionId, release, registry, registryPath) {
-            // Get one image per variant
-            const variants = configUtils.getVariants(definitionId);
-            if (variants) {    
-                return variants.map((variant) => configUtils.getTagList(definitionId, release, false, registry, registryPath, variant)[0]);
-            }
-            return configUtils.getTagList(definitionId, release, false, registry, registryPath)[0];
-    
+    // Get one image per variant
+    const variants = configUtils.getVariants(definitionId);
+    if (variants) {    
+        return variants.map((variant) => configUtils.getTagList(definitionId, release, false, registry, registryPath, variant)[0]);
+    }
+    return configUtils.getTagList(definitionId, release, false, registry, registryPath)[0];
 }
 
 module.exports = {

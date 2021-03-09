@@ -2,6 +2,7 @@ const path = require('path');
 const push = require('./push').push;
 const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
+const packageJson = require('../../package.json');
 
 //TODO: Generate markdown of versions per image that can then be stored with the definitions on release as a different output format.
 
@@ -47,6 +48,11 @@ const dependencyLookupConfig = {
 }
 
 async function generateComponentGovernanceManifest(repo, release, registry, registryPath, buildFirst, pruneBetweenDefinitions, definitionId) {
+    // Warn if image versions might be out of sync
+    if (release.charAt(0) === 'v' && !isNaN(parseInt(release.charAt(1))) && release !== `v${packageJson.version}`) {
+        console.log(`(!) WARNING: Release specified (${release}) does not match the package.json\n    version (${packageJson.version}). Some image versions will be based on\n    local source code so this can lead to unexpected results.\n`);
+    }
+
     // Load config files
     await configUtils.loadConfig();
 

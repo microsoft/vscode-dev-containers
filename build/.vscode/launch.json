@@ -59,8 +59,9 @@
 			"args": [
 				"scan",
 				"debian",
-				"--no-always-pull",
 				"--release", "master",
+				"--no-always-pull",
+				"--no-prune",
 				"--registry", "mcr.microsoft.com",
 				"--registryPath", "vscode/devcontainers"
 			]

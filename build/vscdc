@@ -252,6 +252,10 @@ require('yargs')
                     describe: 'A space separated list of definition IDs to not scan.',
                     type: 'array',
                     default: []
+                },
+                'prune': {
+                    describe: 'whether to prune images between definitions',
+                    default: false
                 }
             })
     }, scanCommand)
@@ -273,7 +277,7 @@ function pushCommand(argv) {
 }
 
 function scanCommand(argv) {
-    scanImagesForMalware(argv.release, argv.registry, argv.registryPath, argv.alwaysPull, argv.page, argv.pageTotal, argv.skip, argv.devcontainer)
+    scanImagesForMalware(argv.release, argv.registry, argv.registryPath, argv.alwaysPull, argv.page, argv.pageTotal, argv.skip, argv.prune, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Scan failed - ${reason}`);
             if(reason.stack) {
