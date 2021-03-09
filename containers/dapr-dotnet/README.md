@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Dapr applications using C# and .NET Core 3.1. Includes all needed SDKs, extensions, and dependencies.*
+*Develop Dapr applications using C# and .NET. Includes all needed SDKs, extensions, and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -16,7 +16,7 @@
 
 ## Dapr Notes
 
-When the dev container is created, the definition automatically initializes Dapr on a separate Docker network (to isolate it from Dapr instances running locally or in another Dapr dev container). This is done via the `postCreateCommand` in the `.devcontainer/devcontainer.json` and the `DAPR_NETWORK` environment variable in the `.devcontainer/docker-compose.yml`. The `DAPR_REDIS_HOST` and `DAPR_PLACEMENT_HOST` environment variables ensure that Dapr `run` commands implicitly connect to the Dapr instance in that Docker network.
+When the dev container is created, the definition automatically initializes Dapr on a separate Docker network (to isolate it from Dapr instances running locally or in another Dapr dev container). This is done via the `postCreateCommand` in the `.devcontainer/devcontainer.json` and the `DAPR_NETWORK` environment variable in the `.devcontainer/docker-compose.yml`.
 
 ## Using this definition with an existing folder
 
@@ -99,7 +99,7 @@ This definition includes some test code that will help you verify it is working 
 
     ```bash
     $ cd test-project
-    $ dapr run --app-id test --app-port 5000 --dapr-http-port 3500 --components-path ./components dotnet run
+    $ dapr run --app-id test --app-port 5000 --dapr-http-port 3500 dotnet run
     ```
 
 7. In a separate terminal, invoke the application via Dapr:
