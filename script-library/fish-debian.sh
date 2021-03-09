@@ -5,7 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # ** This script is community supported **
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/homebrew.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/fish.md
 # Maintainer: @andreiborisov
 #
 # Syntax: ./fish-debian.sh [whether to install Fisher] [non-root user]
