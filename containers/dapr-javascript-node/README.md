@@ -1,8 +1,8 @@
-# Dapr with Node.js & TypeScript (Community)
+# Dapr with Node.js & JavaScript (Community)
 
 ## Summary
 
-*Develop Dapr applications using Node.js and TypeScript. Includes Dapr, Node.js, eslint, yarn, and the TypeScript compiler.*
+*Develop Dapr applications using Node.js and JavaScript. Includes Dapr, Node.js, eslint, yarn, and the TypeScript compiler.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -16,7 +16,7 @@
 
 ## Dapr Notes
 
-When the dev container is created, the definition automatically initializes Dapr on a separate Docker network (to isolate it from Dapr instances running locally or in another Dapr dev container). This is done via the `postCreateCommand` in the `.devcontainer/devcontainer.json` and the `DAPR_NETWORK` environment variable in the `.devcontainer/docker-compose.yml`. The `DAPR_REDIS_HOST` and `DAPR_PLACEMENT_HOST` environment variables ensure that Dapr `run` commands implicitly connect to the Dapr instance in that Docker network.
+When the dev container is created, the definition automatically initializes Dapr on a separate Docker network (to isolate it from Dapr instances running locally or in another Dapr dev container). This is done via the `postCreateCommand` in the `.devcontainer/devcontainer.json` and the `DAPR_NETWORK` environment variable in the `.devcontainer/docker-compose.yml`.
 
 ## Using this definition with an existing folder
 
@@ -51,14 +51,7 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/dapr-typescript-node-12` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project. This will automatically run `npm install` and compile the source before starting it.
-6. Start the application with Dapr:
-
-    ```bash
-    $ cd test-project
-    $ npm run dapr
-    ```
-
-7. In a separate terminal, invoke the application via Dapr:
+6. In a separate terminal, invoke the application via Dapr:
 
     ```bash
     # Deposit funds to the account (creating the account if not exists)

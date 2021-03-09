@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/java.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./java-debian.sh [JDK version] [SDKMAN_DIR] [non-root user] [Add to rc files flag]
 

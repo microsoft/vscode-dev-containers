@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/git-lfs.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./git-lfs-debian.sh
 

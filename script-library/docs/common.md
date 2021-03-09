@@ -6,6 +6,8 @@
 
 **OS support**: Debian 9+, Ubuntu 16.04+, Alpine 3.9+, CentOS/RHEL 7+ (community supported) and downstream distros.
 
+**Maintainer:** The VS Code and GitHub Codespaces teams
+
 ## Syntax
 
 ```text

@@ -9,8 +9,8 @@
 		"compile": "tsc -p tsconfig.json",
 		"start": "node out/server.js",
 		"debug": "node --inspect=9229 out/server.js",
-		"dapr": "dapr run --dapr-http-port 3500 --app-id test --app-port 3000 --components-path ./components npm run start",
-		"dapr-debug": "dapr run --dapr-http-port 3500 --app-id test --app-port 3000 --components-path ./components npm run debug",
+		"dapr": "dapr run --dapr-http-port 3500 --app-id test --app-port 3000 npm run start",
+		"dapr-debug": "dapr run --dapr-http-port 3500 --app-id test --app-port 3000 npm run debug",
 		"test": " REGRESSION_TESTING=true npm start"
 	},
 	"dependencies": {

@@ -1,16 +1,15 @@
-version: '3.5'
+version: '3.7'
 services:
   app:
     build: 
       context: .
       dockerfile: Dockerfile
       args:
-        variant: 14
+        variant: 3.1
 
     environment:
+      ASPNETCORE_Kestrel__Endpoints__Http__Url: http://*:5000
       DAPR_NETWORK: dapr-dev-container
-      DAPR_REDIS_HOST: dapr_redis
-      DAPR_PLACEMENT_HOST: dapr_placement
 
     init: true
     volumes:
@@ -29,16 +28,8 @@ services:
     # security_opt:
     #   - seccomp:unconfined
 
-    # Uncomment the next line to use a non-root user for all processes.
-    # user: node
-
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
     # (Adding the "ports" property to this file will not forward from a Codespace.)
-
-  # Dapr will not initialize a Redis host if a custom redis host name is specified, so start one manually.
-  # https://github.com/dapr/cli/issues/418
-  dapr_redis:
-    image: 'redis:latest'
 
 networks: 
   default:
