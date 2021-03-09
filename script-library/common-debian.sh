@@ -71,8 +71,10 @@ apt-get-update-if-needed()
 # Run install apt-utils to avoid debconf warning then verify presence of other common developer tools and dependencies
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     # Needed for adding manpages-posix and manpages-posix-dev which are non-free packages in Debian
-    CODENAME=$(lsb_release -cs)
-    echo -e "deb http://deb.debian.org/debian/ $(CODENAME) main contrib non-free \ndeb http://deb.debian.org/debian/ $(CODENAME)-updates main contrib non-free \ndeb http://deb.debian.org/debian-security/ $(CODENAME)/updates main contrib non-free \ndeb http://deb.debian.org/debian/ $(CODENAME)-backports main contrib non-free" >/etc/apt/sources.list
+    if [ "$(lsb_release -is)" = "Debian" ]; then
+        CODENAME=$(lsb_release -cs)
+        echo -e "deb http://deb.debian.org/debian/ $(CODENAME) main contrib non-free \ndeb http://deb.debian.org/debian/ $(CODENAME)-updates main contrib non-free \ndeb http://deb.debian.org/debian-security/ $(CODENAME)/updates main contrib non-free \ndeb http://deb.debian.org/debian/ $(CODENAME)-backports main contrib non-free" >/etc/apt/sources.list
+    fi
     apt-get-update-if-needed
 
     PACKAGE_LIST="apt-utils \
@@ -111,6 +113,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         ncdu \
         man-db \
         strace \
+        manpages \
         manpages-dev \
         manpages-posix \
         manpages-posix-dev"
