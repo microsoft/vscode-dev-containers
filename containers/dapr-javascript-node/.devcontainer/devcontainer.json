@@ -1,5 +1,5 @@
 {
-	"name": "Dapr with Node.js & TypeScript (Community)",
+	"name": "Dapr with Node.js & JavaScript (Community)",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
