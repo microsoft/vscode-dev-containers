@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/desktop-lite.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./desktop-lite-debian.sh [non-root user] [vnc password] [install no vnc flag]
 

@@ -78,7 +78,6 @@ check "git-ed" [ "$(cat /home/codespace/.local/bin/git-ed.sh)" = "$(cat ./git-ed
 # Check that we can run a puppeteer node app.
 yarn
 check "run-puppeteer" node puppeteer.js
-check "img-puppeteer" type ./example.png
 
 # Report result
 reportResults

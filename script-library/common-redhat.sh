@@ -4,11 +4,11 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
+# ** This script is community supported **
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
+# Maintainer: The VS Code and Codespaces Teams
 #
-# Community supported RedHat based version of common-debian.sh
-#
-# Syntax: ./common-redhat.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My *! flag]
+# Syntax: ./common-redhat.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My Zsh! flag]
 
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"automatic"}
@@ -84,7 +84,6 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         libicu \
         zlib \
         sudo \
-        coreutils \
         sed \
         grep \
         which \
@@ -156,99 +155,114 @@ fi
 EOF
 )"
 
+# code shim, it fallbacks to code-insiders if code is not available
+cat << 'EOF' > /usr/local/bin/code
+#!/bin/sh
+
+get_in_path_except_current() {
+    which -a "$1" | grep -A1 "$0" | grep -v "$0"
+}
+
+code="$(get_in_path_except_current code)"
+
+if [ -n "$code" ]; then
+    exec "$code" "$@"
+elif [ "$(command -v code-insiders)" ]; then
+    exec code-insiders "$@"
+else
+    echo "code or code-insiders is not installed" >&2
+    exit 127
+fi
+EOF
+chmod +x /usr/local/bin/code
+
 # Codespaces themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
-<<EOF
-#!/usr/bin/env bash
-prompt() {
-    if [ "\$?" != "0" ]; then
-        local arrow_color=\${bold_red}
-    else
-        local arrow_color=\${reset_color}
-    fi
-    if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="gh:@\${GITHUB_USER}"
-    else
-        local USERNAME="\$(whoami)"
-    fi
-    local cwd="\$(pwd | sed "s|^\${HOME}|~|")"
-    PS1="\${green}\${USERNAME} \${arrow_color}➜\${reset_color} \${bold_blue}\${cwd}\${reset_color} \$(scm_prompt_info)\${white}$ \${reset_color}"
+<<'EOF'
+__bash_prompt() {
+    local userpart='`export XIT=$? \
+        && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
+        && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
+    local gitbranch='`export BRANCH=$(git describe --contains --all HEAD 2>/dev/null); \
+        if [ "${BRANCH}" != "" ]; then \
+            echo -n "\[\033[0;36m\](\[\033[1;31m\]${BRANCH}" \
+            && if git ls-files --error-unmatch -m --directory --no-empty-directory -o --exclude-standard ":/*" > /dev/null 2>&1; then \
+                    echo -n " \[\033[1;33m\]✗"; \
+            fi \
+            && echo -n "\[\033[0;36m\]) "; \
+        fi`'
+    local lightblue='\[\033[1;34m\]'
+    local removecolor='\[\033[0m\]'
+    PS1="${userpart} ${lightblue}\w ${gitbranch}${removecolor}\$ "
+    unset -f __bash_prompt
 }
-SCM_THEME_PROMPT_PREFIX="\${reset_color}\${cyan}(\${bold_red}"
-SCM_THEME_PROMPT_SUFFIX="\${reset_color} "
-SCM_THEME_PROMPT_DIRTY=" \${bold_yellow}✗\${reset_color}\${cyan})"
-SCM_THEME_PROMPT_CLEAN="\${reset_color}\${cyan})"
-SCM_GIT_SHOW_MINIMAL_INFO="true"
-safe_append_prompt_command prompt
+__bash_prompt
 EOF
 )"
 CODESPACES_ZSH="$(cat \
-<<EOF
-prompt() {
-    if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="gh:@\${GITHUB_USER}"
+<<'EOF'
+__zsh_prompt() {
+    local prompt_username
+    if [ ! -z "${GITHUB_USER}" ]; then 
+        prompt_username="@${GITHUB_USER}"
     else
-        local USERNAME="\$(whoami)"
+        prompt_username="%n"
     fi
-    PROMPT="%{\$fg[green]%}\${USERNAME} %(?:%{\$reset_color%}➜ :%{\$fg_bold[red]%}➜ )"
-    PROMPT+='%{\$fg_bold[blue]%}%~%{\$reset_color%} \$(git_prompt_info)%{\$fg[white]%}$ %{\$reset_color%}'
+    PROMPT="%{$fg[green]%}${prompt_username} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )"
+    PROMPT+='%{$fg_bold[blue]%}%~%{$reset_color%} $(git_prompt_info)%{$fg[white]%}$ %{$reset_color%}'
+    unset -f __zsh_prompt
 }
-ZSH_THEME_GIT_PROMPT_PREFIX="%{\$fg_bold[cyan]%}(%{\$fg_bold[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{\$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{\$fg_bold[yellow]%}✗%{\$fg_bold[cyan]%})"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{\$fg_bold[cyan]%})"
-prompt
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}(%{$fg_bold[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg_bold[yellow]%}✗%{$fg_bold[cyan]%})"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[cyan]%})"
+__zsh_prompt
 EOF
 )"
 
-# Adapted Oh My Zsh! install step to work with both "Oh Mys" rather than relying on an installer script
-# See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
-install-oh-my()
-{
-    local OH_MY=$1
-    local OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-${OH_MY}"
-    local TEMPLATE="${OH_MY_INSTALL_DIR}/templates/$2"
-    local OH_MY_GIT_URL=$3
-    local USER_RC_FILE="${USER_RC_PATH}/.${OH_MY}rc"
+# Add notice that Oh My Bash! has been removed from images and how to provide information on how to install manually
+OMB_README="$(cat \
+<<'EOF'
+"Oh My Bash!" has been removed from this image in favor of a simple shell prompt. If you still
+wish to use it, remove "~/.oh-my-bash" and install it from: https://github.com/ohmybash/oh-my-bash
+You may also want to consider "Bash-it" as an alternative: https://github.com/bash-it/bash-it
+See https://github.com/microsoft/vscode-dev-containers/issues/674#issuecomment-783474956
+EOF
+)"
+OMB_STUB="$(cat \
+<<'EOF'
+#!/usr/bin/env bash
+cd "$(dirname $0)"
+if [ -t 1 ]; then
+    cat README.md
+fi
+EOF
+)"
 
-    if [ -d "${OH_MY_INSTALL_DIR}" ] || [ "${INSTALL_OH_MYS}" != "true" ]; then
-        return 0
-    fi
-
-    umask g-w,o-w
-    mkdir -p ${OH_MY_INSTALL_DIR}
-    git clone --depth=1 \
-        -c core.eol=lf \
-        -c core.autocrlf=false \
-        -c fsck.zeroPaddedFilemode=ignore \
-        -c fetch.fsck.zeroPaddedFilemode=ignore \
-        -c receive.fsck.zeroPaddedFilemode=ignore \
-        ${OH_MY_GIT_URL} ${OH_MY_INSTALL_DIR} 2>&1
-    echo -e "$(cat "${TEMPLATE}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
-    if [ "${OH_MY}" = "bash" ]; then
-        sed -i -e 's/OSH_THEME=.*/OSH_THEME="codespaces"/g' ${USER_RC_FILE}
-        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes/codespaces
-        echo "${CODESPACES_BASH}" > ${OH_MY_INSTALL_DIR}/custom/themes/codespaces/codespaces.theme.sh
-    else
-        sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
-        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
-        echo "${CODESPACES_ZSH}" > ${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme
-    fi
-    # Shrink git while still enabling updates
-    cd ${OH_MY_INSTALL_DIR} 
-    git repack -a -d -f --depth=1 --window=1
-
-    if [ "${USERNAME}" != "root" ]; then
-        cp -rf ${USER_RC_FILE} ${OH_MY_INSTALL_DIR} /root
-        chown -R ${USERNAME}:${USERNAME} ${USER_RC_PATH}
-    fi
-}
-
+# Add RC snippet and custom bash prompt
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
-    echo "${RC_SNIPPET}" >> /etc/bashrc
+    echo "${RC_SNIPPET}" >> /etc/bash.bashrc
+    echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
+    if [ "${USERNAME}" != "root" ]; then
+        echo "${CODESPACES_BASH}" >> "/root/.bashrc"
+    fi
+    chown ${USERNAME}:${USERNAME} "${USER_RC_PATH}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
 fi
-install-oh-my bash bashrc.osh-template https://github.com/ohmybash/oh-my-bash
+
+# Add stub for Oh My Bash!
+if [ ! -d "${USER_RC_PATH}/.oh-my-bash}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
+    mkdir -p "${USER_RC_PATH}/.oh-my-bash" "/root/.oh-my-bash"
+    echo "${OMB_README}" >> "${USER_RC_PATH}/.oh-my-bash/README.md"
+    echo "${OMB_STUB}" >> "${USER_RC_PATH}/.oh-my-bash/oh-my-bash.sh"
+    chmod +x "${USER_RC_PATH}/.oh-my-bash/oh-my-bash.sh"
+    if [ "${USERNAME}" != "root" ]; then
+        echo "${OMB_README}" >> "/root/.oh-my-bash/README.md"
+        echo "${OMB_STUB}" >> "/root/.oh-my-bash/oh-my-bash.sh"
+        chmod +x "/root/.oh-my-bash/oh-my-bash.sh"
+    fi
+    chown -R "${USERNAME}:${USERNAME}" "${USER_RC_PATH}/.oh-my-bash"
+fi
 
 # Optionally install and configure zsh and Oh My Zsh!
 if [ "${INSTALL_ZSH}" = "true" ]; then
@@ -259,7 +273,35 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
         echo "${RC_SNIPPET}" >> /etc/zshrc
         ZSH_ALREADY_INSTALLED="true"
     fi
-    install-oh-my zsh zshrc.zsh-template https://github.com/ohmyzsh/ohmyzsh
+
+    # Adapted, simplified inline Oh My Zsh! install steps that adds, defaults to a codespaces theme.
+    # See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
+    OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-zsh"
+    if [ ! -d "${OH_MY_INSTALL_DIR}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
+        TEMPLATE_PATH="${OH_MY_INSTALL_DIR}/templates/zshrc.zsh-template"
+        USER_RC_FILE="${USER_RC_PATH}/.zshrc"
+        umask g-w,o-w
+        mkdir -p ${OH_MY_INSTALL_DIR}
+        git clone --depth=1 \
+            -c core.eol=lf \
+            -c core.autocrlf=false \
+            -c fsck.zeroPaddedFilemode=ignore \
+            -c fetch.fsck.zeroPaddedFilemode=ignore \
+            -c receive.fsck.zeroPaddedFilemode=ignore \
+            "https://github.com/ohmyzsh/ohmyzsh" "${OH_MY_INSTALL_DIR}" 2>&1
+        echo -e "$(cat "${TEMPLATE_PATH}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
+        sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
+        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
+        echo "${CODESPACES_ZSH}" > "${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme"
+        # Shrink git while still enabling updates
+        cd "${OH_MY_INSTALL_DIR}"
+        git repack -a -d -f --depth=1 --window=1
+        # Copy to non-root user if one is specified
+        if [ "${USERNAME}" != "root" ]; then
+            cp -rf "${USER_RC_FILE}" "${OH_MY_INSTALL_DIR}" /root
+            chown -R ${USERNAME}:${USERNAME} "${USER_RC_PATH}"
+        fi
+    fi
 fi
 
 # Write marker file

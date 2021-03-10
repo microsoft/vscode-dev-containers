@@ -31,11 +31,13 @@ fi
 
 if [ "${DISTRO}" = "debian" ]; then
     runScript ${SCRIPT_DIR}/azcli-${DISTRO}.sh
+    runScript ${SCRIPT_DIR}/fish-${DISTRO}.sh "false ${USERNAME}"
     runScript ${SCRIPT_DIR}/git-from-src-${DISTRO}.sh "2.26.2"
     runScript ${SCRIPT_DIR}/git-lfs-${DISTRO}.sh
     runScript ${SCRIPT_DIR}/github-${DISTRO}.sh
     runScript ${SCRIPT_DIR}/go-${DISTRO}.sh "1.14 /opt/go /go ${USERNAME} false"
     runScript ${SCRIPT_DIR}/gradle-${DISTRO}.sh "4.4 /usr/local/sdkman1 ${USERNAME} false"
+    runScript ${SCRIPT_DIR}/homebrew-${DISTRO}.sh "${USERNAME} false true /home/${USERNAME}/linuxbrew"
     runScript ${SCRIPT_DIR}/java-${DISTRO}.sh "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
     runScript ${SCRIPT_DIR}/kubectl-helm-${DISTRO}.sh
     runScript ${SCRIPT_DIR}/maven-${DISTRO}.sh "3.6.3 /usr/local/sdkman3 ${USERNAME} false" 

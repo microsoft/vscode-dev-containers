@@ -6,14 +6,16 @@
 
 **OS support**: Debian 9+, Ubuntu 16.04+, CentOS/RHEL 7+ (community supported) and downstream distros.
 
+**Maintainer:** The VS Code and GitHub Codespaces teams, [@smankoo](https://github.com/smankoo) (`docker-redhat.sh`)
+
+> **Note:** `docker-redhat.sh` is community supported.
+
 ## Syntax
 
 ```text
 ./docker-debian.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user] [Use Moby]
 ./docker-redhat.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user]
 ```
-
-> **Note:** `docker-redhat.sh` is community supported.
 
 |Argument|Default|Description|
 |--------|-------|-----------|

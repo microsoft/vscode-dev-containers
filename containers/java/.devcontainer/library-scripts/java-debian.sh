@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/java.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./java-debian.sh [JDK version] [SDKMAN_DIR] [non-root user] [Add to rc files flag]
 
@@ -50,7 +51,10 @@ fi
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+        echo -e "$1" >> /etc/bash.bashrc
+        if [ -f "/etc/zsh/zshrc" ]; then
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
     fi
 }
 

@@ -66,7 +66,6 @@ async function patchImage(imageId, patchPath, dockerFilePath, bumpVersion, regis
                 `ORIGINAL_IMAGE=${registry}/${repoAndTagList[0].repository}@${imageId}`]
                 .concat(tagArgs)
                 .concat('-f', dockerFilePath, patchPath), spawnOpts);
-            done = true;
         } catch (ex) {
             // Try to clean out unused images and retry once if get an out of storage response
             if (ex.result && ex.result.indexOf('no space left on device') >= 0 && retry === false) {

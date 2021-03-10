@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/azcli.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./azcli-debian.sh
 

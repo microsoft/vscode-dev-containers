@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/go.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./go-debian.sh [Go version] [GOROOT] [GOPATH] [non-root user] [Add GOPATH, GOROOT to rc files flag] [Install tools flag]
 
@@ -47,7 +48,10 @@ fi
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+        echo -e "$1" >> /etc/bash.bashrc
+        if [ -f "/etc/zsh/zshrc" ]; then
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
     fi
 }
 
@@ -94,21 +98,19 @@ GO_TOOLS="\
     github.com/mgechev/revive \
     github.com/uudashr/gopkgs/v2/cmd/gopkgs \
     github.com/ramya-rao-a/go-outline \
-    github.com/go-delve/delve/cmd/dlv"
+    github.com/go-delve/delve/cmd/dlv \
+    github.com/golangci/golangci-lint/cmd/golangci-lint"
 if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     echo "Installing common Go tools..."
     export PATH=${TARGET_GOROOT}/bin:${PATH}
-    mkdir -p /tmp/gotools
+    mkdir -p /tmp/gotools /usr/local/etc/vscode-dev-containers ${TARGET_GOPATH}/bin
     cd /tmp/gotools
     export GOPATH=/tmp/gotools
     export GOCACHE=/tmp/gotools/cache
 
     # Go tools w/module support
     export GO111MODULE=on
-    (echo "${GO_TOOLS}" | xargs -n 1 go get -v )2>&1
-
-    # golangci-lint
-    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b ${TARGET_GOPATH}/bin 2>&1
+    (echo "${GO_TOOLS}" | xargs -n 1 go get -v )2>&1 | tee -a /usr/local/etc/vscode-dev-containers/go.log
 
     # Move Go tools into path and clean up
     mv /tmp/gotools/bin/* ${TARGET_GOPATH}/bin/
@@ -124,7 +126,6 @@ export GOROOT="${TARGET_GOROOT}"
 if [[ "\${PATH}" != *"\${GOROOT}/bin"* ]]; then export PATH="\${PATH}:\${GOROOT}/bin"; fi
 EOF
 )"
-
 
 echo "Done!"
 

@@ -31,7 +31,7 @@ jobs:
 
     - name: Get tag name
       id: get_tag_name  
-      uses: little-core-labs/get-git-tag@v3.0.2
+      run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
 
     - name: Azure CLI login
       id: az_login
@@ -70,8 +70,8 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get tag name
-      id: get_tag_name  
-      uses: little-core-labs/get-git-tag@v3.0.2
+      id: get_tag_name
+      run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
 
     - name: Update Dockerfile common script sources and re-tag
       id: update_script_source

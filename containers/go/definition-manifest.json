@@ -1,6 +1,6 @@
 {
-	"variants": ["1", "1.15", "1.14"],
-	"definitionVersion": "0.201.0",
+	"variants": ["1", "1.16", "1.15"],
+	"definitionVersion": "0.202.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -16,73 +16,17 @@
 		],
 		"git": {
 			"Oh My Zsh!": "/root/.oh-my-zsh",
-			"Oh My Bash!": "/root/.oh-my-bash",
 			"nvm": "/usr/local/share/nvm"
 		},
-		"manual": [{
-			"Component": {
-			   "Type": "go",
-			   "Go": {
-				 "Name": "golang.org/x/tools/gopls",
-				 "Version": "0.6.4"
-			   }
-			 }
-		}, {
-			"Component": {
-			   "Type": "go",
-			   "Go": {
-				 "Name": "honnef.co/go/tools",
-				 "Version": "0.1.1"
-			   }
-			 }
-		}, {
-			"Component": {
-			   "Type": "go",
-			   "Go": {
-				 "Name": "golang.org/x/lint/golint",
-				 "Version": "0.0.0-20201208152925-83fdc39ff7b5"
-			   }
-			 }
-		}, {
-			"Component": {
-			   "Type": "go",
-			   "Go": {
-				 "Name": "github.com/mgechev/revive",
-				 "Version": "1.0.3"
-			   }
-			 }
-		}, {
-			"Component": {
-			   "Type": "go",
-			   "Go": {
-				 "Name": "github.com/uudashr/gopkgs/v2/cmd/gopkgs",
-				 "Version": "2.1.2"
-			   }
-			 }
-		}, {
-			"Component": {
-			   "Type": "go",
-			   "Go": {
-				 "Name": "github.com/ramya-rao-a/go-outline",
-				 "Version": "0.0.0-20200117021646-2a048b4510eb"
-			   }
-			 }
-		}, {
-			"Component": {
-			   "Type": "go",
-			   "Go": {
-				 "Name": "github.com/go-delve/delve/cmd/dlv",
-				 "Version": "1.6.0"
-			   }
-			 }
-		}, {
-			"Component": {
-			   "Type": "go",
-			   "Go": {
-				 "Name": "github.com/golangci/golangci-lint",
-				 "Version": "1.36.0"
-			   }
-			 }
-		}]
+		"go": {
+			"golang.org/x/tools/gopls": null,
+			"honnef.co/go/tools/...": null,
+			"golang.org/x/lint/golint": null,
+			"github.com/mgechev/revive": null,
+			"github.com/uudashr/gopkgs/v2/cmd/gopkgs": null,
+			"github.com/ramya-rao-a/go-outline": null,
+			"github.com/go-delve/delve/cmd/dlv": null,
+			"github.com/golangci/golangci-lint/cmd/golangci-lint": null
+		}
 	}
 }

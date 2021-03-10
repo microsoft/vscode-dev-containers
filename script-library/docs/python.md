@@ -2,9 +2,11 @@
 
 *Installs Python, PIPX, and common Python utilities.*
 
-**Script status**: Draft
+**Script status**: Stable
 
 **OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+
+**Maintainer:** The VS Code and GitHub Codespaces teams
 
 ## Syntax
 
@@ -33,7 +35,7 @@
         PIPX_BIN_DIR=/usr/local/py-utils/bin
     ENV PATH=${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}
     COPY .devcontainer/library-scripts/python-debian.sh /tmp/library-scripts/
-    RUN apt-get update && bash /tmp/library-scripts/python-debian.sh "3.8.3" "${PYTHON_PATH}" "${PIPX_HOME}" \
+    RUN apt-get update && bash /tmp/library-scripts/python-debian.sh "3.8.3" "${PYTHON_PATH}" "${PIPX_HOME}"
     ```
 
 That's it!

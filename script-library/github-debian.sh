@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/github.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./github-debian.sh [version]
 
