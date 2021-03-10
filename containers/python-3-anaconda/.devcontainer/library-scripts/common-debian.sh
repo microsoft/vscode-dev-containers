@@ -47,7 +47,7 @@ elif [ "${USERNAME}" = "none" ]; then
 fi
 
 # Load markers to see which steps have already run
-MARKER_FILE="/usr/local/etc/vscode-dev-containers/common-script-run"
+MARKER_FILE="/usr/local/etc/vscode-dev-containers/common"
 if [ -f "${MARKER_FILE}" ]; then
     echo "Marker file found:"
     cat "${MARKER_FILE}"
