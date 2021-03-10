@@ -42,7 +42,19 @@ fi
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+        echo -e "$1" >> /etc/bash.bashrc
+        if [ -f "/etc/zsh/zshrc" ]; then
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
+    fi
+}
+
+function updatefishconfig() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        echo "Updating /etc/fish/config.fish..."
+        if [ -f "/etc/fish/config.fish" ]; then
+             echo -e "$1" >> /etc/fish/config.fish
+         fi
     fi
 }
 
@@ -105,17 +117,19 @@ else
     git clone --depth 1 https://github.com/Homebrew/linuxbrew-core "${BREW_PREFIX}/Homebrew/Library/Taps/homebrew/homebrew-core"
     # Disable automatic updates as they are not allowed with shallow clone installation
     updaterc "export HOMEBREW_NO_AUTO_UPDATE=1"
+    updatefishconfig "set -gx HOMEBREW_NO_AUTO_UPDATE 1"
 fi
 "${BREW_PREFIX}/Homebrew/bin/brew" config
 mkdir "${BREW_PREFIX}/bin"
 ln -s "${BREW_PREFIX}/Homebrew/bin/brew" "${BREW_PREFIX}/bin"
 chown -R ${USERNAME} "${BREW_PREFIX}"
 
-# Add Homebrew binaries into PATH in bashrc/zshrc files (unless disabled)
+# Add Homebrew binaries into PATH in bashrc/zshrc/config.fish files (unless disabled)
 updaterc "$(cat << EOF
 if [[ "\${PATH}" != *"${BREW_PREFIX}/bin"* ]]; then export PATH="${BREW_PREFIX}/bin:\${PATH}"; fi
 if [[ "\${PATH}" != *"${BREW_PREFIX}/sbin"* ]]; then export PATH="${BREW_PREFIX}/sbin:\${PATH}"; fi
 EOF
 )"
+updatefishconfig "fish_add_path ${BREW_PREFIX}/bin ${BREW_PREFIX}/sbin"
 
 echo "Done!"
