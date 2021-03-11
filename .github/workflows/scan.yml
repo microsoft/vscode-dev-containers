@@ -1,0 +1,39 @@
+name: Scan latest images
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+
+jobs:
+  malware_scan:
+    name: Scan latest images for malware
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Free more space
+      id: free_space 
+      run: |
+        set -e
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+    
+    - name: Get latest tag
+      id: get_latest_tag
+      run: echo "::set-output name=tag::$(git describe --tags --abbrev=0 --match 'v*.*.*')"
+
+    - name: Checkout latest version tag
+      id: checkout
+      uses: actions/checkout@v2
+        ref: ${{ steps.get_latest_tag.output.tag }}
+
+    - name: Scan images
+      id: scan_for_malware
+      run: |
+        set -e
+        build/vscdc scan --always-pull \
+                        --prune \
+                        --release ${{ steps.get_latest_tag.output.tag }} \
+                        --registry ${{ secrets.STUB_REGISTRY }} \
+                        --registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
