@@ -32,7 +32,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove buster list to avoid unexpected errors given base image is stretch
     && rm /etc/apt/sources.list.d/buster.list \
     # Run common script and setup user
-    && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "true" "true" \
+    && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "true" "true" "true"\
     && bash /tmp/scripts/setup-user.sh "${USERNAME}" "${PATH}" \
     # Upgrade git to avoid security issue
     && apt-get upgrade -yq git \

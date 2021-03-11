@@ -13,7 +13,7 @@ ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \ 
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
+RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     # Install Node
     && bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "10" "${USERNAME}" \
     # Install Azure CLI
