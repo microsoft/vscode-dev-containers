@@ -37,3 +37,11 @@ sudo -u ${USERNAME} mkdir -p /home/${USERNAME}/.local/bin
 install -o ${USERNAME} -g ${USERNAME} -m 755 /tmp/scripts/git-ed.sh /home/${USERNAME}/.local/bin/git-ed.sh
 sudo -u ${USERNAME} git config --global core.editor "/home/${USERNAME}/.local/bin/git-ed.sh"
 rm -f /tmp/scripts/git-ed.sh
+
+# Add one time notice
+cat << 'EOF' > "/usr/local/etc/vscode-dev-containers/first-run-notice.txt"
+Welcome to Codespaces! Note that this version of the Codespaces image is now depreicated.
+A new version of the image is available that uses Ubuntu 20.04 instead of Debian 9 with updated
+tools! So, change your devcontainer.json or Dockerfile to reference version 1-linux to get 
+the latest. More information on the update can be found at: https://aka.ms/ghcs-default-focal.
+EOF
