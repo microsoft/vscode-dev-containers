@@ -118,7 +118,7 @@ In this case, you can simply pass in the arguments to the script.
 ARG INSTALL_ZSH="true"
 
 COPY library-scripts/*.sh /tmp/library-scripts/
-RUN /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "vscode" "1000" "1000" "true" \
+RUN /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "vscode" "1000" "1000" "true" "true" "true"\
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 ```
 
