@@ -7,7 +7,7 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My Zsh! flag]
+# Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My Zsh! flag] [Add non-free packages]
 
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"automatic"}
@@ -15,6 +15,7 @@ USER_UID=${3:-"automatic"}
 USER_GID=${4:-"automatic"}
 UPGRADE_PACKAGES=${5:-"true"}
 INSTALL_OH_MYS=${6:-"true"}
+ADD_NON_FREE_PACKAGES=${7:-"false"}
 
 set -e
 
@@ -71,7 +72,6 @@ apt-get-update-if-needed()
 
 # Run install apt-utils to avoid debconf warning then verify presence of other common developer tools and dependencies
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
-    apt-get-update-if-needed
 
     PACKAGE_LIST="apt-utils \
         git \
@@ -108,7 +108,27 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         sudo \
         ncdu \
         man-db \
-        strace"
+        strace \
+        manpages \
+        manpages-dev "
+        
+    # Needed for adding manpages-posix and manpages-posix-dev which are non-free packages in Debian
+    if [ "${ADD_NON_FREE_PACKAGES}" = "true" ]; then
+        CODENAME="$(cat /etc/os-release | grep -oE '^VERSION_CODENAME=.+$' | cut -d'=' -f2)"
+        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME} main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb http:\/\/deb\.debian\.org\/debian-security ${CODENAME}\/updates main/deb http:\/\/deb\.debian\.org\/debian-security ${CODENAME}\/updates main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian-security ${CODENAME}\/updates main/deb http:\/\/deb\.debian\.org\/debian-security ${CODENAME}\/updates main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main contrib non-free/" /etc/apt/sources.list 
+        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main contrib non-free/" /etc/apt/sources.list
+        echo "Running apt-get update..."
+        apt-get update
+        PACKAGE_LIST="${PACKAGE_LIST} manpages-posix manpages-posix-dev"
+    else
+        apt-get-update-if-needed
+    fi
 
     # Install libssl1.1 if available
     if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
