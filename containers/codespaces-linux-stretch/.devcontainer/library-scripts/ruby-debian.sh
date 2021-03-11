@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/ruby.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add to rc files flag] [Install tools flag]
 

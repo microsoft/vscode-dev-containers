@@ -1,10 +1,14 @@
 # Homebrew Install Script
 
+> **Note:** This is a community contributed and maintained script.
+
 *Adds Homebrew to a container.*
 
 **Script status**: Stable
 
 **OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+
+**Maintainer:** [@andreiborisov](https://github.com/andreiborisov)
 
 ## Syntax
 

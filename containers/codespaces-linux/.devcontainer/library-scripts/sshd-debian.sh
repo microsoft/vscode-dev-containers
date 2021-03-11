@@ -5,6 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/sshd.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./sshd-debian.sh [SSH Port (don't use 22)] [non-root user] [start sshd now flag] [new password for user]
 #
