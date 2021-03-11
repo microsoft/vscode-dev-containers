@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "071c4d199b1a0aa3391080c2e7fc2683c2a27698"
+                    "commitHash": "b1332682a0679df58390770388769023f2524acd"
                 }
             }
         },
@@ -158,7 +158,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-cli",
-                    "Version": "20.10.3+azure-1",
+                    "Version": "20.10.5+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -171,7 +171,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-engine",
-                    "Version": "20.10.3+azure-1",
+                    "Version": "20.10.5+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -208,7 +208,7 @@
                 "Git": {
                     "Name": "nvs",
                     "repositoryUrl": "https://github.com/jasongin/nvs",
-                    "commitHash": "5a2b954f5e6dc7cb6b416b97435ecb4036e682b5"
+                    "commitHash": "e35b15861268fb05209f6f3e7449109fea79171c"
                 }
             }
         },
@@ -218,7 +218,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "071c4d199b1a0aa3391080c2e7fc2683c2a27698"
+                    "commitHash": "b1332682a0679df58390770388769023f2524acd"
                 }
             }
         },
@@ -228,7 +228,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "071c4d199b1a0aa3391080c2e7fc2683c2a27698"
+                    "commitHash": "b1332682a0679df58390770388769023f2524acd"
                 }
             }
         },
@@ -237,7 +237,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.7.1"
+                    "Version": "2.7.2"
                 }
             }
         },
@@ -327,7 +327,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pipx",
-                    "Version": "0.16.0.0"
+                    "Version": "0.16.1.0"
                 }
             }
         },
@@ -417,7 +417,7 @@
                 "Type": "Go",
                 "Go": {
                     "Name": "github.com/go-delve/delve/cmd/dlv",
-                    "Version": "1.37.1"
+                    "Version": "1.38.0"
                 }
             }
         },
@@ -480,7 +480,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "git",
-                    "Version": "2.30.1",
+                    "Version": "2.30.2",
                     "DownloadUrl": "https://github.com/git/git"
                 }
             }
@@ -520,7 +520,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Helm",
-                    "Version": "3.5.2",
+                    "Version": "3.5.3",
                     "DownloadUrl": "https://github.com/helm/helm"
                 }
             }
@@ -530,7 +530,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Compose",
-                    "Version": "1.28.4",
+                    "Version": "1.28.5",
                     "DownloadUrl": "https://github.com/docker/compose"
                 }
             }
@@ -560,7 +560,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHubCLI",
-                    "Version": "1.6.2",
+                    "Version": "1.7.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -570,7 +570,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.16",
+                    "Version": "1.16.1",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -696,7 +696,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "071c4d199b1a0aa3391080c2e7fc2683c2a27698"
+                    "commitHash": "b1332682a0679df58390770388769023f2524acd"
                 }
             }
         },
@@ -1035,7 +1035,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.20.0"
+                    "Version": "7.21.0"
                 }
             }
         },
@@ -1113,7 +1113,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.2.2"
+                    "Version": "4.2.3"
                 }
             }
         },
