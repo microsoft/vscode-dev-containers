@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "b1332682a0679df58390770388769023f2524acd"
+                    "commitHash": "0edc2cccd166ebfa41d4c098b9650962424f82ce"
                 }
             }
         },
@@ -218,7 +218,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "b1332682a0679df58390770388769023f2524acd"
+                    "commitHash": "0edc2cccd166ebfa41d4c098b9650962424f82ce"
                 }
             }
         },
@@ -228,7 +228,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "b1332682a0679df58390770388769023f2524acd"
+                    "commitHash": "0edc2cccd166ebfa41d4c098b9650962424f82ce"
                 }
             }
         },
@@ -570,7 +570,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.16.1",
+                    "Version": "1.16.2",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -696,7 +696,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "b1332682a0679df58390770388769023f2524acd"
+                    "commitHash": "0edc2cccd166ebfa41d4c098b9650962424f82ce"
                 }
             }
         },
