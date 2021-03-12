@@ -26,6 +26,7 @@ jobs:
     - name: Checkout latest version tag
       id: checkout
       uses: actions/checkout@v2
+      with:
         ref: ${{ steps.get_latest_tag.output.tag }}
 
     - name: Scan images
@@ -33,7 +34,7 @@ jobs:
       run: |
         set -e
         build/vscdc scan --always-pull \
-                        --prune \
-                        --release ${{ steps.get_latest_tag.output.tag }} \
-                        --registry ${{ secrets.STUB_REGISTRY }} \
-                        --registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+                         --prune \
+                         --release ${{ steps.get_latest_tag.output.tag }} \
+                         --registry ${{ secrets.STUB_REGISTRY }} \
+                         --registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
