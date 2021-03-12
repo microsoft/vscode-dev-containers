@@ -8,9 +8,9 @@
 			"universal:${VERSION}-linux",
 			"universal:${VERSION}"
 		]
-	}, 
+	},
 	"dependencies": {
-		"image": "mcr.microsoft.com/oryx/build:vso-focal-20201204.1",
+		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210308.3",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"debian": [
 			"git-lfs",
@@ -53,11 +53,11 @@
 		"other": {
 			"git": {
 				"versionCommand": "git --version | sed -n '/git version /s///p'",
-				"downloadUrl":"https://github.com/git/git"
+				"downloadUrl": "https://github.com/git/git"
 			},
 			"Xdebug": {
 				"versionCommand": "php --version | grep -oE 'with Xdebug\\sv[^,]+'| sed -n '/with Xdebug\\sv/s///p'",
-				"downloadUrl":"https://xdebug.org/"
+				"downloadUrl": "https://xdebug.org/"
 			},
 			"Composer": {
 				"versionCommand": "composer --version 2>/dev/null | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",

@@ -36,8 +36,10 @@ function createLinks() {
     done
 }
 
-createLinks "3.1.404"
-echo
-createLinks "2.1.811"
-echo
-createLinks "5.0.100"
+# Dynamically find and link all installed dotnet SDKs
+find /opt/dotnet/*.*.*/sdk -maxdepth 1 -type d -name "*.*.*" | while read SDK_PATH; do
+    SDK_VERSION="$(basename ${SDK_PATH})"
+    createLinks "$SDK_VERSION"
+done
+
+set +ex
