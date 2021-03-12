@@ -1,6 +1,6 @@
 # Update the VARIANT arg in docker-compose.yml to pick a Node version: 10, 12, 14
 ARG VARIANT=12
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
 # Update args in docker-compose.yaml to set the UID/GID of the "node" user.
 ARG USER_UID=1000

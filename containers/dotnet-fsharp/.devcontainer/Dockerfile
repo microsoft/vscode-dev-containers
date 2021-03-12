@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/dotnet:dev-5.0
+FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-5.0
 
 # [Option] Install Node.js
 ARG INSTALL_NODE="true"

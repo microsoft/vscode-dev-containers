@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/java:dev-11
+FROM mcr.microsoft.com/vscode/devcontainers/java:0-11
 
 # Install JDK 8 and optionally Maven and Gradle - version of "" installs latest
 ARG JDK8_VERSION=""

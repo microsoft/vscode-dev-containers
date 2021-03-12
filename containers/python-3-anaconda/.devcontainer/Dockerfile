@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
+FROM mcr.microsoft.com/vscode/devcontainers/anaconda:0-3
 
 # Copy environment.yml (if found) to a temp location so we update the environment. Also
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.

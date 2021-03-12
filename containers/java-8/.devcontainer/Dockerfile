@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/java:dev-8
+FROM mcr.microsoft.com/vscode/devcontainers/java:0-8
 
 # [Option] Install Maven
 ARG INSTALL_MAVEN="false"
