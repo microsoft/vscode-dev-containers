@@ -153,7 +153,7 @@ fi
 # .bashrc/.zshrc snippet
 RC_SNIPPET="$(cat << 'EOF'
 
-if [ -z "${USER}"]; then export USER=$(whoami); fi
+if [ -z "${USER}" ]; then export USER=$(whoami); fi
 if [[ "${PATH}" != *"$HOME/.local/bin"* ]]; then export PATH="${PATH}:$HOME/.local/bin"; fi
 
 # Display optional first run image specific notice if configured and terminal is interactive
