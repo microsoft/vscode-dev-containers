@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "0edc2cccd166ebfa41d4c098b9650962424f82ce"
+                    "commitHash": "addce31186936b7b722a4c1429e41530fd8bd33b"
                 }
             }
         },
@@ -135,7 +135,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/oryx/build",
-                    "Version": "vso-focal-20201204.1",
+                    "Version": "vso-focal-20210308.3",
                     "DownloadUrl": "https://github.com/microsoft/oryx"
                 }
             }
@@ -184,7 +184,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "powershell",
-                    "Version": "7.1.2-1.ubuntu.20.04",
+                    "Version": "7.1.3-1.ubuntu.20.04",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -218,7 +218,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "0edc2cccd166ebfa41d4c098b9650962424f82ce"
+                    "commitHash": "addce31186936b7b722a4c1429e41530fd8bd33b"
                 }
             }
         },
@@ -228,7 +228,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "0edc2cccd166ebfa41d4c098b9650962424f82ce"
+                    "commitHash": "addce31186936b7b722a4c1429e41530fd8bd33b"
                 }
             }
         },
@@ -273,7 +273,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "yapf",
-                    "Version": "0.30.0"
+                    "Version": "0.31.0"
                 }
             }
         },
@@ -500,7 +500,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "1.9.3",
+                    "Version": "2.0.8",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -610,7 +610,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "powershell",
-                    "Version": "7.1.2-1.debian.9",
+                    "Version": "7.1.3-1.debian.9",
                     "Distribution": "debian",
                     "Release": "9",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-debian-stretch-prod",
@@ -624,6 +624,16 @@
                 "RubyGems": {
                     "Name": "rake",
                     "Version": "13.0.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Composer",
+                    "Version": "1.9.3",
+                    "DownloadUrl": "https://getcomposer.org/"
                 }
             }
         },
@@ -696,7 +706,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "0edc2cccd166ebfa41d4c098b9650962424f82ce"
+                    "commitHash": "addce31186936b7b722a4c1429e41530fd8bd33b"
                 }
             }
         },
@@ -1035,7 +1045,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.21.0"
+                    "Version": "7.22.0"
                 }
             }
         },
