@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The Azure Data Team |
+| *Contributors* | The Azure Data Team (@dzsquared) |
 | *Categories* | Languages |
 | *Definition type* | Docker Compose |
 | *Published image architecture(s)* | x86-64 |
