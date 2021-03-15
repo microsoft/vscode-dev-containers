@@ -5,7 +5,7 @@
 	},
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
-		"go.toolsManagement.checkForUpdates": "off",
+		"go.toolsManagement.checkForUpdates": "local",
 		"go.useLanguageServer": true,
 		"go.gopath": "/go",
 		"go.goroot": "/usr/local/go",
