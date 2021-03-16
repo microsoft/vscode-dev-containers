@@ -1,5 +1,4 @@
 #!/bin/bash
-set -echo
 echo "Installing mssql-tools"
 curl -sSL https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT)
 DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
