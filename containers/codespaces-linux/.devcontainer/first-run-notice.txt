@@ -7,3 +7,4 @@
 🔍 To explore VS Code to its fullest, search using the Command Palette (Cmd/Ctrl + Shift + P or F1)
 
 📝 Edit away, run your app as usual, and we'll automatically make it available for to you to access.
+
