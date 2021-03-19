@@ -1,4 +1,4 @@
-👋 Welcome to Codespaces! You are on our default image. This includes the latest versions of: 
+👋 Welcome to Codespaces! You are on our default image. This includes runtimes and tools for: 
    - Python 
    - Node.js
    - Docker
