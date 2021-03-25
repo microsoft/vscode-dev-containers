@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | [Aisuko](https://github.com/Aisuko) |
+| *Categories* | Community |
 | *Definition type* | Dockerfile |
 | *Architecture(s)* | x86-64 |
 | *Works in Codespaces* | No |
