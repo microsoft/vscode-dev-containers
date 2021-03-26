@@ -1,5 +1,5 @@
 {
-	"name": "MIT-Scheme",
+	"name": "MIT-Scheme (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update 'TARGET_SCHEME_VERSION' to pick an MIT-Scheme version: 11.1
