@@ -264,11 +264,9 @@ EOF
 
 # Add RC snippet and custom bash prompt
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
-    echo "${RC_SNIPPET}" >> /etc/bashrc
-    chmod +x /etc/bashrc
-    echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
+    echo -e "${RC_SNIPPET}\n${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
     if [ "${USERNAME}" != "root" ]; then
-        echo "${CODESPACES_BASH}" >> "/root/.bashrc"
+        echo -e "${RC_SNIPPET}\n${CODESPACES_BASH}" >> "/root/.bashrc"
     fi
     chown ${USERNAME}:${USERNAME} "${USER_RC_PATH}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
