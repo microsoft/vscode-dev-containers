@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "acf86ce4a8721f25a3373502c21ed2508590043b"
+                    "commitHash": "7773d6038ede6eeaad34a27abf47fc154c98e8f1"
                 }
             }
         },
@@ -145,7 +145,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "git-lfs",
-                    "Version": "2.13.2",
+                    "Version": "2.13.3",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packagecloud.io/github/git-lfs/ubuntu",
@@ -218,7 +218,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "acf86ce4a8721f25a3373502c21ed2508590043b"
+                    "commitHash": "7773d6038ede6eeaad34a27abf47fc154c98e8f1"
                 }
             }
         },
@@ -228,7 +228,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "acf86ce4a8721f25a3373502c21ed2508590043b"
+                    "commitHash": "7773d6038ede6eeaad34a27abf47fc154c98e8f1"
                 }
             }
         },
@@ -381,7 +381,7 @@
                 "Type": "Go",
                 "Go": {
                     "Name": "golang.org/x/lint/golint",
-                    "Version": "1.0.4"
+                    "Version": "1.0.5"
                 }
             }
         },
@@ -390,7 +390,7 @@
                 "Type": "Go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.0.4"
+                    "Version": "1.0.5"
                 }
             }
         },
@@ -417,7 +417,7 @@
                 "Type": "Go",
                 "Go": {
                     "Name": "github.com/go-delve/delve/cmd/dlv",
-                    "Version": "1.38.0"
+                    "Version": "1.39.0"
                 }
             }
         },
@@ -444,7 +444,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rustfmt",
-                    "Version": "1.4.30-stable"
+                    "Version": "1.4.36-stable"
                 }
             }
         },
@@ -480,7 +480,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "git",
-                    "Version": "2.31.0",
+                    "Version": "2.31.1",
                     "DownloadUrl": "https://github.com/git/git"
                 }
             }
@@ -530,7 +530,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Compose",
-                    "Version": "1.28.5",
+                    "Version": "1.28.6",
                     "DownloadUrl": "https://github.com/docker/compose"
                 }
             }
@@ -580,7 +580,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.50.0",
+                    "Version": "1.51.0",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -706,7 +706,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "acf86ce4a8721f25a3373502c21ed2508590043b"
+                    "commitHash": "7773d6038ede6eeaad34a27abf47fc154c98e8f1"
                 }
             }
         },
@@ -1045,7 +1045,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.22.0"
+                    "Version": "7.23.0"
                 }
             }
         },
