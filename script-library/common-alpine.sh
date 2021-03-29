@@ -157,9 +157,13 @@ if [ -z "${USER}" ]; then export USER=$(whoami); fi
 if [[ "${PATH}" != *"$HOME/.local/bin"* ]]; then export PATH="${PATH}:$HOME/.local/bin"; fi
 
 # Display optional first run image specific notice if configured and terminal is interactive
-if [ -t 1 ] && [ -f "/usr/local/etc/vscode-dev-containers/first-run-notice.txt" ] && [ ! -f "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed" ]; then
-    cat /usr/local/etc/vscode-dev-containers/first-run-notice.txt
-    mkdir -p $HOME/.config/vscode-dev-containers
+if [ -t 1 ] && [ ! -f "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed" ]; then
+    if [ -f "/usr/local/etc/vscode-dev-containers/first-run-notice.txt" ]; then
+        cat "/usr/local/etc/vscode-dev-containers/first-run-notice.txt"
+    elif [ -f "/workspaces/.codespaces/shared/first-run-notice.txt" ]; then
+        cat "/workspaces/.codespaces/shared/first-run-notice.txt"
+    fi
+    mkdir -p "$HOME/.config/vscode-dev-containers"
     # Mark first run notice as displayed after 10s to avoid problems with fast terminal refreshes hiding it
     (sleep 10s; touch "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed") & >/dev/null 2>&1
     disown %+
@@ -260,10 +264,9 @@ EOF
 
 # Add RC snippet and custom bash prompt
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
-    echo "${RC_SNIPPET}" >> /etc/bash.bashrc
-    echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
+    echo -e "${RC_SNIPPET}\n${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
     if [ "${USERNAME}" != "root" ]; then
-        echo "${CODESPACES_BASH}" >> "/root/.bashrc"
+        echo -e "${RC_SNIPPET}\n${CODESPACES_BASH}" >> "/root/.bashrc"
     fi
     chown ${USERNAME}:${USERNAME} "${USER_RC_PATH}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
