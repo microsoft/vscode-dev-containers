@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "7773d6038ede6eeaad34a27abf47fc154c98e8f1"
+                    "commitHash": "263b1033a06bda0185045a5ba40447845acf3fc1"
                 }
             }
         },
@@ -208,7 +208,7 @@
                 "Git": {
                     "Name": "nvs",
                     "repositoryUrl": "https://github.com/jasongin/nvs",
-                    "commitHash": "e35b15861268fb05209f6f3e7449109fea79171c"
+                    "commitHash": "70384d4b5b59fed3df1e03f58c3bf59cdfd45b44"
                 }
             }
         },
@@ -218,7 +218,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "7773d6038ede6eeaad34a27abf47fc154c98e8f1"
+                    "commitHash": "263b1033a06bda0185045a5ba40447845acf3fc1"
                 }
             }
         },
@@ -228,7 +228,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "7773d6038ede6eeaad34a27abf47fc154c98e8f1"
+                    "commitHash": "263b1033a06bda0185045a5ba40447845acf3fc1"
                 }
             }
         },
@@ -237,7 +237,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.7.2"
+                    "Version": "2.7.4"
                 }
             }
         },
@@ -381,7 +381,7 @@
                 "Type": "Go",
                 "Go": {
                     "Name": "golang.org/x/lint/golint",
-                    "Version": "1.0.5"
+                    "Version": "1.0.6"
                 }
             }
         },
@@ -390,7 +390,7 @@
                 "Type": "Go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.0.5"
+                    "Version": "1.0.6"
                 }
             }
         },
@@ -453,7 +453,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.50.0"
+                    "Version": "1.51.0"
                 }
             }
         },
@@ -462,7 +462,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.50.0"
+                    "Version": "1.51.0"
                 }
             }
         },
@@ -471,7 +471,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.50.0"
+                    "Version": "1.51.0"
                 }
             }
         },
@@ -560,7 +560,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHubCLI",
-                    "Version": "1.7.0",
+                    "Version": "1.8.1",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -570,7 +570,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.16.2",
+                    "Version": "1.16.3",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -706,7 +706,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "7773d6038ede6eeaad34a27abf47fc154c98e8f1"
+                    "commitHash": "263b1033a06bda0185045a5ba40447845acf3fc1"
                 }
             }
         },
@@ -795,7 +795,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.0.11",
+                    "Version": "2.0.12",
                     "DownloadUrl": "https://getcomposer.org/installer"
                 }
             }
