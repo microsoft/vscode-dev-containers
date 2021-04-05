@@ -221,8 +221,7 @@ if [ -t 1 ] && [ ! -f "$HOME/.config/vscode-dev-containers/first-run-notice-alre
     fi
     mkdir -p "$HOME/.config/vscode-dev-containers"
     # Mark first run notice as displayed after 10s to avoid problems with fast terminal refreshes hiding it
-    (sleep 10s; touch "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed") & >/dev/null 2>&1
-    disown %+
+    ((sleep 10s; touch "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed") &)
 fi
 
 EOF

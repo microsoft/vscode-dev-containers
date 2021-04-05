@@ -5,8 +5,9 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
+# Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My *! flag]
+# Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My Zsh! flag] [Add non-free packages]
 
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"automatic"}
@@ -14,6 +15,7 @@ USER_UID=${3:-"automatic"}
 USER_GID=${4:-"automatic"}
 UPGRADE_PACKAGES=${5:-"true"}
 INSTALL_OH_MYS=${6:-"true"}
+ADD_NON_FREE_PACKAGES=${7:-"false"}
 
 set -e
 
@@ -70,7 +72,6 @@ apt-get-update-if-needed()
 
 # Run install apt-utils to avoid debconf warning then verify presence of other common developer tools and dependencies
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
-    apt-get-update-if-needed
 
     PACKAGE_LIST="apt-utils \
         git \
@@ -107,7 +108,27 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         sudo \
         ncdu \
         man-db \
-        strace"
+        strace \
+        manpages \
+        manpages-dev "
+        
+    # Needed for adding manpages-posix and manpages-posix-dev which are non-free packages in Debian
+    if [ "${ADD_NON_FREE_PACKAGES}" = "true" ]; then
+        CODENAME="$(cat /etc/os-release | grep -oE '^VERSION_CODENAME=.+$' | cut -d'=' -f2)"
+        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME} main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main/deb http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb-src http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main/deb http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main contrib non-free/" /etc/apt/sources.list
+        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main contrib non-free/" /etc/apt/sources.list 
+        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main contrib non-free/" /etc/apt/sources.list
+        echo "Running apt-get update..."
+        apt-get update
+        PACKAGE_LIST="${PACKAGE_LIST} manpages-posix manpages-posix-dev"
+    else
+        apt-get-update-if-needed
+    fi
 
     # Install libssl1.1 if available
     if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
@@ -186,9 +207,23 @@ else
 fi
 
 # .bashrc/.zshrc snippet
-RC_SNIPPET="$(cat << EOF
-export USER=\$(whoami)
-if [[ "\${PATH}" != *"\$HOME/.local/bin"* ]]; then export PATH="\${PATH}:\$HOME/.local/bin"; fi
+RC_SNIPPET="$(cat << 'EOF'
+
+if [ -z "${USER}" ]; then export USER=$(whoami); fi
+if [[ "${PATH}" != *"$HOME/.local/bin"* ]]; then export PATH="${PATH}:$HOME/.local/bin"; fi
+
+# Display optional first run image specific notice if configured and terminal is interactive
+if [ -t 1 ] && [ ! -f "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed" ]; then
+    if [ -f "/usr/local/etc/vscode-dev-containers/first-run-notice.txt" ]; then
+        cat "/usr/local/etc/vscode-dev-containers/first-run-notice.txt"
+    elif [ -f "/workspaces/.codespaces/shared/first-run-notice.txt" ]; then
+        cat "/workspaces/.codespaces/shared/first-run-notice.txt"
+    fi
+    mkdir -p "$HOME/.config/vscode-dev-containers"
+    # Mark first run notice as displayed after 10s to avoid problems with fast terminal refreshes hiding it
+    ((sleep 10s; touch "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed") &)
+fi
+
 EOF
 )"
 
@@ -213,107 +248,99 @@ fi
 EOF
 chmod +x /usr/local/bin/code
 
-# Codespaces themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
+# Codespaces bash and OMZ themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
-<<EOF
-#!/usr/bin/env bash
-prompt() {
-    if [ "\$?" != "0" ]; then
-        local arrow_color=\${bold_red}
-    else
-        local arrow_color=\${reset_color}
-    fi
-    if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="@\${GITHUB_USER}"
-    else
-        local USERNAME="\\u"
-    fi
-    local cwd="\$(pwd | sed "s|^\${HOME}|~|")"
-    PS1="\${green}\${USERNAME} \${arrow_color}➜\${reset_color} \${bold_blue}\${cwd}\${reset_color} \$(scm_prompt_info)\${white}$ \${reset_color}"
-    
-    # Prepend Python virtual env version to prompt
-    if [[ -n \$VIRTUAL_ENV ]]; then
-        if [ -z "\${VIRTUAL_ENV_DISABLE_PROMPT:-}" ]; then
-            PS1="(\`basename \"\$VIRTUAL_ENV\"\`) \${PS1:-}"
-        fi
-    fi
-}
+<<'EOF'
 
-SCM_THEME_PROMPT_PREFIX="\${reset_color}\${cyan}(\${bold_red}"
-SCM_THEME_PROMPT_SUFFIX="\${reset_color} "
-SCM_THEME_PROMPT_DIRTY=" \${bold_yellow}✗\${reset_color}\${cyan})"
-SCM_THEME_PROMPT_CLEAN="\${reset_color}\${cyan})"
-SCM_GIT_SHOW_MINIMAL_INFO="true"
-safe_append_prompt_command prompt
+# Codespaces bash prompt theme
+__bash_prompt() {
+    local userpart='`export XIT=$? \
+        && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
+        && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
+    local gitbranch='`\
+        export BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); \
+        if [ "${BRANCH}" = "HEAD" ]; then \
+            export BRANCH=$(git describe --contains --all HEAD 2>/dev/null); \
+        fi; \
+        if [ "${BRANCH}" != "" ]; then \
+            echo -n "\[\033[0;36m\](\[\033[1;31m\]${BRANCH}" \
+            && if git ls-files --error-unmatch -m --directory --no-empty-directory -o --exclude-standard ":/*" > /dev/null 2>&1; then \
+                    echo -n " \[\033[1;33m\]✗"; \
+            fi \
+            && echo -n "\[\033[0;36m\]) "; \
+        fi`'
+    local lightblue='\[\033[1;34m\]'
+    local removecolor='\[\033[0m\]'
+    PS1="${userpart} ${lightblue}\w ${gitbranch}${removecolor}\$ "
+    unset -f __bash_prompt
+}
+__bash_prompt
+
 EOF
 )"
 CODESPACES_ZSH="$(cat \
-<<EOF
-prompt() {
-    if [ ! -z "\${GITHUB_USER}" ]; then
-        local USERNAME="@\${GITHUB_USER}"
+<<'EOF'
+__zsh_prompt() {
+    local prompt_username
+    if [ ! -z "${GITHUB_USER}" ]; then 
+        prompt_username="@${GITHUB_USER}"
     else
-        local USERNAME="%n"
+        prompt_username="%n"
     fi
-    PROMPT="%{\$fg[green]%}\${USERNAME} %(?:%{\$reset_color%}➜ :%{\$fg_bold[red]%}➜ )"
-    PROMPT+='%{\$fg_bold[blue]%}%~%{\$reset_color%} \$(git_prompt_info)%{\$fg[white]%}$ %{\$reset_color%}'
+    PROMPT="%{$fg[green]%}${prompt_username} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )"
+    PROMPT+='%{$fg_bold[blue]%}%~%{$reset_color%} $(git_prompt_info)%{$fg[white]%}$ %{$reset_color%}'
+    unset -f __zsh_prompt
 }
-ZSH_THEME_GIT_PROMPT_PREFIX="%{\$fg_bold[cyan]%}(%{\$fg_bold[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{\$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{\$fg_bold[yellow]%}✗%{\$fg_bold[cyan]%})"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{\$fg_bold[cyan]%})"
-prompt
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}(%{$fg_bold[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg_bold[yellow]%}✗%{$fg_bold[cyan]%})"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[cyan]%})"
+__zsh_prompt
 EOF
 )"
 
-# Adapted Oh My Zsh! install step to work with both "Oh Mys" rather than relying on an installer script
-# See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
-install-oh-my()
-{
-    local OH_MY=$1
-    local OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-${OH_MY}"
-    local TEMPLATE="${OH_MY_INSTALL_DIR}/templates/$2"
-    local OH_MY_GIT_URL=$3
-    local USER_RC_FILE="${USER_RC_PATH}/.${OH_MY}rc"
+# Add notice that Oh My Bash! has been removed from images and how to provide information on how to install manually
+OMB_README="$(cat \
+<<'EOF'
+"Oh My Bash!" has been removed from this image in favor of a simple shell prompt. If you 
+still wish to use it, remove "~/.oh-my-bash" and install it from: https://github.com/ohmybash/oh-my-bash
+You may also want to consider "Bash-it" as an alternative: https://github.com/bash-it/bash-it
+See here for infomation on adding it to your image or dotfiles: https://aka.ms/codespaces/omb-remove
+EOF
+)"
+OMB_STUB="$(cat \
+<<'EOF'
+#!/usr/bin/env bash
+if [ -t 1 ]; then
+    cat $HOME/.oh-my-bash/README.md
+fi
+EOF
+)"
 
-    if [ -d "${OH_MY_INSTALL_DIR}" ] || [ "${INSTALL_OH_MYS}" != "true" ]; then
-        return 0
-    fi
-
-    umask g-w,o-w
-    mkdir -p ${OH_MY_INSTALL_DIR}
-    git clone --depth=1 \
-        -c core.eol=lf \
-        -c core.autocrlf=false \
-        -c fsck.zeroPaddedFilemode=ignore \
-        -c fetch.fsck.zeroPaddedFilemode=ignore \
-        -c receive.fsck.zeroPaddedFilemode=ignore \
-        ${OH_MY_GIT_URL} ${OH_MY_INSTALL_DIR} 2>&1
-    echo -e "$(cat "${TEMPLATE}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
-    if [ "${OH_MY}" = "bash" ]; then
-        sed -i -e 's/OSH_THEME=.*/OSH_THEME="codespaces"/g' ${USER_RC_FILE}
-        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes/codespaces
-        echo "${CODESPACES_BASH}" > ${OH_MY_INSTALL_DIR}/custom/themes/codespaces/codespaces.theme.sh
-    else
-        sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
-        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
-        echo "${CODESPACES_ZSH}" > ${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme
-    fi
-    # Shrink git while still enabling updates
-    cd ${OH_MY_INSTALL_DIR} 
-    git repack -a -d -f --depth=1 --window=1
-
-    if [ "${USERNAME}" != "root" ]; then
-        cp -rf ${USER_RC_FILE} ${OH_MY_INSTALL_DIR} /root
-        chown -R ${USERNAME}:${USERNAME} ${USER_RC_PATH}
-    fi
-}
-
+# Add RC snippet and custom bash prompt
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
     echo "${RC_SNIPPET}" >> /etc/bash.bashrc
+    echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
+    if [ "${USERNAME}" != "root" ]; then
+        echo "${CODESPACES_BASH}" >> "/root/.bashrc"
+    fi
+    chown ${USERNAME}:${USERNAME} "${USER_RC_PATH}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
 fi
-install-oh-my bash bashrc.osh-template https://github.com/ohmybash/oh-my-bash
+
+# Add stub for Oh My Bash!
+if [ ! -d "${USER_RC_PATH}/.oh-my-bash}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
+    mkdir -p "${USER_RC_PATH}/.oh-my-bash" "/root/.oh-my-bash"
+    echo "${OMB_README}" >> "${USER_RC_PATH}/.oh-my-bash/README.md"
+    echo "${OMB_STUB}" >> "${USER_RC_PATH}/.oh-my-bash/oh-my-bash.sh"
+    chmod +x "${USER_RC_PATH}/.oh-my-bash/oh-my-bash.sh"
+    if [ "${USERNAME}" != "root" ]; then
+        echo "${OMB_README}" >> "/root/.oh-my-bash/README.md"
+        echo "${OMB_STUB}" >> "/root/.oh-my-bash/oh-my-bash.sh"
+        chmod +x "/root/.oh-my-bash/oh-my-bash.sh"
+    fi
+    chown -R "${USERNAME}:${USERNAME}" "${USER_RC_PATH}/.oh-my-bash"
+fi
 
 # Optionally install and configure zsh and Oh My Zsh!
 if [ "${INSTALL_ZSH}" = "true" ]; then
@@ -325,7 +352,35 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
         echo "${RC_SNIPPET}" >> /etc/zsh/zshrc
         ZSH_ALREADY_INSTALLED="true"
     fi
-    install-oh-my zsh zshrc.zsh-template https://github.com/ohmyzsh/ohmyzsh
+
+    # Adapted, simplified inline Oh My Zsh! install steps that adds, defaults to a codespaces theme.
+    # See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
+    OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-zsh"
+    if [ ! -d "${OH_MY_INSTALL_DIR}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
+        TEMPLATE_PATH="${OH_MY_INSTALL_DIR}/templates/zshrc.zsh-template"
+        USER_RC_FILE="${USER_RC_PATH}/.zshrc"
+        umask g-w,o-w
+        mkdir -p ${OH_MY_INSTALL_DIR}
+        git clone --depth=1 \
+            -c core.eol=lf \
+            -c core.autocrlf=false \
+            -c fsck.zeroPaddedFilemode=ignore \
+            -c fetch.fsck.zeroPaddedFilemode=ignore \
+            -c receive.fsck.zeroPaddedFilemode=ignore \
+            "https://github.com/ohmyzsh/ohmyzsh" "${OH_MY_INSTALL_DIR}" 2>&1
+        echo -e "$(cat "${TEMPLATE_PATH}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
+        sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
+        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
+        echo "${CODESPACES_ZSH}" > "${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme"
+        # Shrink git while still enabling updates
+        cd "${OH_MY_INSTALL_DIR}"
+        git repack -a -d -f --depth=1 --window=1
+        # Copy to non-root user if one is specified
+        if [ "${USERNAME}" != "root" ]; then
+            cp -rf "${USER_RC_FILE}" "${OH_MY_INSTALL_DIR}" /root
+            chown -R ${USERNAME}:${USERNAME} "${USER_RC_PATH}"
+        fi
+    fi
 fi
 
 # Write marker file
