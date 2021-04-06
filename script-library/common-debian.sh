@@ -321,8 +321,10 @@ EOF
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
     echo "${RC_SNIPPET}" >> /etc/bash.bashrc
     echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
+    echo 'export PROMPT_DIRTRIM=2' >> "${USER_RC_PATH}/.bashrc"
     if [ "${USERNAME}" != "root" ]; then
         echo "${CODESPACES_BASH}" >> "/root/.bashrc"
+        echo 'export PROMPT_DIRTRIM=2' >> "/root/.bashrc"
     fi
     chown ${USERNAME}:${USERNAME} "${USER_RC_PATH}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
@@ -370,6 +372,7 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
             "https://github.com/ohmyzsh/ohmyzsh" "${OH_MY_INSTALL_DIR}" 2>&1
         echo -e "$(cat "${TEMPLATE_PATH}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
         sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
+
         mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
         echo "${CODESPACES_ZSH}" > "${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme"
         # Shrink git while still enabling updates
