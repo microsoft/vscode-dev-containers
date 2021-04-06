@@ -44,11 +44,11 @@
 			"debase"
 		],
 		"cargo": {
-			"rls": "rls --version",
-			"rustfmt": "rustfmt --version",
-			"rust-analysis": null,
-			"rust-src": null,
-			"clippy": null
+			"rls": null,
+			"rustfmt": null,
+			"rust-analysis": "rustc --version",
+			"rust-src": "rustc --version",
+			"clippy": "rustc --version"
 		},
 		"other": {
 			"git": {
@@ -108,7 +108,7 @@
 			"github.com/uudashr/gopkgs/v2/cmd/gopkgs": null,
 			"github.com/ramya-rao-a/go-outline": null,
 			"github.com/go-delve/delve/cmd/dlv": null,
-			"github.com/golangci/golangci-lint/cmd/golangci-lint": null
+			"github.com/golangci/golangci-lint/cmd/golangci-lint": "golangci-lint --version | sed -n '/golangci-lint has version v/s///p' | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]'"
 		}
 	}
 }
