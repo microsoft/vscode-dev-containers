@@ -19,6 +19,7 @@ ENV SHELL=/bin/bash \
     PIPX_HOME="/usr/local/py-utils" \
     PIPX_BIN_DIR="/usr/local/py-utils/bin" \
     RVM_PATH="/usr/local/rvm" \
+    RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev" \ 
     GOROOT="/usr/local/go" \
     GOPATH="/go" \
     CARGO_HOME="/usr/local/cargo" \

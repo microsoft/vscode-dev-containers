@@ -2,17 +2,17 @@
 
 ## Summary
 
-*Develop Ruby on Rails applications, includes everything you need to get up and running.*
+_Develop Ruby on Rails applications, includes everything you need to get up and running._
 
-| Metadata | Value |  
-|----------|-------|
-| *Contributors* | [Amblizer][la] |
-| *Categories* | Community, Frameworks |
-| *Definition type* | Dockerfile |
-| *Works in Codespaces* | Yes |
-| *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Debian |
-| *Languages, platforms* | Ruby |
+| Metadata                    | Value                 |
+| --------------------------- | --------------------- |
+| _Contributors_              | [Amblizer][la]        |
+| _Categories_                | Community, Frameworks |
+| _Definition type_           | Dockerfile            |
+| _Works in Codespaces_       | Yes                   |
+| _Container host OS support_ | Linux, macOS, Windows |
+| _Container OS_              | Debian                |
+| _Languages, platforms_      | Ruby                  |
 
 ## Using this definition with an existing folder
 
@@ -31,16 +31,28 @@ This container also includes Node.js. You can change the version of Node.js by u
 }
 ```
 
+In the [Dockerfile](./.devcontainer/Dockerfile), this container also supports serving a development server over a GitHub Codespace port-forwarded domain. This is necessary due to [Rails 6 adding guards against DNS rebinding attacks](https://blog.saeloun.com/2019/10/31/rails-6-adds-guard-against-dns-rebinding-attacks.html)/
+
+The environment variable's value is a comma-separated list of allowed domains, and is only honored in Rails version **7.0.0+**.
+
+```dockerfile
+# Default value to allow debug server to serve content over GitHub Codespace's port forwarding service
+# The value is a comma-separated list of allowed domains
+ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev <, YOUR_OTHER_ALLOWED_DOMAIN(S), ...>"
+```
+
 ### Adding the definition to your folder
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
 2. To start then:
+
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
    3. Select the Ruby on Rails definition.
 
 3. To use latest-and-greatest copy of this definition from the repository:
+
    1. Clone this repository.
    2. Copy the contents of `.devcontainer` and `.vscode` folders under `containers/ruby-rails/` to the root of your project folder.
    3. Start VS Code and open your project folder.
@@ -58,7 +70,7 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/ruby-rails` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. You should see "* Listening on tcp://0.0.0.0:3000" in the Debug Console. 
+6. You should see "\* Listening on tcp://0.0.0.0:3000" in the Debug Console.
 7. Press <kbd>F1</kbd>. Select **Forward a Port** then choose **Forward 3000**.
 8. By browsing http://localhost:3000/ you should see "Yay! You’re on Rails!".
 9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
@@ -70,4 +82,5 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).
 
 <!-- links -->
+
 [la]: https://code.mzhao.page/
