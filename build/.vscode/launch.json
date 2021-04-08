@@ -46,9 +46,10 @@
 			"args": [
 				"cg",
 				"codespaces-linux",
+				"--no-build",
 				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
-				"--registry", "clantz.azurecr.io",
+				"--registry", "mcr.microsoft.com",
 				"--registryPath", "vscode/devcontainers"
 			]
 		},

@@ -15,11 +15,11 @@
 			"Oh My Zsh!": "/root/.oh-my-zsh"
 		},
 		"cargo": {
-			"rls": "rls --version",
-			"rustfmt": "rustfmt --version",
-			"rust-analysis": null,
-			"rust-src": null,
-			"clippy": null
+			"rls": null,
+			"rustfmt": null,
+			"rust-analysis": "rustc --version",
+			"rust-src": "rustc --version",
+			"clippy": "rustc --version"
 		}
 	}
 }

@@ -183,10 +183,12 @@ require('yargs')
                 },
                 'build': {
                     describe: 'whether to to build the image first step',
+                    type: 'boolean',
                     default: true
                 },
                 'prune': {
                     describe: 'whether to prune images between definitions',
+                    type: 'boolean',
                     default: false
                 }
             })

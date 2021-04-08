@@ -1,9 +1,14 @@
+/*--------------------------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+ *-------------------------------------------------------------------------------------------------------------*/
+
 const asyncUtils = require('./async');
 const configUtils = require('./config');
 
 // Docker images and native OS libraries need to be registered as "other" while others are scenario dependant
-const osPackageLookupConfig = {
-    debian: {
+const linuxPackageInfoExtractionConfig = {
+    apt: {
         // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
         // Output: <package>    <version>
         // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
@@ -15,19 +20,7 @@ const osPackageLookupConfig = {
         downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
         poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
     },
-    ubuntu: {
-        // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
-        // Output: <package>    <version>
-        // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
-        // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
-        namePrefix: 'Ubuntu Package:',
-        listCommand: "dpkg-query --show -f='\\${Package} ~~v~~ \\${Version}\n'",
-        lineRegEx: /(.+) ~~v~~ (.+)/,
-        getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
-        downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
-        poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
-    },
-    alpine: {
+    apk: {
         // Command to get package versions: apk info -e -v <package>
         // Output: <package-with-maybe-dashes>-<version-with-dashes>
         // Command to get download URLs: apk policy
@@ -73,9 +66,9 @@ async function getLinuxDistroInfo(imageTagOrContainerName) {
     const osInfoLines = osInfoCommandOutput.split('\n');
     osInfoLines.forEach((infoLine) => {
         const infoLineParts = infoLine.split('=');
-        if (infoLineParts === 2) {
+        if (infoLineParts.length === 2) {
             const propName = snakeCaseToCamelCase(infoLineParts[0].trim());
-            info[propName] = infoLineParts[1].trim();    
+            info[propName] = infoLineParts[1].replace(/"/g,'').trim();    
         }
     })
     return info;
@@ -84,9 +77,8 @@ async function getLinuxDistroInfo(imageTagOrContainerName) {
 // Convert SNAKE_CASE to snakeCase ... well, technically camelCase :)
 function snakeCaseToCamelCase(variableName) {
     return variableName.split('').reduce((prev, next) => {
-        if(prev[prev.length-1] === '_') {
-            prev[prev.length-1] = next.toLocaleUpperCase();
-            return prev;
+        if(prev.charAt(prev.length-1) === '_') {
+            return prev.substr(0, prev.length-1) + next.toLocaleUpperCase();
         }
         return prev + next.toLocaleLowerCase();
 	}, '');
@@ -96,55 +88,72 @@ function snakeCaseToCamelCase(variableName) {
 {
     name: "yarn",
     version: "1.22.5-1",
+    annotation: "Yarn"
     poolUrl: "https://dl.yarnpkg.com/debian",
     poolKeyUrl: "https://dl.yarnpkg.com/debian/pubkey.gpg"
 }
- */   
+
+Defaults to "cgIgnore": true, "markdownIgnore": false given base packages don't need to be registered
+*/   
 async function getLinuxPackageInfo(imageTagOrContainerName, packageList, linuxDistroInfo) {
     if (!packageList) {
         return [];
     }
+
+    const componentList = [];
 
     // Get OS info if not passed in
     if(!linuxDistroInfo) {
         linuxDistroInfo = await getLinuxDistroInfo(imageTagOrContainerName);
     }
 
-    // Use the appropriate package lookup config for distro
-    const config = osPackageLookupConfig[linuxDistroInfo.id];
+    // Use the appropriate package lookup settings for distro
+    const extractionConfig = linuxPackageInfoExtractionConfig[getLinuxPackageManagerForDistro(linuxDistroInfo.id)];
 
-    const componentList = [];
+    // Generate a settings object from packageList
+    const settings = packageList.reduce((obj, current) => {
+        if(typeof current === 'string') {
+            obj[current] = { name: current };
+        } else {
+            obj[current.name] = current;
+        }
+        return obj;
+    }, {});
+
+    // Space separated list of packages for use in com,ands
+    const packageListCommandPart = packageList.reduce((prev, current) => {
+        return prev += ` ${typeof current === 'string' ? current : current.name}`;
+    }, '');
+
     // Generate and exec command to get installed package versions
     console.log('(*) Gathering information about Linux package versions...');
-    const packageVersionListCommand = packageList.reduce((prev, current) => {
-        return prev += ` ${current}`;
-    }, config.listCommand);
-    const packageVersionListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, packageVersionListCommand, true);
+    const packageVersionListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, extractionConfig.listCommand + packageListCommandPart, true);
    
     // Generate and exec command to extract download URIs
     console.log('(*) Gathering information about Linux package download URLs...');
-    const packageUriCommand = packageList.reduce((prev, current) => {
-        return prev += ` ${current}`;
-    }, config.getUriCommand);
-    const packageUriCommandOutput = await getDockerRunCommandOutput(imageTagOrContainerName, packageUriCommand, true);
+    const packageUriCommandOutput = await getDockerRunCommandOutput(imageTagOrContainerName, extractionConfig.getUriCommand + packageListCommandPart, true);
 
     const packageVersionList = packageVersionListOutput.split('\n');
     packageVersionList.forEach((packageVersion) => {
         packageVersion = packageVersion.trim();
         if (packageVersion !== '') {
-            const versionCaptureGroup = new RegExp(config.lineRegEx).exec(packageVersion);
+            const versionCaptureGroup = new RegExp(extractionConfig.lineRegEx).exec(packageVersion);
             if (!versionCaptureGroup) {
                 console.log(`(!) Warning: Unable to parse output "${packageVersion}". Likely not from command. Skipping.`);
                 return;
             }
             const package = versionCaptureGroup[1];
             const version = versionCaptureGroup[2];
-            const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config, package, version);
+            const packageSettings = settings[package] || {};
+            const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, extractionConfig, package, version);
             componentList.push({
                 name: package,
                 version: version,
                 poolUrl: poolUrl,
-                poolKeyUrl: configUtils.getPoolKeyForPoolUrl(poolUrl)
+                poolKeyUrl: configUtils.getPoolKeyForPoolUrl(poolUrl),
+                annotation: packageSettings.annotation,
+                cgIgnore: typeof packageSettings.cgIgnore === 'undefined' ? true : packageSettings.cgIgnore,
+                markdownIgnore: packageSettings.markdownIgnore
             });
         }
     });
@@ -250,6 +259,7 @@ async function getPipxVersionLookup(imageTagOrContainerName) {
 /* Generate "Git" entries. E.g.
 {
     name: "Oh My Zsh!",
+    path: "/home/codespace/.oh-my-zsh",
     repositoryUrl: "https://github.com/ohmyzsh/ohmyzsh.git",
     commitHash: "cddac7177abc358f44efb469af43191922273705"
 }
@@ -272,6 +282,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName, gitRepoPaths) {
             const gitCommit = remoteAndCommit[1];
             componentList.push({
                 name: repoName,
+                path: repoPath,
                 repositoryUrl: gitRemote,
                 commitHash: gitCommit
             });
@@ -309,7 +320,11 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents) {
             componentList.push({
                 name: otherName,
                 version: otherVersion,
-                downloadUrl: otherSettings.downloadUrl
+                downloadUrl: otherSettings.downloadUrl,
+                path: otherSettings.path,
+                annotation: otherSettings.annotation,
+                cgIgnore: otherSettings.cgIgnore,
+                markdownIgnore: otherSettings.markdownIgnore
             });
          }
     }
@@ -360,7 +375,6 @@ async function getCargoPackageInfo(imageTagOrContainerName, crates) {
             const versionCommand = crates[crate] || `${crate} --version`;
             console.log(`(*) Getting version for ${crate}...`);
             const versionOutput = await getDockerRunCommandOutput(imageTagOrContainerName, versionCommand);
-            console.log(versionOutput);
             const crateVersionCaptureGroup = new RegExp('[0-9]+\\.[0-9]+\\.[0-9]+','m').exec(versionOutput);
             const version = crateVersionCaptureGroup[0];
             componentList.push({
@@ -448,13 +462,22 @@ async function getImageDigest(imageTag) {
 }
 */
 
+// Convert 
+function getLinuxPackageManagerForDistro(distroId)
+{
+    switch(distroId) {
+        case 'debian', 'ubuntu': return 'apt';
+        case 'alpine': return 'apk';
+    }
+}
+
 // Spins up a container for a referenced image and extracts info for the specified dependencies
 async function getAllContentInfo(imageTag, dependencies) {
     const containerName = await startContainerForProcessing(imageTag);
     const distroInfo = await getLinuxDistroInfo(containerName);
     const contents = {
         distro: distroInfo,
-        linux: await getLinuxPackageInfo(containerName, dependencies[distroInfo.id], distroInfo),
+        linux: await getLinuxPackageInfo(containerName, dependencies[getLinuxPackageManagerForDistro(distroInfo.id)], distroInfo),
         npm: await getNpmGlobalPackageInfo(containerName, dependencies.npm),
         pip: await getPipPackageInfo(containerName, dependencies.pip, false),
         pipx: await getPipPackageInfo(containerName, dependencies.pipx, true),
@@ -462,7 +485,9 @@ async function getAllContentInfo(imageTag, dependencies) {
         cargo: await getCargoPackageInfo(containerName, dependencies.cargo),
         go: await getGoPackageInfo(containerName, dependencies.go),
         git: await getGitRepositoryInfo(containerName, dependencies.git),
-        other: await getOtherComponentInfo(containerName, dependencies.other)
+        other: await getOtherComponentInfo(containerName, dependencies.other),
+        languages: await getOtherComponentInfo(containerName, dependencies.languages),
+        manual: dependencies.manual
     }
     await asyncUtils.spawn('docker', ['rm', '-f', containerName], { shell: true, stdio: 'inherit' });
     return contents;

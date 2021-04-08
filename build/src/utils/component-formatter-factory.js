@@ -1,3 +1,8 @@
+/*--------------------------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+ *-------------------------------------------------------------------------------------------------------------*/
+
 /* Generate "Linux" entry for linux packages. E.g.
 {
     "Component": {
@@ -13,6 +18,9 @@
 }
  */   
 function linuxPackageComponentFormatter(packageInfo, distroInfo) {
+    if (packageInfo.cgIgnore) {
+        return null;
+    }
     return {
         "Component": {
             "Type": "linux",
@@ -40,7 +48,10 @@ function linuxPackageComponentFormatter(packageInfo, distroInfo) {
     }
 }
 */
-function npmComponentFormetter(packageInfo) {
+function npmComponentFormatter(packageInfo) {
+    if (packageInfo.cgIgnore) {
+        return null;
+    }
     return  {
         "Component": {
             "Type": "npm",
@@ -64,7 +75,10 @@ function npmComponentFormetter(packageInfo) {
     }
 }
 */
-function pipComponentFormetter(packageInfo) {
+function pipComponentFormatter(packageInfo) {
+    if (packageInfo.cgIgnore) {
+        return null;
+    }
     return  {
         "Component": {
             "Type": "Pip",
@@ -89,7 +103,10 @@ function pipComponentFormetter(packageInfo) {
     }
 }
 */
-function gitComponentFormetter(repositoryInfo) {
+function gitComponentFormatter(repositoryInfo) {
+    if (repositoryInfo.cgIgnore) {
+        return null;
+    }
     return {
         "Component": {
             "Type": "git",
@@ -114,7 +131,10 @@ function gitComponentFormetter(repositoryInfo) {
     }
 }
 */
-function otherComponentFormetter(componentInfo) {
+function otherComponentFormatter(componentInfo) {
+    if (componentInfo.cgIgnore) {
+        return null;
+    }
     return {
         "Component": {
             "Type": "other",
@@ -139,6 +159,9 @@ function otherComponentFormetter(componentInfo) {
 }
 */
 function gemComponentFormatter(packageInfo) {
+    if (packageInfo.cgIgnore) {
+        return null;
+    }
     return {
         "Component": {
             "Type": "RubyGems",
@@ -162,6 +185,9 @@ function gemComponentFormatter(packageInfo) {
 }
 */
 function cargoComponentFormatter(packageInfo) {
+    if (packageInfo.cgIgnore) {
+        return null;
+    }
     return {
         "Component": {
             "Type": "cargo",
@@ -183,6 +209,9 @@ function cargoComponentFormatter(packageInfo) {
 }
 */
 function goComponentFormatter(packageInfo) {
+    if (packageInfo.cgIgnore) {
+        return null;
+    }
     return {
         "Component": {
             "Type": "go",
@@ -191,21 +220,34 @@ function goComponentFormatter(packageInfo) {
                 "Version": packageInfo.version
             }
         }
-    }            
+    }
+}
+
+// Remove unused properties like markdownIgnore that only apply to other formatters
+function manualComponentFormatter(component) {
+    if (component.cgIgnore || component.CgIgnore || component.CGIgnore) {
+        return null;
+    }
+    component.markdownIgnore = undefined;
+    component.MarkdownIgnore = undefined;
+    return component;       
 }
 
 
 function getFormatter(distroInfo) {
     return {
-        linux: (packageInfo) => { return linuxPackageComponentFormatter(packageInfo, distroInfo)},
-        npm: npmComponentFormetter,
-        pip: pipComponentFormetter,
-        pipx: pipComponentFormetter,
+        distro: null,
+        linux: (packageInfo) => { return linuxPackageComponentFormatter(packageInfo, distroInfo) },
+        npm: npmComponentFormatter,
+        pip: pipComponentFormatter,
+        pipx: pipComponentFormatter,
         gem: gemComponentFormatter,
         cargo: cargoComponentFormatter,
         go: goComponentFormatter,
-        git: gitComponentFormetter,
-        other: otherComponentFormetter    
+        git: gitComponentFormatter,
+        other: otherComponentFormatter,
+        languages: otherComponentFormatter,
+        manual: manualComponentFormatter
     }
 }    
 
