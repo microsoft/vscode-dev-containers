@@ -259,12 +259,14 @@ function getTagList(definitionId, release, versionPartHandling, registry, regist
 
     let versionList, updateUnversionedTags, updateLatest;
     switch(versionPartHandling) {
-        case true, 'all-latest':
+        case true:
+        case 'all-latest':
             updateLatest = true; 
             updateUnversionedTags = true;
             versionList = [version,`${versionParts[0]}.${versionParts[1]}`, `${versionParts[0]}` ];
             break;
-        case false, 'all':
+        case false:
+        case 'all':
             updateLatest = false;
             updateUnversionedTags = true;
             versionList = [version,`${versionParts[0]}.${versionParts[1]}`, `${versionParts[0]}` ];

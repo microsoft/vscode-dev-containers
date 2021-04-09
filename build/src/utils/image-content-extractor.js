@@ -195,7 +195,7 @@ async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList) {
 
     console.log(`(*) Gathering information about globally installed npm packages...`);
 
-    const npmOutputRaw = await getDockerRunCommandOutput(imageTagOrContainerName, "bash -l -c 'set -e && npm ls --global --depth 0 --json'");
+    const npmOutputRaw = await getDockerRunCommandOutput(imageTagOrContainerName, "bash -l -c 'set -e && npm ls --global --depth 0 --json' 2>/dev/null");
     const npmOutput = JSON.parse(npmOutputRaw);
 
     return packageList.map((package) => {
@@ -343,7 +343,7 @@ async function getGemPackageInfo(imageTagOrContainerName, gems) {
 
     console.log(`(*) Gathering information about gems...`);
 
-    const gemListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, "bash -l -c 'set -e && gem list -d --local'");
+    const gemListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, "bash -l -c 'set -e && gem list -d --local' 2>/dev/null");
     return gems.map((gem) => {
         const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\)]+)`,'m').exec(gemListOutput);
         const gemVersion = gemVersionCaptureGroup[1];
@@ -478,7 +478,8 @@ function isContainerName(imageTagOrContainerName) {
 function getLinuxPackageManagerForDistro(distroId)
 {
     switch(distroId) {
-        case 'debian', 'ubuntu': return 'apt';
+        case 'debian':
+        case 'ubuntu': return 'apt';
         case 'alpine': return 'apk';
     }
 }

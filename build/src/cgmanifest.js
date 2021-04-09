@@ -2,7 +2,7 @@ const path = require('path');
 const push = require('./push').push;
 const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
-const imageContentUtils = require('./utils/image-content');
+const imageContentUtils = require('./utils/image-content-extractor');
 const componentFormatterFactory = require('./utils/component-formatter-factory');
 const markdownFormatterFactory = require('./utils/markdown-formatter-factory');
 

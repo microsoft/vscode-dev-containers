@@ -12,23 +12,19 @@
 	"dependencies": {
 		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210308.3",
 		"imageLink": "https://github.com/microsoft/oryx",
-		"apt": [
-			{
+		"apt": [{
 				"cgIgnore": false,
 				"name": "moby-cli",
 				"annotation": "Docker CLI"
-			},
-			{
+			}, {
 				"cgIgnore": false,
 				"name": "moby-engine",
 				"annotation": "Docker Engine"
-			},
-			{
+			}, {
 				"cgIgnore": false,
 				"name": "git-lfs",
 				"annotation": "Git Large File Support"
-			},
-			{
+			}, {
 				"cgIgnore": false,
 				"markdownIgnore": true,
 				"name": "powershell"

@@ -9,7 +9,7 @@
 ```
 ${tags}
 ```
-> *To keep up to date, you can omit the version part of the tag or use partial version numbers to ensure you only get non-breaking changes (e.g. `0-`) or just get fixes (e.g. `0.200-`).*
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 <!-- tags end -->
 <!-- distro start -->
 **Linux distribution:** ${distro}
@@ -42,10 +42,10 @@ ${pipx}
 
 <!-- pip end -->
 <!-- npm start -->
-**Global npm installed tools and packages**
+**Npm globally installed tools and packages**
 
-| Tool / package | Commit | Path |
-|------|--------|------|
+| Tool / package | Version |
+|----------------|---------|
 ${npm}
 
 <!-- npm end -->
@@ -61,7 +61,7 @@ ${go}
 **Ruby gems and tools**
 
 | Tool / gem | Version |
-|----------------|---------|
+|------------|---------|
 ${gem}
 
 <!-- gem end -->
@@ -69,7 +69,7 @@ ${gem}
 **Cargo / rustup (Rust) crates and tools**
 
 | Tool / crate | Version |
-|----------------|---------|
+|--------------|---------|
 ${cargo}
 
 <!-- gem end -->
@@ -81,10 +81,11 @@ ${cargo}
 ${other}
 
 <!-- other end -->
-<!-- other start -->
-**Additional linux packages and tools**
+<!-- linux start -->
+**Additional linux tools and packages**
 
-| Tool / library | Commit |
-|----------------|--------|
+| Tool / library | Version |
+|----------------|---------|
 ${linux}
-<!-- other end -->
+
+<!-- linux end -->
