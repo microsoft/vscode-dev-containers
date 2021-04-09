@@ -1,6 +1,6 @@
 {
 	"variants": ["14-buster", "12-buster", "10-buster", "14-stretch", "12-stretch", "10-stretch"],
-	"definitionVersion": "0.201.3",
+	"definitionVersion": "0.201.4",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
