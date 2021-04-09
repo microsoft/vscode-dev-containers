@@ -17,17 +17,32 @@
 	"dependencies": {
 		"image": "node:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/node",
-		"debian": [
-			"yarn"
-		],
+		"debian": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/node/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"npm": [
 			"eslint",
-			"tslint",
+			"tslint-to-eslint-config",
 			"typescript"
-		]
+		],
+		"languages": {
+			"Node.js": {
+				"cgIgnore": true,
+				"versionCommand": "node --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/usr/local",
+				"downloadUrl": "https://nodejs.org/en/"
+			},
+			"TypeScript": {
+				"cgIgnore": true,
+				"versionCommand": "tsc --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/usr/local/share/npm-global",
+				"downloadUrl": "https://www.typescriptlang.org/"
+			}
+		}
 	}
 }

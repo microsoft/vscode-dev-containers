@@ -48,10 +48,14 @@ async function getDefinitionImageContent(repo, release, registry, registryPath, 
     const variants = configUtils.getVariants(definitionId) || [null];
     const version = configUtils.getVersionFromRelease(release, definitionId);
     await asyncUtils.forEach(variants, async (variant) => {
+        if(variant) {
+            console.log(`\n(*) Processing variant ${variant}...`);
+        }
+
         const imageTag = configUtils.getTagsForVersion(definitionId, version, registry, registryPath, variant)[0];
         if (buildFirst) {
             // Build but don't push images
-            console.log('(*) Building images...');
+            console.log('(*) Building image...');
             await push(repo, release, false, registry, registryPath, registry, registryPath, false, false, [], 1, 1, false, definitionId);
         } else {
             console.log(`(*) Pulling image ${imageTag}...`);

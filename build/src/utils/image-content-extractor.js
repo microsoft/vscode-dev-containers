@@ -293,12 +293,16 @@ async function getPipxVersionLookup(imageTagOrContainerName) {
 */
 async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos) {
     // Merge in default dependencies
-    gitRepos = gitRepos || [];
-    const defaultPackages = configUtils.getDefaultDependencies('git') || [];
-    gitRepos = defaultPackages.concat(gitRepos);
-    
-    // Return empty array if no repos
-    if (gitRepos.length === 0) {
+    const defaultPackages = configUtils.getDefaultDependencies('git');
+    if(defaultPackages) {
+        const merged = defaultPackages;
+        for(let otherName in gitRepos) {
+            merged[otherName] = gitRepos[otherName];
+        }
+        gitRepos = merged;
+    }
+    // Return empty array if no components
+    if (!gitRepos) {
         return [];
     }
 
@@ -331,10 +335,6 @@ async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos) {
 */
 async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, otherType) {
     otherType = otherType || 'other';
-    if(typeof otherComponents === 'string') {
-        otherComponents = [otherComponents];
-    }
-
     // Merge in default dependencies
     const defaultPackages = configUtils.getDefaultDependencies(otherType);
     if(defaultPackages) {

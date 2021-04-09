@@ -13,6 +13,10 @@ function nameAndVersionFormatter(packageInfo) {
     if (packageInfo.markdownIgnore) {
         return null;
     }
+    if(!packageInfo.version) {
+        console.log(`(!) Warning: No version for package ${packageInfo.name} - skipping markdown output.`);
+        return null;
+    }
     const nameMarkdown = packageInfo.downloadUrl ? `[${packageInfo.name}](${packageInfo.downloadUrl})` : `${packageInfo.name}`
     return `| ${nameMarkdown}${packageInfo.annotation ? ' (' + packageInfo.annotation + ')' : ''} | ${packageInfo.version.replace(/\n/g,'<br />')} ${packageInfo.path ? '| ' + packageInfo.path : ''} |`;
 }
