@@ -1,4 +1,4 @@
-# ${definition}
+# ${definition} ${version}
 
 **Image version:** ${version}
 

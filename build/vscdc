@@ -8,7 +8,7 @@ const push = require('./src/push').push;
 const patch = require('./src/patch');
 const package = require('./src/package').package;
 const prep = require('./src/prep');
-const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
+const generateImageInformationFiles = require('./src/image-info').generateImageInformationFiles;
 const configUtils = require('./src/utils/config');
 const packageJson = require('../package.json');
 
@@ -190,9 +190,64 @@ require('yargs')
                     describe: 'whether to prune images between definitions',
                     type: 'boolean',
                     default: false
+                },
+                'cg': {
+                    describe: 'whether to generate cgmanifest.json',
+                    type: 'boolean',
+                    default: true
+                },
+                'markdown': {
+                    describe: 'whether to generate markdown files in history folders',
+                    type: 'boolean',
+                    default: false
                 }
             })
-    }, cgCommand)
+    }, imageInfoCommand)
+    .command('info [devcontainer]', 'generate image information files', (yargs) => {
+        yargs
+            .positional('devcontainer', {
+                describe: 'limits manifest generation to single definition',
+                default: null
+            })
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or branch',
+                    default: 'master'
+                },
+                'registry': {
+                    describe: 'container registry to push images to',
+                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: configUtils.getConfig('containerRegistryPath', '')
+                },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
+                },
+                'build': {
+                    describe: 'whether to to build the image first step',
+                    type: 'boolean',
+                    default: true
+                },
+                'cg': {
+                    describe: 'whether to generate cgmanifest.json',
+                    type: 'boolean',
+                    default: false
+                },
+                'markdown': {
+                    describe: 'whether to generate markdown files in history folders',
+                    type: 'boolean',
+                    default: true
+                },
+                'prune': {
+                    describe: 'whether to prune images between definitions',
+                    type: 'boolean',
+                    default: false
+                }
+            })
+    }, imageInfoCommand)
     .command('patch', 'patch existing images', (yargs) => {
         yargs
             .options({
@@ -266,11 +321,10 @@ function copyLibraryScriptsCommand() {
         });
 }
 
-
-function cgCommand(argv) {
-    generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build, argv.prune, argv.devcontainer)
+function imageInfoCommand(argv) {
+    generateImageInformationFiles(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build, argv.prune, argv.cg, argv.markdown, argv.devcontainer)
         .catch((reason) => {
-            console.error(`(!) Component governance manifest generation failed - ${reason}`);
+            console.error(`(!) Image information file generation failed - ${reason}`);
             if(reason.stack) {
                 console.error(`    ${reason.stack}`);
             }

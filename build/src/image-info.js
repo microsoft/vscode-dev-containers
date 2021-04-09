@@ -6,7 +6,7 @@ const imageContentUtils = require('./utils/image-content-extractor');
 const componentFormatterFactory = require('./utils/component-formatter-factory');
 const markdownFormatterFactory = require('./utils/markdown-formatter-factory');
 
-async function generateComponentGovernanceManifest(repo, release, registry, registryPath, buildFirst, pruneBetweenDefinitions, definitionId) {
+async function generateImageInformationFiles(repo, release, registry, registryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, definitionId) {
     // Load config files
     await configUtils.loadConfig();
 
@@ -16,22 +16,37 @@ async function generateComponentGovernanceManifest(repo, release, registry, regi
         "Version": 1
     }
 
-    console.log('(*) Generating manifest...');
+    console.log('(*) Generating image information files...');
     const definitions = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList();
     await asyncUtils.forEach(definitions, async (current) => {
-        cgManifest.Registrations = cgManifest.Registrations.concat(
-            await getDefinitionImageContent(repo, release, registry, registryPath, current, alreadyRegistered, buildFirst));
+        const definitionInfo = await getDefinitionImageContent(repo, release, registry, registryPath, current, alreadyRegistered, buildFirst);
+
+        if (generateMarkdown) {
+            // Write version history file
+            console.log('(*) Writing image history markdown...')
+            const historyFolder = path.join(__dirname, '..', '..', 'containers', definitionId, 'history');
+            await asyncUtils.mkdirp(historyFolder);
+            await asyncUtils.writeFile(path.join(historyFolder, `${definitionInfo.version}.md`), definitionInfo.markdown);
+        }
+
+        // Add component registrations if we're using them
+        if (generateCgManifest) {
+            cgManifest.Registrations = cgManifest.Registrations.concat(definitionInfo.registrations);     
+        }
         // Prune images if setting enabled
         if (pruneBetweenDefinitions) {
             await asyncUtils.spawn('docker', ['image', 'prune', '-a', '-f']);
         }
     });
 
-    console.log('(*) Writing manifest...');
-    await asyncUtils.writeFile(
-        path.join(__dirname, '..', '..', 'cgmanifest.json'),
-        JSON.stringify(cgManifest, undefined, 4));
-    console.log('(*) Done!');
+    // Write final cgmanifest.json file if needed
+    if(generateCgManifest) {
+        console.log('(*) Writing cgmanifest.json...');
+        await asyncUtils.writeFile(
+            path.join(__dirname, '..', '..', 'cgmanifest.json'),
+            JSON.stringify(cgManifest, undefined, 4));
+    }
+    console.log('(*) Done!');    
 }
 
 async function getDefinitionImageContent(repo, release, registry, registryPath, definitionId, alreadyRegistered, buildFirst) {
@@ -90,13 +105,11 @@ async function getDefinitionImageContent(repo, release, registry, registryPath, 
         }
     }));
 
-    // Write version history file
-    console.log('(*) Writing image history markdown...')
-    const historyFolder = path.join(__dirname, '..', '..', 'containers', definitionId, 'history');
-    await asyncUtils.mkdirp(historyFolder);
-    await asyncUtils.writeFile(path.join(historyFolder, `${version}.md`), markdown);
-
-    return registrations;
+    return {
+        registrations: registrations,
+        markdown: markdown,
+        version: version
+    }
 }
 
 // Filter out components already in the registration list and format output returns an array of formatted and filtered contents
@@ -204,5 +217,5 @@ function getFormattedContent(content, formatterFn) {
 }
 
 module.exports = {
-    generateComponentGovernanceManifest: generateComponentGovernanceManifest
+    generateImageInformationFiles: generateImageInformationFiles
 }
