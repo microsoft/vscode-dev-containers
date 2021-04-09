@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "263b1033a06bda0185045a5ba40447845acf3fc1"
+                    "commitHash": "4135aaf3da1cb39877e0decbbd6cc4ccc63a435f"
                 }
             }
         },
@@ -218,7 +218,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "263b1033a06bda0185045a5ba40447845acf3fc1"
+                    "commitHash": "4135aaf3da1cb39877e0decbbd6cc4ccc63a435f"
                 }
             }
         },
@@ -228,7 +228,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "263b1033a06bda0185045a5ba40447845acf3fc1"
+                    "commitHash": "4135aaf3da1cb39877e0decbbd6cc4ccc63a435f"
                 }
             }
         },
@@ -490,7 +490,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.0.3",
+                    "Version": "3.0.4",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -510,7 +510,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.20.5",
+                    "Version": "1.21.0",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -530,7 +530,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Compose",
-                    "Version": "1.28.6",
+                    "Version": "1.29.0",
                     "DownloadUrl": "https://github.com/docker/compose"
                 }
             }
@@ -706,7 +706,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "263b1033a06bda0185045a5ba40447845acf3fc1"
+                    "commitHash": "4135aaf3da1cb39877e0decbbd6cc4ccc63a435f"
                 }
             }
         },
@@ -1123,7 +1123,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.2.3"
+                    "Version": "4.2.4"
                 }
             }
         },
