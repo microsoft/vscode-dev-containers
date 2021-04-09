@@ -33,6 +33,9 @@ const linuxPackageInfoExtractionConfig = {
         poolUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
     }
 }
+linuxPackageInfoExtractionConfig.alpine = linuxPackageInfoExtractionConfig.apk;
+linuxPackageInfoExtractionConfig.debian = linuxPackageInfoExtractionConfig.apt;
+linuxPackageInfoExtractionConfig.ubuntu = linuxPackageInfoExtractionConfig.apt;
 
 /* This function converts the contents of /etc/os-release from this:
 
@@ -96,19 +99,21 @@ function snakeCaseToCamelCase(variableName) {
 Defaults to "cgIgnore": true, "markdownIgnore": false given base packages don't need to be registered
 */   
 async function getLinuxPackageInfo(imageTagOrContainerName, packageList, linuxDistroInfo) {
-    if (!packageList) {
+    // Merge in default dependencies
+    packageList = packageList || [];
+    const packageManager = getLinuxPackageManagerForDistro(linuxDistroInfo.id);
+    const defaultPackages = configUtils.getDefaultDependencies(packageManager) || [];
+    packageList = defaultPackages.concat(packageList);
+
+    // Return empty array if no packages
+    if (packageList.length === 0) {
         return [];
     }
-
-    const componentList = [];
 
     // Get OS info if not passed in
     if(!linuxDistroInfo) {
         linuxDistroInfo = await getLinuxDistroInfo(imageTagOrContainerName);
     }
-
-    // Use the appropriate package lookup settings for distro
-    const extractionConfig = linuxPackageInfoExtractionConfig[getLinuxPackageManagerForDistro(linuxDistroInfo.id)];
 
     // Generate a settings object from packageList
     const settings = packageList.reduce((obj, current) => {
@@ -120,26 +125,36 @@ async function getLinuxPackageInfo(imageTagOrContainerName, packageList, linuxDi
         return obj;
     }, {});
 
-    // Space separated list of packages for use in com,ands
+    // Space separated list of packages for use in commands
     const packageListCommandPart = packageList.reduce((prev, current) => {
         return prev += ` ${typeof current === 'string' ? current : current.name}`;
     }, '');
 
+    // Use the appropriate package lookup settings for distro
+    const extractionConfig = linuxPackageInfoExtractionConfig[packageManager];
+
     // Generate and exec command to get installed package versions
     console.log('(*) Gathering information about Linux package versions...');
-    const packageVersionListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, extractionConfig.listCommand + packageListCommandPart, true);
+    const packageVersionListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, 
+        extractionConfig.listCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
    
     // Generate and exec command to extract download URIs
     console.log('(*) Gathering information about Linux package download URLs...');
-    const packageUriCommandOutput = await getDockerRunCommandOutput(imageTagOrContainerName, extractionConfig.getUriCommand + packageListCommandPart, true);
+    const packageUriCommandOutput = await getDockerRunCommandOutput(imageTagOrContainerName, 
+        extractionConfig.getUriCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
 
+    const componentList = [];
     const packageVersionList = packageVersionListOutput.split('\n');
     packageVersionList.forEach((packageVersion) => {
         packageVersion = packageVersion.trim();
         if (packageVersion !== '') {
             const versionCaptureGroup = new RegExp(extractionConfig.lineRegEx).exec(packageVersion);
             if (!versionCaptureGroup) {
-                console.log(`(!) Warning: Unable to parse output "${packageVersion}". Likely not from command. Skipping.`);
+                if(packageVersion === 'Some packages were not found.') {
+                    console.log('(!) Warning: Some specified packages were not found.');
+                } else {
+                    console.log(`(!) Warning: Unable to parse output "${packageVersion}" - skipping.`);
+                }
                 return;
             }
             const [, package, version ] = versionCaptureGroup;
@@ -189,7 +204,13 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config,
 }
 */
 async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList) {
-    if (!packageList) {
+    // Merge in default dependencies
+    packageList = packageList || [];
+    const defaultPackages = configUtils.getDefaultDependencies('npm') || [];
+    packageList = defaultPackages.concat(packageList);
+    
+    // Return empty array if no packages
+    if (packageList.length === 0) {
         return [];
     }
 
@@ -215,7 +236,13 @@ async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList) {
 }
 */
 async function getPipPackageInfo(imageTagOrContainerName, packageList, usePipx) {
-    if (!packageList) {
+    // Merge in default dependencies
+    packageList = packageList || [];
+    const defaultPackages = configUtils.getDefaultDependencies(usePipx ? 'pipx' : 'pip') || [];
+    packageList = defaultPackages.concat(packageList);
+    
+    // Return empty array if no packages
+    if (packageList.length === 0) {
         return [];
     }
 
@@ -264,15 +291,20 @@ async function getPipxVersionLookup(imageTagOrContainerName) {
     commitHash: "cddac7177abc358f44efb469af43191922273705"
 }
 */
-async function getGitRepositoryInfo(imageTagOrContainerName, gitRepoPaths) {
-    if (!gitRepoPaths) {
+async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos) {
+    // Merge in default dependencies
+    gitRepos = gitRepos || [];
+    const defaultPackages = configUtils.getDefaultDependencies('git') || [];
+    gitRepos = defaultPackages.concat(gitRepos);
+    
+    // Return empty array if no repos
+    if (gitRepos.length === 0) {
         return [];
     }
 
     const componentList = [];
-
-    for(let repoName in gitRepoPaths) {
-        const repoPath = gitRepoPaths[repoName];
+    for(let repoName in gitRepos) {
+        const repoPath = gitRepos[repoName];
         if (typeof repoPath === 'string') {
             console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
@@ -297,18 +329,28 @@ async function getGitRepositoryInfo(imageTagOrContainerName, gitRepoPaths) {
     downloadUrl: "https://pecl.php.net/get/xdebug-2.9.6.tgz"
 }
 */
-async function getOtherComponentInfo(imageTagOrContainerName, otherComponents) {
-    if (!otherComponents) {
-        return [];
-    }
-
+async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, otherType) {
+    otherType = otherType || 'other';
     if(typeof otherComponents === 'string') {
         otherComponents = [otherComponents];
     }
 
-    const componentList = [];
-    console.log(`(*) Gathering information about "other" components...`);
+    // Merge in default dependencies
+    const defaultPackages = configUtils.getDefaultDependencies(otherType);
+    if(defaultPackages) {
+        const merged = defaultPackages;
+        for(let otherName in otherComponents) {
+            merged[otherName] = otherComponents[otherName];
+        }
+        otherComponents = merged;
+    }
+    // Return empty array if no components
+    if (!otherComponents) {
+        return [];
+    }
 
+    console.log(`(*) Gathering information about "other" components...`);
+    const componentList = [];
     for(let otherName in otherComponents) {
         const otherSettings = otherComponents[otherName];
         if (typeof otherSettings === 'object') {
@@ -336,15 +378,20 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents) {
     version: "13.0.1"
 }
 */
-async function getGemPackageInfo(imageTagOrContainerName, gems) {
-    if (!gems) {
+async function getGemPackageInfo(imageTagOrContainerName, packageList) {
+    // Merge in default dependencies
+    packageList = packageList || [];
+    const defaultPackages = configUtils.getDefaultDependencies('gem') || [];
+    packageList = defaultPackages.concat(packageList);
+    
+    // Return empty array if no packages
+    if (packageList.length === 0) {
         return [];
     }
 
     console.log(`(*) Gathering information about gems...`);
-
     const gemListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, "bash -l -c 'set -e && gem list -d --local' 2>/dev/null");
-    return gems.map((gem) => {
+    return packageList.map((gem) => {
         const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\)]+)`,'m').exec(gemListOutput);
         const gemVersion = gemVersionCaptureGroup[1];
         return {
@@ -360,17 +407,27 @@ async function getGemPackageInfo(imageTagOrContainerName, gems) {
     version: "1.4.17-stable"
 }
 */
-async function getCargoPackageInfo(imageTagOrContainerName, crates) {
-    if (!crates) {
+async function getCargoPackageInfo(imageTagOrContainerName, packages) {
+    // Merge in default dependencies
+    const defaultPackages = configUtils.getDefaultDependencies('go');
+    if(defaultPackages) {
+        const merged = defaultPackages;
+        for(let package in packages) {
+            merged[package] = packages[package];
+        }
+        packages = merged;
+    }
+    // Return empty array if no packages
+    if (!packages) {
         return [];
     }
 
     const componentList = [];
     console.log(`(*) Gathering information about cargo packages...`);
 
-    for(let crate in crates) {
+    for(let crate in packages) {
         if (typeof crate === 'string') {
-            const versionCommand = crates[crate] || `${crate} --version`;
+            const versionCommand = packages[crate] || `${crate} --version`;
             console.log(`(*) Getting version for ${crate}...`);
             const versionOutput = await getDockerRunCommandOutput(imageTagOrContainerName, versionCommand);
             const crateVersionCaptureGroup = new RegExp('[0-9]+\\.[0-9]+\\.[0-9]+','m').exec(versionOutput);
@@ -392,13 +449,22 @@ async function getCargoPackageInfo(imageTagOrContainerName, crates) {
 }
 */
 async function getGoPackageInfo(imageTagOrContainerName, packages) {
+    // Merge in default dependencies
+    const defaultPackages = configUtils.getDefaultDependencies('go');
+    if(defaultPackages) {
+        const merged = defaultPackages;
+        for(let package in packages) {
+            merged[package] = packages[package];
+        }
+        packages = merged;
+    }
+    // Return empty array if no components
     if (!packages) {
         return [];
     }
 
-    const componentList = [];
     console.log(`(*) Gathering information about go modules and packages...`);
-
+    const componentList = [];
     const packageInstallOutput = await getDockerRunCommandOutput(imageTagOrContainerName, "cat /usr/local/etc/vscode-dev-containers/go.log");
     for(let package in packages) {
         if (typeof package === 'string') {
@@ -478,10 +544,21 @@ function isContainerName(imageTagOrContainerName) {
 function getLinuxPackageManagerForDistro(distroId)
 {
     switch(distroId) {
+        case 'apt':
         case 'debian':
         case 'ubuntu': return 'apt';
+        case 'apk':
         case 'alpine': return 'apk';
     }
+    return null;
+}
+
+// Return dependencies by mapping distro "ID" from /etc/os-release to determine appropriate package manger
+function getLinuxPackageManagerDependencies(dependencies, distroInfo) {
+    if(dependencies[distroInfo.id]) {
+        return dependencies[distroInfo.id];
+    } 
+    return dependencies[getLinuxPackageManagerForDistro(distroInfo.id)]
 }
 
 // Spins up a container for a referenced image and extracts info for the specified dependencies
@@ -491,7 +568,7 @@ async function getAllContentInfo(imageTag, dependencies) {
     const contents = {
         image: await getImageInfo(containerName),
         distro: distroInfo,
-        linux: await getLinuxPackageInfo(containerName, dependencies[getLinuxPackageManagerForDistro(distroInfo.id)], distroInfo),
+        linux: await getLinuxPackageInfo(containerName, getLinuxPackageManagerDependencies(dependencies, distroInfo), distroInfo),
         npm: await getNpmGlobalPackageInfo(containerName, dependencies.npm),
         pip: await getPipPackageInfo(containerName, dependencies.pip, false),
         pipx: await getPipPackageInfo(containerName, dependencies.pipx, true),
@@ -499,8 +576,8 @@ async function getAllContentInfo(imageTag, dependencies) {
         cargo: await getCargoPackageInfo(containerName, dependencies.cargo),
         go: await getGoPackageInfo(containerName, dependencies.go),
         git: await getGitRepositoryInfo(containerName, dependencies.git),
-        other: await getOtherComponentInfo(containerName, dependencies.other),
-        languages: await getOtherComponentInfo(containerName, dependencies.languages),
+        other: await getOtherComponentInfo(containerName, dependencies.other, 'other'),
+        languages: await getOtherComponentInfo(containerName, dependencies.languages, 'languages'),
         manual: dependencies.manual
     }
     await asyncUtils.spawn('docker', ['rm', '-f', containerName], { shell: true, stdio: 'inherit' });

@@ -542,7 +542,6 @@ function getAllDependencies() {
 
 function getPoolKeyForPoolUrl(poolUrl) {
     const poolKey = config.poolKeys[poolUrl];
-    console.log (`(*) Key for ${poolUrl} is ${poolKey}`);
     return poolKey;
 }
 
@@ -573,6 +572,11 @@ function shouldFlattenDefinitionBaseImage(definitionId) {
     return (getConfig('flattenBaseImage', []).indexOf(definitionId) >= 0)
 }
 
+function getDefaultDependencies(dependencyType) {
+    const packageManagerConfig = getConfig('commonDependencies');
+    return packageManagerConfig ? packageManagerConfig[dependencyType] : null;
+} 
+
 module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
@@ -587,6 +591,7 @@ module.exports = {
     objectByDefinitionLinuxDistro: objectByDefinitionLinuxDistro,
     getDefinitionDependencies: getDefinitionDependencies,
     getAllDependencies: getAllDependencies,
+    getDefaultDependencies: getDefaultDependencies,
     getStagingFolder: getStagingFolder,
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
     getVersionFromRelease: getVersionFromRelease,

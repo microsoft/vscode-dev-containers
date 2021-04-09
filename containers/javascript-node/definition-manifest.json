@@ -21,7 +21,7 @@
 			"name": "yarn"
 		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/node/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"npm": [
