@@ -16,7 +16,7 @@
 	"dependencies": {
 		"image": "node:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/node",
-		"debian": [
+		"apt": [
 			"yarn"
 		],
 		"git": {

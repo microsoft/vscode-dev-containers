@@ -1,16 +1,19 @@
 <!-- variant start -->
 ## Variant: ${variant}
 <!-- variant end -->
-<!-- distro start -->
-**Linux distribution:** ${distro}
-<!-- distro end -->
+<!-- image start -->
+**Image:** ${image}
+<!-- image end -->
 <!-- tags start -->
 **Tags:**
 ```
 ${tags}
 ```
-*To keep up to date, you can omit the version part of the tag or use partial version numbers to ensure you only get non-breaking changes (e.g. `0-`) or just get fixes (e.g. `0.200-`).*
+> *To keep up to date, you can omit the version part of the tag or use partial version numbers to ensure you only get non-breaking changes (e.g. `0-`) or just get fixes (e.g. `0.200-`).*
 <!-- tags end -->
+<!-- distro start -->
+**Linux distribution:** ${distro}
+<!-- distro end -->
 
 ### Contents
 <!-- languages start -->

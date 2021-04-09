@@ -232,8 +232,17 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
     }, []);
 }
 
-// Generate complete list of tags for a given definition
-function getTagList(definitionId, release, updateLatest, registry, registryPath, variant) {
+/* 
+Generate complete list of tags for a given definition.
+
+versionPartHandling has a few different modes:
+    - true/'latest' - latest, X.X.X, X.X, X
+    - false/'full' - X.X.X, X.X, X
+    - 'full-only' - X.X.X
+    - 'major-minor' - X.X
+    - 'major' - X
+*/
+function getTagList(definitionId, release, versionPartHandling, registry, registryPath, variant) {
     const version = getVersionFromRelease(release, definitionId);
 
     // If version is 'dev', there's no need to generate semver tags for the version
@@ -247,20 +256,43 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
     if (versionParts.length !== 3) {
         throw (`Invalid version format in ${version}.`);
     }
+
+    let versionList, updateUnversionedTags, updateLatest;
+    switch(versionPartHandling) {
+        case true, 'all-latest':
+            updateLatest = true; 
+            updateUnversionedTags = true;
+            versionList = [version,`${versionParts[0]}.${versionParts[1]}`, `${versionParts[0]}` ];
+            break;
+        case false, 'all':
+            updateLatest = false;
+            updateUnversionedTags = true;
+            versionList = [version,`${versionParts[0]}.${versionParts[1]}`, `${versionParts[0]}` ];
+            break;
+        case 'full-only':
+            updateLatest = false;
+            updateUnversionedTags = false;
+            versionList = [version];
+            break;
+        case 'major-minor':
+            updateLatest = false;
+            updateUnversionedTags = false;
+            versionList = [`${versionParts[0]}.${versionParts[1]}`];
+            break;
+        case 'major':
+            updateLatest = false;
+            updateUnversionedTags = false;
+            versionList = [ `${versionParts[0]}`];
+            break;
+    }
+
     // Normally, we also want to return a tag without a version number, but for
     // some definitions that exist in the same repository as others, we may
     // only want to return a list of tags with part of the version number in it
-    const versionedTagsOnly = config.definitionBuildSettings[definitionId].versionedTagsOnly;
-    const versionList = versionedTagsOnly ? [
-            version,
-            `${versionParts[0]}.${versionParts[1]}`,
-            `${versionParts[0]}`
-        ] : [
-            version,
-            `${versionParts[0]}.${versionParts[1]}`,
-            `${versionParts[0]}`,
-            '' // This is the equivalent of latest for qualified tags- e.g. python:3 instead of python:0.35.0-3
-        ];
+    if(updateUnversionedTags && !config.definitionBuildSettings[definitionId].versionedTagsOnly) {
+        // This is the equivalent of latest for qualified tags- e.g. python:3 instead of python:0.35.0-3
+        versionList.push(''); 
+    }
 
     // If this variant should also be used for the the latest tag (it's the left most in the list), add it
     const allVariants = getVariants(definitionId);

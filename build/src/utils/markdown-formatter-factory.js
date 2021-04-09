@@ -47,6 +47,16 @@ function distroFormatter(distroInfo) {
     return `${distroInfo.prettyName}${distroInfo.idLike ? ' (' + distroInfo.idLike + '-like distro)' : ''}`;
 }
 
+/*
+Returns: digest (image name)
+*/
+function imageInfoFormatter(imageInfo) {
+    if (imageInfo.markdownIgnore) {
+        return null;
+    }
+    return `${imageInfo.digest} (${imageInfo.name})`;
+}
+
 /* Handle CG manifest entries like:
 {
     "Component": {
@@ -82,6 +92,7 @@ function componentFormatter(component) {
 
 function getFormatter() {
     return {
+        image: imageInfoFormatter,
         distro: distroFormatter,
         linux: nameAndVersionFormatter,
         npm: nameAndVersionFormatter,

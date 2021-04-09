@@ -36,15 +36,15 @@ const linuxPackageInfoExtractionConfig = {
 
 /* This function converts the contents of /etc/os-release from this:
 
-PRETTY_NAME="Debian GNU/Linux 10 (buster)"
-NAME="Debian GNU/Linux"
-VERSION_ID="10"
-VERSION="10 (buster)"
-VERSION_CODENAME=buster
-ID=debian
-HOME_URL="https://www.debian.org/"
-SUPPORT_URL="https://www.debian.org/support"
-BUG_REPORT_URL="https://bugs.debian.org/"
+    PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+    NAME="Debian GNU/Linux"
+    VERSION_ID="10"
+    VERSION="10 (buster)"
+    VERSION_CODENAME=buster
+    ID=debian
+    HOME_URL="https://www.debian.org/"
+    SUPPORT_URL="https://www.debian.org/support"
+    BUG_REPORT_URL="https://bugs.debian.org/"
 
 to an object like this:
 
@@ -84,7 +84,7 @@ function snakeCaseToCamelCase(variableName) {
 	}, '');
 }
 
-/* Generate "Linux" entry for linux packages. E.g.
+/* A set of info objects linux packages. E.g.
 {
     name: "yarn",
     version: "1.22.5-1",
@@ -142,8 +142,7 @@ async function getLinuxPackageInfo(imageTagOrContainerName, packageList, linuxDi
                 console.log(`(!) Warning: Unable to parse output "${packageVersion}". Likely not from command. Skipping.`);
                 return;
             }
-            const package = versionCaptureGroup[1];
-            const version = versionCaptureGroup[2];
+            const [, package, version ] = versionCaptureGroup;
             const packageSettings = settings[package] || {};
             const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, extractionConfig, package, version);
             componentList.push({
@@ -183,7 +182,7 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config,
     return uriCaptureGroup[1];
 }
 
-/* Generate "Npm" entries. E.g.
+/* Generate "Npm" info objects. E.g.
 {
     name: "eslint",
     version: "7.23.0"
@@ -200,15 +199,16 @@ async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList) {
     const npmOutput = JSON.parse(npmOutputRaw);
 
     return packageList.map((package) => {
+        const packageJson =  npmOutput.dependencies[package] || {};
         return {
             name: package,
-            version: npmOutput.dependencies[package].version
+            version:packageJson.version
         }
     });
 }
 
 
-/* Generate "Pip" entries. E.g.
+/* Generate pip or pipx info objects. E.g.
 {
     name: "pylint",
     version: "2.6.0"
@@ -256,7 +256,7 @@ async function getPipxVersionLookup(imageTagOrContainerName) {
     }, {});
 }
 
-/* Generate "Git" entries. E.g.
+/* Generate git info objects. E.g.
 {
     name: "Oh My Zsh!",
     path: "/home/codespace/.oh-my-zsh",
@@ -277,9 +277,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName, gitRepoPaths) {
             console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
             const remoteAndCommitOutput = await getDockerRunCommandOutput(imageTagOrContainerName, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi`,true);
-            const remoteAndCommit = remoteAndCommitOutput.split('\n');
-            const gitRemote = remoteAndCommit[0];
-            const gitCommit = remoteAndCommit[1];
+            const [gitRemote, gitCommit] = remoteAndCommitOutput.split('\n');
             componentList.push({
                 name: repoName,
                 path: repoPath,
@@ -292,7 +290,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName, gitRepoPaths) {
     return componentList;
 }
 
-/* Generate "Other" entries. E.g.
+/* Generate "other" info objects. E.g.
 {
     name: "Xdebug",
     version: "2.9.6",
@@ -332,7 +330,7 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents) {
     return componentList;
 }
 
-/* Generate "RubyGems" entries. E.g.
+/* Generate Ruby gems info objects. E.g.
 {
     name: "rake",
     version: "13.0.1"
@@ -356,7 +354,7 @@ async function getGemPackageInfo(imageTagOrContainerName, gems) {
     });
 }
 
-/* Generate "Cargo" entries. E.g.
+/* Generate cargo info object. E.g.
 {
     name: "rustfmt",
     version: "1.4.17-stable"
@@ -387,7 +385,7 @@ async function getCargoPackageInfo(imageTagOrContainerName, crates) {
     return componentList;
 }
 
-/* Generate "Go" entries. E.g.
+/* Generate go info objects. E.g.
 {
     name: "golang.org/x/tools/gopls",
     version: "0.6.4"
@@ -422,6 +420,26 @@ async function getGoPackageInfo(imageTagOrContainerName, packages) {
     return componentList;
 }
 
+/* Generate image info object. E.g.
+{
+    "name": "debian"
+    "digest": "sha256:c33d4c1938625a1d0cda78102127b81935e0e94785bc4810b71b5f236dd935e"
+}
+*/
+async function getImageInfo(imageTagOrContainerName) {
+    let image = imageTagOrContainerName;
+    if(isContainerName(imageTagOrContainerName)) {
+        image = await asyncUtils.spawn('docker', ['inspect', "--format='{{.Image}}'", imageTagOrContainerName.trim()], { shell: true, stdio: 'pipe' });
+    }
+    const imageNameAndDigest = await asyncUtils.spawn('docker', ['inspect', "--format='{{index .RepoDigests 0}}'", image], { shell: true, stdio: 'pipe' });
+    const [name, digest] = imageNameAndDigest.trim().split('@');
+    return {
+        "name": name,
+        "digest": digest
+    }
+}
+
+
 // Command to start a container for processing. Returns a container name with a 
 // specific format that can be used to detect whether an image tag or container
 // name is passed into the content extractor functions.
@@ -440,7 +458,7 @@ async function removeProcessingContainer(containerName) {
 // name is passed in, the function will use "docker exec" and otherwise use "docker run" 
 // since this means an image tag was passed in instead.
 async function getDockerRunCommandOutput(imageTagOrContainerName, command, forceRoot) {
-    const runArgs = imageTagOrContainerName.indexOf('vscdc--extract--') === 0 ?
+    const runArgs = isContainerName(imageTagOrContainerName) ?
         ['exec'].concat(forceRoot ? ['-u', 'root'] : [])
         : ['run','--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);
     const wrappedCommand = `bash -c "set -e && echo ~~~BEGIN~~~ && ${command} && echo ~~~END~~~"`;
@@ -452,17 +470,11 @@ async function getDockerRunCommandOutput(imageTagOrContainerName, command, force
     return filteredResult.trim();
 }
 
-/*
-async function getImageDigest(imageTag) {
-    const commandOutput = await asyncUtils.spawn('docker',
-        ['inspect', "--format='{{index .RepoDigests 0}}'", imageTag],
-        { shell: true, stdio: 'pipe' });
-    // Example output: ruby@sha256:0b503bc5b8cbe2a1e24f122abb4d6c557c21cb7dae8adff1fe0dcad76d606215
-    return commandOutput.split('@')[1].trim();
+function isContainerName(imageTagOrContainerName) {
+    return (imageTagOrContainerName.indexOf('vscdc--extract--') === 0)
 }
-*/
 
-// Convert 
+// Use distro "ID" from /etc/os-release to determine appropriate package manger
 function getLinuxPackageManagerForDistro(distroId)
 {
     switch(distroId) {
@@ -476,6 +488,7 @@ async function getAllContentInfo(imageTag, dependencies) {
     const containerName = await startContainerForProcessing(imageTag);
     const distroInfo = await getLinuxDistroInfo(containerName);
     const contents = {
+        image: await getImageInfo(containerName),
         distro: distroInfo,
         linux: await getLinuxPackageInfo(containerName, dependencies[getLinuxPackageManagerForDistro(distroInfo.id)], distroInfo),
         npm: await getNpmGlobalPackageInfo(containerName, dependencies.npm),
@@ -494,6 +507,7 @@ async function getAllContentInfo(imageTag, dependencies) {
 }
 
 module.exports = {
+    getImageInfo: getImageInfo,
     getLinuxDistroInfo: getLinuxDistroInfo,
     getLinuxPackageInfo: getLinuxPackageInfo,
     getNpmGlobalPackageInfo: getNpmGlobalPackageInfo,

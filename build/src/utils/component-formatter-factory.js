@@ -236,6 +236,7 @@ function manualComponentFormatter(component) {
 
 function getFormatter(distroInfo) {
     return {
+        image: null,
         distro: null,
         linux: (packageInfo) => { return linuxPackageComponentFormatter(packageInfo, distroInfo) },
         npm: npmComponentFormatter,

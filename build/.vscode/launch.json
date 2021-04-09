@@ -45,9 +45,9 @@
 			"program": "${workspaceFolder}/vscdc",
 			"args": [
 				"cg",
-				"codespaces-linux",
+				"javascript-node",
 				"--no-build",
-				"--release", "master",
+				"--release", "v0.166.2",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "mcr.microsoft.com",
 				"--registryPath", "vscode/devcontainers"
