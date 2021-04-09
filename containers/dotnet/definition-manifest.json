@@ -12,12 +12,21 @@
 	"dependencies": {
 		"image": "mcr.microsoft.com/dotnet/sdk:${VARIANT}-focal",
 		"imageLink": "https://hub.docker.com/_/microsoft-dotnet-sdk",
-		"debian": [
-			"yarn"
-		],
+		"debian": [{
+			"cgIgnore": false,
+			"name":"yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
+		},
+		"languages": {
+			".NET": {
+				"cgIgnore": true,
+				"versionCommand": "dotnet --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+' | tr -d '\\n' && echo \\\" (\\$(dotnet --info | grep -ozP 'Host.*:\\s*Version:\\s*\\K[0-9]\\.[0-9]\\.[0-9]' | tr -d '\\0'))\\\"",
+				"path": "/usr",
+				"downloadUrl": "https://dotnet.microsoft.com/"
+			}
 		}
 	}
 }
