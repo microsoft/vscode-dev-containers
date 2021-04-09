@@ -159,14 +159,18 @@ async function getLinuxPackageInfo(imageTagOrContainerName, packageList, linuxDi
             }
             const [, package, version ] = versionCaptureGroup;
             const packageSettings = settings[package] || {};
+            const cgIgnore =  typeof packageSettings.cgIgnore === 'undefined' ? true : packageSettings.cgIgnore; // default to true
             const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, extractionConfig, package, version);
+            if(!cgIgnore && !poolUrl) {
+                throw new Error('(!) No pool URL found to register package!');
+            }
             componentList.push({
                 name: package,
                 version: version,
                 poolUrl: poolUrl,
                 poolKeyUrl: configUtils.getPoolKeyForPoolUrl(poolUrl),
                 annotation: packageSettings.annotation,
-                cgIgnore: typeof packageSettings.cgIgnore === 'undefined' ? true : packageSettings.cgIgnore,
+                cgIgnore: cgIgnore,
                 markdownIgnore: packageSettings.markdownIgnore
             });
         }
@@ -185,12 +189,12 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config,
         .exec(packageUriCommandOutput);
 
     if (!uriCaptureGroup) {
-        console.log(`(!) No URI found for ${package} ${version}. Attempting to use fallback.`);
         const fallbackPoolUrl = configUtils.getFallbackPoolUrl(package);
         if (fallbackPoolUrl) {
             return fallbackPoolUrl;
         } 
-        throw new Error('No download URI found for package');
+        console.log(`(!) No URI found for ${package} ${version}.`);
+        return null;
     }
 
     // Extract URIs
