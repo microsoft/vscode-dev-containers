@@ -10,11 +10,12 @@
 	"dependencies": {
 		"image": "anaconda3:latest",
 		"imageLink": "https://hub.docker.com/r/continuumio/anaconda3",
-		"debian": [
-			"yarn"
-		],
+		"debian": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		}
 	}

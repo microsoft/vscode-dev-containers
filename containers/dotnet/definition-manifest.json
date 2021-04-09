@@ -5,14 +5,14 @@
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
-			"dotnetcore:${VERSION}-${VARIANT}",
-			"dotnet:${VERSION}-${VARIANT}"
+			"dotnet:${VERSION}-${VARIANT}",
+			"dotnetcore:${VERSION}-${VARIANT}"
 		]
 	},
 	"dependencies": {
 		"image": "mcr.microsoft.com/dotnet/sdk:${VARIANT}-focal",
 		"imageLink": "https://hub.docker.com/_/microsoft-dotnet-sdk",
-		"debian": [{
+		"apt": [{
 			"cgIgnore": false,
 			"name":"yarn"
 		}],

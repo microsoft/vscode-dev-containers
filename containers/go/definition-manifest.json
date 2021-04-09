@@ -11,11 +11,12 @@
 	"dependencies": {
 		"image": "golang:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/golang",
-		"debian": [
-			"yarn"
-		],
+		"debian": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"go": {
@@ -27,6 +28,14 @@
 			"github.com/ramya-rao-a/go-outline": null,
 			"github.com/go-delve/delve/cmd/dlv": null,
 			"github.com/golangci/golangci-lint/cmd/golangci-lint": "golangci-lint --version | sed -n '/golangci-lint has version v/s///p' | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]'"
+		},
+		"languages": {
+			"Go": {
+				"cgIgnore": true,
+				"versionCommand": "go version | grep -oE -m 1 'version\\sgo[^ ]+' | sed -n '/^version\\sgo/s///p'",
+				"path": "/usr/local/go",
+				"downloadUrl": "https://golang.org/dl"
+			}
 		}
 	}
 }
