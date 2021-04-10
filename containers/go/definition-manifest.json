@@ -14,7 +14,13 @@
 		"debian": [{
 			"cgIgnore": false,
 			"name": "yarn"
-		}],
+			},
+			"g++",
+			"gcc",
+			"libc6-dev", 
+			"make",
+			"pkg-config"
+		],
 		"git": {
 			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"

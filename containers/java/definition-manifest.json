@@ -21,7 +21,7 @@
 		},
 		"other": {
 			"SDKMAN!": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -ozP 'SDKMAN\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
 				"path": "/usr/local/sdkman",
 				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
 			}
@@ -29,7 +29,7 @@
 		"languages": {
 			"Java": {
 				"cgIgnore": true,
-				"versionCommand": "java --version | grep -ozP 'openjdk\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+' | tr -d '\\0'",
+				"versionCommand": "java --version | grep -ozP 'openjdk\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+' | tr '\\0' '\\n'",
 				"path": "/usr/local/",
 				"downloadUrl": "https://adoptopenjdk.net/"
 			}

@@ -113,7 +113,7 @@
 				"downloadUrl": "https://github.com/docker/compose"
 			},
 			"SDKMAN!": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -ozP 'SDKMAN\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
 				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
 			},
 			"rvm": {
@@ -138,7 +138,7 @@
 				"downloadUrl": "https://maven.apache.org/"
 			},
 			"Gradle": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && gradle --version | grep -ozP 'Welcome to Gradle\\s+\\K[0-9]\\.[0-9]\\.[0-9]' | tr -d '\\0'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && gradle --version | grep -ozP 'Welcome to Gradle\\s+\\K[0-9]\\.[0-9]\\.[0-9]' | tr '\\0' '\n'",
 				"downloadUrl": "https://gradle.org/"
 			},
 			"Docker (Moby) CLI": {
@@ -170,7 +170,7 @@
 				"downloadUrl": "https://www.python.org/"
 			},
 			"Java": {
-				"versionCommand": "/usr/local/sdkman/candidates/java/current/bin/java --version | grep -ozP '^openjdk\\s+\\K[^\\s]+' | tr -d '\\0'",
+				"versionCommand": "/usr/local/sdkman/candidates/java/current/bin/java --version | grep -ozP '^openjdk\\s+\\K[^\\s]+' | tr '\\0' '\\n'",
 				"path": "/usr/local/sdkman/candidates/java/current",
 				"downloadUrl": "https://adoptopenjdk.net/"
 			},
@@ -181,7 +181,7 @@
 				"downloadUrl": "https://dotnet.microsoft.com/"
 			},
 			"Ruby": {
-				"versionCommand": ". /usr/local/rvm/scripts/rvm > /dev/null 2>&1 && ruby --version | grep -ozP '^ruby\\s+\\K[^\\s]+' | tr -d '\\0'",
+				"versionCommand": ". /usr/local/rvm/scripts/rvm > /dev/null 2>&1 && ruby --version | grep -ozP '^ruby\\s+\\K[^\\s]+' | tr '\\0' '\\n'",
 				"path": "/usr/local/rvm/rubies/ruby-&lt;version&gt;",
 				"downloadUrl": "https://www.ruby-lang.org/en/"
 			},

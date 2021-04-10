@@ -12,9 +12,11 @@
 		"image": "ruby:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/ruby",
 		"debian": [{
-			"cgIgnore": false,
-			"name": "yarn"
-		}],
+				"cgIgnore": false,
+				"name": "yarn"
+			},
+			"build-essential"
+		],
 		"git": {
 			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm",
@@ -35,8 +37,9 @@
 		},
 		"languages": {
 			"Ruby": {
-				"versionCommand": "ruby --version | grep -ozP '^ruby\\s+\\K[^\\s]+' | tr -d '\\0'",
-				"path": "/usr/local;",
+				"cgIgnore": true,
+				"versionCommand": "ruby --version | grep -ozP '^ruby\\s+\\K[^\\s]+' | tr '\\0' '\\n'",
+				"path": "/usr/local",
 				"downloadUrl": "https://www.ruby-lang.org/en/"
 			}
 		}

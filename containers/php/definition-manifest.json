@@ -33,7 +33,8 @@
 		},
 		"languages": {
 			"PHP": {
-				"versionCommand": "php --version | grep -ozP 'PHP\\s\\K[0-9][^\\s]+' | tr -d '\\0'",
+				"cgIgnore": true,
+				"versionCommand": "php --version | grep -ozP 'PHP\\s\\K[0-9][^\\s]+' | tr '\\0' '\\n'",
 				"path": "/usr/local",
 				"downloadUrl":"https://xdebug.org/"
 			}	

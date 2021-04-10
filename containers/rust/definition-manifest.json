@@ -10,6 +10,12 @@
 	"dependencies": {
 		"image": "rust:1",
 		"imageLink": "https://hub.docker.com/_/rust",
+		"apt": [
+			"lldb", 
+			"python3-minimal",
+			"gcc", 
+			"libc6-dev"
+		],
 		"git": {
 			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
 		},
@@ -22,6 +28,7 @@
 		},
 		"languages": {
 			"Rust": {
+				"cgIgnore": true,
 				"versionCommand": "rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p'",
 				"path": "/usr/local/cargo",
 				"downloadUrl": "https://github.com/rust-lang/rust"

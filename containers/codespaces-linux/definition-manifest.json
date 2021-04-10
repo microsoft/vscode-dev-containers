@@ -144,7 +144,7 @@
 				"downloadUrl": "https://github.com/docker/compose"
 			},
 			"SDKMAN!": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -ozP 'SDKMAN\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
 				"path": "/usr/local/sdkman",
 				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
 			},
@@ -175,7 +175,7 @@
 				"downloadUrl": "https://maven.apache.org/"
 			},
 			"Gradle": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && gradle --version | grep -ozP 'Welcome to Gradle\\s+\\K[0-9]\\.[0-9]\\.[0-9]' | tr -d '\\0'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && gradle --version | grep -ozP 'Welcome to Gradle\\s+\\K[0-9]\\.[0-9]\\.[0-9]' | tr '\\0' '\\n'\n'",
 				"downloadUrl": "https://gradle.org/"
 			},
 			"Docker (Moby) CLI & Engine": {

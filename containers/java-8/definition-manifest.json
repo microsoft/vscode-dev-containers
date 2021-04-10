@@ -21,15 +21,20 @@
 		},
 		"other": {
 			"SDKMAN!": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -ozP 'SDKMAN\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
 				"path": "/usr/local/sdkman",
 				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
+			},
+			"AdoptOpenJDK": {
+				"markdownIgnore": true,
+				"versionCommand": "/usr/local/sdkman/candidates/java/current/bin/java -version 2>&1 | grep -ozP '^openjdk\\sversion\\s\\\"\\K[^\\\"]+' | tr '\\0' '\\n'",
+				"downloadUrl": "https://adoptopenjdk.net/"
 			}
 		},
 		"languages": {
 			"Java": {
 				"cgIgnore": true,
-				"versionCommand": "/usr/local/sdkman/candidates/java/current/bin/java -version 2>&1 | grep -ozP '^openjdk\\sversion\\s\\\"\\K[^\\\"]+' | tr '\\0' '\\n' && /usr/local/openjdk-*/bin/java --version | grep -ozP 'openjdk\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+' | tr -d '\\0'",
+				"versionCommand": "/usr/local/sdkman/candidates/java/current/bin/java -version 2>&1 | grep -ozP '^openjdk\\sversion\\s\\\"\\K[^\\\"]+' | tr '\\0' '\\n' && /usr/local/openjdk-*/bin/java --version | grep -ozP 'openjdk\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+' | tr '\\0' '\\n'",
 				"path": "/usr/local/sdkman/candidates/java/current<br />/usr/local",
 				"downloadUrl": "https://adoptopenjdk.net/"
 			}
