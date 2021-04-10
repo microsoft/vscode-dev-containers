@@ -396,7 +396,7 @@ async function getGemPackageInfo(imageTagOrContainerName, packageList) {
     console.log(`(*) Gathering information about gems...`);
     const gemListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, "bash -l -c 'set -e && gem list -d --local' 2>/dev/null");
     return packageList.map((gem) => {
-        const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\)]+)`,'m').exec(gemListOutput);
+        const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\),]+)`,'m').exec(gemListOutput);
         const gemVersion = gemVersionCaptureGroup[1];
         return {
             name: gem,
@@ -531,7 +531,7 @@ async function getDockerRunCommandOutput(imageTagOrContainerName, command, force
     const runArgs = isContainerName(imageTagOrContainerName) ?
         ['exec'].concat(forceRoot ? ['-u', 'root'] : [])
         : ['run','--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);
-    const wrappedCommand = `bash -c "set -e && echo ~~~BEGIN~~~ && ${command} && echo ~~~END~~~"`;
+    const wrappedCommand = `bash -c "set -e && echo ~~~BEGIN~~~ && ${command} && echo && echo ~~~END~~~"`;
     runArgs.push(imageTagOrContainerName);
     runArgs.push(wrappedCommand);
     const result = await asyncUtils.spawn('docker', runArgs, { shell: true, stdio: 'pipe' });

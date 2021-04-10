@@ -236,8 +236,8 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
 Generate complete list of tags for a given definition.
 
 versionPartHandling has a few different modes:
-    - true/'latest' - latest, X.X.X, X.X, X
-    - false/'full' - X.X.X, X.X, X
+    - true/'all-latest' - latest, X.X.X, X.X, X
+    - false/'all' - X.X.X, X.X, X
     - 'full-only' - X.X.X
     - 'major-minor' - X.X
     - 'major' - X

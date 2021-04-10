@@ -1,4 +1,4 @@
-# ${definition} ${version}
+# [${definition}](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/${definition})
 
 **Image version:** ${version}
 
