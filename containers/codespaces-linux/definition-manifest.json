@@ -28,6 +28,10 @@
 				"cgIgnore": false,
 				"markdownIgnore": true,
 				"name": "powershell"
+			}, {
+				"cgIgnore": false,
+				"name": "azure-cli",
+				"annotation": "Azure CLI"
 			},
 			"cmake",
 			"build-essential", 
@@ -44,7 +48,8 @@
 			"xtail",
 			"software-properties-common",
 			"libsecret-1-dev",
-			"libnss3", "libnspr4",
+			"libnss3", 
+			"libnspr4",
 			"libatk-bridge2.0-0",
 			"libatk1.0-0",
 			"libx11-6",
@@ -57,44 +62,7 @@
 			"libpango-1.0-0",
 			"libgbm1",
 			"libgtk-3-0",
-			"git",
-			"openssh-client",
 			"openssh-server",
-			"gnupg2",
-			"iproute2",
-			"procps",
-			"lsof",
-			"htop",
-			"net-tools",
-			"psmisc",
-			"curl",
-			"wget",
-			"rsync",
-			"ca-certificates",
-			"unzip",
-			"zip",
-			"nano",
-			"vim-tiny",
-			"less",
-			"jq",
-			"lsb-release",
-			"apt-transport-https",
-			"dialog",
-			"libc6",
-			"libgcc1",
-			"libkrb5-3",
-			"libgssapi-krb5-2",
-			"libicu[0-9][0-9]",
-			"liblttng-ust0",
-			"libstdc++6",
-			"zlib1g",
-			"locales",
-			"sudo",
-			"ncdu",
-			"man-db",
-			"strace",
-			"manpages",
-			"manpages-dev",
 			"lxc",
 			"pigz",
 			"iptables",
@@ -105,11 +73,7 @@
 			"make", 
 			"pkg-config",
 			"sed",
-			"python3-minimal",
-			"libssl1.1",
-			"manpages-posix",
-			"manpages-posix-dev",
-			"zsh"
+			"python3-minimal"
 		],
 		"pipx": [
 			"pylint",
@@ -145,13 +109,13 @@
 		},
 		"go": {
 			"golang.org/x/tools/gopls": null,
-			"honnef.co/go/tools/...": null,
-			"golang.org/x/lint/golint": null,
+			"honnef.co/go/tools": null,
+			"golang.org/x/lint": null,
 			"github.com/mgechev/revive": null,
-			"github.com/uudashr/gopkgs/v2/cmd/gopkgs": null,
+			"github.com/uudashr/gopkgs": null,
 			"github.com/ramya-rao-a/go-outline": null,
-			"github.com/go-delve/delve/cmd/dlv": null,
-			"github.com/golangci/golangci-lint/cmd/golangci-lint": "golangci-lint --version | sed -n '/golangci-lint has version v/s///p' | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]'"
+			"github.com/go-delve/delve": null,
+			"github.com/golangci/golangci-lint": null
 		},
 		"other": {
 			"git": {
@@ -210,14 +174,8 @@
 				"downloadUrl": "https://maven.apache.org/"
 			},
 			"Gradle": {
-				"versionCommand": "gradle --version | grep -m 1 -oE 'Gradle\\s*[0-9]\\.[0-9]\\.[0-9].*' | sed -n '/Gradle\\s*/s///p'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && gradle --version | grep -ozP 'Gradle\\s+\\K[0-9]\\.[0-9]\\.[0-9]' | tr -d '\\0'",
 				"downloadUrl": "https://gradle.org/"
-			},
-			"Azure CLI": {
-				"cgIgnore": true,
-				"versionCommand": "az --version 2>/dev/null | grep -oE 'azure-cli\\s+[0-9]+\\.[0-9]+\\.[0-9]+.*' | sed -n '/azure-cli\\s*/s///p'",
-				"path": "/opt/az",
-				"downloadUrl": "https://docs.microsoft.com/en-us/cli/azure/"
 			},
 			"Docker (Moby) CLI & Engine": {
 				"cgIgnore": true,
