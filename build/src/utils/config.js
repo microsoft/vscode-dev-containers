@@ -472,7 +472,7 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
 
-    const definition = getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath, false);
+    const definition = getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath);
 
     // If definition not found, fall back on swapping out more generic logic - e.g. for when a image already has a version tag in it
     if (!definition) {
@@ -498,7 +498,7 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
 }
 
 // Lookup definition from a tag
-function getDefinitionFromTag(tag, registry, registryPath, matchWithVersionNumber) {
+function getDefinitionFromTag(tag, registry, registryPath) {
     registry = registry || '.+';
     registryPath = registryPath || '.+';
     const captureGroups = new RegExp(`${registry}/${registryPath}/(.+):(.+)`).exec(tag);

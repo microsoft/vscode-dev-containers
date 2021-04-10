@@ -477,7 +477,7 @@ async function getGoPackageInfo(imageTagOrContainerName, packages) {
             if(versionCommand) {
                 version = await getDockerRunCommandOutput(imageTagOrContainerName, versionCommand);
             } else {
-                const versionCaptureGroup = new RegExp(`${package}\\s.*v([0-9]+\\.[0-9]+\\.[0-9]+.*)\\n`,'m').exec(packageInstallOutput);
+                const versionCaptureGroup = new RegExp(`downloading\\s*${package}\\s*v([0-9]+\\.[0-9]+\\.[0-9]+.*)\\n`).exec(packageInstallOutput);
                 version = versionCaptureGroup ? versionCaptureGroup[1] : 'latest';
             }
             componentList.push({

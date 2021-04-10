@@ -27,6 +27,7 @@
 		"https://packages.microsoft.com/repos/microsoft-debian-buster-prod": "https://packages.microsoft.com/keys/microsoft.asc",
 		"https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod": "https://packages.microsoft.com/keys/microsoft.asc",
 		"https://packages.microsoft.com/repos/microsoft-ubuntu-bionic-prod": "https://packages.microsoft.com/keys/microsoft.asc",
+		"https://packages.microsoft.com/repos/azure-cli": "https://packages.microsoft.com/keys/microsoft.asc",
 		"http://archive.ubuntu.com/ubuntu": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg",
 		"http://security.ubuntu.com/ubuntu": "http://security.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg",
 		"https://packagecloud.io/github/git-lfs/ubuntu": "https://packagecloud.io/github/git-lfs/gpgkey",
@@ -36,8 +37,10 @@
 	"poolUrlFallback": {
 		"moby-cli": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
 		"moby-engine": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
+		"powershell": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
 		"yarn": "https://dl.yarnpkg.com/debian",
-		"git-lfs": "https://packagecloud.io/github/git-lfs/ubuntu"
+		"git-lfs": "https://packagecloud.io/github/git-lfs/ubuntu",
+		"azure-cli": "https://packages.microsoft.com/repos/azure-cli"
 	},
 
 	"commonDependencies": {
