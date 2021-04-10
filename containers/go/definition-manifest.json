@@ -21,13 +21,13 @@
 		},
 		"go": {
 			"golang.org/x/tools/gopls": null,
-			"honnef.co/go/tools/...": null,
-			"golang.org/x/lint/golint": null,
+			"honnef.co/go/tools": null,
+			"golang.org/x/lint": null,
 			"github.com/mgechev/revive": null,
-			"github.com/uudashr/gopkgs/v2/cmd/gopkgs": null,
+			"github.com/uudashr/gopkgs": null,
 			"github.com/ramya-rao-a/go-outline": null,
-			"github.com/go-delve/delve/cmd/dlv": null,
-			"github.com/golangci/golangci-lint/cmd/golangci-lint": "golangci-lint --version | sed -n '/golangci-lint has version v/s///p' | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]'"
+			"github.com/go-delve/delve": null,
+			"github.com/golangci/golangci-lint": null
 		},
 		"languages": {
 			"Go": {

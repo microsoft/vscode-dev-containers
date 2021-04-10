@@ -13,10 +13,46 @@
 	"dependencies": {
 		"image": "mcr.microsoft.com/oryx/build:vso-20200417.5",
 		"imageLink": "https://github.com/microsoft/oryx",
-		"debian": [
-			"git-lfs",
-			"moby-cli",
-			"powershell"
+		"apt": [{
+				"cgIgnore": false,
+				"name": "moby-cli",
+				"annotation": "Docker CLI"
+			}, {
+				"cgIgnore": false,
+				"name": "git-lfs",
+				"annotation": "Git Large File Support"
+			}, {
+				"cgIgnore": false,
+				"markdownIgnore": true,
+				"name": "powershell"
+			},{
+				"cgIgnore": false,
+				"name": "azure-cli",
+				"annotation": "Azure CLI"
+			},
+			"cmake",
+			"build-essential", 
+			"cmake",
+			"cppcheck",
+			"valgrind",
+			"lldb",
+			"llvm", 
+			"gdb",
+			"clang",
+			"vim",
+			"xtail",
+			"software-properties-common",
+			"libsecret-1-dev",
+			"openssh-server",
+			"tar",
+			"g++",
+			"gcc",
+			"libc6-dev",
+			"make", 
+			"pkg-config",
+			"sed",
+			"python3-minimal",
+			"openjdk-8-jdk"
 		],
 		"pipx": [
 			"pylint",
@@ -44,23 +80,24 @@
 			"debase"
 		],
 		"cargo": {
-			"rls": "rls --version",
-			"rustfmt": "rustfmt --version",
-			"rust-analysis": null,
-			"rust-src": null,
-			"clippy": null
+			"rls": null,
+			"rustfmt": null,
+			"rust-analysis": "rustc --version",
+			"rust-src": "rustc --version",
+			"clippy": "rustc --version"
 		},
 		"other": {
 			"git": {
 				"versionCommand": "git --version | sed -n '/git version /s///p'",
-				"downloadUrl":"https://github.com/git/git"
+				"downloadUrl": "https://github.com/git/git"
 			},
 			"Xdebug": {
-				"versionCommand": "php --version | grep -oE 'Xdebug\\sv[^,]+' | sed -n '/Xdebug\\sv/s///p'",
-				"downloadUrl":"https://xdebug.org/"
+				"versionCommand": "php --version | grep -oE 'with Xdebug\\sv[^,]+'| sed -n '/with Xdebug\\sv/s///p'",
+				"downloadUrl": "https://xdebug.org/"
 			},
 			"Composer": {
-				"versionCommand": "composer --version 2>/dev/null | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
+				"cgIgnore": "true",
+				"versionCommand": "composer --no-ansi --version 2>/dev/null | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
 				"downloadUrl": "https://getcomposer.org/"
 			},
 			"kubectl": {
@@ -72,47 +109,112 @@
 				"downloadUrl": "https://github.com/helm/helm"
 			},
 			"Docker Compose": {
-				"versionCommand": "docker-compose version | grep -oE 'version\\s[^,]+' | sed -n '/version\\s/s///p'",
+				"versionCommand": "docker-compose version | grep -m 1 -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*'",
 				"downloadUrl": "https://github.com/docker/compose"
 			},
 			"SDKMAN!": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | sed -n '/.*SDKMAN\\s/s///p'",
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
 				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
-			},
-			"AdoptOpenJDK": {
-				"versionCommand": "java -version 2>&1 | grep -oE -m 1 '.*build\\s[^\\)]+' | sed -n '/.*build\\s/s///p'",
-				"downloadUrl": "https://adoptopenjdk.net/"
-			},
-			"GitHubCLI": {
-				"versionCommand": "gh version 2>&1 | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
-				"downloadUrl": "https://github.com/cli/cli"
-			},
-			"Go": {
-				"versionCommand": "go version | grep -oE -m 1 'version\\sgo[^ ]+' | sed -n '/^version\\sgo/s///p'",
-				"downloadUrl": "https://golang.org/dl"
-			},
-			"Rust": {
-				"versionCommand": "rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p'",
-				"downloadUrl": "https://github.com/rust-lang/rust"
 			},
 			"rvm": {
 				"versionCommand": ". /usr/local/rvm/scripts/rvm > /dev/null 2>&1 && rvm --version | grep -oE -m 1 'rvm\\s[^ ]+' | sed -n '/^rvm\\s/s///p'",
+				"path": "/usr/local/rvm",
 				"downloadUrl": "https://github.com/rvm/rvm"
 			},
-			"Ruby": {
-				"versionCommand": ". /usr/local/rvm/scripts/rvm && ruby --version | grep -oE 'ruby\\s[^ ]+' | sed -n '/ruby\\s/s///p'",
-				"downloadUrl": "https://www.ruby-lang.org/en/downloads/"
+			"GitHub CLI": {
+				"versionCommand": "gh version 2>&1 | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
+				"downloadUrl": "https://github.com/cli/cli"
+			},
+			"yarn": {
+				"cgIgnore": true,
+				"versionCommand": "yarn --version",
+				"downloadUrl": "https://yarnpkg.com/",
+				"path": "/opt/yarn"
+			},
+			"Maven": {
+				"cgIgnore": true,
+				"versionCommand": "mvn -version | grep -oE '\\\"[0-9]+\\.[0-9]\\.[0-9][^\\\"]+' | tr -d '\\\"'",
+				"path": "/opt/maven",
+				"downloadUrl": "https://maven.apache.org/"
+			},
+			"Gradle": {
+				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && gradle --version | grep -ozP 'Welcome to Gradle\\s+\\K[0-9]\\.[0-9]\\.[0-9]' | tr -d '\\0'",
+				"downloadUrl": "https://gradle.org/"
+			},
+			"Docker (Moby) CLI": {
+				"cgIgnore": true,
+				"versionCommand": "docker --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+0-9a-z]*'"
 			}
 		},
 		"go": {
 			"golang.org/x/tools/gopls": null,
-			"honnef.co/go/tools/...": null,
-			"golang.org/x/lint/golint": null,
+			"honnef.co/go/tools": null,
+			"golang.org/x/lint": null,
 			"github.com/mgechev/revive": null,
-			"github.com/uudashr/gopkgs/v2/cmd/gopkgs": null,
+			"github.com/uudashr/gopkgs": null,
 			"github.com/ramya-rao-a/go-outline": null,
-			"github.com/go-delve/delve/cmd/dlv": null,
-			"github.com/golangci/golangci-lint/cmd/golangci-lint": null
+			"github.com/go-delve/delve": null,
+			"github.com/golangci/golangci-lint": null
+		},
+		"languages": {
+			"Node.js": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/nodejs | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/nodejs/&lt;version&gt;",
+				"downloadUrl": "https://nodejs.org/en/"
+			},
+			"Python": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/python | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/python/&lt;version&gt;",
+				"downloadUrl": "https://www.python.org/"
+			},
+			"Java": {
+				"versionCommand": "/usr/local/sdkman/candidates/java/current/bin/java --version | grep -ozP '^openjdk\\s+\\K[^\\s]+' | tr -d '\\0'",
+				"path": "/usr/local/sdkman/candidates/java/current",
+				"downloadUrl": "https://adoptopenjdk.net/"
+			},
+			".NET": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/dotnet/runtimes | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/home/codespaces/.dotnet",
+				"downloadUrl": "https://dotnet.microsoft.com/"
+			},
+			"Ruby": {
+				"versionCommand": ". /usr/local/rvm/scripts/rvm > /dev/null 2>&1 && ruby --version | grep -ozP '^ruby\\s+\\K[^\\s]+' | tr -d '\\0'",
+				"path": "/usr/local/rvm/rubies/ruby-&lt;version&gt;",
+				"downloadUrl": "https://www.ruby-lang.org/en/"
+			},
+			"PHP": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/php | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/php/&lt;version&gt;",
+				"downloadUrl": "https://www.php.net/"
+			},
+			"PowerShell": {
+				"cgIgnore": true,
+				"versionCommand": "pwsh --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/microsoft/powershell",
+				"downloadUrl": "https://docs.microsoft.com/en-us/powershell/"
+			},
+			"GCC": {
+				"cgIgnore": true,
+				"versionCommand": "gcc --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+.+)' | tr -d ')'"
+			},
+			"Clang": {
+				"cgIgnore": true,
+				"versionCommand": "clang --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+.*'"
+			},
+			"Go": {
+				"versionCommand": "go version | grep -oE -m 1 'version\\sgo[^ ]+' | sed -n '/^version\\sgo/s///p'",
+				"path": "/usr/local/go",
+				"downloadUrl": "https://golang.org/dl"
+			},
+			"Rust": {
+				"versionCommand": "rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p'",
+				"path": "/usr/local/cargo",
+				"downloadUrl": "https://github.com/rust-lang/rust"
+			}
 		}
 	}
 }
