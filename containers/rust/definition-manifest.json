@@ -11,7 +11,6 @@
 		"image": "rust:1",
 		"imageLink": "https://hub.docker.com/_/rust",
 		"git": {
-			
 			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
 		},
 		"cargo": {
@@ -20,6 +19,13 @@
 			"rust-analysis": "rustc --version",
 			"rust-src": "rustc --version",
 			"clippy": "rustc --version"
+		},
+		"languages": {
+			"Rust": {
+				"versionCommand": "rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p'",
+				"path": "/usr/local/cargo",
+				"downloadUrl": "https://github.com/rust-lang/rust"
+			}
 		}
 	}
 }

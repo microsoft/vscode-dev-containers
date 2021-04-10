@@ -17,6 +17,34 @@
 		"git": {
 			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
+		},
+		"other": {
+			"conda": {
+				"cgIgnore": true,
+				"versionCommand": "conda --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/conda",
+				"downloadUrl": "https://github.com/conda/conda"
+			}
+		},
+		"languages": {
+			"Python": {
+				"cgIgnore": true,
+				"versionCommand": "python --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/conda",
+				"downloadUrl": "https://www.python.org/"
+			},
+			"Jupyter Notebooks": {
+				"cgIgnore": true,
+				"versionCommand": "jupyter-notebook --version",
+				"path": "/opt/conda",
+				"downloadUrl": "https://jupyter.org/"
+			},
+			"Jupyter Lab": {
+				"cgIgnore": true,
+				"versionCommand": "jupyter-lab --version",
+				"path": "/opt/conda",
+				"downloadUrl": "https://jupyter.org/"
+			}
 		}
 	}
 }

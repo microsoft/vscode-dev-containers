@@ -25,6 +25,20 @@
 			"rake",
 			"ruby-debug-ide",
 			"debase"
-		]
+		],
+		"other":{
+			"rvm": {
+				"versionCommand": "cat /usr/local/rvm/VERSION",
+				"path": "/usr/local/rvm",
+				"downloadUrl": "https://github.com/rvm/rvm"
+			}
+		},
+		"languages": {
+			"Ruby": {
+				"versionCommand": "ruby --version | grep -ozP '^ruby\\s+\\K[^\\s]+' | tr -d '\\0'",
+				"path": "/usr/local;",
+				"downloadUrl": "https://www.ruby-lang.org/en/"
+			}
+		}
 	}
 }
