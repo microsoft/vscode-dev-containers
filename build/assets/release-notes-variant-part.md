@@ -65,14 +65,14 @@ ${go}
 ${gem}
 
 <!-- gem end -->
-<!-- gem start -->
+<!-- cargo start -->
 **Cargo / rustup (Rust) crates and tools**
 
 | Tool / crate | Version |
 |--------------|---------|
 ${cargo}
 
-<!-- gem end -->
+<!-- cargo end -->
 <!-- other start -->
 **Other tools and utilities**
 
