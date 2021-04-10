@@ -356,7 +356,7 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, o
     console.log(`(*) Gathering information about "other" components...`);
     const componentList = [];
     for(let otherName in otherComponents) {
-        const otherSettings = otherComponents[otherName];
+        const otherSettings = mergeOtherDefaultSettings(otherName, otherComponents[otherName]);
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
@@ -374,6 +374,20 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, o
     }
 
     return componentList;
+}
+
+// Merge in default config for specified otherName if it exists
+function mergeOtherDefaultSettings(otherName, settings) {
+    const otherDefaultSettings = configUtils.getConfig('otherDefaultSettings', null);
+    if (!otherDefaultSettings) {
+        return settings;
+    }
+    settings = settings || {};
+    const mergedSettings = otherDefaultSettings[otherName] || {};
+    for (let settingName in settings) {
+        mergedSettings[settingName] = settings[settingName];
+    }
+    return mergedSettings;
 }
 
 /* Generate Ruby gems info objects. E.g.
