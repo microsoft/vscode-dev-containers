@@ -18,13 +18,13 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
 
     console.log('(*) Generating image information files...');
     const definitions = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList();
-    await asyncUtils.forEach(definitions, async (current) => {
-        const definitionInfo = await getDefinitionImageContent(repo, release, registry, registryPath, current, alreadyRegistered, buildFirst);
+    await asyncUtils.forEach(definitions, async (currentDefinitionId) => {
+        const definitionInfo = await getDefinitionImageContent(repo, release, registry, registryPath, currentDefinitionId, alreadyRegistered, buildFirst);
 
         if (generateMarkdown) {
             // Write version history file
             console.log('(*) Writing image history markdown...')
-            const historyFolder = path.join(__dirname, '..', '..', 'containers', definitionId, 'history');
+            const historyFolder = path.join(__dirname, '..', '..', 'containers', currentDefinitionId, 'history');
             await asyncUtils.mkdirp(historyFolder);
             await asyncUtils.writeFile(path.join(historyFolder, `${definitionInfo.version}.md`), definitionInfo.markdown);
         }
