@@ -15,7 +15,7 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | MIT-Scheme |
 
-## Using this definition with an existing folder
+## Using this definition
 
 While the definition itself works unmodified, you can select the version of MIT-SCHEME uses by updating the `TARGET_SCHEME_VERSION` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
@@ -25,21 +25,21 @@ While the definition itself works unmodified, you can select the version of MIT-
 
 Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
 
-### Adding the definition to your project
+### Adding the definition to a project or codespace
 
 Just follow these steps:
 
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
-2. To use the Dockerfile for this definition (*rather than the pre-built image*):
-   1. Clone this repository.
-   2. Copy the contents of `containers/mit-scheme/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+2. Start VS Code and open your project folder or connect to a codespace.
 
-3. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
 
-4. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+   > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
 
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
+
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
 ## License
 

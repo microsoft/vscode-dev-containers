@@ -221,6 +221,20 @@ A few notes on the definition:
 
 See the section below for your operating system for more detailed setup instructions.
 
+### GitHub Codespaces
+
+While you cannot sync or connect to your local Kubernetes configuration with Codespaces, you can use `kubectl`, Helm, and the Kubernetes extension.
+
+1. If this is your first time using a development container, please see [creating a codespace](https://aka.ms/ghcs-open-codespace) for information on using GitHub Codespaces.
+
+2. Create or connect to an existing codespace.
+
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
+
+5. Finally, press <kbd>F1</kbd> and run **Codespaces: Rebuild Container** to start using the definition.
+
 ### Windows / macOS
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
@@ -229,17 +243,11 @@ See the section below for your operating system for more detailed setup instruct
 
 3. Check **Kubernetes > Enable Kubernetes**
 
-4. To use VS Code's copy of this definition:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Docker from Docker Compose definition.
+4. Start VS Code and open your project folder.
 
-5. To use latest-and-greatest copy of this definition from the repository:
-   1. Clone this repository.
-   2. Copy the contents of `containers/kubernetes-helm/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+5. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
 
-6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+6.  Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
 7. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
@@ -255,17 +263,11 @@ See the section below for your operating system for more detailed setup instruct
     kubectl config set-context minikube
     ```
 
-4. To use VS Code's copy of this definition:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Docker from Docker Compose definition.
+4. Start VS Code and open your project folder.
 
-5. To use latest-and-greatest copy of this definition from the repository:
-   1. Clone this repository.
-   2. Copy the contents of `containers/kubernetes-helm/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+5. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
 
-6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+6.  Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
 7. Open `.devcontainer/devcontainer.json` and uncomment this line in the `runArgs` array:
 

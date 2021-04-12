@@ -17,7 +17,7 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | Node.js, JavaScript |
 
-## Using this definition with an existing folder
+## Using this definition
 
 While the definition itself works unmodified, you can select the version of Node.js the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
@@ -44,25 +44,24 @@ Alternatively, you can use the contents of the `Dockerfile` to fully customize y
 
 Beyond Node.js and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. [Node Version Manager](https://github.com/nvm-sh/nvm) (`nvm`) is also included in case you need to use a different version of Node.js than the one included in the image.
 
-### Adding the definition to your project
+### Adding the definition to a project or codespace
 
-Just follow these steps:
-
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
 2. To use the pre-built image:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Node.js 14 definition.
+   1. Start VS Code and open your project folder or connect to a codespace.
+   2. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+   3. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
-3. To use the Dockerfile for this definition (*rather than the pre-built image*):
-   1. Clone this repository.
-   2. Copy the contents of `containers/javascript-node/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+3. To build a custom version of the image instead:
+   1. Clone this repository locally.
+   2. Start VS Code and open your project folder or connect to a codespace.
+   3. Use your local operating system's file explorer to drag-and-drop the locally cloned copy of the `.devcontainer` folder for this definition into the VS Code file explorer for your opened project or codespace.
+   4. Update `.devcontainer/devcontainer.json` to reference `"dockerfile": "base.Dockerfile"`.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
-5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
 ## Testing the definition
 
