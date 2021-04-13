@@ -21,17 +21,13 @@
 		"other": {
 			"conda": {
 				"cgIgnore": true,
-				"versionCommand": "conda --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
-				"path": "/opt/conda",
-				"downloadUrl": "https://github.com/conda/conda"
+				"path": "/opt/conda"
 			}
 		},
 		"languages": {
 			"Python": {
 				"cgIgnore": true,
-				"versionCommand": "python --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
-				"path": "/opt/conda",
-				"downloadUrl": "https://www.python.org/"
+				"path": "/opt/conda"
 			},
 			"Jupyter Notebooks": {
 				"cgIgnore": true,

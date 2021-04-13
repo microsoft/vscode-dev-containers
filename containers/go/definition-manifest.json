@@ -37,10 +37,7 @@
 		},
 		"languages": {
 			"Go": {
-				"cgIgnore": true,
-				"versionCommand": "go version | grep -oE -m 1 'version\\sgo[^ ]+' | sed -n '/^version\\sgo/s///p'",
-				"path": "/usr/local/go",
-				"downloadUrl": "https://golang.org/dl"
+				"cgIgnore": true
 			}
 		}
 	}

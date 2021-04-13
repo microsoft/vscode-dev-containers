@@ -28,10 +28,7 @@
 		},
 		"languages": {
 			"Rust": {
-				"cgIgnore": true,
-				"versionCommand": "rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p'",
-				"path": "/usr/local/cargo",
-				"downloadUrl": "https://github.com/rust-lang/rust"
+				"cgIgnore": true
 			}
 		}
 	}

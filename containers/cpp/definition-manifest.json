@@ -53,12 +53,10 @@
 		},
 		"languages": {
 			"GCC": {
-				"cgIgnore": true,
-				"versionCommand": "gcc --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+.+)' | tr -d ')'"
+				"cgIgnore": true
 			},
 			"Clang": {
-				"cgIgnore": true,
-				"versionCommand": "clang --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+.*'"
+				"cgIgnore": true
 			}
 		}
 	}

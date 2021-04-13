@@ -30,9 +30,7 @@
 		"languages": {
 			"Node.js": {
 				"cgIgnore": true,
-				"versionCommand": "node --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
-				"path": "/usr/local",
-				"downloadUrl": "https://nodejs.org/en/"
+				"path": "/usr/local"
 			}
 		}
 	}

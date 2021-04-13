@@ -21,22 +21,16 @@
 		},
 		"other": {
 			"Xdebug": {
-				"versionCommand": "php --version | grep -oE 'with Xdebug\\sv[^,]+'| sed -n '/with Xdebug\\sv/s///p'",
-				"path": "/usr/local/lib/php/extensions",
-				"downloadUrl":"https://xdebug.org/"
+				"path": "/usr/local/lib/php/extensions"
 			},
 			"Composer": {
-				"versionCommand": "composer --version 2>/dev/null | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
-				"path": "/usr/local",
-				"downloadUrl": "https://getcomposer.org/installer"
+				"path": "/usr/local"
 			}
 		},
 		"languages": {
 			"PHP": {
 				"cgIgnore": true,
-				"versionCommand": "php --version | grep -ozP 'PHP\\s\\K[0-9][^\\s]+' | tr '\\0' '\\n'",
-				"path": "/usr/local",
-				"downloadUrl":"https://xdebug.org/"
+				"path": "/usr/local"
 			}	
 		}
 	}

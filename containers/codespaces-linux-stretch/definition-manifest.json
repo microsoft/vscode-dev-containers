@@ -87,63 +87,28 @@
 			"clippy": "rustc --version"
 		},
 		"other": {
-			"git": {
-				"versionCommand": "git --version | sed -n '/git version /s///p'",
-				"downloadUrl": "https://github.com/git/git"
-			},
-			"Xdebug": {
-				"versionCommand": "php --version | grep -oE 'with Xdebug\\sv[^,]+'| sed -n '/with Xdebug\\sv/s///p'",
-				"downloadUrl": "https://xdebug.org/"
-			},
+			"git": null,
+			"Xdebug": null,
 			"Composer": {
-				"cgIgnore": "true",
-				"versionCommand": "composer --no-ansi --version 2>/dev/null | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
-				"downloadUrl": "https://getcomposer.org/"
+				"cgIgnore": true
 			},
-			"kubectl": {
-				"versionCommand": "kubectl version --client | grep -oE 'GitVersion:\\\"v[^\\\"]+' | sed -n '/GitVersion:\\\"v/s///p'",
-				"downloadUrl": "https://github.com/kubernetes/kubectl"
-			},
-			"Helm": {
-				"versionCommand": "helm version | grep -oE 'Version:\\\"v[^\\\"]+' | sed -n '/Version:\\\"v/s///p'",
-				"downloadUrl": "https://github.com/helm/helm"
-			},
-			"Docker Compose": {
-				"versionCommand": "docker-compose version | grep -m 1 -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*'",
-				"downloadUrl": "https://github.com/docker/compose"
-			},
-			"SDKMAN!": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | grep -ozP 'SDKMAN\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+[+,0-9,a-z]*' | tr -d '[:cntrl:]'",
-				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
-			},
-			"rvm": {
-				"versionCommand": ". /usr/local/rvm/scripts/rvm > /dev/null 2>&1 && rvm --version | grep -oE -m 1 'rvm\\s[^ ]+' | sed -n '/^rvm\\s/s///p'",
-				"path": "/usr/local/rvm",
-				"downloadUrl": "https://github.com/rvm/rvm"
-			},
-			"GitHub CLI": {
-				"versionCommand": "gh version 2>&1 | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
-				"downloadUrl": "https://github.com/cli/cli"
-			},
+			"kubectl": null,
+			"Helm": null,
+			"Docker Compose": null,
+			"SDKMAN!": null,
+			"rvm": null,
+			"GitHub CLI": null,
 			"yarn": {
 				"cgIgnore": true,
-				"versionCommand": "yarn --version",
-				"downloadUrl": "https://yarnpkg.com/",
 				"path": "/opt/yarn"
 			},
 			"Maven": {
 				"cgIgnore": true,
-				"versionCommand": "mvn -version | grep -oE '\\\"[0-9]+\\.[0-9]\\.[0-9][^\\\"]+' | tr -d '\\\"'",
-				"path": "/opt/maven",
-				"downloadUrl": "https://maven.apache.org/"
+				"path": "/opt/maven"
 			},
-			"Gradle": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && gradle --version | grep -ozP 'Welcome to Gradle\\s+\\K[0-9]\\.[0-9]\\.[0-9]' | tr '\\0' '\n'",
-				"downloadUrl": "https://gradle.org/"
-			},
+			"Gradle": null,
 			"Docker (Moby) CLI": {
-				"cgIgnore": true,
-				"versionCommand": "docker --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+0-9a-z]*'"
+				"cgIgnore": true
 			}
 		},
 		"go": {
