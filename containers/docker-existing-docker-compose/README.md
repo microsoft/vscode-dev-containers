@@ -14,7 +14,7 @@
 
 > **Note:** There is also a single [Dockerfile](../docker-existing-dockerfile) variation of this same definition.
 
-## Using this definition with an existing folder
+## Using this definition
 
 This definition requires an existing `docker-compose.yml` file that you would prefer not to modify but still want to add additional ports, a volume mount, or override the default command so that the container does not shut down if you stop the application.  The `.devcontainer/docker-compose.yml` and `.devcontainer/devcontainer.json` file will needs to be modified for your scenario.
 
