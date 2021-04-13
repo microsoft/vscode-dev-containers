@@ -17,8 +17,8 @@ The [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-rem
 ## Adding a definition to a project or codespace
   
   1. Either [create a codespace for your repository](https://aka.ms/ghcs-open-codespace) or [set up your local machine](https://aka.ms/vscode-remote/containers/getting-started) for use with the Remote - Containers extension, start VS Code, and open your project folder.
-  2. Press <kbd>F1</kbd>, select the **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
-  3. Pick one of definitions from the list. (You may need to choose the **From a predefined container configuration definition...** option if your project has an existing Dockerfile or Docker Compose file.) Answer any questions that appear.
+  2. Press <kbd>F1</kbd>, and select the **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+  3. Pick one of the recommended definitions from the list or select **Show All Definitions...** to see all of them. You may need to choose the **From a predefined container configuration definition...** option if your project has an existing Dockerfile or Docker Compose file. Answer any questions that appear.
   4. See the definition's `README` for configuration options. A link is available in the `.devcontainer/devcontainer.json` file added to your folder.
   5. Run **Remote-Containers: Reopen in Container** to use it locally, or **Codespaces: Rebuild Container** from within a codespace.
 
