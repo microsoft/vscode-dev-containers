@@ -26,7 +26,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "4135aaf3da1cb39877e0decbbd6cc4ccc63a435f"
+                    "commitHash": "3553ac475a7e08c7af2747f60174fe02e6240de7"
                 }
             }
         },
@@ -218,7 +218,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "4135aaf3da1cb39877e0decbbd6cc4ccc63a435f"
+                    "commitHash": "3553ac475a7e08c7af2747f60174fe02e6240de7"
                 }
             }
         },
@@ -228,7 +228,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "4135aaf3da1cb39877e0decbbd6cc4ccc63a435f"
+                    "commitHash": "3553ac475a7e08c7af2747f60174fe02e6240de7"
                 }
             }
         },
@@ -706,7 +706,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "4135aaf3da1cb39877e0decbbd6cc4ccc63a435f"
+                    "commitHash": "3553ac475a7e08c7af2747f60174fe02e6240de7"
                 }
             }
         },
@@ -737,6 +737,15 @@
                     "Name": "Docker Image: golang",
                     "Version": "1.15",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Go",
+                "Go": {
+                    "Name": "golang.org/x/tools/gopls",
+                    "Version": "0.6.10"
                 }
             }
         },
@@ -1045,7 +1054,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.23.0"
+                    "Version": "7.24.0"
                 }
             }
         },
