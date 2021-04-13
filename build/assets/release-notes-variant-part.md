@@ -76,7 +76,7 @@ ${cargo}
 <!-- other start -->
 **Other tools and utilities**
 
-| Tool | Commit | Path |
+| Tool | Version | Path |
 |------|--------|------|
 ${other}
 

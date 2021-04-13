@@ -316,7 +316,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos) {
         if (typeof repoPath === 'string') {
             console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
-            const remoteAndCommitOutput = await getDockerRunCommandOutput(imageTagOrContainerName, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .); fi`,true);
+            const remoteAndCommitOutput = await getDockerRunCommandOutput(imageTagOrContainerName, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && git log -n 1 --pretty=format:%H -- . | tee /dev/null; fi`,true);
             const [gitRemote, gitCommit] = remoteAndCommitOutput.split('\n');
             componentList.push({
                 name: repoName,
@@ -379,11 +379,12 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, o
 // Merge in default config for specified otherName if it exists
 function mergeOtherDefaultSettings(otherName, settings) {
     const otherDefaultSettings = configUtils.getConfig('otherDefaultSettings', null);
-    if (!otherDefaultSettings) {
+    if (!otherDefaultSettings || !otherDefaultSettings[otherName] ) {
         return settings;
     }
+    // Create a copy of default settings for merging
+    const mergedSettings = Object.assign({}, otherDefaultSettings[otherName]);
     settings = settings || {};
-    const mergedSettings = otherDefaultSettings[otherName] || {};
     for (let settingName in settings) {
         mergedSettings[settingName] = settings[settingName];
     }
