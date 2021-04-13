@@ -19,6 +19,7 @@
 			"password": "postgres"
 		}],
 		"python.pythonPath": "/usr/local/bin/python",
+		"python.languageServer": "Pylance",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
@@ -36,6 +37,7 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
+		"ms-python.vscode-pylance",
 		"mtxr.sqltools",
 		"mtxr.sqltools-driver-pg"
 	],
