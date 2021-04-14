@@ -142,7 +142,7 @@
 			".NET": {
 				"cgIgnore": true,
 				"versionCommand": "ls /opt/dotnet/runtimes | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
-				"path": "/home/codespaces/.dotnet",
+				"path": "/home/codespaces/.dotnet<br />/opt/dotnet",
 				"downloadUrl": "https://dotnet.microsoft.com/"
 			},
 			"Ruby": {

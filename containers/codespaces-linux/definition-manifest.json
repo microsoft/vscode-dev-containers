@@ -166,7 +166,7 @@
 			".NET": {
 				"cgIgnore": true,
 				"versionCommand": "ls /opt/dotnet | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
-				"path": "/home/codespaces/.dotnet"
+				"path": "/home/codespaces/.dotnet<br />/opt/dotnet"
 			},
 			"Ruby": {
 				"cgIgnore": true,
