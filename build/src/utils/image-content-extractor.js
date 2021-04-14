@@ -378,7 +378,7 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, o
 
 // Merge in default config for specified otherName if it exists
 function mergeOtherDefaultSettings(otherName, settings) {
-    const otherDefaultSettings = configUtils.getConfig('otherDefaultSettings', null);
+    const otherDefaultSettings = configUtils.getConfig('otherDependencyDefaultSettings', null);
     if (!otherDefaultSettings || !otherDefaultSettings[otherName] ) {
         return settings;
     }

@@ -23,8 +23,9 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
 
         if (generateMarkdown) {
             // Write version history file
-            console.log('(*) Writing image history markdown...')
-            const historyFolder = path.join(__dirname, '..', '..', 'containers', currentDefinitionId, 'history');
+            console.log('(*) Writing image history markdown...');
+            const definitionRelativePath = configUtils.getDefinitionPath(currentDefinitionId, true);
+            const historyFolder = path.join(__dirname, '..', '..', definitionRelativePath, 'history');
             await asyncUtils.mkdirp(historyFolder);
             await asyncUtils.writeFile(path.join(historyFolder, `${definitionInfo.version}.md`), definitionInfo.markdown);
         }
