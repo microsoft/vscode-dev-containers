@@ -121,6 +121,34 @@ This definition includes some test code that will help you verify it is working 
 8. You should see the `matplotlib` output in the interactive window.
 9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
+## Running Jupyter notebooks
+
+Use this container to run Jupyter notebooks.
+
+1. Edit the `./.devcontainer/devcontainer.json` file and add `8888` in the `forwardPorts` array:
+
+    ```json
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [8888],
+    ```
+.
+1. Edit the `./.devcontainer/devcontainer.json` file and add a `postStartCommand` command to start the Jupyter notebook web app after the container is created. Use nohup so it isn't killed when the command finishes. Logs will appear in `nohup.out`.
+
+    ```json
+	// Use 'postStartCommand' to run commands after the container is created.
+	"postStartCommand": "nohup bash -c 'jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root &'",
+    ```
+
+1. View the terminal output to see the correct URL including the access token:
+
+    ```bash
+     http://127.0.0.1:8888/?token=1234567
+    ```
+
+1. Open the URL in a browser. You can edit and run code from the web browser.
+
+1. If you have the [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) installed, you can also edit and run code from VS Code. 
+
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
