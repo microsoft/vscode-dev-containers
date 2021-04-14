@@ -177,6 +177,16 @@ require('yargs')
                     describe: 'container registry path',
                     default: configUtils.getConfig('containerRegistryPath', '')
                 },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry',
+                        configUtils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: configUtils.getConfig('stubRegistryPath',
+                        configUtils.getConfig('containerRegistryPath', ''))
+                },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
                     default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
@@ -221,6 +231,16 @@ require('yargs')
                 'registry-path': {
                     describe: 'container registry path',
                     default: configUtils.getConfig('containerRegistryPath', '')
+                },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry',
+                        configUtils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: configUtils.getConfig('stubRegistryPath',
+                        configUtils.getConfig('containerRegistryPath', ''))
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
@@ -322,7 +342,8 @@ function copyLibraryScriptsCommand() {
 }
 
 function imageInfoCommand(argv) {
-    generateImageInformationFiles(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build, argv.prune, argv.cg, argv.markdown, argv.devcontainer)
+    generateImageInformationFiles(argv.githubRepo, argv.release, argv.registry, argv.registryPath, 
+        argv.stubRegistry, argv.stubRegistryPath, argv.build, argv.prune, argv.cg, argv.markdown, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Image information file generation failed - ${reason}`);
             if(reason.stack) {

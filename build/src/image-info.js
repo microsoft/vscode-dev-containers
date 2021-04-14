@@ -6,7 +6,8 @@ const imageContentUtils = require('./utils/image-content-extractor');
 const componentFormatterFactory = require('./utils/component-formatter-factory');
 const markdownFormatterFactory = require('./utils/markdown-formatter-factory');
 
-async function generateImageInformationFiles(repo, release, registry, registryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, definitionId) {
+async function generateImageInformationFiles(repo, release, registry, registryPath, 
+    stubRegistry, stubRegistryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, definitionId) {
     // Load config files
     await configUtils.loadConfig();
 
@@ -19,7 +20,7 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
     console.log('(*) Generating image information files...');
     const definitions = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList();
     await asyncUtils.forEach(definitions, async (currentDefinitionId) => {
-        const definitionInfo = await getDefinitionImageContent(repo, release, registry, registryPath, currentDefinitionId, alreadyRegistered, buildFirst);
+        const definitionInfo = await getDefinitionImageContent(repo, release, registry, registryPath,  stubRegistry, stubRegistryPath, currentDefinitionId, alreadyRegistered, buildFirst);
 
         if (generateMarkdown) {
             // Write version history file
@@ -50,7 +51,7 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
     console.log('(*) Done!');    
 }
 
-async function getDefinitionImageContent(repo, release, registry, registryPath, definitionId, alreadyRegistered, buildFirst) {
+async function getDefinitionImageContent(repo, release, registry, registryPath, stubRegistry, stubRegistryPath, definitionId, alreadyRegistered, buildFirst) {
     const dependencies = configUtils.getDefinitionDependencies(definitionId);
     if (typeof dependencies !== 'object') {
         return [];
@@ -82,7 +83,7 @@ async function getDefinitionImageContent(repo, release, registry, registryPath, 
         const contents = await imageContentUtils.getAllContentInfo(imageTag, dependencies);
         
         // Update markdown content
-        markdown = markdown + await generateReleaseNotesPart(contents, release, definitionId, variant);
+        markdown = markdown + await generateReleaseNotesPart(contents, release, stubRegistry, stubRegistryPath, definitionId, variant);
 
         // Add to registrations
         registrations = registrations.concat(getUniqueComponents(alreadyRegistered, contents));
@@ -153,12 +154,12 @@ async function generateReleaseNotesHeader(release, definitionId) {
 }
 
 // Generate 
-async function generateReleaseNotesPart(contents, release, definitionId, variant) {
+async function generateReleaseNotesPart(contents, release, stubRegistry, stubRegistryPath, definitionId, variant) {
     const markdownFormatter = markdownFormatterFactory.getFormatter();
     const formattedContents = getFormattedContents(contents, markdownFormatter);
     let markdown = await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'release-notes-variant-part.md'));
 
-    const tags = configUtils.getTagList(definitionId, release, 'full-only', configUtils.getConfig('stubRegistry'),  configUtils.getConfig('stubRegistryPath'), variant);
+    const tags = configUtils.getTagList(definitionId, release, 'full-only', stubRegistry,  stubRegistryPath, variant);
     if(variant) {
         markdown = markdown.replace(`\${variant}`, variant);
     } else {
