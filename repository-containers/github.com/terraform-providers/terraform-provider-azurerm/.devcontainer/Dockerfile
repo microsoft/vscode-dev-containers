@@ -1,4 +1,4 @@
-FROM golang:1.15-buster
+FROM golang:1.16-buster
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
