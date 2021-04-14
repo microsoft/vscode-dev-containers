@@ -16,7 +16,7 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | Rust |
 
-## Using this definition with an existing folder
+## Using this definition
 
 This definition does not require any special steps to use. Note that the `Cargo.toml` file in the root of this folder is for the test project and can be ignored.
 
@@ -34,14 +34,14 @@ See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vs
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
-### Adding the definition to your project
+### Adding the definition to a project or codespace
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Rust definition.
+   4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.
