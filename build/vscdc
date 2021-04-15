@@ -4,6 +4,7 @@
  *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
  *-------------------------------------------------------------------------------------------------------------*/
 
+const path = require('path');
 const push = require('./src/push').push;
 const patch = require('./src/patch');
 const package = require('./src/package').package;
@@ -210,6 +211,10 @@ require('yargs')
                     describe: 'whether to generate markdown files in history folders',
                     type: 'boolean',
                     default: false
+                },
+                'output-path': {
+                    describe: 'path to where extracted information should be stored',
+                    default: path.resolve(__dirname, '..', configUtils.getConfig('informationFileOutputPath', '.'))
                 }
             })
     }, imageInfoCommand)
@@ -265,6 +270,10 @@ require('yargs')
                     describe: 'whether to prune images between definitions',
                     type: 'boolean',
                     default: false
+                },
+                'output-path': {
+                    describe: 'path to where extracted information should be stored',
+                    default: path.resolve(__dirname, '..', configUtils.getConfig('informationFileOutputPath', '.'))
                 }
             })
     }, imageInfoCommand)
@@ -343,7 +352,7 @@ function copyLibraryScriptsCommand() {
 
 function imageInfoCommand(argv) {
     generateImageInformationFiles(argv.githubRepo, argv.release, argv.registry, argv.registryPath, 
-        argv.stubRegistry, argv.stubRegistryPath, argv.build, argv.prune, argv.cg, argv.markdown, argv.devcontainer)
+        argv.stubRegistry, argv.stubRegistryPath, argv.build, argv.prune, argv.cg, argv.markdown, argv.outputPath, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Image information file generation failed - ${reason}`);
             if(reason.stack) {

@@ -6,6 +6,7 @@
 
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",
+	"historyFolderName": "history",
 	"repoContainersToBuildPath": "repository-containers/images",
 	"scriptLibraryPathInRepo": "script-library",
 	"scriptLibraryFolderNameInDefinition": "library-scripts",
@@ -154,14 +155,17 @@
 		},
 		"kubectl": {
 			"versionCommand": "kubectl version --client | grep -oE 'GitVersion:\\\"v[^\\\"]+' | sed -n '/GitVersion:\\\"v/s///p'",
+			"path": "/usr/local/bin",
 			"downloadUrl": "https://github.com/kubernetes/kubectl"
 		},
 		"Helm": {
 			"versionCommand": "helm version | grep -oE 'Version:\\\"v[^\\\"]+' | sed -n '/Version:\\\"v/s///p'",
+			"path": "/usr/local/bin",
 			"downloadUrl": "https://github.com/helm/helm"
 		},
 		"Docker Compose": {
 			"versionCommand": "docker-compose version | grep -m 1 -oE '[0-9]+\\.[0-9]+\\.[0-9]+[+0-9a-z]*'",
+			"path": "/usr/local/bin",
 			"downloadUrl": "https://github.com/docker/compose"
 		},
 		"git": {

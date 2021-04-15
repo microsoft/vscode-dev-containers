@@ -7,7 +7,7 @@ const componentFormatterFactory = require('./utils/component-formatter-factory')
 const markdownFormatterFactory = require('./utils/markdown-formatter-factory');
 
 async function generateImageInformationFiles(repo, release, registry, registryPath, 
-    stubRegistry, stubRegistryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, definitionId) {
+    stubRegistry, stubRegistryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, outputPath, definitionId) {
     // Load config files
     await configUtils.loadConfig();
 
@@ -26,7 +26,7 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
             // Write version history file
             console.log('(*) Writing image history markdown...');
             const definitionRelativePath = configUtils.getDefinitionPath(currentDefinitionId, true);
-            const historyFolder = path.join(__dirname, '..', '..', definitionRelativePath, 'history');
+            const historyFolder = path.join(outputPath, definitionRelativePath, configUtils.getConfig('historyFolderName', 'history'));
             await asyncUtils.mkdirp(historyFolder);
             await asyncUtils.writeFile(path.join(historyFolder, `${definitionInfo.version}.md`), definitionInfo.markdown);
         }
@@ -45,7 +45,7 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
     if(generateCgManifest) {
         console.log('(*) Writing cgmanifest.json...');
         await asyncUtils.writeFile(
-            path.join(__dirname, '..', '..', 'cgmanifest.json'),
+            path.join(outputPath, 'cgmanifest.json'),
             JSON.stringify(cgManifest, undefined, 4));
     }
     console.log('(*) Done!');    
