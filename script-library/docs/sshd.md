@@ -49,7 +49,7 @@ Usage:
 
     The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
 
-  4. Next time you connect, you can spin up the SSH server again by running `/usr/local/share/sshd-init.sh` in a terminal in the container/codespace and using the same command / password.
+  4. Next time you connect to your container/codespace, just repeat steps 2 and 3 and use the same password you set in step 1.
 
 ### Usage in a Dockerfile
 You can add this script to your own Dockerfile as follows.
