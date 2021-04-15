@@ -1,0 +1,99 @@
+name: Update version history
+
+on:
+  workflow_dispatch:
+    inputs:
+      cg:
+        description: 'Generate cgmanifest.json'
+        required: true
+        default: false
+      push:
+        description: 'Update repository with results'
+        required: true
+        default: false
+
+jobs:
+  image_info:
+    name: Update version history
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Free more space
+      id: free_space 
+      run: |
+        set -e
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.inputs.release }}
+
+
+    - name: Azure CLI login
+      id: az_login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZ_ACR_CREDS }}
+
+    - name: Get image info
+      id: Get_image_info
+      run: |
+        set -e
+
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
+        # ACR login
+        ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
+        az acr login --name $ACR_REGISTRY_NAME
+
+        # Pull images and update cgmanifest.json
+        yarn install
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        build/vscdc info  --no-build \
+                          --markdown \
+                          --prune \
+                          --release $GIT_BRANCH \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
+                          --output-path /tmp/vscdc-history
+                          $(if [ "${{ github.event.inputs.cg }}" = "false" ]; then echo '--no-cg'; fi)
+
+
+    - name: Switch to main branch
+      id: checkout_main
+      uses: actions/checkout@v2
+      with:
+        ref: master
+
+    - name: Push image information
+      id: push_image_info
+      run: |
+        set -e
+
+        git config --global user.email "vscr-feedback@microsoft.com"
+        git config --global user.name "CI"
+        git config pull.rebase false
+        git pull "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:master"
+
+        # Move content into working tree
+        cp -Rf /tmp/vscdc-history/* $(pwd)/
+
+        git add -A
+        git commit -m 'Automated update for image history' || export NO_UPDATES=true
+
+        if [ "$NO_UPDATES" != "true" ] && [ "${{ github.event.inputs.push }}" = "true" ]; then
+            git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:master" \
+        fi
