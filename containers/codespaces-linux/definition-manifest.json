@@ -10,6 +10,7 @@
 		]
 	},
 	"dependencies": {
+		"annotation": "This document describes the base contents of the default GitHub Codespaces dev container image. Note that this image also includes detection logic to dynamically install additional language / runtime versions based on your repository's contents. Dynamically installed content can be found in sub-folders under `/opt`.",
 		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210308.3",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"apt": [{
@@ -118,10 +119,15 @@
 			"github.com/golangci/golangci-lint": null
 		},
 		"other": {
-			"git": null,
-			"Xdebug": null,
+			"git": {
+				"path": "/usr/local"
+			},
+			"Xdebug": {
+				"path": "/opt/php/lts"
+			},
 			"Composer": {
-				"cgIgnore": true
+				"cgIgnore": true,
+				"path": "/opt/php-composer"
 			},
 			"kubectl": null,
 			"Helm": null,

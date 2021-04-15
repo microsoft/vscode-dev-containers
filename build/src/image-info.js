@@ -60,7 +60,7 @@ async function getDefinitionImageContent(repo, release, registry, registryPath, 
     let registrations = [];
 
     // Create header for markdown
-    let markdown = await generateReleaseNotesHeader(release, definitionId);
+    let markdown = await generateReleaseNotesHeader(release, definitionId, dependencies);
 
     const variants = configUtils.getVariants(definitionId) || [null];
     const version = configUtils.getVersionFromRelease(release, definitionId);
@@ -144,12 +144,17 @@ function getUniqueComponents(alreadyRegistered, contents) {
 }
 
 // Use template to generate header of version markdown content
-async function generateReleaseNotesHeader(release, definitionId) {
+async function generateReleaseNotesHeader(release, definitionId, dependencies) {
     const version = configUtils.getVersionFromRelease(release, definitionId);
     let markdown = await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'release-notes-header.md'));
     markdown = markdown.replace(/\${definition}/gm, definitionId);
     markdown = markdown.replace(/\${release}/gm, release);
     markdown = markdown.replace(/\${version}/gm, version);
+    if(dependencies.annotation) {
+        markdown = markdown.replace(/\${annotation}/gm, dependencies.annotation);
+    } else {
+        markdown = markdown.replace(/<!--\s*annotation start\s*-->(.*\n)*<!--\s*annotation end\s*-->\n?/m,'');
+    }
     return markdown;
 }
 
@@ -163,7 +168,7 @@ async function generateReleaseNotesPart(contents, release, stubRegistry, stubReg
     if(variant) {
         markdown = markdown.replace(`\${variant}`, variant);
     } else {
-        markdown = markdown.replace(/<!--\s*variant start\s*-->(.*\n)*<!--\svariant end\s-->\n?/m,'');
+        markdown = markdown.replace(/<!--\s*variant start\s*-->(.*\n)*<!--\s*variant end\s*-->\n?/m,'');
     }
 
     markdown = markdown.replace(`\${tags}`, tags.reduce((prev, next) => prev + next + '\n', '').trim());
