@@ -5,6 +5,8 @@ const configUtils = require('./utils/config');
 const imageContentUtils = require('./utils/image-content-extractor');
 const componentFormatterFactory = require('./utils/component-formatter-factory');
 const markdownFormatterFactory = require('./utils/markdown-formatter-factory');
+const handlebars = require('handlebars');
+let releaseNotesHeaderTemplate, releaseNotesVariantPartTemplate;
 
 async function generateImageInformationFiles(repo, release, registry, registryPath, 
     stubRegistry, stubRegistryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, outputPath, definitionId) {
@@ -59,11 +61,13 @@ async function getDefinitionImageContent(repo, release, registry, registryPath, 
 
     let registrations = [];
 
-    // Create header for markdown
-    let markdown = await generateReleaseNotesHeader(release, definitionId, dependencies);
 
     const variants = configUtils.getVariants(definitionId) || [null];
     const version = configUtils.getVersionFromRelease(release, definitionId);
+
+    // Create header for markdown
+    let markdown = await generateReleaseNotesHeader(repo, release, definitionId, variants, dependencies);
+
     await asyncUtils.forEach(variants, async (variant) => {
         if(variant) {
             console.log(`\n(*) Processing variant ${variant}...`);
@@ -144,58 +148,29 @@ function getUniqueComponents(alreadyRegistered, contents) {
 }
 
 // Use template to generate header of version markdown content
-async function generateReleaseNotesHeader(release, definitionId, dependencies) {
-    const version = configUtils.getVersionFromRelease(release, definitionId);
-    let markdown = await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'release-notes-header.md'));
-    markdown = markdown.replace(/\${definition}/gm, definitionId);
-    markdown = markdown.replace(/\${release}/gm, release);
-    markdown = markdown.replace(/\${version}/gm, version);
-    if(dependencies.annotation) {
-        markdown = markdown.replace(/\${annotation}/gm, dependencies.annotation);
-    } else {
-        markdown = markdown.replace(/<!--\s*annotation start\s*-->(.*\n)*<!--\s*annotation end\s*-->\n?/m,'');
+async function generateReleaseNotesHeader(repo, release, definitionId, variants, dependencies) {
+    releaseNotesHeaderTemplate = releaseNotesHeaderTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'release-notes-header.md')));
+    const data = {
+        version: configUtils.getVersionFromRelease(release, definitionId),
+        definition: definitionId,
+        release: release,
+        annotation: dependencies.annotation,
+        repository: repo,
+        variants: variants,
+        hasVariants: variants && variants[0]
     }
-    return markdown;
+    return releaseNotesHeaderTemplate(data);
 }
 
-// Generate 
+// Generate release notes section for variant
 async function generateReleaseNotesPart(contents, release, stubRegistry, stubRegistryPath, definitionId, variant) {
+    releaseNotesVariantPartTemplate = releaseNotesVariantPartTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'release-notes-variant-part.md')));
     const markdownFormatter = markdownFormatterFactory.getFormatter();
     const formattedContents = getFormattedContents(contents, markdownFormatter);
-    let markdown = await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'release-notes-variant-part.md'));
-
-    const tags = configUtils.getTagList(definitionId, release, 'full-only', stubRegistry,  stubRegistryPath, variant);
-    if(variant) {
-        markdown = markdown.replace(`\${variant}`, variant);
-    } else {
-        markdown = markdown.replace(/<!--\s*variant start\s*-->(.*\n)*<!--\s*variant end\s*-->\n?/m,'');
-    }
-
-    markdown = markdown.replace(`\${tags}`, tags.reduce((prev, next) => prev + next + '\n', '').trim());
-    for (let contentType in contents) {
-        let content = formattedContents[contentType] || '';
-        if(Array.isArray(content)) {
-            content = content.reduce((prev, next) => `${prev}${next}\n`, '');
-        }
-        if(content.length > 0) {
-            markdown = markdown.replace(`\${${contentType}}`, content.trim());
-        } else {
-            const contentTagRemoveRegex = new RegExp(`\\$\\{${contentType}\\}\\n?`)
-            markdown = markdown.replace(contentTagRemoveRegex,'');
-            // Treat pip and pipx as the same section - don't remove if one or the other are present
-            if(contentType === 'pip' || contentType === 'pipx' ) {
-                if ((!contents.pip || contents.pip.length === 0) && 
-                    (!contents.pipx || contents.pipx.length === 0)) {
-                    contentType = 'pip';
-                } else {
-                    contentType = null;
-                }
-            }
-            const sectionRemoveRegex = new RegExp(`<!--\\s${contentType} start\\s*-->(.*\\n)*<!--\\s*${contentType} end\\s*-->\\n?`,'gm');
-            markdown = markdown.replace(sectionRemoveRegex, '');
-        }
-    }
-    return markdown;
+    formattedContents.hasPip = formattedContents.pip.length > 0 || formattedContents.pipx.length > 0;
+    formattedContents.tags = configUtils.getTagList(definitionId, release, 'full-only', stubRegistry,  stubRegistryPath, variant),
+    formattedContents.variant = variant;
+    return releaseNotesVariantPartTemplate(formattedContents);
 }
 
 // Return all contents as an object of formatted values

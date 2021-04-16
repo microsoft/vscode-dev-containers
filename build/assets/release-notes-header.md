@@ -1,8 +1,16 @@
-# [${definition}](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/${definition})
-<!-- annotation start -->
-${annotation}
-<!-- annotation end -->
+# [{{definition}}](https://github.com/{{repository}}/tree/master/containers/{{definition}})
+{{#if annotation}}
+{{{annotation}}}
+{{/if}}
 
-**Image version:** ${version}
+**Image version:** {{version}}
 
-**Source release/branch:** [${release}](https://github.com/microsoft/vscode-dev-containers/tree/${release}/containers/${definition})
+**Source release/branch:** [{{release}}](https://github.com/{{repository}}/tree/{{release}}/containers/{{definition}})
+
+{{#if hasVariants}}
+**Definition variations:**
+{{#each variants}}
+- [{{this}}](#variant-{{this}})
+{{/each}}
+
+{{/if}}

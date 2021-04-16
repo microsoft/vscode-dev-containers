@@ -6,59 +6,28 @@
 /* 
 Returns: 
 
-* package (optional annotation) version
+{
+    name: "Xdebug",
+    version: "2.9.6",
+    url: "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+    path: "/opt/something"
+}
 
 */
-function nameAndVersionFormatter(packageInfo) {
+function nameAndVersionNormalizer(packageInfo) {
     if (packageInfo.markdownIgnore) {
         return null;
     }
-    if(!packageInfo.version) {
+    const normalized = Object.assign({}, packageInfo);
+    normalized.version = packageInfo.version || packageInfo.commitHash;  
+    if(!normalized.version) {
         console.log(`(!) Warning: No version for package ${packageInfo.name} - skipping markdown output.`);
         return null;
     }
-    const nameMarkdown = packageInfo.downloadUrl ? `[${packageInfo.name}](${packageInfo.downloadUrl})` : `${packageInfo.name}`
-    return `| ${nameMarkdown}${packageInfo.annotation ? ' (' + packageInfo.annotation + ')' : ''} | ${packageInfo.version.replace(/\n/g,'<br />')} ${packageInfo.path ? '| ' + packageInfo.path : ''} |`;
-}
-
-/* 
-Returns:
-
-* [repo name](git repository link) (optional annotation) commit
-
-*/
-function gitFormatter(repoInfo) {
-    if (repoInfo.markdownIgnore) {
-        return null;
-    }
-    return `| [${repoInfo.name}](${repoInfo.repositoryUrl})${repoInfo.annotation ? ' (' + repoInfo.annotation + ')' : ''} | ${repoInfo.commitHash} ${repoInfo.path ? '| ' + repoInfo.path  : ''} |`;
-}
-
-/* 
-Returns: 
-
-PRETTY_NAME (ID_LIKE-like distro)
-
-e.g 
-
-Ubuntu 20.04.2 LTS (debian-like distro)
-
-*/
-function distroFormatter(distroInfo) {
-    if (distroInfo.markdownIgnore) {
-        return null;
-    }
-    return `${distroInfo.prettyName}${distroInfo.idLike ? ' (' + distroInfo.idLike + '-like distro)' : ''}`;
-}
-
-/*
-Returns: digest (image name)
-*/
-function imageInfoFormatter(imageInfo) {
-    if (imageInfo.markdownIgnore) {
-        return null;
-    }
-    return `${imageInfo.digest} (${imageInfo.name})`;
+    normalized.version = normalized.version.replace(/\n/g,'<br />');
+    normalized.url = packageInfo.downloadUrl || packageInfo.repositoryUrl;
+    normalized.path = normalized.path ? normalized.path.replace(/\n/g,'<br />') : normalized.path;
+    return normalized;
 }
 
 /* Handle CG manifest entries like:
@@ -75,10 +44,14 @@ function imageInfoFormatter(imageInfo) {
 
 Returns: 
 
-* [component name](download URL) version
+{
+    name: "Xdebug",
+    version: "2.9.6",
+    "url": "https://pecl.php.net/get/xdebug-2.9.6.tgz"
+}
 
 */
-function componentFormatter(component) {
+function componentNormalizer(component) {
     if (component.markdownIgnore ||component.MarkdownIgnore ) {
         return null;
     }
@@ -88,28 +61,28 @@ function componentFormatter(component) {
         componentType = componentType[0].toUpperCase() + componentType.substr(1);
     }
     const componentInfo = component.Component[componentType];
-    if (componentInfo.DownloadUrl) {
-        return `* [${componentInfo.Name}](${component.DownloadUrl}) ${componentInfo.Version}`;
-    } 
-    return `* ${componentInfo.Name} ${componentInfo.Version}`;
+    return {
+        name: componentInfo.Name,
+        url: componentInfo.DownloadUrl,
+        version: componentInfo.Version
+    }
 }
 
 function getFormatter() {
     return {
-        image: imageInfoFormatter,
-        distro: distroFormatter,
-        linux: nameAndVersionFormatter,
-        npm: nameAndVersionFormatter,
-        pip: nameAndVersionFormatter,
-        pipx: nameAndVersionFormatter,
-        gem: nameAndVersionFormatter,
-        cargo: nameAndVersionFormatter,
-        go: nameAndVersionFormatter,
-        git: gitFormatter,
-        other: nameAndVersionFormatter,
-        languages: nameAndVersionFormatter,
-        manual: componentFormatter
-
+        image: (info) => info,
+        distro:  (info) => info,
+        linux: nameAndVersionNormalizer,
+        npm: nameAndVersionNormalizer,
+        pip: nameAndVersionNormalizer,
+        pipx: nameAndVersionNormalizer,
+        gem: nameAndVersionNormalizer,
+        cargo: nameAndVersionNormalizer,
+        go: nameAndVersionNormalizer,
+        git: nameAndVersionNormalizer,
+        other: nameAndVersionNormalizer,
+        languages: nameAndVersionNormalizer,
+        manual: componentNormalizer
     }
 }
 
