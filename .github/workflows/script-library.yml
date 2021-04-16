@@ -1,7 +1,7 @@
 name: Test script library and update definitions
 
 on: 
-  #repository_dispatch:
+  workflow_dispatch:
   push:
     branches: [master]
     paths:

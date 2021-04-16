@@ -1,14 +1,14 @@
 name: Build and push "dev" images
 
 on: 
-  #repository_dispatch:
+  workflow_dispatch:
   push:
     branches: [master]
     paths:
       - 'containers/alpine/**'
       - 'containers/debian/**'
       - 'containers/cpp/**'
-      - 'containers/dotnetcore/**'
+      - 'containers/dotnet/**'
       - 'containers/go/**'
       - 'containers/java/**'
       - 'containers/java-8/**'
