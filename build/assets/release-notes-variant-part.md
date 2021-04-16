@@ -2,7 +2,7 @@
 ## Variant: {{variant}}
 
 {{/if}}
-**Image:** {{image.digest}} ({{image.name}})
+**Digest:** {{image.digest}}
 
 **Tags:**
 ```
