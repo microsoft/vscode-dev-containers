@@ -3,14 +3,23 @@ name: Update version history
 on:
   workflow_dispatch:
     inputs:
+      release:
+        description: 'Release branch or tag'
+        required: true
+        default: 'master'
       cg:
         description: 'Generate cgmanifest.json'
         required: true
-        default: false
+        default: 'false'
       push:
         description: 'Update repository with results'
         required: true
-        default: false
+        default: 'true'
+      definition:
+        description: 'Definition ID (Optional)'
+        required: false
+        default: ''
+
 
 jobs:
   image_info:
@@ -27,12 +36,19 @@ jobs:
         sudo apt-get clean -y
         sudo rm -rf /usr/share/dotnet
 
-    - name: Checkout
-      id: checkout
+    - name: Checkout ref
+      id: checkout_ref
       uses: actions/checkout@v2
       with:
+        path: 'ref'
+        ref: ${{ github.ref }}
+        
+    - name: Checkout release
+      id: checkout_release
+      uses: actions/checkout@v2
+      with:
+        path: 'release'
         ref: ${{ github.event.inputs.release }}
-
 
     - name: Azure CLI login
       id: az_login
@@ -45,55 +61,57 @@ jobs:
       run: |
         set -e
 
-        # Ensure enough space is available for build
-        sudo apt-get autoremove -y
-        sudo apt-get clean -y
-        sudo rm -rf /usr/share/dotnet
-
         # ACR login
         ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
         az acr login --name $ACR_REGISTRY_NAME
 
-        # Pull images and update cgmanifest.json
+        # Setup build CLI
+        cd "$GITHUB_WORKSPACE/ref"
         yarn install
-        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
-        if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
-        fi
+
+        # Go to the release, symlink the build tool from ref since this is the version for the workflow
+        cd "$GITHUB_WORKSPACE/release"
+        rm -rf build node_modules
+        ln -s "$GITHUB_WORKSPACE/ref/build" build
+        ln -s "$GITHUB_WORKSPACE/ref/node_modules" node_modules
+
+        # Pull images and update cgmanifest.json, but output back to ref
         build/vscdc info  --no-build \
                           --markdown \
                           --prune \
-                          --release $GIT_BRANCH \
+                          --release ${{ github.event.inputs.release }} \
                           --registry ${{ secrets.REGISTRY }} \
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
                           --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
-                          --output-path /tmp/vscdc-history
-                          $(if [ "${{ github.event.inputs.cg }}" = "false" ]; then echo '--no-cg'; fi)
-
-
-    - name: Switch to main branch
-      id: checkout_main
-      uses: actions/checkout@v2
-      with:
-        ref: master
+                          --output-path "$GITHUB_WORKSPACE/ref" \
+                          $(if [ "${{ github.event.inputs.cg }}" = "false" ]; then echo '--no-cg'; else echo '--cg'; fi) \
+                          ${{ github.event.inputs.definition }}
 
     - name: Push image information
       id: push_image_info
       run: |
         set -e
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
 
         git config --global user.email "vscr-feedback@microsoft.com"
         git config --global user.name "CI"
         git config pull.rebase false
-        git pull "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:master"
 
-        # Move content into working tree
-        cp -Rf /tmp/vscdc-history/* $(pwd)/
+        # Push updates to ref
+        cd "$GITHUB_WORKSPACE/ref"
 
+        # Pull in anything that may have come in
+        git pull "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:$GIT_BRANCH"
+
+        # Add / update and commit
         git add -A
         git commit -m 'Automated update for image history' || export NO_UPDATES=true
 
+        # Push (unless disabled for testing)
         if [ "$NO_UPDATES" != "true" ] && [ "${{ github.event.inputs.push }}" = "true" ]; then
-            git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:master" \
+            git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:$GIT_BRANCH"
         fi
