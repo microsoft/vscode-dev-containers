@@ -92,6 +92,10 @@ jobs:
       id: push_image_info
       run: |
         set -e
+
+        # Push updates to ref
+        cd "$GITHUB_WORKSPACE/ref"
+
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=master
@@ -100,9 +104,6 @@ jobs:
         git config --global user.email "vscr-feedback@microsoft.com"
         git config --global user.name "CI"
         git config pull.rebase false
-
-        # Push updates to ref
-        cd "$GITHUB_WORKSPACE/ref"
 
         # Pull in anything that may have come in
         git pull "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:$GIT_BRANCH"
