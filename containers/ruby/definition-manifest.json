@@ -11,11 +11,14 @@
 	"dependencies": {
 		"image": "ruby:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/ruby",
-		"debian": [
-			"yarn"
+		"debian": [{
+				"cgIgnore": false,
+				"name": "yarn"
+			},
+			"build-essential"
 		],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm",
 			"rbenv": "/usr/local/share/rbenv",
 			"ruby-build": "/usr/local/share/ruby-build"
@@ -24,6 +27,15 @@
 			"rake",
 			"ruby-debug-ide",
 			"debase"
-		]
+		],
+		"other":{
+			"rvm": null
+		},
+		"languages": {
+			"Ruby": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}
+		}
 	}
 }

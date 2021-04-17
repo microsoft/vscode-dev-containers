@@ -38,8 +38,26 @@
 	"dependencies": {
 		"image": "buildpack-deps:${VARIANT}-curl",
 		"imageLink": "https://hub.docker.com/_/buildpack-deps",
+		"apt": [
+			"build-essential",
+			"cmake",
+			"cppcheck",
+			"valgrind",
+			"clang",
+			"lldb",
+			"llvm",
+			"gdb"
+		],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh"
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
+		},
+		"languages": {
+			"GCC": {
+				"cgIgnore": true
+			},
+			"Clang": {
+				"cgIgnore": true
+			}
 		}
 	}
 }

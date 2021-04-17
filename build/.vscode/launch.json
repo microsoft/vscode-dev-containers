@@ -11,10 +11,11 @@
 			"program": "${workspaceFolder}/vscdc",
 			"args": [
 				"push",
+				"go",
 				"--no-push",
-				"--page", "4",
-				"--page-total", "4",
-				"--release", "master",
+				"--page", "1",
+				"--page-total", "1",
+				"--release", "v0.167.0",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
 				"--registryPath", "vscode/devcontainers",
@@ -45,10 +46,12 @@
 			"program": "${workspaceFolder}/vscdc",
 			"args": [
 				"cg",
-				"codespaces-linux",
-				"--release", "master",
+				"codespaces-linux-stretch",
+				"--no-build",
+				"--markdown",
+				"--release", "v0.166.2",
 				"--github-repo", "microsoft/vscode-dev-containers",
-				"--registry", "clantz.azurecr.io",
+				"--registry", "mcr.microsoft.com",
 				"--registryPath", "vscode/devcontainers"
 			]
 		},

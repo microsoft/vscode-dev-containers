@@ -16,15 +16,22 @@
 	"dependencies": {
 		"image": "node:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/node",
-		"debian": [
-			"yarn"
-		],
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/node/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"npm": [
 			"eslint"
-		]
+		],
+		"languages": {
+			"Node.js": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}
+		}
 	}
 }

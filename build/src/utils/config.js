@@ -232,8 +232,17 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
     }, []);
 }
 
-// Generate complete list of tags for a given definition
-function getTagList(definitionId, release, updateLatest, registry, registryPath, variant) {
+/* 
+Generate complete list of tags for a given definition.
+
+versionPartHandling has a few different modes:
+    - true/'all-latest' - latest, X.X.X, X.X, X
+    - false/'all' - X.X.X, X.X, X
+    - 'full-only' - X.X.X
+    - 'major-minor' - X.X
+    - 'major' - X
+*/
+function getTagList(definitionId, release, versionPartHandling, registry, registryPath, variant) {
     const version = getVersionFromRelease(release, definitionId);
 
     // If version is 'dev', there's no need to generate semver tags for the version
@@ -247,20 +256,45 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
     if (versionParts.length !== 3) {
         throw (`Invalid version format in ${version}.`);
     }
+
+    let versionList, updateUnversionedTags, updateLatest;
+    switch(versionPartHandling) {
+        case true:
+        case 'all-latest':
+            updateLatest = true; 
+            updateUnversionedTags = true;
+            versionList = [version,`${versionParts[0]}.${versionParts[1]}`, `${versionParts[0]}` ];
+            break;
+        case false:
+        case 'all':
+            updateLatest = false;
+            updateUnversionedTags = true;
+            versionList = [version,`${versionParts[0]}.${versionParts[1]}`, `${versionParts[0]}` ];
+            break;
+        case 'full-only':
+            updateLatest = false;
+            updateUnversionedTags = false;
+            versionList = [version];
+            break;
+        case 'major-minor':
+            updateLatest = false;
+            updateUnversionedTags = false;
+            versionList = [`${versionParts[0]}.${versionParts[1]}`];
+            break;
+        case 'major':
+            updateLatest = false;
+            updateUnversionedTags = false;
+            versionList = [ `${versionParts[0]}`];
+            break;
+    }
+
     // Normally, we also want to return a tag without a version number, but for
     // some definitions that exist in the same repository as others, we may
     // only want to return a list of tags with part of the version number in it
-    const versionedTagsOnly = config.definitionBuildSettings[definitionId].versionedTagsOnly;
-    const versionList = versionedTagsOnly ? [
-            version,
-            `${versionParts[0]}.${versionParts[1]}`,
-            `${versionParts[0]}`
-        ] : [
-            version,
-            `${versionParts[0]}.${versionParts[1]}`,
-            `${versionParts[0]}`,
-            '' // This is the equivalent of latest for qualified tags- e.g. python:3 instead of python:0.35.0-3
-        ];
+    if(updateUnversionedTags && !config.definitionBuildSettings[definitionId].versionedTagsOnly) {
+        // This is the equivalent of latest for qualified tags- e.g. python:3 instead of python:0.35.0-3
+        versionList.push(''); 
+    }
 
     const allVariants = getVariants(definitionId);
     const firstVariant = allVariants ? allVariants[0] : variant;
@@ -438,7 +472,7 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
 
-    const definition = getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath, false);
+    const definition = getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath);
 
     // If definition not found, fall back on swapping out more generic logic - e.g. for when a image already has a version tag in it
     if (!definition) {
@@ -464,7 +498,7 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
 }
 
 // Lookup definition from a tag
-function getDefinitionFromTag(tag, registry, registryPath, matchWithVersionNumber) {
+function getDefinitionFromTag(tag, registry, registryPath) {
     registry = registry || '.+';
     registryPath = registryPath || '.+';
     const captureGroups = new RegExp(`${registry}/${registryPath}/(.+):(.+)`).exec(tag);
@@ -508,7 +542,6 @@ function getAllDependencies() {
 
 function getPoolKeyForPoolUrl(poolUrl) {
     const poolKey = config.poolKeys[poolUrl];
-    console.log (`(*) Key for ${poolUrl} is ${poolKey}`);
     return poolKey;
 }
 
@@ -539,6 +572,11 @@ function shouldFlattenDefinitionBaseImage(definitionId) {
     return (getConfig('flattenBaseImage', []).indexOf(definitionId) >= 0)
 }
 
+function getDefaultDependencies(dependencyType) {
+    const packageManagerConfig = getConfig('commonDependencies');
+    return packageManagerConfig ? packageManagerConfig[dependencyType] : null;
+} 
+
 module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
@@ -553,6 +591,7 @@ module.exports = {
     objectByDefinitionLinuxDistro: objectByDefinitionLinuxDistro,
     getDefinitionDependencies: getDefinitionDependencies,
     getAllDependencies: getAllDependencies,
+    getDefaultDependencies: getDefaultDependencies,
     getStagingFolder: getStagingFolder,
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
     getVersionFromRelease: getVersionFromRelease,

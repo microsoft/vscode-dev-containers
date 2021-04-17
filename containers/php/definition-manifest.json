@@ -11,22 +11,27 @@
 	"dependencies": {
 		"image": "php:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/php",
-		"debian": [
-			"yarn"
-		],
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"other": {
 			"Xdebug": {
-				"versionCommand": "php --version | grep -oE 'with Xdebug\\sv[^,]+'| sed -n '/with Xdebug\\sv/s///p'",
-				"downloadUrl":"https://xdebug.org/"
+				"path": "/usr/local/lib/php/extensions"
 			},
 			"Composer": {
-				"versionCommand": "composer --version 2>/dev/null | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
-				"downloadUrl": "https://getcomposer.org/installer"
+				"path": "/usr/local"
 			}
+		},
+		"languages": {
+			"PHP": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}	
 		}
 	}
 }

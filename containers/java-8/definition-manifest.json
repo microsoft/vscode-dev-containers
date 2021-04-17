@@ -11,21 +11,27 @@
 	"dependencies": {
 		"image": "openjdk:8-jdk-buster",
 		"imageLink": "https://hub.docker.com/_/java",
-		"debian": [
-			"yarn"
-		],
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"other": {
-			"SDKMAN!": {
-				"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version | sed -n '/.*SDKMAN\\s/s///p'",
-				"downloadUrl": "https://github.com/sdkman/sdkman-cli"
-			},
+			"SDKMAN!": null,
 			"AdoptOpenJDK": {
-				"versionCommand": "java -version 2>&1 | grep -oE -m 1 '.*build\\s[^\\)]+' | sed -n '/.*build\\s/s///p'",
+				"markdownIgnore": true,
+				"versionCommand": "/usr/local/sdkman/candidates/java/current/bin/java -version 2>&1 | grep -ozP '^openjdk\\sversion\\s\\\"\\K[^\\\"]+' | tr '\\0' '\\n'",
 				"downloadUrl": "https://adoptopenjdk.net/"
+			}
+		},
+		"languages": {
+			"Java": {
+				"cgIgnore": true,
+				"versionCommand": "/usr/local/sdkman/candidates/java/current/bin/java -version 2>&1 | grep -ozP '^openjdk\\sversion\\s\\\"\\K[^\\\"]+' | tr '\\0' '\\n' && /usr/local/openjdk-*/bin/java --version | grep -ozP 'openjdk\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+' | tr '\\0' '\\n'",
+				"path": "/usr/local/sdkman/candidates/java/current<br />/usr/local"
 			}
 		}
 	}
