@@ -107,7 +107,7 @@ RUN apt-get update -yq\
     # Setup codespace user
     && { echo && echo "PATH=${EXTRA_PATHS_OVERRIDES}:\$PATH:${USER_EXTRA_PATHS}" ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
     && { echo && echo $BASH_PROMPT ; } | tee -a /etc/bash.bashrc >> /etc/skel/.bashrc \
-    && printf "$FISH_PROMPT" >> /etc/fish/conf.d/fish_prompt.fish \
+    && printf "$FISH_PROMPT" >> /etc/fish/functions/fish_prompt.fish \
     && { echo && echo $ZSH_PROMPT ; } | tee -a /etc/zsh/zshrc >> /etc/skel/.zshrc \
     && useradd --create-home --shell /bin/bash codespace \
     && mkdir -p /etc/sudoers.d \
