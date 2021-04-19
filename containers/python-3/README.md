@@ -7,15 +7,17 @@
 | Metadata | Value |
 |----------|-------|
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
+| *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
-| *Published image* | mcr.microsoft.com/vscode/devcontainers/python:3 |
-| *Available image variants* |  mcr.microsoft.com/vscode/devcontainers/python:3.8 <br />  mcr.microsoft.com/vscode/devcontainers/python:3.7<br /> mcr.microsoft.com/vscode/devcontainers/python:3.6 |
+| *Published image* | mcr.microsoft.com/vscode/devcontainers/python |
+| *Available image variants* | 3, 3.6, 3.7, 3.8, 3.9 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/python/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container Host OS Support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Python |
 
-## Using this definition with an existing folder
+## Using this definition
 
 ### Configuration
 
@@ -31,16 +33,31 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/python:3.6`
 - `mcr.microsoft.com/vscode/devcontainers/python:3.7`
 - `mcr.microsoft.com/vscode/devcontainers/python:3.8`
+- `mcr.microsoft.com/vscode/devcontainers/python:3.9`
 
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/python:0-3`
-- `mcr.microsoft.com/vscode/devcontainers/python:0.123-3`
-- `mcr.microsoft.com/vscode/devcontainers/python:0.123.0-3`
+- `mcr.microsoft.com/vscode/devcontainers/python:0-3.9`
+- `mcr.microsoft.com/vscode/devcontainers/python:0.200-3.9`
+- `mcr.microsoft.com/vscode/devcontainers/python:0.200.0-3.9`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/python/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize the your container's contents or build for a container architecture the image does not support.
 
 Beyond Python and `git`, this image / `Dockerfile` includes a number of Python tools, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
+
+### Installing Node.js
+
+Given JavaScript front-end web client code written for use in conjunction with a Python back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+
+```json
+"args": {
+    "VARIANT": "3",
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10"
+}
+```
 
 #### Installing or updating Python utilities
 
@@ -104,10 +121,11 @@ If you prefer, you can add the following to your `Dockerfile` to cause global in
 ENV PIP_TARGET=/usr/local/pip-global
 ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
 ENV PATH=${PIP_TARGET}/bin:${PATH}
-RUN mkdir -p ${PIP_TARGET} \
-    && chown vscode:root ${PIP_TARGET} \
-    && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then sudo chown -R vscode:root ${PIP_TARGET}; fi" \
-    | tee -a /root/.bashrc /root/.zshrc /home/vscode/.bashrc >> /home/vscode/.zshrc
+RUN if ! cat /etc/group | grep -e "^pip-global:" > /dev/null 2>&1; then groupadd -r pip-global; fi \
+    && usermod -a -G pip-global vscode \
+    && umask 0002 && mkdir -p ${PIP_TARGET} \
+    && chown :pip-global ${PIP_TARGET} \
+    && ( [ ! -f "/etc/profile.d/00-restore-env.sh" ] || sed -i -e "s/export PATH=/export PATH=\/usr\/local\/pip-global:/" /etc/profile.d/00-restore-env.sh )
 ```
 
 #### [Optional] Installing multiple versions of Python in the same image
@@ -123,25 +141,24 @@ RUN apt-get update && apt-get install --no-install-recommends -yq software-prope
      && pip3 install --no-cache-dir --upgrade pip setuptools wheel
 ```
 
-### Adding the definition to your project
+### Adding the definition to a project or codespace
 
-Just follow these steps:
-
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
 2. To use the pre-built image:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Python 3 definition.
+   1. Start VS Code and open your project folder or connect to a codespace.
+   2. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+   4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
-3. To use the Dockerfile for this definition (*rather than the pre-built image*):
-   1. Clone this repository.
-   2. Copy the contents of `containers/python-3/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+3. To build a custom version of the image instead:
+   1. Clone this repository locally.
+   2. Start VS Code and open your project folder or connect to a codespace.
+   3. Use your local operating system's file explorer to drag-and-drop the locally cloned copy of the `.devcontainer` folder for this definition into the VS Code file explorer for your opened project or codespace.
+   4. Update `.devcontainer/devcontainer.json` to reference `"dockerfile": "base.Dockerfile"`.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
-5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
 ## Testing the definition
 
@@ -160,3 +177,4 @@ This definition includes some test code that will help you verify it is working 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE)
+

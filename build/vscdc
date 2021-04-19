@@ -4,11 +4,12 @@
  *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
  *-------------------------------------------------------------------------------------------------------------*/
 
+const path = require('path');
 const push = require('./src/push').push;
 const patch = require('./src/patch');
 const package = require('./src/package').package;
-const updateAllScriptSourcesInRepo = require('./src/prep').updateAllScriptSourcesInRepo;
-const generateComponentGovernanceManifest = require('./src/cgmanifest').generateComponentGovernanceManifest;
+const prep = require('./src/prep');
+const generateImageInformationFiles = require('./src/image-info').generateImageInformationFiles;
 const configUtils = require('./src/utils/config');
 const packageJson = require('../package.json');
 
@@ -63,6 +64,11 @@ require('yargs')
                     describe: 'whether to clean up staging folder when done',
                     type: 'boolean',
                     default: true
+                },
+                'skip-push': {
+                    describe: 'A space separated list of definition IDs to skip build and push.',
+                    type: 'array',
+                    default: []
                 }
             })
     }, packCommand)
@@ -128,6 +134,11 @@ require('yargs')
                     describe: 'Whether to replace released images. Does not apply to dev tag.',
                     type: 'boolean',
                     default: false
+                },
+                'skip': {
+                    describe: 'A space separated list of definition IDs to skip building and pushing.',
+                    type: 'array',
+                    default: []
                 }
             })
     }, pushCommand)
@@ -167,16 +178,105 @@ require('yargs')
                     describe: 'container registry path',
                     default: configUtils.getConfig('containerRegistryPath', '')
                 },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry',
+                        configUtils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: configUtils.getConfig('stubRegistryPath',
+                        configUtils.getConfig('containerRegistryPath', ''))
+                },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
                     default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'build': {
                     describe: 'whether to to build the image first step',
+                    type: 'boolean',
                     default: true
+                },
+                'prune': {
+                    describe: 'whether to prune images between definitions',
+                    type: 'boolean',
+                    default: false
+                },
+                'cg': {
+                    describe: 'whether to generate cgmanifest.json',
+                    type: 'boolean',
+                    default: true
+                },
+                'markdown': {
+                    describe: 'whether to generate markdown files in history folders',
+                    type: 'boolean',
+                    default: false
+                },
+                'output-path': {
+                    describe: 'path to where extracted information should be stored',
+                    default: path.resolve(__dirname, '..', configUtils.getConfig('informationFileOutputPath', '.'))
                 }
             })
-    }, cgCommand)
+    }, imageInfoCommand)
+    .command('info [devcontainer]', 'generate image information files', (yargs) => {
+        yargs
+            .positional('devcontainer', {
+                describe: 'limits manifest generation to single definition',
+                default: null
+            })
+            .options({
+                'release': {
+                    describe: 'vscode-dev-containers release tag or branch',
+                    default: 'master'
+                },
+                'registry': {
+                    describe: 'container registry to push images to',
+                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                },
+                'registry-path': {
+                    describe: 'container registry path',
+                    default: configUtils.getConfig('containerRegistryPath', '')
+                },
+                'stub-registry': {
+                    describe: 'registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry',
+                        configUtils.getConfig('containerRegistry', 'docker.io'))
+                },
+                'stub-registry-path': {
+                    describe: 'stub registry path',
+                    default: configUtils.getConfig('stubRegistryPath',
+                        configUtils.getConfig('containerRegistryPath', ''))
+                },
+                'github-repo': {
+                    describe: 'vscode-dev-containers repo name',
+                    default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
+                },
+                'build': {
+                    describe: 'whether to to build the image first step',
+                    type: 'boolean',
+                    default: true
+                },
+                'cg': {
+                    describe: 'whether to generate cgmanifest.json',
+                    type: 'boolean',
+                    default: false
+                },
+                'markdown': {
+                    describe: 'whether to generate markdown files in history folders',
+                    type: 'boolean',
+                    default: true
+                },
+                'prune': {
+                    describe: 'whether to prune images between definitions',
+                    type: 'boolean',
+                    default: false
+                },
+                'output-path': {
+                    describe: 'path to where extracted information should be stored',
+                    default: path.resolve(__dirname, '..', configUtils.getConfig('informationFileOutputPath', '.'))
+                }
+            })
+    }, imageInfoCommand)
     .command('patch', 'patch existing images', (yargs) => {
         yargs
             .options({
@@ -199,40 +299,65 @@ require('yargs')
                 }
             })
     }, patchCommand)
+    .command('copy-library-scripts', 'copy files from script-library folder into appropriate definitions', () => {}, copyLibraryScriptsCommand)
     .demandCommand()
     .help()
     .argv;
 
 function pushCommand(argv) {
     push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry,
-        argv.stubRegistryPath, argv.push, argv.prepOnly, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer)
+        argv.stubRegistryPath, argv.push, argv.prepOnly, argv.skip, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
             process.exit(1);
         });
 }
 
 function packCommand(argv) {
     package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath,
-        argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean)
+        argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean, argv.skipPush)
         .catch((reason) => {
             console.error(`(!) Packaging failed - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
             process.exit(1);
         });
 }
 
 function updateScriptSourcesCommand(argv) {
-    updateAllScriptSourcesInRepo(argv.githubRepo, argv.release, argv.updateSha)
+    prep.updateAllScriptSourcesInRepo(argv.githubRepo, argv.release, argv.updateSha)
         .catch((reason) => {
-            console.error(`(!) Stub generation failed - ${reason}`);
+            console.error(`(!) Failed to update script sources - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
             process.exit(1);
         });
 }
 
-function cgCommand(argv) {
-    generateComponentGovernanceManifest(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.build, argv.devcontainer)
+function copyLibraryScriptsCommand() {
+    prep.copyLibraryScriptsForAllDefinitions()
         .catch((reason) => {
-            console.error(`(!) Component governance manifest generation failed - ${reason}`);
+            console.error(`(!) Failed to copy library scripts to definitions  - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
+            process.exit(1);
+        });
+}
+
+function imageInfoCommand(argv) {
+    generateImageInformationFiles(argv.githubRepo, argv.release, argv.registry, argv.registryPath, 
+        argv.stubRegistry, argv.stubRegistryPath, argv.build, argv.prune, argv.cg, argv.markdown, argv.outputPath, argv.devcontainer)
+        .catch((reason) => {
+            console.error(`(!) Image information file generation failed - ${reason}`);
+            if(reason.stack) {
+                console.error(`    ${reason.stack}`);
+            }
             process.exit(1);
         });
 }
@@ -242,12 +367,18 @@ function patchCommand(argv) {
         patch.patchAll(argv.registry, argv.registryPath)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
+                if(reason.stack) {
+                    console.error(`    ${reason.stack}`);
+                }    
                 process.exit(1);
             });
     } else {
         patch.patch(argv.patchPath, argv.registry, argv.registryPath)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
+                if(reason.stack) {
+                    console.error(`    ${reason.stack}`);
+                }    
                 process.exit(1);
             });
     }

@@ -1,15 +1,22 @@
 {
-	"name": "Script Tester",
+	"name": "Script Tester - Debian",
 	"build": {
 		"dockerfile": "../Dockerfile",
 		"context": "../../",
 		"args": {
-			"IMAGE_TO_TEST": "debian:10",
+			"IMAGE_TO_TEST": "debian",
+			"DISTRO": "debian",
 			"USERNAME": "vscode",
-			"DISTRO": "debian"
+			"UPGRADE_PACKAGES": "false",
+			"RUN_COMMON_SCRIPT": "true",
+			"USE_DEFAULTS": "true"
 		}
 	},
+	"remoteUser": "vscode",
+	"workspaceMount": "source=${localWorkspaceFolder}/../..,target=/workspace,type=bind",
+	"workspaceFolder": "/workspace",
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
+	"runArgs": ["--init", "--security-opt", "seccomp=unconfined"],
 	"overrideCommand": false,
 
 	"settings": { 
@@ -18,7 +25,5 @@
 
 	"extensions": [
 		"ms-azuretools.vscode-docker"
-	],
-
-	"remoteUser": "vscode"
+	]
 }

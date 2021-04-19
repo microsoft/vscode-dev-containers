@@ -23,6 +23,4 @@ fig.savefig("test-project/plot.png")
 plt.show()
 
 print('Open test-project/plot.png to see the result!')
-
-
 #%%

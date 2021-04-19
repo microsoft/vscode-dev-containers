@@ -1,37 +1,44 @@
 version: '3'
-services:
-  web:
-    # Uncomment the next line to use a non-root user for all processes. Update the "remoteUser" property 
-    # in devcontainer.json if you just want VS Code and its sub-processes to execute as the user. 
-    # See https://aka.ms/vscode-remote/containers/non-root for details.
-    #
-    # user: node
 
+services:
+  app:
     build: 
       context: .
       dockerfile: Dockerfile
       args:
-        VARIANT: 12
+        # [Choice] Node.js version: 14, 12, 10
+        VARIANT: 14
         # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
         USER_UID: 1000
         USER_GID: 1000
-    
+
     volumes:
       - ..:/workspace:cached
       
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
 
-    links:
-      - db
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:db
+
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: node
+
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    image: postgres
+    image: postgres:latest
     restart: unless-stopped
-    ports: 
-      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: pass
-      POSTGRES_USER: user
-      POSTGRES_DB: data
- 
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+
+    # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+volumes:
+  postgres-data:

@@ -1,96 +1,200 @@
 {
-	"definitionVersion": "0.11.0",
+	"definitionVersion": "1.3.2",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
+			"universal:${VERSION}-focal",
 			"universal:${VERSION}-linux",
 			"universal:${VERSION}"
 		]
-	}, 
+	},
 	"dependencies": {
-		"image": "mcr.microsoft.com/oryx/build:vso-20200417.5",
+		"annotation": "This document describes the base contents of the default GitHub Codespaces dev container image. Note that this image also includes detection logic to dynamically install additional language / runtime versions based on your repository's contents. Dynamically installed content can be found in sub-folders under `/opt`.",
+		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210308.3",
 		"imageLink": "https://github.com/microsoft/oryx",
-		"debian": [
-			"default-jdk",
-			"vim", 
-			"sudo", 
+		"apt": [{
+				"cgIgnore": false,
+				"name": "moby-cli",
+				"annotation": "Docker CLI"
+			}, {
+				"cgIgnore": false,
+				"name": "moby-engine",
+				"annotation": "Docker Engine"
+			}, {
+				"cgIgnore": false,
+				"name": "git-lfs",
+				"annotation": "Git Large File Support"
+			}, {
+				"cgIgnore": false,
+				"markdownIgnore": true,
+				"name": "powershell"
+			}, {
+				"cgIgnore": false,
+				"name": "azure-cli",
+				"annotation": "Azure CLI"
+			},
+			"cmake",
+			"build-essential", 
+			"cmake",
+			"cppcheck",
+			"valgrind",
+			"lldb",
+			"llvm", 
+			"gdb",
+			"clang",
+			"python3-dev",
+			"vim",
+			"vim-doc",
 			"xtail",
-			"fish", 
-			"zsh",
-			"git-lfs",
-			"libkrb5-3",
-			"libicu57",
-			"openssl",
-			"zlib1g",
-			"lsb-release",
-			"curl", 
-			"gnupg",
-			"apt-transport-https",
-			"debian-archive-keyring",
-			"software-properties-common"
+			"software-properties-common",
+			"libsecret-1-dev",
+			"libnss3", 
+			"libnspr4",
+			"libatk-bridge2.0-0",
+			"libatk1.0-0",
+			"libx11-6",
+			"libpangocairo-1.0-0",
+			"libx11-xcb1",
+			"libcups2",
+			"libxcomposite1",
+			"libxdamage1",
+			"libxfixes3",
+			"libpango-1.0-0",
+			"libgbm1",
+			"libgtk-3-0",
+			"openssh-server",
+			"lxc",
+			"pigz",
+			"iptables",
+			"tar",
+			"g++",
+			"gcc",
+			"libc6-dev",
+			"make", 
+			"pkg-config",
+			"sed",
+			"python3-minimal"
 		],
-		"manual": [
-			{
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Oh My Zsh!",
-						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
-						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
-					}
-				}
+		"pipx": [
+			"pylint",
+			"flake8",
+			"autopep8",
+			"black",
+			"yapf",
+			"mypy",
+			"pydocstyle",
+			"pycodestyle",
+			"bandit",
+			"virtualenv",
+			"pipx"
+		],
+		"git": {
+			"Oh My Zsh!": "/home/codespace/.oh-my-zsh",
+			"nvm": "/home/codespace/.nvm",
+			"nvs": "/home/codespace/.nvs",
+			"rbenv": "/usr/local/share/rbenv",
+			"ruby-build": "/usr/local/share/ruby-build"
+		},
+		"gem": [
+			"rake",
+			"ruby-debug-ide",
+			"debase"
+		],
+		"cargo": {
+			"rls": null,
+			"rustfmt": null,
+			"rust-analysis": "rustc --version",
+			"rust-src": "rustc --version",
+			"clippy": "rustc --version"
+		},
+		"go": {
+			"golang.org/x/tools/gopls": null,
+			"honnef.co/go/tools": null,
+			"golang.org/x/lint": null,
+			"github.com/mgechev/revive": null,
+			"github.com/uudashr/gopkgs": null,
+			"github.com/ramya-rao-a/go-outline": null,
+			"github.com/go-delve/delve": null,
+			"github.com/golangci/golangci-lint": null
+		},
+		"other": {
+			"git": {
+				"path": "/usr/local"
 			},
-			{
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Nvm",
-						"repositoryUrl": "https://github.com/nvm-sh/nvm",
-						"commitHash": "8093dbeacdfde0f4740ea6d5becb234dea9eb430"
-					}
-				}
+			"Xdebug": {
+				"path": "/opt/php/lts"
 			},
-			{
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Nvs",
-						"repositoryUrl": "https://github.com/jasongin/nvs",
-						"commitHash": "b6a607d9c36840ea8051586695d57a644402273c"
-					}
-				}
+			"Composer": {
+				"cgIgnore": true,
+				"path": "/opt/php-composer"
 			},
-			{
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Oh My Zsh!",
-						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
-						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
-					}
-				}
+			"kubectl": null,
+			"Helm": null,
+			"Docker Compose": null,
+			"SDKMAN!": null,
+			"rvm": null,
+			"GitHub CLI": null,
+			"yarn": {
+				"cgIgnore": true,
+				"path": "/opt/yarn"
 			},
-			{
-				"Component": {
-					"Type": "other",
-					"Other": {
-						"Name": "kubectl",
-						"Version": "1.18.2",
-						"DownloadUrl": "https://storage.googleapis.com/kubernetes-release/release/v1.18.2/bin/linux/amd64/kubectl"
-					}
-				}
+			"Maven": {
+				"cgIgnore": true,
+				"path": "/opt/maven"
 			},
-			{
-				"Component": {
-					"Type": "other",
-					"Other": {
-						"Name": "Helm",
-						"Version": "3.2.1",
-						"DownloadUrl": "https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz"
-					}
-				}
+			"Gradle": null,
+			"Docker (Moby) CLI & Engine": {
+				"cgIgnore": true
+			},
+			"AdoptOpenJDK": {
+				"markdownIgnore": true,
+				"versionCommand": "/usr/local/sdkman/candidates/java/8*/bin/java -version 2>&1 | grep -oE -m 1 '.*build\\s[^\\)]+' | sed -n '/.*build\\s/s///p'",
+				"downloadUrl": "https://adoptopenjdk.net/"
 			}
-		]
+		},
+		"languages": {
+			"Node.js": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/nodejs | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/nodejs/&lt;version&gt;"
+			},
+			"Python": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/python | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/python/&lt;version&gt;"
+			},
+			"Java": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/java | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/java/&lt;version&gt;"
+			},
+			".NET": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/dotnet | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/home/codespaces/.dotnet<br />/opt/dotnet"
+			},
+			"Ruby": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/ruby | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/ruby/&lt;version&gt;"
+			},
+			"PHP": {
+				"cgIgnore": true,
+				"versionCommand": "ls /opt/php | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/opt/php/&lt;version&gt;"
+			},
+			"PowerShell": {
+				"cgIgnore": true
+			},
+			"GCC": {
+				"cgIgnore": true
+			},
+			"Clang": {
+				"cgIgnore": true
+			},
+			"Go": null,
+			"Rust": null
+		}
 	}
 }

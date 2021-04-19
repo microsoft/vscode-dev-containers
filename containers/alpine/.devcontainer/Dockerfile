@@ -1,6 +1,6 @@
-# Update the VARIANT arg in devcontainer.json to pick an Alpine version: 3.10, 3.11, 3.12
-ARG VARIANT=3.12
-FROM mcr.microsoft.com/vscode/devcontainers/base:alpine-${VARIANT}
+# [Choice] Alpine version: 3.13, 3.12, 3.11, 3.10
+ARG VARIANT=3.13
+FROM mcr.microsoft.com/vscode/devcontainers/base:0-alpine-${VARIANT}
 
 # ** [Optional] Uncomment this section to install additional packages. **
 # RUN apk update \

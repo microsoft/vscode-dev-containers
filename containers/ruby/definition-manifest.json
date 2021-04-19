@@ -1,0 +1,41 @@
+{
+	"variants": ["3", "3.0", "2", "2.7", "2.6", "2.5"],
+	"definitionVersion": "0.201.4",
+	"build": {
+		"latest": true,
+		"rootDistro": "debian",
+		"tags": [
+			"ruby:${VERSION}-${VARIANT}"
+		]
+	},
+	"dependencies": {
+		"image": "ruby:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/ruby",
+		"debian": [{
+				"cgIgnore": false,
+				"name": "yarn"
+			},
+			"build-essential"
+		],
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm",
+			"rbenv": "/usr/local/share/rbenv",
+			"ruby-build": "/usr/local/share/ruby-build"
+		},
+		"gem": [
+			"rake",
+			"ruby-debug-ide",
+			"debase"
+		],
+		"other":{
+			"rvm": null
+		},
+		"languages": {
+			"Ruby": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}
+		}
+	}
+}

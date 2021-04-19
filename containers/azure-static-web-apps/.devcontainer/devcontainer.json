@@ -1,0 +1,26 @@
+{
+	"name": "Azure Static Web Apps",
+	"dockerFile": "Dockerfile",
+	"forwardPorts": [ 7071, 5500 ],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-azuretools.vscode-azurefunctions",
+		"ms-azuretools.vscode-azurestaticwebapps",
+		"ms-dotnettools.csharp",
+		"ms-python.python",
+		"dbaeumer.vscode-eslint",
+		"ritwickdey.liveserver"
+	],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install --lts",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

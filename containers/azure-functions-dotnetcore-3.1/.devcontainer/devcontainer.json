@@ -1,5 +1,5 @@
 {
-	"name": "Azure Functions & C# (.NET Core 3.1)",
+	"name": "Azure Functions & C# - .NET Core 3.1",
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 
@@ -12,12 +12,11 @@
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
 		"ms-dotnettools.csharp"
-	]
+	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
 
-	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
-
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
 }

@@ -7,30 +7,36 @@
 |          Metadata           |                    Value                     |
 | --------------------------- | -------------------------------------------- |
 | *Contributors*              | [Aaryn Smith](https://gitlab.com/aarynsmith) |
+| *Categories*                | Community, Frameworks                        |
 | *Definition type*           | Dockerfile                                   |
 | *Works in Codespaces*       | Yes                                          |
 | *Container host OS support* | Linux, macOS, Windows                        |
+| *Container OS*              | Debian                                       |
 | *Languages, platforms*      | Hugo                                         |
 
-## Using this definition with an existing folder
+This development container includes the Hugo static site generator as well as Node.js (to help with working on themes).
 
-Just follow these steps:
+There are 3 configuration options in the `devcontainer.json` file:
 
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+- `VARIANT`: the default value is `hugo`. Set this to `hugo_extended` if you want to use SASS/SCSS
+- `VERSION`: version of Hugo to download, e.g. `0.71.1`. The default value is `latest`, which always picks the latest version available.
+- `NODE_VERSION`: version of Node.js to use, for example `14` (the default value)
 
-2. To use VS Code's copy of this definition:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Hugo definition.
+The `.vscode` folder additionally contains a sample `tasks.json` file that can be used to set up Visual Studio Code [tasks](https://code.visualstudio.com/docs/editor/tasks) for working with Hugo sites.
 
-3. To use latest-and-greatest copy of this definition from the repository:
-   1. Clone this repository.
-   2. Copy the contents of this folder in the cloned repository to the root of your project folder.
-   3. Start VS Code and open your project folder.
+## Using this definition
 
-4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
-5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+2. Start VS Code and open your project folder or connect to a codespace.
+
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+
+   > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
+
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
+
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
 ## License
 

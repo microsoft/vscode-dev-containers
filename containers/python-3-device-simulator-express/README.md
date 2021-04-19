@@ -1,4 +1,4 @@
-# Python 3 & Device Simulator Express
+# Python 3 & Device Simulator Express (Community)
 
 ## Summary
 
@@ -7,13 +7,15 @@
 | Metadata | Value |
 |----------|-------|
 | *Contributors* | [Carlos Mendible](https://github.com/cmendible) |
+| *Categories* | Community, Other |
 | *Definition type* | Dockerfile |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container Host OS Support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Python |
 
-## Using this definition with an existing folder
+## Using this definition
 
 ### Configuration
 
@@ -95,31 +97,26 @@ If you prefer, you can add the following to your `Dockerfile` to cause global in
 ENV PIP_TARGET=/usr/local/pip-global
 ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
 ENV PATH=${PIP_TARGET}/bin:${PATH}
-RUN mkdir -p ${PIP_TARGET} \
-    && chown vscode:root ${PIP_TARGET} \
-    && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then sudo chown -R vscode:root ${PIP_TARGET}; fi" \
-    | tee -a /root/.bashrc /root/.zshrc /home/vscode/.bashrc >> /home/vscode/.zshrc \
+RUN if ! cat /etc/group | grep -e "^pip-global:" > /dev/null 2>&1; then groupadd -r pip-global; fi \
+    && usermod -a -G pip-global vscode \
+    && umask 0002 && mkdir -p ${PIP_TARGET} \
+    && chown :pip-global ${PIP_TARGET} \
+    && ( [ ! -f "/etc/profile.d/00-restore-env.sh" ] || sed -i -e "s/export PATH=/export PATH=\/usr\/local\/pip-global:/" /etc/profile.d/00-restore-env.sh )
 ```
 
-### Adding the definition to your project
+### Adding the definition to a project or codespace
 
-Just follow these steps:
+1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+2. Start VS Code and open your project folder or connect to a codespace.
 
-2. To use the pre-built image:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Python 3 definition.
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
 
-3. To use the Dockerfile for this definition (*rather than the pre-built image*):
-   1. Clone this repository.
-   2. Copy the contents of `containers/python-3/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+   > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
 
-4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
-5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
 ## Testing the definition
 

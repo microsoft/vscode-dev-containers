@@ -1,6 +1,8 @@
 {
-	"variants": ["3.12", "3.11", "3.10"],
+	"variants": ["3.13", "3.12", "3.11", "3.10"],
+	"definitionVersion": "0.201.4",
 	"build": {
+		"latest": false,
 		"rootDistro": "alpine",
 		"tags": [
 			"base:${VERSION}-alpine-${VARIANT}",
@@ -11,44 +13,8 @@
 	"dependencies": {
 		"image": "alpine:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/alpine",
-		"alpine": [
-			"git",
-			"bash",
-			"libgcc",
-			"libstdc++",
-			"curl",
-			"openssh-client",
-			"less",
-			"wget",
-			"nano",
-			"jq",
-			"gnupg",
-			"unzip",
-			"procps",
-			"coreutils",
-			"ca-certificates",
-			"krb5-libs",
-			"libintl",
-			"libssl1.1",
-			"lttng-ust",
-			"tzdata",
-			"userspace-rcu",
-			"zlib",
-			"shadow",
-			"sudo",
-			"zsh"
-		],
-		"manual": [
-			{
-				"Component": {
-					"Type": "git",
-					"git": {
-						"Name": "Oh My Zsh!",
-						"repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
-						"commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
-					}
-				}
-			}
-		]
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
+		}
 	}
 }

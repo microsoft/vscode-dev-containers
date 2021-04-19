@@ -1,10 +1,9 @@
 {
-	"name": "Vue",
+	"name": "Vue (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "..",
-		// Update 'VARIANT' to pick a Node version. Rebuild the container 
-		// if it already exists to update. Available variants: 10, 12, 14
+		// Update 'VARIANT' to pick a Node version: 10, 12, 14
 		"args": { "VARIANT": "14" }
 	},
 
@@ -27,6 +26,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
 	
-	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "node"
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node"
 }

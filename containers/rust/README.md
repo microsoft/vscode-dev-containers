@@ -7,21 +7,41 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
+| *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/rust |
+| *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Rust |
 
-## Using this definition with an existing folder
+## Using this definition
 
-This definition does not require any special steps to use. The `Cargo.toml` file in the root of this folder is for the test project and is not included in the dev container definition. Just follow these steps to use the definition:
+This definition does not require any special steps to use. Note that the `Cargo.toml` file in the root of this folder is for the test project and can be ignored.
+
+You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own `Dockerfile` to the following. An example `Dockerfile` is included in this repository.
+
+- `mcr.microsoft.com/vscode/devcontainers/rust` (or `rust:1`)
+
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
+
+- `mcr.microsoft.com/vscode/devcontainers/rust:0-1`
+- `mcr.microsoft.com/vscode/devcontainers/rust:0.200-1`
+- `mcr.microsoft.com/vscode/devcontainers/rust:0.200.0-1`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/rust/tags/list).
+
+Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+
+### Adding the definition to a project or codespace
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
 2. To use VS Code's copy of this definition:
    1. Start VS Code and open your project folder.
    2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Rust definition.
+   4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
 3. To use latest-and-greatest copy of this definition from the repository:
    1. Clone this repository.

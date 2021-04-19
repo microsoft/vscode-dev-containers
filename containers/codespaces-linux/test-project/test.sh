@@ -1,66 +1,83 @@
-#!/bin/bash -i
+#!/bin/bash
 cd $(dirname "$0")
 
-# -- Utility functions --
-if [ -z $HOME ]; then
-    HOME="/root"
-fi
+source test-utils.sh codespace
 
-FAILED=()
+# Run common tests
+checkCommon
 
-check() {
-    LABEL=$1
-    shift
-    echo -e "\n🧪  Testing $LABEL: $@"
-    if $@; then 
-        echo "🏆  Passed!"
-    else
-        echo "💥  $LABEL check failed."
-        FAILED+=("$LABEL")
-    fi
-}
+# Check default extensions
+checkExtension "gitHub.vscode-pull-request-github"
 
-checkMultiple() {
-    PASSED=0
-    LABEL="$1"
-    shift; MINIMUMPASSED=$1
-    shift; EXPRESSION="$1"
-    while [ "$EXPRESSION" != "" ]; do
-        if $EXPRESSION; then ((PASSED++)); fi
-        shift; EXPRESSION=$1
-    done
-    check "$LABEL" [ $PASSED -ge $MINIMUMPASSED ]
-}
+# Check Oryx
+check "oryx" oryx --version
 
-checkExtension() {
-    checkMultiple "$1" 1 "[ -d ""$HOME/.vscode-server/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-server-insiders/extensions/$1*"" ]" "[ -d ""$HOME/.vscode-test-server/extensions/$1*"" ]"
-}
+# Check .NET
+check "dotnet" dotnet --list-sdks
 
-# -- Actual tests - add more here --
-checkMultiple "vscode-server" 1 "[ -d ""$HOME/.vscode-server/bin"" ]" "[ -d ""$HOME/.vscode-server-insiders/bin"" ]" "[ -d ""$HOME/.vscode-test-server/bin"" ]"
-check "non-root-user" "id codespace"
-check "/home/codespace" [ -d "/home/codespace" ]
-check "sudo" sudo -u codespace echo "sudo works."
-check "git" git --version
-check "command-line-tools" which top ip lsb_release
-
-# Check platforms
-check "oryx" oryx platforms
+# Check Python
 check "python" python --version
-check "dotnet" dotnet --info
+check "pip" pip3 --version
+check "pipx" pipx --version
+check "pylint" pylint --version
+check "flake8" flake8 --version
+check "autopep8" autopep8 --version
+check "yapf" yapf --version
+check "mypy" mypy --version
+check "pydocstyle" pydocstyle --version
+check "bandit" bandit --version
+check "virtualenv" virtualenv --version
+
+# Check Java tools
+check "java" java -version
+check "sdkman" bash -c ". /usr/local/sdkman/bin/sdkman-init.sh && sdk --version"
+check "gradle" gradle --version
+check "maven" mvn --version
+
+# Check Ruby tools
+check "ruby" ruby --version
+check "rvm" bash -c ". /usr/local/rvm/scripts/rvm && rvm --version"
+check "rbenv" bash -c 'eval "$(rbenv init -)" && rbenv --version'
+check "rake" rake --version
+
+# Node.js
 check "node" node --version
+check "nvm" bash -c ". /home/codespace/.nvm/nvm.sh && nvm --version"
+check "nvs" bash -c ". /home/codespace/.nvs/nvs.sh && nvs --version"
+check "yarn" yarn --version
+check "npm" npm --version
+
+# PHP
 check "php" php --version
+
+# Rust
+check "cargo" cargo --version
+check "rustup" rustup --version
+check "rls" rls --version
+check "rustfmt" rustfmt --version
+check "clippy" cargo-clippy --version
+check "lldb" which lldb
+
+# Check utilities
+checkOSPackages "additional-os-packages" vim xtail software-properties-common
+check "az" az --version
+check "gh" gh --version
+check "git-lfs" git-lfs --version
+check "docker" docker --version
+check "kubectl" kubectl version --client
+check "helm" helm version
 
 # Check expected shells
 check "bash" bash --version
 check "fish" fish --version
 check "zsh" zsh --version
 
-# -- Report results --
-if [ ${#FAILED[@]} -ne 0 ]; then
-    echo -e "\n💥  Failed tests: ${FAILED[@]}"
-    exit 1
-else 
-    echo -e "\n💯  All passed!"
-    exit 0
-fi
+# Check expected commands
+check "git-ed" [ "$(cat /home/codespace/.local/bin/git-ed.sh)" = "$(cat ./git-ed-expected.txt)" ]
+
+# Check that we can run a puppeteer node app.
+yarn
+check "run-puppeteer" node puppeteer.js
+
+# Report result
+reportResults

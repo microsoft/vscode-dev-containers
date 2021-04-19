@@ -1,12 +1,27 @@
-name: CI & Push "dev"
+name: Build and push "dev" images
 
 on: 
-  #repository_dispatch:
+  workflow_dispatch:
   push:
     branches: [master]
     paths:
-      - 'containers/**'
-      - 'script-library/**'
+      - 'containers/alpine/**'
+      - 'containers/debian/**'
+      - 'containers/cpp/**'
+      - 'containers/dotnet/**'
+      - 'containers/go/**'
+      - 'containers/java/**'
+      - 'containers/java-8/**'
+      - 'containers/javascript-node/**'
+      - 'containers/php/**'
+      - 'containers/python-3/**'
+      - 'containers/python-3-anaconda/**'
+      - 'containers/python-3-miniconda/**'
+      - 'containers/ruby/**'
+      - 'containers/rust/**'
+      - 'containers/typescript-node/**'
+      - 'containers/ubuntu/**'
+      - 'repository-containers/images/**'
 
 jobs:
   build-and-push:
@@ -19,6 +34,15 @@ jobs:
       fail-fast: true
     runs-on: ubuntu-latest
     steps:
+    - name: Free more space
+      id: free_space 
+      run: |
+        set -e
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
     - name: Checkout
       id: checkout
       uses: actions/checkout@v1
@@ -33,10 +57,6 @@ jobs:
       id: build_and_push
       run: |
         set -e
-
-        # Ensure enough space is available for build
-        sudo apt-get autoremove -y
-        sudo apt-get clean -y
 
         # ACR login
         ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
@@ -55,7 +75,8 @@ jobs:
                           --registry ${{ secrets.REGISTRY }} \
                           --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
-                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
+                          --skip codespaces-linux codespaces-linux-stretch
 
   package:
     name: Package
@@ -96,23 +117,23 @@ jobs:
         name: ${{ steps.package.outputs.package_name }}
         path: ./${{ steps.package.outputs.package_name }}
 
-  cgmanifest:
-    name: Trigger CG generation
+  image-info:
+    name: Trigger info extraction
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    needs: [build-and-push]
+    needs: [package]
     runs-on: ubuntu-latest
     steps:
-    - name: Trigger CG generation 
-      id: cgmanifest
+    - name: Trigger image info file generation 
+      id: image-info
       run: |
         set -e
-        echo '(*) Triggering CG manifest generation using repository_dispatch'
+        echo '(*) Triggering CG manifest and image history generation using workflow_dispatch'
 
         # Use alternate GitHub token due to https://github.community/t5/GitHub-Actions/Triggering-a-new-workflow-from-another-workflow/td-p/31676
         curl -X POST \
           -H "Authorization: token ${{ secrets.ALTERNATE_GITHUB_TOKEN }}" \
-          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Accept: application/vnd.github.v3+json" \
           -H "Content-Type: application/json" \
-          https://api.github.com/repos/${{ github.repository }}/dispatches \
-          --data '{"event_type":"oss_cg_trigger"}'
+          https://api.github.com/repos/${{ github.repository }}/actions/workflows/version-history.yml/dispatches \
+          --data "{\"ref\": \"${{ github.ref }}\", \"inputs\": {\"release\": \"${{ github.ref }}\", \"cg\": \"true\", \"push\": \"true\"}"
 

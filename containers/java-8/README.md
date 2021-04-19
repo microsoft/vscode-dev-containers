@@ -2,17 +2,41 @@
 
 ## Summary
 
-*Develop Java 8 applications. Includes JDK 8 and Java extensions.*
+*Develop Java applications. Includes the JDK 8 (and 11) and Java extensions.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Java Team |
+| *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/java:8 |
+| *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Java |
 
-## Using this definition with an existing folder
+## Using this definition
+
+> **Note:** A version of this [definition for **newer JDKs**](../java) is also available!
+
+This definition includes both JDK 8 and JDK 11 due to the fact that the VS Code Java extension requires JDK 11+. The needed `devcontainer.json` settings are present to enable you to work with projects targeting Java 8.
+
+You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
+
+- `mcr.microsoft.com/vscode/devcontainers/java:8`
+
+You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
+
+- `mcr.microsoft.com/vscode/devcontainers/java:0-8`
+- `mcr.microsoft.com/vscode/devcontainers/java:0.200-8`
+- `mcr.microsoft.com/vscode/devcontainers/java:0.200.0-8`
+
+See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list).
+
+Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+
+### Debug Configuration
 
 Note that only the integrated terminal is supported by the Remote - Containers extension. You may need to modify `launch.json` configurations to include the following value if an external console is used.
 
@@ -20,25 +44,59 @@ Note that only the integrated terminal is supported by the Remote - Containers e
 "console": "integratedTerminal"
 ```
 
-Beyond that, just follow these steps to use the definition:
+### Installing Maven or Gradle
 
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "true"` or `"INSTALL_GRADLE: "true"` to build args in `.devcontainer/devcontainer.json`. Both of these are set by default. For example:
 
-2. To use VS Code's copy of this definition:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Java 8  definition.
+```json
+"args": {
+   "INSTALL_GRADLE": "true",
+   "INSTALL_MAVEN": "true"
+}
+```
 
-3. To use latest-and-greatest copy of this definition from the repository:
-   1. Clone this repository.
-   2. Copy the contents of `containers/java-8/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+Remove the appropriate arg or set its value to `"false"` to skip installing the specified tool.
+
+You can also specify the version of Gradle or Maven if needed.
+
+```json
+"args": {
+   "INSTALL_GRADLE": "true",
+   "MAVEN_VERSION": "3.6.3",
+   "INSTALL_MAVEN": "true",
+   "GRADLE_VERSION": "5.4.1"
+}
+```
+
+### Installing Node.js
+
+Given JavaScript front-end web client code written for use in conjunction with a Java back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+
+```json
+"args": {
+    "INSTALL_NODE": "true",
+    "NODE_VERSION": "10"
+}
+```
+
+### Adding the definition to your folder
+
+1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
+
+2. To use the pre-built image:
+   1. Start VS Code and open your project folder or connect to a codespace.
+   2. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+   4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
+
+3. To build a custom version of the image instead:
+   1. Clone this repository locally.
+   2. Start VS Code and open your project folder or connect to a codespace.
+   3. Use your local operating system's file explorer to drag-and-drop the locally cloned copy of the `.devcontainer` folder for this definition into the VS Code file explorer for your opened project or codespace.
+   4. Update `.devcontainer/devcontainer.json` to reference `"dockerfile": "base.Dockerfile"`.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
 
-5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
-
-6. If you want to include maven or gradle build tools into your dev container, please uncomment the corresponding steps from the `containers/java-8/.devcontainer/Dockerfile`, and run **Remote-Containers: Rebuild Container** to rebuild the dev container.
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
 ## Testing the definition
 
@@ -47,7 +105,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/java-8` folder.
+4. Select the `containers/java` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
 6. You should see "Hello Remote World!" in the a Debug Console after the program executes.
 7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.

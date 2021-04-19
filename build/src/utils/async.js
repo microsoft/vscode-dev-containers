@@ -10,6 +10,7 @@ const rimrafCb = require('rimraf');
 const mkdirpCb = require('mkdirp');
 const copyFilesCb = require('copyfiles');
 const spawnCb = require('child_process').spawn;
+const execCb = require('child_process').exec;
 
 module.exports = {
 
@@ -25,15 +26,63 @@ module.exports = {
         console.log(`(*) Spawn: ${command}${args.reduce((prev, current) => `${prev} ${current}`, '')}`);
 
         opts = opts || { stdio: 'inherit', shell: true };
+        let echo = false;
+        if (opts.stdio === 'inherit') {
+            opts.stdio = 'pipe';
+            echo = true;
+        }
         return new Promise((resolve, reject) => {
             let result = '';
-            let errorOutput = '';
             const proc = spawnCb(command, args, opts);
             proc.on('close', (code, signal) => {
                 if (code !== 0) {
                     console.log(result);
-                    console.error(errorOutput);
-                    reject(`Non-zero exit code: ${code} ${signal || ''}`);
+                    const err = new Error(`Non-zero exit code: ${code} ${signal || ''}`);
+                    err.result = result;
+                    err.code = code;
+                    err.signal = signal;
+                    reject(err);
+                    return;
+                }
+                resolve(result);
+            });
+            if (proc.stdout) {
+                proc.stdout.on('data', (chunk) => {
+                    const stringChunk = chunk.toString();
+                    result += stringChunk;
+                    if (echo) {
+                        console.log(stringChunk);
+                    }
+                });
+            }
+            if (proc.stderr) {
+                proc.stderr.on('data', (chunk) => {
+                    const stringChunk = chunk.toString();
+                    result += stringChunk;
+                    if (echo) {
+                        console.error(stringChunk);
+                    }
+                });
+            }
+            proc.on('error', reject);
+        });
+    },
+
+    exec: async (command, opts) => {
+        console.log(`(*) Exec: ${command}`);
+
+        opts = opts || { stdio: 'inherit', shell: true };
+        return new Promise((resolve, reject) => {
+            let result = '';
+            const proc = execCb(command, opts);
+            proc.on('close', (code, signal) => {
+                if (code !== 0) {
+                    console.log(result);
+                    const err = new Error(`Non-zero exit code: ${code} ${signal || ''}`);
+                    err.result = result;
+                    err.code = code;
+                    err.signal = signal;
+                    reject(err);
                     return;
                 }
                 resolve(result);
@@ -95,6 +144,20 @@ module.exports = {
         });
     },
 
+    // async copyfile
+    copyFile: async (src, dest) => {
+        return new Promise((resolve, reject) => {
+            fs.copyFile(src, dest, (err) => err ? reject(err) : resolve());
+        });
+    },
+
+    // async chmod
+    chmod: async (src, mod) => {
+        return new Promise((resolve, reject) => {
+            fs.chmod(src, mod, (err) => err ? reject(err) : resolve());
+        });
+    },
+
     // async readdir
     readdir: async (dirPath, opts) => {
         opts = opts || {};
@@ -146,3 +209,4 @@ module.exports = {
         });
     }
 };
+

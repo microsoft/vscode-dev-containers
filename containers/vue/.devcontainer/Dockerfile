@@ -1,13 +1,12 @@
-# Update the VARIANT arg in devcontainer.json to pick a Node.js version: 14, 12, 10 
+# [Choice] Node.js version: 14, 12, 10
 ARG VARIANT=14
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
-RUN sudo -u node npm install -g http-server @vue/cli @vue/cli-service-global
+RUN su node -c "umask 0002 && npm install -g http-server @vue/cli @vue/cli-service-global"
 WORKDIR /app
 
 EXPOSE 8080
 
 # [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update \
-#     && export DEBIAN_FRONTEND=noninteractive \
-#    && apt-get -y install --no-install-recommends <your-package-list-here>
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>

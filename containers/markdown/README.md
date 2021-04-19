@@ -7,9 +7,11 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
+| *Categories* | Languages |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Markdown |
 
 ## Usage

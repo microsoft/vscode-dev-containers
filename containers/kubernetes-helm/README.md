@@ -7,18 +7,20 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code team and Phetsinorath William |
+| *Categories* | Other |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Any |
 
 ## Description
 
 Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into a local or remote [Kubernetes](https://kubernetes.io/) cluster without affecting your dev container.
 
-This example illustrates how you can do this by using CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker), the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) right from inside your dev container.  This definition builds up from the [docker-from-docker](../docker-from-docker) container definition to add Kubernetes and Helm support.  It installs the Docker and Kubernetes extensions inside the container so you can use its full feature set with your project.
+This example illustrates how you can do this by using CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker), the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) right from inside your dev container.  This definition builds up from the [docker-from-docker](../docker-from-docker) container definition to add Kubernetes and Helm support. It installs the Docker and Kubernetes extensions inside the container so you can use its full feature set with your project.
 
-The dev container also syncs your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container with the necessary modifications to allow it to interact with anything running on your local machine whenever the container or a terminal window is started. This includes interacting with a Kubernetes cluster managed through Docker Desktop or a local Minikube install.
+When using Remote - Containers, the dev container also syncs your local Kubernetes config (`~/.kube/config` or `%USERPROFILE%\.kube\config`) into the container with the necessary modifications to allow it to interact with anything running on your local machine whenever the container or a terminal window is started. This includes interacting with a Kubernetes cluster managed through Docker Desktop or a local Minikube install. (Note that this does **not** happen when using **GitHub Codespaces**.)
 
 ## How it works / adapting your existing dev container config
 
@@ -58,50 +60,90 @@ You can adapt your own existing development container Dockerfile to support this
 2. Next, update your Dockerfile to install all of the needed CLIs in the container:
 
     ```Dockerfile
+    # Install Docker CE CLI
     RUN apt-get update \
-        #
-        # Install Docker CE CLI
         && apt-get install -y apt-transport-https ca-certificates curl gnupg2 lsb-release \
         && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
         && echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
         && apt-get update \
-        && apt-get install -y docker-ce-cli \
-        #
-        # Install kubectl
-        && curl -sSL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
-        && chmod +x /usr/local/bin/kubectl \
-        #
-        # Install Helm
-        && curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
+        && apt-get install -y docker-ce-cli
+
+    # Install kubectl
+    RUN curl -sSL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+        && chmod +x /usr/local/bin/kubectl
+
+    # Install Helm
+    RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
     ```
 
-
-2. Finally, update your Dockerfile to add a script to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates into your `/root/.bashrc`.
+3. Finally, we need to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. Manually copy the [`copy-kube-config.sh` script](.devcontainer/copy-kube-config.sh) from the `.devcontainer` folder in this repo folder into the same folder as your `Dockerfile` and then update your `Dockerfile` to use it from your `/root/.bashrc` and/or `/root/.zshrc`.
 
     ```Dockerfile
-    RUN echo '\n\
-    if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ] && [ -d "/usr/local/share/kube-localhost" ];; then\n\
-        mkdir -p $HOME/.kube\n\
-        cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
-        sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
-    \n\
-        if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
-            mkdir -p $HOME/.minikube\n\
-            cp -r /usr/local/share/minikube-localhost/ca.crt $HOME/.minikube\n\
-            cp -r /usr/local/share/minikube-localhost/client.crt $HOME/.minikube\n\
-            cp -r /usr/local/share/minikube-localhost/client.key $HOME/.minikube\n\
-            sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
-            sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
-            sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
-        fi\n\
-    fi' >> /root/.bashrc
+    COPY copy-kube-config.sh /usr/local/share/
+    RUN echo "source /usr/local/share/copy-kube-config.sh" | tee -a /root/.bashrc >> /root/.zshrc
     ```
 
 4. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
-### Enabling non-root access in the container
+### Enabling non-root access to Docker in the container
 
-To enable non-root access, you can use `socat` to proxy the Docker socket without affecting its permissions. This is safer than updating the permissions of the host socket itself since this would apply to all containers. You then also need to copy the `.bashrc` script into the non-root user's home folder as well.
+This can be a bit trickier than it might first seem if you're looking to ensure things run locally on macOS, Windows, and Linux as well as in Codespaces. The **[docker script](../../script-library/docs/docker.md)** used in this container **automatically detects the right thing** to do to enable this scenario, but it uses the following two approaches to accomplish it.
+
+In short, you can ignore this if you use the script, but here's what it does.
+
+#### Adding the user to a Docker group
+
+In some environments like Codespaces, this is relatively simple to achieve if the Docker socket already has a group other than root on it. To see if this is the case, open a terminal in VS Code when connected to the container to check:
+
+```bash
+stat -c '%g' /var/run/docker.sock
+```
+
+If you get a number other than `0`, you can simply add your non-root user to right user group. To do so:
+
+1. As before, follow [the instructions in the Remote - Containers documentation](https://aka.ms/vscode-remote/containers/non-root) to create a non-root user with sudo access if you do not already have one.
+
+2. Follow the [directions in the previous section](#enabling-root-user-access-to-docker-in-the-container) to install the Docker CLI.
+
+3. Update your `devcontainer.json` from above so VS Code doesn't override the container's entrypoint and enables the non-root user:
+
+    ```json
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+        //..
+    ],
+    "remoteUser": "vscode",
+    "overrideCommand": false
+    ```
+
+4. Next, update your Dockerfile as follows to wire up an entrypoint that creates a group with the right group ID and be sure the user is in it:
+
+    ```Dockerfile
+    ARG NONROOT_USER=vscode
+
+    RUN echo "#!/bin/sh\n\
+        sudoIf() { if [ \"\$(id -u)\" -ne 0 ]; then sudo \"\$@\"; else \"\$@\"; fi }\n\
+        SOCKET_GID=\$(stat -c '%g' /var/run/docker.sock) \n\
+        if [ \"${SOCKET_GID}\" != '0' ]; then\n\
+            if [ \"\$(cat /etc/group | grep :\${SOCKET_GID}:)\" = '' ]; then sudoIf groupadd --gid \${SOCKET_GID} docker-host; fi \n\
+            if [ \"\$(id ${NONROOT_USER} | grep -E \"groups=.*(=|,)\${SOCKET_GID}\(\")\" = '' ]; then sudoIf usermod -aG \${SOCKET_GID} ${NONROOT_USER}; fi\n\
+        fi\n\
+        exec \"\$@\"" > /usr/local/share/docker-init.sh \
+        && chmod +x /usr/local/share/docker-init.sh
+
+    # VS Code overrides ENTRYPOINT and CMD when executing `docker run` by default.
+    # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to
+    # the Docker socket if "overrideCommand": false is set in devcontainer.json.
+    # The script will also execute CMD if you need to alter startup behaviors.
+    ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+    CMD [ "sleep", "infinity" ]
+    ```
+
+5. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+
+#### Final fallback: socat
+
+However, if the host's socket is owned by the root user and root group (`root` `root`), you'll need to either change the group on the socket on the host or use `socat` to proxy the Docker socket without affecting its permissions. The `socat` option can be safer than updating the permissions of the host socket itself since this would apply to all containers. You can also alias `docker` to be `sudo docker` in a `.bashrc` file, but this does not work in cases where the Docker socket is accessed directly.
 
 Follow these directions to set up non-root access using `socat`:
 
@@ -125,24 +167,9 @@ Follow these directions to set up non-root access using `socat`:
     ```Dockerfile
     ARG NONROOT_USER=vscode
 
-    RUN echo '\n\
-        if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ] && [ -d "/usr/local/share/kube-localhost" ]; then\n\
-            mkdir -p $HOME/.kube\n\
-            sudo cp -r /usr/local/share/kube-localhost/* $HOME/.kube\n\
-            sudo chown -R $(id -u) $HOME/.kube\n\
-            sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config\n\
-        \n\
-            if [ -d "/usr/local/share/minikube-localhost" ]; then\n\
-                mkdir -p $HOME/.minikube\n\
-                sudo cp -r /usr/local/share/minikube-localhost/ca.crt $HOME/.minikube\n\
-                sudo cp -r /usr/local/share/minikube-localhost/client.crt $HOME/.minikube\n\
-                sudo cp -r /usr/local/share/minikube-localhost/client.key $HOME/.minikube\n\
-                sudo chown -R $(id -u) $HOME/.minikube\n\
-                sed -i -r "s|(\s*certificate-authority:\s).*|\\1$HOME\/.minikube\/ca.crt|g" $HOME/.kube/config\n\
-                sed -i -r "s|(\s*client-certificate:\s).*|\\1$HOME\/.minikube\/client.crt|g" $HOME/.kube/config\n\
-                sed -i -r "s|(\s*client-key:\s).*|\\1$HOME\/.minikube\/client.key|g" $HOME/.kube/config\n\
-            fi\n\
-        fi' | tee /root/.bashrc >> /home/${NONROOT_USER}/.bashrc
+    COPY copy-kube-config.sh /usr/local/share/
+    RUN chown ${NONROOT_USER}:root /usr/local/share/copy-kube-config.sh \
+        && echo "source /usr/local/share/copy-kube-config.sh" | tee -a /root/.bashrc /root/.zshrc /home/${NONROOT_USER}/.bashrc >> /home/${NONROOT_USER}/.zshrc
 
     # Default to root only access to the Docker socket, set up non-root init script
     RUN touch /var/run/docker.socket \
@@ -164,9 +191,15 @@ Follow these directions to set up non-root access using `socat`:
     CMD [ "sleep", "infinity" ]
     ```
 
-6. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
+5. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 That's it!
+
+## A note on Minkube or otherwise using a local cluster
+
+While this definition works with Minkube in most cases, if you hit trouble, make sure that your `~/.kube/config` file and Minikube certs reference your host's IP rather than `127.0.0.1` or `localhost` (since `localhost` resolve to the container itself rather than your local machine where Minikube is running).
+
+This should happen by default on Linux. On macOS and Windows, we recommend using the Kuberntes install that comes with Docker Desktop instead of Minikube to avoid these kinds of issues.
 
 ## Using this definition with an existing folder
 
@@ -188,6 +221,20 @@ A few notes on the definition:
 
 See the section below for your operating system for more detailed setup instructions.
 
+### GitHub Codespaces
+
+While you cannot sync or connect to your local Kubernetes configuration with Codespaces, you can use `kubectl`, Helm, and the Kubernetes extension.
+
+1. If this is your first time using a development container, please see [creating a codespace](https://aka.ms/ghcs-open-codespace) for information on using GitHub Codespaces.
+
+2. Create or connect to an existing codespace.
+
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
+
+5. Finally, press <kbd>F1</kbd> and run **Codespaces: Rebuild Container** to start using the definition.
+
 ### Windows / macOS
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
@@ -196,21 +243,15 @@ See the section below for your operating system for more detailed setup instruct
 
 3. Check **Kubernetes > Enable Kubernetes**
 
-4. To use VS Code's copy of this definition:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Docker from Docker Compose definition.
+4. Start VS Code and open your project folder.
 
-5. To use latest-and-greatest copy of this definition from the repository:
-   1. Clone this repository.
-   2. Copy the contents of `containers/kubernetes-helm/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+5. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
 
-6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+6.  Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
 7. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
 
-## Linux / Minikube Setup
+### Linux / Minikube Setup
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 
@@ -222,17 +263,11 @@ See the section below for your operating system for more detailed setup instruct
     kubectl config set-context minikube
     ```
 
-4. To use VS Code's copy of this definition:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Docker from Docker Compose definition.
+4. Start VS Code and open your project folder.
 
-5. To use latest-and-greatest copy of this definition from the repository:
-   1. Clone this repository.
-   2. Copy the contents of `containers/kubernetes-helm/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+5. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
 
-6. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+6.  Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
 7. Open `.devcontainer/devcontainer.json` and uncomment this line in the `runArgs` array:
 

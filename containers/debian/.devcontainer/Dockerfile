@@ -1,9 +1,8 @@
-# Update the VARIANT arg in devcontainer.json to pick an Debian version: buster (or debian-10), stretch (or debian-9)
+# [Choice] Debian version: buster, stretch
 ARG VARIANT=buster
 FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 
 # ** [Optional] Uncomment this section to install additional packages. **
-# RUN apt-get update \
-#     && export DEBIAN_FRONTEND=noninteractive \
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 

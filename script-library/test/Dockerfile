@@ -3,39 +3,21 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
+# Test defaults
 ARG IMAGE_TO_TEST=debian:10
 FROM ${IMAGE_TO_TEST}
 
-ARG DISTRO="debian"
-ARG USERNAME="vscode"
-ARG INSTALL_DOCKER="true"
-ARG UPGRADE_PACKAGES="true"
-
 COPY *.sh /tmp/
-RUN chmod +x /tmp/*.sh \
-    && if [ "${DISTRO}" = "debian" ]; then \
-      apt-get update; \
-    fi
+COPY test/*.sh /tmp
+RUN chmod +x /tmp/*.sh
 
-# Run common script
-RUN /tmp/common-${DISTRO}.sh true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}
+ARG DISTRO="debian"
+ARG USE_DEFAULTS="true"
+ARG USERNAME="vscode"
+ARG RUN_COMMON_SCRIPT="true"
+ARG UPGRADE_PACKAGES="false"
+RUN /tmp/run-scripts.sh /tmp ${DISTRO} ${USE_DEFAULTS} ${USERNAME} ${RUN_COMMON_SCRIPT} ${UPGRADE_PACKAGES}
 
-RUN if [ "${DISTRO}" = "debian" ]; then \
-        # Run Node script
-        /tmp/node-${DISTRO}.sh "/usr/local/share/nvm" 12 ${USERNAME}; \
-    fi
-
-RUN if  [ "${DISTRO}" != "alpine" ]; then\
-        # Run Docker script
-        /tmp/docker-${DISTRO}.sh true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}; \
-    else \
-        echo -e '#!/bin/bash\n"$@"' | tee /usr/local/share/docker-init.sh \
-        && chown ${USERNAME} /usr/local/share/docker-init.sh \
-        && chmod +x /usr/local/share/docker-init.sh; \
-    fi
-
-# Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
-# the Docker socket if "overrideCommand": false is set in devcontainer.json. 
-# The script will also execute CMD if you need to alter startup behaviors.
-ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
+ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh", "/usr/local/share/desktop-init.sh" ]
 CMD [ "sleep", "infinity" ]

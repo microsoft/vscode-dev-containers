@@ -1,10 +1,10 @@
 {
-	"name": "Script Tester",
+	"name": "Script Tester - Alpine",
 	"build": {
 		"dockerfile": "../Dockerfile",
 		"context": "../../",
 		"args": {
-			"IMAGE_TO_TEST": "alpine:3.10",
+			"IMAGE_TO_TEST": "alpine",
 			"USERNAME": "vscode",
 			"DISTRO": "alpine"
 		}
@@ -13,6 +13,8 @@
 	"settings": { 
 		"terminal.integrated.shell.linux": null
 	},
-
+	"workspaceMount": "source=${localWorkspaceFolder}/../..,target=/workspace,type=bind",
+	"workspaceFolder": "/workspace",
 	"remoteUser": "vscode"
+
 }

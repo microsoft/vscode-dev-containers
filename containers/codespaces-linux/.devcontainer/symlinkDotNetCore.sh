@@ -6,15 +6,15 @@
 
 set -ex
 
-splitSdksDir="/opt/dotnet/sdks"
+splitSdksDir="/opt/dotnet"
 
 allSdksDir="/home/codespace/.dotnet"
 mkdir -p "$allSdksDir"
 
 # Copy latest muxer and license files
-cp -f "$splitSdksDir/3/dotnet" "$allSdksDir"
-cp -f "$splitSdksDir/3/LICENSE.txt" "$allSdksDir"
-cp -f "$splitSdksDir/3/ThirdPartyNotices.txt" "$allSdksDir"
+cp -f "$splitSdksDir/lts/dotnet" "$allSdksDir"
+cp -f "$splitSdksDir/lts/LICENSE.txt" "$allSdksDir"
+cp -f "$splitSdksDir/lts/ThirdPartyNotices.txt" "$allSdksDir"
 
 function createLinks() {
     local sdkVersion="$1"
@@ -23,7 +23,7 @@ function createLinks() {
     cd "$installedDir"
 
     # Find folders with the name being a version number like 3.1.0 or 3.1.301
-    find . -type d -regex '.*/[0-9]\.[0-9]\.[0-9]+' | while read subPath; do
+    find . -maxdepth 3 -type d -regex '.*/[0-9]\.[0-9]\.[0-9]+' | while read subPath; do
         # Trim beginning 2 characters from the line which currently looks like, for example, './sdk/2.2.402'
         subPath="${subPath:2}"
         
@@ -36,12 +36,10 @@ function createLinks() {
     done
 }
 
-createLinks "3.1.301"
-echo
-createLinks "3.0.103"
-echo
-createLinks "2.2.402"
-echo
-createLinks "2.1.807"
-echo
-createLinks "1.1.14"
+# Dynamically find and link all installed dotnet SDKs
+find /opt/dotnet/*.*.*/sdk -maxdepth 1 -type d -name "*.*.*" | while read SDK_PATH; do
+    SDK_VERSION="$(basename ${SDK_PATH})"
+    createLinks "$SDK_VERSION"
+done
+
+set +ex

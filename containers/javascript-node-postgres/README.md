@@ -1,50 +1,61 @@
-# Node.js & PostgresSQL
+# Node.js & PostgreSQL (Community)
 
 ## Summary
 
-*Develop applications in Node.js and Postgres. Includes Node.js, eslint, and yarn in a container linked to a Postgres DB container*
+*Develop applications in Node.js and PostgreSQL. Includes Node.js, eslint, and yarn in a container linked to a Postgres DB container*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | [Mehant](mailto:kmehant@gmail.com) |
+| *Categories* | Community, Languages |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Languages, platforms* | Node.js, JavaScript, Postgres DB |
+| *Container OS* | Debian |
+| *Languages, platforms* | Node.js, JavaScript, PostgreSQL DB |
 
-## Using this definition with an existing folder
+## Description
 
-While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. [Node Version Manager](https://github.com/nvm-sh/nvm) (`nvm`) is also included in case you need to use a different version of Node.js than the one included in the image.
+This definition creates two containers, one for Node.js and one for PostgreSQL. VS Code will attach to the Node.js container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `postgres-data`.
 
-You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` with one of the following: 10, 12, or 14.
+While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Node.js version 10, 12, or 14.
 
 ```yaml
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        VARIANT: 14
+build:
+  context: .
+  dockerfile: Dockerfile
+  args:
+    VARIANT: 12
 ```
 
-### Adding the definition to your project
+You also can connect to PostgreSQL from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
 
-Just follow these steps:
+```json
+"forwardPorts": [ "5432" ]
+```
 
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+### Adding another service
 
-2. To use VS Code's copy of this definition:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Node.js & Postgres DB definition.
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentaiton](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
 
-3. To use latest-and-greatest copy of this definition from the repository:
-   1. Clone this repository.
-   2. Copy the contents of `containers/javascript-node-postgres/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+```yaml
+# Runs the service on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+network_mode: service:db
+```
 
-4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+### Adding the definition to a project or codespace
 
-5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
+
+2. Start VS Code and open your project folder or connect to a codespace.
+
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+
+   > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
+
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
+
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
 ## Testing the definition
 

@@ -2,35 +2,46 @@ version: '3'
 
 services:
   app:
-    # Uncomment the next line to use a non-root user for all processes. You can also
-    # simply use the "remoteUser" property in devcontainer.json if you just want
-    # VS Code and its sub-processes (terminals, tasks, debugging) to execute as the user
-    # On Linux, you may need to update the args USER_UID and USER_GID the "build" section
-    # to match your user if not 1000. See https://aka.ms/vscode-remote/containers/non-root for details.
-    # user: vscode
-
-    build: 
+    build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
       args:
-        #
+        # [Choice] Python version: 3, 3.8, 3.7, 3.6
         VARIANT: 3
+        # [Choice] Install Node.js
+        INSTALL_NODE: "true"
+        NODE_VERSION: "lts/*"
+        # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
         USER_UID: 1000
         USER_GID: 1000
 
     volumes:
       - ..:/workspace:cached
-      
+
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
-    
-    links: 
-      - db
-    
+
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:db
+
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: vscode
+
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
   db:
-    image: postgres
+    image: postgres:latest
     restart: unless-stopped
-    ports: 
-      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: LocalPassword
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+
+    # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+volumes:
+  postgres-data:

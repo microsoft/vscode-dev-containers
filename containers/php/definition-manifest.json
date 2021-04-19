@@ -1,0 +1,37 @@
+{
+	"variants": ["8", "8.0", "7", "7.4", "7.3"],
+	"definitionVersion": "0.201.4",
+	"build": {
+		"latest": true,
+		"rootDistro": "debian",
+		"tags": [
+			"php:${VERSION}-${VARIANT}"
+		]
+	},
+	"dependencies": {
+		"image": "php:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/php",
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm"
+		},
+		"other": {
+			"Xdebug": {
+				"path": "/usr/local/lib/php/extensions"
+			},
+			"Composer": {
+				"path": "/usr/local"
+			}
+		},
+		"languages": {
+			"PHP": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}	
+		}
+	}
+}

@@ -1,18 +1,20 @@
-# Ruby & Sinatra
+# Ruby & Sinatra (Community)
 
 ## Summary
 
-*Develop Ruby & Sinatra applications. Includes everything you need to get up and running.*
+*Develop Ruby and Sinatra applications. Includes everything you need to get up and running.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | [Amblizer][la] |
+| *Categories* | Community, Frameworks |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian |
 | *Languages, platforms* | Ruby |
 
-## Using this definition with an existing folder
+## Using this definition
 
 While this definition should work unmodified, you can select the version of Ruby the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
@@ -22,7 +24,7 @@ While this definition should work unmodified, you can select the version of Ruby
 
 ### Installing Node.js
 
-Given how frequently Ruby-based web applications use Node.js for front end code, this container also includes Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+Given JavaScript front-end web client code written for use in conjunction with a Ruby back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
 ```json
 "args": {
@@ -34,21 +36,17 @@ Given how frequently Ruby-based web applications use Node.js for front end code,
 
 ### Adding the definition to your folder
 
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
-2. To start then:
-   1. Start VS Code and open your project folder.
-   2. Press <kbd>F1</kbd> select and **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-   3. Select the Ruby 2 definition.
+2. Start VS Code and open your project folder or connect to a codespace.
 
-3. To use latest-and-greatest copy of this definition from the repository:
-   1. Clone this repository.
-   2. Copy the contents of `containers/ruby-sinatra/.devcontainer` to the root of your project folder.
-   3. Start VS Code and open your project folder.
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
 
-4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+   > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
 
-5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** to start using the definition.
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
+
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
 ## Testing the definition
 
