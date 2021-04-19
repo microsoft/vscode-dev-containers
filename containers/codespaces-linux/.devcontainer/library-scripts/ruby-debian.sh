@@ -74,11 +74,11 @@ function updaterc() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, software-properties-common, build-essential, gnupg2 if missing
-if ! dpkg -s curl ca-certificates software-properties-common build-essential gnupg2 > /dev/null 2>&1; then
+if ! dpkg -s curl ca-certificates software-properties-common build-essential gnupg2 libreadline-dev > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates software-properties-common build-essential gnupg2
+    apt-get -y install --no-install-recommends curl ca-certificates software-properties-common build-essential gnupg2 libreadline-dev
 fi
 
 # Just install Ruby if RVM already installed
