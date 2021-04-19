@@ -8,6 +8,9 @@ const markdownFormatterFactory = require('./utils/markdown-formatter-factory');
 const handlebars = require('handlebars');
 let releaseNotesHeaderTemplate, releaseNotesVariantPartTemplate;
 
+// Register helper for anchors - Adapted from https://github.com/gjtorikian/html-pipeline/blob/main/lib/html/pipeline/toc_filter.rb
+handlebars.registerHelper('anchor', (value) => value.toLowerCase().replace(/[^\w\- ]/g, '').replace(/ /g, '-'));
+
 async function generateImageInformationFiles(repo, release, registry, registryPath, 
     stubRegistry, stubRegistryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, outputPath, definitionId) {
     // Load config files

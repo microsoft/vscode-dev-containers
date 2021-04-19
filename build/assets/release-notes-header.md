@@ -10,7 +10,7 @@
 {{#if hasVariants}}
 **Definition variations:**
 {{#each variants}}
-- [{{this}}](#variant-{{this}})
+- [{{this}}](#variant-{{anchor this}})
 {{/each}}
 
 {{/if}}
