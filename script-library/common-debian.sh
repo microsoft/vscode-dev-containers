@@ -322,10 +322,10 @@ EOF
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
     echo "${RC_SNIPPET}" >> /etc/bash.bashrc
     echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
-    echo 'export PROMPT_DIRTRIM=2' >> "${USER_RC_PATH}/.bashrc"
+    echo 'export PROMPT_DIRTRIM=4' >> "${USER_RC_PATH}/.bashrc"
     if [ "${USERNAME}" != "root" ]; then
         echo "${CODESPACES_BASH}" >> "/root/.bashrc"
-        echo 'export PROMPT_DIRTRIM=2' >> "/root/.bashrc"
+        echo 'export PROMPT_DIRTRIM=4' >> "/root/.bashrc"
     fi
     chown ${USERNAME}:${USERNAME} "${USER_RC_PATH}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
