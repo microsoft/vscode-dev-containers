@@ -2,17 +2,17 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/alpine)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/alpine)
 
 **Definition variations:**
-- [3.13](#variant-3.13)
-- [3.12](#variant-3.12)
-- [3.11](#variant-3.11)
-- [3.10](#variant-3.10)
+- [3.13](#variant-313)
+- [3.12](#variant-312)
+- [3.11](#variant-311)
+- [3.10](#variant-310)
 
 ## Variant: 3.13
 
-**Digest:** sha256:c86174765d4cf046321eae6a164c602a1fb5dfa10416cabd6d0c17ea2c5eca91
+**Digest:** sha256:7e1c23e8202368d99a67cad2135e44a1d37d68a1ea77531ba5c572550438ec67
 
 **Tags:**
 ```
@@ -74,7 +74,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.12
 
-**Digest:** sha256:d98e74ede5e5be2b95bdf7d11f364afd015464db00d167b86fca9a09f40cdf0a
+**Digest:** sha256:b706902807e35710f3c9f2790f528c505e883049387eebf27a51a91e5d3cf306
 
 **Tags:**
 ```
@@ -136,7 +136,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.11
 
-**Digest:** sha256:0331550d632324eac0746708c20b9a52112374cda19c3bc69766f7b4f25e362b
+**Digest:** sha256:7ec110c9fd5b8a0a21f3ab8771d5bf3af2e12c0f6cf5218813451d1c1290008b
 
 **Tags:**
 ```
@@ -199,7 +199,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.10
 
-**Digest:** sha256:32a6c804f7b20a73c9af008fb6b6422fc946c67eb7548b17c3c8b0930cfa80c3
+**Digest:** sha256:f11d2c6019984cd9c4353ae60527fb5d8e1a232e3b41f5b1f40160292ba6df22
 
 **Tags:**
 ```

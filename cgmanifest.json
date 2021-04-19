@@ -135,7 +135,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.22.0-1~focal",
+                    "Version": "2.22.1-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -1156,7 +1156,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.2.0"
+                    "Version": "2.3.0"
                 }
             }
         },
@@ -1164,8 +1164,7 @@
             "Component": {
                 "Type": "npm",
                 "Npm": {
-                    "Name": "typescript",
-                    "Version": "4.2.4"
+                    "Name": "typescript"
                 }
             }
         },

@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/codespaces-linux-stretch)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/codespaces-linux-stretch)
 
 **Digest:** sha256:bfdba186241e6bb22871f7275be26ba005c258c9e1e6a20811ac172a0fe9c4a2
 

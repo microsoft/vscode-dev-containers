@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/javascript-node)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/javascript-node)
 
 **Definition variations:**
 - [14-buster](#variant-14-buster)
@@ -14,7 +14,7 @@
 
 ## Variant: 14-buster
 
-**Digest:** sha256:88a365411a8cd1cdb3b6958343fea21d91d7210e808d7be59fb41560aaa67e3f
+**Digest:** sha256:2cdc395ba96744c75d5ecdbe9f68f98a3f651948f38d7b6abed4e0da5cabebba
 
 **Tags:**
 ```
@@ -95,7 +95,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:697673ad1eaafef466156728764728f4c755a58ca4e6c58fec52f6ffe7ef3363
+**Digest:** sha256:12bf30a49fe5ae4d1d6f29a477b7eedb9b7fcc6f335f842d979e2ff4ba3715b0
 
 **Tags:**
 ```
@@ -176,7 +176,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 ## Variant: 10-buster
 
-**Digest:** sha256:acd7cb13b264c5c3a31be59a58a258437a1e22736b25908af41a9bfb8fbb9c39
+**Digest:** sha256:ef6cf0972fa0b76d01174f5d3faf354e84128e472a1de7a55416f5182ab053ce
 
 **Tags:**
 ```
@@ -257,7 +257,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-10
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:bc9fa0606982248db2403e23460704412bd90079e70d3b0e1a9073ec890669df
+**Digest:** sha256:d2ba76fd3c51e7186399ccd25842e6db9b044fa50ea80692d59f27c309ce252e
 
 **Tags:**
 ```
@@ -338,7 +338,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:a97ae62b3aeae3bf180bc242ffd87857946e60a84c6d9e34eac1cde94d67b9e9
+**Digest:** sha256:4319dba2e6a15cbb384ca3148def11a8bb0fe951a0ced8f7884342324d187ecf
 
 **Tags:**
 ```
@@ -419,7 +419,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 
 ## Variant: 10-stretch
 
-**Digest:** sha256:5b9c3d83de179c3b1e132c5930fec46a0cc42123bbc9ee6c18be6314be7d914d
+**Digest:** sha256:406257740b11ba7905a576095b0fe033aacdba174f183f3f9f4bf431198d2534
 
 **Tags:**
 ```

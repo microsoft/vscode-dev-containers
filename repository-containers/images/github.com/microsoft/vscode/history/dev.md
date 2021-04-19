@@ -2,14 +2,14 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/github.com/microsoft/vscode)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/github.com/microsoft/vscode)
 
 **Definition variations:**
 - [12](#variant-12)
 
 ## Variant: 12
 
-**Digest:** sha256:44a7a09e620747499c0d9d6a47ea3479ee0c188201621405c16a34ece9f78026
+**Digest:** sha256:2226d80a1ef95605a37c5c6f12bc046934be33cb3ef4fcc52e0aba3f1f72844f
 
 **Tags:**
 ```

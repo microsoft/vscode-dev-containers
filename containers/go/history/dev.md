@@ -2,16 +2,16 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/go)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/go)
 
 **Definition variations:**
 - [1](#variant-1)
-- [1.16](#variant-1.16)
-- [1.15](#variant-1.15)
+- [1.16](#variant-116)
+- [1.15](#variant-115)
 
 ## Variant: 1
 
-**Digest:** sha256:59d6dcbfb2b00124447e99ae6a9c90490aef6aaa154cf45d793458d9586de9a3
+**Digest:** sha256:08a339bde23b4c1ce33d6bfcd3a2b27b9c26f8935725a308c00e051fcf51f634
 
 **Tags:**
 ```
@@ -103,7 +103,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.16
 
-**Digest:** sha256:59d6dcbfb2b00124447e99ae6a9c90490aef6aaa154cf45d793458d9586de9a3
+**Digest:** sha256:08a339bde23b4c1ce33d6bfcd3a2b27b9c26f8935725a308c00e051fcf51f634
 
 **Tags:**
 ```
@@ -195,7 +195,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 
 ## Variant: 1.15
 
-**Digest:** sha256:505b2f929768aff7c342d7009ab991f034991bbb5394ecaae2018ef846904495
+**Digest:** sha256:023a356f01483388d92bbf4e6f1d8bbc8dfba4c579d00f4eae15ef0dc7064816
 
 **Tags:**
 ```

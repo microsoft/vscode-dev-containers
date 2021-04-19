@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/debian)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/debian)
 
 **Definition variations:**
 - [buster](#variant-buster)
@@ -10,7 +10,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:e58ba7a20dabffc33b804c8dd8fe507daa464ebb20822bc34315a77c9bf2cac9
+**Digest:** sha256:cd80eefed4b26f2a79b89081ef5f012b5cdcee768d237929a37c77f9497b7a43
 
 **Tags:**
 ```
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:d2f778b818b90ee1268bbcad3ed802649181f7cac7ec9da8c74eb6b3e18ee14a
+**Digest:** sha256:739903fcdf9cd9982000853fac210a0fbc8996a885f71e48aeeb7b4b59a2f4eb
 
 **Tags:**
 ```

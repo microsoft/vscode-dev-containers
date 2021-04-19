@@ -2,18 +2,18 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/python-3)
 
 **Definition variations:**
 - [3](#variant-3)
-- [3.9](#variant-3.9)
-- [3.8](#variant-3.8)
-- [3.7](#variant-3.7)
-- [3.6](#variant-3.6)
+- [3.9](#variant-39)
+- [3.8](#variant-38)
+- [3.7](#variant-37)
+- [3.6](#variant-36)
 
 ## Variant: 3
 
-**Digest:** sha256:282605152eb990ff919479db461cbeeeabe5168f3a66e3a5b14915df4660f9b4
+**Digest:** sha256:d8f75e43d0b9d349f4d7e8d8385900ab2d595be55c30170364394d65823a388f
 
 **Tags:**
 ```
@@ -103,7 +103,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.9
 
-**Digest:** sha256:282605152eb990ff919479db461cbeeeabe5168f3a66e3a5b14915df4660f9b4
+**Digest:** sha256:d8f75e43d0b9d349f4d7e8d8385900ab2d595be55c30170364394d65823a388f
 
 **Tags:**
 ```
@@ -193,7 +193,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 
 ## Variant: 3.8
 
-**Digest:** sha256:ebb0a824d5c87719be1d02081cd8ab343f6f78626f369a3353c03573eccd6195
+**Digest:** sha256:02c22a2b5e7204a6bbcaff46c8f69a5782a2949197d6e0167604eeb178361692
 
 **Tags:**
 ```
@@ -283,7 +283,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:041f60e8e08ee8a03916ff1350fc7be0074bef44ff9dcdf80ab3c59c861efba7
+**Digest:** sha256:9ed38ed94026ec7624a577fbe24cb26031c1e3881db7b2da00207b76fe477b65
 
 **Tags:**
 ```
@@ -373,7 +373,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:d5c95e843200d026006370f237cf0854435b33973a298dba07525f20a6641ad9
+**Digest:** sha256:d39cd92fe1b76257c23fadc767df1fa1bf71230e4f8a15d30e8f721d0f9b32a7
 
 **Tags:**
 ```

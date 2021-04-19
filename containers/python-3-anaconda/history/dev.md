@@ -2,9 +2,9 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-anaconda)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/python-3-anaconda)
 
-**Digest:** sha256:e21fdb6f54425da30640bcc4d6f83de443214ea101123c59b2a7610471ddef38
+**Digest:** sha256:1c20d05752d5340a0f46efaaddee7c76fef2db0d82dada7436947fa92483487f
 
 **Tags:**
 ```

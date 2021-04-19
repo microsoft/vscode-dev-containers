@@ -3,9 +3,9 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/codespaces-linux)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/codespaces-linux)
 
-**Digest:** sha256:70c2c0aa3ccc2876bd4d80ddfbcc68ebc8e9e4a0a332989410eb7781ae332af8
+**Digest:** sha256:45e2f1999806f8fe88a59d7f6b39dae5c14cf0cc744967aeeee0effc8bf2a287
 
 **Tags:**
 ```
@@ -114,7 +114,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.5 |
 | apt-utils | 2.0.5 |
-| azure-cli (Azure CLI) | 2.22.0-1~focal |
+| azure-cli (Azure CLI) | 2.22.1-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.1 |
 | clang | 1:10.0-50~exp1 |

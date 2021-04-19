@@ -2,16 +2,16 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/dotnet)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/dotnet)
 
 **Definition variations:**
-- [5.0](#variant-5.0)
-- [3.1](#variant-3.1)
-- [2.1](#variant-2.1)
+- [5.0](#variant-50)
+- [3.1](#variant-31)
+- [2.1](#variant-21)
 
 ## Variant: 5.0
 
-**Digest:** sha256:bd92d68ebab8491c5d7f957515eff20058522e957ca36aa0dd1caa5a1890d092
+**Digest:** sha256:ddf476d2eded10aea672592a339305ae60a66153d20eb47ad5d4aa24b79cce8c
 
 **Tags:**
 ```
@@ -86,7 +86,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:945f33593e425eeac53fcc0dd072cc5cfbda8b81dc55dd3f10e0b219ece8be60
+**Digest:** sha256:58ba536714a09456ebe3924c87555181325d9a74f0ee45f6f2b7aaf3844f9ff6
 
 **Tags:**
 ```
@@ -161,7 +161,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:ae287be8d67caf202004ab5bc269cd42c36ae94bab7d342373fc827a005b0c1f
+**Digest:** sha256:f3aee0a881929f60e382a352fce9376e97ca31e05c3fec678af05bdbbeb1c7a1
 
 **Tags:**
 ```

@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/ubuntu)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/ubuntu)
 
 **Definition variations:**
 - [focal](#variant-focal)
@@ -10,7 +10,7 @@
 
 ## Variant: focal
 
-**Digest:** sha256:c2a3c631df9f64af37f39c30fe11932ed9cc9658b1c69f38753db7bffa841605
+**Digest:** sha256:c11f9417ecb5bc02c3ed1be8dff90c41d7ccb54b11343720cfcf0fc87ac41461
 
 **Tags:**
 ```
@@ -79,7 +79,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:daad16fb6cf8d6e3f1910fb2977caa91db233458be0753fc817c57b0e6db1bfd
+**Digest:** sha256:0931c4e656ea76bdde4d51cc7e94d51da982318006246265549bd845e669b705
 
 **Tags:**
 ```

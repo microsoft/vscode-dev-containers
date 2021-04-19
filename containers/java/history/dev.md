@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/java)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/java)
 
 **Definition variations:**
 - [15](#variant-15)
@@ -10,7 +10,7 @@
 
 ## Variant: 15
 
-**Digest:** sha256:661e0e2aff6661f4d1551ccfc961e78fe71298a6bddb367cbb5589f8f73715dd
+**Digest:** sha256:0fa8c97d25be5bf23a35cb93bf500cd25e698d9ac83dbc05ed1ba2568af6f961
 
 **Tags:**
 ```
@@ -90,7 +90,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-15
 
 ## Variant: 11
 
-**Digest:** sha256:b6f1ff851ab05c326617c856ee40c437269449348d07bec4c3dff02910759933
+**Digest:** sha256:9c3bcf4a94fd9aa9485c3efe91f785179ed728b00fe7034b3ed905c61a02da65
 
 **Tags:**
 ```

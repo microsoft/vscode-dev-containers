@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/cpp)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/cpp)
 
 **Definition variations:**
 - [buster](#variant-buster)
@@ -12,7 +12,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:78f9914202d0cba25af493362ed4044ca2d73d0fc10a8f6239a5bf7b3bdbda59
+**Digest:** sha256:dfb5e055592ac9edf42147c9b8ff7f51cd07646f142b128a59c94e38ac5ea7d4
 
 **Tags:**
 ```
@@ -97,7 +97,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: focal
 
-**Digest:** sha256:7fe92c65327aa8623edc4051c521928abe5774b0d89beba45a8e57c4d7b6e969
+**Digest:** sha256:a39d6cf222aba6d48410980f1929cb63860b35bc01fc691e10c7d04cc095d938
 
 **Tags:**
 ```
@@ -181,7 +181,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:0155083b71678bdc4f31ce0b82ec964e1c7633d9c3145f6f6f1362e19b77b43b
+**Digest:** sha256:88abd309b93942c25d307149a33cf83bb06ec59d42a99344c6b6eabe7622edb0
 
 **Tags:**
 ```
@@ -265,7 +265,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:164f878902b2238fdbd0d8c203189478e86bd61332c3bfe982ff73269a067e74
+**Digest:** sha256:4200aea3d5b3bbc96225b4a205c3e310c7609121baa6873226eff957f9b318b9
 
 **Tags:**
 ```

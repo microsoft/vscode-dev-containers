@@ -2,9 +2,9 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-miniconda)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/python-3-miniconda)
 
-**Digest:** sha256:7c2c898121d94edc86996e94cbe356c5282e24deea1aea07c9b4695383aa1d3a
+**Digest:** sha256:6ab197d4b2ea4f2c4496c1db7f6d601254904ca7818a00d98729f53ed9bb6347
 
 **Tags:**
 ```

@@ -2,18 +2,18 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/php)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/php)
 
 **Definition variations:**
 - [8](#variant-8)
-- [8.0](#variant-8.0)
+- [8.0](#variant-80)
 - [7](#variant-7)
-- [7.4](#variant-7.4)
-- [7.3](#variant-7.3)
+- [7.4](#variant-74)
+- [7.3](#variant-73)
 
 ## Variant: 8
 
-**Digest:** sha256:1cfdd82dd86655e65e8ad9ff76b141503697ec406a935d63b61bdfd07f519b39
+**Digest:** sha256:bc4e759df9d1d639453fe74b0b12aa31218139030b1c852ddb775f09ac5ac827
 
 **Tags:**
 ```
@@ -94,7 +94,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 ## Variant: 8.0
 
-**Digest:** sha256:1cfdd82dd86655e65e8ad9ff76b141503697ec406a935d63b61bdfd07f519b39
+**Digest:** sha256:bc4e759df9d1d639453fe74b0b12aa31218139030b1c852ddb775f09ac5ac827
 
 **Tags:**
 ```
@@ -175,7 +175,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0
 
 ## Variant: 7
 
-**Digest:** sha256:57fa9e114cb0f25b45c13b8c9471d7c5175ca18913fe9617412e4c6ca9feec38
+**Digest:** sha256:cdc224229a49e3f9119a6f4e914f54f72954e09fdcd645bd4ea6d6bedd618de9
 
 **Tags:**
 ```
@@ -256,7 +256,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 ## Variant: 7.4
 
-**Digest:** sha256:57fa9e114cb0f25b45c13b8c9471d7c5175ca18913fe9617412e4c6ca9feec38
+**Digest:** sha256:cdc224229a49e3f9119a6f4e914f54f72954e09fdcd645bd4ea6d6bedd618de9
 
 **Tags:**
 ```
@@ -337,7 +337,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4
 
 ## Variant: 7.3
 
-**Digest:** sha256:6a7c7c9ab23eb07871248b6aefca61dea4e2110ea41fdca79e88fe3df2f5b699
+**Digest:** sha256:3f8b6ee095660411f73a280ce492ac6074c79254cf65dcde25f5f645341f6a24
 
 **Tags:**
 ```

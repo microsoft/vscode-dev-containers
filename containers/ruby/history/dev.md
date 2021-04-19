@@ -2,19 +2,19 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/ruby)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/ruby)
 
 **Definition variations:**
 - [3](#variant-3)
-- [3.0](#variant-3.0)
+- [3.0](#variant-30)
 - [2](#variant-2)
-- [2.7](#variant-2.7)
-- [2.6](#variant-2.6)
-- [2.5](#variant-2.5)
+- [2.7](#variant-27)
+- [2.6](#variant-26)
+- [2.5](#variant-25)
 
 ## Variant: 3
 
-**Digest:** sha256:b828f379cc3f19892c14b29a593040d95f84b159fc1a9e52bff35433132bb577
+**Digest:** sha256:cdd97ccc4aa3141d8c05bc9ad873e8ff43b80cfabce25e3ae1324ed38f3d6014
 
 **Tags:**
 ```
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 ## Variant: 3.0
 
-**Digest:** sha256:b828f379cc3f19892c14b29a593040d95f84b159fc1a9e52bff35433132bb577
+**Digest:** sha256:cdd97ccc4aa3141d8c05bc9ad873e8ff43b80cfabce25e3ae1324ed38f3d6014
 
 **Tags:**
 ```
@@ -196,7 +196,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3.0
 
 ## Variant: 2
 
-**Digest:** sha256:b0cad60f966cc13e537bd6838f3b3c520e80e0162577c4e2fa3b4859504cf0e0
+**Digest:** sha256:dbddcf1caa124f151f0ebc50505d01d637656cf56a3ecc09db83bb24fdb838fd
 
 **Tags:**
 ```
@@ -287,7 +287,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 ## Variant: 2.7
 
-**Digest:** sha256:b0cad60f966cc13e537bd6838f3b3c520e80e0162577c4e2fa3b4859504cf0e0
+**Digest:** sha256:dbddcf1caa124f151f0ebc50505d01d637656cf56a3ecc09db83bb24fdb838fd
 
 **Tags:**
 ```
@@ -378,7 +378,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.7
 
 ## Variant: 2.6
 
-**Digest:** sha256:b3fe42903716d0b386b5ec96c4cfe5c83512a5c932bc64b52f3152071bcb45ec
+**Digest:** sha256:11c7d87b042c651d3cc36bbc8d2f7b40ae32db18bca536482df14b4044b42e55
 
 **Tags:**
 ```
@@ -469,7 +469,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 
 ## Variant: 2.5
 
-**Digest:** sha256:6d7e0884d2374ee3f3b248bc67f89b49f381500dfc9bf9143b5bca35276decb0
+**Digest:** sha256:814005f20c6ac2bca8da04951cca3060ee48127e856c46f51569727d1e50a523
 
 **Tags:**
 ```

@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/typescript-node)
+**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/typescript-node)
 
 **Definition variations:**
 - [14-buster](#variant-14-buster)
@@ -14,7 +14,7 @@
 
 ## Variant: 14-buster
 
-**Digest:** sha256:362d36ee0d1a2214cd4e449d393fd2c1f8eae3f0365600b72ce7904ce6bd0024
+**Digest:** sha256:443db30b867c6d57f66dd4cab97dcf4482b757d39ee8064645f0e7b790cd7af8
 
 **Tags:**
 ```
@@ -45,8 +45,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 | Tool / package | Version |
 |----------------|---------|
 | eslint | 7.24.0 |
-| tslint-to-eslint-config | 2.2.0 |
-| typescript | 4.2.4 |
+| tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
 
@@ -98,7 +97,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:3307b5e76d6b57f53397fa9935a808055623d38d2f8e2168a9b8028d9ba58e0c
+**Digest:** sha256:a49f4aa3c2accfc51e9bd272b8c80580d1fd121ba8dad117dbe700edb872e140
 
 **Tags:**
 ```
@@ -129,8 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 | Tool / package | Version |
 |----------------|---------|
 | eslint | 7.24.0 |
-| tslint-to-eslint-config | 2.2.0 |
-| typescript | 4.2.4 |
+| tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
 
@@ -182,7 +180,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 ## Variant: 10-buster
 
-**Digest:** sha256:6a777734c4f1628fdbc9446939cba9ed85e78778ab56780c830dd7b5b710aeeb
+**Digest:** sha256:1ab4a4ee1ab773cfcc113b29e457bce1e2bfc34b383ec3695963e554a035b6a1
 
 **Tags:**
 ```
@@ -213,8 +211,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-10
 | Tool / package | Version |
 |----------------|---------|
 | eslint | 7.24.0 |
-| tslint-to-eslint-config | 2.2.0 |
-| typescript | 4.2.4 |
+| tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
 
@@ -266,7 +263,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-10
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:1e8de67a831195f5b2efa3448c6752735e6a9b24a56736a5c7aaa85e7d62783f
+**Digest:** sha256:ac593135bbf79e4212fc5ea5beac8648961c36f110ed2006b8e2bbae2bd035c1
 
 **Tags:**
 ```
@@ -296,8 +293,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 | Tool / package | Version |
 |----------------|---------|
 | eslint | 7.24.0 |
-| tslint-to-eslint-config | 2.2.0 |
-| typescript | 4.2.4 |
+| tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
 
@@ -350,7 +346,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:7aebd0934a7fe3302ae05e913745587254e6cac11997e03545d4096cf44d8def
+**Digest:** sha256:bba01a707217d31aab6630d67ca6e32594a82bd8370444732ba9c95605319514
 
 **Tags:**
 ```
@@ -380,8 +376,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 | Tool / package | Version |
 |----------------|---------|
 | eslint | 7.24.0 |
-| tslint-to-eslint-config | 2.2.0 |
-| typescript | 4.2.4 |
+| tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
 
@@ -434,7 +429,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 
 ## Variant: 10-stretch
 
-**Digest:** sha256:0752a65cd8fc7ce8199ec1c2ca893f9f336f78340d82fe74e0511a38b22be3c4
+**Digest:** sha256:5758757256b26c6f4422b9e5bc3c4512a7cc90306155b64b3ae80d713ab0dbfb
 
 **Tags:**
 ```
@@ -464,8 +459,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-10-stretch
 | Tool / package | Version |
 |----------------|---------|
 | eslint | 7.24.0 |
-| tslint-to-eslint-config | 2.2.0 |
-| typescript | 4.2.4 |
+| tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
 
