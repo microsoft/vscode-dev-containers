@@ -145,6 +145,10 @@ jobs:
     needs: [package]
     runs-on: ubuntu-latest
     steps:
+    - name: Get tag name
+      id: get_tag_name
+      run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
+      
     - name: Trigger image info file generation 
       id: image-info
       run: |
