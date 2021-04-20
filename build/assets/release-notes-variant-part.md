@@ -14,6 +14,8 @@
 
 **Linux distribution:** {{distro.prettyName}}{{#if distro.idLike}} ({{distro.idLike}}-like distro){{/if}}
 
+**Available (non-root) user:** {{image.user}}
+
 ### Contents
 {{#if languages}}
 **Languages and runtimes**

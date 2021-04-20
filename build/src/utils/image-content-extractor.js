@@ -65,7 +65,7 @@ to an object like this:
 */
 async function getLinuxDistroInfo(imageTagOrContainerName) {
     const info = {};
-    const osInfoCommandOutput = await getDockerRunCommandOutput(imageTagOrContainerName, 'cat /etc/os-release', true);
+    const osInfoCommandOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 'cat /etc/os-release', true);
     const osInfoLines = osInfoCommandOutput.split('\n');
     osInfoLines.forEach((infoLine) => {
         const infoLineParts = infoLine.split('=');
@@ -135,12 +135,12 @@ async function getLinuxPackageInfo(imageTagOrContainerName, packageList, linuxDi
 
     // Generate and exec command to get installed package versions
     console.log('(*) Gathering information about Linux package versions...');
-    const packageVersionListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, 
+    const packageVersionListOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 
         extractionConfig.listCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
    
     // Generate and exec command to extract download URIs
     console.log('(*) Gathering information about Linux package download URLs...');
-    const packageUriCommandOutput = await getDockerRunCommandOutput(imageTagOrContainerName, 
+    const packageUriCommandOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 
         extractionConfig.getUriCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
 
     const componentList = [];
@@ -220,7 +220,7 @@ async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList) {
 
     console.log(`(*) Gathering information about globally installed npm packages...`);
 
-    const npmOutputRaw = await getDockerRunCommandOutput(imageTagOrContainerName, "bash -l -c 'set -e && npm ls --global --depth 0 --json' 2>/dev/null");
+    const npmOutputRaw = await getCommandOutputFromContainer(imageTagOrContainerName, "bash -l -c 'set -e && npm ls --global --depth 0 --json' 2>/dev/null");
     const npmOutput = JSON.parse(npmOutputRaw);
 
     return packageList.map((package) => {
@@ -263,7 +263,7 @@ async function getPipPackageInfo(imageTagOrContainerName, packageList, usePipx) 
 }
 
 async function getPipVersionLookup(imageTagOrContainerName) {
-    const packageVersionListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, 'pip list --format json');
+    const packageVersionListOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 'pip list --format json');
 
     const packageVersionList = JSON.parse(packageVersionListOutput);
 
@@ -275,7 +275,7 @@ async function getPipVersionLookup(imageTagOrContainerName) {
 
 async function getPipxVersionLookup(imageTagOrContainerName) {
     // --format json doesn't work with pipx, so have to do text parsing
-    const packageVersionListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, 'pipx list');
+    const packageVersionListOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 'pipx list');
 
     const packageVersionListOutputLines = packageVersionListOutput.split('\n');
     return packageVersionListOutputLines.reduce((prev, current) => {
@@ -316,7 +316,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos) {
         if (typeof repoPath === 'string') {
             console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
-            const remoteAndCommitOutput = await getDockerRunCommandOutput(imageTagOrContainerName, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && git log -n 1 --pretty=format:%H -- . | tee /dev/null; fi`,true);
+            const remoteAndCommitOutput = await getCommandOutputFromContainer(imageTagOrContainerName, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && git log -n 1 --pretty=format:%H -- . | tee /dev/null; fi`,true);
             const [gitRemote, gitCommit] = remoteAndCommitOutput.split('\n');
             componentList.push({
                 name: repoName,
@@ -360,7 +360,7 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, o
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
-            const otherVersion = (await getDockerRunCommandOutput(imageTagOrContainerName, otherSettings.versionCommand));
+            const otherVersion = (await getCommandOutputFromContainer(imageTagOrContainerName, otherSettings.versionCommand));
             componentList.push({
                 name: otherName,
                 version: otherVersion,
@@ -409,7 +409,7 @@ async function getGemPackageInfo(imageTagOrContainerName, packageList) {
     }
 
     console.log(`(*) Gathering information about gems...`);
-    const gemListOutput = await getDockerRunCommandOutput(imageTagOrContainerName, "bash -l -c 'set -e && gem list -d --local' 2>/dev/null");
+    const gemListOutput = await getCommandOutputFromContainer(imageTagOrContainerName, "bash -l -c 'set -e && gem list -d --local' 2>/dev/null");
     return packageList.map((gem) => {
         const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\),]+)`,'m').exec(gemListOutput);
         const gemVersion = gemVersionCaptureGroup[1];
@@ -448,7 +448,7 @@ async function getCargoPackageInfo(imageTagOrContainerName, packages) {
         if (typeof crate === 'string') {
             const versionCommand = packages[crate] || `${crate} --version`;
             console.log(`(*) Getting version for ${crate}...`);
-            const versionOutput = await getDockerRunCommandOutput(imageTagOrContainerName, versionCommand);
+            const versionOutput = await getCommandOutputFromContainer(imageTagOrContainerName, versionCommand);
             const crateVersionCaptureGroup = new RegExp('[0-9]+\\.[0-9]+\\.[0-9]+','m').exec(versionOutput);
             const version = crateVersionCaptureGroup[0];
             componentList.push({
@@ -484,13 +484,13 @@ async function getGoPackageInfo(imageTagOrContainerName, packages) {
 
     console.log(`(*) Gathering information about go modules and packages...`);
     const componentList = [];
-    const packageInstallOutput = await getDockerRunCommandOutput(imageTagOrContainerName, "cat /usr/local/etc/vscode-dev-containers/go.log");
+    const packageInstallOutput = await getCommandOutputFromContainer(imageTagOrContainerName, "cat /usr/local/etc/vscode-dev-containers/go.log");
     for(let package in packages) {
         if (typeof package === 'string') {
             const versionCommand = packages[package];
             let version;
             if(versionCommand) {
-                version = await getDockerRunCommandOutput(imageTagOrContainerName, versionCommand);
+                version = await getCommandOutputFromContainer(imageTagOrContainerName, versionCommand);
             } else {
                 const versionCaptureGroup = new RegExp(`downloading\\s*${package}\\s*v([0-9]+\\.[0-9]+\\.[0-9]+.*)\\n`).exec(packageInstallOutput);
                 version = versionCaptureGroup ? versionCaptureGroup[1] : 'latest';
@@ -518,9 +518,11 @@ async function getImageInfo(imageTagOrContainerName) {
     }
     const imageNameAndDigest = await asyncUtils.spawn('docker', ['inspect', "--format='{{index .RepoDigests 0}}'", image], { shell: true, stdio: 'pipe' });
     const [name, digest] = imageNameAndDigest.trim().split('@');
+    const nonRootUser = await getCommandOutputFromContainer(imageTagOrContainerName, 'id -un 1000', true)
     return {
         "name": name,
-        "digest": digest
+        "digest": digest,
+        "user": nonRootUser
     }
 }
 
@@ -542,7 +544,7 @@ async function removeProcessingContainer(containerName) {
 // Utility that executes commands inside a container. If a specially formatted container 
 // name is passed in, the function will use "docker exec" and otherwise use "docker run" 
 // since this means an image tag was passed in instead.
-async function getDockerRunCommandOutput(imageTagOrContainerName, command, forceRoot) {
+async function getCommandOutputFromContainer(imageTagOrContainerName, command, forceRoot) {
     const runArgs = isContainerName(imageTagOrContainerName) ?
         ['exec'].concat(forceRoot ? ['-u', 'root'] : [])
         : ['run','--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);
