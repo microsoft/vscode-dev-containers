@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/php)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/php)
 
 **Definition variations:**
 - [8](#variant-8)

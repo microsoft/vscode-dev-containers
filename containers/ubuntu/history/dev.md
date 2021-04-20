@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/ubuntu)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/ubuntu)
 
 **Definition variations:**
 - [focal](#variant-focal)

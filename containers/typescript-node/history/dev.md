@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/typescript-node)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/typescript-node)
 
 **Definition variations:**
 - [14-buster](#variant-14-buster)

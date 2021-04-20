@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/go)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/go)
 
 **Definition variations:**
 - [1](#variant-1)

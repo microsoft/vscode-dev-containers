@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/javascript-node)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/javascript-node)
 
 **Definition variations:**
 - [14-buster](#variant-14-buster)

@@ -3,7 +3,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/codespaces-linux)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/codespaces-linux)
 
 **Digest:** sha256:6343582d95fbbed3c1d47b4f63db96bd255fde56cd185b2be9423b3ab82f463d
 

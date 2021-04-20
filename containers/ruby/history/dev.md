@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/ruby)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/ruby)
 
 **Definition variations:**
 - [3](#variant-3)

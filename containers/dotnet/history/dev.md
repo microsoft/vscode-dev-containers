@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/dotnet)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/dotnet)
 
 **Definition variations:**
 - [5.0](#variant-50)

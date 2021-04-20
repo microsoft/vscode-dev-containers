@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/rust)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/rust)
 
 **Digest:** sha256:f83605286a4c40db3e566a3e7052843b253b26b415b40822776d681680bdfbe4
 

@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/python-3-anaconda)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-anaconda)
 
 **Digest:** sha256:1c20d05752d5340a0f46efaaddee7c76fef2db0d82dada7436947fa92483487f
 

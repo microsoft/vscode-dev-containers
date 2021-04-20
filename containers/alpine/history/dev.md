@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/alpine)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/alpine)
 
 **Definition variations:**
 - [3.13](#variant-313)
