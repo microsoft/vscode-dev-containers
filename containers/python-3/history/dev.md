@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/python-3)
+**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/python-3)
 
 **Definition variations:**
 - [3](#variant-3)

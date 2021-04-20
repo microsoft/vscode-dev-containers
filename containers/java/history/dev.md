@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/java)
+**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/java)
 
 **Definition variations:**
 - [15](#variant-15)

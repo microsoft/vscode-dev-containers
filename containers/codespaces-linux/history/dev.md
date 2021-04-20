@@ -3,9 +3,9 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/codespaces-linux)
+**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/codespaces-linux)
 
-**Digest:** sha256:45e2f1999806f8fe88a59d7f6b39dae5c14cf0cc744967aeeee0effc8bf2a287
+**Digest:** sha256:6343582d95fbbed3c1d47b4f63db96bd255fde56cd185b2be9423b3ab82f463d
 
 **Tags:**
 ```
@@ -105,7 +105,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
 | [GitHub CLI](https://github.com/cli/cli) | 1.9.2-pre0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
-| [Maven](https://maven.apache.org/) | 5.4.0-1043-azure | /opt/maven |
+| [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
+| [Gradle](https://gradle.org/) | 7.0 | 
 | Docker (Moby) CLI &amp; Engine | 20.10.6+azure | 
 
 **Additional linux tools and packages**

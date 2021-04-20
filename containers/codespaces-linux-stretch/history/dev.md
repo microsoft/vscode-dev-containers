@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/codespaces-linux-stretch)
+**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/codespaces-linux-stretch)
 
 **Digest:** sha256:bfdba186241e6bb22871f7275be26ba005c258c9e1e6a20811ac172a0fe9c4a2
 
@@ -104,7 +104,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev-codespaceslinuxstretch
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
 | [GitHub CLI](https://github.com/cli/cli) | 1.9.2-pre0 | 
 | [yarn](https://yarnpkg.com/) | 1.17.3 | /opt/yarn |
-| [Maven](https://maven.apache.org/) | 5.4.0-1043-azure | /opt/maven |
+| [Maven](https://maven.apache.org/) | 3.8.1 | /opt/maven |
+| [Gradle](https://gradle.org/) | 7.0 | 
 | Docker (Moby) CLI | 20.10.6+azure | 
 
 **Additional linux tools and packages**

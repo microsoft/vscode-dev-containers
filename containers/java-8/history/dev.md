@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/java-8)
+**Source release/branch:** [dev](https://github.com/microsoft/vscode-dev-containers/tree/dev/containers/java-8)
 
 **Digest:** sha256:ec66308e4cc1e54a1d698a7a3e03646099d4c3513a16115761faba497521399f
 

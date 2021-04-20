@@ -573,7 +573,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Gradle",
-                    "Version": "",
+                    "Version": "7.0",
                     "DownloadUrl": "https://gradle.org/"
                 }
             }
