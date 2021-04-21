@@ -15,6 +15,10 @@ on:
         description: 'Update repository with results'
         required: true
         default: 'true'
+      push:
+        description: 'Overwrite existing files'
+        required: true
+        default: 'true'
       definition:
         description: 'Definition ID (Optional)'
         required: false
@@ -85,6 +89,7 @@ jobs:
                           --stub-registry ${{ secrets.STUB_REGISTRY }} \
                           --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
                           --output-path "$GITHUB_WORKSPACE/ref" \
+                          $(if [ "${{ github.event.inputs.overwrite }}" = "false" ]; then echo '--no-overwrite'; else echo '--overwrite'; fi) \
                           $(if [ "${{ github.event.inputs.cg }}" = "false" ]; then echo '--no-cg'; else echo '--cg'; fi) \
                           ${{ github.event.inputs.definition }}
 

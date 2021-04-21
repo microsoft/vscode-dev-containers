@@ -11,7 +11,7 @@
 			"program": "${workspaceFolder}/vscdc",
 			"args": [
 				"push",
-				"go",
+				"debian",
 				"--no-push",
 				"--page", "1",
 				"--page-total", "1",
@@ -42,14 +42,17 @@
 		}, {
 			"type": "node",
 			"request": "launch",
-			"name": "Run CG Manifest Script",
+			"name": "Run CG/Info Script",
 			"program": "${workspaceFolder}/vscdc",
 			"args": [
-				"cg",
-				"codespaces-linux-stretch",
+				"info",
+				"codespaces-linux",
 				"--no-build",
 				"--markdown",
-				"--release", "v0.166.2",
+				"--cg",
+				"--overwrite",
+				"--prune",
+				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "mcr.microsoft.com",
 				"--registryPath", "vscode/devcontainers"
