@@ -1,7 +1,7 @@
 FROM continuumio/miniconda3
 
 # Copy library scripts to execute
-COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
+COPY .devcontainer/library-scripts/*.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
