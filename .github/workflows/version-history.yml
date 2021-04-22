@@ -15,7 +15,7 @@ on:
         description: 'Update repository with results'
         required: true
         default: 'true'
-      push:
+      overwrite:
         description: 'Overwrite existing files'
         required: true
         default: 'true'
