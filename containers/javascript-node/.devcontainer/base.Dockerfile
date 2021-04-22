@@ -15,7 +15,7 @@ ARG NPM_GLOBAL=/usr/local/share/npm-global
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \ 
     PATH=${NPM_GLOBAL}/bin:${NVM_DIR}/current/bin:${PATH}
-COPY library-scripts/*.sh /tmp/library-scripts/
+COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
     && apt-get purge -y imagemagick imagemagick-6-common \
