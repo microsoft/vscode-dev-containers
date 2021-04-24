@@ -1,4 +1,3 @@
-// For format details, see https://aka.ms/devcontainer.json.
 {
 	"name": "Jupyter Data Science Notebooks (Community)",
 	"build": {
