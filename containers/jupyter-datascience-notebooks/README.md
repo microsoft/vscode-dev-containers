@@ -1,13 +1,12 @@
-# Jupyter Data Science Notebooks
+# Jupyter Data Science Notebooks (Community)
 
 ## Summary
 
-Jupyter's [Data Science Notebook container](https://hub.docker.com/r/jupyter/datascience-notebook),
-converted here into a VS Code DevContainer.
+*Use Jupyter Data Science Notebooks with Python, R, Julia, and more.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | Nathan Carter |
+| *Contributors* | Nathan Carter (@nathancarter) |
 | *Categories* | Data Science |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
