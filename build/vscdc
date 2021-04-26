@@ -215,6 +215,11 @@ require('yargs')
                 'output-path': {
                     describe: 'path to where extracted information should be stored',
                     default: path.resolve(__dirname, '..', configUtils.getConfig('informationFileOutputPath', '.'))
+                },
+                'overwrite': {
+                    describe: 'whether to overwrite cgmanifest.json or markdown files',
+                    type: 'boolean',
+                    default: true
                 }
             })
     }, imageInfoCommand)
@@ -274,6 +279,11 @@ require('yargs')
                 'output-path': {
                     describe: 'path to where extracted information should be stored',
                     default: path.resolve(__dirname, '..', configUtils.getConfig('informationFileOutputPath', '.'))
+                },
+                'overwrite': {
+                    describe: 'whether to overwrite cgmanifest.json or markdown files',
+                    type: 'boolean',
+                    default: false
                 }
             })
     }, imageInfoCommand)
@@ -351,8 +361,8 @@ function copyLibraryScriptsCommand() {
 }
 
 function imageInfoCommand(argv) {
-    generateImageInformationFiles(argv.githubRepo, argv.release, argv.registry, argv.registryPath, 
-        argv.stubRegistry, argv.stubRegistryPath, argv.build, argv.prune, argv.cg, argv.markdown, argv.outputPath, argv.devcontainer)
+    generateImageInformationFiles(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, 
+        argv.build, argv.prune, argv.cg, argv.markdown, argv.overwrite, argv.outputPath, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Image information file generation failed - ${reason}`);
             if(reason.stack) {

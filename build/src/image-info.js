@@ -12,7 +12,7 @@ let releaseNotesHeaderTemplate, releaseNotesVariantPartTemplate;
 handlebars.registerHelper('anchor', (value) => value.toLowerCase().replace(/[^\w\- ]/g, '').replace(/ /g, '-'));
 
 async function generateImageInformationFiles(repo, release, registry, registryPath, 
-    stubRegistry, stubRegistryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, outputPath, definitionId) {
+    stubRegistry, stubRegistryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, overwrite, outputPath, definitionId) {
     // Load config files
     await configUtils.loadConfig();
 
@@ -22,18 +22,36 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
         "Version": 1
     }
 
+    // cgmanifest file path and whether it exists
+    const cgManifestPath = path.join(outputPath, 'cgmanifest.json');
+    const cgManifestExists = await asyncUtils.exists(cgManifestPath);
+
     console.log('(*) Generating image information files...');
     const definitions = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList();
     await asyncUtils.forEach(definitions, async (currentDefinitionId) => {
+        // Target file paths and whether they exist
+        const definitionRelativePath = configUtils.getDefinitionPath(currentDefinitionId, true);
+        const historyFolder = path.join(outputPath, definitionRelativePath, configUtils.getConfig('historyFolderName', 'history'));
+        const version = configUtils.getVersionFromRelease(release);
+        const markdownPath = path.join(historyFolder, `${version}.md`);
+        const markdownExists = await asyncUtils.exists(markdownPath);
+
+        // Skip if not overwriting and all files exist
+        if(! overwrite && 
+            (! generateMarkdown || markdownExists) && 
+            (! generateCgManifest || cgManifestExists)) {
+            console.log(`(*) Not in overwrite mode and content for ${definitionId} exists. Skipping.`);
+            return;
+        }
+
+        // Extract information
         const definitionInfo = await getDefinitionImageContent(repo, release, registry, registryPath,  stubRegistry, stubRegistryPath, currentDefinitionId, alreadyRegistered, buildFirst);
 
-        if (generateMarkdown) {
-            // Write version history file
+        // Write markdown file as appropriate
+        if (generateMarkdown && (overwrite || ! markdownExists)) {
             console.log('(*) Writing image history markdown...');
-            const definitionRelativePath = configUtils.getDefinitionPath(currentDefinitionId, true);
-            const historyFolder = path.join(outputPath, definitionRelativePath, configUtils.getConfig('historyFolderName', 'history'));
             await asyncUtils.mkdirp(historyFolder);
-            await asyncUtils.writeFile(path.join(historyFolder, `${definitionInfo.version}.md`), definitionInfo.markdown);
+            await asyncUtils.writeFile(markdownPath, definitionInfo.markdown);    
         }
 
         // Add component registrations if we're using them
@@ -47,11 +65,11 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
     });
 
     // Write final cgmanifest.json file if needed
-    if(generateCgManifest) {
+    if(generateCgManifest && (overwrite || ! cgManifestExists)) {
         console.log('(*) Writing cgmanifest.json...');
         await asyncUtils.writeFile(
             path.join(outputPath, 'cgmanifest.json'),
-            JSON.stringify(cgManifest, undefined, 4));
+            JSON.stringify(cgManifest, undefined, 4));    
     }
     console.log('(*) Done!');    
 }
