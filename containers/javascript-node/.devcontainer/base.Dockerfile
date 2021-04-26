@@ -1,4 +1,4 @@
-# [Choice] Node.js version: 14, 12, 10
+# [Choice] Node.js version: 16, 14, 12, 10
 ARG VARIANT=14-buster
 FROM node:${VARIANT}
 
@@ -29,7 +29,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && usermod -a -G npm ${USERNAME} \
     && umask 0002 \
     && mkdir -p ${NPM_GLOBAL} \
-    && chown ${USERNAME}:npm ${NPM_GLOBAL} \
+    && touch /usr/local/etc/npmrc \
+    && chown ${USERNAME}:npm ${NPM_GLOBAL} /usr/local/etc/npmrc \
     && chmod g+s ${NPM_GLOBAL} \
     && npm config -g set prefix ${NPM_GLOBAL} \
     && sudo -u ${USERNAME} npm config -g set prefix ${NPM_GLOBAL} \

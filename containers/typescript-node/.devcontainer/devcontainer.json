@@ -2,7 +2,7 @@
 	"name": "Node.js & TypeScript",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick a Node version: 10, 12, 14
+		// Update 'VARIANT' to pick a Node version: 10, 12, 14, 16
 		"args": { 
 			"VARIANT": "14"
 		}
