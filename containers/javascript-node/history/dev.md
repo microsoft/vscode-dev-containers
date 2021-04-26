@@ -14,7 +14,7 @@
 
 ## Variant: 14-buster
 
-**Digest:** sha256:2cdc395ba96744c75d5ecdbe9f68f98a3f651948f38d7b6abed4e0da5cabebba
+**Digest:** sha256:1d91cb6383c825a9422d3405913929eddf4a96f14fbd4989584e15cdec0845f4
 
 **Tags:**
 ```
@@ -24,6 +24,8 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -36,21 +38,21 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -95,7 +97,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:12bf30a49fe5ae4d1d6f29a477b7eedb9b7fcc6f335f842d979e2ff4ba3715b0
+**Digest:** sha256:f420ae50284e4733c22c98af2e5b292647b150a95e5065169d82f70f7a428a81
 
 **Tags:**
 ```
@@ -105,6 +107,8 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -117,21 +121,21 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -176,7 +180,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 ## Variant: 10-buster
 
-**Digest:** sha256:ef6cf0972fa0b76d01174f5d3faf354e84128e472a1de7a55416f5182ab053ce
+**Digest:** sha256:f0c189e2581b471d8a68cb65add605a82a45bc7bf78af999dd3a4ed2cff0b222
 
 **Tags:**
 ```
@@ -186,6 +190,8 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-10
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -198,21 +204,21 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -257,7 +263,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-10
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:d2ba76fd3c51e7186399ccd25842e6db9b044fa50ea80692d59f27c309ce252e
+**Digest:** sha256:5c990fc8140083eeda60a9c7536dc3d22522f71df3a9ac9c3ff45223000ebee6
 
 **Tags:**
 ```
@@ -266,6 +272,8 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 9 (stretch)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -278,14 +286,14 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 
 **Additional linux tools and packages**
 
@@ -338,7 +346,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:4319dba2e6a15cbb384ca3148def11a8bb0fe951a0ced8f7884342324d187ecf
+**Digest:** sha256:69b55e7b117c8ee5a0147b3a3a4c55ede4d4de1ead252305fa4f25705d042869
 
 **Tags:**
 ```
@@ -347,6 +355,8 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 9 (stretch)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -359,14 +369,14 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 
 **Additional linux tools and packages**
 
@@ -419,7 +429,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 
 ## Variant: 10-stretch
 
-**Digest:** sha256:406257740b11ba7905a576095b0fe033aacdba174f183f3f9f4bf431198d2534
+**Digest:** sha256:4e723a59b2765cd692e9b2b32a0bc187d54c2f43d1f28655895e3eb77e4900df
 
 **Tags:**
 ```
@@ -428,6 +438,8 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-10-stretch
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 9 (stretch)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -440,14 +452,14 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-10-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 
 **Additional linux tools and packages**
 

@@ -14,7 +14,7 @@
 
 ## Variant: 14-buster
 
-**Digest:** sha256:443db30b867c6d57f66dd4cab97dcf4482b757d39ee8064645f0e7b790cd7af8
+**Digest:** sha256:8be97d131acaca9699e100eeabbcabcfaaa46f2103c5dcb8334754158b549ccb
 
 **Tags:**
 ```
@@ -24,6 +24,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -37,22 +39,22 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 | tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -97,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:a49f4aa3c2accfc51e9bd272b8c80580d1fd121ba8dad117dbe700edb872e140
+**Digest:** sha256:8aac7e9645d4e8640afd8f09ee325bdf78aeb10c92415670714c50982aa91eb7
 
 **Tags:**
 ```
@@ -107,6 +109,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -120,22 +124,22 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 | tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -180,7 +184,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 ## Variant: 10-buster
 
-**Digest:** sha256:1ab4a4ee1ab773cfcc113b29e457bce1e2bfc34b383ec3695963e554a035b6a1
+**Digest:** sha256:2286d3b672509332e4ddc29cd746e201eea7c989d4aee9d89ce6f6a6c49b01ca
 
 **Tags:**
 ```
@@ -190,6 +194,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-10
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -203,22 +209,22 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 | tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -263,7 +269,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-10
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:ac593135bbf79e4212fc5ea5beac8648961c36f110ed2006b8e2bbae2bd035c1
+**Digest:** sha256:0fe2ee86be6c9ab08994a28a797e46482282b49021c3f20fae0ced4e6185da86
 
 **Tags:**
 ```
@@ -272,6 +278,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 9 (stretch)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -285,14 +293,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 | tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
@@ -346,7 +354,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:bba01a707217d31aab6630d67ca6e32594a82bd8370444732ba9c95605319514
+**Digest:** sha256:d62f341fa98c41c7c3cbbdc4472c96995f006171c859c2d333bfa96801ca56b9
 
 **Tags:**
 ```
@@ -355,6 +363,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 9 (stretch)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -368,14 +378,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 | tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**
@@ -429,7 +439,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 
 ## Variant: 10-stretch
 
-**Digest:** sha256:5758757256b26c6f4422b9e5bc3c4512a7cc90306155b64b3ae80d713ab0dbfb
+**Digest:** sha256:ee096c84e9f9bf8fff58fddd1a7bcdaed3c7431b9c71260dc91cc5c603824edc
 
 **Tags:**
 ```
@@ -438,6 +448,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-10-stretch
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 9 (stretch)
+
+**Available (non-root) user:** node
 
 ### Contents
 **Languages and runtimes**
@@ -451,14 +463,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-10-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.24.0 |
+| eslint | 7.25.0 |
 | tslint-to-eslint-config | 2.3.0 |
 
 **Additional linux tools and packages**

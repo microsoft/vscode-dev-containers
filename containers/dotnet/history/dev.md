@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:ddf476d2eded10aea672592a339305ae60a66153d20eb47ad5d4aa24b79cce8c
+**Digest:** sha256:a3e748d3e639517cc55dec77171e51f07de47435dc017ad65fbd35e24acc97c3
 
 **Tags:**
 ```
@@ -21,6 +21,8 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Ubuntu 20.04.2 LTS (debian-like distro)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -33,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -86,7 +88,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:58ba536714a09456ebe3924c87555181325d9a74f0ee45f6f2b7aaf3844f9ff6
+**Digest:** sha256:3469dd8940a8c7ae4320c206a59166492a596ba40d4c4ee431d667d8feacb08f
 
 **Tags:**
 ```
@@ -96,6 +98,8 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Ubuntu 20.04.2 LTS (debian-like distro)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -108,7 +112,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -161,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:f3aee0a881929f60e382a352fce9376e97ca31e05c3fec678af05bdbbeb1c7a1
+**Digest:** sha256:b50e35ab56e066ea4af253a261a1609f5016cd0a5df75a14932175ebbd1589ca
 
 **Tags:**
 ```
@@ -171,6 +175,8 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Ubuntu 20.04.2 LTS (debian-like distro)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -183,7 +189,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Additional linux tools and packages**

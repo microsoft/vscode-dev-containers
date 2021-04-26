@@ -13,7 +13,7 @@
 
 ## Variant: 8
 
-**Digest:** sha256:bc4e759df9d1d639453fe74b0b12aa31218139030b1c852ddb775f09ac5ac827
+**Digest:** sha256:bf5e2a2c8cfefeebc7cce030b67fafde5e024e0adb6c18db7d4cf7a3f1b85e24
 
 **Tags:**
 ```
@@ -22,6 +22,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -34,7 +36,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -48,8 +50,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -94,7 +96,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 ## Variant: 8.0
 
-**Digest:** sha256:bc4e759df9d1d639453fe74b0b12aa31218139030b1c852ddb775f09ac5ac827
+**Digest:** sha256:bc81573b91b29e851f7d6fac6876cc14373c1097e36293b04e4105bfd86fc7da
 
 **Tags:**
 ```
@@ -103,6 +105,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -115,7 +119,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -129,8 +133,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -175,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0
 
 ## Variant: 7
 
-**Digest:** sha256:cdc224229a49e3f9119a6f4e914f54f72954e09fdcd645bd4ea6d6bedd618de9
+**Digest:** sha256:1d51c8029393b9e2e81a60424b5f68bbc49193273d7be9a7ae0a205b1b6b03c5
 
 **Tags:**
 ```
@@ -184,6 +188,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -196,7 +202,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -210,8 +216,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -256,7 +262,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 ## Variant: 7.4
 
-**Digest:** sha256:cdc224229a49e3f9119a6f4e914f54f72954e09fdcd645bd4ea6d6bedd618de9
+**Digest:** sha256:550f08fedc77a50e18afa39c6d9d7f0ab4617fb08a61ee48917dd6b2cfbcf3b4
 
 **Tags:**
 ```
@@ -265,6 +271,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -277,7 +285,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -291,8 +299,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -337,7 +345,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4
 
 ## Variant: 7.3
 
-**Digest:** sha256:3f8b6ee095660411f73a280ce492ac6074c79254cf65dcde25f5f645341f6a24
+**Digest:** sha256:d185ec9bc39fc8fba7dc95cd4672c0c1d9a4746dfa9785c0207e19f209a13d33
 
 **Tags:**
 ```
@@ -346,6 +354,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -358,7 +368,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -372,8 +382,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |

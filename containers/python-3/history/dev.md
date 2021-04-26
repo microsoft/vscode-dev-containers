@@ -13,7 +13,7 @@
 
 ## Variant: 3
 
-**Digest:** sha256:d8f75e43d0b9d349f4d7e8d8385900ab2d595be55c30170364394d65823a388f
+**Digest:** sha256:82eb38d8a5a35916242e410f3f821429f5173d3fa691535e6ab9781359c0b6e0
 
 **Tags:**
 ```
@@ -22,6 +22,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -34,31 +36,31 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.7.4 |
+| pylint | 2.8.1 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
-| black | 20.8b1 |
+| black | 21.4b0 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.0.0 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.3 |
+| virtualenv | 20.4.4 |
 | pipx | 0.16.1.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -103,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.9
 
-**Digest:** sha256:d8f75e43d0b9d349f4d7e8d8385900ab2d595be55c30170364394d65823a388f
+**Digest:** sha256:9e526de1577939acedbc6932dd54f09082c3e252f71de556a80c8c7561b29747
 
 **Tags:**
 ```
@@ -112,6 +114,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -124,31 +128,31 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.7.4 |
+| pylint | 2.8.1 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
-| black | 20.8b1 |
+| black | 21.4b0 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.0.0 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.3 |
+| virtualenv | 20.4.4 |
 | pipx | 0.16.1.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -193,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 
 ## Variant: 3.8
 
-**Digest:** sha256:02c22a2b5e7204a6bbcaff46c8f69a5782a2949197d6e0167604eeb178361692
+**Digest:** sha256:7ea41d5f64323df1371664aad4975c5d429dba3eddafe340ef0b6f99124a93b7
 
 **Tags:**
 ```
@@ -202,6 +206,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -214,31 +220,31 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.7.4 |
+| pylint | 2.8.1 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
-| black | 20.8b1 |
+| black | 21.4b0 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.0.0 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.3 |
+| virtualenv | 20.4.4 |
 | pipx | 0.16.1.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -283,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:9ed38ed94026ec7624a577fbe24cb26031c1e3881db7b2da00207b76fe477b65
+**Digest:** sha256:280f21e1c7bf82fe7cc7380b26b3211ea235a99a5376f6aa2debe31dc199e1a8
 
 **Tags:**
 ```
@@ -292,6 +298,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -304,31 +312,31 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.7.4 |
+| pylint | 2.8.1 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
-| black | 20.8b1 |
+| black | 21.4b0 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.0.0 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.3 |
+| virtualenv | 20.4.4 |
 | pipx | 0.16.1.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -373,7 +381,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:d39cd92fe1b76257c23fadc767df1fa1bf71230e4f8a15d30e8f721d0f9b32a7
+**Digest:** sha256:0880a07e920cccb32d299369ecb994537b58a41699b9e01b68b5430b9ef558c5
 
 **Tags:**
 ```
@@ -382,6 +390,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -394,31 +404,31 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.7.4 |
+| pylint | 2.8.1 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
-| black | 20.8b1 |
+| black | 21.4b0 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.0.0 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.3 |
+| virtualenv | 20.4.4 |
 | pipx | 0.16.1.0 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
