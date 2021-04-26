@@ -1,0 +1,15 @@
+{
+	"name": "docker_web_app",
+	"version": "1.0.0",
+	"description": "Node.js + MongoDB",
+	"author": "First Last <first.last@example.com>",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"test": " REGRESSION_TESTING=true npm start"
+	},
+	"dependencies": {
+		"express": "^4.16.1",
+		"mongodb": "^3.2.1"
+	}
+}

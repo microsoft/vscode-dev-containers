@@ -1,0 +1,54 @@
+# Node.js Install Script
+
+*Installs Node.js, nvm, yarn, and needed dependencies.*
+
+**Script status**: Stable
+
+**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+
+**Maintainer:** The VS Code and GitHub Codespaces teams
+
+## Syntax
+
+```text
+./node-debian.sh [Location to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag]
+```
+
+|Argument|Default|Description|
+|--------|-------|-----------|
+|Location to install nvm|`/usr/local/share/nvm`| Location to install the [Node Version Manager (nvm)](http://nvm.sh) along with Node.js and Node modules. |
+|Node version to install|`lts/*`| Node.js version to install. Use `none` to skip installing anything and just install nvm and yarn. |
+|Non-root user|`automatic`| Specifies a user in the container other than root that will use Node.js. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+| Add to rc files flag | `true` | A `true`/`false` flag that indicates whether sourcing the nvm script should be added to `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
+
+## Usage
+
+1. Add [`node-debian.sh`](../node-debian.sh) to `.devcontainer/library-scripts`
+
+2. Add the following to your `.devcontainer/Dockerfile`:
+
+    ```Dockerfile
+    ENV NVM_DIR="/usr/local/share/nvm"
+    ENV NVM_SYMLINK_CURRENT=true \
+        PATH=${NVM_DIR}/current/bin:${PATH}
+    COPY library-scripts/node-debian.sh /tmp/library-scripts/
+    RUN apt-get update && bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}"
+    ```
+
+### Using nvm from a Dockerfile or postCreateCommand
+
+Certain operations like `postCreateCommand` run non-interactive, non-login shells. Unfortunately, `nvm` is really particular that it needs to be "sourced" before it is used - which can only be done from interactive or login shells (via an rc or profile file).
+
+Try doing the following instead:
+
+```json
+"postCreateCommand": "bash -i -c 'nvm install --lts'"
+```
+
+Or you can source the file before using nvm:
+
+```json
+"postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install --lts"
+```
+
+That's it!

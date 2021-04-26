@@ -1,0 +1,14 @@
+{
+    "extensions.ignoreRecommendations": true,
+    "cSpell.words": [
+        "Distro",
+        "Dockerfiles",
+        "cgmanifest",
+        "copyfiles",
+        "devcontainer",
+        "devcontainers",
+        "dpkg",
+        "npmignore",
+        "redhat"
+    ]
+}

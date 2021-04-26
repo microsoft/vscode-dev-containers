@@ -1,14 +1,7 @@
 {
 	"name": "vscode-dev-containers",
-	"version": "0.1.0",
-	"description": "VS Code Dev Containers: Definitions and Templates",
-	"files": [
-		"containers"
-	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Microsoft/vscode-dev-containers.git"
 	},
 	"author": "Microsoft Corporation",
-	"license": "SEE LICENSE IN LICENSE.md"
-}

@@ -1,0 +1,63 @@
+{
+	"variants": ["buster", "focal", "bionic", "stretch"],
+	"definitionVersion": "0.201.4",
+	"build": {
+		"latest": true,
+		"parent": {
+			"buster": "debian", 
+			"stretch": "debian", 
+			"focal": "ubuntu",
+			"bionic": "ubuntu"
+		},
+		"rootDistro": "debian",
+		"tags": [
+			"cpp:${VERSION}-${VARIANT}"
+		],
+		"variantTags": {
+			"buster": [
+				"cpp:${VERSION}-debian-10",
+				"cpp:${VERSION}-debian10",
+				"cpp:${VERSION}-debian",
+				"cpp:${VERSION}"
+			],
+			"stretch": [
+				"cpp:${VERSION}-debian9",
+				"cpp:${VERSION}-debian-9"
+			],
+			"focal": [
+				"cpp:${VERSION}-ubuntu-20.04",
+				"cpp:${VERSION}-ubuntu20.04",
+				"cpp:${VERSION}-ubuntu"
+			],
+			"bionic": [
+				"cpp:${VERSION}-ubuntu-18.04",
+				"cpp:${VERSION}-ubuntu18.04"
+			]
+		}
+	},
+	"dependencies": {
+		"image": "buildpack-deps:${VARIANT}-curl",
+		"imageLink": "https://hub.docker.com/_/buildpack-deps",
+		"apt": [
+			"build-essential",
+			"cmake",
+			"cppcheck",
+			"valgrind",
+			"clang",
+			"lldb",
+			"llvm",
+			"gdb"
+		],
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
+		},
+		"languages": {
+			"GCC": {
+				"cgIgnore": true
+			},
+			"Clang": {
+				"cgIgnore": true
+			}
+		}
+	}
+}

@@ -1,33 +1,18 @@
-#-----------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See LICENSE in the project root for license information.
-#-----------------------------------------------------------------------------------------
+# [Choice] Go version: 1, 1.16, 1.15
+ARG VARIANT=1
+FROM mcr.microsoft.com/vscode/devcontainers/go:0-${VARIANT}
 
-FROM golang:1
+# [Option] Install Node.js
+ARG INSTALL_NODE="true"
+ARG NODE_VERSION="lts/*"
+RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
-RUN go get -u -v \
-    github.com/mdempsky/gocode \
-    github.com/uudashr/gopkgs/cmd/gopkgs \
-    github.com/ramya-rao-a/go-outline \
-    github.com/acroca/go-symbols \
-    golang.org/x/tools/cmd/guru \
-    golang.org/x/tools/cmd/gorename \
-    github.com/rogpeppe/godef \
-    github.com/zmb3/gogetdoc \
-    github.com/sqs/goreturns \
-    golang.org/x/tools/cmd/goimports \
-    golang.org/x/lint/golint \
-    github.com/alecthomas/gometalinter \
-    honnef.co/go/tools/... \
-    github.com/golangci/golangci-lint/cmd/golangci-lint \
-    github.com/mgechev/revive \
-    github.com/derekparker/delve/cmd/dlv
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>
 
-# Install git
-RUN apt-get update && apt-get -y install git
+# [Optional] Uncomment the next line to use go get to install anything else you need
+# RUN go get -x <your-dependency-or-tool>
 
-# Clean up
-RUN apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
-	
+# [Optional] Uncomment this line to install global node packages.
+# RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1

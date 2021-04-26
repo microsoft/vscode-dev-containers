@@ -1,0 +1,30 @@
+{
+	"name": "Azure Functions & Java 8",
+	"dockerFile": "Dockerfile",
+	"forwardPorts": [ 7071 ],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"java.home": "/usr/lib/jvm/zulu-11-azure-amd64",
+		"java.configuration.runtimes": [
+			{
+			  "default": true,
+			  "name": "JavaSE-1.8",
+			  "path": "/usr/lib/jvm/zulu-8-amd64",
+			}
+		],
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-azuretools.vscode-azurefunctions",
+		"vscjava.vscode-java-pack"
+	],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

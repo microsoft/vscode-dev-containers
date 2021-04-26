@@ -1,9 +1,0 @@
-{
-	"name": "Dev Container Definition Template - Container Image",
-	"image": "ubuntu:bionic",
-	"appPort": 3000,
-	"extensions": [
-		"mutantdino.resourcemonitor"
-    ],
-  "runArgs": []
-}

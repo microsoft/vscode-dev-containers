@@ -1,0 +1,37 @@
+{
+	"variants": ["14-buster", "12-buster", "10-buster","14-stretch", "12-stretch", "10-stretch"],
+	"definitionVersion": "0.201.4",
+	"build": {
+		"latest": true,
+		"rootDistro": "debian",
+		"tags": [
+			"javascript-node:${VERSION}-${VARIANT}"
+		],
+		"variantTags": {
+			"14-buster": [ "javascript-node:${VERSION}-14" ],
+			"12-buster": [ "javascript-node:${VERSION}-12" ],
+			"10-buster": [ "javascript-node:${VERSION}-10" ]
+		}
+	}, 
+	"dependencies": {
+		"image": "node:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/node",
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
+		"git": {
+			"Oh My Zsh!": "/home/node/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm"
+		},
+		"npm": [
+			"eslint"
+		],
+		"languages": {
+			"Node.js": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}
+		}
+	}
+}

@@ -1,0 +1,68 @@
+name: Test script library and update definitions
+
+on: 
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'script-library/**'
+
+jobs:
+  test-script-library:
+    name: Test script library
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    strategy:
+      matrix:
+        os: [debian, alpine, redhat]
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+    - name: Free more space
+      id: free_space 
+      run: |
+        set -e
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Test script library
+      id: test_script_library
+      run: |
+        set -e
+        cd script-library
+        if [ "${{ matrix.os }}" = "redhat" ]; then
+          IMAGE_TO_TEST="centos:7"
+        else
+          IMAGE_TO_TEST=${{ matrix.os }}
+        fi
+        docker build --build-arg DISTRO=${{ matrix.os }} --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST -f test/Dockerfile .
+
+  copy-scripts:
+    name: Copy and commit script-library updates
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    needs: [test-script-library]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Copy and commit script-library updates
+      id: copy-scripts
+      run: |
+        set -e
+        yarn install
+        build/vscdc copy-library-scripts
+        git config --global user.email "vscr-feedback@microsoft.com"
+        git config --global user.name "CI"
+        git config pull.rebase false
+        git pull "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}"
+        git add -u
+        git commit -m 'Automated update for script library changes' \
+          && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \
+          || echo 'No updates to script-library'

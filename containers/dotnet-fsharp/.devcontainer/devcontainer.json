@@ -1,0 +1,32 @@
+{
+	"name": "F# (.NET)",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Options
+			"INSTALL_NODE": "false",
+			"NODE_VERSION": "lts/*",
+			"INSTALL_AZURE_CLI": "false",
+			"UPGRADE_PACKAGES": "false"
+		}
+	},
+
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"Ionide.Ionide-fsharp",
+		"ms-dotnettools.csharp"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

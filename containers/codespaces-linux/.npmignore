@@ -1,0 +1,10 @@
+README.md
+test-project
+history
+definition-manifest.json
+.devcontainer/library-scripts
+.devcontainer/setup-user.sh
+.devcontainer/symlinkDotNetCore.sh
+.devcontainer/first-run-notice.txt
+.vscode
+.npmignore

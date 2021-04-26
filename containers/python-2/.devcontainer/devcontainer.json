@@ -1,8 +1,0 @@
-{
-	"name": "Python 2",
-	"dockerFile": ".devcontainer/Dockerfile",
-	"extensions": [
-		"ms-python.python",
-		"LittleFoxTeam.vscode-python-test-adapter"
-	]
-}

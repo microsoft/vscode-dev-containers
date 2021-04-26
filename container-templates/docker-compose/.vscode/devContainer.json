@@ -1,9 +1,0 @@
-{
-	"name": "Dev Container Definition Template - Docker Compose",
-    "dockerComposeFile": "../.devcontainer/docker-compose.yml",
-    "service": "your-service-name-here",
-    "volume": "app",
-	"extensions": [
-		"mutantdino.resourcemonitor"
-    ]
-}

@@ -2,70 +2,65 @@
 
 ## Summary
 
-*Illustrates how you can use it to access your local Docker install from inside a dev container by simply volume mounting the Docker unix socket.  This variation uses `runArgs` in `devContainer.json` to do the volume mounting.*
+*Create child containers _inside_ a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code team |
+| *Contributors* | GitHub Codespaces Team |
+| *Categories* | Other |
 | *Definition type* | Dockerfile |
+| *Works in Codespaces* | Yes |
+| *Container host OS support* | Linux, macOS, Windows |
+| *Container OS* | Debian (though Ubuntu could be used instead) |
 | *Languages, platforms* | Any |
-
-> **Note:** There is also a [Docker Compose](../docker-in-docker-compose) variation of this same definition.
 
 ## Description
 
-Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into your local Docker Desktop instance without affecting your dev container. This example illustrates how you can do this by running CLI commands and using the [Docker VS Code extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) right from inside your dev container.
+Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into your local Docker Desktop instance without affecting your dev container.
 
-## Usage
+In many cases, the best approach to solve this problem is by bind mounting the docker socket, as demonstrated in [/containers/docker-from-docker](../docker-from-docker). This definition demonstrates an alternative technique called "Docker in Docker".
 
-[See here for information on using this definition with an existing project](../../README.md#using-a-definition).
+This definition's approach creates pure "child" containers by hosting its own instance of the docker daemon inside this container.  This is compared to the forementioned "docker-_from_-docker" method (sometimes called docker-outside-of-docker) that bind mounts the host's docker socket, creating "sibling" containers to the current container.
 
-If you prefer, you can also just look through the contents of the `.devcontainer` folder to understand how to make changes to your own project.
+> **Note:** If preferred, you can use the related [docker-in-docker/moby-in-moby install script](../../script-library/docs/docker-in-docker.md) in your own existing Dockerfiles instead.
 
-No additional setup steps are required, but note that the included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. First, update the `FROM` statement to reference the new base image. For example:
+Running "Docker in Docker" requires the parent container to be run as `--privileged`.  This definition also adds a `/usr/local/share/docker-init.sh` ENTRYPOINT script that, spawns the `dockerd` process, so `overrideCommand: false` also needs to be set in `devcontainer.json`. For example:
+
+```json
+"runArgs": ["--init", "--privileged"],
+"overrideCommand": false
+```
+
+## Using this definition
+
+The included `.devcontainer/Dockerfile` can be altered to work with other Debian/Ubuntu-based container images such as `node` or `python`. You'll also need to update `remoteUser` in `.devcontainer/devcontainer.json` in cases where a `vscode` user does not exist in the image you select. For example, to use `mcr.microsoft.com/vscode/devcontainers/javascript-node`, update the `Dockerfile` as follows:
 
 ```Dockerfile
-FROM node:8
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:14
 ```
 
-Next, if you choose an image that is Debian based instead of Ubuntu, you will need to update this line...
+...and since the user in this container is `node`, update `devcontainer.json` as follows:
 
-```
-        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
-```
-
-...to ...
-
-```
-        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
+```json
+"remoteUser": "node"
 ```
 
-See the [Docker CE installation steps for Linux](https://docs.docker.com/install/linux/docker-ce/debian/) for details on other distributions. Note that you only need the Docker CLI in this particular case.
+Beyond that, just follow these steps to use the definition:
 
-## How it works
+1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
-The trick that makes this work is as follows:
+2. Start VS Code and open your project folder or connect to a codespace.
 
-1. First, install the Docker CLI in the container. From `dev-container.dockerfile`:
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
 
-    ```Dockerfile
-    # Install Docker CE CLI
-    RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
-        && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
-        && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
-        && apt-get update \
-        && apt-get install -y docker-ce-cli
-    ```
-2. Then just forward the Docker socket by mounting it in the container. From `devContainer.json`:
+   > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
 
-    ```json
-    "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
-    ```
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
-That's it!
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](../../LICENSE). 
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).

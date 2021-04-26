@@ -1,0 +1,42 @@
+{
+	"variants": ["3", "3.9", "3.8", "3.7", "3.6"],
+	"definitionVersion": "0.201.4",
+	"build": {
+		"latest": true,
+		"rootDistro": "debian",
+		"tags": [
+			"python:${VERSION}-${VARIANT}"
+		]
+	},
+	"dependencies": {
+		"image": "python:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/python",
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm"
+		},
+		"pipx": [
+			"pylint",
+			"flake8",
+			"autopep8",
+			"black",
+			"yapf",
+			"mypy",
+			"pydocstyle",
+			"pycodestyle",
+			"bandit",
+			"virtualenv",
+			"pipx"
+		],
+		"languages": {
+			"Python": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}
+		}
+	}
+}

@@ -1,75 +1,76 @@
-# Visual Studio Code Remote Development Container Definitions
+# VS Code Remote / GitHub Codespaces Container Definitions
 
-A **development container** is a running container that comes with a basic tool stack (Python, node, Go, etc.) and its prerequisites (e.g. `pylint` for Python). This container may be used to actually run an application or be focused exclusively on sandboxing tools, libraries, runtimes, or other utilities that need to be run against a codebase.
+<table style="width: 100%; border-style: none;"><tr>
+<td style="width: 140px; text-align: center;"><a href="https://aka.ms/vscode-remote/download/extension"><img width="128px" src="https://microsoft.github.io/vscode-remote-release/images/remote-extensionpack.png" alt="Visual Studio Code logo"/></a></td>
+<td>
+<strong>Visual Studio Code Remote Development and GitHub Codespaces</strong><br />
+<i>Open your code in the cloud, in a local container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
+</td>
+</tr></table>
 
-The Containers extension in the [Visual Studio Code Remote Development](https://aka.ms/vscode-remote/download/extension) extension pack allows you to open any folder inside (or mounted into) a dev container and take advantage of VS Code's full feature set. When using the capability, VS Code selectively runs certain extensions in the container to optimize your experience. The result is that VS Code can provide a local-quality development experience including full IntelliSense, debugging, and more regardless of where your code is hosted.
+A **development container** is a running [Docker](https://www.docker.com) container with a well-defined tool/runtime stack and its prerequisites. The [VS Code Remote - Containers](https://aka.ms/vscode-remote/download/containers) extension and [GitHub Codespaces](https://github.com/features/codespaces) allow you to open or clone code in a local or cloud-hosted dev container and take advantage of VS Code's full development feature set.
 
-**[Learn more about the Visual Studio Code Remote - Containers extension](https://aka.ms/vscode-remote/containers)**.
+This repository contains a set of **dev container definitions** to help get you up and running with a containerized environment. The definitions describe the appropriate container image, runtime arguments for starting the container, and VS Code extensions that should be installed. Each provides a container configuration file (`devcontainer.json`) and other needed files that you can drop into any existing folder as a starting point for containerizing your project. You can use the the **Add Development Container Configuration Files...** command to add one to your project or codespace.
 
-This repository contains a set of **dev container definitions** made up of files like `devcontainer.json` to help get you up and running in a containerized environment. These definitions describe the needed container image, any runtime arguments for starting the container, and any VS Code extensions that should be installed into it. They're can be useful to help you get started or as samples for how to adapt your own configuration to different situations.
+The [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) repositories may also be of interest if you are looking for complete sample projects.
 
-## Trying a definition
+## Adding a definition to a project or codespace
+  
+  1. Either [create a codespace for your repository](https://aka.ms/ghcs-open-codespace) or [set up your local machine](https://aka.ms/vscode-remote/containers/getting-started) for use with the Remote - Containers extension, start VS Code, and open your project folder.
+  2. Press <kbd>F1</kbd>, and select the **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+  3. Pick one of the recommended definitions from the list or select **Show All Definitions...** to see all of them. You may need to choose the **From a predefined container configuration definition...** option if your project has an existing Dockerfile or Docker Compose file. Answer any questions that appear.
+  4. See the definition's `README` for configuration options. A link is available in the `.devcontainer/devcontainer.json` file added to your folder.
+  5. Run **Remote-Containers: Reopen in Container** to use it locally, or **Codespaces: Rebuild Container** from within a codespace.
 
-1. Click on one of the `containers` sub-folders to open it in your browser
-2. Check out the README to see if there are any manual steps
-3. Clone this repository or copy the contents of the folder to your machine
-4. Run the **Remote-Containers: Open Folder in Container...** command in VS Code
-5. Select the root of the definition folder in the "open" dialog (**not** the `test-project` folder if present)
+### Adding a definition to a repository
 
-Many definitions include a `test-project` with a sample and/or launch settings in the `.vscode` folder that you can use to see the dev container in action. If you open the folder locally instead, you'll be prompted to reopen it in a container but uou can also use the **Remote-Containers: Reopen Folder in Container** command at any time.
+You can share a customized dev container definition for your project by adding the files under `.devcontainer` to source control.
 
-## Using a definition
+Anyone who then opens a local copy of your repo in VS Code will be prompted to reopen the folder in a container, provided they have the [Remote - Containers](https://aka.ms/vscode-remote/download/containers) extension installed. Additionally, this will be used whenever someone creates a codespace in [GitHub Codespaces](https://github.com/features/codespaces) for the repository.
 
-You can either:
+Your team now has a consistent environment and tool-chain and new contributors or team members can be productive quickly. First-time contributors will require less guidance and there will be fewer issues related to environment setup.
 
-- Manually copy the contents of one of the `containers` sub-folders into your project. Copy the `.devcontainer` folder into your project and you should be ready to go!
+## Sample projects
 
-- Run **Remote-Containers: Create Container Configuration File...** command in VS Code and pick a definition. The appropriate files will then be added to your project.
+If you want to try a sample project which already has a dev container, check out one of the following repositories:
 
-## Adding a definition to an existing public or private repo
-
-You can easily share a customized dev container definition for your project by simply adding files like `.devcontainer/devcontainer.json` to source control. By including these files in your repository, anyone that opens a local copy of your repo in VS Code will be automatically asked if they want reopen the folder in a container instead if the [Remote Development](https://aka.ms/vscode-remote/download/extension) extension installed.
-
-Beyond the advantages of having your team use a consistent environment and tool-chain, doing this can make it easier for new contributors or team members to get productive quickly. First-time contributors will require less guidance and are less likely to either submit issues or contribute code with issues that are related to environment setup.
+- [Node Sample](https://github.com/Microsoft/vscode-remote-try-node)
+- [Python Sample](https://github.com/Microsoft/vscode-remote-try-python)
+- [Go Sample](https://github.com/Microsoft/vscode-remote-try-go)
+- [Java Sample](https://github.com/Microsoft/vscode-remote-try-java)
+- [.NET Core Sample](https://github.com/Microsoft/vscode-remote-try-dotnetcore)
+- [Rust Sample](https://github.com/microsoft/vscode-remote-try-rust)
+- [C++ Sample](https://github.com/microsoft/vscode-remote-try-cpp)
+- [PHP Sample](https://github.com/microsoft/vscode-remote-try-php)
 
 ## Contents
 
-- `containers` - Dev container definition folders. 
-- `container-templates` - Templates for creating your own container definitions in your project or for contributing back to this repository.
+- [`containers`](containers) - Contains reusable dev container definitions.
+- [`script-library`](script-library) - Includes scripts used in this repository to install things. Also useful in your own Dockerfiles.
+- [`repository-containers`](repository-containers) - Dev container definitions for working public source code repositories. Only used by Remote - Containers.
+- [`container-templates`](container-templates) - Contains templates for creating your own container definitions or to [contribute back](CONTRIBUTING.md#contributing-dev-container-definitions).
 
 ## Common Questions
 
-### Can I just reuse an existing container image or Docker configuration?
+### Can I just reuse an existing container image or Docker / Docker Compose configuration?
 
-Absolutely! If you want to use an existing Dockerfile as a starting point, run **Remote-Containers: Create Container Configuration File...** from the command pallette (Cmd/Ctrl+Shift+P). You'll be prompted to select a Dockerfile or you can opt to use a base image instead and customize from there. 
-
-You can also check out the [existing Dockerfile](containers/docker-existing-dockerfile) and [existing Docker Compose](containers/docker-existing-docker-compose) definitions for an example. You can also [attach to an already running container](https://aka.ms/vscode-remote/containers/attach) if you'd prefer.
+Yes! If you have a Dockerfile or Docker Compose file in your project/repository, follow the [same steps to add a definition](#adding) and you'll be prompted to select a Dockerfile or Docker Compose file and customize from there. If you then commit these files to a Git repository, you can use it with [GitHub Codespaces](https://github.com/features/codespaces) as well. If you prefer, you can also start up the container manually and [attach to it](https://aka.ms/vscode-remote/containers/attach). However, note that many images will be missing things like `git` that you will want to use. There are scripts in the [script-library](script-library) like the [common script](script-library/docs/common.md) that can help adding these to your existing Dockerfile or image.
 
 ### What is the goal of `devcontainer.json`?
 
-The intent of `devcontainer.json` is conceptually similar to VS Code's `launch.json` for debugging, but designed to launch (or attach to) your development container instead. At its simplest, all you need to do is add a `.devcontainer/devcontainer.json` file to your project and reference an image, `Dockerfile`, or `docker-compose.yml` and a few properties.
+A `devcontainer.json` file is similar to `launch.json` for debugging, but designed to launch (or attach to) a development container instead. At its simplest, all you need is a `.devcontainer/devcontainer.json` file in your project that references an image, `Dockerfile`, or `docker-compose.yml`, and a few properties. You can [adapt it for use](https://aka.ms/vscode-remote/containers/folder-setup) in a wide variety of situations.
 
-Check out the `container-templates` folder for simple examples. The definitions in the `containers` folder can be used as-is or as samples for how to modify your existing config to support different scenarios. From there, you can [alter your configuration](https://aka.ms/vscode-remote/containers/folder-setup) to install additional tools like Git in the container, automatically install other extensions, expose additional ports, set runtime arguments, and more.
+### Why do Dockerfiles in this repo use `RUN` statements with commands separated by `&&`?
 
-### Are development containers intended to define how an application is deployed?
+Each `RUN` statement creates a Docker image "layer". If one `RUN` statement adds temporary contents, these contents remain in this layer in the image even if they are deleted in a subsequent `RUN`. This means the image takes more storage locally and results in slower image download times if you publish the image to a registry. You can resolve this problem by using a `RUN` statement that includes any clean up steps (separated by `&&`) after a given operation. See [CONTRIBUTING.md](./CONTRIBUTING.md#why-do-dockerfiles-in-this-repository-use-run-statements-with-commands-separated-by-) for more tips.
 
-No. A development container is an environment that you can use to develop your application even before you are ready to build or deploy. While deployment and development containers may resemble one another, you often will not include tools in a deployment image that you will want during development. The set of "dev container definitions" found in the [vscode-dev-containers repo](https://aka.ms/vscode-dev-containers) are intended to help jump start the process of creating a development container by including a set of well-known container build or deployment files and a `devcontainer.json` file. This file provides a home for tooling and edit-time related settings and a pointer to the image (or files that define the image) that should be used for the development container. However, their use is entirely optional, and you can [attach to a running container](https://aka.ms/vscode-remote/attach) in other container-based workflows and scenarios.
+## Contributing and feedback
 
-### Are development containers intended to define how an application is built? Like Buildpacks?
+Have a question or feedback?
 
-No. The [Buildpack](https://buildpacks.io/) concept focuses on taking source code and generating deployable container images through a series of defined steps. A dev container is an environment you can use to develop your application even before you are ready to build. They are therefore complementary concepts. The `devcontainer.json` file is not intended to define how your application should be built, but rather provides a home for tooling and edit-time related settings and a pointer to an image or image definition files. Today it supports pointing to an existing image (which could be generated by a Buildpack), a Dockerfile, or one or more `docker-compose.yml` files, but more will be added as the community has interest. You can also opt to [attach to a running container](https://aka.ms/vscode-remote/attach) if you prefer to use an alternate container build or deployment workflow.
-
-Similarly, the "dev container definitions" found in the [vscode-dev-containers repo](https://aka.ms/vscode-dev-containers) can help jump start the process of creating a dev container when you do not have an existing image, `Dockerfile`, or `docker-compose.yml`. These can also act as samples if you do have existing container files. However, they are not intended to define how an application should be built.
-
-## Contributing & Feedback
-
-Have a question or feedback? There are many ways to contribute.
-
-- Contribute or provide feedback for the [VS Code Remote Development extensions](https://github.com/Microsoft/vscode-remote-release/CONTRIBUTING.md).
+- Contribute or provide feedback for the [VS Code Remote](https://github.com/Microsoft/vscode-remote-release/blob/master/CONTRIBUTING.md) extensions or [GitHub Codespaces](https://github.com/github/feedback/discussions/categories/codespaces-feedback).
 - Search [existing issues](https://github.com/Microsoft/vscode-dev-containers/issues) with dev container definitions or [report a problem](https://github.com/Microsoft/vscode-dev-containers/issues/new).
 - Contribute a [development container definition](CONTRIBUTING.md#contributing-dev-container-definitions) to the repository.
-- Contribute to [our documentation](https://github.com/Microsoft/vscode-docs) or [VS Code itself](https://github.com/Microsoft/vscode).
-- ...and more. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
@@ -79,3 +80,5 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 Copyright (c) Microsoft Corporation. All rights reserved. <br />
 Licensed under the MIT License. See [LICENSE](LICENSE).
+
+For images generated from this repository, see [LICENSE](https://github.com/microsoft/containerregistry/blob/master/legal/Container-Images-Legal-Notice.md) and [NOTICE.txt](NOTICE.txt).

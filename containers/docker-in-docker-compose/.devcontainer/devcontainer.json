@@ -1,9 +1,0 @@
-{
-    "name": "Docker-in-Docker",
-    "dockerComposeFile": ".devcontainer/docker-compose.yml",
-    "service": "docker-in-docker",
-    "workspaceFolder": "/workspace",
-    "extensions": [
-        "peterjausovec.vscode-docker"
-    ]
-}

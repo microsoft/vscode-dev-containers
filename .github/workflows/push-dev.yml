@@ -1,0 +1,142 @@
+name: Build and push "dev" images
+
+on: 
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'containers/alpine/**'
+      - 'containers/debian/**'
+      - 'containers/cpp/**'
+      - 'containers/dotnet/**'
+      - 'containers/go/**'
+      - 'containers/java/**'
+      - 'containers/java-8/**'
+      - 'containers/javascript-node/**'
+      - 'containers/php/**'
+      - 'containers/python-3/**'
+      - 'containers/python-3-anaconda/**'
+      - 'containers/python-3-miniconda/**'
+      - 'containers/ruby/**'
+      - 'containers/rust/**'
+      - 'containers/typescript-node/**'
+      - 'containers/ubuntu/**'
+      - 'repository-containers/images/**'
+
+jobs:
+  build-and-push:
+    name: Build and push
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    strategy:
+      matrix:
+        page: [1, 2, 3, 4]
+        page-total: [4]
+      fail-fast: true
+    runs-on: ubuntu-latest
+    steps:
+    - name: Free more space
+      id: free_space 
+      run: |
+        set -e
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Azure CLI login
+      id: az_login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZ_ACR_CREDS }}
+
+    - name: Build and push dev tags
+      id: build_and_push
+      run: |
+        set -e
+
+        # ACR login
+        ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
+        az acr login --name $ACR_REGISTRY_NAME
+
+        # Build and push dev images
+        yarn install
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        build/vscdc push  --page ${{ matrix.page }} \
+                          --pageTotal ${{ matrix.page-total }} \
+                          --release $GIT_BRANCH \
+                          --github-repo ${{ github.repository }} \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }} \
+                          --skip codespaces-linux codespaces-linux-stretch
+
+  package:
+    name: Package
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    needs: [build-and-push]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Package
+      id: package
+      run: |
+        set -e
+        yarn install
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        build/vscdc pack  --prep-and-package-only \
+                          --release $GIT_BRANCH \
+                          --github-repo ${{ github.repository }} \
+                          --registry ${{ secrets.REGISTRY }} \
+                          --registry-path ${{ secrets.REGISTRY_BASE_PATH }} \
+                          --stub-registry ${{ secrets.STUB_REGISTRY }} \
+                          --stub-registry-path ${{ secrets.STUB_REGISTRY_BASE_PATH }}
+
+        # Set an output with the resulting package name for upload
+        PKG_PREFIX=$(node -p "require('./package.json').name")
+        PKG_NAME=$PKG_PREFIX-${{ github.sha }}.tgz
+        mv ./$PKG_PREFIX-*.tgz ./$PKG_NAME
+        echo "::set-output name=package_name::$PKG_NAME"
+
+    - name: Upload package
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ steps.package.outputs.package_name }}
+        path: ./${{ steps.package.outputs.package_name }}
+
+  image-info:
+    name: Trigger info extraction
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    needs: [package]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger image info file generation 
+      id: image-info
+      run: |
+        set -e
+        echo '(*) Triggering CG manifest and image history generation using workflow_dispatch'
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=master
+        fi
+        # Use alternate GitHub token due to https://github.community/t5/GitHub-Actions/Triggering-a-new-workflow-from-another-workflow/td-p/31676
+        curl -X POST \
+          -H "Authorization: token ${{ secrets.ALTERNATE_GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Content-Type: application/json" \
+          https://api.github.com/repos/${{ github.repository }}/actions/workflows/version-history.yml/dispatches \
+          --data "{\"ref\": \"${{ github.ref }}\", \"inputs\": {\"release\": \"$GIT_BRANCH\", \"cg\": \"true\", \"push\": \"true\", \"overwrite\": \"true\"}"
+

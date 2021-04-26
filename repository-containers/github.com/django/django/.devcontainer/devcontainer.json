@@ -1,0 +1,9 @@
+{
+    "name": "Django",
+    "dockerFile": "Dockerfile",
+    "extensions": [
+        "dbaeumer.jshint",
+        "EditorConfig.EditorConfig",
+        "ms-python.python"
+    ]
+}

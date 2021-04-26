@@ -1,11 +1,39 @@
 {
-    "name": "Kubernetes",
-    "dockerFile": ".devcontainer/Dockerfile",
-    "extensions": [
-        "peterjausovec.vscode-docker",
-        "ms-kubernetes-tools.vscode-kubernetes-tools"
-    ],
-    "runArgs": ["-e", "SYNC_LOCALHOST_KUBECONFIG=true",
-        "-v", "/var/run/docker.sock:/var/run/docker.sock",
-        "-v", "${env:HOME}${env:USERPROFILE}/.kube:/root/.kube-localhost"]
+	"name": "Kubernetes & Helm",
+	"dockerFile": "Dockerfile",
+
+	"remoteEnv": {
+		"SYNC_LOCALHOST_KUBECONFIG": "true"
+	},
+
+	"mounts": [
+		"source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind",
+		"source=${env:HOME}${env:USERPROFILE}/.kube,target=/usr/local/share/kube-localhost,type=bind"
+		// Uncomment the next line to also sync certs in your .minikube folder
+		// "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/usr/local/share/minikube-localhost,type=bind"
+	],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-azuretools.vscode-docker",
+		"ms-kubernetes-tools.vscode-kubernetes-tools"
+	]
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "kubectl version",
+
+	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust.
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "overrideCommand": false,
+	// "remoteUser": "vscode"
 }

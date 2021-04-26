@@ -1,40 +1,37 @@
-#-----------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See LICENSE in the project root for license information.
-#-----------------------------------------------------------------------------------------
+# Note: You can use any Debian/Ubuntu based image you want. 
+FROM mcr.microsoft.com/vscode/devcontainers/base:0-buster
 
-FROM ubuntu:bionic
-
-# Install required tools
+# Options
+ARG INSTALL_ZSH="true"
+ARG UPGRADE_PACKAGES="false"
+ARG ENABLE_NONROOT_DOCKER="true"
+ARG SOURCE_SOCKET=/var/run/docker-host.sock
+ARG TARGET_SOCKET=/var/run/docker.sock
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
+COPY library-scripts/*.sh /tmp/library-scripts/
 RUN apt-get update \
-	&& apt-get install -y git
-
-# Install Docker CE CLI. If you choose a Debian based image, update https://download.docker.com/linux/ubuntu
-# to https://download.docker.com/linux/debian on the third line below.
-RUN apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common \
-    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
-    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
-    && apt-get update \
-    && apt-get install -y docker-ce-cli
+    && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
+    # Use Docker script from script library to set things up
+    && /bin/bash /tmp/library-scripts/docker-debian.sh "${ENABLE_NONROOT_DOCKER}" "${SOURCE_SOCKET}" "${TARGET_SOCKET}" "${USERNAME}" \
+    # Clean up
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 # Install kubectl
-RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
-    && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list \
-    && apt-get update \
-    && apt-get install -y kubectl
+RUN curl -sSL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+    && chmod +x /usr/local/bin/kubectl
 
 # Install Helm
-RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash -
+RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
 
-# Copy localhost's ~/.kube/config file into the container and swap out localhost
-# for host.docker.internal whenever a new shell starts to keep them in sync.
-RUN echo 'if [ "$SYNC_LOCALHOST_KUBECONFIG" == "true" ]; then \
-        mkdir -p $HOME/.kube \
-        && cp -r $HOME/.kube-localhost/* $HOME/.kube \
-        && sed -i -e "s/localhost/host.docker.internal/g" $HOME/.kube/config; \
-        fi' >> $HOME/.bashrc
+# Script copies localhost's ~/.kube/config file into the container and swaps out 
+# localhost for host.docker.internal on bash/zsh start to keep them in sync.
+COPY copy-kube-config.sh /usr/local/share/
+RUN chown ${USERNAME}:root /usr/local/share/copy-kube-config.sh \
+    && echo "source /usr/local/share/copy-kube-config.sh" | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc
 
-# Clean up
-RUN apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>

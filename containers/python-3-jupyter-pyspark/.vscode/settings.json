@@ -1,5 +1,0 @@
-{
-    "python.dataScience.notebookFileRoot": "${workspaceFolder}/test-project",
-    "python.linting.enabled": true
- 
-}

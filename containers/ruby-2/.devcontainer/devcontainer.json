@@ -1,7 +1,0 @@
-{
-	"name": "Ruby",
-	"dockerFile": ".devcontainer/Dockerfile",
-	"extensions": [
-		"rebornix.Ruby"
-	]
-}

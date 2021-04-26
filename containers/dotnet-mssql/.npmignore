@@ -1,0 +1,6 @@
+README.md
+test-project
+.devcontainer/library-scripts/README.md
+.devcontainer/mssql/setup.sql
+.vscode
+.npmignore
