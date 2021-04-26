@@ -40,11 +40,20 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
 
 Note that the `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
 
-3. And the following to `.devcontainer/devcontainer.json`:
+
+3. And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile:
 
     ```json
     "runArgs": ["--init", "--privileged"],
     "overrideCommand": false
+    ```
+
+    Or if you are referencing a Docker Compose file, add this to your `docker-compose.yml` file instead:
+
+    ```yaml
+    your-service-name-here:
+      init: true 
+      privileged: true 
     ```
 
     While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.

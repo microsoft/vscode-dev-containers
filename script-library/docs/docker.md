@@ -48,12 +48,21 @@ See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker
 
     Note that the `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
 
-3. And the following to `.devcontainer/devcontainer.json`:
+3. And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile:
 
     ```json
     "runArgs": ["--init"],
     "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
     "overrideCommand": false
+    ```
+
+    Or if you are referencing a Docker Compose file, add this to your `docker-compose.yml` file instead:
+    
+    ```yaml
+    your-service-name-here:
+      init: true
+      volumes:
+        - /var/run/docker.sock:/var/run/docker-host.sock
     ```
 
     While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.
