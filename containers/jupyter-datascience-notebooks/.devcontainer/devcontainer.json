@@ -1,8 +1,7 @@
 {
 	"name": "Jupyter Data Science Notebooks (Community)",
 	"build": {
-		"dockerfile": "Dockerfile",
-		"context": ".."
+		"dockerfile": "Dockerfile"
 	},
 
 	// Set *default* container specific settings.json values on container create.
