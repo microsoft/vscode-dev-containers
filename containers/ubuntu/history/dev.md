@@ -10,7 +10,7 @@
 
 ## Variant: focal
 
-**Digest:** sha256:5f5b97622d8d92011068306ce95788741ed95c9ada3bf7d4a29d66b2f724c6a5
+**Digest:** sha256:897360b8496b3974672b0d91a135ddd55a80822772af1e7b5d0a524f2ad66e48
 
 **Tags:**
 ```
@@ -47,7 +47,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.2 |
+| libc6 | 2.31-0ubuntu9.3 |
 | libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
@@ -55,7 +55,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.3 |
 | libstdc++6 | 10.2.0-5ubuntu1~20.04 |
-| locales | 2.31-0ubuntu9.2 |
+| locales | 2.31-0ubuntu9.3 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |
@@ -81,7 +81,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:ce7c2b297b6872f4d485b2557c27cb70a82d6e5a405be8ffec864195a5bed109
+**Digest:** sha256:b43efe49aade26254bf220b386d4b7977a7e140e684256cc12b3c2559e4f4dfa
 
 **Tags:**
 ```

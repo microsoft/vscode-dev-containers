@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:a3e748d3e639517cc55dec77171e51f07de47435dc017ad65fbd35e24acc97c3
+**Digest:** sha256:9a9c7b30a4ce9e1622fb0b97c1d00a766664858e9bd5712de4688a7c5159afe4
 
 **Tags:**
 ```
@@ -53,7 +53,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.2 |
+| libc6 | 2.31-0ubuntu9.3 |
 | libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
@@ -61,7 +61,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.3 |
 | libstdc++6 | 10.2.0-5ubuntu1~20.04 |
-| locales | 2.31-0ubuntu9.2 |
+| locales | 2.31-0ubuntu9.3 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |
@@ -88,7 +88,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:3469dd8940a8c7ae4320c206a59166492a596ba40d4c4ee431d667d8feacb08f
+**Digest:** sha256:a0d5fbe6f7e1c24e1de82e266d01cb71ecc11eb6ac00bdddfb6fb3584ab46c06
 
 **Tags:**
 ```
@@ -130,7 +130,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.2 |
+| libc6 | 2.31-0ubuntu9.3 |
 | libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
@@ -138,7 +138,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.3 |
 | libstdc++6 | 10.2.0-5ubuntu1~20.04 |
-| locales | 2.31-0ubuntu9.2 |
+| locales | 2.31-0ubuntu9.3 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |
@@ -165,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:b50e35ab56e066ea4af253a261a1609f5016cd0a5df75a14932175ebbd1589ca
+**Digest:** sha256:d555d68a3a65961f69b6c991cc722db0ecf5a3ee58a7bb071405f149074d9795
 
 **Tags:**
 ```
@@ -207,7 +207,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.2 |
+| libc6 | 2.31-0ubuntu9.3 |
 | libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
@@ -215,7 +215,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.3 |
 | libstdc++6 | 10.2.0-5ubuntu1~20.04 |
-| locales | 2.31-0ubuntu9.2 |
+| locales | 2.31-0ubuntu9.3 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |

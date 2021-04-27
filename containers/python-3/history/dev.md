@@ -13,7 +13,7 @@
 
 ## Variant: 3
 
-**Digest:** sha256:82eb38d8a5a35916242e410f3f821429f5173d3fa691535e6ab9781359c0b6e0
+**Digest:** sha256:3a8300b59038442d1484dd76fd92367d4a90d3135a8c0c3211061c0c4f2c0331
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.1 |
+| pylint | 2.8.2 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
 | black | 21.4b0 |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.9
 
-**Digest:** sha256:9e526de1577939acedbc6932dd54f09082c3e252f71de556a80c8c7561b29747
+**Digest:** sha256:58add5a2bc12ba9f50c10629814b5e16f7cc064e69972a7727ca400269c0d0bd
 
 **Tags:**
 ```
@@ -135,7 +135,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.1 |
+| pylint | 2.8.2 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
 | black | 21.4b0 |
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 
 ## Variant: 3.8
 
-**Digest:** sha256:7ea41d5f64323df1371664aad4975c5d429dba3eddafe340ef0b6f99124a93b7
+**Digest:** sha256:ad48854a7ece4c1ebeb7ae57bb23cb5ae0f5c92be899bf7356a2a96d35e252a7
 
 **Tags:**
 ```
@@ -227,7 +227,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.1 |
+| pylint | 2.8.2 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
 | black | 21.4b0 |
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:280f21e1c7bf82fe7cc7380b26b3211ea235a99a5376f6aa2debe31dc199e1a8
+**Digest:** sha256:014c3daec62c7cfa78da2840140bc53a584d1320920124ae76eb5c96ff9f9edf
 
 **Tags:**
 ```
@@ -319,7 +319,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.1 |
+| pylint | 2.8.2 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
 | black | 21.4b0 |
@@ -381,7 +381,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:0880a07e920cccb32d299369ecb994537b58a41699b9e01b68b5430b9ef558c5
+**Digest:** sha256:14131bad2e1924f378ecd262257b1c3613ca6e364ebf31a35c94b65b41feb521
 
 **Tags:**
 ```
@@ -411,7 +411,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.1 |
+| pylint | 2.8.2 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
 | black | 21.4b0 |

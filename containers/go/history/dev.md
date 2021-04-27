@@ -11,7 +11,7 @@
 
 ## Variant: 1
 
-**Digest:** sha256:ecda59f6606162d060072c7b61de89811da14b0495d1dfbe0f640728e756465d
+**Digest:** sha256:892855d406e95db6f172b745320f84effa39f8515b7f01d2fec632d6270adea1
 
 **Tags:**
 ```
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.16
 
-**Digest:** sha256:c775953ad37c8fccc61db315a6d869a289a4291373ea78f874f8ff8ee789ed75
+**Digest:** sha256:4df11cbbc34eb30f83b1680d4143cda30414e40f0900f6ad5c4357b4acb6b9bd
 
 **Tags:**
 ```
@@ -199,7 +199,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 
 ## Variant: 1.15
 
-**Digest:** sha256:b3d1d2f043c3b6af82a471e642c469e10b9354c9cdc94923537e26cdc057d066
+**Digest:** sha256:27f412995f84e5cc42d118d0a1a8b8842779d99c038c00f46db26377ae174016
 
 **Tags:**
 ```

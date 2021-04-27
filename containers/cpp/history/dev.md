@@ -12,7 +12,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:60ed0957978d6ca7932b7768f6a4bb98b59501a932eb40bce7d1877796d349b4
+**Digest:** sha256:94e330b4ba12bcd7259fab342efa7a0167237c32ebc602afd2eeb222df3cd5a7
 
 **Tags:**
 ```
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: focal
 
-**Digest:** sha256:343514e55e8a98ac6047bda88398cbc7abf1c1e913c357fc48d48fd657e4bf7d
+**Digest:** sha256:7f04893cc241add30ce79ce7912aaf9e1f6739733574eb08347945924f30fb8b
 
 **Tags:**
 ```
@@ -148,7 +148,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.2 |
+| libc6 | 2.31-0ubuntu9.3 |
 | libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
@@ -158,7 +158,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | libstdc++6 | 10.2.0-5ubuntu1~20.04 |
 | lldb | 1:10.0-50~exp1 |
 | llvm | 1:10.0-50~exp1 |
-| locales | 2.31-0ubuntu9.2 |
+| locales | 2.31-0ubuntu9.3 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:2d0cc697185afa839fc74070e625500febccf4564492b7ec9e4d2a8e5e56b7e3
+**Digest:** sha256:ac924e815e36c19239df8f0eebd9fd075534d2aed24d6f8a69b2bef43f5a52c2
 
 **Tags:**
 ```
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:8af0430e5cd4289dcf1235529f7dfb9252acbc39251ec1e79811ed5be13778cf
+**Digest:** sha256:7023683e43ae7de27f9fdd6e535e2d40a425c3862eae4ed78cdfcf2737b4f8f0
 
 **Tags:**
 ```

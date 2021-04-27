@@ -4,7 +4,7 @@
 
 **Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-miniconda)
 
-**Digest:** sha256:b06d34d29798ed0ad447a03490a29650fcc8a6faba539924c181a7802ce3112c
+**Digest:** sha256:8c19f02ff5742917b62dd6efdc5b75bc0f891448f8de134b2ee815df56af0d75
 
 **Tags:**
 ```
@@ -34,7 +34,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.1 |
+| pylint | 2.8.2 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
 | black | 21.4b0 |

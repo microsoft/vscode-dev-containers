@@ -4,7 +4,7 @@
 
 **Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-anaconda)
 
-**Digest:** sha256:6db71a46019dbace2fed45ca8bfb459d06390e3c473ab5dd0f5d522efcde54b2
+**Digest:** sha256:2ea334e853d1d7b7373effb5ef3ff668a4ae245f5d40ff440d50fb2e1b105e33
 
 **Tags:**
 ```

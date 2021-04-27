@@ -894,6 +894,15 @@
         },
         {
             "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pylint",
+                    "Version": "2.8.2"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -1096,6 +1105,16 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
+                    "Version": "16-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
                     "Version": "14-buster",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
@@ -1164,7 +1183,26 @@
             "Component": {
                 "Type": "npm",
                 "Npm": {
+                    "Name": "typescript",
+                    "Version": "4.2.4"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "npm",
+                "Npm": {
                     "Name": "typescript"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "16-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },

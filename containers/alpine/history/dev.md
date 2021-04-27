@@ -12,7 +12,7 @@
 
 ## Variant: 3.13
 
-**Digest:** sha256:2e2dc77b89c4b19f568450a77c540d0effe014aef9eb9f3784d7931fe95c3a14
+**Digest:** sha256:1f4a389563166b03052e96262ffd4998f6642f79ce568b274f4c589f47418c64
 
 **Tags:**
 ```
@@ -76,13 +76,12 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.12
 
-**Digest:** sha256:c8b2873e4417937b13a295f2d1eea9a1be97552fe7749091dbe3c183955b644a
+**Digest:** sha256:144964ae9669c6bfea7e7ee04cc256c6f3b24a099e9f31d2b46b5aea4d2f17d8
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/base:dev-alpine-3.12
 mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
-mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -140,13 +139,12 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.11
 
-**Digest:** sha256:15d909987651a3799a25a1853a1cb1b73586409d979ece266fefe16d214d70e9
+**Digest:** sha256:bba86c49a1c21c8abc9f4b45fd5b5b90042caab9f1a393e075e61f161f0f8b15
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/base:dev-alpine-3.11
 mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.11
-mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -205,13 +203,12 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.10
 
-**Digest:** sha256:374e572ac2ee5c2d153b5a7b7a5d81f95d18c99563b70760f3181f58df44641f
+**Digest:** sha256:89a0fe6b1e08c9796e2958c043e5c1b41ea392e77cfc6d38cbb1cfbc4f7e2f02
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/base:dev-alpine-3.10
 mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.10
-mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
