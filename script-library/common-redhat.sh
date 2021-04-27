@@ -290,7 +290,7 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
     fi
 
     # Adapted, simplified inline Oh My Zsh! install steps that adds, defaults to a codespaces theme.
-    # See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
+    # See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for official script.
     OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-zsh"
     if [ ! -d "${OH_MY_INSTALL_DIR}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
         TEMPLATE_PATH="${OH_MY_INSTALL_DIR}/templates/zshrc.zsh-template"
