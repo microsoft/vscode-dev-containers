@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/debian)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/debian)
 
 **Definition variations:**
 - [buster](#variant-buster)
@@ -10,7 +10,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:cd80eefed4b26f2a79b89081ef5f012b5cdcee768d237929a37c77f9497b7a43
+**Digest:** sha256:bf0e0c9bb4b7530c98d5c6944077662cdd034dd5ba3ae7a43c15699e58d71474
 
 **Tags:**
 ```
@@ -24,19 +24,21 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
 
+**Available (non-root) user:** vscode
+
 ### Contents
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -80,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:739903fcdf9cd9982000853fac210a0fbc8996a885f71e48aeeb7b4b59a2f4eb
+**Digest:** sha256:f06b8cc88540fe1fec4ed968b95428ee3cf4f9556e4b790c8469a6661da90890
 
 **Tags:**
 ```
@@ -92,12 +94,14 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian-9
 
 **Linux distribution:** Debian GNU/Linux 9 (stretch)
 
+**Available (non-root) user:** vscode
+
 ### Contents
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 

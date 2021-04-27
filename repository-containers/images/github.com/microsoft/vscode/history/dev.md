@@ -2,14 +2,14 @@
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/github.com/microsoft/vscode)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/github.com/microsoft/vscode)
 
 **Definition variations:**
 - [12](#variant-12)
 
 ## Variant: 12
 
-**Digest:** sha256:2226d80a1ef95605a37c5c6f12bc046934be33cb3ef4fcc52e0aba3f1f72844f
+**Digest:** sha256:ce4144dc9acf2d34de772754737f23b0d5a213d2ea0642ceb3af8eef112f5fa5
 
 **Tags:**
 ```
@@ -19,13 +19,15 @@ mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
 
+**Available (non-root) user:** node
+
 ### Contents
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |

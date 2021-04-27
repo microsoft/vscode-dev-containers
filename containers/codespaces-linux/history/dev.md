@@ -3,9 +3,9 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/codespaces-linux)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/codespaces-linux)
 
-**Digest:** sha256:45e2f1999806f8fe88a59d7f6b39dae5c14cf0cc744967aeeee0effc8bf2a287
+**Digest:** sha256:8f6f84f201e19a5bdb0603b938373071d569eceaab0e4bc4f08dc4fa397f37e3
 
 **Tags:**
 ```
@@ -16,6 +16,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Ubuntu 20.04.2 LTS (debian-like distro)
+
+**Available (non-root) user:** codespace
 
 ### Contents
 **Languages and runtimes**
@@ -38,26 +40,26 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /home/codespace/.nvm |
-| [nvs](https://github.com/jasongin/nvs) | 22fe78a18290a0b82776cf648c298b2d6ebf630c | /home/codespace/.nvs |
+| [nvs](https://github.com/jasongin/nvs) | 9f7d7b7f3e9b78e9ac4228b97dc04878f9f831a2 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | d604acb78aeba583be95f08d45eeae430372beb9 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 6573f0ae04884d11b93bef0d6f4483223e889ae5 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 0bd64d37990908876e895aa471685d937f01a034 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.7.4 |
+| pylint | 2.8.1 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
-| black | 20.8b1 |
+| black | 21.4b0 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.0.0 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.3 |
+| virtualenv | 20.4.4 |
 | pipx | 0.16.1.0 |
 
 **Go tools and modules**
@@ -103,9 +105,10 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Docker Compose](https://github.com/docker/compose) | 1.29.1 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.0+644 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 1.9.2-pre0 | 
+| [GitHub CLI](https://github.com/cli/cli) | 1.9.2 | 
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
-| [Maven](https://maven.apache.org/) | 5.4.0-1043-azure | /opt/maven |
+| [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
+| [Gradle](https://gradle.org/) | 7.0 | 
 | Docker (Moby) CLI &amp; Engine | 20.10.6+azure | 
 
 **Additional linux tools and packages**

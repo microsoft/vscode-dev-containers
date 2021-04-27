@@ -10,12 +10,14 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/typescript-node |
-| *Available image variants* | 10, 12, 14 (([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/typescript-node/tags/list)) |
+| *Available image variants* | 10, 12, 14, 16 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/typescript-node/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
 | *Languages, platforms* | Node.js, TypeScript |
+
+See **[history](history)** for information on the contents of published images.
 
 ## Using this definition
 
@@ -28,19 +30,20 @@ While the definition itself works unmodified, you can select the version of Node
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own `Dockerfile` with one of the following:
 
 - `mcr.microsoft.com/vscode/devcontainers/typescript-node` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:16`
 - `mcr.microsoft.com/vscode/devcontainers/typescript-node:14`
 - `mcr.microsoft.com/vscode/devcontainers/typescript-node:12`
 - `mcr.microsoft.com/vscode/devcontainers/typescript-node:10`
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0-11`
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.200-11`
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.200.0-11`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0-12`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.202-12`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.202.0-12`
 
-See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/typescript-node/tags/list).
+See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/typescript-node/tags/list).
 
-Alternatively, you can use the contents of the `Dockerfile` or the [JavaScript and Node.js `Dockerfile`](../javascript-node/.devcontainer/base.Dockerfile) to fully customize your container's contents.
+Alternatively, you can use the contents of the `base.Dockerfile` or the [JavaScript and Node.js `base.Dockerfile`](../javascript-node/.devcontainer/base.Dockerfile) to fully customize your container's contents.
 
 Beyond TypeScript, Node.js, and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. Since `tslint` is [now fully depreicated](https://github.com/palantir/tslint/issues/4534), the definition includes `tslint-to-eslint-config` globally to help you migrate.
 

@@ -2,9 +2,9 @@
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/java-8)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/java-8)
 
-**Digest:** sha256:ec66308e4cc1e54a1d698a7a3e03646099d4c3513a16115761faba497521399f
+**Digest:** sha256:74df68bc8d38eb603890d6f0c6b5360692b543b28eb67eb04651a681a07d1cb7
 
 **Tags:**
 ```
@@ -14,18 +14,20 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
 
+**Available (non-root) user:** vscode
+
 ### Contents
 **Languages and runtimes**
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 1.8.0_282<br />15.0.2 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
+| [Java](https://adoptopenjdk.net/) | 1.8.0_292<br />15.0.2 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -38,8 +40,8 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |

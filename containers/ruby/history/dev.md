@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/ruby)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/ruby)
 
 **Definition variations:**
 - [3](#variant-3)
@@ -14,7 +14,7 @@
 
 ## Variant: 3
 
-**Digest:** sha256:cdd97ccc4aa3141d8c05bc9ad873e8ff43b80cfabce25e3ae1324ed38f3d6014
+**Digest:** sha256:f02b78d77292a1bd5a00087d5be23fc2abf73aeaa987be6045d8149f4746098e
 
 **Tags:**
 ```
@@ -23,6 +23,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -35,10 +37,10 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | d604acb78aeba583be95f08d45eeae430372beb9 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 6573f0ae04884d11b93bef0d6f4483223e889ae5 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 0bd64d37990908876e895aa471685d937f01a034 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -58,8 +60,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | build-essential | 12.6 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
@@ -105,7 +107,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 ## Variant: 3.0
 
-**Digest:** sha256:cdd97ccc4aa3141d8c05bc9ad873e8ff43b80cfabce25e3ae1324ed38f3d6014
+**Digest:** sha256:7c5ca092cc95c342ca7543942489c42b1d40925e786906913aa1be54166d2a26
 
 **Tags:**
 ```
@@ -114,6 +116,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3.0
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -126,10 +130,10 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3.0
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | d604acb78aeba583be95f08d45eeae430372beb9 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 6573f0ae04884d11b93bef0d6f4483223e889ae5 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 0bd64d37990908876e895aa471685d937f01a034 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -149,8 +153,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3.0
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | build-essential | 12.6 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
@@ -196,7 +200,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3.0
 
 ## Variant: 2
 
-**Digest:** sha256:dbddcf1caa124f151f0ebc50505d01d637656cf56a3ecc09db83bb24fdb838fd
+**Digest:** sha256:4b3ce8775655ba6af84c73b5d9060c993a2de8042d78b38da664ff5994108177
 
 **Tags:**
 ```
@@ -205,6 +209,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -217,10 +223,10 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | d604acb78aeba583be95f08d45eeae430372beb9 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 6573f0ae04884d11b93bef0d6f4483223e889ae5 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 0bd64d37990908876e895aa471685d937f01a034 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -240,8 +246,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | build-essential | 12.6 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
@@ -287,7 +293,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 ## Variant: 2.7
 
-**Digest:** sha256:dbddcf1caa124f151f0ebc50505d01d637656cf56a3ecc09db83bb24fdb838fd
+**Digest:** sha256:1fcc02c8b8b719d4c399f2bcbd3ab7f0c52a22d1552edb39bb5dd365af2e4ff9
 
 **Tags:**
 ```
@@ -296,6 +302,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.7
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -308,10 +316,10 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | d604acb78aeba583be95f08d45eeae430372beb9 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 6573f0ae04884d11b93bef0d6f4483223e889ae5 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 0bd64d37990908876e895aa471685d937f01a034 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -331,8 +339,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.7
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | build-essential | 12.6 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
@@ -378,7 +386,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.7
 
 ## Variant: 2.6
 
-**Digest:** sha256:11c7d87b042c651d3cc36bbc8d2f7b40ae32db18bca536482df14b4044b42e55
+**Digest:** sha256:4ab15cf6a2eef870908685ac310dc47d030074d7f632819ce2f0c4a8cc7127d7
 
 **Tags:**
 ```
@@ -387,6 +395,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -399,10 +409,10 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | d604acb78aeba583be95f08d45eeae430372beb9 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 6573f0ae04884d11b93bef0d6f4483223e889ae5 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 0bd64d37990908876e895aa471685d937f01a034 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -422,8 +432,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | build-essential | 12.6 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
@@ -469,7 +479,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 
 ## Variant: 2.5
 
-**Digest:** sha256:814005f20c6ac2bca8da04951cca3060ee48127e856c46f51569727d1e50a523
+**Digest:** sha256:9c6bd20af40788f33593b91ea993e76892e7e0e45e1d693176539d1c8acb5976
 
 **Tags:**
 ```
@@ -478,6 +488,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.5
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -490,10 +502,10 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.5
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | d604acb78aeba583be95f08d45eeae430372beb9 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 6573f0ae04884d11b93bef0d6f4483223e889ae5 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 0bd64d37990908876e895aa471685d937f01a034 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -513,8 +525,8 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.5
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | build-essential | 12.6 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |

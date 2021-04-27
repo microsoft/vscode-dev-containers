@@ -56,7 +56,7 @@ async function package(repo, release, updateLatest, registry, registryPath, stub
     let outputPath = null;
     console.log('(*) Moving package...');
     outputPath = path.join(__dirname, '..', '..', `${packageJson.name}-${packageJsonVersion}.tgz`);
-    await asyncUtils.rename(path.join(stagingFolder, `${packageJson.name}-${packageJsonVersion}.tgz`), outputPath);
+    await asyncUtils.copyFile(path.join(stagingFolder, `${packageJson.name}-${packageJsonVersion}.tgz`), outputPath);
 
     if (cleanWhenDone) {
         // And finally clean up

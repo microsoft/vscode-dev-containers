@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "12669f29f0843b8b980dd137f150a74511f88842"
+                    "commitHash": "63a7422d8dd5eb93c849df0ab9e679e6f333818a"
                 }
             }
         },
@@ -198,16 +198,16 @@
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "pylint",
-                    "Version": "2.7.4"
+                    "Version": "2.8.1"
                 }
             }
         },
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "flake8",
                     "Version": "3.9.1"
                 }
@@ -216,7 +216,7 @@
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "autopep8",
                     "Version": "1.5.6"
                 }
@@ -225,16 +225,16 @@
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "black",
-                    "Version": "20.8b1"
+                    "Version": "21.4b0"
                 }
             }
         },
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "yapf",
                     "Version": "0.31.0"
                 }
@@ -243,7 +243,7 @@
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "mypy",
                     "Version": "0.812"
                 }
@@ -252,7 +252,7 @@
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "pydocstyle",
                     "Version": "6.0.0"
                 }
@@ -261,7 +261,7 @@
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "pycodestyle",
                     "Version": "2.7.0"
                 }
@@ -270,7 +270,7 @@
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "bandit",
                     "Version": "1.7.0"
                 }
@@ -279,16 +279,16 @@
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.4.3"
+                    "Version": "20.4.4"
                 }
             }
         },
         {
             "Component": {
                 "Type": "Pip",
-                "Npm": {
+                "Pip": {
                     "Name": "pipx",
                     "Version": "0.16.1.0"
                 }
@@ -444,7 +444,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "12669f29f0843b8b980dd137f150a74511f88842"
+                    "commitHash": "63a7422d8dd5eb93c849df0ab9e679e6f333818a"
                 }
             }
         },
@@ -464,7 +464,7 @@
                 "Git": {
                     "Name": "nvs",
                     "repositoryUrl": "https://github.com/jasongin/nvs",
-                    "commitHash": "22fe78a18290a0b82776cf648c298b2d6ebf630c"
+                    "commitHash": "9f7d7b7f3e9b78e9ac4228b97dc04878f9f831a2"
                 }
             }
         },
@@ -484,7 +484,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "6573f0ae04884d11b93bef0d6f4483223e889ae5"
+                    "commitHash": "0bd64d37990908876e895aa471685d937f01a034"
                 }
             }
         },
@@ -563,7 +563,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "1.9.2-pre0",
+                    "Version": "1.9.2",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -573,7 +573,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Gradle",
-                    "Version": "",
+                    "Version": "7.0",
                     "DownloadUrl": "https://gradle.org/"
                 }
             }
@@ -623,7 +623,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.22.0-1~stretch",
+                    "Version": "2.22.1-1~stretch",
                     "Distribution": "debian",
                     "Release": "9",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -894,6 +894,15 @@
         },
         {
             "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pylint",
+                    "Version": "2.8.2"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -1057,7 +1066,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "AdoptOpenJDK",
-                    "Version": "1.8.0_282",
+                    "Version": "1.8.0_292",
                     "DownloadUrl": "https://adoptopenjdk.net/"
                 }
             }
@@ -1077,7 +1086,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.24.0"
+                    "Version": "7.25.0"
                 }
             }
         },
@@ -1087,7 +1096,17 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "12669f29f0843b8b980dd137f150a74511f88842"
+                    "commitHash": "63a7422d8dd5eb93c849df0ab9e679e6f333818a"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "16-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },
@@ -1164,7 +1183,26 @@
             "Component": {
                 "Type": "npm",
                 "Npm": {
+                    "Name": "typescript",
+                    "Version": "4.2.4"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "npm",
+                "Npm": {
                     "Name": "typescript"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "16-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
         },

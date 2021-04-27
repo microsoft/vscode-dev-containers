@@ -2,7 +2,7 @@
 
 **Image version:** dev
 
-**Source release/branch:** [refs/heads/master](https://github.com/microsoft/vscode-dev-containers/tree/refs/heads/master/containers/java)
+**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/java)
 
 **Definition variations:**
 - [15](#variant-15)
@@ -10,7 +10,7 @@
 
 ## Variant: 15
 
-**Digest:** sha256:0fa8c97d25be5bf23a35cb93bf500cd25e698d9ac83dbc05ed1ba2568af6f961
+**Digest:** sha256:9160190371b1c000407834dc44d9f9b91691beb184b6dad15c059ab0bca5e950
 
 **Tags:**
 ```
@@ -19,6 +19,8 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-15
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Available (non-root) user:** vscode
 
 ### Contents
 **Languages and runtimes**
@@ -31,7 +33,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-15
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -44,8 +46,8 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-15
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |
@@ -90,7 +92,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-15
 
 ## Variant: 11
 
-**Digest:** sha256:9c3bcf4a94fd9aa9485c3efe91f785179ed728b00fe7034b3ed905c61a02da65
+**Digest:** sha256:94503fbb8fb1d45115f522f5c536de6683ab32de70b39da50342da849d679a6d
 
 **Tags:**
 ```
@@ -100,18 +102,20 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
 
+**Available (non-root) user:** vscode
+
 ### Contents
 **Languages and runtimes**
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 11.0.10 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 11.0.11 | /usr/local/ |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 12669f29f0843b8b980dd137f150a74511f88842 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -124,8 +128,8 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.2 |
-| apt-utils | 1.8.2.2 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
 | ca-certificates | 20200601~deb10u2 |
 | curl | 7.64.0-4+deb10u2 |
 | dialog | 1.3-20190211-1 |

@@ -10,6 +10,9 @@
 	"repoContainersToBuildPath": "repository-containers/images",
 	"scriptLibraryPathInRepo": "script-library",
 	"scriptLibraryFolderNameInDefinition": "library-scripts",
+	"historyUrlPrefix": "https://github.com/microsoft/vscode-dev-containers/tree/master/containers/",
+	"repositoryUrl": "https://github.com/microsoft/vscode-dev-containers/",
+	"imageLabelPrefix": "com.visualstudio.code.devcontainers",
 	"definitionBuildConfigFile": "definition-manifest.json",
 
 	"devContainerJsonPreamble": "For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:\n// ",
@@ -144,7 +147,7 @@
 
 	"otherDependencyDefaultSettings": {
 		"SDKMAN!": {
-			"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && echo 'n' | sdk version | grep -ozP 'SDKMAN\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+[+0-9a-z]*' | tr -d '[:cntrl:]'",
+			"versionCommand": ". /usr/local/sdkman/bin/sdkman-init.sh && echo 'n' | sdk version | grep -oP 'SDKMAN\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+[+0-9a-z]*' | tr -d '[:cntrl:]'",
 			"path": "/usr/local/sdkman",
 			"downloadUrl": "https://github.com/sdkman/sdkman-cli"
 		},
@@ -154,12 +157,12 @@
 			"downloadUrl": "https://github.com/rvm/rvm"
 		},
 		"kubectl": {
-			"versionCommand": "kubectl version --client | grep -oE 'GitVersion:\\\"v[^\\\"]+' | sed -n '/GitVersion:\\\"v/s///p'",
+			"versionCommand": "kubectl version --client | grep -oP 'GitVersion\\s*:\\s*\\\"v\\K[0-9]+\\.[0-9]+\\.[0-9]+'",
 			"path": "/usr/local/bin",
 			"downloadUrl": "https://github.com/kubernetes/kubectl"
 		},
 		"Helm": {
-			"versionCommand": "helm version | grep -oE 'Version:\\\"v[^\\\"]+' | sed -n '/Version:\\\"v/s///p'",
+			"versionCommand": "helm version | grep -oP 'Version\\s*:\\s*\\\"v\\K[0-9]+\\.[0-9]+\\.[0-9]+'",
 			"path": "/usr/local/bin",
 			"downloadUrl": "https://github.com/helm/helm"
 		},
@@ -173,7 +176,7 @@
 			"downloadUrl": "https://github.com/git/git"
 		},
 		"Xdebug": {
-			"versionCommand": "php --version | grep -oE 'with Xdebug\\sv[^,]+'| sed -n '/with Xdebug\\sv/s///p'",
+			"versionCommand": "php --version | grep -oP 'with\\s+Xdebug\\s+v\\K[0-9]+\\.[0-9]+\\.[0-9]+'",
 			"downloadUrl": "https://xdebug.org/"
 		},
 		"Composer": {
@@ -181,7 +184,7 @@
 			"downloadUrl": "https://getcomposer.org/"
 		},
 		"GitHub CLI": {
-			"versionCommand": "gh version 2>&1 | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
+			"versionCommand": "gh version 2>&1 | grep -oP 'version\\s\\K[^ ]+'",
 			"downloadUrl": "https://github.com/cli/cli"
 		},
 		"yarn": {
@@ -189,11 +192,11 @@
 			"downloadUrl": "https://yarnpkg.com/"
 		},
 		"Maven": {
-			"versionCommand": "mvn -version | grep -oE '\\\"[0-9]+\\.[0-9]\\.[0-9][^\\\"]+' | tr -d '\\\"'",
+			"versionCommand": "mvn -version | grep -oP '^Apache\\sMaven\\s+\\K[0-9]+\\.[0-9]+[\\.+0-9a-z]*'",
 			"downloadUrl": "https://maven.apache.org/"
 		},
 		"Gradle": {
-			"versionCommand": "gradle --version | grep -ozP 'Welcome to Gradle\\s+\\K[0-9]\\.[0-9]\\.[0-9]' | tr '\\0' '\\n'",
+			"versionCommand": "gradle --version | grep -oP '^Gradle\\s+\\K[0-9]+\\.[0-9]+(\\.[0-9]+)?$'",
 			"downloadUrl": "https://gradle.org/"
 		},
 		"Docker (Moby) CLI": {
@@ -208,27 +211,27 @@
 			"downloadUrl": "https://docs.microsoft.com/en-us/powershell/"
 		},
 		"GCC": {
-			"versionCommand": "gcc --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+.+)' | tr -d ')'"
+			"versionCommand": "gcc --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+.*)' | tr -d ')'"
 		},
 		"Clang": {
 			"versionCommand": "clang --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+.*'"
 		},
 		"Go": {
-			"versionCommand": "go version | grep -oE -m 1 'version\\sgo[^ ]+' | sed -n '/^version\\sgo/s///p'",
+			"versionCommand": "go version | grep -oP -m 1 'version\\sgo\\K[^ ]+'",
 			"path": "/usr/local/go",
 			"downloadUrl": "https://golang.org/dl"
 		},
 		"Rust": {
-			"versionCommand": "rustc --version | grep -oE '^rustc\\s[^ ]+' | sed -n '/rustc\\s/s///p'",
+			"versionCommand": "rustc --version | grep -oP '^rustc\\s\\K[^ ]+'",
 			"path": "/usr/local/cargo<br />/usr/local/rustup",
 			"downloadUrl": "https://github.com/rust-lang/rust"
 		},
 		"PHP": {
-			"versionCommand": "php --version | grep -ozP 'PHP\\s\\K[0-9][^\\s]+' | tr '\\0' '\\n'",
+			"versionCommand": "php --version | grep -oP 'PHP\\s\\K[0-9][^\\s]+'",
 			"downloadUrl":"https://xdebug.org/"
 		},
 		"Java": {
-			"versionCommand": "java --version | grep -ozP 'openjdk\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+' | tr '\\0' '\\n'",
+			"versionCommand": "java --version | grep -oP 'openjdk\\s+\\K[0-9]+\\.[0-9]+\\.[0-9]+'",
 			"downloadUrl": "https://adoptopenjdk.net/"
 		},
 		".NET": {
@@ -236,7 +239,7 @@
 			"downloadUrl": "https://dotnet.microsoft.com/"
 		},
 		"Ruby": {
-			"versionCommand": "ruby --version | grep -ozP '^ruby\\s+\\K[^\\s]+' | tr '\\0' '\\n'",
+			"versionCommand": "ruby --version | grep -oP '^ruby\\s+\\K[^\\s]+'",
 			"downloadUrl": "https://www.ruby-lang.org/en/"
 		},
 		"Python": {

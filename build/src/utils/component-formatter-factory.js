@@ -82,7 +82,7 @@ function pipComponentFormatter(packageInfo) {
     return  {
         "Component": {
             "Type": "Pip",
-            "Npm": {
+            "Pip": {
                 "Name": packageInfo.name,
                 "Version": packageInfo.version
             }

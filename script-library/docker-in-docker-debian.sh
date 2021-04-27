@@ -58,8 +58,10 @@ if ! dpkg -s apt-transport-https curl ca-certificates lsb-release lxc pigz iptab
 fi
 
 # Swap to legacy iptables for compatibility
-update-alternatives --set iptables /usr/sbin/iptables-legacy
-update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+if type iptables-legacy > /dev/null 2>&1; then
+    update-alternatives --set iptables /usr/sbin/iptables-legacy
+    update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+fi
 
 # Install Docker / Moby CLI if not already installed
 if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then

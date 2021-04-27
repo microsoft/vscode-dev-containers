@@ -6,7 +6,10 @@
 const path = require('path');
 const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
+const mkdirp = require('mkdirp');
 const glob = require('glob');
+const handlebars = require('handlebars');
+let metaEnvTemplate;
 
 const scriptSHA = {};
 
@@ -21,25 +24,37 @@ const dockerFilePreamble = configUtils.getConfig('dockerFilePreamble');
 const scriptLibraryPathInRepo = configUtils.getConfig('scriptLibraryPathInRepo');
 const scriptLibraryFolderNameInDefinition = configUtils.getConfig('scriptLibraryFolderNameInDefinition');
 
+const historyUrlPrefix = configUtils.getConfig('historyUrlPrefix');
+const repositoryUrl = configUtils.getConfig('repositoryUrl');
+
 // Prepares dockerfile for building or packaging
 async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, isForBuild, variant) {
-
-    // Use exact version of building, MAJOR if not
-    const version = isForBuild ? configUtils.getVersionFromRelease(release, definitionId) : configUtils.majorFromRelease(release, definitionId);
-
-    // Copy any scripts from the script library into the appropriate definition specific folder
-    await copyLibraryScriptsForDefinition(path.dirname(devContainerDockerfilePath));
+    const devContainerJsonPath = path.dirname(devContainerDockerfilePath);
 
     // Read Dockerfile
     const devContainerDockerfileRaw = await asyncUtils.readFile(devContainerDockerfilePath);
 
+    // Use exact version of building, MAJOR if not
+    const version = isForBuild ? configUtils.getVersionFromRelease(release, definitionId) : configUtils.majorFromRelease(release, definitionId);
+
+    // Create initial result object 
     const prepResult = {
         shouldFlattenBaseImage: false,
         baseImage: null,
         flattenedBaseImage: null,
-        devContainerDockerfileModified: await updateScriptSources(devContainerDockerfileRaw, repo, release, true)
+        devContainerDockerfileModified: await updateScriptSources(devContainerDockerfileRaw, repo, release, true),
+        meta: {
+            version: version,
+            definitionId: definitionId,
+            variant: variant,
+            gitRepository: repositoryUrl,
+            gitRepositoryRelease: release,
+            contentsUrl: `${historyUrlPrefix}${definitionId}/${configUtils.getConfig('historyFolderName', 'history')}/${version}.md`
+        }
     };
 
+    // Copy any scripts from the script library, add meta.env into the appropriate definition specific folder
+    await copyLibraryScriptsForDefinition(devContainerJsonPath, isForBuild, prepResult.meta);
 
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
@@ -213,8 +228,8 @@ async function updateAllScriptSourcesInRepo(repo, release, updateScriptSha) {
     });
 }
 
-// Copy contents of script library to folder 
-async function copyLibraryScriptsForDefinition(definitionDevContainerJsonFolder) {
+// Copy contents of script library to folder, meta.env file if specified and building
+async function copyLibraryScriptsForDefinition(definitionDevContainerJsonFolder, isForBuild, meta) {
     const libraryScriptsFolder = path.join(definitionDevContainerJsonFolder, scriptLibraryFolderNameInDefinition);
     if (await asyncUtils.exists(libraryScriptsFolder)) {
         await asyncUtils.forEach(await asyncUtils.readdir(libraryScriptsFolder), async (script) => {
@@ -229,6 +244,12 @@ async function copyLibraryScriptsForDefinition(definitionDevContainerJsonFolder)
                 await asyncUtils.copyFile(possibleScriptSource, targetScriptPath);
             }
         });
+    }
+    if (isForBuild && meta) {
+        // Write meta.env for use by scripts
+        metaEnvTemplate = metaEnvTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'meta.env')));
+        mkdirp(libraryScriptsFolder);
+        await asyncUtils.writeFile(path.join(libraryScriptsFolder, 'meta.env'), metaEnvTemplate(meta));
     }
 }
 
