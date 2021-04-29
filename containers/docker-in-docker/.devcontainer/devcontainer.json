@@ -2,6 +2,7 @@
 	"name": "Docker in Docker",
 	"dockerFile": "Dockerfile",
 	"runArgs": ["--init", "--privileged"],
+	"mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
 	"overrideCommand": false,
 	
 	// Use this environment variable if you need to bind mount your local source code into a new container.
