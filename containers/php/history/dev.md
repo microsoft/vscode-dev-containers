@@ -13,7 +13,7 @@
 
 ## Variant: 8
 
-**Digest:** sha256:cd768881faff42c186d17c8fd3ec2dda47ffa22d6b3b226b095ef9eff7f172ac
+**Digest:** sha256:4ca87a5a06244a2a62a86775fafc843fd3052a9d86e69ca0333a291c3fee3d3e
 
 **Tags:**
 ```
@@ -30,7 +30,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 8.0.3 | /usr/local |
+| [PHP](https://xdebug.org/) | 8.0.5 | /usr/local |
 
 **Tools installed using git**
 
@@ -44,7 +44,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.0.12 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.0.13 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -96,7 +96,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 ## Variant: 8.0
 
-**Digest:** sha256:87d60a84b64d9b60c24ddd20358f187e5c70aad22c35ea20b82183e2cfeafbc8
+**Digest:** sha256:9c433494333db9903e3c3c9ea9d6562bce60ff660068942914b7bcba6e74a6f9
 
 **Tags:**
 ```
@@ -113,7 +113,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 8.0.3 | /usr/local |
+| [PHP](https://xdebug.org/) | 8.0.5 | /usr/local |
 
 **Tools installed using git**
 
@@ -127,7 +127,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.0.12 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.0.13 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -179,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0
 
 ## Variant: 7
 
-**Digest:** sha256:225d735fe1bc2c938164d8d6e81a290e3e144d8abf5efc4465e679ecb22cbd66
+**Digest:** sha256:a7077c999270cfe51625cb0a4c8542e2e26de4f5532b423c18a81455007195c9
 
 **Tags:**
 ```
@@ -210,7 +210,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.0.12 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.0.13 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -262,7 +262,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 ## Variant: 7.4
 
-**Digest:** sha256:d434056ce148563616eda501b73f75d318d647a33c431c500fb816c3b8280827
+**Digest:** sha256:601d605477a78db53de70797aadf64448da8a6a0b00db9f07688f2dbb21cb006
 
 **Tags:**
 ```
@@ -293,7 +293,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.0.12 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.0.13 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -345,7 +345,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4
 
 ## Variant: 7.3
 
-**Digest:** sha256:4a379ce0e82b5171630732b565090f11837716df73099e8a3cab874631c8cd20
+**Digest:** sha256:c3ea847c928ef864203802416a645d045c2e803bbc609d8636b99e366760f8b0
 
 **Tags:**
 ```
@@ -362,7 +362,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.3.27 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.3.28 | /usr/local |
 
 **Tools installed using git**
 
@@ -376,7 +376,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.0.12 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.0.13 | /usr/local |
 
 **Additional linux tools and packages**
 

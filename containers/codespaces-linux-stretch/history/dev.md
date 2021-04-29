@@ -4,7 +4,7 @@
 
 **Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/codespaces-linux-stretch)
 
-**Digest:** sha256:3240208603088514fa94687d8fc835cd1bf10f6894b6c5e9c32af11f7bf9f23f
+**Digest:** sha256:bc3fda468f8be500eff10c51c976bc6806c0228a4c59e3aec1a54d94f55e88a1
 
 **Tags:**
 ```
@@ -42,24 +42,24 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev-codespaceslinuxstretch
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 9f7d7b7f3e9b78e9ac4228b97dc04878f9f831a2 | /home/codespace/.nvs |
-| [rbenv](https://github.com/rbenv/rbenv.git) | d604acb78aeba583be95f08d45eeae430372beb9 | /usr/local/share/rbenv |
+| [rbenv](https://github.com/rbenv/rbenv.git) | 80af3592322a193b047c21d6a2c488b1cb5baa30 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | 0bd64d37990908876e895aa471685d937f01a034 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.1 |
+| pylint | 2.8.2 |
 | flake8 | 3.9.1 |
 | autopep8 | 1.5.6 |
-| black | 21.4b0 |
+| black | 21.4b2 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.0.0 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
 | virtualenv | 20.4.4 |
-| pipx | 0.16.1.0 |
+| pipx | 0.16.2.1 |
 
 **Go tools and modules**
 
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev-codespaceslinuxstretch
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.21.0 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.5.4 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.1 | /usr/local/bin |
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.0+644 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.2+698 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
 | [GitHub CLI](https://github.com/cli/cli) | 1.9.2 | 
 | [yarn](https://yarnpkg.com/) | 1.17.3 | /opt/yarn |

@@ -12,7 +12,7 @@
 
 ## Variant: 3.13
 
-**Digest:** sha256:1f4a389563166b03052e96262ffd4998f6642f79ce568b274f4c589f47418c64
+**Digest:** sha256:d453df9aac54f3784c82acda0e7c3c6b34bd2e1b88531e5830bf91111b84d5a1
 
 **Tags:**
 ```
@@ -76,7 +76,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.12
 
-**Digest:** sha256:144964ae9669c6bfea7e7ee04cc256c6f3b24a099e9f31d2b46b5aea4d2f17d8
+**Digest:** sha256:cab41bd0c317731341625c21061f595923586ed4db0732933f6fb3ab22a35b79
 
 **Tags:**
 ```
@@ -139,7 +139,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 
 ## Variant: 3.11
 
-**Digest:** sha256:bba86c49a1c21c8abc9f4b45fd5b5b90042caab9f1a393e075e61f161f0f8b15
+**Digest:** sha256:2c4a24dd89ea327ce2ed2db6b07cd4b80e5cb42b8e9dbf3e456a773d10ab6d84
 
 **Tags:**
 ```
@@ -190,7 +190,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.11
 | tzdata | 2021a-r0 |
 | userspace-rcu | 0.11.1-r0 |
 | zlib | 1.2.11-r3 |
-| sudo | 1.8.31-r1 |
+| sudo | 1.9.5p2-r1 |
 | coreutils | 8.31-r0 |
 | sed | 4.7-r0 |
 | grep | 3.3-r0 |
@@ -203,7 +203,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.11
 
 ## Variant: 3.10
 
-**Digest:** sha256:89a0fe6b1e08c9796e2958c043e5c1b41ea392e77cfc6d38cbb1cfbc4f7e2f02
+**Digest:** sha256:2a8861c8ac5311c0ebdfbdb8b5c717c653d23b1caa2c0d49400059f525bdb0cc
 
 **Tags:**
 ```
@@ -254,7 +254,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.10
 | tzdata | 2021a-r0 |
 | userspace-rcu | 0.11.0-r0 |
 | zlib | 1.2.11-r1 |
-| sudo | 1.8.27-r2 |
+| sudo | 1.9.5p2-r0 |
 | coreutils | 8.31-r0 |
 | sed | 4.7-r0 |
 | grep | 3.3-r0 |
