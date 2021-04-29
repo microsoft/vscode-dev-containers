@@ -50,14 +50,14 @@ mv -f terraform /usr/local/bin/
 
 if [ "${TFLINT_VERSION}" != "none" ]; then
     echo "Downloading tflint..."
-    curl -sSL -o /tmp/tf-downloads/tflint.zip https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip
+    curl -sSL -o /tmp/tf-downloads/tflint.zip https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VERSION}/tflint_linux_amd64.zip
     unzip /tmp/tf-downloads/tflint.zip
     mv -f tflint /usr/local/bin/
 fi
 
 if [ "${TERRAGRUNT_VERSION}" != "none" ]; then
     echo "Downloading Terragrunt..."
-    curl -sSL -o /tmp/tf-downloads/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64
+    curl -sSL -o /tmp/tf-downloads/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/${TERRAGRUNT_VERSION}/terragrunt_linux_amd64
     chmod a+x /tmp/tf-downloads/terragrunt
     mv -f /tmp/tf-downloads/terragrunt /usr/local/bin/
 fi
