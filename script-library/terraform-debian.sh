@@ -25,13 +25,11 @@ if [ "${TERRAFORM_VERSION}" = "latest" ] || [ "${TERRAFORM_VERSION}" = "lts" ] |
 fi
 
 if [ "${TFLINT_VERSION}" = "latest" ] || [ "${TFLINT_VERSION}" = "lts" ] || [ "${TFLINT_VERSION}" = "current" ]; then
-    LATEST_RELEASE=$(curl -sSL -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/terraform-linters/tflint/releases?per_page=1&page=1")
-    TFLINT_VERSION=$(echo ${LATEST_RELEASE} | grep -oE 'tag_name":\s*"v[^"]+' | sed -n '/tag_name":\s*"v/s///p')
+    TFLINT_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/terraform-linters/tflint/releases/latest)")
 fi
 
 if [ "${TERRAGRUNT_VERSION}" = "latest" ] || [ "${TERRAGRUNT_VERSION}" = "lts" ] || [ "${TERRAGRUNT_VERSION}" = "current" ]; then
-    LATEST_RELEASE=$(curl -sSL -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/gruntwork-io/terragrunt/releases?per_page=1&page=1")
-    TERRAGRUNT_VERSION=$(echo ${LATEST_RELEASE} | grep -oE 'tag_name":\s*"v[^"]+' | sed -n '/tag_name":\s*"v/s///p')
+    TERRAGRUNT_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/gruntwork-io/terragrunt/releases/latest)")
 fi
 
 # Install curl, unzip if missing
