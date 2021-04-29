@@ -16,8 +16,8 @@ check "docker" docker ps -a
 check "kubectl" kubectl version --client
 check "helm" helm version --client
 check "minikube start" minikube start
-check "minikube remove" minikube remove
-docker image prune -a
+check "minikube remove" minikube delete
+docker image prune -a -f
 
 # Report result
 reportResults
