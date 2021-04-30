@@ -16,6 +16,8 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | Python, Node.js, JavaScript, TypeScript, C++, Java, C#, F#, .NET Core, PHP, PowerShell, Go, Ruby, Rust |
 
+See **[history](history)** for information on the contents of published images.
+
 ## Description
 
 > **Note:** This is the deprecated Debian 9/Strech based image. See the [codespaces-linux definition](../codespaces-linux) for the current Ubuntu 20.04/Focal based image.
@@ -29,10 +31,10 @@ The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. However, **note that only the most recent image is pre-cached in Codespaces which is currently the [Ubuntu 20.04 based image](../codespaces-linux)**. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/universal:0-stretch`
-- `mcr.microsoft.com/vscode/devcontainers/universal:0.22-stretch`
-- `mcr.microsoft.com/vscode/devcontainers/universal:0.22.3-stretch`
+- `mcr.microsoft.com/vscode/devcontainers/universal:0.23-stretch`
+- `mcr.microsoft.com/vscode/devcontainers/universal:0.23.5-stretch`
 
-See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/universal/tags/list).
+See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/universal/tags/list).
 
 ## Accessing the container using SSH, SCP, or SSHFS
 

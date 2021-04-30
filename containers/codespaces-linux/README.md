@@ -16,6 +16,8 @@
 | *Container OS* | Ubuntu |
 | *Languages, platforms* | Python, Node.js, JavaScript, TypeScript, C++, Java, C#, F#, .NET Core, PHP, PowerShell, Go, Ruby, Rust |
 
+See **[history](history)** for information on the contents of published images.
+
 ## Description
 
 While language specific development containers can be useful, in some cases you may want to use more than one in a project without having to set them all up. In other cases you may be looking to create a general "sandbox" container you intend to use with multiple projects or repositories. The large container image generated here (`mcr.microsoft.com/vscode/devcontainers/universal:linux`) includes a number of runtime versions for popular languages lke Python, Node, PHP, Java, Go, C++, Ruby, Go, Rust and .NET Core/C# - many of which are [inherited from the Oryx build image](https://github.com/microsoft/oryx#supported-platforms) it is based on.
@@ -29,10 +31,10 @@ The container includes the `zsh` (and Oh My Zsh!) and `fish` shells that you can
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. However, **note that only the most recent image is pre-cached in Codespaces**. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/universal:1-focal`
-- `mcr.microsoft.com/vscode/devcontainers/universal:1.1-focal`
-- `mcr.microsoft.com/vscode/devcontainers/universal:1.1.1-focal`
+- `mcr.microsoft.com/vscode/devcontainers/universal:1.3-focal`
+- `mcr.microsoft.com/vscode/devcontainers/universal:1.3.3-focal`
 
-See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/universal/tags/list).
+See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/universal/tags/list).
 
 ## Accessing the container using SSH, SCP, or SSHFS
 

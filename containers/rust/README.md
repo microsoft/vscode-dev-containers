@@ -16,6 +16,8 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | Rust |
 
+See **[history](history)** for information on the contents of published images.
+
 ## Using this definition
 
 This definition does not require any special steps to use. Note that the `Cargo.toml` file in the root of this folder is for the test project and can be ignored.
@@ -28,9 +30,9 @@ You can decide how often you want updates by referencing a [semantic version](ht
 
 - `mcr.microsoft.com/vscode/devcontainers/rust:0-1`
 - `mcr.microsoft.com/vscode/devcontainers/rust:0.200-1`
-- `mcr.microsoft.com/vscode/devcontainers/rust:0.200.0-1`
+- `mcr.microsoft.com/vscode/devcontainers/rust:0.200.4-1`
 
-See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/rust/tags/list).
+See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/rust/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

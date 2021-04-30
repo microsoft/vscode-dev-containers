@@ -1,12 +1,15 @@
 {
-	"variants": ["1", "1.16", "1.15"],
+	"variants": ["1.16", "1.15"],
 	"definitionVersion": "0.202.5",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"go:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"1.16": [ "go:${VERSION}-1" ]
+		}
 	},
 	"dependencies": {
 		"image": "golang:${VARIANT}",
