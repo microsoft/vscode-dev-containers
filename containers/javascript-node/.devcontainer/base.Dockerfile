@@ -1,5 +1,5 @@
-# [Choice] Node.js version: 16, 14, 12, 10
-ARG VARIANT=14-buster
+# [Choice] Node.js version: 16, 14, 12
+ARG VARIANT=16-buster
 FROM node:${VARIANT}
 
 # [Option] Install zsh

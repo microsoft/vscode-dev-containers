@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/javascript-node |
-| *Available image variants* | 10, 12, 14, 16 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/javascript-node/tags/list)) |
+| *Available image variants* | 12, 14, 16 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/javascript-node/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -33,13 +33,12 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/javascript-node:16`
 - `mcr.microsoft.com/vscode/devcontainers/javascript-node:14`
 - `mcr.microsoft.com/vscode/devcontainers/javascript-node:12`
-- `mcr.microsoft.com/vscode/devcontainers/javascript-node:10`
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/javascript-node:0-12`
 - `mcr.microsoft.com/vscode/devcontainers/javascript-node:0.202-12`
-- `mcr.microsoft.com/vscode/devcontainers/javascript-node:0.202.0-12`
+- `mcr.microsoft.com/vscode/devcontainers/javascript-node:0.202.1-12`
 
 See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/typescript-node/tags/list).
 
