@@ -1,5 +1,5 @@
 {
-	"variants": ["16-buster", "14-buster", "12-buster", "10-buster", "14-stretch", "12-stretch", "10-stretch"],
+	"variants": ["16-buster", "14-buster", "12-buster", "14-stretch", "12-stretch"],
 	"definitionVersion": "0.202.1",
 	"build": {
 		"latest": true,
@@ -11,8 +11,7 @@
 		"variantTags": {
 			"16-buster": [ "typescript-node:${VERSION}-16" ],
 			"14-buster": [ "typescript-node:${VERSION}-14" ],
-			"12-buster": [ "typescript-node:${VERSION}-12" ],
-			"10-buster": [ "typescript-node:${VERSION}-10" ]
+			"12-buster": [ "typescript-node:${VERSION}-12" ]
 		}
 	},
 	"dependencies": {
