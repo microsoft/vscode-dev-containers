@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "0.23.4",
+	"definitionVersion": "0.23.5",
 	"build": {
 		"latest": false,
 		"versionedTagsOnly": true,
