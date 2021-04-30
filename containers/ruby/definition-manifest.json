@@ -1,12 +1,16 @@
 {
-	"variants": ["3", "3.0", "2", "2.7", "2.6", "2.5"],
+	"variants": ["3.0", "2.7", "2.6"],
 	"definitionVersion": "0.201.5",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"ruby:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"3.0": [ "ruby:${VERSION}-3" ],
+			"2.7": [ "ruby:${VERSION}-2" ]
+		}
 	},
 	"dependencies": {
 		"image": "ruby:${VARIANT}",
