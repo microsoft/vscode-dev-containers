@@ -287,8 +287,9 @@ __zsh_prompt() {
     else
         prompt_username="%n"
     fi
-    PROMPT="%{$fg[green]%}${prompt_username} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )"
-    PROMPT+='%{$fg_bold[blue]%}%~%{$reset_color%} $(git_prompt_info)%{$fg[white]%}$ %{$reset_color%}'
+    PROMPT="%{$fg[green]%}${prompt_username} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )" # User/exit code arrow
+    PROMPT+='%{$fg_bold[blue]%}%(5~|%-1~/…/%3~|%4~)%{$reset_color%} ' # cwd
+    PROMPT+='$(git_prompt_info)%{$fg[white]%}$ %{$reset_color%}' # Git status
     unset -f __zsh_prompt
 }
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}(%{$fg_bold[red]%}"
@@ -321,8 +322,10 @@ EOF
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
     echo "${RC_SNIPPET}" >> /etc/bash.bashrc
     echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
+    echo 'export PROMPT_DIRTRIM=4' >> "${USER_RC_PATH}/.bashrc"
     if [ "${USERNAME}" != "root" ]; then
         echo "${CODESPACES_BASH}" >> "/root/.bashrc"
+        echo 'export PROMPT_DIRTRIM=4' >> "/root/.bashrc"
     fi
     chown ${USERNAME}:${USERNAME} "${USER_RC_PATH}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
@@ -354,7 +357,7 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
     fi
 
     # Adapted, simplified inline Oh My Zsh! install steps that adds, defaults to a codespaces theme.
-    # See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for offical script.
+    # See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for official script.
     OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-zsh"
     if [ ! -d "${OH_MY_INSTALL_DIR}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
         TEMPLATE_PATH="${OH_MY_INSTALL_DIR}/templates/zshrc.zsh-template"
@@ -370,6 +373,7 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
             "https://github.com/ohmyzsh/ohmyzsh" "${OH_MY_INSTALL_DIR}" 2>&1
         echo -e "$(cat "${TEMPLATE_PATH}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
         sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
+
         mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
         echo "${CODESPACES_ZSH}" > "${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme"
         # Shrink git while still enabling updates
@@ -381,6 +385,45 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
             chown -R ${USERNAME}:${USERNAME} "${USER_RC_PATH}"
         fi
     fi
+fi
+
+# Persist image metadata info, script if meta.env found in same directory
+META_INFO_SCRIPT="$(cat << 'EOF'
+#!/bin/sh
+. /usr/local/etc/vscode-dev-containers/meta.env
+
+# Minimal output
+if [ "$1" = "version" ] || [ "$1" = "image-version" ]; then
+    echo "${VERSION}"
+    exit 0
+elif [ "$1" = "release" ]; then
+    echo "${GIT_REPOSITORY_RELEASE}"
+    exit 0
+elif [ "$1" = "content" ] || [ "$1" = "content-url" ] || [ "$1" = "contents" ] || [ "$1" = "contents-url" ]; then
+    echo "${CONTENTS_URL}"
+    exit 0
+fi
+
+#Full output
+echo
+echo "Development container image information"
+echo
+if [ ! -z "${VERSION}" ]; then echo "- Image version: ${VERSION}"; fi
+if [ ! -z "${DEFINITION_ID}" ]; then echo "- Definition ID: ${DEFINITION_ID}"; fi
+if [ ! -z "${VARIANT}" ]; then echo "- Variant: ${VARIANT}"; fi
+if [ ! -z "${GIT_REPOSITORY}" ]; then echo "- Source code repository: ${GIT_REPOSITORY}"; fi
+if [ ! -z "${GIT_REPOSITORY_RELEASE}" ]; then echo "- Source code release/branch: ${GIT_REPOSITORY_RELEASE}"; fi
+if [ ! -z "${BUILD_TIMESTAMP}" ]; then echo "- Timestamp: ${BUILD_TIMESTAMP}"; fi
+if [ ! -z "${CONTENTS_URL}" ]; then echo && echo "More info: ${CONTENTS_URL}"; fi
+echo
+EOF
+)"
+SCRIPT_DIR="$(cd $(dirname $0) && pwd)"
+if [ -f "${SCRIPT_DIR}/meta.env" ]; then
+    mkdir -p /usr/local/etc/vscode-dev-containers/
+    cp -f "${SCRIPT_DIR}/meta.env" /usr/local/etc/vscode-dev-containers/meta.env
+     echo "${META_INFO_SCRIPT}" > /usr/local/bin/devcontainer-info
+    chmod +x /usr/local/bin/devcontainer-info
 fi
 
 # Write marker file

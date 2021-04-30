@@ -49,7 +49,8 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
             variant: variant,
             gitRepository: repositoryUrl,
             gitRepositoryRelease: release,
-            contentsUrl: `${historyUrlPrefix}${definitionId}/${configUtils.getConfig('historyFolderName', 'history')}/${version}.md`
+            contentsUrl: `${historyUrlPrefix}${definitionId}/${configUtils.getConfig('historyFolderName', 'history')}/${version}.md`,
+            buildTimestamp: `${new Date().toUTCString()}`
         }
     };
 

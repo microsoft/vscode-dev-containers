@@ -100,7 +100,8 @@ async function pushImage(definitionId, repo, release, updateLatest,
                         `--label`, `${imageLabelPrefix}.id=${prepResult.meta.definitionId}`,
                         '--label', `${imageLabelPrefix}.variant=${prepResult.meta.variant}`,
                         '--label', `${imageLabelPrefix}.release=${prepResult.meta.gitRepositoryRelease}`,
-                        '--label', `${imageLabelPrefix}.source=${prepResult.meta.gitRepository}`
+                        '--label', `${imageLabelPrefix}.source=${prepResult.meta.gitRepository}`,
+                        '--label', `${imageLabelPrefix}.timestamp='${prepResult.meta.buildTimestamp}'`
                     ].concat(buildParams), spawnOpts);
 
                 // Push

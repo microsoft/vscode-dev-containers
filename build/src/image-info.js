@@ -32,7 +32,7 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
         // Target file paths and whether they exist
         const definitionRelativePath = configUtils.getDefinitionPath(currentDefinitionId, true);
         const historyFolder = path.join(outputPath, definitionRelativePath, configUtils.getConfig('historyFolderName', 'history'));
-        const version = configUtils.getVersionFromRelease(release);
+        const version = configUtils.getVersionFromRelease(release, currentDefinitionId);
         const markdownPath = path.join(historyFolder, `${version}.md`);
         const markdownExists = await asyncUtils.exists(markdownPath);
 
@@ -40,7 +40,7 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
         if(! overwrite && 
             (! generateMarkdown || markdownExists) && 
             (! generateCgManifest || cgManifestExists)) {
-            console.log(`(*) Not in overwrite mode and content for ${definitionId} exists. Skipping.`);
+            console.log(`(*) Skipping ${currentDefinitionId}. Not in overwrite mode and content already exists.`);
             return;
         }
 
