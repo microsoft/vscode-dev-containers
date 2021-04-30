@@ -17,6 +17,8 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | Python |
 
+See **[history](history)** for information on the contents of published images.
+
 ## Using this definition
 
 ### Configuration
@@ -38,10 +40,10 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/python:0-3.9`
-- `mcr.microsoft.com/vscode/devcontainers/python:0.200-3.9`
-- `mcr.microsoft.com/vscode/devcontainers/python:0.200.0-3.9`
+- `mcr.microsoft.com/vscode/devcontainers/python:0.201-3.9`
+- `mcr.microsoft.com/vscode/devcontainers/python:0.201.5-3.9`
 
-See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/python/tags/list).
+See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/python/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize the your container's contents or build for a container architecture the image does not support.
 
