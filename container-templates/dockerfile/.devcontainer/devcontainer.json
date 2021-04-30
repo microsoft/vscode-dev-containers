@@ -8,6 +8,9 @@
 		"args": { "VARIANT": "buster" }
 	},
 
+	// Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
+	"userEnvProbe": "interactiveShell",
+
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": null

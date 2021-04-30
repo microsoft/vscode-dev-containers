@@ -4,6 +4,9 @@
 	// Update the 'image' property with your Docker image name.
 	"image": "mcr.microsoft.com/vscode/devcontainers/base:debian-10",
 
+	// Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
+	"userEnvProbe": "interactiveShell",
+
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		// If you are using an Alpine-based image, change this to /bin/ash

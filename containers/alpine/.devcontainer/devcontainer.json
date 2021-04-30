@@ -5,7 +5,8 @@
 		// Update 'VARIANT' to pick an Alpine version: 3.10, 3.11, 3.12, 3.13
 		"args": { "VARIANT": "3.13" }
 	},
-	
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
+
 	// Set *default* container specific settings.json values on container create. 
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"

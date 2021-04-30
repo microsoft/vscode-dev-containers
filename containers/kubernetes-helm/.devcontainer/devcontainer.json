@@ -2,6 +2,7 @@
 	"name": "Kubernetes - Local Configuration",
 	"dockerFile": "Dockerfile",
 	"overrideCommand": false,
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	"remoteEnv": {
 		"SYNC_LOCALHOST_KUBECONFIG": "true"

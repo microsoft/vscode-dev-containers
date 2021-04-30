@@ -8,6 +8,7 @@
 			"INSTALL_NODE": "true"
 		}
 	},
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 	"mounts": [
 		// [Optional] Anisble Collections: Uncomment if you want to mount your local .ansible/collections folder.
 		// "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ansible/collections,target=/root/.ansible/collections,type=bind,consistency=cached",

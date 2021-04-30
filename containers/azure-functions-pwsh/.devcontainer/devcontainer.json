@@ -8,7 +8,8 @@
 		}
 	},
 	"forwardPorts": [ 7071 ],
-	
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
+
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"terminal.integrated.shell.linux": "/usr/bin/pwsh"

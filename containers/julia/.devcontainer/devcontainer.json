@@ -4,5 +4,6 @@
 	"image": "ghcr.io/julia-vscode/julia-devcontainer",
 	"extensions": ["julialang.language-julia"],
 	"postCreateCommand": "/julia-devcontainer-scripts/postcreate.jl",
-	"remoteUser": "vscode"
+	"remoteUser": "vscode",
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 }

@@ -4,6 +4,7 @@
 	"runArgs": ["--init"],
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 	"overrideCommand": false,
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 	
 	// Use this environment variable if you need to bind mount your local source code into a new container.
 	"remoteEnv": {

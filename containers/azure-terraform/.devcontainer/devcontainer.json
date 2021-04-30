@@ -11,6 +11,7 @@
 			"INSTALL_NODE": "true"
 		}
 	},
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 	"overrideCommand": false,
 	"runArgs": ["--env-file",".devcontainer/devcontainer.env"],

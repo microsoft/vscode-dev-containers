@@ -1,6 +1,7 @@
 { 
 	"name": "Azure Machine Learning", 
 	"dockerFile": "Dockerfile", 
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	// This line allows you to use Docker runconfigs if you set "sharedVolumes": false
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],

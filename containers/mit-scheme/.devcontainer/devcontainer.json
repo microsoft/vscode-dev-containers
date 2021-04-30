@@ -5,6 +5,7 @@
 		// Update 'TARGET_SCHEME_VERSION' to pick an MIT-Scheme version: 11.1
 		"args": { "TARGET_SCHEME_VERSION": "11.1" }
 	},
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 

@@ -15,6 +15,7 @@
 			"NODE_VERSION": "14",
 		}
 	},
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {

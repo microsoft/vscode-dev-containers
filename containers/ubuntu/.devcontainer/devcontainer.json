@@ -5,6 +5,7 @@
 		// Update 'VARIANT' to pick an Ubuntu version: focal, bionic
 		"args": { "VARIANT": "focal" }
 	},
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 

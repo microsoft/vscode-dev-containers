@@ -7,6 +7,7 @@
 			"BAZEL_DOWNLOAD_SHA": "9808adad931ac652e8ff5022a74507c532250c2091d21d6aebc7064573669cc5"
 		}
 	},
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 

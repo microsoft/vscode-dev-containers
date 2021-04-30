@@ -28,6 +28,7 @@
 	},
 	"remoteUser": "codespace",
 	"overrideCommand": false,
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 	"mounts": ["source=codespaces-linux-var-lib-docker,target=/var/lib/docker,type=volume"],
 	"runArgs": [
 		"--cap-add=SYS_PTRACE",

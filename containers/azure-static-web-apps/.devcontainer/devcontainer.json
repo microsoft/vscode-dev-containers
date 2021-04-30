@@ -2,6 +2,7 @@
 	"name": "Azure Static Web Apps",
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071, 5500 ],
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 

@@ -10,6 +10,7 @@
 			"UPGRADE_PACKAGES": "false"
 		}
 	},
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"

@@ -9,6 +9,7 @@
 	"workspaceFolder": "/home/node/workspace/vscode",
 	"overrideCommand": false,
 	"runArgs": [ "--init", "--security-opt", "seccomp=unconfined" ],
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	"settings": {
 		// zsh is also available

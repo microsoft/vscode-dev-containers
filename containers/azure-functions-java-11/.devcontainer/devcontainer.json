@@ -2,6 +2,7 @@
 	"name": "Azure Functions & Java 11",
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
+	"userEnvProbe": "interactiveShell", // Fire ~/.bashrc, ~/.zshrc before starting VS Code processes
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
