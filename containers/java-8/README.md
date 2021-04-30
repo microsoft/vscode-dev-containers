@@ -16,6 +16,8 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | Java |
 
+See **[history](history)** for information on the contents of published images.
+
 ## Using this definition
 
 > **Note:** A version of this [definition for **newer JDKs**](../java) is also available!
@@ -29,10 +31,10 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/java:0-8`
-- `mcr.microsoft.com/vscode/devcontainers/java:0.200-8`
-- `mcr.microsoft.com/vscode/devcontainers/java:0.200.0-8`
+- `mcr.microsoft.com/vscode/devcontainers/java:0.201-8`
+- `mcr.microsoft.com/vscode/devcontainers/java:0.201.5-8`
 
-See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list).
+See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

@@ -16,6 +16,8 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | Python, Anaconda |
 
+See **[history](history)** for information on the contents of published images.
+
 ## Using this definition
 
 ### Configuration
@@ -27,10 +29,10 @@ While the definition itself works unmodified, you can also directly reference pr
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/anaconda:0-3`
-- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.200-3`
-- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.200.0-3`
+- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.201-3`
+- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.201.4-3`
 
-See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/anaconda/tags/list).
+See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/anaconda/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 

@@ -17,6 +17,8 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | PHP |
 
+See **[history](history)** for information on the contents of published images.
+
 ## Using this definition
 
 While the definition itself works unmodified, you can select the version of PHP the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
@@ -37,10 +39,10 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/php:0-7`
-- `mcr.microsoft.com/vscode/devcontainers/php:0.200-7`
-- `mcr.microsoft.com/vscode/devcontainers/php:0.200.0-7`
+- `mcr.microsoft.com/vscode/devcontainers/php:0.201-7`
+- `mcr.microsoft.com/vscode/devcontainers/php:0.201.5-7`
 
-See [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list).
+See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
