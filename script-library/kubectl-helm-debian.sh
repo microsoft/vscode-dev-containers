@@ -45,6 +45,9 @@ echo "Downloading kubectl..."
 if [ "${KUBECTL_VERSION}" = "latest" ] || [ "${KUBECTL_VERSION}" = "lts" ] || [ "${KUBECTL_VERSION}" = "current" ] || [ "${KUBECTL_VERSION}" = "stable" ]; then
     KUBECTL_VERSION="$(curl -sSL https://dl.k8s.io/release/stable.txt)"
 fi
+if [ "${KUBECTL_VERSION::1}" != 'v' ]; then
+    KUBECTL_VERSION="v${KUBECTL_VERSION}"
+fi
 curl -sSL -o /usr/local/bin/kubectl "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/${ARCHITECTURE}/kubectl"
 chmod 0755 /usr/local/bin/kubectl
 if [ "$KUBECTL_SHA256" = "automatic" ]; then
@@ -59,8 +62,10 @@ fi
 # Install Helm, verify signature and checksum
 echo "Downloading Helm..."
 if [ "${HELM_VERSION}" = "latest" ] || [ "${HELM_VERSION}" = "lts" ] || [ "${HELM_VERSION}" = "current" ]; then
-    RECENT_TAGS=$(curl -sSL -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/helm/helm/tags")
-    HELM_VERSION=$(echo ${RECENT_TAGS} | grep -oE 'name":\s*"v[0-9]+\.[0-9]+\.[0-9]+"' | head -n 1 | sed 's/^name":\s*"\(v.*\)"$/\1/')
+    HELM_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/helm/helm/releases/latest)")
+fi
+if [ "${HELM_VERSION::1}" != 'v' ]; then
+    HELM_VERSION="v${HELM_VERSION}"
 fi
 mkdir -p /tmp/helm
 HELM_FILENAME="helm-${HELM_VERSION}-linux-${ARCHITECTURE}.tar.gz"
@@ -101,8 +106,11 @@ fi
 
 # Install Minikube, verify checksum
 if [ "${MINIKUBE_VERSION}" != "none" ]; then
-    # latest is also valid in the download URLs 
     echo "Downloading minikube..."
+    # latest is also valid in the download URLs 
+    if [ "${MINIKUBE_VERSION}" != "latest" ] && [ "${MINIKUBE_VERSION::1}" != "v" ]; then
+        MINIKUBE_VERSION="v${MINIKUBE_VERSION}"
+    fi
     curl -sSL -o /usr/local/bin/minikube "https://storage.googleapis.com/minikube/releases/${MINIKUBE_VERSION}/minikube-linux-${ARCHITECTURE}"    
     chmod 0755 /usr/local/bin/minikube
     if [ "$MINIKUBE_SHA256" = "automatic" ]; then

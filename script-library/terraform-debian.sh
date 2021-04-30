@@ -20,18 +20,6 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-if [ "${TERRAFORM_VERSION}" = "latest" ] || [ "${TERRAFORM_VERSION}" = "lts" ] || [ "${TERRAFORM_VERSION}" = "current" ]; then
-    TERRAFORM_VERSION=$(curl -sSL https://releases.hashicorp.com/terraform/ | grep -m1 -oE '>terraform_[0-9]+\.[0-9]+\.[0-9]+<' | sed 's/^>terraform_\(.*\)<$/\1/')
-fi
-
-if [ "${TFLINT_VERSION}" = "latest" ] || [ "${TFLINT_VERSION}" = "lts" ] || [ "${TFLINT_VERSION}" = "current" ]; then
-    TFLINT_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/terraform-linters/tflint/releases/latest)")
-fi
-
-if [ "${TERRAGRUNT_VERSION}" = "latest" ] || [ "${TERRAGRUNT_VERSION}" = "lts" ] || [ "${TERRAGRUNT_VERSION}" = "current" ]; then
-    TERRAGRUNT_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/gruntwork-io/terragrunt/releases/latest)")
-fi
-
 # Install curl, unzip if missing
 if ! dpkg -s curl ca-certificates unzip > /dev/null 2>&1; then
     export DEBIAN_FRONTEND=noninteractive
@@ -39,6 +27,25 @@ if ! dpkg -s curl ca-certificates unzip > /dev/null 2>&1; then
         apt-get update
     fi
     apt-get -y install --no-install-recommends curl ca-certificates unzip
+fi
+
+
+if [ "${TERRAFORM_VERSION}" = "latest" ] || [ "${TERRAFORM_VERSION}" = "lts" ] || [ "${TERRAFORM_VERSION}" = "current" ]; then
+    TERRAFORM_VERSION=$(curl -sSL https://releases.hashicorp.com/terraform/ | grep -m1 -oE '>terraform_[0-9]+\.[0-9]+\.[0-9]+<' | sed 's/^>terraform_\(.*\)<$/\1/')
+fi
+
+if [ "${TFLINT_VERSION}" = "latest" ] || [ "${TFLINT_VERSION}" = "lts" ] || [ "${TFLINT_VERSION}" = "current" ]; then
+    TFLINT_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/terraform-linters/tflint/releases/latest)")
+fi
+if [ "${TFLINT_VERSION::1}" != 'v' ]; then
+    TFLINT_VERSION="v${TFLINT_VERSION}"
+fi
+
+if [ "${TERRAGRUNT_VERSION}" = "latest" ] || [ "${TERRAGRUNT_VERSION}" = "lts" ] || [ "${TERRAGRUNT_VERSION}" = "current" ]; then
+    TERRAGRUNT_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/gruntwork-io/terragrunt/releases/latest)")
+fi
+if [ "${TERRAGRUNT_VERSION::1}" != 'v' ]; then
+    TERRAGRUNT_VERSION="v${TERRAGRUNT_VERSION}"
 fi
 
 # Install Terraform, tflint, Terragrunt
