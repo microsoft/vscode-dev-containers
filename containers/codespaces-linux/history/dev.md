@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/codespaces-linux)
 
-**Digest:** sha256:01d769bd4373632c6bd5a8dc74ba9d58e4945d18a4b58dfdd5c50ab048cd0e17
+**Digest:** sha256:22e88362976668e473aaa3f9159b12d91f0788ebd98b673b6dfdf7eaf9f4d22d
 
 **Tags:**
 ```
@@ -52,7 +52,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | pylint | 2.8.2 |
 | flake8 | 3.9.1 |
-| autopep8 | 1.5.6 |
+| autopep8 | 1.5.7 |
 | black | 21.4b2 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |

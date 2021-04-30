@@ -218,7 +218,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "autopep8",
-                    "Version": "1.5.6"
+                    "Version": "1.5.7"
                 }
             }
         },
@@ -672,6 +672,15 @@
         },
         {
             "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "autopep8",
+                    "Version": "1.5.6"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "rake",
@@ -797,16 +806,6 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
-                    "Version": "1",
-                    "DownloadUrl": "https://hub.docker.com/_/golang"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: golang",
                     "Version": "1.16",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
@@ -847,27 +846,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: php",
-                    "Version": "8",
-                    "DownloadUrl": "https://hub.docker.com/_/php"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: php",
                     "Version": "8.0",
-                    "DownloadUrl": "https://hub.docker.com/_/php"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: php",
-                    "Version": "7",
                     "DownloadUrl": "https://hub.docker.com/_/php"
                 }
             }
@@ -889,16 +868,6 @@
                     "Name": "Docker Image: php",
                     "Version": "7.3",
                     "DownloadUrl": "https://hub.docker.com/_/php"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: python",
-                    "Version": "3",
-                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
@@ -967,27 +936,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: ruby",
-                    "Version": "3",
-                    "DownloadUrl": "https://hub.docker.com/_/ruby"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: ruby",
                     "Version": "3.0",
-                    "DownloadUrl": "https://hub.docker.com/_/ruby"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: ruby",
-                    "Version": "2",
                     "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
@@ -1008,16 +957,6 @@
                 "Other": {
                     "Name": "Docker Image: ruby",
                     "Version": "2.6",
-                    "DownloadUrl": "https://hub.docker.com/_/ruby"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: ruby",
-                    "Version": "2.5",
                     "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
@@ -1126,16 +1065,6 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
-                    "Version": "10-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
                     "Version": "14-stretch",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
@@ -1147,16 +1076,6 @@
                 "Other": {
                     "Name": "Docker Image: node",
                     "Version": "12-stretch",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "10-stretch",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
@@ -1222,16 +1141,6 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
-                    "Version": "10-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
                     "Version": "14-stretch",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
@@ -1243,16 +1152,6 @@
                 "Other": {
                     "Name": "Docker Image: node",
                     "Version": "12-stretch",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "10-stretch",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
