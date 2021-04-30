@@ -1,12 +1,16 @@
 {
-	"variants": ["8", "8.0", "7", "7.4", "7.3"],
+	"variants": ["8.0", "7.4", "7.3"],
 	"definitionVersion": "0.201.5",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"php:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"8.0": [ "php:${VERSION}-8" ],
+			"7.4": [ "php:${VERSION}-7" ]
+		}
 	},
 	"dependencies": {
 		"image": "php:${VARIANT}",
