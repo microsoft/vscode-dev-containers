@@ -20,25 +20,30 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, apt-transport-https or gpg if missing
-if ! dpkg -s curl ca-certificates > /dev/null 2>&1; then
+# Install curl, apt-transport-https, curl, gpg, or dirmngr if missing
+if ! dpkg -s curl ca-certificates apt-transport-https dirmngr gnupg2 lsb-release > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates
+    apt-get -y install --no-install-recommends curl ca-certificates apt-transport-https dirmngr gnupg2 lsb-release
 fi
 
-# Get latest release number if latest is specified
-if [ "${CLI_VERSION}" = "latest" ] ||  [ "${CLI_VERSION}" = "current" ] ||  [ "${CLI_VERSION}" = "lts" ]; then
-    LATEST_RELEASE=$(curl -sSL -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/cli/cli/releases?per_page=1&page=1")
-    CLI_VERSION=$(echo ${LATEST_RELEASE} | grep -oE 'tag_name":\s*"v[^"]+' | sed -n '/tag_name":\s*"v/s///p')
+if [ "${CLI_VERSION}" != "latest" ] && [ "${CLI_VERSION}" != "lts" ] && [ "${CLI_VERSION}" != "stable" ]; then
+    VERSION_SUFFIX="=${CLI_VERSION}"
+else
+    VERSION_SUFFIX=""
 fi
 
 # Install the GitHub CLI
 echo "Downloading github CLI..."
-curl -OsSL https://github.com/cli/cli/releases/download/v${CLI_VERSION}/gh_${CLI_VERSION}_linux_amd64.deb
-echo "Installing github CLI..."
-apt-get install ./gh_${CLI_VERSION}_linux_amd64.deb
-echo "Removing github CLI deb file after installation..."
-rm -rf ./gh_${CLI_VERSION}_linux_amd64.deb
+# Use different home to ensure nothing pollutes user directories
+export GNUPGHOME="/tmp/gh/gnupg"
+mkdir -p "${GNUPGHOME}"
+chmod 700 ${GNUPGHOME}
+# Import key safely (new method rather than deprecated apt-key approach) and install
+gpg -q --no-default-keyring --keyring /usr/share/keyrings/githubcli-archive-keyring.gpg --keyserver keyserver.ubuntu.com --receive-keys C99B11DEB97541F0
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages $(lsb_release -cs) main" > /etc/apt/sources.list.d/github-cli2.list
+apt-get update
+apt-get -y install "gh${VERSION_SUFFIX}"
+rm -rf "/tmp/gh/gnupg"
 echo "Done!"

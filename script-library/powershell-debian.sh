@@ -26,11 +26,11 @@ if ! dpkg -s apt-transport-https curl ca-certificates lsb-release > /dev/null 2>
     apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lsb-release gnupg2 
 fi
 
-# Use correct source for distro (Ubuntu/Debian) and Codename (stretch, buster, bionic, focal)
+# Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
+curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
 DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
 CODENAME=$(lsb_release -cs)
-curl -s https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT)
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-${DISTRO}-${CODENAME}-prod ${CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${DISTRO}-${CODENAME}-prod ${CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
 apt-get update -yq
 apt-get install -yq powershell
 echo "Done!"

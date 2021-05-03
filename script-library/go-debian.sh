@@ -70,11 +70,19 @@ if [ "${TARGET_GO_VERSION}" = "latest" ] ||  [ "${TARGET_GO_VERSION}" = "current
     TARGET_GO_VERSION=$(curl -sSL "https://golang.org/VERSION?m=text" | sed -n '/^go/s///p' )
 fi
 
+ARCHITECTURE="$(uname -m)"
+case $ARCHITECTURE in
+    x86_64) ARCHITECTURE="amd64";;
+    aarch64) ARCHITECTURE="arm64";;
+    armv8*) ARCHITECTURE="arm64";;
+    armv7*) ARCHITECTURE="armv6l";;
+esac
+
 # Install Go
 GO_INSTALL_SCRIPT="$(cat <<EOF
     set -e
     echo "Downloading Go ${TARGET_GO_VERSION}..."
-    curl -sSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-amd64.tar.gz"
+    curl -sSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${ARCHITECTURE}.tar.gz"
     echo "Extracting Go ${TARGET_GO_VERSION}..."
     tar -xzf /tmp/go.tar.gz -C "${TARGET_GOROOT}" --strip-components=1
     rm -f /tmp/go.tar.gz
