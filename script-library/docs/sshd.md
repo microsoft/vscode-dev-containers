@@ -44,8 +44,10 @@ Usage:
  3. Your container/codespace now has a running SSH server in it. Use a **local terminal** (or other tool) to connect to it using the command and password from step 2. e.g.
 
     ```bash
-    ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vscode@localhost
+    ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null codespace@localhost
     ```
+
+    ...where `codespace` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`).
 
     The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
 
@@ -93,6 +95,7 @@ Usage:
     ```bash
     ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vscode@localhost
     ```
+    ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`).
 
     The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
 
@@ -123,6 +126,8 @@ If you already have a running container, you can use the script to spin up SSH i
     ```bash
     ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vscode@localhost
     ```
+
+    ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`).
 
     The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
 
