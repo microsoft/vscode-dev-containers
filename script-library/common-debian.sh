@@ -110,7 +110,8 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         man-db \
         strace \
         manpages \
-        manpages-dev "
+        manpages-dev \
+        init-system-helpers"
         
     # Needed for adding manpages-posix and manpages-posix-dev which are non-free packages in Debian
     if [ "${ADD_NON_FREE_PACKAGES}" = "true" ]; then
@@ -247,6 +248,18 @@ else
 fi
 EOF
 chmod +x /usr/local/bin/code
+
+# systemctl shim - tells people to use 'service' if systemd is not running
+cat << 'EOF' > /usr/local/bin/systemctl
+#!/bin/sh
+set -e
+if [ -d "/run/systemd/system" ]; then
+    systemctl "$@"
+else
+    echo '\n"systemd" is not running in this container due to its overhead.\nUse the "service" command to start services intead. e.g.: \n\nservice --status-all'
+fi
+EOF
+chmod +x /usr/local/bin/systemctl
 
 # Codespaces bash and OMZ themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
