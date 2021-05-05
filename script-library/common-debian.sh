@@ -254,7 +254,7 @@ cat << 'EOF' > /usr/local/bin/systemctl
 #!/bin/sh
 set -e
 if [ -d "/run/systemd/system" ]; then
-    systemctl "$@"
+    exec /bin/systemctl/systemctl "$@"
 else
     echo '\n"systemd" is not running in this container due to its overhead.\nUse the "service" command to start services intead. e.g.: \n\nservice --status-all'
 fi
