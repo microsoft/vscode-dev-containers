@@ -40,14 +40,15 @@ Usage:
     ```bash
     passwd
     ```
- 2. Open the ****Ports**** tab next to the Terminal tab, select Forward port and enter port `2222`.
+ 2. Open the ****Ports**** tab next to the Terminal tab, select Forward port and enter port `2222`. Take note of the **local address** port number if different than `2222`.
+
  3. Your container/codespace now has a running SSH server in it. Use a **local terminal** (or other tool) to connect to it using the command and password from step 2. e.g.
 
     ```bash
     ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null codespace@localhost
     ```
 
-    ...where `codespace` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`).
+    ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after `-p` is the **local address port** from step 2. 
 
     The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
 
@@ -99,6 +100,8 @@ Usage:
 
     The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
 
+If you are unable to connect, it's possible SSH is available on a different local port because 2222 was busy. Open the ****Ports**** tab next to the Terminal tab, take note of the **local address port** for port 2222 in the container and update `-p 2222` to match.
+
 ### Ad-hoc Usage
 
 If you already have a running container, you can use the script to spin up SSH inside it.
@@ -119,7 +122,7 @@ If you already have a running container, you can use the script to spin up SSH i
 
 3. Take note of the password that was generated and the SSH command.
 
-4. Open the ****Ports**** tab next to the Terminal tab, select Forward port and enter port `2222`.
+4. Open the ****Ports**** tab next to the Terminal tab, select Forward port and enter port `2222`. Take note of the **local address port** number if different than `2222`.
 
 5. Your container/codespace now has a running SSH server in it. Use a **local terminal** (or other tool) to connect to it using the command and password from step 2. e.g.
 
@@ -127,10 +130,39 @@ If you already have a running container, you can use the script to spin up SSH i
     ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vscode@localhost
     ```
 
-    ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`).
+    ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after `-p` is the **local address** port from step 4.
 
     The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
 
 6. Next time you connect, you can spin up the SSH server again by running `/usr/local/share/sshd-init.sh` in a terminal in the container/codespace and using the same command / password.
 
-That's it!
+### Using SSHFS
+
+[SSHFS](https://en.wikipedia.org/wiki/SSHFS) allows you to mount a remote filesystem to your local machine with nothing but a SSH connection. Here's how to use it with a dev container.
+
+1. Follow the steps in one of the previous sections to ensure you can connect to the dev contaienr using the normal `ssh` client.
+
+2. Install a SSHFS client.
+
+    - **Windows:** Install [WinFsp](https://github.com/billziss-gh/winfsp/releases) and [SSHFS-Win](https://github.com/billziss-gh/sshfs-win/releases).
+    - **macOS**: Install macFUSE and the SSHFS packages from the [macFUSE website](https://macfuse.io/).
+    - **Linux:** Use your native package manager to install your distribution's copy of the sshfs package. e.g. `sudo apt-get update && sudo apt-get install sshfs`
+
+3. Mount the remote filesystem.
+
+    - **macOS / Linux:** Use the `sshfs` command to mount the remote filesystem. The arguments are similar to the normal `ssh` command but with a few additions. For example: 
+
+        ```
+        mkdir -p ~/sshfs/devcontainer
+        sshfs "vscode@localhost:/workspaces" "$HOME/sshfs/devcontainer" -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  -C
+        ```
+        ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and updating `-p 2222` to match the local address port you used in step 1 as needed.
+
+    - **Windows:** Press Window+R and enter the following in the "Open" field in the Run dialog: 
+    
+        ```
+        \\sshfs.r\vscode@localhost!2222\workspaces
+        ```
+        ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`)  `2222` after the `!` is the same local port you used in the `ssh` command in step 1 as needed.
+
+4. Your dev container's filesystem should now be available in the `sshfs` folder under your home / user profile folder.
