@@ -140,7 +140,7 @@ If you already have a running container, you can use the script to spin up SSH i
 
 [SSHFS](https://en.wikipedia.org/wiki/SSHFS) allows you to mount a remote filesystem to your local machine with nothing but a SSH connection. Here's how to use it with a dev container.
 
-1. Follow the steps in one of the previous sections to ensure you can connect to the dev contaienr using the a normal `ssh` client.
+1. Follow the steps in one of the previous sections to ensure you can connect to the dev contaienr using the normal `ssh` client.
 
 2. Install a SSHFS client.
 
