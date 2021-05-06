@@ -154,9 +154,9 @@ If you already have a running container, you can use the script to spin up SSH i
 
         ```
         mkdir -p ~/sshfs/devcontainer
-        sshfs "vscode@localhost:/workspaces" "$HOME/sshfs/devcontainer" -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  -C
+        sshfs "vscode@localhost:/workspaces" "$HOME/sshfs/devcontainer" -p 2222 -o follow_symlinks -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  -C
         ```
-        ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after the `-p` and `2222` after the `!` is the same local port you used in the `ssh` command in step 1.
+        ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after the `-p` is the same local port you used in the `ssh` command in step 1.
 
     - **Windows:** Press Window+R and enter the following in the "Open" field in the Run dialog: 
     
@@ -165,4 +165,4 @@ If you already have a running container, you can use the script to spin up SSH i
         ```
         ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after the `!` is the same local port you used in the `ssh` command in step 1.
 
-4. Your dev container's filesystem should now be available in the `sshfs` folder under your home / user profile folder.
+4. Your dev container's filesystem should now be available in the `~/sshfs/devcontainer` on macOS or Liunux and appear in a new explorer window on Windows.
