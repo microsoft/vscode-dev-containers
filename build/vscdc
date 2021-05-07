@@ -24,7 +24,7 @@ require('yargs')
                     default: `v${packageJson.version}`
                 },
                 'registry-repositories': {
-                    describe: 'Map of registries and repositories',
+                    describe: 'Stringified object of registries and repositories',
                     default: configUtils.getConfig('registryRepositories')
                 },
                 'registry': {
@@ -86,7 +86,7 @@ require('yargs')
                     default: `v${packageJson.version}`
                 },
                 'registry-repositories': {
-                    describe: 'Map of registries and repositories',
+                    describe: 'Stringified object of registries and repositories',
                     default: configUtils.getConfig('registryRepositories')
                 },
                 'registry': {
@@ -175,7 +175,7 @@ require('yargs')
                     default: 'master'
                 },
                 'registry-repositories': {
-                    describe: 'Map of registries and to repositories',
+                    describe: 'Stringified object of registries and repositories',
                     default: configUtils.getConfig('registryRepositories')
                 },
                 'registry': {
@@ -241,7 +241,7 @@ require('yargs')
                     default: 'master'
                 },
                 'registry-repositories': {
-                    describe: 'Map of registries and to repositories',
+                    describe: 'Stringified object of registries and repositories',
                     default: configUtils.getConfig('registryRepositories')
                 },
                 'registry': {
@@ -308,7 +308,7 @@ require('yargs')
                     default: '.'
                 },
                 'registry-repositories': {
-                    describe: 'Map of registries and to repositories',
+                    describe: 'Stringified object of registries and repositories',
                     default: configUtils.getConfig('registryRepositories')
                 },
                 'registry': {
@@ -411,14 +411,15 @@ function patchCommand(argv) {
 
 // Utility function to process --registry-repositories, --registry, and --repository flags
 function getRegistryRepositories(registryRepositories, registry, repository) {
+    const objRegistryRepositories = typeof registryRepositories === 'string' ? JSON.parse(registryRepositories) : registryRepositories;
     if(registry && repository) {
         const result = {};
         result[registry] = repository;
         return result;
     } else if(registry) {
         const result = {};
-        result[registry] = registryRepositories[registry];
+        result[registry] = objRegistryRepositories[registry];
         return result;
     } 
-    return registryRepositories;
+    return objRegistryRepositories;
 }

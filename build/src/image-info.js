@@ -86,7 +86,12 @@ async function getDefinitionImageContent(repo, release, registryRepositories, st
     const version = configUtils.getVersionFromRelease(release, definitionId);
 
     // Just use first registry and repository
-    const [registry, repository] = configUtils.getFirstRegistryAndRepository(registryRepositories, true)
+    const oneRegistryAndRepository = configUtils.getFirstRegistryAndRepository(registryRepositories)
+    if (buildFirst) {
+        // Build but don't push images
+        console.log('(*) Building image...');
+        await push(repo, release, false, oneRegistryAndRepository, stubRegistry, stubRepository, false, false, [], 1, 1, false, definitionId);
+    }
 
     // Create header for markdown
     let markdown = await generateReleaseNotesHeader(repo, release, definitionId, variants, dependencies);
@@ -95,12 +100,8 @@ async function getDefinitionImageContent(repo, release, registryRepositories, st
         if(variant) {
             console.log(`\n(*) Processing variant ${variant}...`);
         }
-        const imageTag = configUtils.getImageRepoTagsForVersion(definitionId, version, registry, repository, variant)[0];
-        if (buildFirst) {
-            // Build but don't push images
-            console.log('(*) Building image...');
-            await push(repo, release, false, registry, repository, registry, repository, false, false, [], 1, 1, false, definitionId);
-        } else {
+        const imageTag = configUtils.getAllImageRepoTagsForVersion(definitionId, version, oneRegistryAndRepository, variant)[0];
+        if (!buildFirst) {
             console.log(`(*) Pulling image ${imageTag}...`);
             await asyncUtils.spawn('docker', ['pull', imageTag]);
         }
@@ -190,7 +191,7 @@ async function generateReleaseNotesPart(contents, release, stubRegistry, stubRep
     const markdownFormatter = markdownFormatterFactory.getFormatter();
     const formattedContents = getFormattedContents(contents, markdownFormatter);
     formattedContents.hasPip = formattedContents.pip.length > 0 || formattedContents.pipx.length > 0;
-    formattedContents.tags = configUtils.getTagList(definitionId, release, 'full-only', stubRegistry,  stubRepository, variant),
+    formattedContents.tags = configUtils.getImageRepoTags(definitionId, release, 'full-only', stubRegistry, stubRepository, variant),
     formattedContents.variant = variant;
     return releaseNotesVariantPartTemplate(formattedContents);
 }

@@ -1,8 +1,7 @@
 {
 	"registryRepositories": {
 		"devcon.azurecr.io": [ 
-			"public/vscode/devcontainers",
-			"public/github/devcontainers"
+			"public/vscode/devcontainers"
 		]
 	},
 	"stubRegistry": "mcr.microsoft.com",

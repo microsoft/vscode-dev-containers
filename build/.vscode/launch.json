@@ -17,10 +17,9 @@
 				"--page-total", "1",
 				"--release", "v0.167.0",
 				"--github-repo", "microsoft/vscode-dev-containers",
-				"--registry", "clantz.azurecr.io",
-				"--registryPath", "vscode/devcontainers",
+				"--registry-repositories", "{\"clantz.azurecr.io\":[\"vscode/devcontainers\",\"github/devcontainers\"]}",
 				"--stubRegistry", "clantz.azurecr.io",
-				"--stubRegistryPath", "vscode/devcontainers"
+				"--stubRepository", "vscode/devcontainers"
 			]
 		},
 		{
@@ -35,9 +34,9 @@
 				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
-				"--registryPath", "vscode/devcontainers",
+				"--repository", "vscode/devcontainers",
 				"--stubRegistry", "clantz.azurecr.io",
-				"--stubRegistryPath", "vscode/devcontainers"
+				"--stubRepository", "vscode/devcontainers"
 			]
 		}, {
 			"type": "node",
@@ -55,7 +54,7 @@
 				"--release", "master",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "mcr.microsoft.com",
-				"--registryPath", "vscode/devcontainers"
+				"--repository", "vscode/devcontainers"
 			]
 		},
 		{
@@ -90,7 +89,7 @@
 				"patch",
 				"--patch-path", "patch/sample",
 				"--registry", "clantz.azurecr.io",
-				"--registryPath", "vscode/devcontainers"
+				"--repository", "vscode/devcontainers"
 			]
 		},
 		{
@@ -103,7 +102,7 @@
 				"patch",
 				"--all",
 				"--registry", "clantz.azurecr.io",
-				"--registryPath", "vscode/devcontainers"
+				"--repository", "vscode/devcontainers"
 			]
 		}
 	]
