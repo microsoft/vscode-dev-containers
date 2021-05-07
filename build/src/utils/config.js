@@ -176,20 +176,29 @@ function getLinuxDistroForDefinition(definitionId) {
 }
 
 // Generate 'latest' flavor of a given definition's tag
-function getLatestTag(definitionId, registry, registryPath) {
+function getAllImageRepoLatestTags(definitionId, registryRepositories) {
     if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
         return null;
     }
 
-    // Given there could be multiple registries in the tag list, get all the different latest variations
-    return config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
-        const latest = `${registry}/${registryPath}/${tag.replace(/:.+/, ':latest')}`
-        if (list.indexOf(latest) < 0) {
-            list.push(latest);
-        }
-        return list;
-    }, []);
-
+    let result = [];
+    for (let registry in registryRepositories) {
+        // Given there could be multiple registries in the tag list, get all the different latest variations
+        result = result.concat(config.definitionBuildSettings[definitionId].tags.reduce((list, tag) => {
+            let repositories = registryRepositories[registry];
+            if(typeof repositories === 'string') {
+                repositories = [repositories];
+            }
+            repositories.forEach((repository) => {
+                const latest = `${registry}/${repository}/${tag.replace(/:.+/, ':latest')}`
+                if (list.indexOf(latest) < 0) {
+                    list.push(latest);
+                }
+            });
+            return list;    
+        }, []));
+    }
+    return result;
 }
 
 function getVariants(definitionId) {
@@ -243,7 +252,7 @@ function getAllImageRepoTagsForVersion(definitionId, version, registryRepositori
         if (baseTag.charAt(baseTag.length - 1) !== ':') {
             for(let registry in registryRepositories) {
                 let repositories = registryRepositories[registry];
-                if(typeof pathList === 'string') {
+                if(typeof repositories === 'string') {
                     repositories = [repositories];
                 }
                 repositories.forEach((repository)=> {
@@ -339,7 +348,7 @@ function getAllImageRepoTags(definitionId, versionOrRelease, versionPartHandling
     return tagList.concat((updateLatest 
         && config.definitionBuildSettings[definitionId].latest
         && variant === firstVariant)
-        ? getLatestTag(definitionId, registryRepositories)
+        ? getAllImageRepoLatestTags(definitionId, registryRepositories)
         : []);
 }
 
@@ -348,7 +357,6 @@ function getImageRepoTags(definitionId, versionOrRelease, versionPartHandling, r
     const registryRepositories = {};
     registryRepositories[registry] = repository;
     return getAllImageRepoTags(definitionId, versionOrRelease, versionPartHandling, registryRepositories, variant);
-
 }
 
 // Walk the image build config and paginate and sort list so parents build before (and with) children
