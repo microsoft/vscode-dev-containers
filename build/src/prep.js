@@ -28,7 +28,7 @@ const historyUrlPrefix = configUtils.getConfig('historyUrlPrefix');
 const repositoryUrl = configUtils.getConfig('repositoryUrl');
 
 // Prepares dockerfile for building or packaging
-async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, isForBuild, variant) {
+async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, release, registryRepositories, stubRegistry, stubRepository, isForBuild, variant) {
     const devContainerJsonPath = path.dirname(devContainerDockerfilePath);
 
     // Read Dockerfile
@@ -59,45 +59,29 @@ async function prepDockerFile(devContainerDockerfilePath, definitionId, repo, re
 
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
-        const parentTag = configUtils.getParentTagForVersion(definitionId, version, registry, registryPath, variant);
+        const parentTag = configUtils.getParentImageRepoTagForVersion(definitionId, version, registryRepositories, variant);
         if (parentTag) {
             prepResult.devContainerDockerfileModified = replaceFrom(prepResult.devContainerDockerfileModified, `FROM ${parentTag}`);
         }
 
         prepResult.shouldFlattenBaseImage = configUtils.shouldFlattenDefinitionBaseImage(definitionId);
-        if (prepResult.shouldFlattenBaseImage) {
-            // Determine base image
-            const baseImageFromCaptureGroups = /FROM\s+(.+):([^\s\n]+)?/.exec(prepResult.devContainerDockerfileModified);
-            let registryPath = baseImageFromCaptureGroups[1].replace('${VARIANT}', variant).replace('$VARIANT', variant);
-            const tagName = (baseImageFromCaptureGroups.length > 2) ?
-                baseImageFromCaptureGroups[2].replace('${VARIANT}', variant).replace('$VARIANT', variant) :
-                null;
-            prepResult.baseImageTag = registryPath + (tagName ? ':' + tagName : '');
-
-            // Create tag for flattened image
-            const registrySlashIndex = registryPath.indexOf('/');
-            if (registrySlashIndex > -1) {
-                registryPath = registryPath.substring(registrySlashIndex + 1);
-            }
-            prepResult.flattenedBaseImageTag = `${registry}/${registryPath}:${tagName ? tagName + '-' : ''}flattened`;
-
-            // Modify Dockerfile contents to use flattened image tag
-            prepResult.devContainerDockerfileModified = replaceFrom(prepResult.devContainerDockerfileModified, `FROM ${prepResult.flattenedBaseImageTag}`);
-        }
+        if(prepResult.shouldFlattenBaseImage) {
+            await flattenBaseImage(registryRepositories, prepResult, variant);
+        }    
     } else {
         // Otherwise update any Dockerfiles that refer to an un-versioned tag of another dev container
         // to the MAJOR version from this release.
         const expectedRegistry = configUtils.getConfig('stubRegistry', 'mcr.microsoft.com');
-        const expectedRegistryPath = configUtils.getConfig('stubRegistryPath', 'vscode/devcontainers');
+        const expectedRegistryPath = configUtils.getConfig('stubRepository', 'vscode/devcontainers');
         const fromCaptureGroups = new RegExp(`FROM\\s+(${expectedRegistry}/${expectedRegistryPath}/.+:.+)`).exec(devContainerDockerfileRaw);
         if (fromCaptureGroups && fromCaptureGroups.length > 0) {
-            const fromDefinitionTag = configUtils.getUpdatedTag(
+            const fromDefinitionTag = configUtils.getUpdatedImageRepoTag(
                 fromCaptureGroups[1],
                 expectedRegistry,
                 expectedRegistryPath,
                 version,
                 stubRegistry,
-                stubRegistryPath,
+                stubRepository,
                 variant);
             prepResult.devContainerDockerfileModified = prepResult.devContainerDockerfileModified
                 .replace(fromCaptureGroups[0], `FROM ${fromDefinitionTag}`);
@@ -114,6 +98,30 @@ async function createStub(dotDevContainerPath, definitionId, repo, release, base
     const templateDockerfile = await configUtils.objectByDefinitionLinuxDistro(definitionId, stubPromises);
     const userDockerFile = await processStub(templateDockerfile, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRegistryPath);
     await asyncUtils.writeFile(userDockerFilePath, userDockerFile);
+}
+
+// Originally created for the Oryx image which had a massive number of layers that needed to be flattened
+async function flattenBaseImage(registryRepositories, prepResult, variant) {
+    // Only use first registry for flattened image
+    const [registry,] = configUtils.getFirstRegistryAndRepository(registryRepositories, true);
+
+    // Determine base image
+    const baseImageFromCaptureGroups = /FROM\s+(.+):([^\s\n]+)?/.exec(prepResult.devContainerDockerfileModified);
+    let repository = baseImageFromCaptureGroups[1].replace('${VARIANT}', variant).replace('$VARIANT', variant);
+    const tagName = (baseImageFromCaptureGroups.length > 2) ?
+        baseImageFromCaptureGroups[2].replace('${VARIANT}', variant).replace('$VARIANT', variant) :
+        null;
+    prepResult.baseImageTag = repository + (tagName ? ':' + tagName : '');
+
+    // Create tag for flattened image
+    const registrySlashIndex = repository.indexOf('/');
+    if (registrySlashIndex > -1) {
+        repository = repository.substring(registrySlashIndex + 1);
+    }
+    prepResult.flattenedBaseImageTag = `${registry}/${repository}:${tagName ? tagName + '-' : ''}flattened`;
+
+    // Modify Dockerfile contents to use flattened image tag
+    prepResult.devContainerDockerfileModified = replaceFrom(prepResult.devContainerDockerfileModified, `FROM ${prepResult.flattenedBaseImageTag}`);
 }
 
 async function updateStub(dotDevContainerPath, definitionId, repo, release, baseDockerFileExists, registry, registryPath) {
@@ -146,7 +154,7 @@ async function processStub(userDockerFile, definitionId, repo, release, baseDock
     return replaceFrom(userDockerFile, fromSection);
 }
 
-async function updateConfigForRelease(definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath) {
+async function updateConfigForRelease(definitionId, repo, release, registryRepositories, stubRegistry, stubRegistryPath) {
     // Look for context in devcontainer.json and use it to build the Dockerfile
     console.log(`(*) Making version specific updates to ${definitionId}...`);
     const definitionPath = configUtils.getDefinitionPath(definitionId, false);
@@ -162,7 +170,7 @@ async function updateConfigForRelease(definitionId, repo, release, registry, reg
     // Replace version specific content in Dockerfile
     const dockerFilePath = path.join(dotDevContainerPath, 'Dockerfile');
     if (await asyncUtils.exists(dockerFilePath)) {
-        await prepDockerFile(dockerFilePath, definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, false);
+        await prepDockerFile(dockerFilePath, definitionId, repo, release, registryRepositories, stubRegistry, stubRegistryPath, false);
     }
 }
 

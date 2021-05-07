@@ -10,15 +10,15 @@ const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
 const packageJson = require('../../package.json');
 
-async function package(repo, release, updateLatest, registry, registryPath, stubRegistry,
-    stubRegistryPath, prepAndPackageOnly, packageOnly, cleanWhenDone, definitionsToSkipPush) {
+async function package(repo, release, updateLatest, registryRepositories, stubRegistry,
+    stubRepository, prepAndPackageOnly, packageOnly, cleanWhenDone, definitionsToSkipPush) {
 
     // Optional argument defaults
     packageOnly = typeof packageOnly === 'undefined' ? false : packageOnly;
     prepAndPackageOnly = typeof prepAndPackageOnly === 'undefined' ? false : prepAndPackageOnly;
     cleanWhenDone = typeof cleanWhenDone === 'undefined' ? true : cleanWhenDone;
-    stubRegistry = stubRegistry || registry;
-    stubRegistryPath = stubRegistryPath || registryPath;
+    stubRegistry = stubRegistry || configUtils.getConfig('stubRepository', 'vscode/devcontainers');
+    stubRepository = stubRepository || configUtils.getConfig('stubRepository', 'vscode/devcontainers');
 
     // Stage content and load config
     const stagingFolder = await configUtils.getStagingFolder(release);
@@ -26,7 +26,7 @@ async function package(repo, release, updateLatest, registry, registryPath, stub
 
     if (!packageOnly) {
         // First, push images, update content
-        await push(repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, true, prepAndPackageOnly, definitionsToSkipPush);
+        await push(repo, release, updateLatest, registryRepositories, stubRegistry, stubRepository, true, prepAndPackageOnly, definitionsToSkipPush);
     }
 
     // Then package
@@ -44,7 +44,7 @@ async function package(repo, release, updateLatest, registry, registryPath, stub
     const allDefinitions = configUtils.getAllDefinitionPaths();
     for (let currentDefinitionId in allDefinitions) {
         if (typeof currentDefinitionId === 'string') {
-            await prep.updateConfigForRelease(currentDefinitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath);
+            await prep.updateConfigForRelease(currentDefinitionId, repo, release, registryRepositories, stubRegistry, stubRepository);
         }
     }
 

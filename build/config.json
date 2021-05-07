@@ -1,9 +1,12 @@
 {
-	"containerRegistry": "devcon.azurecr.io",
-	"containerRegistryPath": "public/vscode/devcontainers",
+	"registryRepositories": {
+		"devcon.azurecr.io": [ 
+			"public/vscode/devcontainers",
+			"public/github/devcontainers"
+		]
+	},
 	"stubRegistry": "mcr.microsoft.com",
-	"stubRegistryPath": "vscode/devcontainers",
-
+	"stubRepository": "vscode/devcontainers",
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",
 	"historyFolderName": "history",

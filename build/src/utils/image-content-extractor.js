@@ -54,7 +54,7 @@ to an object like this:
 {
     prettyName: "Debian GNU/Linux 10 (buster)"
     name: "Debian GNU/Linux"
-    versioonId: "10"
+    versionId: "10"
     version: "10 (buster)"
     versionCodename: buster
     id: debian

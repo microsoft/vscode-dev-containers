@@ -11,8 +11,8 @@ let releaseNotesHeaderTemplate, releaseNotesVariantPartTemplate;
 // Register helper for anchors - Adapted from https://github.com/gjtorikian/html-pipeline/blob/main/lib/html/pipeline/toc_filter.rb
 handlebars.registerHelper('anchor', (value) => value.toLowerCase().replace(/[^\w\- ]/g, '').replace(/ /g, '-'));
 
-async function generateImageInformationFiles(repo, release, registry, registryPath, 
-    stubRegistry, stubRegistryPath, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, overwrite, outputPath, definitionId) {
+async function generateImageInformationFiles(repo, release, registryRepositories, 
+    stubRegistry, stubRepository, buildFirst, pruneBetweenDefinitions, generateCgManifest, generateMarkdown, overwrite, outputPath, definitionId) {
     // Load config files
     await configUtils.loadConfig();
 
@@ -45,7 +45,7 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
         }
 
         // Extract information
-        const definitionInfo = await getDefinitionImageContent(repo, release, registry, registryPath,  stubRegistry, stubRegistryPath, currentDefinitionId, alreadyRegistered, buildFirst);
+        const definitionInfo = await getDefinitionImageContent(repo, release, registryRepositories, stubRegistry, stubRepository, currentDefinitionId, alreadyRegistered, buildFirst);
 
         // Write markdown file as appropriate
         if (generateMarkdown && (overwrite || ! markdownExists)) {
@@ -74,7 +74,7 @@ async function generateImageInformationFiles(repo, release, registry, registryPa
     console.log('(*) Done!');    
 }
 
-async function getDefinitionImageContent(repo, release, registry, registryPath, stubRegistry, stubRegistryPath, definitionId, alreadyRegistered, buildFirst) {
+async function getDefinitionImageContent(repo, release, registryRepositories, stubRegistry, stubRepository, definitionId, alreadyRegistered, buildFirst) {
     const dependencies = configUtils.getDefinitionDependencies(definitionId);
     if (typeof dependencies !== 'object') {
         return [];
@@ -82,9 +82,11 @@ async function getDefinitionImageContent(repo, release, registry, registryPath, 
 
     let registrations = [];
 
-
     const variants = configUtils.getVariants(definitionId) || [null];
     const version = configUtils.getVersionFromRelease(release, definitionId);
+
+    // Just use first registry and repository
+    const [registry, repository] = configUtils.getFirstRegistryAndRepository(registryRepositories, true)
 
     // Create header for markdown
     let markdown = await generateReleaseNotesHeader(repo, release, definitionId, variants, dependencies);
@@ -93,12 +95,11 @@ async function getDefinitionImageContent(repo, release, registry, registryPath, 
         if(variant) {
             console.log(`\n(*) Processing variant ${variant}...`);
         }
-
-        const imageTag = configUtils.getTagsForVersion(definitionId, version, registry, registryPath, variant)[0];
+        const imageTag = configUtils.getImageRepoTagsForVersion(definitionId, version, registry, repository, variant)[0];
         if (buildFirst) {
             // Build but don't push images
             console.log('(*) Building image...');
-            await push(repo, release, false, registry, registryPath, registry, registryPath, false, false, [], 1, 1, false, definitionId);
+            await push(repo, release, false, registry, repository, registry, repository, false, false, [], 1, 1, false, definitionId);
         } else {
             console.log(`(*) Pulling image ${imageTag}...`);
             await asyncUtils.spawn('docker', ['pull', imageTag]);
@@ -108,7 +109,7 @@ async function getDefinitionImageContent(repo, release, registry, registryPath, 
         const contents = await imageContentUtils.getAllContentInfo(imageTag, dependencies);
         
         // Update markdown content
-        markdown = markdown + await generateReleaseNotesPart(contents, release, stubRegistry, stubRegistryPath, definitionId, variant);
+        markdown = markdown + await generateReleaseNotesPart(contents, release, stubRegistry, stubRepository, definitionId, variant);
 
         // Add to registrations
         registrations = registrations.concat(getUniqueComponents(alreadyRegistered, contents));
@@ -184,12 +185,12 @@ async function generateReleaseNotesHeader(repo, release, definitionId, variants,
 }
 
 // Generate release notes section for variant
-async function generateReleaseNotesPart(contents, release, stubRegistry, stubRegistryPath, definitionId, variant) {
+async function generateReleaseNotesPart(contents, release, stubRegistry, stubRepository, definitionId, variant) {
     releaseNotesVariantPartTemplate = releaseNotesVariantPartTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'release-notes-variant-part.md')));
     const markdownFormatter = markdownFormatterFactory.getFormatter();
     const formattedContents = getFormattedContents(contents, markdownFormatter);
     formattedContents.hasPip = formattedContents.pip.length > 0 || formattedContents.pipx.length > 0;
-    formattedContents.tags = configUtils.getTagList(definitionId, release, 'full-only', stubRegistry,  stubRegistryPath, variant),
+    formattedContents.tags = configUtils.getTagList(definitionId, release, 'full-only', stubRegistry,  stubRepository, variant),
     formattedContents.variant = variant;
     return releaseNotesVariantPartTemplate(formattedContents);
 }

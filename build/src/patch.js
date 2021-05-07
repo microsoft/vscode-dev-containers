@@ -7,7 +7,7 @@ const path = require('path');
 const asyncUtils = require('./utils/async');
 const jsonc = require('jsonc').jsonc;
 
-async function patch(patchPath, registry, registryPath) {
+async function patch(patchPath, registryRepositories) {
     patchPath = path.resolve(patchPath);
     const patchConfig = await getPatchConfig(patchPath);
 
@@ -17,15 +17,19 @@ async function patch(patchPath, registry, registryPath) {
         throw new Error('tagList property has been deprecated.')
     }
 
-    // Update each listed imageId
-    await asyncUtils.forEach(patchConfig.imageIds, async (imageId) => {
-        await patchImage(imageId, patchPath, dockerFilePath, patchConfig.bumpVersion, registry, registryPath);
-    });
+    // Execute for each registry
+    for (let registry in registryRepositories) {
+        // Update each listed imageId
+        await asyncUtils.forEach(patchConfig.imageIds, async (imageId) => {
+            await patchImage(imageId, patchPath, dockerFilePath, patchConfig.bumpVersion, registry);
+        });
 
-    // If config says to delete any untagged images mentioned in the patch, do so.
-    if (patchConfig.deleteUntaggedImages && patchConfig.imageIds) {
-        await deleteUntaggedImages(patchConfig.imageIds, registry);
+        // If config says to delete any untagged images mentioned in the patch, do so.
+        if (patchConfig.deleteUntaggedImages && patchConfig.imageIds) {
+            await deleteUntaggedImages(patchConfig.imageIds, registry);
+        }
     }
+
     
     console.log('\n(*) Done!')
 }
@@ -45,7 +49,7 @@ async function patchImage(imageId, patchPath, dockerFilePath, bumpVersion, regis
             JSON.stringify(repoAndTagList.reduce((prev, repoAndTag) => { return prev + repoAndTag.repository + ':' + repoAndTag.tag + ' ' }, ''), undefined, 4)
         }`);
 
-    // Bump breakfix number of it applies
+    // Bump break-fix number of it applies
     if(bumpVersion) {
         repoAndTagList = updateVersionTags(repoAndTagList);
     }
@@ -232,7 +236,7 @@ async function getPatchConfig(patchPath) {
 
 }
 
-async function patchAll(registry, registryPath) {
+async function patchAll(registryRepositories) {
     const patchRoot = path.resolve(__dirname, '..', 'patch');
     const patchStatusFilePath = path.join(patchRoot, 'status.json');
     const patchStatus = await asyncUtils.exists(patchStatusFilePath) ? await jsonc.read(patchStatusFilePath) : { complete: {}, failed: {} }
@@ -245,7 +249,7 @@ async function patchAll(registry, registryPath) {
         }
         if (patchEntry.isDirectory()) {
             try {
-                await patch(path.join(patchRoot, patchEntry.name), registry, registryPath);
+                await patch(path.join(patchRoot, patchEntry.name), registryRepositories);
                 patchStatus.complete[patchEntry.name] = true;
             } catch (ex) {
                 console.log(`(!) Patch ${patchEntry.name} failed - ${ex}.`);

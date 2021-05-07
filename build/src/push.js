@@ -11,16 +11,16 @@ const prep = require('./prep');
 
 const imageLabelPrefix = configUtils.getConfig('imageLabelPrefix', 'com.microsoft.vscode.devcontainers');
 
-async function push(repo, release, updateLatest, registry, registryPath, stubRegistry,
-    stubRegistryPath, pushImages, prepOnly, definitionsToSkip, page, pageTotal, replaceImages, definitionId) {
+async function push(repo, release, updateLatest, registryRepositories, stubRegistry,
+    stubRepository, pushImages, prepOnly, definitionsToSkip, page, pageTotal, replaceImages, definitionId) {
 
     // Optional argument defaults
     prepOnly = typeof prepOnly === 'undefined' ? false : prepOnly;
     pushImages = typeof pushImages === 'undefined' ? true : pushImages;
     page = page || 1;
     pageTotal = pageTotal || 1;
-    stubRegistry = stubRegistry || registry;
-    stubRegistryPath = stubRegistryPath || registryPath;
+    stubRegistry = stubRegistry || configUtils.getConfig('stubRepository', 'vscode/devcontainers');
+    stubRepository = stubRepository || configUtils.getConfig('stubRepository', 'vscode/devcontainers');
     definitionsToSkip = definitionsToSkip || [];
 
     // Always replace images when building and pushing the "dev" tag
@@ -35,14 +35,14 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
     await asyncUtils.forEach(definitionsToPush, async (currentDefinitionId) => {
         console.log(`**** Pushing ${currentDefinitionId} ${release} ****`);
         await pushImage(
-            currentDefinitionId, repo, release, updateLatest, registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, pushImages, replaceImages);
+            currentDefinitionId, repo, release, updateLatest, registryRepositories, stubRegistry, stubRepository, prepOnly, pushImages, replaceImages);
     });
 
     return stagingFolder;
 }
 
 async function pushImage(definitionId, repo, release, updateLatest,
-    registry, registryPath, stubRegistry, stubRegistryPath, prepOnly, pushImages, replaceImage) {
+    registryRepositories, stubRegistry, stubRepository, prepOnly, pushImages, replaceImage) {
     const definitionPath = configUtils.getDefinitionPath(definitionId);
     const dotDevContainerPath = path.join(definitionPath, '.devcontainer');
     // Use base.Dockerfile for image build if found, otherwise use Dockerfile
@@ -69,7 +69,7 @@ async function pushImage(definitionId, repo, release, updateLatest,
         // Update common setup script download URL, SHA, parent tag if applicable
         console.log(`(*) Prep Dockerfile for ${definitionId} ${variant ? 'variant "' + variant + '"' : ''}...`);
         const prepResult = await prep.prepDockerFile(dockerFilePath,
-            definitionId, repo, release, registry, registryPath, stubRegistry, stubRegistryPath, true, variant);
+            definitionId, repo, release, registryRepositories, stubRegistry, stubRepository, true, variant);
 
         if (prepOnly) {
             console.log(`(*) Skipping build and push to registry.`);
@@ -82,10 +82,10 @@ async function pushImage(definitionId, repo, release, updateLatest,
             // Build image
             console.log(`(*) Building image...`);
             // Determine tags to use
-            const versionTags = configUtils.getTagList(definitionId, release, updateLatest, registry, registryPath, variant);
+            const versionTags = configUtils.getAllImageRepoTags(definitionId, release, updateLatest, registryRepositories, variant);
             console.log(`(*) Tags:${versionTags.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
 
-            if (replaceImage || !await isDefinitionVersionAlreadyPublished(definitionId, release, registry, registryPath, variant)) {
+            if (replaceImage || !await isDefinitionVersionAlreadyPublished(definitionId, release, registryRepositories, variant)) {
                 const context = devContainerJson.build ? devContainerJson.build.context || '.' : devContainerJson.context || '.';
                 const workingDir = path.resolve(dotDevContainerPath, context);
                 // Note: build.args in devcontainer.json is intentionally ignored so you can vary image contents and defaults as needed
@@ -122,21 +122,21 @@ async function pushImage(definitionId, repo, release, updateLatest,
     // If base.Dockerfile found, update stub/devcontainer.json, otherwise create - just use the default (first) variant if one exists
     if (baseDockerFileExists && dockerFileExists) {
         await prep.updateStub(
-            dotDevContainerPath, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRegistryPath);
+            dotDevContainerPath, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRepository);
         console.log('(*) Updating devcontainer.json...');
         await asyncUtils.writeFile(devContainerJsonPath, devContainerJsonRaw.replace('"base.Dockerfile"', '"Dockerfile"'));
         console.log('(*) Removing base.Dockerfile...');
         await asyncUtils.rimraf(dockerFilePath);
     } else {
         await prep.createStub(
-            dotDevContainerPath, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRegistryPath);
+            dotDevContainerPath, definitionId, repo, release, baseDockerFileExists, stubRegistry, stubRepository);
     }
 
     console.log('(*) Done!\n');
 }
 
 async function flattenBaseImage(baseImageTag, flattenedBaseImageTag, pushImages) {
-    const flattenedImageCaptureGroups = /([^\/]+)\/(.+):(.+)/.exec(flattenedBaseImageTag);
+    const flattenedImageCaptureGroups = /([^/]+)\/(.+):(.+)/.exec(flattenedBaseImageTag);
     if (await isImageAlreadyPublished(flattenedImageCaptureGroups[1], flattenedImageCaptureGroups[2], flattenedImageCaptureGroups[3])) {
         console.log('(*) Flattened base image already published.')
         return;
@@ -163,12 +163,22 @@ async function flattenBaseImage(baseImageTag, flattenedBaseImageTag, pushImages)
     }
 }
 
-async function isDefinitionVersionAlreadyPublished(definitionId, release, registry, registryPath, variant) {
-    // See if image already exists
-    const tagsToCheck = configUtils.getTagList(definitionId, release, false, registry, registryPath, variant);
-    const tagParts = tagsToCheck[0].split(':');
-    const registryName = registry.replace(/\..*/, '');
-    return await isImageAlreadyPublished(registryName, tagParts[0].replace(/[^\/]+\//, ''), tagParts[1]);
+async function isDefinitionVersionAlreadyPublished(definitionId, release, registryRepositories, variant) {
+    // Check a path in each registry
+    for(let registryToCheck in registryRepositories) {
+        let repositoryToCheck = registryRepositories[registryToCheck];
+        if(Array.isArray(repositoryToCheck)) {
+            repositoryToCheck = repositoryToCheck[0];
+        }
+        // See if image already exists
+        const tagsToCheck = configUtils.getImageRepoTags(definitionId, release, false, registryRepositories, variant);
+        const tagParts = tagsToCheck[0].split(':');
+        const registryName = registryToCheck.replace(/\..*/, '');
+        if(! await isImageAlreadyPublished(registryName, tagParts[0].replace(/[^/]+\//, ''), tagParts[1])) {
+            return false;
+        }
+    }
+    return true;
 }
 
 async function isImageAlreadyPublished(registryName, repositoryName, tagName) {

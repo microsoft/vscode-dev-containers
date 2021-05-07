@@ -20,48 +20,50 @@ require('yargs')
         yargs
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or a branch',
+                    describe: 'Repository release tag or branch',
                     default: `v${packageJson.version}`
                 },
-                'registry': {
-                    describe: 'container registry to push images to',
-                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                'registry-repositories': {
+                    describe: 'Map of registries and repositories',
+                    default: configUtils.getConfig('registryRepositories')
                 },
-                'registry-path': {
-                    describe: 'container registry path',
-                    default: configUtils.getConfig('containerRegistryPath', 'vscode/devcontainers')
+                'registry': {
+                    describe: 'Container registry to push images to'
+                },
+                'repository': {
+                    alias: 'registry-path',
+                    describe: 'Repository in registry to push images'
                 },
                 'stub-registry': {
-                    describe: 'registry to add to stub',
-                    default: configUtils.getConfig('stubRegistry',
-                        configUtils.getConfig('containerRegistry', 'docker.io'))
+                    describe: 'Registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry', 'mcr.microsoft.com')
                 },
-                'stub-registry-path': {
-                    describe: 'stub registry path',
-                    default: configUtils.getConfig('stubRegistryPath',
-                        configUtils.getConfig('containerRegistryPath', ''))
+                'stub-repository': {
+                    alias: 'stub-registry-path',
+                    describe: 'Repository in registry to stub',
+                    default: configUtils.getConfig('stubRepository', 'vscode/devcontainers')
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
                     default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'package-only': {
-                    describe: 'whether to prep/build/push before packaging',
+                    describe: 'Whether to prep/build/push before packaging',
                     type: 'boolean',
                     default: false
                 },
                 'prep-and-package-only': {
-                    describe: 'prep and package, but do not build/push',
+                    describe: 'Prep and package, but do not build/push',
                     type: 'boolean',
                     default: false
                 },
                 'update-latest': {
-                    describe: 'whether to tag latest and {MAJOR}',
+                    describe: 'Whether to tag latest and {MAJOR}',
                     type: 'boolean',
                     default: true
                 },
                 'clean': {
-                    describe: 'whether to clean up staging folder when done',
+                    describe: 'Whether to clean up staging folder when done',
                     type: 'boolean',
                     default: true
                 },
@@ -80,43 +82,45 @@ require('yargs')
             })
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or branch',
+                    describe: 'Repository release tag or branch',
                     default: `v${packageJson.version}`
                 },
-                'registry': {
-                    describe: 'container registry to push images to',
-                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                'registry-repositories': {
+                    describe: 'Map of registries and repositories',
+                    default: configUtils.getConfig('registryRepositories')
                 },
-                'registry-path': {
-                    describe: 'container registry path',
-                    default: configUtils.getConfig('containerRegistryPath', '')
+                'registry': {
+                    describe: 'Container registry to push images to'
+                },
+                'repository': {
+                    alias: 'registry-path',
+                    describe: 'Repository in registry to push images'
                 },
                 'stub-registry': {
-                    describe: 'registry to add to stub',
-                    default: configUtils.getConfig('stubRegistry',
-                        configUtils.getConfig('containerRegistry', 'docker.io'))
+                    describe: 'Registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry', 'mcr.microsoft.com')
                 },
-                'stub-registry-path': {
-                    describe: 'stub registry path',
-                    default: configUtils.getConfig('stubRegistryPath',
-                        configUtils.getConfig('containerRegistryPath', ''))
+                'stub-repository': {
+                    alias: 'stub-registry-path',
+                    describe: 'Repository in registry to stub',
+                    default: configUtils.getConfig('stubRepository', 'vscode/devcontainers')
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
                     default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'update-latest': {
-                    describe: 'whether to tag latest and {MAJOR} if pushing',
+                    describe: 'Whether to tag latest and {MAJOR} if pushing',
                     type: 'boolean',
                     default: true
                 },
                 'prep-only': {
-                    describe: 'prep the containers for build/push, but do not actually do it',
+                    describe: 'Prep the containers for build/push, but do not actually do it',
                     type: 'boolean',
                     default: false
                 },
                 'push': {
-                    describe: 'whether to push after prep/build',
+                    describe: 'Whether to push after prep/build',
                     type: 'boolean',
                     default: true
                 },
@@ -145,7 +149,7 @@ require('yargs')
     .command('update-script-sources <release>', 'updates all script source URLs in Dockerfiles to a tag or branch', (yargs) => {
         yargs
             .positional('release', {
-                describe: 'release tag to branch use for script URLs',
+                describe: 'Release tag to branch use for script URLs',
             })
             .options({
                 'github-repo': {
@@ -153,135 +157,139 @@ require('yargs')
                     default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'update-sha': {
-                    describe: 'update script SHAs to match file',
+                    describe: 'Update script SHAs to match file',
                     type: 'boolean',
                     default: true
                 }
             })
     }, updateScriptSourcesCommand)
-    .command('cg [devcontainer]', 'generate cgmanifest.json', (yargs) => {
+    .command('cg [devcontainer]', 'Extracts image information into files like cgmanifest.json', (yargs) => {
         yargs
             .positional('devcontainer', {
-                describe: 'limits manifest generation to single definition',
+                describe: 'Limits info extraction to single definition',
                 default: null
             })
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or branch',
+                    describe: 'Repository release tag or branch',
                     default: 'master'
                 },
-                'registry': {
-                    describe: 'container registry to push images to',
-                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                'registry-repositories': {
+                    describe: 'Map of registries and to repositories',
+                    default: configUtils.getConfig('registryRepositories')
                 },
-                'registry-path': {
-                    describe: 'container registry path',
-                    default: configUtils.getConfig('containerRegistryPath', '')
+                'registry': {
+                    describe: 'Container registry to push images to'
+                },
+                'repository': {
+                    alias: 'registry-path',
+                    describe: 'Repository in registry to push images'
                 },
                 'stub-registry': {
-                    describe: 'registry to add to stub',
-                    default: configUtils.getConfig('stubRegistry',
-                        configUtils.getConfig('containerRegistry', 'docker.io'))
+                    describe: 'Registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry', 'mcr.microsoft.com')
                 },
-                'stub-registry-path': {
-                    describe: 'stub registry path',
-                    default: configUtils.getConfig('stubRegistryPath',
-                        configUtils.getConfig('containerRegistryPath', ''))
+                'stub-repository': {
+                    alias: 'stub-registry-path',
+                    describe: 'Repository in registry to stub',
+                    default: configUtils.getConfig('stubRepository', 'vscode/devcontainers')
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
                     default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'build': {
-                    describe: 'whether to to build the image first step',
+                    describe: 'Whether to to builds image first',
                     type: 'boolean',
                     default: true
                 },
                 'prune': {
-                    describe: 'whether to prune images between definitions',
+                    describe: 'Whether to prune images between definitions',
                     type: 'boolean',
                     default: false
                 },
                 'cg': {
-                    describe: 'whether to generate cgmanifest.json',
+                    describe: 'Whether to generate cgmanifest.json',
                     type: 'boolean',
                     default: true
                 },
                 'markdown': {
-                    describe: 'whether to generate markdown files in history folders',
+                    describe: 'Whether to generate history markdown files',
                     type: 'boolean',
                     default: false
                 },
                 'output-path': {
-                    describe: 'path to where extracted information should be stored',
+                    describe: 'Path to to store extracted info',
                     default: path.resolve(__dirname, '..', configUtils.getConfig('informationFileOutputPath', '.'))
                 },
                 'overwrite': {
-                    describe: 'whether to overwrite cgmanifest.json or markdown files',
+                    describe: 'Whether to overwrite files',
                     type: 'boolean',
                     default: true
                 }
             })
     }, imageInfoCommand)
-    .command('info [devcontainer]', 'generate image information files', (yargs) => {
+    .command('info [devcontainer]', 'Extracts image information into files.', (yargs) => {
         yargs
             .positional('devcontainer', {
-                describe: 'limits manifest generation to single definition',
+                describe: 'Limits info extraction to single definition',
                 default: null
             })
             .options({
                 'release': {
-                    describe: 'vscode-dev-containers release tag or branch',
+                    describe: 'Repository release tag or branch',
                     default: 'master'
                 },
-                'registry': {
-                    describe: 'container registry to push images to',
-                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                'registry-repositories': {
+                    describe: 'Map of registries and to repositories',
+                    default: configUtils.getConfig('registryRepositories')
                 },
-                'registry-path': {
-                    describe: 'container registry path',
-                    default: configUtils.getConfig('containerRegistryPath', '')
+                'registry': {
+                    describe: 'Container registry to push images to'
+                },
+                'repository': {
+                    alias: 'registry-path',
+                    describe: 'Repository in registry to push images'
                 },
                 'stub-registry': {
-                    describe: 'registry to add to stub',
-                    default: configUtils.getConfig('stubRegistry',
-                        configUtils.getConfig('containerRegistry', 'docker.io'))
+                    describe: 'Registry to add to stub',
+                    default: configUtils.getConfig('stubRegistry', 'mcr.microsoft.com')
                 },
-                'stub-registry-path': {
-                    describe: 'stub registry path',
-                    default: configUtils.getConfig('stubRegistryPath',
-                        configUtils.getConfig('containerRegistryPath', ''))
+                'stub-repository': {
+                    alias: 'stub-registry-path',
+                    describe: 'Repository in registry to stub',
+                    default: configUtils.getConfig('stubRepository', 'vscode/devcontainers')
                 },
                 'github-repo': {
                     describe: 'vscode-dev-containers repo name',
                     default: configUtils.getConfig('githubRepoName', 'microsoft/vscode-dev-containers')
                 },
                 'build': {
-                    describe: 'whether to to build the image first step',
+                    describe: 'Whether to builds images first',
                     type: 'boolean',
                     default: true
                 },
                 'cg': {
-                    describe: 'whether to generate cgmanifest.json',
+                    describe: 'Whether to generate cgmanifest.json',
                     type: 'boolean',
                     default: false
                 },
                 'markdown': {
-                    describe: 'whether to generate markdown files in history folders',
+                    describe: 'Whether to generate history markdown files',
                     type: 'boolean',
                     default: true
                 },
                 'prune': {
-                    describe: 'whether to prune images between definitions',
+                    describe: 'Whether to prune images between definitions',
                     type: 'boolean',
                     default: false
                 },
                 'output-path': {
-                    describe: 'path to where extracted information should be stored',
+                    describe: 'Path to to store extracted info',
                     default: path.resolve(__dirname, '..', configUtils.getConfig('informationFileOutputPath', '.'))
                 },
                 'overwrite': {
-                    describe: 'whether to overwrite cgmanifest.json or markdown files',
+                    describe: 'Whether to overwrite files',
                     type: 'boolean',
                     default: false
                 }
@@ -299,13 +307,16 @@ require('yargs')
                     describe: 'path to the folder containing the patch files',
                     default: '.'
                 },
-                'registry': {
-                    describe: 'container registry to push images to',
-                    default: configUtils.getConfig('containerRegistry', 'docker.io')
+                'registry-repositories': {
+                    describe: 'Map of registries and to repositories',
+                    default: configUtils.getConfig('registryRepositories')
                 },
-                'registry-path': {
-                    describe: 'container registry path',
-                    default: configUtils.getConfig('containerRegistryPath', '')
+                'registry': {
+                    describe: 'Container registry to push images to'
+                },
+                'repository': {
+                    alias: 'registry-path',
+                    describe: 'Repository in registry to push images to'
                 }
             })
     }, patchCommand)
@@ -315,8 +326,9 @@ require('yargs')
     .argv;
 
 function pushCommand(argv) {
-    push(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath, argv.stubRegistry,
-        argv.stubRegistryPath, argv.push, argv.prepOnly, argv.skip, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer)
+    const registryRepositories = getRegistryRepositories(argv.registryRepositories, argv.registry, argv.repository)
+    push(argv.githubRepo, argv.release, argv.updateLatest, registryRepositories, argv.stubRegistry,
+        argv.stubRepository, argv.push, argv.prepOnly, argv.skip, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Push failed - ${reason}`);
             if(reason.stack) {
@@ -327,8 +339,9 @@ function pushCommand(argv) {
 }
 
 function packCommand(argv) {
-    package(argv.githubRepo, argv.release, argv.updateLatest, argv.registry, argv.registryPath,
-        argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean, argv.skipPush)
+    const registryRepositories = getRegistryRepositories(argv.registryRepositories, argv.registry, argv.repository)
+    package(argv.githubRepo, argv.release, argv.updateLatest, registryRepositories,
+        argv.stubRegistry, argv.stubRepository, argv.prepAndPackageOnly, argv.packageOnly, argv.clean, argv.skipPush)
         .catch((reason) => {
             console.error(`(!) Packaging failed - ${reason}`);
             if(reason.stack) {
@@ -361,7 +374,8 @@ function copyLibraryScriptsCommand() {
 }
 
 function imageInfoCommand(argv) {
-    generateImageInformationFiles(argv.githubRepo, argv.release, argv.registry, argv.registryPath, argv.stubRegistry, argv.stubRegistryPath, 
+    const registryRepositories = getRegistryRepositories(argv.registryRepositories, argv.registry, argv.repository)
+    generateImageInformationFiles(argv.githubRepo, argv.release, registryRepositories, argv.stubRegistry, argv.stubRepository, 
         argv.build, argv.prune, argv.cg, argv.markdown, argv.overwrite, argv.outputPath, argv.devcontainer)
         .catch((reason) => {
             console.error(`(!) Image information file generation failed - ${reason}`);
@@ -373,8 +387,9 @@ function imageInfoCommand(argv) {
 }
 
 function patchCommand(argv) {
+    const registryRepositories = getRegistryRepositories(argv.registryRepositories, argv.registry, argv.repository)
     if (argv.all) {
-        patch.patchAll(argv.registry, argv.registryPath)
+        patch.patchAll(registryRepositories)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
                 if(reason.stack) {
@@ -383,7 +398,7 @@ function patchCommand(argv) {
                 process.exit(1);
             });
     } else {
-        patch.patch(argv.patchPath, argv.registry, argv.registryPath)
+        patch.patch(registryRepositories)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
                 if(reason.stack) {
@@ -392,4 +407,18 @@ function patchCommand(argv) {
                 process.exit(1);
             });
     }
+}
+
+// Utility function to process --registry-repositories, --registry, and --repository flags
+function getRegistryRepositories(registryRepositories, registry, repository) {
+    if(registry && repository) {
+        const result = {};
+        result[registry] = repository;
+        return result;
+    } else if(registry) {
+        const result = {};
+        result[registry] = registryRepositories[registry];
+        return result;
+    } 
+    return registryRepositories;
 }

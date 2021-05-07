@@ -70,19 +70,19 @@ async function loadConfig(repoPath) {
 
         // Populate definition and variant lookup
         if (buildSettings.tags) {
-            // Variants can be used as a VARAINT arg in tags, so support that too. However, these can
+            // Variants can be used as a VARIANT arg in tags, so support that too. However, these can
             // get overwritten in certain tag configs resulting in bad lookups, so **process them first**.
             const variants = definitionVariants ? ['${VARIANT}', '$VARIANT'].concat(definitionVariants) : [undefined];
             
             variants.forEach((variant) => {
-                const blankTagList = getTagsForVersion(definitionId, '', 'ANY', 'ANY', variant);
+                const blankTagList = getImageRepoTagsForVersion(definitionId, '', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag) => {
                     definitionTagLookup[blankTag] = {
                         id: definitionId,
                         variant: variant
                     };
                 });
-                const devTagList = getTagsForVersion(definitionId, 'dev', 'ANY', 'ANY', variant);
+                const devTagList = getImageRepoTagsForVersion(definitionId, 'dev', 'ANY', 'ANY', variant);
                 devTagList.forEach((devTag) => {
                     definitionTagLookup[devTag] = {
                         id: definitionId,
@@ -108,6 +108,21 @@ function getConfig(property, defaultVal) {
     }, '');
 
     return process.env[envVar] || config[property] || defaultVal;
+}
+
+// Utility function to just get the first registry and repo given an object of registries and repositories
+function getFirstRegistryAndRepository(registryRepositories, asArray) {
+    const registry = Object.keys(registryRepositories)[0];
+    let repository = registryRepositories[registry];
+    if(Array.isArray(repository)) {
+        repository = repository[0];
+    }
+    if(asArray) {
+        return [ registry, repository ];
+    }
+    const result = {};
+    result[registry] = repository;
+    return result;
 }
 
 // Loads definition-manifest.json and adds it to config
@@ -137,18 +152,18 @@ function getAllDefinitionPaths() {
 }
 
 // Convert a release string (v1.0.0) or branch (master) into a version. If a definitionId and 
-// release string is passed in, use the version specified in defintion-build.json if one exists.
-function getVersionFromRelease(release, definitionId) {
+// release string is passed in, use the version specified in definition-build.json if one exists.
+function getVersionFromRelease(versionOrRelease, definitionId) {
     definitionId = definitionId || 'NOT SPECIFIED';
 
     // Already is a version
-    if (!isNaN(parseInt(release.charAt(0)))) {
-        return config.definitionVersions[definitionId] || release;
+    if (!isNaN(parseInt(versionOrRelease.charAt(0)))) {
+        return config.definitionVersions[definitionId] || versionOrRelease;
     }
 
     // Is a release string
-    if (release.charAt(0) === 'v' && !isNaN(parseInt(release.charAt(1)))) {
-        return config.definitionVersions[definitionId] || release.substr(1);
+    if (versionOrRelease.charAt(0) === 'v' && !isNaN(parseInt(versionOrRelease.charAt(1)))) {
+        return config.definitionVersions[definitionId] || versionOrRelease.substr(1);
     }
 
     // Is a branch
@@ -182,7 +197,7 @@ function getVariants(definitionId) {
 }
 
 // Create all the needed variants of the specified version identifier for a given definition
-function getTagsForVersion(definitionId, version, registry, registryPath, variant) {
+function getAllImageRepoTagsForVersion(definitionId, version, registryRepositories, variant) {
     if (typeof config.definitionBuildSettings[definitionId] === 'undefined') {
         return null;
     }
@@ -226,11 +241,27 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
             .replace(/\$\{?VARIANT\}?/, variant || 'NOVARIANT')
             .replace('-NOVARIANT', '');
         if (baseTag.charAt(baseTag.length - 1) !== ':') {
-            list.push(`${registry}/${registryPath}/${baseTag}`);
+            for(let registry in registryRepositories) {
+                let repositories = registryRepositories[registry];
+                if(typeof pathList === 'string') {
+                    repositories = [repositories];
+                }
+                repositories.forEach((repository)=> {
+                    list.push(`${registry}/${repository}/${baseTag}`);
+                })
+            }
         }
         return list;
     }, []);
 }
+
+// Single repository variation of the getAllRepoTagsForVersion function
+function getImageRepoTagsForVersion(definitionId, version, registry, repository, variant) {
+    const registryRepositories = {};
+    registryRepositories[registry] = repository;
+    return getAllImageRepoTagsForVersion(definitionId, version, registryRepositories, variant);
+}
+
 
 /* 
 Generate complete list of tags for a given definition.
@@ -242,13 +273,13 @@ versionPartHandling has a few different modes:
     - 'major-minor' - X.X
     - 'major' - X
 */
-function getTagList(definitionId, release, versionPartHandling, registry, registryPath, variant) {
-    const version = getVersionFromRelease(release, definitionId);
+function getAllImageRepoTags(definitionId, versionOrRelease, versionPartHandling, registryRepositories, variant) {
+    const version = getVersionFromRelease(versionOrRelease, definitionId);
 
     // If version is 'dev', there's no need to generate semver tags for the version
     // (e.g. for 1.0.2, we should also tag 1.0 and 1). So just return the tags for 'dev'.
     if (version === 'dev') {
-        return getTagsForVersion(definitionId, version, registry, registryPath, variant);
+        return getAllImageRepoTagsForVersion(definitionId, version, registryRepositories, variant);
     }
 
     // If this is a release version, split it out into the three parts of the semver
@@ -301,15 +332,23 @@ function getTagList(definitionId, release, versionPartHandling, registry, regist
     let tagList = [];
 
     versionList.forEach((tagVersion) => {
-        tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
+        tagList = tagList.concat(getAllImageRepoTagsForVersion(definitionId, tagVersion, registryRepositories, variant));
     });
 
     // If this variant should also be used for the the latest tag (it's the left most in the list), add it
     return tagList.concat((updateLatest 
         && config.definitionBuildSettings[definitionId].latest
         && variant === firstVariant)
-        ? getLatestTag(definitionId, registry, registryPath)
+        ? getLatestTag(definitionId, registryRepositories)
         : []);
+}
+
+// Single repo version of the getAllRepoTags function
+function getImageRepoTags(definitionId, versionOrRelease, versionPartHandling, registry, repository, variant) {
+    const registryRepositories = {};
+    registryRepositories[registry] = repository;
+    return getAllImageRepoTags(definitionId, versionOrRelease, versionPartHandling, registryRepositories, variant);
+
 }
 
 // Walk the image build config and paginate and sort list so parents build before (and with) children
@@ -454,30 +493,38 @@ function bucketDefinition(definitionId, parentId, parentBuckets) {
     }
 }
 
-// Get parent tag for a given child definition
-function getParentTagForVersion(definitionId, version, registry, registryPath, variant) {
+// Get a list of parent tag for a given child definition
+function getAllParentImageRepoTagsForVersion(definitionId, versionOrRelease, registryRepositories, variant) {
     let parentId = config.definitionBuildSettings[definitionId].parent;
-    if (parentId) {
-        if(typeof parentId !== 'string') {
-            // Use variant to figure out correct parent, or return first if no variant
-            parentId = variant ? parentId[variant] : parentId[Object.keys(parentId)[0]];
-        }
-        return getTagsForVersion(parentId, version, registry, registryPath, variant)[0];
+    if (!parentId) {
+        return null;
     }
-    return null;
+    if(typeof parentId !== 'string') {
+        // Use variant to figure out correct parent, or return first if no variant
+        parentId = variant ? parentId[variant] : parentId[Object.keys(parentId)[0]];
+    }
+    const parentVersion = getVersionFromRelease(versionOrRelease, parentId);
+    return getAllImageRepoTagsForVersion(parentId, parentVersion, registryRepositories, variant);
+}
+
+// Get a single parent tag for a given child definition
+function getParentImageRepoTagForVersion(definitionId, versionOrRelease, registryRepositories, variant) {
+    const trimmedRegistryRepositories = getFirstRegistryAndRepository(registryRepositories);
+    const allTags = getAllParentImageRepoTagsForVersion(definitionId, versionOrRelease, trimmedRegistryRepositories, variant);
+    return allTags ? allTags[0] : null;
 }
 
 // Takes an existing tag and updates it with a new registry version and optionally a variant
-function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updatedVersion, updatedRegistry, updatedRegistryPath, variant) {
+function getUpdatedImageRepoTag(currentTag, currentRegistry, currentRepository, updatedVersion, updatedRegistry, updatedRepository, variant) {
     updatedRegistry = updatedRegistry || currentRegistry;
-    updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
+    updatedRepository = updatedRepository || currentRepository;   
 
-    const definition = getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath);
+    const definition = getDefinitionFromTag(currentTag, currentRegistry, currentRepository);
 
     // If definition not found, fall back on swapping out more generic logic - e.g. for when a image already has a version tag in it
     if (!definition) {
-        const repository = new RegExp(`${currentRegistry}/${currentRegistryPath}/(.+):`).exec(currentTag)[1];
-        const updatedTag = currentTag.replace(new RegExp(`${currentRegistry}/${currentRegistryPath}/${repository}:(dev-|${updatedVersion}-)?`), `${updatedRegistry}/${updatedRegistryPath}/${repository}:${updatedVersion}-`);
+        const repository = new RegExp(`${currentRegistry}/${currentRepository}/(.+):`).exec(currentTag)[1];
+        const updatedTag = currentTag.replace(new RegExp(`${currentRegistry}/${currentRepository}/${repository}:(dev-|${updatedVersion}-)?`), `${updatedRegistry}/${updatedRepository}/${repository}:${updatedVersion}-`);
         console.log(`    Using RegEx to update ${currentTag}\n    to ${updatedTag}`);
         return updatedTag;
     }
@@ -486,8 +533,9 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
     if (!variant) {
         variant = definition.variant;
     }
-
-    const updatedTags = getTagsForVersion(definition.id, updatedVersion, updatedRegistry, updatedRegistryPath, variant);
+    const updatedRegistryRepositories = {};
+    updatedRegistryRepositories[updatedRegistry] = updatedRepository;
+    const updatedTags = getImageRepoTagsForVersion(definition.id, updatedVersion, updatedRegistryRepositories, variant);
     if (updatedTags && updatedTags.length > 0) {
         console.log(`    Updating ${currentTag}\n    to ${updatedTags[0]}`);
         return updatedTags[0];
@@ -579,25 +627,27 @@ function getDefaultDependencies(dependencyType) {
 
 module.exports = {
     loadConfig: loadConfig,
-    getTagList: getTagList,
+    getStagingFolder: getStagingFolder,
+    getVersionFromRelease: getVersionFromRelease,
     getVariants: getVariants,
     getAllDefinitionPaths: getAllDefinitionPaths,
-    getDefinitionFromTag: getDefinitionFromTag,
     getDefinitionPath: getDefinitionPath,
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,
-    getParentTagForVersion: getParentTagForVersion,
-    getUpdatedTag: getUpdatedTag,
+    getImageRepoTags: getImageRepoTags,
+    getAllImageRepoTags: getAllImageRepoTags,
+    getImageRepoTagsForVersion: getImageRepoTagsForVersion,
+    getAllImageRepoTagsForVersion: getAllImageRepoTagsForVersion,
+    getParentImageRepoTagForVersion: getParentImageRepoTagForVersion,
+    getUpdatedImageRepoTag: getUpdatedImageRepoTag,
     majorFromRelease: majorFromRelease,
     objectByDefinitionLinuxDistro: objectByDefinitionLinuxDistro,
     getDefinitionDependencies: getDefinitionDependencies,
     getAllDependencies: getAllDependencies,
     getDefaultDependencies: getDefaultDependencies,
-    getStagingFolder: getStagingFolder,
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
-    getVersionFromRelease: getVersionFromRelease,
-    getTagsForVersion: getTagsForVersion,
     getFallbackPoolUrl: getFallbackPoolUrl,
     getPoolKeyForPoolUrl: getPoolKeyForPoolUrl,
     getConfig: getConfig,
+    getFirstRegistryAndRepository: getFirstRegistryAndRepository,
     shouldFlattenDefinitionBaseImage: shouldFlattenDefinitionBaseImage
 };
