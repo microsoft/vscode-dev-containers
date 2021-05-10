@@ -165,4 +165,4 @@ If you already have a running container, you can use the script to spin up SSH i
         ```
         ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after the `!` is the same local port you used in the `ssh` command in step 1.
 
-4. Your dev container's filesystem should now be available in the `~/sshfs/devcontainer` folder on macOS or Liunux or in a new explorer window on Windows.
+4. Your dev container's filesystem should now be available in the `~/sshfs/devcontainer` folder on macOS or Linux or in a new explorer window on Windows.
