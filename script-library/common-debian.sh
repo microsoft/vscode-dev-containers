@@ -214,7 +214,7 @@ if [ -z "${USER}" ]; then export USER=$(whoami); fi
 if [[ "${PATH}" != *"$HOME/.local/bin"* ]]; then export PATH="${PATH}:$HOME/.local/bin"; fi
 
 # Display optional first run image specific notice if configured and terminal is interactive
-if [ -t 1 ] && [ ! -z "${TERM_PROGRAM}" ] && [ ! -f "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed" ]; then
+if [ -t 1 ] && [[ "${TERM_PROGRAM}" = "vscode" || "${TERM_PROGRAM}" = "codespaces" ]] && [ ! -f "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed" ]; then
     if [ -f "/usr/local/etc/vscode-dev-containers/first-run-notice.txt" ]; then
         cat "/usr/local/etc/vscode-dev-containers/first-run-notice.txt"
     elif [ -f "/workspaces/.codespaces/shared/first-run-notice.txt" ]; then
