@@ -30,7 +30,7 @@ The [`.devcontainer` folder in this repository](.devcontainer) contains a comple
 
 However, this section will outline the how you can selectively add this functionality to your own Dockerfile. Follow these steps:
 
-1. First, see the [docker-from-docker definition](../docker-from-docker) for information on how make your local Docker instance available in the dev container. However, the [`docker` script](../../script-library/docs/docker.md) in the script library provides an easy way to add this to your own Dockerifle, so we'll assume you're using the script.
+1. First, see the [docker-from-docker definition](../docker-from-docker) for information on how make your local Docker instance available in the dev container. However, the [`docker` script](../../script-library/docs/docker.md) in the script library provides an easy way to add this to your own Dockerfile, so we'll assume you're using the script.
 
 2. Next, update your `devcontainer.json` to mount your local `.kube` folder in the container so its contents can be reused. From `.devcontainer/devcontainer.json`:
 
