@@ -27,13 +27,10 @@
 	],
 
 	"needsDedicatedPage": [ 
-		"codespaces-linux",
-		"codespaces-linux-stretch" 
+		"codespaces-linux"
 	],
 
-	"flattenBaseImage": [
-		"codespaces-linux-stretch"
-	],
+	"flattenBaseImage": [],
 
 	"poolKeys": {
 		"https://dl.yarnpkg.com/debian": "https://dl.yarnpkg.com/debian/pubkey.gpg",
