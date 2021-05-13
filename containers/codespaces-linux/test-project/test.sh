@@ -14,6 +14,8 @@ check "oryx" oryx --version
 
 # Check .NET
 check "dotnet" dotnet --list-sdks
+check "oryx-install-dotnet-3.1.0" oryx prep --skip-detection --platforms-and-versions dotnet=3.1.0
+check "dotnet-3.1.0-installed" bash -c 'dotnet --info | grep -E "\s3\.1\.0\s"'
 
 # Check Python
 check "python" python --version
@@ -30,7 +32,7 @@ check "virtualenv" virtualenv --version
 
 # Check Java tools
 check "java" java -version
-check "sdkman" bash -c ". /usr/local/sdkman/bin/sdkman-init.sh && sdk --version"
+check "sdkman" bash -c ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version"
 check "gradle" gradle --version
 check "maven" mvn --version
 
@@ -39,6 +41,15 @@ check "ruby" ruby --version
 check "rvm" bash -c ". /usr/local/rvm/scripts/rvm && rvm --version"
 check "rbenv" bash -c 'eval "$(rbenv init -)" && rbenv --version'
 check "rake" rake --version
+
+# Check Jekyll dynamic install
+mkdir jekyll-test
+cd jekyll-test
+touch _config.yml
+check "oryx-build-jekyll" oryx build --apptype static-sites --manifest-dir /tmp
+check "jekyll" jekyll --version
+cd ..
+rm -rf jekyll-test
 
 # Node.js
 check "node" node --version
@@ -49,6 +60,7 @@ check "npm" npm --version
 
 # PHP
 check "php" php --version
+check "Xdebug" php --version | grep 'Xdebug'
 
 # Rust
 check "cargo" cargo --version
