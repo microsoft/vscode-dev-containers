@@ -48,7 +48,7 @@ Usage:
     ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null codespace@localhost
     ```
 
-    ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after `-p` is the **local address port** from step 2. 
+    ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after `-p` is the **local address port** from step 2.
 
     The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
 
@@ -145,7 +145,7 @@ If you already have a running container, you can use the script to spin up SSH i
 2. Install a SSHFS client.
 
     - **Windows:** Install [WinFsp](https://github.com/billziss-gh/winfsp/releases) and [SSHFS-Win](https://github.com/billziss-gh/sshfs-win/releases).
-    - **macOS**: Install macFUSE and the SSHFS packages from the [macFUSE website](https://macfuse.io/).
+    - **macOS**: Use [Homebrew](https://brew.sh/) to install: `brew install macfuse gromgit/fuse/sshfs-mac`
     - **Linux:** Use your native package manager to install your distribution's copy of the sshfs package. e.g. `sudo apt-get update && sudo apt-get install sshfs`
 
 3. Mount the remote filesystem.
@@ -165,4 +165,4 @@ If you already have a running container, you can use the script to spin up SSH i
         ```
         ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after the `!` is the same local port you used in the `ssh` command in step 1.
 
-4. Your dev container's filesystem should now be available in the `~/sshfs/devcontainer` folder on macOS or Liunux or in a new explorer window on Windows.
+4. Your dev container's filesystem should now be available in the `~/sshfs/devcontainer` folder on macOS or Linux or in a new explorer window on Windows.
