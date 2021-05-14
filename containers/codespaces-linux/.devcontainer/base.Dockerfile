@@ -38,7 +38,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/scripts/common-debian.sh "true" "${USERNAME}" "${USER_UID}" "${USER_GID}" "true" "true" "true" \
     && bash /tmp/scripts/setup-user.sh "${USERNAME}" "${PATH}" \
     # Change owner of opt contents since Oryx can dynamically install and will run as "codespace"
-    && chown -R ${USERNAME} /opt/* \
+    && chown ${USERNAME} /opt/* \
     # Verify expected build and debug tools are present
     && apt-get -y install build-essential cmake cppcheck valgrind clang lldb llvm gdb python3-dev \
     # Install tools and shells not in common script
@@ -64,6 +64,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # Install Python, PHP, Ruby utilities
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install rvm, rbenv, any missing base gems
+    && chown -R ${USERNAME} /opt/ruby/* \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
     # Link composer
     && ln -s $(which composer.phar) /usr/local/bin/composer \
@@ -89,11 +90,9 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
 
 # Install SDKMAN, OpenJDK8 (JDK 11 already present), gradle (maven already present)
 RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
-    && bash /tmp/scripts/java-debian.sh "8.0.292.hs-adpt" "${SDKMAN_DIR}" "${USERNAME}" "true" \
     && su ${USERNAME} -c ". ${SDKMAN_DIR}/bin/sdkman-init.sh \
-        && sdk install java opt-java-11 /opt/java/11.0 \
-        && sdk install java opt-java-lts /opt/java/lts \
-        && sdk default java opt-java-lts"
+        && sdk install java 11-opt-java /opt/java/11.0 \
+        && sdk install java lts-opt-java /opt/java/lts"
 
 # Install Rust, Go, remove scripts now that we're done with them
 RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
