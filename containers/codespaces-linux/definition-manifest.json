@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"annotation": "This document describes the base contents of the default GitHub Codespaces dev container image. Note that this image also includes detection logic to dynamically install additional language / runtime versions based on your repository's contents. Dynamically installed content can be found in sub-folders under `/opt`.",
-		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210512.1",
+		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210514.2",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"apt": [{
 				"cgIgnore": false,
@@ -99,7 +99,8 @@
 		"gem": [
 			"rake",
 			"ruby-debug-ide",
-			"debase"
+			"debase",
+			"jekyll"
 		],
 		"cargo": {
 			"rls": null,
@@ -194,7 +195,10 @@
 				"cgIgnore": true
 			},
 			"Go": null,
-			"Rust": null
+			"Rust": null,
+			"Jekyll": {
+				"cgIgnore": true
+			}
 		}
 	}
 }
