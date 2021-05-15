@@ -5,7 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # ** This script is community supported **
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/common.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./common-redhat.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My Zsh! flag]

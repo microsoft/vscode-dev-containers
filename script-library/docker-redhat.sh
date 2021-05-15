@@ -5,7 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # ** This script is community supported **
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/docker.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md
 # Maintainer: @smankoo
 #
 # Syntax: ./docker-redhat.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user]

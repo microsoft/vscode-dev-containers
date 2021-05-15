@@ -1,8 +1,8 @@
-# [alpine](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/alpine)
+# [alpine](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/alpine)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/alpine)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/alpine)
 
 **Definition variations:**
 - [3.13](#variant-313)

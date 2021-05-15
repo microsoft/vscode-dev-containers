@@ -10,7 +10,7 @@
 	"repoContainersToBuildPath": "repository-containers/images",
 	"scriptLibraryPathInRepo": "script-library",
 	"scriptLibraryFolderNameInDefinition": "library-scripts",
-	"historyUrlPrefix": "https://github.com/microsoft/vscode-dev-containers/tree/master/containers/",
+	"historyUrlPrefix": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/",
 	"repositoryUrl": "https://github.com/microsoft/vscode-dev-containers/",
 	"imageLabelPrefix": "com.visualstudio.code.devcontainers",
 	"definitionBuildConfigFile": "definition-manifest.json",

@@ -168,7 +168,7 @@ require('yargs')
             .options({
                 'release': {
                     describe: 'vscode-dev-containers release tag or branch',
-                    default: 'master'
+                    default: 'main'
                 },
                 'registry': {
                     describe: 'container registry to push images to',
@@ -232,7 +232,7 @@ require('yargs')
             .options({
                 'release': {
                     describe: 'vscode-dev-containers release tag or branch',
-                    default: 'master'
+                    default: 'main'
                 },
                 'registry': {
                     describe: 'container registry to push images to',

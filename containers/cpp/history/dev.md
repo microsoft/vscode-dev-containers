@@ -1,8 +1,8 @@
-# [cpp](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/cpp)
+# [cpp](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/cpp)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/cpp)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/cpp)
 
 **Definition variations:**
 - [buster](#variant-buster)

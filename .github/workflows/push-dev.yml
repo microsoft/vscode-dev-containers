@@ -3,7 +3,7 @@ name: Build and push "dev" images
 on: 
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'containers/alpine/**'
       - 'containers/debian/**'
@@ -66,7 +66,7 @@ jobs:
         yarn install
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
+            GIT_BRANCH=main
         fi
         build/vscdc push  --page ${{ matrix.page }} \
                           --pageTotal ${{ matrix.page-total }} \
@@ -95,7 +95,7 @@ jobs:
         yarn install
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
+            GIT_BRANCH=main
         fi
         build/vscdc pack  --prep-and-package-only \
                           --release $GIT_BRANCH \
@@ -130,7 +130,7 @@ jobs:
         echo '(*) Triggering CG manifest and image history generation using workflow_dispatch'
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
+            GIT_BRANCH=main
         fi
         # Use alternate GitHub token due to https://github.community/t5/GitHub-Actions/Triggering-a-new-workflow-from-another-workflow/td-p/31676
         curl -X POST \

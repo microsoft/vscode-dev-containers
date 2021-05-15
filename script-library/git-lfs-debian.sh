@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/git-lfs.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/git-lfs.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./git-lfs-debian.sh

@@ -1,8 +1,8 @@
-# [javascript-node](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/javascript-node)
+# [javascript-node](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/javascript-node)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/javascript-node)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/javascript-node)
 
 **Definition variations:**
 - [16-buster](#variant-16-buster)

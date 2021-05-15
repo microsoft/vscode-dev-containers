@@ -1,8 +1,8 @@
-# [java-8](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/java-8)
+# [java-8](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java-8)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/java-8)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java-8)
 
 **Digest:** sha256:0fd3c11b8442f77a823526596c171494a93a22491cd0ad9cf1ac31cc2566de57
 

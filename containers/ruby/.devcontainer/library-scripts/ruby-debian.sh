@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/ruby.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/ruby.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add to rc files flag] [Install tools flag]
