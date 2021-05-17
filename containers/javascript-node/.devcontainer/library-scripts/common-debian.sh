@@ -116,10 +116,10 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     # Needed for adding manpages-posix and manpages-posix-dev which are non-free packages in Debian
     if [ "${ADD_NON_FREE_PACKAGES}" = "true" ]; then
         CODENAME="$(cat /etc/os-release | grep -oE '^VERSION_CODENAME=.+$' | cut -d'=' -f2)"
-        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
-        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME} main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
-        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
-        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
+        sed -i -E "s/deb http:\/\/(deb|httpredir)\.debian\.org\/debian ${CODENAME} main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
+        sed -i -E "s/deb-src http:\/\/(deb|httredir)\.debian\.org\/debian ${CODENAME} main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
+        sed -i -E "s/deb http:\/\/(deb|httpredir)\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
+        sed -i -E "s/deb-src http:\/\/(deb|httpredir)\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
         sed -i "s/deb http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main/deb http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main contrib non-free/" /etc/apt/sources.list
         sed -i "s/deb-src http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main/deb http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main contrib non-free/" /etc/apt/sources.list
         sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main contrib non-free/" /etc/apt/sources.list 
