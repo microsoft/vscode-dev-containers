@@ -15,6 +15,7 @@ SSHD_PORT=${1:-"2222"}
 USERNAME=${2:-"automatic"}
 START_SSHD=${3:-"false"}
 NEW_PASSWORD=${4:-"skip"}
+FIX_ENVIRONMENT=${5:-"true"}
 
 set -e
 
@@ -22,12 +23,6 @@ if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
-
-# SSH uses a login shells, so we need to ensure these get the same initial PATH as non-login shells. 
-# /etc/profile wipes out the path which is a problem when the PATH was modified using the ENV directive in a Dockerfile.
-rm -f /etc/profile.d/00-restore-env.sh
-echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
-chmod +x /etc/profile.d/00-restore-env.sh
 
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -88,21 +83,81 @@ sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
 
 # Write out a script that can be referenced as an ENTRYPOINT to auto-start sshd
 tee /usr/local/share/ssh-init.sh > /dev/null \
-<< EOF 
+<< 'EOF'
 #!/usr/bin/env bash
 set -e 
 
-if [ "\$(id -u)" -ne 0 ]; then
-    sudo /etc/init.d/ssh start > /tmp/sshd.log 2>&1
-else
-    /etc/init.d/ssh start > /tmp/sshd.log 2>&1
-fi
+sudoIf()
+{
+    if [ "$(id -u)" -ne 0 ]; then
+        sudo "$@"
+    else
+        "$@"
+    fi
+}
+
+# The files created here are used by /etc/profile.d/000-restore-env.sh.
+sudoIf mkdir -p /usr/local/etc/vscode-dev-containers
+declare -x | grep -oP 'declare\s+-x\s+\K.*=.*' | sudoIf tee /usr/local/etc/vscode-dev-containers/ssh-base-env > /dev/null
+
+# Start SSH server
+sudoIf /etc/init.d/ssh start 2>&1 | sudoIf tee /tmp/sshd.log > /dev/null
 
 set +e
-exec "\$@"
+exec "$@"
 EOF
 chmod +x /usr/local/share/ssh-init.sh
-chown ${USERNAME}:ssh /usr/local/share/ssh-init.sh
+
+# Write out a script to ensure login shells get variables or the PATH that were set in the container image
+RESTORE_ENV_SCRIPT="$(cat << 'EOF'
+#!/usr/bin/env bash
+export VSCDC_FIX_LOGIN_ENV=true
+__vscdc_restore_env() {
+    local base_shell_path
+    if [ -f /usr/local/etc/vscode-dev-containers/ssh-base-env ]; then
+        # Add any missing env vars saved off earlier
+        local IFC=$'\n'
+        for variable_line in $(cat /usr/local/etc/vscode-dev-containers/ssh-base-env); do 
+            local var_name="${variable_line%%=*}"
+            if [ "${var_name}" = "PATH" ]; then
+                local var_value="${variable_line##*=\"}"
+                base_shell_path="${var_value%?}"
+            elif [ -z "${!var_name}" ]; then
+                # All values are quoted, so get everything past the first quote and remove the last
+                local var_value="${variable_line##*=\"}"
+                export ${var_name}="${var_value%?}"
+            fi
+        done
+
+        # Unlike other properties, the starting PATH can get set in a few different ways. Debian sets it in /etc/profile while Ubuntu 
+        # takes it from /env/environment, both of which are a problem if the PATH was modified using the ENV directive in a Dockerfile.
+        if [[ $PATH != *"$base_shell_path"* ]]; then
+            # If we're in a situation where we've got a fresh environment, replace this shell's base path with the image base path. First,
+            # find true base path - Debian hard codes it in /etc/profile while Ubuntu gets it from /etc/environment, so its a bit tricky to get.
+            # Since the true base path can vary by user (particularly for Debian), we need to figure it out here instead of up-front.
+            if [ ! -f /tmp/clean-profile ]; then
+                cp /etc/profile /tmp/clean-profile
+                sed -i 's/\/etc\/profile\.d/\/tmp\/ignore-me.d/g' /tmp/clean-profile
+                sed -i 's/\/etc\/bash\.bashrc/\/tmp\/noop.sh/g' /tmp/clean-profile
+            fi
+            mkdir -p /tmp/ignore-me.d
+            touch /tmp/noop.sh
+            local clean_shell_path="$(env -i bash --noprofile --norc -c 'unset PS1; unset BASH; . /tmp/clean-profile; echo $PATH')"
+            # Replace it if it exists in the path with the base_shell_path saved off earlier
+            export PATH="${PATH//${clean_shell_path//\//\\\/}/$base_shell_path}"
+        fi
+    fi
+}
+__vscdc_restore_env
+unset -f __vscdc_restore_env
+EOF
+)"
+if [ "${FIX_ENVIRONMENT}" = "true" ]; then
+    echo "${RESTORE_ENV_SCRIPT}" > /etc/profile.d/00-fix-login-env.sh
+    chmod +x /etc/profile.d/00-fix-login-env.sh
+    # Remove less complex scipt if present to avoid duplication
+    rm -f /etc/profile.d/00-restore-env.sh
+fi
 
 # If we should start sshd now, do so
 if [ "${START_SSHD}" = "true" ]; then
