@@ -56,9 +56,9 @@ apt-get-update-if-needed()
 export DEBIAN_FRONTEND=noninteractive
 
 # Install openssh-server openssh-client
-if ! dpkg -s openssh-server openssh-client > /dev/null 2>&1; then
+if ! dpkg -s openssh-server openssh-client lsof jq > /dev/null 2>&1; then
     apt-get-update-if-needed
-    apt-get -y install --no-install-recommends openssh-server openssh-client 
+    apt-get -y install --no-install-recommends openssh-server openssh-client lsof jq
 fi
 
 # Generate password if new password set to the word "random"
@@ -96,9 +96,9 @@ sudoIf()
     fi
 }
 
-# The files created here are used by /etc/profile.d/000-restore-env.sh.
+# The files created here are used by /etc/profile.d/00-fix-login-env.sh.
 sudoIf mkdir -p /usr/local/etc/vscode-dev-containers
-declare -x | grep -oP 'declare\s+-x\s+\K.*=.*' | sudoIf tee /usr/local/etc/vscode-dev-containers/ssh-base-env > /dev/null
+declare -x | grep -vE '(USER|HOME|SHELL|PWD|OLDPWD|TERM|TERM_PROGRAM|TERM_PROGRAM_VERSION|SHLVL|HOSTNAME|LOGNAME|MAIL)=' | grep -oP '(declare\s+-x\s+)?\K.*=.*' | sudoIf tee /usr/local/etc/vscode-dev-containers/base-env > /dev/null
 
 # Start SSH server
 sudoIf /etc/init.d/ssh start 2>&1 | sudoIf tee /tmp/sshd.log > /dev/null
@@ -109,29 +109,49 @@ EOF
 chmod +x /usr/local/share/ssh-init.sh
 
 # Write out a script to ensure login shells get variables or the PATH that were set in the container image
-RESTORE_ENV_SCRIPT="$(cat << 'EOF'
-#!/usr/bin/env bash
+SH_RESTORE_ENV_SCRIPT="$(cat << 'EOF'
+#!/bin/sh
+# This script is intended to be sourced, so it uses posix syntax where possible and detects zsh for cases where things differ
+
+if [ "${VSCDC_FIX_LOGIN_ENV}" = "true" ]; then
+    # Already run, so exit
+    return
+fi
+
 export VSCDC_FIX_LOGIN_ENV=true
 __vscdc_restore_env() {
+    local base_env_vars
     local base_shell_path
-    if [ -f /usr/local/etc/vscode-dev-containers/ssh-base-env ]; then
+    # Grab codespaces secrets if present
+    if [ -f /workspaces/.codespaces/shared/.user-secrets.json ]; then
+        base_env_vars="$(cat /workspaces/.codespaces/shared/.user-secrets.json | jq -r '.[] | select (.type=="EnvironmentVariable") | .name+"=\""+.value+"\""')"
+    fi
+    if [ -f /usr/local/etc/vscode-dev-containers/base-env ]; then
+        base_env_vars="${base_env_vars}$(echo && cat /usr/local/etc/vscode-dev-containers/base-env)"
+    fi
+    if [ -v base_env_vars ]; then
         # Add any missing env vars saved off earlier
-        local IFC=$'\n'
-        for variable_line in $(cat /usr/local/etc/vscode-dev-containers/ssh-base-env); do 
+        local variable_line
+        while read variable_line; do
             local var_name="${variable_line%%=*}"
             if [ "${var_name}" = "PATH" ]; then
                 local var_value="${variable_line##*=\"}"
                 base_shell_path="${var_value%?}"
-            elif [ -z "${!var_name}" ]; then
+            elif [ "${var_name}" != "" ] && [ ! -v "${var_name}" ]; then
                 # All values are quoted, so get everything past the first quote and remove the last
                 local var_value="${variable_line##*=\"}"
                 export ${var_name}="${var_value%?}"
             fi
-        done
-
-        # Unlike other properties, the starting PATH can get set in a few different ways. Debian sets it in /etc/profile while Ubuntu 
-        # takes it from /env/environment, both of which are a problem if the PATH was modified using the ENV directive in a Dockerfile.
-        if [[ $PATH != *"$base_shell_path"* ]]; then
+        done <<< "$base_env_vars"
+    fi
+    # Unlike other properties, the starting PATH can get set in a few different ways. Debian sets it in /etc/profile while Ubuntu 
+    # takes it from /env/environment, both of which are a problem if the PATH was modified using the ENV directive in a Dockerfile.
+    if [ -v base_shell_path ] && [ "$PATH" = "${PATH#*$base_shell_path}" ]; then
+        local clean_shell_path
+        if [ "$(lsof -p $$ | awk '(NR==2) {print $1}')" = "zsh" ]; then
+            # zsh always sources /etc/zsh/zshenv so getting a clean environment is simple and we just have to worry about /etc/environment
+            clean_shell_path="$(env -i - PATH="$(PATH=""; . /etc/environment; echo "$PATH" 2>/dev/null)" /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo $PATH' 2>/dev/null)"
+        else 
             # If we're in a situation where we've got a fresh environment, replace this shell's base path with the image base path. First,
             # find true base path - Debian hard codes it in /etc/profile while Ubuntu gets it from /etc/environment, so its a bit tricky to get.
             # Since the true base path can vary by user (particularly for Debian), we need to figure it out here instead of up-front.
@@ -142,10 +162,12 @@ __vscdc_restore_env() {
             fi
             mkdir -p /tmp/ignore-me.d
             touch /tmp/noop.sh
-            local clean_shell_path="$(env -i bash --noprofile --norc -c 'unset PS1; unset BASH; . /tmp/clean-profile; echo $PATH')"
-            # Replace it if it exists in the path with the base_shell_path saved off earlier
-            export PATH="${PATH//${clean_shell_path//\//\\\/}/$base_shell_path}"
+            clean_shell_path="$(env -i - BASH="" PS1="" /bin/bash --noprofile --norc -c '. /tmp/clean-profile; echo $PATH' 2>/dev/null)"
+            # Escape the path for bash/sh
+            clean_shell_path="${clean_shell_path//\//\\\/}"
         fi
+        # Replace it if it exists in the path with the base_shell_path saved off earlier
+        export PATH="${PATH/$clean_shell_path/$base_shell_path}"
     fi
 }
 __vscdc_restore_env
@@ -153,10 +175,14 @@ unset -f __vscdc_restore_env
 EOF
 )"
 if [ "${FIX_ENVIRONMENT}" = "true" ]; then
-    echo "${RESTORE_ENV_SCRIPT}" > /etc/profile.d/00-fix-login-env.sh
+    echo "${SH_RESTORE_ENV_SCRIPT}" > /etc/profile.d/00-fix-login-env.sh
     chmod +x /etc/profile.d/00-fix-login-env.sh
     # Remove less complex scipt if present to avoid duplication
     rm -f /etc/profile.d/00-restore-env.sh
+    # Wire in zsh if present
+    if type zsh > /dev/null 2>&1; then
+        echo -e "if [ -f /etc/profile.d/00-fix-login-env.sh ]; then . /etc/profile.d/00-fix-login-env.sh; fi\n$(cat /etc/zsh/zlogin 2>/dev/null || echo '')" > /etc/zsh/zlogin
+    fi
 fi
 
 # If we should start sshd now, do so
