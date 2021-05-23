@@ -141,7 +141,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
 
 ## Testing
 
-The `test` sub-folder includes Debian, Alpine, and RedHat based dev containers that can be used to test the scripts.
+The `test/regression` sub-folder includes Debian, Alpine, and RedHat based dev containers that can be used to test the scripts.
 
 ## Contributing
 

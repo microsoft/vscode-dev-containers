@@ -40,7 +40,7 @@ jobs:
         else
           IMAGE_TO_TEST=${{ matrix.os }}
         fi
-        docker build --build-arg DISTRO=${{ matrix.os }} --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST -f test/Dockerfile .
+        docker build --build-arg DISTRO=${{ matrix.os }} --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST -f test/regression/Dockerfile .
 
   copy-scripts:
     name: Copy and commit script-library updates

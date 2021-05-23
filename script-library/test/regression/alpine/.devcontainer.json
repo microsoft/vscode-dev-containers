@@ -2,7 +2,7 @@
 	"name": "Script Tester - Alpine",
 	"build": {
 		"dockerfile": "../Dockerfile",
-		"context": "../../",
+		"context": "../../../",
 		"args": {
 			"IMAGE_TO_TEST": "alpine",
 			"USERNAME": "vscode",
@@ -13,7 +13,7 @@
 	"settings": { 
 		"terminal.integrated.shell.linux": null
 	},
-	"workspaceMount": "source=${localWorkspaceFolder}/../..,target=/workspace,type=bind",
+	"workspaceMount": "source=${localWorkspaceFolder}/../../..,target=/workspace,type=bind",
 	"workspaceFolder": "/workspace",
 	"remoteUser": "vscode"
 
