@@ -57,6 +57,8 @@ run_test() {
 
 run_test sh
 run_test bash
-run_test zsh
+if type zsh > /dev/null 2>&1; then
+    run_test zsh
+fi
 
 echo -e "\n🏆 All shell tests passed for user \"$USERNAME\"!"

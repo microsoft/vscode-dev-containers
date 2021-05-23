@@ -12,4 +12,13 @@ run_test() {
     echo -e "\n💯 All tests for $1 passed!"
 }
 
-run_test 'mcr.microsoft.com/vscode/devcontainers/base:0-focal'
+run_test 'debian:buster'
+run_test 'debian:stretch'
+run_test 'ubuntu:focal'
+run_test 'ubuntu:bionic'
+run_test 'mcr.microsoft.com/vscode/devcontainers/base:buster'
+run_test 'mcr.microsoft.com/vscode/devcontainers/base:stretch'
+run_test 'mcr.microsoft.com/vscode/devcontainers/base:focal'
+run_test 'mcr.microsoft.com/vscode/devcontainers/base:bionic'
+
+echo -e "\n🎉 All images passed!"

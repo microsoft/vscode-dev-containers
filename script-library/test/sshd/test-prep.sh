@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 DEFAULT_SHELL_TYPE=$1
 
+set -e
+
 echo -e "export PATH=/front-profile-begin:\$PATH:/back-profile-begin\n$(cat /etc/profile)" > /etc/profile
 echo -e "export PATH=/front-profile-begin:\$PATH:/back-profile-begin\n$(cat /etc/zsh/zlogin)" > /etc/zsh/zlogin
 sed -i 's%export PATH$%&\nexport PATH=/front-profile-post-export:$PATH:/back-profile-post-export%g' /etc/profile
