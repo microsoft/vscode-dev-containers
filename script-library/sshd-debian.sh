@@ -7,7 +7,7 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/sshd.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./sshd-debian.sh [SSH Port (don't use 22)] [non-root user] [start sshd now flag] [new password for user]
+# Syntax: ./sshd-debian.sh [SSH Port (don't use 22)] [non-root user] [start sshd now flag] [new password for user] [fix environment flag]
 #
 # Note: You can change your user's password with "sudo passwd $(whoami)" (or just "passwd" if running as root).
 
@@ -77,7 +77,7 @@ fi
 
 # Setup sshd
 mkdir -p /var/run/sshd
-sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
+sed -i 's/session\s*required\s*pam_loginuid\.so/ession optional pam_loginuid.so/g' /etc/pam.d/sshd
 sed -i 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
 
@@ -85,6 +85,9 @@ sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
 tee /usr/local/share/ssh-init.sh > /dev/null \
 << 'EOF'
 #!/usr/bin/env bash
+# This script is intended to be run as root with a container that runs as root (even if you connect with a different user)
+# However, it supports running as a user other than root if passwordless sudo is configured for that same user.
+
 set -e 
 
 sudoIf()
@@ -96,11 +99,41 @@ sudoIf()
     fi
 }
 
-# The files created here are used by /etc/profile.d/00-fix-login-env.sh.
+# ** The files created here are used by /etc/profile.d/00-fix-login-env.sh **
+# Store any variablese set in the dockerfile under /usr/local/etc/vscode-dev-containers/base-env
 sudoIf mkdir -p /usr/local/etc/vscode-dev-containers
-declare -x | grep -vE '(USER|HOME|SHELL|PWD|OLDPWD|TERM|TERM_PROGRAM|TERM_PROGRAM_VERSION|SHLVL|HOSTNAME|LOGNAME|MAIL)=' | grep -oP '(declare\s+-x\s+)?\K.*=.*' | sudoIf tee /usr/local/etc/vscode-dev-containers/base-env > /dev/null
+declare -x | grep -vE '(USER|HOME|SHELL|PWD|OLDPWD|TERM|TERM_PROGRAM|TERM_PROGRAM_VERSION|SHLVL|HOSTNAME|LOGNAME|MAIL)=' \
+    | grep -oP '(declare\s+-x\s+)?\K.*=.*' | sudoIf tee /usr/local/etc/vscode-dev-containers/base-env > /dev/null
 
-# Start SSH server
+# Setup a /usr/local/etc/vscode-dev-containers/default-path file whose contents vary based on whether an /etc/environment file exists
+ETC_ENVIRONMENT_PATH="$(unset PATH; . /etc/environment; echo "$PATH")"
+if [ ! -z "${ETC_ENVIRONMENT_PATH}" ]; then
+    # If a path is set in /etc/environment like in the ubuntu image, this will get used
+    sudoIf tee /usr/local/etc/vscode-dev-containers/default-path > /dev/null \
+\
+<< EOF_DEFAULT_PATH
+export __vscdc_default_path="${ETC_ENVIRONMENT_PATH}"
+export __vscdc_zshenv_path="$(PATH= /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo $PATH' 2>/dev/null)"
+EOF_DEFAULT_PATH
+
+else
+    # If no path is in /etc/environment, get the default login paths from /etc/login.defs
+    ENV_SUPATH="$(grep -oP 'ENV_SUPATH\s+PATH=\K.+$' /etc/login.defs)"
+    ENV_PATH="$(grep -oP 'ENV_PATH\s+PATH=\K.+$' /etc/login.defs)"
+    sudoIf tee /usr/local/etc/vscode-dev-containers/default-path > /dev/null \
+\
+<< EOF_DEFAULT_PATH
+if [ "\$(id -u)" -ne 0 ]; then
+    export __vscdc_default_path=$ENV_PATH
+else
+    export __vscdc_default_path=$ENV_SUPATH
+fi
+export __vscdc_zshenv_path="$(PATH= /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo $PATH' 2>/dev/null)"
+EOF_DEFAULT_PATH
+
+fi
+
+# ** Start SSH server **
 sudoIf /etc/init.d/ssh start 2>&1 | sudoIf tee /tmp/sshd.log > /dev/null
 
 set +e
@@ -109,9 +142,9 @@ EOF
 chmod +x /usr/local/share/ssh-init.sh
 
 # Write out a script to ensure login shells get variables or the PATH that were set in the container image
-SH_RESTORE_ENV_SCRIPT="$(cat << 'EOF'
+RESTORE_ENV_SCRIPT="$(cat << 'EOF'
 #!/bin/sh
-# This script is intended to be sourced, so it uses posix syntax where possible and detects zsh for cases where things differ
+# This script is intended to be sourced, so it uses posix syntax where possible and detects zsh/sh for cases where things differ
 
 if [ "${VSCDC_FIX_LOGIN_ENV}" = "true" ]; then
     # Already run, so exit
@@ -119,6 +152,18 @@ if [ "${VSCDC_FIX_LOGIN_ENV}" = "true" ]; then
 fi
 
 export VSCDC_FIX_LOGIN_ENV=true
+
+# Get the type of shell without relying on $SHELL which can be empty/wrong
+__vscdc_shell_type="$(lsof -p $$ | awk '(NR==2) {print $1}')"
+
+__vscdc_var_has_val() {
+    # POSIX implementation uses eval, but that doesn't work in zsh and -v is better for bash
+    if [ "${__vscdc_shell_type}" = "bash" ] || [ "${__vscdc_shell_type}" = "zsh" ]; then
+        if [ -v "$1" ]; then return 0; else return 1; fi
+    fi
+    if [ "$(eval "echo \$$1")" = "" ]; then return 1; else return 0; fi
+}
+
 __vscdc_restore_env() {
     local base_env_vars
     local base_shell_path
@@ -129,53 +174,67 @@ __vscdc_restore_env() {
     if [ -f /usr/local/etc/vscode-dev-containers/base-env ]; then
         base_env_vars="${base_env_vars}$(echo && cat /usr/local/etc/vscode-dev-containers/base-env)"
     fi
-    if [ -v base_env_vars ]; then
+    if [ ! -z "${base_env_vars}" ]; then
         # Add any missing env vars saved off earlier
         local variable_line
-        while read variable_line; do
+        while IFS= read -r variable_line; do
             local var_name="${variable_line%%=*}"
             if [ "${var_name}" = "PATH" ]; then
                 local var_value="${variable_line##*=\"}"
                 base_shell_path="${var_value%?}"
-            elif [ "${var_name}" != "" ] && [ ! -v "${var_name}" ]; then
+            elif [ "${var_name}" != "" ] && ! __vscdc_var_has_val "${var_name}"; then
                 # All values are quoted, so get everything past the first quote and remove the last
                 local var_value="${variable_line##*=\"}"
                 export ${var_name}="${var_value%?}"
             fi
-        done <<< "$base_env_vars"
+        done \
+<< EOF_BASE_ENV
+$base_env_vars
+EOF_BASE_ENV
+        # 👆 Use EOF hack for piping in variable to "read" because <<< is not available in sh/dash/ash
     fi
+
     # Unlike other properties, the starting PATH can get set in a few different ways. Debian sets it in /etc/profile while Ubuntu 
     # takes it from /env/environment, both of which are a problem if the PATH was modified using the ENV directive in a Dockerfile.
-    if [ -v base_shell_path ] && [ "$PATH" = "${PATH#*$base_shell_path}" ]; then
-        local clean_shell_path
-        if [ "$(lsof -p $$ | awk '(NR==2) {print $1}')" = "zsh" ]; then
-            # zsh always sources /etc/zsh/zshenv so getting a clean environment is simple and we just have to worry about /etc/environment
-            clean_shell_path="$(env -i - PATH="$(PATH=""; . /etc/environment; echo "$PATH" 2>/dev/null)" /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo $PATH' 2>/dev/null)"
-        else 
-            # If we're in a situation where we've got a fresh environment, replace this shell's base path with the image base path. First,
-            # find true base path - Debian hard codes it in /etc/profile while Ubuntu gets it from /etc/environment, so its a bit tricky to get.
-            # Since the true base path can vary by user (particularly for Debian), we need to figure it out here instead of up-front.
-            if [ ! -f /tmp/clean-profile ]; then
-                cp /etc/profile /tmp/clean-profile
-                sed -i 's/\/etc\/profile\.d/\/tmp\/ignore-me.d/g' /tmp/clean-profile
-                sed -i 's/\/etc\/bash\.bashrc/\/tmp\/noop.sh/g' /tmp/clean-profile
+    if [ -z "${PATH}" ]; then
+        export PATH="${base_shell_path}"
+        return
+    fi
+    if [ "${PATH}" = "${base_shell_path}" ]; then
+        return
+    fi
+    if [ ! -z "${base_shell_path}" ] && [ "$PATH" = "${PATH#*$base_shell_path}" ]; then
+        # Script exports a variable named __vscdc_default_path, __vscdc_zshenv_path
+        . /usr/local/etc/vscode-dev-containers/default-path
+        if [ "${__vscdc_shell_type}" = "zsh" ]; then
+            if [ "$PATH" = "${PATH#*$__vscdc_default_path}" ]; then
+                export PATH="${PATH/$__vscdc_zshenv_path/$base_shell_path}"
+            else
+                export PATH="${PATH/$__vscdc_default_path/$base_shell_path}"
             fi
-            mkdir -p /tmp/ignore-me.d
-            touch /tmp/noop.sh
-            clean_shell_path="$(env -i - BASH="" PS1="" /bin/bash --noprofile --norc -c '. /tmp/clean-profile; echo $PATH' 2>/dev/null)"
-            # Escape the path for bash/sh
-            clean_shell_path="${clean_shell_path//\//\\\/}"
+        else 
+            if [ "${__vscdc_shell_type}" = "bash" ]; then
+                # Use variable expansion for bash, 
+                export PATH="${PATH/${__vscdc_default_path//\//\\\/}/$base_shell_path}"
+            else
+                # Use sed for awk sh/ash/dash. Escape sed's basic regex chars along with % that we use  instead
+                # of '/' in the next line. https://www.gnu.org/software/sed/manual/html_node/BRE-syntax.html
+                __vscdc_default_path="$(echo "$__vscdc_default_path" | sed 's/[]?\\%$*+.^[]/\\&/g')"
+                export PATH="$(echo "$PATH" | sed "s%$__vscdc_default_path%$base_shell_path%")"
+            fi
         fi
-        # Replace it if it exists in the path with the base_shell_path saved off earlier
-        export PATH="${PATH/$clean_shell_path/$base_shell_path}"
     fi
 }
+
 __vscdc_restore_env
-unset -f __vscdc_restore_env
+
+unset -f __vscdc_restore_env __vscdc_var_has_val
+unset __vscdc_shell_type __vscdc_default_path __vscdc_zshenv_path
 EOF
 )"
+
 if [ "${FIX_ENVIRONMENT}" = "true" ]; then
-    echo "${SH_RESTORE_ENV_SCRIPT}" > /etc/profile.d/00-fix-login-env.sh
+    echo "${RESTORE_ENV_SCRIPT}" > /etc/profile.d/00-fix-login-env.sh
     chmod +x /etc/profile.d/00-fix-login-env.sh
     # Remove less complex scipt if present to avoid duplication
     rm -f /etc/profile.d/00-restore-env.sh
