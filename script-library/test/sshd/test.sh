@@ -8,7 +8,7 @@ run_test() {
     echo -e "\n\n***** 🌆 Testing image $1 *****\n🛠 Building image..."
     docker build -t vscdc-sshd-test-image --build-arg IMAGE_TO_TEST=$1 -f test/sshd/Dockerfile .
     echo '📦 Starting container...'
-    docker run --rm vscdc-sshd-test-image /tmp/scripts/test-in-container.sh ${INCLUDE_CODESPACES_TESTS}
+    docker run --init --privileged --rm vscdc-sshd-test-image /tmp/scripts/test-in-container.sh ${INCLUDE_CODESPACES_TESTS}
     echo -e "\n💯 All tests for $1 passed!"
 }
 

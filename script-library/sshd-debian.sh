@@ -219,7 +219,7 @@ EOF
 )"
 
 # Write out a scripts that can be referenced as an ENTRYPOINT to auto-start sshd and fix login environments
-tee -a /usr/local/share/ssh-init.sh > /dev/null \
+tee /usr/local/share/ssh-init.sh > /dev/null \
 << 'EOF'
 #!/usr/bin/env bash
 # This script is intended to be run as root with a container that runs as root (even if you connect with a different user)
