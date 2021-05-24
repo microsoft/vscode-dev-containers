@@ -34,7 +34,7 @@ jobs:
       id: test_script_library
       run: |
         set -e
-        bash test/regression/test.sh "${{ matrix.os }}"
+        bash script-library/test/regression/test.sh "${{ matrix.os }}"
 
   copy-scripts:
     name: Copy and commit script-library updates
