@@ -81,7 +81,7 @@ sed -i 's/session\s*required\s*pam_loginuid\.so/ession optional pam_loginuid.so/
 sed -i 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
 
-# Write out a scripts that can be referenced as an ENTRYPOINT to auto-start sshd and fix login environments
+# Script to store variables that exist at the time the ENTRPOINT is fired
 STORE_ENV_SCRIPT="$(cat << 'EOF'
 # The files created here are used by /etc/profile.d/00-fix-login-env.sh
 
@@ -126,7 +126,7 @@ fi
 EOF
 )"
 
-# Write out a script to ensure login shells get variables or the PATH that were set in the container image
+# Script to ensure login shells get variables or the PATH that were set in the container image
 RESTORE_ENV_SCRIPT="$(cat << 'EOF'
 #!/bin/sh
 # This script is intended to be sourced, so it uses posix syntax where possible and detects zsh/sh for cases where things differ
@@ -218,6 +218,7 @@ unset __vscdc_shell_type __vscdc_default_path __vscdc_zshenv_path
 EOF
 )"
 
+# Write out a scripts that can be referenced as an ENTRYPOINT to auto-start sshd and fix login environments
 tee -a /usr/local/share/ssh-init.sh > /dev/null \
 << 'EOF'
 #!/usr/bin/env bash
@@ -263,7 +264,7 @@ if [ "${START_SSHD}" = "true" ]; then
     /usr/local/share/ssh-init.sh
 fi
 
-# Write out result
+# Output success details
 echo -e "Done!\n\n- Port: ${SSHD_PORT}\n- User: ${USERNAME}"
 if [ "${EMIT_PASSWORD}" = "true" ]; then
     echo "- Password: ${NEW_PASSWORD}"
