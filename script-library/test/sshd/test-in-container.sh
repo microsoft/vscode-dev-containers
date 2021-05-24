@@ -15,4 +15,4 @@ if [ "${USERNAME}" != "" ]; then
     su $USERNAME -c ./test-in-container-for-user.sh $USERNAME $RUN_CODESPACES_TESTS
 fi
 
-echo -e "\n🙌 Tests passed all users!"
+echo -e "\n🙌 Tests passed for all users!"
