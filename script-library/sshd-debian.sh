@@ -114,9 +114,9 @@ fi
 # Handle zsh if present
 if type zsh > /dev/null 2>&1; then
     if ! grep '/etc/profile.d/00-fix-login-env.sh' /etc/zsh/zlogin > /dev/null 2>&1; then
-        echo -e "if [ -f /etc/profile.d/00-fix-login-env.sh ]; then . /etc/profile.d/00-fix-login-env.sh; fi\n$(cat /etc/zsh/zlogin 2>/dev/null || echo '')" > /etc/zsh/zlogin
+        echo -e "if [ -f /etc/profile.d/00-fix-login-env.sh ]; then . /etc/profile.d/00-fix-login-env.sh; fi\n$(cat /etc/zsh/zlogin 2>/dev/null || echo '')" | sudoIf tee /etc/zsh/zlogin > /dev/null
     fi
-    echo "export __vscdc_zshenv_path=\"\$(PATH= /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo \$PATH' 2>/dev/null || echo '')\"" | sudoIf tee -a /usr/local/etc/vscode-dev-containers/default-path > /dev/null
+    echo "export __vscdc_zshenv_path=\"$(PATH= /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo $PATH' 2>/dev/null || echo '')\"" | sudoIf tee -a /usr/local/etc/vscode-dev-containers/default-path > /dev/null
 fi
 
 # Remove less complex scipt if present to avoid duplication
