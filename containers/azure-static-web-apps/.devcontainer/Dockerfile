@@ -6,5 +6,5 @@ ENV NVM_DIR="/usr/local/share/nvm"
 ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/node-debian.sh /tmp/library-scripts/
-RUN apt-get update && bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}"
-RUN su node -c "npm install -g @azure/static-web-apps-cli"
+RUN apt-get update && bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" && \
+    npm install -g @azure/static-web-apps-cli
