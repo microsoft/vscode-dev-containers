@@ -8,7 +8,7 @@ ARG IMAGE_TO_TEST=debian:10
 FROM ${IMAGE_TO_TEST}
 
 COPY *.sh /tmp/
-COPY test/*.sh /tmp
+COPY test/regression/*.sh /tmp/
 RUN chmod +x /tmp/*.sh
 
 ARG DISTRO="debian"
