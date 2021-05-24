@@ -81,25 +81,10 @@ sed -i 's/session\s*required\s*pam_loginuid\.so/ession optional pam_loginuid.so/
 sed -i 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
 
-# Write out a script that can be referenced as an ENTRYPOINT to auto-start sshd
-tee /usr/local/share/ssh-init.sh > /dev/null \
-<< 'EOF'
-#!/usr/bin/env bash
-# This script is intended to be run as root with a container that runs as root (even if you connect with a different user)
-# However, it supports running as a user other than root if passwordless sudo is configured for that same user.
+# Write out a scripts that can be referenced as an ENTRYPOINT to auto-start sshd and fix login environments
+STORE_ENV_SCRIPT="$(cat << 'EOF'
+# The files created here are used by /etc/profile.d/00-fix-login-env.sh
 
-set -e 
-
-sudoIf()
-{
-    if [ "$(id -u)" -ne 0 ]; then
-        sudo "$@"
-    else
-        "$@"
-    fi
-}
-
-# ** The files created here are used by /etc/profile.d/00-fix-login-env.sh **
 # Store any variablese set in the dockerfile under /usr/local/etc/vscode-dev-containers/base-env
 sudoIf mkdir -p /usr/local/etc/vscode-dev-containers
 declare -x | grep -vE '(USER|HOME|SHELL|PWD|OLDPWD|TERM|TERM_PROGRAM|TERM_PROGRAM_VERSION|SHLVL|HOSTNAME|LOGNAME|MAIL)=' \
@@ -109,13 +94,7 @@ declare -x | grep -vE '(USER|HOME|SHELL|PWD|OLDPWD|TERM|TERM_PROGRAM|TERM_PROGRA
 ETC_ENVIRONMENT_PATH="$(unset PATH; . /etc/environment; echo "$PATH")"
 if [ ! -z "${ETC_ENVIRONMENT_PATH}" ]; then
     # If a path is set in /etc/environment like in the ubuntu image, this will get used
-    sudoIf tee /usr/local/etc/vscode-dev-containers/default-path > /dev/null \
-\
-<< EOF_DEFAULT_PATH
-export __vscdc_default_path="${ETC_ENVIRONMENT_PATH}"
-export __vscdc_zshenv_path="$(PATH= /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo $PATH' 2>/dev/null)"
-EOF_DEFAULT_PATH
-
+    echo "export __vscdc_default_path=\"${ETC_ENVIRONMENT_PATH}\"" | sudoIf tee /usr/local/etc/vscode-dev-containers/default-path > /dev/null
 else
     # If no path is in /etc/environment, get the default login paths from /etc/login.defs
     ENV_SUPATH="$(grep -oP 'ENV_SUPATH\s+PATH=\K.+$' /etc/login.defs)"
@@ -128,18 +107,24 @@ if [ "\$(id -u)" -ne 0 ]; then
 else
     export __vscdc_default_path=$ENV_SUPATH
 fi
-export __vscdc_zshenv_path="$(PATH= /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo $PATH' 2>/dev/null)"
 EOF_DEFAULT_PATH
 
 fi
 
-# ** Start SSH server **
-sudoIf /etc/init.d/ssh start 2>&1 | sudoIf tee /tmp/sshd.log > /dev/null
+# Handle zsh if present
+if type zsh > /dev/null 2>&1; then
+    if ! grep '/etc/profile.d/00-fix-login-env.sh' /etc/zsh/zlogin > /dev/null 2>&1; then
+        echo -e "if [ -f /etc/profile.d/00-fix-login-env.sh ]; then . /etc/profile.d/00-fix-login-env.sh; fi\n$(cat /etc/zsh/zlogin 2>/dev/null || echo '')" > /etc/zsh/zlogin
+    fi
+    echo "export __vscdc_zshenv_path=\"\$(PATH= /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo \$PATH' 2>/dev/null || echo '')\"" | sudoIf tee -a /usr/local/etc/vscode-dev-containers/default-path > /dev/null
+fi
 
-set +e
-exec "$@"
+# Remove less complex scipt if present to avoid duplication
+if [ -f "/etc/profile.d/00-restore-env.sh" ]; then
+    sudoIf rm -f /etc/profile.d/00-restore-env.sh
+fi
 EOF
-chmod +x /usr/local/share/ssh-init.sh
+)"
 
 # Write out a script to ensure login shells get variables or the PATH that were set in the container image
 RESTORE_ENV_SCRIPT="$(cat << 'EOF'
@@ -233,16 +218,45 @@ unset __vscdc_shell_type __vscdc_default_path __vscdc_zshenv_path
 EOF
 )"
 
+tee -a /usr/local/share/ssh-init.sh > /dev/null \
+<< 'EOF'
+#!/usr/bin/env bash
+# This script is intended to be run as root with a container that runs as root (even if you connect with a different user)
+# However, it supports running as a user other than root if passwordless sudo is configured for that same user.
+
+set -e 
+
+sudoIf()
+{
+    if [ "$(id -u)" -ne 0 ]; then
+        sudo "$@"
+    else
+        "$@"
+    fi
+}
+
+EOF
 if [ "${FIX_ENVIRONMENT}" = "true" ]; then
+    echo "$STORE_ENV_SCRIPT" >> /usr/local/share/ssh-init.sh
     echo "${RESTORE_ENV_SCRIPT}" > /etc/profile.d/00-fix-login-env.sh
     chmod +x /etc/profile.d/00-fix-login-env.sh
-    # Remove less complex scipt if present to avoid duplication
+    # Remove less complex script if present to avoid path duplication
     rm -f /etc/profile.d/00-restore-env.sh
     # Wire in zsh if present
     if type zsh > /dev/null 2>&1; then
         echo -e "if [ -f /etc/profile.d/00-fix-login-env.sh ]; then . /etc/profile.d/00-fix-login-env.sh; fi\n$(cat /etc/zsh/zlogin 2>/dev/null || echo '')" > /etc/zsh/zlogin
     fi
 fi
+tee -a /usr/local/share/ssh-init.sh > /dev/null \
+<< 'EOF'
+
+# ** Start SSH server **
+sudoIf /etc/init.d/ssh start 2>&1 | sudoIf tee /tmp/sshd.log > /dev/null
+
+set +e
+exec "$@"
+EOF
+chmod +x /usr/local/share/ssh-init.sh
 
 # If we should start sshd now, do so
 if [ "${START_SSHD}" = "true" ]; then

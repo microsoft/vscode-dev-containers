@@ -27,6 +27,8 @@ run_test() {
     local shell_to_test=$1
     local test_result="$(ssh -q -p 2222 -i $HOME/.ssh/test.id_rsa -o StrictHostKeyChecking=no -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null $(whoami)@localhost $shell_to_test -lic 'env' 2> /dev/null)"
     echo -e "\n🧪 Run \"${USERNAME}\" user tests for $1...\n(*) Environment for $shell_to_test:\n$test_result"
+    echo "(*) /usr/local/etc/vscode-dev-containers/default-path contents:"
+    cat /usr/local/etc/vscode-dev-containers/default-path
     echo "(*) Running environment var tests for $1..."
     check_result "$shell_to_test" "$test_result" "this_var=true"
     check_result "$shell_to_test" "$test_result" "that_var=true"
