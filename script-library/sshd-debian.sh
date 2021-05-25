@@ -81,7 +81,7 @@ sed -i 's/session\s*required\s*pam_loginuid\.so/ession optional pam_loginuid.so/
 sed -i 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
 
-# Script to store variables that exist at the time the ENTRPOINT is fired
+# Script to store variables that exist at the time the ENTRYPOINT is fired
 STORE_ENV_SCRIPT="$(cat << 'EOF'
 # The files created here are used by /etc/profile.d/00-fix-login-env.sh
 
