@@ -25,8 +25,7 @@
 		"ms-dotnettools.csharp",
 		"ms-python.python",
 		"vscjava.vscode-java-pack",
-		"dbaeumer.vscode-eslint",
-		"ritwickdey.liveserver"
+		"dbaeumer.vscode-eslint"
 	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
