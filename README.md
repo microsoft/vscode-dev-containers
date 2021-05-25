@@ -68,7 +68,7 @@ Each `RUN` statement creates a Docker image "layer". If one `RUN` statement adds
 
 Have a question or feedback?
 
-- Contribute or provide feedback for the [VS Code Remote](https://github.com/Microsoft/vscode-remote-release/blob/master/CONTRIBUTING.md) extensions or [GitHub Codespaces](https://github.com/github/feedback/discussions/categories/codespaces-feedback).
+- Contribute or provide feedback for the [VS Code Remote](https://github.com/Microsoft/vscode-remote-release/blob/main/CONTRIBUTING.md) extensions or [GitHub Codespaces](https://github.com/github/feedback/discussions/categories/codespaces-feedback).
 - Search [existing issues](https://github.com/Microsoft/vscode-dev-containers/issues) with dev container definitions or [report a problem](https://github.com/Microsoft/vscode-dev-containers/issues/new).
 - Contribute a [development container definition](CONTRIBUTING.md#contributing-dev-container-definitions) to the repository.
 
@@ -81,4 +81,4 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 Copyright (c) Microsoft Corporation. All rights reserved. <br />
 Licensed under the MIT License. See [LICENSE](LICENSE).
 
-For images generated from this repository, see [LICENSE](https://github.com/microsoft/containerregistry/blob/master/legal/Container-Images-Legal-Notice.md) and [NOTICE.txt](NOTICE.txt).
+For images generated from this repository, see [LICENSE](https://github.com/microsoft/containerregistry/blob/main/legal/Container-Images-Legal-Notice.md) and [NOTICE.txt](NOTICE.txt).

@@ -1,8 +1,8 @@
-# [php](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/php)
+# [php](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/php)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/php)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/php)
 
 **Definition variations:**
 - [8.0](#variant-80)

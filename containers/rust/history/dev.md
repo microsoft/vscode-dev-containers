@@ -1,8 +1,8 @@
-# [rust](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/rust)
+# [rust](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/rust)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
 **Digest:** sha256:4acec35787f21527d12b05bb4eb7e9fce6e2a7cbffc92867103492ba31df5b9d
 

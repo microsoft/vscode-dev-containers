@@ -1,4 +1,4 @@
-# [{{definition}}](https://github.com/{{repository}}/tree/master/containers/{{definition}})
+# [{{definition}}](https://github.com/{{repository}}/tree/main/containers/{{definition}})
 {{#if annotation}}
 {{{annotation}}}
 {{/if}}

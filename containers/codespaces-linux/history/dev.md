@@ -1,9 +1,9 @@
-# [codespaces-linux](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/codespaces-linux)
+# [codespaces-linux](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 This document describes the base contents of the default GitHub Codespaces dev container image. Note that this image also includes detection logic to dynamically install additional language / runtime versions based on your repository's contents. Dynamically installed content can be found in sub-folders under `/opt`.
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/codespaces-linux)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
 **Digest:** sha256:eacd0cc5a18b19a4419571ea98d9615c241e140280c5a3b52476d82faa382314
 

@@ -1,8 +1,8 @@
-# [dotnet](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/dotnet)
+# [dotnet](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/dotnet)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/dotnet)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/dotnet)
 
 **Definition variations:**
 - [5.0](#variant-50)

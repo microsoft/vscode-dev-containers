@@ -1,8 +1,8 @@
-# [ruby](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/ruby)
+# [ruby](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/ruby)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/ruby)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/ruby)
 
 **Definition variations:**
 - [3.0](#variant-30)

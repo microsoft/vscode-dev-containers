@@ -1,8 +1,8 @@
-# [go](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/go)
+# [go](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/go)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/go)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/go)
 
 **Definition variations:**
 - [1.16](#variant-116)
