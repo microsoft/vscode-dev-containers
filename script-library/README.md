@@ -80,10 +80,10 @@ Note that the CI process for this repository will automatically keep scripts in 
 
 ### Downloading the script with curl / wget instead
 
-If you prefer, you can download the script using `curl` or `wget` and execute it instead. This can convenient to do with your own `Dockerfile`, but is generally avoided for definitions in this repository. To avoid unexpected issues, you should reference a release specific version of the script, rather than using master. For example:
+If you prefer, you can download the script using `curl` or `wget` and execute it instead. This can convenient to do with your own `Dockerfile`, but is generally avoided for definitions in this repository. To avoid unexpected issues, you should reference a release specific version of the script, rather than using main. For example:
 
 ```Dockerfile
-RUN bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh")" \
+RUN bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/common-debian.sh")" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
@@ -92,7 +92,7 @@ Or if you're not sure if `curl` is installed:
 ```Dockerfile
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get -y install --no-install-recommends curl ca-certificates \
-    && bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh")" \
+    && bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/common-debian.sh")" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
@@ -151,5 +151,5 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definition
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE)
+Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE)
 

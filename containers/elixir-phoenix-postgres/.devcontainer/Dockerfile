@@ -11,7 +11,7 @@ ARG USER_GID=$USER_UID
 # Options for common package install script
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
-ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
+ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/common-debian.sh"
 ARG COMMON_SCRIPT_SHA="dev-mode"
 
 # Optional Settings for Phoenix
@@ -19,7 +19,7 @@ ARG PHOENIX_VERSION="1.5.4"
 
 # [Optional] Settings for installing Node.js.
 ARG INSTALL_NODE="true"
-ARG NODE_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/node-debian.sh"
+ARG NODE_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/node-debian.sh"
 ARG NODE_SCRIPT_SHA="dev-mode"
 ARG NODE_VERSION="lts/*"
 ENV NVM_DIR=/usr/local/share/nvm

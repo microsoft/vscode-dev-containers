@@ -65,7 +65,7 @@ However, this section will outline the how you can selectively add this function
         && chmod +x /usr/local/bin/kubectl
 
     # Install Helm
-    RUN curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
+    RUN curl -s https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash -
     ```
 
 4. Finally, we need to automatically swap out `localhost` for `host.docker.internal` in the container's copy of the Kubernetes config and (optionally) Minikube certificates. Manually copy the [`copy-kube-config.sh` script](.devcontainer/copy-kube-config.sh) from the `.devcontainer` folder in this repo folder into the same folder as your `Dockerfile` and then update your `Dockerfile` to use it from your `/root/.bashrc` and/or `/root/.zshrc`.
@@ -167,4 +167,4 @@ While you cannot sync or connect to your local Kubernetes configuration with Cod
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE). 
+Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE). 

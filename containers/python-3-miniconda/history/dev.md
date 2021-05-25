@@ -1,8 +1,8 @@
-# [python-3-miniconda](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-miniconda)
+# [python-3-miniconda](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-miniconda)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
 **Digest:** sha256:6a53ef53e064412e35ab0083f40e52c02774f0b187da07dca07a89e5746eec4f
 

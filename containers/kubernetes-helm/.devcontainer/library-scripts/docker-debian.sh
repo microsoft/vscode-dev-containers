@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/docker.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby]

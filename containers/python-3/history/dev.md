@@ -1,8 +1,8 @@
-# [python-3](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3)
+# [python-3](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3)
 
 **Definition variations:**
 - [3.9](#variant-39)

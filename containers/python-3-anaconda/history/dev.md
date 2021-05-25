@@ -1,8 +1,8 @@
-# [python-3-anaconda](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-anaconda)
+# [python-3-anaconda](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-anaconda)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
 **Digest:** sha256:d14ce6bd790572b492e491c6949c2aee9c2459746cd1ff0c3d8dd2c7074cc9ac
 

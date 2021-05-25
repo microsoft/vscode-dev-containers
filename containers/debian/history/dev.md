@@ -1,8 +1,8 @@
-# [debian](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/debian)
+# [debian](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/debian)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/debian)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/debian)
 
 **Definition variations:**
 - [buster](#variant-buster)

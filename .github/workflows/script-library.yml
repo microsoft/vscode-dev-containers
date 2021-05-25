@@ -3,7 +3,7 @@ name: Test script library and update definitions
 on: 
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'script-library/**'
 
