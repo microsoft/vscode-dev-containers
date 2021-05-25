@@ -103,7 +103,7 @@ You can also use `wget`:
 ```Dockerfile
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get -y install --no-install-recommends wget ca-certificates \
-    && bash -c "$(wget -qO- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh")" \
+    && bash -c "$(wget -qO- "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/common-debian.sh")" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
@@ -135,7 +135,7 @@ ARG INSTALL_ZSH="true"
 # Download script and run it with the option above
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get -y install --no-install-recommends curl ca-certificates \
-    && bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh")" -- "${INSTALL_ZSH}" "vscode" "1000" "1000" "true" \
+    && bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/common-debian.sh")" -- "${INSTALL_ZSH}" "vscode" "1000" "1000" "true" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
