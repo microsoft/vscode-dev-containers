@@ -8,7 +8,8 @@ ARG DEFAULT_SHELL_TYPE=bash
 COPY sshd-debian.sh test/sshd/*.sh /tmp/scripts/
 ARG current_user=$USER
 USER root
-RUN bash /tmp/scripts/sshd-debian.sh \
+RUN apt-get update \
+    && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/test-prep.sh ${DEFAULT_SHELL_TYPE}
 USER $current_user
 

@@ -85,39 +85,31 @@ sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
 STORE_ENV_SCRIPT="$(cat << 'EOF'
 # The files created here are used by /etc/profile.d/00-fix-login-env.sh
 
-# Store any variablese set in the dockerfile under /usr/local/etc/vscode-dev-containers/base-env
-sudoIf mkdir -p /usr/local/etc/vscode-dev-containers
-declare -x | grep -vE '(USER|HOME|SHELL|PWD|OLDPWD|TERM|TERM_PROGRAM|TERM_PROGRAM_VERSION|SHLVL|HOSTNAME|LOGNAME|MAIL)=' \
-    | grep -oP '(declare\s+-x\s+)?\K.*=.*' | sudoIf tee /usr/local/etc/vscode-dev-containers/base-env > /dev/null
-
-# Setup a /usr/local/etc/vscode-dev-containers/default-path file whose contents vary based on whether an /etc/environment file exists
-ETC_ENVIRONMENT_PATH="$(unset PATH; . /etc/environment; echo "$PATH")"
-if [ ! -z "${ETC_ENVIRONMENT_PATH}" ]; then
-    # If a path is set in /etc/environment like in the ubuntu image, this will get used
-    echo "export __vscdc_default_path=\"${ETC_ENVIRONMENT_PATH}\"" | sudoIf tee /usr/local/etc/vscode-dev-containers/default-path > /dev/null
+# Update default PATH - Need to do this here because its unclear where the ssh script was run in the Dockerfile.
+# Unlike macOS and Windows, nearly everything is legal in file/path names so we need to do some escaping. We then
+# need to modify /etc/environment and possibly /etc/profile and /etc/zsh/zshenv due to hard coding in certain imges.
+QUOTE_ESCAPED_PATH="${PATH//\"/\\\"}"
+SED_ESCAPTED_PATH="${QUOTE_ESCAPED_PATH//\\%/\\\%}"
+if grep 'PATH=' /etc/environment > /dev/null 2>&1; then
+    sudoIf sed -i -E "s%^PATH=.*$%PATH=\"${SED_ESCAPTED_PATH}\"%" /etc/environment
 else
-    # If no path is in /etc/environment, get the default login paths from /etc/login.defs
-    ENV_SUPATH="$(grep -oP 'ENV_SUPATH\s+PATH=\K.+$' /etc/login.defs)"
-    ENV_PATH="$(grep -oP 'ENV_PATH\s+PATH=\K.+$' /etc/login.defs)"
-    sudoIf tee /usr/local/etc/vscode-dev-containers/default-path > /dev/null \
-\
-<< EOF_DEFAULT_PATH
-if [ "\$(id -u)" -ne 0 ]; then
-    export __vscdc_default_path=$ENV_PATH
-else
-    export __vscdc_default_path=$ENV_SUPATH
+    echo "PATH=\"${QUOTE_ESCAPED_PATH//\"/\\\"}\"" | sudoIf tee -a /etc/environment > /dev/null
 fi
-EOF_DEFAULT_PATH
-
-fi
-
+sudoIf sed -i -E "s%((^|\s)PATH=)([^\$]*)$%\2PATH=\"${SED_ESCAPTED_PATH:-\3}\"%" /etc/profile
 # Handle zsh if present
 if type zsh > /dev/null 2>&1; then
     if ! grep '/etc/profile.d/00-fix-login-env.sh' /etc/zsh/zlogin > /dev/null 2>&1; then
         echo -e "if [ -f /etc/profile.d/00-fix-login-env.sh ]; then . /etc/profile.d/00-fix-login-env.sh; fi\n$(cat /etc/zsh/zlogin 2>/dev/null || echo '')" | sudoIf tee /etc/zsh/zlogin > /dev/null
     fi
-    echo "export __vscdc_zshenv_path=\"$(PATH= /usr/bin/zsh --no-globalrcs --no-rcs -c 'echo $PATH' 2>/dev/null || echo '')\"" | sudoIf tee -a /usr/local/etc/vscode-dev-containers/default-path > /dev/null
+    if [ -f /etc/zsh/zshenv ]; then
+        sudoIf sed -i -E "s%((^|\s)PATH=)([^\$]*)$%\2PATH=\"${SED_ESCAPTED_PATH:-\3}\"%" /etc/zsh/zshenv
+    fi
 fi
+
+# Store any variables set in the dockerfile under /usr/local/etc/vscode-dev-containers/base-env
+sudoIf mkdir -p /usr/local/etc/vscode-dev-containers
+declare -x | grep -vE '(USER|HOME|SHELL|PWD|OLDPWD|TERM|TERM_PROGRAM|TERM_PROGRAM_VERSION|SHLVL|HOSTNAME|LOGNAME|MAIL)=' \
+    | grep -oP '(declare\s+-x\s+)?\K.*=.*' | sudoIf tee /usr/local/etc/vscode-dev-containers/base-env > /dev/null
 
 # Remove less complex scipt if present to avoid duplication
 if [ -f "/etc/profile.d/00-restore-env.sh" ]; then
@@ -164,10 +156,7 @@ __vscdc_restore_env() {
         local variable_line
         while IFS= read -r variable_line; do
             local var_name="${variable_line%%=*}"
-            if [ "${var_name}" = "PATH" ]; then
-                local var_value="${variable_line##*=\"}"
-                base_shell_path="${var_value%?}"
-            elif [ "${var_name}" != "" ] && ! __vscdc_var_has_val "${var_name}"; then
+            if [ "${var_name}" != "PATH" ] && [ "${var_name}" != "" ] && ! __vscdc_var_has_val "${var_name}"; then
                 # All values are quoted, so get everything past the first quote and remove the last
                 local var_value="${variable_line##*=\"}"
                 export ${var_name}="${var_value%?}"
@@ -177,37 +166,6 @@ __vscdc_restore_env() {
 $base_env_vars
 EOF_BASE_ENV
         # 👆 Use EOF hack for piping in variable to "read" because <<< is not available in sh/dash/ash
-    fi
-
-    # Unlike other properties, the starting PATH can get set in a few different ways. Debian sets it in /etc/profile while Ubuntu 
-    # takes it from /env/environment, both of which are a problem if the PATH was modified using the ENV directive in a Dockerfile.
-    if [ -z "${PATH}" ]; then
-        export PATH="${base_shell_path}"
-        return
-    fi
-    if [ "${PATH}" = "${base_shell_path}" ]; then
-        return
-    fi
-    if [ ! -z "${base_shell_path}" ] && [ "$PATH" = "${PATH#*$base_shell_path}" ]; then
-        # Script exports a variable named __vscdc_default_path, __vscdc_zshenv_path
-        . /usr/local/etc/vscode-dev-containers/default-path
-        if [ "${__vscdc_shell_type}" = "zsh" ]; then
-            if [ "$PATH" = "${PATH#*$__vscdc_default_path}" ]; then
-                export PATH="${PATH/$__vscdc_zshenv_path/$base_shell_path}"
-            else
-                export PATH="${PATH/$__vscdc_default_path/$base_shell_path}"
-            fi
-        else 
-            if [ "${__vscdc_shell_type}" = "bash" ]; then
-                # Use variable expansion for bash, 
-                export PATH="${PATH/${__vscdc_default_path//\//\\\/}/$base_shell_path}"
-            else
-                # Use sed for awk sh/ash/dash. Escape sed's basic regex chars along with % that we use  instead
-                # of '/' in the next line. https://www.gnu.org/software/sed/manual/html_node/BRE-syntax.html
-                __vscdc_default_path="$(echo "$__vscdc_default_path" | sed 's/[]?\\%$*+.^[]/\\&/g')"
-                export PATH="$(echo "$PATH" | sed "s%$__vscdc_default_path%$base_shell_path%")"
-            fi
-        fi
     fi
 }
 

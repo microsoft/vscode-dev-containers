@@ -3,6 +3,10 @@ USERNAME=${1:-$(whoami)}
 RUN_CODESPACES_TESTS=${2:-false}
 set -e
 
+# Work around wierdness with $HOME in images where this is set by something else
+if [ "${USERNAME}" = "root" ]; then
+    HOME="/root"
+fi
 if [ ! -f $HOME/.ssh/test.id_rsa ]; then
     mkdir -p $HOME/.ssh
     chmod 700 $HOME/.ssh
@@ -27,13 +31,13 @@ run_test() {
     local shell_to_test=$1
     local test_result="$(ssh -q -p 2222 -i $HOME/.ssh/test.id_rsa -o StrictHostKeyChecking=no -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null $USERNAME@localhost $shell_to_test -lic 'env' 2> /dev/null)"
     echo -e "\n🧪 Run \"${USERNAME}\" user tests for $1...\n(*) Environment for $shell_to_test:\n$test_result"
-    echo "(*) /usr/local/etc/vscode-dev-containers/default-path contents:"
-    cat /usr/local/etc/vscode-dev-containers/default-path
+    echo "(*) /usr/local/etc/vscode-dev-containers/base-env contents:"
+    cat /usr/local/etc/vscode-dev-containers/base-env
     echo "(*) Running environment var tests for $1..."
-    check_result "$shell_to_test" "$test_result" "this_var=true"
-    check_result "$shell_to_test" "$test_result" "that_var=true"
+    check_result "$shell_to_test" "$test_result" 'this_var="?true"?'
+    check_result "$shell_to_test" "$test_result" 'that_var="?true"?'
     if [ "${RUN_CODESPACES_TESTS}" = "true" ]; then
-        check_result "$shell_to_test" "$test_result" "CODESPACES=true"
+        check_result "$shell_to_test" "$test_result" 'CODESPACES="?true"?'
         check_result "$shell_to_test" "$test_result" "RepositoryName=.*"
         check_result "$shell_to_test" "$test_result" "ContainerVersion=.*"
         check_result "$shell_to_test" "$test_result" "GITHUB_TOKEN=.*"
@@ -57,10 +61,10 @@ run_test() {
     echo "👍 All $1 tests passed for user \"$USERNAME\". "
 }
 
-run_test sh
 run_test bash
 if type zsh > /dev/null 2>&1; then
     run_test zsh
 fi
+run_test sh
 
 echo -e "\n🏆 All shell tests passed for user \"$USERNAME\"!"
