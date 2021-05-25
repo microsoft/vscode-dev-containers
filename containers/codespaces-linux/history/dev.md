@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:eacd0cc5a18b19a4419571ea98d9615c241e140280c5a3b52476d82faa382314
+**Digest:** sha256:c09c123bd87e48ec214148f2c68574f1678a33d54f94663af7fd124a56bd292a
 
 **Tags:**
 ```
@@ -41,7 +41,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | d646884add277d134235a9b18ab755388d6e0d8d | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 7ab15bee033a1ce6791b05f4636221cba7b9505e | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 780052d1e0b67a409b1382cd6e836cb39ca6188c | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
@@ -60,7 +60,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.6 |
+| virtualenv | 20.4.7 |
 | pipx | 0.16.2.1 |
 
 **Go tools and modules**
@@ -105,9 +105,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.21.1 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.5.4 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.4+709 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.5+713 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 1.10.2 | 
+| [GitHub CLI](https://github.com/cli/cli) | 1.10.3 | 
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.0.2 | 
@@ -119,7 +119,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.5 |
 | apt-utils | 2.0.5 |
-| azure-cli (Azure CLI) | 2.23.0-1~focal |
+| azure-cli (Azure CLI) | 2.24.0-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.1 |
 | clang | 1:10.0-50~exp1 |

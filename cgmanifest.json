@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "63a7422d8dd5eb93c849df0ab9e679e6f333818a"
+                    "commitHash": "7ab15bee033a1ce6791b05f4636221cba7b9505e"
                 }
             }
         },
@@ -135,7 +135,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.23.0-1~focal",
+                    "Version": "2.24.0-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -281,7 +281,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.4.6"
+                    "Version": "20.4.7"
                 }
             }
         },
@@ -453,7 +453,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "d646884add277d134235a9b18ab755388d6e0d8d"
+                    "commitHash": "7ab15bee033a1ce6791b05f4636221cba7b9505e"
                 }
             }
         },
@@ -552,7 +552,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.11.4+709",
+                    "Version": "5.11.5+713",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -572,7 +572,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "1.10.2",
+                    "Version": "1.10.3",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -682,42 +682,6 @@
         },
         {
             "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.6.10"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "golang.org/x/lint",
-                    "Version": "0.0.0-20201208152925-83fdc39ff7b5"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/go-delve/delve",
-                    "Version": "1.6.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.39.0"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
@@ -751,7 +715,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.0.13",
+                    "Version": "2.0.14",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -783,42 +747,6 @@
                     "Name": "Docker Image: php",
                     "Version": "7.3",
                     "DownloadUrl": "https://hub.docker.com/_/php"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "flake8",
-                    "Version": "3.9.1"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "black",
-                    "Version": "21.4b2"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "pydocstyle",
-                    "Version": "6.0.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "virtualenv",
-                    "Version": "20.4.4"
                 }
             }
         },
@@ -884,26 +812,6 @@
         },
         {
             "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "rbenv",
-                    "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "80af3592322a193b047c21d6a2c488b1cb5baa30"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "ruby-build",
-                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "0bd64d37990908876e895aa471685d937f01a034"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: ruby",
@@ -934,48 +842,11 @@
         },
         {
             "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "rust-analysis",
-                    "Version": "1.51.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "rust-src",
-                    "Version": "1.51.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "clippy",
-                    "Version": "1.51.0"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: rust",
                     "Version": "1",
                     "DownloadUrl": "https://hub.docker.com/_/rust"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "SDKMAN!",
-                    "Version": "5.11.2+698",
-                    "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
         },
@@ -1024,7 +895,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.25.0"
+                    "Version": "7.27.0"
                 }
             }
         },
@@ -1034,7 +905,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "63a7422d8dd5eb93c849df0ab9e679e6f333818a"
+                    "commitHash": "7ab15bee033a1ce6791b05f4636221cba7b9505e"
                 }
             }
         },
@@ -1093,7 +964,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.3.0"
+                    "Version": "2.4.2"
                 }
             }
         },
