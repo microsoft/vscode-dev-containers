@@ -6,20 +6,20 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The Azure Functions Team & alvaro.videla@microsoft.com |
+| *Contributors* | The Azure Functions Team & alvaro.videla@microsoft.com & yohan.lasorsa@microsoft.com|
 | *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
-| *Languages, platforms* | Azure Functions, Python, C#, Node.js, JavaScript |
+| *Languages, platforms* | Azure Functions, Python, C#, Java, Node.js, JavaScript |
 
 ## Using this definition
 
 This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/) and learn more about using [Azure Functions with VS Code here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code).
 
-This definition includes Python, .NET Core, and Node.js. Node.js is installed using [nvm](https://github.com/nvm-sh/nvm), so you can use it to pick a different version if needed.
+This definition includes Python, .NET Core, Java, and Node.js. Node.js is installed using [nvm](https://github.com/nvm-sh/nvm), so you can use it to pick a different version if needed.
 
 ### Adding the definition to your folder
 

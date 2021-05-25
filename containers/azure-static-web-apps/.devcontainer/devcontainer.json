@@ -1,11 +1,21 @@
 {
 	"name": "Azure Static Web Apps",
-	"dockerFile": "Dockerfile",
-	"forwardPorts": [ 7071, 5500 ],
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Options
+			"INSTALL_MAVEN": "false",
+			"INSTALL_GRADLE": "false",
+			"JAVA_VERSION": "11",
+			"NODE_VERSION": "lts/*"
+		}
+	},
+	"forwardPorts": [ 7071, 5500, 4280 ],
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"java.home": "/docker-java-home"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -14,12 +24,13 @@
 		"ms-azuretools.vscode-azurestaticwebapps",
 		"ms-dotnettools.csharp",
 		"ms-python.python",
+		"vscjava.vscode-java-pack",
 		"dbaeumer.vscode-eslint",
 		"ritwickdey.liveserver"
 	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install --lts",
+	// "postCreateCommand": "node --version",
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
