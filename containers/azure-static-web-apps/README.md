@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop Azure Static Web Apps & Azure Functions in Node.js. Includes Node.js, eslint, Python, .NET Core, the Azure Functions SDK, and related extensions and dependencies.*
+*Develop Azure Static Web Apps & Azure Functions in any supported language. Includes Node.js, eslint, Python, .NET Core, Java, the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
