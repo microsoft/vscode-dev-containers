@@ -6,7 +6,7 @@
 			// Options
 			"INSTALL_MAVEN": "false",
 			"INSTALL_GRADLE": "false",
-			"JAVA_VERSION": "11",
+			"JAVA_VERSION": "lts",
 			"NODE_VERSION": "lts/*"
 		}
 	},
