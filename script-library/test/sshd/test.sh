@@ -1,16 +1,27 @@
 #!/usr/bin/env bash
 IMAGE_TO_TEST="${1:-default}"
-INCLUDE_CODESPACES_TESTS="${1:-false}"
+INCLUDE_CODESPACES_TESTS="${1:-true}"
 PRUNE_AFTER_TEST="${3:-true}"
 
 set -e
 
-cd "$(cd "$(dirname "$0")" && pwd)/../.."
+SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)"
+cd "${SCRIPT_PATH}/../.."
 run_test() {
     echo -e "\n\n***** 🌆 Testing image $1 *****\n🛠 Building image..."
     docker build -t vscdc-sshd-test-image --build-arg IMAGE_TO_TEST=$1 -f test/sshd/Dockerfile .
     echo '📦 Starting container...'
-    docker run --init --privileged --rm vscdc-sshd-test-image /tmp/scripts/test-in-container.sh ${INCLUDE_CODESPACES_TESTS}
+    if [ -f /workspaces/.codespaces/shared/.user-secrets.json ]; then
+        EXTRA_ARGS="-v /workspaces/.codespaces/shared/.user-secrets.json:/workspaces/.codespaces/shared/.user-secrets.json:"
+    else
+        EXTRA_ARGS="-v ${SCRIPT_PATH}/test-user-secrets.json:/workspaces/.codespaces/shared/.user-secrets.json"
+    fi
+    if [ "${INCLUDE_CODESPACES_TESTS}" = "true" ]; then
+        EXTRA_ARGS="${EXTRA_ARGS} -e CODESPACES=true"
+    fi
+    DOCKER_COMMAND="docker run --init --privileged --rm ${EXTRA_ARGS} vscdc-sshd-test-image /tmp/scripts/test-in-container.sh ${INCLUDE_CODESPACES_TESTS}"
+    echo "Executing: $DOCKER_COMMAND" 
+    eval $DOCKER_COMMAND
     if [ "${PRUNE_AFTER_TEST}" = "true" ]; then
         docker image rm vscdc-sshd-test-image
         docker system prune -f
