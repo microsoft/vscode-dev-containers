@@ -4,9 +4,6 @@
 		"dockerfile": "Dockerfile",
 		"args": {
 			// Options
-			"INSTALL_MAVEN": "false",
-			"INSTALL_GRADLE": "false",
-			"JAVA_VERSION": "lts",
 			"NODE_VERSION": "lts/*"
 		}
 	},
@@ -14,8 +11,7 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
-		"java.home": "/docker-java-home"
+		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -24,7 +20,6 @@
 		"ms-azuretools.vscode-azurestaticwebapps",
 		"ms-dotnettools.csharp",
 		"ms-python.python",
-		"vscjava.vscode-java-pack",
 		"dbaeumer.vscode-eslint"
 	],
 
