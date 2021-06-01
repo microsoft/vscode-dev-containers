@@ -65,21 +65,23 @@ fi
 if [ "${NEW_PASSWORD}" = "random" ]; then
     NEW_PASSWORD="$(openssl rand -hex 16)"
     EMIT_PASSWORD="true"
+elif [ "${NEW_PASSWORD}" != "skip" ]; then
+    # If new password not set to skip, set it for the specified user
+    echo "${USERNAME}:${NEW_PASSWORD}" | chpasswd
 fi
 
-# If new password not set to skip, set it for the specified user
-if [ "${NEW_PASSWORD}" != "skip" ]; then
-    echo "${USERNAME}:${NEW_PASSWORD}" | chpasswd
-    if [ "${NEW_PASSWORD}" != "root" ]; then
-        usermod -aG ssh ${USERNAME}
-    fi
+# Add user to ssh group
+if [ "${USERNAME}" != "root" ]; then
+    usermod -aG ssh ${USERNAME}
 fi
 
 # Setup sshd
 mkdir -p /var/run/sshd
-sed -i 's/session\s*required\s*pam_loginuid\.so/ession optional pam_loginuid.so/g' /etc/pam.d/sshd
+sed -i 's/session\s*required\s*pam_loginuid\.so/session optional pam_loginuid.so/g' /etc/pam.d/sshd
 sed -i 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
+# Need to UsePAM so /etc/environment is processed
+sed -i -E "s/#?\s*UsePAM\s+.+/UsePAM yes/g" /etc/ssh/sshd_config
 
 # Script to store variables that exist at the time the ENTRYPOINT is fired
 STORE_ENV_SCRIPT="$(cat << 'EOF'
@@ -125,8 +127,8 @@ EOF
 # Script to ensure login shells get the latest Codespaces secrets
 RESTORE_SECRETS_SCRIPT="$(cat << 'EOF'
 #!/bin/sh
-if [ "${CODESPACES}" != "true" ] || [ "${VSCDC_FIXED_SECRETS}" = "true" ]; then
-    # Already run, so exit
+if [ "${CODESPACES}" != "true" ] || [ "${VSCDC_FIXED_SECRETS}" = "true" ] || [ ! -z "${GITHUB_CODESPACES_TOKEN}" ]; then
+    # Not codespaces, already run, or secrets already in environment, so return
     return
 fi
 if [ -f /workspaces/.codespaces/shared/.user-secrets.json ]; then
