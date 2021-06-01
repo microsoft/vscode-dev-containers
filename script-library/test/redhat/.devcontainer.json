@@ -15,10 +15,6 @@
 	"workspaceFolder": "/workspace",
 	"overrideCommand": false,
 
-	"settings": { 
-		"terminal.integrated.shell.linux": null
-	},
-
 	"extensions": [
 		"ms-azuretools.vscode-docker"
 	],

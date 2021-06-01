@@ -8,7 +8,6 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"r.rterm.linux": "/usr/local/bin/radian",
 		"r.bracketedPaste": true,
 		"r.sessionWatcher": true,

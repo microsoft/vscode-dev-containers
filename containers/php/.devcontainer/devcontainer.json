@@ -12,7 +12,6 @@
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"php.validate.executablePath": "/usr/local/bin/php"
 	},
 

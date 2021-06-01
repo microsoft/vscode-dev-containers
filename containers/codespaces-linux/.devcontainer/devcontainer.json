@@ -4,7 +4,6 @@
 		"dockerfile": "Dockerfile"
 	},
 	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"go.toolsManagement.checkForUpdates": "local",
 		"go.useLanguageServer": true,
 		"go.gopath": "/go",
