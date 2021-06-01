@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/gradle.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/gradle.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./gradle-debian.sh [Gradle version] [SDKMAN_DIR] [non-root user] [Update rc files flag]

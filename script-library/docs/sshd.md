@@ -48,7 +48,7 @@ Usage:
     ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null codespace@localhost
     ```
 
-    ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after `-p` is the **local address port** from step 2.
+    ...where `codespace` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after `-p` is the **local address port** from step 2.
 
     The “-o” arguments are optional, but will prevent you from getting warnings or errors about known hosts when you do this from multiple containers/codespaces.
 
@@ -111,13 +111,13 @@ If you already have a running container, you can use the script to spin up SSH i
 2. Open a terminal in VS Code and run the following if you're connected as a non-root user and `sudo` is installed:
 
     ```bash
-    sudo bash -c "$(curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh)" -- 2222 $(whoami) true random
+    sudo bash -c "$(curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/sshd-debian.sh)" -- 2222 $(whoami) true random
     ```
 
     Or if running as root:
 
     ```bash
-    bash -c "$(curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh)" -- 2222 $(whoami) true random
+    bash -c "$(curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/sshd-debian.sh)" -- 2222 $(whoami) true random
     ```
 
 3. Take note of the password that was generated and the SSH command.

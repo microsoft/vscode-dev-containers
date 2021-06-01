@@ -153,6 +153,6 @@ This definition includes some test code that will help you verify it is working 
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).
+Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).
 
 Licenses for [SqlPackage](https://docs.microsoft.com/sql/tools/sqlpackage-download), [SQLCMD](https://docs.microsoft.com/sql/linux/sql-server-linux-setup-tools), and [SQL Server Developer Edition](https://go.microsoft.com/fwlink/?linkid=857698).

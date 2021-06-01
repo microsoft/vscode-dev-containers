@@ -6,7 +6,7 @@ on:
       release:
         description: 'Release branch or tag'
         required: true
-        default: 'master'
+        default: 'main'
       cg:
         description: 'Generate cgmanifest.json'
         required: true
@@ -103,7 +103,7 @@ jobs:
 
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
+            GIT_BRANCH=main
         fi
 
         git config --global user.email "vscr-feedback@microsoft.com"

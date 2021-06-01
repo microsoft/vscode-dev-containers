@@ -1,10 +1,10 @@
-# [rust](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/rust)
+# [rust](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/rust)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
-**Digest:** sha256:4acec35787f21527d12b05bb4eb7e9fce6e2a7cbffc92867103492ba31df5b9d
+**Digest:** sha256:e0a1a5c833198c36ad3e18076a9bf945523f5c0f54d1632d52e492599bae6d9e
 
 **Tags:**
 ```
@@ -21,13 +21,13 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Rust](https://github.com/rust-lang/rust) | 1.51.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.52.1 | /usr/local/cargo<br />/usr/local/rustup |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 7ab15bee033a1ce6791b05f4636221cba7b9505e | /home/vscode/.oh-my-zsh |
 
 **Cargo / rustup (Rust) crates and tools**
 
@@ -35,9 +35,9 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.36 |
-| rust-analysis | 1.51.0 |
-| rust-src | 1.51.0 |
-| clippy | 1.51.0 |
+| rust-analysis | 1.52.1 |
+| rust-src | 1.52.1 |
+| clippy | 1.52.1 |
 
 **Additional linux tools and packages**
 

@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/common.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./common-alpine.sh [install zsh flag] [username] [user UID] [user GID] [install Oh My Zsh! flag]

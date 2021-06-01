@@ -146,7 +146,7 @@ function getAllDefinitionPaths() {
     return allDefinitionPaths;
 }
 
-// Convert a release string (v1.0.0) or branch (master) into a version. If a definitionId and 
+// Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
 // release string is passed in, use the version specified in defintion-build.json if one exists.
 function getVersionFromRelease(release, definitionId) {
     definitionId = definitionId || 'NOT SPECIFIED';

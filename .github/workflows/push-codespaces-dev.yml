@@ -3,7 +3,7 @@ name: Build and push "dev" for universal image
 on: 
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'containers/codespaces-linux/**'
 
@@ -45,7 +45,7 @@ jobs:
         yarn install
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
+            GIT_BRANCH=main
         fi
         build/vscdc push  codespaces-linux \
                           --release $GIT_BRANCH \

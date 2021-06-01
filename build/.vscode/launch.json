@@ -32,7 +32,7 @@
 				"pack",
 				"--no-clean",
 				"--prep-and-package-only",
-				"--release", "master",
+				"--release", "main",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
 				"--registryPath", "vscode/devcontainers",
@@ -52,7 +52,7 @@
 				"--cg",
 				"--overwrite",
 				"--prune",
-				"--release", "master",
+				"--release", "main",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "mcr.microsoft.com",
 				"--registryPath", "vscode/devcontainers"

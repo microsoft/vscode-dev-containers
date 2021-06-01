@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "63a7422d8dd5eb93c849df0ab9e679e6f333818a"
+                    "commitHash": "7ab15bee033a1ce6791b05f4636221cba7b9505e"
                 }
             }
         },
@@ -135,7 +135,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.22.1-1~focal",
+                    "Version": "2.24.0-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -209,7 +209,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "flake8",
-                    "Version": "3.9.1"
+                    "Version": "3.9.2"
                 }
             }
         },
@@ -227,7 +227,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "black",
-                    "Version": "21.4b2"
+                    "Version": "21.5b1"
                 }
             }
         },
@@ -254,7 +254,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pydocstyle",
-                    "Version": "6.0.0"
+                    "Version": "6.1.1"
                 }
             }
         },
@@ -281,7 +281,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.4.4"
+                    "Version": "20.4.7"
                 }
             }
         },
@@ -323,6 +323,15 @@
         },
         {
             "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "jekyll",
+                    "Version": "4.2.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rls",
@@ -344,7 +353,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.51.0"
+                    "Version": "1.52.1"
                 }
             }
         },
@@ -353,7 +362,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.51.0"
+                    "Version": "1.52.1"
                 }
             }
         },
@@ -362,7 +371,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.51.0"
+                    "Version": "1.52.1"
                 }
             }
         },
@@ -371,7 +380,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.6.10"
+                    "Version": "0.6.11"
                 }
             }
         },
@@ -389,7 +398,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/lint",
-                    "Version": "0.0.0-20201208152925-83fdc39ff7b5"
+                    "Version": "0.0.0-20210508222113-6edffad5e616"
                 }
             }
         },
@@ -425,7 +434,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/go-delve/delve",
-                    "Version": "1.6.0"
+                    "Version": "1.6.1"
                 }
             }
         },
@@ -434,7 +443,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.39.0"
+                    "Version": "1.40.1"
                 }
             }
         },
@@ -444,7 +453,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "63a7422d8dd5eb93c849df0ab9e679e6f333818a"
+                    "commitHash": "7ab15bee033a1ce6791b05f4636221cba7b9505e"
                 }
             }
         },
@@ -464,7 +473,7 @@
                 "Git": {
                     "Name": "nvs",
                     "repositoryUrl": "https://github.com/jasongin/nvs",
-                    "commitHash": "9f7d7b7f3e9b78e9ac4228b97dc04878f9f831a2"
+                    "commitHash": "780052d1e0b67a409b1382cd6e836cb39ca6188c"
                 }
             }
         },
@@ -474,7 +483,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "80af3592322a193b047c21d6a2c488b1cb5baa30"
+                    "commitHash": "585ed84283f3308380b843391ee7b12706ecff87"
                 }
             }
         },
@@ -484,7 +493,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "0bd64d37990908876e895aa471685d937f01a034"
+                    "commitHash": "e9fa4bfdbe16b71964575eb8e1d27e348305d09b"
                 }
             }
         },
@@ -513,7 +522,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.21.0",
+                    "Version": "1.21.1",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -533,7 +542,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Compose",
-                    "Version": "1.29.1",
+                    "Version": "1.29.2",
                     "DownloadUrl": "https://github.com/docker/compose"
                 }
             }
@@ -543,7 +552,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.11.2+698",
+                    "Version": "5.11.5+713",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -563,7 +572,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "1.9.2",
+                    "Version": "1.10.3",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -573,7 +582,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Gradle",
-                    "Version": "7.0",
+                    "Version": "7.0.2",
                     "DownloadUrl": "https://gradle.org/"
                 }
             }
@@ -583,7 +592,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "AdoptOpenJDK",
-                    "Version": "1.8.0_275-b01",
+                    "Version": "",
                     "DownloadUrl": "https://adoptopenjdk.net/"
                 }
             }
@@ -593,7 +602,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.16.3",
+                    "Version": "1.16.4",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -603,7 +612,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.51.0",
+                    "Version": "1.52.1",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -613,137 +622,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/oryx/build",
-                    "Version": "vso-focal-20210308.3",
-                    "DownloadUrl": "https://github.com/microsoft/oryx"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "linux",
-                "Linux": {
-                    "Name": "azure-cli",
-                    "Version": "2.22.1-1~stretch",
-                    "Distribution": "debian",
-                    "Release": "9",
-                    "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
-                    "Key-URL": "https://packages.microsoft.com/keys/microsoft.asc"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "linux",
-                "Linux": {
-                    "Name": "git-lfs",
-                    "Version": "2.13.3",
-                    "Distribution": "debian",
-                    "Release": "9",
-                    "Pool-URL": "https://packagecloud.io/github/git-lfs/debian",
-                    "Key-URL": "https://packagecloud.io/github/git-lfs/gpgkey"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "linux",
-                "Linux": {
-                    "Name": "moby-cli",
-                    "Version": "20.10.6+azure-1",
-                    "Distribution": "debian",
-                    "Release": "9",
-                    "Pool-URL": "https://packages.microsoft.com/repos/microsoft-debian-stretch-prod",
-                    "Key-URL": "https://packages.microsoft.com/keys/microsoft.asc"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "linux",
-                "Linux": {
-                    "Name": "powershell",
-                    "Version": "7.1.3-1.debian.9",
-                    "Distribution": "debian",
-                    "Release": "9",
-                    "Pool-URL": "https://packages.microsoft.com/repos/microsoft-debian-stretch-prod",
-                    "Key-URL": "https://packages.microsoft.com/keys/microsoft.asc"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "autopep8",
-                    "Version": "1.5.6"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "RubyGems",
-                "RubyGems": {
-                    "Name": "rake",
-                    "Version": "13.0.1"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "git",
-                    "Version": "2.31.1",
-                    "DownloadUrl": "https://github.com/git/git"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Xdebug",
-                    "Version": "3.0.4",
-                    "DownloadUrl": "https://xdebug.org/"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Java",
-                    "Version": "11.0.10",
-                    "DownloadUrl": "https://adoptopenjdk.net/"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Ruby",
-                    "Version": "2.7.2p137",
-                    "DownloadUrl": "https://www.ruby-lang.org/en/"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Rust",
-                    "Version": "1.51.0",
-                    "DownloadUrl": "https://github.com/rust-lang/rust"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: mcr.microsoft.com/oryx/build",
-                    "Version": "vso-20200417.5",
+                    "Version": "vso-focal-20210514.2",
                     "DownloadUrl": "https://github.com/microsoft/oryx"
                 }
             }
@@ -836,7 +715,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.0.13",
+                    "Version": "2.0.14",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -1016,7 +895,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.25.0"
+                    "Version": "7.27.0"
                 }
             }
         },
@@ -1026,7 +905,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "63a7422d8dd5eb93c849df0ab9e679e6f333818a"
+                    "commitHash": "7ab15bee033a1ce6791b05f4636221cba7b9505e"
                 }
             }
         },
@@ -1085,7 +964,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.3.0"
+                    "Version": "2.4.2"
                 }
             }
         },
