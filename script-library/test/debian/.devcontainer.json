@@ -19,9 +19,6 @@
 	"runArgs": ["--init", "--security-opt", "seccomp=unconfined"],
 	"overrideCommand": false,
 
-	"settings": { 
-		"terminal.integrated.shell.linux": null
-	},
 
 	"extensions": [
 		"ms-azuretools.vscode-docker"
