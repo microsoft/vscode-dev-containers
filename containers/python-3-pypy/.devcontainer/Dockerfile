@@ -1,4 +1,4 @@
-# [Choice] Pypy docker images. Choices are 2,3. Complete list of tags is avaiable at: https://hub.docker.com/_/pypy
+# [Choice] Pypy version: 2, 3
 ARG VARIANT="3"
 FROM pypy:${VARIANT}
 
