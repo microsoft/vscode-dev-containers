@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop python applications using the [PyPy](https://www.pypy.org/) interpreter*
+*Develop python applications using the PyPy interpreter*
 
 | Metadata                    | Value                                                                        |
 |---------------------------- | -----------------------------------------------------------------------------|
@@ -12,7 +12,7 @@
 | *Works in Codespaces*       | Yes                                                                          |
 | *Container host OS support* | Linux, macOS, Windows                                                        |
 | *Container OS*              | Debian                                                                       |
-| *Languages, platforms*      | [Languages and platforms the container supports]                             |
+| *Languages, platforms*      | Python, PyPy                                                                 |
 
 ## Using this definition
 
