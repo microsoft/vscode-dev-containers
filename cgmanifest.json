@@ -591,16 +591,6 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "AdoptOpenJDK",
-                    "Version": "",
-                    "DownloadUrl": "https://adoptopenjdk.net/"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
                     "Name": "Go",
                     "Version": "1.16.4",
                     "DownloadUrl": "https://golang.org/dl"
