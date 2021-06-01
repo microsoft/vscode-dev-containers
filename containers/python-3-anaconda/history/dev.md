@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
-**Digest:** sha256:d14ce6bd790572b492e491c6949c2aee9c2459746cd1ff0c3d8dd2c7074cc9ac
+**Digest:** sha256:46c422b63dd1d6e5d2863318f78b122d7d408acfe4fd6a6c3a789085221d7f60
 
 **Tags:**
 ```
@@ -21,22 +21,22 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.8.5 | /opt/conda |
-| [Jupyter Notebooks](https://jupyter.org/) | 6.1.4 | /opt/conda |
-| [Jupyter Lab](https://jupyter.org/) | 2.2.6 | /opt/conda |
+| [Python](https://www.python.org/) | 3.8.8 | /opt/conda |
+| [Jupyter Notebooks](https://jupyter.org/) | 6.3.0 | /opt/conda |
+| [Jupyter Lab](https://jupyter.org/) | 3.0.14 | /opt/conda |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 7ab15bee033a1ce6791b05f4636221cba7b9505e | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [conda](https://github.com/conda/conda) | 4.9.2 | /opt/conda |
+| [conda](https://github.com/conda/conda) | 4.10.1 | /opt/conda |
 
 **Additional linux tools and packages**
 

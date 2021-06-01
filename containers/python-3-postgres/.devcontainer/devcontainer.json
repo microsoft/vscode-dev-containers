@@ -7,7 +7,6 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"sqltools.connections": [{
 			"name": "Container database",
 			"driver": "PostgreSQL",

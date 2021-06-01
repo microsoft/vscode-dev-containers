@@ -9,10 +9,6 @@
 			"DISTRO": "alpine"
 		}
 	},
-
-	"settings": { 
-		"terminal.integrated.shell.linux": null
-	},
 	"workspaceMount": "source=${localWorkspaceFolder}/../../..,target=/workspace,type=bind",
 	"workspaceFolder": "/workspace",
 	"remoteUser": "vscode"

@@ -12,7 +12,7 @@
 
 	"settings": {
 		// zsh is also available
-		"terminal.integrated.shell.linux": "/bin/bash",
+		// "terminal.integrated.defaultProfile.linux": "zsh",
 		"resmon.show.battery": false,
 		"resmon.show.cpufreq": false,
 		"remote.extensionKind": {
