@@ -1,11 +1,8 @@
 trigger:
   branches:
-    include: ['*']
-  tags:
-    include: ['*']
+    include: ['main']
 
 steps:
-
-- script: |
-    echo "Stub for OSS CG ingestion"
-
+- task: ComponentGovernanceComponentDetection@0
+  inputs:
+    ignoreDirectories: 'containers,repository-containers,container-templates,script-library'
