@@ -969,14 +969,6 @@
         },
         {
             "Component": {
-                "Type": "npm",
-                "Npm": {
-                    "Name": "typescript"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
