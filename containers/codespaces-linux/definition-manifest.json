@@ -147,11 +147,6 @@
 			"Gradle": null,
 			"Docker (Moby) CLI & Engine": {
 				"cgIgnore": true
-			},
-			"AdoptOpenJDK": {
-				"markdownIgnore": true,
-				"versionCommand": "/usr/local/sdkman/candidates/java/8*/bin/java -version 2>&1 | grep -oE -m 1 '.*build\\s[^\\)]+' | sed -n '/.*build\\s/s///p'",
-				"downloadUrl": "https://adoptopenjdk.net/"
 			}
 		},
 		"languages": {

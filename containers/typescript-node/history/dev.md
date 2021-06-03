@@ -133,6 +133,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 |----------------|---------|
 | eslint | 7.27.0 |
 | tslint-to-eslint-config | 2.4.2 |
+| typescript | 4.2.4 |
 
 **Additional linux tools and packages**
 
@@ -218,6 +219,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 |----------------|---------|
 | eslint | 7.27.0 |
 | tslint-to-eslint-config | 2.4.2 |
+| typescript | 4.2.4 |
 
 **Additional linux tools and packages**
 
@@ -302,6 +304,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 |----------------|---------|
 | eslint | 7.27.0 |
 | tslint-to-eslint-config | 2.4.2 |
+| typescript | 4.2.4 |
 
 **Additional linux tools and packages**
 
@@ -387,6 +390,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 |----------------|---------|
 | eslint | 7.27.0 |
 | tslint-to-eslint-config | 2.4.2 |
+| typescript | 4.2.4 |
 
 **Additional linux tools and packages**
 
