@@ -1,10 +1,10 @@
 {
 	"name": "Test SSHD script",
 	"build": {
-		"dockerfile": "Dockerfile",
+		"dockerfile": "../Dockerfile",
 		"context": "../../../",
 		"args": { 
-			"IMAGE_TO_TEST": "mcr.microsoft.com/vscode/devcontainers/base:0-focal",
+			"IMAGE_TO_TEST": "mcr.microsoft.com/vscode/devcontainers/base:0-buster",
 			"DEFAULT_SHELL_TYPE": "bash"
 		}
 	},
