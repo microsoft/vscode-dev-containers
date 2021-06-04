@@ -11,7 +11,7 @@
 ## Syntax
 
 ```text
-./sshd-debian.sh [SSH Port] [Non-root user] [Start SSHD now flag] [New password for user]
+./sshd-debian.sh [SSH Port] [Non-root user] [Start SSHD now flag] [New password for user] [Fix environment flag]
 ```
 
 |Argument|Default|Description|
@@ -20,6 +20,7 @@
 | Non-root user |`automatic`| Specifies a user in the container other than root that will use SSH. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 |Start SSHD now flag |`false`| Flag (`true`/`false`) that specifies whether the SSH server should be started after the script runs.|
 |New password for user|`skip`| Sets a new password for the specified non-root user. A value of `skip` will skip this step. A value of `random` will generate a random password and print it out when the script finishes. |
+|Fix environment flag|`true`|Connections using the SSH daemon use "fresh" login shells that will not contain any environment or `PATH` updates made in the image. By default the script will wire into login shell creation, add any environment variables not already set, and base the `PATH` off of what was set in the Dockerifle. Set to false if you experience unexpected problems. |
 
 ## Usage
 
@@ -45,7 +46,7 @@ Usage:
  3. Your container/codespace now has a running SSH server in it. Use a **local terminal** (or other tool) to connect to it using the command and password from step 2. e.g.
 
     ```bash
-    ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null codespace@localhost
+    ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o GlobalKnownHostsFile=/dev/null codespace@localhost
     ```
 
     ...where `codespace` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after `-p` is the **local address port** from step 2.
@@ -94,7 +95,7 @@ Usage:
 5. Connect to the container or [codespace using VS Code](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code). You can now SSH into the container on port `2222`. For example, if you are in the container as the `vscode` user, run the following command in a **local terminal**:
 
     ```bash
-    ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null vscode@localhost
+    ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o GlobalKnownHostsFile=/dev/null vscode@localhost
     ```
     ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`).
 
@@ -140,7 +141,7 @@ If you already have a running container, you can use the script to spin up SSH i
 
 [SSHFS](https://en.wikipedia.org/wiki/SSHFS) allows you to mount a remote filesystem to your local machine with nothing but a SSH connection. Here's how to use it with a dev container.
 
-1. Follow the steps in one of the previous sections to ensure you can connect to the dev contaienr using the normal `ssh` client.
+1. Follow the steps in one of the previous sections to ensure you can connect to the dev container using the normal `ssh` client.
 
 2. Install a SSHFS client.
 
@@ -154,7 +155,7 @@ If you already have a running container, you can use the script to spin up SSH i
 
         ```
         mkdir -p ~/sshfs/devcontainer
-        sshfs "vscode@localhost:/workspaces" "$HOME/sshfs/devcontainer" -p 2222 -o follow_symlinks -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  -C
+        sshfs "vscode@localhost:/workspaces" "$HOME/sshfs/devcontainer" -p 2222 -o follow_symlinks -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o GlobalKnownHostsFile=/dev/null -C
         ```
         ...where `vscode` above is the user you are running as in the container (e.g. `codespace`, `vscode`, `node`, or `root`) and `2222` after the `-p` is the same local port you used in the `ssh` command in step 1.
 

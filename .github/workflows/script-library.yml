@@ -13,7 +13,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     strategy:
       matrix:
-        os: [debian, alpine, redhat]
+        os: [debian, ubuntu, alpine, centos]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
@@ -34,13 +34,7 @@ jobs:
       id: test_script_library
       run: |
         set -e
-        cd script-library
-        if [ "${{ matrix.os }}" = "redhat" ]; then
-          IMAGE_TO_TEST="centos:7"
-        else
-          IMAGE_TO_TEST=${{ matrix.os }}
-        fi
-        docker build --build-arg DISTRO=${{ matrix.os }} --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST -f test/Dockerfile .
+        bash script-library/test/regression/test.sh "${{ matrix.os }}"
 
   copy-scripts:
     name: Copy and commit script-library updates

@@ -2,7 +2,7 @@
 	"name": "Script Tester - RedHat",
 	"build": {
 		"dockerfile": "../Dockerfile",
-		"context": "../../",
+		"context": "../../../",
 		"args": {
 			"IMAGE_TO_TEST": "centos:7",
 			"USERNAME": "vscode",
@@ -11,7 +11,7 @@
 	},
 
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
-	"workspaceMount": "source=${localWorkspaceFolder}/../..,target=/workspace,type=bind",
+	"workspaceMount": "source=${localWorkspaceFolder}/../../..,target=/workspace,type=bind",
 	"workspaceFolder": "/workspace",
 	"overrideCommand": false,
 
