@@ -40,7 +40,9 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
 fi
 
 # Install Prerequisites
-yum -y install deltarpm
+if yum list deltarpm > /dev/null 2>&1; then
+    yum -y install deltarpm
+fi
 yum -y install ca-certificates curl gnupg2 dnf net-tools dialog git openssh-clients curl less procps 
 
 # Try to load os-release
