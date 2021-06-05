@@ -26,6 +26,6 @@
 	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
 	// "postStartCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Minikube does not like running as root, so use a non-root user.
 	"remoteUser": "vscode"
 }
