@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:583b1cf42a6135403e44982c93ad3e40c0835fb26388d77a5e73286f318d20ac
+**Digest:** sha256:9d84338abb4d5e2c31b31bce1c471f45cc37eeacfda35a9912734fb0721c34f5
 
 **Tags:**
 ```
@@ -36,24 +36,24 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 7ab15bee033a1ce6791b05f4636221cba7b9505e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
+| pylint | 2.8.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.5b1 |
+| black | 21.5b2 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
 | virtualenv | 20.4.7 |
-| pipx | 0.16.2.1 |
+| pipx | 0.16.3 |
 
 **Additional linux tools and packages**
 
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:9e6a128408e914d6610138e84a17a1f28f7c7eaa737cd3f12ef4882ed44b83ea
+**Digest:** sha256:b9515ea446d8a68080adf1b7f73fb9eabfa35f936a0cad19f2c843c5c729cae7
 
 **Tags:**
 ```
@@ -128,24 +128,24 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 7ab15bee033a1ce6791b05f4636221cba7b9505e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
+| pylint | 2.8.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.5b1 |
+| black | 21.5b2 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
 | virtualenv | 20.4.7 |
-| pipx | 0.16.2.1 |
+| pipx | 0.16.3 |
 
 **Additional linux tools and packages**
 
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:dcabd1873ec61632e8e5e4128dd0a0e0a0688ef17bb4ad57726bf677e33340ff
+**Digest:** sha256:f20b55ec8acece82d0db69fb69fe554489124377bedeb4c2c8c19dae48536ea1
 
 **Tags:**
 ```
@@ -220,24 +220,24 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 7ab15bee033a1ce6791b05f4636221cba7b9505e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
+| pylint | 2.8.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.5b1 |
+| black | 21.5b2 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
 | virtualenv | 20.4.7 |
-| pipx | 0.16.2.1 |
+| pipx | 0.16.3 |
 
 **Additional linux tools and packages**
 
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:1e31fc9c1a48d0f24ab138462ba3e3f551abe1f6ce12d2f165e4d3733e61913e
+**Digest:** sha256:0f9bb023e152fb305639b158f0cbcec052bc5ab91dc8aaa36f54770e10981af3
 
 **Tags:**
 ```
@@ -312,24 +312,24 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 7ab15bee033a1ce6791b05f4636221cba7b9505e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
+| pylint | 2.8.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.5b1 |
+| black | 21.5b2 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
 | virtualenv | 20.4.7 |
-| pipx | 0.16.2.1 |
+| pipx | 0.16.3 |
 
 **Additional linux tools and packages**
 

@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "7ab15bee033a1ce6791b05f4636221cba7b9505e"
+                    "commitHash": "706b2f3765d41bee2853b17724888d1a3f6f00d9"
                 }
             }
         },
@@ -135,7 +135,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.24.0-1~focal",
+                    "Version": "2.24.2-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -200,7 +200,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.8.2"
+                    "Version": "2.8.3"
                 }
             }
         },
@@ -227,7 +227,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "black",
-                    "Version": "21.5b1"
+                    "Version": "21.5b2"
                 }
             }
         },
@@ -290,7 +290,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pipx",
-                    "Version": "0.16.2.1"
+                    "Version": "0.16.3"
                 }
             }
         },
@@ -407,7 +407,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.0.6"
+                    "Version": "1.0.7"
                 }
             }
         },
@@ -453,7 +453,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "7ab15bee033a1ce6791b05f4636221cba7b9505e"
+                    "commitHash": "706b2f3765d41bee2853b17724888d1a3f6f00d9"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "e9fa4bfdbe16b71964575eb8e1d27e348305d09b"
+                    "commitHash": "19ed806d27df9aadd22ed7a9573e64bc894d9655"
                 }
             }
         },
@@ -532,7 +532,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Helm",
-                    "Version": "3.5.4",
+                    "Version": "3.6.0",
                     "DownloadUrl": "https://github.com/helm/helm"
                 }
             }
@@ -572,7 +572,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "1.10.3",
+                    "Version": "1.11.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -592,7 +592,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.16.4",
+                    "Version": "1.16.5",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -705,7 +705,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.0.14",
+                    "Version": "2.1.1",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -885,7 +885,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.27.0"
+                    "Version": "7.28.0"
                 }
             }
         },
@@ -895,7 +895,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "7ab15bee033a1ce6791b05f4636221cba7b9505e"
+                    "commitHash": "706b2f3765d41bee2853b17724888d1a3f6f00d9"
                 }
             }
         },
@@ -954,7 +954,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.4.2"
+                    "Version": "2.6.0"
                 }
             }
         },
@@ -963,7 +963,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.2.4"
+                    "Version": "4.3.2"
                 }
             }
         },

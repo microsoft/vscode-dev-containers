@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:2941570bbaa8c880d0e68e1ff0490ea5807f6eb7844d5d165739daa4804defa5
+**Digest:** sha256:2886c632e225d7deff12dbdf6f9bcc9777166f04b5789cbfcc04462576251d08
 
 **Tags:**
 ```
@@ -27,24 +27,24 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 7ab15bee033a1ce6791b05f4636221cba7b9505e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
+| pylint | 2.8.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.5b1 |
+| black | 21.5b2 |
 | yapf | 0.31.0 |
 | mypy | 0.812 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
 | virtualenv | 20.4.7 |
-| pipx | 0.16.2.1 |
+| pipx | 0.16.3 |
 
 **Other tools and utilities**
 
