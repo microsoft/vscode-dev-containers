@@ -1,4 +1,4 @@
-# [Choice] Java version: 11, 15
+# [Choice] Java version: 11, 16
 ARG VARIANT=11
 FROM openjdk:${VARIANT}-jdk-buster
 
