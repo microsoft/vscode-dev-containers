@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java-8)
 
-**Digest:** sha256:f41eb2d8a9e62a786aa3d2d00471a41e1652404aef1524f4e6e03e21a3c05b48
+**Digest:** sha256:bfe533af3cda4e4accb13519a560903b2a0805518ea460f1409030c317e0694c
 
 **Tags:**
 ```
@@ -21,7 +21,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 1.8.0_292<br />15.0.2 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
+| [Java](https://adoptopenjdk.net/) | 1.8.0_292<br />16.0.1 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
 
 **Tools installed using git**
 

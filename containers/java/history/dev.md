@@ -5,16 +5,16 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java)
 
 **Definition variations:**
-- [15](#variant-15)
+- [16](#variant-16)
 - [11](#variant-11)
 
-## Variant: 15
+## Variant: 16
 
-**Digest:** sha256:6a4c17b2d5231fdae93d94374c2bfb50bdc319162d8472a0f1f3e3728a4a67a9
+**Digest:** sha256:54699c607ea4b4194fe43d7f88cd93f35962b944e3e84b7208bd99bb78026483
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/java:dev-15
+mcr.microsoft.com/vscode/devcontainers/java:dev-16
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -27,7 +27,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-15
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 15.0.2 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 16.0.1 | /usr/local/ |
 
 **Tools installed using git**
 
@@ -92,7 +92,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-15
 
 ## Variant: 11
 
-**Digest:** sha256:5050ae901b71185b2aa4c6beba1a625d286e299c4e44c5fb4c45cb6c69263a93
+**Digest:** sha256:b61dcc756ff002401651c8b6a041358ae1f4cc6b6ddde2b5b6240f936290cb54
 
 **Tags:**
 ```

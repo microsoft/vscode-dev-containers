@@ -10,7 +10,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:03c0f25c13c618bfaa324d707cb2583f58efe3468f1aeed62d96810abf4b798e
+**Digest:** sha256:6dd028d47abf5530ad786a8b5b01d2b4f6c1862b91dbb23eb6b2c434ee91dd94
 
 **Tags:**
 ```
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:f0d71c6933a64dcecfabacb4b754e4a320951e7f7af71292bf74c6411f38e81e
+**Digest:** sha256:eeb69a1af76bd8dc2346ce38b89a3f8bdead4089b312305af3f7743f09f4fda2
 
 **Tags:**
 ```

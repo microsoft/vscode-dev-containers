@@ -12,7 +12,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:9bddd09071e1f4fcbf34fae48ba1326e2cecaaf6dd0893ba94efe96148a5fbcc
+**Digest:** sha256:05443c9ae55d763b45376d2540d7b58deb1881599cbcb21fad5d88998b694bf0
 
 **Tags:**
 ```
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: focal
 
-**Digest:** sha256:ecd21bd5960adbdfa0931e74e21c9cf49d795b84f17e1d1b95a43ed322b6c8c1
+**Digest:** sha256:01709442d0ee9b19eea7647b159537376384c7177c6fae6a7ec81ba147647ed8
 
 **Tags:**
 ```
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:f45fd784a8156e628c83a09e3ceaf1da8103c68fa9eef2e1a758e6a953128e8b
+**Digest:** sha256:154f263fd0afac33d2e890a1c107384785f6b9b2ffff8910c37931202c312618
 
 **Tags:**
 ```
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:f43bf8a9d9aa8432bb68ca4cfddd5e36369fa7ca49d2ae8c515a94f3b5444c12
+**Digest:** sha256:3aeba357b86d71088a93c1f5d10335dfc4127a92c822f4fb64bb257ce23faa4f
 
 **Tags:**
 ```

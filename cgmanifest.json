@@ -705,7 +705,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.1.1",
+                    "Version": "2.1.2",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -845,7 +845,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: openjdk",
-                    "Version": "15-jdk-buster",
+                    "Version": "16-jdk-buster",
                     "DownloadUrl": "https://hub.docker.com/_/java"
                 }
             }
