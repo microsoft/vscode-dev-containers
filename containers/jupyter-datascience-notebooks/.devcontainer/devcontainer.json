@@ -3,19 +3,27 @@
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
+	"overrideCommand": false,
+	
+	// Forward Jupyter port locally, mark required
+	"forwardPorts": [8888],
+	"portsAttributes": {
+		"8888": {
+			"label": "Jupyter",
+			"requireLocalPort": true,
+			"onAutoForward": "ignore"
+		}
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-        "python.pythonPath": "/opt/conda/bin/python"
+    	"python.pythonPath": "/opt/conda/bin/python"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python"
 	],
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "pip3 install --user -r requirements.txt",
