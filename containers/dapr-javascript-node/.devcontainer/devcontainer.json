@@ -24,7 +24,7 @@
 	// "forwardPorts": [],
 
 	// Ensure Dapr is running on opening the container
-	"postCreateCommand": "dapr uninstall && dapr init",
+	"postCreateCommand": "dapr uninstall --all && dapr init",
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "node"

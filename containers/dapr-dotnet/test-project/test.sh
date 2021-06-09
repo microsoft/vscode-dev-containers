@@ -20,7 +20,6 @@ check "dotnet" dotnet --info
 check "nuget" dotnet restore
 check "msbuild" dotnet msbuild
 sudo rm -rf obj bin
-dapr uninstall # Need to clean up dapr for subseqent executions
 
 # Report result
 reportResults
