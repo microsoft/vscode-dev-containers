@@ -112,10 +112,18 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         manpages \
         manpages-dev \
         init-system-helpers"
+
         
     # Needed for adding manpages-posix and manpages-posix-dev which are non-free packages in Debian
     if [ "${ADD_NON_FREE_PACKAGES}" = "true" ]; then
-        CODENAME="$(cat /etc/os-release | grep -oE '^VERSION_CODENAME=.+$' | cut -d'=' -f2)"
+        CODENAME="$(. /etc/os-release && echo ${VERSION_CODENAME})"
+        if [ -z "${CODENAME}" ]; then
+            # /etc/os-release can be missing VERSION_CODENAME prior to an upgrade of base-files
+            echo "Updating base-files given /etc/os-release is missing VERSION_CODENAME..."
+            apt-get update
+            apt-get -y install base-files 2>&1
+            CODENAME="$(. /etc/os-release && echo ${VERSION_CODENAME})"
+        fi
         sed -i -E "s/deb http:\/\/(deb|httpredir)\.debian\.org\/debian ${CODENAME} main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
         sed -i -E "s/deb-src http:\/\/(deb|httredir)\.debian\.org\/debian ${CODENAME} main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
         sed -i -E "s/deb http:\/\/(deb|httpredir)\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
