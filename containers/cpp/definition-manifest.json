@@ -1,9 +1,10 @@
 {
-	"variants": ["buster", "focal", "bionic", "stretch"],
-	"definitionVersion": "0.201.6",
+	"variants": ["bullseye", "buster", "focal", "bionic", "stretch"],
+	"definitionVersion": "0.202.0",
 	"build": {
 		"latest": true,
 		"parent": {
+			"bullseye": "debian",
 			"buster": "debian", 
 			"stretch": "debian", 
 			"focal": "ubuntu",
@@ -14,15 +15,19 @@
 			"cpp:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"buster": [
-				"cpp:${VERSION}-debian-10",
-				"cpp:${VERSION}-debian10",
+			"bullseye": [
+				"cpp:${VERSION}-debian-11",
+				"cpp:${VERSION}-debian11",
 				"cpp:${VERSION}-debian",
 				"cpp:${VERSION}"
 			],
+			"buster": [
+				"cpp:${VERSION}-debian-10",
+				"cpp:${VERSION}-debian10",
+			],
 			"stretch": [
-				"cpp:${VERSION}-debian9",
-				"cpp:${VERSION}-debian-9"
+				"cpp:${VERSION}-debian-9",
+				"cpp:${VERSION}-debian9"
 			],
 			"focal": [
 				"cpp:${VERSION}-ubuntu-20.04",

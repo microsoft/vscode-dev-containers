@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/cpp |
-| *Available image variants* | stretch, buster, bionic, focal ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/cpp/tags/list)) |
+| *Available image variants* | stretch, buster, bullseye, bionic, focal ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/cpp/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -31,10 +31,11 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 
 - `mcr.microsoft.com/vscode/devcontainers/cpp` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:debian` (latest)
+- `mcr.microsoft.com/vscode/devcontainers/cpp:bullseye` (or `debian-11`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:buster` (or `debian-10`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:stretch` (or `debian-9`)
-- `mcr.microsoft.com/vscode/devcontainers/cpp:bionic` (or `ubuntu-18.04`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:focal` (or `ubuntu-20.04`)
+- `mcr.microsoft.com/vscode/devcontainers/cpp:bionic` (or `ubuntu-18.04`)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 

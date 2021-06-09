@@ -1,5 +1,5 @@
-# [Choice] Debian version: buster, stretch
-ARG VARIANT="buster"
+# [Choice] Debian version: bullseye, buster, stretch
+ARG VARIANT="bullseye"
 FROM buildpack-deps:${VARIANT}-curl
 
 # [Option] Install zsh

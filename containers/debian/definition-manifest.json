@@ -1,6 +1,6 @@
 {
-	"variants": ["buster", "stretch"],
-	"definitionVersion": "0.201.6",
+	"variants": ["bullseye", "buster", "stretch"],
+	"definitionVersion": "0.202.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -8,15 +8,19 @@
 			"base:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"buster": [
-				"base:${VERSION}-debian-10",
-				"base:${VERSION}-debian10",
+			"bullseye": [
+				"base:${VERSION}-debian-11",
+				"base:${VERSION}-debian11",
 				"base:${VERSION}-debian",
 				"base:${VERSION}"
 			],
+			"buster": [
+				"base:${VERSION}-debian-10",
+				"base:${VERSION}-debian10"
+			],
 			"stretch": [
-				"base:${VERSION}-debian9",
-				"base:${VERSION}-debian-9"
+				"base:${VERSION}-debian-9",
+				"base:${VERSION}-debian9"
 			]
 		}
 	},

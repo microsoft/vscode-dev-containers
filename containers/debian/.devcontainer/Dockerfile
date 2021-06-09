@@ -1,5 +1,5 @@
-# [Choice] Debian version: buster, stretch
-ARG VARIANT=buster
+# [Choice] Debian version: bullseye, buster, stretch
+ARG VARIANT=bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 
 # ** [Optional] Uncomment this section to install additional packages. **
