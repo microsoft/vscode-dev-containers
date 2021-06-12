@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:a095f1aa7adcb41753b763811099d6b120f5d46fc2f48503f6dab7ce21086269
+**Digest:** sha256:2b252eb4145f84c8fd9dc8656ef9ae01e2adb540c28cde86bea12780e27b2b60
 
 **Tags:**
 ```
@@ -29,7 +29,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 5.0.300 (5.0.6) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 5.0.301 (5.0.7) | /usr |
 
 **Tools installed using git**
 
@@ -88,7 +88,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:62964d5c55cf31c740e90d6b03a97a95c9e952a0b5f8af4a4336580a2598fd9c
+**Digest:** sha256:8d0ff8a30cf9f4de3c5363e2fe0d7b1e95479a3edcc12452d85a0300c786a868
 
 **Tags:**
 ```
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 3.1.409 (3.1.1) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 3.1.410 (3.1.1) | /usr |
 
 **Tools installed using git**
 
@@ -165,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:b452a697882eb5a8f4def5f62c0e187c57ec9107272b0bb0ba17799a38eb5d94
+**Digest:** sha256:d08cc8e02531ebd97af6a45eed0915d9f742764ca2c87bb1376e591459e5dcfe
 
 **Tags:**
 ```

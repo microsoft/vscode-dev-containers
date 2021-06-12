@@ -10,7 +10,7 @@
 
 ## Variant: 1.16
 
-**Digest:** sha256:714a56af008cc36fe812feeffb9eb8a39170ba29b13ffeec72854ca477c4a020
+**Digest:** sha256:e7a7e3fefc566e4b49602ae15cf8e12340ca2cf9c54aefc8f23d812ef5e88258
 
 **Tags:**
 ```
@@ -41,12 +41,12 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.6.11 |
-| honnef.co/go/tools | 0.1.3 |
+| golang.org/x/tools/gopls | 0.7.0 |
+| honnef.co/go/tools | 0.2.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.0.7 |
 | github.com/uudashr/gopkgs | 1.3.2 |
-| github.com/ramya-rao-a/go-outline | 0.0.0-20200117021646-2a048b4510eb |
+| github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.6.1 |
 | github.com/golangci/golangci-lint | 1.40.1 |
 
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.15
 
-**Digest:** sha256:b9472df9f11644eeb4ec356cd38ab0f79bf0849a9249890a018b440643721cc5
+**Digest:** sha256:5497d62cfb2eca6cac2c9d6b75bde034f5c95eae2746d70cb33c34d3cca2b87b
 
 **Tags:**
 ```
@@ -135,12 +135,12 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.15
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.6.11 |
-| honnef.co/go/tools | 0.1.3 |
+| golang.org/x/tools/gopls | 0.7.0 |
+| honnef.co/go/tools | 0.2.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.0.7 |
 | github.com/uudashr/gopkgs | 1.3.2 |
-| github.com/ramya-rao-a/go-outline | 0.0.0-20200117021646-2a048b4510eb |
+| github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.6.1 |
 | github.com/golangci/golangci-lint | 1.40.1 |
 

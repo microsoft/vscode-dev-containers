@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:6c3c10c7497cb8fccf7453df3252818604ad60cdb079106c7b8743f2f17c3d0f
+**Digest:** sha256:9da3f526959989030bc51313290d96c16fd6a283572090cfe667e5a9697bd70e
 
 **Tags:**
 ```
@@ -46,9 +46,9 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 | pylint | 2.8.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.5b2 |
+| black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.812 |
+| mypy | 0.902 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:5b1c7d89276a39dff576df0e2381d269e1821ac3b4e62a6a04af474d583d2358
+**Digest:** sha256:7872994f8cc30324087aac8d084d9ba9c4eb6c6bd5322f83026404303b70088b
 
 **Tags:**
 ```
@@ -138,9 +138,9 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 | pylint | 2.8.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.5b2 |
+| black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.812 |
+| mypy | 0.902 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:0cf66c2e79328f2153d46d9543d06887bc30e34e6e1b9bf705ff1e62d67c49b8
+**Digest:** sha256:16387683126d7e7a0c55573b5f057a590cc8e8ebb9a507ea9942534e11627c56
 
 **Tags:**
 ```
@@ -230,9 +230,9 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 | pylint | 2.8.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.5b2 |
+| black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.812 |
+| mypy | 0.902 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:8a8486b1a8230d9248d9cb7eb044744170dea0b6f6bc90f10337e69ffd5266dd
+**Digest:** sha256:86f97aa694123c0fd23782644c0587cc64d86c81f03234553cddafa8c44714e5
 
 **Tags:**
 ```
@@ -322,9 +322,9 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 | pylint | 2.8.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.5b2 |
+| black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.812 |
+| mypy | 0.902 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |

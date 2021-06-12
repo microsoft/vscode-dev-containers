@@ -10,7 +10,7 @@
 
 ## Variant: 16
 
-**Digest:** sha256:54699c607ea4b4194fe43d7f88cd93f35962b944e3e84b7208bd99bb78026483
+**Digest:** sha256:906d6ca75b4607e4cbd2709c5654cb24bcf684ac1c412fa6c699e38c51dc89ff
 
 **Tags:**
 ```
@@ -92,7 +92,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 
 ## Variant: 11
 
-**Digest:** sha256:b61dcc756ff002401651c8b6a041358ae1f4cc6b6ddde2b5b6240f936290cb54
+**Digest:** sha256:eca8d19f1e5a85747a49d213a92125f62634b9246018ff8ecda773de45ccccd1
 
 **Tags:**
 ```

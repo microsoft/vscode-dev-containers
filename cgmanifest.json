@@ -672,6 +672,33 @@
         },
         {
             "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "golang.org/x/tools/gopls",
+                    "Version": "0.7.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "honnef.co/go/tools",
+                    "Version": "0.2.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/ramya-rao-a/go-outline",
+                    "Version": "0.0.0-20210608161538-9736a4bde949"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
@@ -705,7 +732,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.1.2",
+                    "Version": "2.1.3",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -737,6 +764,24 @@
                     "Name": "Docker Image: php",
                     "Version": "7.3",
                     "DownloadUrl": "https://hub.docker.com/_/php"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "black",
+                    "Version": "21.6b0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "mypy",
+                    "Version": "0.902"
                 }
             }
         },
@@ -797,6 +842,16 @@
                     "Name": "Docker Image: miniconda3",
                     "Version": "latest",
                     "DownloadUrl": "https://hub.docker.com/r/continuumio/miniconda3"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "ruby-build",
+                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
+                    "commitHash": "6b5c8148228bc3f5e58ab9c54c29d0b71be65524"
                 }
             }
         },
