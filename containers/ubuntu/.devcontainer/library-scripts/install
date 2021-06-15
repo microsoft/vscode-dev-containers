@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-cd "$(dirname "$0")"
 set -e
+
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
 BASE_SCRIPTS_FOLDER=${1:-"_none_"}
 OPTIONS_SCRIPT_FOLDER=${2:-"options"}

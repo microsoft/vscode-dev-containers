@@ -16,6 +16,7 @@ USER_GID=${4:-${COMMON_USER_GID:-"automatic"}}
 UPGRADE_PACKAGES=${5:-${COMMON_UPGRADE_PACKAGES:-"true"}}
 INSTALL_OH_MYS=${6:-${COMMON_INSTALL_OH_MYS:-"true"}}
 ADD_NON_FREE_PACKAGES=${7:-${COMMON_ADD_NON_FREE_PACKAGES:-"false"}}
+SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 
 set -e
 
@@ -431,7 +432,6 @@ if [ ! -z "${CONTENTS_URL}" ]; then echo && echo "More info: ${CONTENTS_URL}"; f
 echo
 EOF
 )"
-SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 if [ -f "${SCRIPT_DIR}/meta.env" ]; then
     mkdir -p /usr/local/etc/vscode-dev-containers/
     cp -f "${SCRIPT_DIR}/meta.env" /usr/local/etc/vscode-dev-containers/meta.env
