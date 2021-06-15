@@ -6,6 +6,9 @@ FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-${VARIANT}
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
 
+# [Option] Install Azure CLI
+ARG INSTALL_AZURE_CLI="false"
+
 # Runs all scripts in the library-scripts folder in alphabetical order using argumetns set in this file. 
 # You can add your own install steps to "library-scripts/user-install-steps.sh" or another file in this folder.
 COPY library-scripts /tmp/library-scripts
