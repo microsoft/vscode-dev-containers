@@ -9,10 +9,10 @@
 #
 # Syntax: ./node-debian.sh [directory to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag]
 
-export NVM_DIR=${1:-"/usr/local/share/nvm"}
-export NODE_VERSION=${2:-"lts/*"}
-USERNAME=${3:-"automatic"}
-UPDATE_RC=${4:-"true"}
+export NVM_DIR=${1:-${NODE_NVM_DIR:-${NVM_DIR:-"/usr/local/share/nvm"}}}
+export NODE_VERSION=${2:-${NODE_VERSION:-"lts/*"}}
+USERNAME=${3:-${NODE_USERNAME:-${COMMON_USERNAME:-"automatic"}}}
+UPDATE_RC=${4:-${NODE_UPDATE_RC:-"true"}}
 
 set -e
 

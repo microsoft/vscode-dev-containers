@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+set -e
+
+BASE_SCRIPTS_FOLDER=${1:-"_none_"}
+OPTIONS_SCRIPT_FOLDER=${2:-"options"}
+
+# Exporrt any env variables added to the settings environment file (library-scripts.env)
+if [ -f "library-scripts.env" ]; then
+    $(awk -F= '{print "export ", $0}' library-scripts.env)
+fi
+
+# Execute all scripts in the library-scripts folder in alphabetical order
+( ls -1Q ${BASE_SCRIPTS_FOLDER}/*.sh 2>/dev/null && ls -1Q *.sh 2>/dev/null ) | xargs -n 1 -L 1 bash
+
+# Execute option scripts if correct environment variable is set to "true"
+while IFS= read -r option_line; do
+    option_var_name="${option_line%%=*}"
+    if [ "${!option_var_name}" = "true" ]; then
+        bash ${OPTIONS_SCRIPT_FOLDER}/${option_line##*=}
+    fi
+done < ${OPTIONS_SCRIPT_FOLDER}/options.env
+
+# Clean up
+apt-get autoremove -y
+apt-get clean -y
+rm -rf /var/lib/apt/lists/*

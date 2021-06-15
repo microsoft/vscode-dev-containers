@@ -2,18 +2,12 @@
 ARG VARIANT="focal"
 FROM buildpack-deps:${VARIANT}-curl
 
-# Options for setup script
-ARG INSTALL_ZSH="true"
-ARG UPGRADE_PACKAGES="true"
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
-COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
-RUN yes | unminimize 2>&1 \ 
-    && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+# Options - Can also be set in library-scripts/library-scripts.env
+ARG COMMON_INSTALL_ZSH="true"
+ARG COMMON_UPGRADE_PACKAGES="true"
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+# Runs all scripts in the library-scripts folder in alphabetical order. You can add your own
+# install steps to "library-scripts/user-install-steps.sh" or another file in this folder.
+COPY library-scripts/base/* library-scripts/install library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
+RUN bash /tmp/library-scripts/install \
+    && rm -rf /tmp/library-scripts

@@ -9,13 +9,14 @@
 #
 # Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My Zsh! flag] [Add non-free packages]
 
-INSTALL_ZSH=${1:-"true"}
-USERNAME=${2:-"automatic"}
-USER_UID=${3:-"automatic"}
-USER_GID=${4:-"automatic"}
-UPGRADE_PACKAGES=${5:-"true"}
-INSTALL_OH_MYS=${6:-"true"}
-ADD_NON_FREE_PACKAGES=${7:-"false"}
+INSTALL_ZSH=${1:-${COMMON_INSTALL_ZSH:-"true"}}
+USERNAME=${2:-${COMMON_USERNAME:-"automatic"}}
+USER_UID=${3:-${COMMON_USER_UID:-"automatic"}}
+USER_GID=${4:-${COMMON_USER_GID:-"automatic"}}
+UPGRADE_PACKAGES=${5:-${COMMON_UPGRADE_PACKAGES:-"true"}}
+INSTALL_OH_MYS=${6:-${COMMON_INSTALL_OH_MYS:-"true"}}
+ADD_NON_FREE_PACKAGES=${7:-${COMMON_ADD_NON_FREE_PACKAGES:-"false"}}
+SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 
 set -e
 
@@ -431,7 +432,6 @@ if [ ! -z "${CONTENTS_URL}" ]; then echo && echo "More info: ${CONTENTS_URL}"; f
 echo
 EOF
 )"
-SCRIPT_DIR="$(cd $(dirname $0) && pwd)"
 if [ -f "${SCRIPT_DIR}/meta.env" ]; then
     mkdir -p /usr/local/etc/vscode-dev-containers/
     cp -f "${SCRIPT_DIR}/meta.env" /usr/local/etc/vscode-dev-containers/meta.env
