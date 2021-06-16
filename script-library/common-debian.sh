@@ -303,6 +303,7 @@ EOF
 )"
 CODESPACES_ZSH="$(cat \
 <<'EOF'
+# Codespaces zsh prompt theme
 __zsh_prompt() {
     local prompt_username
     if [ ! -z "${GITHUB_USER}" ]; then 
