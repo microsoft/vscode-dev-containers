@@ -207,6 +207,16 @@ else
     USER_RC_PATH="/home/${USERNAME}"
 fi
 
+# Restore user .bashrc defaults from skeleton file if it doesn't exist or is empty
+if [ ! -f "${USER_RC_PATH}/.bashrc" ] || [ ! -s "${USER_RC_PATH}/.bashrc" ] ; then
+    cp  /etc/skel/.bashrc "${USER_RC_PATH}/.bashrc"
+fi
+
+# Restore user .profile defaults from skeleton file if it doesn't exist or is empty
+if  [ ! -f "${USER_RC_PATH}/.profile" ] || [ ! -s "${USER_RC_PATH}/.profile" ] ; then
+    cp  /etc/skel/.profile "${USER_RC_PATH}/.profile"
+fi
+
 # .bashrc/.zshrc snippet
 RC_SNIPPET="$(cat << 'EOF'
 
