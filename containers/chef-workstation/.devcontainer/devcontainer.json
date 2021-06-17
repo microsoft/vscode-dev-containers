@@ -1,0 +1,10 @@
+{
+	"name": "Chef Workstation (Community)",
+	"image": "chef/chefworkstation:stable",
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+	},
+	"extensions": [
+		"chef-software.chef"
+	]
+}
