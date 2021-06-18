@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "706b2f3765d41bee2853b17724888d1a3f6f00d9"
+                    "commitHash": "e32d4b1e195f4c7777844beea97af42bd93434eb"
                 }
             }
         },
@@ -699,6 +699,15 @@
         },
         {
             "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/golangci/golangci-lint",
+                    "Version": "1.41.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
@@ -851,7 +860,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "6b5c8148228bc3f5e58ab9c54c29d0b71be65524"
+                    "commitHash": "1b477ae8a1a2152040d38f2248afc1d0bc289f08"
                 }
             }
         },
@@ -882,6 +891,42 @@
                     "Name": "Docker Image: ruby",
                     "Version": "2.6",
                     "DownloadUrl": "https://hub.docker.com/_/ruby"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rustfmt",
+                    "Version": "1.4.37"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rust-analysis",
+                    "Version": "1.53.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rust-src",
+                    "Version": "1.53.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "clippy",
+                    "Version": "1.53.0"
                 }
             }
         },
@@ -950,7 +995,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "706b2f3765d41bee2853b17724888d1a3f6f00d9"
+                    "commitHash": "e32d4b1e195f4c7777844beea97af42bd93434eb"
                 }
             }
         },
@@ -1018,7 +1063,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.3.2"
+                    "Version": "4.3.4"
                 }
             }
         },

@@ -10,7 +10,7 @@
 
 ## Variant: 1.16
 
-**Digest:** sha256:e7a7e3fefc566e4b49602ae15cf8e12340ca2cf9c54aefc8f23d812ef5e88258
+**Digest:** sha256:799c915c67fbfd3fb1af6f7dafdeb1be4092c51599edcafb6a1bebd7ada46df8
 
 **Tags:**
 ```
@@ -34,7 +34,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -48,7 +48,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.6.1 |
-| github.com/golangci/golangci-lint | 1.40.1 |
+| github.com/golangci/golangci-lint | 1.41.0 |
 
 **Additional linux tools and packages**
 
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.15
 
-**Digest:** sha256:5497d62cfb2eca6cac2c9d6b75bde034f5c95eae2746d70cb33c34d3cca2b87b
+**Digest:** sha256:7156aa0531ff17b45f8b41d7d299091fb6f5ee88edadee5ed0e02fb431d4591c
 
 **Tags:**
 ```
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.15
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -142,7 +142,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.15
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.6.1 |
-| github.com/golangci/golangci-lint | 1.40.1 |
+| github.com/golangci/golangci-lint | 1.41.0 |
 
 **Additional linux tools and packages**
 

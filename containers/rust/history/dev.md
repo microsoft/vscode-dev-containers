@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
-**Digest:** sha256:634458c785fc8297447721c5877c1d83b05fbd5fbbfaf1c9ef9d6056993aa586
+**Digest:** sha256:60e95a6f092321b4a91e8942aa4a9a217e59d0d4e35b00248298e5f015b3b2a4
 
 **Tags:**
 ```
@@ -21,23 +21,23 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Rust](https://github.com/rust-lang/rust) | 1.52.1 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.53.0 | /usr/local/cargo<br />/usr/local/rustup |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 
 **Cargo / rustup (Rust) crates and tools**
 
 | Tool / crate | Version |
 |--------------|---------|
 | rls | 1.41.0 |
-| rustfmt | 1.4.36 |
-| rust-analysis | 1.52.1 |
-| rust-src | 1.52.1 |
-| clippy | 1.52.1 |
+| rustfmt | 1.4.37 |
+| rust-analysis | 1.53.0 |
+| rust-src | 1.53.0 |
+| clippy | 1.53.0 |
 
 **Additional linux tools and packages**
 
