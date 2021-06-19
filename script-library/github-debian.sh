@@ -43,7 +43,7 @@ chmod 700 ${GNUPGHOME}
 # Import key safely (new method rather than deprecated apt-key approach) and install
 . /etc/os-release
 gpg -q --no-default-keyring --keyring /usr/share/keyrings/githubcli-archive-keyring.gpg --keyserver keyserver.ubuntu.com --receive-keys C99B11DEB97541F0
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/github-cli2.list
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/github-cli.list
 apt-get update
 apt-get -y install "gh${VERSION_SUFFIX}"
 rm -rf "/tmp/gh/gnupg"

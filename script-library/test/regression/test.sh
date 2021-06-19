@@ -19,12 +19,14 @@ set -e
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../.."
 echo -e  "🧪 Testing image $IMAGE_TO_TEST (${DISTRO}-like)..."
 docker build \
-    --init \
-    --privileged \
     --build-arg DISTRO=$DISTRO \
     --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST \
     --build-arg RUN_ONE=${RUN_ONE} \
     --build-arg RUN_COMMON_SCRIPT=${RUN_COMMON_SCRIPT} \
-    --build_arg USE_DEFAULTS=${USE_DEFAULTS} \
+    --build-arg USE_DEFAULTS=${USE_DEFAULTS} \
+    -t vscdc-script-library-regression \
     -f test/regression/Dockerfile .
+
+docker run -it --init --privileged vscdc-script-library-regression env
+
 echo -e "\n🎉 All tests passed!"
