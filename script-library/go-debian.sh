@@ -23,6 +23,17 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Get arch
+GO_ARCH=
+dpkgArch="$(dpkg --print-architecture)"
+case "${dpkgArch##*-}" in
+    amd64) GO_ARCH='amd64';;
+    arm64) GO_ARCH='arm64';;
+    armhf) GO_ARCH='armv6l';;
+    i386) GO_ARCH='386';;
+    *) echo "unsupported architecture"; exit 1 ;;
+esac
+
 # Ensure that login shells get the correct path if the user updated the PATH using ENV.
 rm -f /etc/profile.d/00-restore-env.sh
 echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
@@ -74,7 +85,7 @@ fi
 GO_INSTALL_SCRIPT="$(cat <<EOF
     set -e
     echo "Downloading Go ${TARGET_GO_VERSION}..."
-    curl -sSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-amd64.tar.gz"
+    curl -sSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${GO_ARCH}.tar.gz"
     echo "Extracting Go ${TARGET_GO_VERSION}..."
     tar -xzf /tmp/go.tar.gz -C "${TARGET_GOROOT}" --strip-components=1
     rm -f /tmp/go.tar.gz
