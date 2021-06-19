@@ -21,11 +21,11 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, apt-transport-https, curl, gpg, or dirmngr if missing
-if ! dpkg -s curl ca-certificates apt-transport-https dirmngr gnupg2 lsb-release > /dev/null 2>&1; then
+if ! dpkg -s curl ca-certificates apt-transport-https dirmngr gnupg2 > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates apt-transport-https dirmngr gnupg2 lsb-release
+    apt-get -y install --no-install-recommends curl ca-certificates apt-transport-https dirmngr gnupg2
 fi
 
 if [ "${CLI_VERSION}" != "latest" ] && [ "${CLI_VERSION}" != "lts" ] && [ "${CLI_VERSION}" != "stable" ]; then
