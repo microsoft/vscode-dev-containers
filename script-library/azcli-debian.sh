@@ -27,8 +27,9 @@ if ! dpkg -s apt-transport-https curl ca-certificates lsb-release gnupg2 > /dev/
 fi
 
 # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
+. /etc/os-release
 curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/azure-cli.list
 apt-get update
 apt-get install -y azure-cli
 echo "Done!"

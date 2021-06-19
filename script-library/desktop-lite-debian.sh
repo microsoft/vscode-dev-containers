@@ -94,12 +94,12 @@ apt-get-update-if-needed
 
 # On older Ubuntu, Tilix is in a PPA. On Debian Strech, its in backports
 if [[ -z $(apt-cache --names-only search ^tilix$) ]]; then
-    apt-get install -y --no-install-recommends lsb-release
-    if [ "$(lsb_release -is)" = "Ubuntu" ]; then
+    . /etc/os-release
+    if [ "${ID}" = "ubuntu" ]; then
         apt-get install -y --no-install-recommends apt-transport-https software-properties-common
         add-apt-repository -y ppa:webupd8team/terminix
     else
-        echo "deb http://deb.debian.org/debian $(lsb_release -cs)-backports main" > /etc/apt/sources.list.d/$(lsb_release -cs)-backports.list
+        echo "deb http://deb.debian.org/debian ${VERSION_CODENAME}-backports main" > /etc/apt/sources.list.d/${VERSION_CODENAME}-backports.list
     fi
     apt-get update
 fi
