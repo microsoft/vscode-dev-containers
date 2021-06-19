@@ -4,10 +4,12 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/common.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/common.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./common-debian.sh [install zsh flag] [username] [user UID] [user GID] [upgrade packages flag] [install Oh My Zsh! flag] [Add non-free packages]
+
+set -e
 
 INSTALL_ZSH=${1:-"true"}
 USERNAME=${2:-"automatic"}
@@ -16,8 +18,7 @@ USER_GID=${4:-"automatic"}
 UPGRADE_PACKAGES=${5:-"true"}
 INSTALL_OH_MYS=${6:-"true"}
 ADD_NON_FREE_PACKAGES=${7:-"false"}
-
-set -e
+SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
@@ -110,15 +111,16 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         man-db \
         strace \
         manpages \
-        manpages-dev "
+        manpages-dev \
+        init-system-helpers"
         
     # Needed for adding manpages-posix and manpages-posix-dev which are non-free packages in Debian
     if [ "${ADD_NON_FREE_PACKAGES}" = "true" ]; then
         CODENAME="$(cat /etc/os-release | grep -oE '^VERSION_CODENAME=.+$' | cut -d'=' -f2)"
-        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
-        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME} main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
-        sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
-        sed -i "s/deb-src http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
+        sed -i -E "s/deb http:\/\/(deb|httpredir)\.debian\.org\/debian ${CODENAME} main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
+        sed -i -E "s/deb-src http:\/\/(deb|httredir)\.debian\.org\/debian ${CODENAME} main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME} main contrib non-free/" /etc/apt/sources.list
+        sed -i -E "s/deb http:\/\/(deb|httpredir)\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
+        sed -i -E "s/deb-src http:\/\/(deb|httpredir)\.debian\.org\/debian ${CODENAME}-updates main/deb http:\/\/\1\.debian\.org\/debian ${CODENAME}-updates main contrib non-free/" /etc/apt/sources.list
         sed -i "s/deb http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main/deb http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main contrib non-free/" /etc/apt/sources.list
         sed -i "s/deb-src http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main/deb http:\/\/security\.debian\.org\/debian-security ${CODENAME}\/updates main contrib non-free/" /etc/apt/sources.list
         sed -i "s/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main/deb http:\/\/deb\.debian\.org\/debian ${CODENAME}-backports main contrib non-free/" /etc/apt/sources.list 
@@ -206,6 +208,16 @@ else
     USER_RC_PATH="/home/${USERNAME}"
 fi
 
+# Restore user .bashrc defaults from skeleton file if it doesn't exist or is empty
+if [ ! -f "${USER_RC_PATH}/.bashrc" ] || [ ! -s "${USER_RC_PATH}/.bashrc" ] ; then
+    cp  /etc/skel/.bashrc "${USER_RC_PATH}/.bashrc"
+fi
+
+# Restore user .profile defaults from skeleton file if it doesn't exist or is empty
+if  [ ! -f "${USER_RC_PATH}/.profile" ] || [ ! -s "${USER_RC_PATH}/.profile" ] ; then
+    cp  /etc/skel/.profile "${USER_RC_PATH}/.profile"
+fi
+
 # .bashrc/.zshrc snippet
 RC_SNIPPET="$(cat << 'EOF'
 
@@ -213,7 +225,7 @@ if [ -z "${USER}" ]; then export USER=$(whoami); fi
 if [[ "${PATH}" != *"$HOME/.local/bin"* ]]; then export PATH="${PATH}:$HOME/.local/bin"; fi
 
 # Display optional first run image specific notice if configured and terminal is interactive
-if [ -t 1 ] && [ ! -f "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed" ]; then
+if [ -t 1 ] && [[ "${TERM_PROGRAM}" = "vscode" || "${TERM_PROGRAM}" = "codespaces" ]] && [ ! -f "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed" ]; then
     if [ -f "/usr/local/etc/vscode-dev-containers/first-run-notice.txt" ]; then
         cat "/usr/local/etc/vscode-dev-containers/first-run-notice.txt"
     elif [ -f "/workspaces/.codespaces/shared/first-run-notice.txt" ]; then
@@ -248,6 +260,18 @@ fi
 EOF
 chmod +x /usr/local/bin/code
 
+# systemctl shim - tells people to use 'service' if systemd is not running
+cat << 'EOF' > /usr/local/bin/systemctl
+#!/bin/sh
+set -e
+if [ -d "/run/systemd/system" ]; then
+    exec /bin/systemctl/systemctl "$@"
+else
+    echo '\n"systemd" is not running in this container due to its overhead.\nUse the "service" command to start services intead. e.g.: \n\nservice --status-all'
+fi
+EOF
+chmod +x /usr/local/bin/systemctl
+
 # Codespaces bash and OMZ themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
 <<'EOF'
@@ -280,6 +304,7 @@ EOF
 )"
 CODESPACES_ZSH="$(cat \
 <<'EOF'
+# Codespaces zsh prompt theme
 __zsh_prompt() {
     local prompt_username
     if [ ! -z "${GITHUB_USER}" ]; then 
@@ -418,7 +443,6 @@ if [ ! -z "${CONTENTS_URL}" ]; then echo && echo "More info: ${CONTENTS_URL}"; f
 echo
 EOF
 )"
-SCRIPT_DIR="$(cd $(dirname $0) && pwd)"
 if [ -f "${SCRIPT_DIR}/meta.env" ]; then
     mkdir -p /usr/local/etc/vscode-dev-containers/
     cp -f "${SCRIPT_DIR}/meta.env" /usr/local/etc/vscode-dev-containers/meta.env

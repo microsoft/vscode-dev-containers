@@ -1,15 +1,15 @@
-# [github.com/microsoft/vscode](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/github.com/microsoft/vscode)
+# [github.com/microsoft/vscode](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/github.com/microsoft/vscode)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
 **Definition variations:**
 - [12](#variant-12)
 
 ## Variant: 12
 
-**Digest:** sha256:30a821c693ca96256595361ea240c3aa092e0366d4d23271a340c5d853ef45d1
+**Digest:** sha256:03b645b60064613dba5ff42d42ae447715ca3562c3f42682bb6adeb8d4b19c32
 
 **Tags:**
 ```

@@ -9,7 +9,9 @@ checkCommon
 # Definition specific tests
 checkExtension "dbaeumer.vscode-eslint"
 check "node" node --version
+sudo rm -f yarn.lock
 check "yarn" yarn install
+sudo rm -f package-lock.json
 check "npm" npm install
 check "eslint" eslint server.js
 check "test-project" npm run test

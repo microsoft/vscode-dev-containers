@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/java |
-| *Available image variants* | 11, 15 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
+| *Available image variants* | 11, 16 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -26,14 +26,14 @@ See **[history](history)** for information on the contents of published images.
 While this definition should work unmodified, you can select the version of Java the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
-"args": { "VARIANT": "15" }
+"args": { "VARIANT": "16" }
 ```
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/java` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/java:11`
-- `mcr.microsoft.com/vscode/devcontainers/java:15`
+- `mcr.microsoft.com/vscode/devcontainers/java:16`
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
@@ -126,4 +126,4 @@ This definition includes some test code that will help you verify it is working 
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).
+Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).

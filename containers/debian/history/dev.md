@@ -1,8 +1,8 @@
-# [debian](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/debian)
+# [debian](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/debian)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/debian)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/debian)
 
 **Definition variations:**
 - [buster](#variant-buster)
@@ -10,7 +10,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:c89ee9d416341314d7edcbc47633a92a499f926122e1be54ece51957b79c44f8
+**Digest:** sha256:fbc57be9eb70112dbd37a30e0c84811d0f9d8cf5a813a7445e698631dd7a3f40
 
 **Tags:**
 ```
@@ -31,7 +31,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:7d000698e3db52140ff39369c10da8585550ae7e11551ac252b00536a4fda36a
+**Digest:** sha256:dabeef6ac62c9a33eeea46ed559ac60bc0a462214243e33665af981068b54ca1
 
 **Tags:**
 ```
@@ -101,7 +101,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian-9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -110,7 +110,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian-9
 | apt-transport-https | 1.4.11 |
 | apt-utils | 1.4.11 |
 | ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u13 |
+| curl | 7.52.1-5+deb9u14 |
 | dialog | 1.3-20160828-2 |
 | git | 1:2.11.0-3+deb9u7 |
 | gnupg2 | 2.1.18-8~deb9u4 |

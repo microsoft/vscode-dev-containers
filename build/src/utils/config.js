@@ -28,11 +28,21 @@ async function loadConfig(repoPath) {
     const containersPath = path.join(repoPath, getConfig('containersPathInRepo', 'containers'));
     const definitions = await asyncUtils.readdir(containersPath, { withFileTypes: true });
     await asyncUtils.forEach(definitions, async (definitionFolder) => {
+        // If directory entry is a file (like README.md, skip
         if (!definitionFolder.isDirectory()) {
             return;
         }
+
         const definitionId = definitionFolder.name;
         const definitionPath = path.resolve(path.join(containersPath, definitionId));
+
+        // If a .deprecated file is found, remove the directory from staging and return
+        if(await asyncUtils.exists(path.join(definitionPath, '.deprecated'))) {
+            await asyncUtils.rimraf(definitionPath);
+            return;
+        }
+
+        // Add to complete list of definitions
         allDefinitionPaths[definitionId] = {
             path: definitionPath,
             relativeToRootPath: path.relative(repoPath, definitionPath)
@@ -136,7 +146,7 @@ function getAllDefinitionPaths() {
     return allDefinitionPaths;
 }
 
-// Convert a release string (v1.0.0) or branch (master) into a version. If a definitionId and 
+// Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
 // release string is passed in, use the version specified in defintion-build.json if one exists.
 function getVersionFromRelease(release, definitionId) {
     definitionId = definitionId || 'NOT SPECIFIED';

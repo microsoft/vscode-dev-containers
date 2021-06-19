@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "1.3.3",
+	"definitionVersion": "1.4.1",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"annotation": "This document describes the base contents of the default GitHub Codespaces dev container image. Note that this image also includes detection logic to dynamically install additional language / runtime versions based on your repository's contents. Dynamically installed content can be found in sub-folders under `/opt`.",
-		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210308.3",
+		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210514.2",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"apt": [{
 				"cgIgnore": false,
@@ -99,7 +99,8 @@
 		"gem": [
 			"rake",
 			"ruby-debug-ide",
-			"debase"
+			"debase",
+			"jekyll"
 		],
 		"cargo": {
 			"rls": null,
@@ -146,11 +147,6 @@
 			"Gradle": null,
 			"Docker (Moby) CLI & Engine": {
 				"cgIgnore": true
-			},
-			"AdoptOpenJDK": {
-				"markdownIgnore": true,
-				"versionCommand": "/usr/local/sdkman/candidates/java/8*/bin/java -version 2>&1 | grep -oE -m 1 '.*build\\s[^\\)]+' | sed -n '/.*build\\s/s///p'",
-				"downloadUrl": "https://adoptopenjdk.net/"
 			}
 		},
 		"languages": {
@@ -194,7 +190,10 @@
 				"cgIgnore": true
 			},
 			"Go": null,
-			"Rust": null
+			"Rust": null,
+			"Jekyll": {
+				"cgIgnore": true
+			}
 		}
 	}
 }

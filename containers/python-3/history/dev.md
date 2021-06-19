@@ -1,8 +1,8 @@
-# [python-3](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3)
+# [python-3](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3)
 
 **Definition variations:**
 - [3.9](#variant-39)
@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:58413dd47f8afb16dd556a8e6b53125c4ae897a27ed3fd503d1e234c6faa51f8
+**Digest:** sha256:c2546098876a6b22ecca3a96603fd2a78c2f734beed71dbe36e31ea42666e0c1
 
 **Tags:**
 ```
@@ -30,30 +30,30 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.9.4 | /usr/local |
+| [Python](https://www.python.org/) | 3.9.5 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
-| flake8 | 3.9.1 |
+| pylint | 2.8.3 |
+| flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.4b2 |
+| black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.812 |
-| pydocstyle | 6.0.0 |
+| mypy | 0.902 |
+| pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.4 |
-| pipx | 0.16.2.1 |
+| virtualenv | 20.4.7 |
+| pipx | 0.16.3 |
 
 **Additional linux tools and packages**
 
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:6769b87b2e745d2cc2c99b6c4f3e59e5459a5dc957735fc2070cb59045aeb361
+**Digest:** sha256:3ce0eaa24ff3d5c6bf638132d43dff6bec2ebca029b21ad152b36e981a972feb
 
 **Tags:**
 ```
@@ -122,30 +122,30 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.8.9 | /usr/local |
+| [Python](https://www.python.org/) | 3.8.10 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
-| flake8 | 3.9.1 |
+| pylint | 2.8.3 |
+| flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.4b2 |
+| black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.812 |
-| pydocstyle | 6.0.0 |
+| mypy | 0.902 |
+| pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.4 |
-| pipx | 0.16.2.1 |
+| virtualenv | 20.4.7 |
+| pipx | 0.16.3 |
 
 **Additional linux tools and packages**
 
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:a598b6ba07712a8eeac0c64c5a45c5093cd9f8f5e185609a8e9332e2d1249b1b
+**Digest:** sha256:3f3a0eb6357a704aa92ceffb19d2aaa06b770b3510a54d0277d2bb5effa92452
 
 **Tags:**
 ```
@@ -220,24 +220,24 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
-| flake8 | 3.9.1 |
+| pylint | 2.8.3 |
+| flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.4b2 |
+| black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.812 |
-| pydocstyle | 6.0.0 |
+| mypy | 0.902 |
+| pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.4 |
-| pipx | 0.16.2.1 |
+| virtualenv | 20.4.7 |
+| pipx | 0.16.3 |
 
 **Additional linux tools and packages**
 
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:c5a8df3c36614fc6befa7b0f3b455bdac8f4862c561b37d5dddcf84950dea898
+**Digest:** sha256:07ab22e181eb177b929502078c21e8c1c1909e1a05f513a3766437eb77b0ef55
 
 **Tags:**
 ```
@@ -312,24 +312,24 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
-| flake8 | 3.9.1 |
+| pylint | 2.8.3 |
+| flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.4b2 |
+| black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.812 |
-| pydocstyle | 6.0.0 |
+| mypy | 0.902 |
+| pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.4 |
-| pipx | 0.16.2.1 |
+| virtualenv | 20.4.7 |
+| pipx | 0.16.3 |
 
 **Additional linux tools and packages**
 

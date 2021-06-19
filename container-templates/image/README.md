@@ -11,7 +11,7 @@
 | *Definition type*           | Image                                                                        |
 | *Works in Codespaces*       | Yes / No                                                                     |
 | *Container host OS support* | Linux, macOS, Windows                                                        |
-| *Container OS*              | [OS used by container - e.g. Debian]                                          |
+| *Container OS*              | [OS used by container - e.g. Debian]                                         |
 | *Languages, platforms*      | [Languages and platforms the container supports]                             |
 
 ## [Optional] Description
@@ -52,4 +52,4 @@ This definition includes some test code that will help you verify it is working 
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).
+Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/main/LICENSE).

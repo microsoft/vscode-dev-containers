@@ -1,10 +1,10 @@
-# [python-3-miniconda](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-miniconda)
+# [python-3-miniconda](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-miniconda)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:6a53ef53e064412e35ab0083f40e52c02774f0b187da07dca07a89e5746eec4f
+**Digest:** sha256:28285bad67307c37afe0e7f56c2a3f5ebf4a276229c9587dec2b43dbc40fcace
 
 **Tags:**
 ```
@@ -27,24 +27,24 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.2 |
-| flake8 | 3.9.1 |
+| pylint | 2.8.3 |
+| flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.4b2 |
+| black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.812 |
-| pydocstyle | 6.0.0 |
+| mypy | 0.902 |
+| pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.4 |
-| pipx | 0.16.2.1 |
+| virtualenv | 20.4.7 |
+| pipx | 0.16.3 |
 
 **Other tools and utilities**
 

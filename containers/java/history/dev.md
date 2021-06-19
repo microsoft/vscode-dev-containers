@@ -1,20 +1,20 @@
-# [java](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/java)
+# [java](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/java)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java)
 
 **Definition variations:**
-- [15](#variant-15)
+- [16](#variant-16)
 - [11](#variant-11)
 
-## Variant: 15
+## Variant: 16
 
-**Digest:** sha256:f9174c7aa677f39c484693c9d614cff74db20c13468b81ed2795f4a2fa73f07f
+**Digest:** sha256:4f763dec363d790e58d9a25ed70d3ffffb9bf5755e8798015870c986af0e968c
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/java:dev-15
+mcr.microsoft.com/vscode/devcontainers/java:dev-16
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -27,20 +27,20 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-15
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 15.0.2 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 16.0.1 | /usr/local/ |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.2+698 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.5+713 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -92,7 +92,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-15
 
 ## Variant: 11
 
-**Digest:** sha256:c3d7b2508d610d0a165822166d0f040e9f26ea67e343d15f83d10b09364bfcb0
+**Digest:** sha256:1ce11bb052ce453e2f86d4668e7148b11e3a58892b29f480b7c9fddd91f93fe1
 
 **Tags:**
 ```
@@ -115,14 +115,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.2+698 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.5+713 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 

@@ -1,8 +1,8 @@
-# [php](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/php)
+# [php](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/php)
 
 **Image version:** dev
 
-**Source release/branch:** [master](https://github.com/microsoft/vscode-dev-containers/tree/master/containers/php)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/php)
 
 **Definition variations:**
 - [8.0](#variant-80)
@@ -11,7 +11,7 @@
 
 ## Variant: 8.0
 
-**Digest:** sha256:4976122e9b63679042abac00e414ba8bc8b3f00ddfb9acc28cd8146da8f76967
+**Digest:** sha256:d92bf96c02e98d0d6f41a3d5bbeb3106af21607c4823f730d2cef681dc9103a0
 
 **Tags:**
 ```
@@ -29,13 +29,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 8.0.5 | /usr/local |
+| [PHP](https://xdebug.org/) | 8.0.7 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.0.13 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.3 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -95,7 +95,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 ## Variant: 7.4
 
-**Digest:** sha256:911898f801ca8908297982ad23852900771016a6cc249a255cdcf5cad22d9f77
+**Digest:** sha256:d3893b521ee60e87ce6519fc7789851bf8334a75bf0feaeca1a08ea5e9e24c55
 
 **Tags:**
 ```
@@ -113,13 +113,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.4.16 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.4.20 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -127,7 +127,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.0.13 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.3 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -179,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 ## Variant: 7.3
 
-**Digest:** sha256:94fb0b5c12420ef7ee9e2de07a02d0780b88cdccc4d1d120ece455680604627d
+**Digest:** sha256:cf4b8d979a1aac940ce00153458eab9670bd6cf36b132bf57aa85967fedd03a6
 
 **Tags:**
 ```
@@ -202,7 +202,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 63a7422d8dd5eb93c849df0ab9e679e6f333818a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -210,7 +210,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.0.13 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.3 | /usr/local |
 
 **Additional linux tools and packages**
 

@@ -10,9 +10,6 @@ checkCommon
 export SYNC_LOCALHOST_KUBECONFIG=true 
 exec bash
 
-# Run Docker init script
-/usr/local/share/docker-init.sh
-
 # Actual tests
 checkExtension "ms-azuretools.vscode-docker"
 checkExtension "ms-kubernetes-tools.vscode-kubernetes-tools"
