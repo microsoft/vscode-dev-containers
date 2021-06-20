@@ -223,7 +223,11 @@ __bash_prompt
 
 # Set the default git editor
 if  [ "${TERM_PROGRAM}" = "vscode" ]; then
-    export GIT_EDITOR="vscode"
+    if [[ $(which code-insiders) && ! $(which code) ]]; then
+        export GIT_EDITOR="code-insiders"
+    else
+        export GIT_EDITOR="code"
+    fi
 fi
 
 EOF
@@ -249,7 +253,11 @@ __zsh_prompt
 
 # Set the default git editor
 if  [ "${TERM_PROGRAM}" = "vscode" ]; then
-    export GIT_EDITOR="vscode"
+    if [[ $(which code-insiders) && ! $(which code) ]]; then
+        export GIT_EDITOR="code-insiders"
+    else
+        export GIT_EDITOR="code"
+    fi
 fi
 
 EOF
