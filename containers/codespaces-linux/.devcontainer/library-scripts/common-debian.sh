@@ -301,7 +301,7 @@ __bash_prompt() {
 
 # Set the default git editor
 if  [ "${TERM_PROGRAM}" = "vscode" ]; then
-    $GIT_EDITOR="vscode"
+    export GIT_EDITOR="vscode"
 fi
 
 __bash_prompt
@@ -330,7 +330,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[cyan]%})"
 
 # Set the default git editor
 if  [ "${TERM_PROGRAM}" = "vscode" ]; then
-    $GIT_EDITOR="vscode"
+    export GIT_EDITOR="vscode"
 fi
 
 __zsh_prompt
