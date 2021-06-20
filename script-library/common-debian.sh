@@ -298,10 +298,16 @@ __bash_prompt() {
     PS1="${userpart} ${lightblue}\w ${gitbranch}${removecolor}\$ "
     unset -f __bash_prompt
 }
-__bash_prompt
 
+# Set the default git editor
+if  [ "${TERM_PROGRAM}" = "vscode" ]; then
+    $GIT_EDITOR="vscode"
+fi
+
+__bash_prompt
 EOF
 )"
+
 CODESPACES_ZSH="$(cat \
 <<'EOF'
 # Codespaces zsh prompt theme
@@ -321,6 +327,12 @@ ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}(%{$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg_bold[yellow]%}✗%{$fg_bold[cyan]%})"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[cyan]%})"
+
+# Set the default git editor
+if  [ "${TERM_PROGRAM}" = "vscode" ]; then
+    $GIT_EDITOR="vscode"
+fi
+
 __zsh_prompt
 EOF
 )"
