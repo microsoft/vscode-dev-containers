@@ -76,6 +76,9 @@ case $ARCHITECTURE in
     aarch64) ARCHITECTURE="arm64";;
     armv8*) ARCHITECTURE="arm64";;
     armv7*) ARCHITECTURE="armv6l";;
+    armvhf*) ARCHITECTURE="armv6l";;
+    i386) ARCHITECTURE="386";;
+    *) echo "(!) Architecture unsupported"; exit 1 ;;
 esac
 
 # Install Go

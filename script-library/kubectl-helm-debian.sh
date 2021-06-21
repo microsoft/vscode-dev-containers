@@ -35,9 +35,13 @@ fi
 
 ARCHITECTURE="$(uname -m)"
 case $ARCHITECTURE in
-    armv*) ARCHITECTURE="arm";;
+    armhf*) ARCHITECTURE="arm";;
+    armv7*) ARCHITECTURE="arm";;
+    armv8*) ARCHITECTURE="arm64";;
     aarch64) ARCHITECTURE="arm64";;
     x86_64) ARCHITECTURE="amd64";;
+    i386) ARCHITECTURE="386";;
+    *) echo "(!) Architecture unsupported"; exit 1 ;;
 esac
 
 # Install the kubectl, verify checksum
