@@ -92,7 +92,12 @@ if type docker-compose > /dev/null 2>&1; then
 else
     TARGET_COMPOSE_ARCH="$(uname -m)" 
     if [ "${TARGET_COMPOSE_ARCH}" != "x86_64"]; then
-        echo "(!) WARNING: docker-compose is not available for this architecture. Skipping."
+        # Use pip to get a version that runns on this architecture
+        if ! dpkg -s python3-pip libffi-dev > /dev/null 2>&1; then
+            apt-get-update-if-needed
+            apt-get -y install --no-install-recommends python3-pip libffi-dev
+        fi
+        pip3 install docker-compose
     else 
         LATEST_COMPOSE_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/docker/compose/releases/latest)")
         curl -fsSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-${TARGET_COMPOSE_ARCH}" -o /usr/local/bin/docker-compose
