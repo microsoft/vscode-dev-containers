@@ -93,6 +93,7 @@ else
     # Use a temporary locaiton for gpg keys to avoid polluting image
     export GNUPGHOME="/tmp/rvm-gnupg"
     mkdir -p ${GNUPGHOME}
+    chmod 700 ${GNUPGHOME}
     echo "disable-ipv6" >> ${GNUPGHOME}/dirmngr.conf
     # GPG key download sometimes fails for some reason and retrying fixes it.
     RETRY_COUNT=0
