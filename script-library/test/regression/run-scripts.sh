@@ -13,7 +13,7 @@ set -e
 runScript()
 {
     SCRIPT_NAME=$1
-    if [ "${RUN_ONE}" != "false" ] && [ "${RUN_ONE}" != "common" ] && [ "${SCRIPT_NAME}" != "${RUN_ONE}" ]; then
+    if [ "${RUN_ONE}" != "false" ] && [ "${SCRIPT_NAME}" != "common" ] && [ "${SCRIPT_NAME}" != "${RUN_ONE}" ]; then
         return
     fi
     if [ "${SCRIPT_NAME}" = "docker" ] || [ "${SCRIPT_NAME}" = "docker-in-docker" ]; then
