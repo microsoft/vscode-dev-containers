@@ -85,7 +85,7 @@ if type docker-compose > /dev/null 2>&1; then
     echo "Docker Compose already installed."
 else
     TARGET_COMPOSE_ARCH="$(uname -m)" 
-    if [ "${TARGET_COMPOSE_ARCH}" != "x86_64"]; then
+    if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
         # Use pip to get a version that runns on this architecture
         if ! dpkg -s python3-pip libffi-dev > /dev/null 2>&1; then
             apt-get-update-if-needed
