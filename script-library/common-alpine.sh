@@ -171,9 +171,9 @@ fi
 
 # Set the default git editor
 if  [ "${TERM_PROGRAM}" = "vscode" ]; then
-    if [[ $(which code-insiders) && ! $(which code) ]]; then
+    if [[ -n $(command -v code-insiders) &&  -z $(command -v code) ]]; then 
         export GIT_EDITOR="code-insiders --wait"
-    else
+    else 
         export GIT_EDITOR="code --wait"
     fi
 fi
