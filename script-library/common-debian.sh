@@ -236,6 +236,15 @@ if [ -t 1 ] && [[ "${TERM_PROGRAM}" = "vscode" || "${TERM_PROGRAM}" = "codespace
     ((sleep 10s; touch "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed") &)
 fi
 
+# Set the default git editor
+if  [ "${TERM_PROGRAM}" = "vscode" ]; then
+    if [[ $(which code-insiders) && ! $(which code) ]]; then
+        export GIT_EDITOR="code-insiders --wait"
+    else
+        export GIT_EDITOR="code --wait"
+    fi
+fi
+
 EOF
 )"
 
@@ -300,15 +309,6 @@ __bash_prompt() {
 }
 __bash_prompt
 
-# Set the default git editor
-if  [ "${TERM_PROGRAM}" = "vscode" ]; then
-    if [[ $(which code-insiders) && ! $(which code) ]]; then
-        export GIT_EDITOR="code-insiders --wait"
-    else
-        export GIT_EDITOR="code --wait"
-    fi
-fi
-
 EOF
 )"
 
@@ -332,15 +332,6 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg_bold[yellow]%}✗%{$fg_bold[cyan]%})"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[cyan]%})"
 __zsh_prompt
-
-# Set the default git editor
-if  [ "${TERM_PROGRAM}" = "vscode" ]; then
-    if [[ $(which code-insiders) && ! $(which code) ]]; then
-        export GIT_EDITOR="code-insiders --wait"
-    else
-        export GIT_EDITOR="code --wait"
-    fi
-fi
 
 EOF
 )"
