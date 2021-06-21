@@ -298,6 +298,7 @@ __bash_prompt() {
     PS1="${userpart} ${lightblue}\w ${gitbranch}${removecolor}\$ "
     unset -f __bash_prompt
 }
+__bash_prompt
 
 # Set the default git editor
 if  [ "${TERM_PROGRAM}" = "vscode" ]; then
@@ -308,7 +309,6 @@ if  [ "${TERM_PROGRAM}" = "vscode" ]; then
     fi
 fi
 
-__bash_prompt
 EOF
 )"
 
@@ -327,6 +327,8 @@ __zsh_prompt() {
     PROMPT+='$(git_prompt_info)%{$fg[white]%}$ %{$reset_color%}' # Git status
     unset -f __zsh_prompt
 }
+__zsh_prompt
+
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}(%{$fg_bold[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg_bold[yellow]%}✗%{$fg_bold[cyan]%})"
@@ -341,7 +343,6 @@ if  [ "${TERM_PROGRAM}" = "vscode" ]; then
     fi
 fi
 
-__zsh_prompt
 EOF
 )"
 
