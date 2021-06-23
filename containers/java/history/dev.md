@@ -10,7 +10,7 @@
 
 ## Variant: 16
 
-**Digest:** sha256:4f763dec363d790e58d9a25ed70d3ffffb9bf5755e8798015870c986af0e968c
+**Digest:** sha256:5d6685935b6c0f569b1a70b0a9c4ae4351800d56376d4adeb3f595b97ce27528
 
 **Tags:**
 ```
@@ -40,7 +40,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.5+713 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.6 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -92,7 +92,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 
 ## Variant: 11
 
-**Digest:** sha256:1ce11bb052ce453e2f86d4668e7148b11e3a58892b29f480b7c9fddd91f93fe1
+**Digest:** sha256:e3b987601f5fdc6aee10747e9932fc6a2a1946e77c0ee5f137b207d6e34e2278
 
 **Tags:**
 ```
@@ -122,7 +122,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.5+713 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.6 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 

@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:c2546098876a6b22ecca3a96603fd2a78c2f734beed71dbe36e31ea42666e0c1
+**Digest:** sha256:dc373f1388bf597c3ebbe009c9b6c63e178605c37135a16af738e8b934c0fc0e
 
 **Tags:**
 ```
@@ -48,7 +48,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.902 |
+| mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:3ce0eaa24ff3d5c6bf638132d43dff6bec2ebca029b21ad152b36e981a972feb
+**Digest:** sha256:c928fa55cbe535467945636c42ea91418cbffd9bf0dd7a345a176606d0ba9b9a
 
 **Tags:**
 ```
@@ -140,7 +140,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.902 |
+| mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:3f3a0eb6357a704aa92ceffb19d2aaa06b770b3510a54d0277d2bb5effa92452
+**Digest:** sha256:f62c117d5d329367adf1068cd433e5c202cc55c282f65a4db957acf976612278
 
 **Tags:**
 ```
@@ -232,7 +232,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.902 |
+| mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:07ab22e181eb177b929502078c21e8c1c1909e1a05f513a3766437eb77b0ef55
+**Digest:** sha256:1540049b54f06159b2d85305cd453f3235a956bae1c995dfb07d860ba1ecf167
 
 **Tags:**
 ```
@@ -324,7 +324,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
 | yapf | 0.31.0 |
-| mypy | 0.902 |
+| mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |

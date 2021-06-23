@@ -12,7 +12,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:48a61854dc4e9ae1396396ea54b443c9725fe46d77aba47f95919d53afcb2a84
+**Digest:** sha256:6973f9cc14cc8805274808c480d72fc4622085f3faedb237fad7fc103dcf6048
 
 **Tags:**
 ```
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: focal
 
-**Digest:** sha256:63b61786253a147de7a35df1c3062774a52235bca919fd92a83355ed9ff797ce
+**Digest:** sha256:9a24948bb92be15afc9c79aef888e65e37e219f1f54fb87bbf7d6bd42d61d939
 
 **Tags:**
 ```
@@ -149,13 +149,13 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
 | libc6 | 2.31-0ubuntu9.2 |
-| libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
+| libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.4 |
-| libstdc++6 | 10.2.0-5ubuntu1~20.04 |
+| libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | lldb | 1:10.0-50~exp1 |
 | llvm | 1:10.0-50~exp1 |
 | locales | 2.31-0ubuntu9.2 |
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:623b4d953ca8014331ce6a7b1663d714000cb67a8e5bb9a5c6eade4bf621741f
+**Digest:** sha256:1881f1f4b35bd48ba19a34ec3b15c008e88d5eefcd3588c2fcc058af23cab6db
 
 **Tags:**
 ```
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:7a35026bc49be9971e82402b67d4f136718b6fe77efe50b7c9c7ccd64af76513
+**Digest:** sha256:397994514ec85d8a86173da8b9eab0eb2072fb8ebc632be4d1dec9585b4a976c
 
 **Tags:**
 ```

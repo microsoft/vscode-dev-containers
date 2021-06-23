@@ -11,7 +11,7 @@
 
 ## Variant: 8.0
 
-**Digest:** sha256:d92bf96c02e98d0d6f41a3d5bbeb3106af21607c4823f730d2cef681dc9103a0
+**Digest:** sha256:0c7ffe09e68aac590ec29ad01c65a034f598e0b6600827451767142d3109d2c5
 
 **Tags:**
 ```
@@ -95,7 +95,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 ## Variant: 7.4
 
-**Digest:** sha256:d3893b521ee60e87ce6519fc7789851bf8334a75bf0feaeca1a08ea5e9e24c55
+**Digest:** sha256:96b2ccacfe38c61a1fc3e83b2dda361be61e572330c651f1e6ca6eaa3393bc6d
 
 **Tags:**
 ```
@@ -179,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 ## Variant: 7.3
 
-**Digest:** sha256:cf4b8d979a1aac940ce00153458eab9670bd6cf36b132bf57aa85967fedd03a6
+**Digest:** sha256:aadb7e25059840c03b8cfef7557b9dd44ccc1dedfb1cb149c04373e1d26c742e
 
 **Tags:**
 ```

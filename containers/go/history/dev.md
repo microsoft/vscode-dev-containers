@@ -10,7 +10,7 @@
 
 ## Variant: 1.16
 
-**Digest:** sha256:799c915c67fbfd3fb1af6f7dafdeb1be4092c51599edcafb6a1bebd7ada46df8
+**Digest:** sha256:8e2b5983a5184e01c8c60af0c6ac3c71a7a29dde4a32cc4c0af59edaf9d334fb
 
 **Tags:**
 ```
@@ -48,7 +48,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.6.1 |
-| github.com/golangci/golangci-lint | 1.41.0 |
+| github.com/golangci/golangci-lint | 1.41.1 |
 
 **Additional linux tools and packages**
 
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.15
 
-**Digest:** sha256:7156aa0531ff17b45f8b41d7d299091fb6f5ee88edadee5ed0e02fb431d4591c
+**Digest:** sha256:ef23919271838ea38d05a73eb605f6b388c2655770f0fedec5cc5a94c99e13f4
 
 **Tags:**
 ```
@@ -142,7 +142,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.15
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.6.1 |
-| github.com/golangci/golangci-lint | 1.41.0 |
+| github.com/golangci/golangci-lint | 1.41.1 |
 
 **Additional linux tools and packages**
 

@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:a9654bfb8c5e5163c70f018591203f88e21d7c643ec5e947b8700fdc869b6ce4
+**Digest:** sha256:c86a3c5aa868d008ba59905d34ad85b0b8189c2968837324c66fa4a2decb5762
 
 **Tags:**
 ```
@@ -54,13 +54,13 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
 | libc6 | 2.31-0ubuntu9.2 |
-| libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
+| libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.4 |
-| libstdc++6 | 10.2.0-5ubuntu1~20.04 |
+| libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
@@ -88,7 +88,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:31212b147b046dcc5392365c7dbc9e242b6cfeff84256b577f54860ec06ce663
+**Digest:** sha256:5d7df95ee123286a9c72fcd7625d2b9808cf4125d14a16987f114eb5b4767525
 
 **Tags:**
 ```
@@ -131,13 +131,13 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
 | libc6 | 2.31-0ubuntu9.2 |
-| libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
+| libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.4 |
-| libstdc++6 | 10.2.0-5ubuntu1~20.04 |
+| libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
@@ -165,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:bc7c384015ee80a6cbee54f3beb94a99c1355a4abd1ddc7e741aaa0daac6af77
+**Digest:** sha256:ead84ef9f6d13bd7b58bc655766fc0cce9993688554987c710f42b3558727e9c
 
 **Tags:**
 ```
@@ -208,13 +208,13 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
 | libc6 | 2.31-0ubuntu9.2 |
-| libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
+| libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.4 |
-| libstdc++6 | 10.2.0-5ubuntu1~20.04 |
+| libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
