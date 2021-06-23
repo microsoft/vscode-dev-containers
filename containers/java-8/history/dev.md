@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java-8)
 
-**Digest:** sha256:e0d6619b567ad6730239dc9406d9c4a856952373e494d4f8b08d464362c709c7
+**Digest:** sha256:3aedf79f47b28e971488687949eac5bc3b34a456461ae1ff84eeadee2d8e4bca
 
 **Tags:**
 ```
