@@ -54,7 +54,7 @@
 
 **Alpine:**
 
-1. Add [`common-alpine.sh`](../common-redhat.sh) to `.devcontainer/library-scripts`
+1. Add [`common-alpine.sh`](../common-alpine.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:
 
