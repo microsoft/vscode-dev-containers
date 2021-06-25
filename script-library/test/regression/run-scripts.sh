@@ -46,6 +46,7 @@ if [ "${RUN_COMMON_SCRIPT}" = "true" ]; then
     chown 1000 /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh
 fi
 
+ARCHITECTURE="$(uname -m)"
 if [ "${DISTRO}" = "debian" ]; then
     runScript azcli
     runScript fish "false ${USERNAME}"
@@ -54,21 +55,25 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript github
     runScript go "1.14 /opt/go /go ${USERNAME} false"
     runScript gradle "4.4 /usr/local/sdkman1 ${USERNAME} false"
-    runScript homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
-    runScript java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
     runScript kubectl-helm "latest latest latest"
     runScript maven "3.6.3 /usr/local/sdkman3 ${USERNAME} false" 
     runScript node "/usr/local/share/nvm 10 ${USERNAME}"
-    runScript powershell
     runScript python "3.4.10 /opt/python ${USERNAME} false false"
     runScript ruby "${USERNAME} false" "2.5.8"
     runScript rust "/opt/rust/cargo /opt/rust/rustup ${USERNAME} false"
-    runScript terraform "0.12.16" "0.8.2"
+    runScript terraform "0.8.2 0.12.16"
     runScript sshd "2223 ${USERNAME} true random"
     runScript desktop-lite "${USERNAME} changeme false"
     runScript docker-in-docker "false ${USERNAME} false"
+    if [ "${ARCHITECTURE}" = "amd4" ] || [ "${ARCHITECTURE}" = "x86_64" ] || [ "${ARCHITECTURE}" = "arm64" ] || [ "${ARCHITECTURE}" = "aarch64" ]; then
+        runScript java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
+    fi
+    if [ "${ARCHITECTURE}" = "amd64" ] || [ "${ARCHITECTURE}" = "x86_64" ]; then
+        runScript powershell
+        runScript homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
+    fi 
 fi
 
-if [ "${DISTRO}" != "alpine" ] && [ "${RUN_ONE}" != "docker-in-docker" ]; then
+if [ "${DISTRO}" != "alpine" ]; then
     runScript docker "true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}"
 fi

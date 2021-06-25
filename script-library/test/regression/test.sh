@@ -19,6 +19,7 @@ set -e
 
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../.."
 echo -e  "🧪 Testing image $IMAGE_TO_TEST (${DISTRO}-like)..."
+
 CURRENT_BUILDERS="$(docker buildx ls)"
 if [[ "${CURRENT_BUILDERS}" != *"vscode-dev-containers"* ]]; then
     docker buildx create --use --name vscode-dev-containers
@@ -37,9 +38,8 @@ BUILDX_COMMAND="docker buildx build \
     -t vscdc-script-library-regression \
     -f test/regression/Dockerfile \
     ."
-
 echo $BUILDX_COMMAND
 $BUILDX_COMMAND
-docker run -it --init --privileged vscdc-script-library-regression env
+docker run -it --init --privileged vscdc-script-library-regression bash -c 'uname -m && env'
 
 echo -e "\n🎉 All tests passed!"
