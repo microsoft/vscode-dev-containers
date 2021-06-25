@@ -27,6 +27,8 @@ Since devcontainer.json can be commited to a source code repository, the definit
 
 If the definition is too similar to others, consider contributing a PR to improve an existing one instead. If the scenario is too specific consider generalizing it and making it more broadly applicable.
 
+To help speed up PRs, we encourage you to install the recommended [EditorConfig extension](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig). This will ensure your changes adhere to our style guidelines.
+
 ### A note on referenced images and Dockefile contents
 
 One of the things we want to be sure anyone using a definition from this repository is able to do is understand what is inside it. In general, images referenced  by Dockerfiles, Docker Compose files, or devcontainer.json in this repository should reference known base Docker, Microsoft, or runtime/platform community/vendor managed base images. These images are already well maintained, regularly patched, and maintained by the platform/runtime community or vendor. From there you can use a Dockerfile to add any additional contents.

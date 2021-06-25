@@ -4,6 +4,7 @@
 
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
+		// We recommend this extension for contributors to assist with the correct styling and formatting of files in this repo.
 		"EditorConfig.EditorConfig",
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
