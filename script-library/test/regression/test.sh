@@ -23,9 +23,11 @@ echo -e  "🧪 Testing image $IMAGE_TO_TEST (${DISTRO}-like)..."
 CURRENT_BUILDERS="$(docker buildx ls)"
 if [[ "${CURRENT_BUILDERS}" != *"vscode-dev-containers"* ]]; then
     docker buildx create --use --name vscode-dev-containers
-    docker run --privileged --rm tonistiigi/binfmt --install all
+else
+    docker buildx use vscode-dev-containers
 fi
 
+docker run --privileged --rm tonistiigi/binfmt --install ${PLATFORMS}
 BUILDX_COMMAND="docker buildx build \
     --builder vscode-dev-containers \
     --load \
