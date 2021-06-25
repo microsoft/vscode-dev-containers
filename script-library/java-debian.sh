@@ -60,6 +60,12 @@ function updaterc() {
 
 export DEBIAN_FRONTEND=noninteractive
 
+ARCHITECTURE="$(uname -m)"
+if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ] && [ "${ARCHITECTURE}" != "arm64" ] && [ "${ARCHITECTURE}" != "aarch64" ]; then
+    echo "(!) Architecture unsupported"
+    exit 1
+fi
+
 # Install curl, zip, unzip if missing
 if ! dpkg -s curl ca-certificates zip unzip sed > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then

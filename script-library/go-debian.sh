@@ -73,11 +73,9 @@ fi
 ARCHITECTURE="$(uname -m)"
 case $ARCHITECTURE in
     x86_64) ARCHITECTURE="amd64";;
-    aarch64) ARCHITECTURE="arm64";;
-    armv8*) ARCHITECTURE="arm64";;
-    armv7*) ARCHITECTURE="armv6l";;
-    armvhf*) ARCHITECTURE="armv6l";;
-    i386) ARCHITECTURE="386";;
+    aarch64 | armv8*) ARCHITECTURE="arm64";;
+    aarch32 | armv7* | armvhf*) ARCHITECTURE="armv6l";;
+    i?86) ARCHITECTURE="386";;
     *) echo "(!) Architecture unsupported"; exit 1 ;;
 esac
 

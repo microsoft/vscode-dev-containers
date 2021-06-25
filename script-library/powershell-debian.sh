@@ -26,6 +26,12 @@ if ! dpkg -s apt-transport-https curl ca-certificates lsb-release > /dev/null 2>
     apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates gnupg2 
 fi
 
+ARCHITECTURE="$(uname -m)"
+if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ]; then
+    echo "(!) Architecture unsupported"
+    exit 1
+fi
+
 # Source /etc/os-release to get OS info
 . /etc/os-release
 # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
