@@ -14,6 +14,8 @@ USERNAME=${2:-"automatic"}
 UPDATE_RC=${3:-"true"}
 INSTALL_RUBY_TOOLS=${6:-"true"}
 
+RVM_PGP_FINGERPRINTS="409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB"
+
 set -e
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -100,7 +102,7 @@ else
     export GNUPGHOME="/tmp/rvm-gnupg"
     mkdir -p ${GNUPGHOME}
     chmod 700 ${GNUPGHOME}
-    echo "disable-ipv6" >> ${GNUPGHOME}/dirmngr.conf
+    echo -e "disable-ipv6\nkeyserver hkps://keys.openpgp.org\nkeyserver hkp://keyserver.ubuntu.com:80\nkeyserver hkp://keyserver.pgp.com" > /tmp/rvm-gnupg/dirmngr.conf
     # GPG key download sometimes fails for some reason and retrying fixes it.
     RETRY_COUNT=0
     GPG_OK="false"
@@ -108,7 +110,7 @@ else
     until [ "${GPG_OK}" = "true" ] || [ "${RETRY_COUNT}" -eq "5" ]; 
     do
         echo "(*) Downloading GPG key..."
-        gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB 2>&1 && GPG_OK="true"
+        gpg --recv-keys ${RVM_PGP_FINGERPRINTS} 2>&1 && GPG_OK="true"
         if [ "${GPG_OK}" != "true" ]; then
             echo "(*) Failed getting key, retring in 10s..."
             (( RETRY_COUNT++ ))
