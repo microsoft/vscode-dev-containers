@@ -7,7 +7,7 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/terraform.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./terraform-debian.sh [terraform version] [tflint version] [terragrunt version]
+# Syntax: ./terraform-debian.sh [terraform version] [tflint version] [terragrunt version] [terraform SHA] [tflint SHA] [terragrunt SHA]
 
 TERRAFORM_VERSION=${1:-"latest"}
 TFLINT_VERSION=${2:-"latest"}
