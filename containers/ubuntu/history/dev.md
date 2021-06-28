@@ -10,7 +10,7 @@
 
 ## Variant: focal
 
-**Digest:** sha256:4c38da3641146ecece21da36c04ae7e001601773936cbe4a889e4dc0d0294a92
+**Digest:** sha256:f1844af078bbdb73f85afac17d391e9a6e51a6ed0bbf363c96cd5c2b20807425
 
 **Tags:**
 ```
@@ -48,13 +48,13 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
 | libc6 | 2.31-0ubuntu9.2 |
-| libgcc1 | 1:10.2.0-5ubuntu1~20.04 |
+| libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.4 |
-| libstdc++6 | 10.2.0-5ubuntu1~20.04 |
+| libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
@@ -81,7 +81,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:be44522032cb9a2ad82119c8635c8fd5e610332bbc0c31e4631901217e2bd6a1
+**Digest:** sha256:1a2c3b218946d5048ba399a7c17165cd7a546e06277b1623c748e08bb2b76a70
 
 **Tags:**
 ```
