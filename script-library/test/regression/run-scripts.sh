@@ -59,7 +59,7 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript maven "3.6.3 /usr/local/sdkman3 ${USERNAME} false" 
     runScript node "/usr/local/share/nvm 10 ${USERNAME}"
     runScript python "3.4.10 /opt/python ${USERNAME} false false"
-    runScript ruby "2.5.8 ${USERNAME} false"
+    runScript ruby "${USERNAME} false" "2.7.3"
     runScript rust "/opt/rust/cargo /opt/rust/rustup ${USERNAME} false"
     runScript terraform "0.8.2 0.12.16"
     runScript sshd "2223 ${USERNAME} true random"
