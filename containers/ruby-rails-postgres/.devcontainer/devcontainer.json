@@ -1,12 +1,11 @@
 {
-	"name": "Ruby on Rails & Postgres",
+	"name": "Ruby on Rails & Postgres (Community)",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"sqltools.connections": [
 			{
 				"name": "Rails Development Database",
