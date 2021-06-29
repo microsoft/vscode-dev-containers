@@ -16,8 +16,8 @@ TERRAFORM_SHA256=${4:-"automatic"}
 TFLINT_SHA256=${5:-"automatic"}
 TERRAGRUNT_SHA256=${6:-"automatic"}
 
-TERRAFORM_PGP_FINGERPRINT=C874011F0AB405110D02105534365D9472D7468F
-TFLINT_PGP_FINGERPRINT=8CE69160EB3F2FE9
+TERRAFORM_PGP_KEYID=72D7468F
+TFLINT_PGP_KEYID=8CE69160EB3F2FE9
 
 set -e
 
@@ -70,7 +70,7 @@ set +e
 until [ "${GPG_OK}" = "true" ] || [ "${RETRY_COUNT}" -eq "5" ]; 
 do
     echo "(*) Downloading GPG keys..."
-    gpg --recv-keys ${TERRAFORM_PGP_FINGERPRINT} 2>&1 && GPG_OK="true"
+    gpg --recv-keys ${TERRAFORM_PGP_KEYID} 2>&1 && GPG_OK="true"
     if [ "${GPG_OK}" != "true" ]; then
         echo "(*) Failed getting key, retring in 10s..."
         (( RETRY_COUNT++ ))
@@ -99,7 +99,7 @@ curl -sSL -o ${TERRAFORM_FILENAME} https://releases.hashicorp.com/terraform/${TE
 if [ "${TERRAFORM_SHA256}" != "dev-mode" ]; then
     if [ "${TERRAFORM_SHA256}" = "automatic" ]; then
         curl -sSL -o terraform_SHA256SUMS https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS 
-        curl -sSL -o terraform_SHA256SUMS.sig https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS.sig
+        curl -sSL -o terraform_SHA256SUMS.sig https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS.${TERRAFORM_PGP_KEYID}.sig
         gpg --verify terraform_SHA256SUMS.sig terraform_SHA256SUMS
     else
         echo "${TERRAFORM_SHA256} *${TERRAFORM_FILENAME}" > terraform_SHA256SUMS
@@ -115,7 +115,7 @@ if [ "${TFLINT_VERSION}" != "none" ]; then
     curl -sSL -o /tmp/tf-downloads/${TFLINT_FILENAME} https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VERSION}/${TFLINT_FILENAME}
     if [ "${TFLINT_SHA256}" != "dev-mode" ]; then
         if [ "${TFLINT_SHA256}" = "automatic" ]; then
-            curl -sSL -o tflint_key https://raw.githubusercontent.com/terraform-linters/tflint/master/${TFLINT_PGP_FINGERPRINT}.key
+            curl -sSL -o tflint_key https://raw.githubusercontent.com/terraform-linters/tflint/master/${TFLINT_PGP_KEYID}.key
             gpg -q --import tflint_key
             curl -sSL -o tflint_checksums.txt https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VERSION}/checksums.txt
             curl -sSL -o tflint_checksums.txt.sig https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VERSION}/checksums.txt.sig
