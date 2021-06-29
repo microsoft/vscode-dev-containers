@@ -96,11 +96,12 @@ else
     fi
     if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
         # Use pip to get a version that runns on this architecture
-        if ! dpkg -s python3-pip libffi-dev > /dev/null 2>&1; then
+        if ! dpkg -s python3-minimal python3-pip libffi-dev > /dev/null 2>&1; then
             apt-get-update-if-needed
-            apt-get -y install --no-install-recommends python3-pip libffi-dev
+            apt-get -y install --no-install-recommends python3-minimal python3-pip libffi-dev
         fi
-        pip3 install docker-compose
+        /usr/bin/pip3 install --disable-pip-version-check --no-warn-script-location --no-cache-dir docker-compose
+
     else 
         LATEST_COMPOSE_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/docker/compose/releases/latest)")
         curl -fsSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-${TARGET_COMPOSE_ARCH}" -o /usr/local/bin/docker-compose
