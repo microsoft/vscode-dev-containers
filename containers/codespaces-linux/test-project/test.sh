@@ -85,7 +85,7 @@ check "fish" fish --version
 check "zsh" zsh --version
 
 # Check expected commands
-check "git-ed" [ "$(cat /home/codespace/.local/bin/git-ed.sh)" = "$(cat ./git-ed-expected.txt)" ]
+check "git-ed" [ ! -z "${GIT_EDITOR}" ]
 
 # Check that we can run a puppeteer node app.
 yarn
