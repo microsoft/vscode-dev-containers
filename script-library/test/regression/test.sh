@@ -31,6 +31,7 @@ docker run --privileged --rm tonistiigi/binfmt --install ${PLATFORMS}
 BUILDX_COMMAND="docker buildx build \
     --builder vscode-dev-containers \
     --load \
+    --progress=plain \
     --build-arg DISTRO=$DISTRO \
     --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST \
     --build-arg RUN_ONE=${RUN_ONE} \
