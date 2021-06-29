@@ -62,7 +62,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 ARCHITECTURE="$(uname -m)"
 if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ]; then
-    echo "(!) Architecture unsupported"
+    echo "(!) Architecture $ARCHITECTURE unsupported"
     exit 1
 fi
 

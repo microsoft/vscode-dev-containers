@@ -50,7 +50,7 @@ ARCHITECTURE="$(uname -m)"
 if [ "${DISTRO}" = "debian" ]; then
     runScript azcli
     runScript fish "false ${USERNAME}"
-    runScript git-from-src "2.26.2"
+    runScript git-from-src "latest true"
     runScript git-lfs
     runScript github
     runScript go "1.14 /opt/go /go ${USERNAME} false"
@@ -65,7 +65,7 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript sshd "2223 ${USERNAME} true random"
     runScript desktop-lite "${USERNAME} changeme false"
     runScript docker-in-docker "false ${USERNAME} false"
-    if [ "${ARCHITECTURE}" = "amd4" ] || [ "${ARCHITECTURE}" = "x86_64" ] || [ "${ARCHITECTURE}" = "arm64" ] || [ "${ARCHITECTURE}" = "aarch64" ]; then
+    if [ "${ARCHITECTURE}" = "amd64" ] || [ "${ARCHITECTURE}" = "x86_64" ] || [ "${ARCHITECTURE}" = "arm64" ] || [ "${ARCHITECTURE}" = "aarch64" ]; then
         runScript java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
     fi
     if [ "${ARCHITECTURE}" = "amd64" ] || [ "${ARCHITECTURE}" = "x86_64" ]; then

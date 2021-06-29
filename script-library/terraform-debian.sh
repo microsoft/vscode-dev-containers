@@ -26,7 +26,7 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Install curl, unzip if missing
+# Install curl, gnupg2, coreutils, unzip if missing
 if ! dpkg -s curl ca-certificates gnupg2 coreutils unzip > /dev/null 2>&1; then
     export DEBIAN_FRONTEND=noninteractive
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
@@ -89,7 +89,7 @@ case $ARCHITECTURE in
     aarch64 | armv8*) ARCHITECTURE="arm64";;
     aarch32 | armv7* | armvhf*) ARCHITECTURE="arm";;
     i?86) ARCHITECTURE="386";;
-    *) echo "(!) Architecture unsupported"; exit 1 ;;
+    *) echo "(!) Architecture $ARCHITECTURE unsupported"; exit 1 ;;
 esac
 
 # Install Terraform, tflint, Terragrunt

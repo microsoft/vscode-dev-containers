@@ -77,7 +77,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 ARCHITECTURE="$(uname -m)"
 if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ] && [ "${ARCHITECTURE}" != "arm64" ] && [ "${ARCHITECTURE}" != "aarch64" ]; then
-    echo "(!) Architecture unsupported"
+    echo "(!) Architecture $ARCHITECTURE unsupported"
     exit 1
 fi
 
@@ -102,7 +102,12 @@ else
     export GNUPGHOME="/tmp/rvm-gnupg"
     mkdir -p ${GNUPGHOME}
     chmod 700 ${GNUPGHOME}
-    echo -e "disable-ipv6\nkeyserver hkps://keys.openpgp.org\nkeyserver hkp://keyserver.ubuntu.com:80\nkeyserver hkp://keyserver.pgp.com" > /tmp/rvm-gnupg/dirmngr.conf
+    cat << 'EOF' > /tmp/rvm-gnupg/dirmngr.conf
+disable-ipv6
+keyserver hkps://keys.openpgp.org
+keyserver hkp://keyserver.ubuntu.com:80
+keyserver hkp://keyserver.pgp.com
+EOF
     # GPG key download sometimes fails for some reason and retrying fixes it.
     RETRY_COUNT=0
     GPG_OK="false"

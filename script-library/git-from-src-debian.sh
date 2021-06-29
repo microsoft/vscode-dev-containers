@@ -7,10 +7,10 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/git-from-src.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./git-from-src-debian.sh [version]
+# Syntax: ./git-from-src-debian.sh [version] [use PPA if available]
 
 GIT_VERSION=${1:-"latest"}
-USE_PPA_IF_AVAILABLE=${2:-"true"}
+USE_PPA_IF_AVAILABLE=${2:-"false"}
 
 set -e
 

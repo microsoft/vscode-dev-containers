@@ -19,7 +19,7 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, apt-transport-https, or gpg if missing
-if ! dpkg -s apt-transport-https curl ca-certificates lsb-release > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
+if ! dpkg -s apt-transport-https curl ca-certificates gnupg2 > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
@@ -28,7 +28,7 @@ fi
 
 ARCHITECTURE="$(uname -m)"
 if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ]; then
-    echo "(!) Architecture unsupported"
+    echo "(!) Architecture $ARCHITECTURE unsupported"
     exit 1
 fi
 
