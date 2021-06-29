@@ -1,4 +1,4 @@
-# Ruby on Rails
+# Ruby on Rails (Community)
 
 ## Summary
 
@@ -7,6 +7,7 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | [Jarrod Davis][jld] |
+| *Categories* | Community, Frameworks |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -17,7 +18,7 @@
 
 This definition creates two containers, one for Ruby and one for PostgreSQL. VS Code will attach to the Ruby container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and an additional user (`vscode`) is added to support common Rails development database configurations. You can use `rake db:setup` (or `rake db:create`) to setup the databases your Rails application needs for development and testing. Data is stored in a volume named `postgres-data`.
 
-While the definition itself works (mostly) unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/ruby` image which includes `git`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), and a non-root `vscode` user with `sudo` access. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Ruby version 2, 2.7, 2.6, or 2.5.
+While the definition itself works (mostly) unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/ruby` image which includes `git`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), and a non-root `vscode` user with `sudo` access. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Ruby version 3, 3.0, 2, 2.7, 2.6, or 2.5.
 
 ```yaml
 build:
@@ -64,7 +65,7 @@ You also can connect to PostgreSQL from an external tool when using VS Code by u
 
 ### Adding another service
 
-You can add other services to your `docker-compose.yml` file [as described in Docker's documentaiton](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentation](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
 
 ```yaml
 # Runs the service on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
