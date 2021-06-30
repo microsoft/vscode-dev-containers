@@ -8,13 +8,13 @@ This definition will hopefully get you going quickly with Haskell running as a r
 
 | Metadata                    | Value                                                                        |
 |---------------------------- | -----------------------------------------------------------------------------|
-| *Contributors*              | [Stuart Pike](https://github.com/stuartpike)                                                  |
+| *Contributors*              | [Stuart Pike](https://github.com/stuartpike), [eitsupi](https://github.com/eitsupi) |
 | *Categories*                | Community, Haskell |
-| *Definition type*           | Dockerfile                                                                   |
-| *Works in Codespaces*       | Yes                                                                     |
-| *Container host OS support* | Linux, macOS, Windows                                                        |
-| *Container OS*              | Debian                                         |
-| *Languages, platforms*      | Haskell                             |
+| *Definition type*           | Dockerfile |
+| *Works in Codespaces*       | Yes |
+| *Container host OS support* | Linux, macOS, Windows |
+| *Container OS*              | Debian |
+| *Languages, platforms*      | Haskell |
 
 
 ## Using this definition
