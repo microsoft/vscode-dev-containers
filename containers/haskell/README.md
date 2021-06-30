@@ -22,8 +22,12 @@ This definition will hopefully get you going quickly with Haskell running as a r
 While the definition itself works unmodified, you can select the version of Haskell the container uses by updating the `VARIANT` arg in the included `.devcontainer/devcontainer.json` file.
 
 ```json
-# [Choice] Haskell version: 9, 8
-ARG VARIANT=8
+"build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+        "VARIANT": "9"
+    }
+}
 ```
 
 ### Adding the definition to a project or codespace
