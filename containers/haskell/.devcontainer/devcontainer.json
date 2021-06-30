@@ -1,5 +1,5 @@
 {
-  "name": "Haskell Container Definition - Dockerfile",
+  "name": "Haskell (Community)",
 
   // Update the 'dockerfile' property if you aren't using the standard 'Dockerfile' filename.
   "build": {
