@@ -3,7 +3,11 @@
 
   // Update the 'dockerfile' property if you aren't using the standard 'Dockerfile' filename.
   "build": {
-          "dockerfile": "Dockerfile"
+          "dockerfile": "Dockerfile",
+          "args": {
+            // Update 'VARIANT' to pick a Haskell version: 9, 8
+            "VARIANT": "8"
+          }
   },
 
   // Set *default* container specific settings.json values on container create.
