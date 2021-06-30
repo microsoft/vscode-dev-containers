@@ -1,0 +1,30 @@
+{
+  "name": "Haskell (Community)",
+
+  // Update the 'dockerfile' property if you aren't using the standard 'Dockerfile' filename.
+  "build": {
+          "dockerfile": "Dockerfile",
+          "args": {
+            // Update 'VARIANT' to pick a Haskell version: 9, 8
+            "VARIANT": "8"
+          }
+  },
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {},
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "haskell.haskell"
+  ],
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "uname -a",
+
+
+  // Comment out connect as root instead. To add a non-root user, see: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode"
+}
