@@ -1,5 +1,5 @@
 {
-	"name": "Dev Container Definition Template - Dockerfile",
+	"name": "Your Definition Name Here (Community)",
 
 	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
 	"build": {
@@ -9,9 +9,7 @@
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"terminal.integrated.shell.linux": null
-	},
+	"settings": {},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [],

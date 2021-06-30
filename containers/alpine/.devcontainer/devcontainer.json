@@ -2,14 +2,12 @@
 	"name": "Alpine",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Alpine version: 3.10, 3.11, 3.12
-		"args": { "VARIANT": "3.12" }
+		// Update 'VARIANT' to pick an Alpine version: 3.10, 3.11, 3.12, 3.13
+		"args": { "VARIANT": "3.13" }
 	},
 	
 	// Set *default* container specific settings.json values on container create. 
-	"settings": {
-		"terminal.integrated.shell.linux": "/bin/ash"
-	},
+	"settings": {},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	// Note that some extensions may not work in Alpine Linux. See https://aka.ms/vscode-remote/linux.

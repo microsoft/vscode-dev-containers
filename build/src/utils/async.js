@@ -26,24 +26,43 @@ module.exports = {
         console.log(`(*) Spawn: ${command}${args.reduce((prev, current) => `${prev} ${current}`, '')}`);
 
         opts = opts || { stdio: 'inherit', shell: true };
+        let echo = false;
+        if (opts.stdio === 'inherit') {
+            opts.stdio = 'pipe';
+            echo = true;
+        }
         return new Promise((resolve, reject) => {
             let result = '';
-            let errorOutput = '';
             const proc = spawnCb(command, args, opts);
             proc.on('close', (code, signal) => {
                 if (code !== 0) {
                     console.log(result);
-                    console.error(errorOutput);
-                    reject(`Non-zero exit code: ${code} ${signal || ''}`);
+                    const err = new Error(`Non-zero exit code: ${code} ${signal || ''}`);
+                    err.result = result;
+                    err.code = code;
+                    err.signal = signal;
+                    reject(err);
                     return;
                 }
                 resolve(result);
             });
             if (proc.stdout) {
-                proc.stdout.on('data', (chunk) => result += chunk.toString());
+                proc.stdout.on('data', (chunk) => {
+                    const stringChunk = chunk.toString();
+                    result += stringChunk;
+                    if (echo) {
+                        console.log(stringChunk);
+                    }
+                });
             }
             if (proc.stderr) {
-                proc.stderr.on('data', (chunk) => result += chunk.toString());
+                proc.stderr.on('data', (chunk) => {
+                    const stringChunk = chunk.toString();
+                    result += stringChunk;
+                    if (echo) {
+                        console.error(stringChunk);
+                    }
+                });
             }
             proc.on('error', reject);
         });
@@ -55,13 +74,15 @@ module.exports = {
         opts = opts || { stdio: 'inherit', shell: true };
         return new Promise((resolve, reject) => {
             let result = '';
-            let errorOutput = '';
             const proc = execCb(command, opts);
             proc.on('close', (code, signal) => {
                 if (code !== 0) {
                     console.log(result);
-                    console.error(errorOutput);
-                    reject(`Non-zero exit code: ${code} ${signal || ''}`);
+                    const err = new Error(`Non-zero exit code: ${code} ${signal || ''}`);
+                    err.result = result;
+                    err.code = code;
+                    err.signal = signal;
+                    reject(err);
                     return;
                 }
                 resolve(result);
@@ -188,3 +209,4 @@ module.exports = {
         });
     }
 };
+

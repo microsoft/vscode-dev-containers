@@ -13,7 +13,7 @@ jobs:
       matrix:
         page: [1, 2, 3, 4, 5]
         page-total: [5]
-      fail-fast: true
+      fail-fast: false
     runs-on: ubuntu-latest
     steps:
     - name: Free more space
@@ -31,7 +31,7 @@ jobs:
 
     - name: Get tag name
       id: get_tag_name  
-      uses: little-core-labs/get-git-tag@v3.0.2
+      run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
 
     - name: Azure CLI login
       id: az_login
@@ -70,8 +70,8 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get tag name
-      id: get_tag_name  
-      uses: little-core-labs/get-git-tag@v3.0.2
+      id: get_tag_name
+      run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
 
     - name: Update Dockerfile common script sources and re-tag
       id: update_script_source
@@ -138,3 +138,27 @@ jobs:
         asset_path: ./${{ steps.package.outputs.package_name }}
         asset_name: ${{ steps.package.outputs.package_name }}
         asset_content_type: application/gzip 
+
+  image-info:
+    name: Trigger info extraction
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    needs: [package]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get tag name
+      id: get_tag_name
+      run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
+      
+    - name: Trigger image info file generation 
+      id: image-info
+      run: |
+        set -e
+        echo '(*) Triggering CG manifest and image history generation using workflow_dispatch'
+
+        # Use alternate GitHub token due to https://github.community/t5/GitHub-Actions/Triggering-a-new-workflow-from-another-workflow/td-p/31676
+        curl -X POST \
+          -H "Authorization: token ${{ secrets.ALTERNATE_GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Content-Type: application/json" \
+          https://api.github.com/repos/${{ github.repository }}/actions/workflows/version-history.yml/dispatches \
+          --data "{\"ref\": \"main\", \"inputs\": {\"release\": \"${{ steps.get_tag_name.outputs.tag }}\", \"cg\": \"false\", \"push\": \"true\", \"overwrite\": \"false\"}"

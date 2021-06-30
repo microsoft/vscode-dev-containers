@@ -7,7 +7,6 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"go.gopath": "/go",
 		"go.useLanguageServer": true,
 		"go.delveConfig": {
@@ -21,19 +20,8 @@
 			"apiVersion": 2,
 			"showGlobalVariables": true
 		},
-		"[go]": {
-			"editor.snippetSuggestions": "none",
-			"editor.formatOnSave": true,
-			"editor.codeActionsOnSave": {
-				"source.organizeImports": true,
-			}
-		},
 		"gopls": {
-			"usePlaceholders": true, // add parameter placeholders when completing a function
-			// Experimental settings
-			"completeUnimported": true, // autocomplete unimported packages
-			"watchFileChanges": true, // watch file changes outside of the editor
-			"deepCompletion": true, // enable deep completion
+			"ui.usePlaceholders": true, // add parameter placeholders when completing a function
 		},
 		"files.eol": "\n", // formatting only supports LF line endings	
 	},

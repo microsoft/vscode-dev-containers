@@ -1,13 +1,12 @@
 // Update the VARIANT arg in docker-compose.yml to pick a Node.js version: 10, 12, 14 
 {
-	"name": "Node.js & PostgreSQL",
+	"name": "Node.js & PostgreSQL (Community)",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
+	"settings": {
 		"sqltools.connections": [{
 			"name": "Container database",
 			"driver": "PostgreSQL",

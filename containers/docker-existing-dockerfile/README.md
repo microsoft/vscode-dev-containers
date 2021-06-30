@@ -7,13 +7,14 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code team |
+| *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Languages, platforms* | Any |
 
 > **Note:** There is also a [Docker Compose](../docker-existing-docker-compose) variation of this same definition.
 
-## Using this definition with an existing folder
+## Using this definition
 
 This definition requires an existing `Dockerfile` in your project and outlines some settings in `.devcontainer/devcontainer.json` to consider when reusing one.
 
@@ -39,4 +40,4 @@ Follow these steps to use it:
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE). 
+Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE). 

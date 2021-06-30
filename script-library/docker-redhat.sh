@@ -4,9 +4,9 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/docker.md
-#
-# Community supported RedHat based version of docker-debian.sh
+# ** This script is community supported **
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md
+# Maintainer: @smankoo
 #
 # Syntax: ./docker-redhat.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user]
 
@@ -40,7 +40,9 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
 fi
 
 # Install Prerequisites
-yum -y install deltarpm
+if yum list deltarpm > /dev/null 2>&1; then
+    yum -y install deltarpm
+fi
 yum -y install ca-certificates curl gnupg2 dnf net-tools dialog git openssh-clients curl less procps 
 
 # Try to load os-release
@@ -79,9 +81,9 @@ yum -y update
 yum -y install docker-ce-cli
 
 # Install Docker Compose
-LATEST_COMPOSE_VERSION=$(curl -sSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -o -P '(?<="tag_name": ").+(?=")')
-curl -sSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose 
+LATEST_COMPOSE_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/docker/compose/releases/latest)")
+curl -fsSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 
 # By default, make the source and target sockets the same
 if [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ]; then

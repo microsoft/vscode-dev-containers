@@ -2,7 +2,7 @@
 	"name": "Miniconda (Python 3)",
 	"build": { 
 		"context": "..",
-		"dockerfile": "base.Dockerfile",
+		"dockerfile": "Dockerfile",
 		"args": {
 			"INSTALL_NODE": "true",
 			"NODE_VERSION": "lts/*"
@@ -11,8 +11,8 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"python.pythonPath": "/opt/conda/bin/python",
+		"python.languageServer": "Pylance",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
@@ -28,7 +28,8 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"ms-python.python"
+		"ms-python.python",
+		"ms-python.vscode-pylance"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

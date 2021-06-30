@@ -1,14 +1,14 @@
 name: Build and push "dev" images
 
 on: 
-  #repository_dispatch:
+  workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'containers/alpine/**'
       - 'containers/debian/**'
       - 'containers/cpp/**'
-      - 'containers/dotnetcore/**'
+      - 'containers/dotnet/**'
       - 'containers/go/**'
       - 'containers/java/**'
       - 'containers/java-8/**'
@@ -66,7 +66,7 @@ jobs:
         yarn install
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
+            GIT_BRANCH=main
         fi
         build/vscdc push  --page ${{ matrix.page }} \
                           --pageTotal ${{ matrix.page-total }} \
@@ -95,7 +95,7 @@ jobs:
         yarn install
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
+            GIT_BRANCH=main
         fi
         build/vscdc pack  --prep-and-package-only \
                           --release $GIT_BRANCH \
@@ -117,23 +117,26 @@ jobs:
         name: ${{ steps.package.outputs.package_name }}
         path: ./${{ steps.package.outputs.package_name }}
 
-  cgmanifest:
-    name: Trigger CG generation
+  image-info:
+    name: Trigger info extraction
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     needs: [package]
     runs-on: ubuntu-latest
     steps:
-    - name: Trigger CG generation 
-      id: cgmanifest
+    - name: Trigger image info file generation 
+      id: image-info
       run: |
         set -e
-        echo '(*) Triggering CG manifest generation using repository_dispatch'
-
+        echo '(*) Triggering CG manifest and image history generation using workflow_dispatch'
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=main
+        fi
         # Use alternate GitHub token due to https://github.community/t5/GitHub-Actions/Triggering-a-new-workflow-from-another-workflow/td-p/31676
         curl -X POST \
           -H "Authorization: token ${{ secrets.ALTERNATE_GITHUB_TOKEN }}" \
-          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Accept: application/vnd.github.v3+json" \
           -H "Content-Type: application/json" \
-          https://api.github.com/repos/${{ github.repository }}/dispatches \
-          --data '{"event_type":"oss_cg_trigger"}'
+          https://api.github.com/repos/${{ github.repository }}/actions/workflows/version-history.yml/dispatches \
+          --data "{\"ref\": \"${{ github.ref }}\", \"inputs\": {\"release\": \"$GIT_BRANCH\", \"cg\": \"true\", \"push\": \"true\", \"overwrite\": \"true\"}"
 

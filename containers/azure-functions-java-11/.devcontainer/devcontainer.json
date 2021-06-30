@@ -5,7 +5,6 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"java.home": "/usr/lib/jvm/zulu-11-azure-amd64"
 	},
 

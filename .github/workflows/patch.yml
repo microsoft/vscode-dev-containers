@@ -1,9 +1,9 @@
 name: Run Patches
 
 on: 
-  #repository_dispatch:
+  workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'build/patch/**'
 
@@ -51,6 +51,8 @@ jobs:
         # Add resulting status.json file back to source control
         git config --global user.email "vscr-feedback@microsoft.com"
         git config --global user.name "CI"
+        git config pull.rebase false
+        git pull "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}"
         git add build/patch/status.json
         git commit -m 'Automated update' \
           && git push "https://ci:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "HEAD:${{ github.ref }}" \

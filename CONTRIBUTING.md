@@ -27,6 +27,24 @@ Since devcontainer.json can be commited to a source code repository, the definit
 
 If the definition is too similar to others, consider contributing a PR to improve an existing one instead. If the scenario is too specific consider generalizing it and making it more broadly applicable.
 
+To help speed up PRs, we encourage you to install the recommended [EditorConfig extension](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig). This will ensure your changes adhere to our style guidelines.
+
+### A note on referenced images and Dockefile contents
+
+One of the things we want to be sure anyone using a definition from this repository is able to do is understand what is inside it. In general, images referenced  by Dockerfiles, Docker Compose files, or devcontainer.json in this repository should reference known base Docker, Microsoft, or runtime/platform community/vendor managed base images. These images are already well maintained, regularly patched, and maintained by the platform/runtime community or vendor. From there you can use a Dockerfile to add any additional contents.
+
+When adding contents to the Dockerfile, use official sources. There are a number of pre-built images you can take advantage of to speed things up for yourself and other developers to reduce build times. In particular, take note of images like `mcr.microsoft.com/vscode/devcontainers/base:debian` and `mcr.microsoft.com/vscode/devcontainers/base:ubuntu` ([see here for a list](https://hub.docker.com/_/microsoft-vscode-devcontainers)). These are like the base `debian` and `ubuntu` images but include things developers commonly need or want (e.g. git and curl).
+
+If you are using something like `curl` or `wget` to download the contents, add a checksum verification if one is available. Using package managers like `apt-get` on Debian/Ubuntu with 3rd party sources can also be a way to do this verification since they require adding the source's signing key.
+
+Note that other definitions in this repository use Debian or Ubuntu bases in the vast majority of cases. We recommend using this as the variation of the base image you use wherever possible so you can avoid questions from developers new to working with Linux.
+
+### Expectations for new definitions
+
+When contributing a new definition, be sure you are also willing to sign up to maintain the definition over time. The likelihood of other maintainers in this repository having the needed knowledge properly maintain your definition is low, so you'll be contacted about PRs and issues raised about them. Please include your GitHub alias (and if desired other contact info) in the README so that you are identified as the maintainer of the definition. You will "@'d" in on PRs and issues raised pertaining to the definition.
+
+Over time, if you no longer want to maintain the definition and do not have a suitable replacement, we can remove it from the repository. Just raise an issue or PR and let us know. This repository's maintainers may also need to do this proactively if an issue is raised that is breaking and we are unable to get a timely response in resolving the issue.
+
 ### Anatomy of a Dev Container Definition
 
 The contents of the folders in the `containers` directory ultimately populate the available definitions list shown in the **Remote-Containers: Add Development Container Configuration Files...** command. To make this work, each folder consists of up to three elements:
@@ -34,6 +52,7 @@ The contents of the folders in the `containers` directory ultimately populate th
 1. **The container definition itself** - These are the files and folders that will be added to a user's existing project / folder if they select the definition. Typically these files are stored in a `.devcontainer` folder.
 2. **Test assets** - While you are creating your definition, you may need to use a test project to make sure it works as expected. Contributing these files back will also help others that want to contribute to your definition in the future. These files are typically located in a `test-project` folder.
 3. **A `.npmignore` file** - This tells VS Code which files in the folder should be ignored when a user selects it for their project / folder. The file typically lists test assets or folders.
+
 
 ### Creating a new definition
 
@@ -108,7 +127,7 @@ So, in short, you want to clean up after you install or configure anything in th
 
 Some other tips:
 
-1. You'd be suprised [how big package lists](https://askubuntu.com/questions/179955/var-lib-apt-lists-is-huge) can get, so be sure to clean these up too. Most Docker images that use Debian / Ubuntu use the following command to clean these up:
+1. You'd be surprised [how big package lists](https://askubuntu.com/questions/179955/var-lib-apt-lists-is-huge) can get, so be sure to clean these up too. Most Docker images that use Debian / Ubuntu use the following command to clean these up:
 
     ```
     rm -rf /var/lib/apt/lists/*
@@ -144,12 +163,6 @@ Note that if you make major changes, Docker may occasionally not pick up your ed
 After you get your container up and running, you can test it by adding test assets / projects into the definition folder and then adding their locations to the `.npmignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form relative to the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `.npmignore` files.
 
 Finally, commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in. We appreciate any and all feedback!
-
-### Speeding up container provisioning
-
-While using a `Dockerfile` is a convenient way to get going with a new container definition, this method can slow down the process of creating the dev container since it requires the image to be built by anyone using it.  If your definition is stable, we strongly recommend building and publishing your image to [GitHub Container Registry](https://docs.github.com/en/free-pro-team@latest/packages/getting-started-with-github-container-registry/about-github-container-registry) instead. 
-
-Once you've published your container image, just update `devcontainer.json` to reference the image instead of the `Dockerfile`. See `container-templates/image` for an example.
 
 ### Release cadence for new containers or container updates
 

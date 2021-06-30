@@ -1,46 +1,24 @@
 {
-	"variants": ["3.12", "3.11", "3.10"],
+	"variants": ["3.13", "3.12", "3.11", "3.10"],
+	"definitionVersion": "0.201.6",
 	"build": {
 		"latest": false,
 		"rootDistro": "alpine",
 		"tags": [
 			"base:${VERSION}-alpine-${VARIANT}",
-			"base:${VERSION}-alpine${VARIANT}",
-			"base:${VERSION}-alpine"
-		]
+			"base:${VERSION}-alpine${VARIANT}"
+		],
+		"variantTags": {
+			"3.13": [
+				"base:${VERSION}-alpine"
+			]
+		}
 	},
 	"dependencies": {
 		"image": "alpine:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/alpine",
-		"alpine": [
-			"git",
-			"bash",
-			"libgcc",
-			"libstdc++",
-			"curl",
-			"openssh-client",
-			"less",
-			"wget",
-			"nano",
-			"jq",
-			"gnupg",
-			"unzip",
-			"procps",
-			"coreutils",
-			"ca-certificates",
-			"krb5-libs",
-			"libintl",
-			"libssl1.1",
-			"lttng-ust",
-			"tzdata",
-			"userspace-rcu",
-			"zlib",
-			"shadow",
-			"sudo",
-			"zsh"
-		],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh"
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
 		}
 	}
 }

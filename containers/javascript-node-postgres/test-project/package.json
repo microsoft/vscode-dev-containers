@@ -11,6 +11,6 @@
 	"dependencies": {
 		"express": "^4.16.1",
 		"bluebird": "^3.5.5",
-		"pg-promise": "^8.7.2"
+		"pg-promise": "^10.9.1"
 	}
 }

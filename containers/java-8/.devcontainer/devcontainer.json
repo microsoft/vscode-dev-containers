@@ -11,8 +11,7 @@
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
+	"settings": {
 		"java.home": "/docker-java-home",
 		"java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current",
 		"java.configuration.runtimes": [{

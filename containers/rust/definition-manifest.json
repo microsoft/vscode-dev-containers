@@ -1,67 +1,35 @@
 {
+	"definitionVersion": "0.200.5",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
-			"rust:${VERSION}-1",
-			"rust:${VERSION}"
+			"rust:${VERSION}-1"
 		]
 	},
 	"dependencies": {
 		"image": "rust:1",
 		"imageLink": "https://hub.docker.com/_/rust",
-		"debian": [
-			"apt-utils",
-			"git",
-			"openssh-client",
-			"gnupg2",
-			"iproute2",
-			"procps",
-			"lsof",
-			"htop",
-			"net-tools",
-			"psmisc",
-			"curl",
-			"wget",
-			"rsync",
-			"ca-certificates",
-			"unzip",
-			"zip",
-			"tar",
-			"nano",
-			"vim-tiny",
-			"less",
-			"jq",
-			"lsb-release",
-			"apt-transport-https",
-			"dialog",
-			"libc6",
-			"libgcc1",
-			"libgssapi-krb5-2",
-			"libicu[0-9][0-9]",
-			"liblttng-ust0",
-			"libstdc++6",
-			"zlib1g",
-			"locales",
-			"sudo",
-			"ncdu",
-			"man-db",
-			"zsh",
-			"yarn",
-			"lldb",
+		"apt": [
+			"lldb", 
 			"python3-minimal",
-			"gcc",
+			"gcc", 
 			"libc6-dev"
 		],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh"
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
 		},
 		"cargo": {
-			"rls": "rls --version",
-			"rustfmt": "rustfmt --version",
-			"rust-analysis": null,
-			"rust-src": null,
-			"clippy": null
+			"rls": null,
+			"rustfmt": null,
+			"rust-analysis": "rustc --version",
+			"rust-src": "rustc --version",
+			"clippy": "rustc --version"
+		},
+		"languages": {
+			"Rust": {
+				"cgIgnore": true
+			}
 		}
 	}
 }

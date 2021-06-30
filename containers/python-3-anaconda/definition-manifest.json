@@ -1,4 +1,5 @@
 {
+	"definitionVersion": "0.201.5",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -7,50 +8,39 @@
 		]
 	},
 	"dependencies": {
-		"image": "anaconda3:${VARIANT}",
+		"image": "anaconda3:latest",
 		"imageLink": "https://hub.docker.com/r/continuumio/anaconda3",
-		"debian": [
-			"apt-utils",
-			"git",
-			"openssh-client",
-			"gnupg2",
-			"iproute2",
-			"procps",
-			"lsof",
-			"htop",
-			"net-tools",
-			"psmisc",
-			"curl",
-			"wget",
-			"rsync",
-			"ca-certificates",
-			"unzip",
-			"zip",
-			"tar",
-			"nano",
-			"vim-tiny",
-			"less",
-			"jq",
-			"lsb-release",
-			"apt-transport-https",
-			"dialog",
-			"libc6",
-			"libgcc1",
-			"libgssapi-krb5-2",
-			"libicu[0-9][0-9]",
-			"liblttng-ust0",
-			"libstdc++6",
-			"zlib1g",
-			"locales",
-			"sudo",
-			"ncdu",
-			"man-db",
-			"zsh",
-			"yarn"
-		],
+		"debian": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
+		},
+		"other": {
+			"conda": {
+				"cgIgnore": true,
+				"path": "/opt/conda"
+			}
+		},
+		"languages": {
+			"Python": {
+				"cgIgnore": true,
+				"path": "/opt/conda"
+			},
+			"Jupyter Notebooks": {
+				"cgIgnore": true,
+				"versionCommand": "jupyter-notebook --version",
+				"path": "/opt/conda",
+				"downloadUrl": "https://jupyter.org/"
+			},
+			"Jupyter Lab": {
+				"cgIgnore": true,
+				"versionCommand": "jupyter-lab --version",
+				"path": "/opt/conda",
+				"downloadUrl": "https://jupyter.org/"
+			}
 		}
 	}
 }

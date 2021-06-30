@@ -1,20 +1,22 @@
 # Common Utility and Non-Root User Install Script
 
-*Installs a set of common command line utilities, Oh My Bash!, Oh My Zsh!, and sets up a non-root user.*
+*Installs a set of common command line utilities, Oh My Zsh!, and sets up a non-root user.*
 
 **Script status**: Stable
 
 **OS support**: Debian 9+, Ubuntu 16.04+, Alpine 3.9+, CentOS/RHEL 7+ (community supported) and downstream distros.
 
+**Maintainer:** The VS Code and GitHub Codespaces teams
+
 ## Syntax
 
 ```text
-./common-debian.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My *! flag]
-./common-redhat.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My *! flag]
-./common-alpine.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Install Oh My *! flag]
+./common-debian.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My Zsh! flag]
+./common-redhat.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My Zsh! flag]
+./common-alpine.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Install Oh My Zsh! flag]
 ```
 
-*Note that `common-redhat.sh` is community supported.*
+> **Note:** `common-redhat.sh` is community supported.
 
 |Argument|Default|Description|
 |--------|-------|-----------|
@@ -23,7 +25,9 @@
 |User UID|`automatic`| A specific UID (e.g. `1000`) for the user that will be created modified. A value of `automatic` will pick a free one if the user is created. |
 |User GID|`automatic`| A specific GID (e.g. `1000`) for the user's group that will be created modified. A value of `automatic` will pick a free one if the group is created. |
 | Upgrade packages flag | `true` | A `true`/`false` flag that indicates whether packages should be upgraded to the latest for the distro. |
-| Install Oh My *! flag | `true` | A `true`/`false` flag that indicates whether Oh My Bash! and Oh My Zsh! should be installed. |
+| Install Oh My Zsh! flag | `true` | A `true`/`false` flag that indicates whether Oh My Zsh! should be installed. |
+
+> **Note:** Previous versions of this script also installed Oh My Bash! but this has been dropped in favor of a simplified, default PS1 since it conflicted with common user configuration. A stub has been added so those that may have referenced it in places like their dotfiles are informed of the change and how to add it back if needed.
 
 ## Usage
 
@@ -50,7 +54,7 @@
 
 **Alpine:**
 
-1. Add [`common-alpine.sh`](../common-redhat.sh) to `.devcontainer/library-scripts`
+1. Add [`common-alpine.sh`](../common-alpine.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:
 

@@ -1,5 +1,5 @@
-# [Choice] Node.js version: 14, 12, 10
-ARG VARIANT=14
+# [Choice] Node.js version: 16, 14, 12
+ARG VARIANT=16
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:${VARIANT}
 
 # [Optional] Uncomment this section to install additional OS packages.
@@ -11,4 +11,4 @@ FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:${VARIANT}
 # RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
 
 # [Optional] Uncomment if you want to install more global node packages
-# RUN sudo -u node npm install -g <your-package-list -here>
+# RUN su node -c "npm install -g <your-package-list -here>"

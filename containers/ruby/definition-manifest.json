@@ -1,58 +1,28 @@
 {
-	"variants": ["2", "2.7", "2.6", "2.5"],
+	"variants": ["3.0", "2.7", "2.6"],
+	"definitionVersion": "0.201.6",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"ruby:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"3.0": [ "ruby:${VERSION}-3" ],
+			"2.7": [ "ruby:${VERSION}-2" ]
+		}
 	},
 	"dependencies": {
 		"image": "ruby:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/ruby",
-		"debian": [
-			"apt-utils",
-			"git",
-			"openssh-client",
-			"gnupg2",
-			"iproute2",
-			"procps",
-			"lsof",
-			"htop",
-			"net-tools",
-			"psmisc",
-			"curl",
-			"wget",
-			"rsync",
-			"ca-certificates",
-			"unzip",
-			"zip",
-			"tar",
-			"nano",
-			"vim-tiny",
-			"less",
-			"jq",
-			"lsb-release",
-			"apt-transport-https",
-			"dialog",
-			"libc6",
-			"libgcc1",
-			"libgssapi-krb5-2",
-			"libicu[0-9][0-9]",
-			"liblttng-ust0",
-			"libstdc++6",
-			"zlib1g",
-			"locales",
-			"sudo",
-			"ncdu",
-			"man-db",
-			"zsh",
-			"yarn",
-			"software-properties-common", 
+		"debian": [{
+				"cgIgnore": false,
+				"name": "yarn"
+			},
 			"build-essential"
 		],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm",
 			"rbenv": "/usr/local/share/rbenv",
 			"ruby-build": "/usr/local/share/ruby-build"
@@ -61,6 +31,15 @@
 			"rake",
 			"ruby-debug-ide",
 			"debase"
-		]
+		],
+		"other":{
+			"rvm": null
+		},
+		"languages": {
+			"Ruby": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}
+		}
 	}
 }

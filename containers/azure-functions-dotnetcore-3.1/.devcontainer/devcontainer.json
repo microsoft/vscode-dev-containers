@@ -1,12 +1,10 @@
 {
-	"name": "Azure Functions & C# (.NET Core 3.1)",
+	"name": "Azure Functions & C# - .NET Core 3.1",
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash"
-	},
+	"settings": {},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [

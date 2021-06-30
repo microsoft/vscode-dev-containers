@@ -4,7 +4,8 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/python.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/python.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./python-debian.sh [Python Version] [Python intall path] [PIPX_HOME] [non-root user] [Update rc files flag] [install tools]
 
@@ -21,6 +22,11 @@ if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
+
+# Ensure that login shells get the correct path if the user updated the PATH using ENV.
+rm -f /etc/profile.d/00-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
+chmod +x /etc/profile.d/00-restore-env.sh
 
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -42,7 +48,10 @@ fi
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+        echo -e "$1" >> /etc/bash.bashrc
+        if [ -f "/etc/zsh/zshrc" ]; then
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
     fi
 }
 
@@ -113,22 +122,28 @@ export PATH=${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:${PATH}
 echo "Updating pip..."
 python3 -m pip install --no-cache-dir --upgrade pip
 
-# Install tools
+# Create pipx group, dir, and set sticky bit
+if ! cat /etc/group | grep -e "^pipx:" > /dev/null 2>&1; then
+    groupadd -r pipx
+fi
+usermod -a -G pipx ${USERNAME}
+umask 0002
 mkdir -p ${PIPX_BIN_DIR}
-chown -R ${USERNAME} ${PIPX_HOME} ${PIPX_BIN_DIR}
-su ${USERNAME} -c "$(cat << EOF
-    set -e
-    echo "Installing Python tools..."
-    export PIPX_HOME=${PIPX_HOME}
-    export PIPX_BIN_DIR=${PIPX_BIN_DIR}
-    export PYTHONUSERBASE=/tmp/pip-tmp
-    export PIP_CACHE_DIR=/tmp/pip-tmp/cache
-    export PATH=${PATH}
-    pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
-    /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir pipx
-    echo "${DEFAULT_UTILS}" | xargs -n 1 /tmp/pip-tmp/bin/pipx install --system-site-packages --pip-args '--no-cache-dir --force-reinstall'
-    chown -R ${USERNAME} ${PIPX_HOME}
-    rm -rf /tmp/pip-tmp
+chown :pipx ${PIPX_HOME} ${PIPX_BIN_DIR}
+chmod g+s ${PIPX_HOME} ${PIPX_BIN_DIR}
+
+# Install tools
+echo "Installing Python tools..."
+export PYTHONUSERBASE=/tmp/pip-tmp
+export PIP_CACHE_DIR=/tmp/pip-tmp/cache
+pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
+/tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir pipx
+echo "${DEFAULT_UTILS}" | xargs -n 1 /tmp/pip-tmp/bin/pipx install --system-site-packages --pip-args '--no-cache-dir --force-reinstall'
+rm -rf /tmp/pip-tmp
+
+updaterc "$(cat << EOF
+export PIPX_HOME="${PIPX_HOME}"
+export PIPX_BIN_DIR="${PIPX_BIN_DIR}"
+if [[ "\${PATH}" != *"\${PIPX_BIN_DIR}"* ]]; then export PATH="\${PATH}:\${PIPX_BIN_DIR}"; fi
 EOF
 )"
-updaterc "export PIPX_HOME=${PIPX_HOME}\nexport PIPX_BIN_DIR=${PIPX_BIN_DIR}\nexport PATH=\${PATH}:\${PIPX_BIN_DIR}"

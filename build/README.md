@@ -44,7 +44,7 @@ Once you have your build configuration setup, you can use the `vscdc` CLI to tes
 1. First, build the image(s) using the CLI as follows:
 
    ```bash
-   build/vscdc push --no-push --registry mcr.microsoft.com --registry-path vscode/devcontainers --release master <you-definition-id-here>
+   build/vscdc push --no-push --registry mcr.microsoft.com --registry-path vscode/devcontainers --release main <you-definition-id-here>
    ```
 
 2. Use the Docker CLI to verify all of the expected images and tags and have the right contents:
@@ -56,7 +56,7 @@ Once you have your build configuration setup, you can use the `vscdc` CLI to tes
 3. Finally, test cgmanifest generation by running:
 
    ```bash
-   build/vscdc cg --registry mcr.microsoft.com --registry-path vscode/devcontainers --release master <you-definition-id-here>
+   build/vscdc cg --registry mcr.microsoft.com --registry-path vscode/devcontainers --release main <you-definition-id-here>
    ```
 
 Once you're happy with the result, you can also verify that the `devcontainer.json` and the associated concent that will be generated for your definition is correct.
@@ -64,7 +64,7 @@ Once you're happy with the result, you can also verify that the `devcontainer.js
 1. Generate a `.tgz` with all of the definitions zipped inside of it.
 
     ```bash
-    build/vscdc pack --prep-and-package-only --release master
+    build/vscdc pack --prep-and-package-only --release main
     ```
 
     A new file called `vscode-dev-containers-<version>-dev.tgz` should be in the root of the repository once this is done.
@@ -155,7 +155,7 @@ In this case, Debian is also the one that is used for `latest` for the `base` re
 
 > **NOTE:** The version number used for this repository should be kept in sync with the VS Code Remote - Containers extension to make it easy for developers to find.
 
-There's a special "dev" version that can be used to build master on CI - I ended up needing this to test and others would if they base an image off of one of the MCR images.  e.g. `dev-debian-9`.
+There's a special "dev" version that can be used to build main on CI - I ended up needing this to test and others would if they base an image off of one of the MCR images.  e.g. `dev-debian-9`.
 
 Finally, there is a **`parent`** property that can be used to specify if the container depends an image created as a part of another container build. For example, `typescript-node` uses the image from `javascript-node` and therefore includes the following:
 
@@ -296,14 +296,14 @@ When necessary, a specific version can also be specified for an individual image
 
 ### Deprecation of container definitions
 
-The versioning scheme above allows us to version dev containers and reference them even when they are removed from `master`. To keep the number of containers in `master` reasonable, we would deprecate and remove containers under the following scenarios:
+The versioning scheme above allows us to version dev containers and reference them even when they are removed from `main`. To keep the number of containers in `main` reasonable, we would deprecate and remove containers under the following scenarios:
 
 1. It refers to a runtime that is no longer supported - e.g. Node.js 8 is out of support as of the end of 2019, so we would deprecate `javascript-node-8`. Until that point, we would have containers for node 8, 10, and 12 (which just went LTS).
 2. The container is not used enough to maintain and has broken.
 3. The container refers to a product that has been deprecated.
 4. The container was contributed by a 3rd party, has issues, and the 3rd party is not responsive.
 
-Since the images would continue to exist after this point and the source code is available under the version label, we can safely remove the containers from master without impacting customers.
+Since the images would continue to exist after this point and the source code is available under the version label, we can safely remove the containers from main without impacting customers.
 
 ### Release process and the contents of the npm package
 
@@ -339,7 +339,7 @@ The `definition-manifest.json` file dictates how the build process should behave
 
 Testing, then, is as simple as it is now - open the folder in `vscode-dev-containers` in a container and edit / test as required. Anyone simply copying the folder contents then gets a fully working version of the container even if in-flight and there is no image for it yet.
 
-In the vscode-dev-containers repo itself, the `FROM` statement in `Dockerfile` would always point to `latest` or `dev` since it what is in master may not have even been released yet. This would get dynamically updated as a part of the release process - which we will cover next.
+In the vscode-dev-containers repo itself, the `FROM` statement in `Dockerfile` would always point to `latest` or `dev` since it what is in main may not have even been released yet. This would get dynamically updated as a part of the release process - which we will cover next.
 
 ```Dockerfile
 FROM mcr.microsoft.com/vs/devcontainer/javascript-node:dev-10
@@ -351,7 +351,7 @@ The process also automatically swaps out referenced MCR images for MAJOR version
 
 ##### Common scripts
 
-Another problem the build solves is mass updates - there's a set of things we want in every image and right now it requires ~54 changes to add things. With this new process, images use a tagged version of scripts in `script-library`. The build generates a SHA for script so they can be safely used in Dockerfiles that are not built into images while still allowing people to just grab `.devcontainer` from master and use it if they prefer.
+Another problem the build solves is mass updates - there's a set of things we want in every image and right now it requires ~54 changes to add things. With this new process, images use a tagged version of scripts in `script-library`. The build generates a SHA for script so they can be safely used in Dockerfiles that are not built into images while still allowing people to just grab `.devcontainer` from main and use it if they prefer.
 
 When a release is cut, this SHA is generated and the source code for the related Git tag is updated to include source files with these values set. Consequently, you may need to run `git fetch --tags --force` to update a tag that already exists on your system.
 
@@ -399,7 +399,7 @@ After everything builds successfully, the packaging process kicks off and perfor
 2. Runs through all Dockerfiles and looks for [common script](#common-scripts) references and updates the URL to the tagged version and adds the expected SHA as another arg. The result is that sections of the Dockerfile that look like this:
 
     ```Dockerfile
-    ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh"
+    ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/common-debian.sh"
     ARG COMMON_SCRIPT_SHA="dev-mode"
     ```
 

@@ -6,6 +6,8 @@
 
 **OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
 
+**Maintainer:** The VS Code and GitHub Codespaces teams
+
 ## Syntax
 
 ```text
@@ -46,7 +48,7 @@ Try doing the following instead:
 Or you can source the file before using nvm:
 
 ```json
-"postCreateCommand": "source ${NVM_DIR}/nvm.sh && nvm install --lts"
+"postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install --lts"
 ```
 
 That's it!

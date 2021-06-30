@@ -4,7 +4,8 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/rust.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/rust.md
+# Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./rust-debian.sh [CARGO_HOME] [RUSTUP_HOME] [non-root user] [add CARGO/RUSTUP_HOME to rc files flag] [whether to update rust]
 
@@ -20,6 +21,11 @@ if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
+
+# Ensure that login shells get the correct path if the user updated the PATH using ENV.
+rm -f /etc/profile.d/00-restore-env.sh
+echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
+chmod +x /etc/profile.d/00-restore-env.sh
 
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -41,7 +47,10 @@ fi
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" | tee -a /etc/bash.bashrc >> /etc/zsh/zshrc
+        echo -e "$1" >> /etc/bash.bashrc
+        if [ -f "/etc/zsh/zshrc" ]; then
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
     fi
 }
 
@@ -80,5 +89,14 @@ EOF
 
 # Add CARGO_HOME, RUSTUP_HOME and bin directory into bashrc/zshrc files (unless disabled)
 updaterc "export CARGO_HOME=\"${CARGO_HOME}\"\nexport RUSTUP_HOME=\"${RUSTUP_HOME}\"\nexport PATH=\"\${CARGO_HOME}/bin:\${PATH}\""
+
+updaterc "$(cat << EOF
+export RUSTUP_HOME="${RUSTUP_HOME}"
+export CARGO_HOME="${CARGO_HOME}"
+if [[ "\${PATH}" != *"\${CARGO_HOME}/bin"* ]]; then export PATH="\${PATH}:\${CARGO_HOME}/bin"; fi
+EOF
+)"
+
+
 echo "Done!"
 

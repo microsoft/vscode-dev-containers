@@ -6,6 +6,8 @@
 
 **OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
 
+**Maintainer:** The VS Code and GitHub Codespaces teams
+
 ## Syntax
 
 ```text
@@ -32,8 +34,8 @@ Usage:
     ENV CARGO_HOME=/usr/local/cargo \
         RUSTUP_HOME=/usr/local/rustup
     ENV PATH=${CARGO_HOME}/bin:${RUSTUP_HOME}/bin:${PATH}
-    COPY library-scripts/go-debian.sh /tmp/library-scripts/
-    RUN apt-get update && bash /tmp/library-scripts/go-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}"
+    COPY library-scripts/rust-debian.sh /tmp/library-scripts/
+    RUN apt-get update && bash /tmp/library-scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}"
     ```
 
 That's it!

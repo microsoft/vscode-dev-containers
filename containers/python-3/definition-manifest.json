@@ -1,56 +1,25 @@
 {
-	"variants": ["3", "3.9", "3.8", "3.7", "3.6"],
+	"variants": ["3.9", "3.8", "3.7", "3.6"],
+	"definitionVersion": "0.201.6",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"python:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"3.9": [ "python:${VERSION}-3" ]
+		}
 	},
 	"dependencies": {
 		"image": "python:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/python",
-		"debian": [
-			"apt-utils",
-			"git",
-			"openssh-client",
-			"gnupg2",
-			"iproute2",
-			"procps",
-			"lsof",
-			"htop",
-			"net-tools",
-			"psmisc",
-			"curl",
-			"wget",
-			"rsync",
-			"ca-certificates",
-			"unzip",
-			"zip",
-			"tar",
-			"nano",
-			"vim-tiny",
-			"less",
-			"jq",
-			"lsb-release",
-			"apt-transport-https",
-			"dialog",
-			"libc6",
-			"libgcc1",
-			"libgssapi-krb5-2",
-			"libicu[0-9][0-9]",
-			"liblttng-ust0",
-			"libstdc++6",
-			"zlib1g",
-			"locales",
-			"sudo",
-			"ncdu",
-			"man-db",
-			"zsh",
-			"yarn"
-		],
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"pipx": [
@@ -65,6 +34,12 @@
 			"bandit",
 			"virtualenv",
 			"pipx"
-		]
+		],
+		"languages": {
+			"Python": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}
+		}
 	}
 }
