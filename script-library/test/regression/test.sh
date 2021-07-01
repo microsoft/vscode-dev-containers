@@ -29,10 +29,9 @@ if [ ! -z "${PLATFORMS}" ]; then
     fi
 
     docker run --privileged --rm tonistiigi/binfmt --install ${PLATFORMS}
-    PLATFORMS_ARG="--platform ${PLATFORMS}"
+    PLATFORMS_ARG="--builder vscode-dev-containers --platform ${PLATFORMS}"
 fi
 BUILDX_COMMAND="docker buildx build \
-    --builder vscode-dev-containers \
     --load \
     ${PLATFORMS_ARG} \
     --progress=plain \
