@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:2f49defc64b261443c0f8c8de2c54593928a8d7151e57238d01c94ae2d4db610
+**Digest:** sha256:a3b70042840c0f6575497a3d252d1ad9940d0ef3d544f61be20739210347410c
 
 **Tags:**
 ```
@@ -30,20 +30,20 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.9.5 | /usr/local |
+| [Python](https://www.python.org/) | 3.9.6 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.3 |
+| pylint | 2.9.1 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:502ed025e10b6e269de92bbca13035ac67d901875f72ce42ee60c796c7089ef8
+**Digest:** sha256:8fe14d4c2947b65046335bb1d988c90f106d8bb262440496dee36525f24e2344
 
 **Tags:**
 ```
@@ -122,20 +122,20 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.8.10 | /usr/local |
+| [Python](https://www.python.org/) | 3.8.11 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.3 |
+| pylint | 2.9.1 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:76b5f3ab86b9972d4810796385d76fa93a092270cab6ef99f9ac6488e128856b
+**Digest:** sha256:66cb60b04566bb5d8ef20ec8fc406655bc591a42b1c58c56ea5cdb83709f97d6
 
 **Tags:**
 ```
@@ -214,20 +214,20 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.7.10 | /usr/local |
+| [Python](https://www.python.org/) | 3.7.11 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.3 |
+| pylint | 2.9.1 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:45cc9c044491cd1a89e595cd37db66c1d11d1a2b7bfc98594e8894d0e00c7ab7
+**Digest:** sha256:471d675b67322a57dbdcb3d1f831cd877e4de25dff5350bbe355e1712118f9f8
 
 **Tags:**
 ```
@@ -306,20 +306,20 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.6.13 | /usr/local |
+| [Python](https://www.python.org/) | 3.6.14 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.3 |
+| pylint | 2.9.1 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |

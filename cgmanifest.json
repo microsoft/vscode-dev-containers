@@ -148,7 +148,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "git-lfs",
-                    "Version": "2.13.3",
+                    "Version": "2.9.2-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packagecloud.io/github/git-lfs/ubuntu",
@@ -200,7 +200,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.8.3"
+                    "Version": "2.9.1"
                 }
             }
         },
@@ -407,7 +407,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.0.7"
+                    "Version": "1.0.8"
                 }
             }
         },
@@ -463,7 +463,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "258938ef66a2a49a4a400554a6dce890226ae34c"
+                    "commitHash": "3fea5493a431ac64470d4230d4b51438cf213bd1"
                 }
             }
         },
@@ -532,7 +532,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Helm",
-                    "Version": "3.6.1",
+                    "Version": "3.6.2",
                     "DownloadUrl": "https://github.com/helm/helm"
                 }
             }
@@ -572,7 +572,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "1.12.0-pre.2",
+                    "Version": "1.12.1",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -636,7 +636,7 @@
                 "Git": {
                     "Name": "nvm",
                     "repositoryUrl": "https://github.com/nvm-sh/nvm.git",
-                    "commitHash": "258938ef66a2a49a4a400554a6dce890226ae34c"
+                    "commitHash": "3fea5493a431ac64470d4230d4b51438cf213bd1"
                 }
             }
         },
@@ -963,7 +963,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.3.4"
+                    "Version": "4.3.5"
                 }
             }
         },

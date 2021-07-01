@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:66ee4d593e08f69eb18efd373f96b6a894fb811e845c5bd29a58e66a235156f9
+**Digest:** sha256:749de8626734f7a62d8708ff25bfc62dcf99fec0455d41e50a7cedea33ff262b
 
 **Tags:**
 ```
@@ -42,7 +42,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/codespace/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /home/codespace/.nvm |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 9098e738e1a22297bb0d23c09c1d0a2bebe5eb4b | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | 1b477ae8a1a2152040d38f2248afc1d0bc289f08 | /usr/local/share/ruby-build |
@@ -51,7 +51,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.8.3 |
+| pylint | 2.9.1 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
@@ -70,7 +70,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | golang.org/x/tools/gopls | 0.7.0 |
 | honnef.co/go/tools | 0.2.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.0.7 |
+| github.com/mgechev/revive | 1.0.8 |
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.6.1 |
@@ -103,11 +103,11 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.21.2 | /usr/local/bin |
-| [Helm](https://github.com/helm/helm) | 3.6.1 | /usr/local/bin |
+| [Helm](https://github.com/helm/helm) | 3.6.2 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.6 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 1.12.0-pre.2 | 
+| [GitHub CLI](https://github.com/cli/cli) | 1.12.1 | 
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.1 | 
@@ -131,7 +131,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | gcc | 4:9.3.0-1ubuntu2 |
 | gdb | 9.2-0ubuntu1~20.04 |
 | git | 1:2.25.1-1ubuntu3.1 |
-| git-lfs (Git Large File Support) | 2.13.3 |
+| git-lfs (Git Large File Support) | 2.9.2-1 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
 | htop | 2.2.0-2build1 |
 | iproute2 | 5.5.0-1ubuntu1 |

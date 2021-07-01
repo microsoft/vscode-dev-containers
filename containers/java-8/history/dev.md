@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java-8)
 
-**Digest:** sha256:3aedf79f47b28e971488687949eac5bc3b34a456461ae1ff84eeadee2d8e4bca
+**Digest:** sha256:add0a84a63dd3292db322ca4ac8e76c587e09b8595478fe8ca8b0090867e867e
 
 **Tags:**
 ```
@@ -28,7 +28,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
