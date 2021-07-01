@@ -45,6 +45,6 @@ BUILDX_COMMAND="docker buildx build \
     ."
 echo $BUILDX_COMMAND
 $BUILDX_COMMAND
-docker run -it --init --privileged vscdc-script-library-regression bash -c 'uname -m && env'
+docker run --init --privileged vscdc-script-library-regression bash -c 'uname -m && env'
 
 echo -e "\n🎉 All tests passed!"
