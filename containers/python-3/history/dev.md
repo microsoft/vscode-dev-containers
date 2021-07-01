@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:a3b70042840c0f6575497a3d252d1ad9940d0ef3d544f61be20739210347410c
+**Digest:** sha256:753a340e301b57a811d7024125bb422ac320e3a443325599d67dd2ce414902e2
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.1 |
+| pylint | 2.9.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:8fe14d4c2947b65046335bb1d988c90f106d8bb262440496dee36525f24e2344
+**Digest:** sha256:4f18d838cfe7920b760ff8c7a2c757d7b31a043c057fac474d31505785f835bc
 
 **Tags:**
 ```
@@ -135,7 +135,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.1 |
+| pylint | 2.9.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:66cb60b04566bb5d8ef20ec8fc406655bc591a42b1c58c56ea5cdb83709f97d6
+**Digest:** sha256:d62fadfcd46eb50333fd527c5a483c581451f72e68012df60122a15c74a90092
 
 **Tags:**
 ```
@@ -227,7 +227,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.1 |
+| pylint | 2.9.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:471d675b67322a57dbdcb3d1f831cd877e4de25dff5350bbe355e1712118f9f8
+**Digest:** sha256:4542af89624a0f3a4f2be697edb5e3eee2ff0f65c5ab8689740f48c820dc6528
 
 **Tags:**
 ```
@@ -319,7 +319,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.1 |
+| pylint | 2.9.3 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.6b0 |
