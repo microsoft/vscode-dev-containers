@@ -9,7 +9,7 @@ ENV LANG=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US
 
-# Install bundler
+# Install bundler, latest jekyll, and github-pages for older jekyll
 RUN gem install bundler jekyll github-pages
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12
