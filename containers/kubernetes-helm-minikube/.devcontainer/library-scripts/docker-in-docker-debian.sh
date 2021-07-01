@@ -52,9 +52,9 @@ apt-get-update-if-needed()
 export DEBIAN_FRONTEND=noninteractive
 
 # Install docker/dockerd dependencies if missing
-if ! dpkg -s apt-transport-https curl ca-certificates lsb-release lxc pigz iptables > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
+if ! dpkg -s apt-transport-https curl ca-certificates lxc pigz iptables > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
     apt-get-update-if-needed
-    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lsb-release lxc pigz iptables gnupg2 
+    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lxc pigz iptables gnupg2 
 fi
 
 # Swap to legacy iptables for compatibility
@@ -67,16 +67,18 @@ fi
 if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then
     echo "Docker / Moby CLI and Engine already installed."
 else
+    # Source /etc/os-release to get OS info
+    . /etc/os-release
     if [ "${USE_MOBY}" = "true" ]; then
-        DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
-        CODENAME=$(lsb_release -cs)
-        curl -s https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT)
-        echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-${DISTRO}-${CODENAME}-prod ${CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
+        curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
         apt-get update
         apt-get -y install --no-install-recommends moby-cli moby-buildx moby-engine
     else
-        curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT)
-        echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list
+        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
+        curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
         apt-get update
         apt-get -y install --no-install-recommends docker-ce-cli docker-ce
     fi
@@ -84,13 +86,31 @@ fi
 
 echo "Finished installing docker / moby"
 
-# Install Docker Compose if not already installed 
+# Install Docker Compose if not already installed  and is on a supported architecture
 if type docker-compose > /dev/null 2>&1; then
     echo "Docker Compose already installed."
 else
-    LATEST_COMPOSE_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/docker/compose/releases/latest)")
-    curl -fsSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
+    TARGET_COMPOSE_ARCH="$(uname -m)"
+    if [ "${TARGET_COMPOSE_ARCH}" = "amd64" ]; then
+        TARGET_COMPOSE_ARCH="x86_64"
+    fi
+    if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
+        # Use pip to get a version that runns on this architecture
+        if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv pipx > /dev/null 2>&1; then
+            apt-get-update-if-needed
+            apt-get -y install python3-minimal python3-pip libffi-dev python3-venv pipx
+        fi
+        export PIPX_HOME=/usr/local/pipx
+        mkdir -p ${PIPX_HOME}
+        export PIPX_BIN_DIR=/usr/local/bin
+        export PIP_CACHE_DIR=/tmp/pip-tmp/cache
+        pipx install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
+        rm -rf /tmp/pip-tmp
+    else 
+        LATEST_COMPOSE_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/docker/compose/releases/latest)")
+        curl -fsSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-${TARGET_COMPOSE_ARCH}" -o /usr/local/bin/docker-compose
+        chmod +x /usr/local/bin/docker-compose
+    fi
 fi
 
 # If init file already exists, exit
