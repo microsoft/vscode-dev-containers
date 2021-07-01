@@ -34,6 +34,8 @@ jobs:
       id: test_script_library
       run: |
         set -e
+        sudo apt-get update
+        sudo apt-get install -y qemu-kvm qemu virt-manager virt-viewer libvirt-clients libvirt-daemon-system bridge-utils virtinst libvirt-daemon
         bash script-library/test/regression/test.sh "${{ matrix.os }}"
 
   copy-scripts:
