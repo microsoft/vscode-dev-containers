@@ -5,14 +5,77 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/alpine)
 
 **Definition variations:**
+- [3.14](#variant-314)
 - [3.13](#variant-313)
 - [3.12](#variant-312)
 - [3.11](#variant-311)
-- [3.10](#variant-310)
+
+## Variant: 3.14
+
+**Digest:** sha256:ec8c10c75468ebddc75fbe7c8ba7801ec537dcfbb461d6941c5da354da647c57
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/base:dev-alpine-3.14
+mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Alpine Linux v3.14
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| git | 2.32.0-r0 |
+| openssh-client-default | 8.6_p1-r2 |
+| gnupg | 2.2.27-r0 |
+| procps | 3.3.17-r0 |
+| lsof | 4.94.0-r0 |
+| htop | 3.0.5-r2 |
+| net-tools | 1.60_git20140218-r2 |
+| psmisc | 23.4-r0 |
+| curl | 7.77.0-r1 |
+| wget | 1.21.1-r1 |
+| rsync | 3.2.3-r2 |
+| ca-certificates | 20191127-r5 |
+| unzip | 6.0-r9 |
+| zip | 3.0-r9 |
+| nano | 5.7-r2 |
+| vim | 8.2.2956-r0 |
+| less | 581-r1 |
+| jq | 1.6-r1 |
+| libgcc | 10.3.1_git20210424-r2 |
+| libstdc++ | 10.3.1_git20210424-r2 |
+| krb5-libs | 1.18.3-r1 |
+| libintl | 0.21-r0 |
+| libssl1.1 | 1.1.1k-r0 |
+| lttng-ust | 2.12.0-r3 |
+| tzdata | 2021a-r0 |
+| userspace-rcu | 0.12.2-r0 |
+| zlib | 1.2.11-r3 |
+| sudo | 1.9.7_p1-r1 |
+| coreutils | 8.32-r2 |
+| sed | 4.8-r0 |
+| grep | 3.6-r0 |
+| which | 2.21-r1 |
+| ncdu | 1.15.1-r0 |
+| shadow | 4.8.1-r0 |
+| strace | 5.12-r0 |
+| man-pages | 5.11-r0 |
 
 ## Variant: 3.13
 
-**Digest:** sha256:cf6b4b5509aac3a92cf49180d76db2bf55dbe8d2298fcca6e641fdfe29688d02
+**Digest:** sha256:dadb954e60334ce9274dba770385c76bce8aa743e30227ed2c7f205ba80d59ce
 
 **Tags:**
 ```
@@ -76,7 +139,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.12
 
-**Digest:** sha256:e3bfdde993946f1d40759aa163353e7a7a0df5e3aa14557251ba4d9b6c43187d
+**Digest:** sha256:42e50ca392a2be3a03a3cbd02bab73b7ddfab46502f22538491373c95eb457b6
 
 **Tags:**
 ```
@@ -139,7 +202,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 
 ## Variant: 3.11
 
-**Digest:** sha256:63d97f8530bf79420ca8a2935e8059e3906ab37825d488454497b8c275b2c37a
+**Digest:** sha256:32e7eaa2a455bbdff422c3e6c0d113fe4b82376aa26d001c72cfcfc3a97ae059
 
 **Tags:**
 ```
@@ -200,68 +263,4 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.11
 | strace | 5.3-r1 |
 | man | 1.14.5-r1 |
 | man-pages | 5.04-r0 |
-
-## Variant: 3.10
-
-**Digest:** sha256:899238970ff47b28a49861c8530c9b693947fe6c376625851b9d43c11f3bae86
-
-**Tags:**
-```
-mcr.microsoft.com/vscode/devcontainers/base:dev-alpine-3.10
-mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.10
-```
-> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
-
-**Linux distribution:** Alpine Linux v3.10
-
-**Available (non-root) user:** vscode
-
-### Contents
-**Tools installed using git**
-
-| Tool | Commit | Path |
-|------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
-
-**Additional linux tools and packages**
-
-| Tool / library | Version |
-|----------------|---------|
-| git | 2.22.5-r0 |
-| openssh-client | 8.1_p1-r0 |
-| gnupg | 2.2.19-r0 |
-| procps | 3.3.15-r0 |
-| lsof | 4.91-r0 |
-| htop | 2.2.0-r0 |
-| net-tools | 1.60_git20140218-r2 |
-| psmisc | 23.2-r1 |
-| curl | 7.66.0-r4 |
-| wget | 1.20.3-r0 |
-| rsync | 3.1.3-r1 |
-| ca-certificates | 20191127-r2 |
-| unzip | 6.0-r6 |
-| zip | 3.0-r7 |
-| nano | 4.3-r0 |
-| vim | 8.1.1365-r0 |
-| less | 551-r0 |
-| jq | 1.6-r0 |
-| libgcc | 8.3.0-r0 |
-| libstdc++ | 8.3.0-r0 |
-| krb5-libs | 1.17.2-r0 |
-| libintl | 0.19.8.1-r4 |
-| libssl1.1 | 1.1.1k-r0 |
-| lttng-ust | 2.10.3-r0 |
-| tzdata | 2021a-r0 |
-| userspace-rcu | 0.11.0-r0 |
-| zlib | 1.2.11-r1 |
-| sudo | 1.9.5p2-r0 |
-| coreutils | 8.31-r0 |
-| sed | 4.7-r0 |
-| grep | 3.3-r0 |
-| which | 2.21-r1 |
-| ncdu | 1.14-r0 |
-| shadow | 4.6-r2 |
-| strace | 4.26-r0 |
-| man | 1.14.3-r3 |
-| man-pages | 5.01-r0 |
 

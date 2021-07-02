@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:0c44f8a715b881676044d9d456c2b63291497c747395d88d9b84bf989676fd65
+**Digest:** sha256:1372ca3ab666b0e4222e5600056edf779b6ae2fa8c54e882ac087436abc0082e
 
 **Tags:**
 ```
@@ -42,8 +42,8 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 2.0.5 |
-| apt-utils | 2.0.5 |
+| apt-transport-https | 2.0.6 |
+| apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.1 |
 | curl | 7.68.0-1ubuntu2.5 |
 | dialog | 1.3-20190808-1 |
@@ -88,7 +88,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:5d34ad716ffa3d8db227b31da7e4256d1819f6957ab61c8608af67ee9bf5ca70
+**Digest:** sha256:112d7911be40fd7a601df51fda78246458695b3cf6415a36dd4cd767f309876d
 
 **Tags:**
 ```
@@ -119,8 +119,8 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 2.0.5 |
-| apt-utils | 2.0.5 |
+| apt-transport-https | 2.0.6 |
+| apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.1 |
 | curl | 7.68.0-1ubuntu2.5 |
 | dialog | 1.3-20190808-1 |
@@ -165,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:9800efc9052165b826780bde75dd5663627071e30a6379687aefdd3a3e8fea87
+**Digest:** sha256:560b1fdb3539c50b75318e10bdb383887990e7f02aa50d69a855ce6d53ea774c
 
 **Tags:**
 ```
@@ -196,8 +196,8 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 2.0.5 |
-| apt-utils | 2.0.5 |
+| apt-transport-https | 2.0.6 |
+| apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.1 |
 | curl | 7.68.0-1ubuntu2.5 |
 | dialog | 1.3-20190808-1 |

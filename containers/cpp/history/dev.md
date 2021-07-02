@@ -12,7 +12,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:e51b5d75b736daad95bd761f62999533e5d8522ed3f4e4f1e8d21129753be285
+**Digest:** sha256:e2937f6d18a837588817f55f81b4c6a22a503c6734a4c23f1073863f9564ed5a
 
 **Tags:**
 ```
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: focal
 
-**Digest:** sha256:581ef451523a29798751bfcd5196f60466651bdecd85669a57705b289d24ac19
+**Digest:** sha256:43c891786d9e395cd4253c6d3b2fd88f05f7d0b529a44869dcc4954b06ecfb66
 
 **Tags:**
 ```
@@ -132,8 +132,8 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 2.0.5 |
-| apt-utils | 2.0.5 |
+| apt-transport-https | 2.0.6 |
+| apt-utils | 2.0.6 |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.1 |
 | clang | 1:10.0-50~exp1 |
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:6c4432f130ed9b53c671d6e20973870d001218d5515455e2bea8a2be758fd775
+**Digest:** sha256:53ed2fbfef5d9521e1b7f5015fa338643200d8dde672deb05a2f537a36f586d8
 
 **Tags:**
 ```
@@ -217,8 +217,8 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.6.13 |
-| apt-utils | 1.6.13 |
+| apt-transport-https | 1.6.14 |
+| apt-utils | 1.6.14 |
 | build-essential | 12.4ubuntu1 |
 | ca-certificates | 20210119~18.04.1 |
 | clang | 1:6.0-41~exp5~ubuntu1 |
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:649adde095bc51067fa38f8adc337cea3946c989445cce44c67a921347418e79
+**Digest:** sha256:3ea92979f4d88ac4c66c4f46c911951187a8c42dcf897849df0a8c39f042fe4d
 
 **Tags:**
 ```

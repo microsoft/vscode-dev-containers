@@ -11,7 +11,7 @@
 
 ## Variant: 8.0
 
-**Digest:** sha256:921454a0699df936ba16a864e89770b25dd1c8889c910976fa884ccc31c960a5
+**Digest:** sha256:cd97eadfbebff6ff3720f8abea521ee7ec6be28ed678bc52ca8d991d17158242
 
 **Tags:**
 ```
@@ -29,7 +29,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 8.0.7 | /usr/local |
+| [PHP](https://xdebug.org/) | 8.0.8 | /usr/local |
 
 **Tools installed using git**
 
@@ -95,7 +95,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 ## Variant: 7.4
 
-**Digest:** sha256:d09d59a5ff601f406c62cda8140f2b5bff4e49fb524d3cbae0f03fab248c4837
+**Digest:** sha256:259a3e313ba754ce0efb11e40cbe699ca90b0bed5533971c19cfdf78499edf5b
 
 **Tags:**
 ```
@@ -113,7 +113,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.4.20 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.4.21 | /usr/local |
 
 **Tools installed using git**
 
@@ -179,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 ## Variant: 7.3
 
-**Digest:** sha256:252e3e7eab3bd4fda4084a2f8fe813baeee97ae75ab2e4a2609870c8e276f427
+**Digest:** sha256:f04529a20c5dd8f85658191253c4073a529d1d9550a47ff9e1415fff3dafc44b
 
 **Tags:**
 ```
@@ -196,7 +196,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.3.28 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.3.29 | /usr/local |
 
 **Tools installed using git**
 
