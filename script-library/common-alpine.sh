@@ -16,6 +16,15 @@ USERNAME=${2:-"automatic"}
 USER_UID=${3:-"automatic"}
 USER_GID=${4:-"automatic"}
 INSTALL_OH_MYS=${5:-"true"}
+
+# Switch to bash right away
+if [ "${SWITCHED_TO_BASH}" != "true" ]; then
+    apk add bash
+    export SWITCHED_TO_BASH=true
+    exec /bin/bash "$0" "$@"
+    exit $?
+fi
+
 SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -28,13 +37,7 @@ rm -f /etc/profile.d/00-restore-env.sh
 echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
 chmod +x /etc/profile.d/00-restore-env.sh
 
-# Switch to bash right away
-if [ "${SWITCHED_TO_BASH}" != "true" ]; then
-    apk add bash
-    export SWITCHED_TO_BASH=true
-    exec /bin/bash "$0" "$@"
-    exit $?
-fi
+
 
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
