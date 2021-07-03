@@ -3,39 +3,44 @@
  *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
  *-------------------------------------------------------------------------------------------------------------*/
 
-const asyncUtils = require('./async');
-const configUtils = require('./config');
+import * as asyncUtils from './async';
+import { DistroInfo, ImageInfo, PackageInfo } from '../domain/common';
+import { getFallbackPoolUrl, getPoolKeyForPoolUrl, getDefaultDependencies, getConfig } from './config';
+
+const aptConfig = {
+    // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
+    // Output: <package>    <version>
+    // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
+    // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
+    namePrefix: 'Debian Package:',
+    listCommand: "dpkg-query --show -f='\\${Package} ~~v~~ \\${Version}\n'",
+    lineRegEx: /(.+) ~~v~~ (.+)/,
+    getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
+    downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
+    poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
+}
+
+const apkConfig = {
+    // Command to get package versions: apk info -e -v <package>
+    // Output: <package-with-maybe-dashes>-<version-with-dashes>
+    // Command to get download URLs: apk policy
+    namePrefix: 'Alpine Package:',
+    listCommand: "apk info -e -v",
+    lineRegEx: /(.+)-([0-9].+)/,
+    getUriCommand: 'apk update && apk policy',
+    downloadUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
+    downloadUriSuffix: '/x86_64/${PACKAGE}-${VERSION}.apk',
+    poolUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
+}
 
 // Docker images and native OS libraries need to be registered as "other" while others are scenario dependant
 const linuxPackageInfoExtractionConfig = {
-    apt: {
-        // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
-        // Output: <package>    <version>
-        // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
-        // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
-        namePrefix: 'Debian Package:',
-        listCommand: "dpkg-query --show -f='\\${Package} ~~v~~ \\${Version}\n'",
-        lineRegEx: /(.+) ~~v~~ (.+)/,
-        getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
-        downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
-        poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
-    },
-    apk: {
-        // Command to get package versions: apk info -e -v <package>
-        // Output: <package-with-maybe-dashes>-<version-with-dashes>
-        // Command to get download URLs: apk policy
-        namePrefix: 'Alpine Package:',
-        listCommand: "apk info -e -v",
-        lineRegEx: /(.+)-([0-9].+)/,
-        getUriCommand: 'apk update && apk policy',
-        downloadUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
-        downloadUriSuffix: '/x86_64/${PACKAGE}-${VERSION}.apk',
-        poolUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
-    }
+    apt: aptConfig,
+    apk: apkConfig,
+    alpine: aptConfig,
+    debian: aptConfig,
+    ubuntu: aptConfig
 }
-linuxPackageInfoExtractionConfig.alpine = linuxPackageInfoExtractionConfig.apk;
-linuxPackageInfoExtractionConfig.debian = linuxPackageInfoExtractionConfig.apt;
-linuxPackageInfoExtractionConfig.ubuntu = linuxPackageInfoExtractionConfig.apt;
 
 /* This function converts the contents of /etc/os-release from this:
 
@@ -63,7 +68,7 @@ to an object like this:
     bugReportUrl: "https://bugs.debian.org/"
 }
 */
-async function getLinuxDistroInfo(imageTagOrContainerName) {
+async function getLinuxDistroInfo(imageTagOrContainerName: string): Promise<DistroInfo> {
     const info = {};
     const osInfoCommandOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 'cat /etc/os-release', true);
     const osInfoLines = osInfoCommandOutput.split('\n');
@@ -74,12 +79,12 @@ async function getLinuxDistroInfo(imageTagOrContainerName) {
             info[propName] = infoLineParts[1].replace(/"/g,'').trim();    
         }
     })
-    return info;
+    return <DistroInfo>info;
 }
 
 // Convert SNAKE_CASE to snakeCase ... well, technically camelCase :)
-function snakeCaseToCamelCase(variableName) {
-    return variableName.split('').reduce((prev, next) => {
+function snakeCaseToCamelCase(variableName: string) {
+    return variableName.split('').reduce((prev: string, next: string) => {
         if(prev.charAt(prev.length-1) === '_') {
             return prev.substr(0, prev.length-1) + next.toLocaleUpperCase();
         }
@@ -98,11 +103,10 @@ function snakeCaseToCamelCase(variableName) {
 
 Defaults to "cgIgnore": true, "markdownIgnore": false given base packages don't need to be registered
 */   
-async function getLinuxPackageInfo(imageTagOrContainerName, packageList, linuxDistroInfo) {
+async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList: string[] = [], linuxDistroInfo: DistroInfo): Promise<PackageInfo[]> {
     // Merge in default dependencies
-    packageList = packageList || [];
     const packageManager = getLinuxPackageManagerForDistro(linuxDistroInfo.id);
-    const defaultPackages = configUtils.getDefaultDependencies(packageManager) || [];
+    const defaultPackages = getDefaultDependencies(packageManager) || [];
     packageList = defaultPackages.concat(packageList);
 
     // Return empty array if no packages
@@ -168,7 +172,7 @@ async function getLinuxPackageInfo(imageTagOrContainerName, packageList, linuxDi
                 name: package,
                 version: version,
                 poolUrl: poolUrl,
-                poolKeyUrl: configUtils.getPoolKeyForPoolUrl(poolUrl),
+                poolKeyUrl: getPoolKeyForPoolUrl(poolUrl),
                 annotation: packageSettings.annotation,
                 cgIgnore: cgIgnore,
                 markdownIgnore: packageSettings.markdownIgnore
@@ -189,7 +193,7 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config,
         .exec(packageUriCommandOutput);
 
     if (!uriCaptureGroup) {
-        const fallbackPoolUrl = configUtils.getFallbackPoolUrl(package);
+        const fallbackPoolUrl = getFallbackPoolUrl(package);
         if (fallbackPoolUrl) {
             return fallbackPoolUrl;
         } 
@@ -207,10 +211,10 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config,
     version: "7.23.0"
 }
 */
-async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList) {
+async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList): Promise<PackageInfo[]> {
     // Merge in default dependencies
     packageList = packageList || [];
-    const defaultPackages = configUtils.getDefaultDependencies('npm') || [];
+    const defaultPackages = getDefaultDependencies('npm') || [];
     packageList = defaultPackages.concat(packageList);
     
     // Return empty array if no packages
@@ -256,10 +260,10 @@ async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList) {
     version: "2.6.0"
 }
 */
-async function getPipPackageInfo(imageTagOrContainerName, packageList, usePipx) {
+async function getPipPackageInfo(imageTagOrContainerName, packageList, usePipx): Promise<PackageInfo[]> {
     // Merge in default dependencies
     packageList = packageList || [];
-    const defaultPackages = configUtils.getDefaultDependencies(usePipx ? 'pipx' : 'pip') || [];
+    const defaultPackages = getDefaultDependencies(usePipx ? 'pipx' : 'pip') || [];
     packageList = defaultPackages.concat(packageList);
     
     // Return empty array if no packages
@@ -312,9 +316,9 @@ async function getPipxVersionLookup(imageTagOrContainerName) {
     commitHash: "cddac7177abc358f44efb469af43191922273705"
 }
 */
-async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos) {
+async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos): Promise<PackageInfo[]> {
     // Merge in default dependencies
-    const defaultPackages = configUtils.getDefaultDependencies('git');
+    const defaultPackages = getDefaultDependencies('git');
     if(defaultPackages) {
         const merged = defaultPackages;
         for(let otherName in gitRepos) {
@@ -354,10 +358,10 @@ async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos) {
     downloadUrl: "https://pecl.php.net/get/xdebug-2.9.6.tgz"
 }
 */
-async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, otherType) {
+async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, otherType): Promise<PackageInfo[]> {
     otherType = otherType || 'other';
     // Merge in default dependencies
-    const defaultPackages = configUtils.getDefaultDependencies(otherType);
+    const defaultPackages = getDefaultDependencies(otherType);
     if(defaultPackages) {
         const merged = defaultPackages;
         for(let otherName in otherComponents) {
@@ -381,7 +385,7 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, o
             componentList.push({
                 name: otherName,
                 version: otherVersion,
-                downloadUrl: otherSettings.downloadUrl,
+                url: otherSettings.downloadUrl,
                 path: otherSettings.path,
                 annotation: otherSettings.annotation,
                 cgIgnore: otherSettings.cgIgnore,
@@ -395,7 +399,7 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, o
 
 // Merge in default config for specified otherName if it exists
 function mergeOtherDefaultSettings(otherName, settings) {
-    const otherDefaultSettings = configUtils.getConfig('otherDependencyDefaultSettings', null);
+    const otherDefaultSettings = getConfig('otherDependencyDefaultSettings', null);
     if (!otherDefaultSettings || !otherDefaultSettings[otherName] ) {
         return settings;
     }
@@ -414,10 +418,10 @@ function mergeOtherDefaultSettings(otherName, settings) {
     version: "13.0.1"
 }
 */
-async function getGemPackageInfo(imageTagOrContainerName, packageList) {
+async function getGemPackageInfo(imageTagOrContainerName, packageList): Promise<PackageInfo[]> {
     // Merge in default dependencies
     packageList = packageList || [];
-    const defaultPackages = configUtils.getDefaultDependencies('gem') || [];
+    const defaultPackages = getDefaultDependencies('gem') || [];
     packageList = defaultPackages.concat(packageList);
     
     // Return empty array if no packages
@@ -443,9 +447,9 @@ async function getGemPackageInfo(imageTagOrContainerName, packageList) {
     version: "1.4.17-stable"
 }
 */
-async function getCargoPackageInfo(imageTagOrContainerName, packages) {
+async function getCargoPackageInfo(imageTagOrContainerName, packages): Promise<PackageInfo[]> {
     // Merge in default dependencies
-    const defaultPackages = configUtils.getDefaultDependencies('go');
+    const defaultPackages = getDefaultDependencies('go');
     if(defaultPackages) {
         const merged = defaultPackages;
         for(let package in packages) {
@@ -484,9 +488,9 @@ async function getCargoPackageInfo(imageTagOrContainerName, packages) {
     version: "0.6.4"
 }
 */
-async function getGoPackageInfo(imageTagOrContainerName, packages) {
+async function getGoPackageInfo(imageTagOrContainerName, packages): Promise<PackageInfo[]> {
     // Merge in default dependencies
-    const defaultPackages = configUtils.getDefaultDependencies('go');
+    const defaultPackages = getDefaultDependencies('go');
     if(defaultPackages) {
         const merged = defaultPackages;
         for(let package in packages) {
@@ -528,13 +532,25 @@ async function getGoPackageInfo(imageTagOrContainerName, packages) {
     "digest": "sha256:c33d4c1938625a1d0cda78102127b81935e0e94785bc4810b71b5f236dd935e"
 }
 */
-async function getImageInfo(imageTagOrContainerName) {
+async function getImageInfo(imageTagOrContainerName): Promise<ImageInfo> {
     let image = imageTagOrContainerName;
     if(isContainerName(imageTagOrContainerName)) {
         image = await asyncUtils.spawn('docker', ['inspect', "--format='{{.Image}}'", imageTagOrContainerName.trim()], { shell: true, stdio: 'pipe' });
     }
-    const imageNameAndDigest = await asyncUtils.spawn('docker', ['inspect', "--format='{{index .RepoDigests 0}}'", image], { shell: true, stdio: 'pipe' });
-    const [name, digest] = imageNameAndDigest.trim().split('@');
+    // If image not yet published, there will be no repo digests, so set to N/A if that is the case
+    let name: string, digest: string;
+    try {
+        const imageNameAndDigest = await asyncUtils.spawn('docker', ['inspect', "--format='{{index .RepoDigests 0}}'", image], { shell: true, stdio: 'pipe' });
+        [name, digest] = imageNameAndDigest.trim().split('@');
+    } catch(err) {
+        if(err.result.indexOf('Template parsing error') > 0) {
+            name = 'N/A';
+            digest = 'N/A';
+        } else {
+            throw err;
+        }
+    }
+
     const nonRootUser = await getCommandOutputFromContainer(imageTagOrContainerName, 'id -un 1000', true)
     return {
         "name": name,
@@ -561,7 +577,7 @@ async function removeProcessingContainer(containerName) {
 // Utility that executes commands inside a container. If a specially formatted container 
 // name is passed in, the function will use "docker exec" and otherwise use "docker run" 
 // since this means an image tag was passed in instead.
-async function getCommandOutputFromContainer(imageTagOrContainerName, command, forceRoot) {
+async function getCommandOutputFromContainer(imageTagOrContainerName: string, command: string, forceRoot: boolean = false) {
     const runArgs = isContainerName(imageTagOrContainerName) ?
         ['exec'].concat(forceRoot ? ['-u', 'root'] : [])
         : ['run','--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);

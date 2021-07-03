@@ -6,6 +6,8 @@
 import * as path from 'path';
 import { jsonc } from 'jsonc';
 import { Lookup } from './common';
+import * as asyncUtils from '../utils/async';
+import { getConfig } from '../utils/config';
 
 export interface Dependency {
     name: string;
@@ -50,6 +52,10 @@ export class Definition {
     variants: string[];
     build: BuildSettings;
     dependencies?: Dependencies;
+    devcontainerJson?: {};
+    devcontainerJsonString?: string;
+    hasManifest: boolean = false;
+    hasBaseDockerfile: boolean = false;
 
     // Parent is either a single definition or a lookup of variants to definitions
     parentDefinitions?: Map<string | undefined, Definition>;
@@ -58,18 +64,31 @@ export class Definition {
     path: string;
     relativePath: string;
     repositoryPath: string;
+    libraryScriptsPath: string;
 
-    constructor(id: string, repositoryPath: string) {
+    constructor(id: string, definitionPath, repositoryPath: string) {
         this.id = id;
         this.repositoryPath = repositoryPath;
+        this.path = definitionPath;
+        this.relativePath = path.relative(this.repositoryPath, this.path);
     }
 
-    // Loads definition-manifest.json and adds it to config
-    async load(manifestPath: string): Promise<void> {
-        const definitionManifest = await jsonc.read(manifestPath);
-        Object.assign(this, definitionManifest);
-        this.path = path.dirname(manifestPath);
-        this.relativePath = path.relative(this.repositoryPath, this.path);
+    // Loads definition-manifest.json, devcontainer.json
+    async load(): Promise<void> {
+        const manifestPath = path.join(this.path, getConfig('definitionBuildConfigFile', 'definition-manifest.json'));
+        if(await asyncUtils.exists(manifestPath)) {
+            this.hasManifest = true;
+            const definitionManifest = await jsonc.read(manifestPath);
+            Object.assign(this, definitionManifest);
+        }
+        this.devcontainerJsonString = await asyncUtils.readFile(path.join(this.path, '.devcontainer', 'devcontainer.json'));
+        this.devcontainerJson = jsonc.parse(this.devcontainerJsonString);
+        this.hasBaseDockerfile = await asyncUtils.exists(path.join(this.path,'.devcontainer', 'base.Dockerfile'));
+        const libraryScriptsPath = path.join(this.path,'.devcontainer', 'base.Dockerfile');
+        if (await asyncUtils.exists(libraryScriptsPath)) {
+            this.libraryScriptsPath = libraryScriptsPath;
+        }
+
     }
 
     // Generate 'latest' flavor of a given definition's tag
@@ -144,6 +163,15 @@ export class Definition {
         return 'dev';
     }
 
+    // Get the major part of the version number
+    majorFromRelease(versionOrRelease: string): string {
+        const version = this.getVersionFromRelease(versionOrRelease);
+        if (version === 'dev') {
+            return 'dev';
+        }
+        const versionParts = version.split('.');
+        return versionParts[0];
+    }
 
     /* 
     Generate complete list of tags for a given definition.
@@ -236,4 +264,33 @@ export class Definition {
         const parentVersion = parentDefinition.definitionVersion || version;
         return parentDefinition.getTagsForVersion(parentVersion, registry, repository, variant)[0];
     }
+
+    // Get the path to the dockerfile for the definitions
+    async getDockerfilePath(userDockerfile: boolean = false) {
+        if(!userDockerfile && this.hasBaseDockerfile) {
+            return path.join(this.path,'.devcontainer', 'base.Dockerfile');
+        }
+        const dockerFilePath = path.join(this.path, '.devcontainer', 'Dockerfile');
+        if (await asyncUtils.exists(dockerFilePath)) {
+            return dockerFilePath;
+        }
+    }
+
+    // Write an updated devcontainer json file and store any changes in the object
+    async updateDevcontainerJson(content: string) {
+        this.devcontainerJsonString = content;
+        this.devcontainerJson = jsonc.parse(content);
+        await asyncUtils.writeFile(path.join(this.path, '.devcontainer', 'devcontainer.json') ,content);
+    }
+
+    // Read the dockerfile for the definition
+    async readDockerfile(userDockerfile: boolean=false): Promise<string> {
+        return await asyncUtils.readFile(await this.getDockerfilePath(userDockerfile));
+    }
+
+    // Read the dockerfile for the definition
+    async writeDockerfile(content: string, userDockerfile: boolean=false): Promise<void> {
+        await asyncUtils.writeFile(await this.getDockerfilePath(userDockerfile),content);
+    }
+
 }

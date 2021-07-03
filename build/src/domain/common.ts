@@ -2,23 +2,32 @@ export interface Lookup<T> {
     [key: string]: T
 }
 
+export interface CommonParams {
+    repo: string;
+    release: string;
+    registry: string;
+    repository: string;
+    stubRegistry:string;
+    stubRepository: string;
+}
+
 export interface PackageInfo {
     name: string;
     version: string;
-    cgIgnore: boolean;
-    markdownIgnore: boolean;
+    url?: string;
+    path?: string;
     annotation?: string;
     poolUrl?: string;
     poolKeyUrl?: string;
-    path?: string;
-    repositoryUrl?: string;
     commitHash?: string;
-    downloadUrl?: string;
+    cgIgnore?: boolean;
+    markdownIgnore?: boolean;
 }
 
 export interface ImageInfo {
     name: string;
     digest: string;
+    user: string;
 }
 
 export interface DistroInfo extends Lookup<string> {
@@ -34,6 +43,52 @@ export interface DistroInfo extends Lookup<string> {
     bugReportUrl?: string;
 }
 
+export interface Component {
+    Component: {
+        Type: string;
+        Linux?: {
+            Name: string;
+            Version: string;
+            Distribution: string;
+            Release: string;
+            "Pool-URL": string;
+            "Key-URL": string;
+        },
+        Npm?: {
+            Name: string;
+            Version: string;
+        },
+        Pip?: {
+            Name: string;
+            Version: string;
+        }
+        Git?: {
+            Name: string;
+            repositoryUrl: string;
+            commitHash: string;
+        },
+        Other?: {
+            Name: string;
+            Version: string;
+            DownloadUrl: string;
+        },
+        RubyGems?: {
+            Name: string;
+            Version: string;
+        },
+        Cargo?: {
+            Name: string;
+            Version: string;
+        },
+        Go?: {
+            Name: string;
+            Version: string;
+        }
+    }
+    markdownIgnore?: boolean;
+    cgIgnore?: boolean;
+}
+
 export interface Formatter {
     image: ((info: ImageInfo) => any) | null;
     distro: ((info: DistroInfo) => any) | null;
@@ -47,5 +102,6 @@ export interface Formatter {
     git: ((info: PackageInfo) => any) | null;
     other: ((info: PackageInfo) => any) | null;
     languages:((info: PackageInfo) => any) | null;
-    manual: ((info: PackageInfo) => any) | null;
+    manual: ((info: Component) => any) | null;
 }
+

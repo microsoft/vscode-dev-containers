@@ -3,6 +3,8 @@
  *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
  *-------------------------------------------------------------------------------------------------------------*/
 
+import { DistroInfo, ImageInfo, PackageInfo, Component, Formatter } from "../domain/common";
+
 /* 
 Returns: 
 
@@ -14,7 +16,7 @@ Returns:
 }
 
 */
-function nameAndVersionNormalizer(packageInfo) {
+function nameAndVersionNormalizer(packageInfo: PackageInfo): PackageInfo {
     if (packageInfo.markdownIgnore) {
         return null;
     }
@@ -25,7 +27,6 @@ function nameAndVersionNormalizer(packageInfo) {
         return null;
     }
     normalized.version = normalized.version.replace(/\n/g,'<br />');
-    normalized.url = packageInfo.downloadUrl || packageInfo.repositoryUrl;
     normalized.path = normalized.path ? normalized.path.replace(/\n/g,'<br />') : normalized.path;
     return normalized;
 }
@@ -51,8 +52,8 @@ Returns:
 }
 
 */
-function componentNormalizer(component) {
-    if (component.markdownIgnore ||component.MarkdownIgnore ) {
+function componentNormalizer(component: Component): PackageInfo {
+    if (component.markdownIgnore) {
         return null;
     }
     let componentType = component.Component.Type;
@@ -68,24 +69,22 @@ function componentNormalizer(component) {
     }
 }
 
-function getFormatter() {
-    return {
-        image: (info) => info,
-        distro:  (info) => info,
-        linux: nameAndVersionNormalizer,
-        npm: nameAndVersionNormalizer,
-        pip: nameAndVersionNormalizer,
-        pipx: nameAndVersionNormalizer,
-        gem: nameAndVersionNormalizer,
-        cargo: nameAndVersionNormalizer,
-        go: nameAndVersionNormalizer,
-        git: nameAndVersionNormalizer,
-        other: nameAndVersionNormalizer,
-        languages: nameAndVersionNormalizer,
-        manual: componentNormalizer
+export class MarkdownFormatter implements Formatter {
+    image(info: ImageInfo) {
+        return info;
     }
-}
-
-module.exports = {
-    getFormatter: getFormatter
+    distro(info: DistroInfo) {
+        return info;
+    }
+    linux = nameAndVersionNormalizer;
+    npm = nameAndVersionNormalizer;
+    pip = nameAndVersionNormalizer;
+    pipx = nameAndVersionNormalizer;
+    gem = nameAndVersionNormalizer;
+    cargo = nameAndVersionNormalizer;
+    go = nameAndVersionNormalizer;
+    git = nameAndVersionNormalizer;
+    other = nameAndVersionNormalizer;
+    languages = nameAndVersionNormalizer;
+    manual = componentNormalizer;
 }

@@ -7,37 +7,10 @@ import * as os from 'os';
 import * as path from 'path';
 import * as glob from 'glob';
 import { Dirent } from 'fs';
-import { jsonc } from 'jsonc';
 import * as asyncUtils from '../utils/async';
-import { OtherDependency, Dependencies, Definition } from './definition';
+import { GlobalConfig, getConfig } from '../utils/config';
+import { Definition } from './definition';
 import { Lookup } from './common';
-import { lookup } from 'dns';
-
-interface GlobalConfig {
-    commonDependencies?: Dependencies;
-    containerRegistry: string;
-    containerRegistryPath: string;
-    stubRegistry: string;
-    stubRegistryPath: string;
-    githubRepoName: string;
-    containersPathInRepo: string;
-    historyFolderName: string;
-    repoContainersToBuildPath: string;
-    scriptLibraryPathInRepo: string;
-    scriptLibraryFolderNameInDefinition: string;
-    historyUrlPrefix: string;
-    repositoryUrl: string;
-    imageLabelPrefix: string;
-    definitionBuildConfigFile: string;
-    devContainerJsonPreamble: string;
-    dockerFilePreamble: string;
-    filesToStage: string[];
-    needsDedicatedPage?: string[];
-    flattenBaseImage?: string[];
-    poolKeys: Lookup<string>;
-    poolUrlFallback: Lookup<string>;
-    otherDependencyDefaultSettings?: Lookup<OtherDependency>;
-}
 
 interface DefinitionVariant {
     definition: Definition;
@@ -49,11 +22,12 @@ let repositoryPath = path.join(__dirname, '..', '..', '..');
 const stagingFolders: Lookup<string> = {};
 const definitionLookup: Lookup<Definition> = {};
 const definitionTagLookup: Lookup<DefinitionVariant> = {};
+const fullDefinitionListLookup: Lookup<Definition> = {};
 
 // Must be called first
-export async function loadConfig(repoPath: string): Promise<void> {
-    repositoryPath = repoPath || repositoryPath;
-    config = await jsonc.read(path.join(__dirname, '..', '..', 'config.json'));
+export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void> {
+    config = globalConfig;
+    repositoryPath = config.repositoryPath;
     const definitionBuildConfigFile = getConfig('definitionBuildConfigFile', 'definition-manifest.json');
 
     // Get list of definition folders
@@ -75,13 +49,13 @@ export async function loadConfig(repoPath: string): Promise<void> {
             return;
         }
 
-        // If definition-manifest.json exists, load it
-        const manifestPath = path.join(definitionPath, definitionBuildConfigFile);
-        if (await asyncUtils.exists(manifestPath)) {
-            const definition = new Definition(definitionId, repoPath);
-            await definition.load(manifestPath);
+        // Load definitions and if definition-manifest.json exists, load it
+        const definition = new Definition(definitionId, definitionPath, repoPath);
+        await definition.load();
+        if(definition.hasManifest) {
             definitionLookup[definitionId] = definition;
         }
+        fullDefinitionListLookup[definitionId] = definition;
     });
 
     // Load repo containers to build
@@ -90,9 +64,10 @@ export async function loadConfig(repoPath: string): Promise<void> {
     await asyncUtils.forEach(repoContainerManifestFiles, async (manifestFilePath: string) => {
         const definitionPath = path.resolve(path.dirname(manifestFilePath));
         const definitionId = path.relative(repoContainersToBuildPath, definitionPath);
-        const definition = new Definition(definitionId, repoPath);
-        await definition.load(manifestFilePath);
+        const definition = new Definition(definitionId, definitionPath, repoPath);
+        await definition.load();
         definitionLookup[definitionId] = definition;
+        fullDefinitionListLookup[definitionId] = definition;
     });
 
     // Populate associations, tag lookup, and image variants for registrations
@@ -154,29 +129,13 @@ function populateParentAssociations(definition: Definition) {
     }
 }
 
-
-// Get a value from the config file or a similarly named env var
-export function getConfig(property: string, defaultVal?: string | {} | []) {
-    defaultVal = defaultVal || null;
-    // Generate env var name from property - camelCase to CAMEL_CASE
-    const envVar = property.split('').reduce((prev, next) => {
-        if (next >= 'A' && next <= 'Z') {
-            return prev + '_' + next;
-        } else {
-            return prev + next.toLocaleUpperCase();
-        }
-    }, '');
-
-    return process.env[envVar] || config[property] || defaultVal;
-}
-
 // Returns location of the definition based on Id
 export function getDefinitionPath(definitionId: string, relative: boolean = false): string {
     return relative ? definitionLookup[definitionId].relativePath : definitionLookup[definitionId].path
 }
 
-export function getAllDefinitions(): Lookup<Definition> {
-    return definitionLookup;
+export function getAllDefinitions(includeDefinitionsWithoutManifests: boolean = false): Lookup<Definition> {
+    return includeDefinitionsWithoutManifests ? definitionLookup : fullDefinitionListLookup;
 }
 
 export function getDefinition(definitionId: string): Definition {
@@ -310,17 +269,6 @@ export function getDefinitionDependencies(definitionId: string) {
     return definitionLookup[definitionId].dependencies;
 }
 
-export function getPoolKeyForPoolUrl(poolUrl: string) {
-    const poolKey = config.poolKeys[poolUrl];
-    return poolKey;
-}
-
-export function getFallbackPoolUrl(linuxPackage: string) {
-    const poolUrl = config.poolUrlFallback[linuxPackage];
-    console.log (`(*) Fallback pool URL for ${linuxPackage} is ${poolUrl}`);
-    return poolUrl;
-}
-
 export async function getStagingFolder(release: string) {
     if (!stagingFolders[release]) {
         const stagingFolder = path.join(os.tmpdir(), 'vscode-dev-containers', release);
@@ -336,16 +284,6 @@ export async function getStagingFolder(release: string) {
     }
     return stagingFolders[release];
 }
-
-export function shouldFlattenDefinitionBaseImage(definitionId) {
-    return (getConfig('flattenBaseImage', []).indexOf(definitionId) >= 0)
-}
-
-export function getDefaultDependencies(dependencyType) {
-    const packageManagerConfig = getConfig('commonDependencies');
-    return packageManagerConfig ? packageManagerConfig[dependencyType] : null;
-} 
-
 
 // Walk definition associations, bucket by root parent, then paginate and return the requested page
 export function getSortedDefinitionBuildList(page: number = 1, pageTotal: number = 1, definitionIdsToSkip: string[] = []) {

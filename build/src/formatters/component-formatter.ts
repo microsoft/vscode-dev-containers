@@ -3,51 +3,7 @@
  *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
  *-------------------------------------------------------------------------------------------------------------*/
 
-import { PackageInfo, ImageInfo, DistroInfo, Formatter } from '../domain/common'
-
-export interface Component {
-    Component: {
-        Type: string;
-        Linux?: {
-            Name: string;
-            Version: string;
-            Distribution: string;
-            Release: string;
-            "Pool-URL": string;
-            "Key-URL": string;
-        },
-        Npm?: {
-            Name: string;
-            Version: string;
-        },
-        Pip?: {
-            Name: string;
-            Version: string;
-        }
-        Git?: {
-            Name: string;
-            repositoryUrl: string;
-            commitHash: string;
-        },
-        Other?: {
-            Name: string;
-            Version: string;
-            DownloadUrl: string;
-        },
-        RubyGems?: {
-            Name: string;
-            Version: string;
-        },
-        Cargo?: {
-            Name: string;
-            Version: string;
-        },
-        Go?: {
-            Name: string;
-            Version: string;
-        }
-    }
-}
+import { PackageInfo, DistroInfo, Component, Formatter } from '../domain/common'
 
 /* Generate "Linux" entry for linux packages. E.g.
 {
@@ -158,7 +114,7 @@ function gitComponentFormatter(repositoryInfo: PackageInfo) {
             "Type": "git",
             "Git": {
                 "Name": repositoryInfo.name,
-                "repositoryUrl": repositoryInfo.repositoryUrl,
+                "repositoryUrl": repositoryInfo.url,
                 "commitHash": repositoryInfo.commitHash
             }
         }
@@ -177,17 +133,17 @@ function gitComponentFormatter(repositoryInfo: PackageInfo) {
     }
 }
 */
-function otherComponentFormatter(componentInfo: PackageInfo) {
-    if (componentInfo.cgIgnore) {
+function otherComponentFormatter(packageInfo: PackageInfo) {
+    if (packageInfo.cgIgnore) {
         return null;
     }
     return {
         "Component": {
             "Type": "other",
             "Other": {
-                "Name": componentInfo.name,
-                "Version": componentInfo.version,
-                "DownloadUrl": componentInfo.downloadUrl
+                "Name": packageInfo.name,
+                "Version": packageInfo.version,
+                "DownloadUrl": packageInfo.url
             }
         }
     }   
@@ -270,12 +226,11 @@ function goComponentFormatter(packageInfo: PackageInfo) {
 }
 
 // Remove unused properties like markdownIgnore that only apply to other formatters
-function manualComponentFormatter(component: any) {
-    if (component.cgIgnore || component.CgIgnore || component.CGIgnore) {
+function manualComponentFormatter(component: Component) {
+    if (component.cgIgnore) {
         return null;
     }
     component.markdownIgnore = undefined;
-    component.MarkdownIgnore = undefined;
     return component;       
 }
 
