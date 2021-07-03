@@ -30,6 +30,10 @@ jobs:
       id: checkout
       uses: actions/checkout@v1
 
+    - name: Setup buildx
+      uses: docker/setup-buildx-action@a1c666d855a037f439ebb7bf701ee144fcadd307
+      id: buildx
+
     - name: Test script library
       id: test_script_library
       run: |

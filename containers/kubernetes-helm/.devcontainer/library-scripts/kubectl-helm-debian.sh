@@ -26,18 +26,20 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl if missing
-if ! dpkg -s curl ca-certificates gnupg2 > /dev/null 2>&1; then
+if ! dpkg -s curl ca-certificates coreutils gnupg2 > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
     fi
-    apt-get -y install --no-install-recommends curl ca-certificates gnupg2
+    apt-get -y install --no-install-recommends curl ca-certificates coreutils gnupg2
 fi
 
 ARCHITECTURE="$(uname -m)"
 case $ARCHITECTURE in
-    armv*) ARCHITECTURE="arm";;
-    aarch64) ARCHITECTURE="arm64";;
     x86_64) ARCHITECTURE="amd64";;
+    aarch64 | armv8*) ARCHITECTURE="arm64";;
+    aarch32 | armv7* | armvhf*) ARCHITECTURE="arm";;
+    i?86) ARCHITECTURE="386";;
+    *) echo "(!) Architecture $ARCHITECTURE unsupported"; exit 1 ;;
 esac
 
 # Install the kubectl, verify checksum
@@ -74,10 +76,15 @@ curl -sSL "https://get.helm.sh/${HELM_FILENAME}" -o "${TMP_HELM_FILENAME}"
 curl -sSL "https://github.com/helm/helm/releases/download/${HELM_VERSION}/${HELM_FILENAME}.asc" -o "${TMP_HELM_FILENAME}.asc"
 # todo - use aka.ms for keys
 curl -sSL "https://raw.githubusercontent.com/helm/helm/main/KEYS" -o /tmp/helm/KEYS
-echo "disable-ipv6" >> /tmp/helm/dirmngr.conf
 export GNUPGHOME="/tmp/helm/gnupg"
 mkdir -p "${GNUPGHOME}"
 chmod 700 ${GNUPGHOME}
+cat << 'EOF' > /tmp/helm/gnupg/dirmngr.conf
+disable-ipv6
+keyserver hkps://keys.openpgp.org
+keyserver hkp://keyserver.ubuntu.com:80
+keyserver hkp://keyserver.pgp.com
+EOF
 gpg -q --import "/tmp/helm/KEYS"
 if ! gpg --verify "${TMP_HELM_FILENAME}.asc" > /tmp/helm/gnupg/verify.log 2>&1; then
     echo "Verification failed!"

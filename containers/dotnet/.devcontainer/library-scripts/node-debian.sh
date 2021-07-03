@@ -13,6 +13,7 @@ export NVM_DIR=${1:-"/usr/local/share/nvm"}
 export NODE_VERSION=${2:-"lts/*"}
 USERNAME=${3:-"automatic"}
 UPDATE_RC=${4:-"true"}
+export NVM_VERSION="0.38.0"
 
 set -e
 
@@ -72,8 +73,9 @@ fi
 if type yarn > /dev/null 2>&1; then
     echo "Yarn already installed."
 else
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT)
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    # Import key safely (new method rather than deprecated apt-key approach) and install
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor > /usr/share/keyrings/yarn-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
     apt-get update
     apt-get -y install --no-install-recommends yarn
 fi
@@ -101,7 +103,7 @@ su ${USERNAME} -c "$(cat << EOF
     umask 0002
     # Do not update profile - we'll do this manually
     export PROFILE=/dev/null
-    curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
+    curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash 
     source ${NVM_DIR}/nvm.sh
     if [ "${NODE_VERSION}" != "" ]; then
         nvm alias default ${NODE_VERSION}

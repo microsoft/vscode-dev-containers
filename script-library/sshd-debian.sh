@@ -99,8 +99,10 @@ if [ "${CODESPACES}" != "true" ] || [ "${VSCDC_FIXED_SECRETS}" = "true" ] || [ !
     # Not codespaces, already run, or secrets already in environment, so return
     return
 fi
-if [ -f /workspaces/.codespaces/shared/.user-secrets.json ]; then
-   $(cat /workspaces/.codespaces/shared/.user-secrets.json | jq -r '.[] | select (.type=="EnvironmentVariable") | "export "+.name+"=\""+.value+"\""')
+if [ -f /workspaces/.codespaces/shared/.env ]; then
+    set -o allexport
+    . /workspaces/.codespaces/shared/.env
+    set +o allexport
 fi
 export VSCDC_FIXED_SECRETS=true
 EOF

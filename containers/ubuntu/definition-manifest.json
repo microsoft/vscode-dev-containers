@@ -1,6 +1,6 @@
 {
 	"variants": ["focal", "bionic"],
-	"definitionVersion": "0.201.6",
+	"definitionVersion": "0.201.7",
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",

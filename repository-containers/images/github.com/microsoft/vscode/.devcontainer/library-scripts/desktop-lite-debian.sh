@@ -25,7 +25,6 @@ PACKAGE_LIST="
     at-spi2-core \
     xterm \
     eterm \
-    tilix \
     nautilus\
     mousepad \
     seahorse \
@@ -92,16 +91,21 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get-update-if-needed
 
-# On older Ubuntu, Tilix is in a PPA. On Debian Strech, its in backports
+# On older Ubuntu, Tilix is in a PPA. on Debian strech its in backports.
 if [[ -z $(apt-cache --names-only search ^tilix$) ]]; then
-    apt-get install -y --no-install-recommends lsb-release
-    if [ "$(lsb_release -is)" = "Ubuntu" ]; then
+    . /etc/os-release
+    if [ "${ID}" = "ubuntu" ]; then
         apt-get install -y --no-install-recommends apt-transport-https software-properties-common
         add-apt-repository -y ppa:webupd8team/terminix
-    else
-        echo "deb http://deb.debian.org/debian $(lsb_release -cs)-backports main" > /etc/apt/sources.list.d/$(lsb_release -cs)-backports.list
+    elif [ "${VERSION_CODENAME}" = "stretch" ]; then
+        echo "deb http://deb.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/stretch-backports.list
     fi
     apt-get update
+    if [[ -z $(apt-cache --names-only search ^tilix$) ]]; then
+        echo "(!) WARNING: Tilix not available on ${ID} ${VERSION_CODENAME} architecture $(uname -m). Skipping."
+    else
+        PACKAGE_LIST="${PACKAGE_LIST} tilix"
+    fi
 fi
 
 # Install X11, fluxbox and VS Code dependencies
