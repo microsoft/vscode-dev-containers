@@ -190,6 +190,7 @@ async function generateReleaseNotesPart(contents, release, stubRegistry, stubReg
     const formattedContents = getFormattedContents(contents, markdownFormatter);
     formattedContents.hasPip = formattedContents.pip.length > 0 || formattedContents.pipx.length > 0;
     formattedContents.tags = configUtils.getTagList(definitionId, release, 'full-only', stubRegistry,  stubRegistryPath, variant),
+    formattedContents.architectures = configUtils.getBuildSettings(definitionId).architectures;
     formattedContents.variant = variant;
     return releaseNotesVariantPartTemplate(formattedContents);
 }

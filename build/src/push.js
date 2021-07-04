@@ -30,6 +30,16 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
     const stagingFolder = await configUtils.getStagingFolder(release);
     await configUtils.loadConfig(stagingFolder);
 
+    // Use or create builder
+    console.log('(*) Setting up builder...');
+    const builders = await asyncUtils.exec('docker buildx ls');
+    if(builders.indexOf('vscode-dev-containers') < 0) {
+        await asyncUtils.spawn('docker', ['buildx', 'create', '--use', '--name', 'vscode-dev-containers']);
+    } else {
+        await asyncUtils.spawn('docker', ['buildx', 'use', 'vscode-dev-containers']);
+    }
+    await asyncUtils.spawn('docker', ['run', '--privileged', '--rm', 'tonistiigi/binfmt', '--install', 'all']);
+
     // Build and push subset of images
     const definitionsToPush = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip);
     await asyncUtils.forEach(definitionsToPush, async (currentDefinitionId) => {
@@ -84,6 +94,18 @@ async function pushImage(definitionId, repo, release, updateLatest,
             // Determine tags to use
             const versionTags = configUtils.getTagList(definitionId, release, updateLatest, registry, registryPath, variant);
             console.log(`(*) Tags:${versionTags.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
+            let currentArchitecture = process.arch;
+            switch(currentArchitecture) {
+                case 'arm': currentArchitecture = 'linux/arm/v7'; break;
+                case 'aarch32': currentArchitecture = 'linux/arm/v7'; break;
+                case 'aarch64': currentArchitecture = 'linux/arm64'; break;
+                case 'x64': currentArchitecture = 'linux/amd64'; break;
+                case 'x32': currentArchitecture = 'linux/386'; break;
+                default: currentArchitecture = `linux/${currentArchitecture}`; break;
+            }
+            console.log(`(*) Current architecture: ${currentArchitecture} ${pushImages ? '' : ' - using current architecture since not pushing.'}`);
+            const architectures = configUtils.getBuildSettings(definitionId).architectures;
+            console.log(`(*) Supported architectures: ${architectures.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
 
             if (replaceImage || !await isDefinitionVersionAlreadyPublished(definitionId, release, registry, registryPath, variant)) {
                 const context = devContainerJson.build ? devContainerJson.build.context || '.' : devContainerJson.context || '.';
@@ -93,7 +115,8 @@ async function pushImage(definitionId, repo, release, updateLatest,
                     .concat(versionTags.reduce((prev, current) => prev.concat(['-t', current]), []));
                 const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };
                 await asyncUtils.spawn('docker', [
-                        'build', 
+                        'buildx',
+                        'build',
                         workingDir,
                         '-f', dockerFilePath, 
                         '--label', `version=${prepResult.meta.version}`,
@@ -101,16 +124,14 @@ async function pushImage(definitionId, repo, release, updateLatest,
                         '--label', `${imageLabelPrefix}.variant=${prepResult.meta.variant}`,
                         '--label', `${imageLabelPrefix}.release=${prepResult.meta.gitRepositoryRelease}`,
                         '--label', `${imageLabelPrefix}.source=${prepResult.meta.gitRepository}`,
-                        '--label', `${imageLabelPrefix}.timestamp='${prepResult.meta.buildTimestamp}'`
-                    ].concat(buildParams), spawnOpts);
-
-                // Push
-                if (pushImages) {
-                    console.log(`(*) Pushing...`);
-                    await asyncUtils.forEach(versionTags, async (versionTag) => {
-                        await asyncUtils.spawn('docker', ['push', versionTag], spawnOpts);
-                    });
-                } else {
+                        '--label', `${imageLabelPrefix}.timestamp='${prepResult.meta.buildTimestamp}'`,
+                        '--builder', 'vscode-dev-containers',
+                        '--progress', 'plain',
+                        '--platform', pushImages ? architectures.reduce((prev, current) => prev + ',' + current, '').substring(1) : currentArchitecture,
+                        pushImages ? '--push' : '--load',
+                        ...buildParams
+                    ], spawnOpts);
+                if (!pushImages) {
                     console.log(`(*) Skipping push to registry.`);
                 }
             } else {

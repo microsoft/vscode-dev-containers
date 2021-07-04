@@ -72,6 +72,7 @@ async function loadConfig(repoPath) {
         const buildSettings = config.definitionBuildSettings[definitionId];
         const definitionVariants = config.definitionVariants[definitionId];
         const dependencies = config.definitionDependencies[definitionId];
+        buildSettings.architecture = buildSettings.architecture || ['linux/amd64'];
 
         // Populate images list for variants for dependency registration
         dependencies.imageVariants = definitionVariants ?
@@ -587,11 +588,16 @@ function getDefaultDependencies(dependencyType) {
     return packageManagerConfig ? packageManagerConfig[dependencyType] : null;
 } 
 
+function getBuildSettings(definitionId) {
+    return config.definitionBuildSettings[definitionId];
+}
+
 module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
     getVariants: getVariants,
     getAllDefinitionPaths: getAllDefinitionPaths,
+    getBuildSettings: getBuildSettings,
     getDefinitionFromTag: getDefinitionFromTag,
     getDefinitionPath: getDefinitionPath,
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,
