@@ -62,7 +62,7 @@ async function pushImage(definitionId, repo, release, updateLatest,
     
     // Make sure there's a Dockerfile present
     if (!await asyncUtils.exists(dockerFilePath)) {
-        throw `Invalid path ${dockerFilePath}`;
+        throw `Definition ${definitionId} does not exist! Invalid path: ${definitionPath}`;
     }
 
     // Look for context in devcontainer.json and use it to build the Dockerfile
@@ -97,7 +97,7 @@ async function pushImage(definitionId, repo, release, updateLatest,
             let architectures = configUtils.getBuildSettings(definitionId).architectures;
             switch (typeof architectures) {
                 case 'string': architectures = [architectures]; break;
-                case 'object': if (!Array.isArray(architectures)) {  architectures = architectures[variant]; } break;
+                case 'object': if (!Array.isArray(architectures)) { architectures = architectures[variant]; } break;
                 case 'undefined': architectures = ['linux/amd64']; break;
             }
             console.log(`(*) Target image architectures: ${architectures.reduce((prev, current) => prev += `\n     ${current}`, '')}`);

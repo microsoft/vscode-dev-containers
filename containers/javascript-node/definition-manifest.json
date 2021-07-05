@@ -4,6 +4,7 @@
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
+		"architectures": ["linux/amd64", "linux/arm64", "linux/linux/arm/v7"],
 		"tags": [
 			"javascript-node:${VERSION}-${VARIANT}"
 		],
