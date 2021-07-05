@@ -94,19 +94,26 @@ async function pushImage(definitionId, repo, release, updateLatest,
             // Determine tags to use
             const versionTags = configUtils.getTagList(definitionId, release, updateLatest, registry, registryPath, variant);
             console.log(`(*) Tags:${versionTags.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
-            let currentArchitecture = process.arch;
-            switch(currentArchitecture) {
-                case 'arm': currentArchitecture = 'linux/arm/v7'; break;
-                case 'aarch32': currentArchitecture = 'linux/arm/v7'; break;
-                case 'aarch64': currentArchitecture = 'linux/arm64'; break;
-                case 'x64': currentArchitecture = 'linux/amd64'; break;
-                case 'x32': currentArchitecture = 'linux/386'; break;
-                default: currentArchitecture = `linux/${currentArchitecture}`; break;
+            let architectures = configUtils.getBuildSettings(definitionId).architectures;
+            switch (typeof architectures) {
+                case 'string': architectures = [architectures]; break;
+                case 'object': if (!Array.isArray(architectures)) {  architectures = architectures[variant]; } break;
+                case 'undefined': architectures = ['linux/amd64']; break;
             }
-            console.log(`(*) Current architecture: ${currentArchitecture} ${pushImages ? '' : ' - using current architecture since not pushing.'}`);
-            const architectures = configUtils.getBuildSettings(definitionId).architectures;
-            console.log(`(*) Supported architectures: ${architectures.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
-
+            console.log(`(*) Target image architectures: ${architectures.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
+            let localArchitecture = process.arch;
+            switch(localArchitecture) {
+                case 'arm': localArchitecture = 'linux/arm/v7'; break;
+                case 'aarch32': localArchitecture = 'linux/arm/v7'; break;
+                case 'aarch64': localArchitecture = 'linux/arm64'; break;
+                case 'x64': localArchitecture = 'linux/amd64'; break;
+                case 'x32': localArchitecture = 'linux/386'; break;
+                default: localArchitecture = `linux/${localArchitecture}`; break;
+            }
+            console.log(`(*) Local architecture: ${localArchitecture}`);
+            if (!pushImages) {
+                console.log(`(*) Push disabled: Only building local architecture (${localArchitecture}).`);
+            }
             if (replaceImage || !await isDefinitionVersionAlreadyPublished(definitionId, release, registry, registryPath, variant)) {
                 const context = devContainerJson.build ? devContainerJson.build.context || '.' : devContainerJson.context || '.';
                 const workingDir = path.resolve(dotDevContainerPath, context);
@@ -127,7 +134,7 @@ async function pushImage(definitionId, repo, release, updateLatest,
                         '--label', `${imageLabelPrefix}.timestamp='${prepResult.meta.buildTimestamp}'`,
                         '--builder', 'vscode-dev-containers',
                         '--progress', 'plain',
-                        '--platform', pushImages ? architectures.reduce((prev, current) => prev + ',' + current, '').substring(1) : currentArchitecture,
+                        '--platform', pushImages ? architectures.reduce((prev, current) => prev + ',' + current, '').substring(1) : localArchitecture,
                         pushImages ? '--push' : '--load',
                         ...buildParams
                     ], spawnOpts);

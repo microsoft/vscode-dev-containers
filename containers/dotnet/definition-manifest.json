@@ -4,7 +4,11 @@
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
-		"architectures": ["linux/amd64", "linux/arm/v7"],
+		"architectures": {
+			"5.0": ["linux/amd64", "linux/arm64", "linux/arm/v7"],
+			"3.1": ["linux/amd64", "linux/arm64", "linux/arm/v7"],
+			"2.1": ["linux/amd64", "linux/arm/v7"]
+		},
 		"tags": [
 			"dotnet:${VERSION}-${VARIANT}",
 			"dotnetcore:${VERSION}-${VARIANT}"
