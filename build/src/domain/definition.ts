@@ -5,7 +5,7 @@
 
 import * as path from 'path';
 import { jsonc } from 'jsonc';
-import { Lookup } from './common';
+import { Component, Lookup } from './common';
 import * as asyncUtils from '../utils/async';
 import { getConfig } from '../utils/config';
 
@@ -36,14 +36,17 @@ export interface Dependencies {
     imageLink: string;
     annotation?: string;
     apt?: (Dependency | string)[];
+    pip?: string[];
     pipx?: string[];
     git?: Lookup<string>;
     gem?: string[];
     cargo?: Lookup<string | null>;
     go?: Lookup<string | null>;
+    npm?: string[];
     other?: Lookup<OtherDependency | null>;
     languages?: Lookup<OtherDependency | null>;
     imageVariants?: string[];
+    manual: Component[];
 }
 
 export class Definition {

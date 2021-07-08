@@ -105,3 +105,4 @@ export interface Formatter {
     manual: ((info: Component) => any) | null;
 }
 
+

@@ -4,42 +4,62 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as asyncUtils from './async';
-import { DistroInfo, ImageInfo, PackageInfo } from '../domain/common';
+import { Component, DistroInfo, ImageInfo, Lookup, PackageInfo } from '../domain/common';
 import { getFallbackPoolUrl, getPoolKeyForPoolUrl, getDefaultDependencies, getConfig } from './config';
+import { Dependency, Dependencies, OtherDependency } from '../domain/definition';
 
-const aptConfig = {
-    // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
-    // Output: <package>    <version>
-    // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
-    // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
-    namePrefix: 'Debian Package:',
-    listCommand: "dpkg-query --show -f='\\${Package} ~~v~~ \\${Version}\n'",
-    lineRegEx: /(.+) ~~v~~ (.+)/,
-    getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
-    downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
-    poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
+export interface ExtractedInfo {
+    image: ImageInfo;
+    distro: DistroInfo,
+    linux: PackageInfo[];
+    npm: PackageInfo[];
+    pip: PackageInfo[];
+    pipx: PackageInfo[];
+    gem: PackageInfo[];
+    cargo: PackageInfo[];
+    go: PackageInfo[];
+    git: PackageInfo[];
+    other: PackageInfo[];
+    languages: PackageInfo[];
+    manual: Component[];
 }
 
-const apkConfig = {
-    // Command to get package versions: apk info -e -v <package>
-    // Output: <package-with-maybe-dashes>-<version-with-dashes>
-    // Command to get download URLs: apk policy
-    namePrefix: 'Alpine Package:',
-    listCommand: "apk info -e -v",
-    lineRegEx: /(.+)-([0-9].+)/,
-    getUriCommand: 'apk update && apk policy',
-    downloadUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
-    downloadUriSuffix: '/x86_64/${PACKAGE}-${VERSION}.apk',
-    poolUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
+interface LinuxPackageInfoExtractorConfig {
+    namePrefix: string;
+    listCommand: string;
+    lineRegEx: RegExp;
+    getUriCommand: string;
+    poolUriMatchRegEx: string;
+    downloadUriMatchRegEx: string;
+    downloadUriSuffix?: string,
 }
 
 // Docker images and native OS libraries need to be registered as "other" while others are scenario dependant
-const linuxPackageInfoExtractionConfig = {
-    apt: aptConfig,
-    apk: apkConfig,
-    alpine: aptConfig,
-    debian: aptConfig,
-    ubuntu: aptConfig
+const linuxPackageInfoExtractorConfigByDistro = {
+    apt: {
+        // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
+        // Output: <package>    <version>
+        // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
+        // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
+        namePrefix: 'Debian Package:',
+        listCommand: "dpkg-query --show -f='\\${Package} ~~v~~ \\${Version}\n'",
+        lineRegEx: /(.+) ~~v~~ (.+)/,
+        getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
+        downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
+        poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
+    } as LinuxPackageInfoExtractorConfig,
+    apk: {    
+        // Command to get package versions: apk info -e -v <package>
+        // Output: <package-with-maybe-dashes>-<version-with-dashes>
+        // Command to get download URLs: apk policy
+        namePrefix: 'Alpine Package:',
+        listCommand: "apk info -e -v",
+        lineRegEx: /(.+)-([0-9].+)/,
+        getUriCommand: 'apk update && apk policy',
+        downloadUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
+        downloadUriSuffix: '/x86_64/${PACKAGE}-${VERSION}.apk',
+        poolUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
+    } as LinuxPackageInfoExtractorConfig
 }
 
 /* This function converts the contents of /etc/os-release from this:
@@ -103,7 +123,7 @@ function snakeCaseToCamelCase(variableName: string) {
 
 Defaults to "cgIgnore": true, "markdownIgnore": false given base packages don't need to be registered
 */   
-async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList: string[] = [], linuxDistroInfo: DistroInfo): Promise<PackageInfo[]> {
+async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList: Array<string | Dependency> = [], linuxDistroInfo: DistroInfo): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const packageManager = getLinuxPackageManagerForDistro(linuxDistroInfo.id);
     const defaultPackages = getDefaultDependencies(packageManager) || [];
@@ -130,12 +150,12 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
     }, {});
 
     // Space separated list of packages for use in commands
-    const packageListCommandPart = packageList.reduce((prev, current) => {
+    const packageListCommandPart = packageList.reduce((prev: string, current: string | Dependency) => {
         return prev += ` ${typeof current === 'string' ? current : current.name}`;
     }, '');
 
     // Use the appropriate package lookup settings for distro
-    const extractionConfig = linuxPackageInfoExtractionConfig[packageManager];
+    const extractionConfig: LinuxPackageInfoExtractorConfig = linuxPackageInfoExtractorConfigByDistro[packageManager];
 
     // Generate and exec command to get installed package versions
     console.log('(*) Gathering information about Linux package versions...');
@@ -161,15 +181,15 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
                 }
                 return;
             }
-            const [, package, version ] = versionCaptureGroup;
-            const packageSettings = settings[package] || {};
+            const [, packageName, version ] = versionCaptureGroup;
+            const packageSettings = settings[packageName] || {};
             const cgIgnore =  typeof packageSettings.cgIgnore === 'undefined' ? true : packageSettings.cgIgnore; // default to true
-            const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, extractionConfig, package, version);
+            const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, extractionConfig, packageName, version);
             if(!cgIgnore && !poolUrl) {
                 throw new Error('(!) No pool URL found to register package!');
             }
             componentList.push({
-                name: package,
+                name: packageName,
                 version: version,
                 poolUrl: poolUrl,
                 poolKeyUrl: getPoolKeyForPoolUrl(poolUrl),
@@ -184,20 +204,20 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
 }
 
 // Gets a package pool URL out of a download URL - Needed for registering in cgmanifest.json
-function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config, package, version) {
+function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput: string, config: LinuxPackageInfoExtractorConfig, packageName: string, version: string) {
     // Handle regex reserved charters in regex strings and that ":" is treaded as "1%3a" on Debian/Ubuntu 
-    const sanitizedPackage = package.replace(/\+/g, '\\+').replace(/\./g, '\\.');
+    const sanitizedPackage = packageName.replace(/\+/g, '\\+').replace(/\./g, '\\.');
     const sanitizedVersion = version.replace(/\+/g, '\\+').replace(/\./g, '\\.').replace(/:/g, '%3a');
     const uriCaptureGroup = new RegExp(
         config.poolUriMatchRegEx.replace('${PACKAGE}', sanitizedPackage).replace('${VERSION}', sanitizedVersion), 'm')
         .exec(packageUriCommandOutput);
 
     if (!uriCaptureGroup) {
-        const fallbackPoolUrl = getFallbackPoolUrl(package);
+        const fallbackPoolUrl = getFallbackPoolUrl(packageName);
         if (fallbackPoolUrl) {
             return fallbackPoolUrl;
         } 
-        console.log(`(!) No URI found for ${package} ${version}.`);
+        console.log(`(!) No URI found for ${packageName} ${version}.`);
         return null;
     }
 
@@ -211,32 +231,32 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, config,
     version: "7.23.0"
 }
 */
-async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList): Promise<PackageInfo[]> {
+async function getNpmGlobalPackageInfo(imageTagOrContainerName: string, packageNameList: string[]): Promise<PackageInfo[]> {
     // Merge in default dependencies
-    packageList = packageList || [];
+    packageNameList = packageNameList || [];
     const defaultPackages = getDefaultDependencies('npm') || [];
-    packageList = defaultPackages.concat(packageList);
+    packageNameList = defaultPackages.concat(packageNameList);
     
     // Return empty array if no packages
-    if (packageList.length === 0) {
+    if (packageNameList.length === 0) {
         return [];
     }
 
     console.log(`(*) Gathering information about globally installed npm packages...`);
 
-    const packageListString = packageList.reduce((prev, current) => prev + ' ' + current, '');
+    const packageListString = packageNameList.reduce((prev, current) => prev + ' ' + current, '');
     const npmOutputRaw = await getCommandOutputFromContainer(imageTagOrContainerName, `bash -l -c 'set -e && npm ls --global --depth 1 --json ${packageListString}' 2>/dev/null`);
     const npmOutput = JSON.parse(npmOutputRaw);
 
-    return packageList.map((package) => {
-        let packageJson =  npmOutput.dependencies[package];
+    return packageNameList.map((packageName) => {
+        let packageJson =  npmOutput.dependencies[packageName];
         if (!packageJson) {
             // Possible desired package is referenced by another top level package, so check dependencies too.
             // E.g. tslint-to-eslint-config can cause typescript to not appear at top level in npm ls
             for (let packageInNpmOutput in npmOutput.dependencies) {
                 const packageDependencies = npmOutput.dependencies[packageInNpmOutput].dependencies;
                 if(packageDependencies) {
-                    packageJson = packageDependencies[package];
+                    packageJson = packageDependencies[packageName];
                     if(packageJson) {
                         break;
                     }    
@@ -244,10 +264,10 @@ async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList): Pr
             }
         }
         if(!packageJson || !packageJson.version) {
-            throw new Error(`Unable to parse version for ${package} from npm ls output: ${npmOutputRaw}`);
+            throw new Error(`Unable to parse version for ${packageName} from npm ls output: ${npmOutputRaw}`);
         }
         return {
-            name: package,
+            name: packageName,
             version:packageJson.version
         }
     });
@@ -260,14 +280,14 @@ async function getNpmGlobalPackageInfo(imageTagOrContainerName, packageList): Pr
     version: "2.6.0"
 }
 */
-async function getPipPackageInfo(imageTagOrContainerName, packageList, usePipx): Promise<PackageInfo[]> {
+async function getPipPackageInfo(imageTagOrContainerName: string, packageNameList: string[], usePipx: boolean): Promise<PackageInfo[]> {
     // Merge in default dependencies
-    packageList = packageList || [];
+    packageNameList = packageNameList || [];
     const defaultPackages = getDefaultDependencies(usePipx ? 'pipx' : 'pip') || [];
-    packageList = defaultPackages.concat(packageList);
+    packageNameList = defaultPackages.concat(packageNameList);
     
     // Return empty array if no packages
-    if (packageList.length === 0) {
+    if (packageNameList.length === 0) {
         return [];
     }
 
@@ -275,10 +295,10 @@ async function getPipPackageInfo(imageTagOrContainerName, packageList, usePipx):
     console.log('(*) Gathering information about pip packages...');
     const versionLookup = usePipx ? await getPipxVersionLookup(imageTagOrContainerName) : await getPipVersionLookup(imageTagOrContainerName);
 
-    return packageList.map((package) => {
+    return packageNameList.map((packageName) => {
         return {
-            name: package,
-            version: versionLookup[package]
+            name: packageName,
+            version: versionLookup[packageName]
         };
     });
 }
@@ -316,7 +336,7 @@ async function getPipxVersionLookup(imageTagOrContainerName) {
     commitHash: "cddac7177abc358f44efb469af43191922273705"
 }
 */
-async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos): Promise<PackageInfo[]> {
+async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: Lookup<string>): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const defaultPackages = getDefaultDependencies('git');
     if(defaultPackages) {
@@ -358,26 +378,25 @@ async function getGitRepositoryInfo(imageTagOrContainerName, gitRepos): Promise<
     downloadUrl: "https://pecl.php.net/get/xdebug-2.9.6.tgz"
 }
 */
-async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, otherType): Promise<PackageInfo[]> {
-    otherType = otherType || 'other';
+async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDependencyList: Lookup<OtherDependency | null>, otherType: string = 'other'): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const defaultPackages = getDefaultDependencies(otherType);
     if(defaultPackages) {
         const merged = defaultPackages;
-        for(let otherName in otherComponents) {
-            merged[otherName] = otherComponents[otherName];
+        for(let otherName in otherDependencyList) {
+            merged[otherName] = otherDependencyList[otherName];
         }
-        otherComponents = merged;
+        otherDependencyList = merged;
     }
     // Return empty array if no components
-    if (!otherComponents) {
+    if (!otherDependencyList) {
         return [];
     }
 
     console.log(`(*) Gathering information about "other" components...`);
     const componentList = [];
-    for(let otherName in otherComponents) {
-        const otherSettings = mergeOtherDefaultSettings(otherName, otherComponents[otherName]);
+    for(let otherName in otherDependencyList) {
+        const otherSettings = mergeOtherDefaultSettings(otherName, otherDependencyList[otherName]);
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
@@ -398,16 +417,16 @@ async function getOtherComponentInfo(imageTagOrContainerName, otherComponents, o
 }
 
 // Merge in default config for specified otherName if it exists
-function mergeOtherDefaultSettings(otherName, settings) {
+function mergeOtherDefaultSettings(otherName: string, dependency: OtherDependency) {
     const otherDefaultSettings = getConfig('otherDependencyDefaultSettings', null);
     if (!otherDefaultSettings || !otherDefaultSettings[otherName] ) {
-        return settings;
+        return dependency;
     }
     // Create a copy of default settings for merging
     const mergedSettings = Object.assign({}, otherDefaultSettings[otherName]);
-    settings = settings || {};
-    for (let settingName in settings) {
-        mergedSettings[settingName] = settings[settingName];
+    dependency = dependency || <OtherDependency>{};
+    for (let settingName in dependency) {
+        mergedSettings[settingName] = dependency[settingName];
     }
     return mergedSettings;
 }
@@ -418,7 +437,7 @@ function mergeOtherDefaultSettings(otherName, settings) {
     version: "13.0.1"
 }
 */
-async function getGemPackageInfo(imageTagOrContainerName, packageList): Promise<PackageInfo[]> {
+async function getGemPackageInfo(imageTagOrContainerName: string, packageList: string[]): Promise<PackageInfo[]> {
     // Merge in default dependencies
     packageList = packageList || [];
     const defaultPackages = getDefaultDependencies('gem') || [];
@@ -447,27 +466,27 @@ async function getGemPackageInfo(imageTagOrContainerName, packageList): Promise<
     version: "1.4.17-stable"
 }
 */
-async function getCargoPackageInfo(imageTagOrContainerName, packages): Promise<PackageInfo[]> {
+async function getCargoPackageInfo(imageTagOrContainerName: string, cargoPackages: Lookup<string | null>): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const defaultPackages = getDefaultDependencies('go');
     if(defaultPackages) {
         const merged = defaultPackages;
-        for(let package in packages) {
-            merged[package] = packages[package];
+        for(let packageName in cargoPackages) {
+            merged[packageName] = cargoPackages[packageName];
         }
-        packages = merged;
+        cargoPackages = merged;
     }
     // Return empty array if no packages
-    if (!packages) {
+    if (!cargoPackages) {
         return [];
     }
 
     const componentList = [];
     console.log(`(*) Gathering information about cargo packages...`);
 
-    for(let crate in packages) {
+    for(let crate in cargoPackages) {
         if (typeof crate === 'string') {
-            const versionCommand = packages[crate] || `${crate} --version`;
+            const versionCommand = cargoPackages[crate] || `${crate} --version`;
             console.log(`(*) Getting version for ${crate}...`);
             const versionOutput = await getCommandOutputFromContainer(imageTagOrContainerName, versionCommand);
             const crateVersionCaptureGroup = new RegExp('[0-9]+\\.[0-9]+\\.[0-9]+','m').exec(versionOutput);
@@ -488,36 +507,36 @@ async function getCargoPackageInfo(imageTagOrContainerName, packages): Promise<P
     version: "0.6.4"
 }
 */
-async function getGoPackageInfo(imageTagOrContainerName, packages): Promise<PackageInfo[]> {
+async function getGoPackageInfo(imageTagOrContainerName: string, goPackages: Lookup<string | null>): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const defaultPackages = getDefaultDependencies('go');
     if(defaultPackages) {
         const merged = defaultPackages;
-        for(let package in packages) {
-            merged[package] = packages[package];
+        for(let packageName in goPackages) {
+            merged[packageName] = goPackages[packageName];
         }
-        packages = merged;
+        goPackages = merged;
     }
     // Return empty array if no components
-    if (!packages) {
+    if (!goPackages) {
         return [];
     }
 
     console.log(`(*) Gathering information about go modules and packages...`);
     const componentList = [];
     const packageInstallOutput = await getCommandOutputFromContainer(imageTagOrContainerName, "cat /usr/local/etc/vscode-dev-containers/go.log");
-    for(let package in packages) {
-        if (typeof package === 'string') {
-            const versionCommand = packages[package];
+    for(let packageName in goPackages) {
+        if (typeof packageName === 'string') {
+            const versionCommand = goPackages[packageName];
             let version;
             if(versionCommand) {
                 version = await getCommandOutputFromContainer(imageTagOrContainerName, versionCommand);
             } else {
-                const versionCaptureGroup = new RegExp(`downloading\\s*${package}\\s*v([0-9]+\\.[0-9]+\\.[0-9]+.*)\\n`).exec(packageInstallOutput);
+                const versionCaptureGroup = new RegExp(`downloading\\s*${packageName}\\s*v([0-9]+\\.[0-9]+\\.[0-9]+.*)\\n`).exec(packageInstallOutput);
                 version = versionCaptureGroup ? versionCaptureGroup[1] : 'latest';
             }
             componentList.push({
-                name: package,
+                name: packageName,
                 version: version
             });
         }
@@ -532,7 +551,7 @@ async function getGoPackageInfo(imageTagOrContainerName, packages): Promise<Pack
     "digest": "sha256:c33d4c1938625a1d0cda78102127b81935e0e94785bc4810b71b5f236dd935e"
 }
 */
-async function getImageInfo(imageTagOrContainerName): Promise<ImageInfo> {
+async function getImageInfo(imageTagOrContainerName: string): Promise<ImageInfo> {
     let image = imageTagOrContainerName;
     if(isContainerName(imageTagOrContainerName)) {
         image = await asyncUtils.spawn('docker', ['inspect', "--format='{{.Image}}'", imageTagOrContainerName.trim()], { shell: true, stdio: 'pipe' });
@@ -563,21 +582,21 @@ async function getImageInfo(imageTagOrContainerName): Promise<ImageInfo> {
 // Command to start a container for processing. Returns a container name with a 
 // specific format that can be used to detect whether an image tag or container
 // name is passed into the content extractor functions.
-async function startContainerForProcessing(imageTag) {
+async function startContainerForProcessing(imageTag: string) {
     const containerName = `vscdc--extract--${Date.now()}`;
     await asyncUtils.spawn('docker', ['run', '-d', '--rm', '--init', '--privileged', '--name', containerName, imageTag, 'sh -c "while sleep 1000; do :; done"'], { shell: true, stdio: 'inherit' });
     return containerName;
 }
 
 // Removes the specified container
-async function removeProcessingContainer(containerName) {
+async function removeProcessingContainer(containerName: string): Promise<void> {
     await asyncUtils.spawn('docker', ['rm', '-f', containerName], { shell: true, stdio: 'inherit' });
 }
 
 // Utility that executes commands inside a container. If a specially formatted container 
 // name is passed in, the function will use "docker exec" and otherwise use "docker run" 
 // since this means an image tag was passed in instead.
-async function getCommandOutputFromContainer(imageTagOrContainerName: string, command: string, forceRoot: boolean = false) {
+async function getCommandOutputFromContainer(imageTagOrContainerName: string, command: string, forceRoot: boolean = false): Promise<string> {
     const runArgs = isContainerName(imageTagOrContainerName) ?
         ['exec'].concat(forceRoot ? ['-u', 'root'] : [])
         : ['run','--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);
@@ -595,7 +614,7 @@ function isContainerName(imageTagOrContainerName) {
 }
 
 // Use distro "ID" from /etc/os-release to determine appropriate package manger
-function getLinuxPackageManagerForDistro(distroId)
+function getLinuxPackageManagerForDistro(distroId: string): string
 {
     switch(distroId) {
         case 'apt':
@@ -608,7 +627,7 @@ function getLinuxPackageManagerForDistro(distroId)
 }
 
 // Return dependencies by mapping distro "ID" from /etc/os-release to determine appropriate package manger
-function getLinuxPackageManagerDependencies(dependencies, distroInfo) {
+function getLinuxPackageManagerDependencies(dependencies: Dependencies, distroInfo: DistroInfo) {
     if(dependencies[distroInfo.id]) {
         return dependencies[distroInfo.id];
     } 
@@ -616,7 +635,7 @@ function getLinuxPackageManagerDependencies(dependencies, distroInfo) {
 }
 
 // Spins up a container for a referenced image and extracts info for the specified dependencies
-async function getAllContentInfo(imageTag, dependencies) {
+export async function getAllContentInfo(imageTag: string, dependencies: Dependencies): Promise<ExtractedInfo> {
     const containerName = await startContainerForProcessing(imageTag);
     try {
         const distroInfo = await getLinuxDistroInfo(containerName);
@@ -631,8 +650,8 @@ async function getAllContentInfo(imageTag, dependencies) {
             cargo: await getCargoPackageInfo(containerName, dependencies.cargo),
             go: await getGoPackageInfo(containerName, dependencies.go),
             git: await getGitRepositoryInfo(containerName, dependencies.git),
-            other: await getOtherComponentInfo(containerName, dependencies.other, 'other'),
-            languages: await getOtherComponentInfo(containerName, dependencies.languages, 'languages'),
+            other: await getOtherDependencyInfo(containerName, dependencies.other, 'other'),
+            languages: await getOtherDependencyInfo(containerName, dependencies.languages, 'languages'),
             manual: dependencies.manual
         }    
         await removeProcessingContainer(containerName);
@@ -641,20 +660,4 @@ async function getAllContentInfo(imageTag, dependencies) {
         await removeProcessingContainer(containerName);
         throw e;
     }
-}
-
-module.exports = {
-    getImageInfo: getImageInfo,
-    getLinuxDistroInfo: getLinuxDistroInfo,
-    getLinuxPackageInfo: getLinuxPackageInfo,
-    getNpmGlobalPackageInfo: getNpmGlobalPackageInfo,
-    getPipPackageInfo: getPipPackageInfo,
-    getGemPackageInfo: getGemPackageInfo,
-    getCargoPackageInfo: getCargoPackageInfo,
-    getGoPackageInfo: getGoPackageInfo,
-    getGitRepositoryInfo: getGitRepositoryInfo,
-    getOtherComponentInfo: getOtherComponentInfo,
-    startContainerForProcessing: startContainerForProcessing,
-    removeProcessingContainer: removeProcessingContainer,
-    getAllContentInfo: getAllContentInfo
 }
