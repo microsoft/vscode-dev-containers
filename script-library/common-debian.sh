@@ -297,7 +297,7 @@ __bash_prompt() {
             && if git ls-files --error-unmatch -m --directory --no-empty-directory -o --exclude-standard ":/*" > /dev/null 2>&1; then \
                     echo -n " \[\033[1;33m\]✗"; \
                fi \
-            && echo -n "\[\033[0;36m\]) "; `'
+            && echo -n "\[\033[0;36m\]) "; \
         fi`'
     local lightblue='\[\033[1;34m\]'
     local removecolor='\[\033[0m\]'
