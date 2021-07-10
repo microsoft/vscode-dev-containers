@@ -108,9 +108,23 @@ export VSCDC_FIXED_SECRETS=true
 EOF
 )"
 
+# Add ENTRYPOINT script
+mkdir -p /usr/local/etc/devcontainer-entrypoint.d/
+cat << 'EOF' > /usr/local/bin/devcontainer-entrypoint
+#!/usr/bin/env bash
+for script in /usr/local/etc/devcontainer-entrypoint.d/*.sh; do
+    if [ -r $script ]; then $script; fi
+done
+exec "$@"
+EOF
+chmod +x /usr/local/bin/devcontainer-entrypoint
+chown -R ${USERNAME}:root /usr/local/bin/devcontainer-entrypoint /usr/local/etc/devcontainer-entrypoint.d
+# Symlink common by-convention docker-entrypoint.sh locations 
+if [ -f /docker-entrypoint.sh ]; then ln -sf /docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint.sh; fi
+if [ -f /usr/local/bin/docker-entrypoint.sh ]; then ln -sf /usr/local/bin/docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint-usr-local-bin.sh; fi
+
 # Write out a scripts that can be referenced as an ENTRYPOINT to auto-start sshd and fix login environments
-tee /usr/local/share/ssh-init.sh > /dev/null \
-<< 'EOF'
+cat << 'EOF' > /usr/local/etc/devcontainer-entrypoint.d/ssh-init.sh
 #!/usr/bin/env bash
 # This script is intended to be run as root with a container that runs as root (even if you connect with a different user)
 # However, it supports running as a user other than root if passwordless sudo is configured for that same user.
@@ -128,7 +142,7 @@ sudoIf()
 
 EOF
 if [ "${FIX_ENVIRONMENT}" = "true" ]; then
-    echo "${STORE_ENV_SCRIPT}" >> /usr/local/share/ssh-init.sh
+    echo "${STORE_ENV_SCRIPT}" >> /usr/local/etc/devcontainer-entrypoint.d/ssh-init.sh
     echo "${RESTORE_SECRETS_SCRIPT}" > /etc/profile.d/00-restore-secrets.sh
     chmod +x /etc/profile.d/00-restore-secrets.sh
     # Wire in zsh if present
@@ -136,8 +150,7 @@ if [ "${FIX_ENVIRONMENT}" = "true" ]; then
         echo -e "if [ -f /etc/profile.d/00-restore-secrets.sh ]; then . /etc/profile.d/00-restore-secrets.sh; fi\n$(cat /etc/zsh/zlogin 2>/dev/null || echo '')" > /etc/zsh/zlogin
     fi
 fi
-tee -a /usr/local/share/ssh-init.sh > /dev/null \
-<< 'EOF'
+cat << 'EOF' >> /usr/local/etc/devcontainer-entrypoint.d/ssh-init.sh
 
 # ** Start SSH server **
 sudoIf /etc/init.d/ssh start 2>&1 | sudoIf tee /tmp/sshd.log > /dev/null
@@ -145,11 +158,13 @@ sudoIf /etc/init.d/ssh start 2>&1 | sudoIf tee /tmp/sshd.log > /dev/null
 set +e
 exec "$@"
 EOF
-chmod +x /usr/local/share/ssh-init.sh
+chmod +x /usr/local/etc/devcontainer-entrypoint.d/ssh-init.sh
+# Symlink for backwards compatibility
+ln -sf /usr/local/etc/devcontainer-entrypoint.d/ssh-init.sh /usr/local/share/ssh-init.sh
 
 # If we should start sshd now, do so
 if [ "${START_SSHD}" = "true" ]; then
-    /usr/local/share/ssh-init.sh
+    /usr/local/etc/devcontainer-entrypoint.d/ssh-init.sh
 fi
 
 # Output success details

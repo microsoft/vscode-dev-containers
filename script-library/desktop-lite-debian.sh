@@ -164,12 +164,8 @@ if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
     sed -i -E 's/^python /python2 /' /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
 fi 
 
-# Set up folders for scripts and init files
-mkdir -p /var/run/dbus /usr/local/etc/vscode-dev-containers/ /root/.fluxbox
-
 # Script to change resolution of desktop
-tee /usr/local/bin/set-resolution > /dev/null \
-<< EOF 
+cat << EOF > /usr/local/bin/set-resolution
 #!/bin/bash
 RESOLUTION=\${1:-\${VNC_RESOLUTION:-1920x1080}}
 DPI=\${2:-\${VNC_DPI:-96}}
@@ -204,10 +200,24 @@ fi
 
 echo -e "\nSuccess!\n"
 EOF
+chmod +x /usr/local/bin/set-resolution
 
-# Container ENTRYPOINT script
-tee /usr/local/share/desktop-init.sh > /dev/null \
-<< EOF 
+# Add ENTRYPOINT script
+mkdir -p /usr/local/etc/devcontainer-entrypoint.d/
+cat << 'EOF' > /usr/local/bin/devcontainer-entrypoint
+#!/bin/sh
+for script in /usr/local/etc/devcontainer-entrypoint.d/*.sh; do
+    if [ -r $script ]; then $script; fi
+done
+exec "$@"
+EOF
+chmod +x /usr/local/bin/devcontainer-entrypoint
+# Symlink common by-convention docker-entrypoint.sh locations 
+if [ -f /docker-entrypoint.sh ]; then ln -sf /docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint.sh; fi
+if [ -f /usr/local/bin/docker-entrypoint.sh ]; then ln -sf /usr/local/bin/docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint-usr-local-bin.sh; fi
+
+# Add desktop init script to entrypoint folder
+cat << EOF > /usr/local/etc/devcontainer-entrypoint.d/desktop-init.sh
  #!/bin/bash
 
 USERNAME=${USERNAME}
@@ -246,11 +256,11 @@ sudoIf()
     fi
 }
 
-# Use sudo to run as non-root user if not already running
-sudoUserIf()
+# Use su to run as non-root user when running as root
+suUserIf()
 {
     if [ "\$(id -u)" -eq 0 ] && [ "\${USERNAME}" != "root" ]; then
-        sudo -u \${USERNAME} "\$@"
+        su \${USERNAME} -c "\$@"
     else
         "\$@"
     fi
@@ -275,12 +285,12 @@ while ! pidof dbus-daemon > /dev/null; do
 done
 
 # Startup tigervnc server and fluxbox
-sudo rm -rf /tmp/.X11-unix /tmp/.X*-lock
+sudoIf rm -rf /tmp/.X11-unix /tmp/.X*-lock
 mkdir -p /tmp/.X11-unix
 sudoIf chmod 1777 /tmp/.X11-unix
 sudoIf chown root:\${USERNAME} /tmp/.X11-unix
 if [ "\$(echo "\${VNC_RESOLUTION}" | tr -cd 'x' | wc -c)" = "1" ]; then VNC_RESOLUTION=\${VNC_RESOLUTION}x16; fi
-startInBackgroundIfNotRunning "Xtigervnc" sudoUserIf "tigervncserver -screen \${DISPLAY:-:1} \${VNC_RESOLUTION:-1440x768x16} -rfbport \${VNC_PORT:-5901} -dpi \${VNC_DPI:-96} -localhost -desktop fluxbox -fg -passwd /usr/local/etc/vscode-dev-containers/vnc-passwd"
+startInBackgroundIfNotRunning "Xtigervnc" suUserIf "tigervncserver -screen \${DISPLAY:-:1} \${VNC_RESOLUTION:-1440x768x16} -rfbport \${VNC_PORT:-5901} -dpi \${VNC_DPI:-96} -localhost -desktop fluxbox -fg -passwd /usr/local/etc/vscode-dev-containers/vnc-passwd"
 
 # Spin up noVNC if installed and not runnning.
 if [ -d "/usr/local/novnc" ] && [ "\$(ps -ef | grep /usr/local/novnc/noVNC*/utils/launch.sh | grep -v grep)" = "" ]; then
@@ -295,21 +305,26 @@ log "Executing \"\$@\"."
 exec "\$@"
 log "** SCRIPT EXIT **"
 EOF
+chmod +x /usr/local/etc/devcontainer-entrypoint.d/desktop-init.sh
+# Symlink for backwards compatibility
+ln -sf /usr/local/etc/devcontainer-entrypoint.d/desktop-init.sh /usr/local/share/desktop-init.sh
 
+# Set up folders for scripts and init files
+mkdir -p /var/run/dbus /usr/local/etc/vscode-dev-containers/ /root/.fluxbox
+
+# Output VNC password
 echo "${VNC_PASSWORD}" | vncpasswd -f > /usr/local/etc/vscode-dev-containers/vnc-passwd
-touch /root/.Xmodmap 
-chmod +x /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution
 
-tee /root/.fluxbox/apps > /dev/null \
-<<EOF
+touch /root/.Xmodmap 
+
+cat << 'EOF' > /root/.fluxbox/apps
 [transient] (role=GtkFileChooserDialog)
   [Dimensions]	{70% 70%}
   [Position]	(CENTER)	{0 0}
 [end]
 EOF
 
-tee /root/.fluxbox/init > /dev/null \
-<<EOF
+cat << 'EOF' > /root/.fluxbox/init
 session.configVersion:	13
 session.menuFile:	~/.fluxbox/menu
 session.keyFile: ~/.fluxbox/keys
@@ -322,7 +337,7 @@ session.screen0.toolbar.tools: RootMenu, clock, iconbar, systemtray
 session.screen0.workspaceNames: One,
 EOF
 
-tee /root/.fluxbox/menu > /dev/null \
+cat << 'EOF' > /root/.fluxbox/menu
 <<EOF
 [begin] (  Application Menu  )
     [exec] (File Manager) { nautilus ~ } <>
@@ -350,7 +365,6 @@ if [ "${USERNAME}" != "root" ]; then
     touch /home/${USERNAME}/.Xmodmap
     cp -R /root/.fluxbox /home/${USERNAME}
     chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox
-    chown ${USERNAME}:root /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution /usr/local/etc/vscode-dev-containers/vnc-passwd
 fi
 
 echo "Done!"

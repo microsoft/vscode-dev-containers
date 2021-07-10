@@ -52,9 +52,9 @@ apt-get-update-if-needed()
 export DEBIAN_FRONTEND=noninteractive
 
 # Install docker/dockerd dependencies if missing
-if ! dpkg -s apt-transport-https curl ca-certificates lxc pigz iptables > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
+if ! dpkg -s apt-transport-https curl ca-certificates lxc pigz xz-utils iptables > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
     apt-get-update-if-needed
-    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lxc pigz iptables gnupg2 
+    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lxc pigz xz-utils iptables gnupg2 
 fi
 
 # Swap to legacy iptables for compatibility
@@ -113,13 +113,6 @@ else
     fi
 fi
 
-# If init file already exists, exit
-if [ -f "/usr/local/share/docker-init.sh" ]; then
-    echo "/usr/local/share/docker-init.sh already exists, so exiting."
-    exit 0
-fi
-echo "docker-init doesnt exist..."
-
 # Add user to the docker group
 if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
     if ! getent group docker > /dev/null 2>&1; then
@@ -128,8 +121,22 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
         usermod -aG docker ${USERNAME}
 fi
 
-tee /usr/local/share/docker-init.sh > /dev/null \
-<< 'EOF' 
+# Add ENTRYPOINT script
+mkdir -p /usr/local/etc/devcontainer-entrypoint.d/
+cat << 'EOF' > /usr/local/bin/devcontainer-entrypoint
+#!/bin/sh
+for script in /usr/local/etc/devcontainer-entrypoint.d/*.sh; do
+    if [ -r $script ]; then $script; fi
+done
+exec "$@"
+EOF
+chmod +x /usr/local/bin/devcontainer-entrypoint
+# Symlink common by-convention docker-entrypoint.sh locations 
+if [ -f /docker-entrypoint.sh ]; then ln -sf /docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint.sh; fi
+if [ -f /usr/local/bin/docker-entrypoint.sh ]; then ln -sf /usr/local/bin/docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint-usr-local-bin.sh; fi
+
+# Add docker init script to entrypoint folder
+cat << 'EOF' > /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -144,6 +151,8 @@ sudoIf()
         "$@"
     fi
 }
+
+date > /tmp/dockerd.log
 
 # explicitly remove dockerd and containerd PID file to ensure that it can start properly if it was stopped uncleanly
 # ie: docker kill <ID>
@@ -186,16 +195,16 @@ set +e
 cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
 if [ $? -eq 0 ]
 then
-  echo "Setting dockerd Azure DNS."
+  echo "Setting dockerd Azure DNS." >> /tmp/dockerd.log
   CUSTOMDNS="--dns 168.63.129.16"
 else
-  echo "Not setting dockerd DNS manually."
+  echo "Not setting dockerd DNS manually." >> /tmp/dockerd.log
   CUSTOMDNS=""
 fi
 set -e
 
 # Start docker/moby engine
-( sudoIf dockerd $CUSTOMDNS > /tmp/dockerd.log 2>&1 ) &
+( sudoIf dockerd $CUSTOMDNS >> /tmp/dockerd.log 2>&1 ) &
 
 set +e
 
@@ -203,6 +212,8 @@ set +e
 # to set this script to ENTRYPOINT while still executing the default CMD.
 exec "$@"
 EOF
+chmod +x /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh
+# Symlink for backwards compatibility
+ln -sf /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh /usr/local/share/docker-init.sh
 
-chmod +x /usr/local/share/docker-init.sh
-chown ${USERNAME}:root /usr/local/share/docker-init.sh
+echo "Done!"

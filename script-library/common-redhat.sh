@@ -195,6 +195,20 @@ fi
 EOF
 chmod +x /usr/local/bin/code
 
+# Add common ENTRYPOINT script
+mkdir -p /usr/local/etc/devcontainer-entrypoint.d/
+cat << 'EOF' > /usr/local/bin/devcontainer-entrypoint
+#!/bin/sh
+for script in /usr/local/etc/devcontainer-entrypoint.d/*.sh; do
+    if [ -r $script ]; then $script; fi
+done
+exec "$@"
+EOF
+chmod +x /usr/local/bin/devcontainer-entrypoint
+# Symlink common by-convention docker-entrypoint.sh locations 
+if [ -f /docker-entrypoint.sh ]; then ln -sf /docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint.sh; fi
+if [ -f /usr/local/bin/docker-entrypoint.sh ]; then ln -sf /usr/local/bin/docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint-usr-local-bin.sh; fi
+
 # Codespaces bash and OMZ themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 CODESPACES_BASH="$(cat \
 <<'EOF'
@@ -361,7 +375,7 @@ EOF
 if [ -f "${SCRIPT_DIR}/meta.env" ]; then
     mkdir -p /usr/local/etc/vscode-dev-containers/
     cp -f "${SCRIPT_DIR}/meta.env" /usr/local/etc/vscode-dev-containers/meta.env
-     echo "${META_INFO_SCRIPT}" > /usr/local/bin/devcontainer-info
+    echo "${META_INFO_SCRIPT}" > /usr/local/bin/devcontainer-info
     chmod +x /usr/local/bin/devcontainer-info
 fi
 

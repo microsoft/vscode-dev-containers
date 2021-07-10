@@ -54,9 +54,9 @@ apt-get-update-if-needed()
 export DEBIAN_FRONTEND=noninteractive
 
 # Install apt-transport-https, curl, gpg if missing
-if ! dpkg -s apt-transport-https curl ca-certificates > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
+if ! dpkg -s apt-transport-https curl ca-certificates pigz xz-utils > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
     apt-get-update-if-needed
-    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates gnupg2 
+    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates gnupg2 pigz xz-utils
 fi
 
 # Install Docker / Moby CLI if not already installed
@@ -108,7 +108,7 @@ else
 fi
 
 # If init file already exists, exit
-if [ -f "/usr/local/share/docker-init.sh" ]; then
+if [ -f "/usr/local/etc/devcontainer-entrypoint.d/docker-init.sh" ]; then
     exit 0
 fi
 
@@ -118,10 +118,25 @@ if [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ]; then
     ln -s "${SOURCE_SOCKET}" "${TARGET_SOCKET}"
 fi
 
+# Add ENTRYPOINT script
+mkdir -p /usr/local/etc/devcontainer-entrypoint.d/
+cat << 'EOF' > /usr/local/bin/devcontainer-entrypoint
+#!/bin/sh
+for script in /usr/local/etc/devcontainer-entrypoint.d/*.sh; do
+    if [ -r $script ]; then $script; fi
+done
+exec "$@"
+EOF
+chmod +x /usr/local/bin/devcontainer-entrypoint
+# Symlink common by-convention docker-entrypoint.sh locations 
+if [ -f /docker-entrypoint.sh ]; then ln -sf /docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint.sh; fi
+if [ -f /usr/local/bin/docker-entrypoint.sh ]; then ln -sf /usr/local/bin/docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint-usr-local-bin.sh; fi
+
 # Add a stub if not adding non-root user access, user is root
 if [ "${ENABLE_NONROOT_DOCKER}" = "false" ] || [ "${USERNAME}" = "root" ]; then
-    echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
-    chmod +x /usr/local/share/docker-init.sh
+    echo -e '#!/usr/bin/env bash\nexec "$@"' > /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh
+    chmod +x /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh
+    ln -s /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh /usr/local/share/docker-init.sh
     exit 0
 fi
 
@@ -131,8 +146,9 @@ if ! dpkg -s socat > /dev/null 2>&1; then
     apt-get-update-if-needed
     apt-get -y install socat
 fi
-tee /usr/local/share/docker-init.sh > /dev/null \
-<< EOF 
+
+# Add docker init script to entrypoint folder
+cat << EOF > /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -197,6 +213,8 @@ fi
 set +e
 exec "\$@"
 EOF
-chmod +x /usr/local/share/docker-init.sh
-chown ${USERNAME}:root /usr/local/share/docker-init.sh
+chmod +x /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh
+# Symlink for backwards compatibility
+ln -sf /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh /usr/local/share/docker-init.sh
+
 echo "Done!"
