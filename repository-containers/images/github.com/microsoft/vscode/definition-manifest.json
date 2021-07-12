@@ -1,6 +1,5 @@
 {
-	"variants": ["12"],
-	"definitionVersion": "0.201.4",
+	"definitionVersion": "0.202.3",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
