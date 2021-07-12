@@ -84,9 +84,6 @@ check "bash" bash --version
 check "fish" fish --version
 check "zsh" zsh --version
 
-# Check expected commands
-check "git-ed" [ ! -z "${GIT_EDITOR}" ]
-
 # Check that we can run a puppeteer node app.
 yarn
 check "run-puppeteer" node puppeteer.js

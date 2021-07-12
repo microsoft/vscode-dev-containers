@@ -1,6 +1,6 @@
 {
-	"variants": ["12"],
-	"definitionVersion": "0.201.4",
+	"variants": ["14"],
+	"definitionVersion": "0.202.3",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -10,7 +10,7 @@
 		]
 	}, 
 	"dependencies": {
-		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:12",
+		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:${VARIANT}",
 		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
 		"manual": [{
             "Component": {

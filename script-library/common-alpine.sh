@@ -16,6 +16,15 @@ USERNAME=${2:-"automatic"}
 USER_UID=${3:-"automatic"}
 USER_GID=${4:-"automatic"}
 INSTALL_OH_MYS=${5:-"true"}
+
+# Switch to bash right away
+if [ "${SWITCHED_TO_BASH}" != "true" ]; then
+    apk add bash
+    export SWITCHED_TO_BASH=true
+    exec /bin/bash "$0" "$@"
+    exit $?
+fi
+
 SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -28,13 +37,7 @@ rm -f /etc/profile.d/00-restore-env.sh
 echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
 chmod +x /etc/profile.d/00-restore-env.sh
 
-# Switch to bash right away
-if [ "${SWITCHED_TO_BASH}" != "true" ]; then
-    apk add bash
-    export SWITCHED_TO_BASH=true
-    exec /bin/bash "$0" "$@"
-    exit $?
-fi
+
 
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -212,15 +215,12 @@ __bash_prompt() {
         && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
         && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
     local gitbranch='`\
-        export BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); \
-        if [ "${BRANCH}" = "HEAD" ]; then \
-            export BRANCH=$(git describe --contains --all HEAD 2>/dev/null); \
-        fi; \
+        export BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null); \
         if [ "${BRANCH}" != "" ]; then \
             echo -n "\[\033[0;36m\](\[\033[1;31m\]${BRANCH}" \
             && if git ls-files --error-unmatch -m --directory --no-empty-directory -o --exclude-standard ":/*" > /dev/null 2>&1; then \
                     echo -n " \[\033[1;33m\]✗"; \
-            fi \
+               fi \
             && echo -n "\[\033[0;36m\]) "; \
         fi`'
     local lightblue='\[\033[1;34m\]'

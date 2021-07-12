@@ -5,11 +5,11 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
 **Definition variations:**
-- [12](#variant-12)
+- [14](#variant-14)
 
-## Variant: 12
+## Variant: 14
 
-**Digest:** sha256:c57fea3c432734a0fff122758277b7a155a5159145893e6993cd418fb73fb3ec
+**Digest:** sha256:51dbe433ccd3def2ce8167f9d730b5771c8e3f2f176fcd01812ea8fb737b625a
 
 **Tags:**
 ```

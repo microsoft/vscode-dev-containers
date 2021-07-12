@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e32d4b1e195f4c7777844beea97af42bd93434eb"
+                    "commitHash": "e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50"
                 }
             }
         },
@@ -87,6 +87,16 @@
                     "Name": "Docker Image: buildpack-deps",
                     "Version": "stretch-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: alpine",
+                    "Version": "3.14",
+                    "DownloadUrl": "https://hub.docker.com/_/alpine"
                 }
             }
         },
@@ -116,16 +126,6 @@
                 "Other": {
                     "Name": "Docker Image: alpine",
                     "Version": "3.11",
-                    "DownloadUrl": "https://hub.docker.com/_/alpine"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: alpine",
-                    "Version": "3.10",
                     "DownloadUrl": "https://hub.docker.com/_/alpine"
                 }
             }
@@ -672,6 +672,15 @@
         },
         {
             "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mgechev/revive",
+                    "Version": "1.0.9"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
@@ -742,6 +751,15 @@
         },
         {
             "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pylint",
+                    "Version": "2.9.3"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -797,6 +815,25 @@
                     "Name": "Docker Image: miniconda3",
                     "Version": "latest",
                     "DownloadUrl": "https://hub.docker.com/r/continuumio/miniconda3"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "rake",
+                    "Version": "13.0.6"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "ruby-build",
+                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
+                    "commitHash": "ebdcf0c26ed0039762dca01844ce8175c0d02755"
                 }
             }
         },
@@ -885,7 +922,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.29.0"
+                    "Version": "7.30.0"
                 }
             }
         },
@@ -895,7 +932,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e32d4b1e195f4c7777844beea97af42bd93434eb"
+                    "commitHash": "e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50"
                 }
             }
         },
@@ -954,7 +991,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.6.0"
+                    "Version": "2.9.0"
                 }
             }
         },
@@ -1052,7 +1089,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/typescript-node",
-                    "Version": "12",
+                    "Version": "14",
                     "DownloadUrl": "https://github.com/microsoft/vscode-dev-containers"
                 }
             }

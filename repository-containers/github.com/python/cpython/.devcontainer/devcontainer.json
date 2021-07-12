@@ -20,6 +20,6 @@
 		"ms-vscode.cpptools",
 		"ms-python.python"
 	],
-	"postCreateCommand": "./configure --with-pydebug --enable-shared && make -j4 regen-all &&  make -j4 -s",
+	"postCreateCommand": "./configure --with-pydebug && make -j4 regen-all &&  make -j4 -s && make install",
 	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ]
 }
