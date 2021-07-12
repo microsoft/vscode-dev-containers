@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:2b5d8c0f2f90ccdaeccc8646c1a1068070b190d79d0f89b9b27385c3535be214
+**Digest:** sha256:5b74a61dffc00cc40d9d817f7ef1ae6ceb20bc4c38bd35c366131be1d1ee3017
 
 **Tags:**
 ```
@@ -88,7 +88,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:296889754553cacf2758ddcc57a58e7b3903f14624ab1ff394231af8a3ebc1b0
+**Digest:** sha256:437d2aeb1166ddf74d0c6480d4dae0ef30b8bf8ed0c8369f590490eb061b6aeb
 
 **Tags:**
 ```
@@ -165,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:68c10c0ab1ad9d316724c72daf617414bb510f92a60888a127997420fdd34176
+**Digest:** sha256:845ae3284a930663dbf295502a76b60173dbb51469fb20d00681602c6de09544
 
 **Tags:**
 ```

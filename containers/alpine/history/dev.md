@@ -12,7 +12,7 @@
 
 ## Variant: 3.14
 
-**Digest:** sha256:2d4e85759f167fa0ab13de5dd3d3542a392b691de0224ef51c6fec859de28deb
+**Digest:** sha256:80e7efb99c179b98f7f3ea63c9fd61af4a83b2bc617c0c1a4bd7fc7294381c81
 
 **Tags:**
 ```
@@ -75,7 +75,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 ## Variant: 3.13
 
-**Digest:** sha256:022b4885d7396ae836c7be3361d24b6b34f5b65d8e8413bcd2701911c01801f2
+**Digest:** sha256:b60f49c895a5767e50daf05429b323f0befd9edc465ede912ba0543de20bac44
 
 **Tags:**
 ```
@@ -139,7 +139,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.12
 
-**Digest:** sha256:94d7164334efa0095421cb532865cc4739706412d09264b54cb783aee6c9daab
+**Digest:** sha256:1d8c1ecf5709a3d8f3aa111c5d6dbfcf1711778a0edc815593a08e75c56c7a25
 
 **Tags:**
 ```
@@ -202,7 +202,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 
 ## Variant: 3.11
 
-**Digest:** sha256:3386bff5304850e56d01bfc3e6d3589f96ac37673ff7b2404f00e1b41ab3b5cb
+**Digest:** sha256:08a78970a715fe9e86c8d711657fbb95b6da57b4a741cd1f6c868262a5920c88
 
 **Tags:**
 ```

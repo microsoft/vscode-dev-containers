@@ -820,6 +820,56 @@
         },
         {
             "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: rust",
+                    "Version": "1",
+                    "DownloadUrl": "https://hub.docker.com/_/rust"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: openjdk",
+                    "Version": "16-jdk-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/java"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: openjdk",
+                    "Version": "11-jdk-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/java"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "AdoptOpenJDK",
+                    "Version": "1.8.0_292",
+                    "DownloadUrl": "https://adoptopenjdk.net/"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: openjdk",
+                    "Version": "8-jdk-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/java"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "rake",
@@ -869,11 +919,19 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: rust",
-                    "Version": "1",
-                    "DownloadUrl": "https://hub.docker.com/_/rust"
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "bundler",
+                    "Version": "2.2.23"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "github-pages",
+                    "Version": "215"
                 }
             }
         },
@@ -881,39 +939,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: openjdk",
-                    "Version": "16-jdk-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: openjdk",
-                    "Version": "11-jdk-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "AdoptOpenJDK",
-                    "Version": "1.8.0_292",
-                    "DownloadUrl": "https://adoptopenjdk.net/"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: openjdk",
-                    "Version": "8-jdk-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
+                    "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/ruby",
+                    "Version": "2",
+                    "DownloadUrl": "https://github.com/microsoft/vscode-dev-containers"
                 }
             }
         },

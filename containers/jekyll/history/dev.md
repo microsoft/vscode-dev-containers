@@ -1,14 +1,14 @@
-# [java-8](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java-8)
+# [jekyll](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll)
 
 **Image version:** dev
 
-**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java-8)
+**Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll)
 
-**Digest:** sha256:88fa38a809f98fc5591face8adfbba369077198ffdc10b92ff5dee23e76235bd
+**Digest:** sha256:22f30e491fdb271cd9b46387dc53c948509c36b44baec0011d19d58bdd9ffc28
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/java:dev-8
+mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -21,7 +21,8 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 1.8.0_292<br />16.0.1 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
+| [Ruby](https://www.ruby-lang.org/en/) | 3.0.2p107 | /usr/local |
+| [Jekyll](https://jekyllrb.com/) | 4.2.0 | /usr/local/bundle/bin |
 
 **Tools installed using git**
 
@@ -29,12 +30,25 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+| [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | ebdcf0c26ed0039762dca01844ce8175c0d02755 | /usr/local/share/ruby-build |
+
+**Ruby gems and tools**
+
+| Tool / gem | Version |
+|------------|---------|
+| rake | 13.0.6 |
+| ruby-debug-ide | 0.7.2 |
+| debase | 0.2.4.1 |
+| bundler | 2.2.23 |
+| jekyll | 4.2.0 |
+| github-pages | 215 |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.6 | /usr/local/sdkman |
+| [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
 
 **Additional linux tools and packages**
 
