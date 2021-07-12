@@ -10,7 +10,7 @@
 
 ## Variant: focal
 
-**Digest:** sha256:af72440fbdb6ee81ebc1a0c9842cce0dadc487cf935b3c279d7112f0a0a872c4
+**Digest:** sha256:f2c309b86c4677f0e3132cba3473a061ee423d4561cd41a2988dace920a01005
 
 **Tags:**
 ```
@@ -30,7 +30,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b4e3ee7f1c48505a3ec56ce38e444b88feda7a4 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -81,7 +81,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:20faaf763044971bc04ce43784eafa2a058866fc5e4b47a15ac3cd4ecea4369d
+**Digest:** sha256:ca957cf0bf72d28564a2d3082a8e0825b73b2dd2f306cbd71bc2a15086a8ebf5
 
 **Tags:**
 ```
@@ -100,7 +100,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b4e3ee7f1c48505a3ec56ce38e444b88feda7a4 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 

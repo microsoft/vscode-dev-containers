@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:9b00c0bc508b005c41070eb22a22c02b7e50098477286f59f89aca9cdbe98375
+**Digest:** sha256:75cddd4b1b2ff7f0326544831e79bc7cd80d46872552f7077dfb0a9ffbba1b78
 
 **Tags:**
 ```
@@ -37,7 +37,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b4e3ee7f1c48505a3ec56ce38e444b88feda7a4 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -96,7 +96,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:f3cec09e63e237c13939707af3558ce651e361171e44b489de86dc87aa45d424
+**Digest:** sha256:cf05fc642608044eba9c15f4c04795a97cc5b872f089cee653c9a88faf61ced8
 
 **Tags:**
 ```
@@ -120,7 +120,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b4e3ee7f1c48505a3ec56ce38e444b88feda7a4 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -179,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:3cac33e7c2b4ed8b9eed8791c5d384345333d96062ca5f9f92ad5368d039bf3a
+**Digest:** sha256:0343d3c13b179b71c832084b61957b5f63190560771eef540e1b081d8414d3fe
 
 **Tags:**
 ```
@@ -203,7 +203,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b4e3ee7f1c48505a3ec56ce38e444b88feda7a4 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -262,7 +262,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:549930abdc101d3ccc6ea507240db6a7afc4877985d9bbad3fcd6db06c86e9b7
+**Digest:** sha256:b8595e585614f9e5e2010833b343c296749fbe548b8cfbcf1fe75d5954a9fa04
 
 **Tags:**
 ```
@@ -285,7 +285,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b4e3ee7f1c48505a3ec56ce38e444b88feda7a4 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -345,7 +345,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:7d15a65730ca16811197ae3d141d3b1f9a5ddf556d949507c7cd6600eea5302c
+**Digest:** sha256:5bd1ef6b5ba29c912c76e2031f26442a27b88b359af97a597b31056ca31f2a1b
 
 **Tags:**
 ```
@@ -368,7 +368,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b4e3ee7f1c48505a3ec56ce38e444b88feda7a4 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**

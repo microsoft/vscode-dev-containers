@@ -6,97 +6,87 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "5b4e3ee7f1c48505a3ec56ce38e444b88feda7a4"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "buster-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "stretch-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "focal-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "bionic-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "buster-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "focal-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "bionic-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "stretch-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
                     "commitHash": "e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "buster-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "stretch-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "focal-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "bionic-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "buster-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "focal-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "bionic-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "stretch-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
         },
@@ -942,7 +932,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "5b4e3ee7f1c48505a3ec56ce38e444b88feda7a4"
+                    "commitHash": "e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50"
                 }
             }
         },
@@ -1099,7 +1089,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/typescript-node",
-                    "Version": "12",
+                    "Version": "14",
                     "DownloadUrl": "https://github.com/microsoft/vscode-dev-containers"
                 }
             }
