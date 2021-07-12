@@ -31,7 +31,7 @@ You can decide how often you want updates by referencing a [semantic version](ht
 - `mcr.microsoft.com/vscode/devcontainers/jekyll:0.0`
 - `mcr.microsoft.com/vscode/devcontainers/jekyll:0.0.1`
 
-See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list).
+See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/jekyll/tags/list).
 
 Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
 
