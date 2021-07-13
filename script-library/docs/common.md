@@ -64,7 +64,9 @@
 
 ### Common entrypoint
 
-This script also includes a common container entrypoint that can make it easier to to start things automatically when container starts. Other script-library scripts are set up to work with it. It also will automatically look for existing entrypoints like `/docker-entrypoint.sh` and `/usr/local/bin/dockerr-entrypoint.sh` and wire them in so you do not need to worry about them.
+This script also includes a common container entrypoint that can make it easier to to start things automatically whenever the container starts rather than relying on `devcontainer.json`'s `postStartCommand` property (which cannot be baked into a container image). Other script-library scripts are already set up to use it where applicable. 
+
+It also will automatically look for common existing entrypoint locations like `/docker-entrypoint.sh` and `/usr/local/bin/docker-entrypoint.sh` and wire them in so you do not need to worry about them.
 
 To use it:
 
