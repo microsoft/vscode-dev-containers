@@ -3,13 +3,14 @@
 	"build": {
 		"latest": true,
 		"parent": "ruby",
+		"parentVariant": "2.7",
 		"rootDistro": "debian",
 		"tags": [
 			"jekyll:${VERSION}"
 		]
 	},
 	"dependencies": {
-		"image": "mcr.microsoft.com/vscode/devcontainers/ruby:2",
+		"image": "mcr.microsoft.com/vscode/devcontainers/ruby:2.7",
 		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
 		"debian": [{
 			"cgIgnore": false,

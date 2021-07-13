@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/ruby:2
+FROM mcr.microsoft.com/vscode/devcontainers/ruby:2.7
 COPY library-scripts/meta.env /usr/local/etc/vscode-dev-containers
 
 # ENV Variables required by Jekyll
