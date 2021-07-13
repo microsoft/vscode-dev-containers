@@ -1,8 +1,6 @@
-ARG VARIANT="14"
-FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:14-buster
 
-# Need to reference same build arg again to use it here - the other one is before the FROM so it is not applied
-ARG VARIANT="14"
+ARG NODE_VERSION="14"
 COPY library-scripts/desktop-lite-debian.sh /tmp/library-scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 	&& bash /tmp/library-scripts/desktop-lite-debian.sh \
