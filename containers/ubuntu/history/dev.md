@@ -10,7 +10,7 @@
 
 ## Variant: focal
 
-**Digest:** sha256:aaf3111da6831b031aa94d6e143184b24d4988c6d36c985288db2d8c76fd59f6
+**Digest:** sha256:4bb72f9f6b0d129b87625273bfd061f051198b72b6f26cd3fbf8bf2b262f8e4f
 
 **Tags:**
 ```
@@ -81,7 +81,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:59983df138b0b50a41e974d2d28fa022d3acc1cc319b7a6044a0f5a730f7986c
+**Digest:** sha256:f40d8f477fcf66e9ec39de1db40f0207b85bfa26e40d303215d4ea392bd36c54
 
 **Tags:**
 ```

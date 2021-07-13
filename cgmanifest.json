@@ -832,6 +832,16 @@
             "Component": {
                 "Type": "other",
                 "Other": {
+                    "Name": "SDKMAN!",
+                    "Version": "5.11.7",
+                    "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
                     "Name": "Docker Image: openjdk",
                     "Version": "16-jdk-buster",
                     "DownloadUrl": "https://hub.docker.com/_/java"
@@ -862,8 +872,8 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: openjdk",
-                    "Version": "8-jdk-buster",
+                    "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/java",
+                    "Version": "11",
                     "DownloadUrl": "https://hub.docker.com/_/java"
                 }
             }
@@ -940,7 +950,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/ruby",
-                    "Version": "2",
+                    "Version": "2.7",
                     "DownloadUrl": "https://github.com/microsoft/vscode-dev-containers"
                 }
             }
@@ -1117,7 +1127,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/typescript-node",
-                    "Version": "14",
+                    "Version": "14-buster",
                     "DownloadUrl": "https://github.com/microsoft/vscode-dev-containers"
                 }
             }

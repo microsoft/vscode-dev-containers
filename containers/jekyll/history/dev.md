@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll)
 
-**Digest:** sha256:22f30e491fdb271cd9b46387dc53c948509c36b44baec0011d19d58bdd9ffc28
+**Digest:** sha256:bfece03cbe2510695abfe334e5f1290006a9d9243f6e2995d4fb4537e4284da0
 
 **Tags:**
 ```
@@ -21,7 +21,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Ruby](https://www.ruby-lang.org/en/) | 3.0.2p107 | /usr/local |
+| [Ruby](https://www.ruby-lang.org/en/) | 2.7.4p191 | /usr/local |
 | [Jekyll](https://jekyllrb.com/) | 4.2.0 | /usr/local/bundle/bin |
 
 **Tools installed using git**

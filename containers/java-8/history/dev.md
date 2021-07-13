@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java-8)
 
-**Digest:** sha256:88fa38a809f98fc5591face8adfbba369077198ffdc10b92ff5dee23e76235bd
+**Digest:** sha256:8377c7fe42712d9ff9d1f9c2ab070f75e693f71f0db5e1a8a0e9767cd7fd8f51
 
 **Tags:**
 ```
@@ -21,7 +21,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 1.8.0_292<br />16.0.1 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
+| [Java](https://adoptopenjdk.net/) | 1.8.0_292<br />11.0.11 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
 
 **Tools installed using git**
 
@@ -34,7 +34,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.6 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.7 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 

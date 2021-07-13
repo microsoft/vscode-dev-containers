@@ -10,7 +10,7 @@
 
 ## Variant: 1.16
 
-**Digest:** sha256:b3ec9e08f2c062778a282d57586da10fa8f4e8d853d54fadde0a0c9927eafc6f
+**Digest:** sha256:20f499ed59ed5fc4771e9b7573890cfe7e2004f2a4f36bfd82f14d1aae0029fd
 
 **Tags:**
 ```
@@ -28,7 +28,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.16.5 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.16.6 | /usr/local/go |
 
 **Tools installed using git**
 
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.15
 
-**Digest:** sha256:c9b9c217daf8a9856b1885694b324a609317136477e561b3d7fd75ee25188f1d
+**Digest:** sha256:95c13623206ae97222fda1e5e682b6540efcaeb726f3b7e8fcdf422c48b22226
 
 **Tags:**
 ```
@@ -122,7 +122,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.15
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.15.13 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.15.14 | /usr/local/go |
 
 **Tools installed using git**
 

@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
-**Digest:** sha256:e3a7e39b2f8de77adc2d78f87ead9e2c5698845f4199218cf3bbf290c8f045b9
+**Digest:** sha256:e320d05b01b6e1ad0ddaa7a3b5b93a9f3d80e1f80a6e80e63b71acad0f13ebc0
 
 **Tags:**
 ```

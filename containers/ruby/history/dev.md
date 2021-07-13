@@ -11,7 +11,7 @@
 
 ## Variant: 3.0
 
-**Digest:** sha256:b926c95e5bf71a62693ff7a5794a5c742c13e6aca4a4d9e3111fd4a780e84cfe
+**Digest:** sha256:99e9b2d0199c0d97a6b01381a7939a9189274371a448899256d185e966651649
 
 **Tags:**
 ```
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 ## Variant: 2.7
 
-**Digest:** sha256:53d4fbeddbb25878ed375692a6df58f770f229ac16b87bad28e6c46a50b4d070
+**Digest:** sha256:00630fa9911f04c5dfeac6c6af14395efeb784274c5894877767c0cafebfdff3
 
 **Tags:**
 ```
@@ -199,7 +199,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 ## Variant: 2.6
 
-**Digest:** sha256:eec92f53cc4da5c2c29a4fecac42aeb4fdac7031ae91324455c9328f1f56b5fe
+**Digest:** sha256:08452a87e92bb6b092867661a774d335fe0d807e4182690aff53a623386dbecd
 
 **Tags:**
 ```
