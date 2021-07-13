@@ -33,12 +33,19 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
     ```Dockerfile
     COPY library-scripts/*.sh /tmp/library-scripts/
     RUN apt-get update && /bin/bash /tmp/library-scripts/docker-in-docker-debian.sh
-    ENTRYPOINT ["/usr/local/share/docker-init.sh"]
+    ENTRYPOINT ["/usr/local/etc/devcontainer-entrypoint.d/docker-init.sh"]
     VOLUME [ "/var/lib/docker" ]
     CMD ["sleep", "infinity"]
     ```
 
-    Note that the `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
+    If you have also run the [common script](./common.md), this and other script-library scripts in this repository automatically wire into a common entrypoint you can use instead.
+
+    ```Dockerfile
+    ENTRYPOINT ["/usr/local/bin/devcontainer-entrypoint"]
+    ```
+  
+    In either case, the `ENTRYPOINT` can be chained with another script by simply adding the other script to the end of the array.
+
 
 3. And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile:
 
@@ -76,7 +83,7 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
       # ...
     ```
 
-5. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
+5. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [common script](common.md) can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
 
 ## Resources
 

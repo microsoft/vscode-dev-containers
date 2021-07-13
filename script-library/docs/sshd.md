@@ -67,11 +67,17 @@ Usage:
     ```Dockerfile
     COPY library-scripts/sshd-debian.sh /tmp/library-scripts/
     RUN apt-get update && bash /tmp/library-scripts/sshd-debian.sh
-    ENTRYPOINT ["/usr/local/share/ssh-init.sh"]
+    ENTRYPOINT ["/usr/local/etc/devcontainer-entrypoint.d/ssh-init.sh"]
     CMD ["sleep", "infinity"]
     ```
 
-    The `ENTRYPOINT` script can be chained with another script by adding it to the array after `ssh-init.sh`.
+    If you have also run the [common script](./common.md), this and other script-library scripts in this repository automatically wire into a common entrypoint you can use instead.
+
+    ```Dockerfile
+    ENTRYPOINT ["/usr/local/bin/devcontainer-entrypoint"]
+    ```
+  
+    In either case, the `ENTRYPOINT` can be chained with another script by simply adding the other script to the end of the array.
 
 3. And the following to `.devcontainer/devcontainer.json`:
 

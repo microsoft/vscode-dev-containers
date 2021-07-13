@@ -62,4 +62,30 @@
     COPY library-scripts/common-alpine.sh /tmp/library-scripts/
     RUN ash /tmp/library-scripts/common-alpine.sh
 
+### Common entrypoint
+
+This script also includes a common container entrypoint that can make it easier to to start things automatically when container starts. Other script-library scripts are set up to work with it. It also will automatically look for existing entrypoints like `/docker-entrypoint.sh` and `/usr/local/bin/dockerr-entrypoint.sh` and wire them in so you do not need to worry about them.
+
+To use it:
+
+1. Update your Dockerfile to include the entrypoint and a command that keeps the container running:
+
+    ```Dockerfile
+    ENTRYPOINT ["/usr/local/bin/devcontainer-entrypoint"]
+    CMD ["sleep", "infinity"]
+    ```
+
+2. [Optional] Copy your own shell script into the right location and make it executable.
+
+    ```Dockerfile
+    COPY your-script-name-here.sh /usr/local/etc/devcontainer-entrypoint.d/
+    RUN chmod +x /usr/local/etc/devcontainer-entrypoint.d/*.sh
+    ```
+
+3. Update `devcontainer.json` to ensure the entrypoint is used:
+
+    ```json
+    "overrideCommand": false
+    ```
+
 That's it!

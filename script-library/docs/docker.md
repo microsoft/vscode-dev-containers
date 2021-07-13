@@ -36,9 +36,17 @@ See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker
     ```Dockerfile
     COPY library-scripts/docker-debian.sh /tmp/library-scripts/
     RUN apt-get update && bash /tmp/library-scripts/docker-debian.sh
-    ENTRYPOINT ["/usr/local/share/docker-init.sh"]
+    ENTRYPOINT ["/usr/local/etc/devcontainer-entrypoint.d/docker-init.sh"]
     CMD ["sleep", "infinity"]
     ```
+
+    If you have also run the [common script](./common.md), this and other script-library scripts in this repository automatically wire into a common entrypoint you can use instead.
+
+    ```Dockerfile
+    ENTRYPOINT ["/usr/local/bin/devcontainer-entrypoint"]
+    ```
+  
+    In either case, the `ENTRYPOINT` can be chained with another script by simply adding the other script to the end of the array.
 
     For CentOS/RedHat, simply replace the `RUN` above with:
 
@@ -46,7 +54,6 @@ See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker
     RUN bash /tmp/library-scripts/docker-redhat.sh
     ```
 
-    Note that the `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
 
 3. And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile:
 
@@ -67,7 +74,7 @@ See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker
 
     While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.
 
-4. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
+4. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [common script](common.md) can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
 
 ### Supporting bind mounts from the workspace folder
 

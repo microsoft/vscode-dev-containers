@@ -32,12 +32,19 @@
     COPY library-scripts/desktop-lite-debian.sh /tmp/library-scripts/
     RUN apt-get update && bash /tmp/library-scripts/desktop-lite-debian.sh
     ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
-    ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
+    ENTRYPOINT ["/usr/local/etc/devcontainer-entrypoint.d/desktop-init.sh"]
     CMD ["sleep", "infinity"]
     ```
 
-    The `ENTRYPOINT` script can be chained with another script by adding it to the array after `desktop-init.sh`.
-    If you need to select a different locale, be sure to add it to `/etc/locale.gen` and run `locale-gen`.
+    If you have also run the [common script](./common.md), scripts in this repository wire into a common entrypoint you can use instead.
+
+    ```Dockerfile
+    ENTRYPOINT ["/usr/local/bin/devcontainer-entrypoint"]
+    ```
+
+    In either case, the `ENTRYPOINT` script can be chained with another script by adding it to the end of the array. 
+    
+    Finally, if you need to select a different locale, be sure to add it to `/etc/locale.gen` and run `locale-gen`.
 
 3. And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile:
 
@@ -91,7 +98,7 @@ If you want the full version of **Google Chrome** in the desktop:
         && if type zsh > /dev/null 2>&1; then echo "${ALIASES}" >> /etc/zsh/zshrc; fi
     ```
 
-2. Chrome sandbox support requires you set up and run as a non-root user. The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). Alternatively, you can start Chrome using `google-chrome --no-sandbox --disable-dev-shm-usage`
+2. Chrome sandbox support requires you set up and run as a non-root user. The [common script](common.md) can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). Alternatively, you can start Chrome using `google-chrome --no-sandbox --disable-dev-shm-usage`
 
 3. While Chrome should be aliased correctly with the instructions above, if you run into crashes, pass `--disable-dev-shm-usage` in as an argument when starting it: `google-chrome --disable-dev-shm-usage`
 
