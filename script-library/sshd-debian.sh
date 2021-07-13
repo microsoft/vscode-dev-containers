@@ -108,22 +108,8 @@ export VSCDC_FIXED_SECRETS=true
 EOF
 )"
 
-# Add ENTRYPOINT script
-mkdir -p /usr/local/etc/devcontainer-entrypoint.d/
-cat << 'EOF' > /usr/local/bin/devcontainer-entrypoint
-#!/usr/bin/env bash
-for script in /usr/local/etc/devcontainer-entrypoint.d/*.sh; do
-    if [ -r $script ]; then $script; fi
-done
-exec "$@"
-EOF
-chmod +x /usr/local/bin/devcontainer-entrypoint
-chown -R ${USERNAME}:root /usr/local/bin/devcontainer-entrypoint /usr/local/etc/devcontainer-entrypoint.d
-# Symlink common by-convention docker-entrypoint.sh locations 
-if [ -f /docker-entrypoint.sh ]; then ln -sf /docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint.sh; fi
-if [ -f /usr/local/bin/docker-entrypoint.sh ]; then ln -sf /usr/local/bin/docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint-usr-local-bin.sh; fi
-
 # Write out a scripts that can be referenced as an ENTRYPOINT to auto-start sshd and fix login environments
+mkdir -p /usr/local/etc/devcontainer-entrypoint.d/
 cat << 'EOF' > /usr/local/etc/devcontainer-entrypoint.d/ssh-init.sh
 #!/usr/bin/env bash
 # This script is intended to be run as root with a container that runs as root (even if you connect with a different user)

@@ -121,21 +121,8 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
         usermod -aG docker ${USERNAME}
 fi
 
-# Add ENTRYPOINT script
-mkdir -p /usr/local/etc/devcontainer-entrypoint.d/
-cat << 'EOF' > /usr/local/bin/devcontainer-entrypoint
-#!/bin/sh
-for script in /usr/local/etc/devcontainer-entrypoint.d/*.sh; do
-    if [ -r $script ]; then $script; fi
-done
-exec "$@"
-EOF
-chmod +x /usr/local/bin/devcontainer-entrypoint
-# Symlink common by-convention docker-entrypoint.sh locations 
-if [ -f /docker-entrypoint.sh ]; then ln -sf /docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint.sh; fi
-if [ -f /usr/local/bin/docker-entrypoint.sh ]; then ln -sf /usr/local/bin/docker-entrypoint.sh /usr/local/etc/devcontainer-entrypoint.d/docker-entrypoint-usr-local-bin.sh; fi
-
 # Add docker init script to entrypoint folder
+mkdir -p /usr/local/etc/devcontainer-entrypoint.d/
 cat << 'EOF' > /usr/local/etc/devcontainer-entrypoint.d/docker-init.sh
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------------------------------------
