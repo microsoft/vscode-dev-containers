@@ -9,13 +9,10 @@ import * as glob from 'glob';
 import { Dirent } from 'fs';
 import * as asyncUtils from '../utils/async';
 import { GlobalConfig, getConfig } from '../utils/config';
-import { Definition, Parent } from './definition';
+import { Definition, DefinitionVariant } from './definition';
 import { Lookup } from './common';
 
-interface DefinitionVariant {
-    definition: Definition;
-    variant?: string;
-}
+
 
 let config: GlobalConfig;
 let repositoryPath = path.join(__dirname, '..', '..', '..');
@@ -31,7 +28,7 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
     const definitionBuildConfigFile = getConfig('definitionBuildConfigFile', 'definition-manifest.json');
 
     // Get list of definition folders
-    const containersPath = path.join(repoPath, getConfig('containersPathInRepo', 'containers'));
+    const containersPath = path.join(repositoryPath, getConfig('containersPathInRepo', 'containers'));
     const definitions = await asyncUtils.readdir(containersPath, { withFileTypes: true });
     await asyncUtils.forEach(definitions, async (definitionFolder: Dirent) => {
         // If directory entry is a file (like README.md, skip
@@ -50,7 +47,7 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
         }
 
         // Load definitions and if definition-manifest.json exists, load it
-        const definition = new Definition(definitionId, definitionPath, repoPath);
+        const definition = new Definition(definitionId, definitionPath, repositoryPath);
         await definition.load();
         if(definition.hasManifest) {
             definitionLookup[definitionId] = definition;
@@ -59,7 +56,7 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
     });
 
     // Load repo containers to build
-    const repoContainersToBuildPath = path.join(repoPath, getConfig('repoContainersToBuildPath', 'repository-containers/build'));
+    const repoContainersToBuildPath = path.join(repositoryPath, getConfig('repoContainersToBuildPath', 'repository-containers/build'));
     const repoContainerManifestFiles = glob.sync(`${repoContainersToBuildPath}/**/${definitionBuildConfigFile}`);
     await asyncUtils.forEach(repoContainerManifestFiles, async (manifestFilePath: string) => {
         const definitionPath = path.resolve(path.dirname(manifestFilePath));
@@ -87,14 +84,14 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
             const variants = definition.variants ? ['${VARIANT}', '$VARIANT'].concat(definition.variants) : [undefined];
 
             variants.forEach((variant) => {
-                const blankTagList = definition.getTagsForVersion('', 'ANY', 'ANY', variant);
+                const blankTagList = definition.getTagsForRelease('', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag: string) => {
                     definitionTagLookup[blankTag] = {
                         definition: definition,
                         variant: variant
                     };
                 });
-                const devTagList = definition.getTagsForVersion('dev', 'ANY', 'ANY', variant);
+                const devTagList = definition.getTagsForRelease('dev', 'ANY', 'ANY', variant);
                 devTagList.forEach((devTag) => {
                     definitionTagLookup[devTag] = {
                         definition: definition,
@@ -110,7 +107,7 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
 // Processes and associate definitions together
 function populateParentAssociations(definition: Definition) {
     if(definition.build.parent) {
-        definition.parentDefinitions = definition.parentDefinitions || new Map<string | undefined, Parent>();
+        definition.parentDefinitions = definition.parentDefinitions || new Map<string | undefined, DefinitionVariant>();
         let parentLookup: (string | Lookup<string>) = definition.build.parent;
         let parentVariantLookup: (string | Lookup<string>) = definition.build.parentVariant;
         // If single parent for all variants (and possibly a single parentVariant)
@@ -175,7 +172,6 @@ export function getLinuxDistroForDefinition(definitionId: string): string {
 
 // Generate 'latest' flavor of a given definition's tag
 export function getLatestTags(definitionId: string, registry: string, repository: string): string[] | null {
-    const definitionBuildSettings = definitionLookup[definitionId]?.build;
     if (typeof definitionLookup[definitionId] === 'undefined') {
         return null;
     }
@@ -191,7 +187,7 @@ export function getTagsForVersion(definitionId: string, version: string, registr
     if (typeof definitionLookup[definitionId] === 'undefined') {
         return null;
     }
-    return definitionLookup[definitionId].getTagsForVersion(version, registry, repository, variant);
+    return definitionLookup[definitionId].getTagsForRelease(version, registry, repository, variant);
 }
 
 // Generate complete list of tags for a given definition.
@@ -207,7 +203,7 @@ export function getParentTagForVersion(definitionId: string, version: string, re
     if (typeof definitionLookup[definitionId] === 'undefined') {
         return null;
     }
-    return definitionLookup[definitionId].getParentTagForVersion(version, registry, repository, variant);
+    return definitionLookup[definitionId].getParentTagForRelease(version, registry, repository, variant);
 
 }
 
@@ -229,7 +225,7 @@ export function getUpdatedTag(currentTag: string, currentRegistry: string, curre
         variant = definitionVariant.variant;
     }
 
-    const updatedTags = definitionVariant.definition.getTagsForVersion( updatedVersion, updatedRegistry, updatedRepository, variant);
+    const updatedTags = definitionVariant.definition.getTagsForRelease( updatedVersion, updatedRegistry, updatedRepository, variant);
     if (updatedTags && updatedTags.length > 0) {
         console.log(`    Updating ${currentTag}\n    to ${updatedTags[0]}`);
         return updatedTags[0];

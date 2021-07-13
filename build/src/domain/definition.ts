@@ -23,17 +23,18 @@ export interface OtherDependency extends Dependency {
 }
 
 export interface BuildSettings {
-    parent?: Lookup<string> | string;
-    latest?: string;
-    versionedTagsOnly?: boolean;
     rootDistro: string;
     tags: string[];
-    variantTags: Lookup<string[]> 
+    variantTags?: Lookup<string[]> 
+    parent?: Lookup<string> | string;
+    parentVariant?: Lookup<string> | string;
+    latest?: string;
+    versionedTagsOnly?: boolean;
 }
 
-export interface Parent {
+export interface DefinitionVariant {
     definition: Definition;
-    variant: string | undefined;
+    variant?: string;
 }
 
 export interface Dependencies {
@@ -66,7 +67,7 @@ export class Definition {
     hasBaseDockerfile: boolean = false;
 
     // Parent is either a single definition or a lookup of variants to definitions
-    parentDefinitions?: Map<string | undefined, Parent>;
+    parentDefinitions?: Map<string | undefined, DefinitionVariant>;
     childDefinitions?: Definition[];
 
     path: string;
@@ -74,7 +75,7 @@ export class Definition {
     repositoryPath: string;
     libraryScriptsPath: string;
 
-    constructor(id: string, definitionPath, repositoryPath: string) {
+    constructor(id: string, definitionPath: string, repositoryPath: string) {
         this.id = id;
         this.repositoryPath = repositoryPath;
         this.path = definitionPath;
@@ -112,7 +113,8 @@ export class Definition {
     }
 
     // Create all the needed variants of the specified version identifier for a given definition
-    getTagsForVersion(version: string, registry: string, repository: string, variant?: string): string[] {
+    getTagsForRelease(versionOrRelease: string, registry: string, repository: string, variant?: string): string[] {
+        let version = this.getVersionForRelease(versionOrRelease);
         // If the definition states that only versioned tags are returned and the version is 'dev', 
         // add the definition Id to ensure that we do not incorrectly hijack a tag from another definition.
         if (version === 'dev') {
@@ -158,7 +160,7 @@ export class Definition {
 
     // Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
     // release string is passed in, use the version specified in defintion-manifest.json if one exists.
-    getVersionFromRelease(versionOrRelease: string): string {
+    getVersionForRelease(versionOrRelease: string): string {
         // Already is a version
         if (!isNaN(parseInt(versionOrRelease.charAt(0)))) {
             return this.definitionVersion || versionOrRelease;
@@ -172,8 +174,8 @@ export class Definition {
     }
 
     // Get the major part of the version number
-    majorFromRelease(versionOrRelease: string): string {
-        const version = this.getVersionFromRelease(versionOrRelease);
+    majorVersionPartForRelease(versionOrRelease: string): string {
+        const version = this.getVersionForRelease(versionOrRelease);
         if (version === 'dev') {
             return 'dev';
         }
@@ -192,12 +194,12 @@ export class Definition {
         - 'major' - X
     */
     getTagList(releaseOrVersion: string, versionPartHandling: string | boolean, registry: string, repository: string, variant?: string): string[] {
-        const version = this.getVersionFromRelease(releaseOrVersion);
+        const version = this.getVersionForRelease(releaseOrVersion);
 
         // If version is 'dev', there's no need to generate semver tags for the version
         // (e.g. for 1.0.2, we should also tag 1.0 and 1). So just return the tags for 'dev'.
         if (version === 'dev') {
-            return this.getTagsForVersion(version, registry, repository, variant);
+            return this.getTagsForRelease(version, registry, repository, variant);
         }
 
         // If this is a release version, split it out into the three parts of the semver
@@ -249,7 +251,7 @@ export class Definition {
         let tagList = [];
 
         versionList.forEach((tagVersion: string) => {
-            tagList = tagList.concat(this.getTagsForVersion(tagVersion, registry, repository, variant));
+            tagList = tagList.concat(this.getTagsForRelease(tagVersion, registry, repository, variant));
         });
 
         // If this variant should also be used for the the latest tag (it's the left most in the list), add it
@@ -261,7 +263,9 @@ export class Definition {
     }
 
     // Get parent tag for a given child definition
-    getParentTagForVersion(version: string, registry: string, repository: string, variant?: string) {
+    getParentTagForRelease(releaseOrVersion: string, registry: string, repository: string, variant?: string) {
+        const version = this.getVersionForRelease(releaseOrVersion);
+
         if(!this.parentDefinitions) {
             return null;
         }
@@ -269,7 +273,7 @@ export class Definition {
             variant = this.variants[0];
         }
         const parent = this.parentDefinitions.get(variant);
-        return parent.definition.getTagsForVersion(
+        return parent.definition.getTagsForRelease(
             parent.definition.definitionVersion || version, 
             registry,
             repository,
