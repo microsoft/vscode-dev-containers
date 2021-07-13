@@ -112,12 +112,6 @@ if [ -f "/usr/local/share/docker-init.sh" ]; then
     exit 0
 fi
 
-# By default, make the source and target sockets the same
-if [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ]; then
-    touch "${SOURCE_SOCKET}"
-    ln -s "${SOURCE_SOCKET}" "${TARGET_SOCKET}"
-fi
-
 # Add a stub if not adding non-root user access, user is root
 if [ "${ENABLE_NONROOT_DOCKER}" = "false" ] || [ "${USERNAME}" = "root" ]; then
     echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
@@ -163,6 +157,12 @@ log()
 
 echo -e "\n** \$(date) **" | sudoIf tee -a \${SOCAT_LOG} > /dev/null
 log "Ensuring ${USERNAME} has access to ${SOURCE_SOCKET} via ${TARGET_SOCKET}"
+
+# By default, make the source and target sockets the same
+if [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ]; then
+    sudoIf touch "${SOURCE_SOCKET}"
+    sudoIf ln -s "${SOURCE_SOCKET}" "${TARGET_SOCKET}"
+fi
 
 # If enabled, try to add a docker group with the right GID. If the group is root, 
 # fall back on using socat to forward the docker socket to another unix socket so 
