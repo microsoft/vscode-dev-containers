@@ -9,7 +9,7 @@ import * as glob from 'glob';
 import { Dirent } from 'fs';
 import * as asyncUtils from '../utils/async';
 import { GlobalConfig, getConfig } from '../utils/config';
-import { Definition } from './definition';
+import { Definition, Parent } from './definition';
 import { Lookup } from './common';
 
 interface DefinitionVariant {
@@ -110,18 +110,25 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
 // Processes and associate definitions together
 function populateParentAssociations(definition: Definition) {
     if(definition.build.parent) {
-        definition.parentDefinitions = definition.parentDefinitions || new Map<string | undefined, Definition>();
+        definition.parentDefinitions = definition.parentDefinitions || new Map<string | undefined, Parent>();
         let parentLookup: (string | Lookup<string>) = definition.build.parent;
-        // If single parent for all variants
+        let parentVariantLookup: (string | Lookup<string>) = definition.build.parentVariant;
+        // If single parent for all variants (and possibly a single parentVariant)
         if(typeof parentLookup === 'string') {
             const parentDefinition = getDefinition(parentLookup);
-            definition.parentDefinitions.set(undefined, parentDefinition);
+            definition.parentDefinitions.set(undefined, {
+                definition: parentDefinition,
+                variant: <string | undefined>parentVariantLookup
+            });
             parentDefinition.childDefinitions = parentDefinition.childDefinitions || [];
             parentDefinition.childDefinitions.push(definition);
         } else {
             for (let variant in parentLookup) {
                 const parentDefinition = getDefinition(parentLookup[variant]);
-                definition.parentDefinitions.set(variant, parentDefinition);
+                definition.parentDefinitions.set(variant, {
+                    definition: parentDefinition,
+                    variant: parentVariantLookup[variant]
+                });
                 parentDefinition.childDefinitions = parentDefinition.childDefinitions || [];
                 parentDefinition.childDefinitions.push(definition);
             }    
@@ -322,7 +329,7 @@ function findRootParentBucket(definition: Definition, parentBucketMap: Map<Defin
     // If has parents (can be more than one), get all root buckets
     const definitionParentBuckets = new Map<Definition, Definition[]>();
     definition.parentDefinitions.forEach((parentDefinition) => {
-        definitionParentBuckets.set(parentDefinition, findRootParentBucket(parentDefinition, parentBucketMap));
+        definitionParentBuckets.set(parentDefinition.definition, findRootParentBucket(parentDefinition.definition, parentBucketMap));
     });
     // Merge parent buckets if needed
     let unifiedBucket: Definition[];

@@ -31,6 +31,11 @@ export interface BuildSettings {
     variantTags: Lookup<string[]> 
 }
 
+export interface Parent {
+    definition: Definition;
+    variant: string | undefined;
+}
+
 export interface Dependencies {
     image: string;
     imageLink: string;
@@ -46,7 +51,7 @@ export interface Dependencies {
     other?: Lookup<OtherDependency | null>;
     languages?: Lookup<OtherDependency | null>;
     imageVariants?: string[];
-    manual: Component[];
+    manual?: Component[];
 }
 
 export class Definition {
@@ -61,7 +66,7 @@ export class Definition {
     hasBaseDockerfile: boolean = false;
 
     // Parent is either a single definition or a lookup of variants to definitions
-    parentDefinitions?: Map<string | undefined, Definition>;
+    parentDefinitions?: Map<string | undefined, Parent>;
     childDefinitions?: Definition[];
 
     path: string;
@@ -263,9 +268,12 @@ export class Definition {
         if(!variant && this.variants) {
             variant = this.variants[0];
         }
-        const parentDefinition = this.parentDefinitions.get(variant);
-        const parentVersion = parentDefinition.definitionVersion || version;
-        return parentDefinition.getTagsForVersion(parentVersion, registry, repository, variant)[0];
+        const parent = this.parentDefinitions.get(variant);
+        return parent.definition.getTagsForVersion(
+            parent.definition.definitionVersion || version, 
+            registry,
+            repository,
+            parent.variant)[0];
     }
 
     // Get the path to the dockerfile for the definitions
