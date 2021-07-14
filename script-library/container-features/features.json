@@ -47,7 +47,7 @@
 			"name": "latest Terraform, tflint, and TFGrunt CLIs",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_KUBE",
+			"buildArg": "INSTALL_TERRAFORM",
 			"extensions": [
 				"HashiCorp.terraform"
 			]
@@ -86,10 +86,21 @@
 			"buildArg": "INSTALL_SSH"
 		},
 		{
+			"id": "homebrew",
+			"name": "Homebrew",
+			"type": "option",
+			"default": false,
+			"buildArg": "INSTALL_HOMEBREW",
+			"containerEnv": {
+				"BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
+				"PATH": "${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:${PATH}"
+			}
+		},
+		{
 			"id": "node",
 			"name": "Node.js (via NVM) and yarn",
 			"type": "choice",
-			"values": ["latest", "lts/*", "16", "14", "12"],
+			"values": [ "lts/*", "latest","16", "14", "12"],
 			"default": false,
 			"buildArg": "NODE_VERSION",
 			"extensions": ["dbaeumer.vscode-eslint"],
@@ -101,7 +112,7 @@
 		},
 		{
 			"id": "python",
-			"name": "Python (requires a long build) and tools",
+			"name": "Python (requires a build) and tools",
 			"type": "choice",
 			"values": ["latest", "3.9", "3.8", "3.7", "3.6"],
 			"default": false,
@@ -165,7 +176,6 @@
 			"values": ["latest", "7", "6", "5"],
 			"default": false,
 			"buildArg": "GRADLE_VERSION",
-			"extensions": ["golang.Go"],
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}"
