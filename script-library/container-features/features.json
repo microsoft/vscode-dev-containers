@@ -30,18 +30,18 @@
 				"source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
 			]
 		},
-		//  Problem area #1 - there's three versions here and they go together as a unit, and no ability to pin to a version
+		//  Problem #2 - there's three versions here and they go together as a unit, and no ability to pin to a version
 		{
 			"id": "kubectl-helm-minikube",
 			"name": "latest kubectl, Helm, and minkube",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_KUBE",
+			"buildArg": "INSTALL_KUBE_HELM_MINIKUBE",
 			"extensions": [
 				"ms-kubernetes-tools.vscode-kubernetes-tools"
 			]
 		},
-		//  Problem area #2 - Terraform also involves three versions here and they go together as a unit, and no ability to pin to a version
+		//  Problem #3 - Terraform also involves three versions here and they go together as a unit, and no ability to pin to a version
 		{
 			"id": "terraform",
 			"name": "latest Terraform, tflint, and TFGrunt CLIs",
@@ -144,7 +144,7 @@
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}"
 			}
 		},
-		// Problem #3 - Maven and gradle options should not be presented if Java isn't checked
+		// Problem #4 - Maven and gradle options should not be presented if Java isn't checked
 		{
 			"id": "maven",
 			"name": "Maven (via SDKMAN!)",
@@ -178,11 +178,7 @@
 			"values": ["3.0", "2.7", "2.6"],
 			"default": false,
 			"buildArg": "RUBY_VERSION",
-			"extensions": ["vscjava.vscode-java-pack"],
-			"containerEnv": {
-				"SDKMAN_DIR": "/usr/local/sdkman",
-				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}"
-			}
+			"extensions": ["rebornix.Ruby"]
 		},
 		{
 			"id": "rust",
