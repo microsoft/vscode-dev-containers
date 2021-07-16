@@ -489,7 +489,7 @@ function getParentTagForVersion(definitionId, version, registry, registryPath, v
         }
         
         // Parent image version may be different than child's
-        const parentVersion = getVersionFromRelease(version, definitionId);
+        const parentVersion = getVersionFromRelease(version, parentId);
         return getTagsForVersion(parentId, parentVersion, registry, registryPath, parentVariant)[0];
     }
     return null;
