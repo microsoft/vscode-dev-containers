@@ -6,6 +6,10 @@ set -e
 
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+rm -rf library-scripts
+mkdir library-scripts
+cp ../*.sh library-scripts
+
 if [ ! -z "${PLATFORMS}" ]; then
     CURRENT_BUILDERS="$(docker buildx ls)"
     if [[ "${CURRENT_BUILDERS}" != *"vscode-dev-containers"* ]]; then

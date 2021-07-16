@@ -3,11 +3,11 @@ FROM $BASE_IMAGE
 
 USER root
 
-#{containerEnv}
-
-COPY feature-scripts.env features.env install.sh library-scripts/*.sh /tmp/library-scripts/
+COPY features.env feature-scripts.env install.sh library-scripts/*.sh /tmp/library-scripts/
 RUN /tmp/library-scripts/install.sh \
     && rm -rf /tmp/library-scripts
+
+#{containerEnv}
 
 ARG IMAGE_USER=root
 USER $IMAGE_USER

@@ -114,7 +114,7 @@
 			"id": "python",
 			"name": "Python (requires a build) and tools",
 			"type": "choice",
-			"values": ["latest", "3.9", "3.8", "3.7", "3.6"],
+			"values": ["3.9", "3.8", "3.7", "3.6"],
 			"default": false,
 			"buildArg": "PYTHON_VERSION",
 			"extensions": [
@@ -188,7 +188,15 @@
 			"values": ["3.0", "2.7", "2.6"],
 			"default": false,
 			"buildArg": "RUBY_VERSION",
-			"extensions": ["rebornix.Ruby"]
+			"extensions": [
+				"rebornix.Ruby"
+			],
+			"containerEnv": {
+				"GEM_PATH": "/usr/local/rvm/gems/default:/usr/local/rvm/gems/default@global",
+				"GEM_HOME": "/usr/local/rvm/gems/default",
+				"MY_RUBY_HOME": "/usr/local/rvm/rubies/default",
+				"PATH": "/usr/local/rvm/gems/default/bin:/usr/local/rvm/gems/default@global/bin:/usr/local/rvm/rubies/default/bin:${PATH}"
+			}
 		},
 		{
 			"id": "rust",
