@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50"
+                    "commitHash": "23f9348e2c2341df71b1891eb4607f60ddd5a204"
                 }
             }
         },
@@ -760,6 +760,15 @@
         },
         {
             "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "virtualenv",
+                    "Version": "20.6.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -932,7 +941,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "bundler",
-                    "Version": "2.2.23"
+                    "Version": "2.2.24"
                 }
             }
         },
@@ -970,7 +979,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e4f6f1698d4bf2cebe3fd0e2f5bae9f163780a50"
+                    "commitHash": "23f9348e2c2341df71b1891eb4607f60ddd5a204"
                 }
             }
         },
@@ -1029,7 +1038,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.9.0"
+                    "Version": "2.9.1"
                 }
             }
         },
