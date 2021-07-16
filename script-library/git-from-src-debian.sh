@@ -12,12 +12,26 @@
 GIT_VERSION=${1:-"latest"}
 USE_PPA_IF_AVAILABLE=${2:-"false"}
 
+GIT_CORE_PPA_ARCHIVE_GPG_KEY=E1DD270288B4E6030699E45FA1715D88E1DF1F24
+
 set -e
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
+
+function getCommonSetting() {
+    if [ "${COMMON_SETTINGS_LOADED}" != "true" ]; then
+        curl -sL --fail-with-body "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+        COMMON_SETTINGS_LOADED=true
+    fi
+    local multi_line=""
+    if [ "$2" = "true" ]; then multi_line="-z"; fi
+    if [ -f "/tmp/vsdc-settings.env" ]; then
+        if [ ! -z "$1" ]; then declare -g $1="$(grep ${multi_line} -oP "${$1}=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"; fi
+    fi
+}
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -35,7 +49,8 @@ if ([ "${GIT_VERSION}" = "latest" ] || [ "${GIT_VERSION}" = "lts" ] || [ "${GIT_
     export GNUPGHOME="/tmp/git-core/gnupg"
     mkdir -p "${GNUPGHOME}"
     chmod 700 ${GNUPGHOME}
-    gpg -q --no-default-keyring --keyring /usr/share/keyrings/gitcoreppa-archive-keyring.gpg --keyserver keyserver.ubuntu.com --receive-keys E1DD270288B4E6030699E45FA1715D88E1DF1F24
+    getCommonSetting GIT_CORE_PPA_GPG_KEY
+    gpg -q --no-default-keyring --keyring /usr/share/keyrings/gitcoreppa-archive-keyring.gpg --keyserver keyserver.ubuntu.com --receive-keys ${GIT_CORE_PPA_ARCHIVE_GPG_KEY}
     echo -e "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gitcoreppa-archive-keyring.gpg] http://ppa.launchpad.net/git-core/ppa/ubuntu ${VERSION_CODENAME} main\ndeb-src [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gitcoreppa-archive-keyring.gpg] http://ppa.launchpad.net/git-core/ppa/ubuntu ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/git-core-ppa.list
     apt-get update
     apt-get -y install --no-install-recommends git 
