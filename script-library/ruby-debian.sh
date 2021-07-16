@@ -14,7 +14,10 @@ USERNAME=${2:-"automatic"}
 UPDATE_RC=${3:-"true"}
 INSTALL_RUBY_TOOLS=${6:-"true"}
 
-RVM_PGP_FINGERPRINTS="409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB"
+RVM_GPG_KEYS="409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB"
+GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
+keyserver hkps://keys.openpgp.org
+keyserver hkp://keyserver.pgp.com"
 
 set -e
 
@@ -45,24 +48,6 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-# Determine appropriate settings for rvm
-DEFAULT_GEMS="rake ruby-debug-ide debase"
-if [ "${RUBY_VERSION}" = "none" ]; then
-    RVM_INSTALL_ARGS=""
-else
-    if [ "${RUBY_VERSION}" = "latest" ] || [ "${RUBY_VERSION}" = "current" ] || [ "${RUBY_VERSION}" = "lts" ]; then
-        RVM_INSTALL_ARGS="--ruby"
-        RUBY_VERSION=""
-    else
-        RVM_INSTALL_ARGS="--ruby=${RUBY_VERSION}"
-    fi
-    if [ "${INSTALL_RUBY_TOOLS}" = "true" ]; then
-        SKIP_GEM_INSTALL="true"
-    else 
-        DEFAULT_GEMS=""
-    fi
-fi
-
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
@@ -73,6 +58,61 @@ function updaterc() {
     fi
 }
 
+function getCommonSetting() {
+    if [ "${COMMON_SETTINGS_LOADED}" != "true" ]; then
+        curl -sL --fail-with-body "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+        COMMON_SETTINGS_LOADED=true
+    fi
+    local multi_line=""
+    if [ "$2" = "true" ]; then multi_line="-z"; fi
+    if [ -f "/tmp/vsdc-settings.env" ]; then
+        if [ ! -z "$1" ]; then declare -g $1="$(grep ${multi_line} -oP "${$1}=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"; fi
+    fi
+}
+
+function importGPGKeys() {
+    getCommonSetting $1
+    local keys=${!1}
+    getCommonSetting GPG_KEY_SERVERS true
+
+    # Use a temporary locaiton for gpg keys to avoid polluting image
+    export GNUPGHOME="/tmp/tmp-gnupg"
+    mkdir -p ${GNUPGHOME}
+    chmod 700 ${GNUPGHOME}
+    echo -e "disable-ipv6\n${GPG_KEY_SERVERS}" > ${GNUPGHOME}/dirmngr.conf
+    # GPG key download sometimes fails for some reason and retrying fixes it.
+    local retry_count=0
+    local gpg_ok="false"
+    set +e
+    until [ "${gpg_ok}" = "true" ] || [ "${retry_count}" -eq "5" ]; 
+    do
+        echo "(*) Downloading GPG key..."
+        ( echo "${keys}" | xargs -n 1 gpg --recv-keys) 2>&1 && gpg_ok="true"
+        if [ "${gpg_ok}" != "true" ]; then
+            echo "(*) Failed getting key, retring in 10s..."
+            (( retry_count++ ))
+            sleep 10s
+        fi
+    done
+    set -e
+    if [ "${gpg_ok}" = "false" ]; then
+        echo "(!) Failed to install rvm."
+        exit 1
+    fi
+}
+
+# Function to run apt-get if needed
+apt-get-update-if-needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
+# Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
 ARCHITECTURE="$(uname -m)"
@@ -82,64 +122,76 @@ if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ] && [ "$
 fi
 
 # Install curl, software-properties-common, build-essential, gnupg2 if missing
-if ! dpkg -s curl ca-certificates software-properties-common build-essential gnupg2 libreadline-dev procps git > /dev/null 2>&1; then
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        apt-get update
-    fi
-    apt-get -y install --no-install-recommends curl ca-certificates software-properties-common build-essential gnupg2 libreadline-dev procps git 
+PACKAGE_LIST="curl ca-certificates software-properties-common build-essential gnupg2 libreadline-dev 
+    procps dirmngr gawk autoconf automake bison libffi-dev libgdbm-dev libncurses5-dev 
+    libsqlite3-dev libtool libyaml-dev pkg-config sqlite3 zlib1g-dev libgmp-dev libssl-dev"
+if ! dpkg -s ${PACKAGE_LIST} > /dev/null 2>&1; then
+    apt-get-update-if-needed
+    apt-get -y install --no-install-recommends ${PACKAGE_LIST}
 fi
+if ! type git > /dev/null 2>&1; then
+    apt-get-update-if-needed
+    apt-get -y install --no-install-recommends git
+fi
+
+
+# Figure out correct version of a three part version number is not passed
+if [ "${RUBY_VERSION}" != "none" ]; then
+    RUBY_VERSION_LIST="$(git ls-remote --tags https://github.com/ruby/ruby | grep -oP 'tags/v\K[0-9]+_[0-9]+_[0-9]+$' | tr '_' '.' | sort -rV)"
+    if [ "$(echo "${RUBY_VERSION}" | grep -o '\.' | wc -l)" != "2" ]; then
+        if [ "${RUBY_VERSION}" = "latest" ] || [ "${RUBY_VERSION}" = "current" ] || [ "${RUBY_VERSION}" = "lts" ]; then
+            RUBY_VERSION="$(echo "${RUBY_VERSION_LIST}" | head -n 1)"
+        else 
+            RUBY_VERSION="$(echo "${RUBY_VERSION_LIST}" | grep -m1 "${RUBY_VERSION}")"
+        fi
+    fi
+    if ! echo "${RUBY_VERSION_LIST}" | grep "^${RUBY_VERSION}$" > /dev/null 2>&1; then
+        echo "Invalid Ruby version ${RUBY_VERSION}"
+        exit 1
+    fi
+    echo "Target Ruby version: ${RUBY_VERSION}"
+fi
+
+DEFAULT_GEMS="rake ruby-debug-ide debase"
 
 # Just install Ruby if RVM already installed
 if [ -d "/usr/local/rvm" ]; then
     echo "Ruby Version Manager already exists."
     if [ "${RUBY_VERSION}" != "none" ]; then
         echo "Installing specified Ruby version."
-        su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && rvm install ruby ${RUBY_VERSION}"
+        su ${USERNAME} -c "&& rvm install ruby ${RUBY_VERSION}"
     fi
     SKIP_GEM_INSTALL="false"
 else
-    # Use a temporary locaiton for gpg keys to avoid polluting image
-    export GNUPGHOME="/tmp/rvm-gnupg"
-    mkdir -p ${GNUPGHOME}
-    chmod 700 ${GNUPGHOME}
-    cat << 'EOF' > /tmp/rvm-gnupg/dirmngr.conf
-disable-ipv6
-keyserver hkps://keys.openpgp.org
-keyserver hkp://keyserver.ubuntu.com:80
-keyserver hkp://keyserver.pgp.com
-EOF
-    # GPG key download sometimes fails for some reason and retrying fixes it.
-    RETRY_COUNT=0
-    GPG_OK="false"
-    set +e
-    until [ "${GPG_OK}" = "true" ] || [ "${RETRY_COUNT}" -eq "5" ]; 
-    do
-        echo "(*) Downloading GPG key..."
-        gpg --recv-keys ${RVM_PGP_FINGERPRINTS} 2>&1 && GPG_OK="true"
-        if [ "${GPG_OK}" != "true" ]; then
-            echo "(*) Failed getting key, retring in 10s..."
-            (( RETRY_COUNT++ ))
-            sleep 10s
-        fi
-    done
-    set -e
-    if [ "${GPG_OK}" = "false" ]; then
-        echo "(!) Failed to install rvm."
-        exit 1
-    fi
-
     # Install RVM
+    importGPGKeys RVM_GPG_KEYS
+    # Determine appropriate settings for rvm installer
+    if [ "${RUBY_VERSION}" = "none" ]; then
+        RVM_INSTALL_ARGS=""
+    else
+        if [ "${RUBY_VERSION}" = "latest" ] || [ "${RUBY_VERSION}" = "current" ] || [ "${RUBY_VERSION}" = "lts" ]; then
+            RVM_INSTALL_ARGS="--ruby"
+            RUBY_VERSION=""
+        else
+            RVM_INSTALL_ARGS="--ruby=${RUBY_VERSION}"
+        fi
+        if [ "${INSTALL_RUBY_TOOLS}" = "true" ]; then
+            SKIP_GEM_INSTALL="true"
+        else 
+            DEFAULT_GEMS=""
+        fi
+    fi
     curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles ${RVM_INSTALL_ARGS} --with-default-gems="${DEFAULT_GEMS}" 2>&1
     usermod -aG rvm ${USERNAME}
     su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && rvm fix-permissions system"
     rm -rf ${GNUPGHOME}
 fi
 
-if [ "${INSTALL_RUBY_TOOLS}" = "true" ] && [ "${SKIP_GEM_INSTALL}" != "true" ]; then
+if [ "${INSTALL_RUBY_TOOLS}" = "true" ]; then
     # Non-root user may not have "gem" in path when script is run and no ruby version
     # is installed by rvm, so handle this by using root's default gem in this case
-    ROOT_GEM="$(which gem)"
-    su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && \"$(which gem || ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
+    ROOT_GEM='$(which gem || echo "")'
+    su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && \"$(which gem || echo ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
 fi
 
 # VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it

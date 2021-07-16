@@ -55,20 +55,52 @@ function updaterc() {
     fi
 }
 
+# Function to run apt-get if needed
+apt-get-update-if-needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
+# Figure out correct version of a three part version number is not passed
+function findGoVersionFromGitTags() {
+    local variable_name=$1
+    local requested_version=${!1}
+    local repository=$2
+    if [ "${requested_version}" = "none" ]; then return; fi
+    local version_list="$(git ls-remote --tags ${repository} | grep -oP 'tags/go\K[0-9]+\.[0-9]+(\.[0-9]+)?$' | sort -rV)"
+    if [ "$(echo "${requested_version}" | grep -o '\.' | wc -l)" != "2" ]; then
+        if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
+            declare -g ${variable_name}="$(echo "${version_list}" | head -n 1)"
+        else 
+            declare -g ${variable_name}="$(echo "${version_list}" | grep -m1 "${requested_version}")"
+        fi
+    fi
+    if ! echo "${version_list}" | grep "^${!variable_name}$" > /dev/null 2>&1; then
+        echo "Invalid ${variable_name} value: ${!variable_name}"
+        exit 1
+    fi
+    echo "${variable_name} target: ${!variable_name}"
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, tar, git, other dependencies if missing
-if ! dpkg -s curl ca-certificates tar git g++ gcc libc6-dev make pkg-config > /dev/null 2>&1; then
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        apt-get update
-    fi
-    apt-get -y install --no-install-recommends curl ca-certificates tar git g++ gcc libc6-dev make pkg-config
+if ! dpkg -s curl ca-certificates tar g++ gcc libc6-dev make pkg-config > /dev/null 2>&1; then
+    apt-get-update-if-needed
+    apt-get -y install --no-install-recommends curl ca-certificates tar g++ gcc libc6-dev make pkg-config
+fi
+if ! type git > /dev/null 2>&1; then
+    apt-get-update-if-needed
+    apt-get -y install --no-install-recommends git
 fi
 
-# Get latest version number if latest is specified
-if [ "${TARGET_GO_VERSION}" = "latest" ] ||  [ "${TARGET_GO_VERSION}" = "current" ] ||  [ "${TARGET_GO_VERSION}" = "lts" ]; then
-    TARGET_GO_VERSION=$(curl -sSL "https://golang.org/VERSION?m=text" | sed -n '/^go/s///p' )
-fi
+# Get closest match for version number specified
+findGoVersionFromGitTags TARGET_GO_VERSION 'https://go.googlesource.com/go'
 
 ARCHITECTURE="$(uname -m)"
 case $ARCHITECTURE in

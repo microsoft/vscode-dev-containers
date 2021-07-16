@@ -18,19 +18,50 @@ KUBECTL_SHA256="${4:-"automatic"}"
 HELM_SHA256="${5:-"automatic"}"
 MINIKUBE_SHA256="${6:-"automatic"}"
 
+HELM_GPG_KEYS_URI="https://raw.githubusercontent.com/helm/helm/main/KEYS"
+GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
+keyserver hkps://keys.openpgp.org
+keyserver hkp://keyserver.pgp.com"
+
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
 
+function getCommonSetting() {
+    if [ "${COMMON_SETTINGS_LOADED}" != "true" ]; then
+        curl -sL --fail-with-body "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+        COMMON_SETTINGS_LOADED=true
+    fi
+    local multi_line=""
+    if [ "$2" = "true" ]; then multi_line="-z"; fi
+    if [ -f "/tmp/vsdc-settings.env" ]; then
+        if [ ! -z "$1" ]; then declare -g $1="$(grep ${multi_line} -oP "${$1}=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"; fi
+    fi
+}
+
+# Function to run apt-get if needed
+apt-get-update-if-needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
+# Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl if missing
-if ! dpkg -s curl ca-certificates coreutils gnupg2 > /dev/null 2>&1; then
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        apt-get update
-    fi
-    apt-get -y install --no-install-recommends curl ca-certificates coreutils gnupg2
+if ! dpkg -s curl ca-certificates coreutils gnupg2 dirmngr > /dev/null 2>&1; then
+    apt-get-update-if-needed
+    apt-get -y install --no-install-recommends curl ca-certificates coreutils gnupg2 dirmngr
+fi
+if ! type git > /dev/null 2>&1; then
+    apt-get-update-if-needed
+    apt-get -y install --no-install-recommends git
 fi
 
 ARCHITECTURE="$(uname -m)"
@@ -74,19 +105,15 @@ HELM_FILENAME="helm-${HELM_VERSION}-linux-${ARCHITECTURE}.tar.gz"
 TMP_HELM_FILENAME="/tmp/helm/${HELM_FILENAME}"
 curl -sSL "https://get.helm.sh/${HELM_FILENAME}" -o "${TMP_HELM_FILENAME}"
 curl -sSL "https://github.com/helm/helm/releases/download/${HELM_VERSION}/${HELM_FILENAME}.asc" -o "${TMP_HELM_FILENAME}.asc"
-# todo - use aka.ms for keys
-curl -sSL "https://raw.githubusercontent.com/helm/helm/main/KEYS" -o /tmp/helm/KEYS
 export GNUPGHOME="/tmp/helm/gnupg"
 mkdir -p "${GNUPGHOME}"
 chmod 700 ${GNUPGHOME}
-cat << 'EOF' > /tmp/helm/gnupg/dirmngr.conf
-disable-ipv6
-keyserver hkps://keys.openpgp.org
-keyserver hkp://keyserver.ubuntu.com:80
-keyserver hkp://keyserver.pgp.com
-EOF
+getCommonSetting HELM_GPG_KEYS_URI
+getCommonSetting GPG_KEY_SERVERS true
+curl -sSL "${HELM_GPG_KEYS_URI}" -o /tmp/helm/KEYS
+echo -e "disable-ipv6\n${GPG_KEY_SERVERS}" > ${GNUPGHOME}/dirmngr.conf
 gpg -q --import "/tmp/helm/KEYS"
-if ! gpg --verify "${TMP_HELM_FILENAME}.asc" > /tmp/helm/gnupg/verify.log 2>&1; then
+if ! gpg --verify "${TMP_HELM_FILENAME}.asc" > ${GNUPGHOME}/verify.log 2>&1; then
     echo "Verification failed!"
     cat /tmp/helm/gnupg/verify.log
     exit 1
