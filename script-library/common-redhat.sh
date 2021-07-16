@@ -61,7 +61,6 @@ fi
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
 
     PACKAGE_LIST="\
-        git \
         openssh-clients \
         gnupg2 \
         iproute \
@@ -97,6 +96,10 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     fi
 
     yum -y install ${PACKAGE_LIST}
+
+    if ! type git > /dev/null 2>&1; then
+        yum -y install git
+    fi
 
     PACKAGES_ALREADY_INSTALLED="true"
 fi

@@ -75,7 +75,6 @@ apt-get-update-if-needed()
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
 
     PACKAGE_LIST="apt-utils \
-        git \
         openssh-client \
         gnupg2 \
         iproute2 \
@@ -152,6 +151,11 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     echo "Packages to verify are installed: ${PACKAGE_LIST}"
     apt-get -y install --no-install-recommends ${PACKAGE_LIST} 2> >( grep -v 'debconf: delaying package configuration, since apt-utils is not installed' >&2 )
         
+    # Install git if not already installed (may be more recent than distro version)
+    if ! type git > /dev/null 2>&1; then
+        apt-get -y install --no-install-recommends git
+    fi
+
     PACKAGES_ALREADY_INSTALLED="true"
 fi
 

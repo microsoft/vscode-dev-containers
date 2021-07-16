@@ -70,7 +70,6 @@ fi
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     apk update
     apk add --no-cache \
-        git \
         openssh-client \
         gnupg \
         procps \
@@ -108,9 +107,14 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
 
     # Install man pages - package name varies between 3.12 and earlier versions
     if apk info man > /dev/null 2>&1; then
-        apk add man man-pages
+        apk add --no-cache man man-pages
     else 
-        apk add mandoc man-pages
+        apk add --no-cache mandoc man-pages
+    fi
+
+    # Install git if not already installed (may be more recent than distro version)
+    if ! type git > /dev/null 2>&1; then
+        apk add --no-cache git
     fi
 
     PACKAGES_ALREADY_INSTALLED="true"
