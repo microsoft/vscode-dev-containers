@@ -15,8 +15,10 @@ export PIPX_HOME=${3:-"/usr/local/py-utils"}
 USERNAME=${4:-"automatic"}
 UPDATE_RC=${5:-"true"}
 INSTALL_PYTHON_TOOLS=${6:-"true"}
+USE_PPA_IF_AVAILABLE=${7:-"true"}
 
-PYTHON_SOURCE_GPG_KEYS="64E628F8D684696D B26995E310250568 2D347EA6AA65421D FB9921286F5E1540"
+DEADSNAKES_PPA_ARCHIVE_GPG_KEY="F23C5A6CF475977595C89F51BA6932366A755776"
+PYTHON_SOURCE_GPG_KEYS="64E628F8D684696D B26995E310250568 2D347EA6AA65421D FB9921286F5E1540 3A5CA953F73C700D 04C367C218ADD4FF 0EDDC5F26A45C816 6AF053F07D9DC8D2 C9BE28DEE6DF025C 126EB563A74B06BF D9866941EA5BBD71 ED9D77D5"
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
 keyserver hkps://keys.openpgp.org
 keyserver hkp://keyserver.pgp.com"
@@ -50,7 +52,7 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-function updaterc() {
+updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
         echo -e "$1" >> /etc/bash.bashrc
@@ -60,22 +62,31 @@ function updaterc() {
     fi
 }
 
-function getCommonSetting() {
-    if [ "${COMMON_SETTINGS_LOADED}" != "true" ]; then
+# Get central common setting
+get_common_setting() {
+    if [ "${common_settings_file_loaded}" != "true" ]; then
         curl -sL --fail-with-body "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
-        COMMON_SETTINGS_LOADED=true
+        common_settings_file_loaded=true
     fi
     local multi_line=""
     if [ "$2" = "true" ]; then multi_line="-z"; fi
     if [ -f "/tmp/vsdc-settings.env" ]; then
-        if [ ! -z "$1" ]; then declare -g $1="$(grep ${multi_line} -oP "${$1}=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"; fi
+        local result="$(grep ${multi_line} -oP "$1=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"
+        if [ ! -z "${result}" ]; then declare -g $1="{result}"; fi
     fi
+    echo "$1=${!1}"
 }
 
-function importGPGKeys() {
-    getCommonSetting $1
+# Import the specified key in a variable name passed in as 
+receive_gpg_keys() {
+    get_common_setting $1
     local keys=${!1}
-    getCommonSetting GPG_KEY_SERVERS true
+    get_common_setting GPG_KEY_SERVERS true
+    local keyring_args=""
+    if [ ! -z "$2" ]; then
+        mkdir -p "$(dirname \"$2\")"
+        keyring_args="--no-default-keyring --keyring $2"
+    fi
 
     # Use a temporary locaiton for gpg keys to avoid polluting image
     export GNUPGHOME="/tmp/tmp-gnupg"
@@ -89,7 +100,7 @@ function importGPGKeys() {
     until [ "${gpg_ok}" = "true" ] || [ "${retry_count}" -eq "5" ]; 
     do
         echo "(*) Downloading GPG key..."
-        ( echo "${keys}" | xargs -n 1 gpg --recv-keys) 2>&1 && gpg_ok="true"
+        ( echo "${keys}" | xargs -n 1 gpg -q ${keyring_args} --recv-keys) 2>&1 && gpg_ok="true"
         if [ "${gpg_ok}" != "true" ]; then
             echo "(*) Failed getting key, retring in 10s..."
             (( retry_count++ ))
@@ -103,8 +114,42 @@ function importGPGKeys() {
     fi
 }
 
+# Figure out correct version of a three part version number is not passed
+find_version_from_git_tags() {
+    local variable_name=$1
+    local requested_version=${!variable_name}
+    if [ "${requested_version}" = "none" ]; then return; fi
+    local repository=$2
+    local prefix=${3:-"tags/v"}
+    local separator=${4:-"."}
+    local last_part_optional=${5:-"false"}    
+    if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
+        local escaped_separator=${separator//./\\.}
+        local last_part
+        if [ "${last_part_optional}" = "true" ]; then
+            last_part="(${escaped_separator}[0-9]+)?"
+        else
+            last_part="${escaped_separator}[0-9]+"
+        fi
+        local regex="${prefix}\\K[0-9]+${escaped_separator}[0-9]+${last_part}$"
+        local version_list="$(git ls-remote --tags ${repository} | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
+        if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
+            declare -g ${variable_name}="$(echo "${version_list}" | head -n 1)"
+        else
+            set +e
+            declare -g ${variable_name}="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
+            set -e
+        fi
+    fi
+    if [ -z "${!variable_name}" ] || ! echo "${version_list}" | grep "^${!variable_name//./\\.}$" > /dev/null 2>&1; then
+        echo -e "Invalid ${variable_name} value: ${requested_version}\nValid values:\n${version_list}" >&2
+        exit 1
+    fi
+    echo "${variable_name}=${!variable_name}"
+}
+
 # Function to run apt-get if needed
-apt-get-update-if-needed()
+apt_get_update_if_needed()
 {
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         echo "Running apt-get update..."
@@ -114,57 +159,65 @@ apt-get-update-if-needed()
     fi
 }
 
-# Ensure apt is in non-interactive to avoid prompts
-export DEBIAN_FRONTEND=noninteractive
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
 
-# Install python from source if needed
-if [ "${PYTHON_VERSION}" != "none" ]; then
+install_from_ppa() {
+    echo "Using PPA to install Python..."
+    check_packages apt-transport-https curl ca-certificates gnupg2
+    receive_gpg_keys DEADSNAKES_PPA_ARCHIVE_GPG_KEY /usr/share/keyrings/deadsnakes-archive-keyring.gpg 
+    echo -e "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/deadsnakes-archive-keyring.gpg] http://ppa.launchpad.net/deadsnakes/ppa/ubuntu ${VERSION_CODENAME} main\ndeb-src [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/deadsnakes-archive-keyring.gpg] http://ppa.launchpad.net/deadsnakes/ppa/ubuntu ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/deadsnakes-ppa.list
+    apt-get update
+    apt-get -y install python${PYTHON_VERSION}
+    rm -rf /tmp/tmp-gnupg
+    exit 0
+}
+
+install_from_source() {
     if [ -d "${PYTHON_INSTALL_PATH}" ]; then
         echo "Path ${PYTHON_INSTALL_PATH} already exists. Remove this existing path or select a different one."
         exit 1
     else
         echo "Building Python ${PYTHON_VERSION} from source..."
         # Install prereqs if missing
-        PREREQ_PKGS="curl ca-certificates tar make build-essential libssl-dev zlib1g-dev \
+        check_packages curl ca-certificates tar make build-essential libssl-dev zlib1g-dev \
                     wget libbz2-dev libreadline-dev libxml2-dev xz-utils tk-dev gnupg2 \
-                    libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev llvm dirmngr"
-        if ! dpkg -s ${PREREQ_PKGS} > /dev/null 2>&1; then
-            apt-get-apt-get-update-if-needed
-            apt-get -y install --no-install-recommends ${PREREQ_PKGS}
-        fi
+                    libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev llvm dirmngr
         if ! type git > /dev/null 2>&1; then
-            apt-get-apt-get-update-if-needed
+            apt_get_update_if_needed
             apt-get -y install --no-install-recommends git
         fi
 
-        # Figure out correct version of a three part version number is not passed
-        PYTHON_VERSION_LIST="$(git ls-remote --tags https://github.com/python/cpython | grep -oP 'tags/v\K[0-9]+\.[0-9]+\.[0-9]+$' | sort -rV)"
-        if [ "$(echo "${PYTHON_VESRION}" | grep -o '\.' | wc -l)" != "2" ]; then
-            if [ "${PYTHON_VERSION}" = "latest" ] || [ "${PYTHON_VERSION}" = "current" ] || [ "${PYTHON_VERSION}" = "lts" ]; then
-                PYTHON_VERSION="$(echo "${PYTHON_VERSION_LIST}" | head -n 1)"
-            else 
-                PYTHON_VERSION="$(echo "${PYTHON_VERSION_LIST}" | grep -m1 "${PYTHON_VESION}")"
-            fi
-        fi
-        if ! echo "${PYTHON_VERSION_LIST}" | grep "^${PYTHON_VERSION}$" > /dev/null 2>&1; then
-            echo "Invalid Python version ${PYTHON_VERSION}"
-            exit 1
-        fi
-        echo "Target Python version: ${PYTHON_VERSION}"
+        # Find version using soft match
+        find_version_from_git_tags PYTHON_VERSION "https://github.com/python/cpython"
 
-        # Get signing keys
-        importGPGKeys PYTHON_SOURCE_GPG_KEYS
-
-        # Download and build from src
+        # Download tgz of source
         mkdir -p /tmp/python-src "${PYTHON_INSTALL_PATH}"
         cd /tmp/python-src
         TGZ_FILENAME="Python-${PYTHON_VERSION}.tgz"
         TGZ_URL="https://www.python.org/ftp/python/${PYTHON_VERSION}/${TGZ_FILENAME}"
         echo "Downloading ${TGZ_FILENAME}..."
         curl -sSL -o "/tmp/python-src/${TGZ_FILENAME}" "${TGZ_URL}"
-        echo "Downloading ${TGZ_FILENAME}.asc..."
-        curl -sSL -o "/tmp/python-src/${TGZ_FILENAME}.asc" "${TGZ_URL}.asc"
-        gpg --verify "${TGZ_FILENAME}.asc"
+
+        # Verify signature
+        if [ "${SKIP_SIGNATURE_CHECK}" != "true" ]; then
+            receive_gpg_keys PYTHON_SOURCE_GPG_KEYS
+            echo "Downloading ${TGZ_FILENAME}.asc..."
+            curl -sSL -o "/tmp/python-src/${TGZ_FILENAME}.asc" "${TGZ_URL}.asc"
+            gpg --verify "${TGZ_FILENAME}.asc"
+        fi
+
+        # Update min protocol for testing only - https://bugs.python.org/issue41561
+        cp /etc/ssl/openssl.cnf /tmp/python-src/
+        sed -i -E 's/MinProtocol[=\ ]+.*/MinProtocol = TLSv1.0/g' /tmp/python-src/openssl.cnf
+        export OPENSSL_CONF=/tmp/python-src/openssl.cnf
+
+        # Untar and build
         tar -xzf "/tmp/python-src/${TGZ_FILENAME}" -C "/tmp/python-src" --strip-components=1
         ./configure --prefix="${PYTHON_INSTALL_PATH}" --enable-optimizations --with-ensurepip=install
         make -j 8
@@ -178,6 +231,21 @@ if [ "${PYTHON_VERSION}" != "none" ]; then
         ln -s ${PYTHON_INSTALL_PATH}/bin/pydoc3 ${PYTHON_INSTALL_PATH}/bin/pydoc
         ln -s ${PYTHON_INSTALL_PATH}/bin/python3-config ${PYTHON_INSTALL_PATH}/bin/python-config
         updaterc "export PATH=${PYTHON_INSTALL_PATH}/bin:\${PATH}"
+    fi
+}
+
+# Ensure apt is in non-interactive to avoid prompts
+export DEBIAN_FRONTEND=noninteractive
+
+# Install python from source if needed
+if [ "${PYTHON_VERSION}" != "none" ]; then
+    # Source /etc/os-release to get OS info
+    . /etc/os-release
+    # If ubuntu, PPAs allowed - install from there
+    if [ "${ID}" = "ubuntu" ] && [ "${USE_PPA_IF_AVAILABLE}" = "true" ]; then
+        install_from_ppa
+    else
+        install_from_source
     fi
 fi
 
@@ -199,7 +267,6 @@ DEFAULT_UTILS="\
     bandit \
     pipenv \
     virtualenv"
-
 
 export PIPX_BIN_DIR=${PIPX_HOME}/bin
 export PATH=${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:${PATH}
