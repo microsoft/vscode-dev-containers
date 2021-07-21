@@ -14,6 +14,7 @@ USERNAME=${2:-"automatic"}
 UPDATE_RC=${3:-"true"}
 INSTALL_RUBY_TOOLS=${6:-"true"}
 
+DEFAULT_GEMS="rake ruby-debug-ide debase"
 RVM_GPG_KEYS="409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB"
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
 keyserver hkps://keys.openpgp.org
@@ -48,7 +49,7 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-function updaterc() {
+updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
         echo -e "$1" >> /etc/bash.bashrc
@@ -58,22 +59,30 @@ function updaterc() {
     fi
 }
 
-function getCommonSetting() {
-    if [ "${COMMON_SETTINGS_LOADED}" != "true" ]; then
+# Get central common setting
+get_common_setting() {
+    if [ "${common_settings_file_loaded}" != "true" ]; then
         curl -sL --fail-with-body "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
-        COMMON_SETTINGS_LOADED=true
+        common_settings_file_loaded=true
     fi
     local multi_line=""
     if [ "$2" = "true" ]; then multi_line="-z"; fi
     if [ -f "/tmp/vsdc-settings.env" ]; then
-        if [ ! -z "$1" ]; then declare -g $1="$(grep ${multi_line} -oP "${$1}=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"; fi
+        local result="$(grep ${multi_line} -oP "$1=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"
+        if [ ! -z "${result}" ]; then declare -g $1="{result}"; fi
     fi
+    echo "$1=${!1}"
 }
 
-function importGPGKeys() {
-    getCommonSetting $1
+# Import the specified key in a variable name passed in as 
+receive_gpg_keys() {
+    get_common_setting $1
     local keys=${!1}
-    getCommonSetting GPG_KEY_SERVERS true
+    get_common_setting GPG_KEY_SERVERS true
+    local keyring_args=""
+    if [ ! -z "$2" ]; then
+        keyring_args="--no-default-keyring --keyring \"$2\""
+    fi
 
     # Use a temporary locaiton for gpg keys to avoid polluting image
     export GNUPGHOME="/tmp/tmp-gnupg"
@@ -87,7 +96,7 @@ function importGPGKeys() {
     until [ "${gpg_ok}" = "true" ] || [ "${retry_count}" -eq "5" ]; 
     do
         echo "(*) Downloading GPG key..."
-        ( echo "${keys}" | xargs -n 1 gpg --recv-keys) 2>&1 && gpg_ok="true"
+        ( echo "${keys}" | xargs -n 1 gpg -q ${keyring_args} --recv-keys) 2>&1 && gpg_ok="true"
         if [ "${gpg_ok}" != "true" ]; then
             echo "(*) Failed getting key, retring in 10s..."
             (( retry_count++ ))
@@ -101,8 +110,42 @@ function importGPGKeys() {
     fi
 }
 
+# Figure out correct version of a three part version number is not passed
+find_version_from_git_tags() {
+    local variable_name=$1
+    local requested_version=${!variable_name}
+    if [ "${requested_version}" = "none" ]; then return; fi
+    local repository=$2
+    local prefix=${3:-"tags/v"}
+    local separator=${4:-"."}
+    local last_part_optional=${5:-"false"}    
+    if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
+        local escaped_separator=${separator//./\\.}
+        local last_part
+        if [ "${last_part_optional}" = "true" ]; then
+            last_part="(${escaped_separator}[0-9]+)?"
+        else
+            last_part="${escaped_separator}[0-9]+"
+        fi
+        local regex="${prefix}\\K[0-9]+${escaped_separator}[0-9]+${last_part}$"
+        local version_list="$(git ls-remote --tags ${repository} | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
+        if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
+            declare -g ${variable_name}="$(echo "${version_list}" | head -n 1)"
+        else
+            set +e
+            declare -g ${variable_name}="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
+            set -e
+        fi
+    fi
+    if [ -z "${!variable_name}" ] || ! echo "${version_list}" | grep "^${!variable_name//./\\.}$" > /dev/null 2>&1; then
+        echo -e "Invalid ${variable_name} value: ${requested_version}\nValid values:\n${version_list}" >&2
+        exit 1
+    fi
+    echo "${variable_name}=${!variable_name}"
+}
+
 # Function to run apt-get if needed
-apt-get-update-if-needed()
+apt_get_update_if_needed()
 {
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         echo "Running apt-get update..."
@@ -112,47 +155,36 @@ apt-get-update-if-needed()
     fi
 }
 
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
-ARCHITECTURE="$(uname -m)"
-if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ] && [ "${ARCHITECTURE}" != "arm64" ] && [ "${ARCHITECTURE}" != "aarch64" ]; then
-    echo "(!) Architecture $ARCHITECTURE unsupported"
+architecture="$(uname -m)"
+if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "x86_64" ] && [ "${architecture}" != "arm64" ] && [ "${architecture}" != "aarch64" ]; then
+    echo "(!) Architecture $architecture unsupported"
     exit 1
 fi
 
-# Install curl, software-properties-common, build-essential, gnupg2 if missing
-PACKAGE_LIST="curl ca-certificates software-properties-common build-essential gnupg2 libreadline-dev 
-    procps dirmngr gawk autoconf automake bison libffi-dev libgdbm-dev libncurses5-dev 
-    libsqlite3-dev libtool libyaml-dev pkg-config sqlite3 zlib1g-dev libgmp-dev libssl-dev"
-if ! dpkg -s ${PACKAGE_LIST} > /dev/null 2>&1; then
-    apt-get-update-if-needed
-    apt-get -y install --no-install-recommends ${PACKAGE_LIST}
-fi
+# Install dependencies
+check_packages curl ca-certificates software-properties-common build-essential gnupg2 libreadline-dev \
+    procps dirmngr gawk autoconf automake bison libffi-dev libgdbm-dev libncurses5-dev \
+    libsqlite3-dev libtool libyaml-dev pkg-config sqlite3 zlib1g-dev libgmp-dev libssl-dev
 if ! type git > /dev/null 2>&1; then
-    apt-get-update-if-needed
+    apt_get_update_if_needed
     apt-get -y install --no-install-recommends git
 fi
 
 
 # Figure out correct version of a three part version number is not passed
-if [ "${RUBY_VERSION}" != "none" ]; then
-    RUBY_VERSION_LIST="$(git ls-remote --tags https://github.com/ruby/ruby | grep -oP 'tags/v\K[0-9]+_[0-9]+_[0-9]+$' | tr '_' '.' | sort -rV)"
-    if [ "$(echo "${RUBY_VERSION}" | grep -o '\.' | wc -l)" != "2" ]; then
-        if [ "${RUBY_VERSION}" = "latest" ] || [ "${RUBY_VERSION}" = "current" ] || [ "${RUBY_VERSION}" = "lts" ]; then
-            RUBY_VERSION="$(echo "${RUBY_VERSION_LIST}" | head -n 1)"
-        else 
-            RUBY_VERSION="$(echo "${RUBY_VERSION_LIST}" | grep -m1 "${RUBY_VERSION}")"
-        fi
-    fi
-    if ! echo "${RUBY_VERSION_LIST}" | grep "^${RUBY_VERSION}$" > /dev/null 2>&1; then
-        echo "Invalid Ruby version ${RUBY_VERSION}"
-        exit 1
-    fi
-    echo "Target Ruby version: ${RUBY_VERSION}"
-fi
-
-DEFAULT_GEMS="rake ruby-debug-ide debase"
+find_version_from_git_tags RUBY_VERSION "https://github.com/ruby/ruby" "tags/v" "_"
 
 # Just install Ruby if RVM already installed
 if [ -d "/usr/local/rvm" ]; then
@@ -164,7 +196,7 @@ if [ -d "/usr/local/rvm" ]; then
     SKIP_GEM_INSTALL="false"
 else
     # Install RVM
-    importGPGKeys RVM_GPG_KEYS
+    receive_gpg_keys RVM_GPG_KEYS
     # Determine appropriate settings for rvm installer
     if [ "${RUBY_VERSION}" = "none" ]; then
         RVM_INSTALL_ARGS=""
