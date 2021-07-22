@@ -7,11 +7,17 @@ FROM mcr.microsoft.com/oryx/build:vso-focal-exp-20210721.2 as kitchensink
 ARG USERNAME=codespace
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+ARG HOMEDIR=/home/$USERNAME
 
 # Default to bash shell (other shells available at /usr/bin/fish and /usr/bin/zsh)
 ENV SHELL=/bin/bash \
     ORYX_ENV_TYPE=vsonline-present \
-    DOTNET_ROOT="/home/${USERNAME}/.dotnet" \ 
+    DOTNET_ROOT="${HOMEDIR}/.dotnet" \
+    JAVA_ROOT="${HOMEDIR}/.java" \
+    NODE_ROOT="${HOMEDIR}/.nodejs" \
+    PHP_ROOT="${HOMEDIR}/.php" \
+    PYTHON_ROOT="${HOMEDIR}/.python" \
+    RUBY_ROOT="${HOMEDIR}/.ruby" \
     NVM_SYMLINK_CURRENT=true \
     NVM_DIR="/home/${USERNAME}/.nvm" \
     NVS_HOME="/home/${USERNAME}/.nvs" \
@@ -25,7 +31,7 @@ ENV SHELL=/bin/bash \
     CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup" \
     SDKMAN_DIR="/usr/local/sdkman"
-ENV PATH="${ORIGINAL_PATH}:${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${ORYX_PATHS}"
+ENV PATH="${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${PYTHON_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${ORIGINAL_PATH}:${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${ORYX_PATHS}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/* setup-user.sh first-run-notice.txt /tmp/scripts/
@@ -59,11 +65,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mkdir -p /usr/local/etc/vscode-dev-containers/ \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
-# Changing default shell (/bin/sh) to /bin/bash
-RUN chsh -s /bin/bash ${USERNAME}
-
 # Install Python, PHP, Ruby utilities
-RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
+RUN chsh -s /bin/bash ${USERNAME} \
+    && bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install rvm, rbenv, any missing base gems
     && chown -R ${USERNAME} /opt/ruby/* \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
