@@ -59,6 +59,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mkdir -p /usr/local/etc/vscode-dev-containers/ \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
+# Changing default shell (/bin/sh) to /bin/bash
+RUN chsh -s /bin/bash ${USERNAME}
+
 # Install Python, PHP, Ruby utilities
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install rvm, rbenv, any missing base gems
