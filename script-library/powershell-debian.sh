@@ -16,15 +16,29 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Function to run apt-get if needed
+apt_get_update_if_needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, apt-transport-https, or gpg if missing
-if ! dpkg -s apt-transport-https curl ca-certificates gnupg2 > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        apt-get update
-    fi
-    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates gnupg2 
-fi
+# Install dependencies
+check_packages apt-transport-https curl ca-certificates gnupg2 
 
 ARCHITECTURE="$(uname -m)"
 if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ]; then
