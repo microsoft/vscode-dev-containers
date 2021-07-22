@@ -134,7 +134,7 @@
 			"id": "python",
 			"name": "Python (requires a build) and tools",
 			"type": "choice",
-			"values": ["3.9", "3.8", "3.7", "3.6"],
+			"values": ["latest", "3.9", "3.8", "3.7", "3.6"],
 			"default": false,
 			"buildArg": "PYTHON_VERSION",
 			"extensions": [
@@ -176,6 +176,7 @@
 				"GOROOT": "/usr/local/go",
 				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
 			},
+			//  Problem #4 - Need to set these for ptrace based debuggers
 			"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 			"settings": {
 				"go.toolsManagement.checkForUpdates": "local",
@@ -188,7 +189,7 @@
 			"id": "java",
 			"name": "Java (via SDKMAN!)",
 			"type": "choice",
-			"values": ["16", "11", "8"],
+			"values": ["lts", "latest", "16", "11", "8"],
 			"default": false,
 			"buildArg": "JAVA_VERSION",
 			"extensions": ["vscjava.vscode-java-pack"],
@@ -200,7 +201,7 @@
 				"java.home": "/usr/local/sdkman/candidates/java/current"
 			}
 		},
-		// Problem #4 - Maven and gradle options should not be presented if Java isn't checked
+		// Problem #5 - Maven and gradle options should not be presented if Java isn't checked
 		{
 			"id": "maven",
 			"name": "Maven (via SDKMAN!)",
@@ -231,7 +232,7 @@
 			"id": "ruby",
 			"name": "Ruby (via rvm)",
 			"type": "choice",
-			"values": ["3.0", "2.7", "2.6"],
+			"values": ["latest", "3.0", "2.7", "2.6"],
 			"default": false,
 			"buildArg": "RUBY_VERSION",
 			"extensions": [
@@ -262,6 +263,7 @@
 				"RUSTUP_HOME": "/usr/local/rustup",
 				"PATH": "${CARGO_HOME}/bin:${RUSTUP_HOME}/bin:${PATH}"
 			},
+			//  Problem #4 - Need to set these for ptrace based debuggers
 			"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
 			"settings": {
 				"lldb.executable": "/usr/bin/lldb",
