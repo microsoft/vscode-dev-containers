@@ -6,7 +6,7 @@
 			"name": "Docker (Moby) CLI and Engine in container",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_DIND",
+			"buildArg": "INSTALL_DOCKER_IN_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
 			"privileged": true,
 			"extensions": [
@@ -49,8 +49,18 @@
 			"default": false,
 			"buildArg": "INSTALL_TERRAFORM",
 			"extensions": [
-				"HashiCorp.terraform"
-			]
+				"HashiCorp.terraform",
+				"ms-vscode.azurecli",
+				"ms-azuretools.vscode-azureterraform",
+				"ms-azuretools.vscode-docker"
+			],
+			"settings": { 
+				"terraform.languageServer": {
+					"enabled": true,
+					"args": []
+				},
+				"azureTerraform.terminal": "integrated"
+			}
 		},
 		{
 			"id": "git",
@@ -76,7 +86,10 @@
 			"name": "Azure CLI",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_AZURE_CLI"
+			"buildArg": "INSTALL_AZURE_CLI",
+			"extensions": [
+				"ms-vscode.azurecli"
+			]
 		},
 		{
 			"id": "sshd",
@@ -84,6 +97,13 @@
 			"type": "option",
 			"default": false,
 			"buildArg": "INSTALL_SSH"
+		},
+		{
+			"id": "desktop-lite",
+			"name": "light-weight Desktop (fluxbox)",
+			"type": "option",
+			"default": false,
+			"buildArg": "INSTALL_DESKTOP_LITE"
 		},
 		{
 			"id": "homebrew",
@@ -126,6 +146,21 @@
 				"PIPX_HOME": "/usr/local/py-utils",
 				"PIPX_BIN_DIR": "/usr/local/py-utils/bin",
 				"PATH":"${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}"
+			},
+			"settings": { 
+				"python.pythonPath": "/usr/local/bin/python",
+				"python.languageServer": "Pylance",
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": true,
+				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+				"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+				"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
+				"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+				"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
 			}
 		},
 		{
@@ -140,6 +175,13 @@
 				"GOPATH": "/go",
 				"GOROOT": "/usr/local/go",
 				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
+			},
+			"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+			"settings": {
+				"go.toolsManagement.checkForUpdates": "local",
+				"go.useLanguageServer": true,
+				"go.gopath": "/go",
+				"go.goroot": "/usr/local/go"
 			}
 		},
 		{
@@ -153,6 +195,9 @@
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}"
+			},
+			"settings": {
+				"java.home": "/usr/local/sdkman/candidates/java/current"
 			}
 		},
 		// Problem #4 - Maven and gradle options should not be presented if Java isn't checked
@@ -163,7 +208,7 @@
 			"values": ["latest", "3.8", "3.6", "3.5"],
 			"default": false,
 			"buildArg": "MAVEN_VERSION",
-			"extensions": ["vscjava.vscode-maven"],
+			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${PATH}"
@@ -176,6 +221,7 @@
 			"values": ["latest", "7", "6", "5"],
 			"default": false,
 			"buildArg": "GRADLE_VERSION",
+			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}"
@@ -205,14 +251,24 @@
 			"default": false,
 			"buildArg": "INSTALL_RUST",
 			"extensions": [
-				"rust-lang.rust",
-				"bungcip.better-toml",
-				"vadimcn.vscode-lldb"		
+				"vadimcn.vscode-lldb",
+				"mutantdino.resourcemonitor",
+				"matklad.rust-analyzer",
+				"tamasfe.even-better-toml",
+				"serayuzgur.crates"	
 			],
 			"containerEnv": {
 				"CARGO_HOME": "/usr/local/cargo",
 				"RUSTUP_HOME": "/usr/local/rustup",
 				"PATH": "${CARGO_HOME}/bin:${RUSTUP_HOME}/bin:${PATH}"
+			},
+			"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
+			"settings": {
+				"lldb.executable": "/usr/bin/lldb",
+				"files.watcherExclude": {
+					"**/target/**": true
+				},
+				"rust-analyzer.checkOnSave.command": "clippy"
 			}
 		},
 		{

@@ -14,6 +14,7 @@ while IFS= read -r feature_line; do
         feature_script_and_args="${feature_line##*=}"
         feature_script_and_args="${feature_script_and_args%\"}"
         # Execute the script line - but do not quote so arguments can be included in the 
+        echo "${feature_script_and_args#\"}"
         eval "/tmp/library-scripts/${feature_script_and_args#\"}"
     fi
 done < /tmp/library-scripts/feature-scripts.env
