@@ -27,8 +27,6 @@ if [ "${SWITCHED_TO_BASH}" != "true" ]; then
     exit $?
 fi
 
-SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
-
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
@@ -375,7 +373,7 @@ EOF
 if [ -f "${SCRIPT_DIR}/meta.env" ]; then
     mkdir -p /usr/local/etc/vscode-dev-containers/
     cp -f "${SCRIPT_DIR}/meta.env" /usr/local/etc/vscode-dev-containers/meta.env
-     echo "${meta_info_script}" > /usr/local/bin/devcontainer-info
+    echo "${meta_info_script}" > /usr/local/bin/devcontainer-info
     chmod +x /usr/local/bin/devcontainer-info
 fi
 

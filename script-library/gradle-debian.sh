@@ -16,11 +16,6 @@ UPDATE_RC=${4:-"true"}
 
 set -e
 
- # Blank will install latest gradle version
-if [ "${GRADLE_VERSION}" = "lts" ] || [ "${GRADLE_VERSION}" = "latest" ] || [ "${GRADLE_VERSION}" = "current" ]; then
-    GRADLE_VERSION=""
-fi
-
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
