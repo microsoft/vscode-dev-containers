@@ -18,16 +18,19 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-function get_common_setting() {
-    if [ "${COMMON_SETTINGS_LOADED}" != "true" ]; then
-        curl -sL --fail-with-body "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
-        COMMON_SETTINGS_LOADED=true
+# Get central common setting
+get_common_setting() {
+    if [ "${common_settings_file_loaded}" != "true" ]; then
+        curl -sfL "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+        common_settings_file_loaded=true
     fi
-    local multi_line=""
-    if [ "$2" = "true" ]; then multi_line="-z"; fi
     if [ -f "/tmp/vsdc-settings.env" ]; then
-        if [ ! -z "$1" ]; then declare -g $1="$(grep ${multi_line} -oP "${$1}=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"; fi
+        local multi_line=""
+        if [ "$2" = "true" ]; then multi_line="-z"; fi
+        local result="$(grep ${multi_line} -oP "$1=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"
+        if [ ! -z "${result}" ]; then declare -g $1="${result}"; fi
     fi
+    echo "$1=${!1}"
 }
 
 # Function to run apt-get if needed
