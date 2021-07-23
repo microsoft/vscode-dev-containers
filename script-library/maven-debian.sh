@@ -16,11 +16,6 @@ UPDATE_RC=${4:-"true"}
 
 set -e
 
- # Blank will install latest maven version
-if [ "${MAVEN_VERSION}" = "lts" ] || [ "${MAVEN_VERSION}" = "current" ] || [ "${MAVEN_VERSION}" = "latest" ]; then
-    MAVEN_VERSION=""
-fi
-
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
