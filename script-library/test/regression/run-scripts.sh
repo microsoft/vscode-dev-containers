@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SCRIPT_DIR=${1-"/tmp"}
 DISTRO=${2:-"debian"}
