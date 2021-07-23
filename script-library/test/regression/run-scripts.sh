@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPT_DIR=${1-"/tmp"}
 DISTRO=${2:-"debian"}
@@ -39,7 +39,7 @@ runScript()
     echo "**** Done! ****\n"
 }
 
-echo -e '#!/bin/bash\n"$@"' | tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh > /usr/local/share/desktop-init.sh
+echo '#!/bin/bash\n"$@"' | tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh > /usr/local/share/desktop-init.sh
 chmod +x /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh
 if [ "${RUN_COMMON_SCRIPT}" = "true" ]; then
     runScript common "true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}"
