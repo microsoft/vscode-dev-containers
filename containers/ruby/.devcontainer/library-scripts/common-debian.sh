@@ -236,12 +236,14 @@ if [ -t 1 ] && [[ "${TERM_PROGRAM}" = "vscode" || "${TERM_PROGRAM}" = "codespace
     ((sleep 10s; touch "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed") &)
 fi
 
-# Set the default git editor
-if  [ "${TERM_PROGRAM}" = "vscode" ]; then
-    if [[ -n $(command -v code-insiders) &&  -z $(command -v code) ]]; then 
-        export GIT_EDITOR="code-insiders --wait"
-    else 
-        export GIT_EDITOR="code --wait"
+# Set the default git editor if not already set
+if [ -z "$(git config --get core.editor)" ] && [ -z "${GIT_EDITOR}" ]; then
+    if  [ "${TERM_PROGRAM}" = "vscode" ]; then
+        if [[ -n $(command -v code-insiders) &&  -z $(command -v code) ]]; then 
+            export GIT_EDITOR="code-insiders --wait"
+        else 
+            export GIT_EDITOR="code --wait"
+        fi
     fi
 fi
 
