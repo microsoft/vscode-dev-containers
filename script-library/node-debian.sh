@@ -10,7 +10,7 @@
 # Syntax: ./node-debian.sh [directory to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag]
 
 export NVM_DIR=${1:-"/usr/local/share/nvm"}
-export NODE_VERSION=${2:-"lts/*"}
+export NODE_VERSION=${2:-"lts"}
 USERNAME=${3:-"automatic"}
 UPDATE_RC=${4:-"true"}
 export NVM_VERSION="0.38.0"
@@ -42,10 +42,6 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     fi
 elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
-fi
-
-if [ "${NODE_VERSION}" = "none" ]; then
-    export NODE_VERSION=
 fi
 
 updaterc() {
@@ -92,6 +88,13 @@ else
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
     apt-get update
     apt-get -y install --no-install-recommends yarn
+fi
+
+# Adjust node version if required
+if [ "${NODE_VERSION}" = "none" ]; then
+    export NODE_VERSION=
+elif [ "${NODE_VERSION}" = "lts" ]; then
+    export NODE_VERSION="lts/*"
 fi
 
 # Install the specified node version if NVM directory already exists, then exit
