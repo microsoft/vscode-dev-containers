@@ -8,12 +8,13 @@ checkCommon
 
 # Run definition specific tests
 
-checkExtension esbenp.prettier-vscode
 checkExtension octref.vetur
 checkExtension dbaeumer.vscode-eslint
+checkExtension esbenp.prettier-vscode
+checkExtension streetsidesoftware.code-spell-checker
+checkExtension visualstudioexptteam.vscodeintellicode
 checkExtension msjsdiag.debugger-for-chrome
 checkExtension firefox-devtools.vscode-firefox-debug
-checkExtension msjsdiag.debugger-for-edge
 SPECIFIC_PACKAGE_LIST="fzf \
         silversearcher-ag"
 checkOSPackages "specific-os-packages" ${SPECIFIC_PACKAGE_LIST}

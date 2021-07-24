@@ -8,8 +8,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 ARG VUE_VERSION
 ARG VUE_CLI_VERSION
 ARG COMPILER_SFC_VERSION
-ARG HTTP_SERVER_VERSION
-RUN su node -c "umask 0002 && npm install -g vue@${VUE_VERSION} @vue/compiler-sfc@${COMPILER_SFC_VERSION} @vue/cli@${VUE_CLI_VERSION} http-server@${HTTP_SERVER_VERSION}"
+ARG IONIC_VERSION
+ARG GRIDSOME_VERSION
+RUN su node -c "umask 0002 && npm install -g vue@${VUE_VERSION} @vue/compiler-sfc@${COMPILER_SFC_VERSION} @vue/cli@${VUE_CLI_VERSION} @ionic/cli@${IONIC_VERSION} @gridsome/cli@${GRIDSOME_VERSION}"
 
 WORKDIR /app
 

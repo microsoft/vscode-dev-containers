@@ -23,21 +23,28 @@ This development container aims at providing a reproducible development environm
 - [x] Based on `typescript-node` container image (`git`, `zsh`, `oh-my-zsh`, etc.)
 - [x] Command-line fuzzy finder [fzf](https://github.com/junegunn/fzf)
 - [x] Code-searching tool [ag](https://github.com/ggreer/the_silver_searcher)
-- [] hard pinned tool versions installed from the base container image [typescript-node](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/typescript-node/.devcontainer) (depends on [javascript-node](https://github.com/fkromer/vscode-dev-containers/tree/main/containers/javascript-node/.devcontainer))
-- [] Support for custom `dotfiles`
+- [ ] hard pinned tool versions installed from the base container image [typescript-node](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/typescript-node/.devcontainer) (depends on [javascript-node](https://github.com/fkromer/vscode-dev-containers/tree/main/containers/javascript-node/.devcontainer))
+- [x] Support for custom `dotfiles`
 - [x] [npm](https://www.npmjs.com/) (provided by base image)
 - [x] [yarn](https://yarnpkg.com/) (provided by base image)
 - [x] [Vue.js 3](https://github.com/vuejs/vue-next) aka `vue-next` (including `compiler-sfc`, etc.)
-- [] [Ionic Framework (Vue)](https://ionicframework.com/docs/vue/overview) - [global install instructions](https://ionicframework.com/docs/vue/quickstart#creating-a-project-with-the-ionic-cli)
-- [] [Gridsome](https://gridsome.org/) - [global install instructions](https://gridsome.org/docs/#1-install-gridsome-cli-tool)
-- [x] [`http-server`](https://www.npmjs.com/package/http-server)
+- [x] [Ionic Framework (Vue)](https://ionicframework.com/docs/vue/overview)
+- [x] [Gridsome](https://gridsome.org/)
 - [x] [VSCode Extension Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+- [ ] VSCode Settings for Vetur [configuration info](https://vuejs.github.io/vetur/guide/setup.html#vs-code-config)
 - [x] [VSCode Extension ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [ ] VSCode Settings for ESLint [configuration info](https://github.com/microsoft/vscode-eslint/blob/main/history/settings_1_9_x.md)
 - [x] [VSCode Extension Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [x] [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
-- [] Debugger for Chrome `launch` request [configuration](https://github.com/Microsoft/vscode-chrome-debug#configuration)
-- [x] [Debugger for Firefox](https://marketplace.visualstudio.com/items?itemName=firefox-devtools.vscode-firefox-debug)
-- [] Debugger for Firefox `launch` request [configuration](https://github.com/firefox-devtools/vscode-firefox-debug#getting-started)
+- [ ] VSCode Settings for Prettier [configuration info](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#prettier-settings)
+- [x] [Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=visualstudioexptteam.vscodeintellicode)
+- [x] [VSCode Extension Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
+- [ ] Debugger for Chrome `launch` request [configuration](https://github.com/Microsoft/vscode-chrome-debug#configuration)
+- [x] [VSCode Extension Debugger for Firefox](https://marketplace.visualstudio.com/items?itemName=firefox-devtools.vscode-firefox-debug)
+- [ ] Debugger for Firefox `launch` request [configuration](https://github.com/firefox-devtools/vscode-firefox-debug#getting-started)
+- [x] [VSCode Extension GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+- [ ] Settings for GitLens [config info](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens#gitlens-settings)
+- [x] [VSCode Extension GitGraph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
+- [ ] Settings for GitGraph [config info](https://github.com/mhutchie/vscode-git-graph/wiki/Extension-Settings)
 - [x] Container image tests
 - [x] Test project
 
@@ -52,7 +59,7 @@ Of course you can use other common tools by installing into project specific env
 
 While the definition itself works unmodified, you can customize the container with `args` in the included `.devcontainer/devcontainer.json` file.
 
-This container uses the `typescript-node` container as base container. For more info about available cusotmization options via `args` refer to the [usage instructions](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/typescript-node#using-this-definition).
+This container uses the `typescript-node` container as base container. For more info about available customization options via `args` refer to the [usage instructions](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/typescript-node#using-this-definition).
 
 > Beyond TypeScript, Node.js, and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. Since `tslint` is now fully depreicated, the definition includes `tslint-to-eslint-config` globally to help you migrate.
 >
@@ -60,43 +67,65 @@ This container uses the `typescript-node` container as base container. For more 
 
 This container's overall customization options via `args` are as follows. The values shown are the default values.
 
-### Debian version
+### Configuration: Debian version
 
 ```json
 "args": { "VARIANT": "0-16-buster" }
 ```
 
-More info about [valid values](https://mcrflowprodcentralus.data.mcr.microsoft.com/mcrprod/vscode/devcontainers/typescript-node?P1=1627143043&P2=1&P3=1&P4=5TQ%2B5GHJS4tUC0eBZ4jTxKeU%2Bi9Ng9LEPIHHbtcSemU%3D&se=2021-07-24T16%3A10%3A43Z&sig=XEyqxn2SkBgIj2%2FMFlsOvV6IA76PVNijFWdNMLB%2B8OE%3D&sp=r&sr=b&sv=2015-02-21).
+More info about [valid values](https://mcrflowprodcentralus.data.mcr.microsoft.com/mcrprod/vscode/devcontainers/typescript-node?P1=1627143043&P2=1&P3=1&P4=5TQ%2B5GHJS4tUC0eBZ4jTxKeU%2Bi9Ng9LEPIHHbtcSemU%3D&se=2021-07-24T16%3A10%3A43Z&sig=XEyqxn2SkBgIj2%2FMFlsOvV6IA76PVNijFWdNMLB%2B8OE%3D&sp=r&sr=b&sv=2015-02-21)...
 
-### Vue.js 3 version
+### Configuration: Vue.js 3 version
 
 ```json
 "args": { "VUE_VERSION": "3.1.5" }
 ```
 
-### Compiler SFC version
+More info about [valid values](https://www.npmjs.com/package/vue?activeTab=versions) (the ones with major version 3)...
+
+### Configuration: Compiler SFC version
 
 ```json
 "args": { "COMPILER_SFC_VERSION": "3.1.5" }
 ```
 
-### http-server version
+More info about [valid values](https://www.npmjs.com/package/@vue/compiler-sfc?activeTab=versions) (the ones with major version 3)...
+
+### Configuration: Ionic framework version
 
 ```json
-"args": { "HTTP_SERVER_VERSION": "0.12.3" }
+"args": { "IONIC_VERSION": "0.12.3" }
 ```
+
+More info about [valid values](https://www.npmjs.com/package/@ionic/cli?activeTab=versions)...
+
+### Configuration: Gridsome version
+
+```json
+"args": { "GRIDSOME_VERSION": "0.3.4" }
+```
+
+More info about [valid values](https://www.npmjs.com/package/@gridsome/cli?activeTab=versions)...
+
+### Configuration: dotfiles
+
+Create a Git repository containing your `dotfiles` and containing an `install.sh` script if required.
+In `.vscode/settings.json` adjust `"remote.containers.dotfiles.repository": "https://github.com/fkromer/vue-3-dotfiles"`
+to your Git repository.
 
 ### Adding the definition to a project or codespace
 
 1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
-   For usage in a local VSCode installation install [VSCode Extension Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) on the host machine. In case of usage of WSL2 on Windows the host machine is Windows, not the WSL2 Linux distribution.
+   > **Note**: For usage in a local VSCode installation install [VSCode Extension Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) on the host machine. In case of usage of WSL2 on Windows the host machine is Windows, not the WSL2 Linux distribution.
 
 2. Start VS Code and open your project folder or connect to a codespace.
 
 3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
 
    > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
+
+   > **Note:** As long this repository is no officially supported dev container the folders `.devcontainer` and `.vscode` need to be copied into a local project folder. Refer to the configuration instructions above.
 
 4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 

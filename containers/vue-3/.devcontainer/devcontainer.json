@@ -8,24 +8,22 @@
 			"VUE_VERSION": "3.1.5",
 			"VUE_CLI_VERSION": "4.5.13",
 			"COMPILER_SFC_VERSION": "3.1.5",
-			"HTTP_SERVER_VERSION": "0.12.3"
+			"IONIC_VERSION": "6.16.3"
 		}
 	},
 	"settings": {
-		"terminal.integrated.profiles.linux": {
-			"zsh (login)": {
-				"path": "zsh"
-			}
-		}
+		"terminal.integrated.defaultProfile.linux": "zsh"
 	},
-	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"octref.vetur",
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
+		"streetsidesoftware.code-spell-checker",
+		"visualstudioexptteam.vscodeintellicode",
 		"msjsdiag.debugger-for-chrome",
 		"firefox-devtools.vscode-firefox-debug",
-		"msjsdiag.debugger-for-edge"
+		"eamodio.gitlens",
+		"mhutchie.git-graph"
 	],
 	"forwardPorts": [
 		8080
