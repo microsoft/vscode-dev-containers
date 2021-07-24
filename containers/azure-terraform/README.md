@@ -31,11 +31,11 @@ You can also choose the specific version of Terraform installed by updating the 
    "TERRAGRUNT_VERSION": "0.28.1"
    "INSTALL_AZURE_CLI": "true",
    "INSTALL_DOCKER": "true",
-   "INSTALL_NODE": "true"
+   "NODE_VERSION": "lts"
 }
 ```
 
-If you plan to use the Azure Cloud Shell for all of your Terraform operations, you can set `"INSTALL_DOCKER": "false"`. Conversely, if you do not plan to use Cloud Shell, you can set `"INSTALL_DOCKER": "false"`. By default, both are installed so you can decide later.
+If you plan to use the Azure Cloud Shell for all of your Terraform operations, you can set `"INSTALL_DOCKER": "false"`. Conversely, if you do not plan to use Cloud Shell, you can set `"NODE_VERSION": "none"`. By default, both are installed so you can decide later.
 
 Beyond `git`, this `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
 

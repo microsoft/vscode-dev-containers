@@ -53,8 +53,7 @@ Given how frequently ASP.NET applications use Node.js for front end code, this c
 
 ```yaml
 arg:
-  INSTALL_NODE: "true"
-  ARG NODE_VERSION: "10"
+  ARG NODE_VERSION: "14" # Set to "none" to skip Node.js installation
 ```
 
 If you would like to install the Azure CLI update this line in `.devcontainer/docker-compose.yml`:
@@ -62,8 +61,7 @@ If you would like to install the Azure CLI update this line in `.devcontainer/do
 ```yaml
 arg:
   INSTALL_AZURE_CLI: "true"
-  INSTALL_NODE: "true"
-  ARG NODE_VERSION: "10"
+  NODE_VERSION: "lts"
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.

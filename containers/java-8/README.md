@@ -74,10 +74,9 @@ You can also specify the version of Gradle or Maven if needed.
 
 Given JavaScript front-end web client code written for use in conjunction with a Java back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```json
+```jsonc
 "args": {
-    "INSTALL_NODE": "true",
-    "NODE_VERSION": "10"
+    "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
 }
 ```
 
