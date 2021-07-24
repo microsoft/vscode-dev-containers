@@ -5,6 +5,8 @@ set -a
 . /tmp/library-scripts/features.env
 set +a
 
+chmod +x /tmp/library-scripts/*.sh
+
 # Execute option scripts if correct environment variable is set to "true"
 while IFS= read -r feature_line; do
     # Extract the env var part of the line

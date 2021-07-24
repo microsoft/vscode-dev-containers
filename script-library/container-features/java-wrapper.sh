@@ -9,7 +9,7 @@ USERNAME=${3:-"automatic"}
 UPDATE_RC=${4:-"true"}
 ADDITIONAL_JAVA_VERSION=11
 
-if echo "${JAVA_VERSION}" | grep -E '^8"([\s\.]|$)' > /dev/null 2>&1; then
-    ./java-debian.sh "${ADDITIONAL_JAVA_VERSION}" "${SDKMAN_DIR}" "${USERNAME}" "${UPDATE_RC}"
+if echo "${JAVA_VERSION}" | grep -E '^8([\s\.]|$)' > /dev/null 2>&1; then
+    /tmp/library-scripts/java-debian.sh "${ADDITIONAL_JAVA_VERSION}" "${SDKMAN_DIR}" "${USERNAME}" "${UPDATE_RC}"
 fi
-./java-debian.sh "${JAVA_VERSION}" "${SDKMAN_DIR}" "${USERNAME}" "${UPDATE_RC}"
+/tmp/library-scripts/java-debian.sh "${JAVA_VERSION}" "${SDKMAN_DIR}" "${USERNAME}" "${UPDATE_RC}"
