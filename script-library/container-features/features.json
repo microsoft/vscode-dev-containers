@@ -14,6 +14,17 @@
 			],
 			"mounts": [
 				"source=dind-var-lib-docker,target=/var/lib/docker,type=volume"
+			],
+			"exclude": [
+				"alpine",
+				"azure-ansible",
+				"azure-terraform",
+				"docker-in-docker",
+				"docker-from-docker",
+				"docker-from-docker-compose",
+				"codespaces-linux",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube"
 			]
 		},
 		{
@@ -28,23 +39,40 @@
 			],
 			"mounts": [
 				"source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
+			],
+			"exclude": [
+				"alpine",
+				"azure-ansible",
+				"azure-terraform",
+				"docker-in-docker",
+				"docker-from-docker",
+				"docker-from-docker-compose",
+				"codespaces-linux",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube"
 			]
 		},
 		//  Problem #2 - there's three versions here and they go together as a unit, and no ability to pin to a version
 		{
 			"id": "kubectl-helm-minikube",
-			"name": "latest kubectl, Helm, and minkube",
+			"name": "Kubectl, Helm, and Minkube",
 			"type": "option",
 			"default": false,
 			"buildArg": "INSTALL_KUBE_HELM_MINIKUBE",
 			"extensions": [
 				"ms-kubernetes-tools.vscode-kubernetes-tools"
+			],
+			"exclude": [
+				"alpine",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube"
+
 			]
 		},
 		//  Problem #3 - Terraform also involves three versions here and they go together as a unit, and no ability to pin to a version
 		{
 			"id": "terraform",
-			"name": "latest Terraform, tflint, and TFGrunt CLIs",
+			"name": "Terraform, tflint, and TFGrunt",
 			"type": "option",
 			"default": false,
 			"buildArg": "INSTALL_TERRAFORM",
@@ -60,26 +88,42 @@
 					"args": []
 				},
 				"azureTerraform.terminal": "integrated"
-			}
+			},
+			"exclude": [
+				"alpine",
+				"azure-terraform"
+			]
 		},
 		{
 			"id": "git",
-			"name": "latest version of Git (may require a build)",
+			"name": "Git (latest version - may require a build)",
 			"default": false,
-			"buildArg": "INSTALL_GIT"
+			"buildArg": "INSTALL_GIT",
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
 		},
 		{
 			"id": "git-lfs",
 			"name": "Git Large File Support (LFS)",
 			"default": false,
-			"buildArg": "INSTALL_GIT_LFS"
+			"buildArg": "INSTALL_GIT_LFS",
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
 		},
 		{
 			"id": "github-cli",
 			"name": "GitHub CLI",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_GITHUB_CLI"
+			"buildArg": "INSTALL_GITHUB_CLI",
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
 		},
 		{
 			"id": "azure-cli",
@@ -89,6 +133,28 @@
 			"buildArg": "INSTALL_AZURE_CLI",
 			"extensions": [
 				"ms-vscode.azurecli"
+			],
+			"exclude": [
+				"alpine",
+				"azure-ansible",
+				"azure-bicep",
+				"azure-cli",
+				"azure-terraform",
+				"azure-functions-dotnetcore-2.1",
+				"azure-functions-dotnetcore-3.1",
+				"azure-functions-java-8",
+				"azure-functions-java-11",
+				"azure-functions-node",
+				"azure-functions-pwsh",
+				"azure-functions-python-3",
+				"azure-machine-learning-python-3",
+				"azure-static-web-apps",
+				"azure-terraform",
+				"codespaces-linux",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"dapr-dotnet"
 			]
 		},
 		{
@@ -96,14 +162,21 @@
 			"name": "SSH server",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_SSH"
+			"buildArg": "INSTALL_SSH",
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
 		},
 		{
 			"id": "desktop-lite",
-			"name": "light-weight Desktop (fluxbox)",
+			"name": "Light-weight desktop (fluxbox)",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_DESKTOP_LITE"
+			"buildArg": "INSTALL_DESKTOP_LITE",
+			"exclude": [
+				"alpine"
+			]
 		},
 		{
 			"id": "homebrew",
@@ -114,13 +187,16 @@
 			"containerEnv": {
 				"BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
 				"PATH": "${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:${PATH}"
-			}
+			},
+			"exclude": [
+				"alpine"
+			]
 		},
 		{
 			"id": "node",
 			"name": "Node.js (via NVM) and yarn",
 			"type": "choice",
-			"values": [ "lts/*", "latest","16", "14", "12"],
+			"values": [ "lts", "latest","16", "14", "12"],
 			"default": false,
 			"buildArg": "NODE_VERSION",
 			"extensions": ["dbaeumer.vscode-eslint"],
@@ -128,7 +204,51 @@
 				"NVM_DIR":"/usr/local/share/nvm",
 				"NVM_SYMLINK_CURRENT": true,
 				"PATH": "${NVM_DIR}/current/bin:${PATH}"
-			}
+			},
+			"exclude": [
+				"alpine",
+				"azure-ansible",
+				"azure-bicep",
+				"azure-terraform",
+				"azure-functions-node",
+				"azure-functions-python-3",
+				"azure-machine-learning-python-3",
+				"azure-static-web-apps",
+				"azure-terraform",
+				"codespaces-linux",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"dapr-dotnet",
+				"dapr-javascript-node",
+				"elm",
+				"go",
+				"elixr-phoenix-postgres",
+				"hugo",
+				"java",
+				"java-8",
+				"javascript-node",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"jekyll",
+				"php",
+				"php-mariadb",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-device-simulator-express",
+				"python-3-miniconda",
+				"python-3-postgres",
+				"python-3-pypy",
+				"reasonml",
+				"ruby",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"ruby-sinatra",
+				"swift",
+				"typescript-node",
+				"vue"
+			]
 		},
 		{
 			"id": "python",
@@ -161,11 +281,23 @@
 				"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
 				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
 				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
-			}
+			},
+			"exclude": [
+				"alpine",
+				"azure-functions-python-3",
+				"azure-machine-learning-python-3",
+				"codespaces-linux",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-device-simulator-express",
+				"python-3-miniconda",
+				"python-3-postgres",
+				"python-3-pypy"
+			]
 		},
 		{
 			"id": "golang",
-			"name": "Go (golang) and related tools",
+			"name": "Go and related tools",
 			"type": "choice",
 			"values": ["latest", "1.16", "1.15", "1.14"],
 			"default": false,
@@ -183,7 +315,11 @@
 				"go.useLanguageServer": true,
 				"go.gopath": "/go",
 				"go.goroot": "/usr/local/go"
-			}
+			},
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
 		},
 		{
 			"id": "java",
@@ -199,7 +335,15 @@
 			},
 			"settings": {
 				"java.home": "/usr/local/sdkman/candidates/java/current"
-			}
+			},
+			"exclude": [
+				"alpine",
+				"azure-functions-java-11",
+				"azure-functions-java-8",
+				"codespaces-linux",
+				"java",
+				"java-8"
+			]
 		},
 		// Problem #5 - Maven and gradle options should not be presented if Java isn't checked
 		{
@@ -213,7 +357,15 @@
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${PATH}"
-			}
+			},
+			"exclude": [
+				"alpine",
+				"azure-functions-java-11",
+				"azure-functions-java-8",
+				"codespaces-linux",
+				"java",
+				"java-8"
+			]
 		},
 		{
 			"id": "gradle",
@@ -226,7 +378,15 @@
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}"
-			}
+			},
+			"exclude": [
+				"alpine",
+				"azure-functions-java-11",
+				"azure-functions-java-8",
+				"codespaces-linux",
+				"java",
+				"java-8"
+			]
 		},
 		{
 			"id": "ruby",
@@ -243,7 +403,15 @@
 				"GEM_HOME": "/usr/local/rvm/gems/default",
 				"MY_RUBY_HOME": "/usr/local/rvm/rubies/default",
 				"PATH": "/usr/local/rvm/gems/default/bin:/usr/local/rvm/gems/default@global/bin:/usr/local/rvm/rubies/default/bin:${PATH}"
-			}
+			},
+			"exclude": [
+				"alpine",
+				"codespaces-linux",
+				"ruby",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"ruby-sinatra"
+			]
 		},
 		{
 			"id": "rust",
@@ -271,14 +439,23 @@
 					"**/target/**": true
 				},
 				"rust-analyzer.checkOnSave.command": "clippy"
-			}
+			},
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
 		},
 		{
 			"id": "powershell",
 			"name": "PowerShell",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_POWERSHELL"
+			"buildArg": "INSTALL_POWERSHELL",
+			"exclude": [
+				"alpine",
+				"codespaces-linux",
+				"powershell"
+			]
 		}
 	]
 }
