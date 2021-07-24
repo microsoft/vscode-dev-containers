@@ -1,0 +1,34 @@
+// https://code.visualstudio.com/docs/remote/devcontainerjson-reference
+{
+	"name": "Vue 3 (Community)",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"BASE_IMAGE_VARIANT": "0-16-buster",
+			"VUE_VERSION": "3.1.5",
+			"VUE_CLI_VERSION": "4.5.13",
+			"COMPILER_SFC_VERSION": "3.1.5",
+			"HTTP_SERVER_VERSION": "0.12.3"
+		}
+	},
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"zsh (login)": {
+				"path": "zsh"
+			}
+		}
+	},
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"octref.vetur",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"msjsdiag.debugger-for-chrome",
+		"firefox-devtools.vscode-firefox-debug",
+		"msjsdiag.debugger-for-edge"
+	],
+	"forwardPorts": [
+		8080
+	],
+	"remoteUser": "node"
+}
