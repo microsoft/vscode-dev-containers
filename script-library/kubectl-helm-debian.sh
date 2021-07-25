@@ -25,7 +25,7 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl if missing
+# Install curl and bash-completion if missing
 if ! dpkg -s curl ca-certificates coreutils gnupg2 bash-completion > /dev/null 2>&1; then
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         apt-get update
@@ -61,8 +61,13 @@ if ! type kubectl > /dev/null 2>&1; then
     exit 1
 fi
 
-# generate kubectl bash completion
+# kubectl bash completion
 kubectl completion bash > /etc/bash_completion.d/kubectl
+
+# kubectl zsh completion
+mkdir -p /home/${USERNAME}/.oh-my-zsh/completions
+kubectl completion zsh > /home/${USERNAME}/.oh-my-zsh/completions/_kubectl
+echo 'source $HOME/.oh-my-zsh/completions/_kubectl' >> /home/${USERNAME}/.zshrc
 
 # Install Helm, verify signature and checksum
 echo "Downloading Helm..."
