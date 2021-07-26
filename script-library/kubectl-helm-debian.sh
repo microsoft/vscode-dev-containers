@@ -100,10 +100,10 @@ check_packages() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
-check_packages curl ca-certificates coreutils gnupg2 dirmngr bash-completion
+check_packages curl git ca-certificates coreutils gnupg2 dirmngr bash-completion
 if ! type git > /dev/null 2>&1; then
     apt_get_update_if_needed
-    apt-get -y install --no-install-recommends git
+    apt-get -y install --no-install-recommends curl git ca-certificates coreutils gnupg2 dirmngr bash-completion
 fi
 
 architecture="$(uname -m)"
