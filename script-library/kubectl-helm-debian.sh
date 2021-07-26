@@ -100,7 +100,7 @@ check_packages() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
-check_packages curl ca-certificates coreutils gnupg2 dirmngr
+check_packages curl ca-certificates coreutils gnupg2 dirmngr bash-completion
 if ! type git > /dev/null 2>&1; then
     apt_get_update_if_needed
     apt-get -y install --no-install-recommends git
@@ -135,6 +135,13 @@ if ! type kubectl > /dev/null 2>&1; then
     echo '(!) kubectl installation failed!'
     exit 1
 fi
+
+# kubectl bash completion
+kubectl completion bash > /etc/bash_completion.d/kubectl
+
+# kubectl zsh completion
+mkdir -p /home/${USERNAME}/.oh-my-zsh/completions
+kubectl completion zsh > /home/${USERNAME}/.oh-my-zsh/completions/_kubectl
 
 # Install Helm, verify signature and checksum
 echo "Downloading Helm..."
