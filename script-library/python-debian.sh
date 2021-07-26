@@ -168,12 +168,17 @@ check_packages() {
 }
 
 install_from_ppa() {
+    local requested_version="python${PYTHON_VERSION}"
     echo "Using PPA to install Python..."
     check_packages apt-transport-https curl ca-certificates gnupg2
     receive_gpg_keys DEADSNAKES_PPA_ARCHIVE_GPG_KEY /usr/share/keyrings/deadsnakes-archive-keyring.gpg 
     echo -e "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/deadsnakes-archive-keyring.gpg] http://ppa.launchpad.net/deadsnakes/ppa/ubuntu ${VERSION_CODENAME} main\ndeb-src [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/deadsnakes-archive-keyring.gpg] http://ppa.launchpad.net/deadsnakes/ppa/ubuntu ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/deadsnakes-ppa.list
     apt-get update
-    apt-get -y install python${PYTHON_VERSION}
+    if [ "${PYTHON_VERSION}" = "latest" ] || [ "${PYTHON_VERSION}" = "current" ] || [ "${PYTHON_VERSION}" = "lts" ]; then
+        requested_version="$(apt-cache search '^python3\.[0-9]$' | grep -oE '^python3\.[0-9]' | sort -rV | head -n 1)"
+        echo "Using ${requested_version} in place of ${PYTHON_VERSION}."
+    fi
+    apt-get -y install ${requested_version}
     rm -rf /tmp/tmp-gnupg
     exit 0
 }

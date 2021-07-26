@@ -36,10 +36,13 @@ runScript()
         echo "Arguments: ${REQUIRED_PREFIX_ARGS} ${ARGS}"
         ${SCRIPT} ${REQUIRED_PREFIX_ARGS} ${ARGS}
     fi
-    echo "**** Done! ****\n"
+    echo "**** Done! ****"
 }
 
-echo '#!/bin/bash\n"$@"' | tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh > /usr/local/share/desktop-init.sh
+tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh > /usr/local/share/desktop-init.sh << 'EOF'
+#!/bin/bash
+"$@"
+EOF
 chmod +x /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh
 if [ "${RUN_COMMON_SCRIPT}" = "true" ]; then
     runScript common "true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}"
