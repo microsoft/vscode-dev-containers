@@ -93,8 +93,7 @@ Given how frequently ASP.NET applications use Node.js for front end code, this c
 ```yaml
 args:
   VARIANT: "3.1"
-  INSTALL_NODE: "true"
-  NODE_VERSION: "10"
+  NODE_VERSION: "14" # Set to "none" to skip Node.js installation
 ```
 
 If you would like to install the Azure CLI update you can set the `INSTALL_AZURE_CLI` argument line in `.devcontainer/docker-compose.yml`:
@@ -102,8 +101,7 @@ If you would like to install the Azure CLI update you can set the `INSTALL_AZURE
 ```yaml
 args:
   VARIANT: "3.1"
-  INSTALL_NODE: "true"
-  NODE_VERSION: "10"
+  NODE_VERSION: "14"
   INSTALL_AZURE_CLI: "true"
 ```
 

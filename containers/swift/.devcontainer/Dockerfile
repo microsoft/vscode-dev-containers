@@ -23,14 +23,13 @@ RUN git clone https://github.com/vknabel/sourcekite \
     && ln -s /usr/lib/libsourcekitdInProc.so /usr/lib/sourcekitdInProc \
     && cd sourcekite && make install PREFIX=/usr/local -j2
 
-# [Option] Install Node.js
-ARG INSTALL_NODE="false"
-ARG NODE_VERSION="lts/*"
+# [Choice] Node.js version: none, lts, 16, 14, 12, 10
+ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/node-debian.sh /tmp/library-scripts/
-RUN if [ "$INSTALL_NODE" = "true" ]; then /bin/bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
+RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
     && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # [Optional] Uncomment this section to install additional OS packages you may want.

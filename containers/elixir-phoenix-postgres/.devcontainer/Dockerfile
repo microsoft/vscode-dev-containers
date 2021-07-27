@@ -17,14 +17,15 @@ ARG COMMON_SCRIPT_SHA="dev-mode"
 # Optional Settings for Phoenix
 ARG PHOENIX_VERSION="1.5.4"
 
-# [Optional] Settings for installing Node.js.
-ARG INSTALL_NODE="true"
 ARG NODE_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/node-debian.sh"
 ARG NODE_SCRIPT_SHA="dev-mode"
-ARG NODE_VERSION="lts/*"
+ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true
 ENV PATH=${NVM_DIR}/current/bin:${PATH}
+
+# [Choice] Node.js version: none, lts, 16, 14, 12, 10
+ARG NODE_VERSION="lts/*"
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apt-get update \
@@ -35,7 +36,7 @@ RUN apt-get update \
   && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
   #
   # [Optional] Install Node.js for use with web applications
-  && if [ "$INSTALL_NODE" = "true" ]; then \
+  && if [ "$NODE_VERSION" != "none" ]; then \
   curl -sSL ${NODE_SCRIPT_SOURCE} -o /tmp/node-setup.sh \
   && ([ "${NODE_SCRIPT_SHA}" = "dev-mode" ] || (echo "${COMMON_SCRIPT_SHA} */tmp/node-setup.sh" | sha256sum -c -)) \
   && /bin/bash /tmp/node-setup.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; \

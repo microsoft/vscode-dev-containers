@@ -40,8 +40,7 @@ services:
     args:
       # ...
       # Node Version: 10, 11, ...
-      INSTALL_NODE: true
-      NODE_VERSION: 10
+      NODE_VERSION: 14
       # ...
 ```
 

@@ -4,7 +4,6 @@
 		"context": "..",
 		"dockerfile": "Dockerfile",
 		"args": {
-			"INSTALL_NODE": "true",
 			"NODE_VERSION": "lts/*"
 		}
 	},
