@@ -33,7 +33,7 @@ RUN curl -sSL https://getcomposer.org/installer | php \
     && chmod +x composer.phar \
     && mv composer.phar /usr/local/bin/composer
 
-# [Choice] Node.js version: none, lts, 16, 14, 12
+# [Choice] Node.js version: none, lts, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \

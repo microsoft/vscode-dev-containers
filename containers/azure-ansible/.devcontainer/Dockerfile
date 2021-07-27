@@ -24,7 +24,7 @@ RUN pip3 install ansible[azure]
 ARG INSTALL_AZURE_CLI="true"
 # [Option] Install Docker CLI
 ARG INSTALL_DOCKER="true"
-# [Choice] Node.js version: none, lts, 16, 14, 12
+# [Choice] Node.js version: none, lts, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \

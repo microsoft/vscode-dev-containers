@@ -21,13 +21,13 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 ARG INSTALL_AZURE_CLI="true"
 # [Option] Install Docker CLI
 ARG INSTALL_DOCKER="true"
-# [Choice] Node.js version: none, lts, 16, 14, 12
+# [Choice] Node.js version: none, lts, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 RUN if [ "${INSTALL_AZURE_CLI}" = "true" ]; then bash /tmp/library-scripts/azcli-debian.sh; fi \
-    && if [ "${NODE_VERSION}}" != "none" ]; then bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
+    && if [ "${NODE_VERSION}" != "none" ]; then bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
     && if [ "${INSTALL_DOCKER}" = "true" ]; then \
         bash /tmp/library-scripts/docker-debian.sh "true" "/var/run/docker-host.sock" "/var/run/docker.sock" "${USERNAME}"; \
     else \
