@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll)
 
-**Digest:** sha256:d75ceee4f334551898d56bdbb383412d3db588a37b2ae5159598b46b6eb0ca92
+**Digest:** sha256:2a63c53f10df13161c94b536bc1c1672a886525b0fab21dc9fbc9981250a625d
 
 **Tags:**
 ```
@@ -28,10 +28,10 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | ebdcf0c26ed0039762dca01844ce8175c0d02755 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 75c2fe4560b02fb2e38518434eebe4bb96c2c627 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -42,7 +42,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 | debase | 0.2.4.1 |
 | bundler | 2.2.24 |
 | jekyll | 4.2.0 |
-| github-pages | 215 |
+| github-pages | 217 |
 
 **Other tools and utilities**
 
@@ -67,9 +67,9 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |

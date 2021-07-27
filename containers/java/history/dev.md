@@ -10,7 +10,7 @@
 
 ## Variant: 16
 
-**Digest:** sha256:747c673cc62abae69aa640414395ab8a06b68b7ab99c5c0d00d2875085717b7a
+**Digest:** sha256:3831c3c3b17a52c85658414e7a6c77002c01455a3e2115056125eacedcefa3a2
 
 **Tags:**
 ```
@@ -27,20 +27,20 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 16.0.1 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 16.0.2 | /usr/local/ |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.7 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.2 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -59,9 +59,9 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -92,7 +92,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 
 ## Variant: 11
 
-**Digest:** sha256:6b13096669d8bd7ba60b922a6a684386c5492c29b6f03968ba0cbf54def9f8cd
+**Digest:** sha256:58ec7cc77fc0da392c918e78274a322fb670ae91e061e24767a000a3a81c714a
 
 **Tags:**
 ```
@@ -109,20 +109,20 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 11.0.11 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 11.0.12 | /usr/local/ |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.7 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.2 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -141,9 +141,9 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |

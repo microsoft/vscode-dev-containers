@@ -11,7 +11,7 @@
 
 ## Variant: 8.0
 
-**Digest:** sha256:aa3450ad507dadf443460d70a1201841ca919d54c48854e4f9e57ed7e9afcc1b
+**Digest:** sha256:657f8054c095e003f707bcfa2460c639228c93657e2aed9e33422a4dd1ae190c
 
 **Tags:**
 ```
@@ -35,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.3 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.5 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -62,9 +62,9 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -95,7 +95,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 ## Variant: 7.4
 
-**Digest:** sha256:675e09baf5c61cc986a51409eee1d98fc82506c79268fd161050635651657318
+**Digest:** sha256:859cfe14545b5c01bf7002601ccbab8c5ef27b3e837482ac66bd936ff0a3040d
 
 **Tags:**
 ```
@@ -119,7 +119,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -127,7 +127,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.3 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.5 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -146,9 +146,9 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -179,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 ## Variant: 7.3
 
-**Digest:** sha256:242819e817fbfb0ff2eee77432cc82cdf05085f47771a3826bfb4c97af250c6b
+**Digest:** sha256:d1c3e573652e1ac698437aa366b160c67fc0baa07992c7f1859d16066201b72f
 
 **Tags:**
 ```
@@ -202,7 +202,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -210,7 +210,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.3 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.5 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -229,9 +229,9 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |

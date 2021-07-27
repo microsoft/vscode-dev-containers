@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:4454bd76df0b12e23e6801d83c1b5b1a07c01a053ac9481bc10af660b5201175
+**Digest:** sha256:09cc10f940d97f6bed958dfaa6af4d3a6785542545c8c3d1f20478ab918ccb4d
 
 **Tags:**
 ```
@@ -38,14 +38,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.30.0 |
+| eslint | 7.31.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 
@@ -66,9 +66,9 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:b1ca3093af7c2de2312a3feaca129b66514d8f9205c4742e8532c211f1e7a12d
+**Digest:** sha256:a1f88fe407f215ad449d462f313122dec66418d263434f95d8749ec3db30d3a6
 
 **Tags:**
 ```
@@ -124,14 +124,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.30.0 |
+| eslint | 7.31.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 
@@ -152,9 +152,9 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:b06fc329acba62128816fcff9ea2dd1efa062d8f664ad9011fd2f36e52d43c9b
+**Digest:** sha256:ac5e26dfd669668dd3f0cc27c8a174417041d6fb1cc5137efef4b58366a0cda2
 
 **Tags:**
 ```
@@ -210,14 +210,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.30.0 |
+| eslint | 7.31.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 
@@ -238,9 +238,9 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:c7f2787a842be59d7f55b2d83f5ab582ff52c492488dcc5ffe679b00fe4a899c
+**Digest:** sha256:d75892162e9d772f3d1c0b520718eaf543771acf8ccb5318d77b5493d347230b
 
 **Tags:**
 ```
@@ -295,14 +295,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.30.0 |
+| eslint | 7.31.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 
@@ -357,7 +357,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:6ad090a31fd22f9eff73d26ce68da31b6c286da3e16a3020c75a3cff7602b480
+**Digest:** sha256:e9ca89c859b49e1bc278f3bd18ce3de11beb45b0a2a06716a7ef0d09b7ce1c97
 
 **Tags:**
 ```
@@ -381,14 +381,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.30.0 |
+| eslint | 7.31.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 

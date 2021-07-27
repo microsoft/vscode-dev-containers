@@ -10,7 +10,7 @@
 
 ## Variant: 1.16
 
-**Digest:** sha256:ef0645311b525ddc09dca1a393d3b5b606f922f42923749ef4fbbb8aae4e925e
+**Digest:** sha256:81373654cc1b5ed0ab8d57f827e6940c8b70880535f63701e06f7658c386bb64
 
 **Tags:**
 ```
@@ -34,7 +34,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -47,7 +47,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 | github.com/mgechev/revive | 1.0.9 |
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.6.1 |
+| github.com/go-delve/delve | 1.7.0 |
 | github.com/golangci/golangci-lint | 1.41.1 |
 
 **Additional linux tools and packages**
@@ -70,9 +70,9 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 | libc6 | 2.28-10 |
 | libc6-dev | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.15
 
-**Digest:** sha256:29961a0c76d4f5476c33f4b81072ea1c5bd422fc4f88d070bb033ad5cca1120c
+**Digest:** sha256:3f882401c78bf88c0c33afd518b699716baeb26501a83b602dd13360df07d7b2
 
 **Tags:**
 ```
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.15
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -141,7 +141,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.15
 | github.com/mgechev/revive | 1.0.9 |
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.6.1 |
+| github.com/go-delve/delve | 1.7.0 |
 | github.com/golangci/golangci-lint | 1.41.1 |
 
 **Additional linux tools and packages**
@@ -164,9 +164,9 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.15
 | libc6 | 2.28-10 |
 | libc6-dev | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |

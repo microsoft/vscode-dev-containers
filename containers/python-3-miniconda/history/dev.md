@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:d8720fc2e4e0ce8ea10cdbb3835f3bb23082638a4b76e33242cf70acc23b1d4f
+**Digest:** sha256:9f4b353c859b341c71107596d4909ad87988768716ad62452b99373a4373c11a
 
 **Tags:**
 ```
@@ -21,23 +21,23 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.8.5 | /opt/conda |
+| [Python](https://www.python.org/) | 3.9.5 | /opt/conda |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.3 |
+| pylint | 2.9.5 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.6b0 |
+| black | 21.7b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
@@ -50,7 +50,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool | Version | Path |
 |------|---------|------|
-| [conda](https://github.com/conda/conda) | 4.9.2 | /opt/conda |
+| [conda](https://github.com/conda/conda) | 4.10.3 | /opt/conda |
 
 **Additional linux tools and packages**
 
@@ -69,9 +69,9 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |

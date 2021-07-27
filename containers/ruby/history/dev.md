@@ -11,7 +11,7 @@
 
 ## Variant: 3.0
 
-**Digest:** sha256:673dd14a93aaa39e10c05ff1389982dbfb89d23e76ea7857d3d2143df069c810
+**Digest:** sha256:de5ddb04df27fa342305e75419ad032fb436157df5e8059f9ecf505f021c3209
 
 **Tags:**
 ```
@@ -35,10 +35,10 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | ebdcf0c26ed0039762dca01844ce8175c0d02755 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 75c2fe4560b02fb2e38518434eebe4bb96c2c627 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -72,9 +72,9 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 ## Variant: 2.7
 
-**Digest:** sha256:e267fa0ac4b86e9ab8d53104b75531302acbe2e57bb3a2910585747d1ad73e5a
+**Digest:** sha256:c4959c4e3b682ec36c88c0d1eb037da2db2566eaa1c94c243871d472144785c4
 
 **Tags:**
 ```
@@ -129,10 +129,10 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | ebdcf0c26ed0039762dca01844ce8175c0d02755 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 75c2fe4560b02fb2e38518434eebe4bb96c2c627 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -166,9 +166,9 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -199,7 +199,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 ## Variant: 2.6
 
-**Digest:** sha256:424f63b0078bab14189f58ab2d74112d88f225f47d018f2b583b936303760ac0
+**Digest:** sha256:1da3935930c51878348b874c5c6ec97c12b3d88a4e21d97623d581b2f971efb7
 
 **Tags:**
 ```
@@ -222,10 +222,10 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | ebdcf0c26ed0039762dca01844ce8175c0d02755 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 75c2fe4560b02fb2e38518434eebe4bb96c2c627 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -259,9 +259,9 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
