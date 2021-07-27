@@ -53,7 +53,7 @@ Given how frequently ASP.NET applications use Node.js for front end code, this c
 
 ```yaml
 arg:
-  ARG NODE_VERSION: "14" # Set to "none" to skip Node.js installation
+  NODE_VERSION: "14" # Set to "none" to skip Node.js installation
 ```
 
 If you would like to install the Azure CLI update this line in `.devcontainer/docker-compose.yml`:
