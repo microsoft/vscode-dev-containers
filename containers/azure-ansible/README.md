@@ -20,15 +20,15 @@ While technically optional, this definition includes the Ansible extension. You 
 
 There are a few options you can pick from  by updating the following line in `.devcontainer/devcontainer.json`:
 
-```Dockerfile
+```jsonc
 "arg": {
    "INSTALL_AZURE_CLI": "true",
    "INSTALL_DOCKER": "true",
-   "INSTALL_NODE": "true"
+   "NODE_VERSION": "lts"
 }
 ```
 
-If you plan to use the Azure Cloud Shell for all of your Ansible operations, you can set `"INSTALL_DOCKER": "false"`. Conversely, if you do not plan to use Cloud Shell, you can set `"INSTALL_DOCKER": "false"`. By default, both are installed so you can decide later.
+If you plan to use the Azure Cloud Shell for all of your Ansible operations, you can set `"INSTALL_DOCKER": "false"`. Conversely, if you do not plan to use Cloud Shell, you can set `"NODE_VERSION": "none"`. By default, both are installed so you can decide later.
 
 Beyond `git`, this `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
 

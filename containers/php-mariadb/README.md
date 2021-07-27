@@ -41,8 +41,7 @@ Given how frequently web applications use Node.js for front end code, this conta
 ```yaml
 args:
   VARIANT: "7"
-  INSTALL_NODE: "true"
-  NODE_VERSION: "10"
+  NODE_VERSION: "10" # Set to "none" to skip Node.js installation
 ```
 
 You also can connect to MariaDB from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:

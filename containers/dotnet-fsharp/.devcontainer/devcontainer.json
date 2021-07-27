@@ -4,7 +4,6 @@
 		"dockerfile": "Dockerfile",
 		"args": {
 			// Options
-			"INSTALL_NODE": "false",
 			"NODE_VERSION": "lts/*",
 			"INSTALL_AZURE_CLI": "false",
 			"UPGRADE_PACKAGES": "false"
