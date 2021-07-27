@@ -37,7 +37,7 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/powershell` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. You should see "Hello remote world #1!" up to 100 in a terminal window after the program executes.
+6. You should see "Hello remote world #1!" up to 50 in a terminal window after the program executes.
 7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License

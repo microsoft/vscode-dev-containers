@@ -12,6 +12,7 @@
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 USERNAME=${2:-"automatic"}
 USE_MOBY=${3:-"true"}
+MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 
 set -e
 
@@ -37,8 +38,23 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
+# Get central common setting
+get_common_setting() {
+    if [ "${common_settings_file_loaded}" != "true" ]; then
+        curl -sfL "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+        common_settings_file_loaded=true
+    fi
+    if [ -f "/tmp/vsdc-settings.env" ]; then
+        local multi_line=""
+        if [ "$2" = "true" ]; then multi_line="-z"; fi
+        local result="$(grep ${multi_line} -oP "$1=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"
+        if [ ! -z "${result}" ]; then declare -g $1="${result}"; fi
+    fi
+    echo "$1=${!1}"
+}
+
 # Function to run apt-get if needed
-apt-get-update-if-needed()
+apt_get_update_if_needed()
 {
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         echo "Running apt-get update..."
@@ -48,14 +64,19 @@ apt-get-update-if-needed()
     fi
 }
 
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
-# Install docker/dockerd dependencies if missing
-if ! dpkg -s apt-transport-https curl ca-certificates lxc pigz iptables > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
-    apt-get-update-if-needed
-    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lxc pigz iptables gnupg2 
-fi
+# Install dependencies
+check_packages apt-transport-https curl ca-certificates lxc pigz iptables gnupg2
 
 # Swap to legacy iptables for compatibility
 if type iptables-legacy > /dev/null 2>&1; then
@@ -71,7 +92,8 @@ else
     . /etc/os-release
     if [ "${USE_MOBY}" = "true" ]; then
         # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-        curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
+        get_common_setting MICROSOFT_GPG_KEYS_URI
+        curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
         echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
         apt-get update
         apt-get -y install --no-install-recommends moby-cli moby-buildx moby-compose moby-engine
@@ -97,7 +119,7 @@ else
     if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
         # Use pip to get a version that runns on this architecture
         if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv pipx > /dev/null 2>&1; then
-            apt-get-update-if-needed
+            apt_get_update_if_needed
             apt-get -y install python3-minimal python3-pip libffi-dev python3-venv pipx
         fi
         export PIPX_HOME=/usr/local/pipx
