@@ -97,6 +97,7 @@
 		{
 			"id": "git",
 			"name": "Git (latest version - may require a build)",
+			"type": "option",
 			"default": false,
 			"buildArg": "INSTALL_GIT",
 			"exclude": [
@@ -107,6 +108,7 @@
 		{
 			"id": "git-lfs",
 			"name": "Git Large File Support (LFS)",
+			"type": "option",
 			"default": false,
 			"buildArg": "INSTALL_GIT_LFS",
 			"exclude": [
@@ -318,7 +320,8 @@
 			},
 			"exclude": [
 				"alpine",
-				"codespaces-linux"
+				"codespaces-linux",
+				"go"
 			]
 		},
 		{
