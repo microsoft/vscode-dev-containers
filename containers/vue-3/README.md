@@ -23,7 +23,7 @@ This development container aims at providing a reproducible development environm
 - [x] Based on `typescript-node` container image (`git`, `zsh`, `oh-my-zsh`, etc.)
 - [x] Command-line fuzzy finder [fzf](https://github.com/junegunn/fzf)
 - [x] Code-searching tool [ag](https://github.com/ggreer/the_silver_searcher)
-- [ ] hard pinned tool versions installed from the base container image [typescript-node](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/typescript-node/.devcontainer) (depends on [javascript-node](https://github.com/fkromer/vscode-dev-containers/tree/main/containers/javascript-node/.devcontainer))
+- [x] hard pinned tool versions installed from the base container image [typescript-node](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/typescript-node/.devcontainer) (depends on [javascript-node](https://github.com/fkromer/vscode-dev-containers/tree/main/containers/javascript-node/.devcontainer))
 - [x] Support for custom `dotfiles`
 - [x] [npm](https://www.npmjs.com/) (provided by base image)
 - [x] [yarn](https://yarnpkg.com/)

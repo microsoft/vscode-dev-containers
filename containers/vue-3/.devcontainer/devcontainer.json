@@ -4,7 +4,7 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			"BASE_IMAGE_VARIANT": "0-16-buster",
+			"BASE_IMAGE_VARIANT": "0.202.3-16-buster",
 			"YARN_VERSION": "1.22.11",
 			"VUE_VERSION": "3.1.5",
 			"VUE_CLI_VERSION": "4.5.13",
