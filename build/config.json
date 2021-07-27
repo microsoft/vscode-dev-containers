@@ -20,6 +20,7 @@
 
 	"filesToStage": [
 		"+(containers|repository-containers)/**/!(test-project|history)/*",
+		"script-library/**/*",
 		"LICENSE",
 		"package.json",
 		"yarn.lock",
