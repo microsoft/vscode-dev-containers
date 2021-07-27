@@ -26,7 +26,7 @@ This development container aims at providing a reproducible development environm
 - [ ] hard pinned tool versions installed from the base container image [typescript-node](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/typescript-node/.devcontainer) (depends on [javascript-node](https://github.com/fkromer/vscode-dev-containers/tree/main/containers/javascript-node/.devcontainer))
 - [x] Support for custom `dotfiles`
 - [x] [npm](https://www.npmjs.com/) (provided by base image)
-- [x] [yarn](https://yarnpkg.com/) (provided by base image)
+- [x] [yarn](https://yarnpkg.com/)
 - [x] [Vue.js 3](https://github.com/vuejs/vue-next) aka `vue-next` (including `compiler-sfc`, etc.)
 - [x] [Ionic Framework (Vue)](https://ionicframework.com/docs/vue/overview)
 - [x] [Gridsome](https://gridsome.org/)
@@ -74,6 +74,14 @@ This container's overall customization options via `args` are as follows. The va
 ```
 
 More info about [valid values](https://mcrflowprodcentralus.data.mcr.microsoft.com/mcrprod/vscode/devcontainers/typescript-node?P1=1627143043&P2=1&P3=1&P4=5TQ%2B5GHJS4tUC0eBZ4jTxKeU%2Bi9Ng9LEPIHHbtcSemU%3D&se=2021-07-24T16%3A10%3A43Z&sig=XEyqxn2SkBgIj2%2FMFlsOvV6IA76PVNijFWdNMLB%2B8OE%3D&sp=r&sr=b&sv=2015-02-21)...
+
+### Configuration: Yarn version
+
+```json
+"args": { "YARN_VERSION": "1.22.11" }
+```
+
+More info about [valid values](https://www.npmjs.com/package/yarn)...
 
 ### Configuration: Vue.js 3 version
 
