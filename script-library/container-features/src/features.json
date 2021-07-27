@@ -6,7 +6,7 @@
 			"name": "Docker (Moby) CLI and Engine in container",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_DOCKER_IN_DOCKER",
+			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
 			"privileged": true,
 			"extensions": [
@@ -32,7 +32,7 @@
 			"name": "Docker (Moby) CLI, but reuse local Docker Engine",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_DOCKER_FROM_DOCKER",
+			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
 			"extensions": [
 				"ms-azuretools.vscode-docker"
@@ -58,7 +58,7 @@
 			"name": "Kubectl, Helm, and Minkube",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_KUBE_HELM_MINIKUBE",
+			"buildArg": "_VSC_INSTALL_KUBE_HELM_MINIKUBE",
 			"extensions": [
 				"ms-kubernetes-tools.vscode-kubernetes-tools"
 			],
@@ -75,7 +75,7 @@
 			"name": "Terraform, tflint, and TFGrunt",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_TERRAFORM",
+			"buildArg": "_VSC_INSTALL_TERRAFORM",
 			"extensions": [
 				"HashiCorp.terraform",
 				"ms-vscode.azurecli",
@@ -99,7 +99,7 @@
 			"name": "Git (latest version - may require a build)",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_GIT",
+			"buildArg": "_VSC_INSTALL_GIT",
 			"exclude": [
 				"alpine",
 				"codespaces-linux"
@@ -110,7 +110,7 @@
 			"name": "Git Large File Support (LFS)",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_GIT_LFS",
+			"buildArg": "_VSC_INSTALL_GIT_LFS",
 			"exclude": [
 				"alpine",
 				"codespaces-linux"
@@ -121,7 +121,7 @@
 			"name": "GitHub CLI",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_GITHUB_CLI",
+			"buildArg": "_VSC_INSTALL_GITHUB_CLI",
 			"exclude": [
 				"alpine",
 				"codespaces-linux"
@@ -132,7 +132,7 @@
 			"name": "Azure CLI",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_AZURE_CLI",
+			"buildArg": "_VSC_INSTALL_AZURE_CLI",
 			"extensions": [
 				"ms-vscode.azurecli"
 			],
@@ -175,7 +175,7 @@
 			"name": "Light-weight desktop (fluxbox)",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_DESKTOP_LITE",
+			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
 			"exclude": [
 				"alpine"
 			]
@@ -185,7 +185,7 @@
 			"name": "Homebrew",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_HOMEBREW",
+			"buildArg": "_VSC_INSTALL_HOMEBREW",
 			"containerEnv": {
 				"BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
 				"PATH": "${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:${PATH}"
@@ -200,7 +200,7 @@
 			"type": "choice",
 			"values": [ "lts", "latest","16", "14", "12"],
 			"default": false,
-			"buildArg": "NODE_VERSION",
+			"buildArg": "_VSC_NODE_VERSION",
 			"extensions": ["dbaeumer.vscode-eslint"],
 			"containerEnv": {
 				"NVM_DIR":"/usr/local/share/nvm",
@@ -258,7 +258,7 @@
 			"type": "choice",
 			"values": ["latest", "3.9", "3.8", "3.7", "3.6"],
 			"default": false,
-			"buildArg": "PYTHON_VERSION",
+			"buildArg": "_VSC_PYTHON_VERSION",
 			"extensions": [
 				"ms-python.python",
 				"ms-python.vscode-pylance"
@@ -303,7 +303,7 @@
 			"type": "choice",
 			"values": ["latest", "1.16", "1.15", "1.14"],
 			"default": false,
-			"buildArg": "GOLANG_VERSION",
+			"buildArg": "_VSC_GO_VERSION",
 			"extensions": ["golang.Go"],
 			"containerEnv": {
 				"GOPATH": "/go",
@@ -330,7 +330,7 @@
 			"type": "choice",
 			"values": ["lts", "latest", "16", "11", "8"],
 			"default": false,
-			"buildArg": "JAVA_VERSION",
+			"buildArg": "_VSC_JAVA_VERSION",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
@@ -355,7 +355,7 @@
 			"type": "choice",
 			"values": ["latest", "3.8", "3.6", "3.5"],
 			"default": false,
-			"buildArg": "MAVEN_VERSION",
+			"buildArg": "_VSC_MAVEN_VERSION",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
@@ -376,7 +376,7 @@
 			"type": "choice",
 			"values": ["latest", "7", "6", "5"],
 			"default": false,
-			"buildArg": "GRADLE_VERSION",
+			"buildArg": "_VSC_GRADLE_VERSION",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
@@ -397,7 +397,7 @@
 			"type": "choice",
 			"values": ["latest", "3.0", "2.7", "2.6"],
 			"default": false,
-			"buildArg": "RUBY_VERSION",
+			"buildArg": "_VSC_RUBY_VERSION",
 			"extensions": [
 				"rebornix.Ruby"
 			],
@@ -421,7 +421,7 @@
 			"name": "Rust",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_RUST",
+			"buildArg": "_VSC_INSTALL_RUST",
 			"extensions": [
 				"vadimcn.vscode-lldb",
 				"mutantdino.resourcemonitor",
@@ -453,7 +453,7 @@
 			"name": "PowerShell",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_POWERSHELL",
+			"buildArg": "_VSC_INSTALL_POWERSHELL",
 			"exclude": [
 				"alpine",
 				"codespaces-linux",

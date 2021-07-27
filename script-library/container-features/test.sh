@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 IMAGE_TO_TEST="${1:-"mcr.microsoft.com/vscode/devcontainers/base:buster"}"
 PLATFORMS="${2:-""}"
+SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 
 set -e
 
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-rm -rf library-scripts
-mkdir library-scripts
-cp ../*.sh library-scripts
+"${SCRIPT_DIR}/stage.sh"
+cp -f test-features.env out/features.env
 
 if [ ! -z "${PLATFORMS}" ]; then
     CURRENT_BUILDERS="$(docker buildx ls)"
@@ -21,7 +21,10 @@ if [ ! -z "${PLATFORMS}" ]; then
     docker run --privileged --rm tonistiigi/binfmt --install ${PLATFORMS}
     PLATFORMS_ARG="--builder vscode-dev-containers --platform ${PLATFORMS}"
 fi
-docker buildx build --progress plain --load ${PLATFORMS_ARG} --build-arg BASE_IMAGE=$IMAGE_TO_TEST -t container-features-regression .
+docker buildx build --progress plain --load ${PLATFORMS_ARG} --build-arg BASE_IMAGE=$IMAGE_TO_TEST -t container-features-regression out
 docker run --init --privileged container-features-regression bash -c 'uname -m && env'
+
+# Remove features.env from out folder so we can use it to test the VS Code extension
+rm -f out/features.env
 
 echo -e "\n🎉 All tests passed!"
