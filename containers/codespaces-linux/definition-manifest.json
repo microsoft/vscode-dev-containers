@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "1.5.0",
+	"definitionVersion": "1.6.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"annotation": "This document describes the base contents of the default GitHub Codespaces dev container image. Note that this image also includes detection logic to dynamically install additional language / runtime versions based on your repository's contents. Dynamically installed content can be found in sub-folders under `/opt`.",
-		"image": "mcr.microsoft.com/oryx/build:vso-focal-exp-20210721.2",
+		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210728.1",
 		"imageLink": "https://github.com/microsoft/oryx",
 		"apt": [{
 				"cgIgnore": false,
