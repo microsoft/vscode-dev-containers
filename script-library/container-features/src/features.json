@@ -12,6 +12,7 @@
 			"extensions": [
 				"ms-azuretools.vscode-docker"
 			],
+			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
 			"mounts": [
 				"source=dind-var-lib-docker,target=/var/lib/docker,type=volume"
 			],
@@ -52,15 +53,19 @@
 				"kubernetes-helm-minikube"
 			]
 		},
-		//  Problem #2 - there's three versions here and they go together as a unit, and no ability to pin to a version
+		// Problem #3 - there's three versions here and they go together as a unit, and no ability to pin to a version
 		{
 			"id": "kubectl-helm-minikube",
 			"name": "Kubectl, Helm, and Minkube",
 			"type": "option",
 			"default": false,
-			"buildArg": "_VSC_INSTALL_KUBE_HELM_MINIKUBE",
+			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
 			"extensions": [
 				"ms-kubernetes-tools.vscode-kubernetes-tools"
+			],
+			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
+			"mounts": [
+				"source=minikube-config,target=/home/vscode/.minikube,type=volume"
 			],
 			"exclude": [
 				"alpine",
@@ -310,7 +315,7 @@
 				"GOROOT": "/usr/local/go",
 				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
 			},
-			//  Problem #4 - Need to set these for ptrace based debuggers
+			//  Problem #5 - Need to set these for ptrace based debuggers
 			"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 			"settings": {
 				"go.toolsManagement.checkForUpdates": "local",
@@ -348,7 +353,7 @@
 				"java-8"
 			]
 		},
-		// Problem #5 - Maven and gradle options should not be presented if Java isn't checked
+		// Problem #6 - Maven and gradle options should not be presented if Java isn't checked
 		{
 			"id": "maven",
 			"name": "Maven (via SDKMAN!)",
@@ -434,7 +439,7 @@
 				"RUSTUP_HOME": "/usr/local/rustup",
 				"PATH": "${CARGO_HOME}/bin:${RUSTUP_HOME}/bin:${PATH}"
 			},
-			//  Problem #4 - Need to set these for ptrace based debuggers
+			//  Problem #5 - Need to set these for ptrace based debuggers
 			"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
 			"settings": {
 				"lldb.executable": "/usr/bin/lldb",
