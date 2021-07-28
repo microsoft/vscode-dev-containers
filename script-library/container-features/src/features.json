@@ -3,7 +3,7 @@
 		//  Problem #1 - you should be able to pick docker-in-docker or docker-from-docker, but not both, and settings need to be different
 		{
 			"id": "docker-in-docker",
-			"name": "Docker (Moby) CLI and Engine in container",
+			"name": "Docker (Moby) CLI/Engine (Docker-in-Docker)",
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
@@ -29,7 +29,7 @@
 		},
 		{
 			"id": "docker-from-docker",
-			"name": "Docker (Moby) CLI, but reuse local Docker Engine",
+			"name": "Docker (Moby) CLI, reuse host Docker Engine",
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
@@ -96,7 +96,7 @@
 		},
 		{
 			"id": "git",
-			"name": "Git (latest version - may require a build)",
+			"name": "Git (latest version - may require compilation)",
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_GIT",
@@ -172,7 +172,7 @@
 		},
 		{
 			"id": "desktop-lite",
-			"name": "Light-weight desktop (fluxbox)",
+			"name": "Light-weight desktop (Fluxbox)",
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
@@ -196,7 +196,7 @@
 		},
 		{
 			"id": "node",
-			"name": "Node.js (via NVM) and yarn",
+			"name": "Node.js (via nvm) and yarn",
 			"type": "choice",
 			"values": [ "lts", "latest","16", "14", "12"],
 			"default": false,
@@ -254,7 +254,7 @@
 		},
 		{
 			"id": "python",
-			"name": "Python (requires a build) and tools",
+			"name": "Python (may require compilation)",
 			"type": "choice",
 			"values": ["latest", "3.9", "3.8", "3.7", "3.6"],
 			"default": false,
@@ -299,7 +299,7 @@
 		},
 		{
 			"id": "golang",
-			"name": "Go and related tools",
+			"name": "Go",
 			"type": "choice",
 			"values": ["latest", "1.16", "1.15", "1.14"],
 			"default": false,
