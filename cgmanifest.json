@@ -453,7 +453,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "dac3314c76e799cddbbe5cf63870d31861626059"
+                    "commitHash": "5377cc37c0f71fe22484303a4c6f387aa339f3f5"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "37d7143986bd5d826e5da71cf18dcc5492fe500a"
+                    "commitHash": "75c2fe4560b02fb2e38518434eebe4bb96c2c627"
                 }
             }
         },
@@ -612,7 +612,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/oryx/build",
-                    "Version": "vso-focal-exp-20210721.2",
+                    "Version": "vso-focal-20210728.1",
                     "DownloadUrl": "https://github.com/microsoft/oryx"
                 }
             }
@@ -847,16 +847,6 @@
                     "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/java",
                     "Version": "11",
                     "DownloadUrl": "https://hub.docker.com/_/java"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "ruby-build",
-                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "75c2fe4560b02fb2e38518434eebe4bb96c2c627"
                 }
             }
         },

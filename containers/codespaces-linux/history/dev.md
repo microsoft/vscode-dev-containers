@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:167759912f34fb72f1c8f3b2ce93c1e9e6a5e92676337675581323144e7d1982
+**Digest:** sha256:64fe77e1ed8ce5418dacda8d8fa0ddedb56b30db2705e8c3414b6c70548b5d63
 
 **Tags:**
 ```
@@ -41,11 +41,11 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dac3314c76e799cddbbe5cf63870d31861626059 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 024dea3f7bc852312932c32c0957cb034f5f7917 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 37d7143986bd5d826e5da71cf18dcc5492fe500a | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 75c2fe4560b02fb2e38518434eebe4bb96c2c627 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
