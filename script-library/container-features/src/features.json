@@ -169,7 +169,7 @@
 			"name": "SSH server",
 			"type": "option",
 			"default": false,
-			"buildArg": "INSTALL_SSH",
+			"buildArg": "_VSC_INSTALL_SSH",
 			"exclude": [
 				"alpine",
 				"codespaces-linux"
