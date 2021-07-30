@@ -1,4 +1,4 @@
-# R version: latest, ... ,4.0.1 , 4.0.0
+# R version: latest, ... , 4.0.3
 ARG VARIANT="latest"
 FROM rocker/r-ver:${VARIANT}
 
@@ -26,10 +26,16 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         libxt-dev \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts \
     && python3 -m pip --no-cache-dir install radian \
-    && install2.r --error --skipinstalled --repos ${CRAN} --ncpus -1 \
+    && install2.r --error --skipinstalled --ncpus -1 \
         devtools \
         languageserver \
+        httpgd \
     && rm -rf /tmp/downloaded_packages
+
+# R Session watcher settings.
+# See more details: https://github.com/REditorSupport/vscode-R/wiki/R-Session-watcher
+RUN echo 'source(file.path(Sys.getenv("HOME"), ".vscode-R", "init.R"))' >> ${R_HOME}/etc/Rprofile.site \
+    && echo 'options(vsc.use_httpgd = TRUE)' >> ${R_HOME}/etc/Rprofile.site
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update \
