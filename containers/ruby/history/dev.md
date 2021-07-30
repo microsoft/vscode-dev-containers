@@ -11,7 +11,7 @@
 
 ## Variant: 3.0
 
-**Digest:** sha256:031463a423588956274e733257cac5eb625f46d109cdbbfda3265569ff4066d0
+**Digest:** sha256:09cf8e91b5461cf0d35d51b70df56240c7ee4f99f3ef01bbf8ab02b69bb5c955
 
 **Tags:**
 ```
@@ -29,22 +29,22 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Ruby](https://www.ruby-lang.org/en/) | 3.0.1p64 | /usr/local |
+| [Ruby](https://www.ruby-lang.org/en/) | 3.0.2p107 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 19ed806d27df9aadd22ed7a9573e64bc894d9655 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 75c2fe4560b02fb2e38518434eebe4bb96c2c627 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
 | Tool / gem | Version |
 |------------|---------|
-| rake | 13.0.3 |
+| rake | 13.0.6 |
 | ruby-debug-ide | 0.7.2 |
 | debase | 0.2.4.1 |
 
@@ -72,9 +72,9 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 ## Variant: 2.7
 
-**Digest:** sha256:cb9d88bbf3a0a9ae8947ef2f400d47e5289b94235bd5aebd81c7e5a9334f5337
+**Digest:** sha256:2d9d6731a028653a9572b461ef9098098df125c84671b38a182b6b990babdc28
 
 **Tags:**
 ```
@@ -123,22 +123,22 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Ruby](https://www.ruby-lang.org/en/) | 2.7.3p183 | /usr/local |
+| [Ruby](https://www.ruby-lang.org/en/) | 2.7.4p191 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 19ed806d27df9aadd22ed7a9573e64bc894d9655 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 75c2fe4560b02fb2e38518434eebe4bb96c2c627 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
 | Tool / gem | Version |
 |------------|---------|
-| rake | 13.0.3 |
+| rake | 13.0.6 |
 | ruby-debug-ide | 0.7.2 |
 | debase | 0.2.4.1 |
 
@@ -166,9 +166,9 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -199,7 +199,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 ## Variant: 2.6
 
-**Digest:** sha256:9dadef0565e3383f01a8867b44cbe78cd670b52edd3cc704e5f6f4446dce2ad6
+**Digest:** sha256:e6f5efde5b0400c5788aa6c4f3c2642cc0a2517efaf53c34ffb1d18ebadc5bbc
 
 **Tags:**
 ```
@@ -216,22 +216,22 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Ruby](https://www.ruby-lang.org/en/) | 2.6.7p197 | /usr/local |
+| [Ruby](https://www.ruby-lang.org/en/) | 2.6.8p205 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 706b2f3765d41bee2853b17724888d1a3f6f00d9 | /home/vscode/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 258938ef66a2a49a4a400554a6dce890226ae34c | /usr/local/share/nvm |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 19ed806d27df9aadd22ed7a9573e64bc894d9655 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 75c2fe4560b02fb2e38518434eebe4bb96c2c627 | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
 | Tool / gem | Version |
 |------------|---------|
-| rake | 13.0.3 |
+| rake | 13.0.6 |
 | ruby-debug-ide | 0.7.2 |
 | debase | 0.2.4.1 |
 
@@ -259,9 +259,9 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |

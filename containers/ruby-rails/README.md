@@ -24,10 +24,10 @@ While this definition should work unmodified, you can select the version of Ruby
 
 This container also includes Node.js. You can change the version of Node.js by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```json
+```jsonc
 "args": {
     "VARIANT": "2",
-    "NODE_VERSION": "10",
+    "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
 }
 ```
 

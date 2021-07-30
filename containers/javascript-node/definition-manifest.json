@@ -1,6 +1,6 @@
 {
 	"variants": ["16-buster", "14-buster", "12-buster", "14-stretch", "12-stretch"],
-	"definitionVersion": "0.202.2",
+	"definitionVersion": "0.202.4",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
