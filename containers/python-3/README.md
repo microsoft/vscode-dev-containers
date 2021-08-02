@@ -53,11 +53,10 @@ Beyond Python and `git`, this image / `Dockerfile` includes a number of Python t
 
 Given JavaScript front-end web client code written for use in conjunction with a Python back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```json
+```jsonc
 "args": {
     "VARIANT": "3",
-    "INSTALL_NODE": "true",
-    "NODE_VERSION": "10"
+    "NODE_VERSION": "10" // Set to "none" to skip Node.js installation
 }
 ```
 

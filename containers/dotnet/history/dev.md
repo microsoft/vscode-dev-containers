@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:1372ca3ab666b0e4222e5600056edf779b6ae2fa8c54e882ac087436abc0082e
+**Digest:** sha256:00e8027cdb2195618886c8e0827fe072562500d16460a24f1e1eb81e16d37f2e
 
 **Tags:**
 ```
@@ -29,13 +29,13 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 5.0.301 (5.0.7) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 5.0.302 (5.0.8) | /usr |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -45,7 +45,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.1 |
-| curl | 7.68.0-1ubuntu2.5 |
+| curl | 7.68.0-1ubuntu2.6 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.1 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
@@ -88,7 +88,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:112d7911be40fd7a601df51fda78246458695b3cf6415a36dd4cd767f309876d
+**Digest:** sha256:0d7106ab5226c8dfec2565877eb2dcf960a4a82f91dad3755dda7f87c9289e39
 
 **Tags:**
 ```
@@ -106,13 +106,13 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 3.1.410 (3.1.1) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 3.1.411 (3.1.1) | /usr |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -122,7 +122,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.1 |
-| curl | 7.68.0-1ubuntu2.5 |
+| curl | 7.68.0-1ubuntu2.6 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.1 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
@@ -165,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:560b1fdb3539c50b75318e10bdb383887990e7f02aa50d69a855ce6d53ea774c
+**Digest:** sha256:b6e4d60438dae104a20bd43a85c79fee0493411bb1660a63b54f4157b3602210
 
 **Tags:**
 ```
@@ -189,7 +189,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -199,7 +199,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.1 |
-| curl | 7.68.0-1ubuntu2.5 |
+| curl | 7.68.0-1ubuntu2.6 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.1 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |

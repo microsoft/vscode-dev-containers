@@ -11,7 +11,6 @@ services:
         # Phoenix Version: 1.4.17, 1.5.4, ...
         PHOENIX_VERSION: "1.5.7"
         # Node Version: 10, 11, ...
-        INSTALL_NODE: "true"
         NODE_VERSION: "10"
 
     volumes:

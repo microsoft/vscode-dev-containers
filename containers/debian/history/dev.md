@@ -10,7 +10,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:7d60740648ff0e42a2c7d537f050f15aec8d6ebcbfdbc2bd5e467ae808c63553
+**Digest:** sha256:2d4f23abb134a148235dab456d6300e95d56d38a0a56a4f84f8debf2df019b9c
 
 **Tags:**
 ```
@@ -31,7 +31,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -50,9 +50,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:f66dc60c72af44f15aff046f1609d33e4a2d47361d3ecd3c47d01969210ecb7c
+**Digest:** sha256:0e6fbfd48e7e0ca41caca914fde1c4bac55145393cc24e12ebc8e14b739503f5
 
 **Tags:**
 ```
@@ -101,7 +101,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian-9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 

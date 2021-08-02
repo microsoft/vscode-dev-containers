@@ -111,21 +111,19 @@ If you've already opened your folder in a container, rebuild the container using
 
 Given JavaScript front-end web client code written for use in conjunction with an ASP.NET back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```json
+```jsonc
 "args": {
     "VARIANT": "3.1",
-    "INSTALL_NODE": "true",
-    "NODE_VERSION": "10",
+    "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
 }
 ```
 
 If you would like to install the Azure CLI update you can set the `INSTALL_AZURE_CLI` argument line in `.devcontainer/devcontainer.json`:
 
-```Dockerfile
+```json
 "args": {
     "VARIANT": "3.1",
-    "INSTALL_NODE": "true",
-    "NODE_VERSION": "10",
+    "NODE_VERSION": "14",
     "INSTALL_AZURE_CLI": "true"
 }
 ```

@@ -6,7 +6,6 @@
 			// Update the VARIANT arg to pick a Swift version 
 			"VARIANT": "5.3",
 			// Options
-			"INSTALL_NODE": "false",
 			"NODE_VERSION": "lts/*"
 		}
 	},

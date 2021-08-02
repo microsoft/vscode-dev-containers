@@ -16,11 +16,6 @@ UPDATE_RC=${4:-"true"}
 
 set -e
 
- # Blank will install latest maven version
-if [ "${MAVEN_VERSION}" = "lts" ] || [ "${MAVEN_VERSION}" = "current" ] || [ "${MAVEN_VERSION}" = "latest" ]; then
-    MAVEN_VERSION=""
-fi
-
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
@@ -48,7 +43,7 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-function updaterc() {
+updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
         echo -e "$1" >> /etc/bash.bashrc
@@ -58,15 +53,60 @@ function updaterc() {
     fi
 }
 
+# Function to run apt-get if needed
+apt_get_update_if_needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
+# Use SDKMAN to install something using a partial version match
+sdk_install() {
+    local install_type=$1
+    local requested_version=$2
+    local prefix=$3
+    local suffix="${4:-"\\s*"}"
+    local full_version_check=${5:-".*-[a-z]+"}
+    if [ "${requested_version}" = "none" ]; then return; fi
+    # Blank will install latest stable AdoptOpenJDK version
+    if [ "${requested_version}" = "lts" ] || [ "${requested_version}" = "default" ]; then
+         requested_version=""
+    elif echo "${requested_version}" | grep -oE "${full_version_check}" > /dev/null 2>&1; then
+        echo "${requested_version}"
+    else
+        local regex="${prefix}\\K[0-9]+\\.[0-9]+\\.[0-9]+${suffix}"
+        local version_list="$(. ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk list ${install_type} 2>&1 | grep -oP "${regex}" | tr -d ' ' | sort -rV)"
+        if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ]; then
+            requested_version="$(echo "${version_list}" | head -n 1)"
+        else
+            set +e
+            requested_version="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
+            set -e
+        fi
+        if [ -z "${requested_version}" ] || ! echo "${version_list}" | grep "^${requested_version//./\\.}$" > /dev/null 2>&1; then
+            echo -e "Version $2 not found. Available versions:\n${version_list}" >&2
+            exit 1
+        fi
+    fi
+    su ${USERNAME} -c "umask 0002 && . ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install ${install_type} ${requested_version} && sdk flush archives && sdk flush temp"
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, zip, unzip if missing
-if ! dpkg -s curl ca-certificates zip unzip sed > /dev/null 2>&1; then
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        apt-get update
-    fi
-    apt-get -y install --no-install-recommends curl ca-certificates zip unzip sed
-fi
+# Install dependencies
+check_packages curl ca-certificates zip unzip sed
 
 # Install sdkman if not installed
 if [ ! -d "${SDKMAN_DIR}" ]; then
@@ -85,7 +125,7 @@ if [ ! -d "${SDKMAN_DIR}" ]; then
 fi
 
 # Install Maven
-su ${USERNAME} -c "umask 0002 && . ${SDKMAN_DIR}/bin/sdkman-init.sh && sdk install maven ${MAVEN_VERSION} && sdk flush archives && sdk flush temp"
-updaterc "export M2=\$HOME/.m2"
+sdk_install maven ${MAVEN_VERSION} '\s\s' '\s\s' '^[0-9]+\.[0-9]+\.[0-9]+$'
+updaterc '[ -z "$M2" ] && export M2=$HOME/.m2'
 
 echo "Done!"

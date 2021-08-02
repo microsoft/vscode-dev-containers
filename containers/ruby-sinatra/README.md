@@ -26,11 +26,10 @@ While this definition should work unmodified, you can select the version of Ruby
 
 Given JavaScript front-end web client code written for use in conjunction with a Ruby back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```json
+```jsonc
 "args": {
     "VARIANT": "2",
-    "INSTALL_NODE": "true",
-    "NODE_VERSION": "10",
+    "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
 }
 ```
 

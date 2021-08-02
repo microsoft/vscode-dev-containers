@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
-**Digest:** sha256:03ada2a668f3009e9f00ca818a5b7d340b362b94cd45bd93ba5b468a4252c166
+**Digest:** sha256:ce44b66a0cb732c163d8323ed9d308560f3dd6d04cf0ee0197018c030b8c590e
 
 **Tags:**
 ```
@@ -27,7 +27,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 
 **Cargo / rustup (Rust) crates and tools**
 
@@ -58,9 +58,9 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 | libc6 | 2.28-10 |
 | libc6-dev | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |

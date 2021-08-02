@@ -42,7 +42,7 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
 fi
 
 # Function to run apt-get if needed
-apt-get-update-if-needed()
+apt_get_update_if_needed()
 {
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         echo "Running apt-get update..."
@@ -52,14 +52,19 @@ apt-get-update-if-needed()
     fi
 }
 
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
 # Install openssh-server openssh-client
-if ! dpkg -s openssh-server openssh-client lsof jq > /dev/null 2>&1; then
-    apt-get-update-if-needed
-    apt-get -y install --no-install-recommends openssh-server openssh-client lsof jq
-fi
+check_packages openssh-server openssh-client lsof
 
 # Generate password if new password set to the word "random"
 if [ "${NEW_PASSWORD}" = "random" ]; then
@@ -84,7 +89,7 @@ sed -i -E "s/#*\s*Port\s+.+/Port ${SSHD_PORT}/g" /etc/ssh/sshd_config
 sed -i -E "s/#?\s*UsePAM\s+.+/UsePAM yes/g" /etc/ssh/sshd_config
 
 # Script to store variables that exist at the time the ENTRYPOINT is fired
-STORE_ENV_SCRIPT="$(cat << 'EOF'
+store_env_script="$(cat << 'EOF'
 # Wire in codespaces secret processing to zsh if present (since may have been added to image after script was run)
 if [ -f  /etc/zsh/zlogin ] && ! grep '/etc/profile.d/00-restore-secrets.sh' /etc/zsh/zlogin > /dev/null 2>&1; then
     echo -e "if [ -f /etc/profile.d/00-restore-secrets.sh ]; then . /etc/profile.d/00-restore-secrets.sh; fi\n$(cat /etc/zsh/zlogin 2>/dev/null || echo '')" | sudoIf tee /etc/zsh/zlogin > /dev/null
@@ -93,7 +98,7 @@ EOF
 )"
 
 # Script to ensure login shells get the latest Codespaces secrets
-RESTORE_SECRETS_SCRIPT="$(cat << 'EOF'
+restore_secrets_script="$(cat << 'EOF'
 #!/bin/sh
 if [ "${CODESPACES}" != "true" ] || [ "${VSCDC_FIXED_SECRETS}" = "true" ] || [ ! -z "${GITHUB_CODESPACES_TOKEN}" ]; then
     # Not codespaces, already run, or secrets already in environment, so return
@@ -128,8 +133,8 @@ sudoIf()
 
 EOF
 if [ "${FIX_ENVIRONMENT}" = "true" ]; then
-    echo "${STORE_ENV_SCRIPT}" >> /usr/local/share/ssh-init.sh
-    echo "${RESTORE_SECRETS_SCRIPT}" > /etc/profile.d/00-restore-secrets.sh
+    echo "${store_env_script}" >> /usr/local/share/ssh-init.sh
+    echo "${restore_secrets_script}" > /etc/profile.d/00-restore-secrets.sh
     chmod +x /etc/profile.d/00-restore-secrets.sh
     # Wire in zsh if present
     if type zsh > /dev/null 2>&1; then

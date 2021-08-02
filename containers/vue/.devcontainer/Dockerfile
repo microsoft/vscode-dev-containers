@@ -1,5 +1,5 @@
-# [Choice] Node.js version: 14, 12, 10
-ARG VARIANT=14
+# [Choice] Node.js version: 16, 14, 12
+ARG VARIANT=16
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
 RUN su node -c "umask 0002 && npm install -g http-server @vue/cli @vue/cli-service-global"

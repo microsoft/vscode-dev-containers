@@ -470,10 +470,28 @@ function getParentTagForVersion(definitionId, version, registry, registryPath, v
     let parentId = config.definitionBuildSettings[definitionId].parent;
     if (parentId) {
         if(typeof parentId !== 'string') {
-            // Use variant to figure out correct parent, or return first if no variant
+            // Use variant to figure out correct parent, or return first parent if child has no variant
             parentId = variant ? parentId[variant] : parentId[Object.keys(parentId)[0]];
         }
-        return getTagsForVersion(parentId, version, registry, registryPath, variant)[0];
+    
+        // Determine right parent variant to use (assuming there are variants)
+        const parentVariantList = getVariants(parentId);
+        let parentVariant;
+        if(parentVariantList) {
+            // If a variant is specified in the parentVariant property in build, use it - otherwise default to the child definition's variant
+            parentVariant = config.definitionBuildSettings[definitionId].parentVariant || variant;
+            if(typeof parentVariant !== 'string') {
+                // Use variant to figure out correct variant it not the same across all parents, or return first variant if child has no variant
+                parentVariant = variant ? parentVariant[variant] : parentVariant[Object.keys(parentId)[0]];
+            }
+            if(!parentVariantList.includes(parentVariant)) {
+                throw `Unable to determine variant for parent. Variant ${parentVariant} is not in ${parentId} list: ${parentVariantList}`;
+            }
+        }
+        
+        // Parent image version may be different than child's
+        const parentVersion = getVersionFromRelease(version, parentId);
+        return getTagsForVersion(parentId, parentVersion, registry, registryPath, parentVariant)[0];
     }
     return null;
 }

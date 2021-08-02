@@ -12,7 +12,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:e2937f6d18a837588817f55f81b4c6a22a503c6734a4c23f1073863f9564ed5a
+**Digest:** sha256:7c9e7e77ffdd59609f0445eaf3ffd64393ce068c2b3bac6962ac008ce597ed20
 
 **Tags:**
 ```
@@ -40,7 +40,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -64,9 +64,9 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: focal
 
-**Digest:** sha256:43c891786d9e395cd4253c6d3b2fd88f05f7d0b529a44869dcc4954b06ecfb66
+**Digest:** sha256:160fe1bca5065d94912e5ba5acb7af7479da4f284bc6ba9af3bfc80d42aa4189
 
 **Tags:**
 ```
@@ -126,7 +126,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -139,7 +139,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | clang | 1:10.0-50~exp1 |
 | cmake | 3.16.3-1ubuntu1 |
 | cppcheck | 1.90-4build1 |
-| curl | 7.68.0-1ubuntu2.5 |
+| curl | 7.68.0-1ubuntu2.6 |
 | dialog | 1.3-20190808-1 |
 | gdb | 9.2-0ubuntu1~20.04 |
 | git | 1:2.25.1-1ubuntu3.1 |
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:53ed2fbfef5d9521e1b7f5015fa338643200d8dde672deb05a2f537a36f586d8
+**Digest:** sha256:2099e9b79ec8ccfa099ffcd11793e275b4a5585768eafaf1e070203c613971b0
 
 **Tags:**
 ```
@@ -211,7 +211,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -222,9 +222,9 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 | build-essential | 12.4ubuntu1 |
 | ca-certificates | 20210119~18.04.1 |
 | clang | 1:6.0-41~exp5~ubuntu1 |
-| cmake | 3.10.2-1ubuntu2.18.04.1 |
+| cmake | 3.10.2-1ubuntu2.18.04.2 |
 | cppcheck | 1.82-1 |
-| curl | 7.58.0-2ubuntu3.13 |
+| curl | 7.58.0-2ubuntu3.14 |
 | dialog | 1.3-20171209-1 |
 | gdb | 8.1.1-0ubuntu1 |
 | git | 1:2.17.1-1ubuntu0.8 |
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:3ea92979f4d88ac4c66c4f46c911951187a8c42dcf897849df0a8c39f042fe4d
+**Digest:** sha256:4ebad2fb01c69861bb5ed61de89b8f70710397c353340e557be0b2e4ae1b65a8
 
 **Tags:**
 ```
@@ -297,7 +297,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian-9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
