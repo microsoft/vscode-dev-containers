@@ -2,7 +2,7 @@
 	"name": "Debian",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Debian version: buster, stretch
+		// Update 'VARIANT' to pick an Debian version: bullseye, buster, stretch
 		"args": { "VARIANT": "buster" }
 	},
 
