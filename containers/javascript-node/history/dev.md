@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:8357589a8020f0b1e69bb3c89e72ac1b0f16529ab53571e29ddfc3bc6566158b
+**Digest:** sha256:f1f7eb6041a21a40a4c982dc0de293d692cd087cf0eae5e93acf282a0fb89806
 
 **Tags:**
 ```
@@ -31,7 +31,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.5.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.6.0 | /usr/local |
 
 **Tools installed using git**
 
@@ -44,7 +44,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 
 **Additional linux tools and packages**
 
@@ -96,7 +96,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:f7e65663d023c8ec894c777c95e182b622ddde36356954721d4b2bcce7b36c43
+**Digest:** sha256:d2074f0c6e6b56a33cf50e938fcf2243a4fca7f06b037ce717aba876b8813bba
 
 **Tags:**
 ```
@@ -114,7 +114,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
 
 **Tools installed using git**
 
@@ -127,7 +127,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 
 **Additional linux tools and packages**
 
@@ -179,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:c7d4692185dc11c658a93964979bec4b10e19a6311940545816fc1d31ef8c0a9
+**Digest:** sha256:4c1790338d59f1fd2b039df596c29c87280af1dbd89fc3fd9a1d95cf2d88025b
 
 **Tags:**
 ```
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
 
 **Tools installed using git**
 
@@ -210,7 +210,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 
 **Additional linux tools and packages**
 
@@ -262,7 +262,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:18433fc533dfe0cc63aa71ba76873469d707eadb9557f0aff1d920de5479b288
+**Digest:** sha256:345c12f8f52421062e184793625b47869873c5815b89b456f6661b8b4c3b8d7b
 
 **Tags:**
 ```
@@ -279,7 +279,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
 
 **Tools installed using git**
 
@@ -292,7 +292,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 
 **Additional linux tools and packages**
 
@@ -345,7 +345,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:9579ee2f3b91465c5adc0f580930a9f8e97d92b783ed918a37f4a9705c47f251
+**Digest:** sha256:290fe97c6e82ec2419541fcf4e04893dd2775ececdd4194377ff833b15546874
 
 **Tags:**
 ```
@@ -362,7 +362,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
 
 **Tools installed using git**
 
@@ -375,7 +375,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 
 **Additional linux tools and packages**
 

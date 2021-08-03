@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:2ae6b2c1a4989d249bed990f45aecdd1b8f0f447199225e42332fe06436f44a9
+**Digest:** sha256:38345675c92db7f890401cbab1a84b1c4b4f432d0b0f322d818a3c8ee6977114
 
 **Tags:**
 ```
@@ -31,7 +31,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.5.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.6.0 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -45,7 +45,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:706c23a3f6afb0cd8507374504611e68a476babac8321a75dfe2d86d11933ea8
+**Digest:** sha256:744e48c34078b8564ffa9949d4d1cec73851d1ac954278b975125d9796880b9a
 
 **Tags:**
 ```
@@ -117,7 +117,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -131,7 +131,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:407f2eedfcbbda4828f4b38fe272caed172a058bb6ebc4871fa87f681d225590
+**Digest:** sha256:6cc2a8fc17d610a8d1ed40e63a66031b579e3ebe447592ef9af231389e892803
 
 **Tags:**
 ```
@@ -203,7 +203,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -217,7 +217,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:3ac0e77b7f4b883bb93f0aeb453cefd2f83c4bba99086e1341572bdccaf19481
+**Digest:** sha256:03a244fded7f5671827178bfda9b3fe58f5c294cb4fe9ddc41b27a82ee957a96
 
 **Tags:**
 ```
@@ -288,7 +288,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -302,7 +302,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 
@@ -357,7 +357,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:c530b39f6574bb75e7d62fa267998ef0db36ec749d628e339996462aea165e13
+**Digest:** sha256:0dd161a67eaf33cacd9650ab8f6b76df1698ce80d97aa9d32b51d27e38a65a2b
 
 **Tags:**
 ```
@@ -374,7 +374,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -388,7 +388,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.31.0 |
+| eslint | 7.32.0 |
 | tslint-to-eslint-config | 2.9.1 |
 | typescript | 4.3.5 |
 

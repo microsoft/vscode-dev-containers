@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:2d87a6ae831f08665d935571ae2d89f1a2efc6f52b017a2f54758d2e618f2f67
+**Digest:** sha256:c78d8154058d8c6c0f2ba1370cbefbdbf07aaa1d7a043cc17d1f306d20a6a83c
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.5 |
+| pylint | 2.9.6 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.7b0 |
@@ -52,7 +52,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.6.0 |
+| virtualenv | 20.7.0 |
 | pipx | 0.16.3 |
 
 **Additional linux tools and packages**
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:c1a072065d96b1ada8d45a8b4ff225a2aece21937a1958fd2fa2627bd3462b9d
+**Digest:** sha256:7824d862d311e6024ffe703fcaefda1f5d96c1e48cf178bdd20f5d9306e00d22
 
 **Tags:**
 ```
@@ -135,7 +135,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.5 |
+| pylint | 2.9.6 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.7b0 |
@@ -144,7 +144,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.6.0 |
+| virtualenv | 20.7.0 |
 | pipx | 0.16.3 |
 
 **Additional linux tools and packages**
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:f42e67f169e7222d20c30501f728be5c38ddad0cea98555f43ab10bb74f66369
+**Digest:** sha256:cd19fccc9eff5083d350800592892ec237ad3a6e16bb0756141365db6bf19ead
 
 **Tags:**
 ```
@@ -227,7 +227,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.5 |
+| pylint | 2.9.6 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.7b0 |
@@ -236,7 +236,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.6.0 |
+| virtualenv | 20.7.0 |
 | pipx | 0.16.3 |
 
 **Additional linux tools and packages**
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:f9c1cc0858610f88f7f2b6ffd2b1b21b954cb5753bd74a96a391dfd3b80225bd
+**Digest:** sha256:5099035749e7d68c855d2556949bf7c5c1a2ec15dac194e3272d8c357ebd9f71
 
 **Tags:**
 ```
@@ -319,7 +319,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.5 |
+| pylint | 2.9.6 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.7b0 |
@@ -328,7 +328,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.6.0 |
+| virtualenv | 20.7.0 |
 | pipx | 0.16.3 |
 
 **Additional linux tools and packages**

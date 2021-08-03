@@ -12,7 +12,7 @@
 
 ## Variant: 3.14
 
-**Digest:** sha256:31fa21966e21fae14febe9617c16c10435106928d00445f3010283295b548410
+**Digest:** sha256:cd5e0149c62e4595cac3a1b12ee9a11ea2f681aba512ff248e861db283e40c9b
 
 **Tags:**
 ```
@@ -46,7 +46,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 | psmisc | 23.4-r0 |
 | curl | 7.78.0-r0 |
 | wget | 1.21.1-r1 |
-| rsync | 3.2.3-r2 |
+| rsync | 3.2.3-r4 |
 | ca-certificates | 20191127-r5 |
 | unzip | 6.0-r9 |
 | zip | 3.0-r9 |
@@ -75,7 +75,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 ## Variant: 3.13
 
-**Digest:** sha256:68318bc78d7f87781a053f8e5db33cc71058bee261fea44768bfadc33ac00832
+**Digest:** sha256:e531033d19638da7564549d443df759d6bacc0c707f99145aafa6f74227bebff
 
 **Tags:**
 ```
@@ -110,7 +110,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 | psmisc | 23.3-r0 |
 | curl | 7.78.0-r0 |
 | wget | 1.21.1-r1 |
-| rsync | 3.2.3-r1 |
+| rsync | 3.2.3-r4 |
 | ca-certificates | 20191127-r5 |
 | unzip | 6.0-r9 |
 | zip | 3.0-r9 |
@@ -139,7 +139,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.12
 
-**Digest:** sha256:2fac7318e384b4ab420e90bc02720ac0c144e912315fb644b71c9a7ae6679623
+**Digest:** sha256:59c07857e89b4fc93b55f74e543d15d1278cbfd34ec2180fab85c6fc5051fc9e
 
 **Tags:**
 ```
@@ -202,7 +202,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 
 ## Variant: 3.11
 
-**Digest:** sha256:f0c74fe64bfaed603d8fb82a00b1e28bb3be6feb7207891df243e7fb2747c467
+**Digest:** sha256:f80fe6870a76faaeb712317a9990b71e91277c51ab0ea8d19a2d51c2b388835f
 
 **Tags:**
 ```

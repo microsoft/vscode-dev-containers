@@ -2,7 +2,7 @@
 	"name": "R (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update VARIANT to pick a specific R version: latest, ... ,4.0.1 , 4.0.0
+		// Update VARIANT to pick a specific R version: latest, ... , 4.0.3
 		"args": { "VARIANT": "latest" }
 	},
 
@@ -10,9 +10,14 @@
 	"settings": {
 		"r.rterm.linux": "/usr/local/bin/radian",
 		"r.bracketedPaste": true,
-		"r.sessionWatcher": true,
 		"[r]": {
 			"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+		},
+		"terminal.integrated.profiles.linux": {
+			"radian": {
+				"path": "/usr/local/bin/radian",
+				"overrideName": true
+			}
 		}
 	},
 
