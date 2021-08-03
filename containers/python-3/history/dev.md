@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:c78d8154058d8c6c0f2ba1370cbefbdbf07aaa1d7a043cc17d1f306d20a6a83c
+**Digest:** sha256:04cf64b8e0d045477d9c3a0fd2e94df8c2e2dd16a8e06ede00e60c56ff46f27c
 
 **Tags:**
 ```
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:7824d862d311e6024ffe703fcaefda1f5d96c1e48cf178bdd20f5d9306e00d22
+**Digest:** sha256:bb489b277b9ba212adc6d7920da642ccaf9ec48d824adcd8082fd5b022e8ff1e
 
 **Tags:**
 ```
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:cd19fccc9eff5083d350800592892ec237ad3a6e16bb0756141365db6bf19ead
+**Digest:** sha256:7d34cedbaea4d1860dc0c73339068fc0163afb426c1d97e50f738bd3a74db637
 
 **Tags:**
 ```
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:5099035749e7d68c855d2556949bf7c5c1a2ec15dac194e3272d8c357ebd9f71
+**Digest:** sha256:6fee0c58a0ae68938bfc35433c6e353a2146b2dfc66a843048b02174e5ec0fdb
 
 **Tags:**
 ```

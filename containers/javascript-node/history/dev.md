@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:f1f7eb6041a21a40a4c982dc0de293d692cd087cf0eae5e93acf282a0fb89806
+**Digest:** sha256:3998a99e53f6536fb4ea6066ef9424e02a161259d15fb1046923d906f2c1a457
 
 **Tags:**
 ```
@@ -96,7 +96,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:d2074f0c6e6b56a33cf50e938fcf2243a4fca7f06b037ce717aba876b8813bba
+**Digest:** sha256:c66112227b53f428433510ef57eacdfb796b3cf0b408599d2ba5862de8b8460a
 
 **Tags:**
 ```
@@ -179,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:4c1790338d59f1fd2b039df596c29c87280af1dbd89fc3fd9a1d95cf2d88025b
+**Digest:** sha256:02463ac15a4d78f2e5996706b54b1ef2f16635120c4be80da4f5975a875afde1
 
 **Tags:**
 ```
@@ -262,7 +262,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:345c12f8f52421062e184793625b47869873c5815b89b456f6661b8b4c3b8d7b
+**Digest:** sha256:6651055dd382fb5a80efa4f28f25ac01ec745da73b9fdc6266db67ce867f7209
 
 **Tags:**
 ```
@@ -345,7 +345,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:290fe97c6e82ec2419541fcf4e04893dd2775ececdd4194377ff833b15546874
+**Digest:** sha256:d54254627053b6149c3c3885c67f545cde1a7231b9f05cdc3713ea20b22a97e1
 
 **Tags:**
 ```
