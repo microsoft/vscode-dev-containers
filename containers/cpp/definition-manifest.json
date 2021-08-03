@@ -1,5 +1,5 @@
 {
-	"variants": ["bullseye", "buster", "focal", "bionic", "stretch"],
+	"variants": ["buster", "bullseye", "focal", "bionic", "stretch"],
 	"definitionVersion": "0.202.0",
 	"build": {
 		"latest": true,
@@ -17,13 +17,13 @@
 		"variantTags": {
 			"bullseye": [
 				"cpp:${VERSION}-debian-11",
-				"cpp:${VERSION}-debian11",
-				"cpp:${VERSION}-debian",
-				"cpp:${VERSION}"
+				"cpp:${VERSION}-debian11"
 			],
 			"buster": [
 				"cpp:${VERSION}-debian-10",
-				"cpp:${VERSION}-debian10"
+				"cpp:${VERSION}-debian10",
+				"cpp:${VERSION}-debian",
+				"cpp:${VERSION}"
 			],
 			"stretch": [
 				"cpp:${VERSION}-debian-9",

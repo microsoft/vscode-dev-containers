@@ -1,9 +1,9 @@
 {
 	"name": "Debian",
 	"build": {
-		"dockerfile": "base.Dockerfile",
+		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick an Debian version: bullseye, buster, stretch
-		"args": { "VARIANT": "bullseye" }
+		"args": { "VARIANT": "buster" }
 	},
 
 	// Set *default* container specific settings.json values on container create.
