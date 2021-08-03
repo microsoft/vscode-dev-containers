@@ -122,3 +122,6 @@ RUN if [ -z $DeveloperBuild ]; then \
     fi
 
 USER ${USERNAME}
+
+# Bump npm to latest
+RUN npm install -g npm@6
