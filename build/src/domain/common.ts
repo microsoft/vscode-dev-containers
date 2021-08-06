@@ -3,7 +3,7 @@ export interface Lookup<T> {
 }
 
 export interface CommonParams {
-    repo: string;
+    githubRepo: string;
     release: string;
     registry: string;
     repository: string;

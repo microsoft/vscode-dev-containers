@@ -1,1 +1,1 @@
-@node vscdc %@
+@npx ts-node %~dp0\vscdc.ts %@

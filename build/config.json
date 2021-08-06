@@ -4,14 +4,14 @@
 	"stubRegistry": "mcr.microsoft.com",
 	"stubRegistryPath": "vscode/devcontainers",
 
-	"githubRepoName": "microsoft/vscode-dev-containers",
-	"containersPathInRepo": "containers",
+	"repositoryUrlPrefix": "https://github.com",
+	"githubRepo": "microsoft/vscode-dev-containers",
+	"historyUrlBranch": "main",
 	"historyFolderName": "history",
+	"containersPathInRepo": "containers",
 	"repoContainersToBuildPath": "repository-containers/images",
 	"scriptLibraryPathInRepo": "script-library",
 	"scriptLibraryFolderNameInDefinition": "library-scripts",
-	"historyUrlPrefix": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/",
-	"repositoryUrl": "https://github.com/microsoft/vscode-dev-containers/",
 	"imageLabelPrefix": "com.visualstudio.code.devcontainers",
 	"definitionBuildConfigFile": "definition-manifest.json",
 

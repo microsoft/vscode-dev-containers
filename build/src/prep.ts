@@ -39,14 +39,16 @@ const dockerFilePreamble = getConfig('dockerFilePreamble');
 const scriptLibraryPathInRepo = getConfig('scriptLibraryPathInRepo');
 const scriptLibraryFolderNameInDefinition = getConfig('scriptLibraryFolderNameInDefinition');
 
-const historyUrlPrefix = getConfig('historyUrlPrefix');
-const repositoryUrl = getConfig('repositoryUrl');
+const repositoryUrlPrefix = getConfig('repositoryUrlPrefix');
+const historyUrlBranch = getConfig('historyUrlPathPrefix');
+const historyFolderName = getConfig('historyFolderName', 'history');
+const containersPathInRepo = getConfig('containersPathInRepo', 'containers');
 
 // Prepares dockerfile for building or packaging
 export async function prepDockerFile(definition: Definition, params: CommonParams, isForBuild: boolean = false, variant?: string) {
     const release = params.release;
     // Use exact version of building, MAJOR if not
-    const version = isForBuild ? definition.getVersionFromRelease(release) : definition.majorFromRelease(release);
+    const version = isForBuild ? definition.getVersionForRelease(release) : definition.majorVersionPartForRelease(release);
 
     // Create initial result object 
     const prepResult: PrepResult = {
@@ -58,9 +60,9 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
             version: version,
             definitionId: definition.id,
             variant: variant,
-            gitRepository: repositoryUrl,
+            gitRepository: `${repositoryUrlPrefix}/${params.githubRepo}`,
             gitRepositoryRelease: release,
-            contentsUrl: `${historyUrlPrefix}${definition.id}/${getConfig('historyFolderName', 'history')}/${version}.md`,
+            contentsUrl: `${repositoryUrlPrefix}/${params.githubRepo}/tree/${historyUrlBranch}/${containersPathInRepo}/${definition.id}/${historyFolderName}/${version}.md`,
             buildTimestamp: `${new Date().toUTCString()}`
         }
     };
@@ -70,7 +72,7 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
 
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
-        const parentTag = definition.getParentTagForVersion(version, params.registry, params.repository, variant);
+        const parentTag = definition.getParentTagForRelease(version, params.registry, params.repository, variant);
         if (parentTag) {
             prepResult.devContainerDockerfileModified = replaceFrom(prepResult.devContainerDockerfileModified, `FROM ${parentTag}`);
         }
@@ -120,13 +122,13 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
 
 export async function updateStub(definition: Definition, params: CommonParams) {
     console.log('(*) Updating user Dockerfile...');
-    const devContainerImageVersion = definition.majorFromRelease(params.release);
-    let fromSection = `# ${dockerFilePreamble}https://github.com/${params.repo}/tree/${params.release}/${definition.relativePath}/.devcontainer/${definition.hasBaseDockerfile ? 'base.' : ''}Dockerfile\n\n`;
+    const devContainerImageVersion = definition.majorVersionPartForRelease(params.release);
+    let fromSection = `# ${dockerFilePreamble}https://github.com/${params.gitHubRepo}/tree/${params.release}/${definition.relativePath}/.devcontainer/${definition.hasBaseDockerfile ? 'base.' : ''}Dockerfile\n\n`;
     // The VARIANT arg allows this value to be set from devcontainer.json, handle it if found
     const userDockerfile = await definition.readDockerfile(true);
     if (/ARG\s+VARIANT\s*=/.exec(userDockerfile) !== null) {
         const variant = definition.variants[0];
-        const tagWithVariant = definition.getTagsForVersion(devContainerImageVersion, params.registry, params.repository, '${VARIANT}')[0];
+        const tagWithVariant = definition.getTagsForRelease(devContainerImageVersion, params.registry, params.repository, '${VARIANT}')[0];
         // Handle scenario where "# [Choice]" comment exists
         const choiceCaptureGroup=/(#\s+\[Choice\].+\n)ARG\s+VARIANT\s*=/.exec(userDockerfile);
         if (choiceCaptureGroup) {
@@ -134,7 +136,7 @@ export async function updateStub(definition: Definition, params: CommonParams) {
         }
         fromSection += `ARG VARIANT="${variant}"\nFROM ${tagWithVariant}`;
     } else {
-        const imageTag = definition.getTagsForVersion(devContainerImageVersion, params.registry, params.repository)[0];
+        const imageTag = definition.getTagList(params.release, 'major', params.registry, params.repository)[0];
         fromSection += `FROM ${imageTag}`;
     }
 
@@ -145,7 +147,7 @@ export async function updateConfigForRelease(definition: Definition, params: Com
     // Look for context in devcontainer.json and use it to build the Dockerfile
     console.log(`(*) Making version specific updates to ${definition.id}...`);
     const devContainerJsonModified =
-        `// ${getConfig('devContainerJsonPreamble')}https://github.com/${params.repo}/tree/${params.release}/${definition.relativePath}\n` +
+        `// ${getConfig('devContainerJsonPreamble')}https://github.com/${params.gitHubRepo}/tree/${params.release}/${definition.relativePath}\n` +
         definition.devcontainerJsonString;
     await definition.updateDevcontainerJson(devContainerJsonModified);
     await prepDockerFile(definition, params, false);
@@ -161,7 +163,7 @@ async function updateScriptSources(definition: Definition, params: CommonParams,
         if (scriptCaptureGroups) {
             console.log(`(*) Script library source found.`);
             const scriptName = scriptCaptureGroups[2];
-            const scriptSource = `https://raw.githubusercontent.com/${params.repo}/${params.release}/${scriptLibraryPathInRepo}/${scriptName}`;
+            const scriptSource = `https://raw.githubusercontent.com/${params.gitHubRepo}/${params.release}/${scriptLibraryPathInRepo}/${scriptName}`;
             console.log(`    Updated script source URL: ${scriptSource}`);
             let sha = scriptSHA[scriptName];
             if (updateScriptSha && typeof sha === 'undefined') {

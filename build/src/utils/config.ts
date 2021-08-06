@@ -2,7 +2,11 @@ import { OtherDependency, Dependencies } from '../domain/definition';
 import { Lookup } from '../domain/common';
 import { loadDefinitions } from '../domain/definition-factory';
 import { jsonc } from 'jsonc';
+import { Definition } from '../domain/definition'
 import * as path from 'path';
+import * as asyncUtils from './async'
+
+const stagingFolders: Lookup<string> = {};
 
 export interface GlobalConfig {
     commonDependencies?: Dependencies;
@@ -77,4 +81,35 @@ export function shouldFlattenDefinitionBaseImage(definitionId: string) {
 export function getDefaultDependencies(dependencyType: string) {
     const packageManagerConfig = getConfig('commonDependencies');
     return packageManagerConfig ? packageManagerConfig[dependencyType] : null;
+}
+
+export async function getStagingFolder(release: string) {
+    if (!stagingFolders[release]) {
+        const stagingFolder = path.join(os.tmpdir(), 'vscode-dev-containers', release);
+        console.log(`(*) Copying files to ${stagingFolder}\n`);
+        await asyncUtils.rimraf(stagingFolder); // Clean out folder if it exists
+        await asyncUtils.mkdirp(stagingFolder); // Create the folder
+        await asyncUtils.copyFiles(
+            path.resolve(__dirname, '..', '..', '..'),
+            getConfig('filesToStage'),
+            stagingFolder);
+
+        stagingFolders[release] = stagingFolder;
+    }
+    return stagingFolders[release];
+}
+
+// Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
+// release string is passed in, use the version specified in defintion-manifest.json if one exists.
+export function  getVersionForRelease(versionOrRelease: string, definition?: Definition): string {
+    // Already is a version
+    if (!isNaN(parseInt(versionOrRelease.charAt(0)))) {
+        return definition.definitionVersion || versionOrRelease;
+    }
+    // Is a release string
+    if (versionOrRelease.charAt(0) === 'v' && !isNaN(parseInt(versionOrRelease.charAt(1)))) {
+        return definition.definitionVersion || versionOrRelease.substr(1);
+    }
+    // Is a branch
+    return 'dev';
 }

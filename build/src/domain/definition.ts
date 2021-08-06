@@ -7,7 +7,7 @@ import * as path from 'path';
 import { jsonc } from 'jsonc';
 import { Component, Lookup } from './common';
 import * as asyncUtils from '../utils/async';
-import { getConfig } from '../utils/config';
+import { getConfig, getVersionForRelease } from '../utils/config';
 
 export interface Dependency {
     name: string;
@@ -61,9 +61,10 @@ export class Definition {
     variants: string[];
     build: BuildSettings;
     dependencies?: Dependencies;
-    devcontainerJson?: {};
+    devcontainerJson?: any;
     devcontainerJsonString?: string;
     hasManifest: boolean = false;
+    hasDockerfile: boolean = false;
     hasBaseDockerfile: boolean = false;
 
     // Parent is either a single definition or a lookup of variants to definitions
@@ -93,7 +94,8 @@ export class Definition {
         this.devcontainerJsonString = await asyncUtils.readFile(path.join(this.path, '.devcontainer', 'devcontainer.json'));
         this.devcontainerJson = jsonc.parse(this.devcontainerJsonString);
         this.hasBaseDockerfile = await asyncUtils.exists(path.join(this.path,'.devcontainer', 'base.Dockerfile'));
-        const libraryScriptsPath = path.join(this.path,'.devcontainer', 'base.Dockerfile');
+        this.hasDockerfile = await asyncUtils.exists(path.join(this.path,'.devcontainer', 'Dockerfile'));
+        const libraryScriptsPath = path.join(this.path,'.devcontainer', getConfig('scriptLibraryFolderNameInDefinition', 'library-scripts'));
         if (await asyncUtils.exists(libraryScriptsPath)) {
             this.libraryScriptsPath = libraryScriptsPath;
         }
@@ -161,16 +163,7 @@ export class Definition {
     // Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
     // release string is passed in, use the version specified in defintion-manifest.json if one exists.
     getVersionForRelease(versionOrRelease: string): string {
-        // Already is a version
-        if (!isNaN(parseInt(versionOrRelease.charAt(0)))) {
-            return this.definitionVersion || versionOrRelease;
-        }
-        // Is a release string
-        if (versionOrRelease.charAt(0) === 'v' && !isNaN(parseInt(versionOrRelease.charAt(1)))) {
-            return this.definitionVersion || versionOrRelease.substr(1);
-        }
-        // Is a branch
-        return 'dev';
+        return getVersionForRelease(versionOrRelease, this);
     }
 
     // Get the major part of the version number

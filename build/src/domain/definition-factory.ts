@@ -12,11 +12,8 @@ import { GlobalConfig, getConfig } from '../utils/config';
 import { Definition, DefinitionVariant } from './definition';
 import { Lookup } from './common';
 
-
-
 let config: GlobalConfig;
 let repositoryPath = path.join(__dirname, '..', '..', '..');
-const stagingFolders: Lookup<string> = {};
 const definitionLookup: Lookup<Definition> = {};
 const definitionTagLookup: Lookup<DefinitionVariant> = {};
 const fullDefinitionListLookup: Lookup<Definition> = {};
@@ -270,22 +267,6 @@ export function objectByDefinitionLinuxDistro(definitionId: string, objectsByDis
 
 export function getDefinitionDependencies(definitionId: string) {
     return definitionLookup[definitionId].dependencies;
-}
-
-export async function getStagingFolder(release: string) {
-    if (!stagingFolders[release]) {
-        const stagingFolder = path.join(os.tmpdir(), 'vscode-dev-containers', release);
-        console.log(`(*) Copying files to ${stagingFolder}\n`);
-        await asyncUtils.rimraf(stagingFolder); // Clean out folder if it exists
-        await asyncUtils.mkdirp(stagingFolder); // Create the folder
-        await asyncUtils.copyFiles(
-            path.resolve(__dirname, '..', '..', '..'),
-            getConfig('filesToStage'),
-            stagingFolder);
-
-        stagingFolders[release] = stagingFolder;
-    }
-    return stagingFolders[release];
 }
 
 // Walk definition associations, bucket by root parent, then paginate and return the requested page
