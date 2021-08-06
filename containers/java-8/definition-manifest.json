@@ -1,15 +1,16 @@
 {
-	"definitionVersion": "0.202.2",
+	"definitionVersion": "0.202.3",
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",
 		"parent": "java",
+		"parentVariant": "11",
 		"tags": [
 			"java:${VERSION}-8"
 		]
 	},
 	"dependencies": {
-		"image": "openjdk:8-jdk-buster",
+		"image": "mcr.microsoft.com/vscode/devcontainers/java:11",
 		"imageLink": "https://hub.docker.com/_/java",
 		"apt": [{
 			"cgIgnore": false,

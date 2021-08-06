@@ -17,6 +17,7 @@ on:
       - 'containers/python-3/**'
       - 'containers/python-3-anaconda/**'
       - 'containers/python-3-miniconda/**'
+      - 'containers/jekyll/**'
       - 'containers/ruby/**'
       - 'containers/rust/**'
       - 'containers/typescript-node/**'

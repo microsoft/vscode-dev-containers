@@ -5,7 +5,7 @@
 		"args": {
 			"INSTALL_AZURE_CLI": "true",
 			"INSTALL_DOCKER": "true",
-			"INSTALL_NODE": "true"
+			"NODE_VERSION": "lts"
 		}
 	},
 	"mounts": [

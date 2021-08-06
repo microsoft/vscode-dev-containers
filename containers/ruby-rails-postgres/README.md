@@ -79,7 +79,7 @@ This container also includes Node.js. You can change the version of Node.js by u
 ```yaml
 args:
   VARIANT: 2.6
-  NODE_VERSION: "12"
+  NODE_VERSION: "12" # Set to "none" to skip Node.js installation
 ```
 
 ### Adding the definition to your folder

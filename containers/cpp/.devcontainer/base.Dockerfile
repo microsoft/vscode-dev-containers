@@ -1,5 +1,5 @@
-# [Choice] Debian / Ubuntu version: debian-10, debian-9, ubuntu-20.04, ubuntu-18.04
-ARG VARIANT=buster
+# [Choice] Debian / Ubuntu version: debian-11, debian-10, debian-9, ubuntu-20.04, ubuntu-18.04
+ARG VARIANT=debian-10
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 # Install needed packages. Use a separate RUN statement to add your own dependencies.

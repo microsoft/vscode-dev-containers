@@ -19,6 +19,7 @@ USER_GID=${4:-"automatic"}
 UPGRADE_PACKAGES=${5:-"true"}
 INSTALL_OH_MYS=${6:-"true"}
 SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
+MARKER_FILE="/usr/local/etc/vscode-dev-containers/common"
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
@@ -50,7 +51,6 @@ elif [ "${USERNAME}" = "none" ]; then
 fi
 
 # Load markers to see which steps have already run
-MARKER_FILE="/usr/local/etc/vscode-dev-containers/common"
 if [ -f "${MARKER_FILE}" ]; then
     echo "Marker file found:"
     cat "${MARKER_FILE}"
@@ -60,8 +60,7 @@ fi
 # Install common dependencies
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
 
-    PACKAGE_LIST="\
-        git \
+    package_list="\
         openssh-clients \
         gnupg2 \
         iproute \
@@ -93,10 +92,14 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
 
     # Install OpenSSL 1.0 compat if needed
     if yum -q list compat-openssl10 >/dev/null 2>&1; then
-        PACKAGE_LIST="${PACKAGE_LIST}       compat-openssl10"
+        package_list="${package_list}       compat-openssl10"
     fi
 
-    yum -y install ${PACKAGE_LIST}
+    yum -y install ${package_list}
+
+    if ! type git > /dev/null 2>&1; then
+        yum -y install git
+    fi
 
     PACKAGES_ALREADY_INSTALLED="true"
 fi
@@ -139,13 +142,13 @@ fi
 
 # ** Shell customization section **
 if [ "${USERNAME}" = "root" ]; then 
-    USER_RC_PATH="/root"
+    user_rc_path="/root"
 else
-    USER_RC_PATH="/home/${USERNAME}"
+    user_rc_path="/home/${USERNAME}"
 fi
 
 # .bashrc/.zshrc snippet
-RC_SNIPPET="$(cat << 'EOF'
+rc_snippet="$(cat << 'EOF'
 
 if [ -z "${USER}" ]; then export USER=$(whoami); fi
 if [[ "${PATH}" != *"$HOME/.local/bin"* ]]; then export PATH="${PATH}:$HOME/.local/bin"; fi
@@ -162,12 +165,14 @@ if [ -t 1 ] && [[ "${TERM_PROGRAM}" = "vscode" || "${TERM_PROGRAM}" = "codespace
     ((sleep 10s; touch "$HOME/.config/vscode-dev-containers/first-run-notice-already-displayed") &)
 fi
 
-# Set the default git editor
-if  [ "${TERM_PROGRAM}" = "vscode" ]; then
-    if [[ -n $(command -v code-insiders) &&  -z $(command -v code) ]]; then 
-        export GIT_EDITOR="code-insiders --wait"
-    else 
-        export GIT_EDITOR="code --wait"
+# Set the default git editor if not already set
+if [ -z "$(git config --get core.editor)" ] && [ -z "${GIT_EDITOR}" ]; then
+    if  [ "${TERM_PROGRAM}" = "vscode" ]; then
+        if [[ -n $(command -v code-insiders) &&  -z $(command -v code) ]]; then 
+            export GIT_EDITOR="code-insiders --wait"
+        else 
+            export GIT_EDITOR="code --wait"
+        fi
     fi
 fi
 
@@ -196,7 +201,7 @@ EOF
 chmod +x /usr/local/bin/code
 
 # Codespaces bash and OMZ themes - partly inspired by https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
-CODESPACES_BASH="$(cat \
+codespaces_bash="$(cat \
 <<'EOF'
 
 # Codespaces bash prompt theme
@@ -205,15 +210,12 @@ __bash_prompt() {
         && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
         && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
     local gitbranch='`\
-        export BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); \
-        if [ "${BRANCH}" = "HEAD" ]; then \
-            export BRANCH=$(git describe --contains --all HEAD 2>/dev/null); \
-        fi; \
+        export BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null); \
         if [ "${BRANCH}" != "" ]; then \
             echo -n "\[\033[0;36m\](\[\033[1;31m\]${BRANCH}" \
             && if git ls-files --error-unmatch -m --directory --no-empty-directory -o --exclude-standard ":/*" > /dev/null 2>&1; then \
                     echo -n " \[\033[1;33m\]✗"; \
-            fi \
+               fi \
             && echo -n "\[\033[0;36m\]) "; \
         fi`'
     local lightblue='\[\033[1;34m\]'
@@ -225,7 +227,7 @@ __bash_prompt
 
 EOF
 )"
-CODESPACES_ZSH="$(cat \
+codespaces_zsh="$(cat \
 <<'EOF'
 __zsh_prompt() {
     local prompt_username
@@ -248,7 +250,7 @@ EOF
 )"
 
 # Add notice that Oh My Bash! has been removed from images and how to provide information on how to install manually
-OMB_README="$(cat \
+omb_readme="$(cat \
 <<'EOF'
 "Oh My Bash!" has been removed from this image in favor of a simple shell prompt. If you 
 still wish to use it, remove "~/.oh-my-bash" and install it from: https://github.com/ohmybash/oh-my-bash
@@ -256,7 +258,7 @@ You may also want to consider "Bash-it" as an alternative: https://github.com/ba
 See here for infomation on adding it to your image or dotfiles: https://aka.ms/codespaces/omb-remove
 EOF
 )"
-OMB_STUB="$(cat \
+omb_stub="$(cat \
 <<'EOF'
 #!/usr/bin/env bash
 if [ -t 1 ]; then
@@ -267,27 +269,27 @@ EOF
 
 # Add RC snippet and custom bash prompt
 if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
-    echo "${RC_SNIPPET}" >> /etc/bashrc
-    echo "${CODESPACES_BASH}" >> "${USER_RC_PATH}/.bashrc"
+    echo "${rc_snippet}" >> /etc/bashrc
+    echo "${codespaces_bash}" >> "${user_rc_path}/.bashrc"
     if [ "${USERNAME}" != "root" ]; then
-        echo "${CODESPACES_BASH}" >> "/root/.bashrc"
+        echo "${codespaces_bash}" >> "/root/.bashrc"
     fi
-    chown ${USERNAME}:${USERNAME} "${USER_RC_PATH}/.bashrc"
+    chown ${USERNAME}:${USERNAME} "${user_rc_path}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
 fi
 
 # Add stub for Oh My Bash!
-if [ ! -d "${USER_RC_PATH}/.oh-my-bash}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
-    mkdir -p "${USER_RC_PATH}/.oh-my-bash" "/root/.oh-my-bash"
-    echo "${OMB_README}" >> "${USER_RC_PATH}/.oh-my-bash/README.md"
-    echo "${OMB_STUB}" >> "${USER_RC_PATH}/.oh-my-bash/oh-my-bash.sh"
-    chmod +x "${USER_RC_PATH}/.oh-my-bash/oh-my-bash.sh"
+if [ ! -d "${user_rc_path}/.oh-my-bash}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
+    mkdir -p "${user_rc_path}/.oh-my-bash" "/root/.oh-my-bash"
+    echo "${omb_readme}" >> "${user_rc_path}/.oh-my-bash/README.md"
+    echo "${omb_stub}" >> "${user_rc_path}/.oh-my-bash/oh-my-bash.sh"
+    chmod +x "${user_rc_path}/.oh-my-bash/oh-my-bash.sh"
     if [ "${USERNAME}" != "root" ]; then
-        echo "${OMB_README}" >> "/root/.oh-my-bash/README.md"
-        echo "${OMB_STUB}" >> "/root/.oh-my-bash/oh-my-bash.sh"
+        echo "${omb_readme}" >> "/root/.oh-my-bash/README.md"
+        echo "${omb_stub}" >> "/root/.oh-my-bash/oh-my-bash.sh"
         chmod +x "/root/.oh-my-bash/oh-my-bash.sh"
     fi
-    chown -R "${USERNAME}:${USERNAME}" "${USER_RC_PATH}/.oh-my-bash"
+    chown -R "${USERNAME}:${USERNAME}" "${user_rc_path}/.oh-my-bash"
 fi
 
 # Optionally install and configure zsh and Oh My Zsh!
@@ -296,42 +298,42 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
         yum install -y zsh
     fi
     if [ "${ZSH_ALREADY_INSTALLED}" != "true" ]; then
-        echo "${RC_SNIPPET}" >> /etc/zshrc
+        echo "${rc_snippet}" >> /etc/zshrc
         ZSH_ALREADY_INSTALLED="true"
     fi
 
     # Adapted, simplified inline Oh My Zsh! install steps that adds, defaults to a codespaces theme.
     # See https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh for official script.
-    OH_MY_INSTALL_DIR="${USER_RC_PATH}/.oh-my-zsh"
-    if [ ! -d "${OH_MY_INSTALL_DIR}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
-        TEMPLATE_PATH="${OH_MY_INSTALL_DIR}/templates/zshrc.zsh-template"
-        USER_RC_FILE="${USER_RC_PATH}/.zshrc"
+    oh_my_install_dir="${user_rc_path}/.oh-my-zsh"
+    if [ ! -d "${oh_my_install_dir}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
+        template_path="${oh_my_install_dir}/templates/zshrc.zsh-template"
+        user_rc_file="${user_rc_path}/.zshrc"
         umask g-w,o-w
-        mkdir -p ${OH_MY_INSTALL_DIR}
+        mkdir -p ${oh_my_install_dir}
         git clone --depth=1 \
             -c core.eol=lf \
             -c core.autocrlf=false \
             -c fsck.zeroPaddedFilemode=ignore \
             -c fetch.fsck.zeroPaddedFilemode=ignore \
             -c receive.fsck.zeroPaddedFilemode=ignore \
-            "https://github.com/ohmyzsh/ohmyzsh" "${OH_MY_INSTALL_DIR}" 2>&1
-        echo -e "$(cat "${TEMPLATE_PATH}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${USER_RC_FILE}
-        sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${USER_RC_FILE}
-        mkdir -p ${OH_MY_INSTALL_DIR}/custom/themes
-        echo "${CODESPACES_ZSH}" > "${OH_MY_INSTALL_DIR}/custom/themes/codespaces.zsh-theme"
+            "https://github.com/ohmyzsh/ohmyzsh" "${oh_my_install_dir}" 2>&1
+        echo -e "$(cat "${template_path}")\nDISABLE_AUTO_UPDATE=true\nDISABLE_UPDATE_PROMPT=true" > ${user_rc_file}
+        sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="codespaces"/g' ${user_rc_file}
+        mkdir -p ${oh_my_install_dir}/custom/themes
+        echo "${codespaces_zsh}" > "${oh_my_install_dir}/custom/themes/codespaces.zsh-theme"
         # Shrink git while still enabling updates
-        cd "${OH_MY_INSTALL_DIR}"
+        cd "${oh_my_install_dir}"
         git repack -a -d -f --depth=1 --window=1
         # Copy to non-root user if one is specified
         if [ "${USERNAME}" != "root" ]; then
-            cp -rf "${USER_RC_FILE}" "${OH_MY_INSTALL_DIR}" /root
-            chown -R ${USERNAME}:${USERNAME} "${USER_RC_PATH}"
+            cp -rf "${user_rc_file}" "${oh_my_install_dir}" /root
+            chown -R ${USERNAME}:${USERNAME} "${user_rc_path}"
         fi
     fi
 fi
 
 # Persist image metadata info, script if meta.env found in same directory
-META_INFO_SCRIPT="$(cat << 'EOF'
+meta_info_script="$(cat << 'EOF'
 #!/bin/sh
 . /usr/local/etc/vscode-dev-containers/meta.env
 
@@ -364,7 +366,7 @@ EOF
 if [ -f "${SCRIPT_DIR}/meta.env" ]; then
     mkdir -p /usr/local/etc/vscode-dev-containers/
     cp -f "${SCRIPT_DIR}/meta.env" /usr/local/etc/vscode-dev-containers/meta.env
-     echo "${META_INFO_SCRIPT}" > /usr/local/bin/devcontainer-info
+     echo "${meta_info_script}" > /usr/local/bin/devcontainer-info
     chmod +x /usr/local/bin/devcontainer-info
 fi
 

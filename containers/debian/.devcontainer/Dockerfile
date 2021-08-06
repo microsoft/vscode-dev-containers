@@ -1,4 +1,4 @@
-# [Choice] Debian version: buster, stretch
+# [Choice] Debian version: bullseye, buster, stretch
 ARG VARIANT=buster
 FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 

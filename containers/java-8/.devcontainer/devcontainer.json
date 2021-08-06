@@ -5,7 +5,6 @@
 		"args": {
 			"INSTALL_MAVEN": "false",
 			"INSTALL_GRADLE": "false",
-			"INSTALL_NODE": "false",
 			"NODE_VERSION": "lts/*"
 		}
 	},

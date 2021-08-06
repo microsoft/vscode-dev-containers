@@ -1,0 +1,47 @@
+{
+	"definitionVersion": "0.0.2",
+	"build": {
+		"latest": true,
+		"parent": "ruby",
+		"parentVariant": "2.7",
+		"rootDistro": "debian",
+		"tags": [
+			"jekyll:${VERSION}"
+		]
+	},
+	"dependencies": {
+		"image": "mcr.microsoft.com/vscode/devcontainers/ruby:2.7",
+		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
+		"debian": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm",
+			"rbenv": "/usr/local/share/rbenv",
+			"ruby-build": "/usr/local/share/ruby-build"
+		},
+		"gem": [
+			"rake",
+			"ruby-debug-ide",
+			"debase",
+			"bundler",
+			"jekyll",
+			"github-pages"
+		],
+		"other":{
+			"rvm": null
+		},
+		"languages": {
+			"Ruby": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			},
+			"Jekyll": {
+				"cgIgnore": true,
+				"path": "/usr/local/bundle/bin"
+			}
+		}
+	}
+}

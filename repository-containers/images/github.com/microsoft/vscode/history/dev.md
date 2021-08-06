@@ -4,12 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
-**Definition variations:**
-- [12](#variant-12)
-
-## Variant: 12
-
-**Digest:** sha256:e7f29c05bcb022b24819906777218e4f559098ba69ecc3d59470ceafc942348c
+**Digest:** sha256:2daafbdc87e9c536fb373e4bcc7d196fb6398ff5a55abd8bc67fac28fa231a25
 
 **Tags:**
 ```
@@ -39,9 +34,9 @@ mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u6 |
 | libstdc++6 | 8.3.0-6 |

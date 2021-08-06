@@ -9,6 +9,8 @@
 #
 # Syntax: ./git-lfs-debian.sh
 
+GIT_LFS_ARCHIVE_GPG_KEY_URI="https://packagecloud.io/github/git-lfs/gpgkey"
+
 set -e
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -16,8 +18,23 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Get central common setting
+get_common_setting() {
+    if [ "${common_settings_file_loaded}" != "true" ]; then
+        curl -sfL "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+        common_settings_file_loaded=true
+    fi
+    if [ -f "/tmp/vsdc-settings.env" ]; then
+        local multi_line=""
+        if [ "$2" = "true" ]; then multi_line="-z"; fi
+        local result="$(grep ${multi_line} -oP "$1=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"
+        if [ ! -z "${result}" ]; then declare -g $1="${result}"; fi
+    fi
+    echo "$1=${!1}"
+}
+
 # Function to run apt-get if needed
-apt-get-update-if-needed()
+apt_get_update_if_needed()
 {
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         echo "Running apt-get update..."
@@ -27,23 +44,32 @@ apt-get-update-if-needed()
     fi
 }
 
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Install git, curl, gpg, and debian-archive-keyring if missing
 . /etc/os-release
-if ! dpkg -s git curl ca-certificates gnupg2 apt-transport-https > /dev/null 2>&1; then
-    apt-get-update-if-needed
-    apt-get -y install --no-install-recommends git curl ca-certificates gnupg2 apt-transport-https
+check_packages curl ca-certificates gnupg2 apt-transport-https
+if ! type git > /dev/null 2>&1; then
+    apt_get_update_if_needed
+    apt-get -y install --no-install-recommends git
 fi
-if [ "${ID}" = "debian" ] &&! dpkg -s debian-archive-keyring > /dev/null 2>&1; then
-    apt-get-update-if-needed
-    apt-get -y debian-archive-keyring
+if [ "${ID}" = "debian" ]; then
+    check_packages debian-archive-keyring
 fi
 
 # Install Git LFS
 echo "Installing Git LFS..."
-curl -sSL https://packagecloud.io/github/git-lfs/gpgkey | gpg --dearmor > /usr/share/keyrings/gitlfs-archive-keyring.gpg
+get_common_setting GIT_LFS_ARCHIVE_GPG_KEY_URI
+curl -sSL "${GIT_LFS_ARCHIVE_GPG_KEY_URI}" | gpg --dearmor > /usr/share/keyrings/gitlfs-archive-keyring.gpg
 echo -e "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gitlfs-archive-keyring.gpg] https://packagecloud.io/github/git-lfs/${ID} ${VERSION_CODENAME} main\ndeb-src [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gitlfs-archive-keyring.gpg] https://packagecloud.io/github/git-lfs/${ID} ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/git-lfs.list
 apt-get install -yq git-lfs
-git lfs install
+git lfs install --skip-repo
 echo "Done!"
