@@ -10,40 +10,45 @@ const stagingFolders: Lookup<string> = {};
 
 export interface GlobalConfig {
     commonDependencies?: Dependencies;
+
     containerRegistry: string;
     containerRegistryPath: string;
     stubRegistry: string;
     stubRegistryPath: string;
-    githubRepoName: string;
-    containersPathInRepo: string;
-    historyFolderName: string;
-    repoContainersToBuildPath: string;
-    scriptLibraryPathInRepo: string;
-    scriptLibraryFolderNameInDefinition: string;
-    historyUrlPrefix: string;
-    repositoryUrl: string;
-    repositoryPath: string;
+
+    repositoryUrlPrefix: string;
+    githubRepo: string;
+    historyUrlBranch: string;
+    historyFolder: string;
+    containersFolder: string;
+    repoContainersImageFolder: string;
+    scriptLibraryFolder: string;
+    scriptLibraryFolderInDefinition: string;
     imageLabelPrefix: string;
     definitionBuildConfigFile: string;
+
     devContainerJsonPreamble: string;
     dockerFilePreamble: string;
+
     filesToStage: string[];
     needsDedicatedPage?: string[];
     flattenBaseImage?: string[];
     poolKeys: Lookup<string>;
     poolUrlFallback: Lookup<string>;
     otherDependencyDefaultSettings?: Lookup<OtherDependency>;
+
+    rootPath: string;
 }
 
 let config: GlobalConfig;
 
-export async function loadConfig(repoPath: string): Promise<GlobalConfig> {
+export async function loadConfig(rootPath: string): Promise<GlobalConfig> {
     if (config) {
         console.warn('(!) Config loaded multiple times.')
         return;
     }
     config = await jsonc.read(path.join(__dirname, '..', '..', 'config.json'));
-    config.repositoryPath = repoPath || config.repositoryPath;
+    config.rootPath = rootPath || config.rootPath;
     await loadDefinitions(config);
     return config;
 }

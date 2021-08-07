@@ -4,9 +4,10 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as asyncUtils from './async';
-import { Component, DistroInfo, ImageInfo, Lookup, PackageInfo } from '../domain/common';
+import { DistroInfo, ImageInfo, PackageInfo } from '../transformers/transformer';
 import { getFallbackPoolUrl, getPoolKeyForPoolUrl, getDefaultDependencies, getConfig } from './config';
-import { Dependency, Dependencies, OtherDependency } from '../domain/definition';
+import { Dependency, Dependencies, OtherDependency, CgComponent } from '../domain/definition';
+import { Lookup } from '../domain/common';
 
 export interface ExtractedInfo {
     image: ImageInfo;
@@ -21,7 +22,7 @@ export interface ExtractedInfo {
     git: PackageInfo[];
     other: PackageInfo[];
     languages: PackageInfo[];
-    manual: Component[];
+    manual: CgComponent[];
 }
 
 interface LinuxPackageInfoExtractorConfig {
@@ -653,7 +654,7 @@ export async function getAllContentInfo(imageTag: string, dependencies: Dependen
             other: await getOtherDependencyInfo(containerName, dependencies.other, 'other'),
             languages: await getOtherDependencyInfo(containerName, dependencies.languages, 'languages'),
             manual: dependencies.manual
-        }    
+        } as ExtractedInfo;
         await removeProcessingContainer(containerName);
         return contents;
     } catch (e) {

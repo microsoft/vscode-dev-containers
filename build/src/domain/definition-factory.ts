@@ -13,7 +13,7 @@ import { Definition, DefinitionVariant } from './definition';
 import { Lookup } from './common';
 
 let config: GlobalConfig;
-let repositoryPath = path.join(__dirname, '..', '..', '..');
+let rootPath = path.join(__dirname, '..', '..', '..');
 const definitionLookup: Lookup<Definition> = {};
 const definitionTagLookup: Lookup<DefinitionVariant> = {};
 const fullDefinitionListLookup: Lookup<Definition> = {};
@@ -21,11 +21,11 @@ const fullDefinitionListLookup: Lookup<Definition> = {};
 // Must be called first
 export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void> {
     config = globalConfig;
-    repositoryPath = config.repositoryPath;
+    rootPath = config.rootPath;
     const definitionBuildConfigFile = getConfig('definitionBuildConfigFile', 'definition-manifest.json');
 
     // Get list of definition folders
-    const containersPath = path.join(repositoryPath, getConfig('containersPathInRepo', 'containers'));
+    const containersPath = path.join(rootPath, getConfig('containersPathInRepo', 'containers'));
     const definitions = await asyncUtils.readdir(containersPath, { withFileTypes: true });
     await asyncUtils.forEach(definitions, async (definitionFolder: Dirent) => {
         // If directory entry is a file (like README.md, skip
@@ -44,7 +44,7 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
         }
 
         // Load definitions and if definition-manifest.json exists, load it
-        const definition = new Definition(definitionId, definitionPath, repositoryPath);
+        const definition = new Definition(definitionId, definitionPath, rootPath);
         await definition.load();
         if(definition.hasManifest) {
             definitionLookup[definitionId] = definition;
@@ -53,12 +53,12 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
     });
 
     // Load repo containers to build
-    const repoContainersToBuildPath = path.join(repositoryPath, getConfig('repoContainersToBuildPath', 'repository-containers/build'));
+    const repoContainersToBuildPath = path.join(rootPath, getConfig('repoContainersToBuildPath', 'repository-containers/build'));
     const repoContainerManifestFiles = glob.sync(`${repoContainersToBuildPath}/**/${definitionBuildConfigFile}`);
     await asyncUtils.forEach(repoContainerManifestFiles, async (manifestFilePath: string) => {
         const definitionPath = path.resolve(path.dirname(manifestFilePath));
         const definitionId = path.relative(repoContainersToBuildPath, definitionPath);
-        const definition = new Definition(definitionId, definitionPath, repoPath);
+        const definition = new Definition(definitionId, definitionPath, rootPath);
         await definition.load();
         definitionLookup[definitionId] = definition;
         fullDefinitionListLookup[definitionId] = definition;
@@ -143,6 +143,7 @@ export function getDefinition(definitionId: string): Definition {
     return definitionLookup[definitionId];
 }
 
+/*
 // Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
 // release string is passed in, use the version specified in defintion-manifest.json if one exists.
 export function getVersionFromRelease(release: string, definitionId?: string): string {
@@ -268,9 +269,10 @@ export function objectByDefinitionLinuxDistro(definitionId: string, objectsByDis
 export function getDefinitionDependencies(definitionId: string) {
     return definitionLookup[definitionId].dependencies;
 }
+*/
 
 // Walk definition associations, bucket by root parent, then paginate and return the requested page
-export function getSortedDefinitionBuildList(page: number = 1, pageTotal: number = 1, definitionIdsToSkip: string[] = []) {
+export function getSortedDefinitionBuildList(page: number = 1, pageTotal: number = 1, definitionIdsToSkip: string[] = []): Definition[] {
     // Bucket definitions by parent
     const parentBucketMap = new Map<Definition, Definition[]>();
     for (let definitionId in getAllDefinitions()) {
@@ -395,6 +397,7 @@ function getPageFromBuckets(buckets: Definition[][], page: number, pageTotal: nu
     return allPages[page - 1];
 }
 
+/*
 // Walk the image build config and paginate and sort list so parents build before (and with) children
 export function getSortedDefinitionBuildListOld(page: number = 1, pageTotal: number = 1, definitionsToSkip: string[] = []) {
     // Bucket definitions by parent
@@ -534,3 +537,4 @@ function bucketDefinition(definitionId: string, parentId: string, parentBuckets:
         parentBuckets[parentId].push(definitionId);
     }
 }
+*/

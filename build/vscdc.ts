@@ -8,7 +8,7 @@ import { push } from './src/push';
 import { updateAllScriptSourcesInRepo, copyLibraryScriptsForAllDefinitions } from './src/prep';
 import { generateImageInformationFiles } from './src/image-info';
 import { patch, patchAll } from './src/patch';
-import { package } from './src/package';
+import { packageDefinitions } from './src/package';
 import { getConfig } from './src/utils/config';
 import { CommonParams } from './src/domain/common';
 const packageJson = require('../package.json');
@@ -260,8 +260,7 @@ function pushCommand(argv) {
 
 function packCommand(argv) {
     const params = argvToCommonParams(argv);
-    package(params, argv.updateLatest, argv.registry, argv.registryPath,
-        argv.stubRegistry, argv.stubRegistryPath, argv.prepAndPackageOnly, argv.packageOnly, argv.clean, argv.skipPush)
+    packageDefinitions(params, argv.updateLatest, argv.prepAndPackageOnly, argv.packageOnly, argv.clean, argv.skipPush)
         .catch((reason) => {
             console.error(`(!) Packaging failed - ${reason}`);
             if(reason.stack) {

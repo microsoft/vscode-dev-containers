@@ -7,7 +7,7 @@ import * as path from 'path';
 import * as asyncUtils from './utils/async';
 import { getConfig, shouldFlattenDefinitionBaseImage } from './utils/config';
 import { Definition } from './domain/definition';
-import { Lookup, CommonParams } from './domain/common';
+import { CommonParams } from './domain/common';
 import * as definitionFactory from './domain/definition-factory';
 import * as mkdirp from 'mkdirp';
 import * as glob from 'glob';
@@ -36,12 +36,12 @@ let metaEnvTemplate: handlebars.TemplateDelegate;
 const scriptSHA = {};
 
 const dockerFilePreamble = getConfig('dockerFilePreamble');
-const scriptLibraryPathInRepo = getConfig('scriptLibraryPathInRepo');
-const scriptLibraryFolderNameInDefinition = getConfig('scriptLibraryFolderNameInDefinition');
+const scriptLibraryFolder = getConfig('scriptLibraryFolder', 'script-library');
+const scriptLibraryFolderInDefinition = getConfig('scriptLibraryFolderInDefinition', 'library-scripts');
 
-const repositoryUrlPrefix = getConfig('repositoryUrlPrefix');
-const historyUrlBranch = getConfig('historyUrlPathPrefix');
-const historyFolderName = getConfig('historyFolderName', 'history');
+const repositoryUrlPrefix = getConfig('repositoryUrlPrefix', 'https://github.com');
+const historyUrlBranch = getConfig('historyUrlPathPrefix', 'main');
+const historyFolder = getConfig('historyFolder', 'history');
 const containersPathInRepo = getConfig('containersPathInRepo', 'containers');
 
 // Prepares dockerfile for building or packaging
@@ -62,7 +62,7 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
             variant: variant,
             gitRepository: `${repositoryUrlPrefix}/${params.githubRepo}`,
             gitRepositoryRelease: release,
-            contentsUrl: `${repositoryUrlPrefix}/${params.githubRepo}/tree/${historyUrlBranch}/${containersPathInRepo}/${definition.id}/${historyFolderName}/${version}.md`,
+            contentsUrl: `${repositoryUrlPrefix}/${params.githubRepo}/tree/${historyUrlBranch}/${containersPathInRepo}/${definition.id}/${historyFolder}/${version}.md`,
             buildTimestamp: `${new Date().toUTCString()}`
         }
     };
@@ -123,7 +123,7 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
 export async function updateStub(definition: Definition, params: CommonParams) {
     console.log('(*) Updating user Dockerfile...');
     const devContainerImageVersion = definition.majorVersionPartForRelease(params.release);
-    let fromSection = `# ${dockerFilePreamble}https://github.com/${params.gitHubRepo}/tree/${params.release}/${definition.relativePath}/.devcontainer/${definition.hasBaseDockerfile ? 'base.' : ''}Dockerfile\n\n`;
+    let fromSection = `# ${dockerFilePreamble}https://github.com/${params.githubRepo}/tree/${params.release}/${definition.relativePath}/.devcontainer/${definition.hasBaseDockerfile ? 'base.' : ''}Dockerfile\n\n`;
     // The VARIANT arg allows this value to be set from devcontainer.json, handle it if found
     const userDockerfile = await definition.readDockerfile(true);
     if (/ARG\s+VARIANT\s*=/.exec(userDockerfile) !== null) {
@@ -147,7 +147,7 @@ export async function updateConfigForRelease(definition: Definition, params: Com
     // Look for context in devcontainer.json and use it to build the Dockerfile
     console.log(`(*) Making version specific updates to ${definition.id}...`);
     const devContainerJsonModified =
-        `// ${getConfig('devContainerJsonPreamble')}https://github.com/${params.gitHubRepo}/tree/${params.release}/${definition.relativePath}\n` +
+        `// ${getConfig('devContainerJsonPreamble')}https://github.com/${params.githubRepo}/tree/${params.release}/${definition.relativePath}\n` +
         definition.devcontainerJsonString;
     await definition.updateDevcontainerJson(devContainerJsonModified);
     await prepDockerFile(definition, params, false);
@@ -159,11 +159,11 @@ async function updateScriptSources(definition: Definition, params: CommonParams,
     const scriptArgs = /ARG\s+.+_SCRIPT_SOURCE/.exec(devContainerDockerfileModified) || [];
     await asyncUtils.forEach(scriptArgs, async (scriptArg) => {
         // Replace script URL and generate SHA if applicable
-        const scriptCaptureGroups = new RegExp(`${scriptArg}\\s*=\\s*"(.+)/${scriptLibraryPathInRepo.replace('.', '\\.')}/(.+)"`).exec(devContainerDockerfileModified);
+        const scriptCaptureGroups = new RegExp(`${scriptArg}\\s*=\\s*"(.+)/${scriptLibraryFolder.replace('.', '\\.')}/(.+)"`).exec(devContainerDockerfileModified);
         if (scriptCaptureGroups) {
             console.log(`(*) Script library source found.`);
             const scriptName = scriptCaptureGroups[2];
-            const scriptSource = `https://raw.githubusercontent.com/${params.gitHubRepo}/${params.release}/${scriptLibraryPathInRepo}/${scriptName}`;
+            const scriptSource = `https://raw.githubusercontent.com/${params.gitHubRepo}/${params.release}/${scriptLibraryFolder}/${scriptName}`;
             console.log(`    Updated script source URL: ${scriptSource}`);
             let sha = scriptSHA[scriptName];
             if (updateScriptSha && typeof sha === 'undefined') {
@@ -209,7 +209,7 @@ async function copyLibraryScriptsForDefinition(libraryScriptsFolder: string, isF
             if (path.extname(script) !== '.sh') {
                 return;
             }
-            const possibleScriptSource = path.join(__dirname, '..', '..', scriptLibraryPathInRepo, script);
+            const possibleScriptSource = path.join(__dirname, '..', '..', scriptLibraryFolder, script);
             if (await asyncUtils.exists(possibleScriptSource)) {
                 const targetScriptPath = path.join(libraryScriptsFolder, script);
                 console.log(`(*) Copying ${script} to ${libraryScriptsFolder}...`);
@@ -229,7 +229,7 @@ async function copyLibraryScriptsForDefinition(libraryScriptsFolder: string, isF
 export async function copyLibraryScriptsForAllDefinitions() {
     const devcontainerFolders = glob.sync(`${path.resolve(__dirname, '..', '..')}/+(containers|container-templates|repository-containers)/**/.devcontainer`);
     await asyncUtils.forEach(devcontainerFolders, async (folder) => {
-        console.log(`(*) Checking ${path.basename(path.resolve(folder, '..'))} for ${scriptLibraryFolderNameInDefinition} folder...`);
+        console.log(`(*) Checking ${path.basename(path.resolve(folder, '..'))} for ${scriptLibraryFolderInDefinition} folder...`);
         await copyLibraryScriptsForDefinition(folder);
     });
 }

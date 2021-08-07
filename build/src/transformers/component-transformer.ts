@@ -3,7 +3,23 @@
  *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
  *-------------------------------------------------------------------------------------------------------------*/
 
-import { PackageInfo, DistroInfo, Component, Formatter } from '../domain/common'
+import { CgComponent } from '../domain/definition';
+import { PackageInfo, DistroInfo, InfoTransformer } from './transformer'
+import { ExtractedInfo } from '../utils/image-info-extractor'
+
+export interface CgManifestInfo {
+    linux: CgComponent[];
+    npm: CgComponent[];
+    pip: CgComponent[];
+    pipx: CgComponent[];
+    gem: CgComponent[];
+    cargo: CgComponent[];
+    go: CgComponent[];
+    git: CgComponent[];
+    other: CgComponent[];
+    languages: CgComponent[];
+    manual: CgComponent[];
+}
 
 /* Generate "Linux" entry for linux packages. E.g.
 {
@@ -19,7 +35,7 @@ import { PackageInfo, DistroInfo, Component, Formatter } from '../domain/common'
     }
 }
  */   
-function linuxPackageComponentFormatter(packageInfo: PackageInfo, distroInfo: DistroInfo): Component {
+function linuxPackageComponentTransformer(packageInfo: PackageInfo, distroInfo: DistroInfo): CgComponent {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -50,7 +66,7 @@ function linuxPackageComponentFormatter(packageInfo: PackageInfo, distroInfo: Di
     }
 }
 */
-function npmComponentFormatter(packageInfo: PackageInfo): Component {
+function npmComponentTransformer(packageInfo: PackageInfo): CgComponent {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -77,7 +93,7 @@ function npmComponentFormatter(packageInfo: PackageInfo): Component {
     }
 }
 */
-function pipComponentFormatter(packageInfo: PackageInfo) {
+function pipComponentTransformer(packageInfo: PackageInfo) {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -105,7 +121,7 @@ function pipComponentFormatter(packageInfo: PackageInfo) {
     }
 }
 */
-function gitComponentFormatter(repositoryInfo: PackageInfo) {
+function gitComponentTransformer(repositoryInfo: PackageInfo) {
     if (repositoryInfo.cgIgnore) {
         return null;
     }
@@ -133,7 +149,7 @@ function gitComponentFormatter(repositoryInfo: PackageInfo) {
     }
 }
 */
-function otherComponentFormatter(packageInfo: PackageInfo) {
+function otherComponentTransformer(packageInfo: PackageInfo) {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -160,7 +176,7 @@ function otherComponentFormatter(packageInfo: PackageInfo) {
     }
 }
 */
-function gemComponentFormatter(packageInfo: PackageInfo) {
+function gemComponentTransformer(packageInfo: PackageInfo) {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -186,7 +202,7 @@ function gemComponentFormatter(packageInfo: PackageInfo) {
     }
 }
 */
-function cargoComponentFormatter(packageInfo: PackageInfo) {
+function cargoComponentTransformer(packageInfo: PackageInfo) {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -210,7 +226,7 @@ function cargoComponentFormatter(packageInfo: PackageInfo) {
     }
 }
 */
-function goComponentFormatter(packageInfo: PackageInfo) {
+function goComponentTransformer(packageInfo: PackageInfo) {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -226,7 +242,7 @@ function goComponentFormatter(packageInfo: PackageInfo) {
 }
 
 // Remove unused properties like markdownIgnore that only apply to other formatters
-function manualComponentFormatter(component: Component) {
+function manualComponentTransformer(component: CgComponent) {
     if (component.cgIgnore) {
         return null;
     }
@@ -235,27 +251,31 @@ function manualComponentFormatter(component: Component) {
 }
 
 
-export class ComponentFormatter implements Formatter {
-    distroInfo: any;
+export class ComponentInfoTransformer extends InfoTransformer {
+    private distroInfo: any;
 
     constructor(distroInfo: DistroInfo) {
+        super();
         this.distroInfo = distroInfo;
     }
 
     image =  null;
     distro = null;
-    linux (packageInfo: PackageInfo) { 
-        return linuxPackageComponentFormatter(packageInfo, this.distroInfo);
-    };
-    npm = npmComponentFormatter;
-    pip = pipComponentFormatter;
-    pipx =  pipComponentFormatter;
-    gem = gemComponentFormatter;
-    cargo = cargoComponentFormatter;
-    go = goComponentFormatter;
-    git = gitComponentFormatter;
-    other = otherComponentFormatter;
-    languages = otherComponentFormatter;
-    manual = manualComponentFormatter;
+    linux = (packageInfo: PackageInfo) => linuxPackageComponentTransformer(packageInfo, this.distroInfo);
+    npm = npmComponentTransformer;
+    pip = pipComponentTransformer;
+    pipx =  pipComponentTransformer;
+    gem = gemComponentTransformer;
+    cargo = cargoComponentTransformer;
+    go = goComponentTransformer;
+    git = gitComponentTransformer;
+    other = otherComponentTransformer;
+    languages = otherComponentTransformer;
+    manual = manualComponentTransformer;
+
+    transform(info: ExtractedInfo): CgManifestInfo {
+        return <CgManifestInfo>super.transform(info);
+    }
+
 }
 

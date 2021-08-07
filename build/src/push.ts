@@ -8,7 +8,7 @@ import * as asyncUtils from './utils/async';
 import * as configUtils from './utils/config';
 import * as prep from './prep';
 import { Definition } from './domain/definition';
-import { Lookup, CommonParams } from './domain/common';
+import { CommonParams } from './domain/common';
 import { getSortedDefinitionBuildList, getDefinition } from './domain/definition-factory';
 
 const imageLabelPrefix = configUtils.getConfig('imageLabelPrefix', 'com.microsoft.vscode.devcontainers');
@@ -32,7 +32,7 @@ export async function push(params: CommonParams, updateLatest: boolean = false, 
     return stagingFolder;
 }
 
-async function pushImage(definition: Definition, params: CommonParams, updateLatest, prepOnly, pushImages, replaceImage) {
+async function pushImage(definition: Definition, params: CommonParams, updateLatest: boolean, prepOnly: boolean, pushImages: boolean, replaceImages: boolean) {
     const dotDevContainerPath = path.join(definition.path, '.devcontainer');
     const dockerFilePath = await definition.getDockerfilePath();
     
@@ -64,7 +64,7 @@ async function pushImage(definition: Definition, params: CommonParams, updateLat
             const versionTags = definition.getTagList(params.release, updateLatest, params.registry, params.repository, variant);
             console.log(`(*) Tags:${versionTags.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
 
-            if (replaceImage || !await isDefinitionVersionAlreadyPublished(definition, params, variant)) {
+            if (replaceImages || !await isDefinitionVersionAlreadyPublished(definition, params, variant)) {
                 const context = definition.build ? definition.devcontainerJson.build.context || '.' : '.';
                 const workingDir = path.resolve(dotDevContainerPath, context);
                 // Note: build.args in devcontainer.json is intentionally ignored so you can vary image contents and defaults as needed

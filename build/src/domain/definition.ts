@@ -5,9 +5,55 @@
 
 import * as path from 'path';
 import { jsonc } from 'jsonc';
-import { Component, Lookup } from './common';
+import { Lookup } from './common';
 import * as asyncUtils from '../utils/async';
 import { getConfig, getVersionForRelease } from '../utils/config';
+
+export interface CgComponent {
+    Component: {
+        Type: string;
+        Linux?: {
+            Name: string;
+            Version: string;
+            Distribution: string;
+            Release: string;
+            "Pool-URL": string;
+            "Key-URL": string;
+        },
+        Npm?: {
+            Name: string;
+            Version: string;
+        },
+        Pip?: {
+            Name: string;
+            Version: string;
+        }
+        Git?: {
+            Name: string;
+            repositoryUrl: string;
+            commitHash: string;
+        },
+        Other?: {
+            Name: string;
+            Version: string;
+            DownloadUrl: string;
+        },
+        RubyGems?: {
+            Name: string;
+            Version: string;
+        },
+        Cargo?: {
+            Name: string;
+            Version: string;
+        },
+        Go?: {
+            Name: string;
+            Version: string;
+        }
+    }
+    markdownIgnore?: boolean;
+    cgIgnore?: boolean;
+}
 
 export interface Dependency {
     name: string;
@@ -52,7 +98,7 @@ export interface Dependencies {
     other?: Lookup<OtherDependency | null>;
     languages?: Lookup<OtherDependency | null>;
     imageVariants?: string[];
-    manual?: Component[];
+    manual?: CgComponent[];
 }
 
 export class Definition {
@@ -73,14 +119,14 @@ export class Definition {
 
     path: string;
     relativePath: string;
-    repositoryPath: string;
+    githubRepoRootPath: string;
     libraryScriptsPath: string;
 
-    constructor(id: string, definitionPath: string, repositoryPath: string) {
+    constructor(id: string, definitionPathOnDisk: string, githubRepoRootPath: string) {
         this.id = id;
-        this.repositoryPath = repositoryPath;
-        this.path = definitionPath;
-        this.relativePath = path.relative(this.repositoryPath, this.path);
+        this.githubRepoRootPath = githubRepoRootPath;
+        this.path = definitionPathOnDisk;
+        this.relativePath = path.relative(this.githubRepoRootPath, this.path);
     }
 
     // Loads definition-manifest.json, devcontainer.json

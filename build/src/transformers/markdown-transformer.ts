@@ -3,7 +3,28 @@
  *  Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
  *-------------------------------------------------------------------------------------------------------------*/
 
-import { DistroInfo, ImageInfo, PackageInfo, Component, Formatter } from "../domain/common";
+import { CgComponent } from '../domain/definition';
+import { DistroInfo, ImageInfo, PackageInfo, InfoTransformer } from "./transformer";
+import { ExtractedInfo } from '../utils/image-info-extractor'
+
+export interface MarkdownInfo {
+    image: ImageInfo;
+    distro: DistroInfo;
+    linux: PackageInfo[];
+    npm: PackageInfo[];
+    pip: PackageInfo[];
+    pipx: PackageInfo[];
+    gem: PackageInfo[];
+    cargo: PackageInfo[];
+    go: PackageInfo[];
+    git: PackageInfo[];
+    other: PackageInfo[];
+    languages: PackageInfo[];
+    manual: PackageInfo[];
+    hasPip: boolean;
+    tags?: string[];
+    variant?: string;
+}
 
 /* 
 Returns: 
@@ -52,7 +73,7 @@ Returns:
 }
 
 */
-function componentNormalizer(component: Component): PackageInfo {
+function componentNormalizer(component: CgComponent): PackageInfo {
     if (component.markdownIgnore) {
         return null;
     }
@@ -69,13 +90,9 @@ function componentNormalizer(component: Component): PackageInfo {
     }
 }
 
-export class MarkdownFormatter implements Formatter {
-    image(info: ImageInfo) {
-        return info;
-    }
-    distro(info: DistroInfo) {
-        return info;
-    }
+export class MarkdownInfoTransformer extends InfoTransformer {
+    image = (info: ImageInfo) => info;
+    distro = (info: DistroInfo) => info;
     linux = nameAndVersionNormalizer;
     npm = nameAndVersionNormalizer;
     pip = nameAndVersionNormalizer;
@@ -87,4 +104,8 @@ export class MarkdownFormatter implements Formatter {
     other = nameAndVersionNormalizer;
     languages = nameAndVersionNormalizer;
     manual = componentNormalizer;
+
+    transform(info: ExtractedInfo): MarkdownInfo {
+        return <MarkdownInfo>super.transform(info);
+    }
 }
