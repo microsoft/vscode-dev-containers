@@ -5,11 +5,11 @@
 		"dockerfile": "Dockerfile",
 		"args": {
 			"VARIANT": "latest",
-			"YARN_VERSION": "latest",
 			"VUE_VERSION": "next",
 			"VUE_CLI_VERSION": "latest",
 			"COMPILER_SFC_VERSION": "latest",
-			"IONIC_VERSION": "latest"
+			"IONIC_VERSION": "latest",
+			"VUEPRESS_VERSION": "next"
 		}
 	},
 	"settings": {

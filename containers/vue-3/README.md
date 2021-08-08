@@ -66,14 +66,6 @@ This container's overall customization options via `args` are as follows. The va
 
 More info about [valid values](https://mcrflowprodcentralus.data.mcr.microsoft.com/mcrprod/vscode/devcontainers/typescript-node?P1=1627143043&P2=1&P3=1&P4=5TQ%2B5GHJS4tUC0eBZ4jTxKeU%2Bi9Ng9LEPIHHbtcSemU%3D&se=2021-07-24T16%3A10%3A43Z&sig=XEyqxn2SkBgIj2%2FMFlsOvV6IA76PVNijFWdNMLB%2B8OE%3D&sp=r&sr=b&sv=2015-02-21)...
 
-### Configuration: Yarn version
-
-```json
-"args": { "YARN_VERSION": "latest" }
-```
-
-More info about [valid values](https://www.npmjs.com/package/yarn)...
-
 ### Configuration: Vue.js 3 version
 
 ```json
@@ -98,13 +90,13 @@ More info about [valid values](https://www.npmjs.com/package/@vue/compiler-sfc?a
 
 More info about [valid values](https://www.npmjs.com/package/@ionic/cli?activeTab=versions)...
 
-### Configuration: Gridsome version
+### Configuration: VuePress version
 
 ```json
-"args": { "GRIDSOME_VERSION": "latest" }
+"args": { "VUEPRESS_VERSION": "next" }
 ```
 
-More info about [valid values](https://www.npmjs.com/package/@gridsome/cli?activeTab=versions)...
+More info about [valid values](https://www.npmjs.com/package/vuepress?activeTab=versions)...
 
 ### Configuration: dotfiles
 
