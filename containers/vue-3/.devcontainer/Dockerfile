@@ -1,5 +1,6 @@
-ARG BASE_IMAGE_VARIANT
-FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:${BASE_IMAGE_VARIANT}
+# [Choice] Base image version: 12, 14, 16 (refer to https://mcr.microsoft.com/v2/vscode/devcontainers/typescript-node/tags/list for full list)
+ARG VARIANT
+FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:${VARIANT}
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends fzf silversearcher-ag \

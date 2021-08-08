@@ -23,10 +23,9 @@ This development container aims at providing a reproducible development environm
 - [x] Based on `typescript-node` container image (`git`, `zsh`, `oh-my-zsh`, etc.)
 - [x] Command-line fuzzy finder [fzf](https://github.com/junegunn/fzf)
 - [x] Code-searching tool [ag](https://github.com/ggreer/the_silver_searcher)
-- [x] hard pinned tool versions installed from the base container image [typescript-node](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/typescript-node/.devcontainer) (depends on [javascript-node](https://github.com/fkromer/vscode-dev-containers/tree/main/containers/javascript-node/.devcontainer))
 - [x] Support for custom `dotfiles`
 - [x] [npm](https://www.npmjs.com/) (provided by base image)
-- [x] [yarn](https://yarnpkg.com/)
+- [x] [yarn](https://yarnpkg.com/) (provided by base image)
 - [x] [Vue.js 3](https://github.com/vuejs/vue-next) aka `vue-next` (including `compiler-sfc`, etc.)
 - [x] [Ionic Framework (Vue)](https://ionicframework.com/docs/vue/overview)
 - [x] [Gridsome](https://gridsome.org/)
@@ -37,14 +36,6 @@ This development container aims at providing a reproducible development environm
 - [x] [VSCode Extension Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [ ] VSCode Settings for Prettier [configuration info](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#prettier-settings)
 - [x] [Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=visualstudioexptteam.vscodeintellicode)
-- [x] [VSCode Extension Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
-- [ ] Debugger for Chrome `launch` request [configuration](https://github.com/Microsoft/vscode-chrome-debug#configuration)
-- [x] [VSCode Extension Debugger for Firefox](https://marketplace.visualstudio.com/items?itemName=firefox-devtools.vscode-firefox-debug)
-- [ ] Debugger for Firefox `launch` request [configuration](https://github.com/firefox-devtools/vscode-firefox-debug#getting-started)
-- [x] [VSCode Extension GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
-- [ ] Settings for GitLens [config info](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens#gitlens-settings)
-- [x] [VSCode Extension GitGraph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
-- [ ] Settings for GitGraph [config info](https://github.com/mhutchie/vscode-git-graph/wiki/Extension-Settings)
 - [x] Container image tests
 - [x] Test project
 
@@ -70,7 +61,7 @@ This container's overall customization options via `args` are as follows. The va
 ### Configuration: Debian version
 
 ```json
-"args": { "VARIANT": "0-16-buster" }
+"args": { "VARIANT": "latest" }
 ```
 
 More info about [valid values](https://mcrflowprodcentralus.data.mcr.microsoft.com/mcrprod/vscode/devcontainers/typescript-node?P1=1627143043&P2=1&P3=1&P4=5TQ%2B5GHJS4tUC0eBZ4jTxKeU%2Bi9Ng9LEPIHHbtcSemU%3D&se=2021-07-24T16%3A10%3A43Z&sig=XEyqxn2SkBgIj2%2FMFlsOvV6IA76PVNijFWdNMLB%2B8OE%3D&sp=r&sr=b&sv=2015-02-21)...
@@ -78,7 +69,7 @@ More info about [valid values](https://mcrflowprodcentralus.data.mcr.microsoft.c
 ### Configuration: Yarn version
 
 ```json
-"args": { "YARN_VERSION": "1.22.11" }
+"args": { "YARN_VERSION": "latest" }
 ```
 
 More info about [valid values](https://www.npmjs.com/package/yarn)...
@@ -86,7 +77,7 @@ More info about [valid values](https://www.npmjs.com/package/yarn)...
 ### Configuration: Vue.js 3 version
 
 ```json
-"args": { "VUE_VERSION": "3.1.5" }
+"args": { "VUE_VERSION": "next" }
 ```
 
 More info about [valid values](https://www.npmjs.com/package/vue?activeTab=versions) (the ones with major version 3)...
@@ -94,7 +85,7 @@ More info about [valid values](https://www.npmjs.com/package/vue?activeTab=versi
 ### Configuration: Compiler SFC version
 
 ```json
-"args": { "COMPILER_SFC_VERSION": "3.1.5" }
+"args": { "COMPILER_SFC_VERSION": "latest" }
 ```
 
 More info about [valid values](https://www.npmjs.com/package/@vue/compiler-sfc?activeTab=versions) (the ones with major version 3)...
@@ -102,7 +93,7 @@ More info about [valid values](https://www.npmjs.com/package/@vue/compiler-sfc?a
 ### Configuration: Ionic framework version
 
 ```json
-"args": { "IONIC_VERSION": "0.12.3" }
+"args": { "IONIC_VERSION": "latest" }
 ```
 
 More info about [valid values](https://www.npmjs.com/package/@ionic/cli?activeTab=versions)...
@@ -110,7 +101,7 @@ More info about [valid values](https://www.npmjs.com/package/@ionic/cli?activeTa
 ### Configuration: Gridsome version
 
 ```json
-"args": { "GRIDSOME_VERSION": "0.3.4" }
+"args": { "GRIDSOME_VERSION": "latest" }
 ```
 
 More info about [valid values](https://www.npmjs.com/package/@gridsome/cli?activeTab=versions)...

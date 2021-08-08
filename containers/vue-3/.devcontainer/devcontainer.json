@@ -4,12 +4,12 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			"BASE_IMAGE_VARIANT": "0.202.3-16-buster",
-			"YARN_VERSION": "1.22.11",
-			"VUE_VERSION": "3.1.5",
-			"VUE_CLI_VERSION": "4.5.13",
-			"COMPILER_SFC_VERSION": "3.1.5",
-			"IONIC_VERSION": "6.16.3"
+			"VARIANT": "latest",
+			"YARN_VERSION": "latest",
+			"VUE_VERSION": "next",
+			"VUE_CLI_VERSION": "latest",
+			"COMPILER_SFC_VERSION": "latest",
+			"IONIC_VERSION": "latest"
 		}
 	},
 	"settings": {
@@ -20,11 +20,7 @@
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
 		"streetsidesoftware.code-spell-checker",
-		"visualstudioexptteam.vscodeintellicode",
-		"msjsdiag.debugger-for-chrome",
-		"firefox-devtools.vscode-firefox-debug",
-		"eamodio.gitlens",
-		"mhutchie.git-graph"
+		"visualstudioexptteam.vscodeintellicode"
 	],
 	"forwardPorts": [
 		8080
