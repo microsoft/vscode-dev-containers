@@ -231,14 +231,7 @@ require('yargs')
                     describe: 'path to the folder containing the patch files',
                     default: '.'
                 },
-                'registry': {
-                    describe: 'container registry to push images to',
-                    default: getConfig('containerRegistry', 'docker.io')
-                },
-                'registry-path': {
-                    describe: 'container registry path',
-                    default: getConfig('containerRegistryPath', '')
-                }
+                'registry': { describe: 'container registry to push images to' }
             })
     }, patchCommand)
     .command('copy-library-scripts', 'copy files from script-library folder into appropriate definitions', () => {}, copyLibraryScriptsCommand)
@@ -306,8 +299,9 @@ function imageInfoCommand(argv) {
 }
 
 function patchCommand(argv) {
+    const params = argvToCommonParams(argv);
     if (argv.all) {
-        patch.patchAll(argv.registry, argv.registryPath)
+        patch.patchAll(params)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
                 if(reason.stack) {
@@ -316,7 +310,7 @@ function patchCommand(argv) {
                 process.exit(1);
             });
     } else {
-        patch.patch(argv.patchPath, argv.registry, argv.registryPath)
+        patch.patch(params, argv.patchPath)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
                 if(reason.stack) {
