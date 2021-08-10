@@ -80,14 +80,14 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
             const variants: (string | undefined)[] = definition.variants ? ['${VARIANT}', '$VARIANT', ...definition.variants] : [undefined];
 
             variants.forEach((variant: string | undefined) => {
-                const blankTagList = definition.getTagsForRelease('', 'ANY', 'ANY', variant);
+                const blankTagList = definition.getImageTagsForRelease('', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag: string) => {
                     definitionTagLookup[blankTag] = {
                         definition: definition,
                         variant: variant
                     };
                 });
-                const devTagList = definition.getTagsForRelease('dev', 'ANY', 'ANY', variant);
+                const devTagList = definition.getImageTagsForRelease('dev', 'ANY', 'ANY', variant);
                 devTagList.forEach((devTag: string) => {
                     definitionTagLookup[devTag] = {
                         definition: definition,
@@ -151,79 +151,22 @@ export function getDefinition(definitionId: string): Definition {
     return definitionLookup[definitionId];
 }
 
-/*
-// Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
-// release string is passed in, use the version specified in defintion-manifest.json if one exists.
-export function getVersionFromRelease(release: string, definitionId?: string): string {
-    definitionId = definitionId || 'NOT SPECIFIED';
-
-    // Already is a version
-    if (!isNaN(parseInt(release.charAt(0)))) {
-        return definitionLookup[definitionId]?.definitionVersion || release;
-    }
-
-    // Is a release string
-    if (release.charAt(0) === 'v' && !isNaN(parseInt(release.charAt(1)))) {
-        return definitionLookup[definitionId]?.definitionVersion || release.substr(1);
-    }
-
-    // Is a branch
-    return 'dev';
-}
-
-// Look up distro and fallback to debian if not specified
-export function getLinuxDistroForDefinition(definitionId: string): string {
-    return definitionLookup[definitionId].build?.rootDistro || 'debian';
-}
-
-// Generate 'latest' flavor of a given definition's tag
-export function getLatestTags(definitionId: string, registry: string, repository: string): string[] | null {
-    if (typeof definitionLookup[definitionId] === 'undefined') {
-        return null;
-    }
-    return definitionLookup[definitionId].getLatestTags(registry, repository);
-}
-
-export function getVariants(definitionId): string[] | null {
-    return definitionLookup[definitionId]?.variants || null;
-}
-
-// Create all the needed variants of the specified version identifier for a given definition
-export function getTagsForVersion(definitionId: string, version: string, registry: string, repository: string, variant?: string) {
-    if (typeof definitionLookup[definitionId] === 'undefined') {
-        return null;
-    }
-    return definitionLookup[definitionId].getTagsForRelease(version, registry, repository, variant);
-}
-
-// Generate complete list of tags for a given definition.
-export function getTagList(definitionId: string, versionOrRelease: string, versionPartHandling: string, registry: string, repository: string, variant?: string) {
-    if (typeof definitionLookup[definitionId] === 'undefined') {
-        return null;
-    }
-    return definitionLookup[definitionId].getTagList(versionOrRelease, versionPartHandling, registry, repository, variant);
-}
-
-// Get parent tag for a given child definition
-export function getParentTagForVersion(definitionId: string, version: string, registry: string, repository: string, variant?: string) {
-    if (typeof definitionLookup[definitionId] === 'undefined') {
-        return null;
-    }
-    return definitionLookup[definitionId].getParentTagForRelease(version, registry, repository, variant);
-
-}
-
 // Takes an existing tag and updates it with a new registry version and optionally a variant
-export function getUpdatedTag(currentTag: string, currentRegistry: string, currentRepository: string, updatedVersion: string, updatedRegistry: string = currentRegistry, updatedRepository: string = currentRepository, variant? : string): string {
+export function getUpdatedImageTag(imageTag: string, currentRegistry: string, currentRepositoryPrefix: string, updatedVersion: string, 
+    updatedRegistry: string = currentRegistry, updatedRepositoryPrefix: string = currentRepositoryPrefix, variant? : string): string {
 
-    const definitionVariant = getDefinitionVariantFromTag(currentTag, currentRegistry, currentRepository);
+    const definitionVariant = getDefinitionVariantFromImageTag(imageTag, currentRegistry, currentRepositoryPrefix);
 
     // If definition not found, fall back on swapping out more generic logic - e.g. for when a image already has a version tag in it
     if (!definitionVariant) {
-        const repository = new RegExp(`${currentRegistry}/${currentRepository}/(.+):`).exec(currentTag)[1];
-        const updatedTag = currentTag.replace(new RegExp(`${currentRegistry}/${currentRepository}/${repository}:(dev-|${updatedVersion}-)?`), `${updatedRegistry}/${updatedRepository}/${repository}:${updatedVersion}-`);
-        console.log(`    Using RegEx to update ${currentTag}\n    to ${updatedTag}`);
-        return updatedTag;
+        const captureGroups = new RegExp(`${currentRegistry}/${currentRepositoryPrefix}/(.+):`).exec(imageTag);
+        if(!captureGroups || captureGroups.length < 2) {
+            throw `Unable to find image name in ${imageTag}.`
+        }
+        const imageName = captureGroups[1];
+        const updatedImageTag = imageTag.replace(new RegExp(`${currentRegistry}/${currentRepositoryPrefix}/${imageName}:(dev-|${updatedVersion.replace('.', '\.')}-)?`), `${updatedRegistry}/${updatedRepositoryPrefix}/${imageName}:${updatedVersion}-`);
+        console.log(`    Using RegEx to update ${imageTag}\n    to ${updatedImageTag}`);
+        return updatedImageTag;
     }
 
     // See if definition found and no variant passed in, see if definition lookup returned a variant match
@@ -231,19 +174,22 @@ export function getUpdatedTag(currentTag: string, currentRegistry: string, curre
         variant = definitionVariant.variant;
     }
 
-    const updatedTags = definitionVariant.definition.getTagsForRelease( updatedVersion, updatedRegistry, updatedRepository, variant);
+    const updatedTags = definitionVariant.definition.getImageTagsForRelease(updatedVersion, updatedRegistry, updatedRepositoryPrefix, variant);
     if (updatedTags && updatedTags.length > 0) {
-        console.log(`    Updating ${currentTag}\n    to ${updatedTags[0]}`);
+        console.log(`    Updating ${imageTag}\n    to ${updatedTags[0]}`);
         return updatedTags[0];
     }
     // In the case where this is already a tag with a version number in it,
     // we won't get an updated tag returned, so we'll just reuse the current tag.
-    return currentTag;
+    return imageTag;
 }
 
 // Lookup definition from a tag
-export function getDefinitionVariantFromTag(tag, registry = '.+', repository = '.+'): DefinitionVariant {
-    const captureGroups = new RegExp(`${registry}/${repository}/(.+):(.+)`).exec(tag);
+export function getDefinitionVariantFromImageTag(imageTag: string, registry = '.+', repository = '.+'): DefinitionVariant {
+    const captureGroups = new RegExp(`${registry}/${repository}/(.+):(.+)`).exec(imageTag);
+    if (!captureGroups || captureGroups.length < 3) {
+        throw `Unable to find image name and tag in ${imageTag}`;
+    }
     const repo = captureGroups[1];
     const tagPart = captureGroups[2];
     const definitionVariant = definitionTagLookup[`ANY/ANY/${repo}:${tagPart}`];
@@ -254,30 +200,6 @@ export function getDefinitionVariantFromTag(tag, registry = '.+', repository = '
     // If lookup fails, try removing a numeric first part - dev- is already handled
     return definitionTagLookup[`ANY/ANY/${repo}:${tagPart.replace(/^\d+-/,'')}`];
 }
-
-// Return just the major version of a release number
-export function majorFromRelease(release: string, definitionId?: string): string {
-    const version = getVersionFromRelease(release, definitionId);
-
-    if (version === 'dev') {
-        return 'dev';
-    }
-
-    const versionParts = version.split('.');
-    return versionParts[0];
-}
-
-// Return an object from a map based on the linux distro for the definition
-export function objectByDefinitionLinuxDistro(definitionId: string, objectsByDistro = {}) {
-    const distro = getLinuxDistroForDefinition(definitionId);
-    const obj = objectsByDistro[distro];
-    return obj;
-}
-
-export function getDefinitionDependencies(definitionId: string) {
-    return definitionLookup[definitionId].dependencies;
-}
-*/
 
 // Walk definition associations, bucket by root parent, then paginate and return the requested page
 export function getSortedDefinitionBuildList(page: number = 1, pageTotal: number = 1, definitionIdsToSkip: string[] = []): Definition[] {

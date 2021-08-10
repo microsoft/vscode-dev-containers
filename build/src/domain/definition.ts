@@ -175,7 +175,7 @@ export class Definition {
     }
 
     // Create all the needed variants of the specified version identifier for a given definition
-    getTagsForRelease(versionOrRelease: string, registry: string, repository: string, variant?: string): string[] {
+    getImageTagsForRelease(versionOrRelease: string, registry: string, repository: string, variant?: string): string[] {
         if (!this.build) {
             throw `Could not getTagsForRelease for ${this.id}. No "build" settings.`;
         }
@@ -260,7 +260,7 @@ export class Definition {
         // If version is 'dev', there's no need to generate semver tags for the version
         // (e.g. for 1.0.2, we should also tag 1.0 and 1). So just return the tags for 'dev'.
         if (version === 'dev') {
-            return this.getTagsForRelease(version, registry, repository, variant);
+            return this.getImageTagsForRelease(version, registry, repository, variant);
         }
 
         // If this is a release version, split it out into the three parts of the semver
@@ -314,7 +314,7 @@ export class Definition {
         let tagList: string[] = [];
 
         versionList.forEach((tagVersion: string) => {
-            tagList = tagList.concat(this.getTagsForRelease(tagVersion, registry, repository, variant));
+            tagList = tagList.concat(this.getImageTagsForRelease(tagVersion, registry, repository, variant));
         });
 
         // If this variant should also be used for the the latest tag (it's the left most in the list), add it
@@ -326,7 +326,7 @@ export class Definition {
     }
 
     // Get parent tag for a given child definition
-    getParentTagForRelease(releaseOrVersion: string, registry: string, repository: string, variant?: string) {
+    getParentImageTagForRelease(releaseOrVersion: string, registry: string, repository: string, variant?: string) {
         const version = this.getVersionForRelease(releaseOrVersion);
 
         if(!this.parentDefinitions) {
@@ -339,7 +339,7 @@ export class Definition {
         if (!parent) {
             throw `Could not get parent for ${this.id} variant ${variant}.`;
         }
-        return parent.definition.getTagsForRelease(
+        return parent.definition.getImageTagsForRelease(
             parent.definition.definitionVersion || version, 
             registry,
             repository,

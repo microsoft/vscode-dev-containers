@@ -16,7 +16,7 @@ import * as handlebars from 'handlebars';
 interface DefinitionMetadata {
     version: string;
     definitionId: string;
-    variant: string;
+    variant?: string;
     gitRepository: string;
     gitRepositoryRelease: string;
     contentsUrl: string;
@@ -53,8 +53,8 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
     // Create initial result object 
     const prepResult: PrepResult = {
         shouldFlattenBaseImage: false,
-        baseImageTag: null,
-        flattenedBaseImageTag: null,
+        baseImageTag: '',
+        flattenedBaseImageTag: '',
         devContainerDockerfileModified: await updateScriptSources(definition, params, !isForBuild, true),
         meta: {
             version: version,
@@ -68,11 +68,13 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
     };
 
     // Copy any scripts from the script library, add meta.env into the appropriate definition specific folder
-    await copyLibraryScriptsForDefinition(definition.libraryScriptsPath, isForBuild, prepResult.meta);
+    if (definition.libraryScriptsPath) {
+        await copyLibraryScriptsForDefinition(definition.libraryScriptsPath, isForBuild, prepResult.meta);
+    }
 
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
-        const parentTag = definition.getParentTagForRelease(version, params.registry, params.repository, variant);
+        const parentTag = definition.getParentImageTagForRelease(version, params.registry, params.repository, variant);
         if (parentTag) {
             prepResult.devContainerDockerfileModified = replaceFrom(prepResult.devContainerDockerfileModified, `FROM ${parentTag}`);
         }
@@ -81,6 +83,9 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
         if (prepResult.shouldFlattenBaseImage) {
             // Determine base image
             const baseImageFromCaptureGroups = /FROM\s+(.+):([^\s\n]+)?/.exec(prepResult.devContainerDockerfileModified);
+            if(!baseImageFromCaptureGroups || baseImageFromCaptureGroups.length < 2) {
+                throw `Unable to find base image and tag in Dockerfile for ${definition.id}`;
+            }
             let registryPath = baseImageFromCaptureGroups[1].replace('${VARIANT}', variant).replace('$VARIANT', variant);
             const tagName = (baseImageFromCaptureGroups.length > 2) ?
                 baseImageFromCaptureGroups[2].replace('${VARIANT}', variant).replace('$VARIANT', variant) :
@@ -104,7 +109,7 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
         const expectedRepository = getConfig('stubRegistryPath', 'vscode/devcontainers');
         const fromCaptureGroups = new RegExp(`FROM\\s+(${expectedRegistry}/${expectedRepository}/.+:.+)`).exec(prepResult.devContainerDockerfileModified);
         if (fromCaptureGroups && fromCaptureGroups.length > 0) {
-            const fromDefinitionTag = definitionFactory.getUpdatedTag(
+            const fromDefinitionTag = definitionFactory.getUpdatedImageTag(
                 fromCaptureGroups[1],
                 expectedRegistry,
                 expectedRepository,
@@ -128,7 +133,7 @@ export async function updateStub(definition: Definition, params: CommonParams) {
     const userDockerfile = await definition.readDockerfile(true);
     if (/ARG\s+VARIANT\s*=/.exec(userDockerfile) !== null) {
         const variant = definition.variants[0];
-        const tagWithVariant = definition.getTagsForRelease(devContainerImageVersion, params.registry, params.repository, '${VARIANT}')[0];
+        const tagWithVariant = definition.getImageTagsForRelease(devContainerImageVersion, params.registry, params.repository, '${VARIANT}')[0];
         // Handle scenario where "# [Choice]" comment exists
         const choiceCaptureGroup=/(#\s+\[Choice\].+\n)ARG\s+VARIANT\s*=/.exec(userDockerfile);
         if (choiceCaptureGroup) {

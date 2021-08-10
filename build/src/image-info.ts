@@ -100,7 +100,7 @@ async function getDefinitionImageContentData(params: CommonParams, definition: D
             console.log(`\n(*) Processing variant ${variant}...`);
         }
 
-        const imageTag = definition.getTagsForRelease(params.release, params.registry, params.repository, variant)[0];
+        const imageTag = definition.getImageTagsForRelease(params.release, params.registry, params.repository, variant)[0];
         if (buildFirst) {
             // Build but don't push images
             console.log('(*) Building image...');

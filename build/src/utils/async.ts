@@ -225,11 +225,11 @@ export async function shaForString(content: string) {
 }
 
 // async HTTPS get
-export async function getUrlAsString(url: string) {
+export async function getUrlAsString(url: string): Promise<string> {
     return new Promise((resolve, reject) => {
-        let content = '';
+        let content: string = '';
         const req = https.get(url, function (res) {
-            res.on('data', function (chunk) {
+            res.on('data', function (chunk: string | Buffer) {
                 content += chunk.toString();
             });
         });
