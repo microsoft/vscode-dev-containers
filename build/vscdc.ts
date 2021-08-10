@@ -4,19 +4,20 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
+import { getConfig } from './src/utils/config';
 import { push } from './src/push';
 import { updateAllScriptSourcesInRepo, copyLibraryScriptsForAllDefinitions } from './src/prep';
 import { generateImageInformationFiles } from './src/image-info';
 import { patch, patchAll } from './src/patch';
 import { packageDefinitions } from './src/package';
-import { getConfig } from './src/utils/config';
 import { CommonParams } from './src/domain/common';
+import yargs from 'yargs';
 const packageJson = require('../package.json');
 
-console.log('vscode-dev-containers CLI\nCopyright (c) Microsoft Corporation. All rights reserved.\n')
+console.log('vscode-dev-containers CLI\nCopyright (c) Microsoft Corporation. All rights reserved.\n');
 
-require('yargs')
-    .command('pack', 'package dev container definitions', (yargs) => {
+yargs(process.argv.slice(2))
+    .command('pack', 'package dev container definitions', (yargs: yargs.Argv) => {
         yargs
             .options({
                 'release': {
@@ -55,7 +56,7 @@ require('yargs')
                 }
             })
     }, packCommand)
-    .command('push [devcontainer]', 'push dev container images to a repository', (yargs) => {
+    .command('push [devcontainer]', 'push dev container images to a repository', (yargs: yargs.Argv) => {
         yargs
             .positional('devcontainer', {
                 describe: 'ID of dev container to push',
@@ -88,12 +89,10 @@ require('yargs')
                 },
                 'page': {
                     describe: 'Page number (of total) to push',
-                    type: 'integer',
                     default: 1
                 },
                 'page-total': {
                     describe: 'Total number of pages to use when parallelizing builds',
-                    type: 'integer',
                     default: 1
                 },
                 'replace-images': {
@@ -108,7 +107,7 @@ require('yargs')
                 }
             })
     }, pushCommand)
-    .command('update-script-sources <release>', 'updates all script source URLs in Dockerfiles to a tag or branch', (yargs) => {
+    .command('update-script-sources <release>', 'updates all script source URLs in Dockerfiles to a tag or branch', (yargs: yargs.Argv) => {
         yargs
             .positional('release', {
                 describe: 'release tag to branch use for script URLs',
@@ -125,7 +124,7 @@ require('yargs')
                 }
             })
     }, updateScriptSourcesCommand)
-    .command('cg [devcontainer]', 'generate cgmanifest.json', (yargs) => {
+    .command('cg [devcontainer]', 'generate cgmanifest.json', (yargs: yargs.Argv) => {
         yargs
             .positional('devcontainer', {
                 describe: 'limits manifest generation to single definition',
@@ -172,7 +171,7 @@ require('yargs')
                 }
             })
     }, imageInfoCommand)
-    .command('info [devcontainer]', 'generate image information files', (yargs) => {
+    .command('info [devcontainer]', 'generate image information files', (yargs: yargs.Argv) => {
         yargs
             .positional('devcontainer', {
                 describe: 'limits manifest generation to single definition',
@@ -219,7 +218,7 @@ require('yargs')
                 }
             })
     }, imageInfoCommand)
-    .command('patch', 'patch existing images', (yargs) => {
+    .command('patch', 'patch existing images', (yargs: any) => {
         yargs
             .options({
                 'all': {
@@ -239,7 +238,7 @@ require('yargs')
     .help()
     .argv;
 
-function pushCommand(argv) {
+function pushCommand(argv: any) {
     const params = argvToCommonParams(argv);
     push(params, argv.updateLatest, argv.push, argv.prepOnly, argv.skip, argv.page, argv.pageTotal, argv.replaceImages, argv.devcontainer)
         .catch((reason) => {
@@ -251,7 +250,7 @@ function pushCommand(argv) {
         });
 }
 
-function packCommand(argv) {
+function packCommand(argv: any) {
     const params = argvToCommonParams(argv);
     packageDefinitions(params, argv.updateLatest, argv.prepAndPackageOnly, argv.packageOnly, argv.clean, argv.skipPush)
         .catch((reason) => {
@@ -263,7 +262,7 @@ function packCommand(argv) {
         });
 }
 
-function updateScriptSourcesCommand(argv) {
+function updateScriptSourcesCommand(argv: any) {
     const params = argvToCommonParams(argv);
     updateAllScriptSourcesInRepo(params, argv.updateSha)
         .catch((reason) => {
@@ -286,7 +285,7 @@ function copyLibraryScriptsCommand() {
         });
 }
 
-function imageInfoCommand(argv) {
+function imageInfoCommand(argv: any) {
     const params = argvToCommonParams(argv);
     generateImageInformationFiles(params, argv.build, argv.prune, argv.cg, argv.markdown, argv.overwrite, argv.outputPath, argv.devcontainer)
         .catch((reason) => {
@@ -298,10 +297,10 @@ function imageInfoCommand(argv) {
         });
 }
 
-function patchCommand(argv) {
+function patchCommand(argv: any) {
     const params = argvToCommonParams(argv);
     if (argv.all) {
-        patch.patchAll(params)
+        patchAll(params)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
                 if(reason.stack) {
@@ -310,7 +309,7 @@ function patchCommand(argv) {
                 process.exit(1);
             });
     } else {
-        patch.patch(params, argv.patchPath)
+        patch(params, argv.patchPath)
             .catch((reason) => {
                 console.error(`(!) Patching failed - ${reason}`);
                 if(reason.stack) {
@@ -321,7 +320,7 @@ function patchCommand(argv) {
     }
 }
 
-function argvToCommonParams(argv): CommonParams {
+function argvToCommonParams(argv: any): CommonParams {
     return <CommonParams> {
         githubRepo: argv.githubRepo || getConfig('githubRepoName', 'microsoft/vscode-dev-containers'),
         release: argv.release || `v${packageJson.version}`,

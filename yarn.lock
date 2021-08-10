@@ -22,10 +22,18 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
-"@types/copyfiles@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@types/copyfiles/-/copyfiles-2.4.0.tgz#877ef9aa9def7df889fb1ca900206c79a873d113"
-  integrity sha512-ujm66wtJzW0ok5bIfwSZdvI4C4E6rbAvG58zow71wLjPPj65rIMu4Uy5LOx5H4eRvaagGUrrKTxqfLiDSsHEGQ==
+"@types/copyfiles@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@types/copyfiles/-/copyfiles-2.4.1.tgz#b0119c781457910115454bacb35f59e91145e7ec"
+  integrity sha512-v2JLxXeWUeWYWVo3/tlpxqiDCvgewSvf58HHjHYNaCi0lAthhRQ7jz8InxGzJsrMbWmWkYaxBO+BEtKjBU4ebw==
+
+"@types/glob@*":
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.4.tgz#ea59e21d2ee5c517914cb4bc8e4153b99e566672"
+  integrity sha512-w+LsMxKyYQm347Otw+IfBXOv9UWVjpHpCDdbBMt8Kz/xbvCYNjP+0qPh91Km3iKfSRLBB0P7fAMf0KHrPu+MyA==
+  dependencies:
+    "@types/minimatch" "*"
+    "@types/node" "*"
 
 "@types/glob@^7.1.3":
   version "7.1.3"
@@ -56,6 +64,26 @@
   version "12.20.15"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.15.tgz#10ee6a6a3f971966fddfa3f6e89ef7a73ec622df"
   integrity sha512-F6S4Chv4JicJmyrwlDkxUdGNSplsQdGwp1A0AJloEVDirWdZOAiRHhovDlsFkKUrquUXhz1imJhXHsf59auyAg==
+
+"@types/rimraf@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/rimraf/-/rimraf-3.0.1.tgz#1bbc106f0978742289103e080d4b41b3b4656e58"
+  integrity sha512-CAoSlbco40aKZ0CkelBF2g3JeN6aioRaTVnqSX5pWsn/WApm6IDxI4e4tD9D0dY/meCkyyleP1IQDVN13F4maA==
+  dependencies:
+    "@types/glob" "*"
+    "@types/node" "*"
+
+"@types/yargs-parser@*":
+  version "20.2.1"
+  resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-20.2.1.tgz#3b9ce2489919d9e4fea439b76916abc34b2df129"
+  integrity sha512-7tFImggNeNBVMsn0vLrpn1H1uPrUBdnARPTpZoitY37ZrdJREzf7I16tMrlK3hen349gr1NYh8CmZQa7CTG6Aw==
+
+"@types/yargs@^17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-17.0.2.tgz#8fb2e0f4cdc7ab2a1a570106e56533f31225b584"
+  integrity sha512-JhZ+pNdKMfB0rXauaDlrIvm+U7V4m03PPOSVoPS66z8gf+G4Z/UW8UlrVIj2MRQOBzuoEvYtjS0bqYwnpZaS9Q==
+  dependencies:
+    "@types/yargs-parser" "*"
 
 ansi-regex@^4.1.0:
   version "4.1.0"

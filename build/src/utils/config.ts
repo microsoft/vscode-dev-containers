@@ -1,12 +1,10 @@
 import { OtherDependency, Dependencies } from '../domain/definition';
 import { Lookup } from '../domain/common';
 import { loadDefinitions } from '../domain/definition-factory';
-import { jsonc } from 'jsonc';
 import { Definition } from '../domain/definition'
 import * as path from 'path';
+import * as os from 'os';
 import * as asyncUtils from './async'
-
-const stagingFolders: Lookup<string> = {};
 
 export interface GlobalConfig {
     commonDependencies?: Dependencies;
@@ -40,22 +38,17 @@ export interface GlobalConfig {
     rootPath: string;
 }
 
-let config: GlobalConfig;
+const config: GlobalConfig = require(path.join(__dirname, '..', '..', 'config.json'));
+const stagingFolders: Lookup<string> = {};
 
 export async function loadConfig(rootPath: string): Promise<GlobalConfig> {
-    if (config) {
-        console.warn('(!) Config loaded multiple times.')
-        return;
-    }
-    config = await jsonc.read(path.join(__dirname, '..', '..', 'config.json'));
     config.rootPath = rootPath || config.rootPath;
     await loadDefinitions(config);
     return config;
 }
 
 // Get a value from the config file or a similarly named env var
-export function getConfig(property: string, defaultVal?: string | {} | []) {
-    defaultVal = defaultVal || null;
+export function getConfig(property: string, defaultVal: string | {} | [] | null = null): any {
     // Generate env var name from property - camelCase to CAMEL_CASE
     const envVar = property.split('').reduce((prev, next) => {
         if (next >= 'A' && next <= 'Z') {
@@ -65,7 +58,7 @@ export function getConfig(property: string, defaultVal?: string | {} | []) {
         }
     }, '');
 
-    return process.env[envVar] || config[property] || defaultVal;
+    return process.env[envVar] || (<any>config)[property] || defaultVal;
 }
 
 export function getPoolKeyForPoolUrl(poolUrl: string) {
@@ -109,11 +102,11 @@ export async function getStagingFolder(release: string) {
 export function  getVersionForRelease(versionOrRelease: string, definition?: Definition): string {
     // Already is a version
     if (!isNaN(parseInt(versionOrRelease.charAt(0)))) {
-        return definition.definitionVersion || versionOrRelease;
+        return definition?.definitionVersion || versionOrRelease;
     }
     // Is a release string
     if (versionOrRelease.charAt(0) === 'v' && !isNaN(parseInt(versionOrRelease.charAt(1)))) {
-        return definition.definitionVersion || versionOrRelease.substr(1);
+        return definition?.definitionVersion || versionOrRelease.substr(1);
     }
     // Is a branch
     return 'dev';

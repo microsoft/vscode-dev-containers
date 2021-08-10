@@ -18,10 +18,12 @@
 		"prepack": "rimraf containers-readmes manifests && copyfiles --up 1 containers/**/README.md containers-readmes && copyfiles --up 1 containers/**/definition-manifest.json manifests"
 	},
 	"devDependencies": {
-		"@types/copyfiles": "^2.4.0",
+		"@types/copyfiles": "^2.4.1",
 		"@types/glob": "^7.1.3",
 		"@types/mkdirp": "^1.0.1",
 		"@types/node": "^12.13.0",
+		"@types/rimraf": "^3.0.1",
+		"@types/yargs": "^17.0.2",
 		"copyfiles": "^2.1.1",
 		"glob": "^7.1.6",
 		"handlebars": "^4.7.7",

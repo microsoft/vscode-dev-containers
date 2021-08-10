@@ -5,17 +5,28 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "node",
-			"request": "launch",
+			"type": "pwa-node",
 			"name": "Run Push Script",
-			"program": "${workspaceFolder}/vscdc",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**",
+				"node_modules/**"
+			],
+			"runtimeExecutable": "node",
+			"runtimeArgs": [
+				"--nolazy",
+				"-r",
+				"ts-node/register"
+			],
+			"cwd": "${workspaceRoot}",
 			"args": [
+				"${workspaceFolder}/vscdc.ts",
 				"push",
 				"debian",
 				"--no-push",
 				"--page", "1",
 				"--page-total", "1",
-				"--release", "v0.167.0",
+				"--release", "v0.191.0",
 				"--github-repo", "microsoft/vscode-dev-containers",
 				"--registry", "clantz.azurecr.io",
 				"--registryPath", "vscode/devcontainers",

@@ -37,12 +37,12 @@ async function pushImage(definition: Definition, params: CommonParams, updateLat
     const dockerFilePath = await definition.getDockerfilePath();
     
     // Make sure there's a Dockerfile present
-    if (!await asyncUtils.exists(dockerFilePath)) {
+    if (!dockerFilePath || !await asyncUtils.exists(dockerFilePath)) {
         throw `Invalid path ${dockerFilePath}`;
     }
 
     // Process variants in reverse order to be sure the first one is tagged as "latest" if appropriate
-    const variants = definition.variants || [null];
+    const variants = definition.variants || [undefined];
     for (let i = variants.length - 1; i > -1; i--) {
         const variant = variants[i];
 
@@ -69,7 +69,7 @@ async function pushImage(definition: Definition, params: CommonParams, updateLat
                 const workingDir = path.resolve(dotDevContainerPath, context);
                 // Note: build.args in devcontainer.json is intentionally ignored so you can vary image contents and defaults as needed
                 const buildParams = (variant ? ['--build-arg', `VARIANT=${variant}`] : [])
-                    .concat(versionTags.reduce((prev, current) => prev.concat(['-t', current]), []));
+                    .concat(versionTags.reduce((prev: string[], current: string) => prev.concat(['-t', current]), []));
                 const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };
                 await asyncUtils.spawn('docker', [
                         'build', 
@@ -80,13 +80,14 @@ async function pushImage(definition: Definition, params: CommonParams, updateLat
                         '--label', `${imageLabelPrefix}.variant=${prepResult.meta.variant}`,
                         '--label', `${imageLabelPrefix}.release=${prepResult.meta.gitRepositoryRelease}`,
                         '--label', `${imageLabelPrefix}.source=${prepResult.meta.gitRepository}`,
-                        '--label', `${imageLabelPrefix}.timestamp='${prepResult.meta.buildTimestamp}'`
-                    ].concat(buildParams), spawnOpts);
+                        '--label', `${imageLabelPrefix}.timestamp='${prepResult.meta.buildTimestamp}'`,
+                        ...buildParams], 
+                    spawnOpts);
 
                 // Push
                 if (pushImages) {
                     console.log(`(*) Pushing...`);
-                    await asyncUtils.forEach(versionTags, async (versionTag) => {
+                    await asyncUtils.forEach(versionTags, async (versionTag: string) => {
                         await asyncUtils.spawn('docker', ['push', versionTag], spawnOpts);
                     });
                 } else {
@@ -110,8 +111,11 @@ async function pushImage(definition: Definition, params: CommonParams, updateLat
     console.log('(*) Done!\n');
 }
 
-async function flattenBaseImage(baseImageTag, flattenedBaseImageTag, pushImages) {
+async function flattenBaseImage(baseImageTag: string, flattenedBaseImageTag: string, pushImages: boolean) {
     const flattenedImageCaptureGroups = /([^\/]+)\/(.+):(.+)/.exec(flattenedBaseImageTag);
+    if (!flattenedImageCaptureGroups) {
+        throw `Unable to flatten. Invalid tag ${flattenedBaseImageTag}`;
+    }
     if (await isImageAlreadyPublished(flattenedImageCaptureGroups[1], flattenedImageCaptureGroups[2], flattenedImageCaptureGroups[3])) {
         console.log('(*) Flattened base image already published.')
         return;
@@ -124,7 +128,7 @@ async function flattenBaseImage(baseImageTag, flattenedBaseImageTag, pushImages)
     const containerInspectOutput = await asyncUtils.spawn('docker', ['inspect', 'vscode-dev-containers-build-flatten'], { shell: true, stdio: 'pipe' });
     console.log('(*) Flattening (this could take a while)...');
     const config = JSON.parse(containerInspectOutput)[0].Config;
-    const envString = config.Env.reduce((prev, current) => prev + ' ' + current, '');
+    const envString = config.Env.reduce((prev: string, current: string) => prev + ' ' + current, '');
     const importArgs = `-c 'ENV ${envString}' -c 'ENTRYPOINT ${JSON.stringify(config.Entrypoint)}' -c 'CMD ${JSON.stringify(config.Cmd)}'`;
     await asyncUtils.exec(`docker export vscode-dev-containers-build-flatten | docker import ${importArgs} - ${flattenedBaseImageTag}`, processOpts);
     await asyncUtils.spawn('docker', ['container', 'rm', '-f', 'vscode-dev-containers-build-flatten'], processOpts);
@@ -138,7 +142,7 @@ async function flattenBaseImage(baseImageTag, flattenedBaseImageTag, pushImages)
     }
 }
 
-async function isDefinitionVersionAlreadyPublished(definition: Definition, params: CommonParams, variant) {
+async function isDefinitionVersionAlreadyPublished(definition: Definition, params: CommonParams, variant?: string) {
     // See if image already exists
     const tagsToCheck = definition.getTagList(params.release, false, params.registry, params.repository, variant);
     const tagParts = tagsToCheck[0].split(':');
@@ -146,7 +150,7 @@ async function isDefinitionVersionAlreadyPublished(definition: Definition, param
     return await isImageAlreadyPublished(registryName, tagParts[0].replace(/[^\/]+\//, ''), tagParts[1]);
 }
 
-async function isImageAlreadyPublished(registryName, repositoryName, tagName) {
+async function isImageAlreadyPublished(registryName: string, repositoryName: string, tagName: string) {
     registryName = registryName.replace(/\.azurecr\.io.*/, '');
     // Check if repository exists
     const repositoriesOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'list', '--name', registryName], { shell: true, stdio: 'pipe' });

@@ -67,20 +67,19 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
     // Populate associations, tag lookup, and image variants for registrations
     for (let definitionId in definitionLookup) {
         const definition = getDefinition(definitionId);
+        if (!definition) {
+            throw `Definition ${definitionId} not found!`
+        }
+
         populateParentAssociations(definition);
 
-        // Populate images list for variants for dependency registration
-        definition.dependencies.imageVariants = definition.variants ?
-            definition.variants.map((variant) => definition.dependencies.image.replace('${VARIANT}', variant)) :
-            [definition.dependencies.image];
-
         // Populate definition and variant lookup
-        if (definition.build.tags) {
+        if (definition.build?.tags) {
             // Variants can be used as a VARAINT arg in tags, so support that too. However, these can
             // get overwritten in certain tag configs resulting in bad lookups, so **process them first**.
-            const variants = definition.variants ? ['${VARIANT}', '$VARIANT'].concat(definition.variants) : [undefined];
+            const variants: (string | undefined)[] = definition.variants ? ['${VARIANT}', '$VARIANT', ...definition.variants] : [undefined];
 
-            variants.forEach((variant) => {
+            variants.forEach((variant: string | undefined) => {
                 const blankTagList = definition.getTagsForRelease('', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag: string) => {
                     definitionTagLookup[blankTag] = {
@@ -89,7 +88,7 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
                     };
                 });
                 const devTagList = definition.getTagsForRelease('dev', 'ANY', 'ANY', variant);
-                devTagList.forEach((devTag) => {
+                devTagList.forEach((devTag: string) => {
                     definitionTagLookup[devTag] = {
                         definition: definition,
                         variant: variant
@@ -103,30 +102,39 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
 
 // Processes and associate definitions together
 function populateParentAssociations(definition: Definition) {
-    if(definition.build.parent) {
-        definition.parentDefinitions = definition.parentDefinitions || new Map<string | undefined, DefinitionVariant>();
-        let parentLookup: (string | Lookup<string>) = definition.build.parent;
-        let parentVariantLookup: (string | Lookup<string>) = definition.build.parentVariant;
-        // If single parent for all variants (and possibly a single parentVariant)
-        if(typeof parentLookup === 'string') {
-            const parentDefinition = getDefinition(parentLookup);
-            definition.parentDefinitions.set(undefined, {
+    if(!definition.build?.parent) {
+        return;
+    }
+    definition.parentDefinitions = definition.parentDefinitions || new Map<string | undefined, DefinitionVariant>();
+    // If single parent for all variants (and possibly a single parentVariant)
+    if(typeof definition.build.parent === 'string') {
+        if (typeof definition.build.parentVariant !== 'string') {
+            throw `Value of parent is a string, but parentVariant is not.`;
+        }
+        const parentDefinition = getDefinition(definition.build.parent);
+        definition.parentDefinitions.set(undefined, {
+            definition: parentDefinition,
+            variant: <string | undefined>definition.build.parentVariant
+        });
+        parentDefinition.childDefinitions = parentDefinition.childDefinitions || [];
+        parentDefinition.childDefinitions.push(definition);
+    } else {
+        if (typeof definition.build.parentVariant !== 'object') {
+            throw `Value of parent is an object, but parentVariant is not.`;
+        }
+        for (let variant in definition.build.parent) {
+            const parentDefinition = getDefinition(definition.build.parent[variant]);
+            let variantValue: string | undefined = undefined;
+            if (definition.build.parentVariant) {
+                variantValue = definition.build.parentVariant[variant];
+            }
+            definition.parentDefinitions.set(variant, {
                 definition: parentDefinition,
-                variant: <string | undefined>parentVariantLookup
+                variant: variantValue
             });
             parentDefinition.childDefinitions = parentDefinition.childDefinitions || [];
             parentDefinition.childDefinitions.push(definition);
-        } else {
-            for (let variant in parentLookup) {
-                const parentDefinition = getDefinition(parentLookup[variant]);
-                definition.parentDefinitions.set(variant, {
-                    definition: parentDefinition,
-                    variant: parentVariantLookup[variant]
-                });
-                parentDefinition.childDefinitions = parentDefinition.childDefinitions || [];
-                parentDefinition.childDefinitions.push(definition);
-            }    
-        }
+        }    
     }
 }
 
@@ -295,7 +303,7 @@ export function getSortedDefinitionBuildList(page: number = 1, pageTotal: number
 }
 
 // Recursively find parent bucket (and create one if it doesn't exist)
-function findRootParentBucket(definition: Definition, parentBucketMap: Map<Definition, Definition[]>) {
+function findRootParentBucket(definition: Definition, parentBucketMap: Map<Definition, Definition[]>): Definition[] {
     // If this is a parent, add it and its children to lookup
     if(!definition.parentDefinitions) {
         let bucket = parentBucketMap.get(definition);
@@ -311,7 +319,7 @@ function findRootParentBucket(definition: Definition, parentBucketMap: Map<Defin
         definitionParentBuckets.set(parentDefinition.definition, findRootParentBucket(parentDefinition.definition, parentBucketMap));
     });
     // Merge parent buckets if needed
-    let unifiedBucket: Definition[];
+    let unifiedBucket: Definition[] | undefined = undefined;
     definitionParentBuckets.forEach((bucket, parentDefinition) => {
         if(!unifiedBucket) {
             unifiedBucket = bucket;
@@ -323,6 +331,9 @@ function findRootParentBucket(definition: Definition, parentBucketMap: Map<Defin
             }
         }
     });
+    if(!unifiedBucket) {
+        throw `Unable to determine bucket for ${definition.id}`;
+    }
     return unifiedBucket;
 }
 
@@ -349,7 +360,7 @@ function getPageFromBuckets(buckets: Definition[][], page: number, pageTotal: nu
         needsDedicatedPageDefinitionIds = needsDedicatedPageDefinitionIds.reduce((prev: string[], definitionId: string) => (definitionsIdsToSkip.indexOf(definitionId) < 0 ? prev.concat(definitionId) : prev), []);
         if (pageTotal > needsDedicatedPageDefinitionIds.length) {
             pageTotalMinusDedicatedPages = pageTotal - needsDedicatedPageDefinitionIds.length;
-            needsDedicatedPageDefinitionIds.forEach((definitionId) => {
+            needsDedicatedPageDefinitionIds.forEach((definitionId: string) => {
                 const definition = getDefinition(definitionId);
                 allPages.push([definition]);
                 const definitionIndex = noRelativesBucket.indexOf(definition);

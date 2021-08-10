@@ -10,7 +10,7 @@ import { CommonParams } from './domain/common';
 
 interface RepoAndTag { 
     repository: string; 
-    tag:
+    tag: string;
 }
 
 export async function patch(params: CommonParams, patchPath: string) {
@@ -36,7 +36,7 @@ export async function patch(params: CommonParams, patchPath: string) {
     console.log('\n(*) Done!')
 }
 
-async function patchImage(params:CommonParams, imageId, patchPath, dockerFilePath, bumpVersion) {
+async function patchImage(params:CommonParams, imageId: string, patchPath: string, dockerFilePath: string, bumpVersion: boolean) {
     console.log(`\n*** Updating Image: ${imageId} ***`);
     const spawnOpts = { stdio: 'inherit', cwd: patchPath, shell: true };
 
@@ -109,11 +109,12 @@ function updateVersionTags(repoAndTagList: RepoAndTag[]) {
                 tag = `${versionParts[0]}.${versionParts[1]}.${versionParts[2] + 1}${tag.substring(firstDash)}`;
             }
         }
-        return prev.push({
-            repository: repoAndTag.repository,
-            tag: tag
-        } as RepoAndTag);
-    }, []);
+        prev.push({
+                repository: repoAndTag.repository,
+                tag: tag
+            } as RepoAndTag);
+        return prev;
+    }, new Array<RepoAndTag>());
 }
 
 export  async function deleteUnpatchedImages(params:CommonParams, patchPath: string) {

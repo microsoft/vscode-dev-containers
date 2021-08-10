@@ -103,12 +103,12 @@ export interface Dependencies {
 
 export class Definition {
     id: string;
-    definitionVersion: string;
-    variants: string[];
-    build: BuildSettings;
+    definitionVersion?: string;
+    variants?: string[];
+    build?: BuildSettings;
     dependencies?: Dependencies;
-    devcontainerJson?: any;
-    devcontainerJsonString?: string;
+    devcontainerJson: any = {};
+    devcontainerJsonString: string = '';
     hasManifest: boolean = false;
     hasDockerfile: boolean = false;
     hasBaseDockerfile: boolean = false;
@@ -120,7 +120,7 @@ export class Definition {
     path: string;
     relativePath: string;
     githubRepoRootPath: string;
-    libraryScriptsPath: string;
+    libraryScriptsPath?: string;
 
     constructor(id: string, definitionPathOnDisk: string, githubRepoRootPath: string) {
         this.id = id;
@@ -146,10 +146,24 @@ export class Definition {
             this.libraryScriptsPath = libraryScriptsPath;
         }
 
+        // Populate images list for variants for dependency registration
+        if (this.dependencies) {
+            const deps = <Dependencies>this.dependencies;
+            if (!deps.image) {
+                throw `Dependency "image" not found for ${this.id}`;
+            }
+            deps.imageVariants = this.variants ?
+                this.variants.map<string>((variant: string) => deps.image.replace('${VARIANT}', variant)) :
+                [deps.image];
+        }
     }
 
     // Generate 'latest' flavor of a given definition's tag
     getLatestTags(registry: string, registryPath: string): string[] {
+        if (!this.build) {
+            throw `Could not getLatestTags for ${this.id}. No "build" settings.`;
+        }
+
         // Given there could be multiple registries in the tag list, get all the different latest variations
         return this.build.tags.reduce((list, tag) => {
             const latest = `${registry}/${registryPath}/${tag.replace(/:.+/, ':latest')}`
@@ -157,11 +171,15 @@ export class Definition {
                 list.push(latest);
             }
             return list;
-        }, []);
+        }, new Array<string>());
     }
 
     // Create all the needed variants of the specified version identifier for a given definition
     getTagsForRelease(versionOrRelease: string, registry: string, repository: string, variant?: string): string[] {
+        if (!this.build) {
+            throw `Could not getTagsForRelease for ${this.id}. No "build" settings.`;
+        }
+
         let version = this.getVersionForRelease(versionOrRelease);
         // If the definition states that only versioned tags are returned and the version is 'dev', 
         // add the definition Id to ensure that we do not incorrectly hijack a tag from another definition.
@@ -203,7 +221,7 @@ export class Definition {
                 list.push(`${registry}/${repository}/${baseTag}`);
             }
             return list;
-        }, []);
+        }, new Array<string>());
     }
 
     // Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
@@ -233,6 +251,10 @@ export class Definition {
         - 'major' - X
     */
     getTagList(releaseOrVersion: string, versionPartHandling: string | boolean, registry: string, repository: string, variant?: string): string[] {
+        if (!this.build) {
+            throw `Could not getTagList for ${this.id}. No "build" settings.`;
+        }
+
         const version = this.getVersionForRelease(releaseOrVersion);
 
         // If version is 'dev', there's no need to generate semver tags for the version
@@ -276,6 +298,8 @@ export class Definition {
                 updateUnversionedTags = false;
                 versionList = [ `${versionParts[0]}`];
                 break;
+            default:
+                throw `Invalid versionPartHandling type`;
         }
 
         // Normally, we also want to return a tag without a version number, but for
@@ -287,7 +311,7 @@ export class Definition {
         }
 
         const firstVariant = this.variants ? this.variants[0] : variant;
-        let tagList = [];
+        let tagList: string[] = [];
 
         versionList.forEach((tagVersion: string) => {
             tagList = tagList.concat(this.getTagsForRelease(tagVersion, registry, repository, variant));
@@ -312,6 +336,9 @@ export class Definition {
             variant = this.variants[0];
         }
         const parent = this.parentDefinitions.get(variant);
+        if (!parent) {
+            throw `Could not get parent for ${this.id} variant ${variant}.`;
+        }
         return parent.definition.getTagsForRelease(
             parent.definition.definitionVersion || version, 
             registry,
@@ -321,12 +348,16 @@ export class Definition {
 
     // Get the path to the dockerfile for the definitions
     async getDockerfilePath(userDockerfile: boolean = false) {
+        let result: string;
         if(!userDockerfile && this.hasBaseDockerfile) {
-            return path.join(this.path,'.devcontainer', 'base.Dockerfile');
+            result = path.join(this.path,'.devcontainer', 'base.Dockerfile');
+        } else {
+            result = path.join(this.path, '.devcontainer', 'Dockerfile');
         }
-        const dockerFilePath = path.join(this.path, '.devcontainer', 'Dockerfile');
-        if (await asyncUtils.exists(dockerFilePath)) {
-            return dockerFilePath;
+        if (await asyncUtils.exists(result)) {
+            return result;
+        } else {
+            throw `Expected to find Dockerfile at ${result}.`
         }
     }
 
@@ -338,7 +369,7 @@ export class Definition {
     }
 
     // Read the dockerfile for the definition
-    async readDockerfile(userDockerfile: boolean=false): Promise<string> {
+    async readDockerfile(userDockerfile: boolean = false): Promise<string> {
         return await asyncUtils.readFile(await this.getDockerfilePath(userDockerfile));
     }
 

@@ -1,15 +1,15 @@
 import * as fs from 'fs';
 import * as cp from 'child_process';
-import * as copyFilesCb from 'copyfiles';
-import * as rimrafCb from 'rimraf';
+import copyFilesCb from 'copyfiles';
+import rimrafCb from 'rimraf';
 import * as  crypto from 'crypto';
 import * as https from 'https';
 import * as path from 'path';
 
 export class ProcessError extends Error {
-    result: string;
-    code: number;
-    signal: string;
+    result: string = '';
+    code: number = -1;
+    signal: string = '';
 }
 
 export async function spawn(command: string, args: string[], opts: any = { stdio: 'inherit', shell: true }): Promise<string> {
@@ -71,7 +71,7 @@ export async function writeFile(filePath: string, data: string): Promise<void> {
     });
 }
 
-export async function exec(command, opts: any = {}) {
+export async function exec(command: string, opts: any = {}) {
     console.log(`(*) Exec: ${command}`);
     return new Promise((resolve, reject) => {
         let result = '';
@@ -133,7 +133,7 @@ export async function copyFiles(source: string, blobs: string[], target: string)
 }
 
 // async copyfile
-export async function copyFile(src, dest): Promise<void> {
+export async function copyFile(src: string, dest: string): Promise<void> {
     return new Promise((resolve, reject) => {
         fs.copyFile(src, dest, (err) => err ? reject(err) : resolve());
     });
@@ -141,7 +141,7 @@ export async function copyFile(src, dest): Promise<void> {
 
 
 // async chmod
-export async function chmod(src, mod): Promise<void> {
+export async function chmod(src: string, mod: string): Promise<void> {
     return new Promise((resolve, reject) => {
         fs.chmod(src, mod, (err) => err ? reject(err) : resolve());
     });
@@ -167,8 +167,8 @@ export async function readdirRecursive(dirPath: string, relativeTo: string = dir
             if(err) {
                 return reject(err);
             }
-            const currentFiles = [];
-            const currentDirectories = [];
+            const currentFiles: string[] = [];
+            const currentDirectories: string[] = [];
             entries.forEach((entry) => {
                 const entryPath = path.resolve(dirPath, entry.name);
                 const entryRelativePath = path.relative(relativeTo, entryPath);
@@ -201,7 +201,7 @@ export async function exists(filePath: string): Promise<boolean> {
 }
 
 // async gen SHA 256 hash for file
-export async function shaForFile(filePath) : Promise<string> {
+export async function shaForFile(filePath: string) : Promise<string> {
     return new Promise((resolve, reject) => {
         const fd = fs.createReadStream(filePath);
         const hash = crypto.createHash('sha256');
@@ -218,14 +218,14 @@ export async function shaForFile(filePath) : Promise<string> {
 }
 
 // async gen SHA 256 hash for string
-export async function shaForString(content) {
+export async function shaForString(content: string) {
     const hash = crypto.createHash('sha256');
     hash.update(content);
     return hash.digest('hex');
 }
 
 // async HTTPS get
-export async function getUrlAsString(url) {
+export async function getUrlAsString(url: string) {
     return new Promise((resolve, reject) => {
         let content = '';
         const req = https.get(url, function (res) {
