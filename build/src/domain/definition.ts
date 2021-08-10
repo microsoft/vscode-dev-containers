@@ -112,21 +112,23 @@ export class Definition {
     hasManifest: boolean = false;
     hasDockerfile: boolean = false;
     hasBaseDockerfile: boolean = false;
+    hasLibraryScripts: boolean = false;
 
-    // Parent is either a single definition or a lookup of variants to definitions
-    parentDefinitions?: Map<string | undefined, DefinitionVariant>;
-    childDefinitions?: Definition[];
+    // parentDefinitions is a map of variants to definitions. If there are no variants, "undefined" maps to the parent
+    parentDefinitions = new Map<string | undefined, DefinitionVariant>()
+    childDefinitions: Definition[] = [];
 
     path: string;
     relativePath: string;
     githubRepoRootPath: string;
-    libraryScriptsPath?: string;
+    libraryScriptsPath: string;
 
     constructor(id: string, definitionPathOnDisk: string, githubRepoRootPath: string) {
         this.id = id;
         this.githubRepoRootPath = githubRepoRootPath;
         this.path = definitionPathOnDisk;
         this.relativePath = path.relative(this.githubRepoRootPath, this.path);
+        this.libraryScriptsPath = path.join(this.path,'.devcontainer', getConfig('scriptLibraryFolderNameInDefinition', 'library-scripts'));
     }
 
     // Loads definition-manifest.json, devcontainer.json
@@ -141,10 +143,7 @@ export class Definition {
         this.devcontainerJson = jsonc.parse(this.devcontainerJsonString);
         this.hasBaseDockerfile = await asyncUtils.exists(path.join(this.path,'.devcontainer', 'base.Dockerfile'));
         this.hasDockerfile = await asyncUtils.exists(path.join(this.path,'.devcontainer', 'Dockerfile'));
-        const libraryScriptsPath = path.join(this.path,'.devcontainer', getConfig('scriptLibraryFolderNameInDefinition', 'library-scripts'));
-        if (await asyncUtils.exists(libraryScriptsPath)) {
-            this.libraryScriptsPath = libraryScriptsPath;
-        }
+        this.hasLibraryScripts = await asyncUtils.exists(this.libraryScriptsPath);
 
         // Populate images list for variants for dependency registration
         if (this.dependencies) {
@@ -329,8 +328,8 @@ export class Definition {
     getParentImageTagForRelease(releaseOrVersion: string, registry: string, repository: string, variant?: string) {
         const version = this.getVersionForRelease(releaseOrVersion);
 
-        if(!this.parentDefinitions) {
-            return null;
+        if(this.parentDefinitions.size === 0) {
+            return undefined;
         }
         if(!variant && this.variants) {
             variant = this.variants[0];

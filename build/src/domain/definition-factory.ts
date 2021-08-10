@@ -105,7 +105,6 @@ function populateParentAssociations(definition: Definition) {
     if(!definition.build?.parent) {
         return;
     }
-    definition.parentDefinitions = definition.parentDefinitions || new Map<string | undefined, DefinitionVariant>();
     // If single parent for all variants (and possibly a single parentVariant)
     if(typeof definition.build.parent === 'string') {
         if (typeof definition.build.parentVariant !== 'string') {
@@ -116,7 +115,6 @@ function populateParentAssociations(definition: Definition) {
             definition: parentDefinition,
             variant: <string | undefined>definition.build.parentVariant
         });
-        parentDefinition.childDefinitions = parentDefinition.childDefinitions || [];
         parentDefinition.childDefinitions.push(definition);
     } else {
         if (typeof definition.build.parentVariant !== 'object') {
@@ -132,7 +130,6 @@ function populateParentAssociations(definition: Definition) {
                 definition: parentDefinition,
                 variant: variantValue
             });
-            parentDefinition.childDefinitions = parentDefinition.childDefinitions || [];
             parentDefinition.childDefinitions.push(definition);
         }    
     }
@@ -227,7 +224,7 @@ export function getSortedDefinitionBuildList(page: number = 1, pageTotal: number
 // Recursively find parent bucket (and create one if it doesn't exist)
 function findRootParentBucket(definition: Definition, parentBucketMap: Map<Definition, Definition[]>): Definition[] {
     // If this is a parent, add it and its children to lookup
-    if(!definition.parentDefinitions) {
+    if(definition.parentDefinitions.size === 0) {
         let bucket = parentBucketMap.get(definition);
         if (!bucket) {
             bucket =  [definition];

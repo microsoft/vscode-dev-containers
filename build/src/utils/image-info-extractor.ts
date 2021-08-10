@@ -90,7 +90,7 @@ to an object like this:
 }
 */
 async function getLinuxDistroInfo(imageTagOrContainerName: string): Promise<DistroInfo> {
-    const info = {};
+    const info: Lookup<string> = {};
     const osInfoCommandOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 'cat /etc/os-release', true);
     const osInfoLines = osInfoCommandOutput.split('\n');
     osInfoLines.forEach((infoLine) => {

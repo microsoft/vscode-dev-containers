@@ -101,7 +101,7 @@ async function pushImage(definition: Definition, params: CommonParams, updateLat
 
     // If base.Dockerfile found, update stub/devcontainer.json, otherwise create - just use the default (first) variant if one exists
     if (definition.hasBaseDockerfile && definition.hasDockerfile) {
-        await prep.updateStub(definition, params);
+        await prep.updateUserDockerfile(definition, params);
         console.log('(*) Updating devcontainer.json...');
         await definition.updateDevcontainerJson(definition.devcontainerJsonString.replace('"base.Dockerfile"', '"Dockerfile"'));
         console.log('(*) Removing base.Dockerfile...');

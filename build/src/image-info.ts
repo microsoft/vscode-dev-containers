@@ -3,21 +3,21 @@ import { push } from './push';
 import * as asyncUtils from './utils/async';
 import { loadConfig, getStagingFolder, getConfig } from './utils/config';
 import { getSortedDefinitionBuildList, getDefinition } from './domain/definition-factory';
-import { CommonParams } from './domain/common';
+import { CommonParams, Lookup } from './domain/common';
 import { Definition, CgComponent } from './domain/definition';
 import { getAllContentInfo, ExtractedInfo } from './utils/image-info-extractor';
 import { ComponentInfoTransformer } from './transformers/component-transformer';
 import { MarkdownInfoTransformer } from './transformers/markdown-transformer';
 import * as handlebars from 'handlebars';
 
-let releaseNotesHeaderTemplate, releaseNotesVariantPartTemplate;
 
 interface FileContents {
-    registrations?: CgComponent[];
-    markdown?: string;
-    version?: string;
+    registrations: CgComponent[];
+    markdown: string;
+    version: string;
 }
 
+let releaseNotesHeaderTemplate: handlebars.TemplateDelegate, releaseNotesVariantPartTemplate: handlebars.TemplateDelegate;
 // Register helper for anchors - Adapted from https://github.com/gjtorikian/html-pipeline/blob/main/lib/html/pipeline/toc_filter.rb
 handlebars.registerHelper('anchor', (value) => value.toLowerCase().replace(/[^\w\- ]/g, '').replace(/ /g, '-'));
 
@@ -27,9 +27,9 @@ export async function generateImageInformationFiles(params: CommonParams, buildF
     const stagingFolder = await getStagingFolder(params.release);
     await loadConfig(stagingFolder);
 
-    const alreadyRegistered = {};
+    const alreadyRegistered: Lookup<boolean> = {};
     const cgManifest = {
-        "Registrations": [],
+        "Registrations": new Array<any>(),
         "Version": 1
     }
 
@@ -55,12 +55,15 @@ export async function generateImageInformationFiles(params: CommonParams, buildF
 
         // Extract information
         const fileContents = await getDefinitionImageContentData(params, currentDefinition, alreadyRegistered, buildFirst);
+        if(!fileContents) {
+            throw `Unable to get image information for ${currentDefinition.id}`;
+        }
 
         // Write markdown file as appropriate
         if (generateMarkdown && (overwrite || ! markdownExists)) {
             console.log('(*) Writing image history markdown...');
             await asyncUtils.mkdirp(historyFolderPath);
-            await asyncUtils.writeFile(markdownPath, fileContents.markdown);    
+            await asyncUtils.writeFile(markdownPath, fileContents.markdown);
         }
 
         // Add component registrations if we're using them
@@ -83,19 +86,23 @@ export async function generateImageInformationFiles(params: CommonParams, buildF
     console.log('(*) Done!');
 }
 
-async function getDefinitionImageContentData(params: CommonParams, definition: Definition, alreadyRegistered: {}, buildFirst: boolean): Promise<FileContents> {
+async function getDefinitionImageContentData(params: CommonParams, definition: Definition, alreadyRegistered: Lookup<boolean>, buildFirst: boolean): Promise<FileContents | undefined> {
     if (typeof definition.dependencies !== 'object') {
-        return {};
+        return undefined;
     }
 
-    let registrations = [];
+    let registrations = new Array<any>();
 
     const version = definition.getVersionForRelease(params.release);
 
     // Create header for markdown
     let markdown = await generateReleaseNotesHeader(params, definition);
 
-    await asyncUtils.forEach(definition.variants, async (variant: string) => {
+    await asyncUtils.forEach(definition.variants || [undefined], async (variant: string) => {
+        if(!definition.dependencies) {
+            throw `Unable to get definition image dependencies for ${definition.id}. No dependencies in manifest.`
+        }
+
         if(variant) {
             console.log(`\n(*) Processing variant ${variant}...`);
         }
@@ -121,21 +128,28 @@ async function getDefinitionImageContentData(params: CommonParams, definition: D
     });
 
     // Register upstream images
+    if(!definition.dependencies?.imageVariants) {
+        throw `Unable to process image variants for ${definition.id}. imageVariants is undefined.`
+    }
     await asyncUtils.forEach(definition.dependencies.imageVariants, (async (imageTag: string) => {
-        if (typeof alreadyRegistered[imageTag] === 'undefined') {
-            const [image, imageVersion] = imageTag.split(':');
-            registrations.push({
-                "Component": {
-                    "Type": "other",
-                    "Other": {
-                        "Name": `Docker Image: ${image}`,
-                        "Version": imageVersion,
-                        "DownloadUrl": definition.dependencies.imageLink
-                    }
-                }
-            });
-            alreadyRegistered[definition.dependencies.image] = [imageVersion];
+        if (alreadyRegistered[imageTag]) {
+            return;
         }
+        if (!definition.dependencies?.imageLink) {
+            throw `Missing property imageLink for ${definition.id}`;
+        }
+        const [image, imageVersion] = imageTag.split(':');
+        registrations.push({
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": `Docker Image: ${image}`,
+                    "Version": imageVersion,
+                    "DownloadUrl": definition.dependencies.imageLink
+                }
+            }
+        });
+        alreadyRegistered[imageTag] = true;
     }));
 
     return {
@@ -146,13 +160,12 @@ async function getDefinitionImageContentData(params: CommonParams, definition: D
 }
 
 // Filter out components already in the registration list and format output returns an array of formatted and filtered contents
-function getUniqueComponents(alreadyRegistered: {}, info: ExtractedInfo): CgComponent[] {
-    let uniqueComponentList = [];
-
+function getUniqueComponents(alreadyRegistered: Lookup<boolean>, info: ExtractedInfo): CgComponent[] {
+    let uniqueComponentList: CgComponent[] = [];
     const transformer = new ComponentInfoTransformer(info.distro);
     const cgManifestInfo = transformer.transform(info);
     for (let contentType in cgManifestInfo) {
-        let cgComponents: CgComponent[] = cgManifestInfo[contentType];
+        let cgComponents: CgComponent[] = (<any>cgManifestInfo)[contentType];
         uniqueComponentList = uniqueComponentList.concat(cgComponents.reduce((prev: CgComponent[], next: CgComponent) => {
             const uniqueId = JSON.stringify(next);
             if(!alreadyRegistered[uniqueId]) {
@@ -173,7 +186,7 @@ async function generateReleaseNotesHeader(params: CommonParams, definition: Defi
         version: definition.getVersionForRelease(params.release),
         definition: definition.id,
         release: params.release,
-        annotation: definition.dependencies.annotation,
+        annotation: definition.dependencies?.annotation,
         repository: params.githubRepo,
         variants: definition.variants,
         hasVariants: definition.variants && definition.variants[0]

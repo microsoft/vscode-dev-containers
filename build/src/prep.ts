@@ -7,9 +7,9 @@ import * as path from 'path';
 import * as asyncUtils from './utils/async';
 import { getConfig, shouldFlattenDefinitionBaseImage } from './utils/config';
 import { Definition } from './domain/definition';
-import { CommonParams } from './domain/common';
+import { CommonParams, Lookup } from './domain/common';
 import * as definitionFactory from './domain/definition-factory';
-import * as mkdirp from 'mkdirp';
+import mkdirp from 'mkdirp';
 import * as glob from 'glob';
 import * as handlebars from 'handlebars';
 
@@ -33,7 +33,7 @@ interface PrepResult {
 
 let metaEnvTemplate: handlebars.TemplateDelegate;
 
-const scriptSHA = {};
+const scriptSHA: Lookup<string> = {};
 
 const dockerFilePreamble = getConfig('dockerFilePreamble');
 const scriptLibraryFolder = getConfig('scriptLibraryFolder', 'script-library');
@@ -68,9 +68,7 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
     };
 
     // Copy any scripts from the script library, add meta.env into the appropriate definition specific folder
-    if (definition.libraryScriptsPath) {
-        await copyLibraryScriptsForDefinition(definition.libraryScriptsPath, isForBuild, prepResult.meta);
-    }
+    await copyLibraryScriptsAndSetMeta(definition, isForBuild, prepResult.meta);
 
     if (isForBuild) {
         // If building, update FROM to target registry and version if definition has a parent
@@ -86,18 +84,21 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
             if(!baseImageFromCaptureGroups || baseImageFromCaptureGroups.length < 2) {
                 throw `Unable to find base image and tag in Dockerfile for ${definition.id}`;
             }
-            let registryPath = baseImageFromCaptureGroups[1].replace('${VARIANT}', variant).replace('$VARIANT', variant);
-            const tagName = (baseImageFromCaptureGroups.length > 2) ?
+            let repository = baseImageFromCaptureGroups[1];
+            if (variant) {
+                repository = repository.replace('${VARIANT}', variant).replace('$VARIANT', variant);
+            }
+            const tagName = (baseImageFromCaptureGroups.length > 2 && variant) ?
                 baseImageFromCaptureGroups[2].replace('${VARIANT}', variant).replace('$VARIANT', variant) :
                 null;
-            prepResult.baseImageTag = registryPath + (tagName ? ':' + tagName : '');
+            prepResult.baseImageTag = repository + (tagName ? ':' + tagName : '');
 
             // Create tag for flattened image
-            const registrySlashIndex = registryPath.indexOf('/');
+            const registrySlashIndex = repository.indexOf('/');
             if (registrySlashIndex > -1) {
-                registryPath = registryPath.substring(registrySlashIndex + 1);
+                repository = repository.substring(registrySlashIndex + 1);
             }
-            prepResult.flattenedBaseImageTag = `${params.registry}/${registryPath}:${tagName ? tagName + '-' : ''}flattened`;
+            prepResult.flattenedBaseImageTag = `${params.registry}/${repository}:${tagName ? tagName + '-' : ''}flattened`;
 
             // Modify Dockerfile contents to use flattened image tag
             prepResult.devContainerDockerfileModified = replaceFrom(prepResult.devContainerDockerfileModified, `FROM ${prepResult.flattenedBaseImageTag}`);
@@ -125,21 +126,22 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
     return prepResult;
 }
 
-export async function updateStub(definition: Definition, params: CommonParams) {
+export async function updateUserDockerfile(definition: Definition, params: CommonParams) {
     console.log('(*) Updating user Dockerfile...');
     const devContainerImageVersion = definition.majorVersionPartForRelease(params.release);
     let fromSection = `# ${dockerFilePreamble}https://github.com/${params.githubRepo}/tree/${params.release}/${definition.relativePath}/.devcontainer/${definition.hasBaseDockerfile ? 'base.' : ''}Dockerfile\n\n`;
     // The VARIANT arg allows this value to be set from devcontainer.json, handle it if found
     const userDockerfile = await definition.readDockerfile(true);
     if (/ARG\s+VARIANT\s*=/.exec(userDockerfile) !== null) {
-        const variant = definition.variants[0];
         const tagWithVariant = definition.getImageTagsForRelease(devContainerImageVersion, params.registry, params.repository, '${VARIANT}')[0];
         // Handle scenario where "# [Choice]" comment exists
         const choiceCaptureGroup=/(#\s+\[Choice\].+\n)ARG\s+VARIANT\s*=/.exec(userDockerfile);
         if (choiceCaptureGroup) {
             fromSection += choiceCaptureGroup[1];
         }
-        fromSection += `ARG VARIANT="${variant}"\nFROM ${tagWithVariant}`;
+        if(definition.variants) {
+            fromSection += `ARG VARIANT="${definition.variants[0]}"\nFROM ${tagWithVariant}`;
+        }
     } else {
         const imageTag = definition.getTagList(params.release, 'major', params.registry, params.repository)[0];
         fromSection += `FROM ${imageTag}`;
@@ -162,13 +164,13 @@ export async function updateConfigForRelease(definition: Definition, params: Com
 async function updateScriptSources(definition: Definition, params: CommonParams, userDockerfile: boolean = false, updateScriptSha: boolean = true) {
     let devContainerDockerfileModified = await definition.readDockerfile(userDockerfile);
     const scriptArgs = /ARG\s+.+_SCRIPT_SOURCE/.exec(devContainerDockerfileModified) || [];
-    await asyncUtils.forEach(scriptArgs, async (scriptArg) => {
+    await asyncUtils.forEach(scriptArgs, async (scriptArg: string) => {
         // Replace script URL and generate SHA if applicable
         const scriptCaptureGroups = new RegExp(`${scriptArg}\\s*=\\s*"(.+)/${scriptLibraryFolder.replace('.', '\\.')}/(.+)"`).exec(devContainerDockerfileModified);
         if (scriptCaptureGroups) {
             console.log(`(*) Script library source found.`);
             const scriptName = scriptCaptureGroups[2];
-            const scriptSource = `https://raw.githubusercontent.com/${params.gitHubRepo}/${params.release}/${scriptLibraryFolder}/${scriptName}`;
+            const scriptSource = `https://raw.githubusercontent.com/${params.githubRepo}/${params.release}/${scriptLibraryFolder}/${scriptName}`;
             console.log(`    Updated script source URL: ${scriptSource}`);
             let sha = scriptSHA[scriptName];
             if (updateScriptSha && typeof sha === 'undefined') {
@@ -202,22 +204,22 @@ export async function updateAllScriptSourcesInRepo(params: CommonParams, updateS
         // Update user definitions
         const dockerfileModified = await updateScriptSources(definition, params, true, updateScriptSha);
         definition.writeDockerfile(dockerfileModified, true);
-        await copyLibraryScriptsForDefinition(definition.libraryScriptsPath);
+        await copyLibraryScriptsAndSetMeta(definition);
     }
 }
 
 // Copy contents of script library to folder, meta.env file if specified and building
-async function copyLibraryScriptsForDefinition(libraryScriptsFolder: string, isForBuild: boolean = false, meta?: DefinitionMetadata) {
-    if (libraryScriptsFolder) {
-        await asyncUtils.forEach(await asyncUtils.readdir(libraryScriptsFolder), async (script: string) => {
+async function copyLibraryScriptsAndSetMeta(definition: Definition, isForBuild: boolean = false, meta?: DefinitionMetadata) {
+    if (definition.hasLibraryScripts) {
+        await asyncUtils.forEach(await asyncUtils.readdir(definition.libraryScriptsPath), async (script: string) => {
             // Only copy files that end in .sh
             if (path.extname(script) !== '.sh') {
                 return;
             }
             const possibleScriptSource = path.join(__dirname, '..', '..', scriptLibraryFolder, script);
             if (await asyncUtils.exists(possibleScriptSource)) {
-                const targetScriptPath = path.join(libraryScriptsFolder, script);
-                console.log(`(*) Copying ${script} to ${libraryScriptsFolder}...`);
+                const targetScriptPath = path.join(definition.libraryScriptsPath, script);
+                console.log(`(*) Copying ${script} to ${definition.libraryScriptsPath}...`);
                 await asyncUtils.copyFile(possibleScriptSource, targetScriptPath);
             }
         });
@@ -225,17 +227,18 @@ async function copyLibraryScriptsForDefinition(libraryScriptsFolder: string, isF
     if (isForBuild && meta) {
         // Write meta.env for use by scripts
         metaEnvTemplate = metaEnvTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'meta.env')));
-        mkdirp(libraryScriptsFolder);
-        await asyncUtils.writeFile(path.join(libraryScriptsFolder, 'meta.env'), metaEnvTemplate(meta));
+        mkdirp(definition.libraryScriptsPath);
+        await asyncUtils.writeFile(path.join(definition.libraryScriptsPath, 'meta.env'), metaEnvTemplate(meta));
     }
 }
 
 // For CI of the script library folder
 export async function copyLibraryScriptsForAllDefinitions() {
     const devcontainerFolders = glob.sync(`${path.resolve(__dirname, '..', '..')}/+(containers|container-templates|repository-containers)/**/.devcontainer`);
-    await asyncUtils.forEach(devcontainerFolders, async (folder) => {
+    await asyncUtils.forEach(devcontainerFolders, async (folder: string) => {
         console.log(`(*) Checking ${path.basename(path.resolve(folder, '..'))} for ${scriptLibraryFolderInDefinition} folder...`);
-        await copyLibraryScriptsForDefinition(folder);
+        const definition = definitionFactory.getDefinition(folder);
+        await copyLibraryScriptsAndSetMeta(definition);
     });
 }
 
