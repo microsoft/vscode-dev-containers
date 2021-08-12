@@ -25,6 +25,16 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: buildpack-deps",
+                    "Version": "bullseye-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
                     "Version": "stretch-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
@@ -56,6 +66,16 @@
                 "Other": {
                     "Name": "Docker Image: buildpack-deps",
                     "Version": "buster-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "bullseye-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
@@ -742,6 +762,24 @@
         },
         {
             "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pylint",
+                    "Version": "2.9.6"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "virtualenv",
+                    "Version": "20.7.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -802,6 +840,33 @@
         },
         {
             "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rust-analysis",
+                    "Version": "1.54.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rust-src",
+                    "Version": "1.54.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "clippy",
+                    "Version": "1.54.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: rust",
@@ -852,6 +917,16 @@
         },
         {
             "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "ruby-build",
+                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
+                    "commitHash": "887a13f86af229d85149738956d500808576bd8d"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: ruby",
@@ -885,7 +960,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "bundler",
-                    "Version": "2.2.24"
+                    "Version": "2.2.25"
                 }
             }
         },
@@ -894,7 +969,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "github-pages",
-                    "Version": "217"
+                    "Version": "218"
                 }
             }
         },
@@ -913,7 +988,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.31.0"
+                    "Version": "7.32.0"
                 }
             }
         },

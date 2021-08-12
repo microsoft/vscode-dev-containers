@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
-**Digest:** sha256:ce44b66a0cb732c163d8323ed9d308560f3dd6d04cf0ee0197018c030b8c590e
+**Digest:** sha256:d35bf5679c06da1e9672f6cc82ad72e8fdc85ad63abbaa59288bce7b2d220a15
 
 **Tags:**
 ```
@@ -21,7 +21,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Rust](https://github.com/rust-lang/rust) | 1.53.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.54.0 | /usr/local/cargo<br />/usr/local/rustup |
 
 **Tools installed using git**
 
@@ -35,9 +35,9 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.37 |
-| rust-analysis | 1.53.0 |
-| rust-src | 1.53.0 |
-| clippy | 1.53.0 |
+| rust-analysis | 1.54.0 |
+| rust-src | 1.54.0 |
+| clippy | 1.54.0 |
 
 **Additional linux tools and packages**
 

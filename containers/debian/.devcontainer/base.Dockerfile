@@ -1,4 +1,4 @@
-# [Choice] Debian version: buster, stretch
+# [Choice] Debian version: bullseye, buster, stretch
 ARG VARIANT="buster"
 FROM buildpack-deps:${VARIANT}-curl
 
