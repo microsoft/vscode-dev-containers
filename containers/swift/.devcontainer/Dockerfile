@@ -23,7 +23,7 @@ RUN git clone https://github.com/vknabel/sourcekite \
     && ln -s /usr/lib/libsourcekitdInProc.so /usr/lib/sourcekitdInProc \
     && cd sourcekite && make install PREFIX=/usr/local -j2
 
-# [Choice] Node.js version: none, lts, 16, 14, 12, 10
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
