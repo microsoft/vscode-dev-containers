@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:3998a99e53f6536fb4ea6066ef9424e02a161259d15fb1046923d906f2c1a457
+**Digest:** sha256:8caf60f72958c2e21f5538e9f844a344a16dd0db6fd6e990cf63b7dc280924b3
 
 **Tags:**
 ```
@@ -31,13 +31,13 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.6.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.6.2 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -96,7 +96,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:c66112227b53f428433510ef57eacdfb796b3cf0b408599d2ba5862de8b8460a
+**Digest:** sha256:1b197f10f127f129d51210193642c6147569abaa356581a6dba5063ba108f495
 
 **Tags:**
 ```
@@ -114,13 +114,13 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.5 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -179,7 +179,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:02463ac15a4d78f2e5996706b54b1ef2f16635120c4be80da4f5975a875afde1
+**Digest:** sha256:3e871f93a065f6cb837d02d39533909ca8a82f03e86337ebf4f4589681c71c84
 
 **Tags:**
 ```
@@ -197,13 +197,13 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.5 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -262,7 +262,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:6651055dd382fb5a80efa4f28f25ac01ec745da73b9fdc6266db67ce867f7209
+**Digest:** sha256:361390492abf017b6b6e3b35165b46f9177e761abe1e33f22acec958c627db4d
 
 **Tags:**
 ```
@@ -279,13 +279,13 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.5 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -301,7 +301,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 | apt-transport-https | 1.4.11 |
 | apt-utils | 1.4.11 |
 | ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u14 |
+| curl | 7.52.1-5+deb9u15 |
 | dialog | 1.3-20160828-2 |
 | git | 1:2.11.0-3+deb9u7 |
 | gnupg2 | 2.1.18-8~deb9u4 |
@@ -345,7 +345,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:d54254627053b6149c3c3885c67f545cde1a7231b9f05cdc3713ea20b22a97e1
+**Digest:** sha256:fd11caf32dc2c41e58282191e36b0c10209b91196b2adcaefca6f6062f5ddfef
 
 **Tags:**
 ```
@@ -362,13 +362,13 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.5 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -384,7 +384,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 | apt-transport-https | 1.4.11 |
 | apt-utils | 1.4.11 |
 | ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u14 |
+| curl | 7.52.1-5+deb9u15 |
 | dialog | 1.3-20160828-2 |
 | git | 1:2.11.0-3+deb9u7 |
 | gnupg2 | 2.1.18-8~deb9u4 |

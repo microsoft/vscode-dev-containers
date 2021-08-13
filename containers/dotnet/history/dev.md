@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:d2f96f746bff012622cbbf3c2df7d97aedc2a820f3c9b2634714d1795cd2b327
+**Digest:** sha256:80396a6598a9ded790560dec96dede70f8d8604f30bc16ecd42a0f72696154ed
 
 **Tags:**
 ```
@@ -29,13 +29,13 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 5.0.302 (5.0.8) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 5.0.400 (5.0.9) | /usr |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -59,7 +59,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.4 |
+| libssl1.1 | 1.1.1f-1ubuntu2.5 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -72,7 +72,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
-| openssh-client | 1:8.2p1-4ubuntu0.2 |
+| openssh-client | 1:8.2p1-4ubuntu0.3 |
 | procps | 2:3.3.16-1ubuntu2.2 |
 | psmisc | 23.3-1 |
 | rsync | 3.1.3-8 |
@@ -88,7 +88,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:2b7be069f08f671cd594a6fb5d6885ffef45beaa1353492e5da0e1fe18e9daa6
+**Digest:** sha256:31e49771b7a9602ad221a7c9f3b9acc7d9632e8567cc3d98330d8ac53a43f8b7
 
 **Tags:**
 ```
@@ -106,13 +106,13 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 3.1.411 (3.1.1) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 3.1.412 (3.1.1) | /usr |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -136,7 +136,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.4 |
+| libssl1.1 | 1.1.1f-1ubuntu2.5 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -149,7 +149,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
-| openssh-client | 1:8.2p1-4ubuntu0.2 |
+| openssh-client | 1:8.2p1-4ubuntu0.3 |
 | procps | 2:3.3.16-1ubuntu2.2 |
 | psmisc | 23.3-1 |
 | rsync | 3.1.3-8 |
@@ -165,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:7f330f4d70379ecc4dce9e4e8cea3caca82270be42910a4095dff09155d5cad3
+**Digest:** sha256:ecd32038f8030e7596a91b16bcafa0ca01f93f6b98ba3b4c1480d5601277de00
 
 **Tags:**
 ```
@@ -183,13 +183,13 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 2.1.816 (2.1.2) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 2.1.817 (2.1.2) | /usr |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -213,7 +213,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.4 |
+| libssl1.1 | 1.1.1f-1ubuntu2.5 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -226,7 +226,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
-| openssh-client | 1:8.2p1-4ubuntu0.2 |
+| openssh-client | 1:8.2p1-4ubuntu0.3 |
 | procps | 2:3.3.16-1ubuntu2.2 |
 | psmisc | 23.3-1 |
 | rsync | 3.1.3-8 |

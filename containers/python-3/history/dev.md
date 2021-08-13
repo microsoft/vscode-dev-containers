@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:04cf64b8e0d045477d9c3a0fd2e94df8c2e2dd16a8e06ede00e60c56ff46f27c
+**Digest:** sha256:e7d36b56d91df5c35d25d1825eb7733ddd05affbb5dde6ca5d8f48c4af9c8a4a
 
 **Tags:**
 ```
@@ -36,7 +36,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -52,8 +52,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.7.0 |
-| pipx | 0.16.3 |
+| virtualenv | 20.7.2 |
+| pipx | 0.16.4 |
 
 **Additional linux tools and packages**
 
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:bb489b277b9ba212adc6d7920da642ccaf9ec48d824adcd8082fd5b022e8ff1e
+**Digest:** sha256:be3b9c7e27aed039c10cb5ee30f79b07c01f7b1656487d09ecfabc62a18b7151
 
 **Tags:**
 ```
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -144,8 +144,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.7.0 |
-| pipx | 0.16.3 |
+| virtualenv | 20.7.2 |
+| pipx | 0.16.4 |
 
 **Additional linux tools and packages**
 
@@ -197,7 +197,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:7d34cedbaea4d1860dc0c73339068fc0163afb426c1d97e50f738bd3a74db637
+**Digest:** sha256:27c6668de022586bf342e205dcda8d4f75855eb6e08791a0df23c1f9a17125f7
 
 **Tags:**
 ```
@@ -220,7 +220,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -236,8 +236,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.7.0 |
-| pipx | 0.16.3 |
+| virtualenv | 20.7.2 |
+| pipx | 0.16.4 |
 
 **Additional linux tools and packages**
 
@@ -289,7 +289,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:6fee0c58a0ae68938bfc35433c6e353a2146b2dfc66a843048b02174e5ec0fdb
+**Digest:** sha256:a1d234ed0f17ae2d7c11b4f31138810a932a8b4b4609bb95756bbaab3ff67a75
 
 **Tags:**
 ```
@@ -312,7 +312,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -328,8 +328,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.7.0 |
-| pipx | 0.16.3 |
+| virtualenv | 20.7.2 |
+| pipx | 0.16.4 |
 
 **Additional linux tools and packages**
 

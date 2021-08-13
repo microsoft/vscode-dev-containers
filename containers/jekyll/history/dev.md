@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll)
 
-**Digest:** sha256:eab5c4b62513d29d19369d56765dc6d252401037960812cfe4cf3a68f7aa0f18
+**Digest:** sha256:ccf246394e6d8f80c5e04ca32ba77e443f78c91fa39320c6c2cca90c01e0594f
 
 **Tags:**
 ```
@@ -28,10 +28,10 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 887a13f86af229d85149738956d500808576bd8d | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 57c397d7cabf9f0ff73b8c03c4c1859a3850405a | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 

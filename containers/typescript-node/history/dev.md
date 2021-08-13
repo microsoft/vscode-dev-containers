@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:f4b63756f8f9e693eaa06fb24730aa3af8ceacb5dbf3e04b829a2a2867ba6430
+**Digest:** sha256:c965461279f174b2d2d7cb04e88456ca16d4a8cfbff3805e31899010e5642c8b
 
 **Tags:**
 ```
@@ -31,14 +31,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.6.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.6.2 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:4d01e69bcabe8d732800955b0465743b5bd959dc44d243fe066413b3a97d5408
+**Digest:** sha256:bdd18238de7debba8dd0b249e816bb3673e61e76d6323764c31ea644d5dfd190
 
 **Tags:**
 ```
@@ -117,14 +117,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.5 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:7b99b9c1317f7b2b66ce10e940c0550e68956ef6ce0dc3822f2471741e451072
+**Digest:** sha256:d43b387b5b3fff4230406a77f6b54f3452f83cc7211ac45b7c765d1443887f4d
 
 **Tags:**
 ```
@@ -203,14 +203,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.5 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:d5022c5d7fad12e1f75cf5bf77cf9408817c47a4a135a7402406a60023f5dc96
+**Digest:** sha256:3133990aa3f55581d37affcf98466e8ff4969fb8c1066f079d97b7710a77f1cd
 
 **Tags:**
 ```
@@ -288,14 +288,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.5 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -313,7 +313,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 | apt-transport-https | 1.4.11 |
 | apt-utils | 1.4.11 |
 | ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u14 |
+| curl | 7.52.1-5+deb9u15 |
 | dialog | 1.3-20160828-2 |
 | git | 1:2.11.0-3+deb9u7 |
 | gnupg2 | 2.1.18-8~deb9u4 |
@@ -357,7 +357,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:5786fa4644d4f8c7c422849b9ac5c8baa5f678f763fd23d2bf413ce5224e5e31
+**Digest:** sha256:05da4d477f02d34e6f75bf3dfe8c08af63ce87b0d57f862429e0a5e7fc9d9efd
 
 **Tags:**
 ```
@@ -374,14 +374,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.5 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -399,7 +399,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 | apt-transport-https | 1.4.11 |
 | apt-utils | 1.4.11 |
 | ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u14 |
+| curl | 7.52.1-5+deb9u15 |
 | dialog | 1.3-20160828-2 |
 | git | 1:2.11.0-3+deb9u7 |
 | gnupg2 | 2.1.18-8~deb9u4 |

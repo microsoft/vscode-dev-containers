@@ -10,7 +10,7 @@
 
 ## Variant: 1.16
 
-**Digest:** sha256:19c65d8fe03b074fd09db2965eb15c4a5e32ba8f143486f68208fc5a7b706292
+**Digest:** sha256:febdf787ea4d9f74b7121a49ad53f2280793777dc7f3fda16f5cf57b4a98739b
 
 **Tags:**
 ```
@@ -28,20 +28,20 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.16.6 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.16.7 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.7.0 |
+| golang.org/x/tools/gopls | 0.7.1 |
 | honnef.co/go/tools | 0.2.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.0.9 |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.15
 
-**Digest:** sha256:34c26ea41ee185c6aa0ec4cf4bd32c1f937b45aad82cc6980d72c0be85347e83
+**Digest:** sha256:9231fff3523a9da8058fc4705746fb3140c6ead1b1626c29d82c74bd40f35267
 
 **Tags:**
 ```
@@ -122,20 +122,20 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.15
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.15.14 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.15.15 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.7.0 |
+| golang.org/x/tools/gopls | 0.7.1 |
 | honnef.co/go/tools | 0.2.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.0.9 |
