@@ -151,14 +151,14 @@ fi
 # https://github.com/golang/vscode-go/blob/0ff533d408e4eb8ea54ce84d6efa8b2524d62873/src/goToolsInformation.ts
 # Exception `dlv-dap` is a copy of github.com/go-delve/delve/cmd/dlv built from the master.
 GO_TOOLS="\
-    golang.org/x/tools/gopls \
-    honnef.co/go/tools/... \
-    golang.org/x/lint/golint \
-    github.com/mgechev/revive \
-    github.com/uudashr/gopkgs/v2/cmd/gopkgs \
-    github.com/ramya-rao-a/go-outline \
-    github.com/go-delve/delve/cmd/dlv \
-    github.com/golangci/golangci-lint/cmd/golangci-lint"
+    golang.org/x/tools/gopls@latest \
+    honnef.co/go/tools/cmd/staticcheck@latest \
+    golang.org/x/lint/golint@latest \
+    github.com/mgechev/revive@latest \
+    github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest \
+    github.com/ramya-rao-a/go-outline@latest \
+    github.com/go-delve/delve/cmd/dlv@latest \
+    github.com/golangci/golangci-lint/cmd/golangci-lint@latest"
 if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     echo "Installing common Go tools..."
     export PATH=${TARGET_GOROOT}/bin:${PATH}
