@@ -12,7 +12,7 @@ ENV LANG=en_US.UTF-8 \
 # Install bundler, latest jekyll, and github-pages for older jekyll
 RUN gem install bundler jekyll github-pages
 
-# [Choice] Node.js version: none, lts/*, 16, 14, 12
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
