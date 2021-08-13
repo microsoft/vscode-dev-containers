@@ -6,7 +6,7 @@ about: Create a report to help us improve
 <!--  🚨 Please only include bugs related to Dev Container Definitions here. 🚨 Other locations:
         VS Code Remote Development: http://github.com/Microsoft/vscode-remote-release 
         VS Code OSS: http://github.com/Microsoft/vscode
-        GitHub Codespaces: https://github.community/c/codespaces-beta
+        GitHub Codespaces: https://github.com/github/feedback/discussions/categories/codespaces-feedback
 -->
 
 <!-- Please search existing issues to avoid creating duplicates. -->
@@ -14,6 +14,7 @@ about: Create a report to help us improve
 
 - VSCode Version:
 - Local OS Version:
+- Reproduces in: <Codespaces | Remote - Containers | Both>
 - Name of Dev Container Definition with Issue:
 
 Steps to Reproduce:
