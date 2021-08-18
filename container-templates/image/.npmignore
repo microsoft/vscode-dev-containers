@@ -1,6 +1,7 @@
-../README.md
-../test-project
-../.vscode/launch.json
-../.vscode/launch.test.json
-../.vscode/settings.json
-../.vscode/tasks.json
+README.md
+test-project
+history
+.devcontainer/library-scripts/README.md
+definition-manifest.json
+.vscode
+.npmignore

@@ -10,13 +10,9 @@ checkCommon
 export SYNC_LOCALHOST_KUBECONFIG=true 
 exec bash
 
-# Run Docker init script
-/usr/local/share/docker-init.sh
-
 # Actual tests
 checkExtension "ms-azuretools.vscode-docker"
 checkExtension "ms-kubernetes-tools.vscode-kubernetes-tools"
-check "non-root-user" "id vscode"
 check "docker-socket" ls -l /var/run/docker.sock 
 check "docker" docker ps -a
 check "kube-config-mount" ls -l /usr/local/share/kube-localhost

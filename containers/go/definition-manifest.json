@@ -1,32 +1,47 @@
 {
-	"variants": ["1", "1.16", "1.15"],
-	"definitionVersion": "0.202.2",
+	"variants": ["1.16", "1.15"],
+	"definitionVersion": "0.203.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"go:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"1.16": [ "go:${VERSION}-1" ]
+		}
 	},
 	"dependencies": {
 		"image": "golang:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/golang",
-		"debian": [
-			"yarn"
+		"debian": [{
+			"cgIgnore": false,
+			"name": "yarn"
+			},
+			"g++",
+			"gcc",
+			"libc6-dev", 
+			"make",
+			"pkg-config"
 		],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"go": {
 			"golang.org/x/tools/gopls": null,
-			"honnef.co/go/tools/...": null,
-			"golang.org/x/lint/golint": null,
+			"honnef.co/go/tools": null,
+			"golang.org/x/lint": null,
 			"github.com/mgechev/revive": null,
-			"github.com/uudashr/gopkgs/v2/cmd/gopkgs": null,
+			"github.com/uudashr/gopkgs": null,
 			"github.com/ramya-rao-a/go-outline": null,
-			"github.com/go-delve/delve/cmd/dlv": null,
-			"github.com/golangci/golangci-lint/cmd/golangci-lint": null
+			"github.com/go-delve/delve": null,
+			"github.com/golangci/golangci-lint": null
+		},
+		"languages": {
+			"Go": {
+				"cgIgnore": true
+			}
 		}
 	}
 }

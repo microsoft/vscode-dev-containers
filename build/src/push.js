@@ -9,6 +9,8 @@ const asyncUtils = require('./utils/async');
 const configUtils = require('./utils/config');
 const prep = require('./prep');
 
+const imageLabelPrefix = configUtils.getConfig('imageLabelPrefix', 'com.microsoft.vscode.devcontainers');
+
 async function push(repo, release, updateLatest, registry, registryPath, stubRegistry,
     stubRegistryPath, pushImages, prepOnly, definitionsToSkip, page, pageTotal, replaceImages, definitionId) {
 
@@ -47,7 +49,7 @@ async function pushImage(definitionId, repo, release, updateLatest,
     const dockerFileExists = await asyncUtils.exists(path.join(dotDevContainerPath, 'Dockerfile'));
     const baseDockerFileExists = await asyncUtils.exists(path.join(dotDevContainerPath, 'base.Dockerfile'));
     const dockerFilePath = path.join(dotDevContainerPath, `${baseDockerFileExists ? 'base.' : ''}Dockerfile`);
-
+    
     // Make sure there's a Dockerfile present
     if (!await asyncUtils.exists(dockerFilePath)) {
         throw `Invalid path ${dockerFilePath}`;
@@ -90,7 +92,17 @@ async function pushImage(definitionId, repo, release, updateLatest,
                 const buildParams = (variant ? ['--build-arg', `VARIANT=${variant}`] : [])
                     .concat(versionTags.reduce((prev, current) => prev.concat(['-t', current]), []));
                 const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };
-                await asyncUtils.spawn('docker', ['build', workingDir, '-f', dockerFilePath].concat(buildParams), spawnOpts);
+                await asyncUtils.spawn('docker', [
+                        'build', 
+                        workingDir,
+                        '-f', dockerFilePath, 
+                        '--label', `version=${prepResult.meta.version}`,
+                        `--label`, `${imageLabelPrefix}.id=${prepResult.meta.definitionId}`,
+                        '--label', `${imageLabelPrefix}.variant=${prepResult.meta.variant}`,
+                        '--label', `${imageLabelPrefix}.release=${prepResult.meta.gitRepositoryRelease}`,
+                        '--label', `${imageLabelPrefix}.source=${prepResult.meta.gitRepository}`,
+                        '--label', `${imageLabelPrefix}.timestamp='${prepResult.meta.buildTimestamp}'`
+                    ].concat(buildParams), spawnOpts);
 
                 // Push
                 if (pushImages) {
@@ -104,7 +116,6 @@ async function pushImage(definitionId, repo, release, updateLatest,
             } else {
                 console.log(`(*) Version already published. Skipping.`);
             }
-
         }
     }
 
@@ -174,7 +185,7 @@ async function isImageAlreadyPublished(registryName, repositoryName, tagName) {
     const tagListOutput = await asyncUtils.spawn('az', ['acr', 'repository', 'show-tags',
         '--name', registryName,
         '--repository', repositoryName,
-        '--query', `"[?contains(@,'${tagName}')]"`
+        '--query', `"[?@=='${tagName}']"`
     ], { shell: true, stdio: 'pipe' });
     const tagList = JSON.parse(tagListOutput);
     if (tagList.length > 0) {

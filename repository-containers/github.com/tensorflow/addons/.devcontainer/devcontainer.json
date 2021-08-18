@@ -16,7 +16,6 @@
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": null,
 		"python.formatting.provider": "black",
 		"python.linting.flake8Enabled": true,
 		"python.testing.pytestEnabled": true,

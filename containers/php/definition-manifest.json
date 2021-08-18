@@ -1,32 +1,41 @@
 {
-	"variants": ["8", "8.0", "7", "7.4", "7.3"],
-	"definitionVersion": "0.201.2",
+	"variants": ["8.0", "7.4", "7.3"],
+	"definitionVersion": "0.201.8",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"php:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"8.0": [ "php:${VERSION}-8" ],
+			"7.4": [ "php:${VERSION}-7" ]
+		}
 	},
 	"dependencies": {
 		"image": "php:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/php",
-		"debian": [
-			"yarn"
-		],
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"other": {
 			"Xdebug": {
-				"versionCommand": "php --version | grep -oE 'with Xdebug\\sv[^,]+'| sed -n '/with Xdebug\\sv/s///p'",
-				"downloadUrl":"https://xdebug.org/"
+				"path": "/usr/local/lib/php/extensions"
 			},
 			"Composer": {
-				"versionCommand": "composer --version 2>/dev/null | grep -oE 'version\\s[^ ]+' | sed -n '/version\\s/s///p'",
-				"downloadUrl": "https://getcomposer.org/installer"
+				"path": "/usr/local"
 			}
+		},
+		"languages": {
+			"PHP": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}	
 		}
 	}
 }

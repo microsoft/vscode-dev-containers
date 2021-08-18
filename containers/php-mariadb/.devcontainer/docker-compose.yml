@@ -8,8 +8,7 @@ services:
       args:
         # [Choice] PHP version: 7, 7.4, 7.3
         VARIANT: "7"
-        # [Option] Install Node.js
-        INSTALL_NODE: "true"
+        # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
         NODE_VERSION: "lts/*"
         # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
         USER_UID: 1000

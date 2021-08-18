@@ -28,11 +28,21 @@ async function loadConfig(repoPath) {
     const containersPath = path.join(repoPath, getConfig('containersPathInRepo', 'containers'));
     const definitions = await asyncUtils.readdir(containersPath, { withFileTypes: true });
     await asyncUtils.forEach(definitions, async (definitionFolder) => {
+        // If directory entry is a file (like README.md, skip
         if (!definitionFolder.isDirectory()) {
             return;
         }
+
         const definitionId = definitionFolder.name;
         const definitionPath = path.resolve(path.join(containersPath, definitionId));
+
+        // If a .deprecated file is found, remove the directory from staging and return
+        if(await asyncUtils.exists(path.join(definitionPath, '.deprecated'))) {
+            await asyncUtils.rimraf(definitionPath);
+            return;
+        }
+
+        // Add to complete list of definitions
         allDefinitionPaths[definitionId] = {
             path: definitionPath,
             relativeToRootPath: path.relative(repoPath, definitionPath)
@@ -136,7 +146,7 @@ function getAllDefinitionPaths() {
     return allDefinitionPaths;
 }
 
-// Convert a release string (v1.0.0) or branch (master) into a version. If a definitionId and 
+// Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
 // release string is passed in, use the version specified in defintion-build.json if one exists.
 function getVersionFromRelease(release, definitionId) {
     definitionId = definitionId || 'NOT SPECIFIED';
@@ -232,8 +242,17 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
     }, []);
 }
 
-// Generate complete list of tags for a given definition
-function getTagList(definitionId, release, updateLatest, registry, registryPath, variant) {
+/* 
+Generate complete list of tags for a given definition.
+
+versionPartHandling has a few different modes:
+    - true/'all-latest' - latest, X.X.X, X.X, X
+    - false/'all' - X.X.X, X.X, X
+    - 'full-only' - X.X.X
+    - 'major-minor' - X.X
+    - 'major' - X
+*/
+function getTagList(definitionId, release, versionPartHandling, registry, registryPath, variant) {
     const version = getVersionFromRelease(release, definitionId);
 
     // If version is 'dev', there's no need to generate semver tags for the version
@@ -247,35 +266,60 @@ function getTagList(definitionId, release, updateLatest, registry, registryPath,
     if (versionParts.length !== 3) {
         throw (`Invalid version format in ${version}.`);
     }
+
+    let versionList, updateUnversionedTags, updateLatest;
+    switch(versionPartHandling) {
+        case true:
+        case 'all-latest':
+            updateLatest = true; 
+            updateUnversionedTags = true;
+            versionList = [version,`${versionParts[0]}.${versionParts[1]}`, `${versionParts[0]}` ];
+            break;
+        case false:
+        case 'all':
+            updateLatest = false;
+            updateUnversionedTags = true;
+            versionList = [version,`${versionParts[0]}.${versionParts[1]}`, `${versionParts[0]}` ];
+            break;
+        case 'full-only':
+            updateLatest = false;
+            updateUnversionedTags = false;
+            versionList = [version];
+            break;
+        case 'major-minor':
+            updateLatest = false;
+            updateUnversionedTags = false;
+            versionList = [`${versionParts[0]}.${versionParts[1]}`];
+            break;
+        case 'major':
+            updateLatest = false;
+            updateUnversionedTags = false;
+            versionList = [ `${versionParts[0]}`];
+            break;
+    }
+
     // Normally, we also want to return a tag without a version number, but for
     // some definitions that exist in the same repository as others, we may
     // only want to return a list of tags with part of the version number in it
-    const versionedTagsOnly = config.definitionBuildSettings[definitionId].versionedTagsOnly;
-    const versionList = versionedTagsOnly ? [
-            version,
-            `${versionParts[0]}.${versionParts[1]}`,
-            `${versionParts[0]}`
-        ] : [
-            version,
-            `${versionParts[0]}.${versionParts[1]}`,
-            `${versionParts[0]}`,
-            '' // This is the equivalent of latest for qualified tags- e.g. python:3 instead of python:0.35.0-3
-        ];
+    if(updateUnversionedTags && !config.definitionBuildSettings[definitionId].versionedTagsOnly) {
+        // This is the equivalent of latest for qualified tags- e.g. python:3 instead of python:0.35.0-3
+        versionList.push(''); 
+    }
 
-    // If this variant should also be used for the the latest tag (it's the left most in the list), add it
     const allVariants = getVariants(definitionId);
     const firstVariant = allVariants ? allVariants[0] : variant;
-    let tagList = (updateLatest 
-        && config.definitionBuildSettings[definitionId].latest
-        && variant === firstVariant)
-        ? getLatestTag(definitionId, registry, registryPath)
-        : [];
+    let tagList = [];
 
     versionList.forEach((tagVersion) => {
         tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
     });
 
-    return tagList;
+    // If this variant should also be used for the the latest tag (it's the left most in the list), add it
+    return tagList.concat((updateLatest 
+        && config.definitionBuildSettings[definitionId].latest
+        && variant === firstVariant)
+        ? getLatestTag(definitionId, registry, registryPath)
+        : []);
 }
 
 // Walk the image build config and paginate and sort list so parents build before (and with) children
@@ -425,10 +469,28 @@ function getParentTagForVersion(definitionId, version, registry, registryPath, v
     let parentId = config.definitionBuildSettings[definitionId].parent;
     if (parentId) {
         if(typeof parentId !== 'string') {
-            // Use variant to figure out correct parent, or return first if no variant
+            // Use variant to figure out correct parent, or return first parent if child has no variant
             parentId = variant ? parentId[variant] : parentId[Object.keys(parentId)[0]];
         }
-        return getTagsForVersion(parentId, version, registry, registryPath, variant)[0];
+    
+        // Determine right parent variant to use (assuming there are variants)
+        const parentVariantList = getVariants(parentId);
+        let parentVariant;
+        if(parentVariantList) {
+            // If a variant is specified in the parentVariant property in build, use it - otherwise default to the child definition's variant
+            parentVariant = config.definitionBuildSettings[definitionId].parentVariant || variant;
+            if(typeof parentVariant !== 'string') {
+                // Use variant to figure out correct variant it not the same across all parents, or return first variant if child has no variant
+                parentVariant = variant ? parentVariant[variant] : parentVariant[Object.keys(parentId)[0]];
+            }
+            if(!parentVariantList.includes(parentVariant)) {
+                throw `Unable to determine variant for parent. Variant ${parentVariant} is not in ${parentId} list: ${parentVariantList}`;
+            }
+        }
+        
+        // Parent image version may be different than child's
+        const parentVersion = getVersionFromRelease(version, parentId);
+        return getTagsForVersion(parentId, parentVersion, registry, registryPath, parentVariant)[0];
     }
     return null;
 }
@@ -438,7 +500,7 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
     updatedRegistry = updatedRegistry || currentRegistry;
     updatedRegistryPath = updatedRegistryPath || currentRegistryPath;
 
-    const definition = getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath, false);
+    const definition = getDefinitionFromTag(currentTag, currentRegistry, currentRegistryPath);
 
     // If definition not found, fall back on swapping out more generic logic - e.g. for when a image already has a version tag in it
     if (!definition) {
@@ -464,7 +526,7 @@ function getUpdatedTag(currentTag, currentRegistry, currentRegistryPath, updated
 }
 
 // Lookup definition from a tag
-function getDefinitionFromTag(tag, registry, registryPath, matchWithVersionNumber) {
+function getDefinitionFromTag(tag, registry, registryPath) {
     registry = registry || '.+';
     registryPath = registryPath || '.+';
     const captureGroups = new RegExp(`${registry}/${registryPath}/(.+):(.+)`).exec(tag);
@@ -508,7 +570,6 @@ function getAllDependencies() {
 
 function getPoolKeyForPoolUrl(poolUrl) {
     const poolKey = config.poolKeys[poolUrl];
-    console.log (`(*) Key for ${poolUrl} is ${poolKey}`);
     return poolKey;
 }
 
@@ -539,6 +600,11 @@ function shouldFlattenDefinitionBaseImage(definitionId) {
     return (getConfig('flattenBaseImage', []).indexOf(definitionId) >= 0)
 }
 
+function getDefaultDependencies(dependencyType) {
+    const packageManagerConfig = getConfig('commonDependencies');
+    return packageManagerConfig ? packageManagerConfig[dependencyType] : null;
+} 
+
 module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
@@ -553,6 +619,7 @@ module.exports = {
     objectByDefinitionLinuxDistro: objectByDefinitionLinuxDistro,
     getDefinitionDependencies: getDefinitionDependencies,
     getAllDependencies: getAllDependencies,
+    getDefaultDependencies: getDefaultDependencies,
     getStagingFolder: getStagingFolder,
     getLinuxDistroForDefinition: getLinuxDistroForDefinition,
     getVersionFromRelease: getVersionFromRelease,

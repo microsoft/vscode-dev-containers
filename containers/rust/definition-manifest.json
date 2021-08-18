@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "0.200.2",
+	"definitionVersion": "0.200.7",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -10,16 +10,26 @@
 	"dependencies": {
 		"image": "rust:1",
 		"imageLink": "https://hub.docker.com/_/rust",
+		"apt": [
+			"lldb", 
+			"python3-minimal",
+			"gcc", 
+			"libc6-dev"
+		],
 		"git": {
-			
-			"Oh My Zsh!": "/root/.oh-my-zsh"
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
 		},
 		"cargo": {
-			"rls": "rls --version",
-			"rustfmt": "rustfmt --version",
-			"rust-analysis": null,
-			"rust-src": null,
-			"clippy": null
+			"rls": null,
+			"rustfmt": null,
+			"rust-analysis": "rustc --version",
+			"rust-src": "rustc --version",
+			"clippy": "rustc --version"
+		},
+		"languages": {
+			"Rust": {
+				"cgIgnore": true
+			}
 		}
 	}
 }

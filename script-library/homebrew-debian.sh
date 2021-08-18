@@ -5,7 +5,7 @@
 #-------------------------------------------------------------------------------------------------------------
 #
 # ** This script is community supported **
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/homebrew.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/homebrew.md
 # Maintainer: @andreiborisov
 #
 # Syntax: ./homebrew-debian.sh [non-root user] [add Homebrew binaries to PATH] [whether to use shallow clone] [where to install Homebrew]
@@ -59,6 +59,12 @@ function updatefishconfig() {
 }
 
 export DEBIAN_FRONTEND=noninteractive
+
+ARCHITECTURE="$(uname -m)"
+if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ]; then
+    echo "(!) Architecture $ARCHITECTURE unsupported"
+    exit 1
+fi
 
 # Install dependencies if missing
 if ! dpkg -s \

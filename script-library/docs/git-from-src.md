@@ -1,6 +1,6 @@
 # Git Build/Install from Source Script
 
-*Builds and installs Git from source. Useful for when you want the latest and greatest features. Auto-detects latest stable version and installs needed dependencies.*
+*Install an up-to-date version of Git and build from source as needed. Useful for when you want the latest and greatest features. Auto-detects latest stable version and installs needed dependencies.*
 
 **Script status**: Stable
 
@@ -11,12 +11,13 @@
 ## Syntax
 
 ```text
-./git-from-src-debian.sh [Version]
+./git-from-src-debian.sh [Version] [Use PPA if available]
 ```
 
 |Argument|Default|Description|
 |--------|-------|-----------|
 |Version|`latest`| Version of Git to build and install. Use `latest` to install the latest stable version. |
+|Use PPA if available|`false`| If using Ubuntu and a build already exists in the git-core PPA, use it instead of building from scratch. |
 
 ## Usage
 

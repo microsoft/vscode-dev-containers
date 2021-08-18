@@ -2,14 +2,12 @@
 	"name": "Debian",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Debian version: buster, stretch
+		// Update 'VARIANT' to pick an Debian version: bullseye, buster, stretch
 		"args": { "VARIANT": "buster" }
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
-	},
+	"settings": {},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [],

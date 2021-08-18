@@ -5,14 +5,12 @@
 		"args": { 
 			// Update VARIANT to pick a PHP version: 8, 8.0, 7, 7.4, 7.3
 			"VARIANT": "8",
-			"INSTALL_NODE": "true",
 			"NODE_VERSION": "lts/*"
 		}
 	},
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"php.validate.executablePath": "/usr/local/bin/php"
 	},
 

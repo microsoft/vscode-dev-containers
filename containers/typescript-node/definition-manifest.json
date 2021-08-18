@@ -1,6 +1,6 @@
 {
-	"variants": ["14-buster", "12-buster", "10-buster", "14-stretch", "12-stretch", "10-stretch"],
-	"definitionVersion": "0.201.2",
+	"variants": ["16-buster", "14-buster", "12-buster", "14-stretch", "12-stretch"],
+	"definitionVersion": "0.202.5",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -9,25 +9,38 @@
 			"typescript-node:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
+			"16-buster": [ "typescript-node:${VERSION}-16" ],
 			"14-buster": [ "typescript-node:${VERSION}-14" ],
-			"12-buster": [ "typescript-node:${VERSION}-12" ],
-			"10-buster": [ "typescript-node:${VERSION}-10" ]
+			"12-buster": [ "typescript-node:${VERSION}-12" ]
 		}
 	},
 	"dependencies": {
 		"image": "node:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/node",
-		"debian": [
-			"yarn"
-		],
+		"debian": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/node/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"npm": [
 			"eslint",
-			"tslint",
+			"tslint-to-eslint-config",
 			"typescript"
-		]
+		],
+		"languages": {
+			"Node.js": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			},
+			"TypeScript": {
+				"cgIgnore": true,
+				"versionCommand": "tsc --version | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+				"path": "/usr/local/share/npm-global",
+				"downloadUrl": "https://www.typescriptlang.org/"
+			}
+		}
 	}
 }

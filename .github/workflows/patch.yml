@@ -1,9 +1,9 @@
 name: Run Patches
 
 on: 
-  #repository_dispatch:
+  workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'build/patch/**'
 

@@ -2,7 +2,7 @@
 
 *Adds a lightweight [Fluxbox](http://fluxbox.org/) based desktop to the container that can be accessed using a VNC viewer or the web. UI-based commands executed from the built in VS code terminal will open on the desktop automatically.*
 
-**Script status**: Draft
+**Script status**: Preview
 
 **OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
 
@@ -39,7 +39,7 @@
     The `ENTRYPOINT` script can be chained with another script by adding it to the array after `desktop-init.sh`.
     If you need to select a different locale, be sure to add it to `/etc/locale.gen` and run `locale-gen`.
 
-3. And the following to `.devcontainer/devcontainer.json`:
+3. And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile:
 
     ```json
     "runArgs": ["--init", "--security-opt", "seccomp=unconfined"],
@@ -47,7 +47,16 @@
     "overrideCommand": false
     ```
 
-    The `runArgs` allows the container to take advantage of an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle application and process signals in a desktop environment.
+    Or if you are referencing a Docker Compose file, just include the `forwardPorts` property in `devcontainer.json` and add this to your `docker-compose.yml` instead:
+
+    ```yaml
+    your-service-here:
+      init: true
+      security_opt:
+        - seccomp:unconfined
+    ```
+
+    The `runArgs` / Docker Compose setting allows the container to take advantage of an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle application and process signals in a desktop environment.
 
 4. Once you've started the container / codespace, you'll be able to use a browser on port **6080** from anywhere or connect a [VNC viewer](https://www.realvnc.com/en/connect/download/viewer/) to port **5901** when accessing the codespace from VS Code.
 

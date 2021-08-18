@@ -1,21 +1,25 @@
 {
-	"variants": ["3", "3.9", "3.8", "3.7", "3.6"],
-	"definitionVersion": "0.201.2",
+	"variants": ["3.9", "3.8", "3.7", "3.6"],
+	"definitionVersion": "0.201.8",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
 			"python:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"3.9": [ "python:${VERSION}-3" ]
+		}
 	},
 	"dependencies": {
 		"image": "python:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/python",
-		"debian": [
-			"yarn"
-		],
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
 		"git": {
-			"Oh My Zsh!": "/root/.oh-my-zsh",
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
 			"nvm": "/usr/local/share/nvm"
 		},
 		"pipx": [
@@ -30,6 +34,12 @@
 			"bandit",
 			"virtualenv",
 			"pipx"
-		]
+		],
+		"languages": {
+			"Python": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}
+		}
 	}
 }

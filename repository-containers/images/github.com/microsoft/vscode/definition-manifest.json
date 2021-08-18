@@ -1,16 +1,16 @@
 {
-	"variants": ["12"],
-	"definitionVersion": "0.200.0",
+	"definitionVersion": "0.202.4",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"parent": "typescript-node",
+		"parentVariant": "14-buster",
 		"tags": [
 			"repos/microsoft/vscode:${VERSION}"
 		]
 	}, 
 	"dependencies": {
-		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:12",
+		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:14-buster",
 		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
 		"manual": [{
             "Component": {

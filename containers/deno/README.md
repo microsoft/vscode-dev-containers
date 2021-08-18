@@ -2,56 +2,69 @@
 
 ## Summary
 
-*Develop Deno applications. Includes the latest Deno runtime and extension.*
+_Develop Deno applications. Includes the latest Deno runtime and extension._
 
-| Metadata | Value |  
-|----------|-------|
-| *Contributors* | @anthonychu |
-| *Categories* | Community, Languages |
-| *Definition type* | Dockerfile |
-| *Works in Codespaces* | Yes |
-| *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Debian |
-| *Languages, platforms* | Deno, TypeScript, JavaScript |
+| Metadata                    | Value                        |
+| --------------------------- | ---------------------------- |
+| _Contributors_              | @anthonychu, @kitsonk        |
+| _Categories_                | Community, Languages         |
+| _Definition type_           | Dockerfile                   |
+| _Works in Codespaces_       | Yes                          |
+| _Container host OS support_ | Linux, macOS, Windows        |
+| _Container OS_              | Debian                       |
+| _Languages, platforms_      | Deno, TypeScript, JavaScript |
 
-## Using this definition with an existing folder
+## Using this definition
 
-This definition doesn't require any special steps to use. Just follow these steps:
+1. If this is your first time using a development container, please see getting
+   started information on
+   [setting up](https://aka.ms/vscode-remote/containers/getting-started)
+   Remote-Containers or
+   [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub
+   Codespaces.
 
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+2. Start VS Code and open your project folder or connect to a codespace.
 
-1. To use VS Code's copy of this definition:
-    1. Start VS Code and open your project folder.
-    1. Press <kbd>F1</kbd> and select **Remote-Containers: Add Development Container Configuration Files...** from the command palette.
-    1. Select the **Deno** definition.
-        - If necessary, first select **Show All Definitions...**.
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration
+   Files...** command for **Remote-Containers** or **Codespaces**.
 
-1. To use latest-and-greatest copy of this definition from the repository:
-    1. Clone this repository.
-    1. Copy the contents of `containers/deno/.devcontainer` to the root of your project folder.
-    1. Start VS Code and open your project folder.
+   > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from
+   > this sub-folder in a locally cloned copy of this repository into the VS
+   > Code file explorer instead of using the command.
 
-1. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+4. Select this definition. You may also need to select **Show All
+   Definitions...** for it to appear.
 
-1. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen in Container** to start using the definition.
+5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in
+   Container** or **Codespaces: Rebuild Container** to start using the
+   definition.
 
 ## Testing the definition
 
-To verify the definition is working as expected on your system. Follow these steps:
+To verify the definition is working as expected on your system. Follow these
+steps:
 
-1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
+1. If this is your first time using a development container, please follow the
+   [getting started steps](https://aka.ms/vscode-remote/containers/getting-started)
+   to set up your machine.
 1. Clone this repository.
-1. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
+1. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open
+   Folder in Container...**
 1. Select the `containers/deno` folder.
-1. After the folder has opened in the container, press <kbd>Ctrl-Shift-`</kbd> to open a new terminal.
+1. After the folder has opened in the container, press <kbd>Ctrl-Shift-`</kbd>
+   to open a new terminal.
 1. Run the following command to execute a simple application.
-    ```bash
-    deno run -A https://deno.land/std@0.57.0/examples/welcome.ts
-    ```
-1. You should see "Welcome to Deno 🦕" in the Debug Console after the program executes.
+
+   ```bash
+   deno run -A https://deno.land/std/examples/welcome.ts
+   ```
+
+1. You should see "Welcome to Deno 🦕" in the Debug Console after the program
+   executes.
 
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/master/LICENSE).
+Licensed under the MIT License. See
+[LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).

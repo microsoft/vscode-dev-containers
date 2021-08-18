@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/docker.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby]
@@ -14,6 +14,7 @@ SOURCE_SOCKET=${2:-"/var/run/docker-host.sock"}
 TARGET_SOCKET=${3:-"/var/run/docker.sock"}
 USERNAME=${4:-"automatic"}
 USE_MOBY=${5:-"true"}
+MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 
 set -e
 
@@ -39,8 +40,23 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
+# Get central common setting
+get_common_setting() {
+    if [ "${common_settings_file_loaded}" != "true" ]; then
+        curl -sfL "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+        common_settings_file_loaded=true
+    fi
+    if [ -f "/tmp/vsdc-settings.env" ]; then
+        local multi_line=""
+        if [ "$2" = "true" ]; then multi_line="-z"; fi
+        local result="$(grep ${multi_line} -oP "$1=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"
+        if [ ! -z "${result}" ]; then declare -g $1="${result}"; fi
+    fi
+    echo "$1=${!1}"
+}
+
 # Function to run apt-get if needed
-apt-get-update-if-needed()
+apt_get_update_if_needed()
 {
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         echo "Running apt-get update..."
@@ -50,41 +66,67 @@ apt-get-update-if-needed()
     fi
 }
 
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
-# Install apt-transport-https, curl, lsb-release, gpg if missing
-if ! dpkg -s apt-transport-https curl ca-certificates lsb-release > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
-    apt-get-update-if-needed
-    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates lsb-release gnupg2 
-fi
+# Install dependencies
+check_packages apt-transport-https curl ca-certificates gnupg2
 
 # Install Docker / Moby CLI if not already installed
 if type docker > /dev/null 2>&1; then
     echo "Docker / Moby CLI already installed."
 else
+    # Source /etc/os-release to get OS info
+    . /etc/os-release
     if [ "${USE_MOBY}" = "true" ]; then
-        DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
-        CODENAME=$(lsb_release -cs)
-        curl -s https://packages.microsoft.com/keys/microsoft.asc | (OUT=$(apt-key add - 2>&1) || echo $OUT)
-        echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-${DISTRO}-${CODENAME}-prod ${CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
+        get_common_setting MICROSOFT_GPG_KEYS_URI
+        curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
         apt-get update
-        apt-get -y install --no-install-recommends moby-cli
+        apt-get -y install --no-install-recommends moby-cli moby-buildx moby-compose
     else
-        curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT)
-        echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list
+        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
+        curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
         apt-get update
         apt-get -y install --no-install-recommends docker-ce-cli
     fi
 fi
 
-# Install Docker Compose if not already installed 
+# Install Docker Compose if not already installed  and is on a supported architecture
 if type docker-compose > /dev/null 2>&1; then
     echo "Docker Compose already installed."
 else
-    LATEST_COMPOSE_VERSION=$(curl -sSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -o -P '(?<="tag_name": ").+(?=")')
-    curl -sSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
+    TARGET_COMPOSE_ARCH="$(uname -m)"
+    if [ "${TARGET_COMPOSE_ARCH}" = "amd64" ]; then
+        TARGET_COMPOSE_ARCH="x86_64"
+    fi
+    if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
+        # Use pip to get a version that runns on this architecture
+        if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv pipx > /dev/null 2>&1; then
+            apt_get_update_if_needed
+            apt-get -y install python3-minimal python3-pip libffi-dev python3-venv pipx
+        fi
+        export PIPX_HOME=/usr/local/pipx
+        mkdir -p ${PIPX_HOME}
+        export PIPX_BIN_DIR=/usr/local/bin
+        export PIP_CACHE_DIR=/tmp/pip-tmp/cache
+        pipx install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
+        rm -rf /tmp/pip-tmp
+    else 
+        LATEST_COMPOSE_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/docker/compose/releases/latest)")
+        curl -fsSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-${TARGET_COMPOSE_ARCH}" -o /usr/local/bin/docker-compose
+        chmod +x /usr/local/bin/docker-compose
+    fi
 fi
 
 # If init file already exists, exit
@@ -108,7 +150,7 @@ fi
 # If enabling non-root access and specified user is found, setup socat and add script
 chown -h "${USERNAME}":root "${TARGET_SOCKET}"        
 if ! dpkg -s socat > /dev/null 2>&1; then
-    apt-get-update-if-needed
+    apt_get_update_if_needed
     apt-get -y install socat
 fi
 tee /usr/local/share/docker-init.sh > /dev/null \

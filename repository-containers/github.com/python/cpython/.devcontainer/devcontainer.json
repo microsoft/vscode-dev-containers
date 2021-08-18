@@ -1,0 +1,25 @@
+{
+	"name": "CPython",
+	"dockerFile": "Dockerfile",
+	"settings": { 
+		"python.pythonPath": "${workspaceFolder}/python",
+		"python.testing.unittestArgs": [
+			"-v",
+			"-s",
+			"Lib",
+			"test",
+			"-p",
+			"test_*.py"
+		],
+		"python.testing.cwd": "${workspaceFolder}/Lib/",
+		"python.testing.pytestEnabled": false,
+		"python.testing.nosetestsEnabled": false,
+		"python.testing.unittestEnabled": true
+	},
+	"extensions": [
+		"ms-vscode.cpptools",
+		"ms-python.python"
+	],
+	"postCreateCommand": "./configure --with-pydebug && make -j4 regen-all &&  make -j4 -s && make install",
+	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ]
+}

@@ -27,11 +27,15 @@ Since devcontainer.json can be commited to a source code repository, the definit
 
 If the definition is too similar to others, consider contributing a PR to improve an existing one instead. If the scenario is too specific consider generalizing it and making it more broadly applicable.
 
+To help speed up PRs, we encourage you to install the recommended [EditorConfig extension](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig). This will ensure your changes adhere to our style guidelines.
+
 ### A note on referenced images and Dockefile contents
 
 One of the things we want to be sure anyone using a definition from this repository is able to do is understand what is inside it. In general, images referenced  by Dockerfiles, Docker Compose files, or devcontainer.json in this repository should reference known base Docker, Microsoft, or runtime/platform community/vendor managed base images. These images are already well maintained, regularly patched, and maintained by the platform/runtime community or vendor. From there you can use a Dockerfile to add any additional contents.
 
-When adding contents to the Dockerfile, use official sources. If you are using something like `curl` or `wget` to download the contents, add a checksum verification if one is available. Using package managers like `apt-get` on Debian/Ubuntu with 3rd party sources can also be a way to do this verification since they require adding the source's signing key.
+When adding contents to the Dockerfile, use official sources. There are a number of pre-built images you can take advantage of to speed things up for yourself and other developers to reduce build times. In particular, take note of images like `mcr.microsoft.com/vscode/devcontainers/base:debian` and `mcr.microsoft.com/vscode/devcontainers/base:ubuntu` ([see here for a list](https://hub.docker.com/_/microsoft-vscode-devcontainers)). These are like the base `debian` and `ubuntu` images but include things developers commonly need or want (e.g. git and curl).
+
+If you are using something like `curl` or `wget` to download the contents, add a checksum verification if one is available. Using package managers like `apt-get` on Debian/Ubuntu with 3rd party sources can also be a way to do this verification since they require adding the source's signing key.
 
 Note that other definitions in this repository use Debian or Ubuntu bases in the vast majority of cases. We recommend using this as the variation of the base image you use wherever possible so you can avoid questions from developers new to working with Linux.
 
@@ -123,7 +127,7 @@ So, in short, you want to clean up after you install or configure anything in th
 
 Some other tips:
 
-1. You'd be suprised [how big package lists](https://askubuntu.com/questions/179955/var-lib-apt-lists-is-huge) can get, so be sure to clean these up too. Most Docker images that use Debian / Ubuntu use the following command to clean these up:
+1. You'd be surprised [how big package lists](https://askubuntu.com/questions/179955/var-lib-apt-lists-is-huge) can get, so be sure to clean these up too. Most Docker images that use Debian / Ubuntu use the following command to clean these up:
 
     ```
     rm -rf /var/lib/apt/lists/*

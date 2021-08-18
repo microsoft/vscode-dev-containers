@@ -38,18 +38,45 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
     CMD ["sleep", "infinity"]
     ```
 
-Note that the `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
+    Note that the `ENTRYPOINT` script can be chained with another script by adding it to the array after `docker-init.sh`.
 
-3. And the following to `.devcontainer/devcontainer.json`:
+3. And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile:
 
     ```json
     "runArgs": ["--init", "--privileged"],
     "overrideCommand": false
     ```
 
-    While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.
+    Or if you are referencing a Docker Compose file, add this to your `docker-compose.yml` file instead:
 
-4. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
+    ```yaml
+    your-service-name-here:
+      init: true 
+      privileged: true
+      # ...
+    ```
+
+    The `dind-var-lib-docker` volume mount is optional but will ensure that containers / volumes you create within the dev container survive a rebuild. You should update `dind-var-lib-docker` with a unique name for your container to avoid corruption when multiple containers write to it at the same time.
+
+    While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up. 
+
+4. If you want any containers or volumes you create inside the container to survive it being deleted, you can use a "named volume". And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile replacing `dind-var-lib-docker` with a unique name for your container:
+
+    ```json
+    "mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"]
+    ```
+
+    Or if you are referencing a Docker Compose file, add this to your `docker-compose.yml` file instead:
+
+    ```yaml
+    your-service-name-here:
+      # ...
+      volumes:
+        - dind-var-lib-docker:/var/lib/docker
+      # ...
+    ```
+
+5. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
 
 ## Resources
 

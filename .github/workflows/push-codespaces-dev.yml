@@ -1,21 +1,16 @@
 name: Build and push "dev" for universal image
 
 on: 
-  #repository_dispatch:
+  workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'containers/codespaces-linux/**'
-      - 'containers/codespaces-linux-stretch/**'
 
 jobs:
   build-and-push:
     name: Build and push universal image
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
-    strategy:
-      matrix:
-        definitionId: ["codespaces-linux", "codespaces-linux-stretch"]
-      fail-fast: true
     runs-on: ubuntu-latest
     steps:
     - name: Free more space
@@ -50,9 +45,9 @@ jobs:
         yarn install
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=master
+            GIT_BRANCH=main
         fi
-        build/vscdc push  ${{ matrix.definitionId }} \
+        build/vscdc push  codespaces-linux \
                           --release $GIT_BRANCH \
                           --github-repo ${{ github.repository }} \
                           --registry ${{ secrets.REGISTRY }} \

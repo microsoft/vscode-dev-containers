@@ -3,18 +3,15 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 
-			// Update 'VARIANT' to pick a Ruby version: 3, 3.0, 2, 2.7, 2.6, 2.5
+			// Update 'VARIANT' to pick a Ruby version: 3, 3.0, 2, 2.7, 2.6
 			"VARIANT": "3",
 			// Options
-			"INSTALL_NODE": "true",
 			"NODE_VERSION": "lts/*"
 		}
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
-	},
+	"settings": {},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
