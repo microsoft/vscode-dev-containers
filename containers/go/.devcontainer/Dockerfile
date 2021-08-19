@@ -1,4 +1,4 @@
-# [Choice] Go version: 1, 1.16, 1.15
+# [Choice] Go version: 1, 1.16, 1.17
 ARG VARIANT=1
 FROM mcr.microsoft.com/vscode/devcontainers/go:0-${VARIANT}
 
