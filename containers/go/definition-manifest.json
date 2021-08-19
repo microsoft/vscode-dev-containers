@@ -1,5 +1,5 @@
 {
-	"variants": ["1.16", "1.17"],
+	"variants": ["1.17", "1.16"],
 	"definitionVersion": "0.204.0",
 	"build": {
 		"latest": true,
