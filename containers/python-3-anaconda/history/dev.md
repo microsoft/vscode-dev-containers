@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
-**Digest:** sha256:3448040e754a679a29dd33a9df4d95136fa7bef679ce9d6cd27ef699de0e3a9e
+**Digest:** sha256:54ced2bb456a3ca5bff6a29f1eb7f3975fb7e8b8779beae8c57918c132884902
 
 **Tags:**
 ```
@@ -29,7 +29,7 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**

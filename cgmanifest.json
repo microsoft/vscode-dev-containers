@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "af6c7f3d6782cf0a34e4e68f661df526d35795be"
+                    "commitHash": "cbb534267aca09fd123635fc39a7d00c0e21a5f7"
                 }
             }
         },
@@ -692,10 +692,46 @@
         },
         {
             "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mgechev/revive",
+                    "Version": "1.1.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/uudashr/gopkgs",
+                    "Version": "2.0.1+incompatible"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/go-delve/delve",
+                    "Version": "1.7.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/golangci/golangci-lint",
+                    "Version": "1.42.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
-                    "Version": "1.16",
+                    "Version": "1.17",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
@@ -705,7 +741,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
-                    "Version": "1.15",
+                    "Version": "1.16",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
@@ -725,7 +761,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.1.5",
+                    "Version": "2.1.6",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -905,7 +941,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "bundler",
-                    "Version": "2.2.25"
+                    "Version": "2.2.26"
                 }
             }
         },
@@ -943,7 +979,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "af6c7f3d6782cf0a34e4e68f661df526d35795be"
+                    "commitHash": "cbb534267aca09fd123635fc39a7d00c0e21a5f7"
                 }
             }
         },

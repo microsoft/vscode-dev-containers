@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:c965461279f174b2d2d7cb04e88456ca16d4a8cfbff3805e31899010e5642c8b
+**Digest:** sha256:f84d266ad9b768388922b1cb2e57722bd30acf5df96774a8d9e3a818467c4220
 
 **Tags:**
 ```
@@ -31,14 +31,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.6.2 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.7.0 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:bdd18238de7debba8dd0b249e816bb3673e61e76d6323764c31ea644d5dfd190
+**Digest:** sha256:f2c3e3f07019bad86849c9c66141a3903364dfede27adef8b2211e6f7a833348
 
 **Tags:**
 ```
@@ -124,7 +124,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:d43b387b5b3fff4230406a77f6b54f3452f83cc7211ac45b7c765d1443887f4d
+**Digest:** sha256:98e7a9ade6e9cbadfd9380da0a978cd3a95291158a747e674233d8b41726d4e2
 
 **Tags:**
 ```
@@ -210,7 +210,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:3133990aa3f55581d37affcf98466e8ff4969fb8c1066f079d97b7710a77f1cd
+**Digest:** sha256:d659f0fdb641b7daa01e7072fc7696a6e6f48e2669e4a7db0731465e5e14143c
 
 **Tags:**
 ```
@@ -295,7 +295,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -357,7 +357,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:05da4d477f02d34e6f75bf3dfe8c08af63ce87b0d57f862429e0a5e7fc9d9efd
+**Digest:** sha256:aefabb9ce435f4d9985e683c58a11b7dfb7b51a7fecf9f0a7a73eb2912e48512
 
 **Tags:**
 ```
@@ -381,7 +381,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**

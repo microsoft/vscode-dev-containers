@@ -10,7 +10,7 @@
 
 ## Variant: focal
 
-**Digest:** sha256:01d10cbc28a2c408d2c54e64c2e5ae0b05f788368d9ca5d4ad42d3662e5c8f36
+**Digest:** sha256:2796d02c801252592964342d9ece6b7cd1620aaf1c18dd53f661c325f535544d
 
 **Tags:**
 ```
@@ -21,7 +21,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Ubuntu 20.04.2 LTS (debian-like distro)
+**Linux distribution:** Ubuntu 20.04.3 LTS (debian-like distro)
 
 **Available (non-root) user:** vscode
 
@@ -30,7 +30,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -81,7 +81,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:5f4a84ffb0f7c873a629118bf1f150ece382f8596b4034bec1d02086b903b50e
+**Digest:** sha256:2f46818b248f7cf0f48d72f858209cd76ee69177e60b0b67668c2d7b2faa44d5
 
 **Tags:**
 ```
@@ -100,7 +100,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
