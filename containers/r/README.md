@@ -35,9 +35,9 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/R` folder.
-5. After the folder has opened in the container, you should see the R version printed in the terminal.
-6. Now open the `test-project/sample.R` and press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> to run the script.
+4. Select the `containers/r` folder.
+5. Open the `test-project/hello.R` and press the "Run Source" icon displayed in the upper right (or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> key) to run the code.
+6. You should see "Hello, remote world!" in a terminal window after the program executes.
 
 ## License
 
