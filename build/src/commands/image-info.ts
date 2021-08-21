@@ -3,13 +3,12 @@ import { push } from './push';
 import * as asyncUtils from '../utils/async';
 import { loadConfig, getStagingFolder, getConfig } from '../utils/config';
 import { getSortedDefinitionBuildList, getDefinition } from '../domain/definition-factory';
-import { CommonParams, Lookup } from '../domain/common';
+import { CommonParams } from '../domain/common';
 import { Definition, CgComponent } from '../domain/definition';
 import { getAllContentInfo, ExtractedInfo } from '../utils/image-info-extractor';
 import { ComponentInfoTransformer } from '../transformers/component-transformer';
 import { MarkdownInfoTransformer } from '../transformers/markdown-transformer';
 import * as handlebars from 'handlebars';
-
 
 interface FileContents {
     registrations: CgComponent[];
@@ -25,9 +24,12 @@ export async function generateImageInformationFiles(params: CommonParams, buildF
 
         // Stage content and load config
     const stagingFolder = await getStagingFolder(params.release);
+    if(!stagingFolder) {
+        throw new Error(`Could not find staging folder for release: ${params.release}`);
+    }
     await loadConfig(stagingFolder);
 
-    const alreadyRegistered: Lookup<boolean> = {};
+    const alreadyRegistered = new Map<string, boolean>();
     const cgManifest = {
         "Registrations": new Array<any>(),
         "Version": 1
@@ -86,7 +88,7 @@ export async function generateImageInformationFiles(params: CommonParams, buildF
     console.log('(*) Done!');
 }
 
-async function getDefinitionImageContentData(params: CommonParams, definition: Definition, alreadyRegistered: Lookup<boolean>, buildFirst: boolean): Promise<FileContents | undefined> {
+async function getDefinitionImageContentData(params: CommonParams, definition: Definition, alreadyRegistered: Map<string, boolean>, buildFirst: boolean): Promise<FileContents | undefined> {
     if (typeof definition.dependencies !== 'object') {
         return undefined;
     }
@@ -132,7 +134,7 @@ async function getDefinitionImageContentData(params: CommonParams, definition: D
         throw new Error(`Unable to process image variants for ${definition.id}. imageVariants is undefined.`);
     }
     await asyncUtils.forEach(definition.dependencies.imageVariants, (async (imageTag: string) => {
-        if (alreadyRegistered[imageTag]) {
+        if (alreadyRegistered.get(imageTag)) {
             return;
         }
         if (!definition.dependencies?.imageLink) {
@@ -149,7 +151,7 @@ async function getDefinitionImageContentData(params: CommonParams, definition: D
                 }
             }
         });
-        alreadyRegistered[imageTag] = true;
+        alreadyRegistered.set(imageTag, true);
     }));
 
     return {
@@ -160,7 +162,7 @@ async function getDefinitionImageContentData(params: CommonParams, definition: D
 }
 
 // Filter out components already in the registration list and format output returns an array of formatted and filtered contents
-function getUniqueComponents(alreadyRegistered: Lookup<boolean>, info: ExtractedInfo): CgComponent[] {
+function getUniqueComponents(alreadyRegistered: Map<string, boolean>, info: ExtractedInfo): CgComponent[] {
     let uniqueComponentList: CgComponent[] = [];
     const transformer = new ComponentInfoTransformer(info.distro);
     const cgManifestInfo = transformer.transform(info);
@@ -168,8 +170,8 @@ function getUniqueComponents(alreadyRegistered: Lookup<boolean>, info: Extracted
         let cgComponents: CgComponent[] = (<any>cgManifestInfo)[contentType];
         uniqueComponentList = uniqueComponentList.concat(cgComponents.reduce((prev: CgComponent[], next: CgComponent) => {
             const uniqueId = JSON.stringify(next);
-            if(!alreadyRegistered[uniqueId]) {
-                alreadyRegistered[uniqueId] = true;
+            if(!alreadyRegistered.get(uniqueId)) {
+                alreadyRegistered.set(uniqueId, true);
                 prev.push(next);
             }
             return prev;

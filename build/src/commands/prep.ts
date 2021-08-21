@@ -7,7 +7,7 @@ import * as path from 'path';
 import * as asyncUtils from '../utils/async';
 import { getConfig, shouldFlattenDefinitionBaseImage } from '../utils/config';
 import { Definition } from '../domain/definition';
-import { CommonParams, Lookup } from '../domain/common';
+import { CommonParams } from '../domain/common';
 import * as definitionFactory from '../domain/definition-factory';
 import mkdirp from 'mkdirp';
 import * as glob from 'glob';
@@ -33,7 +33,7 @@ interface PrepResult {
 
 let metaEnvTemplate: handlebars.TemplateDelegate;
 
-const scriptSHA: Lookup<string> = {};
+const scriptSHAMap = new Map<string, string>();
 
 const dockerFilePreamble = getConfig('dockerFilePreamble');
 const scriptLibraryFolder = getConfig('scriptLibraryFolder', 'script-library');
@@ -172,11 +172,11 @@ async function updateScriptSources(definition: Definition, params: CommonParams,
             const scriptName = scriptCaptureGroups[2];
             const scriptSource = `https://raw.githubusercontent.com/${params.githubRepo}/${params.release}/${scriptLibraryFolder}/${scriptName}`;
             console.log(`    Updated script source URL: ${scriptSource}`);
-            let sha = scriptSHA[scriptName];
+            let sha = scriptSHAMap.get(scriptName);
             if (updateScriptSha && typeof sha === 'undefined') {
                 const scriptRaw = await asyncUtils.getUrlAsString(scriptSource);
                 sha = await asyncUtils.shaForString(scriptRaw);
-                scriptSHA[scriptName] = sha;
+                scriptSHAMap.set(scriptName, sha);
             }
             console.log(`    Script SHA: ${sha}`);
             const shaArg = scriptArg.replace('_SOURCE', '_SHA');
@@ -193,8 +193,7 @@ async function updateScriptSources(definition: Definition, params: CommonParams,
 export async function updateAllScriptSourcesInRepo(params: CommonParams, updateScriptSha: boolean = true) {
     // Update script versions in definition Dockerfiles for release
     const allDefinitions = definitionFactory.getAllDefinitions(true);
-    for (let definitionId in allDefinitions) {
-        const definition = allDefinitions[definitionId];
+    for (let [, definition] of allDefinitions) {
         // Update base Dockerfile if one exists
         if(definition.hasBaseDockerfile) {
             const dockerfileModified = await updateScriptSources(definition, params, false, updateScriptSha);

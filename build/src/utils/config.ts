@@ -1,4 +1,4 @@
-import { OtherDependency, Dependencies } from '../domain/definition';
+import { OtherDependencyInfoExtractionSettings as OtherDependencyInfoExtractionSettings, DependencyInfoExtractionSettingsGroup as DependencyInfoExtractionSettingsGroup } from '../domain/definition';
 import { Lookup } from '../domain/common';
 import { loadDefinitions } from '../domain/definition-factory';
 import { Definition } from '../domain/definition'
@@ -6,8 +6,46 @@ import * as path from 'path';
 import * as os from 'os';
 import * as asyncUtils from './async'
 
+export interface LinuxPackageInfoExtractorParams {
+    namePrefix: string;
+    listCommand: string;
+    lineRegEx: RegExp;
+    getUriCommand: string;
+    poolUriMatchRegEx: string;
+    downloadUriMatchRegEx: string;
+    downloadUriSuffix?: string,
+}
+
+// Docker images and native OS libraries need to be registered as "other" while others are scenario dependant
+const linuxPackageInfoExtractorParamsByPackageManager: Lookup<LinuxPackageInfoExtractorParams> = {
+    apt: {
+        // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
+        // Output: <package>    <version>
+        // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
+        // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
+        namePrefix: 'Debian Package:',
+        listCommand: "dpkg-query --show -f='\\${Package} ~~v~~ \\${Version}\n'",
+        lineRegEx: /(.+) ~~v~~ (.+)/,
+        getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
+        downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
+        poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
+    } as LinuxPackageInfoExtractorParams,
+    apk: {
+        // Command to get package versions: apk info -e -v <package>
+        // Output: <package-with-maybe-dashes>-<version-with-dashes>
+        // Command to get download URLs: apk policy
+        namePrefix: 'Alpine Package:',
+        listCommand: "apk info -e -v",
+        lineRegEx: /(.+)-([0-9].+)/,
+        getUriCommand: 'apk update && apk policy',
+        downloadUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
+        downloadUriSuffix: '/x86_64/${PACKAGE}-${VERSION}.apk',
+        poolUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
+    } as LinuxPackageInfoExtractorParams
+}
+
 export interface GlobalConfig {
-    commonDependencies?: Dependencies;
+    commonDependencies?: DependencyInfoExtractionSettingsGroup;
 
     containerRegistry: string;
     containerRegistryPath: string;
@@ -33,13 +71,14 @@ export interface GlobalConfig {
     flattenBaseImage?: string[];
     poolKeys: Lookup<string>;
     poolUrlFallback: Lookup<string>;
-    otherDependencyDefaultSettings?: Lookup<OtherDependency>;
+    otherDependencyDefaultSettings?: Lookup<OtherDependencyInfoExtractionSettings>;
 
     rootPath: string;
 }
 
+
 const config: GlobalConfig = require(path.join(__dirname, '..', '..', 'config.json'));
-const stagingFolders: Lookup<string> = {};
+const stagingFolders = new Map<string, string>();
 
 export async function loadConfig(rootPath: string): Promise<GlobalConfig> {
     config.rootPath = rootPath || config.rootPath;
@@ -82,7 +121,7 @@ export function getDefaultDependencies(dependencyType: string) {
 }
 
 export async function getStagingFolder(release: string) {
-    if (!stagingFolders[release]) {
+    if (!stagingFolders.has(release)) {
         const stagingFolder = path.join(os.tmpdir(), 'vscode-dev-containers', release);
         console.log(`(*) Copying files to ${stagingFolder}\n`);
         await asyncUtils.rimraf(stagingFolder); // Clean out folder if it exists
@@ -92,9 +131,9 @@ export async function getStagingFolder(release: string) {
             getConfig('filesToStage'),
             stagingFolder);
 
-        stagingFolders[release] = stagingFolder;
+        stagingFolders.set(release, stagingFolder);
     }
-    return stagingFolders[release];
+    return stagingFolders.get(release);
 }
 
 // Convert a release string (v1.0.0) or branch (main) into a version. If a definitionId and 
@@ -110,4 +149,38 @@ export function  getVersionForRelease(versionOrRelease: string, definition?: Def
     }
     // Is a branch
     return 'dev';
+}
+
+export function getPackageInfoExtractorParams(packageManager: string): LinuxPackageInfoExtractorParams {
+    const params = linuxPackageInfoExtractorParamsByPackageManager[packageManager];
+    if (!params) {
+        throw new Error(`Unsupported package manager: ${packageManager}`);
+    }
+    return params;
+}
+
+// Use distro "ID" from /etc/os-release to determine appropriate package manger
+export function getLinuxPackageManagerForDistro(distroId: string): string {
+    switch (distroId) {
+        case 'apt':
+        case 'debian':
+        case 'ubuntu': return 'apt';
+        case 'apk':
+        case 'alpine': return 'apk';
+    }
+    throw new Error(`Unsupported distro: ${distroId}`);
+}
+
+export function getPackageInfoExtractorParamsForDistro(distro: string): LinuxPackageInfoExtractorParams {
+    return getPackageInfoExtractorParams(getLinuxPackageManagerForDistro(distro));
+}
+
+// Convert SNAKE_CASE to snakeCase ... well, technically camelCase :)
+export function snakeCaseToCamelCase(variableName: string) {
+    return variableName.split('').reduce((prev: string, next: string) => {
+        if (prev.charAt(prev.length - 1) === '_') {
+            return prev.substr(0, prev.length - 1) + next.toLocaleUpperCase();
+        }
+        return prev + next.toLocaleLowerCase();
+    }, '');
 }

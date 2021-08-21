@@ -20,6 +20,9 @@ export async function push(params: CommonParams, updateLatest: boolean = false, 
 
     // Stage content
     const stagingFolder = await configUtils.getStagingFolder(params.release);
+    if (!stagingFolder) {
+        throw new Error('Staging folder creation failed');
+    }
     await configUtils.loadConfig(stagingFolder);
 
     // Build and push subset of images

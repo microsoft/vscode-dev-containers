@@ -55,14 +55,14 @@ export interface CgComponent {
     cgIgnore?: boolean;
 }
 
-export interface Dependency {
+export interface DependencyInfoExtractionSettings {
     name: string;
     cgIgnore?: boolean;
     markdownIgnore?: boolean;
     annotation?: string;
 }
 
-export interface OtherDependency extends Dependency {
+export interface OtherDependencyInfoExtractionSettings extends DependencyInfoExtractionSettings {
     path?: string;
     versionCommand?: string;
     downloadUrl?: string;
@@ -83,11 +83,11 @@ export interface DefinitionVariant {
     variant?: string;
 }
 
-export interface Dependencies {
+export interface DependencyInfoExtractionSettingsGroup {
     image: string;
     imageLink: string;
     annotation?: string;
-    apt?: (Dependency | string)[];
+    apt?: (DependencyInfoExtractionSettings | string)[];
     pip?: string[];
     pipx?: string[];
     git?: Lookup<string>;
@@ -95,8 +95,8 @@ export interface Dependencies {
     cargo?: Lookup<string | null>;
     go?: Lookup<string | null>;
     npm?: string[];
-    other?: Lookup<OtherDependency | null>;
-    languages?: Lookup<OtherDependency | null>;
+    other?: Lookup<OtherDependencyInfoExtractionSettings | null>;
+    languages?: Lookup<OtherDependencyInfoExtractionSettings | null>;
     imageVariants?: string[];
     manual?: CgComponent[];
 }
@@ -106,7 +106,7 @@ export class Definition {
     definitionVersion?: string;
     variants?: string[];
     build?: BuildSettings;
-    dependencies?: Dependencies;
+    dependencies?: DependencyInfoExtractionSettingsGroup;
     devcontainerJson: any = {};
     devcontainerJsonString: string = '';
     hasManifest: boolean = false;
@@ -147,7 +147,7 @@ export class Definition {
 
         // Populate images list for variants for dependency registration
         if (this.dependencies) {
-            const deps = <Dependencies>this.dependencies;
+            const deps = <DependencyInfoExtractionSettingsGroup>this.dependencies;
             if (!deps.image) {
                 throw new Error(`Dependency "image" not found for ${this.id}`);
             }

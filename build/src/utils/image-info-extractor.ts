@@ -4,8 +4,9 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as asyncUtils from './async';
-import { getFallbackPoolUrl, getPoolKeyForPoolUrl, getDefaultDependencies, getConfig } from './config';
-import { Dependency, Dependencies, OtherDependency, CgComponent } from '../domain/definition';
+import { getFallbackPoolUrl, getPoolKeyForPoolUrl,snakeCaseToCamelCase, getDefaultDependencies, getConfig, 
+    getLinuxPackageManagerForDistro, getPackageInfoExtractorParams, LinuxPackageInfoExtractorParams } from './config';
+import { DependencyInfoExtractionSettings, DependencyInfoExtractionSettingsGroup, OtherDependencyInfoExtractionSettings, CgComponent } from '../domain/definition';
 import { Lookup } from '../domain/common';
 
 export interface PackageInfo {
@@ -56,44 +57,6 @@ export interface ExtractedInfo {
     manual: CgComponent[];
 }
 
-interface LinuxPackageInfoExtractorConfig {
-    namePrefix: string;
-    listCommand: string;
-    lineRegEx: RegExp;
-    getUriCommand: string;
-    poolUriMatchRegEx: string;
-    downloadUriMatchRegEx: string;
-    downloadUriSuffix?: string,
-}
-
-// Docker images and native OS libraries need to be registered as "other" while others are scenario dependant
-const linuxPackageInfoExtractorConfigByDistro: Lookup<LinuxPackageInfoExtractorConfig> = {
-    apt: {
-        // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
-        // Output: <package>    <version>
-        // Command to get download URLs: apt-get update && apt-get install -y --reinstall --print-uris
-        // Output: Multi-line output, but each line is '<download URL>.deb' <package>_<version>_<architecture>.deb <size> <checksum> 
-        namePrefix: 'Debian Package:',
-        listCommand: "dpkg-query --show -f='\\${Package} ~~v~~ \\${Version}\n'",
-        lineRegEx: /(.+) ~~v~~ (.+)/,
-        getUriCommand: 'apt-get update && apt-get install -y --reinstall --print-uris',
-        downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
-        poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
-    } as LinuxPackageInfoExtractorConfig,
-    apk: {
-        // Command to get package versions: apk info -e -v <package>
-        // Output: <package-with-maybe-dashes>-<version-with-dashes>
-        // Command to get download URLs: apk policy
-        namePrefix: 'Alpine Package:',
-        listCommand: "apk info -e -v",
-        lineRegEx: /(.+)-([0-9].+)/,
-        getUriCommand: 'apk update && apk policy',
-        downloadUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
-        downloadUriSuffix: '/x86_64/${PACKAGE}-${VERSION}.apk',
-        poolUriMatchRegEx: '${PACKAGE} policy:\\n.*${VERSION}:\\n.*lib/apk/db/installed\\n\\s*(.+)\\n',
-    } as LinuxPackageInfoExtractorConfig
-}
-
 /* This function converts the contents of /etc/os-release from this:
 
     PRETTY_NAME="Debian GNU/Linux 10 (buster)"
@@ -134,16 +97,6 @@ async function getLinuxDistroInfo(imageTagOrContainerName: string): Promise<Dist
     return <DistroInfo>info;
 }
 
-// Convert SNAKE_CASE to snakeCase ... well, technically camelCase :)
-function snakeCaseToCamelCase(variableName: string) {
-    return variableName.split('').reduce((prev: string, next: string) => {
-        if (prev.charAt(prev.length - 1) === '_') {
-            return prev.substr(0, prev.length - 1) + next.toLocaleUpperCase();
-        }
-        return prev + next.toLocaleLowerCase();
-    }, '');
-}
-
 /* A set of info objects linux packages. E.g.
 {
     name: "yarn",
@@ -155,7 +108,7 @@ function snakeCaseToCamelCase(variableName: string) {
 
 Defaults to "cgIgnore": true, "markdownIgnore": false given base packages don't need to be registered
 */
-async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList: Array<string | Dependency> = [], linuxDistroInfo: DistroInfo): Promise<PackageInfo[]> {
+async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList: Array<string | DependencyInfoExtractionSettings> = [], linuxDistroInfo: DistroInfo): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const packageManager = getLinuxPackageManagerForDistro(linuxDistroInfo.id);
     const defaultPackages = getDefaultDependencies(packageManager) || [];
@@ -172,39 +125,39 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
     }
 
     // Generate a settings object from packageList
-    const settings = packageList.reduce((obj: Lookup<Dependency>, current: string | Dependency) => {
+    const settings = packageList.reduce((obj: Lookup<DependencyInfoExtractionSettings>, current: string | DependencyInfoExtractionSettings) => {
         if (typeof current === 'string') {
             obj[current] = { name: current };
         } else {
             obj[current.name] = current;
         }
         return obj;
-    }, <Lookup<Dependency>>{});
+    }, <Lookup<DependencyInfoExtractionSettings>>{});
 
     // Space separated list of packages for use in commands
-    const packageListCommandPart = packageList.reduce((prev: string, current: string | Dependency) => {
+    const packageListCommandPart = packageList.reduce((prev: string, current: string | DependencyInfoExtractionSettings) => {
         return prev += ` ${typeof current === 'string' ? current : current.name}`;
     }, '');
 
     // Use the appropriate package lookup settings for distro
-    const extractionConfig: LinuxPackageInfoExtractorConfig = <LinuxPackageInfoExtractorConfig>linuxPackageInfoExtractorConfigByDistro[packageManager];
+    const linuxPackageInfoExtractorParams: LinuxPackageInfoExtractorParams = getPackageInfoExtractorParams(packageManager);
 
     // Generate and exec command to get installed package versions
     console.log('(*) Gathering information about Linux package versions...');
     const packageVersionListOutput = await getCommandOutputFromContainer(imageTagOrContainerName,
-        extractionConfig.listCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
+        linuxPackageInfoExtractorParams.listCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
 
     // Generate and exec command to extract download URIs
     console.log('(*) Gathering information about Linux package download URLs...');
     const packageUriCommandOutput = await getCommandOutputFromContainer(imageTagOrContainerName,
-        extractionConfig.getUriCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
+        linuxPackageInfoExtractorParams.getUriCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
 
-    const componentList: PackageInfo[] = [];
+    const packageInfoList: PackageInfo[] = [];
     const packageVersionList = packageVersionListOutput.split('\n');
     packageVersionList.forEach((packageVersion: string) => {
         packageVersion = packageVersion.trim();
         if (packageVersion !== '') {
-            const versionCaptureGroup = new RegExp(extractionConfig.lineRegEx).exec(packageVersion);
+            const versionCaptureGroup = new RegExp(linuxPackageInfoExtractorParams.lineRegEx).exec(packageVersion);
             if (!versionCaptureGroup) {
                 if (packageVersion === 'Some packages were not found.') {
                     console.log('(!) Warning: Some specified packages were not found.');
@@ -214,30 +167,30 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
                 return;
             }
             const [, packageName, version] = versionCaptureGroup;
-            const packageSettings = <Dependency>(settings[packageName] || {});
-            const cgIgnore = typeof packageSettings.cgIgnore === 'undefined' ? true : packageSettings.cgIgnore; // default to true
-            const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, extractionConfig, packageName, version);
+            const extractionSettings = <DependencyInfoExtractionSettings>(settings[packageName] || {});
+            const cgIgnore = typeof extractionSettings.cgIgnore === 'undefined' ? true : extractionSettings.cgIgnore; // default to true
+            const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, linuxPackageInfoExtractorParams, packageName, version);
             const poolKey = poolUrl ? getPoolKeyForPoolUrl(poolUrl) : undefined;
             if (!poolUrl && !cgIgnore) {
                 throw new Error('(!) No pool URL found to register package!');
             }
-            componentList.push({
+            packageInfoList.push({
                 name: packageName,
                 version: version,
                 poolUrl: poolUrl,
                 poolKeyUrl: poolKey,
-                annotation: packageSettings.annotation,
+                annotation: extractionSettings.annotation,
                 cgIgnore: cgIgnore,
-                markdownIgnore: packageSettings.markdownIgnore
+                markdownIgnore: extractionSettings.markdownIgnore
             } as PackageInfo);
         }
     });
 
-    return componentList;
+    return packageInfoList;
 }
 
 // Gets a package pool URL out of a download URL - Needed for registering in cgmanifest.json
-function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput: string, config: LinuxPackageInfoExtractorConfig, packageName: string, version: string) {
+function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput: string, config: LinuxPackageInfoExtractorParams, packageName: string, version: string) {
     // Handle regex reserved charters in regex strings and that ":" is treaded as "1%3a" on Debian/Ubuntu 
     const sanitizedPackage = packageName.replace(/\+/g, '\\+').replace(/\./g, '\\.');
     const sanitizedVersion = version.replace(/\+/g, '\\+').replace(/\./g, '\\.').replace(/:/g, '%3a');
@@ -382,7 +335,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: L
         return [];
     }
 
-    const componentList: PackageInfo[] = [];
+    const packageInfoList: PackageInfo[] = [];
     for (let repoName in gitRepos) {
         const repoPath = gitRepos[repoName];
         if (typeof repoPath === 'string') {
@@ -393,7 +346,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: L
             if (!gitRemote || !gitCommit) {
                 throw new Error(`Unable to determine git remote or commit for ${repoName}.`);
             }
-            componentList.push({
+            packageInfoList.push({
                 name: repoName,
                 path: repoPath,
                 url: gitRemote,
@@ -402,7 +355,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: L
         }
     }
 
-    return componentList;
+    return packageInfoList;
 }
 
 /* Generate "other" info objects. E.g.
@@ -412,7 +365,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: L
     downloadUrl: "https://pecl.php.net/get/xdebug-2.9.6.tgz"
 }
 */
-async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDependencyList: Lookup<OtherDependency | null> = {}, otherType: string = 'other'): Promise<PackageInfo[]> {
+async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDependencyList: Lookup<OtherDependencyInfoExtractionSettings | null> = {}, otherType: string = 'other'): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const defaultPackages = getDefaultDependencies(otherType);
     if (defaultPackages) {
@@ -428,9 +381,9 @@ async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDepe
     }
 
     console.log(`(*) Gathering information about "other" components...`);
-    const componentList: PackageInfo[] = [];
+    const packageInfoList: PackageInfo[] = [];
     for (let otherName in otherDependencyList) {
-        const otherSettings: OtherDependency = mergeOtherDefaultSettings(otherName, otherDependencyList[otherName]);
+        const otherSettings: OtherDependencyInfoExtractionSettings = mergeOtherDefaultSettings(otherName, otherDependencyList[otherName]);
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
@@ -438,7 +391,7 @@ async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDepe
                 throw new Error(`Missing versionCommand for ${otherName}.`)
             }
             const otherVersion = await getCommandOutputFromContainer(imageTagOrContainerName, otherSettings.versionCommand);
-            componentList.push({
+            packageInfoList.push({
                 name: otherName,
                 version: otherVersion,
                 url: otherSettings.downloadUrl,
@@ -450,11 +403,11 @@ async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDepe
         }
     }
 
-    return componentList;
+    return packageInfoList;
 }
 
 // Merge in default config for specified otherName if it exists
-function mergeOtherDefaultSettings(otherName: string, dependency: OtherDependency | null): OtherDependency {
+function mergeOtherDefaultSettings(otherName: string, dependency: OtherDependencyInfoExtractionSettings | null): OtherDependencyInfoExtractionSettings {
     const otherDefaultSettings = getConfig('otherDependencyDefaultSettings', null);
     if (!otherDefaultSettings || !otherDefaultSettings[otherName]) {
         if (!dependency) {
@@ -463,7 +416,7 @@ function mergeOtherDefaultSettings(otherName: string, dependency: OtherDependenc
         return dependency;
     }
     // Create a copy of default settings for merging
-    const mergedSettings = <OtherDependency>Object.assign({}, otherDefaultSettings[otherName]);
+    const mergedSettings = <OtherDependencyInfoExtractionSettings>Object.assign({}, otherDefaultSettings[otherName]);
     if (dependency) {
         for (let settingName in dependency) {
             (<any>mergedSettings)[settingName] = (<any>dependency)[settingName];
@@ -525,7 +478,7 @@ async function getCargoPackageInfo(imageTagOrContainerName: string, cargoPackage
         return [];
     }
 
-    const componentList = [];
+    const packageInfoList:PackageInfo[] = [];
     console.log(`(*) Gathering information about cargo packages...`);
 
     for (let crate in cargoPackages) {
@@ -538,14 +491,14 @@ async function getCargoPackageInfo(imageTagOrContainerName: string, cargoPackage
                 throw new Error(`Could not extract information about crate ${crate}`);
             }
             const version = crateVersionCaptureGroup[0];
-            componentList.push({
+            packageInfoList.push({
                 name: crate,
                 version: version
             });
         }
     }
 
-    return componentList;
+    return packageInfoList;
 }
 
 /* Generate go info objects. E.g.
@@ -570,7 +523,7 @@ async function getGoPackageInfo(imageTagOrContainerName: string, goPackages: Loo
     }
 
     console.log(`(*) Gathering information about go modules and packages...`);
-    const componentList = [];
+    const packageInfoList:PackageInfo[] = [];
     const packageInstallOutput = await getCommandOutputFromContainer(imageTagOrContainerName, "cat /usr/local/etc/vscode-dev-containers/go.log");
     for (let packageName in goPackages) {
         if (typeof packageName === 'string') {
@@ -582,14 +535,14 @@ async function getGoPackageInfo(imageTagOrContainerName: string, goPackages: Loo
                 const versionCaptureGroup = new RegExp(`downloading\\s*${packageName}\\s*v([0-9]+\\.[0-9]+\\.[0-9]+.*)\\n`).exec(packageInstallOutput);
                 version = versionCaptureGroup ? versionCaptureGroup[1] : 'latest';
             }
-            componentList.push({
+            packageInfoList.push({
                 name: packageName,
                 version: version
             });
         }
     }
 
-    return componentList;
+    return packageInfoList;
 }
 
 /* Generate image info object. E.g.
@@ -660,20 +613,8 @@ function isContainerName(imageTagOrContainerName: string) {
     return (imageTagOrContainerName.indexOf('vscdc--extract--') === 0)
 }
 
-// Use distro "ID" from /etc/os-release to determine appropriate package manger
-function getLinuxPackageManagerForDistro(distroId: string): string {
-    switch (distroId) {
-        case 'apt':
-        case 'debian':
-        case 'ubuntu': return 'apt';
-        case 'apk':
-        case 'alpine': return 'apk';
-    }
-    throw new Error(`Unsupported distro: ${distroId}`);
-}
-
 // Return dependencies by mapping distro "ID" from /etc/os-release to determine appropriate package manger
-function getLinuxPackageManagerDependencies(dependencies: Dependencies, distroInfo: DistroInfo): (string | Dependency)[] {
+function getLinuxPackageManagerDependencies(dependencies: DependencyInfoExtractionSettingsGroup, distroInfo: DistroInfo): (string | DependencyInfoExtractionSettings)[] {
     if ((<any>dependencies)[distroInfo.id]) {
         return (<any>dependencies)[distroInfo.id];
     }
@@ -682,7 +623,7 @@ function getLinuxPackageManagerDependencies(dependencies: Dependencies, distroIn
 }
 
 // Spins up a container for a referenced image and extracts info for the specified dependencies
-export async function getAllContentInfo(imageTag: string, dependencies: Dependencies): Promise<ExtractedInfo> {
+export async function getAllContentInfo(imageTag: string, dependencies: DependencyInfoExtractionSettingsGroup): Promise<ExtractedInfo> {
     const containerName = await startContainerForProcessing(imageTag);
     try {
         const distroInfo = await getLinuxDistroInfo(containerName);

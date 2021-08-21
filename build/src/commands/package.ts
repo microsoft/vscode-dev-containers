@@ -16,6 +16,9 @@ export async function packageDefinitions(params: CommonParams, updateLatest: boo
 
     // Stage content and load config
     const stagingFolder = await getStagingFolder(params.release);
+    if(!stagingFolder) {
+        throw new Error(`Could not find staging folder for release: ${params.release}`);
+    }
     await loadConfig(stagingFolder);
 
     if (!packageOnly) {
@@ -36,8 +39,8 @@ export async function packageDefinitions(params: CommonParams, updateLatest: boo
 
     // Update all definition config files for release (devcontainer.json, Dockerfile, library-scripts)
     const allDefinitions = getAllDefinitions();
-    for (let currentDefinitionId in allDefinitions) {
-        await updateConfigForRelease(allDefinitions[currentDefinitionId], params);
+    for (let [, currentDefinition] of allDefinitions) {
+        await updateConfigForRelease(currentDefinition, params);
     }
 
     console.log('(*) Packaging...');
