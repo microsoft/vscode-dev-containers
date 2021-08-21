@@ -68,7 +68,7 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
     for (let definitionId in definitionLookup) {
         const definition = getDefinition(definitionId);
         if (!definition) {
-            throw `Definition ${definitionId} not found!`
+            throw new Error(`Definition ${definitionId} not found!`);
         }
 
         populateParentAssociations(definition);
@@ -108,7 +108,7 @@ function populateParentAssociations(definition: Definition) {
     // If single parent for all variants (and possibly a single parentVariant)
     if(typeof definition.build.parent === 'string') {
         if (typeof definition.build.parentVariant !== 'string') {
-            throw `Value of parent is a string, but parentVariant is not.`;
+            throw new Error(`Value of parent is a string, but parentVariant is not.`);
         }
         const parentDefinition = getDefinition(definition.build.parent);
         definition.parentDefinitions.set(undefined, {
@@ -118,7 +118,7 @@ function populateParentAssociations(definition: Definition) {
         parentDefinition.childDefinitions.push(definition);
     } else {
         if (typeof definition.build.parentVariant !== 'object') {
-            throw `Value of parent is an object, but parentVariant is not.`;
+            throw new Error(`Value of parent is an object, but parentVariant is not.`);
         }
         for (let variant in definition.build.parent) {
             const parentDefinition = getDefinition(definition.build.parent[variant]);
@@ -158,7 +158,7 @@ export function getUpdatedImageTag(imageTag: string, currentRegistry: string, cu
     if (!definitionVariant) {
         const captureGroups = new RegExp(`${currentRegistry}/${currentRepositoryPrefix}/(.+):`).exec(imageTag);
         if(!captureGroups || captureGroups.length < 2) {
-            throw `Unable to find image name in ${imageTag}.`
+            throw new Error(`Unable to find image name in ${imageTag}.`);
         }
         const imageName = captureGroups[1];
         const updatedImageTag = imageTag.replace(new RegExp(`${currentRegistry}/${currentRepositoryPrefix}/${imageName}:(dev-|${updatedVersion.replace('.', '\.')}-)?`), `${updatedRegistry}/${updatedRepositoryPrefix}/${imageName}:${updatedVersion}-`);
@@ -185,7 +185,7 @@ export function getUpdatedImageTag(imageTag: string, currentRegistry: string, cu
 export function getDefinitionVariantFromImageTag(imageTag: string, registry = '.+', repository = '.+'): DefinitionVariant {
     const captureGroups = new RegExp(`${registry}/${repository}/(.+):(.+)`).exec(imageTag);
     if (!captureGroups || captureGroups.length < 3) {
-        throw `Unable to find image name and tag in ${imageTag}`;
+        throw new Error(`Unable to find image name and tag in ${imageTag}`);
     }
     const repo = captureGroups[1];
     const tagPart = captureGroups[2];
@@ -251,7 +251,7 @@ function findRootParentBucket(definition: Definition, parentBucketMap: Map<Defin
         }
     });
     if(!unifiedBucket) {
-        throw `Unable to determine bucket for ${definition.id}`;
+        throw new Error(`Unable to determine bucket for ${definition.id}`);
     }
     return unifiedBucket;
 }

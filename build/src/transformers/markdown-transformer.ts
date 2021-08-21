@@ -37,17 +37,17 @@ Returns:
 }
 
 */
-function nameAndVersionNormalizer(packageInfo: PackageInfo): PackageInfo {
+function nameAndVersionNormalizer(packageInfo: PackageInfo): PackageInfo | null {
     if (packageInfo.markdownIgnore) {
         return null;
     }
-    const normalized = Object.assign({}, packageInfo);
-    normalized.version = packageInfo.version || packageInfo.commitHash;  
-    if(!normalized.version) {
+    const normalized = <PackageInfo>Object.assign({}, packageInfo);
+    const version = packageInfo.version || packageInfo.commitHash;  
+    if(!version) {
         console.log(`(!) Warning: No version for package ${packageInfo.name} - skipping markdown output.`);
         return null;
     }
-    normalized.version = normalized.version.replace(/\n/g,'<br />');
+    normalized.version = version.replace(/\n/g,'<br />');
     normalized.path = normalized.path ? normalized.path.replace(/\n/g,'<br />') : normalized.path;
     return normalized;
 }
@@ -73,16 +73,16 @@ Returns:
 }
 
 */
-function componentNormalizer(component: CgComponent): PackageInfo {
+function componentNormalizer(component: CgComponent): PackageInfo | null {
     if (component.markdownIgnore) {
         return null;
     }
     let componentType = component.Component.Type;
     // Handle capitalization differences
-    if (!component.Component[componentType]) {
+    if (!(<any>component.Component)[componentType]) {
         componentType = componentType[0].toUpperCase() + componentType.substr(1);
     }
-    const componentInfo = component.Component[componentType];
+    const componentInfo = (<any>component.Component)[componentType];
     return {
         name: componentInfo.Name,
         url: componentInfo.DownloadUrl,

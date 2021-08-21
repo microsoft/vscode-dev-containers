@@ -149,7 +149,7 @@ export class Definition {
         if (this.dependencies) {
             const deps = <Dependencies>this.dependencies;
             if (!deps.image) {
-                throw `Dependency "image" not found for ${this.id}`;
+                throw new Error(`Dependency "image" not found for ${this.id}`);
             }
             deps.imageVariants = this.variants ?
                 this.variants.map<string>((variant: string) => deps.image.replace('${VARIANT}', variant)) :
@@ -160,7 +160,7 @@ export class Definition {
     // Generate 'latest' flavor of a given definition's tag
     getLatestTags(registry: string, registryPath: string): string[] {
         if (!this.build) {
-            throw `Could not getLatestTags for ${this.id}. No "build" settings.`;
+            throw new Error(`Could not getLatestTags for ${this.id}. No "build" settings.`);
         }
 
         // Given there could be multiple registries in the tag list, get all the different latest variations
@@ -176,7 +176,7 @@ export class Definition {
     // Create all the needed variants of the specified version identifier for a given definition
     getImageTagsForRelease(versionOrRelease: string, registry: string, repository: string, variant?: string): string[] {
         if (!this.build) {
-            throw `Could not getTagsForRelease for ${this.id}. No "build" settings.`;
+            throw new Error(`Could not getTagsForRelease for ${this.id}. No "build" settings.`);
         }
 
         let version = this.getVersionForRelease(versionOrRelease);
@@ -251,7 +251,7 @@ export class Definition {
     */
     getTagList(releaseOrVersion: string, versionPartHandling: string | boolean, registry: string, repository: string, variant?: string): string[] {
         if (!this.build) {
-            throw `Could not getTagList for ${this.id}. No "build" settings.`;
+            throw new Error(`Could not getTagList for ${this.id}. No "build" settings.`);
         }
 
         const version = this.getVersionForRelease(releaseOrVersion);
@@ -298,7 +298,7 @@ export class Definition {
                 versionList = [ `${versionParts[0]}`];
                 break;
             default:
-                throw `Invalid versionPartHandling type`;
+                throw new Error(`Invalid versionPartHandling type`);
         }
 
         // Normally, we also want to return a tag without a version number, but for
@@ -336,7 +336,7 @@ export class Definition {
         }
         const parent = this.parentDefinitions.get(variant);
         if (!parent) {
-            throw `Could not get parent for ${this.id} variant ${variant}.`;
+            throw new Error(`Could not get parent for ${this.id} variant ${variant}.`);
         }
         return parent.definition.getImageTagsForRelease(
             parent.definition.definitionVersion || version, 
@@ -356,7 +356,7 @@ export class Definition {
         if (await asyncUtils.exists(result)) {
             return result;
         } else {
-            throw `Expected to find Dockerfile at ${result}.`
+            throw new Error(`Expected to find Dockerfile at ${result}.`);
         }
     }
 

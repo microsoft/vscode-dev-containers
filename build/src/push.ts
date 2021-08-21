@@ -38,7 +38,7 @@ async function pushImage(definition: Definition, params: CommonParams, updateLat
     
     // Make sure there's a Dockerfile present
     if (!dockerFilePath || !await asyncUtils.exists(dockerFilePath)) {
-        throw `Invalid path ${dockerFilePath}`;
+        throw new Error(`Invalid path ${dockerFilePath}`);
     }
 
     // Process variants in reverse order to be sure the first one is tagged as "latest" if appropriate
@@ -114,7 +114,7 @@ async function pushImage(definition: Definition, params: CommonParams, updateLat
 async function flattenBaseImage(baseImageTag: string, flattenedBaseImageTag: string, pushImages: boolean) {
     const flattenedImageCaptureGroups = /([^\/]+)\/(.+):(.+)/.exec(flattenedBaseImageTag);
     if (!flattenedImageCaptureGroups) {
-        throw `Unable to flatten. Invalid tag ${flattenedBaseImageTag}`;
+        throw new Error(`Unable to flatten. Invalid tag ${flattenedBaseImageTag}`);
     }
     if (await isImageAlreadyPublished(flattenedImageCaptureGroups[1], flattenedImageCaptureGroups[2], flattenedImageCaptureGroups[3])) {
         console.log('(*) Flattened base image already published.')

@@ -56,7 +56,7 @@ export async function generateImageInformationFiles(params: CommonParams, buildF
         // Extract information
         const fileContents = await getDefinitionImageContentData(params, currentDefinition, alreadyRegistered, buildFirst);
         if(!fileContents) {
-            throw `Unable to get image information for ${currentDefinition.id}`;
+            throw new Error(`Unable to get image information for ${currentDefinition.id}`);
         }
 
         // Write markdown file as appropriate
@@ -100,7 +100,7 @@ async function getDefinitionImageContentData(params: CommonParams, definition: D
 
     await asyncUtils.forEach(definition.variants || [undefined], async (variant: string) => {
         if(!definition.dependencies) {
-            throw `Unable to get definition image dependencies for ${definition.id}. No dependencies in manifest.`
+            throw new Error(`Unable to get definition image dependencies for ${definition.id}. No dependencies in manifest.`);
         }
 
         if(variant) {
@@ -129,14 +129,14 @@ async function getDefinitionImageContentData(params: CommonParams, definition: D
 
     // Register upstream images
     if(!definition.dependencies?.imageVariants) {
-        throw `Unable to process image variants for ${definition.id}. imageVariants is undefined.`
+        throw new Error(`Unable to process image variants for ${definition.id}. imageVariants is undefined.`);
     }
     await asyncUtils.forEach(definition.dependencies.imageVariants, (async (imageTag: string) => {
         if (alreadyRegistered[imageTag]) {
             return;
         }
         if (!definition.dependencies?.imageLink) {
-            throw `Missing property imageLink for ${definition.id}`;
+            throw new Error(`Missing property imageLink for ${definition.id}`);
         }
         const [image, imageVersion] = imageTag.split(':');
         registrations.push({

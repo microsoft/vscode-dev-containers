@@ -5,7 +5,7 @@
 
 import { CgComponent } from '../domain/definition';
 import { InfoTransformer } from './transformer'
-import { ExtractedInfo, DistroInfo, ImageInfo, PackageInfo  } from '../utils/image-info-extractor'
+import { ExtractedInfo, DistroInfo, PackageInfo  } from '../utils/image-info-extractor'
 
 export interface CgManifestInfo {
     linux: CgComponent[];
@@ -35,9 +35,12 @@ export interface CgManifestInfo {
     }
 }
  */   
-function linuxPackageComponentTransformer(packageInfo: PackageInfo, distroInfo: DistroInfo): CgComponent {
+function linuxPackageComponentTransformer(packageInfo: PackageInfo, distroInfo: DistroInfo): CgComponent | null {
     if (packageInfo.cgIgnore) {
         return null;
+    }
+    if(!packageInfo.poolUrl || !packageInfo.poolKeyUrl) {
+        throw new Error(`Cannot transform component - missing poolUrl or poolKeyUrl`);
     }
     return {
         "Component": {
@@ -66,7 +69,7 @@ function linuxPackageComponentTransformer(packageInfo: PackageInfo, distroInfo: 
     }
 }
 */
-function npmComponentTransformer(packageInfo: PackageInfo): CgComponent {
+function npmComponentTransformer(packageInfo: PackageInfo): CgComponent | null {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -93,7 +96,7 @@ function npmComponentTransformer(packageInfo: PackageInfo): CgComponent {
     }
 }
 */
-function pipComponentTransformer(packageInfo: PackageInfo) {
+function pipComponentTransformer(packageInfo: PackageInfo): CgComponent | null {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -121,9 +124,12 @@ function pipComponentTransformer(packageInfo: PackageInfo) {
     }
 }
 */
-function gitComponentTransformer(repositoryInfo: PackageInfo) {
+function gitComponentTransformer(repositoryInfo: PackageInfo): CgComponent | null {
     if (repositoryInfo.cgIgnore) {
         return null;
+    }
+    if(!repositoryInfo.url || !repositoryInfo.commitHash) {
+        throw new Error(`Cannot transform component - missing repositoryUrl or commitHash`);
     }
     return {
         "Component": {
@@ -149,9 +155,12 @@ function gitComponentTransformer(repositoryInfo: PackageInfo) {
     }
 }
 */
-function otherComponentTransformer(packageInfo: PackageInfo) {
+function otherComponentTransformer(packageInfo: PackageInfo): CgComponent | null {
     if (packageInfo.cgIgnore) {
         return null;
+    }
+    if(!packageInfo.url) {
+        throw new Error(`Cannot transform component - missing DownloadUrl`);
     }
     return {
         "Component": {
@@ -176,7 +185,7 @@ function otherComponentTransformer(packageInfo: PackageInfo) {
     }
 }
 */
-function gemComponentTransformer(packageInfo: PackageInfo) {
+function gemComponentTransformer(packageInfo: PackageInfo): CgComponent | null {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -202,7 +211,7 @@ function gemComponentTransformer(packageInfo: PackageInfo) {
     }
 }
 */
-function cargoComponentTransformer(packageInfo: PackageInfo) {
+function cargoComponentTransformer(packageInfo: PackageInfo): CgComponent | null {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -226,7 +235,7 @@ function cargoComponentTransformer(packageInfo: PackageInfo) {
     }
 }
 */
-function goComponentTransformer(packageInfo: PackageInfo) {
+function goComponentTransformer(packageInfo: PackageInfo): CgComponent | null {
     if (packageInfo.cgIgnore) {
         return null;
     }
@@ -242,7 +251,7 @@ function goComponentTransformer(packageInfo: PackageInfo) {
 }
 
 // Remove unused properties like markdownIgnore that only apply to other formatters
-function manualComponentTransformer(component: CgComponent) {
+function manualComponentTransformer(component: CgComponent): CgComponent | null {
     if (component.cgIgnore) {
         return null;
     }

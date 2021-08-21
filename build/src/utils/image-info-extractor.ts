@@ -27,7 +27,7 @@ export interface ImageInfo {
     user: string;
 }
 
-export interface DistroInfo extends Lookup<string|undefined> {
+export interface DistroInfo extends Lookup<string | undefined> {
     prettyName: string;
     name: string;
     versionId: string;
@@ -80,7 +80,7 @@ const linuxPackageInfoExtractorConfigByDistro: Lookup<LinuxPackageInfoExtractorC
         downloadUriMatchRegEx: "'(.+\\.deb)'\\s*${PACKAGE}_.+\\s",
         poolUriMatchRegEx: "'(.+)/pool.+\\.deb'\\s*${PACKAGE}_.+\\s"
     } as LinuxPackageInfoExtractorConfig,
-    apk: {    
+    apk: {
         // Command to get package versions: apk info -e -v <package>
         // Output: <package-with-maybe-dashes>-<version-with-dashes>
         // Command to get download URLs: apk policy
@@ -128,7 +128,7 @@ async function getLinuxDistroInfo(imageTagOrContainerName: string): Promise<Dist
         const infoLineParts = infoLine.split('=');
         if (infoLineParts.length === 2) {
             const propName = snakeCaseToCamelCase(infoLineParts[0].trim());
-            info[propName] = infoLineParts[1].replace(/"/g,'').trim();    
+            info[propName] = infoLineParts[1].replace(/"/g, '').trim();
         }
     })
     return <DistroInfo>info;
@@ -137,11 +137,11 @@ async function getLinuxDistroInfo(imageTagOrContainerName: string): Promise<Dist
 // Convert SNAKE_CASE to snakeCase ... well, technically camelCase :)
 function snakeCaseToCamelCase(variableName: string) {
     return variableName.split('').reduce((prev: string, next: string) => {
-        if(prev.charAt(prev.length-1) === '_') {
-            return prev.substr(0, prev.length-1) + next.toLocaleUpperCase();
+        if (prev.charAt(prev.length - 1) === '_') {
+            return prev.substr(0, prev.length - 1) + next.toLocaleUpperCase();
         }
         return prev + next.toLocaleLowerCase();
-	}, '');
+    }, '');
 }
 
 /* A set of info objects linux packages. E.g.
@@ -154,7 +154,7 @@ function snakeCaseToCamelCase(variableName: string) {
 }
 
 Defaults to "cgIgnore": true, "markdownIgnore": false given base packages don't need to be registered
-*/   
+*/
 async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList: Array<string | Dependency> = [], linuxDistroInfo: DistroInfo): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const packageManager = getLinuxPackageManagerForDistro(linuxDistroInfo.id);
@@ -167,13 +167,13 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
     }
 
     // Get OS info if not passed in
-    if(!linuxDistroInfo) {
+    if (!linuxDistroInfo) {
         linuxDistroInfo = await getLinuxDistroInfo(imageTagOrContainerName);
     }
 
     // Generate a settings object from packageList
-    const settings = packageList.reduce((obj: Lookup<Dependency> , current: string | Dependency) => {
-        if(typeof current === 'string') {
+    const settings = packageList.reduce((obj: Lookup<Dependency>, current: string | Dependency) => {
+        if (typeof current === 'string') {
             obj[current] = { name: current };
         } else {
             obj[current.name] = current;
@@ -191,12 +191,12 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
 
     // Generate and exec command to get installed package versions
     console.log('(*) Gathering information about Linux package versions...');
-    const packageVersionListOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 
+    const packageVersionListOutput = await getCommandOutputFromContainer(imageTagOrContainerName,
         extractionConfig.listCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
-   
+
     // Generate and exec command to extract download URIs
     console.log('(*) Gathering information about Linux package download URLs...');
-    const packageUriCommandOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 
+    const packageUriCommandOutput = await getCommandOutputFromContainer(imageTagOrContainerName,
         extractionConfig.getUriCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
 
     const componentList: PackageInfo[] = [];
@@ -206,19 +206,19 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
         if (packageVersion !== '') {
             const versionCaptureGroup = new RegExp(extractionConfig.lineRegEx).exec(packageVersion);
             if (!versionCaptureGroup) {
-                if(packageVersion === 'Some packages were not found.') {
+                if (packageVersion === 'Some packages were not found.') {
                     console.log('(!) Warning: Some specified packages were not found.');
                 } else {
                     console.log(`(!) Warning: Unable to parse output "${packageVersion}" - skipping.`);
                 }
                 return;
             }
-            const [, packageName, version ] = versionCaptureGroup;
-            const packageSettings = settings[packageName] || {};
-            const cgIgnore =  typeof packageSettings.cgIgnore === 'undefined' ? true : packageSettings.cgIgnore; // default to true
+            const [, packageName, version] = versionCaptureGroup;
+            const packageSettings = <Dependency>(settings[packageName] || {});
+            const cgIgnore = typeof packageSettings.cgIgnore === 'undefined' ? true : packageSettings.cgIgnore; // default to true
             const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, extractionConfig, packageName, version);
             const poolKey = poolUrl ? getPoolKeyForPoolUrl(poolUrl) : undefined;
-            if(!poolUrl && !cgIgnore) {
+            if (!poolUrl && !cgIgnore) {
                 throw new Error('(!) No pool URL found to register package!');
             }
             componentList.push({
@@ -249,7 +249,7 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput: string,
         const fallbackPoolUrl = getFallbackPoolUrl(packageName);
         if (fallbackPoolUrl) {
             return fallbackPoolUrl;
-        } 
+        }
         console.log(`(!) No URI found for ${packageName} ${version}.`);
         return undefined;
     }
@@ -264,12 +264,11 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput: string,
     version: "7.23.0"
 }
 */
-async function getNpmGlobalPackageInfo(imageTagOrContainerName: string, packageNameList: string[]): Promise<PackageInfo[]> {
+async function getNpmGlobalPackageInfo(imageTagOrContainerName: string, packageNameList: string[] = []): Promise<PackageInfo[]> {
     // Merge in default dependencies
-    packageNameList = packageNameList || [];
     const defaultPackages = getDefaultDependencies('npm') || [];
     packageNameList = defaultPackages.concat(packageNameList);
-    
+
     // Return empty array if no packages
     if (packageNameList.length === 0) {
         return [];
@@ -282,26 +281,26 @@ async function getNpmGlobalPackageInfo(imageTagOrContainerName: string, packageN
     const npmOutput = JSON.parse(npmOutputRaw);
 
     return packageNameList.map((packageName) => {
-        let packageJson =  npmOutput.dependencies[packageName];
+        let packageJson = npmOutput.dependencies[packageName];
         if (!packageJson) {
             // Possible desired package is referenced by another top level package, so check dependencies too.
             // E.g. tslint-to-eslint-config can cause typescript to not appear at top level in npm ls
             for (let packageInNpmOutput in npmOutput.dependencies) {
                 const packageDependencies = npmOutput.dependencies[packageInNpmOutput].dependencies;
-                if(packageDependencies) {
+                if (packageDependencies) {
                     packageJson = packageDependencies[packageName];
-                    if(packageJson) {
+                    if (packageJson) {
                         break;
-                    }    
+                    }
                 }
             }
         }
-        if(!packageJson || !packageJson.version) {
+        if (!packageJson || !packageJson.version) {
             throw new Error(`Unable to parse version for ${packageName} from npm ls output: ${npmOutputRaw}`);
         }
         return {
             name: packageName,
-            version:packageJson.version
+            version: packageJson.version
         }
     });
 }
@@ -313,12 +312,11 @@ async function getNpmGlobalPackageInfo(imageTagOrContainerName: string, packageN
     version: "2.6.0"
 }
 */
-async function getPipPackageInfo(imageTagOrContainerName: string, packageNameList: string[], usePipx: boolean): Promise<PackageInfo[]> {
+async function getPipPackageInfo(imageTagOrContainerName: string, packageNameList: string[] = [], usePipx: boolean): Promise<PackageInfo[]> {
     // Merge in default dependencies
-    packageNameList = packageNameList || [];
     const defaultPackages = getDefaultDependencies(usePipx ? 'pipx' : 'pip') || [];
     packageNameList = defaultPackages.concat(packageNameList);
-    
+
     // Return empty array if no packages
     if (packageNameList.length === 0) {
         return [];
@@ -369,12 +367,12 @@ async function getPipxVersionLookup(imageTagOrContainerName: string) {
     commitHash: "cddac7177abc358f44efb469af43191922273705"
 }
 */
-async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: Lookup<string>): Promise<PackageInfo[]> {
+async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: Lookup<string> = {}): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const defaultPackages = getDefaultDependencies('git');
-    if(defaultPackages) {
+    if (defaultPackages) {
         const merged = defaultPackages;
-        for(let otherName in gitRepos) {
+        for (let otherName in gitRepos) {
             merged[otherName] = gitRepos[otherName];
         }
         gitRepos = merged;
@@ -385,14 +383,14 @@ async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: L
     }
 
     const componentList: PackageInfo[] = [];
-    for(let repoName in gitRepos) {
+    for (let repoName in gitRepos) {
         const repoPath = gitRepos[repoName];
         if (typeof repoPath === 'string') {
             console.log(`(*) Getting remote and commit for ${repoName} at ${repoPath}...`);
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
-            const remoteAndCommitOutput = await getCommandOutputFromContainer(imageTagOrContainerName, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && git log -n 1 --pretty=format:%H -- . | tee /dev/null; fi`,true);
+            const remoteAndCommitOutput = await getCommandOutputFromContainer(imageTagOrContainerName, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && git log -n 1 --pretty=format:%H -- . | tee /dev/null; fi`, true);
             const [gitRemote, gitCommit] = remoteAndCommitOutput.split('\n');
-            if(!gitRemote || !gitCommit) {
+            if (!gitRemote || !gitCommit) {
                 throw new Error(`Unable to determine git remote or commit for ${repoName}.`);
             }
             componentList.push({
@@ -414,12 +412,12 @@ async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: L
     downloadUrl: "https://pecl.php.net/get/xdebug-2.9.6.tgz"
 }
 */
-async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDependencyList: Lookup<OtherDependency | null>, otherType: string = 'other'): Promise<PackageInfo[]> {
+async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDependencyList: Lookup<OtherDependency | null> = {}, otherType: string = 'other'): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const defaultPackages = getDefaultDependencies(otherType);
-    if(defaultPackages) {
+    if (defaultPackages) {
         const merged = defaultPackages;
-        for(let otherName in otherDependencyList) {
+        for (let otherName in otherDependencyList) {
             merged[otherName] = otherDependencyList[otherName];
         }
         otherDependencyList = merged;
@@ -431,12 +429,12 @@ async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDepe
 
     console.log(`(*) Gathering information about "other" components...`);
     const componentList: PackageInfo[] = [];
-    for(let otherName in otherDependencyList) {
+    for (let otherName in otherDependencyList) {
         const otherSettings: OtherDependency = mergeOtherDefaultSettings(otherName, otherDependencyList[otherName]);
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
-            if(!otherSettings.versionCommand) {
+            if (!otherSettings.versionCommand) {
                 throw new Error(`Missing versionCommand for ${otherName}.`)
             }
             const otherVersion = await getCommandOutputFromContainer(imageTagOrContainerName, otherSettings.versionCommand);
@@ -449,7 +447,7 @@ async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDepe
                 cgIgnore: otherSettings.cgIgnore,
                 markdownIgnore: otherSettings.markdownIgnore
             } as PackageInfo);
-         }
+        }
     }
 
     return componentList;
@@ -458,18 +456,18 @@ async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDepe
 // Merge in default config for specified otherName if it exists
 function mergeOtherDefaultSettings(otherName: string, dependency: OtherDependency | null): OtherDependency {
     const otherDefaultSettings = getConfig('otherDependencyDefaultSettings', null);
-    if (!otherDefaultSettings || !otherDefaultSettings[otherName] ) {
-        if(!dependency) {
+    if (!otherDefaultSettings || !otherDefaultSettings[otherName]) {
+        if (!dependency) {
             throw new Error(`No extraction settings found for ${otherName}.`)
         }
         return dependency;
     }
     // Create a copy of default settings for merging
     const mergedSettings = <OtherDependency>Object.assign({}, otherDefaultSettings[otherName]);
-    if(dependency) {
+    if (dependency) {
         for (let settingName in dependency) {
-            mergedSettings[settingName] = (<any>dependency)[settingName];
-        }    
+            (<any>mergedSettings)[settingName] = (<any>dependency)[settingName];
+        }
     }
     return mergedSettings;
 }
@@ -480,12 +478,12 @@ function mergeOtherDefaultSettings(otherName: string, dependency: OtherDependenc
     version: "13.0.1"
 }
 */
-async function getGemPackageInfo(imageTagOrContainerName: string, packageList: string[]): Promise<PackageInfo[]> {
+async function getGemPackageInfo(imageTagOrContainerName: string, packageList: string[] = []): Promise<PackageInfo[]> {
     // Merge in default dependencies
     packageList = packageList || [];
     const defaultPackages = getDefaultDependencies('gem') || [];
     packageList = defaultPackages.concat(packageList);
-    
+
     // Return empty array if no packages
     if (packageList.length === 0) {
         return [];
@@ -494,7 +492,10 @@ async function getGemPackageInfo(imageTagOrContainerName: string, packageList: s
     console.log(`(*) Gathering information about gems...`);
     const gemListOutput = await getCommandOutputFromContainer(imageTagOrContainerName, "bash -l -c 'set -e && gem list -d --local' 2>/dev/null");
     return packageList.map((gem) => {
-        const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\),]+)`,'m').exec(gemListOutput);
+        const gemVersionCaptureGroup = new RegExp(`^${gem}\\s\\(([^\\),]+)`, 'm').exec(gemListOutput);
+        if (!gemVersionCaptureGroup) {
+            throw new Error(`Could not extract information about gem ${gem}`);
+        }
         const gemVersion = gemVersionCaptureGroup[1];
         return {
             name: gem,
@@ -509,12 +510,12 @@ async function getGemPackageInfo(imageTagOrContainerName: string, packageList: s
     version: "1.4.17-stable"
 }
 */
-async function getCargoPackageInfo(imageTagOrContainerName: string, cargoPackages: Lookup<string | null>): Promise<PackageInfo[]> {
+async function getCargoPackageInfo(imageTagOrContainerName: string, cargoPackages: Lookup<string | null> = {}): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const defaultPackages = getDefaultDependencies('go');
-    if(defaultPackages) {
+    if (defaultPackages) {
         const merged = defaultPackages;
-        for(let packageName in cargoPackages) {
+        for (let packageName in cargoPackages) {
             merged[packageName] = cargoPackages[packageName];
         }
         cargoPackages = merged;
@@ -527,12 +528,15 @@ async function getCargoPackageInfo(imageTagOrContainerName: string, cargoPackage
     const componentList = [];
     console.log(`(*) Gathering information about cargo packages...`);
 
-    for(let crate in cargoPackages) {
+    for (let crate in cargoPackages) {
         if (typeof crate === 'string') {
             const versionCommand = cargoPackages[crate] || `${crate} --version`;
             console.log(`(*) Getting version for ${crate}...`);
             const versionOutput = await getCommandOutputFromContainer(imageTagOrContainerName, versionCommand);
-            const crateVersionCaptureGroup = new RegExp('[0-9]+\\.[0-9]+\\.[0-9]+','m').exec(versionOutput);
+            const crateVersionCaptureGroup = new RegExp('[0-9]+\\.[0-9]+\\.[0-9]+', 'm').exec(versionOutput);
+            if (!crateVersionCaptureGroup) {
+                throw new Error(`Could not extract information about crate ${crate}`);
+            }
             const version = crateVersionCaptureGroup[0];
             componentList.push({
                 name: crate,
@@ -550,12 +554,12 @@ async function getCargoPackageInfo(imageTagOrContainerName: string, cargoPackage
     version: "0.6.4"
 }
 */
-async function getGoPackageInfo(imageTagOrContainerName: string, goPackages: Lookup<string | null>): Promise<PackageInfo[]> {
+async function getGoPackageInfo(imageTagOrContainerName: string, goPackages: Lookup<string | null> = {}): Promise<PackageInfo[]> {
     // Merge in default dependencies
     const defaultPackages = getDefaultDependencies('go');
-    if(defaultPackages) {
+    if (defaultPackages) {
         const merged = defaultPackages;
-        for(let packageName in goPackages) {
+        for (let packageName in goPackages) {
             merged[packageName] = goPackages[packageName];
         }
         goPackages = merged;
@@ -568,11 +572,11 @@ async function getGoPackageInfo(imageTagOrContainerName: string, goPackages: Loo
     console.log(`(*) Gathering information about go modules and packages...`);
     const componentList = [];
     const packageInstallOutput = await getCommandOutputFromContainer(imageTagOrContainerName, "cat /usr/local/etc/vscode-dev-containers/go.log");
-    for(let packageName in goPackages) {
+    for (let packageName in goPackages) {
         if (typeof packageName === 'string') {
             const versionCommand = goPackages[packageName];
             let version;
-            if(versionCommand) {
+            if (versionCommand) {
                 version = await getCommandOutputFromContainer(imageTagOrContainerName, versionCommand);
             } else {
                 const versionCaptureGroup = new RegExp(`downloading\\s*${packageName}\\s*v([0-9]+\\.[0-9]+\\.[0-9]+.*)\\n`).exec(packageInstallOutput);
@@ -596,7 +600,7 @@ async function getGoPackageInfo(imageTagOrContainerName: string, goPackages: Loo
 */
 async function getImageInfo(imageTagOrContainerName: string): Promise<ImageInfo> {
     let image = imageTagOrContainerName;
-    if(isContainerName(imageTagOrContainerName)) {
+    if (isContainerName(imageTagOrContainerName)) {
         image = await asyncUtils.spawn('docker', ['inspect', "--format='{{.Image}}'", imageTagOrContainerName.trim()], { shell: true, stdio: 'pipe' });
     }
     // If image not yet published, there will be no repo digests, so set to N/A if that is the case
@@ -604,8 +608,8 @@ async function getImageInfo(imageTagOrContainerName: string): Promise<ImageInfo>
     try {
         const imageNameAndDigest = await asyncUtils.spawn('docker', ['inspect', "--format='{{index .RepoDigests 0}}'", image], { shell: true, stdio: 'pipe' });
         [name, digest] = imageNameAndDigest.trim().split('@');
-    } catch(err) {
-        if(err.result.indexOf('Template parsing error') > 0) {
+    } catch (err) {
+        if (err.result.indexOf('Template parsing error') > 0) {
             name = 'N/A';
             digest = 'N/A';
         } else {
@@ -642,7 +646,7 @@ async function removeProcessingContainer(containerName: string): Promise<void> {
 async function getCommandOutputFromContainer(imageTagOrContainerName: string, command: string, forceRoot: boolean = false): Promise<string> {
     const runArgs = isContainerName(imageTagOrContainerName) ?
         ['exec'].concat(forceRoot ? ['-u', 'root'] : [])
-        : ['run','--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);
+        : ['run', '--init', '--privileged', '--rm'].concat(forceRoot ? ['-u', 'root'] : []);
     const wrappedCommand = `bash -c "set -e && echo ~~~BEGIN~~~ && ${command} && echo && echo ~~~END~~~"`;
     runArgs.push(imageTagOrContainerName);
     runArgs.push(wrappedCommand);
@@ -652,29 +656,29 @@ async function getCommandOutputFromContainer(imageTagOrContainerName: string, co
     return filteredResult.trim();
 }
 
-function isContainerName(imageTagOrContainerName) {
+function isContainerName(imageTagOrContainerName: string) {
     return (imageTagOrContainerName.indexOf('vscdc--extract--') === 0)
 }
 
 // Use distro "ID" from /etc/os-release to determine appropriate package manger
-function getLinuxPackageManagerForDistro(distroId: string): string
-{
-    switch(distroId) {
+function getLinuxPackageManagerForDistro(distroId: string): string {
+    switch (distroId) {
         case 'apt':
         case 'debian':
         case 'ubuntu': return 'apt';
         case 'apk':
         case 'alpine': return 'apk';
     }
-    return null;
+    throw new Error(`Unsupported distro: ${distroId}`);
 }
 
 // Return dependencies by mapping distro "ID" from /etc/os-release to determine appropriate package manger
-function getLinuxPackageManagerDependencies(dependencies: Dependencies, distroInfo: DistroInfo) {
-    if(dependencies[distroInfo.id]) {
-        return dependencies[distroInfo.id];
-    } 
-    return dependencies[getLinuxPackageManagerForDistro(distroInfo.id)]
+function getLinuxPackageManagerDependencies(dependencies: Dependencies, distroInfo: DistroInfo): (string | Dependency)[] {
+    if ((<any>dependencies)[distroInfo.id]) {
+        return (<any>dependencies)[distroInfo.id];
+    }
+    const packageManagerDependencies = (<any>dependencies)[getLinuxPackageManagerForDistro(distroInfo.id)];
+    return packageManagerDependencies || [];
 }
 
 // Spins up a container for a referenced image and extracts info for the specified dependencies

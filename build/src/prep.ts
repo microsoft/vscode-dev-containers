@@ -82,7 +82,7 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
             // Determine base image
             const baseImageFromCaptureGroups = /FROM\s+(.+):([^\s\n]+)?/.exec(prepResult.devContainerDockerfileModified);
             if(!baseImageFromCaptureGroups || baseImageFromCaptureGroups.length < 2) {
-                throw `Unable to find base image and tag in Dockerfile for ${definition.id}`;
+                throw new Error(`Unable to find base image and tag in Dockerfile for ${definition.id}`);
             }
             let repository = baseImageFromCaptureGroups[1];
             if (variant) {

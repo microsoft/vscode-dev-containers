@@ -7,10 +7,18 @@ import * as path from 'path';
 import * as asyncUtils from './utils/async';
 import { jsonc } from 'jsonc';
 import { CommonParams } from './domain/common';
+import { Dirent } from 'fs';
 
 interface RepoAndTag { 
     repository: string; 
     tag: string;
+}
+
+interface PatchConfig {
+    dockerFile: string;
+    bumpVersion: boolean;
+    deleteUntaggedImages: boolean;
+    imageIds: string[];
 }
 
 export async function patch(params: CommonParams, patchPath: string) {
@@ -19,12 +27,12 @@ export async function patch(params: CommonParams, patchPath: string) {
 
     console.log(`(*) Applying patch located at "${patchPath}"...`);
     const dockerFilePath = `${patchPath}/${patchConfig.dockerFile || 'Dockerfile'}`;
-    if (patchConfig.tagList) {
+    if ((<any>patchConfig).tagList) {
         throw new Error('tagList property has been deprecated.')
     }
 
     // Update each listed imageId
-    await asyncUtils.forEach(patchConfig.imageIds, async (imageId) => {
+    await asyncUtils.forEach(patchConfig.imageIds, async (imageId: string) => {
         await patchImage(params, imageId, patchPath, dockerFilePath, patchConfig.bumpVersion);
     });
 
@@ -58,8 +66,8 @@ async function patchImage(params:CommonParams, imageId: string, patchPath: strin
 
     //Generate tag arguments
     const tagArgs = repoAndTagList.reduce((prev, repoAndTag) => {
-        return prev.concat(['--tag', `${params.registry}/${repoAndTag.repository}:${repoAndTag.tag}`])
-    }, []);
+        return prev.concat('--tag', `${params.registry}/${repoAndTag.repository}:${repoAndTag.tag}`);
+    }, <string[]>[]);
 
     // Pull and build patched image for tag
     let retry = false;
@@ -86,7 +94,7 @@ async function patchImage(params:CommonParams, imageId: string, patchPath: strin
     } while (retry);
 
     // Push updates
-    await asyncUtils.forEach(repoAndTagList, async (repoAndTag) => {
+    await asyncUtils.forEach(repoAndTagList, async (repoAndTag: RepoAndTag) => {
         await asyncUtils.spawn('docker', ['push', `${params.registry}/${repoAndTag.repository}:${repoAndTag.tag}`], spawnOpts);
     });
 
@@ -138,7 +146,7 @@ async function deleteUntaggedImages(params:CommonParams, imageIds: string[]) {
     console.log(`(*) Manifests to delete: ${JSON.stringify(manifests, undefined, 4)}`);
 
     const spawnOpts = { stdio: 'inherit', shell: true };
-    await asyncUtils.forEach(manifests, async (manifest) => {
+    await asyncUtils.forEach(manifests, async (manifest: any) => {
         if (manifest.tags.length > 0) {
             console.log(`(!) Skipping ${manifest.digest} because it has tags: ${manifest.tags}`);
             return;
@@ -171,7 +179,7 @@ async function getImageRepositoryAndTags(params: CommonParams, imageId: string):
         { shell: true, stdio: 'pipe' });
     const repositoryList = JSON.parse(repositoryListOutput);
 
-    let repoAndTagList = [];
+    let repoAndTagList:RepoAndTag[] = [];
     await asyncUtils.forEach(repositoryList, async (repository: string) => {
         console.log(`(*) Checking in for "${imageId}" in "${repository}"...`);
         const tagListOutput = await asyncUtils.spawn('az',
@@ -188,11 +196,11 @@ async function getImageRepositoryAndTags(params: CommonParams, imageId: string):
     return repoAndTagList;
 }
 
-async function getImageManifests(params:CommonParams, imageIds: string[]) {
+async function getImageManifests(params: CommonParams, imageIds: string[]) {
     // ACR registry name is the registry minus .azurecr.io
     const registryName = params.registry.replace(/\..*/, '');
 
-    let manifests = [];
+    let manifests: any[] = [];
 
     // Get list of repositories
     console.log(`(*) Getting repository list for ACR "${registryName}"...`)
@@ -202,16 +210,16 @@ async function getImageManifests(params:CommonParams, imageIds: string[]) {
     const repositoryList = JSON.parse(repositoryListOutput);
 
     // Query each repository for images, then add any tags found to the list
-    const query = imageIds.reduce((prev, current) => {
+    const query = imageIds.reduce((prev: string | null, current: string) => {
         return prev ? `${prev} || digest=='${current}'` : `"[?digest=='${current}'`;
     }, null) + '] | []"';
-    await asyncUtils.forEach(repositoryList, async (repository) => {
+    await asyncUtils.forEach(repositoryList, async (repository: string) => {
         console.log(`(*) Getting manifests from "${repository}"...`);
         const registryManifestListOutput = await asyncUtils.spawn('az',
             ['acr', 'repository', 'show-manifests', '--name', registryName, '--repository', repository, "--query", query],
             { shell: true, stdio: 'pipe' });
         let registryManifestList = JSON.parse(registryManifestListOutput);
-        registryManifestList = registryManifestList.map((manifest) => {
+        registryManifestList = registryManifestList.map((manifest: any) => {
             manifest.repository = repository;
             return manifest;
         });
@@ -221,12 +229,12 @@ async function getImageManifests(params:CommonParams, imageIds: string[]) {
     return manifests;
 }
 
-async function getPatchConfig(patchPath: string) {
+async function getPatchConfig(patchPath: string): Promise<PatchConfig> {
     const patchConfigFilePath = path.resolve(patchPath, 'patch.json');
     if (!await asyncUtils.exists(patchConfigFilePath)) {
         throw (`No patch.json found at ${patchConfigFilePath}`);
     }
-    const patchConfig = await jsonc.read(patchConfigFilePath);
+    const patchConfig = <PatchConfig>await jsonc.read(patchConfigFilePath);
 
     if (typeof patchConfig.bumpVersion === 'undefined') {
         patchConfig.bumpVersion = true;
@@ -244,8 +252,8 @@ export async function patchAll(params: CommonParams) {
     const patchStatusFilePath = path.join(patchRoot, 'status.json');
     const patchStatus = await asyncUtils.exists(patchStatusFilePath) ? await jsonc.read(patchStatusFilePath) : { complete: {}, failed: {} }
     patchStatus.failed = {};
-    const patchList = await asyncUtils.readdir(patchRoot, { withFileTypes: true });
-    await asyncUtils.forEach(patchList, async (patchEntry) => {
+    const patchList = <Dirent[]>await asyncUtils.readdir(patchRoot, { withFileTypes: true });
+    await asyncUtils.forEach(patchList, async (patchEntry: Dirent) => {
         if (patchStatus.complete[patchEntry.name]) {
             console.log(`(*) Patch ${patchEntry.name} already complete.`);
             return;

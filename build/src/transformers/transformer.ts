@@ -19,10 +19,10 @@ export abstract class InfoTransformer {
 
     // Return all contents as an object of formatted values
     transform(info: ExtractedInfo): any {
-        let transformedInfo = {};
+        let transformedInfo = <ExtractedInfo>{};
         for (let contentType in info) {
-            if(this[contentType]) {
-                transformedInfo[contentType] = this.executeTransformation(info[contentType], this[contentType]);
+            if((<any>this)[contentType]) {
+                (<any>transformedInfo)[contentType] = this.executeTransformation((<any>info)[contentType], (<any>this)[contentType]);
             }
         }    
         return transformedInfo;
