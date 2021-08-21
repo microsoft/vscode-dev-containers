@@ -162,7 +162,7 @@ yargs(process.argv.slice(2))
                 },
                 'output-path': {
                     describe: 'path to where extracted information should be stored',
-                    default: path.resolve(__dirname, '..', getConfig('informationFileOutputPath', '.'))
+                    default: path.resolve(__dirname, '..', '..', getConfig('informationFileOutputPath', '.'))
                 },
                 'overwrite': {
                     describe: 'whether to overwrite cgmanifest.json or markdown files',
@@ -209,7 +209,7 @@ yargs(process.argv.slice(2))
                 },
                 'output-path': {
                     describe: 'path to where extracted information should be stored',
-                    default: path.resolve(__dirname, '..', getConfig('informationFileOutputPath', '.'))
+                    default: path.resolve(__dirname, '..', '..', getConfig('informationFileOutputPath', '.'))
                 },
                 'overwrite': {
                     describe: 'whether to overwrite cgmanifest.json or markdown files',

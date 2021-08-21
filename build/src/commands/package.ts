@@ -50,7 +50,7 @@ export async function packageDefinitions(params: CommonParams, updateLatest: boo
 
     let outputPath = null;
     console.log('(*) Moving package...');
-    outputPath = path.join(__dirname, '..', '..', `${packageJson.name}-${packageJsonVersion}.tgz`);
+    outputPath = path.join(__dirname, '..', '..', '..', `${packageJson.name}-${packageJsonVersion}.tgz`);
     await asyncUtils.copyFile(path.join(stagingFolder, `${packageJson.name}-${packageJsonVersion}.tgz`), outputPath);
 
     if (cleanWhenDone) {

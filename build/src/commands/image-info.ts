@@ -183,7 +183,7 @@ function getUniqueComponents(alreadyRegistered: Map<string, boolean>, info: Extr
 
 // Use template to generate header of version markdown content
 async function generateReleaseNotesHeader(params: CommonParams, definition: Definition): Promise<string> {
-    releaseNotesHeaderTemplate = releaseNotesHeaderTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'release-notes-header.md')));
+    releaseNotesHeaderTemplate = releaseNotesHeaderTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', '..', 'assets', 'release-notes-header.md')));
     const data = {
         version: definition.getVersionForRelease(params.release),
         definition: definition.id,
@@ -198,7 +198,7 @@ async function generateReleaseNotesHeader(params: CommonParams, definition: Defi
 
 // Generate release notes section for variant
 async function generateReleaseNotesPart(info: ExtractedInfo, params: CommonParams, definition: Definition, variant: string): Promise<string> {
-    releaseNotesVariantPartTemplate = releaseNotesVariantPartTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'release-notes-variant-part.md')));
+    releaseNotesVariantPartTemplate = releaseNotesVariantPartTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', '..', 'assets', 'release-notes-variant-part.md')));
     const transformer = new MarkdownInfoTransformer();
     const markdownInfo = transformer.transform(info);
     markdownInfo.hasPip = markdownInfo.pip.length > 0 || markdownInfo.pipx.length > 0;

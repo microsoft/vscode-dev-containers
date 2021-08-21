@@ -248,7 +248,7 @@ async function getPatchConfig(patchPath: string): Promise<PatchConfig> {
 }
 
 export async function patchAll(params: CommonParams) {
-    const patchRoot = path.resolve(__dirname, '..', 'patch');
+    const patchRoot = path.resolve(__dirname, '..', '..', 'patch');
     const patchStatusFilePath = path.join(patchRoot, 'status.json');
     const patchStatus = await asyncUtils.exists(patchStatusFilePath) ? await jsonc.read(patchStatusFilePath) : { complete: {}, failed: {} }
     patchStatus.failed = {};

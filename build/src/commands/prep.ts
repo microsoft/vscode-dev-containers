@@ -214,7 +214,7 @@ async function copyLibraryScriptsAndSetMeta(definition: Definition, isForBuild: 
             if (path.extname(script) !== '.sh') {
                 return;
             }
-            const possibleScriptSource = path.join(__dirname, '..', '..', scriptLibraryFolder, script);
+            const possibleScriptSource = path.join(__dirname, '..', '..', '..', '..', scriptLibraryFolder, script);
             if (await asyncUtils.exists(possibleScriptSource)) {
                 const targetScriptPath = path.join(definition.libraryScriptsPath, script);
                 console.log(`(*) Copying ${script} to ${definition.libraryScriptsPath}...`);
@@ -224,7 +224,7 @@ async function copyLibraryScriptsAndSetMeta(definition: Definition, isForBuild: 
     }
     if (isForBuild && meta) {
         // Write meta.env for use by scripts
-        metaEnvTemplate = metaEnvTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', 'assets', 'meta.env')));
+        metaEnvTemplate = metaEnvTemplate || handlebars.compile(await asyncUtils.readFile(path.join(__dirname, '..', '..', 'assets', 'meta.env')));
         mkdirp(definition.libraryScriptsPath);
         await asyncUtils.writeFile(path.join(definition.libraryScriptsPath, 'meta.env'), metaEnvTemplate(meta));
     }
@@ -232,7 +232,7 @@ async function copyLibraryScriptsAndSetMeta(definition: Definition, isForBuild: 
 
 // For CI of the script library folder
 export async function copyLibraryScriptsForAllDefinitions() {
-    const devcontainerFolders = glob.sync(`${path.resolve(__dirname, '..', '..')}/+(containers|container-templates|repository-containers)/**/.devcontainer`);
+    const devcontainerFolders = glob.sync(`${path.resolve(__dirname, '..', '..', '..', '..')}/+(containers|container-templates|repository-containers)/**/.devcontainer`);
     await asyncUtils.forEach(devcontainerFolders, async (folder: string) => {
         console.log(`(*) Checking ${path.basename(path.resolve(folder, '..'))} for ${scriptLibraryFolderInDefinition} folder...`);
         const definition = definitionFactory.getDefinition(folder);

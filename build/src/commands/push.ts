@@ -28,7 +28,7 @@ export async function push(params: CommonParams, updateLatest: boolean = false, 
     // Build and push subset of images
     const definitionsToPush = definitionId ? [getDefinition(definitionId)] : getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip);
     await asyncUtils.forEach(definitionsToPush, async (currentDefinition: Definition) => {
-        console.log(`**** Pushing ${currentDefinition.id} ${params.release} ****`);
+        console.log(`\n**** Pushing ${currentDefinition.id} ${params.release} ****`);
         await pushImage(currentDefinition, params, updateLatest, prepOnly, pushImages, replaceImages);
     });
 
