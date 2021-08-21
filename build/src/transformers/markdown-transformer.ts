@@ -4,8 +4,8 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import { CgComponent } from '../domain/definition';
-import { DistroInfo, ImageInfo, PackageInfo, InfoTransformer } from "./transformer";
-import { ExtractedInfo } from '../utils/image-info-extractor'
+import { InfoTransformer } from "./transformer";
+import { ExtractedInfo, DistroInfo, ImageInfo, PackageInfo  } from '../utils/image-info-extractor'
 
 export interface MarkdownInfo {
     image: ImageInfo;

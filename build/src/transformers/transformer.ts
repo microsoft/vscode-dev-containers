@@ -1,38 +1,6 @@
 import { Lookup } from '../domain/common';
 import { CgComponent } from '../domain/definition';
-import { ExtractedInfo } from '../utils/image-info-extractor';
-
-export interface PackageInfo {
-    name: string;
-    version: string;
-    url?: string;
-    path?: string;
-    annotation?: string;
-    poolUrl?: string;
-    poolKeyUrl?: string;
-    commitHash?: string;
-    cgIgnore?: boolean;
-    markdownIgnore?: boolean;
-}
-
-export interface ImageInfo {
-    name: string;
-    digest: string;
-    user: string;
-}
-
-export interface DistroInfo extends Lookup<string> {
-    prettyName: string;
-    name: string;
-    versionId: string;
-    version: string;
-    versionCodename: string;
-    id: string;
-    idLike?: string;
-    homeUrl?: string;
-    supportUrl?: string;
-    bugReportUrl?: string;
-}
+import { ExtractedInfo, DistroInfo, ImageInfo, PackageInfo } from '../utils/image-info-extractor';
 
 export abstract class InfoTransformer {
     abstract image: ((info: ImageInfo) => any) | null;

@@ -4,8 +4,8 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import { CgComponent } from '../domain/definition';
-import { PackageInfo, DistroInfo, InfoTransformer } from './transformer'
-import { ExtractedInfo } from '../utils/image-info-extractor'
+import { InfoTransformer } from './transformer'
+import { ExtractedInfo, DistroInfo, ImageInfo, PackageInfo  } from '../utils/image-info-extractor'
 
 export interface CgManifestInfo {
     linux: CgComponent[];

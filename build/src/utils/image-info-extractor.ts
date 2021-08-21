@@ -4,10 +4,41 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as asyncUtils from './async';
-import { DistroInfo, ImageInfo, PackageInfo } from '../transformers/transformer';
 import { getFallbackPoolUrl, getPoolKeyForPoolUrl, getDefaultDependencies, getConfig } from './config';
 import { Dependency, Dependencies, OtherDependency, CgComponent } from '../domain/definition';
 import { Lookup } from '../domain/common';
+
+export interface PackageInfo {
+    name: string;
+    version: string;
+    url?: string;
+    path?: string;
+    annotation?: string;
+    poolUrl?: string;
+    poolKeyUrl?: string;
+    commitHash?: string;
+    cgIgnore?: boolean;
+    markdownIgnore?: boolean;
+}
+
+export interface ImageInfo {
+    name: string;
+    digest: string;
+    user: string;
+}
+
+export interface DistroInfo extends Lookup<string|undefined> {
+    prettyName: string;
+    name: string;
+    versionId: string;
+    version: string;
+    versionCodename: string;
+    id: string;
+    idLike?: string;
+    homeUrl?: string;
+    supportUrl?: string;
+    bugReportUrl?: string;
+}
 
 export interface ExtractedInfo {
     image: ImageInfo;
@@ -36,7 +67,7 @@ interface LinuxPackageInfoExtractorConfig {
 }
 
 // Docker images and native OS libraries need to be registered as "other" while others are scenario dependant
-const linuxPackageInfoExtractorConfigByDistro = {
+const linuxPackageInfoExtractorConfigByDistro: Lookup<LinuxPackageInfoExtractorConfig> = {
     apt: {
         // Command to get package versions: dpkg-query --show -f='${Package}\t${Version}\n' <package>
         // Output: <package>    <version>
@@ -141,14 +172,14 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
     }
 
     // Generate a settings object from packageList
-    const settings = packageList.reduce((obj, current) => {
+    const settings = packageList.reduce((obj: Lookup<Dependency> , current: string | Dependency) => {
         if(typeof current === 'string') {
             obj[current] = { name: current };
         } else {
             obj[current.name] = current;
         }
         return obj;
-    }, {});
+    }, <Lookup<Dependency>>{});
 
     // Space separated list of packages for use in commands
     const packageListCommandPart = packageList.reduce((prev: string, current: string | Dependency) => {
@@ -156,7 +187,7 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
     }, '');
 
     // Use the appropriate package lookup settings for distro
-    const extractionConfig: LinuxPackageInfoExtractorConfig = linuxPackageInfoExtractorConfigByDistro[packageManager];
+    const extractionConfig: LinuxPackageInfoExtractorConfig = <LinuxPackageInfoExtractorConfig>linuxPackageInfoExtractorConfigByDistro[packageManager];
 
     // Generate and exec command to get installed package versions
     console.log('(*) Gathering information about Linux package versions...');
@@ -168,9 +199,9 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
     const packageUriCommandOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 
         extractionConfig.getUriCommand + packageListCommandPart + " || echo 'Some packages were not found.'", true);
 
-    const componentList = [];
+    const componentList: PackageInfo[] = [];
     const packageVersionList = packageVersionListOutput.split('\n');
-    packageVersionList.forEach((packageVersion) => {
+    packageVersionList.forEach((packageVersion: string) => {
         packageVersion = packageVersion.trim();
         if (packageVersion !== '') {
             const versionCaptureGroup = new RegExp(extractionConfig.lineRegEx).exec(packageVersion);
@@ -186,18 +217,19 @@ async function getLinuxPackageInfo(imageTagOrContainerName: string, packageList:
             const packageSettings = settings[packageName] || {};
             const cgIgnore =  typeof packageSettings.cgIgnore === 'undefined' ? true : packageSettings.cgIgnore; // default to true
             const poolUrl = getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput, extractionConfig, packageName, version);
-            if(!cgIgnore && !poolUrl) {
+            const poolKey = poolUrl ? getPoolKeyForPoolUrl(poolUrl) : undefined;
+            if(!poolUrl && !cgIgnore) {
                 throw new Error('(!) No pool URL found to register package!');
             }
             componentList.push({
                 name: packageName,
                 version: version,
                 poolUrl: poolUrl,
-                poolKeyUrl: getPoolKeyForPoolUrl(poolUrl),
+                poolKeyUrl: poolKey,
                 annotation: packageSettings.annotation,
                 cgIgnore: cgIgnore,
                 markdownIgnore: packageSettings.markdownIgnore
-            });
+            } as PackageInfo);
         }
     });
 
@@ -219,7 +251,7 @@ function getPoolUrlFromPackageVersionListOutput(packageUriCommandOutput: string,
             return fallbackPoolUrl;
         } 
         console.log(`(!) No URI found for ${packageName} ${version}.`);
-        return null;
+        return undefined;
     }
 
     // Extract URIs
@@ -304,29 +336,29 @@ async function getPipPackageInfo(imageTagOrContainerName: string, packageNameLis
     });
 }
 
-async function getPipVersionLookup(imageTagOrContainerName) {
+async function getPipVersionLookup(imageTagOrContainerName: string) {
     const packageVersionListOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 'pip list --format json');
 
     const packageVersionList = JSON.parse(packageVersionListOutput);
 
-    return packageVersionList.reduce((prev, current) => {
+    return packageVersionList.reduce((prev: Lookup<any>, current: any) => {
         prev[current.name] = current.version;
         return prev;
-    }, {});
+    }, <Lookup<any>>{});
 }
 
-async function getPipxVersionLookup(imageTagOrContainerName) {
+async function getPipxVersionLookup(imageTagOrContainerName: string) {
     // --format json doesn't work with pipx, so have to do text parsing
     const packageVersionListOutput = await getCommandOutputFromContainer(imageTagOrContainerName, 'pipx list');
 
     const packageVersionListOutputLines = packageVersionListOutput.split('\n');
-    return packageVersionListOutputLines.reduce((prev, current) => {
+    return packageVersionListOutputLines.reduce((prev: Lookup<string>, current: string) => {
         const versionCaptureGroup = /package\s(.+)\s(.+),/.exec(current);
         if (versionCaptureGroup) {
             prev[versionCaptureGroup[1]] = versionCaptureGroup[2];
         }
         return prev;
-    }, {});
+    }, <Lookup<string>>{});
 }
 
 /* Generate git info objects. E.g.
@@ -352,7 +384,7 @@ async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: L
         return [];
     }
 
-    const componentList = [];
+    const componentList: PackageInfo[] = [];
     for(let repoName in gitRepos) {
         const repoPath = gitRepos[repoName];
         if (typeof repoPath === 'string') {
@@ -360,12 +392,15 @@ async function getGitRepositoryInfo(imageTagOrContainerName: string, gitRepos: L
             // Go to the specified folder, see if the commands have already been run, if not run them and get output
             const remoteAndCommitOutput = await getCommandOutputFromContainer(imageTagOrContainerName, `cd \\"${repoPath}\\" && if [ -f \\".git-remote-and-commit\\" ]; then cat .git-remote-and-commit; else git remote get-url origin && git log -n 1 --pretty=format:%H -- . | tee /dev/null; fi`,true);
             const [gitRemote, gitCommit] = remoteAndCommitOutput.split('\n');
+            if(!gitRemote || !gitCommit) {
+                throw new Error(`Unable to determine git remote or commit for ${repoName}.`);
+            }
             componentList.push({
                 name: repoName,
                 path: repoPath,
-                repositoryUrl: gitRemote,
+                url: gitRemote,
                 commitHash: gitCommit
-            });
+            } as PackageInfo);
         }
     }
 
@@ -395,13 +430,16 @@ async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDepe
     }
 
     console.log(`(*) Gathering information about "other" components...`);
-    const componentList = [];
+    const componentList: PackageInfo[] = [];
     for(let otherName in otherDependencyList) {
-        const otherSettings = mergeOtherDefaultSettings(otherName, otherDependencyList[otherName]);
+        const otherSettings: OtherDependency = mergeOtherDefaultSettings(otherName, otherDependencyList[otherName]);
         if (typeof otherSettings === 'object') {
             console.log(`(*) Getting version for ${otherName}...`);
             // Run specified command to get the version number
-            const otherVersion = (await getCommandOutputFromContainer(imageTagOrContainerName, otherSettings.versionCommand));
+            if(!otherSettings.versionCommand) {
+                throw new Error(`Missing versionCommand for ${otherName}.`)
+            }
+            const otherVersion = await getCommandOutputFromContainer(imageTagOrContainerName, otherSettings.versionCommand);
             componentList.push({
                 name: otherName,
                 version: otherVersion,
@@ -410,7 +448,7 @@ async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDepe
                 annotation: otherSettings.annotation,
                 cgIgnore: otherSettings.cgIgnore,
                 markdownIgnore: otherSettings.markdownIgnore
-            });
+            } as PackageInfo);
          }
     }
 
@@ -418,16 +456,20 @@ async function getOtherDependencyInfo(imageTagOrContainerName: string, otherDepe
 }
 
 // Merge in default config for specified otherName if it exists
-function mergeOtherDefaultSettings(otherName: string, dependency: OtherDependency) {
+function mergeOtherDefaultSettings(otherName: string, dependency: OtherDependency | null): OtherDependency {
     const otherDefaultSettings = getConfig('otherDependencyDefaultSettings', null);
     if (!otherDefaultSettings || !otherDefaultSettings[otherName] ) {
+        if(!dependency) {
+            throw new Error(`No extraction settings found for ${otherName}.`)
+        }
         return dependency;
     }
     // Create a copy of default settings for merging
-    const mergedSettings = Object.assign({}, otherDefaultSettings[otherName]);
-    dependency = dependency || <OtherDependency>{};
-    for (let settingName in dependency) {
-        mergedSettings[settingName] = dependency[settingName];
+    const mergedSettings = <OtherDependency>Object.assign({}, otherDefaultSettings[otherName]);
+    if(dependency) {
+        for (let settingName in dependency) {
+            mergedSettings[settingName] = (<any>dependency)[settingName];
+        }    
     }
     return mergedSettings;
 }
