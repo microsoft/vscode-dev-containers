@@ -1,6 +1,6 @@
 {
-	"variants": ["1.16", "1.15"],
-	"definitionVersion": "0.202.8",
+	"variants": ["1.17", "1.16"],
+	"definitionVersion": "0.204.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -8,7 +8,7 @@
 			"go:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"1.16": [ "go:${VERSION}-1" ]
+			"1.17": [ "go:${VERSION}-1" ]
 		}
 	},
 	"dependencies": {

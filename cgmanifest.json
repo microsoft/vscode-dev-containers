@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "5377cc37c0f71fe22484303a4c6f387aa339f3f5"
+                    "commitHash": "cbb534267aca09fd123635fc39a7d00c0e21a5f7"
                 }
             }
         },
@@ -155,7 +155,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.26.1-1~focal",
+                    "Version": "2.27.1-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -207,7 +207,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "powershell",
-                    "Version": "7.1.3-1.ubuntu.20.04",
+                    "Version": "7.1.4-1.ubuntu.20.04",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -220,7 +220,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.9.5"
+                    "Version": "2.9.6"
                 }
             }
         },
@@ -301,7 +301,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.6.0"
+                    "Version": "20.7.2"
                 }
             }
         },
@@ -310,7 +310,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pipx",
-                    "Version": "0.16.3"
+                    "Version": "0.16.4"
                 }
             }
         },
@@ -373,7 +373,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.53.0"
+                    "Version": "1.54.0"
                 }
             }
         },
@@ -382,7 +382,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.53.0"
+                    "Version": "1.54.0"
                 }
             }
         },
@@ -391,7 +391,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.53.0"
+                    "Version": "1.54.0"
                 }
             }
         },
@@ -400,7 +400,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.7.0"
+                    "Version": "0.7.1"
                 }
             }
         },
@@ -473,7 +473,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "5377cc37c0f71fe22484303a4c6f387aa339f3f5"
+                    "commitHash": "af6c7f3d6782cf0a34e4e68f661df526d35795be"
                 }
             }
         },
@@ -513,7 +513,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "75c2fe4560b02fb2e38518434eebe4bb96c2c627"
+                    "commitHash": "57c397d7cabf9f0ff73b8c03c4c1859a3850405a"
                 }
             }
         },
@@ -542,7 +542,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.21.3",
+                    "Version": "1.22.0",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -592,7 +592,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "1.13.1",
+                    "Version": "1.14.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -612,7 +612,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.16.6",
+                    "Version": "1.16.7",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -622,7 +622,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.53.0",
+                    "Version": "1.54.0",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -692,10 +692,46 @@
         },
         {
             "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mgechev/revive",
+                    "Version": "1.1.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/uudashr/gopkgs",
+                    "Version": "2.0.1+incompatible"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/go-delve/delve",
+                    "Version": "1.7.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/golangci/golangci-lint",
+                    "Version": "1.42.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
-                    "Version": "1.16",
+                    "Version": "1.17",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
@@ -705,7 +741,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
-                    "Version": "1.15",
+                    "Version": "1.16",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
@@ -725,7 +761,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.1.5",
+                    "Version": "2.1.6",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -757,24 +793,6 @@
                     "Name": "Docker Image: php",
                     "Version": "7.3",
                     "DownloadUrl": "https://hub.docker.com/_/php"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "pylint",
-                    "Version": "2.9.6"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "virtualenv",
-                    "Version": "20.7.0"
                 }
             }
         },
@@ -840,33 +858,6 @@
         },
         {
             "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "rust-analysis",
-                    "Version": "1.54.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "rust-src",
-                    "Version": "1.54.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "clippy",
-                    "Version": "1.54.0"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: rust",
@@ -917,16 +908,6 @@
         },
         {
             "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "ruby-build",
-                    "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "887a13f86af229d85149738956d500808576bd8d"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: ruby",
@@ -960,7 +941,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "bundler",
-                    "Version": "2.2.25"
+                    "Version": "2.2.26"
                 }
             }
         },
@@ -998,7 +979,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "5377cc37c0f71fe22484303a4c6f387aa339f3f5"
+                    "commitHash": "cbb534267aca09fd123635fc39a7d00c0e21a5f7"
                 }
             }
         },

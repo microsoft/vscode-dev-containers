@@ -148,17 +148,17 @@ else
 fi
 
 # Install Go tools that are isImportant && !replacedByGopls based on
-# https://github.com/golang/vscode-go/blob/0c6dce4a96978f61b022892c1376fe3a00c27677/src/goTools.ts#L188
-# exception: golangci-lint is installed using their install script below.
+# https://github.com/golang/vscode-go/blob/0ff533d408e4eb8ea54ce84d6efa8b2524d62873/src/goToolsInformation.ts
+# Exception `dlv-dap` is a copy of github.com/go-delve/delve/cmd/dlv built from the master.
 GO_TOOLS="\
-    golang.org/x/tools/gopls \
-    honnef.co/go/tools/... \
-    golang.org/x/lint/golint \
-    github.com/mgechev/revive \
-    github.com/uudashr/gopkgs/v2/cmd/gopkgs \
-    github.com/ramya-rao-a/go-outline \
-    github.com/go-delve/delve/cmd/dlv \
-    github.com/golangci/golangci-lint/cmd/golangci-lint"
+    golang.org/x/tools/gopls@latest \
+    honnef.co/go/tools/cmd/staticcheck@latest \
+    golang.org/x/lint/golint@latest \
+    github.com/mgechev/revive@latest \
+    github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest \
+    github.com/ramya-rao-a/go-outline@latest \
+    github.com/go-delve/delve/cmd/dlv@latest \
+    github.com/golangci/golangci-lint/cmd/golangci-lint@latest"
 if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     echo "Installing common Go tools..."
     export PATH=${TARGET_GOROOT}/bin:${PATH}
@@ -167,12 +167,23 @@ if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     export GOPATH=/tmp/gotools
     export GOCACHE=/tmp/gotools/cache
 
-    # Go tools w/module support
-    export GO111MODULE=on
-    (echo "${GO_TOOLS}" | xargs -n 1 go get -v )2>&1 | tee -a /usr/local/etc/vscode-dev-containers/go.log
+    # Use go get for versions of go under 1.16
+    go_install_command=install
+    if [[ "1.16" > "$(go version | grep -oP 'go\K[0-9]+\.[0-9]+(\.[0-9]+)?')" ]]; then
+        export GO111MODULE=on
+        go_install_command=get
+        echo "Go version < 1.16, using go get."
+    fi 
+
+    (echo "${GO_TOOLS}" | xargs -n 1 go ${go_install_command} -v )2>&1 | tee -a /usr/local/etc/vscode-dev-containers/go.log
 
     # Move Go tools into path and clean up
     mv /tmp/gotools/bin/* ${TARGET_GOPATH}/bin/
+
+    # install dlv-dap (dlv@master)
+    go ${go_install_command} -v github.com/go-delve/delve/cmd/dlv@master 2>&1 | tee -a /usr/local/etc/vscode-dev-containers/go.log
+    mv /tmp/gotools/bin/dlv ${TARGET_GOPATH}/bin/dlv-dap
+
     rm -rf /tmp/gotools
     chown -R ${USERNAME} "${TARGET_GOPATH}"
 fi
