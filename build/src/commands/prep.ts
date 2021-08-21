@@ -4,11 +4,11 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as asyncUtils from './utils/async';
-import { getConfig, shouldFlattenDefinitionBaseImage } from './utils/config';
-import { Definition } from './domain/definition';
-import { CommonParams, Lookup } from './domain/common';
-import * as definitionFactory from './domain/definition-factory';
+import * as asyncUtils from '../utils/async';
+import { getConfig, shouldFlattenDefinitionBaseImage } from '../utils/config';
+import { Definition } from '../domain/definition';
+import { CommonParams, Lookup } from '../domain/common';
+import * as definitionFactory from '../domain/definition-factory';
 import mkdirp from 'mkdirp';
 import * as glob from 'glob';
 import * as handlebars from 'handlebars';
@@ -191,7 +191,6 @@ async function updateScriptSources(definition: Definition, params: CommonParams,
 
 // Update all script URLS in the entire repo (not staging folder)
 export async function updateAllScriptSourcesInRepo(params: CommonParams, updateScriptSha: boolean = true) {
-    const definitionFolder = path.join(__dirname, '..', '..', 'containers');
     // Update script versions in definition Dockerfiles for release
     const allDefinitions = definitionFactory.getAllDefinitions(true);
     for (let definitionId in allDefinitions) {

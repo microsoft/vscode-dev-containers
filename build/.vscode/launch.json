@@ -8,19 +8,15 @@
 			"type": "pwa-node",
 			"name": "Run Push Script",
 			"request": "launch",
+			"preLaunchTask": "vscdc cli watch",
 			"skipFiles": [
 				"<node_internals>/**",
 				"node_modules/**"
 			],
 			"runtimeExecutable": "node",
-			"runtimeArgs": [
-				"--nolazy",
-				"-r",
-				"ts-node/register"
-			],
 			"cwd": "${workspaceRoot}",
 			"args": [
-				"${workspaceFolder}/vscdc.ts",
+				"${workspaceFolder}/out/vscdc.js",
 				"push",
 				"debian",
 				"--no-push",

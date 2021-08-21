@@ -1,6 +1,5 @@
-import { Lookup } from '../domain/common';
-import { CgComponent } from '../domain/definition';
 import { ExtractedInfo, DistroInfo, ImageInfo, PackageInfo } from '../utils/image-info-extractor';
+import { CgComponent } from '../domain/definition';
 
 export abstract class InfoTransformer {
     abstract image: ((info: ImageInfo) => any) | null;

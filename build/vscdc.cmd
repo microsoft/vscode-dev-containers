@@ -1,1 +1,3 @@
-@npx ts-node %~dp0\vscdc.ts %@
+@echo off
+npx tsc -p %~dp0\tsconfig.json
+node  %~dp0/out/vscdc.js %@

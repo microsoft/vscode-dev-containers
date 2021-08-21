@@ -1,13 +1,13 @@
 import * as path from 'path';
 import { push } from './push';
-import * as asyncUtils from './utils/async';
-import { loadConfig, getStagingFolder, getConfig } from './utils/config';
-import { getSortedDefinitionBuildList, getDefinition } from './domain/definition-factory';
-import { CommonParams, Lookup } from './domain/common';
-import { Definition, CgComponent } from './domain/definition';
-import { getAllContentInfo, ExtractedInfo } from './utils/image-info-extractor';
-import { ComponentInfoTransformer } from './transformers/component-transformer';
-import { MarkdownInfoTransformer } from './transformers/markdown-transformer';
+import * as asyncUtils from '../utils/async';
+import { loadConfig, getStagingFolder, getConfig } from '../utils/config';
+import { getSortedDefinitionBuildList, getDefinition } from '../domain/definition-factory';
+import { CommonParams, Lookup } from '../domain/common';
+import { Definition, CgComponent } from '../domain/definition';
+import { getAllContentInfo, ExtractedInfo } from '../utils/image-info-extractor';
+import { ComponentInfoTransformer } from '../transformers/component-transformer';
+import { MarkdownInfoTransformer } from '../transformers/markdown-transformer';
 import * as handlebars from 'handlebars';
 
 

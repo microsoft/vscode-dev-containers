@@ -4,15 +4,15 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import { getConfig } from './src/utils/config';
-import { push } from './src/push';
-import { updateAllScriptSourcesInRepo, copyLibraryScriptsForAllDefinitions } from './src/prep';
-import { generateImageInformationFiles } from './src/image-info';
-import { patch, patchAll } from './src/patch';
-import { packageDefinitions } from './src/package';
-import { CommonParams } from './src/domain/common';
+import { getConfig } from './utils/config';
+import { push } from './commands/push';
+import { updateAllScriptSourcesInRepo, copyLibraryScriptsForAllDefinitions } from './commands/prep';
+import { generateImageInformationFiles } from './commands/image-info';
+import { patch, patchAll } from './commands/patch';
+import { packageDefinitions } from './commands/package';
+import { CommonParams } from './domain/common';
 import yargs from 'yargs';
-const packageJson = require('../package.json');
+const packageJson = require('../../package.json');
 
 console.log('vscode-dev-containers CLI\nCopyright (c) Microsoft Corporation. All rights reserved.\n');
 

@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 cd "$(dirname "${BASH_SOURCE[0]}")"
-npx ts-node-transpile-only vscdc.ts "$@"
+npx tsc -p tsconfig.json
+node out/vscdc.js "$@"

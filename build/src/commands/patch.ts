@@ -4,9 +4,9 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as asyncUtils from './utils/async';
+import * as asyncUtils from '../utils/async';
 import { jsonc } from 'jsonc';
-import { CommonParams } from './domain/common';
+import { CommonParams } from '../domain/common';
 import { Dirent } from 'fs';
 
 interface RepoAndTag { 

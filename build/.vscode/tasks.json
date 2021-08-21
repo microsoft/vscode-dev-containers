@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "vscdc cli build",
+			"type": "shell",
+			"command": "npx tsc -p ${workspaceFolder}",
+			"problemMatcher": "$tsc",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "vscdc cli watch",
+			"type": "shell",
+			"command": "npx tsc -w -p ${workspaceFolder}",
+			"problemMatcher": "$tsc-watch",
+			"group": "build",
+			"isBackground": true
+		}
+	]
+}

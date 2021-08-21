@@ -4,12 +4,12 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as asyncUtils from './utils/async';
-import * as configUtils from './utils/config';
+import * as asyncUtils from '../utils/async';
+import * as configUtils from '../utils/config';
 import * as prep from './prep';
-import { Definition } from './domain/definition';
-import { CommonParams } from './domain/common';
-import { getSortedDefinitionBuildList, getDefinition } from './domain/definition-factory';
+import { Definition } from '../domain/definition';
+import { CommonParams } from '../domain/common';
+import { getSortedDefinitionBuildList, getDefinition } from '../domain/definition-factory';
 
 const imageLabelPrefix = configUtils.getConfig('imageLabelPrefix', 'com.microsoft.vscode.devcontainers');
 

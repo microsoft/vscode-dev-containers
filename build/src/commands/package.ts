@@ -5,12 +5,12 @@
 
 import * as path from 'path';
 import { push } from './push';
-import { loadConfig, getStagingFolder, getVersionForRelease } from './utils/config';
-import * as asyncUtils from './utils/async';
+import { loadConfig, getStagingFolder, getVersionForRelease } from '../utils/config';
+import * as asyncUtils from '../utils/async';
 import { updateConfigForRelease } from './prep';
-import { getAllDefinitions } from './domain/definition-factory';
-import { CommonParams } from './domain/common';
-const packageJson = require('../../package.json');
+import { getAllDefinitions } from '../domain/definition-factory';
+import { CommonParams } from '../domain/common';
+const packageJson = require('../../../package.json');
 
 export async function packageDefinitions(params: CommonParams, updateLatest: boolean, prepAndPackageOnly: boolean = false, packageOnly: boolean = false, cleanWhenDone: boolean = true, definitionsToSkipPush: string[] = []) {
 
