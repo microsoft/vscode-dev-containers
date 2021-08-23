@@ -202,8 +202,9 @@
 		{
 			"id": "node",
 			"name": "Node.js (via nvm) and yarn",
+			"hint": "Select node version to install",
 			"type": "choice",
-			"values": [ "lts", "latest","16", "14", "12"],
+			"values": [ "lts", "latest","16", "14", "12" ],
 			"default": false,
 			"buildArg": "_VSC_NODE_VERSION",
 			"extensions": ["dbaeumer.vscode-eslint"],
@@ -260,6 +261,7 @@
 		{
 			"id": "python",
 			"name": "Python (may require compilation)",
+			"hint": "Select python version to install",
 			"type": "choice",
 			"values": ["latest", "3.9", "3.8", "3.7", "3.6"],
 			"default": false,
@@ -305,6 +307,7 @@
 		{
 			"id": "golang",
 			"name": "Go",
+			"hint": "Select go version to install",
 			"type": "choice",
 			"values": ["latest", "1.16", "1.15", "1.14"],
 			"default": false,
@@ -315,8 +318,8 @@
 				"GOROOT": "/usr/local/go",
 				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
 			},
-			//  Problem #5 - Need to set these for ptrace based debuggers
-			"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+			"capAdd": [ "SYS_PTRACE" ],
+			"securityOpt": [ "seccomp=unconfined" ],
 			"settings": {
 				"go.toolsManagement.checkForUpdates": "local",
 				"go.useLanguageServer": true,
@@ -332,6 +335,7 @@
 		{
 			"id": "java",
 			"name": "Java (via SDKMAN!)",
+			"hint": "Select java version to install",
 			"type": "choice",
 			"values": ["lts", "latest", "16", "11", "8"],
 			"default": false,
@@ -357,6 +361,7 @@
 		{
 			"id": "maven",
 			"name": "Maven (via SDKMAN!)",
+			"hint": "Select maven version to install",
 			"type": "choice",
 			"values": ["latest", "3.8", "3.6", "3.5"],
 			"default": false,
@@ -378,6 +383,7 @@
 		{
 			"id": "gradle",
 			"name": "Gradle (via SDKMAN!)",
+			"hint": "Select gradle version to install",
 			"type": "choice",
 			"values": ["latest", "7", "6", "5"],
 			"default": false,
@@ -399,6 +405,7 @@
 		{
 			"id": "ruby",
 			"name": "Ruby (via rvm)",
+			"hint": "Select ruby version to install",
 			"type": "choice",
 			"values": ["latest", "3.0", "2.7", "2.6"],
 			"default": false,
@@ -439,8 +446,8 @@
 				"RUSTUP_HOME": "/usr/local/rustup",
 				"PATH": "${CARGO_HOME}/bin:${RUSTUP_HOME}/bin:${PATH}"
 			},
-			//  Problem #5 - Need to set these for ptrace based debuggers
-			"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
+			"capAdd": [ "SYS_PTRACE" ],
+			"securityOpt": ["seccomp=unconfined"],
 			"settings": {
 				"lldb.executable": "/usr/bin/lldb",
 				"files.watcherExclude": {
