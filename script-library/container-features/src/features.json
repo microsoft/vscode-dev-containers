@@ -1,0 +1,476 @@
+{
+	"features": [
+		//  Problem #1 - you should be able to pick docker-in-docker or docker-from-docker, but not both, and settings need to be different
+		{
+			"id": "docker-in-docker",
+			"name": "Docker (Moby) CLI/Engine (Docker-in-Docker)",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
+			"entrypoint": "/usr/local/share/docker-init.sh",
+			"privileged": true,
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			],
+			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
+			"mounts": [
+				"source=dind-var-lib-docker,target=/var/lib/docker,type=volume"
+			],
+			"exclude": [
+				"alpine",
+				"azure-ansible",
+				"azure-terraform",
+				"docker-in-docker",
+				"docker-from-docker",
+				"docker-from-docker-compose",
+				"codespaces-linux",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube"
+			]
+		},
+		{
+			"id": "docker-from-docker",
+			"name": "Docker (Moby) CLI, reuse host Docker Engine",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
+			"entrypoint": "/usr/local/share/docker-init.sh",
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			],
+			"mounts": [
+				"source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
+			],
+			"exclude": [
+				"alpine",
+				"azure-ansible",
+				"azure-terraform",
+				"docker-in-docker",
+				"docker-from-docker",
+				"docker-from-docker-compose",
+				"codespaces-linux",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube"
+			]
+		},
+		// Problem #3 - there's three versions here and they go together as a unit, and no ability to pin to a version
+		{
+			"id": "kubectl-helm-minikube",
+			"name": "Kubectl, Helm, and Minkube",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
+			"extensions": [
+				"ms-kubernetes-tools.vscode-kubernetes-tools"
+			],
+			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
+			"mounts": [
+				"source=minikube-config,target=/home/vscode/.minikube,type=volume"
+			],
+			"exclude": [
+				"alpine",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube"
+
+			]
+		},
+		//  Problem #3 - Terraform also involves three versions here and they go together as a unit, and no ability to pin to a version
+		{
+			"id": "terraform",
+			"name": "Terraform, tflint, and TFGrunt",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_TERRAFORM",
+			"extensions": [
+				"HashiCorp.terraform",
+				"ms-vscode.azurecli",
+				"ms-azuretools.vscode-azureterraform",
+				"ms-azuretools.vscode-docker"
+			],
+			"settings": { 
+				"terraform.languageServer": {
+					"enabled": true,
+					"args": []
+				},
+				"azureTerraform.terminal": "integrated"
+			},
+			"exclude": [
+				"alpine",
+				"azure-terraform"
+			]
+		},
+		{
+			"id": "git",
+			"name": "Git (latest version - may require compilation)",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_GIT",
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
+		},
+		{
+			"id": "git-lfs",
+			"name": "Git Large File Support (LFS)",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_GIT_LFS",
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
+		},
+		{
+			"id": "github-cli",
+			"name": "GitHub CLI",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_GITHUB_CLI",
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
+		},
+		{
+			"id": "azure-cli",
+			"name": "Azure CLI",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_AZURE_CLI",
+			"extensions": [
+				"ms-vscode.azurecli"
+			],
+			"exclude": [
+				"alpine",
+				"azure-ansible",
+				"azure-bicep",
+				"azure-cli",
+				"azure-terraform",
+				"azure-functions-dotnetcore-2.1",
+				"azure-functions-dotnetcore-3.1",
+				"azure-functions-java-8",
+				"azure-functions-java-11",
+				"azure-functions-node",
+				"azure-functions-pwsh",
+				"azure-functions-python-3",
+				"azure-machine-learning-python-3",
+				"azure-static-web-apps",
+				"azure-terraform",
+				"codespaces-linux",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"dapr-dotnet"
+			]
+		},
+		{
+			"id": "sshd",
+			"name": "SSH server",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_SSH",
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
+		},
+		{
+			"id": "desktop-lite",
+			"name": "Light-weight desktop (Fluxbox)",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
+			"exclude": [
+				"alpine"
+			]
+		},
+		{
+			"id": "homebrew",
+			"name": "Homebrew",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_HOMEBREW",
+			"containerEnv": {
+				"BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
+				"PATH": "${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:${PATH}"
+			},
+			"exclude": [
+				"alpine"
+			]
+		},
+		{
+			"id": "node",
+			"name": "Node.js (via nvm) and yarn",
+			"hint": "Select node version to install",
+			"type": "choice",
+			"values": [ "lts", "latest","16", "14", "12" ],
+			"default": false,
+			"buildArg": "_VSC_NODE_VERSION",
+			"extensions": ["dbaeumer.vscode-eslint"],
+			"containerEnv": {
+				"NVM_DIR":"/usr/local/share/nvm",
+				"NVM_SYMLINK_CURRENT": true,
+				"PATH": "${NVM_DIR}/current/bin:${PATH}"
+			},
+			"exclude": [
+				"alpine",
+				"azure-ansible",
+				"azure-bicep",
+				"azure-terraform",
+				"azure-functions-node",
+				"azure-functions-python-3",
+				"azure-machine-learning-python-3",
+				"azure-static-web-apps",
+				"azure-terraform",
+				"codespaces-linux",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"dapr-dotnet",
+				"dapr-javascript-node",
+				"elm",
+				"go",
+				"elixr-phoenix-postgres",
+				"hugo",
+				"java",
+				"java-8",
+				"javascript-node",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"jekyll",
+				"php",
+				"php-mariadb",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-device-simulator-express",
+				"python-3-miniconda",
+				"python-3-postgres",
+				"python-3-pypy",
+				"reasonml",
+				"ruby",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"ruby-sinatra",
+				"swift",
+				"typescript-node",
+				"vue"
+			]
+		},
+		{
+			"id": "python",
+			"name": "Python (may require compilation)",
+			"hint": "Select python version to install",
+			"type": "choice",
+			"values": ["latest", "3.9", "3.8", "3.7", "3.6"],
+			"default": false,
+			"buildArg": "_VSC_PYTHON_VERSION",
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance"
+			],
+			"containerEnv": {
+				"PYTHON_PATH": "/usr/local/python",
+				"PIPX_HOME": "/usr/local/py-utils",
+				"PIPX_BIN_DIR": "/usr/local/py-utils/bin",
+				"PATH":"${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}"
+			},
+			"settings": { 
+				"python.pythonPath": "/usr/local/bin/python",
+				"python.languageServer": "Pylance",
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": true,
+				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+				"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+				"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
+				"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+				"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
+			},
+			"exclude": [
+				"alpine",
+				"azure-functions-python-3",
+				"azure-machine-learning-python-3",
+				"codespaces-linux",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-device-simulator-express",
+				"python-3-miniconda",
+				"python-3-postgres",
+				"python-3-pypy"
+			]
+		},
+		{
+			"id": "golang",
+			"name": "Go",
+			"hint": "Select go version to install",
+			"type": "choice",
+			"values": ["latest", "1.16", "1.15", "1.14"],
+			"default": false,
+			"buildArg": "_VSC_GO_VERSION",
+			"extensions": ["golang.Go"],
+			"containerEnv": {
+				"GOPATH": "/go",
+				"GOROOT": "/usr/local/go",
+				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
+			},
+			"capAdd": [ "SYS_PTRACE" ],
+			"securityOpt": [ "seccomp=unconfined" ],
+			"settings": {
+				"go.toolsManagement.checkForUpdates": "local",
+				"go.useLanguageServer": true,
+				"go.gopath": "/go",
+				"go.goroot": "/usr/local/go"
+			},
+			"exclude": [
+				"alpine",
+				"codespaces-linux",
+				"go"
+			]
+		},
+		{
+			"id": "java",
+			"name": "Java (via SDKMAN!)",
+			"hint": "Select java version to install",
+			"type": "choice",
+			"values": ["lts", "latest", "16", "11", "8"],
+			"default": false,
+			"buildArg": "_VSC_JAVA_VERSION",
+			"extensions": ["vscjava.vscode-java-pack"],
+			"containerEnv": {
+				"SDKMAN_DIR": "/usr/local/sdkman",
+				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}"
+			},
+			"settings": {
+				"java.home": "/usr/local/sdkman/candidates/java/current"
+			},
+			"exclude": [
+				"alpine",
+				"azure-functions-java-11",
+				"azure-functions-java-8",
+				"codespaces-linux",
+				"java",
+				"java-8"
+			]
+		},
+		// Problem #6 - Maven and gradle options should not be presented if Java isn't checked
+		{
+			"id": "maven",
+			"name": "Maven (via SDKMAN!)",
+			"hint": "Select maven version to install",
+			"type": "choice",
+			"values": ["latest", "3.8", "3.6", "3.5"],
+			"default": false,
+			"buildArg": "_VSC_MAVEN_VERSION",
+			"extensions": ["vscjava.vscode-java-pack"],
+			"containerEnv": {
+				"SDKMAN_DIR": "/usr/local/sdkman",
+				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${PATH}"
+			},
+			"exclude": [
+				"alpine",
+				"azure-functions-java-11",
+				"azure-functions-java-8",
+				"codespaces-linux",
+				"java",
+				"java-8"
+			]
+		},
+		{
+			"id": "gradle",
+			"name": "Gradle (via SDKMAN!)",
+			"hint": "Select gradle version to install",
+			"type": "choice",
+			"values": ["latest", "7", "6", "5"],
+			"default": false,
+			"buildArg": "_VSC_GRADLE_VERSION",
+			"extensions": ["vscjava.vscode-java-pack"],
+			"containerEnv": {
+				"SDKMAN_DIR": "/usr/local/sdkman",
+				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}"
+			},
+			"exclude": [
+				"alpine",
+				"azure-functions-java-11",
+				"azure-functions-java-8",
+				"codespaces-linux",
+				"java",
+				"java-8"
+			]
+		},
+		{
+			"id": "ruby",
+			"name": "Ruby (via rvm)",
+			"hint": "Select ruby version to install",
+			"type": "choice",
+			"values": ["latest", "3.0", "2.7", "2.6"],
+			"default": false,
+			"buildArg": "_VSC_RUBY_VERSION",
+			"extensions": [
+				"rebornix.Ruby"
+			],
+			"containerEnv": {
+				"GEM_PATH": "/usr/local/rvm/gems/default:/usr/local/rvm/gems/default@global",
+				"GEM_HOME": "/usr/local/rvm/gems/default",
+				"MY_RUBY_HOME": "/usr/local/rvm/rubies/default",
+				"PATH": "/usr/local/rvm/gems/default/bin:/usr/local/rvm/gems/default@global/bin:/usr/local/rvm/rubies/default/bin:${PATH}"
+			},
+			"exclude": [
+				"alpine",
+				"codespaces-linux",
+				"ruby",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"ruby-sinatra"
+			]
+		},
+		{
+			"id": "rust",
+			"name": "Rust",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_RUST",
+			"extensions": [
+				"vadimcn.vscode-lldb",
+				"mutantdino.resourcemonitor",
+				"matklad.rust-analyzer",
+				"tamasfe.even-better-toml",
+				"serayuzgur.crates"	
+			],
+			"containerEnv": {
+				"CARGO_HOME": "/usr/local/cargo",
+				"RUSTUP_HOME": "/usr/local/rustup",
+				"PATH": "${CARGO_HOME}/bin:${RUSTUP_HOME}/bin:${PATH}"
+			},
+			"capAdd": [ "SYS_PTRACE" ],
+			"securityOpt": ["seccomp=unconfined"],
+			"settings": {
+				"lldb.executable": "/usr/bin/lldb",
+				"files.watcherExclude": {
+					"**/target/**": true
+				},
+				"rust-analyzer.checkOnSave.command": "clippy"
+			},
+			"exclude": [
+				"alpine",
+				"codespaces-linux"
+			]
+		},
+		{
+			"id": "powershell",
+			"name": "PowerShell",
+			"type": "option",
+			"default": false,
+			"buildArg": "_VSC_INSTALL_POWERSHELL",
+			"exclude": [
+				"alpine",
+				"codespaces-linux",
+				"powershell"
+			]
+		}
+	]
+}
