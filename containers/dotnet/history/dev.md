@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:f0452a3b17427d6dd44b02f8bbeb1c441628aea1126ab42b49028a8152ebf71b
+**Digest:** sha256:91a4f46ffe7ae235c88a459c1e8886a8ff609ab54484e44e8be3298b23af6c7b
 
 **Tags:**
 ```
@@ -35,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -88,7 +88,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:6eab435e41bf4cf485db3407c60af58bc7b5a5fb8f563e4bc41849d8776349ff
+**Digest:** sha256:6af2a74e9d58ff319fbfac9afb19149b4729922aa801b498ed5764156da38607
 
 **Tags:**
 ```
@@ -112,7 +112,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -165,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:d054c880c925c011bc6d1b0b66047c9b6d177000ad6fc27803979ed69bad7eea
+**Digest:** sha256:6584092fc4e372f2a15a9d866368f653910e0753526e7affc99e9e26697c6b91
 
 **Tags:**
 ```
@@ -183,13 +183,13 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 2.1.817 (2.1.2) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 2.1.818 (2.1.3) | /usr |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**

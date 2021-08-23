@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "cbb534267aca09fd123635fc39a7d00c0e21a5f7"
+                    "commitHash": "6d5b8484ce7198161d5f617c3db9fd7d3833d48c"
                 }
             }
         },
@@ -798,6 +798,15 @@
         },
         {
             "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pylint",
+                    "Version": "2.10.2"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -979,7 +988,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "cbb534267aca09fd123635fc39a7d00c0e21a5f7"
+                    "commitHash": "6d5b8484ce7198161d5f617c3db9fd7d3833d48c"
                 }
             }
         },

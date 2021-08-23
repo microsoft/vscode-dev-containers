@@ -10,7 +10,7 @@
 
 ## Variant: 1.17
 
-**Digest:** sha256:f28b835c60582bb99a8850a1fba2dd1ba8fd77c1792d3539a352f306a6b28e54
+**Digest:** sha256:e8dd7a8399caa69740b43aebd067c6ef8ba22086469eb2324cb77beb32902e03
 
 **Tags:**
 ```
@@ -34,7 +34,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.16
 
-**Digest:** sha256:7d6f90202a130dbfec301ea2324f25274006539ad63742857ce3baa521083743
+**Digest:** sha256:690e57f43b0e5c8ff0919d2b4495dd6d644ca972451c00776b628df872243cad
 
 **Tags:**
 ```
@@ -127,7 +127,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | cbb534267aca09fd123635fc39a7d00c0e21a5f7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
