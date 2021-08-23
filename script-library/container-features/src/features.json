@@ -16,16 +16,21 @@
 			"mounts": [
 				"source=dind-var-lib-docker,target=/var/lib/docker,type=volume"
 			],
-			"exclude": [
-				"alpine",
-				"azure-ansible",
-				"azure-terraform",
-				"docker-in-docker",
-				"docker-from-docker",
-				"docker-from-docker-compose",
-				"codespaces-linux",
-				"kubernetes-helm",
-				"kubernetes-helm-minikube"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -41,16 +46,21 @@
 			"mounts": [
 				"source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
 			],
-			"exclude": [
-				"alpine",
-				"azure-ansible",
-				"azure-terraform",
-				"docker-in-docker",
-				"docker-from-docker",
-				"docker-from-docker-compose",
-				"codespaces-linux",
-				"kubernetes-helm",
-				"kubernetes-helm-minikube"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		// Problem #3 - there's three versions here and they go together as a unit, and no ability to pin to a version
@@ -67,11 +77,21 @@
 			"mounts": [
 				"source=minikube-config,target=/home/vscode/.minikube,type=volume"
 			],
-			"exclude": [
-				"alpine",
-				"kubernetes-helm",
-				"kubernetes-helm-minikube"
-
+			"include": [
+				"azure-cli",
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		//  Problem #3 - Terraform also involves three versions here and they go together as a unit, and no ability to pin to a version
@@ -94,9 +114,22 @@
 				},
 				"azureTerraform.terminal": "integrated"
 			},
-			"exclude": [
-				"alpine",
-				"azure-terraform"
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -104,10 +137,26 @@
 			"name": "Git (latest version - may require compilation)",
 			"type": "option",
 			"default": false,
-			"buildArg": "_VSC_INSTALL_GIT",
-			"exclude": [
-				"alpine",
-				"codespaces-linux"
+			"buildArg": "_VSC_INSTALL_GIT",			
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"Javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -116,9 +165,25 @@
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_GIT_LFS",
-			"exclude": [
-				"alpine",
-				"codespaces-linux"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"Javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -127,9 +192,25 @@
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_GITHUB_CLI",
-			"exclude": [
-				"alpine",
-				"codespaces-linux"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"Javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -141,27 +222,22 @@
 			"extensions": [
 				"ms-vscode.azurecli"
 			],
-			"exclude": [
-				"alpine",
-				"azure-ansible",
-				"azure-bicep",
-				"azure-cli",
-				"azure-terraform",
-				"azure-functions-dotnetcore-2.1",
-				"azure-functions-dotnetcore-3.1",
-				"azure-functions-java-8",
-				"azure-functions-java-11",
-				"azure-functions-node",
-				"azure-functions-pwsh",
-				"azure-functions-python-3",
-				"azure-machine-learning-python-3",
-				"azure-static-web-apps",
-				"azure-terraform",
-				"codespaces-linux",
-				"dotnet",
-				"dotnet-fsharp",
-				"dotnet-mssql",
-				"dapr-dotnet"
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -170,9 +246,25 @@
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_SSH",
-			"exclude": [
-				"alpine",
-				"codespaces-linux"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -181,8 +273,25 @@
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
-			"exclude": [
-				"alpine"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -195,8 +304,25 @@
 				"BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
 				"PATH": "${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:${PATH}"
 			},
-			"exclude": [
-				"alpine"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -212,50 +338,16 @@
 				"NVM_DIR":"/usr/local/share/nvm",
 				"NVM_SYMLINK_CURRENT": true,
 				"PATH": "${NVM_DIR}/current/bin:${PATH}"
-			},
-			"exclude": [
-				"alpine",
-				"azure-ansible",
-				"azure-bicep",
-				"azure-terraform",
-				"azure-functions-node",
-				"azure-functions-python-3",
-				"azure-machine-learning-python-3",
-				"azure-static-web-apps",
-				"azure-terraform",
-				"codespaces-linux",
-				"dotnet",
-				"dotnet-fsharp",
-				"dotnet-mssql",
-				"dapr-dotnet",
-				"dapr-javascript-node",
-				"elm",
-				"go",
-				"elixr-phoenix-postgres",
-				"hugo",
-				"java",
-				"java-8",
-				"javascript-node",
-				"javascript-node-azurite",
-				"javascript-node-mongo",
-				"javascript-node-postgres",
-				"jekyll",
-				"php",
-				"php-mariadb",
-				"python-3",
-				"python-3-anaconda",
-				"python-3-device-simulator-express",
-				"python-3-miniconda",
-				"python-3-postgres",
-				"python-3-pypy",
-				"reasonml",
-				"ruby",
-				"ruby-rails",
-				"ruby-rails-postgres",
-				"ruby-sinatra",
-				"swift",
-				"typescript-node",
-				"vue"
+			}, "include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"rust",
+				"dart"
 			]
 		},
 		{
@@ -291,17 +383,25 @@
 				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
 				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
 			},
-			"exclude": [
-				"alpine",
-				"azure-functions-python-3",
-				"azure-machine-learning-python-3",
-				"codespaces-linux",
-				"python-3",
-				"python-3-anaconda",
-				"python-3-device-simulator-express",
-				"python-3-miniconda",
-				"python-3-postgres",
-				"python-3-pypy"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"java-8",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart"
 			]
 		},
 		{
@@ -326,10 +426,25 @@
 				"go.gopath": "/go",
 				"go.goroot": "/usr/local/go"
 			},
-			"exclude": [
-				"alpine",
-				"codespaces-linux",
-				"go"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -348,13 +463,24 @@
 			"settings": {
 				"java.home": "/usr/local/sdkman/candidates/java/current"
 			},
-			"exclude": [
-				"alpine",
-				"azure-functions-java-11",
-				"azure-functions-java-8",
-				"codespaces-linux",
-				"java",
-				"java-8"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		// Problem #6 - Maven and gradle options should not be presented if Java isn't checked
@@ -371,13 +497,24 @@
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${PATH}"
 			},
-			"exclude": [
-				"alpine",
-				"azure-functions-java-11",
-				"azure-functions-java-8",
-				"codespaces-linux",
-				"java",
-				"java-8"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -392,14 +529,24 @@
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}"
-			},
-			"exclude": [
-				"alpine",
-				"azure-functions-java-11",
-				"azure-functions-java-8",
-				"codespaces-linux",
-				"java",
-				"java-8"
+			}, "include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -419,13 +566,25 @@
 				"MY_RUBY_HOME": "/usr/local/rvm/rubies/default",
 				"PATH": "/usr/local/rvm/gems/default/bin:/usr/local/rvm/gems/default@global/bin:/usr/local/rvm/rubies/default/bin:${PATH}"
 			},
-			"exclude": [
-				"alpine",
-				"codespaces-linux",
-				"ruby",
-				"ruby-rails",
-				"ruby-rails-postgres",
-				"ruby-sinatra"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -455,9 +614,25 @@
 				},
 				"rust-analyzer.checkOnSave.command": "clippy"
 			},
-			"exclude": [
-				"alpine",
-				"codespaces-linux"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"powershell",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		},
 		{
@@ -466,10 +641,25 @@
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_POWERSHELL",
-			"exclude": [
-				"alpine",
-				"codespaces-linux",
-				"powershell"
+			"include": [
+				"azure-cli",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"dart",
+				"python-3"
 			]
 		}
 	]
