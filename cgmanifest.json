@@ -155,7 +155,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.27.1-1~focal",
+                    "Version": "2.27.2-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -181,7 +181,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-cli",
-                    "Version": "20.10.7+azure-1",
+                    "Version": "20.10.8+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -194,7 +194,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-engine",
-                    "Version": "20.10.7+azure-1",
+                    "Version": "20.10.8+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -220,7 +220,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.9.6"
+                    "Version": "2.10.2"
                 }
             }
         },
@@ -427,7 +427,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.0.9"
+                    "Version": "1.1.0"
                 }
             }
         },
@@ -436,7 +436,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/uudashr/gopkgs",
-                    "Version": "1.3.2"
+                    "Version": "2.0.1+incompatible"
                 }
             }
         },
@@ -454,7 +454,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/go-delve/delve",
-                    "Version": "1.7.0"
+                    "Version": "1.7.1"
                 }
             }
         },
@@ -463,7 +463,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.41.1"
+                    "Version": "1.42.0"
                 }
             }
         },
@@ -473,7 +473,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "af6c7f3d6782cf0a34e4e68f661df526d35795be"
+                    "commitHash": "6d5b8484ce7198161d5f617c3db9fd7d3833d48c"
                 }
             }
         },
@@ -522,7 +522,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "git",
-                    "Version": "2.32.0",
+                    "Version": "2.33.0",
                     "DownloadUrl": "https://github.com/git/git"
                 }
             }
@@ -542,7 +542,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.22.0",
+                    "Version": "1.22.1",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -612,7 +612,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.16.7",
+                    "Version": "1.17",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -694,35 +694,8 @@
             "Component": {
                 "Type": "go",
                 "Go": {
-                    "Name": "github.com/mgechev/revive",
-                    "Version": "1.1.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
                     "Name": "github.com/uudashr/gopkgs",
-                    "Version": "2.0.1+incompatible"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/go-delve/delve",
-                    "Version": "1.7.1"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.42.0"
+                    "Version": "1.3.2"
                 }
             }
         },
@@ -793,15 +766,6 @@
                     "Name": "Docker Image: php",
                     "Version": "7.3",
                     "DownloadUrl": "https://hub.docker.com/_/php"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "pylint",
-                    "Version": "2.10.2"
                 }
             }
         },

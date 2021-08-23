@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:32b11feb1fe4f5067a0941e173de437f6745e8dff9caa3dc8e3b1fae4e3f028f
+**Digest:** sha256:779216d34aa8f700c8dd86dce094a9537eac86e879dbf56006e1a2bbd396a147
 
 **Tags:**
 ```
@@ -15,7 +15,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Ubuntu 20.04.2 LTS (debian-like distro)
+**Linux distribution:** Ubuntu 20.04.3 LTS (debian-like distro)
 
 **Available (non-root) user:** codespace
 
@@ -33,7 +33,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.1.4 | /opt/microsoft/powershell |
 | GCC | 9.3.0-17ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
-| [Go](https://golang.org/dl) | 1.16.7 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.17 | /usr/local/go |
 | [Rust](https://github.com/rust-lang/rust) | 1.54.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.0 | 
 
@@ -41,7 +41,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | af6c7f3d6782cf0a34e4e68f661df526d35795be | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 024dea3f7bc852312932c32c0957cb034f5f7917 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
@@ -51,7 +51,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.6 |
+| pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.7b0 |
@@ -70,11 +70,11 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | golang.org/x/tools/gopls | 0.7.1 |
 | honnef.co/go/tools | 0.2.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.0.9 |
-| github.com/uudashr/gopkgs | 1.3.2 |
+| github.com/mgechev/revive | 1.1.0 |
+| github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.7.0 |
-| github.com/golangci/golangci-lint | 1.41.1 |
+| github.com/go-delve/delve | 1.7.1 |
+| github.com/golangci/golangci-lint | 1.42.0 |
 
 **Ruby gems and tools**
 
@@ -99,10 +99,10 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Version | Path |
 |------|---------|------|
-| [git](https://github.com/git/git) | 2.32.0 | /usr/local |
+| [git](https://github.com/git/git) | 2.33.0 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.22.0 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.22.1 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.6.3 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.2 | /usr/local/sdkman |
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.1.1 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.7+azure | 
+| Docker (Moby) CLI &amp; Engine | 20.10.8+azure | 
 
 **Additional linux tools and packages**
 
@@ -119,7 +119,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| azure-cli (Azure CLI) | 2.27.1-1~focal |
+| azure-cli (Azure CLI) | 2.27.2-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.1 |
 | clang | 1:10.0-50~exp1 |
@@ -143,7 +143,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libc6 | 2.31-0ubuntu9.2 |
 | libc6-dev | 2.31-0ubuntu9.2 |
 | libcups2 | 2.3.1-9ubuntu1.1 |
-| libgbm1 | 21.0.3-0ubuntu0.2~20.04.1 |
+| libgbm1 | 21.0.3-0ubuntu0.3~20.04.1 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libgtk-3-0 | 3.24.20-0ubuntu1 |
@@ -174,8 +174,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.7+azure-1 |
-| moby-engine (Docker Engine) | 20.10.7+azure-1 |
+| moby-cli (Docker CLI) | 20.10.8+azure-1 |
+| moby-engine (Docker Engine) | 20.10.8+azure-1 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
