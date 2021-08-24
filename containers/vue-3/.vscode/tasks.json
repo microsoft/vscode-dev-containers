@@ -1,0 +1,25 @@
+// https://code.visualstudio.com/docs/editor/tasks
+{
+    "version": "2.0.0",
+    "tasks": [
+		{
+			"label": "Vue3 (dev): Image tests",
+			"type": "shell",
+			"command": "test.sh",
+			"group": "test",
+			"options": {
+				"cwd": "${workspaceFolder}/test-project"
+			},
+		},
+        {
+			"label": "Serve Vue3 app (npm)",
+			"type": "shell",
+			"command": "npm run serve",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"isBackground": true
+      }
+    ]
+}

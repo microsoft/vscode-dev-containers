@@ -1,0 +1,5 @@
+{
+    "remote.containers.dotfiles.repository": "https://github.com/fkromer/vue-3-dotfiles",
+    "remote.containers.dotfiles.targetPath": "~/dotfiles",
+    "remote.containers.dotfiles.installCommand": "~/dotfiles/install.sh"
+}

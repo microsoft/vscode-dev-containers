@@ -1,0 +1,29 @@
+// https://code.visualstudio.com/docs/remote/devcontainerjson-reference
+{
+	"name": "Vue 3 (Community)",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"VARIANT": "latest",
+			"VUE_VERSION": "next",
+			"VUE_CLI_VERSION": "latest",
+			"COMPILER_SFC_VERSION": "latest",
+			"IONIC_VERSION": "latest",
+			"VUEPRESS_VERSION": "next"
+		}
+	},
+	"settings": {
+		"terminal.integrated.defaultProfile.linux": "zsh"
+	},
+	"extensions": [
+		"octref.vetur",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"streetsidesoftware.code-spell-checker",
+		"visualstudioexptteam.vscodeintellicode"
+	],
+	"forwardPorts": [
+		8080
+	],
+	"remoteUser": "node"
+}
