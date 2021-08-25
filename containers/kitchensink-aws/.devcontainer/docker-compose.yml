@@ -1,0 +1,68 @@
+#-------------------------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+#-------------------------------------------------------------------------------------------------------------
+
+version: '3'
+
+services:
+  ubuntu-dev:
+    user: vscode
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - ..:/workspace
+      - ~/.aws:/home/vscode/.aws
+      # Uncomment the relevant line for your OS to use Terraform Cloud
+      # Windows (uncomment the following line)
+      # - ${APPDATA}/terraform.rc:/home/vscode/.terraformrc
+      # macOs/Linux (uncomment the following line)
+      # - ~/.terraformrc:/home/vscode/.terraformrc
+
+      # Forwards the local Docker socket to the container.
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    environment:
+      AWS_PROFILE: default
+      AWS_REGION: us-west-2
+      SSM_PATH: /dev/myapp 
+      # SSM_PATH is used to set environment variables from SSM
+      # More info: https://hub.docker.com/r/base2/awsenv/
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    networks:
+      default:
+        aliases:
+          - workspace
+          - ubuntu
+
+  # db:
+  #   image: postgres
+  #   ports:
+  #     - 5433:5432
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: mypassword
+  #     POSTGRES_DB: data
+  #   networks:
+  #     default:
+  #       aliases:
+  #         - postgres
+  #         - database
+
+  # web:
+  #   image: dpage/pgadmin4
+  #   ports:
+  #     - 5050:80
+  #   volumes:
+  #     - ${APPDATA}/pgAdminServer:/var/lib/pgadmin
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${USERNAME}@github.com
+  #     PGADMIN_DEFAULT_PASSWORD: mypassword
+  #   networks:
+  #     - default

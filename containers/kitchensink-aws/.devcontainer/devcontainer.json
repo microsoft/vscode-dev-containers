@@ -1,0 +1,35 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+	"name": "AWS Multi Language",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "ubuntu-dev",
+	"workspaceFolder": "/workspace",
+	"extensions": [
+		"mauve.terraform",
+		"shardulm94.trailing-spaces",
+		"yzhang.markdown-all-in-one",
+		"amazonwebservices.aws-toolkit-vscode",
+		"mark-tucker.aws-cli-configure",
+		"mutantdino.resourcemonitor",
+		"ms-vscode.csharp",
+		"ms-python.python",
+		"ms-azuretools.vscode-docker",
+		// "ms-ossdata.vscode-postgresql"
+	],
+	"settings": {
+		"remote.extensionKind": {
+			"ms-azuretools.vscode-docker": "workspace"
+		},
+		"[yaml]": {
+			"editor.tabSize": 2,
+			"editor.insertSpaces": true,
+			"editor.detectIndentation": false
+		},
+		"[terraform]": {
+			"editor.tabSize": 2,
+			"editor.insertSpaces": true,
+			"editor.detectIndentation": false
+		},
+		"trailing-spaces.syntaxIgnore": ["markdown"]
+	}
+}
