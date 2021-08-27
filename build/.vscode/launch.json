@@ -15,8 +15,8 @@
 			],
 			"runtimeExecutable": "node",
 			"cwd": "${workspaceRoot}",
+			"program": "${workspaceFolder}/out/vscdc.js",
 			"args": [
-				"${workspaceFolder}/out/vscdc.js",
 				"push",
 				"debian",
 				"--no-push",
@@ -31,10 +31,17 @@
 			]
 		},
 		{
-			"type": "node",
-			"request": "launch",
+			"type": "pwa-node",
 			"name": "Run Pack Script",
-			"program": "${workspaceFolder}/vscdc",
+			"request": "launch",
+			"preLaunchTask": "vscdc cli watch",
+			"skipFiles": [
+				"<node_internals>/**",
+				"node_modules/**"
+			],
+			"runtimeExecutable": "node",
+			"cwd": "${workspaceRoot}",
+			"program": "${workspaceFolder}/out/vscdc.js",
 			"args": [
 				"pack",
 				"--no-clean",
@@ -47,10 +54,17 @@
 				"--stubRegistryPath", "vscode/devcontainers"
 			]
 		}, {
-			"type": "node",
-			"request": "launch",
+			"type": "pwa-node",
 			"name": "Run CG/Info Script",
-			"program": "${workspaceFolder}/vscdc",
+			"request": "launch",
+			"preLaunchTask": "vscdc cli watch",
+			"skipFiles": [
+				"<node_internals>/**",
+				"node_modules/**"
+			],
+			"runtimeExecutable": "node",
+			"cwd": "${workspaceRoot}",
+			"program": "${workspaceFolder}/out/vscdc.js",
 			"args": [
 				"info",
 				"codespaces-linux",
@@ -66,11 +80,17 @@
 			]
 		},
 		{
-			"type": "node",
-			"request": "launch",
+			"type": "pwa-node",
 			"name": "Run Update Script URLs",
-			"program": "${workspaceFolder}/vscdc",
-			"cwd": "${workspaceFolder}",
+			"request": "launch",
+			"preLaunchTask": "vscdc cli watch",
+			"skipFiles": [
+				"<node_internals>/**",
+				"node_modules/**"
+			],
+			"runtimeExecutable": "node",
+			"cwd": "${workspaceRoot}",
+			"program": "${workspaceFolder}/out/vscdc.js",
 			"args": [
 				"update-script-sources",
 				"v0.100.0",
@@ -78,21 +98,33 @@
 			]
 		},
 		{
-			"type": "node",
-			"request": "launch",
+			"type": "pwa-node",
 			"name": "Run Copy Library Scripts",
-			"program": "${workspaceFolder}/vscdc",
-			"cwd": "${workspaceFolder}",
+			"request": "launch",
+			"preLaunchTask": "vscdc cli watch",
+			"skipFiles": [
+				"<node_internals>/**",
+				"node_modules/**"
+			],
+			"runtimeExecutable": "node",
+			"cwd": "${workspaceRoot}",
+			"program": "${workspaceFolder}/out/vscdc.js",
 			"args": [
 				"copy-library-scripts"
 			]
 		},
 		{
-			"type": "node",
-			"request": "launch",
+			"type": "pwa-node",
 			"name": "Run Patch",
-			"program": "${workspaceFolder}/vscdc",
-			"cwd": "${workspaceFolder}",
+			"request": "launch",
+			"preLaunchTask": "vscdc cli watch",
+			"skipFiles": [
+				"<node_internals>/**",
+				"node_modules/**"
+			],
+			"runtimeExecutable": "node",
+			"cwd": "${workspaceRoot}",
+			"program": "${workspaceFolder}/out/vscdc.js",
 			"args": [
 				"patch",
 				"--patch-path", "patch/sample",
@@ -101,11 +133,17 @@
 			]
 		},
 		{
-			"type": "node",
-			"request": "launch",
+			"type": "pwa-node",
 			"name": "Run Patch All",
-			"program": "${workspaceFolder}/vscdc",
-			"cwd": "${workspaceFolder}",
+			"request": "launch",
+			"preLaunchTask": "vscdc cli watch",
+			"skipFiles": [
+				"<node_internals>/**",
+				"node_modules/**"
+			],
+			"runtimeExecutable": "node",
+			"cwd": "${workspaceRoot}",
+			"program": "${workspaceFolder}/out/vscdc.js",
 			"args": [
 				"patch",
 				"--all",
