@@ -28,8 +28,8 @@ export async function spawn(command: string, args: string[], opts: any = { stdio
                 console.log(result);
                 const err = new ProcessError(`Non-zero exit code: ${code} ${signal || ''}`);
                 err.result = result;
-                err.code = code;
-                err.signal = signal;
+                err.code = code || -1;
+                err.signal = signal || '';
                 reject(err);
                 return;
             }
@@ -81,8 +81,8 @@ export async function exec(command: string, opts: any = {}) {
                 console.log(result);
                 const err = new ProcessError(`Non-zero exit code: ${code} ${signal || ''}`);
                 err.result = result;
-                err.code = code;
-                err.signal = signal;
+                err.code = code || -1;
+                err.signal = signal || '';
                 reject(err);
                 return;
             }

@@ -9,7 +9,21 @@
         "devcontainers",
         "dpkg",
         "npmignore",
-        "redhat"
+        "redhat",
+		"breakfix",
+		"Unpatched",
+		"azurecr",
+		"dotnetcore",
+		"SHAs",
+		"pylint",
+		"codespace",
+		"Codespaces",
+		"Repos",
+		"Xdebug",
+		"rustfmt",
+		"vscdc",
+		"gopls",
+		"copyfile"
     ],
 	"search.exclude": {
         "out": true

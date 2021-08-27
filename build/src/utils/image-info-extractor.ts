@@ -74,7 +74,7 @@ to an object like this:
 {
     prettyName: "Debian GNU/Linux 10 (buster)"
     name: "Debian GNU/Linux"
-    versioonId: "10"
+    versionId: "10"
     version: "10 (buster)"
     versionCodename: buster
     id: debian
@@ -561,7 +561,7 @@ async function getImageInfo(imageTagOrContainerName: string): Promise<ImageInfo>
     try {
         const imageNameAndDigest = await asyncUtils.spawn('docker', ['inspect', "--format='{{index .RepoDigests 0}}'", image], { shell: true, stdio: 'pipe' });
         [name, digest] = imageNameAndDigest.trim().split('@');
-    } catch (err) {
+    } catch (err: any) {
         if (err.result.indexOf('Template parsing error') > 0) {
             name = 'N/A';
             digest = 'N/A';
