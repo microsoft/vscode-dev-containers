@@ -158,14 +158,14 @@ export class Definition {
     }
 
     // Generate 'latest' flavor of a given definition's tag
-    getLatestTags(registry: string, registryPath: string): string[] {
+    getLatestTags(registry: string, repository: string): string[] {
         if (!this.build) {
             throw new Error(`Could not getLatestTags for ${this.id}. No "build" settings.`);
         }
 
         // Given there could be multiple registries in the tag list, get all the different latest variations
         return this.build.tags.reduce((list, tag) => {
-            const latest = `${registry}/${registryPath}/${tag.replace(/:.+/, ':latest')}`
+            const latest = `${registry}/${repository}/${tag.replace(/:.+/, ':latest')}`
             if (list.indexOf(latest) < 0) {
                 list.push(latest);
             }

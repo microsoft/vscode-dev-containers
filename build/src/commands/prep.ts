@@ -107,7 +107,7 @@ export async function prepDockerFile(definition: Definition, params: CommonParam
         // Otherwise update any Dockerfiles that refer to an un-versioned tag of another dev container
         // to the MAJOR version from this release.
         const expectedRegistry = getConfig('stubRegistry', 'mcr.microsoft.com');
-        const expectedRepository = getConfig('stubRegistryPath', 'vscode/devcontainers');
+        const expectedRepository = getConfig('stubRepository', 'vscode/devcontainers');
         const fromCaptureGroups = new RegExp(`FROM\\s+(${expectedRegistry}/${expectedRepository}/.+:.+)`).exec(prepResult.devContainerDockerfileModified);
         if (fromCaptureGroups && fromCaptureGroups.length > 0) {
             const fromDefinitionTag = definitionFactory.getUpdatedImageTag(

@@ -14,7 +14,7 @@ import { CommonParams } from './domain/common';
 import yargs from 'yargs';
 const packageJson = require('../../package.json');
 
-console.log('vscode-dev-containers CLI\nCopyright (c) Microsoft Corporation. All rights reserved.\n');
+console.log('vscode-dev-containers build CLI\nCopyright (c) Microsoft Corporation. All rights reserved.\n');
 
 yargs(process.argv.slice(2))
     .command('pack', 'package dev container definitions', (yargs: yargs.Argv) => {
@@ -236,6 +236,7 @@ yargs(process.argv.slice(2))
     .command('copy-library-scripts', 'copy files from script-library folder into appropriate definitions', () => {}, copyLibraryScriptsCommand)
     .demandCommand()
     .help()
+    .scriptName('vscdc')
     .argv;
 
 function pushCommand(argv: any) {

@@ -48,9 +48,9 @@ export interface GlobalConfig {
     commonDependencies?: DependencyInfoExtractionSettingsGroup;
 
     containerRegistry: string;
-    containerRegistryPath: string;
+    containerRepository: string;
     stubRegistry: string;
-    stubRegistryPath: string;
+    stubRepository: string;
 
     repositoryUrlPrefix: string;
     githubRepo: string;
