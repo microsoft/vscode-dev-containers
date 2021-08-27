@@ -30,7 +30,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -60,7 +62,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		// Problem #3 - there's three versions here and they go together as a unit, and no ability to pin to a version
@@ -91,7 +95,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		//  Problem #3 - Terraform also involves three versions here and they go together as a unit, and no ability to pin to a version
@@ -129,7 +135,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -156,7 +164,9 @@
 				"typescript-node",
 				"Javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -183,7 +193,9 @@
 				"typescript-node",
 				"Javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -210,7 +222,9 @@
 				"typescript-node",
 				"Javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -237,7 +251,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -264,7 +280,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -291,7 +309,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -322,7 +342,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -347,7 +369,9 @@
 				"docker-in-docker",
 				"powershell",
 				"rust",
-				"dart"
+				"dart",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -401,7 +425,9 @@
 				"rust",
 				"typescript-node",
 				"javascript-node",
-				"dart"
+				"dart",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -444,7 +470,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -480,7 +508,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		// Problem #6 - Maven and gradle options should not be presented if Java isn't checked
@@ -514,7 +544,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -546,7 +578,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -584,7 +618,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -632,7 +668,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		},
 		{
@@ -659,7 +697,9 @@
 				"typescript-node",
 				"javascript-node",
 				"dart",
-				"python-3"
+				"python-3",
+				"ubuntu",
+				"debian"
 			]
 		}
 	]
