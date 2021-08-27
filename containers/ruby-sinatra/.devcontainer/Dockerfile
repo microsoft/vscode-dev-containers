@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 # Install Sinatra
 RUN gem install sinatra sinatra-reloader thin data_mapper dm-sqlite-adapter 
 
-# [Choice] Node.js version: lts, 16, 14, 12
+# [Choice] Node.js version: lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="lts/*"
 RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"
 

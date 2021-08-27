@@ -17,7 +17,7 @@ namespace aspnetapp
             string databaseNames = "";
             SqlConnectionStringBuilder connectionBuilder = new SqlConnectionStringBuilder();
 
-            connectionBuilder.DataSource = "localhost,61433"; 
+            connectionBuilder.DataSource = "localhost,1433"; 
             connectionBuilder.UserID = "sa";            
             connectionBuilder.Password = "P@ssw0rd"; 
             using (SqlConnection containerConnection = new SqlConnection(connectionBuilder.ConnectionString)) {

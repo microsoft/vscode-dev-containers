@@ -27,7 +27,7 @@ ENV PATH=${PATH}:${PIPX_BIN_DIR}
 RUN bash /tmp/library-scripts/python-debian.sh "none" "/usr/local" "${PIPX_HOME}" "${USERNAME}" \ 
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# [Choice] Node.js version: none, lts, 16, 14, 12, 10
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
