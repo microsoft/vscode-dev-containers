@@ -175,11 +175,15 @@ export class Definition {
 
     // Create all the needed variants of the specified version identifier for a given definition
     getImageTagsForRelease(versionOrRelease: string, registry: string, repository: string, variant?: string): string[] {
+        return this.getImageTagsForVersion(versionOrRelease, registry, repository, variant);
+    }
+
+    // Create all the needed variants of the specified version identifier for a given definition - no release conversion
+    getImageTagsForVersion(version: string, registry: string, repository: string, variant?: string): string[] {
         if (!this.build) {
             throw new Error(`Could not getTagsForRelease for ${this.id}. No "build" settings.`);
         }
 
-        let version = this.getVersionForRelease(versionOrRelease);
         // If the definition states that only versioned tags are returned and the version is 'dev', 
         // add the definition Id to ensure that we do not incorrectly hijack a tag from another definition.
         if (version === 'dev') {
@@ -313,7 +317,7 @@ export class Definition {
         let tagList: string[] = [];
 
         versionList.forEach((tagVersion: string) => {
-            tagList = tagList.concat(this.getImageTagsForRelease(tagVersion, registry, repository, variant));
+            tagList = tagList.concat(this.getImageTagsForVersion(tagVersion, registry, repository, variant));
         });
 
         // If this variant should also be used for the the latest tag (it's the left most in the list), add it

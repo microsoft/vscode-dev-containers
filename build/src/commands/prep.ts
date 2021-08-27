@@ -133,7 +133,7 @@ export async function updateUserDockerfile(definition: Definition, params: Commo
     // The VARIANT arg allows this value to be set from devcontainer.json, handle it if found
     const userDockerfile = await definition.readDockerfile(true);
     if (/ARG\s+VARIANT\s*=/.exec(userDockerfile) !== null) {
-        const tagWithVariant = definition.getImageTagsForRelease(devContainerImageVersion, params.registry, params.repository, '${VARIANT}')[0];
+        const tagWithVariant = definition.getImageTagsForVersion(devContainerImageVersion, params.registry, params.repository, '${VARIANT}')[0];
         // Handle scenario where "# [Choice]" comment exists
         const choiceCaptureGroup=/(#\s+\[Choice\].+\n)ARG\s+VARIANT\s*=/.exec(userDockerfile);
         if (choiceCaptureGroup) {

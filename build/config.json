@@ -1,8 +1,8 @@
 {
 	"containerRegistry": "devcon.azurecr.io",
-	"containerRegistryPath": "public/vscode/devcontainers",
+	"containerRepository": "public/vscode/devcontainers",
 	"stubRegistry": "mcr.microsoft.com",
-	"stubRegistryPath": "vscode/devcontainers",
+	"stubRepository": "vscode/devcontainers",
 
 	"repositoryUrlPrefix": "https://github.com",
 	"githubRepo": "microsoft/vscode-dev-containers",

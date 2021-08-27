@@ -80,14 +80,14 @@ export async function loadDefinitions(globalConfig: GlobalConfig): Promise<void>
             const variants: (string | undefined)[] = definition.variants ? ['${VARIANT}', '$VARIANT', ...definition.variants] : [undefined];
 
             variants.forEach((variant: string | undefined) => {
-                const blankTagList = definition.getImageTagsForRelease('', 'ANY', 'ANY', variant);
+                const blankTagList = definition.getImageTagsForVersion('', 'ANY', 'ANY', variant);
                 blankTagList.forEach((blankTag: string) => {
                     definitionVariantTagMap.set(blankTag, {
                         definition: definition,
                         variant: variant
                     });
                 });
-                const devTagList = definition.getImageTagsForRelease('dev', 'ANY', 'ANY', variant);
+                const devTagList = definition.getImageTagsForVersion('dev', 'ANY', 'ANY', variant);
                 devTagList.forEach((devTag: string) => {
                     definitionVariantTagMap.set(devTag, {
                         definition: definition,
@@ -170,7 +170,7 @@ export function getUpdatedImageTag(imageTag: string, currentRegistry: string, cu
         variant = definitionVariant.variant;
     }
 
-    const updatedTags = definitionVariant.definition.getImageTagsForRelease(updatedVersion, updatedRegistry, updatedRepositoryPrefix, variant);
+    const updatedTags = definitionVariant.definition.getImageTagsForVersion(updatedVersion, updatedRegistry, updatedRepositoryPrefix, variant);
     if (updatedTags && updatedTags.length > 0) {
         console.log(`    Updating ${imageTag}\n    to ${updatedTags[0]}`);
         return updatedTags[0];
