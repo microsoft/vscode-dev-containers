@@ -1,21 +1,29 @@
 {
-	"variants": ["5.0", "3.1", "2.1"],
+	"variants": ["6.0", "6.0-focal", "5.0-focal", "3.1-focal", "2.1-focal"],
 	"definitionVersion": "0.201.10",
 	"build": {
-		"latest": true,
+		"latest": "5.0-focal",
 		"rootDistro": "debian",
 		"architectures": {
-			"5.0": ["linux/amd64", "linux/arm64", "linux/arm/v7"],
-			"3.1": ["linux/amd64", "linux/arm64", "linux/arm/v7"],
-			"2.1": ["linux/amd64", "linux/arm/v7"]
+			"6.0": ["linux/amd64", "linux/arm64"],
+			"6.0-focal": ["linux/amd64"],
+			"5.0-focal": ["linux/amd64"],
+			"3.1-focal": ["linux/amd64"],
+			"2.1-focal": ["linux/amd64"]
 		},
 		"tags": [
 			"dotnet:${VERSION}-${VARIANT}",
 			"dotnetcore:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"6.0": ["dotnet:${VERSION}-6.0-bullseye"],
+			"5.0-focal": ["dotnet:${VERSION}-5.0", "dotnetcore:${VERSION}-5.0"],
+			"3.1-focal": ["dotnet:${VERSION}-3.1", "dotnetcore:${VERSION}-3.1"],
+			"2.1-focal": ["dotnet:${VERSION}-2.1", "dotnetcore:${VERSION}-2.1"]
+		}		
 	},
 	"dependencies": {
-		"image": "mcr.microsoft.com/dotnet/sdk:${VARIANT}-focal",
+		"image": "mcr.microsoft.com/dotnet/sdk:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/microsoft-dotnet-sdk",
 		"apt": [{
 			"cgIgnore": false,

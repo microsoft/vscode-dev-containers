@@ -1,12 +1,19 @@
 {
+	"variants": ["1-bullseye", "1-buster"],
 	"definitionVersion": "0.200.8",
 	"build": {
-		"latest": true,
+		"latest": "1-bullseye",
 		"rootDistro": "debian",
-		"architectures": ["linux/amd64", "linux/arm64", "linux/arm/v7"],
+		"architectures": {
+			"1-bullseye": ["linux/amd64", "linux/arm64"],
+			"1-buster": ["linux/amd64"]
+		},
 		"tags": [
-			"rust:${VERSION}-1"
-		]
+			"rust:${VERSION}-${VARIANT}"
+		],
+		"variantTags": {
+			"1-bullseye": [ "rust:${VERSION}-1" ]
+		}
 	},
 	"dependencies": {
 		"image": "rust:1",

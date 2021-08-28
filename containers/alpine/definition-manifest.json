@@ -2,9 +2,9 @@
 	"variants": ["3.14", "3.13", "3.12", "3.11"],
 	"definitionVersion": "0.202.2",
 	"build": {
-		"latest": false,
+		"latest": "3.14",
 		"rootDistro": "alpine",
-		"architectures": ["linux/amd64", "linux/arm64", "linux/arm/v7"],
+		"architectures": ["linux/amd64", "linux/arm64"],
 		"tags": [
 			"base:${VERSION}-alpine-${VARIANT}",
 			"base:${VERSION}-alpine${VARIANT}"

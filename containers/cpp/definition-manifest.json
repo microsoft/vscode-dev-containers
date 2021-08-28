@@ -1,8 +1,8 @@
 {
-	"variants": ["buster", "bullseye", "focal", "bionic", "stretch"],
+	"variants": [ "bullseye", "buster", "stretch", "focal", "bionic"],
 	"definitionVersion": "0.202.1",
 	"build": {
-		"latest": true,
+		"latest": "bullseye",
 		"parent": {
 			"bullseye": "debian",
 			"buster": "debian", 
@@ -11,20 +11,26 @@
 			"bionic": "ubuntu"
 		},
 		"rootDistro": "debian",
-		"architectures": ["linux/amd64", "linux/arm64", "linux/arm/v7"],
+		"architectures": {
+			"bullseye": ["linux/amd64", "linux/arm64"],
+			"buster": ["linux/amd64"],
+			"stretch": ["linux/amd64"],
+			"focal": ["linux/amd64"],
+			"bionic": ["linux/amd64"]
+		},
 		"tags": [
 			"cpp:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
 			"bullseye": [
 				"cpp:${VERSION}-debian-11",
-				"cpp:${VERSION}-debian11"
+				"cpp:${VERSION}-debian11",
+				"cpp:${VERSION}-debian",
+				"cpp:${VERSION}"
 			],
 			"buster": [
 				"cpp:${VERSION}-debian-10",
-				"cpp:${VERSION}-debian10",
-				"cpp:${VERSION}-debian",
-				"cpp:${VERSION}"
+				"cpp:${VERSION}-debian10"
 			],
 			"stretch": [
 				"cpp:${VERSION}-debian-9",

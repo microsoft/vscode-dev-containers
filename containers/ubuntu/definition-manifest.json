@@ -2,9 +2,9 @@
 	"variants": ["focal", "bionic"],
 	"definitionVersion": "0.201.9",
 	"build": {
-		"latest": false,
+		"latest": "focal",
 		"rootDistro": "debian",
-		"architectures": ["linux/amd64", "linux/arm64", "linux/arm/v7"],
+		"architectures": ["linux/amd64"],
 		"tags": [
 			"base:${VERSION}-${VARIANT}"
 		],

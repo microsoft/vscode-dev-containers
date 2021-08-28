@@ -1,6 +1,6 @@
-# [Choice] .NET version: 5.0, 3.1, 2.1
-ARG VARIANT="3.1"
-FROM mcr.microsoft.com/dotnet/sdk:${VARIANT}-focal
+# [Choice] .NET version: 5.0-focal, 6.0, 6.0-focal, 3.1-focal, 2.1-focal
+ARG VARIANT="3.1-focal"
+FROM mcr.microsoft.com/dotnet/sdk:${VARIANT}
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/

@@ -3,7 +3,7 @@
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
-		"architectures": "linux/amd64",
+		"architectures": ["linux/amd64"],
 		"tags": [
 			"anaconda:${VERSION}-3"
 		]

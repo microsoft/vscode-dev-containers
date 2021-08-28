@@ -2,9 +2,9 @@
 	"variants": ["8.0", "7.4", "7.3"],
 	"definitionVersion": "0.201.9",
 	"build": {
-		"latest": true,
+		"latest": "8.0",
 		"rootDistro": "debian",
-		"architectures": ["linux/amd64", "linux/arm64", "linux/arm/v7"],
+		"architectures": ["linux/amd64", "linux/arm64"],
 		"tags": [
 			"php:${VERSION}-${VARIANT}"
 		],

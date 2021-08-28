@@ -10,8 +10,8 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/dotnet <br/> mcr.microsoft.com/vscode/devcontainers/dotnetcore |
-| *Available image variants* | 2.1, 3.1, 5.0 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list)) |
-| *Published image architecture(s)* | x86-64 |
+| *Available image variants* | 2.1, 3.1, 5.0, 6.0 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list)) |
+| *Published image architecture(s)* | x86-64, arm64/aarch64 for 6.0 (bullseye) |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Ubuntu |

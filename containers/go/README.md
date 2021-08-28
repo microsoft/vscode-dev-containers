@@ -11,7 +11,7 @@
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/go |
 | *Available image variants* | 1, 1.16, 1.17 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/go/tags/list)) |
-| *Published image architecture(s)* | x86-64 |
+| *Published image architecture(s)* | x86-64, arm64/aarch64 (bullseye) |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |

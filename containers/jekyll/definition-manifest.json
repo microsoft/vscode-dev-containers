@@ -5,6 +5,7 @@
 		"parent": "ruby",
 		"parentVariant": "2.7",
 		"rootDistro": "debian",
+		"architectures": ["linux/amd64", "linux/arm64"],
 		"tags": [
 			"jekyll:${VERSION}"
 		]

@@ -307,18 +307,16 @@ function getTagList(definitionId, release, versionPartHandling, registry, regist
         versionList.push(''); 
     }
 
-    const allVariants = getVariants(definitionId);
-    const firstVariant = allVariants ? allVariants[0] : variant;
     let tagList = [];
 
     versionList.forEach((tagVersion) => {
         tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
     });
 
-    // If this variant should also be used for the the latest tag (it's the left most in the list), add it
+    // If this variant should also be used for the the latest tag, add it
     return tagList.concat((updateLatest 
         && config.definitionBuildSettings[definitionId].latest
-        && variant === firstVariant)
+        && (!variant || variant === config.definitionBuildSettings[definitionId].latest))
         ? getLatestTag(definitionId, registry, registryPath)
         : []);
 }
