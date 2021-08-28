@@ -38,7 +38,7 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
     } else {
         await asyncUtils.spawn('docker', ['buildx', 'use', 'vscode-dev-containers']);
     }
-    await asyncUtils.spawn('docker', ['run', '--privileged', '--rm', 'tonistiigi/binfmt', '--install', 'all']);
+    await asyncUtils.spawn('docker', ['run', '--privileged', '--rm', 'tonistiigi/binfmt:qemu-v6.1.0', '--install', 'all']);
 
     // Build and push subset of images
     const definitionsToPush = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip);
