@@ -307,6 +307,8 @@ function getTagList(definitionId, release, versionPartHandling, registry, regist
         versionList.push(''); 
     }
 
+    const allVariants = getVariants(definitionId);
+    const firstVariant = allVariants ? allVariants[0] : variant;
     let tagList = [];
 
     versionList.forEach((tagVersion) => {
@@ -318,9 +320,9 @@ function getTagList(definitionId, release, versionPartHandling, registry, regist
     const definitionLatestProperty = config.definitionBuildSettings[definitionId].latest;
     return tagList.concat((updateLatest 
         && definitionLatestProperty
-        && (!variant
+        && (!allVariants
             || variant === definitionLatestProperty 
-            || (definitionLatestProperty === true && variant === config.definitionBuildSettings[definitionId].variants[0])))
+            || (definitionLatestProperty === true && variant === firstVariant)))
         ? getLatestTag(definitionId, registry, registryPath)
         : []);
 }
