@@ -14,6 +14,8 @@
 
 **Linux distribution:** {{distro.prettyName}}{{#if distro.idLike}} ({{distro.idLike}}-like distro){{/if}}
 
+**Architectures:** {{architectures}}
+
 **Available (non-root) user:** {{image.user}}
 
 ### Contents
