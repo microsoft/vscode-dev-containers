@@ -3,8 +3,8 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 
-			// Update 'VARIANT' to pick a .NET Core version: 2.1-focal, 3.1-focal, 5.0-focal, 6.0-focal, 6.0-bullseye
-			"VARIANT": "5.0-focal",
+			// Update 'VARIANT' to pick a .NET Core version: 5.0, 3.1, 2.1
+			"VARIANT": "5.0",
 			// Options
 			"NODE_VERSION": "lts/*",
 			"INSTALL_AZURE_CLI": "false"

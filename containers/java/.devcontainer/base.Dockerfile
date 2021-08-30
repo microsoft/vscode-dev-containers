@@ -1,6 +1,6 @@
 # [Choice] Java version: 11, 16
 ARG VARIANT=11
-FROM openjdk:${VARIANT}-jdk-buster
+FROM openjdk:${VARIANT}-jdk-bullseye
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/

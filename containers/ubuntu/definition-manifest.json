@@ -4,7 +4,10 @@
 	"build": {
 		"latest": "focal",
 		"rootDistro": "debian",
-		"architectures": ["linux/amd64"],
+		"architectures": {
+			"focal": ["linux/amd64"],
+			"bionic": ["linux/amd64", "linux/arm64"]
+		},
 		"tags": [
 			"base:${VERSION}-${VARIANT}"
 		],
