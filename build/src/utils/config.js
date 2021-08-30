@@ -313,10 +313,14 @@ function getTagList(definitionId, release, versionPartHandling, registry, regist
         tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
     });
 
-    // If this variant should also be used for the the latest tag, add it
+    // If this variant should also be used for the the latest tag, add it. The "latest" value could be
+    // true, false, or a specific variant. "true" assumes the first variant is the latest.
+    const definitionLatestProperty = config.definitionBuildSettings[definitionId].latest;
     return tagList.concat((updateLatest 
-        && config.definitionBuildSettings[definitionId].latest
-        && (!variant || variant === config.definitionBuildSettings[definitionId].latest))
+        && definitionLatestProperty
+        && (!variant
+            || variant === definitionLatestProperty 
+            || (definitionLatestProperty === true && variant === config.definitionBuildSettings[definitionId].variants[0])))
         ? getLatestTag(definitionId, registry, registryPath)
         : []);
 }
