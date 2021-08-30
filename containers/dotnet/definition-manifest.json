@@ -4,13 +4,7 @@
 	"build": {
 		"latest": "5.0-focal",
 		"rootDistro": "debian",
-		"architectures": {
-			"6.0": ["linux/amd64", "linux/arm64"],
-			"6.0-focal": ["linux/amd64"],
-			"5.0-focal": ["linux/amd64"],
-			"3.1-focal": ["linux/amd64"],
-			"2.1-focal": ["linux/amd64"]
-		},
+		"architectures": ["linux/amd64"],
 		"tags": [
 			"dotnet:${VERSION}-${VARIANT}",
 			"dotnetcore:${VERSION}-${VARIANT}"
