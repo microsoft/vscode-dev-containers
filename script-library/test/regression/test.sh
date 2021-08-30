@@ -5,7 +5,9 @@ USE_DEFAULTS="${3:-true}"
 RUN_COMMON_SCRIPT="${4:-true}"
 PLATFORMS="$5"
 
-if [[ "${IMAGE_TO_TEST}" = *"ubuntu"* ]]; then
+if [[ "${IMAGE_TO_TEST}" = *"debian"* ]]; then
+    DISTRO="debian"
+elif [[ "${IMAGE_TO_TEST}" = *"ubuntu"* ]]; then
     DISTRO="debian"
 elif [[ "${IMAGE_TO_TEST}" = *"alpine"* ]]; then
     DISTRO="alpine"
