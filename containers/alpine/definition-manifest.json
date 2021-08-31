@@ -4,13 +4,13 @@
 	"build": {
 		"latest": "3.14",
 		"rootDistro": "alpine",
-		"architectures": ["linux/amd64", "linux/arm64"],
+		"architectures": ["linux/arm64"],
 		"tags": [
 			"base:${VERSION}-alpine-${VARIANT}",
 			"base:${VERSION}-alpine${VARIANT}"
 		],
 		"variantTags": {
-			"3.13": [
+			"3.14": [
 				"base:${VERSION}-alpine"
 			]
 		}
