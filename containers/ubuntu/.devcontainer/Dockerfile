@@ -1,4 +1,4 @@
-# [Choice] Ubuntu version: bionic, focal
+# [Choice] Ubuntu version: hirsute, bionic, focal
 ARG VARIANT=focal
 FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 
