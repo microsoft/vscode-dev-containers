@@ -51,7 +51,7 @@ module.exports = {
                     const stringChunk = chunk.toString();
                     result += stringChunk;
                     if (echo) {
-                        console.log(stringChunk);
+                        process.stdout.write(stringChunk);
                     }
                 });
             }
@@ -60,7 +60,7 @@ module.exports = {
                     const stringChunk = chunk.toString();
                     result += stringChunk;
                     if (echo) {
-                        console.error(stringChunk);
+                        process.stderr.write(stringChunk);
                     }
                 });
             }
