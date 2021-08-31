@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "6d5b8484ce7198161d5f617c3db9fd7d3833d48c"
+                    "commitHash": "190325049ef93731ab28295dbedf36d44ab33d7a"
                 }
             }
         },
@@ -247,7 +247,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "black",
-                    "Version": "21.7b0"
+                    "Version": "21.8b0"
                 }
             }
         },
@@ -427,7 +427,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.1.0"
+                    "Version": "1.1.1"
                 }
             }
         },
@@ -473,7 +473,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "6d5b8484ce7198161d5f617c3db9fd7d3833d48c"
+                    "commitHash": "190325049ef93731ab28295dbedf36d44ab33d7a"
                 }
             }
         },
@@ -513,7 +513,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "57c397d7cabf9f0ff73b8c03c4c1859a3850405a"
+                    "commitHash": "fceea425267fbe558a9e80ee00c192228e4b6a8b"
                 }
             }
         },
@@ -592,7 +592,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "1.14.0",
+                    "Version": "2.0.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -923,7 +923,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "github-pages",
-                    "Version": "218"
+                    "Version": "219"
                 }
             }
         },
@@ -952,7 +952,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "6d5b8484ce7198161d5f617c3db9fd7d3833d48c"
+                    "commitHash": "190325049ef93731ab28295dbedf36d44ab33d7a"
                 }
             }
         },
@@ -1011,7 +1011,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.9.1"
+                    "Version": "2.9.2"
                 }
             }
         },
@@ -1020,7 +1020,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.3.5"
+                    "Version": "4.4.2"
                 }
             }
         },

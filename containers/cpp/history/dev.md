@@ -13,7 +13,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:32894d373989e343027bcd0cac91655864fe330b1a7bf3860953d28da3574128
+**Digest:** sha256:4548be5be7a595d8586a87150abbcbd15b395d057f3ae9834f97917e1877b2fb
 
 **Tags:**
 ```
@@ -26,6 +26,8 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -41,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -69,7 +71,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 | libicu63 | 63.1-6+deb10u1 |
 | libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | lldb | 1:7.0-47 |
 | llvm | 1:7.0-47 |
@@ -100,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: bullseye
 
-**Digest:** sha256:b37f745c1a6d2d8bbe4395e47701548484b3b8ad1df5b40af17d0452b222d5d9
+**Digest:** sha256:08361cb48034dad7a8580fd6e2bdf204231f8204724a6c3ac5004a880cbd9511
 
 **Tags:**
 ```
@@ -111,6 +113,8 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian11
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -126,7 +130,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian11
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -153,7 +157,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian11
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | lldb | 1:11.0-51+nmu5 |
 | llvm | 1:11.0-51+nmu5 |
@@ -184,7 +188,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian11
 
 ## Variant: focal
 
-**Digest:** sha256:32e5bd7138ad642471a51ee4478d26810ddca391ccf8e46223030fa32a0a91ff
+**Digest:** sha256:d32b0673b22b4caf7a9c57226d393105589e3358265d8778774cda90177f50b8
 
 **Tags:**
 ```
@@ -196,6 +200,8 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Ubuntu 20.04.3 LTS (debian-like distro)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -211,7 +217,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -239,7 +245,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.5 |
+| libssl1.1 | 1.1.1f-1ubuntu2.8 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | lldb | 1:10.0-50~exp1 |
 | llvm | 1:10.0-50~exp1 |
@@ -270,7 +276,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:8442c6eabee206e3cefccc2ae13c6cdf2f1e21e3105406a6f0503e1b58564317
+**Digest:** sha256:9ed6bc5fbbb081cc868f617fb3e9fb65a1ca78742539e4d8a82ec83f5dbb9f83
 
 **Tags:**
 ```
@@ -281,6 +287,8 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Ubuntu 18.04.5 LTS (debian-like distro)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -296,7 +304,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -324,8 +332,8 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 | libicu60 | 60.2-3ubuntu3.1 |
 | libkrb5-3 | 1.16-2ubuntu0.2 |
 | liblttng-ust0 | 2.10.1-1 |
-| libssl1.0.0 | 1.0.2n-1ubuntu5.6 |
-| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.10 |
+| libssl1.0.0 | 1.0.2n-1ubuntu5.7 |
+| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.13 |
 | libstdc++6 | 8.4.0-1ubuntu1~18.04 |
 | lldb | 1:6.0-41~exp5~ubuntu1 |
 | llvm | 1:6.0-41~exp5~ubuntu1 |
@@ -356,7 +364,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:466b74b15fc1a933144e82da234b16a65065c93b9690eace1621298ad7a85d8f
+**Digest:** sha256:1134eb28e5234ac5e877db36ead218e68a2753834f895220b269cc3db6b971d6
 
 **Tags:**
 ```
@@ -367,6 +375,8 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian9
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 9 (stretch)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -382,7 +392,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 

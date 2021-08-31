@@ -11,7 +11,7 @@
 
 ## Variant: 8.0
 
-**Digest:** sha256:cb6aa93ca3077190d3c9b63d0296e8ee00620c9eca04419dd6b41150c9eb52d8
+**Digest:** sha256:f415c2e5954509d5799485001687b4287f8c1b6eb1d6adb09df85954f122db76
 
 **Tags:**
 ```
@@ -22,6 +22,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** vscode
 
 ### Contents
@@ -29,13 +31,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 8.0.9 | /usr/local |
+| [PHP](https://xdebug.org/) | 8.0.10 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -65,7 +67,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |
@@ -94,7 +96,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8
 
 ## Variant: 7.4
 
-**Digest:** sha256:32a8b7a1f91609e1c14039dcaa6447e079969982d1bdeb34e8145ffb62bd2efd
+**Digest:** sha256:26819b30df40b8e0dfb3efd736d530d35111699e728773e111d4f1a7815ba7af
 
 **Tags:**
 ```
@@ -105,6 +107,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** vscode
 
 ### Contents
@@ -112,13 +116,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.4.22 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.4.23 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -148,7 +152,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |
@@ -177,7 +181,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7
 
 ## Variant: 7.3
 
-**Digest:** sha256:9fd9da15903e41cda950e0d6d287c776605e678d249673628bc6c6ca742a1d8a
+**Digest:** sha256:1876b901219018a8a658a2e406ed74442a52df4ba97a49646dfdb1320cc269d5
 
 **Tags:**
 ```
@@ -187,6 +191,8 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** vscode
 
 ### Contents
@@ -194,13 +200,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.3.29 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.3.30 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -230,7 +236,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |

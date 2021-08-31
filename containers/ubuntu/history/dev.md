@@ -10,7 +10,7 @@
 
 ## Variant: focal
 
-**Digest:** sha256:7e2bf34f5561a82369aa39918d6e3df0dad005ec1b1a7aa9878523e522e26818
+**Digest:** sha256:ec36c975d29d7c129fe5af59493558c11328e792693a8b729e9d5e3022791475
 
 **Tags:**
 ```
@@ -23,6 +23,8 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 **Linux distribution:** Ubuntu 20.04.3 LTS (debian-like distro)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** vscode
 
 ### Contents
@@ -30,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -53,7 +55,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.5 |
+| libssl1.1 | 1.1.1f-1ubuntu2.8 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -81,7 +83,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:86b548f6943b0e1f0365920ea5c39344d5999b55000ad28880ac8344abe5b425
+**Digest:** sha256:c9b18acaed407a77e4d4e2d1098f5ee0e9bb5434f7dd7590332b776640642f24
 
 **Tags:**
 ```
@@ -93,6 +95,8 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 **Linux distribution:** Ubuntu 18.04.5 LTS (debian-like distro)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** vscode
 
 ### Contents
@@ -100,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -123,8 +127,8 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | libicu60 | 60.2-3ubuntu3.1 |
 | libkrb5-3 | 1.16-2ubuntu0.2 |
 | liblttng-ust0 | 2.10.1-1 |
-| libssl1.0.0 | 1.0.2n-1ubuntu5.6 |
-| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.10 |
+| libssl1.0.0 | 1.0.2n-1ubuntu5.7 |
+| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.13 |
 | libstdc++6 | 8.4.0-1ubuntu1~18.04 |
 | locales | 2.27-3ubuntu1.4 |
 | lsb-release | 9.20170808ubuntu1 |

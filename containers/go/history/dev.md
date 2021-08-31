@@ -10,7 +10,7 @@
 
 ## Variant: 1.17
 
-**Digest:** sha256:e328dcbdf059386d148e256ce68c7a242fee1b7763bd144a57084cd920a11943
+**Digest:** sha256:66edc92470466a531d0a84652728d34f17b6120be8b7a59e27ad51463076c6b7
 
 **Tags:**
 ```
@@ -20,6 +20,8 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -34,7 +36,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -44,7 +46,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 | golang.org/x/tools/gopls | 0.7.1 |
 | honnef.co/go/tools | 0.2.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.1.0 |
+| github.com/mgechev/revive | 1.1.1 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.7.1 |
@@ -73,7 +75,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |
@@ -104,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.16
 
-**Digest:** sha256:94573c350cf726f9631b516819404f00870532d7af55ce156e1862d86f5a6add
+**Digest:** sha256:24bd4529a230b1bbe251d651a3483b84e1b05bd3c93e6ac489bef57bd10625c7
 
 **Tags:**
 ```
@@ -113,6 +115,8 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -127,7 +131,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -137,7 +141,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 | golang.org/x/tools/gopls | 0.7.1 |
 | honnef.co/go/tools | 0.2.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.1.0 |
+| github.com/mgechev/revive | 1.1.1 |
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.7.1 |
@@ -166,7 +170,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |

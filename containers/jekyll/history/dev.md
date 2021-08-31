@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll)
 
-**Digest:** sha256:72d5869293aa39c7817dc0b3004e136df0dedb2a28744f46f5a4caf984b997ea
+**Digest:** sha256:7a00be19b87c7529b951dc474421d101258aa9b95f54d2d3b93d900ded1c15bd
 
 **Tags:**
 ```
@@ -13,6 +13,8 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -28,10 +30,10 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 57c397d7cabf9f0ff73b8c03c4c1859a3850405a | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | fceea425267fbe558a9e80ee00c192228e4b6a8b | /usr/local/share/ruby-build |
 
 **Ruby gems and tools**
 
@@ -42,7 +44,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 | debase | 0.2.4.1 |
 | bundler | 2.2.26 |
 | jekyll | 4.2.0 |
-| github-pages | 218 |
+| github-pages | 219 |
 
 **Other tools and utilities**
 
@@ -70,7 +72,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |

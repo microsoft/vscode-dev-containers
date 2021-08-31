@@ -12,7 +12,7 @@
 
 ## Variant: 3.9
 
-**Digest:** sha256:3330b2ffd89fa597968c11adf927c30f4ee827eec91a28f07829e576e56c1ed7
+**Digest:** sha256:d25791ab5cfdb3e7f51db3535e9c08eac719101b35f930b9b686d285cd4010bc
 
 **Tags:**
 ```
@@ -23,6 +23,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** vscode
 
 ### Contents
@@ -30,13 +32,13 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.9.6 | /usr/local |
+| [Python](https://www.python.org/) | 3.9.7 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -46,7 +48,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 | pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.7b0 |
+| black | 21.8b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
@@ -75,7 +77,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |
@@ -104,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8
 
-**Digest:** sha256:2ffef7f41a76434ee45b25c7af050330aac5e6f7ddd1ebbb354861681d9eff23
+**Digest:** sha256:5cdb1f60d1c7b01880e34a6541f6fbaf8be19c9f8be738b963e842a797f1961f
 
 **Tags:**
 ```
@@ -114,6 +116,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** vscode
 
 ### Contents
@@ -121,13 +125,13 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.8.11 | /usr/local |
+| [Python](https://www.python.org/) | 3.8.12 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -137,7 +141,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 | pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.7b0 |
+| black | 21.8b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
@@ -166,7 +170,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |
@@ -195,7 +199,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7
 
-**Digest:** sha256:b8e57645a90768209ac8f17d69cc925eaaa417335b02356b4c60381282f620bd
+**Digest:** sha256:7027eaf7bafde1fd3ec8741d15f70838abf00dfb3b9596d6d470d5a7c6e011af
 
 **Tags:**
 ```
@@ -204,6 +208,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -218,7 +224,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -228,7 +234,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 | pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.7b0 |
+| black | 21.8b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
@@ -257,7 +263,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |
@@ -286,7 +292,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6
 
-**Digest:** sha256:5f9cad3acc45a3c28033a71348d0edb2593abce3bb1ebc78ffd5ed1e3c836021
+**Digest:** sha256:c2ebe7d035683ade9bb55560e6c4133a597e353282b1ecd393e97c834bfa5072
 
 **Tags:**
 ```
@@ -295,6 +301,8 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -309,7 +317,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 6d5b8484ce7198161d5f617c3db9fd7d3833d48c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -319,7 +327,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 | pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.7b0 |
+| black | 21.8b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
@@ -348,7 +356,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13 |
 | lsb-release | 11.1.0 |
