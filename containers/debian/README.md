@@ -11,7 +11,7 @@
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:debian |
 | *Available image variants* | stretch, buster, bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
-| *Published image architecture(s)* | x86-64 |
+| *Published image architecture(s)* | x86-64, aarch64/arm64 for `bullseye` and `stretch` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |

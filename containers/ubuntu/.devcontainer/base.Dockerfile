@@ -1,4 +1,4 @@
-# Update the VARIANT arg in devcontainer.json to pick an Ubuntu version: focal, bionic
+# Update the VARIANT arg in devcontainer.json to pick an Ubuntu version: hirsute, focal, bionic
 ARG VARIANT="focal"
 FROM buildpack-deps:${VARIANT}-curl
 
