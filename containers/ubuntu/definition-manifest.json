@@ -2,7 +2,7 @@
 	"variants": ["hirsute", "focal", "bionic"],
 	"definitionVersion": "0.202.0",
 	"build": {
-		"latest": "focal",
+		"latest": false,
 		"rootDistro": "debian",
 		"architectures": {
 			"hirsute": ["linux/amd64", "linux/arm64"],
