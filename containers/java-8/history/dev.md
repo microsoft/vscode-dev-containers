@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java-8)
 
-**Digest:** sha256:9966093c8e63063c81d8d3cece14fa21149018ddb9e52078c673ebf385e097fc
+**Digest:** sha256:87c84fa2a1f42da298118128d1d796ec2f87c4b264ffa173441275d492b9dbc8
 
 **Tags:**
 ```
@@ -36,7 +36,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.2 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.3 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 

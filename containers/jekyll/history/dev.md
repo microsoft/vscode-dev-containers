@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll)
 
-**Digest:** sha256:af518052d14b950120eb4249c6c1e3ca5adebd695f1c215c2855488d31bb9fd8
+**Digest:** sha256:70e5e83f85eb9fa5f1bd8d4d6f5c4ff1835ce7b852e1e684b2e5fd55e58f3395
 
 **Tags:**
 ```

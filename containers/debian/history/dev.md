@@ -11,15 +11,13 @@
 
 ## Variant: buster
 
-**Digest:** sha256:76478d5a5bf99ece89c0d24d876a93dce1e1ce362ae7511cf908880186426609
+**Digest:** sha256:f052465e4ecff74fa381c00fe4bb102f66794ec7c86a8d25fcd3bced6ec54219
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/base:dev-buster
 mcr.microsoft.com/vscode/devcontainers/base:dev-debian-10
 mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
-mcr.microsoft.com/vscode/devcontainers/base:dev-debian
-mcr.microsoft.com/vscode/devcontainers/base:dev
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -85,19 +83,21 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: bullseye
 
-**Digest:** sha256:9a67074ef906a554b71af287748d36fcc3edf30be404e91926fa62617de6453a
+**Digest:** sha256:41b5c114fac3b8550fd7843b9717da827a95613c45c4a6e9c7dc7af97c77ab08
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/base:dev-bullseye
 mcr.microsoft.com/vscode/devcontainers/base:dev-debian-11
 mcr.microsoft.com/vscode/devcontainers/base:dev-debian11
+mcr.microsoft.com/vscode/devcontainers/base:dev-debian
+mcr.microsoft.com/vscode/devcontainers/base:dev
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
 
-**Architectures:** linux/amd64
+**Architectures:** linux/amd64, linux/arm64
 
 **Available (non-root) user:** vscode
 
@@ -156,7 +156,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian11
 
 ## Variant: stretch
 
-**Digest:** sha256:e395e7aea5b4630aab5ca206099e6c0130c9f9fed1ec47147d9005f52aed099c
+**Digest:** sha256:da936c009dacbcb37d5fecdec862595255be5341a3964ecd3d16788dd6917658
 
 **Tags:**
 ```
@@ -168,7 +168,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 
 **Linux distribution:** Debian GNU/Linux 9 (stretch)
 
-**Architectures:** linux/amd64
+**Architectures:** linux/amd64, linux/arm64
 
 **Available (non-root) user:** vscode
 

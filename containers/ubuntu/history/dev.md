@@ -5,12 +5,84 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/ubuntu)
 
 **Definition variations:**
+- [hirsute](#variant-hirsute)
 - [focal](#variant-focal)
 - [bionic](#variant-bionic)
 
+## Variant: hirsute
+
+**Digest:** sha256:b95256125af3a59634f078f240a42143d7411470bd9ea8f83aa5883861ea131a
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/base:dev-hirsute
+mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu-21.04
+mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Ubuntu 21.04 (debian-like distro)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4ubuntu0.1 |
+| apt-utils | 2.2.4ubuntu0.1 |
+| ca-certificates | 20210119build1 |
+| curl | 7.74.0-1ubuntu2.1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1ubuntu1 |
+| gnupg2 | 2.2.20-1ubuntu3 |
+| htop | 3.0.5-6 |
+| iproute2 | 5.10.0-4ubuntu1 |
+| jq | 1.6-2.1ubuntu1 |
+| less | 551-2 |
+| libc6 | 2.33-0ubuntu5 |
+| libgssapi-krb5-2 | 1.18.3-4 |
+| libicu67 | 67.1-6ubuntu2 |
+| libkrb5-3 | 1.18.3-4 |
+| liblttng-ust0 | 2.12.1-1ubuntu1 |
+| libssl1.1 | 1.1.1j-1ubuntu3.5 |
+| libstdc++6 | 11.1.0-1ubuntu1~21.04 |
+| locales | 2.33-0ubuntu5 |
+| lsb-release | 11.1.0ubuntu2 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1ubuntu0.1 |
+| manpages-dev | 5.10-1ubuntu0.1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2build1 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1ubuntu2 |
+| openssh-client | 1:8.4p1-5ubuntu1.1 |
+| procps | 2:3.3.16-5ubuntu3.1 |
+| psmisc | 23.4-2build1 |
+| rsync | 3.2.3-3ubuntu1 |
+| strace | 5.11-0ubuntu1 |
+| sudo | 1.9.5p2-2ubuntu3 |
+| unzip | 6.0-26ubuntu1 |
+| vim-tiny | 2:8.2.2434-1ubuntu1 |
+| wget | 1.21-1ubuntu3 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2ubuntu6 |
+| zsh | 5.8-6 |
+
 ## Variant: focal
 
-**Digest:** sha256:7c5ba4d31bf6e6f449c42f19e1bae204530c11bd34e80c1d5d02d4064ed8b864
+**Digest:** sha256:635a0372a55d55e34a7508c2e20202d01513ebcbe3e0a7092b9c98e80241b4be
 
 **Tags:**
 ```
@@ -83,7 +155,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:e298ee2105e7f13de8ffac7f0cf3dee5402669004356ea86de55406dac899208
+**Digest:** sha256:d1323fe9ceb901329174e0c592cbbd2d1e582d4df3d62d4acfabdd8d4775cf7c
 
 **Tags:**
 ```
@@ -95,7 +167,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 **Linux distribution:** Ubuntu 18.04.5 LTS (debian-like distro)
 
-**Architectures:** linux/amd64
+**Architectures:** linux/amd64, linux/arm64
 
 **Available (non-root) user:** vscode
 

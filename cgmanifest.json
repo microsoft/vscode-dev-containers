@@ -45,6 +45,16 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: buildpack-deps",
+                    "Version": "hirsute-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
                     "Version": "focal-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
@@ -836,6 +846,16 @@
                     "Name": "Docker Image: rust",
                     "Version": "1",
                     "DownloadUrl": "https://hub.docker.com/_/rust"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "SDKMAN!",
+                    "Version": "5.12.3",
+                    "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
         },
