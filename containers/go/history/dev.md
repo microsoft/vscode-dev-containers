@@ -10,7 +10,7 @@
 
 ## Variant: 1.17
 
-**Digest:** sha256:66edc92470466a531d0a84652728d34f17b6120be8b7a59e27ad51463076c6b7
+**Digest:** sha256:f3f653d1e3d5c3699d6c5055be003f03ef811fe61f44ff7a3907482bbbc5617f
 
 **Tags:**
 ```
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1
 
 ## Variant: 1.16
 
-**Digest:** sha256:24bd4529a230b1bbe251d651a3483b84e1b05bd3c93e6ac489bef57bd10625c7
+**Digest:** sha256:3478686f1c79a64fe0ab65d3a20413d7ef35d48e1340087b1ed1064da3edfe26
 
 **Tags:**
 ```

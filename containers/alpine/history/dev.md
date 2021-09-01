@@ -12,7 +12,7 @@
 
 ## Variant: 3.14
 
-**Digest:** sha256:73a848c17dcf71d75b330eacb4975653c3cdfaf76c3a317b169123b919a5b764
+**Digest:** sha256:4e9eb4603d27c0f87e5e505495d2154ff56e3ec15f4e0b7af66e75ab86199cf9
 
 **Tags:**
 ```
@@ -77,7 +77,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 ## Variant: 3.13
 
-**Digest:** sha256:e03ab83bc1aa4b85c7242a119395db196cb0f97c611c30559a8d95e4986601f5
+**Digest:** sha256:a66b330e2d41230a4cceeecac98d4871bb717d48346d3359076683620ad6dede
 
 **Tags:**
 ```
@@ -126,7 +126,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 | libstdc++ | 10.2.1_pre1-r3 |
 | krb5-libs | 1.18.4-r0 |
 | libintl | 0.20.2-r2 |
-| libssl1.1 | 1.1.1k-r0 |
+| libssl1.1 | 1.1.1l-r0 |
 | lttng-ust | 2.12.0-r2 |
 | tzdata | 2021a-r0 |
 | userspace-rcu | 0.12.1-r0 |
@@ -143,7 +143,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.12
 
-**Digest:** sha256:e24d6f501049f03a3850b0bd9b45807d19471a0966539f761073127492893ba0
+**Digest:** sha256:f44572c349b8351a81e9aabe1dbd9eda115e656386ce7ae1fb035370ee7b0017
 
 **Tags:**
 ```
@@ -191,7 +191,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 | libstdc++ | 9.3.0-r2 |
 | krb5-libs | 1.18.4-r0 |
 | libintl | 0.20.2-r0 |
-| libssl1.1 | 1.1.1k-r0 |
+| libssl1.1 | 1.1.1l-r0 |
 | lttng-ust | 2.12.0-r1 |
 | tzdata | 2021a-r0 |
 | userspace-rcu | 0.12.1-r0 |
@@ -208,7 +208,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 
 ## Variant: 3.11
 
-**Digest:** sha256:d58c9c0b03de4b9a81f7b112688b106fdef45f49497c1c7e4be17694b5dcac93
+**Digest:** sha256:4a4e3afd1d23c851c8e4540ffa24c4cc0ebfe7e45715f1c2b0052f4c94648a7f
 
 **Tags:**
 ```
@@ -256,7 +256,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.11
 | libstdc++ | 9.3.0-r0 |
 | krb5-libs | 1.17.2-r0 |
 | libintl | 0.20.1-r2 |
-| libssl1.1 | 1.1.1k-r0 |
+| libssl1.1 | 1.1.1l-r0 |
 | lttng-ust | 2.10.4-r0 |
 | tzdata | 2021a-r0 |
 | userspace-rcu | 0.11.1-r0 |

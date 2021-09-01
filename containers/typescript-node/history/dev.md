@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:229697c83200a651e64622e2f29b9b74b757caa0609690cdf1696473f425400f
+**Digest:** sha256:8fe587fd46f5b8f674301b7ff9d8189985189fafa11bdbb044ed86477a5ef881
 
 **Tags:**
 ```
@@ -101,7 +101,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:997d885155fb0964ee92cffc73b1585b8e9d313565916b86493d5203588325e9
+**Digest:** sha256:19bce17ba2f0a3ab92107c2eb9d7c2d9fa5b4538458f1d71316ccb3de73f1df1
 
 **Tags:**
 ```
@@ -121,7 +121,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.5 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.6 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.4.2 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -189,7 +189,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:19a13601cdd48899003878dc2d0028ffb87a8057439ff075a8d3e57ff9c99e39
+**Digest:** sha256:3ec7157c932354943fedabb4e40938f883c414abda2113b68f153ca32b6a597b
 
 **Tags:**
 ```
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.5 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.6 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.4.2 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -277,7 +277,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:be6e15e5d050f06553ce65c94e7dd0ac4f260f063cade93056db0cad9b0e512a
+**Digest:** sha256:1ec552321a1a34c09eabb84ece40853e3302adca4c1f2cfbd1f0766329c32e13
 
 **Tags:**
 ```
@@ -296,7 +296,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.5 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.6 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.4.2 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -365,7 +365,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:69568ad03c4b483ffe65879833de0ddd912dfdc2ae1175bac730d2eb09ec4827
+**Digest:** sha256:3aaa8aa9c2e4a1b8a98046437ba9244dfab7488685a082277319e2600cd0ae62
 
 **Tags:**
 ```
@@ -384,7 +384,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.5 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.6 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.4.2 | /usr/local/share/npm-global |
 
 **Tools installed using git**

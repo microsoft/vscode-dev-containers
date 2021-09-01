@@ -13,7 +13,7 @@
 
 ## Variant: 16-buster
 
-**Digest:** sha256:05721a2b6340c7bc5dcad9163b175e65550a784e445465907cb83e83930444c0
+**Digest:** sha256:1402eeecafe8140feb38c7096fb32b756922d5498334e7f7f11fc4c78235940c
 
 **Tags:**
 ```
@@ -98,7 +98,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:532d46df76a9c45a8617a451e8f1396f2ea46d37da8f4ab99f8bdd1495231b38
+**Digest:** sha256:e772ad885f53f55b61362e0881e3eb1416fe640e3fdb16fda10bc042e7c0284f
 
 **Tags:**
 ```
@@ -118,7 +118,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.5 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.6 | /usr/local |
 
 **Tools installed using git**
 
@@ -183,7 +183,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:09ef4ecbb183d16b88520e03cb47569489c08254c51b3815abebc96e3d7b1281
+**Digest:** sha256:38835fa75244889c32846efdffef7131131658cc76fce8c8883bdb4c8ef5d9c3
 
 **Tags:**
 ```
@@ -203,7 +203,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.5 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.6 | /usr/local |
 
 **Tools installed using git**
 
@@ -268,7 +268,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 ## Variant: 14-stretch
 
-**Digest:** sha256:a1fdebfe2f6deab4458a2a82c4ba3d5b6f820e939ab473883183a36aca6cff51
+**Digest:** sha256:b541e29fab12024ce7efa09508bb5cc4fa36377046c3e1117710a9f6a407f73a
 
 **Tags:**
 ```
@@ -287,7 +287,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.5 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.6 | /usr/local |
 
 **Tools installed using git**
 
@@ -353,7 +353,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
 
 ## Variant: 12-stretch
 
-**Digest:** sha256:8d3ceddbc5f3f3b2aec58edfd24b57e90b24b899af9c9fa3ebd65fd613121c94
+**Digest:** sha256:4b4c7bb40f9a0daf8eec26b3e2ddbd5ef48d782bd1b3b2541f64fe6d38e6cbac
 
 **Tags:**
 ```
@@ -372,7 +372,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.5 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.6 | /usr/local |
 
 **Tools installed using git**
 
