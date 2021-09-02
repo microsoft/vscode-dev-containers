@@ -2,9 +2,10 @@
 	"name": "Node.js & TypeScript",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick a Node version: 12, 14, 16
+		// Update 'VARIANT' to pick a Node version: 16, 14, 12.
+		// Append -bullseye or -buster to pin to an OS version.
 		"args": { 
-			"VARIANT": "16"
+			"VARIANT": "16-bullseye"
 		}
 	},
 

@@ -1,10 +1,18 @@
 {
-	"variants": ["16-buster", "14-buster", "12-buster", "14-stretch", "12-stretch"],
-	"definitionVersion": "0.202.7",
+	"variants": ["16-bullseye", "14-bullseye", "12-bullseye", "16-buster", "14-buster", "12-buster"],
+	"definitionVersion": "0.203.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"parent": "javascript-node",
+		"architectures": {
+			"16-bullseye": ["linux/amd64", "linux/arm64"],
+			"14-bullseye": ["linux/amd64", "linux/arm64"],
+			"12-bullseye": ["linux/amd64", "linux/arm64"],
+			"16-buster": ["linux/amd64"],
+			"14-buster": ["linux/amd64"],
+			"12-buster": ["linux/amd64"]
+		},
 		"tags": [
 			"typescript-node:${VERSION}-${VARIANT}"
 		],
