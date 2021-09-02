@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/typescript-node |
-| *Available image variants* | 12 / 12-buster, 14 / 14-buster, 16 / 16-buster, 12-bullseye, 14-bullseye, 16-bullseye,  ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/javascript-node/tags/list)) |
+| *Available image variants* | 12 / 12-buster, 14 / 14-buster, 16 / 16-buster, 12-bullseye, 14-bullseye, 16-bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/javascript-node/tags/list)) |
 | *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
