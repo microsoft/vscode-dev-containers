@@ -123,3 +123,7 @@ RUN if [ -z $DeveloperBuild ]; then \
     fi
 
 USER ${USERNAME}
+
+# Bump npm/node
+RUN npm install -g npm@6
+RUN nvm install 14.17.6
