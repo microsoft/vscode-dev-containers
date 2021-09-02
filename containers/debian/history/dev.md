@@ -11,7 +11,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:f052465e4ecff74fa381c00fe4bb102f66794ec7c86a8d25fcd3bced6ec54219
+**Digest:** sha256:cc4ab9d41deba2619f3ef1fbb301635986483d1479233b7cd0595426e7255675
 
 **Tags:**
 ```
@@ -83,7 +83,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 ## Variant: bullseye
 
-**Digest:** sha256:41b5c114fac3b8550fd7843b9717da827a95613c45c4a6e9c7dc7af97c77ab08
+**Digest:** sha256:1cbf311c5e59ced0965f8a0393d52572188bb73e1baf9e7288a3330a4927bf31
 
 **Tags:**
 ```
@@ -156,7 +156,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:da936c009dacbcb37d5fecdec862595255be5341a3964ecd3d16788dd6917658
+**Digest:** sha256:c7c3657f14ddebd090cd83c3946c15b3ce0a009fbb28d8d62b5d001aeee210ac
 
 **Tags:**
 ```

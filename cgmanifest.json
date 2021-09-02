@@ -981,6 +981,36 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
+                    "Version": "16-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "14-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "12-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
                     "Version": "16-buster",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
@@ -1002,26 +1032,6 @@
                 "Other": {
                     "Name": "Docker Image: node",
                     "Version": "12-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14-stretch",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "12-stretch",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
@@ -1049,6 +1059,36 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: node",
+                    "Version": "16-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "14-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
+                    "Version": "12-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/node"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: node",
                     "Version": "16-buster",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
@@ -1070,26 +1110,6 @@
                 "Other": {
                     "Name": "Docker Image: node",
                     "Version": "12-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14-stretch",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "12-stretch",
                     "DownloadUrl": "https://hub.docker.com/_/node"
                 }
             }
