@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
-**Digest:** sha256:23f35292e0873270a82cbfdf4c6c7674ffc7f9945431582df40928ee7753a5b0
+**Digest:** sha256:619024fc0eca71339ae5a87b65780483c143c74236cf769b862d53332eba04c5
 
 **Tags:**
 ```
@@ -29,7 +29,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 
 **Cargo / rustup (Rust) crates and tools**
 

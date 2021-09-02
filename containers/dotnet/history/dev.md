@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:01b045495da14f82ac08b3044ff76b23835c10b8f42f5dd8e5e604305767b596
+**Digest:** sha256:51437625753d914689df274017a3ddc83d6a89acd1360ad750d1f42881b74b33
 
 **Tags:**
 ```
@@ -37,7 +37,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -90,7 +90,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1
 
-**Digest:** sha256:0eeaef701f2235ae417715387c3c87025b90907b0fc49a9940c4a1682088b787
+**Digest:** sha256:e5b89f91ff66260df5cab9510e53921c4593db43a1e92eab59091eb4142d3c3f
 
 **Tags:**
 ```
@@ -116,7 +116,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -169,7 +169,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 ## Variant: 2.1
 
-**Digest:** sha256:38c251648f4a64a34d4b73755abc0ee69c1b12a9dc720d941f641667593ecddf
+**Digest:** sha256:6e210cb6a25ef1bb366dbbbb69fe93f6780f078c199ac07dd233588343939489
 
 **Tags:**
 ```
@@ -195,7 +195,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**

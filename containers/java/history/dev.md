@@ -10,7 +10,7 @@
 
 ## Variant: 16
 
-**Digest:** sha256:eb8cfe397c9f91c6c82d274f8ebfd99a5c058da4f876d568134a04abc3ec1d8d
+**Digest:** sha256:2f7c32055118d4e8d8a4123dedc5c3c7e9687840800425fb1de391ae6b1410e5
 
 **Tags:**
 ```
@@ -35,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -94,7 +94,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 
 ## Variant: 11
 
-**Digest:** sha256:d45f6fe8f12091b761098c25a184c90d3947123b4f3935514fbe8749f0a3ba29
+**Digest:** sha256:df092d2a595e72bbcdbeaca4aef7340ac0ff244d436d2e96d19c9832e5ac4db5
 
 **Tags:**
 ```
@@ -119,7 +119,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**

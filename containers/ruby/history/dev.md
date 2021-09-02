@@ -11,7 +11,7 @@
 
 ## Variant: 3.0
 
-**Digest:** sha256:a68a313a64e3e471080c2724be7eac96a23beffc611a2e4686c1533800d1244e
+**Digest:** sha256:e49d9e9960bd43fe05f925e4aaf1d540a1280e6f8c574a56357eca84ceebaa04
 
 **Tags:**
 ```
@@ -37,7 +37,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | fceea425267fbe558a9e80ee00c192228e4b6a8b | /usr/local/share/ruby-build |
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-3
 
 ## Variant: 2.7
 
-**Digest:** sha256:f8f4a48ab57a1ea7ad8c6b784f99ad431cecb17a6cf5bb843c7711f7c7fa87b5
+**Digest:** sha256:834a2b81807904b3ab9d649ebe72708ba153fcfbeeb8e50b449d4ce7df549797
 
 **Tags:**
 ```
@@ -132,7 +132,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | fceea425267fbe558a9e80ee00c192228e4b6a8b | /usr/local/share/ruby-build |
@@ -201,7 +201,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2
 
 ## Variant: 2.6
 
-**Digest:** sha256:b4d4e89def3a114b9f8cdf44a32f2c4f821c49cb9397e2eb9aafa348fe393d9a
+**Digest:** sha256:c63a96d0f49ec22edb9cc2e7bc3cb586635e663c813b8c22c3ae4d4fec56d5c1
 
 **Tags:**
 ```
@@ -226,7 +226,7 @@ mcr.microsoft.com/vscode/devcontainers/ruby:dev-2.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | fceea425267fbe558a9e80ee00c192228e4b6a8b | /usr/local/share/ruby-build |

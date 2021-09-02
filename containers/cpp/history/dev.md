@@ -13,7 +13,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:75461bb916c6bd69a4d23471d924603a5e8d421d0ad8b09c1bd96ef059bf78e6
+**Digest:** sha256:e1a78943fef8288f236350abaad9b795ebfb1b7ccc124c8cd5ac0997fe4d4a57
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: bullseye
 
-**Digest:** sha256:28b66a0c263a49e0ee9dd46a8c74541ebe75dceb9c2422d283bd9757b51a81c4
+**Digest:** sha256:0dbbbae6f898f057136613e13e7e72150525c5bb62659dddeeb316020cd649c8
 
 **Tags:**
 ```
@@ -130,7 +130,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian11
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -188,7 +188,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian11
 
 ## Variant: focal
 
-**Digest:** sha256:b2ea0a73b5b3de16e48a3e6ae565a9661a7ba43470f0f5408c70b928a5044556
+**Digest:** sha256:3376a637bc46d2e1d37fea09964e3619b18000604dfde6a66a1605b2fba0a36f
 
 **Tags:**
 ```
@@ -217,7 +217,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -276,7 +276,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:6b6d3cdab2f2b212f6cc80228df9ff2788a4a8d455249a29ed3f2447cddd211f
+**Digest:** sha256:7f8b68378728ae1d55cc4a9fb6998a56b2eff00b5de8388acc8eecedcc71bce0
 
 **Tags:**
 ```
@@ -304,7 +304,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -364,7 +364,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:86b1798c226d6c7ca2719992ba635f307c8ee3c7e4c0bf62e526caf9125e43bc
+**Digest:** sha256:5296f75aeaedabafc0fa647cbfd0ab9d2de7047349cf1066ebbe61b52fcce9d4
 
 **Tags:**
 ```
@@ -392,7 +392,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
