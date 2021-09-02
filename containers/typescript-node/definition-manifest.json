@@ -2,7 +2,7 @@
 	"variants": ["16-bullseye", "14-bullseye", "12-bullseye", "16-buster", "14-buster", "12-buster"],
 	"definitionVersion": "0.203.0",
 	"build": {
-		"latest": true,
+		"latest": "16-buster",
 		"rootDistro": "debian",
 		"parent": "javascript-node",
 		"architectures": {
