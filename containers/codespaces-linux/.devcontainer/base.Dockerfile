@@ -83,7 +83,7 @@ RUN bash /tmp/scripts/powershell-debian.sh \
     && apt-get clean -y
 
 # Setup Node.js, install NVM and NVS
-RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "lts" "${USERNAME}" \
+RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "v14.17.6" "${USERNAME}" \
     && (cd ${NVM_DIR} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVM_DIR}/.git-remote-and-commit \
     # Install nvs (alternate cross-platform Node.js version-management tool)
     && sudo -u ${USERNAME} git clone -c advice.detachedHead=false --depth 1 https://github.com/jasongin/nvs ${NVS_HOME} 2>&1 \
@@ -93,6 +93,8 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "lts" "${USERNAME}" \
     # Set npm global location
     && sudo -u ${USERNAME} npm config set prefix ${NPM_GLOBAL} \
     && npm config -g set prefix ${NPM_GLOBAL} \
+    && . ${NVM_DIR}/nvm.sh \
+    && nvm use --delete-prefix v14.17.6 --silent \
     # Clean up
     && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
 
