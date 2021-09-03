@@ -36,7 +36,9 @@ module.exports = {
             const proc = spawnCb(command, args, opts);
             proc.on('close', (code, signal) => {
                 if (code !== 0) {
-                    console.log(result);
+                    if(!echo) {
+                        console.error(result);
+                    }
                     const err = new Error(`Non-zero exit code: ${code} ${signal || ''}`);
                     err.result = result;
                     err.code = code;
