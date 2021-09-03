@@ -4,8 +4,10 @@
 		"dockerfile": "Dockerfile",
 		"context": "..",
 		"args": { 
-			// Update 'VARIANT' to pick a Python version: 3, 3.6, 3.7, 3.8, 3.9
-			"VARIANT": "3",
+			// Update 'VARIANT' to pick a Python version: 3, 3.9, 3.8, 3.7, 3.6.
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use the -bullseye variants if you are on a M1 mac.
+			"VARIANT": "3-bullseye",
 			// Options
 			"NODE_VERSION": "lts/*"
 		}

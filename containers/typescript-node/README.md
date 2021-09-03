@@ -24,22 +24,22 @@ See **[history](history)** for information on the contents of published images.
 While the definition itself works unmodified, you can select the version of Node.js the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```jsonc
-// Or you can use 14-bullseye if you want to pin to an OS version
+// Or you can use 14-bullseye or 14-buster if you want to pin to an OS version
 "args": { "VARIANT": "14" }
 ```
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own `Dockerfile` with one of the following:
 
 - `mcr.microsoft.com/vscode/devcontainers/typescript-node` (latest)
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:16` (or `16-bullseye` to stay on this OS version)
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:14` (or `14-bullseye` to stay on this OS version)
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:12` (or `12-bullseye` to stay on this OS version)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:16` (or `16-bullseye`, `16-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:14` (or `14-bullseye`, `14-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:12` (or `12-bullseye`, `12-buster` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0-14` (or `0-14-bullseye`)
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.204-14` (or `0.203-14-bullseye`)
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.204.0-14` (or `0.203.0-14-bullseye`)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0-14` (or `0-14-bullseye`, `0-14-buster`)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.204-14` (or `0.203-14-bullseye`, `0.203-14-buster`)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.204.0-14` (or `0.203.0-14-bullseye`, `0.203.0-14-buster`)
 
 However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-14`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
 
