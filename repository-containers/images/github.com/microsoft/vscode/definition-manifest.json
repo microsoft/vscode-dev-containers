@@ -1,10 +1,10 @@
 {
-	"definitionVersion": "0.202.4",
+	"definitionVersion": "0.203.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"parent": "typescript-node",
-		"parentVariant": "14-buster",
+		"parentVariant": "14-bullseye",
 		"tags": [
 			"repos/microsoft/vscode:${VERSION}"
 		]
