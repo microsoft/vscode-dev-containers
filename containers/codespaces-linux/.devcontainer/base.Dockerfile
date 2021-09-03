@@ -80,7 +80,7 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "v14.17.6" "${USERNAME}" \
     # Set npm global location
     && sudo -u ${USERNAME} npm config set prefix ${NPM_GLOBAL} \
     && npm config -g set prefix ${NPM_GLOBAL} \
-    su ${USERNAME} -c ". $NVM_DIR/nvm.sh && nvm use --delete-prefix v14.17.6 --silent && nvm clear-cache" \
+    && su ${USERNAME} -c ". $NVM_DIR/nvm.sh && nvm use --delete-prefix v14.17.6 --silent && nvm clear-cache" \
     # Clean up
     && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
 
