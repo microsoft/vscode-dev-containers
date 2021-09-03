@@ -30,8 +30,8 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     strategy:
       matrix:
-        page: [1, 2, 3, 4, 5]
-        page-total: [5]
+        page: [1, 2, 3, 4, 5, 6]
+        page-total: [6]
       fail-fast: true
     runs-on: ubuntu-latest
     steps:
