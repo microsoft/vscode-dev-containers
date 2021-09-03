@@ -124,9 +124,5 @@ RUN if [ -z $DeveloperBuild ]; then \
 
 USER ${USERNAME}
 
-# Bump npm/node
+# Bump npm
 RUN npm install -g npm@6
-RUN source $NVM_DIR/nvm.sh \
-    && nvm install 14.17.6 \
-    && nvm alias default 14.17.6 \
-    && nvm use default
