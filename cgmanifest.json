@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "21b385e7bd522983642b52b51db5d4a210a77717"
+                    "commitHash": "1b03896a0e01ad263439449a0742d0f3339732e2"
                 }
             }
         },
@@ -483,7 +483,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "190325049ef93731ab28295dbedf36d44ab33d7a"
+                    "commitHash": "21b385e7bd522983642b52b51db5d4a210a77717"
                 }
             }
         },
@@ -582,7 +582,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.12.2",
+                    "Version": "5.12.3",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -784,7 +784,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
-                    "Version": "3.9",
+                    "Version": "3.9-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
@@ -794,7 +794,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
-                    "Version": "3.8",
+                    "Version": "3.8-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
@@ -804,7 +804,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
-                    "Version": "3.7",
+                    "Version": "3.7-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
@@ -814,7 +814,47 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
-                    "Version": "3.6",
+                    "Version": "3.6-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.9-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.8-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.7-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.6-buster",
                     "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
@@ -846,16 +886,6 @@
                     "Name": "Docker Image: rust",
                     "Version": "1",
                     "DownloadUrl": "https://hub.docker.com/_/rust"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "SDKMAN!",
-                    "Version": "5.12.3",
-                    "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
         },
@@ -934,7 +964,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "bundler",
-                    "Version": "2.2.26"
+                    "Version": "2.2.27"
                 }
             }
         },
@@ -972,7 +1002,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "21b385e7bd522983642b52b51db5d4a210a77717"
+                    "commitHash": "1b03896a0e01ad263439449a0742d0f3339732e2"
                 }
             }
         },

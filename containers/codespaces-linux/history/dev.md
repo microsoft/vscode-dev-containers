@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:e1a92e1dc39c12886ca92c4250b97c63d909bf126c41ddd3d76d5c53f383966a
+**Digest:** sha256:7c8ac42a8c72d4f27f64248f26e4dfe84595c41e74e27e580111db5b89d0946a
 
 **Tags:**
 ```
@@ -26,10 +26,10 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 10.23.0<br />12.22.4<br />14.17.4 | /opt/nodejs/&lt;version&gt; |
+| [Node.js](https://nodejs.org/en/) | 10.23.0<br />12.22.6<br />14.17.6 | /opt/nodejs/&lt;version&gt; |
 | [Python](https://www.python.org/) | 3.6.12<br />3.7.9<br />3.8.6 | /opt/python/&lt;version&gt; |
 | [Java](https://adoptopenjdk.net/) | 11.0.8 | /opt/java/&lt;version&gt; |
-| [.NET](https://dotnet.microsoft.com/) | 2.1.816<br />3.1.411<br />5.0.302 | /home/codespaces/.dotnet<br />/opt/dotnet |
+| [.NET](https://dotnet.microsoft.com/) | 2.1.818<br />3.1.412<br />5.0.400 | /home/codespaces/.dotnet<br />/opt/dotnet |
 | [Ruby](https://www.ruby-lang.org/en/) | 2.7.2 | /opt/ruby/&lt;version&gt; |
 | [PHP](https://xdebug.org/) | 7.2.34<br />7.3.27<br />7.4.16 | /opt/php/&lt;version&gt; |
 | [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.1.4 | /opt/microsoft/powershell |
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 190325049ef93731ab28295dbedf36d44ab33d7a | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 024dea3f7bc852312932c32c0957cb034f5f7917 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
@@ -107,7 +107,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.22.1 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.6.3 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.2 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.3 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
 | [GitHub CLI](https://github.com/cli/cli) | 2.0.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |

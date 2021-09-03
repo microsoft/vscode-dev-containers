@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/jekyll)
 
-**Digest:** sha256:17565fcd3ca9ac927e35b28f5f8366badbfd239ca7696be7b5eb578aa328d797
+**Digest:** sha256:2d106129493634477af3d095d835510df38cb47006027363d65fa9676c234583
 
 **Tags:**
 ```
@@ -30,7 +30,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1b03896a0e01ad263439449a0742d0f3339732e2 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | fceea425267fbe558a9e80ee00c192228e4b6a8b | /usr/local/share/ruby-build |
@@ -42,7 +42,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev
 | rake | 13.0.6 |
 | ruby-debug-ide | 0.7.2 |
 | debase | 0.2.4.1 |
-| bundler | 2.2.26 |
+| bundler | 2.2.27 |
 | jekyll | 4.2.0 |
 | github-pages | 219 |
 
