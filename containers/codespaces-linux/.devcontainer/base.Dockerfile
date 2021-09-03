@@ -69,6 +69,21 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mkdir -p /usr/local/etc/vscode-dev-containers/ \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
+# Setup Node.js, install NVM and NVS
+RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "v14.17.6" "${USERNAME}" \
+    && (cd ${NVM_DIR} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVM_DIR}/.git-remote-and-commit \
+    # Install nvs (alternate cross-platform Node.js version-management tool)
+    && sudo -u ${USERNAME} git clone -c advice.detachedHead=false --depth 1 https://github.com/jasongin/nvs ${NVS_HOME} 2>&1 \
+    && (cd ${NVS_HOME} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVS_HOME}/.git-remote-and-commit \
+    && sudo -u ${USERNAME} bash ${NVS_HOME}/nvs.sh install \
+    && rm ${NVS_HOME}/cache/* \
+    # Set npm global location
+    && sudo -u ${USERNAME} npm config set prefix ${NPM_GLOBAL} \
+    && npm config -g set prefix ${NPM_GLOBAL} \
+    su ${USERNAME} -c ". $NVM_DIR/nvm.sh && nvm use --delete-prefix v14.17.6 --silent && nvm clear-cache" \
+    # Clean up
+    && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
+
 # Install Python, PHP, Ruby utilities
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install rvm, rbenv, any missing base gems
@@ -81,22 +96,6 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
 # Install PowerShell
 RUN bash /tmp/scripts/powershell-debian.sh \
     && apt-get clean -y
-
-# Setup Node.js, install NVM and NVS
-RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "v14.17.6" "${USERNAME}" \
-    && (cd ${NVM_DIR} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVM_DIR}/.git-remote-and-commit \
-    # Install nvs (alternate cross-platform Node.js version-management tool)
-    && sudo -u ${USERNAME} git clone -c advice.detachedHead=false --depth 1 https://github.com/jasongin/nvs ${NVS_HOME} 2>&1 \
-    && (cd ${NVS_HOME} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVS_HOME}/.git-remote-and-commit \
-    && sudo -u ${USERNAME} bash ${NVS_HOME}/nvs.sh install \
-    && rm ${NVS_HOME}/cache/* \
-    # Set npm global location
-    && sudo -u ${USERNAME} npm config set prefix ${NPM_GLOBAL} \
-    && npm config -g set prefix ${NPM_GLOBAL} \
-    && . ${NVM_DIR}/nvm.sh \
-    && nvm use --delete-prefix v14.17.6 --silent \
-    # Clean up
-    && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
 
 # Install SDKMAN, OpenJDK8 (JDK 11 already present), gradle (maven already present)
 RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
