@@ -11,7 +11,7 @@
 
 ## Variant: hirsute
 
-**Digest:** sha256:2af8bdbffe128c339d52568eff3c0fa5e084e613f029312c671704cd6515db93
+**Digest:** sha256:fe1531c138ade9453dbfb091d1230641380404f423f0ec4e28f52642ef24591d
 
 **Tags:**
 ```
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:80cfd81ceeeca13df8087a7dfaca92150ef0ace0ab4110b532445133cc6dff26
+**Digest:** sha256:86812a7527c04cbe282ef20a4b2d44d5fd6f3b5034f72fea220637ebc58dd736
 
 **Tags:**
 ```
@@ -155,7 +155,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:372e4f28c6427848929ac6563f90175e8b94d874f3a8140561dbefb085e75a22
+**Digest:** sha256:d981a4337125195e5d7f2f7ab597d33a8dcecaf5c7ee10de5f7129f82e65dd83
 
 **Tags:**
 ```

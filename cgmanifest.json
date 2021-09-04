@@ -754,7 +754,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: php",
-                    "Version": "8.0",
+                    "Version": "8.0-apache-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/php"
                 }
             }
@@ -764,7 +764,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: php",
-                    "Version": "7.4",
+                    "Version": "7.4-apache-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/php"
                 }
             }
@@ -774,7 +774,37 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: php",
-                    "Version": "7.3",
+                    "Version": "7.3-apache-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/php"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: php",
+                    "Version": "8.0-apache-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/php"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: php",
+                    "Version": "7.4-apache-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/php"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: php",
+                    "Version": "7.3-apache-buster",
                     "DownloadUrl": "https://hub.docker.com/_/php"
                 }
             }
