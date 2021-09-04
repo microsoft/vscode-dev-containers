@@ -11,8 +11,8 @@ jobs:
     name: Build and push images
     strategy:
       matrix:
-        page: [1, 2, 3, 4, 5, 6, 7]
-        page-total: [7]
+        page: [1, 2, 3, 4, 5, 6, 7, 8]
+        page-total: [8]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
