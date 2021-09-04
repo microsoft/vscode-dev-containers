@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/python |
-| *Available image variants* | 3 / 3-bullseye, 3.6 / 3.6-bullseye, 3.7 / 3.7-bullseye, 3.8 / 3.8-bullseye, 3.9 / 3.9-bullseye, 3-buster, 3.6-buster, 3.7-buster, 3.8-buster, 3.9-buster,  ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/python/tags/list)) |
+| *Available image variants* | 3 / 3-bullseye, 3.6 / 3.6-bullseye, 3.7 / 3.7-bullseye, 3.8 / 3.8-bullseye, 3.9 / 3.9-bullseye, 3-buster, 3.6-buster, 3.7-buster, 3.8-buster, 3.9-buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/python/tags/list)) |
 | *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container Host OS Support* | Linux, macOS, Windows |
@@ -42,7 +42,7 @@ You can decide how often you want updates by referencing a [semantic version](ht
 
 - `mcr.microsoft.com/vscode/devcontainers/python:0-3.9` (or `0-3.9-bullseye`, `0-3.9-buster`)
 - `mcr.microsoft.com/vscode/devcontainers/python:0.202-3.9` (or `0.202-3.9-bullseye`, `0.202-3.9-buster`)
-- `mcr.microsoft.com/vscode/devcontainers/python:0.202.0-3.9` (or `0.202.0-3.9-bullseye`, `0.202/0-3.9-buster`)
+- `mcr.microsoft.com/vscode/devcontainers/python:0.202.0-3.9` (or `0.202.0-3.9-bullseye`, `0.202.0-3.9-buster`)
 
 However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-14`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
 
