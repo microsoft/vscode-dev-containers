@@ -16,7 +16,7 @@
 
 ## Variant: 3.9-bullseye
 
-**Digest:** sha256:81147d363ab4f3e23abb3ef3b5a95561c744bfa4af3f96f0a8e22b2e19520306
+**Digest:** sha256:0d5e9a7796ecf706f6b8a9c6b813da772862d24b45b1ec65da74cab23e9ccbcb
 
 **Tags:**
 ```
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 ## Variant: 3.8-bullseye
 
-**Digest:** sha256:7b720fd53ef04395a1d824fbb114d17bd3ec95c110ba2ec5c375bbf0b2203ae8
+**Digest:** sha256:b2703bf655a23d8e531452e8cfe92ef1c2319bfa444c39e2b319cf219a7d5142
 
 **Tags:**
 ```
@@ -205,7 +205,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7-bullseye
 
-**Digest:** sha256:34c9bb98970edc02f2c2142df845918e39b4c8b9e7f0af65a67799acd4c52f74
+**Digest:** sha256:178ced044492e7edd9e2cc938e432076351845c2460093ec4fd82bc42b625240
 
 **Tags:**
 ```
@@ -299,7 +299,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6-buster
 
-**Digest:** sha256:f883b4427e13f47c052679bb27f34c2e83a98018f45ec4c0ce0ac202bef387b8
+**Digest:** sha256:48d022a5784ec0045ffa1a1de17837296097ec601cc9ec1659280b9e4f6d894c
 
 **Tags:**
 ```
@@ -393,7 +393,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6-buster
 
 ## Variant: 3.9-buster
 
-**Digest:** sha256:c6d5cf60cf2bcea17592941a94a1f934600bdff5eb2bc6cf9644acc3460ca923
+**Digest:** sha256:09aca6da7eeca43312013792e5d974f024f0953fc035578838b5bbd7db91d03c
 
 **Tags:**
 ```
@@ -488,7 +488,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3-buster
 
 ## Variant: 3.8-buster
 
-**Digest:** sha256:470c8afb7b88921b6d3f8d4ee0d310718f823c8ba9625eddc4f0c54a98489987
+**Digest:** sha256:082d34ca075e86ac7896cee4f843be8e70ff52972b70f158bfd439605087372b
 
 **Tags:**
 ```
@@ -582,7 +582,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8-buster
 
 ## Variant: 3.7-buster
 
-**Digest:** sha256:ff474e3200938280f359b31be40d96fc52c2398526f3a32d86061a2f6ee4d51d
+**Digest:** sha256:417946303b998808945bc9d2995d79327f6e343abaefbfb4a1878a820e0bf33e
 
 **Tags:**
 ```
@@ -676,7 +676,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7-buster
 
 ## Variant: 3.6-buster
 
-**Digest:** sha256:f883b4427e13f47c052679bb27f34c2e83a98018f45ec4c0ce0ac202bef387b8
+**Digest:** sha256:48d022a5784ec0045ffa1a1de17837296097ec601cc9ec1659280b9e4f6d894c
 
 **Tags:**
 ```
