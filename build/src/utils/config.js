@@ -391,7 +391,7 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
     }
 
     // Create pages and distribute entries with no parents
-    const pageSize = Math.ceil(total / pageTotalMinusDedicatedPages);
+    const pageSize = Math.floor(total / pageTotalMinusDedicatedPages);
     for (let bucketId in parentBuckets) {
         let bucket = parentBuckets[bucketId];
         if (typeof bucket === 'object') {
@@ -402,16 +402,17 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
             allPages.push(bucket);
         }
     }
-    if (noParentList.length > 0) {
-        allPages.push(noParentList);
+    while (noParentList.length > 0) {
+        const noParentPage = noParentList.splice(0, noParentList.length > pageSize ? pageSize : noParentList.length);
+        allPages.push(noParentPage);
     }
 
     if (allPages.length > pageTotal) {
         // If too many pages, add extra pages to last one
-        console.log(`(!) Not enough pages to dedicate one page per parent. Adding excess definitions to last page.`);
+        console.log(`(!) Not enough pages to for target page size. Adding excess definitions to last page.`);
         for (let i = pageTotal; i < allPages.length; i++) {
             allPages[pageTotal - 1] = allPages[pageTotal - 1].concat(allPages[i]);
-            allPages[i] = [];
+            allPages.splice(i, 1);
         }
     } else if (allPages.length < pageTotal) {
         // If too few, add some empty pages
