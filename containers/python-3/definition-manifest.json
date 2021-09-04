@@ -24,7 +24,8 @@
 			], 
 			"3.8-bullseye": [ "python:${VERSION}-3.8" ],
 			"3.7-bullseye": [ "python:${VERSION}-3.7" ],
-			"3.6-bullseye": [ "python:${VERSION}-3.6" ]
+			"3.6-bullseye": [ "python:${VERSION}-3.6" ],
+			"3.9-buster": ["python:${VERSION}-3-buster"]
 		}
 	},
 	"dependencies": {

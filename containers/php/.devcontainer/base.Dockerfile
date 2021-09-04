@@ -1,6 +1,6 @@
-# [Choice] PHP version: 8, 8.0, 7, 7.4, 7.3
-ARG VARIANT=7
-FROM php:${VARIANT}-apache
+# [Choice] PHP version: 8-apache-bullseye, 8.0-apache-bullseye, 7-apache-bullseye, 7.4-apache-bullseye, 7.3-apache-bullseye, 8-apache-buster, 8.0-apache-buster, 7-apache-buster, 7.4-apache-buster, 7.3-apache-buster
+ARG VARIANT=7-apache-bullseye
+FROM php:${VARIANT}
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
