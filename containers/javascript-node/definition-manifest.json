@@ -16,7 +16,13 @@
 			"javascript-node:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"16-buster": [ "javascript-node:${VERSION}-16" ],
+			"16-bullseye": [ 
+				"javascript-node:${VERSION}-bullseye"
+			],
+			"16-buster": [ 
+				"javascript-node:${VERSION}-16",
+				"javascript-node:${VERSION}-buster"
+			],
 			"14-buster": [ "javascript-node:${VERSION}-14" ],
 			"12-buster": [ "javascript-node:${VERSION}-12" ]
 		}

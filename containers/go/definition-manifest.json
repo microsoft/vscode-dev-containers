@@ -17,10 +17,14 @@
 			"1.17-bullseye": [ 
 				"go:${VERSION}-1.17",
 				"go:${VERSION}-1",
-				"go:${VERSION}-1-bullseye" 
+				"go:${VERSION}-1-bullseye",
+				"go:${VERSION}-bullseye" 
 			],
 			"1.16-bullseye": ["go:${VERSION}-1.16"],
-			"1.17-buster": ["go:${VERSION}-1-buster"]
+			"1.17-buster": [
+				"go:${VERSION}-1-buster",
+				"go:${VERSION}-buster"
+			]
 		}
 	},
 	"dependencies": {

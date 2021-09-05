@@ -9,6 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Categories* | Languages |
 | *Definition type* | Dockerfile |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/php |
 | *Available image variants* | 8 / 8-bullseye, 8.0 / 8.0-bullseye, 7 / 7-bullseye, 7.4 / 7.4-bullseye, 7.3 / 7.3-bullseye, 8-buster, 8.0-buster, 7-buster, 7.5-buster, 7.3-buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list)) |
 | *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |

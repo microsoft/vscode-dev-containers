@@ -19,7 +19,8 @@
 			"8.0-apache-bullseye": [ 
 				"php:${VERSION}-8",
 				"php:${VERSION}-8-bullseye",
-				"php:${VERSION}-8.0-bullseye"
+				"php:${VERSION}-8.0-bullseye",
+				"php:${VERSION}-bullseye"
 			],
 			"7.4-apache-bullseye": [ 
 				"php:${VERSION}-7" ,
@@ -31,8 +32,15 @@
 				"php:${VERSION}-7.3",
 				"php:${VERSION}-7.3-bullseye"
 			],
-			"8.0-apache-buster": [ "php:${VERSION}-8.0-buster" ],
-			"7.4-apache-buster": [ "php:${VERSION}-7.4-buster" ],
+			"8.0-apache-buster": [ 
+				"php:${VERSION}-8-buster",
+				"php:${VERSION}-8.0-buster",
+				"php:${VERSION}-buster"
+			],
+			"7.4-apache-buster": [
+				"php:${VERSION}-7-buster",
+				"php:${VERSION}-7.4-buster"
+			],
 			"7.3-apache-buster": [ "php:${VERSION}-7.3-buster" ]
 		}
 	},
