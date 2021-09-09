@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/ruby:2.7
+# [Choice] Debian OS version: 2.7-bullseye, 2.7-buster
+ARG VARIANT=2.7-bullseye
+FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 COPY library-scripts/meta.env /usr/local/etc/vscode-dev-containers
 
 # ENV Variables required by Jekyll

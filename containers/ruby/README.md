@@ -10,8 +10,8 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/ruby |
-| *Available image variants* | 3, 3.0, 2, 2.7, 2.6 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list)) |
-| *Published image architecture(s)* | x86-64 |
+| *Available image variants* | 3 / 3-bullseye, 3.0 / 3.0-bullseye, 2 / 2-bullseye, 2.7 / 2.7-bullseye, 2.6 / 2.7-bullseye, 3-buster, 3.0-buster, 2-buster, 2.7-buster, 2.6-buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list)) |
+| *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
@@ -24,23 +24,26 @@ See **[history](history)** for information on the contents of published images.
 While this definition should work unmodified, you can select the version of Ruby the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
+// Or you can use 2.7-bullseye or 2.7-buster if you want to pin to an OS version
 "args": { "VARIANT": "2.7" }
 ```
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/ruby` (latest)
-- `mcr.microsoft.com/vscode/devcontainers/ruby:3`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:3.0`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:2`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:2.7`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:2.6`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:3` (or `3-bullseye`, `3-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/ruby:3.0` (or `3.0-bullseye`, `3.0-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/ruby:2` (or `2-bullseye`, `2-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/ruby:2.7` (or `2.7-bullseye`, `2.7-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/ruby:2.6` (or `2.6-bullseye`, `2.6-buster` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0-3`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.201-3`
-- `mcr.microsoft.com/vscode/devcontainers/ruby:0.201.5-3`
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0-3` (or `0-3-bullseye`, `0-3-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0.202-3` (or `0.202-3-bullseye`, `0.202-3-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/ruby:0.202.0-3` (or `0.202.0-3-bullseye`, `0.202.0-3-buster` to pin to an OS version)
+
+However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-2.7`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
 
 See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list).
 

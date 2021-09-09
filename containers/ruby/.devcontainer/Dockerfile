@@ -1,5 +1,5 @@
-# [Choice] Ruby version: 3, 3.0, 2, 2.7, 2.6
-ARG VARIANT=2
+# [Choice] Ruby version: 3, 3.0, 2, 2.7, 2.6, 3-bullseye, 3.0-bullseye, 2-bullseye, 2.7-bullseye, 2.6-bullseye, 3-buster, 3.0-buster, 2-buster, 2.7-buster, 2.6-buster
+ARG VARIANT=2-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
