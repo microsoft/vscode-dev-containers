@@ -28,7 +28,9 @@
 	],
 
 	"needsDedicatedPage": [ 
-		"codespaces-linux"
+		"codespaces-linux",
+		"php",
+		"python-3"
 	],
 
 	"flattenBaseImage": [],

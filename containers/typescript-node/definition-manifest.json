@@ -17,7 +17,13 @@
 			"typescript-node:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"16-buster": [ "typescript-node:${VERSION}-16" ],
+			"16-bullseye": [ 
+				"typescript-node:${VERSION}-bullseye"
+			],
+			"16-buster": [ 
+				"typescript-node:${VERSION}-16",
+				"typescript-node:${VERSION}-buster"
+			],
 			"14-buster": [ "typescript-node:${VERSION}-14" ],
 			"12-buster": [ "typescript-node:${VERSION}-12" ]
 		}

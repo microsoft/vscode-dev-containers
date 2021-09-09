@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/jekyll:0
+# [Choice] Debian OS version: bullseye, buster
+ARG VARIANT=bullseye
+FROM mcr.microsoft.com/vscode/devcontainers/jekyll:0-${VARIANT}
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
