@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/java:0-11
+# [Choice] Debian OS version: buster, bullseye
+ARG VARIANT="buster"
+FROM mcr.microsoft.com/vscode/devcontainers/java:0-11-${VARIANT}
 
 # Install JDK 8 and optionally Maven and Gradle - version of "" installs latest
 ARG JDK8_VERSION=""

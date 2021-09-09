@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/java:0-8
+# [Choice] Debian OS version: buster, bullseye
+ARG VARIANT="buster"
+FROM mcr.microsoft.com/vscode/devcontainers/java:0-8-${VARIANT}
 
 # [Option] Install Maven
 ARG INSTALL_MAVEN="false"
