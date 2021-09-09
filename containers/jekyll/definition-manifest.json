@@ -4,7 +4,6 @@
 	"build": {
 		"latest": "2.7-bullseye",
 		"parent": "ruby",
-		"parentVariant": "2.7-bullseye",
 		"rootDistro": "debian",
 		"architectures": {
 			"2.7-bullseye": ["linux/amd64", "linux/arm64"],
