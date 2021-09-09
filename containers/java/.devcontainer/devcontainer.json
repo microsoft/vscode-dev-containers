@@ -4,7 +4,9 @@
 		"dockerfile": "Dockerfile",
 		"args": {
 			// Update the VARIANT arg to pick a Java version: 11, 16
-			"VARIANT": "11",
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use the -bullseye variants if you are on a M1 mac.
+			"VARIANT": "11-sdk-buster",
 			// Options
 			"INSTALL_MAVEN": "false",
 			"INSTALL_GRADLE": "false",
