@@ -1,4 +1,4 @@
-# [Choice] Debian OS version: buster, bullseye
+# [Choice] Debian OS version (use bullseye for arm64/Apple Silicon): buster, bullseye
 ARG VARIANT="buster"
 FROM rust:1-${VARIANT}
 
