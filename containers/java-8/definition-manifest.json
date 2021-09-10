@@ -6,8 +6,8 @@
 		"rootDistro": "debian",
 		"parent": "java",
 		"parentVariant": {
-			"bullseye": "11-bullseye",
-			"buster": "11-buster"
+			"bullseye": "11-jdk-bullseye",
+			"buster": "11-jdk-buster"
 		},
 		"architectures": {
 			"bullseye": ["linux/amd64", "linux/arm64"],
