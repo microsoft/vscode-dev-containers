@@ -11,7 +11,7 @@
 
 ## Variant: hirsute
 
-**Digest:** sha256:0d553f58edfb2b60466700bf8cba040c6b583330e5e947cf6fbbe1e0aa06ac7a
+**Digest:** sha256:d04aca389249946246f08cab97ad69f8eb2c9e58822061d4db8236770d046268
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 81edb03c5261658d40885abf4bcd54cf9dbbc6a5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 735808f48d54aabce540f6c90294e21118104cf4 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:88949c51a71941c5d03247426182824af4e8d36c8e8b1abb0080074223e7806e
+**Digest:** sha256:83c868c1fd10d8a3071fb1ed984d4fbf85852aa2162760d885c366e614bfc3f6
 
 **Tags:**
 ```
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 358ac6a141010b19175d0eb5a6f28ff544aa75d3 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 735808f48d54aabce540f6c90294e21118104cf4 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -155,7 +155,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:76c2c76ec2ae5d931f3d676c9061dd053e20bc029d987763fc3a2709df639cfc
+**Digest:** sha256:224736a530cf58b3204c1bf8af8e144c05f1879681115d6005b14c079ecfbc2f
 
 **Tags:**
 ```
@@ -176,7 +176,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 358ac6a141010b19175d0eb5a6f28ff544aa75d3 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 735808f48d54aabce540f6c90294e21118104cf4 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 

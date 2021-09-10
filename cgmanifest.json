@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "358ac6a141010b19175d0eb5a6f28ff544aa75d3"
+                    "commitHash": "735808f48d54aabce540f6c90294e21118104cf4"
                 }
             }
         },
@@ -37,16 +37,6 @@
                     "Name": "Docker Image: buildpack-deps",
                     "Version": "stretch-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "81edb03c5261658d40885abf4bcd54cf9dbbc6a5"
                 }
             }
         },
@@ -85,6 +75,16 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: buildpack-deps",
+                    "Version": "bullseye-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
                     "Version": "buster-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
@@ -95,7 +95,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: buildpack-deps",
-                    "Version": "bullseye-curl",
+                    "Version": "hirsute-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
                 }
             }
@@ -989,7 +989,17 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: rust",
-                    "Version": "1",
+                    "Version": "1-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/rust"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: rust",
+                    "Version": "1-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/rust"
                 }
             }
@@ -1089,7 +1099,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "358ac6a141010b19175d0eb5a6f28ff544aa75d3"
+                    "commitHash": "735808f48d54aabce540f6c90294e21118104cf4"
                 }
             }
         },
