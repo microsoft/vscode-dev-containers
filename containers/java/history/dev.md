@@ -5,16 +5,190 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/java)
 
 **Definition variations:**
-- [16](#variant-16)
-- [11](#variant-11)
+- [16-jdk-bullseye](#variant-16-jdk-bullseye)
+- [11-jdk-bullseye](#variant-11-jdk-bullseye)
+- [16-jdk-buster](#variant-16-jdk-buster)
+- [11-jdk-buster](#variant-11-jdk-buster)
 
-## Variant: 16
+## Variant: 16-jdk-bullseye
 
-**Digest:** sha256:44f4ddcddd8d79b0f61f034bc203b3726eaff54bc1a3d8ae6cd7896a9f8c248e
+**Digest:** sha256:94db572f6aef946ce59c916abd67cd2863751ff186efb1285647574b702bb04d
 
 **Tags:**
 ```
+mcr.microsoft.com/vscode/devcontainers/java:dev-16-jdk-bullseye
+mcr.microsoft.com/vscode/devcontainers/java:dev-16-bullseye
+mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Java](https://adoptopenjdk.net/) | 16.0.2 | /usr/local/ |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 358ac6a141010b19175d0eb5a6f28ff544aa75d3 | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Other tools and utilities**
+
+| Tool | Version | Path |
+|------|---------|------|
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.4 | /usr/local/sdkman |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.5-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: 11-jdk-bullseye
+
+**Digest:** sha256:0d9cd13a75ac1a569a007d40ab48884b4d39b8257d2efaf7ea7d19b6b02d2fde
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
+mcr.microsoft.com/vscode/devcontainers/java:dev-11-bullseye
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Java](https://adoptopenjdk.net/) | 11.0.12 | /usr/local/ |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 358ac6a141010b19175d0eb5a6f28ff544aa75d3 | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Other tools and utilities**
+
+| Tool | Version | Path |
+|------|---------|------|
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.4 | /usr/local/sdkman |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.5-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: 16-jdk-buster
+
+**Digest:** sha256:6db4c34e61fc20f512c25f307a61a21ca7fc803cc3de26c6f4185f823bda791a
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/java:dev-16-jdk-buster
 mcr.microsoft.com/vscode/devcontainers/java:dev-16
+mcr.microsoft.com/vscode/devcontainers/java:dev-16-buster
+mcr.microsoft.com/vscode/devcontainers/java:dev-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -35,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 450acc0113b114352ce3b94870fe63fc461844bd | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 358ac6a141010b19175d0eb5a6f28ff544aa75d3 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -92,13 +266,15 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-16
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |
 
-## Variant: 11
+## Variant: 11-jdk-buster
 
-**Digest:** sha256:4d440cded6e33f4c55c73b577c1e6606f5ed6219745736a886d511f2e36c7fef
+**Digest:** sha256:110d9570fe4c7dd9533495ea314b3051f5b05692c904716fec71b63548e95fd5
 
 **Tags:**
 ```
+mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-buster
 mcr.microsoft.com/vscode/devcontainers/java:dev-11
+mcr.microsoft.com/vscode/devcontainers/java:dev-11-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -119,7 +295,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 450acc0113b114352ce3b94870fe63fc461844bd | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 358ac6a141010b19175d0eb5a6f28ff544aa75d3 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
