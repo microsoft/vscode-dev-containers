@@ -10,8 +10,8 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/java |
-| *Available image variants* | 11, 16 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
-| *Published image architecture(s)* | x86-64 |
+| *Available image variants* | 11 / 11-buster, 16 / 16-buster, 11-bullseye, 16-bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
+| *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
@@ -26,20 +26,23 @@ See **[history](history)** for information on the contents of published images.
 While this definition should work unmodified, you can select the version of Java the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
+// Or you can use 16-bullseye or 16-buster if you want to pin to an OS version
 "args": { "VARIANT": "16" }
 ```
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/java` (latest)
-- `mcr.microsoft.com/vscode/devcontainers/java:11`
-- `mcr.microsoft.com/vscode/devcontainers/java:16`
+- `mcr.microsoft.com/vscode/devcontainers/java:11` (or `11-bullseye`, `11-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/java:16` (or `16-bullseye`, `16-buster` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/java:0-11`
-- `mcr.microsoft.com/vscode/devcontainers/java:0.201-11`
-- `mcr.microsoft.com/vscode/devcontainers/java:0.201.5-11`
+- `mcr.microsoft.com/vscode/devcontainers/java:0-11` (or `0-11-bullseye`, `0-11-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/java:0.203-11` (or `0.203-11-bullseye`, `0.203-11-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/java:0.203.0-11` (or `0.203.0-11-bullseye`, `0.203.0-11-buster` to pin to an OS version)
+
+However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-11`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
 
 See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list).
 

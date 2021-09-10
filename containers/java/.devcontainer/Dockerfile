@@ -1,5 +1,5 @@
-# [Choice] Java version: 11, 16
-ARG VARIANT=11
+# [Choice] Java version (use -bullseye variants for arm64/Apple Silicon): 11, 16, 11-bullseye, 16-bullseye, 11-buster, 16-buster
+ARG VARIANT=11-buster
 FROM mcr.microsoft.com/vscode/devcontainers/java:${VARIANT}
 
 # [Option] Install Maven

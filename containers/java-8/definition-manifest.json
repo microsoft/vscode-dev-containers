@@ -1,16 +1,31 @@
 {
-	"definitionVersion": "0.202.4",
+	"variants": [ "bullseye", "buster" ],
+	"definitionVersion": "0.203.0",
 	"build": {
-		"latest": false,
+		"latest": "buster",
 		"rootDistro": "debian",
 		"parent": "java",
-		"parentVariant": "11",
+		"parentVariant": {
+			"bullseye": "11-jdk-bullseye",
+			"buster": "11-jdk-buster"
+		},
+		"architectures": {
+			"bullseye": ["linux/amd64", "linux/arm64"],
+			"buster": ["linux/amd64"]
+		},
 		"tags": [
-			"java:${VERSION}-8"
-		]
+			"java:${VERSION}-8-${VARIANT}"
+		],
+		"variantTags": {
+			"buster": [ 
+				"java:${VERSION}-8",
+				"java:${VERSION}-8-jdk-buster"
+			],
+			"bullseye": [ "java:${VERSION}-8-jdk-bullseye" ]
+		}
 	},
 	"dependencies": {
-		"image": "mcr.microsoft.com/vscode/devcontainers/java:11",
+		"image": "mcr.microsoft.com/vscode/devcontainers/java:11-${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/java",
 		"apt": [{
 			"cgIgnore": false,
