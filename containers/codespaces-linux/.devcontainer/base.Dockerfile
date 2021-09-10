@@ -52,7 +52,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Install tools and shells not in common script
     && apt-get install -yq vim vim-doc xtail software-properties-common libsecret-1-dev \
     # Install additional tools (useful for 'puppeteer' project)
-    && apt-get install -y --no-install-recommends libnss3 libnspr4 libatk-bridge2.0-0 libatk1.0-0 libx11-6 libpangocairo-1.0-0 \
+    && apt-get install -y --no-install-recommends libnss3 libnspr4 libatk-bridge2.0-0 libatk1.0-0 libx11-6 libpangocairo-1.0-0 libbz2-dev \
                                                   libx11-xcb1 libcups2 libxcomposite1 libxdamage1 libxfixes3 libpango-1.0-0 libgbm1 libgtk-3-0 \
     && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/git-lfs-debian.sh \
@@ -70,7 +70,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
 # Install Python, PHP, Ruby utilities
-RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
+RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" "true" "true" \
     # Install rvm, rbenv, any missing base gems
     && chown -R ${USERNAME} /opt/ruby/* \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
