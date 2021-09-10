@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/rust:1
+# [Choice] Debian OS version (use bullseye for arm64/Apple Silicon): buster, bullseye
+ARG VARIANT="buster"
+FROM mcr.microsoft.com/vscode/devcontainers/rust:1-${VARAINT}
 
 # [Optional] Uncomment this section to install additional packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
