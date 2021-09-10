@@ -8,6 +8,8 @@
 
 **OS support**: Debian 9+, Ubuntu 20.04+, and downstream distros.
 
+> **Note:** Your host chip architecture needs to match the your container image architecture for this script to function. Cross-architecture emulation will not work.
+
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
 ## Syntax
