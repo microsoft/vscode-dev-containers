@@ -10,7 +10,7 @@
 | *Categories* | Languages |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/anaconda:3 |
-| *Published image architecture(s)* | x86-64 |
+| *Published image architecture(s)* | x86-64, aarch64/arm64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
@@ -29,8 +29,8 @@ While the definition itself works unmodified, you can also directly reference pr
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/anaconda:0-3`
-- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.201-3`
-- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.201.4-3`
+- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.202-3`
+- `mcr.microsoft.com/vscode/devcontainers/anaconda:0.202.0-3`
 
 See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/anaconda/tags/list).
 
