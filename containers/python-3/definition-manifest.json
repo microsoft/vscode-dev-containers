@@ -21,6 +21,7 @@
 			"3.9-bullseye": [ 
 				"python:${VERSION}-3.9",
 				"python:${VERSION}-3",
+				"python:${VERSION}-3-bullseye",
 				"python:${VERSION}-bullseye"
 			], 
 			"3.8-bullseye": [ "python:${VERSION}-3.8" ],
