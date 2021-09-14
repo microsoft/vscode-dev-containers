@@ -32,7 +32,7 @@ else
         docker buildx use vscode-dev-containers
     fi
 
-    docker run --privileged --rm tonistiigi/binfmt --install --all
+    docker run --privileged --rm tonistiigi/binfmt --install all
     OTHER_ARGS="--builder vscode-dev-containers --platform ${PLATFORMS}"
 fi
 
