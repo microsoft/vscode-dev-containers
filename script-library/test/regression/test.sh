@@ -32,7 +32,7 @@ else
         docker buildx use vscode-dev-containers
     fi
 
-    docker run --privileged --rm tonistiigi/binfmt --install ${PLATFORMS}
+    docker run --privileged --rm tonistiigi/binfmt --install --all
     OTHER_ARGS="--builder vscode-dev-containers --platform ${PLATFORMS}"
 fi
 
@@ -49,6 +49,10 @@ BUILDX_COMMAND="docker buildx build \
     ."
 echo $BUILDX_COMMAND
 $BUILDX_COMMAND
-docker run --init --privileged vscdc-script-library-regression bash -c 'uname -m && env'
+
+# If we've loaded the image into docker, run it to make sure it starts properly
+if [ -z "${PLATFORMS}" ]; then
+    docker run --init --privileged vscdc-script-library-regression bash -c 'uname -m && env'
+fi
 
 echo -e "\n🎉 All tests passed!"
