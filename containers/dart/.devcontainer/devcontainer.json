@@ -1,5 +1,6 @@
 {
 	"name": "Dart",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update VARIANT to pick a Dart version

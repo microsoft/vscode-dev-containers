@@ -1,5 +1,6 @@
 {
 	"name": "Azure Functions & PowerShell",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {

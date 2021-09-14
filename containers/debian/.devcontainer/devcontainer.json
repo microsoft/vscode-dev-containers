@@ -1,5 +1,6 @@
 {
 	"name": "Debian",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick an Debian version: bullseye, buster, stretch

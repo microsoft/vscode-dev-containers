@@ -1,5 +1,6 @@
 {
 	"name": "Ruby on Rails (Community)",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 

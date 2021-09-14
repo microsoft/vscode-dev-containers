@@ -1,5 +1,6 @@
 {
     "name": "Deno",
+    "runArgs": ["--init"],
     "dockerFile": "Dockerfile",
     "settings": {
         // Enables the project as a Deno project

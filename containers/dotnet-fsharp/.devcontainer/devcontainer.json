@@ -1,5 +1,6 @@
 {
 	"name": "F# (.NET)",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {

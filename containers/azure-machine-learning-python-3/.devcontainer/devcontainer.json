@@ -1,5 +1,6 @@
 { 
 	"name": "Azure Machine Learning", 
+	"runArgs": ["--init"],
 	"dockerFile": "Dockerfile", 
 
 	// This line allows you to use Docker runconfigs if you set "sharedVolumes": false
