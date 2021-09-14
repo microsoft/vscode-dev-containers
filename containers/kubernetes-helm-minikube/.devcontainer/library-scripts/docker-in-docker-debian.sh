@@ -118,17 +118,23 @@ else
     fi
     if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
         # Use pip to get a version that runns on this architecture
-        if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv pipx > /dev/null 2>&1; then
+        if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
             apt_get_update_if_needed
-            apt-get -y install python3-minimal python3-pip libffi-dev python3-venv pipx
+            apt-get -y install python3-minimal python3-pip libffi-dev python3-venv
         fi
         export PIPX_HOME=/usr/local/pipx
         mkdir -p ${PIPX_HOME}
         export PIPX_BIN_DIR=/usr/local/bin
+        export PYTHONUSERBASE=/tmp/pip-tmp
         export PIP_CACHE_DIR=/tmp/pip-tmp/cache
-        pipx install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
+        pipx_bin=pipx
+        if ! type pipx > /dev/null 2>&1; then
+            pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
+            pipx_bin=/tmp/pip-tmp/bin/pipx
+        fi
+        ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
         rm -rf /tmp/pip-tmp
-    else 
+    else
         LATEST_COMPOSE_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/docker/compose/releases/latest)")
         curl -fsSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-${TARGET_COMPOSE_ARCH}" -o /usr/local/bin/docker-compose
         chmod +x /usr/local/bin/docker-compose
@@ -147,11 +153,12 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
     if ! getent group docker > /dev/null 2>&1; then
         groupadd docker
     fi
-        usermod -aG docker ${USERNAME}
+
+    usermod -aG docker ${USERNAME}
 fi
 
 tee /usr/local/share/docker-init.sh > /dev/null \
-<< 'EOF' 
+<< 'EOF'
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -221,7 +228,7 @@ set -e
 
 set +e
 
-# Execute whatever commands were passed in (if any). This allows us 
+# Execute whatever commands were passed in (if any). This allows us
 # to set this script to ENTRYPOINT while still executing the default CMD.
 exec "$@"
 EOF
