@@ -5,7 +5,7 @@
 		"args": {
 			// Update the VARIANT arg to pick a Java version: 11, 16
 			// Append -bullseye or -buster to pin to an OS version.
-			// Use the -bullseye variants if you are on arm64/Apple Silicon.
+			// Use the -bullseye variants on local arm64/Apple Silicon.
 			"VARIANT": "11-jdk-bullseye",
 			// Options
 			"INSTALL_MAVEN": "false",

@@ -9,6 +9,7 @@
 | *Contributors* | [cloudnull](https://github.com/cloudnull) |
 | *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
+| *Supported architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |

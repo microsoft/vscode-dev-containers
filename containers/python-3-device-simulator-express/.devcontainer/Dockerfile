@@ -1,6 +1,6 @@
 # Update the VARIANT arg in devcontainer.json to pick a Python version: 3.7, 3.8 or higher
 ARG VARIANT=3.8
-FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}-bullseye
 
 # Create venv for device simulator
 RUN python3 -m venv /opt/vscode/extensions/ms-python.devicesimulatorexpress/venv \

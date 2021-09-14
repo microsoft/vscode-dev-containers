@@ -7,7 +7,9 @@ services:
       dockerfile: Dockerfile
       args:
         # [Choice] PHP version: 7, 7.4, 7.3
-        VARIANT: "7"
+        # Append -bullseye or -buster to pin to an OS version.
+        # Use -bullseye variants on local arm64/Apple Silicon.
+        VARIANT: "7-bullseye"
         # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
         NODE_VERSION: "lts/*"
         # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
