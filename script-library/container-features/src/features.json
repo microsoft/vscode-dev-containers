@@ -435,7 +435,7 @@
 			"name": "Go",
 			"hint": "Select go version to install",
 			"type": "choice",
-			"values": ["latest", "1.16", "1.15", "1.14"],
+			"values": ["latest", "1.17", "1.16"],
 			"default": false,
 			"buildArg": "_VSC_GO_VERSION",
 			"extensions": ["golang.Go"],
