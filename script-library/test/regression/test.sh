@@ -22,7 +22,9 @@ set -e
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../.."
 echo -e  "🧪 Testing image $IMAGE_TO_TEST (${DISTRO}-like)..."
 
-if [ ! -z "${PLATFORMS}" ]; then
+if [ -z "${PLATFORMS}" ]; then
+    OTHER_ARGS="--load"
+else
     CURRENT_BUILDERS="$(docker buildx ls)"
     if [[ "${CURRENT_BUILDERS}" != *"vscode-dev-containers"* ]]; then
         docker buildx create --use --name vscode-dev-containers
@@ -31,11 +33,11 @@ if [ ! -z "${PLATFORMS}" ]; then
     fi
 
     docker run --privileged --rm tonistiigi/binfmt --install ${PLATFORMS}
-    PLATFORMS_ARG="--builder vscode-dev-containers --platform ${PLATFORMS}"
+    OTHER_ARGS="--builder vscode-dev-containers --platform ${PLATFORMS}"
 fi
+
 BUILDX_COMMAND="docker buildx build \
-    --load \
-    ${PLATFORMS_ARG} \
+    ${OTHER_ARGS} \
     --progress=plain \
     --build-arg DISTRO=$DISTRO \
     --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST \
