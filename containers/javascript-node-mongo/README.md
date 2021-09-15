@@ -25,7 +25,7 @@ build:
   context: .
   dockerfile: Dockerfile
   args:
-    VARIANT: 12
+    VARIANT: 14
 ```
 
 You also can connect to MongoDB from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
