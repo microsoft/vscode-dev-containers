@@ -12,9 +12,6 @@ services:
         VARIANT: "8-bullseye"
         # Optional Node.js version
         NODE_VERSION: "lts/*"
-        # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
-        USER_UID: 1000
-        USER_GID: 1000
 
     volumes:
       - ..:/workspace:cached
