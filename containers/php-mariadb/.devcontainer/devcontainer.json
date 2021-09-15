@@ -1,4 +1,4 @@
-// Update the VARIANT arg in docker-compose.yml to pick a PHP version: 7, 7.3, 7.4 
+// Update the VARIANT arg in docker-compose.yml to pick a PHP version
 {
 	"name": "PHP & MariaDB (Community)",
 	"dockerComposeFile": "docker-compose.yml",

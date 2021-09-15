@@ -1,3 +1,4 @@
+// Update the VARIANT arg in docker-compose.yml to pick a Ruby version
 {
 	"name": "Ruby on Rails & Postgres (Community)",
 	"dockerComposeFile": "docker-compose.yml",
