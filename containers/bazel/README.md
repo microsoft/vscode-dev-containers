@@ -9,7 +9,7 @@
 | *Contributors* | William Phetsinorath <deva.shikanime@protonmail.com> |
 | *Categories* | Community, Other |
 | *Definition type* | Dockerfile |
-| *Supported architecture(s)* | x86-64, arm64/aarch64 for `bullseye` based images |
+| *Supported architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
