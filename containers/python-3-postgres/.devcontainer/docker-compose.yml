@@ -6,13 +6,12 @@ services:
       context: ..
       dockerfile: .devcontainer/Dockerfile
       args:
-        # [Choice] Python version: 3, 3.8, 3.7, 3.6
-        VARIANT: 3
-        # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+        # Update 'VARIANT' to pick a version of Python: 3, 3.9, 3.8, 3.7, 3.6
+        # Append -bullseye or -buster to pin to an OS version.
+        # Use -bullseye variants on local arm64/Apple Silicon.
+        VARIANT: 3-bullseye
+        # Optional Node.js version to install
         NODE_VERSION: "lts/*"
-        # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
-        USER_UID: 1000
-        USER_GID: 1000
 
     volumes:
       - ..:/workspace:cached

@@ -1,4 +1,4 @@
-# Ruby on Rails (Community)
+# Ruby on Rails & Postgres
 
 ## Summary
 
@@ -6,10 +6,12 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | [Jarrod Davis][jld] |
-| *Categories* | Community, Frameworks |
+| *Contributors* | [Jarrod Davis][jld], the VS Code Team |
+| *Categories* | Core, Frameworks |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
+| *Available image variants* | [See Ruby definition](../ruby). |
+| *Supported architecture(s)* | x86-64, arm64/aarch64 for `bullseye` based images |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
 | *Languages, platforms* | Ruby |
@@ -18,14 +20,17 @@
 
 This definition creates two containers, one for Ruby and one for PostgreSQL. VS Code will attach to the Ruby container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and an additional user (`vscode`) is added to support common Rails development database configurations. You can use `rake db:setup` (or `rake db:create`) to setup the databases your Rails application needs for development and testing. Data is stored in a volume named `postgres-data`.
 
-While the definition itself works (mostly) unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/ruby` image which includes `git`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), and a non-root `vscode` user with `sudo` access. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Ruby version 3, 3.0, 2, 2.7, 2.6, or 2.5.
+While the definition itself works (mostly) unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/ruby` image which includes `git`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), and a non-root `vscode` user with `sudo` access. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick a Ruby version.
 
 ```yaml
 build:
   context: ..
   dockerfile: .devcontainer/Dockerfile
   args:
-    VARIANT: 2.6
+    # Update 'VARIANT' to pick a version of Ruby: 3, 3.0, 2, 2.7, 2.6
+    # Append -bullseye or -buster to pin to an OS version.
+    # Use -bullseye variants on local arm64/Apple Silicon.
+    VARIANT: "2-bullseye"
 ```
 
 To get the best experience, you'll need to update the [SQLTools configuration][sqltools] in `.devcontainer/devcontainer.json` to match the database names used by your application:
@@ -78,8 +83,8 @@ This container also includes Node.js. You can change the version of Node.js by u
 
 ```yaml
 args:
-  VARIANT: 2.6
-  NODE_VERSION: "12" # Set to "none" to skip Node.js installation
+  VARIANT: "2-bullseye"
+  NODE_VERSION: "14" # Set to "none" to skip Node.js installation
 ```
 
 ### Adding the definition to your folder

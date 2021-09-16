@@ -6,9 +6,11 @@ services:
       context: ..
       dockerfile: .devcontainer/Dockerfile
       args:
-        # [Choice] Ruby version: 3, 3.0, 2, 2.7, 2.6, 2.5
-        VARIANT: 2
-        # [Choice] Node.js version: lts/*, 16, 14, 12, 10
+        # Update 'VARIANT' to pick a version of Ruby: 3, 3.0, 2, 2.7, 2.6
+        # Append -bullseye or -buster to pin to an OS version.
+        # Use -bullseye variants on local arm64/Apple Silicon.
+        VARIANT: "2-bullseye"
+        # Optional Node.js version to install
         NODE_VERSION: "lts/*"
 
     volumes:

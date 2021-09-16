@@ -4,7 +4,7 @@
 		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick a Node version: 16, 14, 12.
 		// Append -bullseye or -buster to pin to an OS version.
-		// Use the -bullseye variants if you are on a M1 mac.
+		// Use -bullseye variants on local on arm64/Apple Silicon.
 		"args": { 
 			"VARIANT": "16-bullseye"
 		}

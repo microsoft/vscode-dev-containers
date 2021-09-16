@@ -5,7 +5,7 @@
 		"args": { 
 			// Update 'VARIANT' to pick a Ruby version: 3, 3.0, 2, 2.7, 2.6
 			// Append -bullseye or -buster to pin to an OS version.
-			// Use the -bullseye variants if you are on a M1 mac.
+			// Use -bullseye variants on local on arm64/Apple Silicon.
 			"VARIANT": "3-bullseye",
 			// Options
 			"NODE_VERSION": "lts/*"

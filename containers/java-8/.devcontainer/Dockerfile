@@ -1,4 +1,4 @@
-# [Choice] Debian OS version (use bullseye for arm64/Apple Silicon): buster, bullseye
+# [Choice] Debian OS version (use bullseye on local arm64/Apple Silicon): buster, bullseye
 ARG VARIANT="buster"
 FROM mcr.microsoft.com/vscode/devcontainers/java:0-8-${VARIANT}
 

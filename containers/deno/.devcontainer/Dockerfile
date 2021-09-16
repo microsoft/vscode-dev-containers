@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:debian-10
+# [Choice] Debian OS version: bullseye, buster
+ARG VARIANT=bullseye
+FROM --platform=linux/amd64 mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 ENV DENO_INSTALL=/deno
 RUN mkdir -p /deno \

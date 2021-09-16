@@ -18,6 +18,19 @@ Everything you need to get started using Node with Azurite.
 
 This setup creates two containers, one for Node.js and one for Azurite. Both will be accessable on localhost, Blob storage will be available on port 10000 and queue will be available on port 10001
 
+While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Node.js version.
+
+```yaml
+build:
+  context: .
+  dockerfile: Dockerfile
+  args:
+    # Update 'VARIANT' to pick an LTS version of Node.js: 16, 14, 12.
+    # Append -bullseye or -buster to pin to an OS version.
+    # Use -bullseye variants on local arm64/Apple Silicon.
+    VARIANT: 14-bullseye
+```
+
 ### Adding another service
 
 You can add other services to your `docker-compose.yml` file [as described in Docker's documentaiton](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:

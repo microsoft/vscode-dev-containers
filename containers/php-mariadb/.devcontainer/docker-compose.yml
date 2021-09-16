@@ -6,13 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # [Choice] PHP version: 7, 7.4, 7.3
-        VARIANT: "7"
-        # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+        # Update 'VARIANT' to pick a version of PHP version: 8, 8.0, 7, 7.4, 7.3
+        # Append -bullseye or -buster to pin to an OS version.
+        # Use -bullseye variants on local arm64/Apple Silicon.
+        VARIANT: "8-bullseye"
+        # Optional Node.js version
         NODE_VERSION: "lts/*"
-        # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
-        USER_UID: 1000
-        USER_GID: 1000
 
     volumes:
       - ..:/workspace:cached
