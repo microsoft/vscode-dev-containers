@@ -9,6 +9,7 @@ _Develop Deno applications. Includes the latest Deno runtime and extension._
 | _Contributors_              | @anthonychu, @kitsonk        |
 | _Categories_                | Community, Languages         |
 | _Definition type_           | Dockerfile                   |
+| _Supported architecture(s)_ | x86-64                       |
 | _Works in Codespaces_       | Yes                          |
 | _Container host OS support_ | Linux, macOS, Windows        |
 | _Container OS_              | Debian                       |
