@@ -10,7 +10,7 @@
 | *Categories* | Core, Frameworks |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
-| *Available image variants* | 3 / 3-bullseye, 3.0 / 3.0-bullseye, 2 / 2-bullseye, 2.7 / 2.7-bullseye, 2.6 / 2.7-bullseye, 3-buster, 3.0-buster, 2-buster, 2.7-buster, 2.6-buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list)) |
+| *Available image variants* | [See Ruby definition](../ruby). |
 | *Supported architecture(s)* | x86-64, arm64/aarch64 for `bullseye` based images |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |

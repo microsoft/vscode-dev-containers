@@ -10,6 +10,8 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
+| *Available image variants* | [See Python 3 definition](../python-3). |
+| *Supported architecture(s)* | x86-64, arm64/aarch64 for `bullseye` based images |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
 | *Languages, platforms* | Python |
