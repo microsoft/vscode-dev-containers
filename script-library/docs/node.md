@@ -11,7 +11,7 @@
 ## Syntax
 
 ```text
-./node-debian.sh [Location to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag]
+./node-debian.sh [Location to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag] [Install node-gyp deps flag]
 ```
 
 |Argument|Default|Description|
@@ -20,6 +20,7 @@
 |Node version to install|`lts/*`| Node.js version to install. Use `none` to skip installing anything and just install nvm and yarn. |
 |Non-root user|`automatic`| Specifies a user in the container other than root that will use Node.js. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 | Add to rc files flag | `true` | A `true`/`false` flag that indicates whether sourcing the nvm script should be added to `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
+| Install node-gyp deps flag | `true` | A `true`/`false` flag that indicates whether the script should check for key requirements for node-gyp (python, make, gcc) and install them if missing. |
 
 ## Usage
 
