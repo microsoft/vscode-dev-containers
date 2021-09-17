@@ -9,9 +9,9 @@ USERNAME=${3:-"automatic"}
 UPDATE_RC=${4:-"true"}
 ADDITIONAL_JAVA_VERSION=11
 
-/tmp/library-scripts/java-debian.sh "${JAVA_VERSION}" "${SDKMAN_DIR}" "${USERNAME}" "${UPDATE_RC}"
+/tmp/build-features/java-debian.sh "${JAVA_VERSION}" "${SDKMAN_DIR}" "${USERNAME}" "${UPDATE_RC}"
 
 # If the user selected JDK 8, install the JDK 11 as well
 if echo "${JAVA_VERSION}" | grep -E '^8([\s\.]|$)' > /dev/null 2>&1; then
-    /tmp/library-scripts/java-debian.sh "${ADDITIONAL_JAVA_VERSION}" "${SDKMAN_DIR}" "${USERNAME}" "${UPDATE_RC}"
+    /tmp/build-features/java-debian.sh "${ADDITIONAL_JAVA_VERSION}" "${SDKMAN_DIR}" "${USERNAME}" "${UPDATE_RC}"
 fi
