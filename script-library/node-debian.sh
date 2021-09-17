@@ -146,9 +146,17 @@ if [ "${INSTALL_TOOLS_FOR_NODE_GYP}" = "true" ]; then
         apt_get_update_if_needed
         apt-get -y install --no-install-recommends build-essential
     fi
+    if ! type python3 > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends python3-minimal
+    fi
+    # Debian bullseye does not have the "python" command by default since it doesn't include python2.
+    # This can cause errors when using node-gyp, so alias python to python3 in this case to avoid it.
     if ! type python > /dev/null 2>&1; then
         apt_get_update_if_needed
-        apt-get -y install --no-install-recommends python-is-python3
+        if [ ! -z "$(apt-cache --names-only search ^python-is-python3$)" ]; then
+            apt-get -y install --no-install-recommends python-is-python3
+        fi
     fi
 fi
 
