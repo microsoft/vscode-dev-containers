@@ -52,7 +52,7 @@ $BUILDX_COMMAND
 
 # If we've loaded the image into docker, run it to make sure it starts properly
 if [ -z "${PLATFORMS}" ]; then
-    docker run --init --privileged vscdc-script-library-regression bash -c 'uname -m && env'
+    docker run --init --privileged --rm vscdc-script-library-regression bash -c 'uname -m && env'
 fi
 
 echo -e "\n🎉 All tests passed!"
