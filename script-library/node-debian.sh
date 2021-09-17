@@ -7,12 +7,13 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/node.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./node-debian.sh [directory to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag]
+# Syntax: ./node-debian.sh [directory to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag] [install node-gyp deps]
 
 export NVM_DIR=${1:-"/usr/local/share/nvm"}
 export NODE_VERSION=${2:-"lts"}
 USERNAME=${3:-"automatic"}
 UPDATE_RC=${4:-"true"}
+INSTALL_TOOLS_FOR_NODE_GYP="${5:-true}"
 export NVM_VERSION="0.38.0"
 
 set -e
@@ -136,6 +137,19 @@ export NVM_DIR="${NVM_DIR}"
 [ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
 EOF
 )"
-fi 
+fi
+
+# If enabled, verify "python", "make" commands are available so node-gyp works (e.g. in bullseye it is not)
+if [ "${INSTALL_TOOLS_FOR_NODE_GYP}" = "true" ]; then
+    echo "Verifying node-gyp OS requirements..."
+    if ! type make > /dev/null 2>&1 || ! type gcc > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends build-essential
+    fi
+    if ! type python > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends python-is-python3
+    fi
+fi
 
 echo "Done!"
