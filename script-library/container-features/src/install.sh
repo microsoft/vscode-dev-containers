@@ -2,10 +2,10 @@
 set -e
 
 set -a
-. /tmp/library-scripts/features.env
+. /tmp/build-features/features.env
 set +a
 
-chmod +x /tmp/library-scripts/*.sh
+chmod +x *.sh
 
 # Execute option scripts if correct environment variable is set to "true"
 while IFS= read -r feature_line; do
@@ -17,9 +17,9 @@ while IFS= read -r feature_line; do
         feature_script_and_args="${feature_script_and_args%\"}"
         # Execute the script line - but do not quote so arguments can be included in the 
         echo "${feature_script_and_args#\"}"
-        eval "/tmp/library-scripts/${feature_script_and_args#\"}"
+        eval "./${feature_script_and_args#\"}"
     fi
-done < /tmp/library-scripts/feature-scripts.env
+done < ./feature-scripts.env
 
 # Clean up
 apt-get autoremove -y
