@@ -6,6 +6,11 @@ on:
     branches: [main]
     paths:
       - 'script-library/container-features/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'script-library/container-features/**'  
 
 jobs:
   test-script-library:
