@@ -139,24 +139,25 @@ EOF
 )"
 fi
 
-# If enabled, verify "python", "make" commands are available so node-gyp works (e.g. in bullseye it is not)
+# If enabled, verify "python3", "make", "gcc", "g++" commands are available so node-gyp works - https://github.com/nodejs/node-gyp
 if [ "${INSTALL_TOOLS_FOR_NODE_GYP}" = "true" ]; then
     echo "Verifying node-gyp OS requirements..."
-    if ! type make > /dev/null 2>&1 || ! type gcc > /dev/null 2>&1; then
-        apt_get_update_if_needed
-        apt-get -y install --no-install-recommends build-essential
+    to_install=""
+    if ! type make > /dev/null 2>&1; then
+        to_install="${to_install} make"
+    fi
+    if ! type gcc > /dev/null 2>&1; then
+        to_install="${to_install} gcc"
+    fi
+    if ! type g++ > /dev/null 2>&1; then
+        to_install="${to_install} g++"
     fi
     if ! type python3 > /dev/null 2>&1; then
-        apt_get_update_if_needed
-        apt-get -y install --no-install-recommends python3-minimal
+        to_install="${to_install} python3-minimal"
     fi
-    # Debian bullseye does not have the "python" command by default since it doesn't include python2.
-    # This can cause errors when using node-gyp, so alias python to python3 in this case to avoid it.
-    if ! type python > /dev/null 2>&1; then
+    if [ ! -z "${to_install}" ]; then
         apt_get_update_if_needed
-        if [ ! -z "$(apt-cache --names-only search ^python-is-python3$)" ]; then
-            apt-get -y install --no-install-recommends python-is-python3
-        fi
+        apt-get -y install ${to_install}
     fi
 fi
 
