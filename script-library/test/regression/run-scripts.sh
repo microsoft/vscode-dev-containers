@@ -68,11 +68,11 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript sshd "2223 ${USERNAME} true random"
     runScript desktop-lite "${USERNAME} changeme false"
     runScript docker-in-docker "false ${USERNAME} false"
+    runScript powershell
     if [ "${ARCHITECTURE}" = "amd64" ] || [ "${ARCHITECTURE}" = "x86_64" ] || [ "${ARCHITECTURE}" = "arm64" ] || [ "${ARCHITECTURE}" = "aarch64" ]; then
         runScript java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
     fi
     if [ "${ARCHITECTURE}" = "amd64" ] || [ "${ARCHITECTURE}" = "x86_64" ]; then
-        runScript powershell
         runScript homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
     fi 
 fi
