@@ -126,7 +126,7 @@ else
     curl -sSL -o "release.html" "https://github.com/PowerShell/PowerShell/releases/tag/v${POWERSHELL_VERSION}"
     powershell_archive_sha256="$(cat release.html | tr '\n' ' ' | sed 's|<[^>]*>||g' | grep -oP "${powershell_filename}\s+\K[0-9a-fA-F]{64}" || echo '')"
     if [ -z "${powershell_archive_sha256}" ]; then
-        echo "WARNING: Failed to retrieve SHA256 for archive. Skipping validaiton."
+        echo "(!) WARNING: Failed to retrieve SHA256 for archive. Skipping validaiton."
     else
         echo "SHA256: ${powershell_archive_sha256}"
         echo "${powershell_archive_sha256} *${powershell_filename}" | sha256sum -c -
