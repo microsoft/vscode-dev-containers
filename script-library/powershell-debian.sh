@@ -93,12 +93,6 @@ check_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
-ARCHITECTURE="$(uname -m)"
-if [ "${ARCHITECTURE}" != "amd64" ] && [ "${ARCHITECTURE}" != "x86_64" ]; then
-    echo "(!) Architecture $ARCHITECTURE unsupported"
-    exit 1
-fi
-
 # Source /etc/os-release to get OS info
 . /etc/os-release
 architecture="$(dpkg --print-architecture)"
@@ -128,6 +122,15 @@ else
     mkdir -p /tmp/pwsh "${powershell_target_path}"
     cd /tmp/pwsh
     curl -sSL -o "${powershell_filename}" "https://github.com/PowerShell/PowerShell/releases/download/v${POWERSHELL_VERSION}/${powershell_filename}"
+    # Ugly - but only way to get sha256 is to parse release HTML. Remove newlines and tags, then look for filename followed by 64 hex characters.
+    curl -sSL -o "release.html" "https://github.com/PowerShell/PowerShell/releases/tag/v${POWERSHELL_VERSION}"
+    powershell_archive_sha256="$(cat release.html | tr '\n' ' ' | sed 's|<[^>]*>||g' | grep -oP "${powershell_filename}\s+\K[0-9a-fA-F]{64}" || echo '')"
+    if [ -z "${powershell_archive_sha256}" ]; then
+        echo "WARNING: Failed to retrieve SHA256 for archive. Skipping validaiton."
+    else
+        echo "SHA256: ${powershell_archive_sha256}"
+        echo "${powershell_archive_sha256} *${powershell_filename}" | sha256sum -c -
+    fi
     tar xf "${powershell_filename}" -C "${powershell_target_path}"
     ln -s "${powershell_target_path}/pwsh" /usr/local/bin/pwsh
     rm -rf /tmp/pwsh
