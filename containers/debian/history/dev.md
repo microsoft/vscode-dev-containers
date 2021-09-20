@@ -6,23 +6,24 @@
 
 **Definition variations:**
 - [buster](#variant-buster)
+- [bullseye](#variant-bullseye)
 - [stretch](#variant-stretch)
 
 ## Variant: buster
 
-**Digest:** sha256:2a4c4c03661d8116053f317f4e63c15b806d90e231fe5d5d24769e995edc8895
+**Digest:** sha256:998f699a3bf09c3bde453910ef558421100974aa0c05ba595d76651c08896407
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/base:dev-buster
 mcr.microsoft.com/vscode/devcontainers/base:dev-debian-10
 mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
-mcr.microsoft.com/vscode/devcontainers/base:dev-debian
-mcr.microsoft.com/vscode/devcontainers/base:dev
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -31,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -50,11 +51,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -80,19 +81,23 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |
 
-## Variant: stretch
+## Variant: bullseye
 
-**Digest:** sha256:4989692f82dc1cad35f34f4e2d18ad56e66a878d16bff3f30883ebb9dad30ac6
+**Digest:** sha256:0f1c2725d182af0a6c22ce3f92b338bacef80ed491f34e1a3a09aa43bd9b71af
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/base:dev-stretch
-mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
-mcr.microsoft.com/vscode/devcontainers/base:dev-debian-9
+mcr.microsoft.com/vscode/devcontainers/base:dev-bullseye
+mcr.microsoft.com/vscode/devcontainers/base:dev-debian-11
+mcr.microsoft.com/vscode/devcontainers/base:dev-debian11
+mcr.microsoft.com/vscode/devcontainers/base:dev-debian
+mcr.microsoft.com/vscode/devcontainers/base:dev
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Debian GNU/Linux 9 (stretch)
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
 
 **Available (non-root) user:** vscode
 
@@ -101,7 +106,78 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian-9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: stretch
+
+**Digest:** sha256:4162b28fcf382774532524e7ce0a51738a908c5d3ea8c744de7c2b7785ef40e2
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/base:dev-stretch
+mcr.microsoft.com/vscode/devcontainers/base:dev-debian-9
+mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 9 (stretch)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -110,7 +186,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian-9
 | apt-transport-https | 1.4.11 |
 | apt-utils | 1.4.11 |
 | ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u14 |
+| curl | 7.52.1-5+deb9u15 |
 | dialog | 1.3-20160828-2 |
 | git | 1:2.11.0-3+deb9u7 |
 | gnupg2 | 2.1.18-8~deb9u4 |

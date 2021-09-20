@@ -1,15 +1,47 @@
 {
-	"variants": ["8.0", "7.4", "7.3"],
-	"definitionVersion": "0.201.7",
+	"variants": ["8.0-apache-bullseye", "7.4-apache-bullseye", "7.3-apache-bullseye", "8.0-apache-buster", "7.4-apache-buster", "7.3-apache-buster"],
+	"definitionVersion": "0.202.0",
 	"build": {
-		"latest": true,
+		"latest": "8.0-apache-bullseye",
 		"rootDistro": "debian",
+		"architectures": {
+			"8.0-apache-bullseye": ["linux/amd64", "linux/arm64"],
+			"7.4-apache-bullseye": ["linux/amd64", "linux/arm64"],
+			"7.3-apache-bullseye": ["linux/amd64", "linux/arm64"],
+			"8.0-apache-buster": ["linux/amd64"],
+			"7.4-apache-buster": ["linux/amd64"],
+			"7.3-apache-buster": ["linux/amd64"]
+		},
 		"tags": [
 			"php:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"8.0": [ "php:${VERSION}-8" ],
-			"7.4": [ "php:${VERSION}-7" ]
+			"8.0-apache-bullseye": [ 
+				"php:${VERSION}-8",
+				"php:${VERSION}-8-bullseye",
+				"php:${VERSION}-8.0-bullseye",
+				"php:${VERSION}-bullseye"
+			],
+			"7.4-apache-bullseye": [ 
+				"php:${VERSION}-7" ,
+				"php:${VERSION}-7-bullseye",
+				"php:${VERSION}-7.4",
+				"php:${VERSION}-7.4-bullseye"
+			],
+			"7.3-apache-bullseye": [ 
+				"php:${VERSION}-7.3",
+				"php:${VERSION}-7.3-bullseye"
+			],
+			"8.0-apache-buster": [ 
+				"php:${VERSION}-8-buster",
+				"php:${VERSION}-8.0-buster",
+				"php:${VERSION}-buster"
+			],
+			"7.4-apache-buster": [
+				"php:${VERSION}-7-buster",
+				"php:${VERSION}-7.4-buster"
+			],
+			"7.3-apache-buster": [ "php:${VERSION}-7.3-buster" ]
 		}
 	},
 	"dependencies": {

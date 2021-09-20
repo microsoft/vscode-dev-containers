@@ -2,8 +2,9 @@
 	"name": "Bash (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Debian / Ubuntu OS version: debian-10, debian-9, ubuntu-20.04, ubuntu-18.04
-		"args": { "VARIANT": "debian-10" }
+		// Update 'VARIANT' to pick an Debian / Ubuntu OS version: debian-11, debian-10, debian-9, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
+		// Use Debian 11, Debian 9, Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
+		"args": { "VARIANT": "debian-11" }
 	},
 
 	// Set *default* container specific settings.json values on container create.

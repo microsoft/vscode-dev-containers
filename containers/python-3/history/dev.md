@@ -5,23 +5,32 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3)
 
 **Definition variations:**
-- [3.9](#variant-39)
-- [3.8](#variant-38)
-- [3.7](#variant-37)
-- [3.6](#variant-36)
+- [3.9-bullseye](#variant-39-bullseye)
+- [3.8-bullseye](#variant-38-bullseye)
+- [3.7-bullseye](#variant-37-bullseye)
+- [3.6-buster](#variant-36-buster)
+- [3.9-buster](#variant-39-buster)
+- [3.8-buster](#variant-38-buster)
+- [3.7-buster](#variant-37-buster)
+- [3.6-buster](#variant-36-buster)
 
-## Variant: 3.9
+## Variant: 3.9-bullseye
 
-**Digest:** sha256:3d9b4c751881185622c9dd6fcd09d8317b42cfc3c7183d6602592ec701e1223b
+**Digest:** sha256:0df4e0c51cff1acbe02ddb7d87f043ce0086e4e5aa4205f4b85820e45cde59c5
 
 **Tags:**
 ```
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.9-bullseye
 mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 mcr.microsoft.com/vscode/devcontainers/python:dev-3
+mcr.microsoft.com/vscode/devcontainers/python:dev-3-bullseye
+mcr.microsoft.com/vscode/devcontainers/python:dev-bullseye
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Debian GNU/Linux 10 (buster)
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
 
 **Available (non-root) user:** vscode
 
@@ -30,90 +39,92 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.9.6 | /usr/local |
+| [Python](https://www.python.org/) | 3.9.7 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.3 |
+| pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.6b0 |
+| black | 21.9b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.6.0 |
-| pipx | 0.16.3 |
+| virtualenv | 20.8.0 |
+| pipx | 0.16.4 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.3 |
-| apt-utils | 1.8.2.3 |
-| ca-certificates | 20200601~deb10u2 |
-| curl | 7.64.0-4+deb10u2 |
-| dialog | 1.3-20190211-1 |
-| git | 1:2.20.1-2+deb10u3 |
-| gnupg2 | 2.2.12-1+deb10u1 |
-| htop | 2.2.0-1+b1 |
-| iproute2 | 4.20.0-2+deb10u1 |
-| jq | 1.5+dfsg-2+b1 |
-| less | 487-0.1+b1 |
-| libc6 | 2.28-10 |
-| libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
-| libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
-| liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
-| libstdc++6 | 8.3.0-6 |
-| locales | 2.28-10 |
-| lsb-release | 10.2019051400 |
-| lsof | 4.91+dfsg-1 |
-| man-db | 2.8.5-2 |
-| manpages | 4.16-2 |
-| manpages-dev | 4.16-2 |
-| manpages-posix | 2013a-2 |
-| manpages-posix-dev | 2013a-2 |
-| nano | 3.2-3 |
-| ncdu | 1.13-1+b1 |
-| net-tools | 1.60+git20180626.aebd88e-1 |
-| openssh-client | 1:7.9p1-10+deb10u2 |
-| procps | 2:3.3.15-2 |
-| psmisc | 23.2-1 |
-| rsync | 3.1.3-6 |
-| strace | 4.26-0.2 |
-| sudo | 1.8.27-1+deb10u3 |
-| unzip | 6.0-23+deb10u2 |
-| vim-tiny | 2:8.1.0875-5 |
-| wget | 1.20.1-1.1 |
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
 | yarn | 1.22.5-1 |
-| zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.11.dfsg-1 |
-| zsh | 5.7.1-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
 
-## Variant: 3.8
+## Variant: 3.8-bullseye
 
-**Digest:** sha256:d0b9d5c1747622b2559359c7eb14e4c8edc7f2bb03e2e4c3d366cf6f8f655e6e
+**Digest:** sha256:58ce68098aa8d149e4a99f1da9f073b9b12171da64c925119696d7752dc8cb54
 
 **Tags:**
 ```
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.8-bullseye
 mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Debian GNU/Linux 10 (buster)
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
 
 **Available (non-root) user:** vscode
 
@@ -122,90 +133,92 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.8.11 | /usr/local |
+| [Python](https://www.python.org/) | 3.8.12 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.3 |
+| pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.6b0 |
+| black | 21.9b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.6.0 |
-| pipx | 0.16.3 |
+| virtualenv | 20.8.0 |
+| pipx | 0.16.4 |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 1.8.2.3 |
-| apt-utils | 1.8.2.3 |
-| ca-certificates | 20200601~deb10u2 |
-| curl | 7.64.0-4+deb10u2 |
-| dialog | 1.3-20190211-1 |
-| git | 1:2.20.1-2+deb10u3 |
-| gnupg2 | 2.2.12-1+deb10u1 |
-| htop | 2.2.0-1+b1 |
-| iproute2 | 4.20.0-2+deb10u1 |
-| jq | 1.5+dfsg-2+b1 |
-| less | 487-0.1+b1 |
-| libc6 | 2.28-10 |
-| libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
-| libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
-| liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
-| libstdc++6 | 8.3.0-6 |
-| locales | 2.28-10 |
-| lsb-release | 10.2019051400 |
-| lsof | 4.91+dfsg-1 |
-| man-db | 2.8.5-2 |
-| manpages | 4.16-2 |
-| manpages-dev | 4.16-2 |
-| manpages-posix | 2013a-2 |
-| manpages-posix-dev | 2013a-2 |
-| nano | 3.2-3 |
-| ncdu | 1.13-1+b1 |
-| net-tools | 1.60+git20180626.aebd88e-1 |
-| openssh-client | 1:7.9p1-10+deb10u2 |
-| procps | 2:3.3.15-2 |
-| psmisc | 23.2-1 |
-| rsync | 3.1.3-6 |
-| strace | 4.26-0.2 |
-| sudo | 1.8.27-1+deb10u3 |
-| unzip | 6.0-23+deb10u2 |
-| vim-tiny | 2:8.1.0875-5 |
-| wget | 1.20.1-1.1 |
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
 | yarn | 1.22.5-1 |
-| zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.11.dfsg-1 |
-| zsh | 5.7.1-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
 
-## Variant: 3.7
+## Variant: 3.7-bullseye
 
-**Digest:** sha256:4dff4d6a58cc8819cd162ede1cd2e47109423176ac0ff8df6c564081309a9bc4
+**Digest:** sha256:6ece1c54190b3b90de8786259e9c3ad30ec60be74f491928b4a8b778119d18e4
 
 **Tags:**
 ```
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.7-bullseye
 mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Debian GNU/Linux 10 (buster)
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
 
 **Available (non-root) user:** vscode
 
@@ -214,30 +227,123 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.7.11 | /usr/local |
+| [Python](https://www.python.org/) | 3.7.12 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.3 |
+| pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.6b0 |
+| black | 21.9b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.6.0 |
-| pipx | 0.16.3 |
+| virtualenv | 20.8.0 |
+| pipx | 0.16.4 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.5-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: 3.6-buster
+
+**Digest:** sha256:f79fb30b45a08fd78875745313e69494c74a4feaa9048a8b921aaebc8e37ed58
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.6-buster
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Python](https://www.python.org/) | 3.6.15 | /usr/local |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Pip / pipx installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| pylint | 2.10.2 |
+| flake8 | 3.9.2 |
+| autopep8 | 1.5.7 |
+| black | 21.9b0 |
+| yapf | 0.31.0 |
+| mypy | 0.910 |
+| pydocstyle | 6.1.1 |
+| pycodestyle | 2.7.0 |
+| bandit | 1.7.0 |
+| virtualenv | 20.8.0 |
+| pipx | 0.16.4 |
 
 **Additional linux tools and packages**
 
@@ -256,11 +362,11 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -287,17 +393,21 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |
 
-## Variant: 3.6
+## Variant: 3.9-buster
 
-**Digest:** sha256:68ebcb78d1ebbc55e56adbbd2a8fb6bcd478451b1b7c7761b580e81debc86320
+**Digest:** sha256:5cb51fb0a6c0c24ac23ec02c01900591d95ad6d5e04204c3f6f13ad5d0a13d0f
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.9-buster
+mcr.microsoft.com/vscode/devcontainers/python:dev-3-buster
+mcr.microsoft.com/vscode/devcontainers/python:dev-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -306,30 +416,30 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.6.14 | /usr/local |
+| [Python](https://www.python.org/) | 3.9.7 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.3 |
+| pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.6b0 |
+| black | 21.9b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.6.0 |
-| pipx | 0.16.3 |
+| virtualenv | 20.8.0 |
+| pipx | 0.16.4 |
 
 **Additional linux tools and packages**
 
@@ -348,11 +458,293 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
+| libstdc++6 | 8.3.0-6 |
+| locales | 2.28-10 |
+| lsb-release | 10.2019051400 |
+| lsof | 4.91+dfsg-1 |
+| man-db | 2.8.5-2 |
+| manpages | 4.16-2 |
+| manpages-dev | 4.16-2 |
+| manpages-posix | 2013a-2 |
+| manpages-posix-dev | 2013a-2 |
+| nano | 3.2-3 |
+| ncdu | 1.13-1+b1 |
+| net-tools | 1.60+git20180626.aebd88e-1 |
+| openssh-client | 1:7.9p1-10+deb10u2 |
+| procps | 2:3.3.15-2 |
+| psmisc | 23.2-1 |
+| rsync | 3.1.3-6 |
+| strace | 4.26-0.2 |
+| sudo | 1.8.27-1+deb10u3 |
+| unzip | 6.0-23+deb10u2 |
+| vim-tiny | 2:8.1.0875-5 |
+| wget | 1.20.1-1.1 |
+| yarn | 1.22.5-1 |
+| zip | 3.0-11+b1 |
+| zlib1g | 1:1.2.11.dfsg-1 |
+| zsh | 5.7.1-1 |
+
+## Variant: 3.8-buster
+
+**Digest:** sha256:31fed77f02c671e3508910ac60351fc4d1310ad17f262233922ff997f7ff3bb7
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.8-buster
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Python](https://www.python.org/) | 3.8.12 | /usr/local |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Pip / pipx installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| pylint | 2.10.2 |
+| flake8 | 3.9.2 |
+| autopep8 | 1.5.7 |
+| black | 21.9b0 |
+| yapf | 0.31.0 |
+| mypy | 0.910 |
+| pydocstyle | 6.1.1 |
+| pycodestyle | 2.7.0 |
+| bandit | 1.7.0 |
+| virtualenv | 20.8.0 |
+| pipx | 0.16.4 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
+| ca-certificates | 20200601~deb10u2 |
+| curl | 7.64.0-4+deb10u2 |
+| dialog | 1.3-20190211-1 |
+| git | 1:2.20.1-2+deb10u3 |
+| gnupg2 | 2.2.12-1+deb10u1 |
+| htop | 2.2.0-1+b1 |
+| iproute2 | 4.20.0-2+deb10u1 |
+| jq | 1.5+dfsg-2+b1 |
+| less | 487-0.1+b1 |
+| libc6 | 2.28-10 |
+| libgcc1 | 1:8.3.0-6 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
+| libicu63 | 63.1-6+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
+| liblttng-ust0 | 2.10.3-1 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
+| libstdc++6 | 8.3.0-6 |
+| locales | 2.28-10 |
+| lsb-release | 10.2019051400 |
+| lsof | 4.91+dfsg-1 |
+| man-db | 2.8.5-2 |
+| manpages | 4.16-2 |
+| manpages-dev | 4.16-2 |
+| manpages-posix | 2013a-2 |
+| manpages-posix-dev | 2013a-2 |
+| nano | 3.2-3 |
+| ncdu | 1.13-1+b1 |
+| net-tools | 1.60+git20180626.aebd88e-1 |
+| openssh-client | 1:7.9p1-10+deb10u2 |
+| procps | 2:3.3.15-2 |
+| psmisc | 23.2-1 |
+| rsync | 3.1.3-6 |
+| strace | 4.26-0.2 |
+| sudo | 1.8.27-1+deb10u3 |
+| unzip | 6.0-23+deb10u2 |
+| vim-tiny | 2:8.1.0875-5 |
+| wget | 1.20.1-1.1 |
+| yarn | 1.22.5-1 |
+| zip | 3.0-11+b1 |
+| zlib1g | 1:1.2.11.dfsg-1 |
+| zsh | 5.7.1-1 |
+
+## Variant: 3.7-buster
+
+**Digest:** sha256:db3f473887ba81d846385445e2d7e6663cb50f1fcb859622543d69acb27bc0c0
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.7-buster
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Python](https://www.python.org/) | 3.7.12 | /usr/local |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Pip / pipx installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| pylint | 2.10.2 |
+| flake8 | 3.9.2 |
+| autopep8 | 1.5.7 |
+| black | 21.9b0 |
+| yapf | 0.31.0 |
+| mypy | 0.910 |
+| pydocstyle | 6.1.1 |
+| pycodestyle | 2.7.0 |
+| bandit | 1.7.0 |
+| virtualenv | 20.8.0 |
+| pipx | 0.16.4 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
+| ca-certificates | 20200601~deb10u2 |
+| curl | 7.64.0-4+deb10u2 |
+| dialog | 1.3-20190211-1 |
+| git | 1:2.20.1-2+deb10u3 |
+| gnupg2 | 2.2.12-1+deb10u1 |
+| htop | 2.2.0-1+b1 |
+| iproute2 | 4.20.0-2+deb10u1 |
+| jq | 1.5+dfsg-2+b1 |
+| less | 487-0.1+b1 |
+| libc6 | 2.28-10 |
+| libgcc1 | 1:8.3.0-6 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
+| libicu63 | 63.1-6+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
+| liblttng-ust0 | 2.10.3-1 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
+| libstdc++6 | 8.3.0-6 |
+| locales | 2.28-10 |
+| lsb-release | 10.2019051400 |
+| lsof | 4.91+dfsg-1 |
+| man-db | 2.8.5-2 |
+| manpages | 4.16-2 |
+| manpages-dev | 4.16-2 |
+| manpages-posix | 2013a-2 |
+| manpages-posix-dev | 2013a-2 |
+| nano | 3.2-3 |
+| ncdu | 1.13-1+b1 |
+| net-tools | 1.60+git20180626.aebd88e-1 |
+| openssh-client | 1:7.9p1-10+deb10u2 |
+| procps | 2:3.3.15-2 |
+| psmisc | 23.2-1 |
+| rsync | 3.1.3-6 |
+| strace | 4.26-0.2 |
+| sudo | 1.8.27-1+deb10u3 |
+| unzip | 6.0-23+deb10u2 |
+| vim-tiny | 2:8.1.0875-5 |
+| wget | 1.20.1-1.1 |
+| yarn | 1.22.5-1 |
+| zip | 3.0-11+b1 |
+| zlib1g | 1:1.2.11.dfsg-1 |
+| zsh | 5.7.1-1 |
+
+## Variant: 3.6-buster
+
+**Digest:** sha256:f79fb30b45a08fd78875745313e69494c74a4feaa9048a8b921aaebc8e37ed58
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.6-buster
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Python](https://www.python.org/) | 3.6.15 | /usr/local |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Pip / pipx installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| pylint | 2.10.2 |
+| flake8 | 3.9.2 |
+| autopep8 | 1.5.7 |
+| black | 21.9b0 |
+| yapf | 0.31.0 |
+| mypy | 0.910 |
+| pydocstyle | 6.1.1 |
+| pycodestyle | 2.7.0 |
+| bandit | 1.7.0 |
+| virtualenv | 20.8.0 |
+| pipx | 0.16.4 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
+| ca-certificates | 20200601~deb10u2 |
+| curl | 7.64.0-4+deb10u2 |
+| dialog | 1.3-20190211-1 |
+| git | 1:2.20.1-2+deb10u3 |
+| gnupg2 | 2.2.12-1+deb10u1 |
+| htop | 2.2.0-1+b1 |
+| iproute2 | 4.20.0-2+deb10u1 |
+| jq | 1.5+dfsg-2+b1 |
+| less | 487-0.1+b1 |
+| libc6 | 2.28-10 |
+| libgcc1 | 1:8.3.0-6 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
+| libicu63 | 63.1-6+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
+| liblttng-ust0 | 2.10.3-1 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |

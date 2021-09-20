@@ -72,6 +72,7 @@ async function loadConfig(repoPath) {
         const buildSettings = config.definitionBuildSettings[definitionId];
         const definitionVariants = config.definitionVariants[definitionId];
         const dependencies = config.definitionDependencies[definitionId];
+        buildSettings.architecture = buildSettings.architecture || ['linux/amd64'];
 
         // Populate images list for variants for dependency registration
         dependencies.imageVariants = definitionVariants ?
@@ -314,10 +315,14 @@ function getTagList(definitionId, release, versionPartHandling, registry, regist
         tagList = tagList.concat(getTagsForVersion(definitionId, tagVersion, registry, registryPath, variant));
     });
 
-    // If this variant should also be used for the the latest tag (it's the left most in the list), add it
+    // If this variant should also be used for the the latest tag, add it. The "latest" value could be
+    // true, false, or a specific variant. "true" assumes the first variant is the latest.
+    const definitionLatestProperty = config.definitionBuildSettings[definitionId].latest;
     return tagList.concat((updateLatest 
-        && config.definitionBuildSettings[definitionId].latest
-        && variant === firstVariant)
+        && definitionLatestProperty
+        && (!allVariants
+            || variant === definitionLatestProperty 
+            || (definitionLatestProperty === true && variant === firstVariant)))
         ? getLatestTag(definitionId, registry, registryPath)
         : []);
 }
@@ -386,7 +391,7 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
     }
 
     // Create pages and distribute entries with no parents
-    const pageSize = Math.ceil(total / pageTotalMinusDedicatedPages);
+    const pageSize = Math.floor(total / pageTotalMinusDedicatedPages);
     for (let bucketId in parentBuckets) {
         let bucket = parentBuckets[bucketId];
         if (typeof bucket === 'object') {
@@ -397,16 +402,17 @@ function getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip) {
             allPages.push(bucket);
         }
     }
-    if (noParentList.length > 0) {
-        allPages.push(noParentList);
+    while (noParentList.length > 0) {
+        const noParentPage = noParentList.splice(0, noParentList.length > pageSize ? pageSize : noParentList.length);
+        allPages.push(noParentPage);
     }
 
     if (allPages.length > pageTotal) {
         // If too many pages, add extra pages to last one
-        console.log(`(!) Not enough pages to dedicate one page per parent. Adding excess definitions to last page.`);
+        console.log(`(!) Not enough pages to for target page size. Adding excess definitions to last page.`);
         for (let i = pageTotal; i < allPages.length; i++) {
             allPages[pageTotal - 1] = allPages[pageTotal - 1].concat(allPages[i]);
-            allPages[i] = [];
+            allPages.splice(i, 1);
         }
     } else if (allPages.length < pageTotal) {
         // If too few, add some empty pages
@@ -605,11 +611,16 @@ function getDefaultDependencies(dependencyType) {
     return packageManagerConfig ? packageManagerConfig[dependencyType] : null;
 } 
 
+function getBuildSettings(definitionId) {
+    return config.definitionBuildSettings[definitionId];
+}
+
 module.exports = {
     loadConfig: loadConfig,
     getTagList: getTagList,
     getVariants: getVariants,
     getAllDefinitionPaths: getAllDefinitionPaths,
+    getBuildSettings: getBuildSettings,
     getDefinitionFromTag: getDefinitionFromTag,
     getDefinitionPath: getDefinitionPath,
     getSortedDefinitionBuildList: getSortedDefinitionBuildList,

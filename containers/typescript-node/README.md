@@ -10,8 +10,8 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published image* | mcr.microsoft.com/vscode/devcontainers/typescript-node |
-| *Available image variants* | 12, 14, 16 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/typescript-node/tags/list)) |
-| *Published image architecture(s)* | x86-64 |
+| *Available image variants* | 12 / 12-buster, 14 / 14-buster, 16 / 16-buster, 12-bullseye, 14-bullseye, 16-bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/javascript-node/tags/list)) |
+| *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
@@ -23,28 +23,31 @@ See **[history](history)** for information on the contents of published images.
 
 While the definition itself works unmodified, you can select the version of Node.js the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
-```json
-"args": { "VARIANT": "12" }
+```jsonc
+// Or you can use 14-bullseye or 14-buster if you want to pin to an OS version
+"args": { "VARIANT": "14" }
 ```
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own `Dockerfile` with one of the following:
 
 - `mcr.microsoft.com/vscode/devcontainers/typescript-node` (latest)
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:16`
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:14`
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:12`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:16` (or `16-bullseye`, `16-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:14` (or `14-bullseye`, `14-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:12` (or `12-bullseye`, `12-buster` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0-12`
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.202-12`
-- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.202.1-12`
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0-14` (or `0-14-bullseye`, `0-14-buster`)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.204-14` (or `0.203-14-bullseye`, `0.203-14-buster`)
+- `mcr.microsoft.com/vscode/devcontainers/typescript-node:0.204.0-14` (or `0.203.0-14-bullseye`, `0.203.0-14-buster`)
+
+However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-14`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
 
 See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/typescript-node/tags/list).
 
 Alternatively, you can use the contents of the `base.Dockerfile` or the [JavaScript and Node.js `base.Dockerfile`](../javascript-node/.devcontainer/base.Dockerfile) to fully customize your container's contents.
 
-Beyond TypeScript, Node.js, and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. Since `tslint` is [now fully depreicated](https://github.com/palantir/tslint/issues/4534), the definition includes `tslint-to-eslint-config` globally to help you migrate.
+Beyond TypeScript, Node.js, and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `node` user with `sudo` access, and a set of common dependencies for development. Since `tslint` is [now fully depreicated](https://github.com/palantir/tslint/issues/4534), the definition includes `tslint-to-eslint-config` globally to help you migrate.
 
 Note that, while `eslint`and `typescript` are installed globally for convenance, [as of ESLint 6](https://eslint.org/docs/user-guide/migrating-to-6.0.0#-plugins-and-shareable-configs-are-no-longer-affected-by-eslints-location), you will need to install the following packages locally to lint TypeScript code: `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser`, `eslint`, `typescript`.
 

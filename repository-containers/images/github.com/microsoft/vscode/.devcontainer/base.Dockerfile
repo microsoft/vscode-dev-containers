@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:14-buster
+FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:14-bullseye
 
 ARG NODE_VERSION="14"
 COPY library-scripts/desktop-lite-debian.sh /tmp/library-scripts/

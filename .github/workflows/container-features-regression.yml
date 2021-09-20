@@ -1,0 +1,39 @@
+name: Container Features Regression Test
+
+on: 
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'script-library/container-features/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'script-library/container-features/**'  
+
+jobs:
+  test-script-library:
+    name: Run test script
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Free more space
+      id: free_space 
+      run: |
+        set -e
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Run test
+      id: run_test_script
+      run: |
+        set -e
+        cd ./script-library/container-features
+        ./test.sh

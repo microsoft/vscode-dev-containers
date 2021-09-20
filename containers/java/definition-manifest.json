@@ -1,15 +1,37 @@
 {
-	"variants": [ "16", "11" ],
-	"definitionVersion": "0.202.2",
+	"variants": [ "16-jdk-bullseye", "11-jdk-bullseye", "16-jdk-buster", "11-jdk-buster" ],
+	"definitionVersion": "0.203.0",
 	"build": {
-		"latest": true,
+		"latest": "16-jdk-buster",
 		"rootDistro": "debian",
+		"architectures": {
+			"16-jdk-bullseye": ["linux/amd64", "linux/arm64"],
+			"11-jdk-bullseye": ["linux/amd64", "linux/arm64"],
+			"16-jdk-buster": ["linux/amd64"],
+			"11-jdk-buster": ["linux/amd64"]
+		},
 		"tags": [
 			"java:${VERSION}-${VARIANT}"
-		]
+		],
+		"variantTags": {
+			"16-jdk-bullseye": [ 
+				"java:${VERSION}-16-bullseye",
+				"java:${VERSION}-bullseye"
+			],
+			"11-jdk-bullseye": [ "java:${VERSION}-11-bullseye" ],
+			"16-jdk-buster": [ 
+				"java:${VERSION}-16",
+				"java:${VERSION}-16-buster",
+				"java:${VERSION}-buster"
+			],
+			"11-jdk-buster": [ 
+				"java:${VERSION}-11",
+				"java:${VERSION}-11-buster"
+			]
+		}
 	},
 	"dependencies": {
-		"image": "openjdk:${VARIANT}-jdk-buster",
+		"image": "openjdk:${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/java",
 		"apt": [{
 			"cgIgnore": false,

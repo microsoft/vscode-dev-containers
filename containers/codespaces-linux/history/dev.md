@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:749de8626734f7a62d8708ff25bfc62dcf99fec0455d41e50a7cedea33ff262b
+**Digest:** sha256:7c8ac42a8c72d4f27f64248f26e4dfe84595c41e74e27e580111db5b89d0946a
 
 **Tags:**
 ```
@@ -15,7 +15,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Ubuntu 20.04.2 LTS (debian-like distro)
+**Linux distribution:** Ubuntu 20.04.3 LTS (debian-like distro)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** codespace
 
@@ -24,63 +26,63 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 10.23.0<br />12.19.0<br />14.15.1 | /opt/nodejs/&lt;version&gt; |
+| [Node.js](https://nodejs.org/en/) | 10.23.0<br />12.22.6<br />14.17.6 | /opt/nodejs/&lt;version&gt; |
 | [Python](https://www.python.org/) | 3.6.12<br />3.7.9<br />3.8.6 | /opt/python/&lt;version&gt; |
 | [Java](https://adoptopenjdk.net/) | 11.0.8 | /opt/java/&lt;version&gt; |
-| [.NET](https://dotnet.microsoft.com/) | 2.1.814<br />3.1.407<br />5.0.202 | /home/codespaces/.dotnet<br />/opt/dotnet |
+| [.NET](https://dotnet.microsoft.com/) | 2.1.818<br />3.1.412<br />5.0.400 | /home/codespaces/.dotnet<br />/opt/dotnet |
 | [Ruby](https://www.ruby-lang.org/en/) | 2.7.2 | /opt/ruby/&lt;version&gt; |
 | [PHP](https://xdebug.org/) | 7.2.34<br />7.3.27<br />7.4.16 | /opt/php/&lt;version&gt; |
-| [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.1.3 | /opt/microsoft/powershell |
+| [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.1.4 | /opt/microsoft/powershell |
 | GCC | 9.3.0-17ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
-| [Go](https://golang.org/dl) | 1.16.5 | /usr/local/go |
-| [Rust](https://github.com/rust-lang/rust) | 1.53.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Go](https://golang.org/dl) | 1.17 | /usr/local/go |
+| [Rust](https://github.com/rust-lang/rust) | 1.54.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.0 | 
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e32d4b1e195f4c7777844beea97af42bd93434eb | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 21b385e7bd522983642b52b51db5d4a210a77717 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
-| [nvs](https://github.com/jasongin/nvs) | 9098e738e1a22297bb0d23c09c1d0a2bebe5eb4b | /home/codespace/.nvs |
+| [nvs](https://github.com/jasongin/nvs) | 024dea3f7bc852312932c32c0957cb034f5f7917 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 585ed84283f3308380b843391ee7b12706ecff87 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 1b477ae8a1a2152040d38f2248afc1d0bc289f08 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | fceea425267fbe558a9e80ee00c192228e4b6a8b | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.1 |
+| pylint | 2.10.2 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.6b0 |
+| black | 21.8b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.4.7 |
-| pipx | 0.16.3 |
+| virtualenv | 20.7.2 |
+| pipx | 0.16.4 |
 
 **Go tools and modules**
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.7.0 |
+| golang.org/x/tools/gopls | 0.7.1 |
 | honnef.co/go/tools | 0.2.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.0.8 |
-| github.com/uudashr/gopkgs | 1.3.2 |
+| github.com/mgechev/revive | 1.1.1 |
+| github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.6.1 |
-| github.com/golangci/golangci-lint | 1.41.1 |
+| github.com/go-delve/delve | 1.7.1 |
+| github.com/golangci/golangci-lint | 1.42.0 |
 
 **Ruby gems and tools**
 
 | Tool / gem | Version |
 |------------|---------|
-| rake | 13.0.3 |
+| rake | 13.0.6 |
 | ruby-debug-ide | 0.7.2 |
 | debase | 0.2.4.1 |
 | jekyll | 4.2.0 |
@@ -91,41 +93,41 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.37 |
-| rust-analysis | 1.53.0 |
-| rust-src | 1.53.0 |
-| clippy | 1.53.0 |
+| rust-analysis | 1.54.0 |
+| rust-src | 1.54.0 |
+| clippy | 1.54.0 |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [git](https://github.com/git/git) | 2.32.0 | /usr/local |
+| [git](https://github.com/git/git) | 2.33.0 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.21.2 | /usr/local/bin |
-| [Helm](https://github.com/helm/helm) | 3.6.2 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.22.1 | /usr/local/bin |
+| [Helm](https://github.com/helm/helm) | 3.6.3 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.11.6 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.12.3 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 1.12.1 | 
+| [GitHub CLI](https://github.com/cli/cli) | 2.0.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
-| [Gradle](https://gradle.org/) | 7.1 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.6+azure | 
+| [Gradle](https://gradle.org/) | 7.1.1 | 
+| Docker (Moby) CLI &amp; Engine | 20.10.8+azure | 
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 2.0.5 |
-| apt-utils | 2.0.5 |
-| azure-cli (Azure CLI) | 2.25.0-1~focal |
+| apt-transport-https | 2.0.6 |
+| apt-utils | 2.0.6 |
+| azure-cli (Azure CLI) | 2.27.2-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.1 |
 | clang | 1:10.0-50~exp1 |
 | cmake | 3.16.3-1ubuntu1 |
 | cppcheck | 1.90-4build1 |
-| curl | 7.68.0-1ubuntu2.5ppa1 |
+| curl | 7.68.0-1ubuntu2.6 |
 | dialog | 1.3-20190808-1 |
 | g++ | 4:9.3.0-1ubuntu2 |
 | gcc | 4:9.3.0-1ubuntu2 |
@@ -143,7 +145,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libc6 | 2.31-0ubuntu9.2 |
 | libc6-dev | 2.31-0ubuntu9.2 |
 | libcups2 | 2.3.1-9ubuntu1.1 |
-| libgbm1 | 20.2.6-0ubuntu0.20.04.1 |
+| libgbm1 | 21.0.3-0ubuntu0.3~20.04.1 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libgtk-3-0 | 3.24.20-0ubuntu1 |
@@ -155,7 +157,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libpango-1.0-0 | 1.44.7-2ubuntu4 |
 | libpangocairo-1.0-0 | 1.44.7-2ubuntu4 |
 | libsecret-1-dev | 0.20.4-0ubuntu1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.4 |
+| libssl1.1 | 1.1.1f-1ubuntu2.8 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | libx11-6 | 2:1.6.9-2ubuntu1.2 |
 | libx11-xcb1 | 2:1.6.9-2ubuntu1.2 |
@@ -174,13 +176,13 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.6+azure-1 |
-| moby-engine (Docker Engine) | 20.10.6+azure-1 |
+| moby-cli (Docker CLI) | 20.10.8+azure-1 |
+| moby-engine (Docker Engine) | 20.10.8+azure-1 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
-| openssh-client | 1:8.2p1-4ubuntu0.2 |
-| openssh-server | 1:8.2p1-4ubuntu0.2 |
+| openssh-client | 1:8.2p1-4ubuntu0.3 |
+| openssh-server | 1:8.2p1-4ubuntu0.3 |
 | pigz | 2.4-1 |
 | pkg-config | 0.29.1-0ubuntu4 |
 | procps | 2:3.3.16-1ubuntu2.2 |

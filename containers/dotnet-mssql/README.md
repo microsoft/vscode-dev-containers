@@ -93,8 +93,7 @@ Given how frequently ASP.NET applications use Node.js for front end code, this c
 ```yaml
 args:
   VARIANT: "3.1"
-  INSTALL_NODE: "true"
-  NODE_VERSION: "10"
+  NODE_VERSION: "14" # Set to "none" to skip Node.js installation
 ```
 
 If you would like to install the Azure CLI update you can set the `INSTALL_AZURE_CLI` argument line in `.devcontainer/docker-compose.yml`:
@@ -102,8 +101,7 @@ If you would like to install the Azure CLI update you can set the `INSTALL_AZURE
 ```yaml
 args:
   VARIANT: "3.1"
-  INSTALL_NODE: "true"
-  NODE_VERSION: "10"
+  NODE_VERSION: "14"
   INSTALL_AZURE_CLI: "true"
 ```
 
@@ -143,11 +141,10 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/dotnetcore` folder.
 5. After the folder has opened in the container, if prompted to restore packages in a notification, click "Restore".
-6. After packages are restored, press <kbd>F5</kbd> to start the project.
-7. Once the project is running, press <kbd>F1</kbd> and select **Remote-Containers: Forward Port from Container...**
-8. Select port 8090 and click the "Open Browser" button in the notification that appears.
-9. You should see "Hello remote world from ASP.NET Core!" after the page loads.
-10. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+6. After packages are restored, press <kbd>F5</kbd> to start the project. *Note: if Auto Forward Ports has been disabled, you will need to manually forward port 8090 from the container with "Remote-Containers: Forward Ports..."*
+7. Open the browser to [localhost:8090](http://localhost:8090).
+8. You should see "The databases are: ApplicationDB,msdb,model,tempdb,master" after the page loads.
+9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 

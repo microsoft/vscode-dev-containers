@@ -20,6 +20,7 @@
 
 	"filesToStage": [
 		"+(containers|repository-containers)/**/!(test-project|history)/*",
+		"script-library/**/*",
 		"LICENSE",
 		"package.json",
 		"yarn.lock",
@@ -27,7 +28,9 @@
 	],
 
 	"needsDedicatedPage": [ 
-		"codespaces-linux"
+		"codespaces-linux",
+		"php",
+		"python-3"
 	],
 
 	"flattenBaseImage": [],

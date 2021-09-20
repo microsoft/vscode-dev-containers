@@ -1,4 +1,4 @@
-# Kubectl and Helm Install Script
+# Kubectl, Helm, and Minikube Install Script
 
 *Installs latest version of kubectl, Helm, and optionally minikube. Auto-detects latest versions and installs needed dependencies.*
 

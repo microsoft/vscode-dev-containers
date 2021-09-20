@@ -13,7 +13,10 @@ USERNAME=${1:-"automatic"}
 VNC_PASSWORD=${2:-"vscode"}
 INSTALL_NOVNC=${3:-"true"}
 
-PACKAGE_LIST="
+NOVNC_VERSION=1.2.0
+WEBSOCKETIFY_VERSION=0.9.0
+
+package_list="
     tigervnc-standalone-server \
     tigervnc-common \
     fluxbox \
@@ -76,7 +79,7 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
 fi
 
 # Function to run apt-get if needed
-apt-get-update-if-needed()
+apt_get_update_if_needed()
 {
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         echo "Running apt-get update..."
@@ -86,10 +89,18 @@ apt-get-update-if-needed()
     fi
 }
 
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get-update-if-needed
+apt_get_update_if_needed
 
 # On older Ubuntu, Tilix is in a PPA. on Debian strech its in backports.
 if [[ -z $(apt-cache --names-only search ^tilix$) ]]; then
@@ -104,14 +115,14 @@ if [[ -z $(apt-cache --names-only search ^tilix$) ]]; then
     if [[ -z $(apt-cache --names-only search ^tilix$) ]]; then
         echo "(!) WARNING: Tilix not available on ${ID} ${VERSION_CODENAME} architecture $(uname -m). Skipping."
     else
-        PACKAGE_LIST="${PACKAGE_LIST} tilix"
+        package_list="${package_list} tilix"
     fi
+else
+    package_list="${package_list} tilix"
 fi
 
 # Install X11, fluxbox and VS Code dependencies
-if ! dpkg -s ${PACKAGE_LIST} > /dev/null 2>&1; then
-    apt-get -y install --no-install-recommends ${PACKAGE_LIST}
-fi
+check_packages ${package_list}
 
 # Install Emoji font if available in distro - Available in Debian 10+, Ubuntu 18.04+
 if dpkg-query -W fonts-noto-color-emoji > /dev/null 2>&1 && ! dpkg -s fonts-noto-color-emoji > /dev/null 2>&1; then
@@ -120,7 +131,7 @@ fi
 
 # Check at least one locale exists
 if ! grep -o -E '^\s*en_US.UTF-8\s+UTF-8' /etc/locale.gen > /dev/null; then
-    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
     locale-gen
 fi
 
@@ -134,8 +145,6 @@ if [ ! -d "/usr/share/fonts/truetype/cascadia" ]; then
 fi
 
 # Install noVNC
-NOVNC_VERSION=1.2.0
-WEBSOCKETIFY_VERSION=0.9.0
 if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
     mkdir -p /usr/local/novnc
     curl -sSL https://github.com/novnc/noVNC/archive/v${NOVNC_VERSION}.zip -o /tmp/novnc-install.zip
@@ -146,30 +155,19 @@ if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
     ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
     rm -f /tmp/websockify-install.zip /tmp/novnc-install.zip
 
-    # noVNC works best with Python 2 right now. Install the right package and use it.
-    if  [[ -z $(apt-cache --names-only search '^python2-minimal$') ]]; then
-        NOVNC_PYTHON_PACKAGE="python-minimal"
-    else
-        NOVNC_PYTHON_PACKAGE="python2-minimal"
+    # Install noVNC dependencies and use them.
+    if ! dpkg -s python3-minimal python3-numpy > /dev/null 2>&1; then
+        apt-get -y install --no-install-recommends python3-minimal python3-numpy
     fi
-    # Distros all have python-numpy for python2 right now, but future proof
-    if [[ -z $(apt-cache --names-only search '^python2-numpy$') ]]; then
-        NOVNC_NUMPY_PACKAGE="python-numpy"
-    else
-        NOVNC_NUMPY_PACKAGE="python2-numpy"
-    fi
-    if ! dpkg -s ${NOVNC_PYTHON_PACKAGE} ${NOVNC_NUMPY_PACKAGE} > /dev/null 2>&1; then
-        apt-get -y install --no-install-recommends ${NOVNC_PYTHON_PACKAGE} ${NOVNC_NUMPY_PACKAGE}
-    fi
-    sed -i -E 's/^python /python2 /' /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
-fi 
+    sed -i -E 's/^python /python3 /' /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
+fi
 
 # Set up folders for scripts and init files
 mkdir -p /var/run/dbus /usr/local/etc/vscode-dev-containers/ /root/.fluxbox
 
 # Script to change resolution of desktop
 tee /usr/local/bin/set-resolution > /dev/null \
-<< EOF 
+<< EOF
 #!/bin/bash
 RESOLUTION=\${1:-\${VNC_RESOLUTION:-1920x1080}}
 DPI=\${2:-\${VNC_DPI:-96}}
@@ -197,7 +195,7 @@ fi
 
 xrandr --fb \${RESOLUTION} --dpi \${DPI} > /dev/null 2>&1
 
-if [ \$? -ne 0 ] && [ "\${IGNORE_ERROR}" != "true" ]; then 
+if [ \$? -ne 0 ] && [ "\${IGNORE_ERROR}" != "true" ]; then
     echo -e "\nFAILED TO SET RESOLUTION!\n"
     exit 1
 fi
@@ -207,7 +205,7 @@ EOF
 
 # Container ENTRYPOINT script
 tee /usr/local/share/desktop-init.sh > /dev/null \
-<< EOF 
+<< EOF
  #!/bin/bash
 
 USERNAME=${USERNAME}
@@ -280,7 +278,9 @@ mkdir -p /tmp/.X11-unix
 sudoIf chmod 1777 /tmp/.X11-unix
 sudoIf chown root:\${USERNAME} /tmp/.X11-unix
 if [ "\$(echo "\${VNC_RESOLUTION}" | tr -cd 'x' | wc -c)" = "1" ]; then VNC_RESOLUTION=\${VNC_RESOLUTION}x16; fi
-startInBackgroundIfNotRunning "Xtigervnc" sudoUserIf "tigervncserver -screen \${DISPLAY:-:1} \${VNC_RESOLUTION:-1440x768x16} -rfbport \${VNC_PORT:-5901} -dpi \${VNC_DPI:-96} -localhost -desktop fluxbox -fg -passwd /usr/local/etc/vscode-dev-containers/vnc-passwd"
+screen_geometry="\${VNC_RESOLUTION%*x*}"
+screen_depth="\${VNC_RESOLUTION##*x}"
+startInBackgroundIfNotRunning "Xtigervnc" sudoUserIf "tigervncserver \${DISPLAY:-:1} -geometry \${screen_geometry} -depth \${screen_depth} -rfbport \${VNC_PORT:-5901} -dpi \${VNC_DPI:-96} -localhost -desktop fluxbox -fg -passwd /usr/local/etc/vscode-dev-containers/vnc-passwd"
 
 # Spin up noVNC if installed and not runnning.
 if [ -d "/usr/local/novnc" ] && [ "\$(ps -ef | grep /usr/local/novnc/noVNC*/utils/launch.sh | grep -v grep)" = "" ]; then
@@ -297,7 +297,7 @@ log "** SCRIPT EXIT **"
 EOF
 
 echo "${VNC_PASSWORD}" | vncpasswd -f > /usr/local/etc/vscode-dev-containers/vnc-passwd
-touch /root/.Xmodmap 
+touch /root/.Xmodmap
 chmod +x /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution
 
 tee /root/.fluxbox/apps > /dev/null \
@@ -346,7 +346,7 @@ tee /root/.fluxbox/menu > /dev/null \
 EOF
 
 # Set up non-root user (if one exists)
-if [ "${USERNAME}" != "root" ]; then 
+if [ "${USERNAME}" != "root" ]; then
     touch /home/${USERNAME}/.Xmodmap
     cp -R /root/.fluxbox /home/${USERNAME}
     chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox
@@ -354,3 +354,4 @@ if [ "${USERNAME}" != "root" ]; then
 fi
 
 echo "Done!"
+

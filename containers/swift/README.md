@@ -9,6 +9,7 @@
 | *Contributors* | [cloudnull](https://github.com/cloudnull) |
 | *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
+| *Supported architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
@@ -24,11 +25,10 @@ While the definition itself works unmodified, you can select the version of Swif
 
 Given how frequently web applications use Node.js for front end code, this container also includes an optional install of Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```json
+```jsonc
 "args": {
     "VARIANT": "4",
-    "INSTALL_NODE": "true",
-    "NODE_VERSION": "10",
+    "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
 }
 ```
 

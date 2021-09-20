@@ -5,24 +5,27 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/javascript-node)
 
 **Definition variations:**
+- [16-bullseye](#variant-16-bullseye)
+- [14-bullseye](#variant-14-bullseye)
+- [12-bullseye](#variant-12-bullseye)
 - [16-buster](#variant-16-buster)
 - [14-buster](#variant-14-buster)
 - [12-buster](#variant-12-buster)
-- [14-stretch](#variant-14-stretch)
-- [12-stretch](#variant-12-stretch)
 
-## Variant: 16-buster
+## Variant: 16-bullseye
 
-**Digest:** sha256:043c7a9ec6180b0b7f8812c2d74f4a877b60e99bb8575ee8b356338c2e8c352e
+**Digest:** sha256:476de0cffeacc3bed8ded78833ffcde7c4bbf419c845504753f235fa7c55dff3
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16-buster
-mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
+mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16-bullseye
+mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-bullseye
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Debian GNU/Linux 10 (buster)
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
 
 **Available (non-root) user:** node
 
@@ -31,20 +34,271 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.5.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.9.1 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.30.0 |
+| eslint | 7.32.0 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.5-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: 14-bullseye
+
+**Digest:** sha256:7d2293ccb0894d7499e237ac9759d14b3a983db4119ee5dac67537321aff9aae
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-bullseye
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** node
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Node.js](https://nodejs.org/en/) | 14.17.6 | /usr/local |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/node/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Npm globally installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| eslint | 7.32.0 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.5-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: 12-bullseye
+
+**Digest:** sha256:e8db27548b853013ecad7bf235ee6d66b889f1df466501e55ce105fd5ca0e309
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-bullseye
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** node
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Node.js](https://nodejs.org/en/) | 12.22.6 | /usr/local |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/node/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Npm globally installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| eslint | 7.32.0 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.5-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: 16-buster
+
+**Digest:** sha256:faa2cbc3bf23234288f7b36039eed8f576c8e017955dd0b62df2f63f30f37ce9
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16-buster
+mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
+mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-buster
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
+
+**Available (non-root) user:** node
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Node.js](https://nodejs.org/en/) | 16.9.1 | /usr/local |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/node/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Npm globally installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| eslint | 7.32.0 |
 
 **Additional linux tools and packages**
 
@@ -63,11 +317,11 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -96,7 +350,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 ## Variant: 14-buster
 
-**Digest:** sha256:727a1246e976bffb10fff261b05897d4ecf7db8933246761592f8cefde1cf947
+**Digest:** sha256:2abac3befc501366e0deff365f729226699184a865a07587494ff6123bebce2c
 
 **Tags:**
 ```
@@ -107,6 +361,8 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** node
 
 ### Contents
@@ -114,20 +370,20 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.17.6 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.30.0 |
+| eslint | 7.32.0 |
 
 **Additional linux tools and packages**
 
@@ -146,11 +402,11 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -179,7 +435,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:8eee65c5b46fa780ca004d7f963cacff0c07169b774905a22ff42589dd602bfd
+**Digest:** sha256:c351dac154d66e63652b7977b8d0375e875c25e6e109c21b24fc855f01a57dc5
 
 **Tags:**
 ```
@@ -190,6 +446,8 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** node
 
 ### Contents
@@ -197,20 +455,20 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.3 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 12.22.6 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 7.30.0 |
+| eslint | 7.32.0 |
 
 **Additional linux tools and packages**
 
@@ -229,11 +487,11 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -259,170 +517,4 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |
-
-## Variant: 14-stretch
-
-**Digest:** sha256:4b0fe3ddc935162fa7f214a52be91e08678dee4e418f328f8a4473077108cbbd
-
-**Tags:**
-```
-mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-stretch
-```
-> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
-
-**Linux distribution:** Debian GNU/Linux 9 (stretch)
-
-**Available (non-root) user:** node
-
-### Contents
-**Languages and runtimes**
-
-| Language / runtime | Version | Path |
-|--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.3 | /usr/local |
-
-**Tools installed using git**
-
-| Tool | Commit | Path |
-|------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
-
-**Npm globally installed tools and packages**
-
-| Tool / package | Version |
-|----------------|---------|
-| eslint | 7.30.0 |
-
-**Additional linux tools and packages**
-
-| Tool / library | Version |
-|----------------|---------|
-| apt-transport-https | 1.4.11 |
-| apt-utils | 1.4.11 |
-| ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u14 |
-| dialog | 1.3-20160828-2 |
-| git | 1:2.11.0-3+deb9u7 |
-| gnupg2 | 2.1.18-8~deb9u4 |
-| htop | 2.0.2-1 |
-| iproute2 | 4.9.0-1+deb9u1 |
-| jq | 1.5+dfsg-1.3 |
-| less | 481-2.1 |
-| libc6 | 2.24-11+deb9u4 |
-| libgcc1 | 1:6.3.0-18+deb9u1 |
-| libgssapi-krb5-2 | 1.15-1+deb9u2 |
-| libicu57 | 57.1-6+deb9u4 |
-| libkrb5-3 | 1.15-1+deb9u2 |
-| liblttng-ust0 | 2.9.0-2+deb9u1 |
-| libssl1.0.2 | 1.0.2u-1~deb9u4 |
-| libssl1.1 | 1.1.0l-1~deb9u3 |
-| libstdc++6 | 6.3.0-18+deb9u1 |
-| locales | 2.24-11+deb9u4 |
-| lsb-release | 9.20161125 |
-| lsof | 4.89+dfsg-0.1 |
-| man-db | 2.7.6.1-2 |
-| manpages | 4.10-2 |
-| manpages-dev | 4.10-2 |
-| manpages-posix | 2013a-2 |
-| manpages-posix-dev | 2013a-2 |
-| nano | 2.7.4-1 |
-| ncdu | 1.12-1+b1 |
-| net-tools | 1.60+git20161116.90da8a0-1 |
-| openssh-client | 1:7.4p1-10+deb9u7 |
-| procps | 2:3.3.12-3+deb9u1 |
-| psmisc | 22.21-2.1+b2 |
-| rsync | 3.1.2-1+deb9u2 |
-| strace | 4.15-2 |
-| sudo | 1.8.19p1-2.1+deb9u3 |
-| unzip | 6.0-21+deb9u2 |
-| vim-tiny | 2:8.0.0197-4+deb9u3 |
-| wget | 1.18-5+deb9u3 |
-| yarn | 1.22.5-1 |
-| zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.8.dfsg-5 |
-| zsh | 5.3.1-4+deb9u4 |
-
-## Variant: 12-stretch
-
-**Digest:** sha256:d3518f8d69efc20718d8369aefef731c998db5e5899d9aa5eed814033c6ef20f
-
-**Tags:**
-```
-mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-stretch
-```
-> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
-
-**Linux distribution:** Debian GNU/Linux 9 (stretch)
-
-**Available (non-root) user:** node
-
-### Contents
-**Languages and runtimes**
-
-| Language / runtime | Version | Path |
-|--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.3 | /usr/local |
-
-**Tools installed using git**
-
-| Tool | Commit | Path |
-|------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/node/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
-
-**Npm globally installed tools and packages**
-
-| Tool / package | Version |
-|----------------|---------|
-| eslint | 7.30.0 |
-
-**Additional linux tools and packages**
-
-| Tool / library | Version |
-|----------------|---------|
-| apt-transport-https | 1.4.11 |
-| apt-utils | 1.4.11 |
-| ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u14 |
-| dialog | 1.3-20160828-2 |
-| git | 1:2.11.0-3+deb9u7 |
-| gnupg2 | 2.1.18-8~deb9u4 |
-| htop | 2.0.2-1 |
-| iproute2 | 4.9.0-1+deb9u1 |
-| jq | 1.5+dfsg-1.3 |
-| less | 481-2.1 |
-| libc6 | 2.24-11+deb9u4 |
-| libgcc1 | 1:6.3.0-18+deb9u1 |
-| libgssapi-krb5-2 | 1.15-1+deb9u2 |
-| libicu57 | 57.1-6+deb9u4 |
-| libkrb5-3 | 1.15-1+deb9u2 |
-| liblttng-ust0 | 2.9.0-2+deb9u1 |
-| libssl1.0.2 | 1.0.2u-1~deb9u4 |
-| libssl1.1 | 1.1.0l-1~deb9u3 |
-| libstdc++6 | 6.3.0-18+deb9u1 |
-| locales | 2.24-11+deb9u4 |
-| lsb-release | 9.20161125 |
-| lsof | 4.89+dfsg-0.1 |
-| man-db | 2.7.6.1-2 |
-| manpages | 4.10-2 |
-| manpages-dev | 4.10-2 |
-| manpages-posix | 2013a-2 |
-| manpages-posix-dev | 2013a-2 |
-| nano | 2.7.4-1 |
-| ncdu | 1.12-1+b1 |
-| net-tools | 1.60+git20161116.90da8a0-1 |
-| openssh-client | 1:7.4p1-10+deb9u7 |
-| procps | 2:3.3.12-3+deb9u1 |
-| psmisc | 22.21-2.1+b2 |
-| rsync | 3.1.2-1+deb9u2 |
-| strace | 4.15-2 |
-| sudo | 1.8.19p1-2.1+deb9u3 |
-| unzip | 6.0-21+deb9u2 |
-| vim-tiny | 2:8.0.0197-4+deb9u3 |
-| wget | 1.18-5+deb9u3 |
-| yarn | 1.22.5-1 |
-| zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.8.dfsg-5 |
-| zsh | 5.3.1-4+deb9u4 |
 

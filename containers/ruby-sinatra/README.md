@@ -10,15 +10,18 @@
 | *Categories* | Community, Frameworks |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
+| *Available image variants* | [See Ruby definition](../ruby). |
+| *Supported architecture(s)* | x86-64, arm64/aarch64 for `bullseye` based images |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
 | *Languages, platforms* | Ruby |
 
 ## Using this definition
 
-While this definition should work unmodified, you can select the version of Ruby the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+While this definition should work unmodified, you can select [an available version Ruby](../ruby) the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
+// Or you can use 2.7-bullseye or 2.7-buster if you want to pin to an OS version
 "args": { "VARIANT": "2.7" }
 ```
 
@@ -26,11 +29,10 @@ While this definition should work unmodified, you can select the version of Ruby
 
 Given JavaScript front-end web client code written for use in conjunction with a Ruby back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```json
+```jsonc
 "args": {
     "VARIANT": "2",
-    "INSTALL_NODE": "true",
-    "NODE_VERSION": "10",
+    "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
 }
 ```
 

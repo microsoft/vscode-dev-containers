@@ -1,5 +1,5 @@
-# [Choice] Go version: 1, 1.16, 1.15
-ARG VARIANT=1
+# [Choice] Go version (use -bullseye variants on local arm64/Apple Silicon): 1, 1.16, 1.17, 1-bullseye, 1.16-bullseye, 1.17-bullseye, 1-buster, 1.16-buster, 1.17-buster
+ARG VARIANT=1-bullseye
 FROM golang:${VARIANT}
 
 # Copy library scripts to execute
@@ -21,13 +21,12 @@ ENV GO111MODULE=auto
 RUN bash /tmp/library-scripts/go-debian.sh "none" "/usr/local/go" "${GOPATH}" "${USERNAME}" "false" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# [Option] Install Node.js
-ARG INSTALL_NODE="true"
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
-RUN if [ "$INSTALL_NODE" = "true" ]; then bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
+RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Remove library scripts for final image

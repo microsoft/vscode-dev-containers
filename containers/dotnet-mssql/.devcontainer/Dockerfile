@@ -2,10 +2,9 @@
 ARG VARIANT=3.1
 FROM mcr.microsoft.com/vscode/devcontainers/dotnet:${VARIANT}
 
-# [Option] Install Node.js
-ARG INSTALL_NODE="true"
-ARG NODE_VERSION="lts/*"
-RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+ARG NODE_VERSION="none"
+RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 # [Option] Install Azure CLI
 ARG INSTALL_AZURE_CLI="false"
@@ -17,12 +16,6 @@ RUN if [ "$INSTALL_AZURE_CLI" = "true" ]; then bash /tmp/library-scripts/azcli-d
 COPY mssql/installSQLtools.sh installSQLtools.sh
 RUN bash ./installSQLtools.sh \
      && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
-
-# Update args in docker-compose.yaml to set the UID/GID of the "vscode" user.
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --gid $USER_GID vscode && usermod --uid $USER_UID --gid $USER_GID vscode; fi
-
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

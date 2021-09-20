@@ -4,9 +4,10 @@
 		"dockerfile": "Dockerfile",
 		"args": { 
 			// Update 'VARIANT' to pick a Ruby version: 3, 3.0, 2, 2.7, 2.6
-			"VARIANT": "3",
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use -bullseye variants on local on arm64/Apple Silicon.
+			"VARIANT": "3-bullseye",
 			// Options
-			"INSTALL_NODE": "true",
 			"NODE_VERSION": "lts/*"
 		}
 	},

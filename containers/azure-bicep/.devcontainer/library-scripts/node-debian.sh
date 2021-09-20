@@ -7,12 +7,13 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/node.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./node-debian.sh [directory to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag]
+# Syntax: ./node-debian.sh [directory to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag] [install node-gyp deps]
 
 export NVM_DIR=${1:-"/usr/local/share/nvm"}
-export NODE_VERSION=${2:-"lts/*"}
+export NODE_VERSION=${2:-"lts"}
 USERNAME=${3:-"automatic"}
 UPDATE_RC=${4:-"true"}
+INSTALL_TOOLS_FOR_NODE_GYP="${5:-true}"
 export NVM_VERSION="0.38.0"
 
 set -e
@@ -44,11 +45,7 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-if [ "${NODE_VERSION}" = "none" ]; then
-    export NODE_VERSION=
-fi
-
-function updaterc() {
+updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
         echo -e "$1" >> /etc/bash.bashrc
@@ -58,16 +55,30 @@ function updaterc() {
     fi
 }
 
+# Function to run apt-get if needed
+apt_get_update_if_needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
-# Install curl, apt-transport-https, tar, or gpg if missing
-if ! dpkg -s apt-transport-https curl ca-certificates tar > /dev/null 2>&1 || ! type gpg > /dev/null 2>&1; then
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        apt-get update
-    fi
-    apt-get -y install --no-install-recommends apt-transport-https curl ca-certificates tar gnupg2
-fi
+# Install dependencies
+check_packages apt-transport-https curl ca-certificates tar gnupg2
 
 # Install yarn
 if type yarn > /dev/null 2>&1; then
@@ -78,6 +89,13 @@ else
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
     apt-get update
     apt-get -y install --no-install-recommends yarn
+fi
+
+# Adjust node version if required
+if [ "${NODE_VERSION}" = "none" ]; then
+    export NODE_VERSION=
+elif [ "${NODE_VERSION}" = "lts" ]; then
+    export NODE_VERSION="lts/*"
 fi
 
 # Install the specified node version if NVM directory already exists, then exit
@@ -119,6 +137,28 @@ export NVM_DIR="${NVM_DIR}"
 [ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
 EOF
 )"
-fi 
+fi
+
+# If enabled, verify "python3", "make", "gcc", "g++" commands are available so node-gyp works - https://github.com/nodejs/node-gyp
+if [ "${INSTALL_TOOLS_FOR_NODE_GYP}" = "true" ]; then
+    echo "Verifying node-gyp OS requirements..."
+    to_install=""
+    if ! type make > /dev/null 2>&1; then
+        to_install="${to_install} make"
+    fi
+    if ! type gcc > /dev/null 2>&1; then
+        to_install="${to_install} gcc"
+    fi
+    if ! type g++ > /dev/null 2>&1; then
+        to_install="${to_install} g++"
+    fi
+    if ! type python3 > /dev/null 2>&1; then
+        to_install="${to_install} python3-minimal"
+    fi
+    if [ ! -z "${to_install}" ]; then
+        apt_get_update_if_needed
+        apt-get -y install ${to_install}
+    fi
+fi
 
 echo "Done!"

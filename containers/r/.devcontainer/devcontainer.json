@@ -2,24 +2,30 @@
 	"name": "R (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update VARIANT to pick a specific R version: latest, ... ,4.0.1 , 4.0.0
-		"args": { "VARIANT": "latest" }
+		// Update VARIANT to pick a specific R version: 4, 4.1, 4.0
+		"args": { "VARIANT": "4" }
 	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"r.rterm.linux": "/usr/local/bin/radian",
 		"r.bracketedPaste": true,
-		"r.sessionWatcher": true,
+		"r.plot.useHttpgd": true,
 		"[r]": {
 			"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+		},
+		"terminal.integrated.profiles.linux": {
+			"radian": {
+				"path": "/usr/local/bin/radian",
+				"overrideName": true
+			}
 		}
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ikuyadeu.r",
-		"reditorsupport.r-lsp"
+		"rdebugger.r-debugger"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

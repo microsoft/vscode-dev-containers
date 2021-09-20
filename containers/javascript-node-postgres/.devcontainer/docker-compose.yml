@@ -6,11 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # [Choice] Node.js version: 14, 12, 10
-        VARIANT: 14
-        # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
-        USER_UID: 1000
-        USER_GID: 1000
+        # Update 'VARIANT' to pick an LTS version of Node.js: 16, 14, 12.
+        # Append -bullseye or -buster to pin to an OS version.
+        # Use -bullseye variants on local arm64/Apple Silicon.
+        VARIANT: 16-bullseye
 
     volumes:
       - ..:/workspace:cached

@@ -1,6 +1,6 @@
 {
 	"name": "vscode-dev-containers",
-	"version": "0.189.0",
+	"version": "0.195.0",
 	"description": "VS Code Dev Containers: Definitions and Templates",
 	"repository": {
 		"type": "git",
@@ -12,10 +12,11 @@
 		"containers",
 		"containers-readmes",
 		"repository-containers",
-		"manifests"
+		"manifests",
+		"container-features"
 	],
 	"scripts": {
-		"prepack": "rimraf containers-readmes manifests && copyfiles --up 1 containers/**/README.md containers-readmes && copyfiles --up 1 containers/**/definition-manifest.json manifests"
+		"prepack": "rimraf containers-readmes manifests container-features && copyfiles --up 1 containers/**/README.md containers-readmes && copyfiles --up 1 containers/**/definition-manifest.json manifests && copyfiles --up 1 script-library/*.sh container-features && copyfiles --up 3 script-library/container-features/src/* container-features"
 	},
 	"devDependencies": {
 		"copyfiles": "^2.1.1",

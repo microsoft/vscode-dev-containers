@@ -1,19 +1,9 @@
-# Update the VARIANT arg in docker-compose.yml to pick a Node version: 10, 12, 14
-ARG VARIANT=12
+# [Choice] Node.js version (use -bullseye variants on local arm64/Apple Silicon): 16, 14, 12, 16-bullseye, 14-bullseye, 12-bullseye, 16-buster, 14-buster, 12-buster
+ARG VARIANT=16-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 USER root
 RUN apt-get update
 RUN apt-get install libsecret-1-dev -y
-
-# Update args in docker-compose.yaml to set the UID/GID of the "node" user.
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
-        groupmod --gid $USER_GID node \
-        && usermod --uid $USER_UID --gid $USER_GID node \
-        && chmod -R $USER_UID:$USER_GID /home/node \
-        && chmod -R $USER_UID:root /usr/local/share/nvm /usr/local/share/npm-global; \
-    fi
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

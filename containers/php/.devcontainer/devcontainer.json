@@ -4,8 +4,9 @@
 		"dockerfile": "Dockerfile",
 		"args": { 
 			// Update VARIANT to pick a PHP version: 8, 8.0, 7, 7.4, 7.3
-			"VARIANT": "8",
-			"INSTALL_NODE": "true",
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use -bullseye variants on local on arm64/Apple Silicon.
+			"VARIANT": "8-bullseye",
 			"NODE_VERSION": "lts/*"
 		}
 	},

@@ -1,14 +1,26 @@
 {
-	"definitionVersion": "0.200.6",
+	"variants": ["buster", "bullseye"],
+	"definitionVersion": "0.201.0",
 	"build": {
-		"latest": true,
+		"latest": "buster",
 		"rootDistro": "debian",
+		"architectures": {
+			"bullseye": ["linux/amd64", "linux/arm64"],
+			"buster": ["linux/amd64"]
+		},
 		"tags": [
-			"rust:${VERSION}-1"
-		]
+			"rust:${VERSION}-${VARIANT}"
+		],
+		"variantTags": {
+			"buster": [ 
+				"rust:${VERSION}-1",
+				"rust:${VERSION}-1-buster"
+			],
+			"bullseye": [ "rust:${VERSION}-1-bullseye" ]
+		}
 	},
 	"dependencies": {
-		"image": "rust:1",
+		"image": "rust:1-${VARIANT}",
 		"imageLink": "https://hub.docker.com/_/rust",
 		"apt": [
 			"lldb", 

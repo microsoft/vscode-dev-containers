@@ -1,6 +1,6 @@
-# [Choice] Java version: 11, 16
-ARG VARIANT=11
-FROM openjdk:${VARIANT}-jdk-buster
+# [Choice] Java version (use -bullseye variants on local arm64/Apple Silicon): 11-jdk-bullseye, 16-jdk-bullseye, 11-jdk-buster, 16-jdk-buster
+ARG VARIANT=11-jdk-buster
+FROM openjdk:${VARIANT}
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
@@ -30,13 +30,12 @@ RUN bash /tmp/library-scripts/java-debian.sh "none" "${SDKMAN_DIR}" "${USERNAME}
     && if [ "${INSTALL_GRADLE}" = "true" ]; then bash /tmp/library-scripts/gradle-debian.sh "${GRADLE_VERSION:-latest}" "${SDKMAN_DIR}" ${USERNAME} "true"; fi \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# [Option] Install Node.js
-ARG INSTALL_NODE="true"
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
     PATH="${NVM_DIR}/current/bin:${PATH}"
-RUN if [ "$INSTALL_NODE" = "true" ]; then bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
+RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Remove library scripts for final image

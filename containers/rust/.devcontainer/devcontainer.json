@@ -1,7 +1,12 @@
 {
 	"name": "Rust",
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Use the VARIANT arg to pick a Debian OS version: buster, bullseye
+			// Use bullseye when on local on arm64/Apple Silicon.
+			"VARIANT": "buster"
+		}
 	},
 	"runArgs": [
 		"--cap-add=SYS_PTRACE",

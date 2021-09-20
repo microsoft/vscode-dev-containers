@@ -4,15 +4,25 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/rust)
 
-**Digest:** sha256:6b3b21b3c78566fcc55e5b436292af169d47eb0cb1a64b497e4491ea543bd060
+**Definition variations:**
+- [buster](#variant-buster)
+- [bullseye](#variant-bullseye)
+
+## Variant: buster
+
+**Digest:** sha256:bbbc772ac7dd9af13dcce26e6dbd9a2cd447357ae8d551d569824c62b29fad44
 
 **Tags:**
 ```
+mcr.microsoft.com/vscode/devcontainers/rust:dev-buster
 mcr.microsoft.com/vscode/devcontainers/rust:dev-1
+mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -21,13 +31,13 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Rust](https://github.com/rust-lang/rust) | 1.53.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.55.0 | /usr/local/cargo<br />/usr/local/rustup |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 23f9348e2c2341df71b1891eb4607f60ddd5a204 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 
 **Cargo / rustup (Rust) crates and tools**
 
@@ -35,9 +45,9 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.37 |
-| rust-analysis | 1.53.0 |
-| rust-src | 1.53.0 |
-| clippy | 1.53.0 |
+| rust-analysis | 1.55.0 |
+| rust-src | 1.55.0 |
+| clippy | 1.55.0 |
 
 **Additional linux tools and packages**
 
@@ -58,11 +68,11 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 | libc6 | 2.28-10 |
 | libc6-dev | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u1 |
+| libgssapi-krb5-2 | 1.17-3+deb10u2 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u1 |
+| libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | lldb | 1:7.0-47 |
 | locales | 2.28-10 |
@@ -89,4 +99,94 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |
+
+## Variant: bullseye
+
+**Digest:** sha256:bd3fb927c46eed08dc16a7f104232ee57aaf5b01406f23b628f65d7279463381
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/rust:dev-bullseye
+mcr.microsoft.com/vscode/devcontainers/rust:dev-1-bullseye
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Rust](https://github.com/rust-lang/rust) | 1.55.0 | /usr/local/cargo<br />/usr/local/rustup |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+
+**Cargo / rustup (Rust) crates and tools**
+
+| Tool / crate | Version |
+|--------------|---------|
+| rls | 1.41.0 |
+| rustfmt | 1.4.37 |
+| rust-analysis | 1.55.0 |
+| rust-src | 1.55.0 |
+| clippy | 1.55.0 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| gcc | 4:10.2.1-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libc6-dev | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| lldb | 1:11.0-51+nmu5 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| python3-minimal | 3.9.2-3 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
 

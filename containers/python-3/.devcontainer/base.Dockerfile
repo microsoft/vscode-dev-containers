@@ -1,5 +1,5 @@
-# [Choice] Python version: 3, 3.9, 3.8, 3.7, 3.6
-ARG VARIANT=3
+# [Choice] Python version (use -bullseye variants on local arm64/Apple Silicon): 3, 3.9, 3.8, 3.7, 3.6, 3-bullseye, 3.9-bullseye, 3.8-bullseye, 3.7-bullseye, 3.6-bullseye, 3-buster, 3.9-buster, 3.8-buster, 3.7-buster, 3.6-buster
+ARG VARIANT=3-bullseye
 FROM python:${VARIANT}
 
 # Copy library scripts to execute
@@ -27,13 +27,12 @@ ENV PATH=${PATH}:${PIPX_BIN_DIR}
 RUN bash /tmp/library-scripts/python-debian.sh "none" "/usr/local" "${PIPX_HOME}" "${USERNAME}" \ 
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# [Option] Install Node.js
-ARG INSTALL_NODE="true"
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
-RUN if [ "$INSTALL_NODE" = "true" ]; then bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}"; fi \
+RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Remove library scripts for final image

@@ -30,6 +30,21 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
     const stagingFolder = await configUtils.getStagingFolder(release);
     await configUtils.loadConfig(stagingFolder);
 
+    // Use or create a buildx / buildkit "builder" that using the docker-container driver that 
+    // uses QEMU to emulate different architectures for cross-platform builds. Setting up a separate
+    // builder avoids problems with the default config being different otherwise altered. It also can
+    // be tweaked down the road to use a different driver like using separate machines per architecture.
+    // See https://docs.docker.com/engine/reference/commandline/buildx_create/
+    console.log('(*) Setting up builder...');
+    const builders = await asyncUtils.exec('docker buildx ls');
+    if(builders.indexOf('vscode-dev-containers') < 0) {
+        await asyncUtils.spawn('docker', ['buildx', 'create', '--use', '--name', 'vscode-dev-containers']);
+    } else {
+        await asyncUtils.spawn('docker', ['buildx', 'use', 'vscode-dev-containers']);
+    }
+    // This step sets up the QEMU emulators for cross-platform builds. See https://github.com/docker/buildx#building-multi-platform-images
+    await asyncUtils.spawn('docker', ['run', '--privileged', '--rm', 'tonistiigi/binfmt', '--install', 'all']);
+
     // Build and push subset of images
     const definitionsToPush = definitionId ? [definitionId] : configUtils.getSortedDefinitionBuildList(page, pageTotal, definitionsToSkip);
     await asyncUtils.forEach(definitionsToPush, async (currentDefinitionId) => {
@@ -52,7 +67,7 @@ async function pushImage(definitionId, repo, release, updateLatest,
     
     // Make sure there's a Dockerfile present
     if (!await asyncUtils.exists(dockerFilePath)) {
-        throw `Invalid path ${dockerFilePath}`;
+        throw `Definition ${definitionId} does not exist! Invalid path: ${definitionPath}`;
     }
 
     // Look for context in devcontainer.json and use it to build the Dockerfile
@@ -84,7 +99,26 @@ async function pushImage(definitionId, repo, release, updateLatest,
             // Determine tags to use
             const versionTags = configUtils.getTagList(definitionId, release, updateLatest, registry, registryPath, variant);
             console.log(`(*) Tags:${versionTags.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
-
+            let architectures = configUtils.getBuildSettings(definitionId).architectures;
+            switch (typeof architectures) {
+                case 'string': architectures = [architectures]; break;
+                case 'object': if (!Array.isArray(architectures)) { architectures = architectures[variant]; } break;
+                case 'undefined': architectures = ['linux/amd64']; break;
+            }
+            console.log(`(*) Target image architectures: ${architectures.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
+            let localArchitecture = process.arch;
+            switch(localArchitecture) {
+                case 'arm': localArchitecture = 'linux/arm/v7'; break;
+                case 'aarch32': localArchitecture = 'linux/arm/v7'; break;
+                case 'aarch64': localArchitecture = 'linux/arm64'; break;
+                case 'x64': localArchitecture = 'linux/amd64'; break;
+                case 'x32': localArchitecture = 'linux/386'; break;
+                default: localArchitecture = `linux/${localArchitecture}`; break;
+            }
+            console.log(`(*) Local architecture: ${localArchitecture}`);
+            if (!pushImages) {
+                console.log(`(*) Push disabled: Only building local architecture (${localArchitecture}).`);
+            }
             if (replaceImage || !await isDefinitionVersionAlreadyPublished(definitionId, release, registry, registryPath, variant)) {
                 const context = devContainerJson.build ? devContainerJson.build.context || '.' : devContainerJson.context || '.';
                 const workingDir = path.resolve(dotDevContainerPath, context);
@@ -93,7 +127,8 @@ async function pushImage(definitionId, repo, release, updateLatest,
                     .concat(versionTags.reduce((prev, current) => prev.concat(['-t', current]), []));
                 const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };
                 await asyncUtils.spawn('docker', [
-                        'build', 
+                        'buildx',
+                        'build',
                         workingDir,
                         '-f', dockerFilePath, 
                         '--label', `version=${prepResult.meta.version}`,
@@ -101,16 +136,14 @@ async function pushImage(definitionId, repo, release, updateLatest,
                         '--label', `${imageLabelPrefix}.variant=${prepResult.meta.variant}`,
                         '--label', `${imageLabelPrefix}.release=${prepResult.meta.gitRepositoryRelease}`,
                         '--label', `${imageLabelPrefix}.source=${prepResult.meta.gitRepository}`,
-                        '--label', `${imageLabelPrefix}.timestamp='${prepResult.meta.buildTimestamp}'`
-                    ].concat(buildParams), spawnOpts);
-
-                // Push
-                if (pushImages) {
-                    console.log(`(*) Pushing...`);
-                    await asyncUtils.forEach(versionTags, async (versionTag) => {
-                        await asyncUtils.spawn('docker', ['push', versionTag], spawnOpts);
-                    });
-                } else {
+                        '--label', `${imageLabelPrefix}.timestamp='${prepResult.meta.buildTimestamp}'`,
+                        '--builder', 'vscode-dev-containers',
+                        '--progress', 'plain',
+                        '--platform', pushImages ? architectures.reduce((prev, current) => prev + ',' + current, '').substring(1) : localArchitecture,
+                        pushImages ? '--push' : '--load',
+                        ...buildParams
+                    ], spawnOpts);
+                if (!pushImages) {
                     console.log(`(*) Skipping push to registry.`);
                 }
             } else {

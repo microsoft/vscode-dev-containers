@@ -1,14 +1,30 @@
 {
-	"variants": ["1.16", "1.15"],
-	"definitionVersion": "0.202.7",
+	"variants": ["1.17-bullseye", "1.16-bullseye", "1.17-buster", "1.16-buster"],
+	"definitionVersion": "0.205.0",
 	"build": {
-		"latest": true,
+		"latest": "1.17-bullseye",
 		"rootDistro": "debian",
 		"tags": [
 			"go:${VERSION}-${VARIANT}"
 		],
+		"architectures": {
+			"1.17-bullseye": ["linux/amd64", "linux/arm64"],
+			"1.16-bullseye": ["linux/amd64", "linux/arm64"],
+			"1.17-buster": ["linux/amd64"],
+			"1.16-buster": ["linux/amd64"]
+		},
 		"variantTags": {
-			"1.16": [ "go:${VERSION}-1" ]
+			"1.17-bullseye": [ 
+				"go:${VERSION}-1.17",
+				"go:${VERSION}-1",
+				"go:${VERSION}-1-bullseye",
+				"go:${VERSION}-bullseye" 
+			],
+			"1.16-bullseye": ["go:${VERSION}-1.16"],
+			"1.17-buster": [
+				"go:${VERSION}-1-buster",
+				"go:${VERSION}-buster"
+			]
 		}
 	},
 	"dependencies": {

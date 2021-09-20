@@ -10,7 +10,8 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/java:8 |
-| *Published image architecture(s)* | x86-64 |
+| *Available image variants* | 8 / 8-buster, 8-bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
+| *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variant |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
@@ -24,15 +25,23 @@ See **[history](history)** for information on the contents of published images.
 
 This definition includes both JDK 8 and JDK 11 due to the fact that the VS Code Java extension requires JDK 11+. The needed `devcontainer.json` settings are present to enable you to work with projects targeting Java 8.
 
+While this definition should work unmodified, you can select the version of Debian the container uses to run Java 8 by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+
+```json
+"args": { "VARIANT": "bullseye" }
+```
+
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
-- `mcr.microsoft.com/vscode/devcontainers/java:8`
+- `mcr.microsoft.com/vscode/devcontainers/java:8` (or `8-bullseye`, `8-buster` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/java:0-8`
-- `mcr.microsoft.com/vscode/devcontainers/java:0.201-8`
-- `mcr.microsoft.com/vscode/devcontainers/java:0.201.5-8`
+- `mcr.microsoft.com/vscode/devcontainers/java:0-8` (or `0-8-bullseye`, `0-8-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/java:0.203-8` (or `0.203-8-bullseye`, `0.203-8-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/java:0.203.0-8` (or `0.203.0-8-bullseye`, `0.203.0-8-buster` to pin to an OS version)
+
+However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-8`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
 
 See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list).
 
@@ -74,10 +83,9 @@ You can also specify the version of Gradle or Maven if needed.
 
 Given JavaScript front-end web client code written for use in conjunction with a Java back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
 
-```json
+```jsonc
 "args": {
-    "INSTALL_NODE": "true",
-    "NODE_VERSION": "10"
+    "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
 }
 ```
 
