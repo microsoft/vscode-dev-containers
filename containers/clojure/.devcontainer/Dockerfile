@@ -2,7 +2,7 @@
 ARG VARIANT=11-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/java:${VARIANT}
 
-# [Optional] Install Clojure CLI tools
+# [Option] Install Clojure CLI tools
 ARG INSTALL_CLOJURE_CLI="true"
 
 # [Option] Install Leiningen
