@@ -1,5 +1,6 @@
 {
 	"name": "Azure Static Web Apps",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {

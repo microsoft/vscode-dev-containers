@@ -1,5 +1,6 @@
 {
 	"name": "Azure Functions & Python 3",
+	"runArgs": ["--init"],
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 

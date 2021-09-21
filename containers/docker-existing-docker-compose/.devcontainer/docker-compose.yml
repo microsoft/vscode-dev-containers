@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   # Update this to the name of the service you want to work with in your docker-compose.yml file
   your-service-name-here:
@@ -19,6 +19,8 @@ services:
     # build:
     #   context: .
     #   dockerfile: .devcontainer/Dockerfile
+
+    init: true
     
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project

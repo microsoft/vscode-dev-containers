@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   app:
@@ -14,7 +14,8 @@ services:
         NODE_VERSION: "lts/*"
 
     volumes:
-      - ..:/workspace:cached
+      - ..:/workspace:cached  
+    init: true
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity

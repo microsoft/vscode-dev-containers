@@ -1,5 +1,6 @@
 {
 	"name": "Java 8",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {

@@ -1,5 +1,6 @@
 {
 	"name": "Ruby",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 

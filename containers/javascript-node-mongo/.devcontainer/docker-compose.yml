@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   app:
@@ -10,9 +10,9 @@ services:
         # Append -bullseye or -buster to pin to an OS version.
         # Use -bullseye variants on local arm64/Apple Silicon.
         VARIANT: 14-buster
-
     volumes:
       - ..:/workspace:cached
+    init: true
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity

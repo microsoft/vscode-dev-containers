@@ -1,5 +1,6 @@
 {
 	"name": "Azure Functions & Java 8",
+	"runArgs": ["--init"],
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 
