@@ -1,0 +1,54 @@
+{
+	"variants": [ "16-jdk-bullseye", "11-jdk-bullseye", "16-jdk-buster", "11-jdk-buster" ],
+	"definitionVersion": "0.203.0",
+	"build": {
+		"latest": "16-jdk-buster",
+		"rootDistro": "debian",
+		"architectures": {
+			"16-jdk-bullseye": ["linux/amd64", "linux/arm64"],
+			"11-jdk-bullseye": ["linux/amd64", "linux/arm64"],
+			"16-jdk-buster": ["linux/amd64"],
+			"11-jdk-buster": ["linux/amd64"]
+		},
+		"tags": [
+			"clojure:${VERSION}-${VARIANT}"
+		],
+		"variantTags": {
+			"16-jdk-bullseye": [ 
+				"clojure:${VERSION}-16-bullseye",
+				"clojure:${VERSION}-bullseye"
+			],
+			"11-jdk-bullseye": [ "clojure:${VERSION}-11-bullseye" ],
+			"16-jdk-buster": [ 
+				"clojure:${VERSION}-16",
+				"clojure:${VERSION}-16-buster",
+				"clojure:${VERSION}-buster"
+			],
+			"11-jdk-buster": [ 
+				"clojure:${VERSION}-11",
+				"clojure:${VERSION}-11-buster"
+			]
+		}
+	},
+	"dependencies": {
+		"image": "openjdk:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/clojure",
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm"
+		},
+		"other": {
+			"SDKMAN!": null
+		},
+		"languages": {
+			"Clojure": {
+				"cgIgnore": true,
+				"path": "/usr/local/"
+			}
+		}
+	}
+}
