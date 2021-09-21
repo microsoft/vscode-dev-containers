@@ -9,6 +9,7 @@
 			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
 			"privileged": true,
+			"init": true,
 			"extensions": [
 				"ms-azuretools.vscode-docker"
 			],
@@ -42,6 +43,7 @@
 			"default": false,
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
+			"init": true,
 			"extensions": [
 				"ms-azuretools.vscode-docker"
 			],
@@ -73,6 +75,7 @@
 			"name": "Kubectl, Helm, and Minkube",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
 			"extensions": [
 				"ms-kubernetes-tools.vscode-kubernetes-tools"
@@ -106,6 +109,7 @@
 			"name": "Terraform, tflint, and TFGrunt",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_TERRAFORM",
 			"extensions": [
 				"HashiCorp.terraform",
@@ -145,6 +149,7 @@
 			"name": "Git (latest version - may require compilation)",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_GIT",			
 			"include": [
 				"azure-cli",
@@ -174,6 +179,7 @@
 			"name": "Git Large File Support (LFS)",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_GIT_LFS",
 			"include": [
 				"azure-cli",
@@ -203,6 +209,7 @@
 			"name": "GitHub CLI",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_GITHUB_CLI",
 			"include": [
 				"azure-cli",
@@ -232,6 +239,7 @@
 			"name": "Azure CLI",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_AZURE_CLI",
 			"extensions": [
 				"ms-vscode.azurecli"
@@ -261,6 +269,7 @@
 			"name": "SSH server",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_SSH",
 			"include": [
 				"azure-cli",
@@ -290,6 +299,7 @@
 			"name": "Light-weight desktop (Fluxbox)",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
 			"include": [
 				"azure-cli",
@@ -319,6 +329,7 @@
 			"name": "Homebrew",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_HOMEBREW",
 			"containerEnv": {
 				"BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
@@ -354,6 +365,7 @@
 			"type": "choice",
 			"values": [ "lts", "latest","16", "14", "12" ],
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_NODE_VERSION",
 			"extensions": ["dbaeumer.vscode-eslint"],
 			"containerEnv": {
@@ -380,6 +392,7 @@
 			"hint": "Select python version to install",
 			"type": "choice",
 			"values": ["latest", "3.9", "3.8", "3.7", "3.6"],
+			"init": true,
 			"default": false,
 			"buildArg": "_VSC_PYTHON_VERSION",
 			"extensions": [
@@ -436,6 +449,7 @@
 			"hint": "Select go version to install",
 			"type": "choice",
 			"values": ["latest", "1.17", "1.16"],
+			"init": true,
 			"default": false,
 			"buildArg": "_VSC_GO_VERSION",
 			"extensions": ["golang.Go"],
@@ -481,6 +495,7 @@
 			"hint": "Select java version to install",
 			"type": "choice",
 			"values": ["lts", "latest", "16", "11", "8"],
+			"init": true,
 			"default": false,
 			"buildArg": "_VSC_JAVA_VERSION",
 			"extensions": ["vscjava.vscode-java-pack"],
@@ -520,6 +535,7 @@
 			"hint": "Select maven version to install",
 			"type": "choice",
 			"values": ["latest", "3.8", "3.6", "3.5"],
+			"init": true,
 			"default": false,
 			"buildArg": "_VSC_MAVEN_VERSION",
 			"extensions": ["vscjava.vscode-java-pack"],
@@ -556,6 +572,7 @@
 			"type": "choice",
 			"values": ["latest", "7", "6", "5"],
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_GRADLE_VERSION",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
@@ -590,6 +607,7 @@
 			"type": "choice",
 			"values": ["latest", "3.0", "2.7", "2.6"],
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_RUBY_VERSION",
 			"extensions": [
 				"rebornix.Ruby"
@@ -628,6 +646,7 @@
 			"name": "Rust",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_RUST",
 			"extensions": [
 				"vadimcn.vscode-lldb",
@@ -678,6 +697,7 @@
 			"name": "PowerShell",
 			"type": "option",
 			"default": false,
+			"init": true,
 			"buildArg": "_VSC_INSTALL_POWERSHELL",
 			"include": [
 				"azure-cli",
@@ -704,3 +724,4 @@
 		}
 	]
 }
+ 
