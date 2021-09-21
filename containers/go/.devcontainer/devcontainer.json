@@ -5,7 +5,7 @@
 		"args": {
 			// Update the VARIANT arg to pick a version of Go: 1, 1.16, 1.17
 			// Append -bullseye or -buster to pin to an OS version.
-			// Use the -bullseye variants if you are on a M1 mac.
+			// Use -bullseye variants on local arm64/Apple Silicon.
 			"VARIANT": "1-bullseye",
 			// Options
 			"NODE_VERSION": "lts/*"

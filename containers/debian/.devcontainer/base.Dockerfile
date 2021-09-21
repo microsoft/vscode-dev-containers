@@ -1,5 +1,5 @@
-# [Choice] Debian version: bullseye, buster, stretch
-ARG VARIANT="buster"
+# [Choice] Debian version (use bullseye or stretch on local arm64/Apple Silicon): bullseye, buster, stretch
+ARG VARIANT="bullseye"
 FROM buildpack-deps:${VARIANT}-curl
 
 # [Option] Install zsh

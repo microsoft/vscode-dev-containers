@@ -11,7 +11,7 @@
 
 ## Variant: hirsute
 
-**Digest:** sha256:d04aca389249946246f08cab97ad69f8eb2c9e58822061d4db8236770d046268
+**Digest:** sha256:d8454c9e4b90e7db698d2132195ec9ad1f309a1fab504dee596cbe2d8221a01d
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 735808f48d54aabce540f6c90294e21118104cf4 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -41,7 +41,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 | apt-transport-https | 2.2.4ubuntu0.1 |
 | apt-utils | 2.2.4ubuntu0.1 |
 | ca-certificates | 20210119build1 |
-| curl | 7.74.0-1ubuntu2.1 |
+| curl | 7.74.0-1ubuntu2.3 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1ubuntu1 |
 | gnupg2 | 2.2.20-1ubuntu3 |
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:83c868c1fd10d8a3071fb1ed984d4fbf85852aa2162760d885c366e614bfc3f6
+**Digest:** sha256:fc819f1bd46af8b0d855a08561f4ab0cabef0215bf5525bea0af332d0d5cd97e
 
 **Tags:**
 ```
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 735808f48d54aabce540f6c90294e21118104cf4 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -113,9 +113,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.1 |
-| curl | 7.68.0-1ubuntu2.6 |
+| curl | 7.68.0-1ubuntu2.7 |
 | dialog | 1.3-20190808-1 |
-| git | 1:2.25.1-1ubuntu3.1 |
+| git | 1:2.25.1-1ubuntu3.2 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
 | htop | 2.2.0-2build1 |
 | iproute2 | 5.5.0-1ubuntu1 |
@@ -155,7 +155,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:224736a530cf58b3204c1bf8af8e144c05f1879681115d6005b14c079ecfbc2f
+**Digest:** sha256:61ab633d11fe89b738feb49a09a94382591a5a082a5c2a40d842dd2778577659
 
 **Tags:**
 ```
@@ -165,7 +165,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Ubuntu 18.04.5 LTS (debian-like distro)
+**Linux distribution:** Ubuntu 18.04.6 LTS (debian-like distro)
 
 **Architectures:** linux/amd64, linux/arm64
 
@@ -176,7 +176,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 735808f48d54aabce540f6c90294e21118104cf4 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -185,9 +185,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | apt-transport-https | 1.6.14 |
 | apt-utils | 1.6.14 |
 | ca-certificates | 20210119~18.04.1 |
-| curl | 7.58.0-2ubuntu3.14 |
+| curl | 7.58.0-2ubuntu3.15 |
 | dialog | 1.3-20171209-1 |
-| git | 1:2.17.1-1ubuntu0.8 |
+| git | 1:2.17.1-1ubuntu0.9 |
 | gnupg2 | 2.2.4-1ubuntu1.4 |
 | htop | 2.1.0-3 |
 | iproute2 | 4.15.0-2ubuntu1.3 |

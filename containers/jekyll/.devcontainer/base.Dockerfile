@@ -1,4 +1,4 @@
-# [Choice] Debian OS version: 2.7-bullseye, 2.7-buster
+# [Choice] Debian OS version (use 2.7-bullseye on local arm64/Apple Silicon): 2.7-bullseye, 2.7-buster
 ARG VARIANT=2.7-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 COPY library-scripts/meta.env /usr/local/etc/vscode-dev-containers

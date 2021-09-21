@@ -1,5 +1,5 @@
-# [Choice] Debian OS version (use bullseye for arm64/Apple Silicon): buster, bullseye
-ARG VARIANT="buster"
+# [Choice] Debian OS version (use bullseye on local arm64/Apple Silicon): buster, bullseye
+ARG VARIANT="bullseye"
 FROM rust:1-${VARIANT}
 
 # [Option] Install zsh

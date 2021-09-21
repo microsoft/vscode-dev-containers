@@ -10,6 +10,8 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Works in Codespaces* | Yes |
+| *Available image variants* | [See Python 3 definition](../python-3). |
+| *Supported architecture(s)* | x86-64, arm64/aarch64 for `bullseye` based images |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
 | *Languages, platforms* | Python |
@@ -18,14 +20,17 @@
 
 This definition creates two containers, one for Python and one for PostgreSQL. VS Code will attach to the Python container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `postgres-data`.
 
-While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/python` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies and Python tools for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Python version 3, 3.8, 3.7, or 3.6.
+While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/python` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies and Python tools for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick a Python version.
 
 ```yaml
 build:
   context: ..
   dockerfile: .devcontainer/Dockerfile
   args:
-    VARIANT: 3.7
+    # Update 'VARIANT' to pick a version of Python: 3, 3.9, 3.8, 3.7, 3.6
+    # Append -bullseye or -buster to pin to an OS version.
+    # Use -bullseye variants on local arm64/Apple Silicon.
+    VARIANT: 3.7-bullseye
 ```
 
 You also can connect to PostgreSQL from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:

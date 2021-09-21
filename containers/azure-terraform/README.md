@@ -11,6 +11,7 @@ This recipe allows you to get going quickly with Terraform in Azure. Includes Te
 | *Contributors* | [Carlos Mendible](https://github.com/cmendible), [Charles Zipp](https://github.com/charleszipp), [Lila Molyva](https://github.com/norelina), [Tas Devani](https://github.com/tasdevani21)  |
 | *Categories* | Community, Azure, Other |
 | *Definition type* | Dockerfile |
+| *Supported architecture(s)* | x86-64, arm64/aarch64 for `bullseye` based images |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |

@@ -1,5 +1,5 @@
-# [Choice] Debian OS version (use bullseye for arm64/Apple Silicon): buster, bullseye
-ARG VARIANT="buster"
+# [Choice] Debian OS version (use bullseye on local arm64/Apple Silicon): buster, bullseye
+ARG VARIANT="bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/java:0-11-${VARIANT}
 
 # Install JDK 8 and optionally Maven and Gradle - version of "" installs latest

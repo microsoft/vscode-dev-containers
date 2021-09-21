@@ -54,14 +54,35 @@ check_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Install dependencies
-check_packages apt-transport-https curl ca-certificates lsb-release gnupg2
-
-# Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-. /etc/os-release
-get_common_setting MICROSOFT_GPG_KEYS_URI
-curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/azure-cli.list
-apt-get update
-apt-get install -y azure-cli
+# See if we're on x86_64 and if so, install via apt-get, otherwise use pip3
+architecture="$(dpkg --print-architecture)"
+if [ "${architecture}" = "amd64" ]; then
+    # Install dependencies
+    check_packages apt-transport-https curl ca-certificates gnupg2
+    # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
+    . /etc/os-release
+    get_common_setting MICROSOFT_GPG_KEYS_URI
+    curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
+    echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/azure-cli.list
+    apt-get update
+    apt-get install -y azure-cli
+else
+    echo "No pre-built binaries availabe for ${architecture}. Installing via pip3."
+    if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install python3-minimal python3-pip libffi-dev python3-venv
+    fi
+    export PIPX_HOME=/usr/local/pipx
+    mkdir -p ${PIPX_HOME}
+    export PIPX_BIN_DIR=/usr/local/bin
+    export PYTHONUSERBASE=/tmp/pip-tmp
+    export PIP_CACHE_DIR=/tmp/pip-tmp/cache
+    pipx_bin=pipx
+    if ! type pipx > /dev/null 2>&1; then
+        pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
+        pipx_bin=/tmp/pip-tmp/bin/pipx
+    fi
+    ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' azure-cli
+    rm -rf /tmp/pip-tmp
+fi
 echo "Done!"

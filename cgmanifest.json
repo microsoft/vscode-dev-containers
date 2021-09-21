@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "735808f48d54aabce540f6c90294e21118104cf4"
+                    "commitHash": "93b557e291ba60286bcd49f5d3e4ac61730b3f7c"
                 }
             }
         },
@@ -792,7 +792,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.1.6",
+                    "Version": "2.1.8",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -854,6 +854,24 @@
                     "Name": "Docker Image: php",
                     "Version": "7.3-apache-buster",
                     "DownloadUrl": "https://hub.docker.com/_/php"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "black",
+                    "Version": "21.9b0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "virtualenv",
+                    "Version": "20.8.0"
                 }
             }
         },
@@ -1099,7 +1117,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "735808f48d54aabce540f6c90294e21118104cf4"
+                    "commitHash": "93b557e291ba60286bcd49f5d3e4ac61730b3f7c"
                 }
             }
         },
@@ -1177,7 +1195,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.4.2"
+                    "Version": "4.4.3"
                 }
             }
         },

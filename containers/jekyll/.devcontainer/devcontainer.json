@@ -4,7 +4,7 @@
 		"dockerfile": "Dockerfile",
 		"args": {
 			// Update 'VARIANT' to pick a Debian OS version: bullseye, buster
-			// Use bullseye if you are on a M1 mac.
+			// Use bullseye when on local arm64/Apple Silicon.
 			"VARIANT": "bullseye",
 			// Enable Node.js: pick the latest LTS version
 			"NODE_VERSION": "lts/*"

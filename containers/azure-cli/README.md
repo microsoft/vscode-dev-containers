@@ -9,6 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
+| *Supported architecture(s)* | x86-64, arm64/aarch64 for `bullseye` based images |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |

@@ -3,9 +3,11 @@ FROM $BASE_IMAGE
 
 USER root
 
-COPY *.env *.sh /tmp/library-scripts/
-RUN /tmp/library-scripts/install.sh \
-    && rm -rf /tmp/library-scripts
+COPY . /tmp/build-features/
+
+RUN cd /tmp/build-features \
+&& chmod +x ./install.sh \
+&& ./install.sh
 
 #{containerEnv}
 
