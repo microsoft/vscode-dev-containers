@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "93b557e291ba60286bcd49f5d3e4ac61730b3f7c"
+                    "commitHash": "a4e68967a472132b4ffb05fbd1c86ac88d27fe42"
                 }
             }
         },
@@ -861,6 +861,15 @@
             "Component": {
                 "Type": "Pip",
                 "Pip": {
+                    "Name": "pylint",
+                    "Version": "2.11.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
                     "Name": "black",
                     "Version": "21.9b0"
                 }
@@ -1117,7 +1126,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "93b557e291ba60286bcd49f5d3e4ac61730b3f7c"
+                    "commitHash": "a4e68967a472132b4ffb05fbd1c86ac88d27fe42"
                 }
             }
         },
@@ -1186,7 +1195,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.9.2"
+                    "Version": "2.10.0"
                 }
             }
         },

@@ -11,7 +11,7 @@
 
 ## Variant: hirsute
 
-**Digest:** sha256:d8454c9e4b90e7db698d2132195ec9ad1f309a1fab504dee596cbe2d8221a01d
+**Digest:** sha256:3e9247abf337a44deabe6293061f094844174375b3ea6ea0797bdcf5b330ab68
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | a4e68967a472132b4ffb05fbd1c86ac88d27fe42 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:fc819f1bd46af8b0d855a08561f4ab0cabef0215bf5525bea0af332d0d5cd97e
+**Digest:** sha256:93975f4063b9beab1ac315df49a8f16221dd0f34db82f4e62787846a2dc5ebfa
 
 **Tags:**
 ```
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | a4e68967a472132b4ffb05fbd1c86ac88d27fe42 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -141,7 +141,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
 | openssh-client | 1:8.2p1-4ubuntu0.3 |
-| procps | 2:3.3.16-1ubuntu2.2 |
+| procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
 | rsync | 3.1.3-8 |
 | strace | 5.5-3ubuntu1 |
@@ -155,7 +155,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:61ab633d11fe89b738feb49a09a94382591a5a082a5c2a40d842dd2778577659
+**Digest:** sha256:039034f226c10c78b25580162266110e03cf37ff202112486bea004e4d4ba81b
 
 **Tags:**
 ```
@@ -176,7 +176,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | a4e68967a472132b4ffb05fbd1c86ac88d27fe42 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -185,7 +185,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | apt-transport-https | 1.6.14 |
 | apt-utils | 1.6.14 |
 | ca-certificates | 20210119~18.04.1 |
-| curl | 7.58.0-2ubuntu3.15 |
+| curl | 7.58.0-2ubuntu3.16 |
 | dialog | 1.3-20171209-1 |
 | git | 1:2.17.1-1ubuntu0.9 |
 | gnupg2 | 2.2.4-1ubuntu1.4 |

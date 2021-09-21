@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:a812fa5a04f1106880340a5ce58d9f9e90b7be1d6ceec30750a5371bb451b626
+**Digest:** sha256:7c8051a24b63e5c182a78c42fe28b5a6ea822a6e87115fcab24108941a978509
 
 **Tags:**
 ```
@@ -29,14 +29,14 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 93b557e291ba60286bcd49f5d3e4ac61730b3f7c | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | a4e68967a472132b4ffb05fbd1c86ac88d27fe42 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.10.2 |
+| pylint | 2.11.1 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
 | black | 21.9b0 |
