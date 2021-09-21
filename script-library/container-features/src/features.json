@@ -32,7 +32,12 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -64,7 +69,12 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
 			]
 		},
 		// Problem #3 - there's three versions here and they go together as a unit, and no ability to pin to a version
@@ -97,7 +107,12 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
 			]
 		},
 		//  Problem #3 - Terraform also involves three versions here and they go together as a unit, and no ability to pin to a version
@@ -137,7 +152,12 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -166,7 +186,12 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -195,7 +220,12 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -224,7 +254,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -253,7 +290,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -282,7 +326,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -311,7 +362,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -344,7 +402,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -363,6 +428,7 @@
 			}, "include": [
 				"azure-cli",
 				"cpp",
+				"php",
 				"kubernetes-helm",
 				"kubernetes-helm-minikube",
 				"docker-from-docker",
@@ -371,7 +437,11 @@
 				"rust",
 				"dart",
 				"ubuntu",
-				"debian"
+				"debian",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -427,7 +497,13 @@
 				"javascript-node",
 				"dart",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres"
 			]
 		},
 		{
@@ -472,7 +548,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -510,7 +593,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		// Problem #6 - Maven and gradle options should not be presented if Java isn't checked
@@ -546,7 +636,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -580,7 +677,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -620,7 +724,12 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -670,7 +779,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		},
 		{
@@ -699,7 +815,14 @@
 				"dart",
 				"python-3",
 				"ubuntu",
-				"debian"
+				"debian",
+				"javascript-node-azurite",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails",
+				"ruby-rails-postgres",
+				"python-3-postgres"
 			]
 		}
 	]
