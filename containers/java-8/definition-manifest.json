@@ -2,7 +2,7 @@
 	"variants": [ "bullseye", "buster" ],
 	"definitionVersion": "0.203.0",
 	"build": {
-		"latest": "buster",
+		"latest": false,
 		"rootDistro": "debian",
 		"parent": "java",
 		"parentVariant": {
