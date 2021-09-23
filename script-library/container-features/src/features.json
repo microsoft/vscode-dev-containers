@@ -122,7 +122,10 @@
 		{
 			"id": "terraform",
 			"name": "Terraform, tflint, and TFGrunt",
-			"type": "option",
+			"type": "choice",
+			"values": ["latest", "1.0.7"],
+			// Expects versions for: tflint, terragrunt
+			"customValues": true, 
 			"default": false,
 			"init": true,
 			"buildArg": "_VSC_INSTALL_TERRAFORM",
