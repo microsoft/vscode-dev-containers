@@ -15,7 +15,11 @@
 			],
 			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
 			"mounts": [
-				"source=dind-var-lib-docker,target=/var/lib/docker,type=volume"
+				{
+					"source":"dind-var-lib-docker", 
+				 	"target":"/var/lib/docker", 
+				 	"type":"volume"
+				}
 			],
 			"include": [
 				"azure-cli",
@@ -53,7 +57,11 @@
 				"ms-azuretools.vscode-docker"
 			],
 			"mounts": [
-				"source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
+				{
+					"source":"/var/run/docker.sock", 
+				 	"target":"/var/run/docker-host.sock", 
+				 	"type":"bind"
+				}
 			],
 			"include": [
 				"azure-cli",
@@ -95,7 +103,11 @@
 			],
 			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
 			"mounts": [
-				"source=minikube-config,target=/home/vscode/.minikube,type=volume"
+				{
+					"source":"minikube-config", 
+				 	"target":"/home/vscode/.minikube", 
+				 	"type":"volume"
+				}
 			],
 			"include": [
 				"azure-cli",
