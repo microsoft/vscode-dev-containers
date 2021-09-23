@@ -83,7 +83,10 @@
 		{
 			"id": "kubectl-helm-minikube",
 			"name": "Kubectl, Helm, and Minkube",
-			"type": "option",
+			"type": "choice",
+			"values": ["latest", "1.22.2"],
+			// Expects: helm, minikube
+			"customValues": true,
 			"default": false,
 			"init": true,
 			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
