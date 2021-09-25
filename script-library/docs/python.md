@@ -26,8 +26,6 @@
 |Optimize when building from source| `false` | A `true`/`false` flag that indicates whether Python should be optimized for performance when built from source. Adds significant time to the build process.|
 
 
-[Use Oryx if available flag] [Optimize when building from source flag]
-
 ## Usage
 
 1. Add [`python-debian.sh`](../python-debian.sh) to `.devcontainer/library-scripts`

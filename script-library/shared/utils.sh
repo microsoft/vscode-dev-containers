@@ -48,9 +48,7 @@ oryx_install() {
         echo "(*) Using ${requested_version} in place of $2."
     fi
 
-    local exports="export ORYX_ENV_TYPE=vsonline-present ORYX_PREFER_USER_INSTALLED_SDKS=true ENABLE_DYNAMIC_INSTALL=true DYNAMIC_INSTALL_ROOT_DIR=/opt"
-    updaterc "${exports}"
-    ${exports}
+    export ORYX_ENV_TYPE=vsonline-present ORYX_PREFER_USER_INSTALLED_SDKS=true ENABLE_DYNAMIC_INSTALL=true DYNAMIC_INSTALL_ROOT_DIR=/opt
     oryx prep --skip-detection --platforms-and-versions "${platform}=${requested_version}"
     local opt_folder="/opt/${platform}/${requested_version}"
     if [ "${target_folder}" != "none" ] && [ "${target_folder}" != "${opt_folder}" ]; then
