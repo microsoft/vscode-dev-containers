@@ -14,7 +14,7 @@ VNC_PASSWORD=${2:-"vscode"}
 INSTALL_NOVNC=${3:-"true"}
 
 NOVNC_VERSION=1.2.0
-WEBSOCKETIFY_VERSION=0.9.0
+WEBSOCKETIFY_VERSION=0.10.0
 
 package_list="
     tigervnc-standalone-server \
