@@ -23,6 +23,45 @@ detect_user() {
     fi
 }
 
+# Use Oryx to install something using a partial version match
+oryx_install() {
+    local platform=$1
+    local requested_version=$2
+    local target_folder=${3:-none}
+    local ldconfig_folder=${4:-none}
+    echo "(*) Installing ${platform} ${requested_version} using Oryx..."
+    check_packages jq
+    # Soft match if full version not specified
+    if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
+        local version_list="$(oryx platforms --json | jq -r ".[] | select(.Name == \"${platform}\") | .Versions | sort | reverse | @tsv" | tr '\t' '\n' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$')"
+        if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
+            requested_version="$(echo "${version_list}" | head -n 1)"
+        else
+            set +e
+            requested_version="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
+            set -e
+        fi
+        if [ -z "${requested_version}" ] || ! echo "${version_list}" | grep "^${requested_version//./\\.}$" > /dev/null 2>&1; then
+            echo -e "(!) Oryx does not support ${platform} version $2\nValid values:\n${version_list}" >&2
+            return 1
+        fi
+        echo "(*) Using ${requested_version} in place of $2."
+    fi
+
+    local exports="export ORYX_ENV_TYPE=vsonline-present ORYX_PREFER_USER_INSTALLED_SDKS=true ENABLE_DYNAMIC_INSTALL=true DYNAMIC_INSTALL_ROOT_DIR=/opt"
+    updaterc "${exports}"
+    ${exports}
+    oryx prep --skip-detection --platforms-and-versions "${platform}=${requested_version}"
+    local opt_folder="/opt/${platform}/${requested_version}"
+    if [ "${target_folder}" != "none" ] && [ "${target_folder}" != "${opt_folder}" ]; then
+        ln -s "${opt_folder}" "${target_folder}"
+    fi
+    # Update library path add to conf
+    if [ "${ldconfig_folder}" != "none" ]; then
+        echo "/opt/${platform}/${requested_version}/lib" >> "/etc/ld.so.conf.d/${platform}.conf"
+        ldconfig
+    fi
+}
 
 # Use SDKMAN to install something using a partial version match
 sdk_install() {
