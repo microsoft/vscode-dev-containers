@@ -22,7 +22,7 @@
 |PIPX_HOME|`/usr/local/py-utils`| Location PIPX should install Python utilities and related venvs. |
 | Add to rc files flag | `true` | A `true`/`false` flag that indicates whether sourcing the PIPX_HOME and bin path should be added to `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
 |Install tools | `true` | A `true`/`false` flag that indicates whether related Python utilities should be installed. |
-|Use Ubuntu PPA if available | `true` | A `true`/`false` flag that indicates whether the [deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa) should be used to install Python on Ubuntu. |
+|Use Oryx if available | `true` | A `true`/`false` flag that indicates whether the Oryx CLI in images like the default codespaces image should be used if available. |
 
 ## Usage
 

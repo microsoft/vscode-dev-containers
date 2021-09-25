@@ -1,12 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 SCRIPT_DIR=${1-"/tmp"}
-DISTRO=${2:-"debian"}
-USE_DEFAULTS=${3:-"true"}
-USERNAME=${4:-"vscode"}
-RUN_COMMON_SCRIPT=${5:-"true"}
-UPGRADE_PACKAGES=${6:-"true"}
-RUN_ONE=${7:-"false"} # false or script name
+USE_DEFAULTS=${2:-"true"}
+USERNAME=${3:-"vscode"}
+RUN_COMMON_SCRIPT=${4:-"true"}
+UPGRADE_PACKAGES=${5:-"true"}
+RUN_ONE=${6:-"false"} # false or script name
 
 set -e
 
@@ -38,6 +37,26 @@ runScript()
     fi
     echo "**** Done! ****"
 }
+
+# Determine distro scripts to use
+. /etc/os-release
+DISTRO="${ID_LIKE}"
+if [ -z "${DISTRO}" ]; then
+    DISTRO="${ID}"
+elif [ "${DISTRO}" = "rhel fedora" ] ||  [ "${DISTRO}" = "rhel" ] || [ "${DISTRO}" = "fedora" ]; then
+    DISTRO="redhat"
+fi
+
+cat << EOF
+- SCRIPT_DIR=${SCRIPT_DIR}
+- DISTRO=${DISTRO}
+- USE_DEFAULTS=${USE_DEFAULTS}
+- USERNAME=${USERNAME}
+- RUN_COMMON_SCRIPT=${RUN_COMMON_SCRIPT}
+- UPGRADE_PACKAGES=${UPGRADE_PACKAGES}
+- RUN_ONE=${RUN_ONE}
+
+EOF
 
 tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh > /usr/local/share/desktop-init.sh << 'EOF'
 #!/bin/bash
