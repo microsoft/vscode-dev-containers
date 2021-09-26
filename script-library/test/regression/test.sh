@@ -5,22 +5,10 @@ USE_DEFAULTS="${3:-true}"
 RUN_COMMON_SCRIPT="${4:-true}"
 PLATFORMS="$5"
 
-if [[ "${IMAGE_TO_TEST}" = *"debian"* ]]; then
-    DISTRO="debian"
-elif [[ "${IMAGE_TO_TEST}" = *"ubuntu"* ]]; then
-    DISTRO="debian"
-elif [[ "${IMAGE_TO_TEST}" = *"alpine"* ]]; then
-    DISTRO="alpine"
-elif [[ "$IMAGE_TO_TEST" = *"centos"* ]] || [[ "$IMAGE_TO_TEST" = *"redhat"* ]]; then
-    DISTRO="redhat"
-else
-    DISTRO=$IMAGE_TO_TEST
-fi
-
 set -e
 
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../.."
-echo -e  "🧪 Testing image $IMAGE_TO_TEST (${DISTRO}-like)..."
+echo -e  "🧪 Testing image $IMAGE_TO_TEST..."
 
 if [ -z "${PLATFORMS}" ]; then
     OTHER_ARGS="--load"
@@ -39,7 +27,6 @@ fi
 BUILDX_COMMAND="docker buildx build \
     ${OTHER_ARGS} \
     --progress=plain \
-    --build-arg DISTRO=$DISTRO \
     --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST \
     --build-arg RUN_ONE=${RUN_ONE} \
     --build-arg RUN_COMMON_SCRIPT=${RUN_COMMON_SCRIPT} \
