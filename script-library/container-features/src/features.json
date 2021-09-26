@@ -188,7 +188,7 @@
 			"type": "option",
 			"default": false,
 			"init": true,
-			"buildArg": "_VSC_INSTALL_GIT",			
+			"buildArg": "_VSC_INSTALL_GIT",
 			"include": [
 				"azure-cli",
 				"cpp",
@@ -605,7 +605,8 @@
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}"
 			},
 			"settings": {
-				"java.home": "/usr/local/sdkman/candidates/java/current"
+				"java.home": "/extension-java-home",
+				"java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current"
 			},
 			"include": [
 				"azure-cli",
