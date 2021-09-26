@@ -606,13 +606,7 @@
 			},
 			"settings": {
 				"java.home": "/extension-java-home",
-				"java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current",
-				// Add runtime setting for JDK 1.8 / 8 since /extension-java-home will be JDK 11 
-				// in this case, so the runtime version needs to be set.
-				"java.configuration.runtimes": [{
-					"name": "JavaSE-1.8",
-					"path": "/usr/local/sdkman/candidates/java/current"
-				}]
+				"java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current"
 			},
 			"include": [
 				"azure-cli",
