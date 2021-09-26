@@ -76,7 +76,7 @@ check_packages() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
-check_packages apt-transport-https curl ca-certificates lxc pigz iptables gnupg2
+check_packages apt-transport-https curl ca-certificates lxc pigz iptables gnupg2 dirmngr
 
 # Swap to legacy iptables for compatibility
 if type iptables-legacy > /dev/null 2>&1; then
@@ -85,6 +85,7 @@ if type iptables-legacy > /dev/null 2>&1; then
 fi
 
 # Install Docker / Moby CLI if not already installed
+architecture="$(dpkg --print-architecture)"
 if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then
     echo "Docker / Moby CLI and Engine already installed."
 else
@@ -94,9 +95,10 @@ else
         # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
         get_common_setting MICROSOFT_GPG_KEYS_URI
         curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+        echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
         apt-get update
-        apt-get -y install --no-install-recommends moby-cli moby-buildx moby-compose moby-engine
+        apt-get -y install --no-install-recommends moby-cli moby-buildx moby-engine
+        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for ${VERSION_CODENAME} ${architecture}. Skipping."
     else
         # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
         curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
@@ -112,11 +114,11 @@ echo "Finished installing docker / moby"
 if type docker-compose > /dev/null 2>&1; then
     echo "Docker Compose already installed."
 else
-    TARGET_COMPOSE_ARCH="$(uname -m)"
-    if [ "${TARGET_COMPOSE_ARCH}" = "amd64" ]; then
-        TARGET_COMPOSE_ARCH="x86_64"
+    target_compose_arch="${architecture}"
+    if [ "${target_compose_arch}" = "amd64" ]; then
+        target_compose_arch="x86_64"
     fi
-    if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
+    if [ "${target_compose_arch}" != "x86_64" ]; then
         # Use pip to get a version that runns on this architecture
         if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
             apt_get_update_if_needed
@@ -135,8 +137,8 @@ else
         ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
         rm -rf /tmp/pip-tmp
     else
-        LATEST_COMPOSE_VERSION=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/docker/compose/releases/latest)")
-        curl -fsSL "https://github.com/docker/compose/releases/download/${LATEST_COMPOSE_VERSION}/docker-compose-$(uname -s)-${TARGET_COMPOSE_ARCH}" -o /usr/local/bin/docker-compose
+        latest_compose_version=$(basename "$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/docker/compose/releases/latest)")
+        curl -fsSL "https://github.com/docker/compose/releases/download/${latest_compose_version}/docker-compose-$(uname -s)-${target_compose_arch}" -o /usr/local/bin/docker-compose
         chmod +x /usr/local/bin/docker-compose
     fi
 fi

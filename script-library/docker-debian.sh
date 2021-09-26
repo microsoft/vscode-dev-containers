@@ -78,9 +78,10 @@ check_packages() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
-check_packages apt-transport-https curl ca-certificates gnupg2
+check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
 
 # Install Docker / Moby CLI if not already installed
+architecture="$(dpkg --print-architecture)"
 if type docker > /dev/null 2>&1; then
     echo "Docker / Moby CLI already installed."
 else
@@ -90,9 +91,10 @@ else
         # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
         get_common_setting MICROSOFT_GPG_KEYS_URI
         curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+        echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
         apt-get update
-        apt-get -y install --no-install-recommends moby-cli moby-buildx moby-compose
+        apt-get -y install --no-install-recommends moby-cli moby-buildx moby-engine
+        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for ${VERSION_CODENAME} ${architecture}. Skipping."
     else
         # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
         curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg

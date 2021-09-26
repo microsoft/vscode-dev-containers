@@ -48,13 +48,14 @@ fi
 updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" >> /etc/bash.bashrc
-        if [ -f "/etc/zsh/zshrc" ]; then
+        if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
+            echo -e "$1" >> /etc/bash.bashrc
+        fi
+        if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
             echo -e "$1" >> /etc/zsh/zshrc
         fi
     fi
 }
-
 # Figure out correct version of a three part version number is not passed
 find_version_from_git_tags() {
     local variable_name=$1

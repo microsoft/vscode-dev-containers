@@ -43,7 +43,7 @@ fi
 if yum list deltarpm > /dev/null 2>&1; then
     yum -y install deltarpm
 fi
-yum -y install ca-certificates curl gnupg2 dnf net-tools dialog git openssh-clients curl less procps 
+yum -y install ca-certificates curl gnupg2 dirmngr dnf net-tools dialog git openssh-clients curl less procps 
 
 # Try to load os-release
 . /etc/os-release 2>/dev/null

@@ -163,7 +163,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 # Install git, curl, gpg, dirmngr and debian-archive-keyring if missing
 . /etc/os-release
-check_packages curl ca-certificates gnupg2 apt-transport-https dirmngr
+check_packages curl ca-certificates gnupg2 dirmngr apt-transport-https
 if ! type git > /dev/null 2>&1; then
     apt_get_update_if_needed
     apt-get -y install --no-install-recommends git

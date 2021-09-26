@@ -91,23 +91,20 @@ check_packages() {
     fi
 }
 
-export DEBIAN_FRONTEND=noninteractive
-
-# Source /etc/os-release to get OS info
-. /etc/os-release
-architecture="$(dpkg --print-architecture)"
-if [[ "${POWERSHELL_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${POWERSHELL_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
+install_using_apt() {
     # Install dependencies
-    check_packages apt-transport-https curl ca-certificates gnupg2 
+    check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
     # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
     get_common_setting MICROSOFT_GPG_KEYS_URI
     curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
     apt-get update -yq
-    apt-get install -yq powershell
-else
-    # Fall back on direct download if no apt package exists in microsoft pool
-    check_packages curl ca-certificates gnupg2 libc6 libgcc1 libgssapi-krb5-2 liblttng-ust0 libstdc++6 libunwind8 libuuid1 zlib1g libicu[0-9][0-9]
+    apt-get install -yq powershell || return 1
+}
+
+install_using_github() {
+        # Fall back on direct download if no apt package exists in microsoft pool
+    check_packages curl ca-certificates gnupg2 dirmngr libc6 libgcc1 libgssapi-krb5-2 liblttng-ust0 libstdc++6 libunwind8 libuuid1 zlib1g libicu[0-9][0-9]
     if ! type git > /dev/null 2>&1; then
         apt_get_update_if_needed
         apt-get install -y --no-install-recommends git
@@ -134,6 +131,21 @@ else
     tar xf "${powershell_filename}" -C "${powershell_target_path}"
     ln -s "${powershell_target_path}/pwsh" /usr/local/bin/pwsh
     rm -rf /tmp/pwsh
+}
+
+export DEBIAN_FRONTEND=noninteractive
+
+# Source /etc/os-release to get OS info
+. /etc/os-release
+architecture="$(dpkg --print-architecture)"
+if [[ "${POWERSHELL_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${POWERSHELL_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
+    install_using_apt || use_github="true"
+else
+    use_github="true"
+fi
+
+if [ "${use_github}" = "true" ]; then
+    install_using_github
 fi
 
 echo "Done!"

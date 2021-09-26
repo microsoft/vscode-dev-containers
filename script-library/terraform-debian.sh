@@ -84,7 +84,7 @@ receive_gpg_keys() {
     done
     set -e
     if [ "${gpg_ok}" = "false" ]; then
-        echo "(!) Failed to install rvm."
+        echo "(!) Failed to get gpg key."
         exit 1
     fi
 }
