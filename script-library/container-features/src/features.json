@@ -188,7 +188,7 @@
 			"type": "option",
 			"default": false,
 			"init": true,
-			"buildArg": "_VSC_INSTALL_GIT",			
+			"buildArg": "_VSC_INSTALL_GIT",
 			"include": [
 				"azure-cli",
 				"cpp",
