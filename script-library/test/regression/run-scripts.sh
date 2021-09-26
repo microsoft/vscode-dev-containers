@@ -24,17 +24,17 @@ runScript()
     if [ "${script_name}" = "desktop-lite" ]; then
         rm -f /usr/local/share/desktop-init.sh
     fi
-    local script=${SCRIPT_DIR}/${script_name}-${DISTRO}.sh
-    chmod +x ${script}
-    local args=$2
-    required_prefix_args=${3:-""}
+    local script="${SCRIPT_DIR}/${script_name}-${DISTRO}.sh"
+    chmod +x "${script}"
+    local optional_args="$2"
+    local required_prefix_args="${3:-""}"
     echo "**** Testing $script ****"
     if [ "${USE_DEFAULTS}" = "true" ]; then
         echo "Using defaults..."
         ${script} ${required_prefix_args}
     else
-        echo "Arguments: ${required_prefix_args} ${args}"
-        ${script} ${required_prefix_args} ${args}
+        echo "Arguments: ${required_prefix_args} ${optional_args}"
+        ${script} ${required_prefix_args} ${optional_args}
     fi
     echo "**** Done! ****"
 }
