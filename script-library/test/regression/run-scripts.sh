@@ -74,7 +74,7 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript azcli
     runScript fish "false ${USERNAME}"
     runScript git-from-src "latest true"
-    runScript git-lfs
+    runScript git-lfs "" "2.13.3"
     runScript github
     runScript go "1.14 /opt/go /go ${USERNAME} false"
     runScript gradle "4.4 /usr/local/sdkman1 ${USERNAME} false"
