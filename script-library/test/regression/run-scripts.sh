@@ -11,29 +11,30 @@ set -e
 
 runScript()
 {
-    SCRIPT_NAME=$1
-    if [ "${RUN_ONE}" != "false" ] && [ "${SCRIPT_NAME}" != "common" ] && [ "${SCRIPT_NAME}" != "${RUN_ONE}" ]; then
+    local script_name=$1
+    if [ "${RUN_ONE}" != "false" ] && [ "${script_name}" != "common" ] && [ "${script_name}" != "${RUN_ONE}" ]; then
         return
     fi
-    if [ "${SCRIPT_NAME}" = "docker" ] || [ "${SCRIPT_NAME}" = "docker-in-docker" ]; then
+    if [ "${script_name}" = "docker" ] || [ "${script_name}" = "docker-in-docker" ]; then
         rm -f /usr/local/share/docker-init.sh
     fi
-    if [ "${SCRIPT_NAME}" = "sshd" ]; then
+    if [ "${script_name}" = "sshd" ]; then
         rm -f /usr/local/share/ssh-init.sh
     fi
-    if [ "${SCRIPT_NAME}" = "desktop-lite" ]; then
+    if [ "${script_name}" = "desktop-lite" ]; then
         rm -f /usr/local/share/desktop-init.sh
     fi
-    SCRIPT=${SCRIPT_DIR}/${SCRIPT_NAME}-${DISTRO}.sh
-    ARGS=$2
-    REQUIRED_PREFIX_ARGS=${3:-""}
-    echo "**** Testing $SCRIPT ****"
+    local script=${SCRIPT_DIR}/${script_name}-${DISTRO}.sh
+    chmod +x ${script}
+    local args=$2
+    required_prefix_args=${3:-""}
+    echo "**** Testing $script ****"
     if [ "${USE_DEFAULTS}" = "true" ]; then
         echo "Using defaults..."
-        ${SCRIPT} ${REQUIRED_PREFIX_ARGS}
+        ${script} ${required_prefix_args}
     else
-        echo "Arguments: ${REQUIRED_PREFIX_ARGS} ${ARGS}"
-        ${SCRIPT} ${REQUIRED_PREFIX_ARGS} ${ARGS}
+        echo "Arguments: ${required_prefix_args} ${args}"
+        ${script} ${required_prefix_args} ${args}
     fi
     echo "**** Done! ****"
 }
@@ -68,7 +69,7 @@ if [ "${RUN_COMMON_SCRIPT}" = "true" ]; then
     chown 1000 /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh
 fi
 
-ARCHITECTURE="$(uname -m)"
+architecture="$(uname -m)"
 if [ "${DISTRO}" = "debian" ]; then
     runScript azcli
     runScript fish "false ${USERNAME}"
@@ -88,10 +89,10 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript desktop-lite "${USERNAME} changeme false"
     runScript docker-in-docker "false ${USERNAME} false"
     runScript powershell
-    if [ "${ARCHITECTURE}" = "amd64" ] || [ "${ARCHITECTURE}" = "x86_64" ] || [ "${ARCHITECTURE}" = "arm64" ] || [ "${ARCHITECTURE}" = "aarch64" ]; then
+    if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ] || [ "${architecture}" = "arm64" ] || [ "${architecture}" = "aarch64" ]; then
         runScript java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
     fi
-    if [ "${ARCHITECTURE}" = "amd64" ] || [ "${ARCHITECTURE}" = "x86_64" ]; then
+    if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ]; then
         runScript homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
     fi 
 fi
