@@ -78,6 +78,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
     package_list="apt-utils \
         openssh-client \
         gnupg2 \
+        dirmngr \
         iproute2 \
         procps \
         lsof \

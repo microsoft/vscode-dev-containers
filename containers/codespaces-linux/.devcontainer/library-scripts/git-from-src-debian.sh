@@ -71,7 +71,7 @@ receive_gpg_keys() {
     done
     set -e
     if [ "${gpg_ok}" = "false" ]; then
-        echo "(!) Failed to install rvm."
+        echo "(!) Failed to get gpg key."
         exit 1
     fi
 }
@@ -102,7 +102,7 @@ export DEBIAN_FRONTEND=noninteractive
 # If ubuntu, PPAs allowed, and latest - install from there
 if ([ "${GIT_VERSION}" = "latest" ] || [ "${GIT_VERSION}" = "lts" ] || [ "${GIT_VERSION}" = "current" ]) && [ "${ID}" = "ubuntu" ] && [ "${USE_PPA_IF_AVAILABLE}" = "true" ]; then
     echo "Using PPA to install latest git..."
-    check_packages apt-transport-https curl ca-certificates gnupg2
+    check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
     receive_gpg_keys GIT_CORE_PPA_ARCHIVE_GPG_KEY /usr/share/keyrings/gitcoreppa-archive-keyring.gpg
     echo -e "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gitcoreppa-archive-keyring.gpg] http://ppa.launchpad.net/git-core/ppa/ubuntu ${VERSION_CODENAME} main\ndeb-src [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gitcoreppa-archive-keyring.gpg] http://ppa.launchpad.net/git-core/ppa/ubuntu ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/git-core-ppa.list
     apt-get update

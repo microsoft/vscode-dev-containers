@@ -12,7 +12,7 @@
 GIT_LFS_VERSION=${1:-"latest"}
 GIT_LFS_ARCHIVE_GPG_KEY_URI="https://packagecloud.io/github/git-lfs/gpgkey"
 GIT_LFS_ARCHIVE_ARCHITECTURES="amd64"
-GIT_LFS_ARCHIVE_VERSION_CODENAMES="stretch buster bionic focal"
+GIT_LFS_ARCHIVE_VERSION_CODENAMES="stretch buster bullseye bionic focal"
 GIT_LFS_CHECKSUM_GPG_KEYS="0x88ace9b29196305ba9947552f1ba225c0223b187 0x86cd3297749375bcf8206715f54fe648088335a9 0xaa3b3450295830d2de6db90caba67be5a5795889"
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
 keyserver hkps://keys.openpgp.org
@@ -101,7 +101,7 @@ receive_gpg_keys() {
     done
     set -e
     if [ "${gpg_ok}" = "false" ]; then
-        echo "(!) Failed to install rvm."
+        echo "(!) Failed to get gpg key."
         exit 1
     fi
 }
@@ -125,24 +125,7 @@ check_packages() {
     fi
 }
 
-export DEBIAN_FRONTEND=noninteractive
-
-# Install git, curl, gpg, and debian-archive-keyring if missing
-. /etc/os-release
-check_packages curl ca-certificates gnupg2 apt-transport-https
-if ! type git > /dev/null 2>&1; then
-    apt_get_update_if_needed
-    apt-get -y install --no-install-recommends git
-fi
-if [ "${ID}" = "debian" ]; then
-    check_packages debian-archive-keyring
-fi
-
-
-# Install Git LFS
-echo "Installing Git LFS..."
-architecture="$(dpkg --print-architecture)"
-if [[ "${GIT_LFS_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${GIT_LFS_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
+install_using_apt() {
     # Soft version matching
     if [ "${GIT_LFS_VERSION}" != "latest" ] && [ "${GIT_LFS_VERSION}" != "lts" ] && [ "${GIT_LFS_VERSION}" != "stable" ]; then
         find_version_from_git_tags GIT_LFS_VERSION "https://github.com/git-lfs/git-lfs"
@@ -154,10 +137,12 @@ if [[ "${GIT_LFS_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${GIT_
     get_common_setting GIT_LFS_ARCHIVE_GPG_KEY_URI
     curl -sSL "${GIT_LFS_ARCHIVE_GPG_KEY_URI}" | gpg --dearmor > /usr/share/keyrings/gitlfs-archive-keyring.gpg
     echo -e "deb [arch=${architecture} signed-by=/usr/share/keyrings/gitlfs-archive-keyring.gpg] https://packagecloud.io/github/git-lfs/${ID} ${VERSION_CODENAME} main\ndeb-src [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gitlfs-archive-keyring.gpg] https://packagecloud.io/github/git-lfs/${ID} ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/git-lfs.list
-    apt-get install -yq git-lfs${version_suffix}
+    apt-get install -yq git-lfs${version_suffix} || return 1
     git lfs install --skip-repo
-else
-    echo "No apt package for ${VERSION_CODENAME} ${architecture}. Installing manually."
+}
+
+install_using_github() {
+    echo "(*) No apt package for ${VERSION_CODENAME} ${architecture}. Installing manually."
     mkdir -p /tmp/git-lfs
     cd /tmp/git-lfs
     find_version_from_git_tags GIT_LFS_VERSION "https://github.com/git-lfs/git-lfs"
@@ -172,6 +157,33 @@ else
     tar xf "${git_lfs_filename}" -C .
     ./install.sh
     rm -rf /tmp/git-lfs /tmp/tmp-gnupg
+}
+
+export DEBIAN_FRONTEND=noninteractive
+
+# Install git, curl, gpg, dirmngr and debian-archive-keyring if missing
+. /etc/os-release
+check_packages curl ca-certificates gnupg2 dirmngr apt-transport-https
+if ! type git > /dev/null 2>&1; then
+    apt_get_update_if_needed
+    apt-get -y install --no-install-recommends git
+fi
+if [ "${ID}" = "debian" ]; then
+    check_packages debian-archive-keyring
+fi
+
+# Install Git LFS
+echo "Installing Git LFS..."
+architecture="$(dpkg --print-architecture)"
+if [[ "${GIT_LFS_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${GIT_LFS_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
+    install_using_apt || use_github="true"
+else
+    use_github="true"
+fi
+
+# If no archive exists or apt install fails, try direct from github
+if [ "${use_github}" = "true" ]; then
+    install_using_github
 fi
 
 echo "Done!"

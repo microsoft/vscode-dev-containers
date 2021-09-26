@@ -58,7 +58,7 @@ export DEBIAN_FRONTEND=noninteractive
 architecture="$(dpkg --print-architecture)"
 if [ "${architecture}" = "amd64" ]; then
     # Install dependencies
-    check_packages apt-transport-https curl ca-certificates gnupg2
+    check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
     # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
     . /etc/os-release
     get_common_setting MICROSOFT_GPG_KEYS_URI
