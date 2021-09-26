@@ -12,7 +12,7 @@
 GIT_LFS_VERSION=${1:-"latest"}
 GIT_LFS_ARCHIVE_GPG_KEY_URI="https://packagecloud.io/github/git-lfs/gpgkey"
 GIT_LFS_ARCHIVE_ARCHITECTURES="amd64"
-GIT_LFS_ARCHIVE_VERSION_CODENAMES="stretch buster bionic focal"
+GIT_LFS_ARCHIVE_VERSION_CODENAMES="stretch buster bullseye bionic focal"
 GIT_LFS_CHECKSUM_GPG_KEYS="0x88ace9b29196305ba9947552f1ba225c0223b187 0x86cd3297749375bcf8206715f54fe648088335a9 0xaa3b3450295830d2de6db90caba67be5a5795889"
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
 keyserver hkps://keys.openpgp.org
@@ -101,7 +101,7 @@ receive_gpg_keys() {
     done
     set -e
     if [ "${gpg_ok}" = "false" ]; then
-        echo "(!) Failed to install rvm."
+        echo "(!) Failed to get gpg key."
         exit 1
     fi
 }
@@ -137,7 +137,6 @@ fi
 if [ "${ID}" = "debian" ]; then
     check_packages debian-archive-keyring
 fi
-
 
 # Install Git LFS
 echo "Installing Git LFS..."
