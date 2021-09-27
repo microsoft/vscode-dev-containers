@@ -33,9 +33,9 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
 2. Add the following to your `.devcontainer/Dockerfile`:
 
     ```Dockerfile
-    COPY library-scripts/*.sh /tmp/library-scripts/
+    COPY .devcontainer/library-scripts/docker-debian.sh /tmp/library-scripts/
     ENV DOCKER_BUILDKIT=1
-    RUN apt-get update && /bin/bash /tmp/library-scripts/docker-in-docker-debian.sh
+    RUN apt-get update && /bin/bash /tmp/library-scripts/docker-debian.sh
     ENTRYPOINT ["/usr/local/share/docker-init.sh"]
     VOLUME [ "/var/lib/docker" ]
     CMD ["sleep", "infinity"]
