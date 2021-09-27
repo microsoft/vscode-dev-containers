@@ -10,6 +10,9 @@
 			"entrypoint": "/usr/local/share/docker-init.sh",
 			"privileged": true,
 			"init": true,
+			"containerEnv": {
+				"DOCKER_BUILDKIT": "1"
+			},
 			"extensions": [
 				"ms-azuretools.vscode-docker"
 			],
@@ -53,6 +56,9 @@
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
 			"init": true,
+			"containerEnv": {
+				"DOCKER_BUILDKIT": "1"
+			},
 			"extensions": [
 				"ms-azuretools.vscode-docker"
 			],
