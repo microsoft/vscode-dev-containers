@@ -1,15 +1,16 @@
 {
 	"variants": ["3.14", "3.13", "3.12", "3.11"],
-	"definitionVersion": "0.202.2",
+	"definitionVersion": "0.203.0",
 	"build": {
 		"latest": false,
 		"rootDistro": "alpine",
+		"architectures": ["linux/amd64","linux/arm64"],
 		"tags": [
 			"base:${VERSION}-alpine-${VARIANT}",
 			"base:${VERSION}-alpine${VARIANT}"
 		],
 		"variantTags": {
-			"3.13": [
+			"3.14": [
 				"base:${VERSION}-alpine"
 			]
 		}
