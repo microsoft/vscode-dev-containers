@@ -1,6 +1,23 @@
 #!/usr/bin/env bash
 set -e
 
+# Verify we're on a supported OS
+. /etc/os-release
+if [ "${ID}" != "debian" ] &&  [ "${ID_LIKE}" != "debian" ]; then
+cat << EOF
+
+*********** Unsupported operating system "${ID}" detected ***********
+
+Features support currently requires a Debian/Ubuntu-based image. Update your 
+image or Dockerfile FROM statement to start with a supported OS. For example:
+mcr.microsoft.com/vscode/devcontainers/base:ubuntu
+
+Aborting build...
+
+EOF
+    exit 2
+fi
+
 set -a
 . ./features.env
 set +a
