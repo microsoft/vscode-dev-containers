@@ -137,8 +137,13 @@ install_using_apt() {
     get_common_setting GIT_LFS_ARCHIVE_GPG_KEY_URI
     curl -sSL "${GIT_LFS_ARCHIVE_GPG_KEY_URI}" | gpg --dearmor > /usr/share/keyrings/gitlfs-archive-keyring.gpg
     echo -e "deb [arch=${architecture} signed-by=/usr/share/keyrings/gitlfs-archive-keyring.gpg] https://packagecloud.io/github/git-lfs/${ID} ${VERSION_CODENAME} main\ndeb-src [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gitlfs-archive-keyring.gpg] https://packagecloud.io/github/git-lfs/${ID} ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/git-lfs.list
-    apt-get install -yq git-lfs${version_suffix} || return 1
-    git lfs install --skip-repo
+
+    if ! apt-get update && apt-get install -yq git-lfs${version_suffix}; then
+        rm -f /etc/apt/sources.list.d/git-lfs.list
+        return 1
+    fi
+
+    git-lfs install --skip-repo
 }
 
 install_using_github() {
