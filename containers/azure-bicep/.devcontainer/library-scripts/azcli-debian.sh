@@ -12,6 +12,8 @@
 set -e
 
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
+AZCLI_ARCHIVE_ARCHITECTURES="amd64"
+AZCLI_ARCHIVE_VERSION_CODENAMES="stretch buster bullseye bionic focal"
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
@@ -54,20 +56,21 @@ check_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
-# See if we're on x86_64 and if so, install via apt-get, otherwise use pip3
-architecture="$(dpkg --print-architecture)"
-if [ "${architecture}" = "amd64" ]; then
+install_using_apt() {
     # Install dependencies
     check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
     # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-    . /etc/os-release
     get_common_setting MICROSOFT_GPG_KEYS_URI
     curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
     echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/azure-cli.list
-    apt-get update
-    apt-get install -y azure-cli
-else
-    echo "No pre-built binaries availabe for ${architecture}. Installing via pip3."
+    if ! apt-get update && apt-get install -yq azure-cli; then
+        -f /etc/apt/sources.list.d/azure-cli.list
+        return 1
+    fi
+}
+
+install_using_pip() {
+    echo "(*) No pre-built binaries availabe for ${architecture}. Installing via pip3."
     if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
         apt_get_update_if_needed
         apt-get -y install python3-minimal python3-pip libffi-dev python3-venv
@@ -84,5 +87,20 @@ else
     fi
     ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' azure-cli
     rm -rf /tmp/pip-tmp
+}
+
+# See if we're on x86_64 and if so, install via apt-get, otherwise use pip3
+echo "(*) Installing Azure CLI..."
+. /etc/os-release
+architecture="$(dpkg --print-architecture)"
+if [[ "${AZCLI_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${AZCLI_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
+    install_using_apt || use_pip="true"
+else
+    use_pip="true"
 fi
+
+if [ "${use_pip}" = "true" ]; then
+    install_using_pip
+fi
+
 echo "Done!"
