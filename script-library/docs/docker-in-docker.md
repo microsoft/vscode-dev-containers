@@ -28,7 +28,7 @@
 
 See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a complete working example. However, here are the general steps to use the script:
 
-1. Add [`docker-debian.sh`](../docker-debian.sh) to `.devcontainer/library-scripts`
+1. Add [`docker-debian.sh`](../docker-debian.sh) to `.devcontainer/library-scripts`. Make this file executable: `chmod +x .devcontainer/library-scripts/docker-debian.sh`
 
 2. Add the following to your `.devcontainer/Dockerfile`:
 
