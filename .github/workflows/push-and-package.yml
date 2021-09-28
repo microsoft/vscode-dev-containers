@@ -7,8 +7,6 @@ on:
     - 'v*'
 
 jobs:
-  permissions:
-    contents: write
 
   build-and-push:
     name: Build and push images
@@ -18,6 +16,9 @@ jobs:
         page-total: [6]
       fail-fast: false
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
     - name: Free more space
       id: free_space 
