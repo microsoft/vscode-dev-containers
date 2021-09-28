@@ -109,10 +109,11 @@ if type docker-compose > /dev/null 2>&1; then
     echo "Docker Compose already installed."
 else
     TARGET_COMPOSE_ARCH="$(uname -m)"
-    if [ "${TARGET_COMPOSE_ARCH}" = "amd64" ]; then
-        TARGET_COMPOSE_ARCH="x86_64"
+    #As of Docker Compose 2.0 (28Sept2021), Docker Compose replaced the "x86_64" suffixed to "AMD64".  Update the target arch to pull the right iteration
+    if [ "${TARGET_COMPOSE_ARCH}" = "x86_64" ]; then
+        TARGET_COMPOSE_ARCH="amd64"
     fi
-    if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
+    if [ "${TARGET_COMPOSE_ARCH}" != "amd64" ]; then
         # Use pip to get a version that runns on this architecture
         if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
             apt_get_update_if_needed
