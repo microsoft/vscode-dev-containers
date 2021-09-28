@@ -3,7 +3,7 @@
 		//  Problem #1 - you should be able to pick docker-in-docker or docker-from-docker, but not both, and settings need to be different
 		{
 			"id": "docker-in-docker",
-			"name": "Docker (Moby) CLI/Engine (Docker-in-Docker)",
+			"name": "Docker (Moby) support (Docker-in-Docker)",
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
@@ -50,7 +50,7 @@
 		},
 		{
 			"id": "docker-from-docker",
-			"name": "Docker (Moby) CLI, reuse host Docker Engine",
+			"name": "Docker (Moby) support, reuse host Docker Engine (Docker-from-Docker)",
 			"type": "option",
 			"default": false,
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
@@ -97,11 +97,15 @@
 		{
 			"id": "kubectl-helm-minikube",
 			"name": "Kubectl, Helm, and Minkube",
-			"type": "choice",
-			"values": ["latest", "1.22.2"],
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.22", "1.21", "1.20"],
+					"default": "latest",
+					"description": "Select or enter a Kubernetes version to install"
+				}
+			},
 			// Expects: helm, minikube
-			"customValues": true,
-			"default": false,
 			"init": true,
 			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
 			"extensions": [
@@ -143,18 +147,20 @@
 		{
 			"id": "terraform",
 			"name": "Terraform, tflint, and TFGrunt",
-			"type": "choice",
-			"values": ["latest", "1.0.7"],
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.0", "0.15"],
+					"default": "latest",
+					"description": "Terraform version"
+				}
+			},
 			// Expects versions for: tflint, terragrunt
-			"customValues": true, 
-			"default": false,
 			"init": true,
 			"buildArg": "_VSC_INSTALL_TERRAFORM",
 			"extensions": [
 				"HashiCorp.terraform",
-				"ms-vscode.azurecli",
-				"ms-azuretools.vscode-azureterraform",
-				"ms-azuretools.vscode-docker"
+				"ms-azuretools.vscode-azureterraform"
 			],
 			"settings": { 
 				"terraform.languageServer": {
@@ -450,16 +456,20 @@
 		{
 			"id": "node",
 			"name": "Node.js (via nvm) and yarn",
-			"hint": "Select node version to install",
-			"type": "choice",
-			"values": [ "lts", "latest","16", "14", "12" ],
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": [ "lts","latest","16", "14", "12" ],
+					"default": "lts",
+					"description": "Select or enter a Node.js version to install"
+				}
+			},
 			"init": true,
-			"buildArg": "_VSC_NODE_VERSION",
+			"buildArg": "_VSC_INSTALL_NODE",
 			"extensions": ["dbaeumer.vscode-eslint"],
 			"containerEnv": {
 				"NVM_DIR":"/usr/local/share/nvm",
-				"NVM_SYMLINK_CURRENT": true,
+				"NVM_SYMLINK_CURRENT": "true",
 				"PATH": "${NVM_DIR}/current/bin:${PATH}"
 			}, "include": [
 				"azure-cli",
@@ -483,12 +493,17 @@
 		{
 			"id": "python",
 			"name": "Python (may require compilation)",
-			"hint": "Select python version to install",
-			"type": "choice",
-			"values": ["latest", "3.9", "3.8", "3.7", "3.6"],
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest", "3.9", "3.8", "3.7", "3.6"],
+					"default": "latest",
+					"description": "Select a Python version to install"
+				}
+			},
 			"init": true,
 			"default": false,
-			"buildArg": "_VSC_PYTHON_VERSION",
+			"buildArg": "_VSC_INSTALL_PYTHON",
 			"extensions": [
 				"ms-python.python",
 				"ms-python.vscode-pylance"
@@ -546,12 +561,16 @@
 		{
 			"id": "golang",
 			"name": "Go",
-			"hint": "Select go version to install",
-			"type": "choice",
-			"values": ["latest", "1.17", "1.16"],
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.17", "1.16"],
+					"default": "latest",
+					"description": "Select or enter a Go version to install"
+				}
+			},
 			"init": true,
-			"default": false,
-			"buildArg": "_VSC_GO_VERSION",
+			"buildArg": "_VSC_INSTALL_GOLANG",
 			"extensions": ["golang.Go"],
 			"containerEnv": {
 				"GOPATH": "/go",
@@ -599,12 +618,16 @@
 		{
 			"id": "java",
 			"name": "Java (via SDKMAN!)",
-			"hint": "Select java version to install",
-			"type": "choice",
-			"values": ["lts", "latest", "16", "11", "8"],
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["lts", "latest", "16", "11", "8"],
+					"default": "lts",
+					"description": "Select or enter a Java version to install"
+				}
+			},
 			"init": true,
-			"default": false,
-			"buildArg": "_VSC_JAVA_VERSION",
+			"buildArg": "_VSC_INSTALL_JAVA",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
@@ -647,12 +670,16 @@
 		{
 			"id": "maven",
 			"name": "Maven (via SDKMAN!)",
-			"hint": "Select maven version to install",
-			"type": "choice",
-			"values": ["latest", "3.8", "3.6", "3.5"],
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "3.8", "3.6", "3.5"],
+					"default": "latest",
+					"description": "Select or enter a Maven version to install"
+				}
+			},
 			"init": true,
-			"default": false,
-			"buildArg": "_VSC_MAVEN_VERSION",
+			"buildArg": "_VSC_INSTALL_MAVEN",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
@@ -690,12 +717,16 @@
 		{
 			"id": "gradle",
 			"name": "Gradle (via SDKMAN!)",
-			"hint": "Select gradle version to install",
-			"type": "choice",
-			"values": ["latest", "7", "6", "5"],
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "7", "6", "5"],
+					"default": "latest",
+					"description": "Select or enter a Gradle version to install"
+				}
+			},
 			"init": true,
-			"buildArg": "_VSC_GRADLE_VERSION",
+			"buildArg": "_VSC_INSTALL_GRADLE",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
@@ -732,12 +763,16 @@
 		{
 			"id": "ruby",
 			"name": "Ruby (via rvm)",
-			"hint": "Select ruby version to install",
-			"type": "choice",
-			"values": ["latest", "3.0", "2.7", "2.6"],
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "3.0", "2.7", "2.6"],
+					"default": "latest",
+					"description": "Select or enter a Ruby version to install"
+				}
+			},
 			"init": true,
-			"buildArg": "_VSC_RUBY_VERSION",
+			"buildArg": "_VSC_INSTALL_RUBY",
 			"extensions": [
 				"rebornix.Ruby"
 			],
