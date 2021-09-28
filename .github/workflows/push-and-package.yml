@@ -92,6 +92,7 @@ jobs:
 
         # Re-tag and push to origin
         if [ "${NO_UPDATES}" != "true" ]; then 
+            git fetch --unshallow origin || echo 'Not a shallow clone.'
             git tag -d ${{ steps.get_tag_name.outputs.tag }}
             git tag ${{ steps.get_tag_name.outputs.tag }}
             git push --delete origin ${{ steps.get_tag_name.outputs.tag }}
