@@ -4,8 +4,19 @@
 		{
 			"id": "docker-in-docker",
 			"name": "Docker (Moby) support (Docker-in-Docker)",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				},
+				"moby": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install OSS Moby build instead of Docker CE"
+				}
+			},
 			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
 			"privileged": true,
@@ -51,8 +62,14 @@
 		{
 			"id": "docker-from-docker",
 			"name": "Docker (Moby) support, reuse host Docker Engine (Docker-from-Docker)",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
 			"init": true,
@@ -93,7 +110,6 @@
 				"python-3-postgres"
 			]
 		},
-		// Problem #3 - there's three versions here and they go together as a unit, and no ability to pin to a version
 		{
 			"id": "kubectl-helm-minikube",
 			"name": "Kubectl, Helm, and Minkube",
@@ -103,9 +119,20 @@
 					"proposals": ["latest", "1.22", "1.21", "1.20"],
 					"default": "latest",
 					"description": "Select or enter a Kubernetes version to install"
+				},
+				"helm": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select or enter a Helm version to install"
+				},
+				"minikube": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select or enter a Minikube version to install"
 				}
 			},
-			// Expects: helm, minikube
 			"init": true,
 			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
 			"extensions": [
@@ -143,7 +170,6 @@
 				"python-3-postgres"
 			]
 		},
-		//  Problem #3 - Terraform also involves three versions here and they go together as a unit, and no ability to pin to a version
 		{
 			"id": "terraform",
 			"name": "Terraform, tflint, and TFGrunt",
@@ -153,9 +179,20 @@
 					"proposals": ["latest", "1.0", "0.15"],
 					"default": "latest",
 					"description": "Terraform version"
+				},
+				"tflint": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Tflint version"
+				},
+				"terragrunt": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Terragrunt version"
 				}
 			},
-			// Expects versions for: tflint, terragrunt
 			"init": true,
 			"buildArg": "_VSC_INSTALL_TERRAFORM",
 			"extensions": [
@@ -197,8 +234,19 @@
 		{
 			"id": "git",
 			"name": "Git (latest version - may require compilation)",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				},
+				"ppa": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install from PPA if available"
+				}
+			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_GIT",
 			"include": [
@@ -232,8 +280,14 @@
 		{
 			"id": "git-lfs",
 			"name": "Git Large File Support (LFS)",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_GIT_LFS",
 			"include": [
@@ -267,8 +321,14 @@
 		{
 			"id": "github-cli",
 			"name": "GitHub CLI",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select version of the GitHub CLI, if not latest."
+				}
+			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_GITHUB_CLI",
 			"include": [
@@ -304,8 +364,14 @@
 		{
 			"id": "azure-cli",
 			"name": "Azure CLI",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_AZURE_CLI",
 			"extensions": [
@@ -341,8 +407,14 @@
 		{
 			"id": "sshd",
 			"name": "SSH server",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_SSH",
 			"include": [
@@ -378,8 +450,14 @@
 		{
 			"id": "desktop-lite",
 			"name": "Light-weight desktop (Fluxbox)",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
 			"include": [
@@ -415,8 +493,14 @@
 		{
 			"id": "homebrew",
 			"name": "Homebrew",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_HOMEBREW",
 			"containerEnv": {
@@ -459,7 +543,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": [ "lts","latest","16", "14", "12" ],
+					"proposals": [ "lts", "latest", "16", "14", "12" ],
 					"default": "lts",
 					"description": "Select or enter a Node.js version to install"
 				}
@@ -496,13 +580,12 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": ["latest", "3.9", "3.8", "3.7", "3.6"],
+					"enum": [ "latest", "3.9", "3.8", "3.7", "3.6" ],
 					"default": "latest",
 					"description": "Select a Python version to install"
 				}
 			},
 			"init": true,
-			"default": false,
 			"buildArg": "_VSC_INSTALL_PYTHON",
 			"extensions": [
 				"ms-python.python",
@@ -813,8 +896,14 @@
 		{
 			"id": "rust",
 			"name": "Rust",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_RUST",
 			"extensions": [
@@ -871,8 +960,14 @@
 		{
 			"id": "powershell",
 			"name": "PowerShell",
-			"type": "option",
-			"default": false,
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_POWERSHELL",
 			"include": [
