@@ -7,9 +7,15 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": ["latest"],
+					"proposals": ["latest"],
 					"default": "latest",
-					"description": "Currently unused."
+					"description": "Select the Docker/Moby ENGINE version"
+				},
+				"cli": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select the Docker/Moby CLI version"
 				},
 				"moby": {
 					"type": "boolean",
@@ -65,9 +71,9 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": ["latest"],
+					"proposals": ["latest"],
 					"default": "latest",
-					"description": "Currently unused."
+					"description": "Select the Docker/Moby CLI version"
 				}
 			},
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
