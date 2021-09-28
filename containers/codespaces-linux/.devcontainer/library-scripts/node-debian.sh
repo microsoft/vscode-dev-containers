@@ -100,6 +100,9 @@ elif [ "${NODE_VERSION}" = "lts" ]; then
     export NODE_VERSION="lts/*"
 fi
 
+# Create a symlink to the installed version for use in Dockerfile PATH statements
+export NVM_SYMLINK_CURRENT=true
+
 # Install the specified node version if NVM directory already exists, then exit
 if [ -d "${NVM_DIR}" ]; then
     echo "NVM already installed."
