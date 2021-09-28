@@ -12,6 +12,8 @@
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 USERNAME=${2:-"automatic"}
 USE_MOBY=${3:-"true"}
+ENGINE_VERSION=${4:-"latest"}
+CLI_VERSION=${5:-"latest"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOCKER_DASH_COMPOSE_VERSION="1"
 
@@ -123,33 +125,87 @@ if type iptables-legacy > /dev/null 2>&1; then
     update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 fi
 
-# Install Docker / Moby CLI if not already installed
+# Source /etc/os-release to get OS info
+. /etc/os-release
+# Fetch host/container arch.
 architecture="$(dpkg --print-architecture)"
+
+# Set up the necessary apt repos (either Microsoft's or Docker's)
+if [ "${USE_MOBY}" = "true" ]; then
+
+    engine_package_name="moby-engine"
+    engine_git_tags="https://github.com/moby/moby"
+    cli_package_name="moby-cli"
+    cli_git_tags="$engine_git_tags" # Same as engine_git_tags
+
+    # Import key safely and import Microsoft apt repo
+    get_common_setting MICROSOFT_GPG_KEYS_URI
+    curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
+    echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+else
+    # Name of proprietary engine package
+    engine_package_name="docker-ce"
+    engine_git_tags="https://github.com/moby/moby"
+    cli_package_name="docker-ce-cli"
+    cli_git_tags="https://github.com/docker/cli"
+
+    # Import key safely and import Docker apt repo
+    curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
+fi
+
+# Refresh apt lists
+apt-get update
+
+# Soft version matching for ENGINE
+if [ "${ENGINE_VERSION}" = "latest" ] || [ "${ENGINE_VERSION}" = "lts" ] || [ "${ENGINE_VERSION}" = "stable" ]; then
+    # Empty, meaning grab whatever "latest" is in apt repo
+    engine_version_suffix=""
+else
+    find_version_from_git_tags ENGINE_VERSION ${engine_git_tags}
+    # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
+    engine_version_suffix="=$(apt-cache madison ${engine_package_name} | grep -m 1 "${ENGINE_VERSION}" | awk -F"|" '{print $2}' | xargs)"
+    if [ -z ${engine_version_suffix} ]; then
+        echo "ERR: Parsed ENGINE_VERSION (${ENGINE_VERSION}) was not found for package ${engine_package_name} in the apt-cache";
+        echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
+        apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}'
+        exit 1
+    fi
+    echo "engine_version_suffix = ${engine_version_suffix}"
+fi
+
+# Soft version matching for CLI
+if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "lts" ] || [ "${CLI_VERSION}" = "stable" ]; then
+    # Empty, meaning grab whatever "latest" is in apt repo
+    cli_version_suffix=""
+else    
+    find_version_from_git_tags CLI_VERSION ${cli_git_tags}
+    # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
+    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | grep -m 1 "${CLI_VERSION}" | awk -F"|" '{print $2}' | xargs)"
+    if [ -z ${cli_version_suffix} ]; then
+        echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found for package ${cli_package_name} the apt-cache";
+        echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
+        apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
+        exit 1
+    fi
+    echo "cli_version_suffix = ${cli_version_suffix}"
+fi
+
+# Install Docker / Moby CLI if not already installed
 if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then
     echo "Docker / Moby CLI and Engine already installed."
 else
-    # Source /etc/os-release to get OS info
-    . /etc/os-release
     if [ "${USE_MOBY}" = "true" ]; then
-        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-        get_common_setting MICROSOFT_GPG_KEYS_URI
-        curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
-        echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
-        apt-get update
-        apt-get -y install --no-install-recommends moby-cli moby-buildx moby-engine
+        apt-get -y install --no-install-recommends moby-cli${cli_version_suffix} moby-buildx moby-engine${engine_version_suffix}
         apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for ${VERSION_CODENAME} ${architecture}. Skipping."
     else
-        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-        curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
-        apt-get update
-        apt-get -y install --no-install-recommends docker-ce-cli docker-ce
+        apt-get -y install --no-install-recommends docker-ce-cli${cli_version_suffix} docker-ce${engine_version_suffix}
     fi
 fi
 
-echo "Finished installing docker / moby"
+echo "Finished installing docker / moby!"
 
-# Install Docker Compose if not already installed  and is on a supported architecture
+# Install Docker Compose if not already installed and is on a supported architecture
 if type docker-compose > /dev/null 2>&1; then
     echo "Docker Compose already installed."
 else
