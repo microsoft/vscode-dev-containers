@@ -166,7 +166,7 @@ else
     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
     engine_version_suffix="=$(apt-cache madison ${engine_package_name} | grep -m 1 "${ENGINE_VERSION}" | awk -F"|" '{print $2}' | xargs)"
     if [ -z ${engine_version_suffix} ]; then
-        echo "ERR: Parsed ENGINE_VERSION (${ENGINE_VERSION}) was not found for package ${engine_package_name} in the apt-cache";
+        echo "ERR: Parsed ENGINE_VERSION (${ENGINE_VERSION}) was not found in the apt-cache for this package+distribution combo. (Package: ${engine_package_name})";
         echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
         apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}'
         exit 1
@@ -183,7 +183,7 @@ else
     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
     cli_version_suffix="=$(apt-cache madison ${cli_package_name} | grep -m 1 "${CLI_VERSION}" | awk -F"|" '{print $2}' | xargs)"
     if [ -z ${cli_version_suffix} ]; then
-        echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found for package ${cli_package_name} the apt-cache";
+        echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found in the apt-cache for this package+distribution combo. (Package: ${engine_package_name})";
         echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
         apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
         exit 1
