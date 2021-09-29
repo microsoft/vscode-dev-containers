@@ -163,9 +163,9 @@ else
     # apt-cache madison is sorted by latest, so grepping for the first match will get the latest that matches the passed regex
     engine_version_suffix="=$(apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}' | grep -m 1 "${DOCKER_VERSION}" | xargs)"
     cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | grep -m 1 "${DOCKER_VERSION}"  | xargs)"
-    if [ -z ${engine_version_suffix} ] || [ -z ${cli_version_suffix} ] ; then
+    if [ ${engine_version_suffix} = "=" ] || [ ${cli_version_suffix} = "=" ] ; then
         echo "ERR: Provided VERSION (${DOCKER_VERSION}) was not found in the apt-cache for the CLI and/or Engine in this distribution";
-        echo "Available engine versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
+        echo "Available *engine* versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
         apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}'
         exit 1
     fi

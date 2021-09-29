@@ -144,7 +144,7 @@ if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "lts" ] || [ "${CLI_V
 else    
     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
     cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | grep -m 1 "${CLI_VERSION}" | xargs)"
-    if [ -z ${cli_version_suffix} ]; then
+    if [ -z ${cli_version_suffix} ] || [ ${cli_version_suffix} = "=" ]; then
         echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found in the apt-cache for this package+distribution combo";
         echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
         apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
