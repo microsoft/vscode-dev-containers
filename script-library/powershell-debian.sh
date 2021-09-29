@@ -11,6 +11,7 @@
 
 set -e
 
+POWERSHELL_VERSION=${1:-"latest"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 POWERSHELL_ARCHIVE_ARCHITECTURES="amd64"
 POWERSHELL_ARCHIVE_VERSION_CODENAMES="stretch buster bionic focal"
@@ -98,12 +99,29 @@ install_using_apt() {
     get_common_setting MICROSOFT_GPG_KEYS_URI
     curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+
+    # Update lists
     apt-get update -yq
-    apt-get install -yq powershell || return 1
+
+    # Soft version matching for CLI
+    if [ "${POWERSHELL_VERSION}" = "latest" ] || [ "${POWERSHELL_VERSION}" = "lts" ] || [ "${POWERSHELL_VERSION}" = "stable" ]; then
+        # Empty, meaning grab whatever "latest" is in apt repo
+        version_suffix=""
+    else    
+        version_suffix="=$(apt-cache madison powershell | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "^(${POWERSHELL_VERSION})(\.|$|\+.*|-.*)")"
+
+        if [ -z ${version_suffix} ] || [ ${version_suffix} = "=" ]; then
+            echo "Provided POWERSHELL_VERSION (${POWERSHELL_VERSION}) was not found in the apt-cache for this package+distribution combo";
+            return 1
+        fi
+        echo "version_suffix ${version_suffix}"
+    fi
+
+    apt-get install -yq powershell${version_suffix} || return 1
 }
 
 install_using_github() {
-        # Fall back on direct download if no apt package exists in microsoft pool
+    # Fall back on direct download if no apt package exists in microsoft pool
     check_packages curl ca-certificates gnupg2 dirmngr libc6 libgcc1 libgssapi-krb5-2 liblttng-ust0 libstdc++6 libunwind8 libuuid1 zlib1g libicu[0-9][0-9]
     if ! type git > /dev/null 2>&1; then
         apt_get_update_if_needed
@@ -112,7 +130,6 @@ install_using_github() {
     if [ "${architecture}" = "amd64" ]; then
         architecture="x64"
     fi
-    POWERSHELL_VERSION="latest"
     find_version_from_git_tags POWERSHELL_VERSION https://github.com/PowerShell/PowerShell
     powershell_filename="powershell-${POWERSHELL_VERSION}-linux-${architecture}.tar.gz"
     powershell_target_path="/opt/microsoft/powershell/$(echo ${POWERSHELL_VERSION} | grep -oE '[^\.]+' | head -n 1)"
@@ -138,6 +155,7 @@ export DEBIAN_FRONTEND=noninteractive
 # Source /etc/os-release to get OS info
 . /etc/os-release
 architecture="$(dpkg --print-architecture)"
+
 if [[ "${POWERSHELL_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${POWERSHELL_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
     install_using_apt || use_github="true"
 else
@@ -145,6 +163,7 @@ else
 fi
 
 if [ "${use_github}" = "true" ]; then
+    echo "Attempting install from GitHub release..."
     install_using_github
 fi
 
