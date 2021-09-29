@@ -7,9 +7,9 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest"],
+					"proposals": ["latest", "20.10" ],
 					"default": "latest",
-					"description": "Select the Docker/Moby Engine+CLI versions"
+					"description": "Select or enter a Docker/Moby Engine version. (Available versions may vary by Linux distribution.)"
 				},
 				"moby": {
 					"type": "boolean",
@@ -65,9 +65,9 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest"],
+					"proposals": ["latest", "20.10"],
 					"default": "latest",
-					"description": "Select the Docker/Moby CLI version"
+					"description": "Select or enter a Docker/Moby CLI version. (Available versions may vary by Linux distribution.)"
 				}
 			},
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
