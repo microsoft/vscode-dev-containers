@@ -120,7 +120,6 @@ architecture="$(dpkg --print-architecture)"
 if [ "${USE_MOBY}" = "true" ]; then
 
     cli_package_name="moby-cli"
-    cli_git_tags="https://github.com/moby/moby"
 
     # Import key safely and import Microsoft apt repo
     get_common_setting MICROSOFT_GPG_KEYS_URI
@@ -129,7 +128,6 @@ if [ "${USE_MOBY}" = "true" ]; then
 else
     # Name of proprietary engine package
     cli_package_name="docker-ce-cli"
-    cli_git_tags="https://github.com/docker/cli"
 
     # Import key safely and import Docker apt repo
     curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
@@ -144,16 +142,15 @@ if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "lts" ] || [ "${CLI_V
     # Empty, meaning grab whatever "latest" is in apt repo
     cli_version_suffix=""
 else    
-    find_version_from_git_tags CLI_VERSION ${cli_git_tags}
     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
-    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | grep -m 1 "${CLI_VERSION}" | awk -F"|" '{print $2}' | xargs)"
+    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | grep -m 1 "${CLI_VERSION}" | xargs)"
     if [ -z ${cli_version_suffix} ]; then
-        echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found in the apt-cache for this package+distribution combo (Package: ${cli_package_name})";
+        echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found in the apt-cache for this package+distribution combo";
         echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
         apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
         exit 1
     fi
-    echo "cli_version_suffix = ${cli_version_suffix}"
+    echo "cli_version_suffix ${cli_version_suffix}"
 fi
 
 # Ensure apt is in non-interactive to avoid prompts

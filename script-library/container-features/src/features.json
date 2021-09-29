@@ -9,13 +9,7 @@
 					"type": "string",
 					"proposals": ["latest"],
 					"default": "latest",
-					"description": "Select the Docker/Moby ENGINE version"
-				},
-				"cli": {
-					"type": "string",
-					"proposals": ["latest"],
-					"default": "latest",
-					"description": "Select the Docker/Moby CLI version"
+					"description": "Select the Docker/Moby Engine+CLI versions"
 				},
 				"moby": {
 					"type": "boolean",

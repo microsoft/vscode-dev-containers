@@ -12,8 +12,7 @@
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 USERNAME=${2:-"automatic"}
 USE_MOBY=${3:-"true"}
-ENGINE_VERSION=${4:-"latest"}
-CLI_VERSION=${5:-"latest"}
+DOCKER_VERSION=${4:-"latest"} # The Docker/Moby Engine + CLI should match in version
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOCKER_DASH_COMPOSE_VERSION="1"
 
@@ -133,21 +132,18 @@ architecture="$(dpkg --print-architecture)"
 # Set up the necessary apt repos (either Microsoft's or Docker's)
 if [ "${USE_MOBY}" = "true" ]; then
 
+    # Name of open source engine/cli
     engine_package_name="moby-engine"
-    engine_git_tags="https://github.com/moby/moby"
     cli_package_name="moby-cli"
-    cli_git_tags="$engine_git_tags" # Same as engine_git_tags
 
     # Import key safely and import Microsoft apt repo
     get_common_setting MICROSOFT_GPG_KEYS_URI
     curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
     echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
 else
-    # Name of proprietary engine package
+    # Name of licensed engine/cli
     engine_package_name="docker-ce"
-    engine_git_tags="https://github.com/moby/moby"
     cli_package_name="docker-ce-cli"
-    cli_git_tags="https://github.com/docker/cli"
 
     # Import key safely and import Docker apt repo
     curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
@@ -157,39 +153,42 @@ fi
 # Refresh apt lists
 apt-get update
 
-# Soft version matching for ENGINE
-if [ "${ENGINE_VERSION}" = "latest" ] || [ "${ENGINE_VERSION}" = "lts" ] || [ "${ENGINE_VERSION}" = "stable" ]; then
+# Soft version matching
+if [ "${DOCKER_VERSION}" = "latest" ] || [ "${DOCKER_VERSION}" = "lts" ] || [ "${DOCKER_VERSION}" = "stable" ]; then
     # Empty, meaning grab whatever "latest" is in apt repo
     engine_version_suffix=""
+    cli_version_suffix=""
 else
-    find_version_from_git_tags ENGINE_VERSION ${engine_git_tags}
     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
-    engine_version_suffix="=$(apt-cache madison ${engine_package_name} | grep -m 1 "${ENGINE_VERSION}" | awk -F"|" '{print $2}' | xargs)"
-    if [ -z ${engine_version_suffix} ]; then
-        echo "ERR: Parsed ENGINE_VERSION (${ENGINE_VERSION}) was not found in the apt-cache for this package+distribution combo. (Package: ${engine_package_name})";
-        echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
+    # apt-cache madison is sorted by latest, so grepping for the first match will get the latest that matches the passed regex
+    engine_version_suffix="=$(apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}' | grep -m 1 "${DOCKER_VERSION}" | xargs)"
+    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | grep -m 1 "${DOCKER_VERSION}"  | xargs)"
+    if [ -z ${engine_version_suffix} ] || [ -z ${cli_version_suffix} ] ; then
+        echo "ERR: Provided VERSION (${DOCKER_VERSION}) was not found in the apt-cache for the CLI and/or Engine in this distribution";
+        echo "Available engine versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
         apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}'
         exit 1
     fi
-    echo "engine_version_suffix = ${engine_version_suffix}"
+    echo "engine_version_suffix ${engine_version_suffix}"
+    echo "cli_version_suffix ${cli_version_suffix}"
 fi
 
-# Soft version matching for CLI
-if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "lts" ] || [ "${CLI_VERSION}" = "stable" ]; then
-    # Empty, meaning grab whatever "latest" is in apt repo
-    cli_version_suffix=""
-else    
-    find_version_from_git_tags CLI_VERSION ${cli_git_tags}
-    # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
-    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | grep -m 1 "${CLI_VERSION}" | awk -F"|" '{print $2}' | xargs)"
-    if [ -z ${cli_version_suffix} ]; then
-        echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found in the apt-cache for this package+distribution combo. (Package: ${cli_package_name})";
-        echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
-        apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
-        exit 1
-    fi
-    echo "cli_version_suffix = ${cli_version_suffix}"
-fi
+# # Soft version matching for CLI
+# if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "lts" ] || [ "${CLI_VERSION}" = "stable" ]; then
+#     # Empty, meaning grab whatever "latest" is in apt repo
+#     cli_version_suffix=""
+# else    
+#     find_version_from_git_tags CLI_VERSION ${cli_git_tags}
+#     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
+#     cli_version_suffix="=$(apt-cache madison ${cli_package_name} | grep -m 1 "${CLI_VERSION}" | awk -F"|" '{print $2}' | xargs)"
+#     if [ -z ${cli_version_suffix} ]; then
+#         echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found in the apt-cache for this package+distribution combo. (Package: ${cli_package_name})";
+#         echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
+#         apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
+#         exit 1
+#     fi
+#     echo "cli_version_suffix = ${cli_version_suffix}"
+# fi
 
 # Install Docker / Moby CLI if not already installed
 if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then
@@ -232,6 +231,7 @@ else
         ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
         rm -rf /tmp/pip-tmp
     else
+        # Only supports docker-compose v1
         find_version_from_git_tags DOCKER_DASH_COMPOSE_VERSION "https://github.com/docker/compose" "tags/"
         echo "(*) Installing docker-compose ${DOCKER_DASH_COMPOSE_VERSION}..."
         curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_DASH_COMPOSE_VERSION}/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
