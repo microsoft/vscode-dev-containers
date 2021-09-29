@@ -173,23 +173,6 @@ else
     echo "cli_version_suffix ${cli_version_suffix}"
 fi
 
-# # Soft version matching for CLI
-# if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "lts" ] || [ "${CLI_VERSION}" = "stable" ]; then
-#     # Empty, meaning grab whatever "latest" is in apt repo
-#     cli_version_suffix=""
-# else    
-#     find_version_from_git_tags CLI_VERSION ${cli_git_tags}
-#     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
-#     cli_version_suffix="=$(apt-cache madison ${cli_package_name} | grep -m 1 "${CLI_VERSION}" | awk -F"|" '{print $2}' | xargs)"
-#     if [ -z ${cli_version_suffix} ]; then
-#         echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found in the apt-cache for this package+distribution combo. (Package: ${cli_package_name})";
-#         echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
-#         apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
-#         exit 1
-#     fi
-#     echo "cli_version_suffix = ${cli_version_suffix}"
-# fi
-
 # Install Docker / Moby CLI if not already installed
 if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then
     echo "Docker / Moby CLI and Engine already installed."
