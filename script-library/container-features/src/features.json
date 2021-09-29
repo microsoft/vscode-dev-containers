@@ -965,7 +965,7 @@
 					"type": "string",
 					"enum": ["latest"],
 					"default": "latest",
-					"description": "Currently unused."
+					"description": "Select version of Powershell, or latest."
 				}
 			},
 			"init": true,
