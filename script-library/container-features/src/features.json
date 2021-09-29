@@ -963,9 +963,9 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": ["latest"],
+					"proposals": ["latest", "7.1"],
 					"default": "latest",
-					"description": "Select version of Powershell, or latest."
+					"description": "Select or enter a version of PowerShell."
 				}
 			},
 			"init": true,
