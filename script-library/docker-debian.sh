@@ -7,13 +7,14 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby]
+# Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby] [CLI version]
 
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 SOURCE_SOCKET=${2:-"/var/run/docker-host.sock"}
 TARGET_SOCKET=${3:-"/var/run/docker.sock"}
 USERNAME=${4:-"automatic"}
 USE_MOBY=${5:-"true"}
+CLI_VERSION=${6:-"latest"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOCKER_DASH_COMPOSE_VERSION="1"
 
@@ -109,6 +110,50 @@ find_version_from_git_tags() {
     echo "${variable_name}=${!variable_name}"
 }
 
+
+# Source /etc/os-release to get OS info
+. /etc/os-release
+# Fetch host/container arch.
+architecture="$(dpkg --print-architecture)"
+
+# Set up the necessary apt repos (either Microsoft's or Docker's)
+if [ "${USE_MOBY}" = "true" ]; then
+
+    cli_package_name="moby-cli"
+
+    # Import key safely and import Microsoft apt repo
+    get_common_setting MICROSOFT_GPG_KEYS_URI
+    curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
+    echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+else
+    # Name of proprietary engine package
+    cli_package_name="docker-ce-cli"
+
+    # Import key safely and import Docker apt repo
+    curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
+fi
+
+# Refresh apt lists
+apt-get update
+
+# Soft version matching for CLI
+if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "lts" ] || [ "${CLI_VERSION}" = "stable" ]; then
+    # Empty, meaning grab whatever "latest" is in apt repo
+    cli_version_suffix=""
+else    
+    # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
+    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "^(${CLI_VERSION})(\.|$|\+.*|-.*)")"
+
+    if [ -z ${cli_version_suffix} ] || [ ${cli_version_suffix} = "=" ]; then
+        echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found in the apt-cache for this package+distribution combo";
+        echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
+        apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
+        exit 1
+    fi
+    echo "cli_version_suffix ${cli_version_suffix}"
+fi
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
@@ -120,26 +165,14 @@ if ! type git > /dev/null 2>&1; then
 fi
 
 # Install Docker / Moby CLI if not already installed
-architecture="$(dpkg --print-architecture)"
 if type docker > /dev/null 2>&1; then
     echo "Docker / Moby CLI already installed."
 else
-    # Source /etc/os-release to get OS info
-    . /etc/os-release
     if [ "${USE_MOBY}" = "true" ]; then
-        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-        get_common_setting MICROSOFT_GPG_KEYS_URI
-        curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
-        echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
-        apt-get update
-        apt-get -y install --no-install-recommends moby-cli moby-buildx moby-engine
+        apt-get -y install --no-install-recommends moby-cli${cli_version_suffix} moby-buildx
         apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for ${VERSION_CODENAME} ${architecture}. Skipping."
     else
-        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-        curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
-        apt-get update
-        apt-get -y install --no-install-recommends docker-ce-cli
+        apt-get -y install --no-install-recommends docker-ce-cli${cli_version_suffix}
     fi
 fi
 
