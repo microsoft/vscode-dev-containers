@@ -6,15 +6,11 @@ COPY library-scripts/*.sh /tmp/library-scripts/
 RUN \
     apt-get update -y \
     # Use Docker script from script library to set things up - enable non-root docker, user vscode, using moby
-    && /bin/bash /tmp/library-scripts/docker-in-docker-debian.sh "true" "vscode" "true"
-
-# install iotedgehubdev
-RUN \
-    apt-get install -y python3-pip && pip3 install iotedgehubdev
-
-# Clean up
-RUN \
-    apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
+    && /bin/bash /tmp/library-scripts/docker-in-docker-debian.sh "true" "vscode" "true" \
+    # install iotedgehubdev
+    && apt-get install -y python3-pip && pip3 install iotedgehubdev \
+    # Clean up
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

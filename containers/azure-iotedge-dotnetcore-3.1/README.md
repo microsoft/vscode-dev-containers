@@ -16,7 +16,7 @@
 
 ## Using this definition
 
-This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/). Once you have an Azure account, You can learn more about [Azure IoT Edge](https://docs.microsoft.com/en-us/azure/iot-edge/about-iot-edge?view=iotedge-2020-11) and how to [Develop Custom Modules with Visual Studio Code](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-vs-code-develop-module?view=iotedge-2020-11). Once you have an IoT Edge device setup, follow these steps:
+This definition requires an Azure subscription to use. You can create a [free account here](https://azure.microsoft.com/en-us/free/serverless/). Once you have an Azure account, you can learn more about [Azure IoT Edge](https://docs.microsoft.com/en-us/azure/iot-edge/about-iot-edge?view=iotedge-2020-11) and how to [Develop Custom Modules with Visual Studio Code](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-vs-code-develop-module?view=iotedge-2020-11). Once you have an IoT Edge device setup, follow these steps:
 
 1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
@@ -37,7 +37,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/azure-functions-dotnetcore-3.1` folder.
+4. Select the `containers/azure-iotedge-dotnetcore-3.1` folder.
 5. After the folder has opened in the container, press <kbd>F1</kbd> and select **Azure IoT Edge: New IoT Edge Solution...**.
 6. Enter these options:
    1. Specify the folder where you wish your new solution to be setup and click <kbd>OK</kbd>
