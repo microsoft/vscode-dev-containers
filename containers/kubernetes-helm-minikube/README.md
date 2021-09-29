@@ -32,7 +32,7 @@ A few notes on the definition:
     FROM node:lts
     ```
 
-* If you want minikube to automatically start when the dev container starrts, uncomment the following line:
+* If you want minikube to automatically start when the dev container starts, uncomment the following line:
 
     ```json
     "postStartCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
