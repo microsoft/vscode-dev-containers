@@ -108,7 +108,8 @@ install_using_apt() {
         # Empty, meaning grab whatever "latest" is in apt repo
         version_suffix=""
     else    
-        version_suffix="=$(apt-cache madison powershell | awk -F"|" '{print $2}' | grep -m 1 "${POWERSHELL_VERSION}" | xargs)"
+        version_suffix="=$(apt-cache madison powershell | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "^(${POWERSHELL_VERSION})(\.|$|\+.*|-.*)")"
+
         if [ -z ${version_suffix} ] || [ ${version_suffix} = "=" ]; then
             echo "Provided POWERSHELL_VERSION (${POWERSHELL_VERSION}) was not found in the apt-cache for this package+distribution combo";
             return 1
