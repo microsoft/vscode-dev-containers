@@ -160,8 +160,8 @@ if [ "${DOCKER_VERSION}" = "latest" ] || [ "${DOCKER_VERSION}" = "lts" ] || [ "$
     cli_version_suffix=""
 else
     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
-    engine_version_suffix="=$(apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "^(${DOCKER_VERSION})(\.|$|\+.*)")"
-    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "^(${DOCKER_VERSION})(\.|$|\+.*)")"
+    engine_version_suffix="=$(apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "^(${DOCKER_VERSION})(\.|$|\+.*)|-.*")"
+    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "^(${DOCKER_VERSION})(\.|$|\+.*|-.*)")"
     if [ ${engine_version_suffix} = "=" ] || [ ${cli_version_suffix} = "=" ] ; then
         echo "ERR: Provided VERSION (${DOCKER_VERSION}) was not found in the apt-cache for the CLI and/or Engine in this distribution";
         echo "Available *engine* versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
