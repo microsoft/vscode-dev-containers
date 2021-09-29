@@ -63,7 +63,7 @@ install_using_apt() {
     get_common_setting MICROSOFT_GPG_KEYS_URI
     curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
     echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/azure-cli.list
-    if ! apt-get update && apt-get install -yq azure-cli; then
+    if ! (apt-get update && apt-get install -yq azure-cli); then
         -f /etc/apt/sources.list.d/azure-cli.list
         return 1
     fi
