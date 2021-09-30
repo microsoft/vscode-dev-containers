@@ -100,15 +100,16 @@ export DEBIAN_FRONTEND=noninteractive
 # Source /etc/os-release to get OS info
 . /etc/os-release
 
-# If we already have a version of git installed on the system, and GIT_VERSION == "system", that is enough.
-if [ ${GIT_VERSION} = "system" ]; then
+# If the os provided version is "good enough", just install that.
+if [ ${GIT_VERSION} = "os-provided" ] || [ ${GIT_VERSION} = "system" ]; then
     if type git > /dev/null 2>&1; then
       echo "Detected existing system install: $(git version)"
-      echo "Exiting successfully."
       exit 0
     fi
-    echo "No existing git install detected.  Installing 'latest'..."
-    GIT_VERSION='latest'
+
+    echo "Installing git from OS apt repository"
+    check_packages git
+    exit 0
 fi
 
 # If ubuntu, PPAs allowed, and latest - install from there

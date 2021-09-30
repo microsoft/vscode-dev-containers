@@ -275,38 +275,19 @@ install_using_oryx() {
     ln -s ${PYTHON_INSTALL_PATH}/bin/python3-config ${PYTHON_INSTALL_PATH}/bin/python-config
 }
 
-link_existing_python() {
-    local existing_python_executable="$1"
-
-    if [ -d "${PYTHON_INSTALL_PATH}" ]; then
-        echo "(!) Path ${PYTHON_INSTALL_PATH} already exists. Not symlinking existing python install to provided installed path."
-        return 0;
-    fi
-
-    mkdir -p ${PYTHON_INSTALL_PATH}/bin
-    echo "Symlinking existing install to ${PYTHON_INSTALL_PATH}"
-    ln -s $(which ${existing_python_executable}) ${PYTHON_INSTALL_PATH}/bin/python
-}
-
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
-# If the system version is "good enough", detect that and bail out.
-if [ ${PYTHON_VERSION} = "system" ]; then
-    if type python > /dev/null 2>&1; then
-      echo "Detected existing system install 'python': $(python --version)"
-      link_existing_python "python"
-      echo "Exiting successfully."
-      exit 0
-    fi
-    if type python3 > /dev/null 2>&1; then
-      echo "Detected existing system install 'python3': $(python3 --version)"
-      link_existing_python "python3"
-      echo "Exiting successfully."
-      exit 0
-    fi
-    echo "No existing python or python3 install detected.  Installing 'latest'..."
-    PYTHON_VERSION='latest'
+# General requirements
+check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
+            libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
+            libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
+
+# If the os-provided versions are "good enough", detect that and bail out.
+if [ ${PYTHON_VERSION} = "os-provided" ] || [ ${PYTHON_VERSION} = "system" ] ; then
+    check_packages python3 python3-doc python3-pip python3-venv python3-dev python3-tk
+    echo "Done!"
+    exit 0
 fi
 
 # Install python from source if needed
