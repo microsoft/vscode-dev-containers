@@ -163,7 +163,7 @@ else
     docker_version_dot_escaped="${DOCKER_VERSION//./\\.}"
     docker_version_dot_plus_escaped="${docker_version_dot_escaped//+/\\+}"
     # Regex needs to handle debian package version number format: https://www.systutorials.com/docs/linux/man/5-deb-version/
-    docker_version_regex="^(.+:)?${docker_version_dot_plus_escaped}([\\.\\+ ]|$)"
+    docker_version_regex="^(.+:)?${docker_version_dot_plus_escaped}([\\.\\+ ~:-]|$)"
     set +e # Don't exit if finding version fails - will handle gracefully
     cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${docker_version_regex}")"
     engine_version_suffix="=$(apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${docker_version_regex}")"
