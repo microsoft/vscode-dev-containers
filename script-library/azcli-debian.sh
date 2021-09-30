@@ -11,6 +11,7 @@
 
 set -e
 
+AZ_VERSION=${1:-"latest"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 AZCLI_ARCHIVE_ARCHITECTURES="amd64"
 AZCLI_ARCHIVE_VERSION_CODENAMES="stretch buster bullseye bionic focal"
@@ -56,6 +57,48 @@ check_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
+# Soft version matching that resolves a version for a given package in the *current apt-cache*
+# Return value is stored in first argument (the unprocessed version)
+apt_cache_version_soft_match() {
+    
+    # Version
+    local variable_name="$1"
+    local requested_version=${!variable_name}
+    # Package Name
+    local package_name="$2"
+    # Exit on no match?
+    local exit_on_no_match="${3:-true}"
+
+    # Ensure we've exported useful variables
+    . /etc/os-release
+    local architecture="$(dpkg --print-architecture)"
+    
+    dot_escaped="${requested_version//./\\.}"
+    dot_plus_escaped="${dot_escaped//+/\\+}"
+    # Regex needs to handle debian package version number format: https://www.systutorials.com/docs/linux/man/5-deb-version/
+    version_regex="^(.+:)?${dot_plus_escaped}([\\.\\+ ~:-]|$)"
+    set +e # Don't exit if finding version fails - handle gracefully
+        fuzzy_version="$(apt-cache madison ${package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${version_regex}")"
+    set -e
+    if [ -z "${fuzzy_version}" ]; then
+        echo "(!) No full or partial for package \"${package_name}\" match found in apt-cache for \"${requested_version}\" on OS ${ID} ${VERSION_CODENAME} (${architecture})."
+
+        if $exit_on_no_match; then
+            echo "Available versions:"
+            apt-cache madison ${package_name} | awk -F"|" '{print $2}' | grep -oP '^(.+:)?\K.+'
+            exit 1 # Fail entire script
+        else
+            echo "Continuing to fallback method (if available)"
+            return 1;
+        fi
+    fi
+
+    # Globally assign fuzzy_version to this value
+    # Use this value as the return value of this function
+    declare -g ${variable_name}="=${fuzzy_version}"
+    echo "${variable_name} ${!variable_name}"
+}
+
 install_using_apt() {
     # Install dependencies
     check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
@@ -63,14 +106,27 @@ install_using_apt() {
     get_common_setting MICROSOFT_GPG_KEYS_URI
     curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
     echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/azure-cli.list
-    if ! (apt-get update && apt-get install -yq azure-cli); then
-        -f /etc/apt/sources.list.d/azure-cli.list
+    apt-get update
+
+    if [ "${AZ_VERSION}" = "latest" ] || [ "${DOCKER_VERSION}" = "lts" ] || [ "${DOCKER_VERSION}" = "stable" ]; then
+        # Empty, meaning grab the "latest" in the apt repo
+        AZ_VERSION=""
+    else
+        # Sets AZ_VERSION to our desired version, if match found.
+        apt_cache_version_soft_match AZ_VERSION "azure-cli" false
+        if [ "$?" != 0 ]; then
+            return 1
+        fi
+    fi
+
+    if ! (apt-get install -yq azure-cli${AZ_VERSION}); then
+        rm -f /etc/apt/sources.list.d/azure-cli.list
         return 1
     fi
 }
 
 install_using_pip() {
-    echo "(*) No pre-built binaries availabe for ${architecture}. Installing via pip3."
+    echo "(*) No pre-built binaries available in apt-cache. Installing via pip3."
     if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
         apt_get_update_if_needed
         apt-get -y install python3-minimal python3-pip libffi-dev python3-venv
@@ -82,11 +138,27 @@ install_using_pip() {
     export PIP_CACHE_DIR=/tmp/pip-tmp/cache
     pipx_bin=pipx
     if ! type pipx > /dev/null 2>&1; then
-        pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
+        pip3 install --disable-pip-version-check --no-cache-dir --user pipx
         pipx_bin=/tmp/pip-tmp/bin/pipx
     fi
-    ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' azure-cli
-    rm -rf /tmp/pip-tmp
+
+    if [ "${AZ_VERSION}" = "latest" ] || [ "${AZ_VERSION}" = "lts" ] || [ "${AZ_VERSION}" = "stable" ]; then
+        # Empty, meaning grab the "latest" in the apt repo
+        ver=""
+    else
+        ver="==${AZ_VERSION}"
+    fi
+
+    set +e
+        ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' -f azure-cli${ver}
+
+        # Fail gracefully
+        if [ "$?" != 0 ]; then
+            echo "Could not install azure-cli${ver} via pip"
+            rm -rf /tmp/pip-tmp
+            return 1
+        fi
+    set -e
 }
 
 # See if we're on x86_64 and if so, install via apt-get, otherwise use pip3
@@ -101,6 +173,14 @@ fi
 
 if [ "${use_pip}" = "true" ]; then
     install_using_pip
+
+    if [ "$?" != 0 ]; then
+        echo "Please provide a valid version for your distribution ${ID} ${VERSION_CODENAME} (${architecture})."
+        echo
+        echo "Valid versions in current apt-cache"
+        apt-cache madison azure-cli | awk -F"|" '{print $2}' | grep -oP '^(.+:)?\K.+'
+        exit 1
+    fi
 fi
 
 echo "Done!"

@@ -9,7 +9,7 @@
 #
 # Syntax: ./python-debian.sh [Python Version] [Python intall path] [PIPX_HOME] [non-root user] [Update rc files flag] [install tools flag] [Use Oryx if available flag] [Optimize when building from source flag]
 
-PYTHON_VERSION=${1:-"latest"}
+PYTHON_VERSION=${1:-"latest"} # 'system' checks the base image first, else installs 'latest'
 PYTHON_INSTALL_PATH=${2:-"/usr/local/python"}
 export PIPX_HOME=${3:-"/usr/local/py-utils"}
 USERNAME=${4:-"automatic"}

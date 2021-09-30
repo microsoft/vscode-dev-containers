@@ -9,7 +9,7 @@
 #
 # Syntax: ./git-from-src-debian.sh [version] [use PPA if available]
 
-GIT_VERSION=${1:-"latest"}
+GIT_VERSION=${1:-"latest"} # 'system' checks the base image first, else installs 'latest'
 USE_PPA_IF_AVAILABLE=${2:-"false"}
 
 GIT_CORE_PPA_ARCHIVE_GPG_KEY=E1DD270288B4E6030699E45FA1715D88E1DF1F24

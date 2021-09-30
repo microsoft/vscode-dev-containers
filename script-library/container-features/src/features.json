@@ -367,9 +367,9 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": ["latest"],
+					"proposals": ["latest"],
 					"default": "latest",
-					"description": "Currently unused."
+					"description": "Select or enter an Azure CLI version. (Available versions may vary by Linux distribution.)"
 				}
 			},
 			"init": true,
