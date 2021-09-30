@@ -275,8 +275,39 @@ install_using_oryx() {
     ln -s ${PYTHON_INSTALL_PATH}/bin/python3-config ${PYTHON_INSTALL_PATH}/bin/python-config
 }
 
+link_existing_python() {
+    local existing_python_executable="$1"
+
+    if [ -d "${PYTHON_INSTALL_PATH}" ]; then
+        echo "(!) Path ${PYTHON_INSTALL_PATH} already exists. Not symlinking existing python install to provided installed path."
+        return 0;
+    fi
+
+    mkdir -p ${PYTHON_INSTALL_PATH}/bin
+    echo "Symlinking existing install to ${PYTHON_INSTALL_PATH}"
+    ln -s $(which ${existing_python_executable}) ${PYTHON_INSTALL_PATH}/bin/python
+}
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
+
+# If the system version is "good enough", detect that and bail out.
+if [ ${PYTHON_VERSION} = "system" ]; then
+    if type python > /dev/null 2>&1; then
+      echo "Detected existing system install 'python': $(python --version)"
+      link_existing_python "python"
+      echo "Exiting successfully."
+      exit 0
+    fi
+    if type python3 > /dev/null 2>&1; then
+      echo "Detected existing system install 'python3': $(python3 --version)"
+      link_existing_python "python3"
+      echo "Exiting successfully."
+      exit 0
+    fi
+    echo "No existing python or python3 install detected.  Installing 'latest'..."
+    PYTHON_VERSION='latest'
+fi
 
 # Install python from source if needed
 if [ "${PYTHON_VERSION}" != "none" ]; then

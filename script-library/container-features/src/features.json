@@ -580,9 +580,9 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": [ "latest", "3.9", "3.8", "3.7", "3.6" ],
-					"default": "latest",
-					"description": "Select a Python version to install"
+					"enum": [ "latest", "system", "3.9", "3.8", "3.7", "3.6" ],
+					"default": "system",
+					"description": "Select a Python version to install. Select 'system' to first check if python is available in the base image, else install 'latest'."
 				}
 			},
 			"init": true,
