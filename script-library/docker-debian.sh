@@ -14,7 +14,7 @@ SOURCE_SOCKET=${2:-"/var/run/docker-host.sock"}
 TARGET_SOCKET=${3:-"/var/run/docker.sock"}
 USERNAME=${4:-"automatic"}
 USE_MOBY=${5:-"true"}
-CLI_VERSION=${6:-"latest"}
+DOCKER_VERSION=${6:-"latest"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOCKER_DASH_COMPOSE_VERSION="1"
 
@@ -110,6 +110,15 @@ find_version_from_git_tags() {
     echo "${variable_name}=${!variable_name}"
 }
 
+# Ensure apt is in non-interactive to avoid prompts
+export DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies
+check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
+if ! type git > /dev/null 2>&1; then
+    apt_get_update_if_needed
+    apt-get -y install git
+fi
 
 # Source /etc/os-release to get OS info
 . /etc/os-release
@@ -138,30 +147,24 @@ fi
 apt-get update
 
 # Soft version matching for CLI
-if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "lts" ] || [ "${CLI_VERSION}" = "stable" ]; then
+if [ "${DOCKER_VERSION}" = "latest" ] || [ "${DOCKER_VERSION}" = "lts" ] || [ "${DOCKER_VERSION}" = "stable" ]; then
     # Empty, meaning grab whatever "latest" is in apt repo
     cli_version_suffix=""
 else    
     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
-    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "^(${CLI_VERSION})(\.|$|\+.*|-.*)")"
-
-    if [ -z ${cli_version_suffix} ] || [ ${cli_version_suffix} = "=" ]; then
-        echo "ERR: Parsed CLI_VERSION (${CLI_VERSION}) was not found in the apt-cache for this package+distribution combo";
-        echo "Available versions for your distribution (NOTE: pass to this script in the form -> MAJOR.MINOR.REV)"
-        apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
+    docker_version_dot_escaped="${DOCKER_VERSION//./\\.}"
+    docker_version_dot_plus_escaped="${docker_version_dot_escaped//+/\\+}"
+    # Regex needs to handle debian package version number format: https://www.systutorials.com/docs/linux/man/5-deb-version/
+    docker_version_regex="^(.+:)?${docker_version_dot_plus_escaped}([\\.\\+ ~:-]|$)"
+    set +e # Don't exit if finding version fails - will handle gracefully
+    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${docker_version_regex}")"
+    set -e
+    if [ -z "${cli_version_suffix}" ] || [ "${cli_version_suffix}" = "=" ]; then
+        echo "(!) No full or partial Docker / Moby version match found for \"${DOCKER_VERSION}\" on OS ${ID} ${VERSION_CODENAME} (${architecture}). Available versions:"
+        apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | grep -oP '^(.+:)?\K.+'
         exit 1
     fi
     echo "cli_version_suffix ${cli_version_suffix}"
-fi
-
-# Ensure apt is in non-interactive to avoid prompts
-export DEBIAN_FRONTEND=noninteractive
-
-# Install dependencies
-check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
-if ! type git > /dev/null 2>&1; then
-    apt_get_update_if_needed
-    apt-get -y install git
 fi
 
 # Install Docker / Moby CLI if not already installed
@@ -170,7 +173,7 @@ if type docker > /dev/null 2>&1; then
 else
     if [ "${USE_MOBY}" = "true" ]; then
         apt-get -y install --no-install-recommends moby-cli${cli_version_suffix} moby-buildx
-        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for ${VERSION_CODENAME} ${architecture}. Skipping."
+        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for OS ${ID} ${VERSION_CODENAME} (${architecture}). Skipping."
     else
         apt-get -y install --no-install-recommends docker-ce-cli${cli_version_suffix}
     fi
