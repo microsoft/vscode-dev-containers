@@ -12,7 +12,7 @@
 
 ## Variant: 16-jdk-bullseye
 
-**Digest:** sha256:78568e9cd92c336414f9227e17826a2aac1f8a33c6ca31168ad58a702b2021cf
+**Digest:** sha256:8c91710d7b736696c21111aa7bcd6854d71e32cfecb294e73df555735e4645d3
 
 **Tags:**
 ```
@@ -39,7 +39,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -90,14 +90,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 | unzip | 6.0-26 |
 | vim-tiny | 2:8.2.2434-3 |
 | wget | 1.21-1+b1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |
 
 ## Variant: 11-jdk-bullseye
 
-**Digest:** sha256:d1b75f9bf0c57203ecbf794bc8f0001a364887e8623c0e61e8fa317e73624525
+**Digest:** sha256:75ba08830c415b2ed8bd4b8ecca65706858f3bfb1cde704e8107d57683ceefe7
 
 **Tags:**
 ```
@@ -123,7 +123,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -174,14 +174,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-bullseye
 | unzip | 6.0-26 |
 | vim-tiny | 2:8.2.2434-3 |
 | wget | 1.21-1+b1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |
 
 ## Variant: 16-jdk-buster
 
-**Digest:** sha256:90ace5e29ee77102ee61e8a2e1852b15c94a55f668a3eddb0df0be84dd9d92ff
+**Digest:** sha256:989a53f81f430d883d02995ef7868426a9a3933c4e4f0937fc04c5f96abae842
 
 **Tags:**
 ```
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -261,14 +261,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-buster
 | unzip | 6.0-23+deb10u2 |
 | vim-tiny | 2:8.1.0875-5 |
 | wget | 1.20.1-1.1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |
 
 ## Variant: 11-jdk-buster
 
-**Digest:** sha256:52a9755f075bf7f3cee31bc38aa20188f5efbdf2be142e1f4fe248767563ee96
+**Digest:** sha256:70534b54e89d0a8059f1a613420838f005df84c2e10bb6f36305f2386bc02580
 
 **Tags:**
 ```
@@ -295,7 +295,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -347,7 +347,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-buster
 | unzip | 6.0-23+deb10u2 |
 | vim-tiny | 2:8.1.0875-5 |
 | wget | 1.20.1-1.1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |

@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:7ace9047aac4455c9fd19ab366ea42eb3d7dc91f200a3b20ce8e415474ad53ab
+**Digest:** sha256:28eb23bc1dd2010ffe1a8baba567d365385a7e7aa50fea372f6371a965d293de
 
 **Tags:**
 ```
@@ -29,7 +29,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -45,7 +45,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.8.0 |
+| virtualenv | 20.8.1 |
 | pipx | 0.16.4 |
 
 **Other tools and utilities**
@@ -97,7 +97,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | unzip | 6.0-23+deb10u2 |
 | vim-tiny | 2:8.1.0875-5 |
 | wget | 1.20.1-1.1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |

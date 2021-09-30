@@ -11,7 +11,7 @@
 
 ## Variant: 5.0
 
-**Digest:** sha256:739761889a3bf0eda2ba2037bc56516afc5910889721b5b3333922b84e91f02d
+**Digest:** sha256:df26b40453aa2d6911ade346ac4dc3ea947cb34b6e3b997d5ff2d530ce51b0bd
 
 **Tags:**
 ```
@@ -37,7 +37,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -46,7 +46,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| ca-certificates | 20210119~20.04.1 |
+| ca-certificates | 20210119~20.04.2 |
 | curl | 7.68.0-1ubuntu2.7 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.2 |
@@ -81,16 +81,16 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
-| vim-tiny | 2:8.1.2269-1ubuntu5 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.3 |
 | wget | 1.20.3-1ubuntu1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |
 | zsh | 5.8-3ubuntu1 |
 
 ## Variant: 3.1
 
-**Digest:** sha256:abb1d23437c8e348d53f3bb9d6f3b74ecdaafb367fbf7e912e5b93ee49be6f97
+**Digest:** sha256:e2c2a29ba7f9d50d52387a4ce60ce3b6598a2864fba34efae4c3ed506c451297
 
 **Tags:**
 ```
@@ -116,7 +116,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -125,7 +125,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| ca-certificates | 20210119~20.04.1 |
+| ca-certificates | 20210119~20.04.2 |
 | curl | 7.68.0-1ubuntu2.7 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.2 |
@@ -160,16 +160,16 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
-| vim-tiny | 2:8.1.2269-1ubuntu5 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.3 |
 | wget | 1.20.3-1ubuntu1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |
 | zsh | 5.8-3ubuntu1 |
 
 ## Variant: 2.1
 
-**Digest:** sha256:9bdb9c790c5421b0fafe19dfce415fe653eb04f1164241258db97f8fe6d381cb
+**Digest:** sha256:b57ce466b4e7682fd8826bbdfa0f7e6d5cfc4ce081277031a035899817d7bf69
 
 **Tags:**
 ```
@@ -195,7 +195,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -204,7 +204,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| ca-certificates | 20210119~20.04.1 |
+| ca-certificates | 20210119~20.04.2 |
 | curl | 7.68.0-1ubuntu2.7 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.2 |
@@ -239,9 +239,9 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-2.1
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
-| vim-tiny | 2:8.1.2269-1ubuntu5 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.3 |
 | wget | 1.20.3-1ubuntu1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |
 | zsh | 5.8-3ubuntu1 |
