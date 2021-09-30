@@ -162,14 +162,15 @@ else
     # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
     docker_version_dot_escaped="${DOCKER_VERSION//./\\.}"
     docker_version_dot_plus_escaped="${docker_version_dot_escaped//+/\\+}"
-    docker_version_regex="^${docker_version_dot_plus_escaped}([\\.\\+ ]|$)"
+    # Regex needs to handle debian package version number format: https://www.systutorials.com/docs/linux/man/5-deb-version/
+    docker_version_regex="^(.+:)?${docker_version_dot_plus_escaped}([\\.\\+ ]|$)"
     set +e # Don't exit if finding version fails - will handle gracefully
     cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${docker_version_regex}")"
     engine_version_suffix="=$(apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${docker_version_regex}")"
     set -e
     if [ -z "${engine_version_suffix}" ] || [ "${engine_version_suffix}" = "=" ] || [ -z "${cli_version_suffix}" ] || [ "${cli_version_suffix}" = "=" ] ; then
-        echo "(!) Docker version ${DOCKER_VERSION} not found for ${ID} ${VERSION_CODENAME} ${architecture}. Available versions:"
-        apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}'
+        echo "(!) No full or partial Docker / Moby version match found for \"${DOCKER_VERSION}\" on OS ${ID} ${VERSION_CODENAME} (${architecture}). Available versions:"
+        apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | grep -oP '^(.+:)?\K.+'
         exit 1
     fi
     echo "engine_version_suffix ${engine_version_suffix}"
@@ -182,7 +183,7 @@ if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then
 else
     if [ "${USE_MOBY}" = "true" ]; then
         apt-get -y install --no-install-recommends moby-cli${cli_version_suffix} moby-buildx moby-engine${engine_version_suffix}
-        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for ${VERSION_CODENAME} ${architecture}. Skipping."
+        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for OS ${ID} ${VERSION_CODENAME} (${architecture}). Skipping."
     else
         apt-get -y install --no-install-recommends docker-ce-cli${cli_version_suffix} docker-ce${engine_version_suffix}
     fi
