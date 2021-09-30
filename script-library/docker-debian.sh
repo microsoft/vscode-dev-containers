@@ -110,6 +110,15 @@ find_version_from_git_tags() {
     echo "${variable_name}=${!variable_name}"
 }
 
+# Ensure apt is in non-interactive to avoid prompts
+export DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies
+check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
+if ! type git > /dev/null 2>&1; then
+    apt_get_update_if_needed
+    apt-get -y install git
+fi
 
 # Source /etc/os-release to get OS info
 . /etc/os-release
@@ -149,22 +158,12 @@ else
     set +e # Don't exit if finding version fails - will handle gracefully
     cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${docker_version_regex}")"
     set -e
-    if [ -z ${cli_version_suffix} ] || [ ${cli_version_suffix} = "=" ]; then
+    if [ -z "${cli_version_suffix}" ] || [ "${cli_version_suffix}" = "=" ]; then
         echo "(!) Docker version ${DOCKER_VERSION} not found for ${ID} ${VERSION_CODENAME} ${architecture}. Available versions:"
         apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}'
         exit 1
     fi
     echo "cli_version_suffix ${cli_version_suffix}"
-fi
-
-# Ensure apt is in non-interactive to avoid prompts
-export DEBIAN_FRONTEND=noninteractive
-
-# Install dependencies
-check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
-if ! type git > /dev/null 2>&1; then
-    apt_get_update_if_needed
-    apt-get -y install git
 fi
 
 # Install Docker / Moby CLI if not already installed
