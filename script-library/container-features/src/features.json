@@ -233,13 +233,13 @@
 		},
 		{
 			"id": "git",
-			"name": "Git (latest version - may require compilation)",
+			"name": "Git (may require compilation)",
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": ["latest"],
-					"default": "latest",
-					"description": "Currently unused."
+					"proposals": ["latest", "system"],
+					"default": "system",
+					"description": "Select or enter a Git version. Select 'system' to first check if the base image provides some version of git, else install latest."
 				},
 				"ppa": {
 					"type": "boolean",

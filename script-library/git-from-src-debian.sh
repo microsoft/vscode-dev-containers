@@ -99,6 +99,18 @@ export DEBIAN_FRONTEND=noninteractive
 
 # Source /etc/os-release to get OS info
 . /etc/os-release
+
+# If we already have a version of git installed on the system, and GIT_VERSION == "system", that is enough.
+if [ ${GIT_VERSION} = "system" ]; then
+    if type git > /dev/null 2>&1; then
+      echo "Detected existing system install: $(git version)"
+      echo "Exiting successfully."
+      exit 0
+    fi
+    echo "No existing git install detected.  Installing 'latest'..."
+    GIT_VERSION='latest'
+fi
+
 # If ubuntu, PPAs allowed, and latest - install from there
 if ([ "${GIT_VERSION}" = "latest" ] || [ "${GIT_VERSION}" = "lts" ] || [ "${GIT_VERSION}" = "current" ]) && [ "${ID}" = "ubuntu" ] && [ "${USE_PPA_IF_AVAILABLE}" = "true" ]; then
     echo "Using PPA to install latest git..."
