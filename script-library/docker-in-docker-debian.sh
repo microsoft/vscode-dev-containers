@@ -13,8 +13,11 @@ ENABLE_NONROOT_DOCKER=${1:-"true"}
 USERNAME=${2:-"automatic"}
 USE_MOBY=${3:-"true"}
 DOCKER_VERSION=${4:-"latest"} # The Docker/Moby Engine + CLI should match in version
+DOCKER_COMPOSE_V1_VERSION=${5:-"1"}
+DOCKER_COMPOSE_V2_VERSION=${6:-"latest"}
+COMPOSE_SWITCH_VERSION=${7:-"latest"}
+
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
-DOCKER_DASH_COMPOSE_VERSION="1"
 
 set -e
 
@@ -63,6 +66,19 @@ apt_get_update_if_needed()
         apt-get update
     else
         echo "Skipping apt-get update."
+    fi
+}
+
+# Update bash/zshrc as needed
+updaterc() {
+    if [ "${UPDATE_RC}" = "true" ]; then
+        echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
+        if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
+            echo -e "$1" >> /etc/bash.bashrc
+        fi
+        if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
+            echo -e "$1" >> /etc/zsh/zshrc
+        fi
     fi
 }
 
@@ -128,6 +144,18 @@ fi
 . /etc/os-release
 # Fetch host/container arch.
 architecture="$(dpkg --print-architecture)"
+target_compose_arch="${architecture}"
+case ${target_compose_arch} in
+ amd64) 
+    target_compose_arch="x86_64"
+    ;;
+ arm64) 
+    target_compose_arch="aarch64"
+    ;;
+ *) echo "(!) Architecture ${architecture} not supported."
+    exit 1
+    ;;
+esac
 
 # Set up the necessary apt repos (either Microsoft's or Docker's)
 if [ "${USE_MOBY}" = "true" ]; then
@@ -147,13 +175,13 @@ else
 
     # Import key safely and import Docker apt repo
     curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
+    echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
 fi
 
 # Refresh apt lists
 apt-get update
 
-# Soft version matching
+# Soft version matching for docker version
 if [ "${DOCKER_VERSION}" = "latest" ] || [ "${DOCKER_VERSION}" = "lts" ] || [ "${DOCKER_VERSION}" = "stable" ]; then
     # Empty, meaning grab whatever "latest" is in apt repo
     engine_version_suffix=""
@@ -177,7 +205,7 @@ else
     echo "cli_version_suffix ${cli_version_suffix}"
 fi
 
-# Install Docker / Moby CLI if not already installed
+# Install Docker / Moby CLI, buildx, and compose v2 if not already installed
 if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then
     echo "Docker / Moby CLI and Engine already installed."
 else
@@ -187,20 +215,31 @@ else
     else
         apt-get -y install --no-install-recommends docker-ce-cli${cli_version_suffix} docker-ce${engine_version_suffix}
     fi
+
+    # Enable buildkit by default
+    updaterc "export DOCKER_BUILDKIT=1"
 fi
 
-echo "Finished installing docker / moby!"
+# Install Compose v2 plugin if missing
+if [ "${DOCKER_COMPOSE_V2_VERSION}" != "none" ] && [ ! -e "/usr/local/lib/docker/cli-plugins/docker-compose" ] && [ ! -e "/usr/local/libexec/docker/cli-plugins/docker-compose" ] && [ ! -e "/usr/lib/docker/cli-plugins/docker-compose" ] && [ ! -e "/usr/libexec/docker/cli-plugins/docker-compose" ]; then
+    find_version_from_git_tags DOCKER_COMPOSE_V2_VERSION "https://github.com/docker/compose"
+    echo "(*) Installing Compose v2 plugin ${DOCKER_COMPOSE_V2_VERSION}..."
+    docker_compose_v2_filename="docker-compose-linux-${target_compose_arch}"
+    curl -fsSL "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_V2_VERSION}/${docker_compose_v2_filename}" -o /tmp/${docker_compose_v2_filename}
+    curl -fsSL "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_V2_VERSION}/${docker_compose_v2_filename}.sha256" -o /tmp/${docker_compose_v2_filename}.sha256
+    cd /tmp
+    sha256sum -c /tmp/${docker_compose_v2_filename}.sha256
+    rm -f /tmp/${docker_compose_v2_filename}.sha256
+    mkdir -p /usr/local/lib/docker/cli-plugins/
+    mv -f /tmp/${docker_compose_v2_filename} /usr/local/lib/docker/cli-plugins/docker-compose
+    chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+fi
 
-# Install Docker Compose if not already installed and is on a supported architecture
-if type docker-compose > /dev/null 2>&1; then
-    echo "Docker Compose already installed."
-else
-    target_compose_arch="${architecture}"
-    if [ "${target_compose_arch}" = "amd64" ]; then
-        target_compose_arch="x86_64"
-    fi
+# Install Docker Compose v1 if not already installed
+if [ "${DOCKER_COMPOSE_V1_VERSION}" != "none" ] && ! type docker-compose > /dev/null 2>&1; then
     if [ "${target_compose_arch}" != "x86_64" ]; then
         # Use pip to get a version that runns on this architecture
+        echo "(*) Installing Compose v1..."
         if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
             apt_get_update_if_needed
             apt-get -y install python3-minimal python3-pip libffi-dev python3-venv
@@ -218,12 +257,29 @@ else
         ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
         rm -rf /tmp/pip-tmp
     else
-        # Only supports docker-compose v1
-        find_version_from_git_tags DOCKER_DASH_COMPOSE_VERSION "https://github.com/docker/compose" "tags/"
-        echo "(*) Installing docker-compose ${DOCKER_DASH_COMPOSE_VERSION}..."
-        curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_DASH_COMPOSE_VERSION}/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
+        find_version_from_git_tags DOCKER_COMPOSE_V1_VERSION "https://github.com/docker/compose" "tags/"
+        echo "(*) Installing Compose v1 (docker-compose) ${DOCKER_COMPOSE_V1_VERSION}..."
+        curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_V1_VERSION}/docker-compose-Linux-x86_64" -o /tmp/docker-compose-Linux-x86_64
+        curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_V1_VERSION}/docker-compose-Linux-x86_64.sha256" -o /tmp/docker-compose-Linux-x86_64.sha256
+        cd /tmp
+        sha256sum -c docker-compose-Linux-x86_64.sha256
+        rm -f /tmp/docker-compose-Linux-x86_64.sha256
+        mv -f /tmp/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
         chmod +x /usr/local/bin/docker-compose
     fi
+fi
+
+# Install docker-compose switch if not already installed
+if [ "${COMPOSE_SWITCH_VERSION}" != "none" ] && [ ! -e "/usr/local/bin/compose-switch" ] && [ -z "$(which docker-compose-v1)" ]; then
+    current_v1_compose_path="$(which docker-compose)"
+    target_v1_compose_path="$(dirname "${current_v1_compose_path}")/docker-compose-v1"
+    mv "${current_v1_compose_path}" "${target_v1_compose_path}"
+    find_version_from_git_tags COMPOSE_SWITCH_VERSION "https://github.com/docker/compose-switch"
+    echo "(*) Installing compose-switch ${COMPOSE_SWITCH_VERSION}..."
+    curl -fsSL "https://github.com/docker/compose-switch/releases/download/v${COMPOSE_SWITCH_VERSION}/docker-compose-linux-${architecture}" -o /usr/local/bin/compose-switch
+    chmod +x /usr/local/bin/compose-switch
+    update-alternatives --install /usr/local/bin/docker-compose docker-compose "${target_v1_compose_path}" 1
+    update-alternatives --install /usr/local/bin/docker-compose docker-compose /usr/local/bin/compose-switch 99
 fi
 
 # If init file already exists, exit
@@ -231,7 +287,7 @@ if [ -f "/usr/local/share/docker-init.sh" ]; then
     echo "/usr/local/share/docker-init.sh already exists, so exiting."
     exit 0
 fi
-echo "docker-init doesnt exist, adding..."
+echo "(*) docker-init doesnt exist, adding..."
 
 # Add user to the docker group
 if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
