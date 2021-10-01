@@ -17,7 +17,7 @@ UPDATE_RC=${5:-"true"}
 INSTALL_GO_TOOLS=${6:-"true"}
 
 # https://www.google.com/linuxrepositories/
-GO_GPG_KEY_URL="https://dl.google.com/linux/linux_signing_key.pub"
+GO_GPG_KEY_URI="https://dl.google.com/linux/linux_signing_key.pub"
 
 set -e
 
@@ -160,8 +160,8 @@ if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
     export GNUPGHOME="/tmp/tmp-gnupg"
     mkdir -p ${GNUPGHOME}
     chmod 700 ${GNUPGHOME}
-    get_common_setting GO_GPG_KEY_URL
-    curl -sSL -o /tmp/tmp-gnupg/golang_key "${GO_GPG_KEY_URL}"
+    get_common_setting GO_GPG_KEY_URI
+    curl -sSL -o /tmp/tmp-gnupg/golang_key "${GO_GPG_KEY_URI}"
     gpg -q --import /tmp/tmp-gnupg/golang_key
     echo "Downloading Go ${TARGET_GO_VERSION}..."
     curl -sSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz"
