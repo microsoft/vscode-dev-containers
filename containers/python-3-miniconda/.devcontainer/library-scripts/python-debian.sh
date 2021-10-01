@@ -9,7 +9,7 @@
 #
 # Syntax: ./python-debian.sh [Python Version] [Python intall path] [PIPX_HOME] [non-root user] [Update rc files flag] [install tools flag] [Use Oryx if available flag] [Optimize when building from source flag]
 
-PYTHON_VERSION=${1:-"latest"}
+PYTHON_VERSION=${1:-"latest"} # 'system' checks the base image first, else installs 'latest'
 PYTHON_INSTALL_PATH=${2:-"/usr/local/python"}
 export PIPX_HOME=${3:-"/usr/local/py-utils"}
 USERNAME=${4:-"automatic"}
@@ -278,9 +278,20 @@ install_using_oryx() {
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
+# General requirements
+check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
+            libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
+            libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
+
+
 # Install python from source if needed
 if [ "${PYTHON_VERSION}" != "none" ]; then
-    if [ "$(dpkg --print-architecture)" = "amd64" ] && [ "${USE_ORYX_IF_AVAILABLE}" = "true" ] && type oryx > /dev/null 2>&1; then
+    # If the os-provided versions are "good enough", detect that and bail out.
+    if [ ${PYTHON_VERSION} = "os-provided" ] || [ ${PYTHON_VERSION} = "system" ]; then
+        check_packages python3 python3-doc python3-pip python3-venv python3-dev python3-tk
+        PYTHON_INSTALL_PATH="/usr"
+        should_install_from_source=false
+    elif [ "$(dpkg --print-architecture)" = "amd64" ] && [ "${USE_ORYX_IF_AVAILABLE}" = "true" ] && type oryx > /dev/null 2>&1; then
         install_using_oryx || should_install_from_source=true
     else
         should_install_from_source=true
@@ -310,9 +321,11 @@ mkdir -p ${PIPX_BIN_DIR}
 chown :pipx ${PIPX_HOME} ${PIPX_BIN_DIR}
 chmod g+s ${PIPX_HOME} ${PIPX_BIN_DIR}
 
-# Update pip
-echo "Updating pip..."
-${PYTHON_INSTALL_PATH}/bin/python3 -m pip install --no-cache-dir --upgrade pip
+# Update pip if not using os provided python
+if [ ${PYTHON_VERSION} != "os-provided" ] && [ ${PYTHON_VERSION} != "system" ]; then
+    echo "Updating pip..."
+    ${PYTHON_INSTALL_PATH}/bin/python3 -m pip install --no-cache-dir --upgrade pip
+fi
 
 # Install tools
 echo "Installing Python tools..."
