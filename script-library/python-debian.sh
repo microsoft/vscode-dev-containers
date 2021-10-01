@@ -283,16 +283,14 @@ check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev li
             libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
             libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
 
-# If the os-provided versions are "good enough", detect that and bail out.
-if [ ${PYTHON_VERSION} = "os-provided" ] || [ ${PYTHON_VERSION} = "system" ] ; then
-    check_packages python3 python3-doc python3-pip python3-venv python3-dev python3-tk
-    echo "Done!"
-    exit 0
-fi
 
 # Install python from source if needed
 if [ "${PYTHON_VERSION}" != "none" ]; then
-    if [ "$(dpkg --print-architecture)" = "amd64" ] && [ "${USE_ORYX_IF_AVAILABLE}" = "true" ] && type oryx > /dev/null 2>&1; then
+    # If the os-provided versions are "good enough", detect that and bail out.
+    if [ ${PYTHON_VERSION} = "os-provided" ] || [ ${PYTHON_VERSION} = "system" ]; then
+        check_packages python3 python3-doc python3-pip python3-venv python3-dev python3-tk
+        should_install_from_source=false
+    elif [ "$(dpkg --print-architecture)" = "amd64" ] && [ "${USE_ORYX_IF_AVAILABLE}" = "true" ] && type oryx > /dev/null 2>&1; then
         install_using_oryx || should_install_from_source=true
     else
         should_install_from_source=true
