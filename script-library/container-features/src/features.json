@@ -546,6 +546,11 @@
 					"proposals": [ "lts", "latest", "16", "14", "12" ],
 					"default": "lts",
 					"description": "Select or enter a Node.js version to install"
+				},
+				"nodeGypDependencies": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install dependencies to compile native node modules (node-gyp)?"
 				}
 			},
 			"init": true,
