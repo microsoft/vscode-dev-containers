@@ -15,8 +15,11 @@ TARGET_SOCKET=${3:-"/var/run/docker.sock"}
 USERNAME=${4:-"automatic"}
 USE_MOBY=${5:-"true"}
 DOCKER_VERSION=${6:-"latest"}
+DOCKER_COMPOSE_PLUGIN_VERSION=${7:-"latest"}
+COMPOSE_SWITCH_VERSION=${8:-"latest"}
+DOCKER_COMPOSE_V1_VERSION=${9:-"1"}
+
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
-DOCKER_DASH_COMPOSE_VERSION="1"
 
 set -e
 
@@ -124,6 +127,18 @@ fi
 . /etc/os-release
 # Fetch host/container arch.
 architecture="$(dpkg --print-architecture)"
+target_compose_arch="${architecture}"
+case ${target_compose_arch} in
+ amd64) 
+    target_compose_arch="x86_64"
+    ;;
+ arm64) 
+    target_compose_arch="aarch64"
+    ;;
+ *) echo "(!) Architecture ${architecture} not supported."
+    exit 1
+    ;;
+esac
 
 # Set up the necessary apt repos (either Microsoft's or Docker's)
 if [ "${USE_MOBY}" = "true" ]; then
@@ -179,38 +194,78 @@ else
     fi
 fi
 
-# Install Docker Compose if not already installed  and is on a supported architecture
-if type docker-compose > /dev/null 2>&1; then
-    echo "Docker Compose already installed."
-else
-    TARGET_COMPOSE_ARCH="$(uname -m)"
-    if [ "${TARGET_COMPOSE_ARCH}" = "amd64" ]; then
-        TARGET_COMPOSE_ARCH="x86_64"
+# Install Compose v2 plugin if missing
+if [ "${DOCKER_COMPOSE_PLUGIN_VERSION}" != "none" ]; then
+    if [ -e "/usr/local/lib/docker/cli-plugins/docker-compose" ] || [ -e "/usr/local/libexec/docker/cli-plugins/docker-compose" ] || [ -e "/usr/lib/docker/cli-plugins/docker-compose" ] || [ -e "/usr/libexec/docker/cli-plugins/docker-compose" ]; then
+        echo "(*) Compose v2 plugin already installed. Skipping..."
+    else
+        find_version_from_git_tags DOCKER_COMPOSE_V2_VERSION "https://github.com/docker/compose"
+        echo "(*) Installing Compose v2 plugin ${DOCKER_COMPOSE_PLUGIN_VERSION}..."
+        docker_compose_v2_filename="docker-compose-linux-${target_compose_arch}"
+        curl -fsSL "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_PLUGIN_VERSION}/${docker_compose_v2_filename}" -o /tmp/${docker_compose_v2_filename}
+        curl -fsSL "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_PLUGIN_VERSION}/${docker_compose_v2_filename}.sha256" -o /tmp/${docker_compose_v2_filename}.sha256
+        cd /tmp
+        sha256sum -c /tmp/${docker_compose_v2_filename}.sha256
+        rm -f /tmp/${docker_compose_v2_filename}.sha256
+        mkdir -p /usr/local/lib/docker/cli-plugins/
+        mv -f /tmp/${docker_compose_v2_filename} /usr/local/lib/docker/cli-plugins/docker-compose
+        chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
     fi
-    if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
-        # Use pip to get a version that runns on this architecture
-        if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
-            apt_get_update_if_needed
-            apt-get -y install python3-minimal python3-pip libffi-dev python3-venv
+fi
+
+# Install Docker Compose v1 if not already installed
+if [ "${DOCKER_COMPOSE_V1_VERSION}" != "none" ]; then
+    if type docker-compose > /dev/null 2>&1; then
+        echo "(*) Compose v1 already installed. Skipping..."
+    else
+        if [ "${target_compose_arch}" != "x86_64" ]; then
+            # Use pip to get a version that runns on this architecture
+            echo "(*) Installing Compose v1..."
+            if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
+                apt_get_update_if_needed
+                apt-get -y install python3-minimal python3-pip libffi-dev python3-venv
+            fi
+            export PIPX_HOME=/usr/local/pipx
+            mkdir -p ${PIPX_HOME}
+            export PIPX_BIN_DIR=/usr/local/bin
+            export PYTHONUSERBASE=/tmp/pip-tmp
+            export PIP_CACHE_DIR=/tmp/pip-tmp/cache
+            pipx_bin=pipx
+            if ! type pipx > /dev/null 2>&1; then
+                pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
+                pipx_bin=/tmp/pip-tmp/bin/pipx
+            fi
+            ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
+            rm -rf /tmp/pip-tmp
+        else
+            find_version_from_git_tags DOCKER_COMPOSE_V1_VERSION "https://github.com/docker/compose" "tags/"
+            echo "(*) Installing Compose v1 (docker-compose) ${DOCKER_COMPOSE_V1_VERSION}..."
+            curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_V1_VERSION}/docker-compose-Linux-x86_64" -o /tmp/docker-compose-Linux-x86_64
+            curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_V1_VERSION}/docker-compose-Linux-x86_64.sha256" -o /tmp/docker-compose-Linux-x86_64.sha256
+            cd /tmp
+            sha256sum -c docker-compose-Linux-x86_64.sha256
+            rm -f /tmp/docker-compose-Linux-x86_64.sha256
+            mv -f /tmp/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
         fi
-        export PIPX_HOME=/usr/local/pipx
-        mkdir -p ${PIPX_HOME}
-        export PIPX_BIN_DIR=/usr/local/bin
-        export PYTHONUSERBASE=/tmp/pip-tmp
-        export PIP_CACHE_DIR=/tmp/pip-tmp/cache
-        pipx_bin=pipx
-        if ! type pipx > /dev/null 2>&1; then
-            pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
-            pipx_bin=/tmp/pip-tmp/bin/pipx
-        fi
-        ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
-        rm -rf /tmp/pip-tmp
-    else 
-        find_version_from_git_tags DOCKER_DASH_COMPOSE_VERSION "https://github.com/docker/compose" "tags/"
-        echo "(*) Installing docker-compose ${DOCKER_DASH_COMPOSE_VERSION}..."
-        curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_DASH_COMPOSE_VERSION}/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
-        chmod +x /usr/local/bin/docker-compose
     fi
+fi
+
+# Install docker-compose switch if not already installed
+if [ "${COMPOSE_SWITCH_VERSION}" != "none" ] && [ ! -e "/usr/local/bin/compose-switch" ]; then
+    if type docker-compose > /dev/null 2>&1; then
+        # Setup v1 CLI as alternative
+        current_v1_compose_path="$(which docker-compose)"
+        target_v1_compose_path="$(dirname "${current_v1_compose_path}")/docker-compose-v1"
+        mv "${current_v1_compose_path}" "${target_v1_compose_path}"
+        update-alternatives --install /usr/local/bin/docker-compose docker-compose "${target_v1_compose_path}" 1
+    fi
+    find_version_from_git_tags COMPOSE_SWITCH_VERSION "https://github.com/docker/compose-switch"
+    echo "(*) Installing compose-switch ${COMPOSE_SWITCH_VERSION}..."
+    curl -fsSL "https://github.com/docker/compose-switch/releases/download/v${COMPOSE_SWITCH_VERSION}/docker-compose-linux-${architecture}" -o /usr/local/bin/compose-switch
+    # TODO: Verify checksum once available: https://github.com/docker/compose-switch/issues/11
+    chmod +x /usr/local/bin/compose-switch
+    update-alternatives --install /usr/local/bin/docker-compose docker-compose /usr/local/bin/compose-switch 99
 fi
 
 # If init file already exists, exit
