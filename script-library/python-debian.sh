@@ -321,9 +321,11 @@ mkdir -p ${PIPX_BIN_DIR}
 chown :pipx ${PIPX_HOME} ${PIPX_BIN_DIR}
 chmod g+s ${PIPX_HOME} ${PIPX_BIN_DIR}
 
-# Update pip
-echo "Updating pip..."
-${PYTHON_INSTALL_PATH}/bin/python3 -m pip install --no-cache-dir --upgrade pip
+# Update pip if not using os provided python
+if [ ${PYTHON_VERSION} != "os-provided" ] && [ ${PYTHON_VERSION} != "system" ]; then
+    echo "Updating pip..."
+    ${PYTHON_INSTALL_PATH}/bin/python3 -m pip install --no-cache-dir --upgrade pip
+fi
 
 # Install tools
 echo "Installing Python tools..."
