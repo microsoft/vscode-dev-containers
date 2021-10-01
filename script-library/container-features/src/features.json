@@ -238,7 +238,7 @@
 				"version": {
 					"type": "string",
 					"proposals": ["latest", "os-provided"],
-					"default": "system",
+					"default": "os-provided",
 					"description": "Select or enter a Git version."
 				},
 				"ppa": {
