@@ -9,7 +9,7 @@
 #
 # Syntax: ./python-debian.sh [Python Version] [Python intall path] [PIPX_HOME] [non-root user] [Update rc files flag] [install tools flag] [Use Oryx if available flag] [Optimize when building from source flag]
 
-PYTHON_VERSION=${1:-"latest"}
+PYTHON_VERSION=${1:-"latest"} # 'system' checks the base image first, else installs 'latest'
 PYTHON_INSTALL_PATH=${2:-"/usr/local/python"}
 export PIPX_HOME=${3:-"/usr/local/py-utils"}
 USERNAME=${4:-"automatic"}
@@ -277,6 +277,18 @@ install_using_oryx() {
 
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
+
+# General requirements
+check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
+            libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
+            libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
+
+# If the os-provided versions are "good enough", detect that and bail out.
+if [ ${PYTHON_VERSION} = "os-provided" ] || [ ${PYTHON_VERSION} = "system" ] ; then
+    check_packages python3 python3-doc python3-pip python3-venv python3-dev python3-tk
+    echo "Done!"
+    exit 0
+fi
 
 # Install python from source if needed
 if [ "${PYTHON_VERSION}" != "none" ]; then

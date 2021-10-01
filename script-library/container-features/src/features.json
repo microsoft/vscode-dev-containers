@@ -233,13 +233,13 @@
 		},
 		{
 			"id": "git",
-			"name": "Git (latest version - may require compilation)",
+			"name": "Git (may require compilation)",
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": ["latest"],
-					"default": "latest",
-					"description": "Currently unused."
+					"proposals": ["latest", "os-provided"],
+					"default": "os-provided",
+					"description": "Select or enter a Git version."
 				},
 				"ppa": {
 					"type": "boolean",
@@ -367,9 +367,9 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": ["latest"],
+					"proposals": ["latest"],
 					"default": "latest",
-					"description": "Currently unused."
+					"description": "Select or enter an Azure CLI version. (Available versions may vary by Linux distribution.)"
 				}
 			},
 			"init": true,
@@ -585,9 +585,9 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": [ "latest", "3.9", "3.8", "3.7", "3.6" ],
-					"default": "latest",
-					"description": "Select a Python version to install"
+					"enum": [ "latest", "os-provided", "3.9", "3.8", "3.7", "3.6" ],
+					"default": "os-provided",
+					"description": "Select a Python version to install."
 				}
 			},
 			"init": true,
