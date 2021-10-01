@@ -1,5 +1,5 @@
 {
-	"name": "Dart",
+	"name": "Dart (Community)",
 	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
