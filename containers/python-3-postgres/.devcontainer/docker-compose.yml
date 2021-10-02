@@ -15,6 +15,7 @@ services:
 
     volumes:
       - ..:/workspace:cached  
+      - run-postgresql:/var/run/postgresql
     init: true
 
     # Overrides default command so things don't shut down after the process ends.
@@ -34,6 +35,7 @@ services:
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
+      - run-postgresql:/var/run/postgresql
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
@@ -44,3 +46,4 @@ services:
 
 volumes:
   postgres-data:
+  run-postgresql:
