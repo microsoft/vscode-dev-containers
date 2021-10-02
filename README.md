@@ -42,6 +42,7 @@ If you want to try a sample project which already has a dev container, check out
 - [Rust Sample](https://github.com/microsoft/vscode-remote-try-rust)
 - [C++ Sample](https://github.com/microsoft/vscode-remote-try-cpp)
 - [PHP Sample](https://github.com/microsoft/vscode-remote-try-php)
+- [Shell Script Sample](https://github.com/microsoft/vscode-remote-try-shellscript)
 
 ## Contents
 
