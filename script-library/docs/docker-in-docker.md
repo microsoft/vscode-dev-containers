@@ -6,7 +6,7 @@
 
 **Script status:** Stable
 
-**OS support**: Debian 9+, Ubuntu 20.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 > **Note:** Your host chip architecture needs to match the your container image architecture for this script to function. Cross-architecture emulation will not work.
 
@@ -23,6 +23,9 @@
 |Non-root access flag|`true`| Flag (`true`/`false`) that specifies whether a non-root user should be granted access to Docker.|
 |Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 |Use Moby|`true`| Specifies that a build of the open source [Moby CLI](https://github.com/moby/moby/tree/master/cli) should be used instead of the Docker CLI distribution of it. |
+| Docker / Moby version | `latest` | Docker/Moby Engine version or `latest`. Partial version numbers allowed. Availability can vary by OS version. |
+| Docker Compose version |`latest` | Docker Compose version or `latest`. Partial version numbers allowed. Docker [Compose Switch](https://github.com/docker/compose-switch) will be installed if v2+ selected. A version of `none` will skip installation. |
+| Compose Switch version | `latest` | Version of [Compose Switch](https://github.com/docker/compose-switch) to be installed if Docker Compose v2+ selected.A version of `none` will skip installation. |
 
 ## Usage
 

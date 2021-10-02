@@ -7,7 +7,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "20.10" ],
+					"proposals": [ "latest", "20.10" ],
 					"default": "latest",
 					"description": "Select or enter a Docker/Moby Engine version. (Availability can vary by OS version.)"
 				},
@@ -15,6 +15,18 @@
 					"type": "boolean",
 					"default": true,
 					"description": "Install OSS Moby build instead of Docker CE"
+				},
+				"composeVersion": {
+					"type": "string",
+					"proposals": [ "none", "latest", "2", "1" ],
+					"default": "latest",
+					"description": "Select or enter a Docker Compose version."
+				},
+				"composeSwitchVersion": {
+					"type": "string",
+					"proposals": [ "none", "latest", "1" ],
+					"default": "latest",
+					"description": "Select or enter a Docker Compose (v2) Switch version."
 				}
 			},
 			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
@@ -68,6 +80,23 @@
 					"proposals": ["latest", "20.10"],
 					"default": "latest",
 					"description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+				},
+				"moby": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install OSS Moby build instead of Docker CE"
+				},
+				"composeVersion": {
+					"type": "string",
+					"proposals": [ "none", "latest", "2", "1" ],
+					"default": "latest",
+					"description": "Select or enter a Docker Compose version."
+				},
+				"composeSwitchVersion": {
+					"type": "string",
+					"proposals": [ "none", "latest", "1" ],
+					"default": "latest",
+					"description": "Select or enter a Docker Compose (v2) Switch version."
 				}
 			},
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",

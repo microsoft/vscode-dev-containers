@@ -4,7 +4,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, CentOS/RHEL 7+ (community supported) and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, CentOS/RHEL 7+ (community supported) and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams, [@smankoo](https://github.com/smankoo) (`docker-redhat.sh`)
 
@@ -24,6 +24,9 @@
 |Target socket|`/var/run/docker.sock`| Location within the container that the Docker CLI will expect to find the Docker socket with permissions that allow the non-root user to access it.|
 |Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 |Use Moby|`true`| Specifies that a build of the open source [Moby CLI](https://github.com/moby/moby/tree/master/cli) should be used instead of the Docker CLI distribution of it. |
+| Docker / Moby version | `latest` | Docker/Moby Engine version or `latest`. Partial version numbers allowed. Availability can vary by OS version. |
+| Docker Compose version |`latest` | Docker Compose version or `latest`. Partial version numbers allowed. Docker [Compose Switch](https://github.com/docker/compose-switch) will be installed if v2+ selected. A version of `none` will skip installation. |
+| Compose Switch version | `latest` | Version of [Compose Switch](https://github.com/docker/compose-switch) to be installed if Docker Compose v2+ selected.A version of `none` will skip installation. |
 
 ## Usage
 
