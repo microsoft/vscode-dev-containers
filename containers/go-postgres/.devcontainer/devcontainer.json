@@ -1,20 +1,21 @@
 {
-	"name": "Go",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			// Update the VARIANT arg to pick a version of Go: 1, 1.16, 1.17
-			// Append -bullseye or -buster to pin to an OS version.
-			// Use -bullseye variants on local arm64/Apple Silicon.
-			"VARIANT": "1-bullseye",
-			// Options
-			"NODE_VERSION": "lts/*"
-		}
-	},
-	"runArgs": [ "--init", "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+	"name": "Go & PostgreSQL",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
+		"sqltools.connections": [{
+			"name": "Container database",
+			"driver": "PostgreSQL",
+			"previewLimit": 50,
+			"server": "localhost",
+			"port": 5432,
+			"database": "postgres",
+			"username": "postgres",
+			"password": "postgres"
+		}],
 		"go.toolsManagement.checkForUpdates": "local",
 		"go.useLanguageServer": true,
 		"go.gopath": "/go",
@@ -24,7 +25,9 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"golang.Go"
+		"golang.Go",
+		"mtxr.sqltools",
+		"mtxr.sqltools-driver-pg"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
