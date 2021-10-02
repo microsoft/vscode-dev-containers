@@ -904,9 +904,15 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": ["latest"],
+					"proposed": ["latest", "1.55", "1.54", "1.53"],
 					"default": "latest",
-					"description": "Currently unused."
+					"description": "Select or enter a version of Rust to install."
+				},
+				"profile": {
+					"type": "string",
+					"proposed": ["minimal", "default", "complete"],
+					"default": "minimal",
+					"description": "Select a rustup install profile."
 				}
 			},
 			"init": true,
@@ -921,7 +927,7 @@
 			"containerEnv": {
 				"CARGO_HOME": "/usr/local/cargo",
 				"RUSTUP_HOME": "/usr/local/rustup",
-				"PATH": "${CARGO_HOME}/bin:${RUSTUP_HOME}/bin:${PATH}"
+				"PATH": "${CARGO_HOME}/bin:${PATH}"
 			},
 			"capAdd": [ "SYS_PTRACE" ],
 			"securityOpt": ["seccomp=unconfined"],
