@@ -5,7 +5,7 @@
 *Develop Clojure applications. Includes the Calva and clj-kondo extensions.*
 
 | Metadata                    | Value                 |
-|-----------------------------+-----------------------|
+|-----------------------------|-----------------------|
 | *Categories*                | Core, Languages       |
 | *Definition Type*           | Dockerfile            |
 | *Works in Codespaces*       | Yes                   |
@@ -24,26 +24,42 @@ While this definition should work unmodified, you can select the version of Java
 
 ## Installing Clojure CLI Tools
 
-The Clojure command line tools will be installed by default but you can change this behavior by adding
-`"INSTALL_LEININGEN: \"false\""` to the build args in 
-`.devcontainer/devcontainer.json`.
+The Clojure command line tools will be installed by default but you can change this behavior by setting the `"INSTALL_CLOJURE_CLI"` build argument to false in
+`.devcontainer/devcontainer.json`. The version of the tools may be set with the `"CLOJURE_CLI_VERSION"` argument.
 
 ```json
 "args": {
-   "VARIANT": "11",
    "INSTALL_CLOJURE_CLI": "false"
+}
+```
+
+## Installing Boot
+
+The Boot command line tools will be installed by default but you can change this behavior by setting the `"INSTALL_BOOT"` build argument to false in `.devcontainer/devcontainer.json`. The version of Boot may be set with the `"BOOT_VERSION"` argument.
+
+```json
+"args": {
+   "INSTALL_BOOT": "false"
 }
 ```
 
 ## Installing Leiningen
 
-Leiningen will be installed by default but you can change this behavior by adding
-`"INSTALL_LEININGEN: \"false\""` to the build args in 
-`.devcontainer/devcontainer.json`.
+Leiningen will be installed by default but you can change this behavior by setting the `"INSTALL_LEININGEN"` build argument to false in `.devcontainer/devcontainer.json`. The version of Leiningen may be set with the `"LEININGEN_VERSION"` argument.
 
 ```json
 "args": {
    "INSTALL_LEININGEN": "false"
+}
+```
+
+## Installing a Specific Clojure Version
+
+You can set the default Clojure version used by Boot as well as the version of Clojure that is pre-loaded with Leiningen by adding the `"CLOJURE_VERSION"` to the build arguments in `.devcontainer/devcontainer.json`.
+
+```json
+"args": {
+   "CLOJURE_VERSION": "1.10.3"
 }
 ```
 

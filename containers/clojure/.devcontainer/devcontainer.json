@@ -8,7 +8,9 @@
 			// Use the -bullseye variants on local arm64/Apple Silicon.
 			"VARIANT": "11-jdk-bullseye",
 			// Options
+			"CLOJURE_VERSION": "1.10.3",
 			"INSTALL_CLOJURE_CLI": "true",
+			"INSTALL_BOOT": "true",
 			"INSTALL_LEININGEN": "true"
 		}
 	},

@@ -2,29 +2,51 @@
 ARG VARIANT=11-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/java:${VARIANT}
 
-# [Option] Install Clojure CLI tools
+# [Option] Clojure version
+ARG CLOJURE_VERSION=1.10.3
+ENV BOOT_CLOJURE_VERSION=${CLOJURE_VERSION}
+
+# [Option] Install Clojure tools
 ARG INSTALL_CLOJURE_CLI="true"
+# [Option] Clojure tools version
+ARG CLOJURE_CLI_VERSION=1.10.3.981
+
+# [Option] Install Boot
+ARG INSTALL_BOOT="true"
+# [Option] Boot version
+ENV BOOT_VERSION=2.8.3
 
 # [Option] Install Leiningen
 ARG INSTALL_LEININGEN="true"
+# [Option] Leiningen version
+ARG LEININGEN_VERSION="stable"
 
 RUN if [ "${INSTALL_CLOJURE_CLI}" = "true" ]; then \
     apt-get update \
     && apt-get -y install rlwrap \
-    && curl -O "https://download.clojure.org/install/linux-install-1.10.3.981.sh" \
-    && chmod +x /linux-install-1.10.3.981.sh \
+    && curl -OL "https://download.clojure.org/install/linux-install-${CLOJURE_CLI_VERSION}.sh" \
+    && chmod +x linux-install-1.10.3.981.sh \
     && /linux-install-1.10.3.981.sh \
     && rm /linux-install-1.10.3.981.sh \
     && clj --version; fi
 
+RUN if [ "${INSTALL_BOOT}" = "true" ]; then \
+    curl -OL "https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh" \
+    && chmod +x boot.sh \
+    && mv boot.sh /usr/local/sbin/boot \
+    && su vscode -c "boot -u"; fi
+
 RUN if [ "${INSTALL_LEININGEN}" = "true" ]; then \
-    curl -O "https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein" \
+    curl -OL "https://raw.githubusercontent.com/technomancy/leiningen/${LEININGEN_VERSION}/bin/lein" \
     && chmod +x lein \
     && mv lein /usr/local/sbin \
     && /usr/local/sbin/lein --version; fi
 
-# Clean up package lists
-RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+# Cache Clojure and dependencies
+RUN if [ "${INSTALL_LEININGEN}" = "true" ]; then \
+    echo '(defproject dummy "" :dependencies [[org.clojure/clojure "'${CLOJURE_VERSION}'"]])' > project.clj \
+    && lein deps \
+    && rm project.clj; fi
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -32,3 +54,6 @@ RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
+
+# Clean up package lists
+RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
