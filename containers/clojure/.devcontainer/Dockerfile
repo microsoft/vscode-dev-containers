@@ -25,10 +25,10 @@ RUN if [ "${INSTALL_CLOJURE_CLI}" = "true" ]; then \
     apt-get update \
     && apt-get -y install rlwrap \
     && curl -OL "https://download.clojure.org/install/linux-install-${CLOJURE_CLI_VERSION}.sh" \
-    && chmod +x linux-install-1.10.3.981.sh \
-    && /linux-install-1.10.3.981.sh \
-    && rm /linux-install-1.10.3.981.sh \
-    && clj --version; fi
+    && chmod +x linux-install-${CLOJURE_CLI_VERSION}.sh \
+    && /linux-install-${CLOJURE_CLI_VERSION}.sh \
+    && rm /linux-install-${CLOJURE_CLI_VERSION}.sh \
+    && su vscode -c "clj --version"; fi
 
 RUN if [ "${INSTALL_BOOT}" = "true" ]; then \
     curl -OL "https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh" \
@@ -39,14 +39,14 @@ RUN if [ "${INSTALL_BOOT}" = "true" ]; then \
 RUN if [ "${INSTALL_LEININGEN}" = "true" ]; then \
     curl -OL "https://raw.githubusercontent.com/technomancy/leiningen/${LEININGEN_VERSION}/bin/lein" \
     && chmod +x lein \
-    && mv lein /usr/local/sbin \
-    && /usr/local/sbin/lein --version; fi
+    && mv lein /usr/local/sbin; fi
 
 # Cache Clojure and dependencies
 RUN if [ "${INSTALL_LEININGEN}" = "true" ]; then \
-    echo '(defproject dummy "" :dependencies [[org.clojure/clojure "'${CLOJURE_VERSION}'"]])' > project.clj \
+    su vscode -c " cd ~ \
+    && echo '(defproject dummy \"\" :dependencies [[org.clojure/clojure \"'${CLOJURE_VERSION}'\"]])' > project.clj \
     && lein deps \
-    && rm project.clj; fi
+    && rm project.clj"; fi
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
