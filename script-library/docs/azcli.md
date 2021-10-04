@@ -34,7 +34,7 @@ To install these capabilities in your primary dev container, reference it in `de
 
 ```json
 "features": {
-    "github": "latest"
+    "azure-cli": "latest"
 }
 ```
 
