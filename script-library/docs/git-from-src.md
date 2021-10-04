@@ -27,7 +27,7 @@ Or as a feature:
 
 |Argument|Feature option|Default|Description|
 |--------|--------------|-------|-----------|
-|Version| `version` | `latest`| Version of Git to build and install. Use `latest` to install the latest stable version or `os-provided` to install the version that ships with the Debian/Ubuntu distribution the container uses. |
+|Version| `version` | `latest`| Version of Git to build and install. Use `latest` to install the latest stable version. |
 |Use PPA if available| `ppa` | `false`| If using Ubuntu and a build already exists in the git-core PPA, use it instead of building from scratch. |
 
 ## Usage

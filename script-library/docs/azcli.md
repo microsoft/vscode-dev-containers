@@ -22,10 +22,6 @@ Or as a feature:
 }
 ```
 
-|Argument|Feature option|Default|Description|
-|--------|--------------|-------|-----------|
-|Version|`version`| `latest` | Version of Azure CLI to install. Use `latest` to install the latest released version. Partial version numbers are allowed. |
-
 ## Usage
 
 ### Feature use
