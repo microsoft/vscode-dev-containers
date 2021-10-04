@@ -39,7 +39,7 @@ Or as a feature:
 
 ### Feature use
 
-You use this script for your primary dev container by adding it to the  the  `features` property in `devcontainer.json`. 
+You can use this script for your primary dev container by adding it to the `features` property in `devcontainer.json`.
 
 ```json
 "features": {
