@@ -4,7 +4,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
@@ -14,16 +14,46 @@
 ./kubectl-helm-debian.sh [kubectl version] [Helm version] [Minikube version] [kubectl SHA256] [Helm SHA256] [minikube SHA256]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-|kubectl version|`latest`| Version of kubectl to install. e.g. `v1.19.0` Use `latest` to install the latest stable version. |
-|Helm version|`latest`| Version of Helm to install. e.g. `v3.5.4` Use `latest` to install the latest stable version. |
-|minikube version|`none`| Version of Minkube to install. e.g. `v3.5.4` Specifying `none` skips installation while `latest` installs the latest stable version.  |
-|kubectl SHA256|`automatic`| SHA256 checksum to use to verify the kubectl download. `automatic` will download the checksum. |
-|Helm SHA256|`automatic`| SHA256 checksum to use to verify the Helm download. `automatic` will both acquire the checksum and do a signature verification of it. |
-|minikube SHA256|`automatic`| SHA256 checksum to use to verify the minikube download. `automatic` will download the checksum. |
+Or as a feature:
+
+```json
+"features": {
+    "kubectl-helm-minikube": {
+        "version": "latest",
+        "helm": "latest",
+        "minikube": "latest"
+    }
+}
+```
+
+|Argument| Feature option |Default|Description|
+|--------|----------------|-------|-----------|
+|kubectl version| `version` | `latest`| Version of kubectl to install. e.g. `v1.19` Use `latest` to install the latest stable version. |
+|Helm version|`helm`|`latest`| Version of Helm to install. e.g. `v3.5` Use `latest` to install the latest stable version. |
+|minikube version| `minkube`| `none`| Version of Minkube to install. e.g. `v1.19` Specifying `none` skips installation while `latest` installs the latest stable version.  |
+|kubectl SHA256| | `automatic`| SHA256 checksum to use to verify the kubectl download. `automatic` will download the checksum. |
+|Helm SHA256| | `automatic`| SHA256 checksum to use to verify the Helm download. `automatic` will both acquire the checksum and do a signature verification of it. |
+|minikube SHA256| | `automatic`| SHA256 checksum to use to verify the minikube download. `automatic` will download the checksum. |
 
 ## Usage
+
+### Feature use
+
+You use this script for your primary dev container by adding it to the  the  `features` property in `devcontainer.json`. 
+
+```json
+"features": {
+    "kubectl-helm-minikube": {
+        "version": "latest",
+        "helm": "latest",
+        "minikube": "latest"
+    }
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 Usage:
 

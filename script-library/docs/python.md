@@ -4,7 +4,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
@@ -14,19 +14,40 @@
  ./python-debian.sh [Python Version] [Install path] [PIPX_HOME] [Non-root user] [Update rc files flag] [Install tools] [Use Oryx if available] [Optimize when building from source]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-|Python Version|`latest`| Version of Python to install. Set to `none` to skip installing.|
-|Python install path|`/usr/local/python`| Location to install Python.|
-|Non-root user|`automatic`| Specifies a user in the container other than root that will use Python. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`.|
-|PIPX_HOME|`/usr/local/py-utils`| Location PIPX should install Python utilities and related venvs.|
-| Add to rc files flag | `true` | A `true`/`false` flag that indicates whether sourcing the PIPX_HOME and bin path should be added to `/etc/bash.bashrc` and `/etc/zsh/zshrc`.|
-|Install tools | `true` | A `true`/`false` flag that indicates whether related Python utilities should be installed.|
-|Use Oryx if available | `true` | A `true`/`false` flag that indicates whether the Oryx CLI in images like the default codespaces image should be used if available (like in mcr.microsoft.com/vscode/devcontainers/universal).|
-|Optimize when building from source| `false` | A `true`/`false` flag that indicates whether Python should be optimized for performance when built from source. Adds significant time to the build process.|
+Or as a feature:
 
+```json
+"features": {
+    "python": "latest"
+}
+```
+
+|Argument|Feature option|Default|Description|
+|--------|--------------|-------|-----------|
+|Python Version| `version` | `latest`| Version of Python to install. Set to `none` to skip installing.|
+|Python install path| |`/usr/local/python`| Location to install Python.|
+|Non-root user| |`automatic`| Specifies a user in the container other than root that will use Python. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`.|
+|PIPX_HOME| |`/usr/local/py-utils`| Location PIPX should install Python utilities and related venvs.|
+| Add to rc files flag | |`true` | A `true`/`false` flag that indicates whether sourcing the PIPX_HOME and bin path should be added to `/etc/bash.bashrc` and `/etc/zsh/zshrc`.|
+|Install tools | | `true` | A `true`/`false` flag that indicates whether related Python utilities should be installed.|
+|Use Oryx if available | |`true` | A `true`/`false` flag that indicates whether the Oryx CLI in images like the default codespaces image should be used if available (like in mcr.microsoft.com/vscode/devcontainers/universal).|
+|Optimize when building from source| |`false` | A `true`/`false` flag that indicates whether Python should be optimized for performance when built from source. Adds significant time to the build process.|
 
 ## Usage
+
+### Feature use
+
+To install these capabilities in your primary dev container, reference it in `devcontainer.json` as follows:
+
+```json
+"features": {
+    "python": "latest"
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 1. Add [`python-debian.sh`](../python-debian.sh) to `.devcontainer/library-scripts`
 
