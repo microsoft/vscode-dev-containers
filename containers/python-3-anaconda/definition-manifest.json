@@ -1,8 +1,9 @@
 {
-	"definitionVersion": "0.201.7",
+	"definitionVersion": "0.202.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
+		"architectures": ["linux/amd64", "linux/arm64"],
 		"tags": [
 			"anaconda:${VERSION}-3"
 		]

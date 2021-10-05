@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/ruby:2.7
+# [Choice] Debian OS version (use 2.7-bullseye on local arm64/Apple Silicon): 2.7-bullseye, 2.7-buster
+ARG VARIANT=2.7-bullseye
+FROM mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}
 COPY library-scripts/meta.env /usr/local/etc/vscode-dev-containers
 
 # ENV Variables required by Jekyll
@@ -12,7 +14,7 @@ ENV LANG=en_US.UTF-8 \
 # Install bundler, latest jekyll, and github-pages for older jekyll
 RUN gem install bundler jekyll github-pages
 
-# [Choice] Node.js version: none, lts/*, 16, 14, 12
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 

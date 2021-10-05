@@ -52,8 +52,10 @@ fi
 updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" >> /etc/bash.bashrc
-        if [ -f "/etc/zsh/zshrc" ]; then
+        if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
+            echo -e "$1" >> /etc/bash.bashrc
+        fi
+        if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
             echo -e "$1" >> /etc/zsh/zshrc
         fi
     fi
@@ -105,7 +107,7 @@ receive_gpg_keys() {
     done
     set -e
     if [ "${gpg_ok}" = "false" ]; then
-        echo "(!) Failed to install rvm."
+        echo "(!) Failed to get gpg key."
         exit 1
     fi
 }

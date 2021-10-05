@@ -1,6 +1,6 @@
-# [Choice] PHP version: 8, 8.0, 7, 7.4, 7.3
-ARG VARIANT=7
-FROM php:${VARIANT}-apache
+# [Choice] PHP version (use -bullseye variants on local arm64/Apple Silicon): 8-apache-bullseye, 8.0-apache-bullseye, 7-apache-bullseye, 7.4-apache-bullseye, 7.3-apache-bullseye, 8-apache-buster, 8.0-apache-buster, 7-apache-buster, 7.4-apache-buster, 7.3-apache-buster
+ARG VARIANT=7-apache-bullseye
+FROM php:${VARIANT}
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
@@ -33,7 +33,7 @@ RUN curl -sSL https://getcomposer.org/installer | php \
     && chmod +x composer.phar \
     && mv composer.phar /usr/local/bin/composer
 
-# [Choice] Node.js version: none, lts, 16, 14, 12, 10
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \

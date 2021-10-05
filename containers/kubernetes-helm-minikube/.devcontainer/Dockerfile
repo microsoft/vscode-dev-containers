@@ -1,5 +1,8 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-buster
+FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
+
+# Enable new "BUILDKIT" mode for Docker CLI
+ENV DOCKER_BUILDKIT=1
 
 # Options
 ARG INSTALL_ZSH="true"

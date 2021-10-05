@@ -18,14 +18,17 @@
 
 This definition creates two containers, one for Node.js and one for MongoDB. VS Code will attach to the Node.js container, and from within that container the MongoDB container will be available on on **`localhost`** port 27017 The MongoDB instance can be managed in VS Code via the automatically installed MongoDB extension. Database options can be configured in `.devcontainer/docker-compose.yml` and data is persisted in a volume called `mongo-data`.
 
-While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Node.js version 10, 12, or 14.
+While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/javascript-node` image which includes `git`, `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick either Node.js version.
 
 ```yaml
 build:
   context: .
   dockerfile: Dockerfile
   args:
-    VARIANT: 12
+    # Update 'VARIANT' to pick an LTS version of Node.js: 16, 14, 12.
+    # Append -bullseye or -buster to pin to an OS version.
+    # Use -bullseye variants on local arm64/Apple Silicon.
+    VARIANT: 14-bullseye
 ```
 
 You also can connect to MongoDB from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:

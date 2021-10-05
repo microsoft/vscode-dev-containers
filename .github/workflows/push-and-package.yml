@@ -11,8 +11,8 @@ jobs:
     name: Build and push images
     strategy:
       matrix:
-        page: [1, 2, 3, 4, 5]
-        page-total: [5]
+        page: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        page-total: [10]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
@@ -92,6 +92,7 @@ jobs:
 
         # Re-tag and push to origin
         if [ "${NO_UPDATES}" != "true" ]; then 
+            git fetch --unshallow origin || echo 'Not a shallow clone.'
             git tag -d ${{ steps.get_tag_name.outputs.tag }}
             git tag ${{ steps.get_tag_name.outputs.tag }}
             git push --delete origin ${{ steps.get_tag_name.outputs.tag }}

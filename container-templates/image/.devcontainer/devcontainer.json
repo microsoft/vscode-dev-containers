@@ -2,7 +2,7 @@
 	"name": "Your Definition Name Here (Community)",
 
 	// Update the 'image' property with your Docker image name.
-	"image": "mcr.microsoft.com/vscode/devcontainers/base:debian-10",
+	"image": "mcr.microsoft.com/vscode/devcontainers/base:debian-11",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},

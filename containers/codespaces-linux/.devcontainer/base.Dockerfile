@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/oryx/build:vso-focal-20210805.1 as kitchensink
+FROM mcr.microsoft.com/oryx/build:vso-focal-20210902.1 as kitchensink
 
 ARG USERNAME=codespace
 ARG USER_UID=1000
@@ -32,8 +32,9 @@ ENV SHELL=/bin/bash \
     GOPATH="/go" \
     CARGO_HOME="/usr/local/cargo" \
     RUSTUP_HOME="/usr/local/rustup" \
-    SDKMAN_DIR="/usr/local/sdkman"
-    
+    SDKMAN_DIR="/usr/local/sdkman" \
+    DOCKER_BUILDKIT=1
+
 ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${ORIGINAL_PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${PYTHON_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${MAVEN_ROOT}/current/bin:${HUGO_ROOT}/current/bin:${ORYX_PATHS}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.

@@ -13,7 +13,7 @@
 	},
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
 	"overrideCommand": false,
-	"runArgs": ["--env-file",".devcontainer/devcontainer.env"],
+	"runArgs": ["--init", "--env-file",".devcontainer/devcontainer.env"],
     "remoteEnv": {
 		// Sets environment variables required for terrafom remote backend
 		"TF_BACKEND_RESOURCE_GROUP" : "${containerEnv:TF_BACKEND_RESOURCE_GROUP}",

@@ -14,7 +14,7 @@ VNC_PASSWORD=${2:-"vscode"}
 INSTALL_NOVNC=${3:-"true"}
 
 NOVNC_VERSION=1.2.0
-WEBSOCKETIFY_VERSION=0.9.0
+WEBSOCKETIFY_VERSION=0.10.0
 
 package_list="
     tigervnc-standalone-server \
@@ -117,6 +117,8 @@ if [[ -z $(apt-cache --names-only search ^tilix$) ]]; then
     else
         package_list="${package_list} tilix"
     fi
+else
+    package_list="${package_list} tilix"
 fi
 
 # Install X11, fluxbox and VS Code dependencies
@@ -129,7 +131,7 @@ fi
 
 # Check at least one locale exists
 if ! grep -o -E '^\s*en_US.UTF-8\s+UTF-8' /etc/locale.gen > /dev/null; then
-    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen 
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
     locale-gen
 fi
 
@@ -153,23 +155,12 @@ if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
     ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify
     rm -f /tmp/websockify-install.zip /tmp/novnc-install.zip
 
-    # noVNC works best with Python 2 right now. Install the right package and use it.
-    if  [[ -z $(apt-cache --names-only search '^python2-minimal$') ]]; then
-        novnc_python_package="python-minimal"
-    else
-        novnc_python_package="python2-minimal"
+    # Install noVNC dependencies and use them.
+    if ! dpkg -s python3-minimal python3-numpy > /dev/null 2>&1; then
+        apt-get -y install --no-install-recommends python3-minimal python3-numpy
     fi
-    # Distros all have python-numpy for python2 right now, but future proof
-    if [[ -z $(apt-cache --names-only search '^python2-numpy$') ]]; then
-        novnc_numpy_package="python-numpy"
-    else
-        novnc_numpy_package="python2-numpy"
-    fi
-    if ! dpkg -s ${novnc_python_package} ${novnc_numpy_package} > /dev/null 2>&1; then
-        apt-get -y install --no-install-recommends ${novnc_python_package} ${novnc_numpy_package}
-    fi
-    sed -i -E 's/^python /python2 /' /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
-fi 
+    sed -i -E 's/^python /python3 /' /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION}/run
+fi
 
 # Set up folders for scripts and init files
 mkdir -p /var/run/dbus /usr/local/etc/vscode-dev-containers/ /root/.fluxbox
@@ -204,7 +195,7 @@ fi
 
 xrandr --fb \${RESOLUTION} --dpi \${DPI} > /dev/null 2>&1
 
-if [ \$? -ne 0 ] && [ "\${IGNORE_ERROR}" != "true" ]; then 
+if [ \$? -ne 0 ] && [ "\${IGNORE_ERROR}" != "true" ]; then
     echo -e "\nFAILED TO SET RESOLUTION!\n"
     exit 1
 fi
@@ -214,7 +205,7 @@ EOF
 
 # Container ENTRYPOINT script
 tee /usr/local/share/desktop-init.sh > /dev/null \
-<< EOF 
+<< EOF
  #!/bin/bash
 
 USERNAME=${USERNAME}
@@ -287,7 +278,9 @@ mkdir -p /tmp/.X11-unix
 sudoIf chmod 1777 /tmp/.X11-unix
 sudoIf chown root:\${USERNAME} /tmp/.X11-unix
 if [ "\$(echo "\${VNC_RESOLUTION}" | tr -cd 'x' | wc -c)" = "1" ]; then VNC_RESOLUTION=\${VNC_RESOLUTION}x16; fi
-startInBackgroundIfNotRunning "Xtigervnc" sudoUserIf "tigervncserver -screen \${DISPLAY:-:1} \${VNC_RESOLUTION:-1440x768x16} -rfbport \${VNC_PORT:-5901} -dpi \${VNC_DPI:-96} -localhost -desktop fluxbox -fg -passwd /usr/local/etc/vscode-dev-containers/vnc-passwd"
+screen_geometry="\${VNC_RESOLUTION%*x*}"
+screen_depth="\${VNC_RESOLUTION##*x}"
+startInBackgroundIfNotRunning "Xtigervnc" sudoUserIf "tigervncserver \${DISPLAY:-:1} -geometry \${screen_geometry} -depth \${screen_depth} -rfbport \${VNC_PORT:-5901} -dpi \${VNC_DPI:-96} -localhost -desktop fluxbox -fg -passwd /usr/local/etc/vscode-dev-containers/vnc-passwd"
 
 # Spin up noVNC if installed and not runnning.
 if [ -d "/usr/local/novnc" ] && [ "\$(ps -ef | grep /usr/local/novnc/noVNC*/utils/launch.sh | grep -v grep)" = "" ]; then
@@ -304,7 +297,7 @@ log "** SCRIPT EXIT **"
 EOF
 
 echo "${VNC_PASSWORD}" | vncpasswd -f > /usr/local/etc/vscode-dev-containers/vnc-passwd
-touch /root/.Xmodmap 
+touch /root/.Xmodmap
 chmod +x /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution
 
 tee /root/.fluxbox/apps > /dev/null \
@@ -353,7 +346,7 @@ tee /root/.fluxbox/menu > /dev/null \
 EOF
 
 # Set up non-root user (if one exists)
-if [ "${USERNAME}" != "root" ]; then 
+if [ "${USERNAME}" != "root" ]; then
     touch /home/${USERNAME}/.Xmodmap
     cp -R /root/.fluxbox /home/${USERNAME}
     chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox
@@ -361,3 +354,4 @@ if [ "${USERNAME}" != "root" ]; then
 fi
 
 echo "Done!"
+

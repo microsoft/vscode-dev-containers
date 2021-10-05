@@ -1,43 +1,63 @@
-#!/bin/sh
+#!/bin/bash
 
 SCRIPT_DIR=${1-"/tmp"}
-DISTRO=${2:-"debian"}
-USE_DEFAULTS=${3:-"true"}
-USERNAME=${4:-"vscode"}
-RUN_COMMON_SCRIPT=${5:-"true"}
-UPGRADE_PACKAGES=${6:-"true"}
-RUN_ONE=${7:-"false"} # false or script name
+USE_DEFAULTS=${2:-"true"}
+USERNAME=${3:-"vscode"}
+RUN_COMMON_SCRIPT=${4:-"true"}
+UPGRADE_PACKAGES=${5:-"true"}
+RUN_ONE=${6:-"false"} # false or script name
 
 set -e
 
 runScript()
 {
-    SCRIPT_NAME=$1
-    if [ "${RUN_ONE}" != "false" ] && [ "${SCRIPT_NAME}" != "common" ] && [ "${SCRIPT_NAME}" != "${RUN_ONE}" ]; then
+    local script_name=$1
+    if [ "${RUN_ONE}" != "false" ] && [ "${script_name}" != "common" ] && [ "${script_name}" != "${RUN_ONE}" ]; then
         return
     fi
-    if [ "${SCRIPT_NAME}" = "docker" ] || [ "${SCRIPT_NAME}" = "docker-in-docker" ]; then
+    if [ "${script_name}" = "docker" ] || [ "${script_name}" = "docker-in-docker" ]; then
         rm -f /usr/local/share/docker-init.sh
     fi
-    if [ "${SCRIPT_NAME}" = "sshd" ]; then
+    if [ "${script_name}" = "sshd" ]; then
         rm -f /usr/local/share/ssh-init.sh
     fi
-    if [ "${SCRIPT_NAME}" = "desktop-lite" ]; then
+    if [ "${script_name}" = "desktop-lite" ]; then
         rm -f /usr/local/share/desktop-init.sh
     fi
-    SCRIPT=${SCRIPT_DIR}/${SCRIPT_NAME}-${DISTRO}.sh
-    ARGS=$2
-    REQUIRED_PREFIX_ARGS=${3:-""}
-    echo "**** Testing $SCRIPT ****"
+    local script="${SCRIPT_DIR}/${script_name}-${DISTRO}.sh"
+    chmod +x "${script}"
+    local optional_args="$2"
+    local required_prefix_args="${3:-""}"
+    echo "**** Testing $script ****"
     if [ "${USE_DEFAULTS}" = "true" ]; then
         echo "Using defaults..."
-        ${SCRIPT} ${REQUIRED_PREFIX_ARGS}
+        ${script} ${required_prefix_args}
     else
-        echo "Arguments: ${REQUIRED_PREFIX_ARGS} ${ARGS}"
-        ${SCRIPT} ${REQUIRED_PREFIX_ARGS} ${ARGS}
+        echo "Arguments: ${required_prefix_args} ${optional_args}"
+        ${script} ${required_prefix_args} ${optional_args}
     fi
     echo "**** Done! ****"
 }
+
+# Determine distro scripts to use
+. /etc/os-release
+DISTRO="${ID_LIKE}"
+if [ -z "${DISTRO}" ]; then
+    DISTRO="${ID}"
+elif [ "${DISTRO}" = "rhel fedora" ] ||  [ "${DISTRO}" = "rhel" ] || [ "${DISTRO}" = "fedora" ]; then
+    DISTRO="redhat"
+fi
+
+cat << EOF
+- SCRIPT_DIR=${SCRIPT_DIR}
+- DISTRO=${DISTRO}
+- USE_DEFAULTS=${USE_DEFAULTS}
+- USERNAME=${USERNAME}
+- RUN_COMMON_SCRIPT=${RUN_COMMON_SCRIPT}
+- UPGRADE_PACKAGES=${UPGRADE_PACKAGES}
+- RUN_ONE=${RUN_ONE}
+
+EOF
 
 tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh > /usr/local/share/desktop-init.sh << 'EOF'
 #!/bin/bash
@@ -49,12 +69,12 @@ if [ "${RUN_COMMON_SCRIPT}" = "true" ]; then
     chown 1000 /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh
 fi
 
-ARCHITECTURE="$(uname -m)"
+architecture="$(uname -m)"
 if [ "${DISTRO}" = "debian" ]; then
     runScript azcli
     runScript fish "false ${USERNAME}"
     runScript git-from-src "latest true"
-    runScript git-lfs
+    runScript git-lfs "" "2.13.3"
     runScript github
     runScript go "1.14 /opt/go /go ${USERNAME} false"
     runScript gradle "4.4 /usr/local/sdkman1 ${USERNAME} false"
@@ -68,11 +88,11 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript sshd "2223 ${USERNAME} true random"
     runScript desktop-lite "${USERNAME} changeme false"
     runScript docker-in-docker "false ${USERNAME} false"
-    if [ "${ARCHITECTURE}" = "amd64" ] || [ "${ARCHITECTURE}" = "x86_64" ] || [ "${ARCHITECTURE}" = "arm64" ] || [ "${ARCHITECTURE}" = "aarch64" ]; then
+    runScript powershell
+    if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ] || [ "${architecture}" = "arm64" ] || [ "${architecture}" = "aarch64" ]; then
         runScript java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
     fi
-    if [ "${ARCHITECTURE}" = "amd64" ] || [ "${ARCHITECTURE}" = "x86_64" ]; then
-        runScript powershell
+    if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ]; then
         runScript homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
     fi 
 fi

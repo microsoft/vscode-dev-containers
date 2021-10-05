@@ -5,24 +5,27 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/typescript-node)
 
 **Definition variations:**
+- [16-bullseye](#variant-16-bullseye)
+- [14-bullseye](#variant-14-bullseye)
+- [12-bullseye](#variant-12-bullseye)
 - [16-buster](#variant-16-buster)
 - [14-buster](#variant-14-buster)
 - [12-buster](#variant-12-buster)
-- [14-stretch](#variant-14-stretch)
-- [12-stretch](#variant-12-stretch)
 
-## Variant: 16-buster
+## Variant: 16-bullseye
 
-**Digest:** sha256:f4b63756f8f9e693eaa06fb24730aa3af8ceacb5dbf3e04b829a2a2867ba6430
+**Digest:** sha256:daac0d6d8726974f001c97b4292f757d0008d4d94d2ae50c6b1ed99dee05cd46
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16-buster
-mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
+mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16-bullseye
+mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-bullseye
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Debian GNU/Linux 10 (buster)
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
 
 **Available (non-root) user:** node
 
@@ -31,14 +34,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.6.0 | /usr/local |
-| [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
+| [Node.js](https://nodejs.org/en/) | 16.10.0 | /usr/local |
+| [TypeScript](https://www.typescriptlang.org/) | 4.4.3 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -46,8 +49,268 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 | Tool / package | Version |
 |----------------|---------|
 | eslint | 7.32.0 |
-| tslint-to-eslint-config | 2.9.1 |
-| typescript | 4.3.5 |
+| tslint-to-eslint-config | 2.10.0 |
+| typescript | 4.4.3 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.13-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: 14-bullseye
+
+**Digest:** sha256:8b0c47d4345690520384fea73cae1ca2e7bd54e143721474949985dcc522088d
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-bullseye
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** node
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Node.js](https://nodejs.org/en/) | 14.18.0 | /usr/local |
+| [TypeScript](https://www.typescriptlang.org/) | 4.4.3 | /usr/local/share/npm-global |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/node/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Npm globally installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| eslint | 7.32.0 |
+| tslint-to-eslint-config | 2.10.0 |
+| typescript | 4.4.3 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.13-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: 12-bullseye
+
+**Digest:** sha256:0aa5fcb1df695e0520fe4ce73beb6a34667f13d1a975fdc2a6f20b379766d107
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-bullseye
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** node
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Node.js](https://nodejs.org/en/) | 12.22.6 | /usr/local |
+| [TypeScript](https://www.typescriptlang.org/) | 4.4.3 | /usr/local/share/npm-global |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/node/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Npm globally installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| eslint | 7.32.0 |
+| tslint-to-eslint-config | 2.10.0 |
+| typescript | 4.4.3 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13 |
+| libgssapi-krb5-2 | 1.18.3-6 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.13-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
+## Variant: 16-buster
+
+**Digest:** sha256:6ba0551cd0e547b7479cc1c963037e23a28c88a4ef6f14d8027238469b1e8acb
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16-buster
+mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
+mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-buster
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
+
+**Available (non-root) user:** node
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Node.js](https://nodejs.org/en/) | 16.10.0 | /usr/local |
+| [TypeScript](https://www.typescriptlang.org/) | 4.4.3 | /usr/local/share/npm-global |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/node/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Npm globally installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| eslint | 7.32.0 |
+| tslint-to-eslint-config | 2.10.0 |
+| typescript | 4.4.3 |
 
 **Additional linux tools and packages**
 
@@ -70,7 +333,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 | libicu63 | 63.1-6+deb10u1 |
 | libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -92,14 +355,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 | unzip | 6.0-23+deb10u2 |
 | vim-tiny | 2:8.1.0875-5 |
 | wget | 1.20.1-1.1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |
 
 ## Variant: 14-buster
 
-**Digest:** sha256:4d01e69bcabe8d732800955b0465743b5bd959dc44d243fe066413b3a97d5408
+**Digest:** sha256:65c5d3b4cb344e8b321fc3e9c8e2007ec6ac2abf70919d22ed600b2a5fe8776a
 
 **Tags:**
 ```
@@ -110,6 +373,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** node
 
 ### Contents
@@ -117,14 +382,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
-| [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
+| [Node.js](https://nodejs.org/en/) | 14.18.0 | /usr/local |
+| [TypeScript](https://www.typescriptlang.org/) | 4.4.3 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -132,8 +397,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 | Tool / package | Version |
 |----------------|---------|
 | eslint | 7.32.0 |
-| tslint-to-eslint-config | 2.9.1 |
-| typescript | 4.3.5 |
+| tslint-to-eslint-config | 2.10.0 |
+| typescript | 4.4.3 |
 
 **Additional linux tools and packages**
 
@@ -156,7 +421,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 | libicu63 | 63.1-6+deb10u1 |
 | libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -178,14 +443,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 | unzip | 6.0-23+deb10u2 |
 | vim-tiny | 2:8.1.0875-5 |
 | wget | 1.20.1-1.1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |
 
 ## Variant: 12-buster
 
-**Digest:** sha256:7b99b9c1317f7b2b66ce10e940c0550e68956ef6ce0dc3822f2471741e451072
+**Digest:** sha256:0a6bf304ddaec3ea01728de2c37bc3130c7280e02edf054558335d45f70c0c79
 
 **Tags:**
 ```
@@ -196,6 +461,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
 
+**Architectures:** linux/amd64
+
 **Available (non-root) user:** node
 
 ### Contents
@@ -203,14 +470,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
-| [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
+| [Node.js](https://nodejs.org/en/) | 12.22.6 | /usr/local |
+| [TypeScript](https://www.typescriptlang.org/) | 4.4.3 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -218,8 +485,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 | Tool / package | Version |
 |----------------|---------|
 | eslint | 7.32.0 |
-| tslint-to-eslint-config | 2.9.1 |
-| typescript | 4.3.5 |
+| tslint-to-eslint-config | 2.10.0 |
+| typescript | 4.4.3 |
 
 **Additional linux tools and packages**
 
@@ -242,7 +509,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 | libicu63 | 63.1-6+deb10u1 |
 | libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -264,180 +531,8 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 | unzip | 6.0-23+deb10u2 |
 | vim-tiny | 2:8.1.0875-5 |
 | wget | 1.20.1-1.1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |
-
-## Variant: 14-stretch
-
-**Digest:** sha256:d5022c5d7fad12e1f75cf5bf77cf9408817c47a4a135a7402406a60023f5dc96
-
-**Tags:**
-```
-mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-stretch
-```
-> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
-
-**Linux distribution:** Debian GNU/Linux 9 (stretch)
-
-**Available (non-root) user:** node
-
-### Contents
-**Languages and runtimes**
-
-| Language / runtime | Version | Path |
-|--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.17.4 | /usr/local |
-| [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
-
-**Tools installed using git**
-
-| Tool | Commit | Path |
-|------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
-
-**Npm globally installed tools and packages**
-
-| Tool / package | Version |
-|----------------|---------|
-| eslint | 7.32.0 |
-| tslint-to-eslint-config | 2.9.1 |
-| typescript | 4.3.5 |
-
-**Additional linux tools and packages**
-
-| Tool / library | Version |
-|----------------|---------|
-| apt-transport-https | 1.4.11 |
-| apt-utils | 1.4.11 |
-| ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u14 |
-| dialog | 1.3-20160828-2 |
-| git | 1:2.11.0-3+deb9u7 |
-| gnupg2 | 2.1.18-8~deb9u4 |
-| htop | 2.0.2-1 |
-| iproute2 | 4.9.0-1+deb9u1 |
-| jq | 1.5+dfsg-1.3 |
-| less | 481-2.1 |
-| libc6 | 2.24-11+deb9u4 |
-| libgcc1 | 1:6.3.0-18+deb9u1 |
-| libgssapi-krb5-2 | 1.15-1+deb9u2 |
-| libicu57 | 57.1-6+deb9u4 |
-| libkrb5-3 | 1.15-1+deb9u2 |
-| liblttng-ust0 | 2.9.0-2+deb9u1 |
-| libssl1.0.2 | 1.0.2u-1~deb9u4 |
-| libssl1.1 | 1.1.0l-1~deb9u3 |
-| libstdc++6 | 6.3.0-18+deb9u1 |
-| locales | 2.24-11+deb9u4 |
-| lsb-release | 9.20161125 |
-| lsof | 4.89+dfsg-0.1 |
-| man-db | 2.7.6.1-2 |
-| manpages | 4.10-2 |
-| manpages-dev | 4.10-2 |
-| manpages-posix | 2013a-2 |
-| manpages-posix-dev | 2013a-2 |
-| nano | 2.7.4-1 |
-| ncdu | 1.12-1+b1 |
-| net-tools | 1.60+git20161116.90da8a0-1 |
-| openssh-client | 1:7.4p1-10+deb9u7 |
-| procps | 2:3.3.12-3+deb9u1 |
-| psmisc | 22.21-2.1+b2 |
-| rsync | 3.1.2-1+deb9u2 |
-| strace | 4.15-2 |
-| sudo | 1.8.19p1-2.1+deb9u3 |
-| unzip | 6.0-21+deb9u2 |
-| vim-tiny | 2:8.0.0197-4+deb9u3 |
-| wget | 1.18-5+deb9u3 |
-| yarn | 1.22.5-1 |
-| zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.8.dfsg-5 |
-| zsh | 5.3.1-4+deb9u4 |
-
-## Variant: 12-stretch
-
-**Digest:** sha256:5786fa4644d4f8c7c422849b9ac5c8baa5f678f763fd23d2bf413ce5224e5e31
-
-**Tags:**
-```
-mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-stretch
-```
-> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
-
-**Linux distribution:** Debian GNU/Linux 9 (stretch)
-
-**Available (non-root) user:** node
-
-### Contents
-**Languages and runtimes**
-
-| Language / runtime | Version | Path |
-|--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 12.22.4 | /usr/local |
-| [TypeScript](https://www.typescriptlang.org/) | 4.3.5 | /usr/local/share/npm-global |
-
-**Tools installed using git**
-
-| Tool | Commit | Path |
-|------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/node/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
-
-**Npm globally installed tools and packages**
-
-| Tool / package | Version |
-|----------------|---------|
-| eslint | 7.32.0 |
-| tslint-to-eslint-config | 2.9.1 |
-| typescript | 4.3.5 |
-
-**Additional linux tools and packages**
-
-| Tool / library | Version |
-|----------------|---------|
-| apt-transport-https | 1.4.11 |
-| apt-utils | 1.4.11 |
-| ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u14 |
-| dialog | 1.3-20160828-2 |
-| git | 1:2.11.0-3+deb9u7 |
-| gnupg2 | 2.1.18-8~deb9u4 |
-| htop | 2.0.2-1 |
-| iproute2 | 4.9.0-1+deb9u1 |
-| jq | 1.5+dfsg-1.3 |
-| less | 481-2.1 |
-| libc6 | 2.24-11+deb9u4 |
-| libgcc1 | 1:6.3.0-18+deb9u1 |
-| libgssapi-krb5-2 | 1.15-1+deb9u2 |
-| libicu57 | 57.1-6+deb9u4 |
-| libkrb5-3 | 1.15-1+deb9u2 |
-| liblttng-ust0 | 2.9.0-2+deb9u1 |
-| libssl1.0.2 | 1.0.2u-1~deb9u4 |
-| libssl1.1 | 1.1.0l-1~deb9u3 |
-| libstdc++6 | 6.3.0-18+deb9u1 |
-| locales | 2.24-11+deb9u4 |
-| lsb-release | 9.20161125 |
-| lsof | 4.89+dfsg-0.1 |
-| man-db | 2.7.6.1-2 |
-| manpages | 4.10-2 |
-| manpages-dev | 4.10-2 |
-| manpages-posix | 2013a-2 |
-| manpages-posix-dev | 2013a-2 |
-| nano | 2.7.4-1 |
-| ncdu | 1.12-1+b1 |
-| net-tools | 1.60+git20161116.90da8a0-1 |
-| openssh-client | 1:7.4p1-10+deb9u7 |
-| procps | 2:3.3.12-3+deb9u1 |
-| psmisc | 22.21-2.1+b2 |
-| rsync | 3.1.2-1+deb9u2 |
-| strace | 4.15-2 |
-| sudo | 1.8.19p1-2.1+deb9u3 |
-| unzip | 6.0-21+deb9u2 |
-| vim-tiny | 2:8.0.0197-4+deb9u3 |
-| wget | 1.18-5+deb9u3 |
-| yarn | 1.22.5-1 |
-| zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.8.dfsg-5 |
-| zsh | 5.3.1-4+deb9u4 |
 

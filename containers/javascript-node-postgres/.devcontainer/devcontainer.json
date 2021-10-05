@@ -1,6 +1,6 @@
-// Update the VARIANT arg in docker-compose.yml to pick a Node.js version: 10, 12, 14 
+// Update the VARIANT arg in docker-compose.yml to pick a Node.js version
 {
-	"name": "Node.js & PostgreSQL (Community)",
+	"name": "Node.js & PostgreSQL",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",

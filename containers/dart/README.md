@@ -1,4 +1,4 @@
-# Dart
+# Dart (Community)
 
 ## Summary
 
@@ -7,8 +7,9 @@
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Team |
-| *Categories* | Languages |
+| *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
+| *Supported architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |

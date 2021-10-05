@@ -8,6 +8,8 @@
 
 **OS support**: Debian 9+, Ubuntu 20.04+, and downstream distros.
 
+> **Note:** Your host chip architecture needs to match the your container image architecture for this script to function. Cross-architecture emulation will not work.
+
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
 ## Syntax
@@ -26,12 +28,15 @@
 
 See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a complete working example. However, here are the general steps to use the script:
 
-1. Add [`docker-debian.sh`](../docker-debian.sh) to `.devcontainer/library-scripts`
+1. Add [`docker-in-docker-debian.sh`](../docker-in-docker-debian.sh) to `.devcontainer/library-scripts`
 
 2. Add the following to your `.devcontainer/Dockerfile`:
 
     ```Dockerfile
+    # If "context" is set to ".." in devcontainer.json, use .devcontainer/library-scripts/*.sh
     COPY library-scripts/*.sh /tmp/library-scripts/
+
+    ENV DOCKER_BUILDKIT=1
     RUN apt-get update && /bin/bash /tmp/library-scripts/docker-in-docker-debian.sh
     ENTRYPOINT ["/usr/local/share/docker-init.sh"]
     VOLUME [ "/var/lib/docker" ]

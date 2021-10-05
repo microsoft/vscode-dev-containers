@@ -1,5 +1,6 @@
 {
 	"name": "Chef Workstation (Community)",
+	"runArgs": ["--init"],
 	"image": "chef/chefworkstation:stable",
 	"settings": {},
 	"extensions": [

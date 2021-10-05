@@ -3,13 +3,15 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			// Update the VARIANT arg to pick a version of Go: 1, 1.16, 1.15
-			"VARIANT": "1",
+			// Update the VARIANT arg to pick a version of Go: 1, 1.16, 1.17
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use -bullseye variants on local arm64/Apple Silicon.
+			"VARIANT": "1-bullseye",
 			// Options
 			"NODE_VERSION": "lts/*"
 		}
 	},
-	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+	"runArgs": [ "--init", "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {

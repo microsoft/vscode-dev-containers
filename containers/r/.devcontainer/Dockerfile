@@ -1,5 +1,5 @@
-# R version: latest, ... , 4.0.3
-ARG VARIANT="latest"
+# R version: 4, 4.1, 4.0
+ARG VARIANT="4"
 FROM rocker/r-ver:${VARIANT}
 
 # Use the [Option] comment to specify true/false arguments that should appear in VS Code UX
@@ -32,10 +32,14 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         httpgd \
     && rm -rf /tmp/downloaded_packages
 
+# VSCode R Debugger dependency. Install the latest release version from GitHub without using GitHub API.
+# See https://github.com/microsoft/vscode-dev-containers/issues/1032
+RUN export TAG=$(git ls-remote --tags --refs --sort='version:refname' https://github.com/ManuelHentschel/vscDebugger v\* | tail -n 1 | cut --delimiter='/' --fields=3) \
+    && Rscript -e "remotes::install_git('https://github.com/ManuelHentschel/vscDebugger.git', ref = '"${TAG}"', dependencies = FALSE)"
+
 # R Session watcher settings.
 # See more details: https://github.com/REditorSupport/vscode-R/wiki/R-Session-watcher
-RUN echo 'source(file.path(Sys.getenv("HOME"), ".vscode-R", "init.R"))' >> ${R_HOME}/etc/Rprofile.site \
-    && echo 'options(vsc.use_httpgd = TRUE)' >> ${R_HOME}/etc/Rprofile.site
+RUN echo 'source(file.path(Sys.getenv("HOME"), ".vscode-R", "init.R"))' >> ${R_HOME}/etc/Rprofile.site
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update \

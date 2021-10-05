@@ -1,8 +1,13 @@
 {
 	"name": "Java 8",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
+			// Use the VARIANT arg to pick a Debian OS version: buster, bullseye
+			// Use bullseye when running on local arm64/Apple Silicon.
+			"VARIANT": "buster",
+			// Options
 			"INSTALL_MAVEN": "false",
 			"INSTALL_GRADLE": "false",
 			"NODE_VERSION": "lts/*"

@@ -1,5 +1,5 @@
-# [Choice] Node.js version: 16, 14, 12
-ARG VARIANT=16-buster
+# [Choice] Node.js version (use -bullseye variants on local arm64/Apple Silicon): 16-bullseye, 14-bullseye, 12-bullseye, 16-buster, 14-buster, 12-buster
+ARG VARIANT=16-bullseye
 FROM node:${VARIANT}
 
 # [Option] Install zsh
@@ -37,6 +37,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Install eslint
     && su ${USERNAME} -c "umask 0002 && npm install -g eslint" \
     && npm cache clean --force > /dev/null 2>&1 \
+    # Install python-is-python3 on bullseye to prevent node-gyp regressions
+    && . /etc/os-release \
+    && if [ "${VERSION_CODENAME}" = "bullseye" ]; then apt-get -y install --no-install-recommends python-is-python3; fi \
     # Clean up
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /root/.gnupg /tmp/library-scripts
 

@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:fdfa5ce42eb3e3e21c9936557e761b91bcd3089f46561ef8b5aee2a098f77c86
+**Digest:** sha256:28eb23bc1dd2010ffe1a8baba567d365385a7e7aa50fea372f6371a965d293de
 
 **Tags:**
 ```
@@ -13,6 +13,8 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
 **Linux distribution:** Debian GNU/Linux 10 (buster)
+
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -27,24 +29,24 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5377cc37c0f71fe22484303a4c6f387aa339f3f5 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.9.6 |
+| pylint | 2.11.1 |
 | flake8 | 3.9.2 |
 | autopep8 | 1.5.7 |
-| black | 21.7b0 |
+| black | 21.9b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.7.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.7.0 |
-| pipx | 0.16.3 |
+| virtualenv | 20.8.1 |
+| pipx | 0.16.4 |
 
 **Other tools and utilities**
 
@@ -73,7 +75,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | libicu63 | 63.1-6+deb10u1 |
 | libkrb5-3 | 1.17-3+deb10u2 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u6 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -95,7 +97,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | unzip | 6.0-23+deb10u2 |
 | vim-tiny | 2:8.1.0875-5 |
 | wget | 1.20.1-1.1 |
-| yarn | 1.22.5-1 |
+| yarn | 1.22.13-1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1 |

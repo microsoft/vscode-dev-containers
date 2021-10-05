@@ -1,5 +1,5 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
-FROM mcr.microsoft.com/vscode/devcontainers/base:buster
+FROM mcr.microsoft.com/vscode/devcontainers/base:bullseye
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
@@ -9,6 +9,9 @@ ARG UPGRADE_PACKAGES="false"
 ARG ENABLE_NONROOT_DOCKER="true"
 # [Option] Use the OSS Moby CLI instead of the licensed Docker CLI
 ARG USE_MOBY="true"
+
+# Enable new "BUILDKIT" mode for Docker CLI
+ENV DOCKER_BUILDKIT=1
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your
 # own dependencies. A user of "automatic" attempts to reuse an user ID if one already exists.

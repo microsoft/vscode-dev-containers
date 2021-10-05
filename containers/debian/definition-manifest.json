@@ -1,22 +1,27 @@
 {
 	"variants": ["buster", "bullseye",  "stretch"],
-	"definitionVersion": "0.202.0",
+	"definitionVersion": "0.202.2",
 	"build": {
-		"latest": true,
+		"latest": "bullseye",
 		"rootDistro": "debian",
+		"architectures": {
+			"bullseye": ["linux/amd64", "linux/arm64"],
+			"buster": ["linux/amd64"],
+			"stretch": ["linux/amd64", "linux/arm64"]
+		},
 		"tags": [
 			"base:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
 			"bullseye": [
 				"base:${VERSION}-debian-11",
-				"base:${VERSION}-debian11"
+				"base:${VERSION}-debian11",
+				"base:${VERSION}-debian",
+				"base:${VERSION}"
 			],
 			"buster": [
 				"base:${VERSION}-debian-10",
-				"base:${VERSION}-debian10",
-				"base:${VERSION}-debian",
-				"base:${VERSION}"
+				"base:${VERSION}-debian10"
 			],
 			"stretch": [
 				"base:${VERSION}-debian-9",

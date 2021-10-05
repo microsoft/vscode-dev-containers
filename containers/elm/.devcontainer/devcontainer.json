@@ -1,5 +1,6 @@
 {
 	"name": "Elm (Community)",
+	"runArgs": ["--init"],
 	"dockerFile": "Dockerfile",
 
 	// Set *default* container specific settings.json values on container create.

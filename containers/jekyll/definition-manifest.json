@@ -1,16 +1,24 @@
 {
-	"definitionVersion": "0.0.2",
+	"variants": ["2.7-bullseye", "2.7-buster"],
+	"definitionVersion": "0.1.0",
 	"build": {
-		"latest": true,
+		"latest": "2.7-bullseye",
 		"parent": "ruby",
-		"parentVariant": "2.7",
 		"rootDistro": "debian",
+		"architectures": {
+			"2.7-bullseye": ["linux/amd64", "linux/arm64"],
+			"2.7-buster": ["linux/amd64"]
+		},
 		"tags": [
 			"jekyll:${VERSION}"
-		]
+		],
+		"variantTags": {
+			"2.7-bullseye": [ "jekyll:${VERSION}-bullseye" ],
+			"2.7-buster": [ "jekyll:${VERSION}-buster" ]
+		}
 	},
 	"dependencies": {
-		"image": "mcr.microsoft.com/vscode/devcontainers/ruby:2.7",
+		"image": "mcr.microsoft.com/vscode/devcontainers/ruby:${VARIANT}",
 		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
 		"debian": [{
 			"cgIgnore": false,

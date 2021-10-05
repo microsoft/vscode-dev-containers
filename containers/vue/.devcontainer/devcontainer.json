@@ -1,5 +1,6 @@
 {
 	"name": "Vue (Community)",
+	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "..",

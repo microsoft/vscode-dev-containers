@@ -7,17 +7,18 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/python.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./python-debian.sh [Python Version] [Python intall path] [PIPX_HOME] [non-root user] [Update rc files flag] [install tools]
+# Syntax: ./python-debian.sh [Python Version] [Python intall path] [PIPX_HOME] [non-root user] [Update rc files flag] [install tools flag] [Use Oryx if available flag] [Optimize when building from source flag]
 
-PYTHON_VERSION=${1:-"latest"}
+PYTHON_VERSION=${1:-"latest"} # 'system' checks the base image first, else installs 'latest'
 PYTHON_INSTALL_PATH=${2:-"/usr/local/python"}
 export PIPX_HOME=${3:-"/usr/local/py-utils"}
 USERNAME=${4:-"automatic"}
 UPDATE_RC=${5:-"true"}
 INSTALL_PYTHON_TOOLS=${6:-"true"}
-USE_PPA_IF_AVAILABLE=${7:-"true"}
+USE_ORYX_IF_AVAILABLE=${7:-"true"}
+OPTIMIZE_BUILD_FROM_SOURCE=${8-"false"}
 
-DEADSNAKES_PPA_ARCHIVE_GPG_KEY="F23C5A6CF475977595C89F51BA6932366A755776"
+DEFAULT_UTILS=("pylint" "flake8" "autopep8" "black" "yapf" "mypy" "pydocstyle" "pycodestyle" "bandit" "pipenv" "virtualenv")
 PYTHON_SOURCE_GPG_KEYS="64E628F8D684696D B26995E310250568 2D347EA6AA65421D FB9921286F5E1540 3A5CA953F73C700D 04C367C218ADD4FF 0EDDC5F26A45C816 6AF053F07D9DC8D2 C9BE28DEE6DF025C 126EB563A74B06BF D9866941EA5BBD71 ED9D77D5"
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
 keyserver hkps://keys.openpgp.org
@@ -55,8 +56,10 @@ fi
 updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" >> /etc/bash.bashrc
-        if [ -f "/etc/zsh/zshrc" ]; then
+        if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
+            echo -e "$1" >> /etc/bash.bashrc
+        fi
+        if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
             echo -e "$1" >> /etc/zsh/zshrc
         fi
     fi
@@ -109,7 +112,7 @@ receive_gpg_keys() {
     done
     set -e
     if [ "${gpg_ok}" = "false" ]; then
-        echo "(!) Failed to install rvm."
+        echo "(!) Failed to get gpg key."
         exit 1
     fi
 }
@@ -148,6 +151,44 @@ find_version_from_git_tags() {
     echo "${variable_name}=${!variable_name}"
 }
 
+# Use Oryx to install something using a partial version match
+oryx_install() {
+    local platform=$1
+    local requested_version=$2
+    local target_folder=${3:-none}
+    local ldconfig_folder=${4:-none}
+    echo "(*) Installing ${platform} ${requested_version} using Oryx..."
+    check_packages jq
+    # Soft match if full version not specified
+    if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
+        local version_list="$(oryx platforms --json | jq -r ".[] | select(.Name == \"${platform}\") | .Versions | sort | reverse | @tsv" | tr '\t' '\n' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$')"
+        if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
+            requested_version="$(echo "${version_list}" | head -n 1)"
+        else
+            set +e
+            requested_version="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
+            set -e
+        fi
+        if [ -z "${requested_version}" ] || ! echo "${version_list}" | grep "^${requested_version//./\\.}$" > /dev/null 2>&1; then
+            echo -e "(!) Oryx does not support ${platform} version $2\nValid values:\n${version_list}" >&2
+            return 1
+        fi
+        echo "(*) Using ${requested_version} in place of $2."
+    fi
+
+    export ORYX_ENV_TYPE=vsonline-present ORYX_PREFER_USER_INSTALLED_SDKS=true ENABLE_DYNAMIC_INSTALL=true DYNAMIC_INSTALL_ROOT_DIR=/opt
+    oryx prep --skip-detection --platforms-and-versions "${platform}=${requested_version}"
+    local opt_folder="/opt/${platform}/${requested_version}"
+    if [ "${target_folder}" != "none" ] && [ "${target_folder}" != "${opt_folder}" ]; then
+        ln -s "${opt_folder}" "${target_folder}"
+    fi
+    # Update library path add to conf
+    if [ "${ldconfig_folder}" != "none" ]; then
+        echo "/opt/${platform}/${requested_version}/lib" >> "/etc/ld.so.conf.d/${platform}.conf"
+        ldconfig
+    fi
+}
+
 # Function to run apt-get if needed
 apt_get_update_if_needed()
 {
@@ -167,118 +208,108 @@ check_packages() {
     fi
 }
 
-install_from_ppa() {
-    local requested_version="python${PYTHON_VERSION}"
-    echo "Using PPA to install Python..."
-    check_packages apt-transport-https curl ca-certificates gnupg2
-    receive_gpg_keys DEADSNAKES_PPA_ARCHIVE_GPG_KEY /usr/share/keyrings/deadsnakes-archive-keyring.gpg 
-    echo -e "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/deadsnakes-archive-keyring.gpg] http://ppa.launchpad.net/deadsnakes/ppa/ubuntu ${VERSION_CODENAME} main\ndeb-src [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/deadsnakes-archive-keyring.gpg] http://ppa.launchpad.net/deadsnakes/ppa/ubuntu ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/deadsnakes-ppa.list
-    apt-get update
-    if [ "${PYTHON_VERSION}" = "latest" ] || [ "${PYTHON_VERSION}" = "current" ] || [ "${PYTHON_VERSION}" = "lts" ]; then
-        requested_version="$(apt-cache search '^python3\.[0-9]$' | grep -oE '^python3\.[0-9]' | sort -rV | head -n 1)"
-        echo "Using ${requested_version} in place of ${PYTHON_VERSION}."
-    fi
-    apt-get -y install ${requested_version}
-    rm -rf /tmp/tmp-gnupg
-    exit 0
-}
-
 install_from_source() {
     if [ -d "${PYTHON_INSTALL_PATH}" ]; then
-        echo "Path ${PYTHON_INSTALL_PATH} already exists. Remove this existing path or select a different one."
+        echo "(!) Path ${PYTHON_INSTALL_PATH} already exists. Remove this existing path or select a different one."
         exit 1
-    else
-        echo "Building Python ${PYTHON_VERSION} from source..."
-        # Install prereqs if missing
-        check_packages curl ca-certificates tar make build-essential libssl-dev zlib1g-dev \
-                    wget libbz2-dev libreadline-dev libxml2-dev xz-utils tk-dev gnupg2 \
-                    libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev llvm dirmngr
-        if ! type git > /dev/null 2>&1; then
-            apt_get_update_if_needed
-            apt-get -y install --no-install-recommends git
-        fi
-
-        # Find version using soft match
-        find_version_from_git_tags PYTHON_VERSION "https://github.com/python/cpython"
-
-        # Download tgz of source
-        mkdir -p /tmp/python-src "${PYTHON_INSTALL_PATH}"
-        cd /tmp/python-src
-        TGZ_FILENAME="Python-${PYTHON_VERSION}.tgz"
-        TGZ_URL="https://www.python.org/ftp/python/${PYTHON_VERSION}/${TGZ_FILENAME}"
-        echo "Downloading ${TGZ_FILENAME}..."
-        curl -sSL -o "/tmp/python-src/${TGZ_FILENAME}" "${TGZ_URL}"
-
-        # Verify signature
-        if [ "${SKIP_SIGNATURE_CHECK}" != "true" ]; then
-            receive_gpg_keys PYTHON_SOURCE_GPG_KEYS
-            echo "Downloading ${TGZ_FILENAME}.asc..."
-            curl -sSL -o "/tmp/python-src/${TGZ_FILENAME}.asc" "${TGZ_URL}.asc"
-            gpg --verify "${TGZ_FILENAME}.asc"
-        fi
-
-        # Update min protocol for testing only - https://bugs.python.org/issue41561
-        cp /etc/ssl/openssl.cnf /tmp/python-src/
-        sed -i -E 's/MinProtocol[=\ ]+.*/MinProtocol = TLSv1.0/g' /tmp/python-src/openssl.cnf
-        export OPENSSL_CONF=/tmp/python-src/openssl.cnf
-
-        # Untar and build
-        tar -xzf "/tmp/python-src/${TGZ_FILENAME}" -C "/tmp/python-src" --strip-components=1
-        ./configure --prefix="${PYTHON_INSTALL_PATH}" --enable-optimizations --with-ensurepip=install
-        make -j 8
-        make install
-        cd /tmp
-        rm -rf /tmp/python-src ${GNUPGHOME} /tmp/vscdc-settings.env
-        chown -R ${USERNAME} "${PYTHON_INSTALL_PATH}"
-        ln -s ${PYTHON_INSTALL_PATH}/bin/python3 ${PYTHON_INSTALL_PATH}/bin/python
-        ln -s ${PYTHON_INSTALL_PATH}/bin/pip3 ${PYTHON_INSTALL_PATH}/bin/pip
-        ln -s ${PYTHON_INSTALL_PATH}/bin/idle3 ${PYTHON_INSTALL_PATH}/bin/idle
-        ln -s ${PYTHON_INSTALL_PATH}/bin/pydoc3 ${PYTHON_INSTALL_PATH}/bin/pydoc
-        ln -s ${PYTHON_INSTALL_PATH}/bin/python3-config ${PYTHON_INSTALL_PATH}/bin/python-config
-        updaterc "export PATH=${PYTHON_INSTALL_PATH}/bin:\${PATH}"
     fi
+    echo "(*) Building Python ${PYTHON_VERSION} from source..."
+    # Install prereqs if missing
+    check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
+                libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
+                libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
+    if ! type git > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends git
+    fi
+
+    # Find version using soft match
+    find_version_from_git_tags PYTHON_VERSION "https://github.com/python/cpython"
+
+    # Download tgz of source
+    mkdir -p /tmp/python-src "${PYTHON_INSTALL_PATH}"
+    cd /tmp/python-src
+    local tgz_filename="Python-${PYTHON_VERSION}.tgz"
+    local tgz_url="https://www.python.org/ftp/python/${PYTHON_VERSION}/${tgz_filename}"
+    echo "Downloading ${tgz_filename}..."
+    curl -sSL -o "/tmp/python-src/${tgz_filename}" "${tgz_url}"
+
+    # Verify signature
+    receive_gpg_keys PYTHON_SOURCE_GPG_KEYS
+    echo "Downloading ${tgz_filename}.asc..."
+    curl -sSL -o "/tmp/python-src/${tgz_filename}.asc" "${tgz_url}.asc"
+    gpg --verify "${tgz_filename}.asc"
+
+    # Update min protocol for testing only - https://bugs.python.org/issue41561
+    cp /etc/ssl/openssl.cnf /tmp/python-src/
+    sed -i -E 's/MinProtocol[=\ ]+.*/MinProtocol = TLSv1.0/g' /tmp/python-src/openssl.cnf
+    export OPENSSL_CONF=/tmp/python-src/openssl.cnf
+
+    # Untar and build
+    tar -xzf "/tmp/python-src/${tgz_filename}" -C "/tmp/python-src" --strip-components=1
+    local config_args=""
+    if [ "${OPTIMIZE_BUILD_FROM_SOURCE}" = "true" ]; then
+        config_args="--enable-optimizations"
+    fi
+    ./configure --prefix="${PYTHON_INSTALL_PATH}" --with-ensurepip=install ${config_args}
+    make -j 8
+    make install
+    cd /tmp
+    rm -rf /tmp/python-src ${GNUPGHOME} /tmp/vscdc-settings.env
+    chown -R ${USERNAME} "${PYTHON_INSTALL_PATH}"
+    ln -s ${PYTHON_INSTALL_PATH}/bin/python3 ${PYTHON_INSTALL_PATH}/bin/python
+    ln -s ${PYTHON_INSTALL_PATH}/bin/pip3 ${PYTHON_INSTALL_PATH}/bin/pip
+    ln -s ${PYTHON_INSTALL_PATH}/bin/idle3 ${PYTHON_INSTALL_PATH}/bin/idle
+    ln -s ${PYTHON_INSTALL_PATH}/bin/pydoc3 ${PYTHON_INSTALL_PATH}/bin/pydoc
+    ln -s ${PYTHON_INSTALL_PATH}/bin/python3-config ${PYTHON_INSTALL_PATH}/bin/python-config
+}
+
+install_using_oryx() {
+    if [ -d "${PYTHON_INSTALL_PATH}" ]; then
+        echo "(!) Path ${PYTHON_INSTALL_PATH} already exists. Remove this existing path or select a different one."
+        exit 1
+    fi
+    oryx_install "python" "${PYTHON_VERSION}" "${PYTHON_INSTALL_PATH}" "lib" || return 1
+    ln -s ${PYTHON_INSTALL_PATH}/bin/idle3 ${PYTHON_INSTALL_PATH}/bin/idle
+    ln -s ${PYTHON_INSTALL_PATH}/bin/pydoc3 ${PYTHON_INSTALL_PATH}/bin/pydoc
+    ln -s ${PYTHON_INSTALL_PATH}/bin/python3-config ${PYTHON_INSTALL_PATH}/bin/python-config
 }
 
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
+# General requirements
+check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
+            libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
+            libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
+
+
 # Install python from source if needed
 if [ "${PYTHON_VERSION}" != "none" ]; then
-    # Source /etc/os-release to get OS info
-    . /etc/os-release
-    # If ubuntu, PPAs allowed - install from there
-    if [ "${ID}" = "ubuntu" ] && [ "${USE_PPA_IF_AVAILABLE}" = "true" ]; then
-        install_from_ppa
+    # If the os-provided versions are "good enough", detect that and bail out.
+    if [ ${PYTHON_VERSION} = "os-provided" ] || [ ${PYTHON_VERSION} = "system" ]; then
+        check_packages python3 python3-doc python3-pip python3-venv python3-dev python3-tk
+        PYTHON_INSTALL_PATH="/usr"
+        should_install_from_source=false
+    elif [ "$(dpkg --print-architecture)" = "amd64" ] && [ "${USE_ORYX_IF_AVAILABLE}" = "true" ] && type oryx > /dev/null 2>&1; then
+        install_using_oryx || should_install_from_source=true
     else
+        should_install_from_source=true
+    fi
+    if [ "${should_install_from_source}" = "true" ]; then
         install_from_source
     fi
+    updaterc "if [[ \"\${PATH}\" != *\"${PYTHON_INSTALL_PATH}/bin\"* ]]; then export PATH=${PYTHON_INSTALL_PATH}/bin:\${PATH}; fi"
 fi
 
 # If not installing python tools, exit
 if [ "${INSTALL_PYTHON_TOOLS}" != "true" ]; then
     echo "Done!"
-    exit 0;
+    exit 0
 fi
 
-DEFAULT_UTILS="\
-    pylint \
-    flake8 \
-    autopep8 \
-    black \
-    yapf \
-    mypy \
-    pydocstyle \
-    pycodestyle \
-    bandit \
-    pipenv \
-    virtualenv"
-
-export PIPX_BIN_DIR=${PIPX_HOME}/bin
-export PATH=${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:${PATH}
-
-# Update pip
-echo "Updating pip..."
-python3 -m pip install --no-cache-dir --upgrade pip
+export PIPX_BIN_DIR="${PIPX_HOME}/bin"
+export PATH="${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:${PATH}"
 
 # Create pipx group, dir, and set sticky bit
 if ! cat /etc/group | grep -e "^pipx:" > /dev/null 2>&1; then
@@ -290,13 +321,29 @@ mkdir -p ${PIPX_BIN_DIR}
 chown :pipx ${PIPX_HOME} ${PIPX_BIN_DIR}
 chmod g+s ${PIPX_HOME} ${PIPX_BIN_DIR}
 
+# Update pip if not using os provided python
+if [ ${PYTHON_VERSION} != "os-provided" ] && [ ${PYTHON_VERSION} != "system" ]; then
+    echo "Updating pip..."
+    ${PYTHON_INSTALL_PATH}/bin/python3 -m pip install --no-cache-dir --upgrade pip
+fi
+
 # Install tools
 echo "Installing Python tools..."
 export PYTHONUSERBASE=/tmp/pip-tmp
 export PIP_CACHE_DIR=/tmp/pip-tmp/cache
-pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
-/tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir pipx
-echo "${DEFAULT_UTILS}" | xargs -n 1 /tmp/pip-tmp/bin/pipx install --system-site-packages --pip-args '--no-cache-dir --force-reinstall'
+pipx_path=""
+if ! type pipx > /dev/null 2>&1; then
+    pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
+    /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir pipx
+    pipx_path="/tmp/pip-tmp/bin/"
+fi
+for util in ${DEFAULT_UTILS[@]}; do
+    if ! type ${util} > /dev/null 2>&1; then
+        ${pipx_path}pipx install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' ${util}
+    else
+        echo "${util} already installed. Skipping."
+    fi
+done
 rm -rf /tmp/pip-tmp
 
 updaterc "$(cat << EOF

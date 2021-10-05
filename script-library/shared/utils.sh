@@ -23,6 +23,43 @@ detect_user() {
     fi
 }
 
+# Use Oryx to install something using a partial version match
+oryx_install() {
+    local platform=$1
+    local requested_version=$2
+    local target_folder=${3:-none}
+    local ldconfig_folder=${4:-none}
+    echo "(*) Installing ${platform} ${requested_version} using Oryx..."
+    check_packages jq
+    # Soft match if full version not specified
+    if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
+        local version_list="$(oryx platforms --json | jq -r ".[] | select(.Name == \"${platform}\") | .Versions | sort | reverse | @tsv" | tr '\t' '\n' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$')"
+        if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
+            requested_version="$(echo "${version_list}" | head -n 1)"
+        else
+            set +e
+            requested_version="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
+            set -e
+        fi
+        if [ -z "${requested_version}" ] || ! echo "${version_list}" | grep "^${requested_version//./\\.}$" > /dev/null 2>&1; then
+            echo -e "(!) Oryx does not support ${platform} version $2\nValid values:\n${version_list}" >&2
+            return 1
+        fi
+        echo "(*) Using ${requested_version} in place of $2."
+    fi
+
+    export ORYX_ENV_TYPE=vsonline-present ORYX_PREFER_USER_INSTALLED_SDKS=true ENABLE_DYNAMIC_INSTALL=true DYNAMIC_INSTALL_ROOT_DIR=/opt
+    oryx prep --skip-detection --platforms-and-versions "${platform}=${requested_version}"
+    local opt_folder="/opt/${platform}/${requested_version}"
+    if [ "${target_folder}" != "none" ] && [ "${target_folder}" != "${opt_folder}" ]; then
+        ln -s "${opt_folder}" "${target_folder}"
+    fi
+    # Update library path add to conf
+    if [ "${ldconfig_folder}" != "none" ]; then
+        echo "/opt/${platform}/${requested_version}/lib" >> "/etc/ld.so.conf.d/${platform}.conf"
+        ldconfig
+    fi
+}
 
 # Use SDKMAN to install something using a partial version match
 sdk_install() {
@@ -58,8 +95,10 @@ sdk_install() {
 updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
-        echo -e "$1" >> /etc/bash.bashrc
-        if [ -f "/etc/zsh/zshrc" ]; then
+        if [[ "$(cat /etc/bash.bashrc)" != *"$1"* ]]; then
+            echo -e "$1" >> /etc/bash.bashrc
+        fi
+        if [ -f "/etc/zsh/zshrc" ] && [[ "$(cat /etc/zsh/zshrc)" != *"$1"* ]]; then
             echo -e "$1" >> /etc/zsh/zshrc
         fi
     fi
@@ -111,7 +150,7 @@ receive_gpg_keys() {
     done
     set -e
     if [ "${gpg_ok}" = "false" ]; then
-        echo "(!) Failed to install rvm."
+        echo "(!) Failed to get gpg key."
         exit 1
     fi
 }
@@ -167,4 +206,46 @@ check_packages() {
         apt_get_update_if_needed
         apt-get -y install --no-install-recommends "$@"
     fi
+}
+
+# Soft version matching that resolves a version for a given package in the *current apt-cache*
+# Return value is stored in first argument (the unprocessed version)
+apt_cache_version_soft_match() {
+    
+    # Version
+    local variable_name="$1"
+    local requested_version=${!variable_name}
+    # Package Name
+    local package_name="$2"
+    # Exit on no match?
+    local exit_on_no_match="${3:-true}"
+
+    # Ensure we've exported useful variables
+    . /etc/os-release
+    local architecture="$(dpkg --print-architecture)"
+    
+    dot_escaped="${requested_version//./\\.}"
+    dot_plus_escaped="${dot_escaped//+/\\+}"
+    # Regex needs to handle debian package version number format: https://www.systutorials.com/docs/linux/man/5-deb-version/
+    version_regex="^(.+:)?${dot_plus_escaped}([\\.\\+ ~:-]|$)"
+    set +e # Don't exit if finding version fails - handle gracefully
+        fuzzy_version="$(apt-cache madison ${package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${version_regex}")"
+    set -e
+    if [ -z "${fuzzy_version}" ]; then
+        echo "(!) No full or partial for package \"${package_name}\" match found in apt-cache for \"${requested_version}\" on OS ${ID} ${VERSION_CODENAME} (${architecture})."
+
+        if $exit_on_no_match; then
+            echo "Available versions:"
+            apt-cache madison ${package_name} | awk -F"|" '{print $2}' | grep -oP '^(.+:)?\K.+'
+            exit 1 # Fail entire script
+        else
+            echo "Continuing to fallback method (if available)"
+            return 1;
+        fi
+    fi
+
+    # Globally assign fuzzy_version to this value
+    # Use this value as the return value of this function
+    declare -g ${variable_name}="=${fuzzy_version}"
+    echo "${variable_name}=${!variable_name}"
 }

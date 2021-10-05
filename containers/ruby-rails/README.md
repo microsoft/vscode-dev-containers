@@ -4,21 +4,24 @@
 
 _Develop Ruby on Rails applications, includes everything you need to get up and running._
 
-| Metadata                    | Value                 |
-| --------------------------- | --------------------- |
-| _Contributors_              | [Amblizer][la]        |
-| _Categories_                | Community, Frameworks |
-| _Definition type_           | Dockerfile            |
-| _Works in Codespaces_       | Yes                   |
-| _Container host OS support_ | Linux, macOS, Windows |
-| _Container OS_              | Debian                |
-| _Languages, platforms_      | Ruby                  |
+| Metadata                    | Value                                             |
+| --------------------------- | ------------------------------------------------- |
+| _Contributors_              | [Amblizer][la]                                    |
+| _Categories_                | Community, Frameworks                             |
+| _Definition type_           | Dockerfile                                        |
+| _Works in Codespaces_       | Yes                                               |
+| _Available image variants_  | [See Ruby definition](../ruby).                   |
+| _Supported architecture(s)_ | x86-64, arm64/aarch64 for `bullseye` based images |
+| _Container host OS support_ | Linux, macOS, Windows                             |
+| _Container OS_              | Debian                                            |
+| _Languages, platforms_      | Ruby                                              |
 
 ## Using this definition
 
-While this definition should work unmodified, you can select the version of Ruby the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+While this definition should work unmodified, you can select [an available version Ruby](../ruby) the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
+// Or you can use 2.7-bullseye or 2.7-buster if you want to pin to an OS version
 "args": { "VARIANT": "2.7" }
 ```
 

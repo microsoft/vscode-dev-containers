@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 services:
   elixir:
@@ -12,6 +12,8 @@ services:
         PHOENIX_VERSION: "1.5.7"
         # Node Version: 10, 11, ...
         NODE_VERSION: "10"
+
+    init: true
 
     volumes:
       - ..:/workspace:cached

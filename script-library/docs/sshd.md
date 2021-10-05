@@ -30,7 +30,9 @@ This script can be used either ad-hoc in an already running container or in a Do
 The SSH script is included in the default Codespaces image (codespaces-linux) that is used in Codespaces when you do not have a custom `devcontainer.json`. It may also be in images you or your organization has created. Here's how to enable SSH in these cases. 
 
 Usage:
-1. The first time you've started the codespace, you will want to set a password for your user. If running as a user other than root, and you have `sudo` installed:
+1. Connect to your container or [codespace using VS Code (client)](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-codeusing).
+
+1. The first time you've started the container / codespace, you will want to set a password for your user. If running as a user other than root, and you have `sudo` installed:
 
     ```bash
     sudo passwd $(whoami)
@@ -92,7 +94,7 @@ Usage:
     passwd
     ```
 
-5. Connect to the container or [codespace using VS Code](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code). You can now SSH into the container on port `2222`. For example, if you are in the container as the `vscode` user, run the following command in a **local terminal**:
+5. Connect to the container or [codespace using VS Code (client)](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code). You can now SSH into the container on port `2222`. For example, if you are in the container as the `vscode` user, run the following command in a **local terminal**:
 
     ```bash
     ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o GlobalKnownHostsFile=/dev/null vscode@localhost
@@ -107,7 +109,7 @@ If you are unable to connect, it's possible SSH is available on a different loca
 
 If you already have a running container, you can use the script to spin up SSH inside it.
 
-1. Connect to the container or [codespace using VS Code](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code).
+1. Connect to the container or [codespace using VS Code (client)](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code).
 
 2. Open a terminal in VS Code and run the following if you're connected as a non-root user and `sudo` is installed:
 
