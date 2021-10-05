@@ -3,8 +3,8 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			// Update the VARIANT arg to pick a Java version: 11, 16
-			"VARIANT": "11",
+			// Update the VARIANT arg to pick a Java version: 11, 16, 17
+			"VARIANT": "17",
 			// Options
 			"INSTALL_MAVEN": "false",
 			"INSTALL_GRADLE": "false",

@@ -1,6 +1,6 @@
-# [Choice] Java version: 11, 16
-ARG VARIANT=11
-FROM openjdk:${VARIANT}-jdk-buster
+# [Choice] Java version: 11, 16, 17
+ARG VARIANT=17
+FROM mcr.microsoft.com/openjdk/jdk:${VARIANT}-ubuntu
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/

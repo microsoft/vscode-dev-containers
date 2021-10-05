@@ -1,16 +1,16 @@
 {
-	"variants": [ "16", "11" ],
-	"definitionVersion": "0.202.3",
+	"variants": [ "17", "16", "11" ],
+	"definitionVersion": "dev",
 	"build": {
 		"latest": true,
-		"rootDistro": "debian",
+		"rootDistro": "ubuntu",
 		"tags": [
 			"java:${VERSION}-${VARIANT}"
 		]
 	},
 	"dependencies": {
-		"image": "openjdk:${VARIANT}-jdk-buster",
-		"imageLink": "https://hub.docker.com/_/java",
+		"image": "mcr.microsoft.com/openjdk/jdk:${VARIANT}-ubuntu",
+		"imageLink": "https://hub.docker.com/_/microsoft-openjdk-jdk",
 		"apt": [{
 			"cgIgnore": false,
 			"name": "yarn"
