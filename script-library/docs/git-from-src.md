@@ -27,7 +27,7 @@ Or as a feature:
 
 |Argument|Feature option|Default|Description|
 |--------|--------------|-------|-----------|
-|Version| `version` | `latest`| Version of Git to build and install. Use `latest` to install the latest stable version. |
+|Version| `version` | `latest`| Version of Git to build and install. Use `latest` to install the latest stable version. Use `os-provided` to skip building and install the pre-compiled version of Git comes with the Linux distribution instead (much faster). |
 |Use PPA if available| `ppa` | `false`| If using Ubuntu and a build already exists in the git-core PPA, use it instead of building from scratch. |
 
 ## Usage

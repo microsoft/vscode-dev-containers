@@ -24,7 +24,7 @@ Or as a feature:
 
 |Argument|Feature option|Default|Description|
 |--------|--------------|-------|-----------|
-|Python Version| `version` | `latest`| Version of Python to install. Set to `none` to skip installing.|
+|Python Version| `version` | `latest`| Version of Python to build and install. Set to `none` to skip installing.Use `os-provided` to skip building and install the pre-compiled version of Python comes with the Linux distribution instead (much faster).|
 |Python install path| |`/usr/local/python`| Location to install Python.|
 |Non-root user| |`automatic`| Specifies a user in the container other than root that will use Python. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`.|
 |PIPX_HOME| |`/usr/local/py-utils`| Location PIPX should install Python utilities and related venvs.|
