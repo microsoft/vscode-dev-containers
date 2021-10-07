@@ -4,17 +4,39 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
 ## Syntax
 
 ```text
-./azcli-debian.sh
+./azcli-debian.sh [Version]
+```
+
+Or as a feature:
+
+```json
+"features": {
+    "azure-cli": "latest"
+}
 ```
 
 ## Usage
+
+### Feature use
+
+To install these capabilities in your primary dev container, reference it in `devcontainer.json` as follows:
+
+```json
+"features": {
+    "azure-cli": "latest"
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 1. Add [`azcli-debian.sh`](../azcli-debian.sh) to `.devcontainer/library-scripts`
 

@@ -4,7 +4,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
@@ -14,17 +14,37 @@
 ./sshd-debian.sh [SSH Port] [Non-root user] [Start SSHD now flag] [New password for user] [Fix environment flag]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-| SSH port |`2222`| Port to host SSH server on. `22` is frequently in use, so using a different port is recommended. |
-| Non-root user |`automatic`| Specifies a user in the container other than root that will use SSH. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
-|Start SSHD now flag |`false`| Flag (`true`/`false`) that specifies whether the SSH server should be started after the script runs.|
-|New password for user|`skip`| Sets a new password for the specified non-root user. A value of `skip` will skip this step. A value of `random` will generate a random password and print it out when the script finishes. |
-|Fix environment flag|`true`|Connections using the SSH daemon use "fresh" login shells. While Remote - Containers and Codespaces handle most environment variables automatically, Codespaces secrets require additional processing. |
+Or as a feature:
+
+```json
+"features": {
+    "sshd": "latest"
+}
+```
+
+|Argument|Feature option|Default|Description|
+|--------|--------------|-------|-----------|
+| SSH port | | `2222`| Port to host SSH server on. `22` is frequently in use, so using a different port is recommended. |
+| Non-root user | | `automatic`| Specifies a user in the container other than root that will use SSH. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|Start SSHD now flag | | `false`| Flag (`true`/`false`) that specifies whether the SSH server should be started after the script runs.|
+|New password for user| | `skip`| Sets a new password for the specified non-root user. A value of `skip` will skip this step. A value of `random` will generate a random password and print it out when the script finishes. |
+|Fix environment flag| |`true`|Connections using the SSH daemon use "fresh" login shells. While Remote - Containers and Codespaces handle most environment variables automatically, Codespaces secrets require additional processing. |
 
 ## Usage
 
-This script can be used either ad-hoc in an already running container or in a Dockerfile. 
+This script can be used as a feature, ad-hoc in an already running container, or in a Dockerfile. 
+
+### Feature use
+
+To install these capabilities in your primary dev container, reference it in `devcontainer.json` as follows:
+
+```json
+"features": {
+    "sshd": "latest"
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
 
 ### Usage when this script is already installed in an image 
 The SSH script is included in the default Codespaces image (codespaces-linux) that is used in Codespaces when you do not have a custom `devcontainer.json`. It may also be in images you or your organization has created. Here's how to enable SSH in these cases. 

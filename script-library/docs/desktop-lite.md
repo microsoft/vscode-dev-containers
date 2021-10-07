@@ -4,7 +4,7 @@
 
 **Script status**: Preview
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
@@ -16,13 +16,35 @@
 ./desktop-lite-debian.sh [Non-root user] [VNC password] [Install noVNC flag]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-|Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
-|VNC password|`vscode`| Password for connecting to the desktop.|
-|Install noVNC flag|`true`| Flag (`true`/`false`) that specifies whether to enable web access to the desktop using [noVNC](https://novnc.com/info.html).|
+Or as a feature:
+
+```json
+"features": {
+    "desktop-lite": "latest"
+}
+```
+
+|Argument| Feature option |Default|Description|
+|--------|----------------|-------|-----------|
+|Non-root user| | `automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|VNC password| | `vscode`| Password for connecting to the desktop.|
+|Install noVNC flag| | `true`| Flag (`true`/`false`) that specifies whether to enable web access to the desktop using [noVNC](https://novnc.com/info.html).|
 
 ## Usage
+
+### Feature use
+
+You can use this script for your primary dev container by adding it to the `features` property in `devcontainer.json`. 
+
+```json
+"features": {
+    "desktop-lite": "latest"
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 1. Add [`desktop-lite-debian.sh`](../desktop-lite-debian.sh) to `.devcontainer/library-scripts`
 

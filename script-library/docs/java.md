@@ -4,7 +4,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
@@ -14,14 +14,36 @@
 ./gradle-debian.sh [Java version] [SDKMAN_DIR] [Non-root user] [Add rc files flag]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-|Java version|`lts`| Version of Java to install. Specify `lts` to install the LTS version. |
-|SDKMAN_DIR|`/usr/local/sdkman`| Location to find [SDKMAN!](https://sdkman.io/), or if not found, where to install it. |
-|Non-root user|`automatic`| Specifies a user in the container other than root that will use Gradle. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
-| Add to rc files flag | `true` | A `true`/`false` flag that indicates whether sourcing the nvm script should be added to `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
+Or as a feature:
+
+```json
+"features": {
+    "java": "latest"
+}
+```
+
+|Argument| Feature option |Default|Description|
+|--------|----------------|-------|-----------|
+|Java version| `version` | `lts`| Version of Java to install. Specify `lts` to install the LTS version. |
+|SDKMAN_DIR| | `/usr/local/sdkman`| Location to find [SDKMAN!](https://sdkman.io/), or if not found, where to install it. |
+|Non-root user| | `automatic`| Specifies a user in the container other than root that will use Gradle. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+| Add to rc files flag | | `true` | A `true`/`false` flag that indicates whether sourcing the nvm script should be added to `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
 
 ## Usage
+
+### Feature use
+
+You can use this script for your primary dev container by adding it to the `features` property in `devcontainer.json`.
+
+```json
+"features": {
+    "java": "latest"
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 1. Add [`java-debian.sh`](../java-debian.sh) to `.devcontainer/library-scripts`
 

@@ -4,7 +4,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, CentOS/RHEL 7+ (community supported) and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, CentOS/RHEL 7+ (community supported) and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams, [@smankoo](https://github.com/smankoo) (`docker-redhat.sh`)
 
@@ -13,19 +13,49 @@
 ## Syntax
 
 ```text
-./docker-debian.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user] [Use Moby]
+./docker-debian.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user] [Use Moby] [Docker / Moby version]
 ./docker-redhat.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-|Non-root access flag|`true`| Flag (`true`/`false`) that specifies whether a non-root user should be granted access to the Docker socket.|
-|Source socket|`/var/run/docker-host.sock`| Location that the host's Docker socket has been mounted in the container.|
-|Target socket|`/var/run/docker.sock`| Location within the container that the Docker CLI will expect to find the Docker socket with permissions that allow the non-root user to access it.|
-|Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
-|Use Moby|`true`| Specifies that a build of the open source [Moby CLI](https://github.com/moby/moby/tree/master/cli) should be used instead of the Docker CLI distribution of it. |
+Or as a feature (Debian/Ubuntu only):
+
+```json
+"features": {
+    "docker-from-docker": {
+        "version": "latest",
+        "moby": true
+    }
+}
+```
+
+|Argument|Feature option| Default | Description |
+|--------|--------------|---------|-------------|
+|Non-root access flag| | `true`| Flag (`true`/`false`) that specifies whether a non-root user should be granted access to the Docker socket.|
+|Source socket| | `/var/run/docker-host.sock`| Location that the host's Docker socket has been mounted in the container.|
+|Target socket| | `/var/run/docker.sock`| Location within the container that the Docker CLI will expect to find the Docker socket with permissions that allow the non-root user to access it.|
+|Non-root user| | `automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|Use Moby| `moby` | `true`| Specifies that a build of the open source [Moby CLI](https://github.com/moby/moby/tree/master/cli) should be used instead of the Docker CLI distribution of it. |
+| Docker / Moby version | `version` | `latest` |  Docker/Moby Engine version or `latest`. Partial version numbers allowed. Availability can vary by OS version. |
+
 
 ## Usage
+
+### Feature use
+
+You can use this script for your primary dev container by adding it to the `features` property in `devcontainer.json`.
+
+```json
+"features": {
+    "docker-from-docker": {
+        "version": "latest",
+        "moby": true
+    }
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker-from-docker-compose`](....//containers/docker-from-docker) definition for a complete working example. However, here are the general steps to use the script:
 
