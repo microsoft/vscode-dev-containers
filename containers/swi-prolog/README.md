@@ -41,3 +41,10 @@ corresponds to the host interface.
 On Windows, you can install an X11 server using [VcXsrv Windows X
 Server](https://community.chocolatey.org/packages/vcxsrv) using Chocolatey. Do
 not forget to disable access control.
+
+## License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Licensed under the MIT License. See
+[LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).
