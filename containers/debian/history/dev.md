@@ -11,7 +11,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:9cb3f82922afec0fa7bc35d1218082b8c7800476869c99c3b7e19ec05d6298db
+**Digest:** sha256:2d71d97a6f70fee7cb2aed7c645d92de5d469a64d9fb5cf506ef0d93ecd2d4e4
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -83,7 +83,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 ## Variant: bullseye
 
-**Digest:** sha256:36b1e45f53f1581b036d022b7579a6b9fd3da40c39ec1fd4c8305baaf1892790
+**Digest:** sha256:5b768548f38a8fbd34d7965ecd42b98a3d0f27fb66edc8ad0c48b483960332ce
 
 **Tags:**
 ```
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -156,7 +156,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:14efb628d3a57dc438129932f6b4aa06b7d09eb36f9ec403e9d8c58b157c2a32
+**Digest:** sha256:ce268d47d99fc9e8f6282878381d1819a4150082f9c3fff24cb9e07a5bdb791e
 
 **Tags:**
 ```
@@ -177,7 +177,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 54783f66b8188297448bc725c578fdc7647e9fa0 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -186,7 +186,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 | apt-transport-https | 1.4.11 |
 | apt-utils | 1.4.11 |
 | ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u15 |
+| curl | 7.52.1-5+deb9u16 |
 | dialog | 1.3-20160828-2 |
 | git | 1:2.11.0-3+deb9u7 |
 | gnupg2 | 2.1.18-8~deb9u4 |
@@ -196,11 +196,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 | less | 481-2.1 |
 | libc6 | 2.24-11+deb9u4 |
 | libgcc1 | 1:6.3.0-18+deb9u1 |
-| libgssapi-krb5-2 | 1.15-1+deb9u2 |
+| libgssapi-krb5-2 | 1.15-1+deb9u3 |
 | libicu57 | 57.1-6+deb9u4 |
-| libkrb5-3 | 1.15-1+deb9u2 |
+| libkrb5-3 | 1.15-1+deb9u3 |
 | liblttng-ust0 | 2.9.0-2+deb9u1 |
-| libssl1.0.2 | 1.0.2u-1~deb9u5 |
+| libssl1.0.2 | 1.0.2u-1~deb9u6 |
 | libssl1.1 | 1.1.0l-1~deb9u4 |
 | libstdc++6 | 6.3.0-18+deb9u1 |
 | locales | 2.24-11+deb9u4 |

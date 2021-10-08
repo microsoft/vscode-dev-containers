@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "54783f66b8188297448bc725c578fdc7647e9fa0"
+                    "commitHash": "dc83d0b7204cf66315471e980729490813b7d915"
                 }
             }
         },
@@ -662,7 +662,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "yarn",
-                    "Version": "1.22.13-1",
+                    "Version": "1.22.15-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://dl.yarnpkg.com/debian",
@@ -707,6 +707,15 @@
                     "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
                     "Version": "2.1-focal",
                     "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "go",
+                "Go": {
+                    "Name": "github.com/mgechev/revive",
+                    "Version": "1.1.2"
                 }
             }
         },
@@ -764,7 +773,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.0.4",
+                    "Version": "3.1.0",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -774,7 +783,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.1.8",
+                    "Version": "2.1.9",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -1054,7 +1063,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "54783f66b8188297448bc725c578fdc7647e9fa0"
+                    "commitHash": "dc83d0b7204cf66315471e980729490813b7d915"
                 }
             }
         },
