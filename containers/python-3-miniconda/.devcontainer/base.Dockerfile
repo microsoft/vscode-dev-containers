@@ -1,7 +1,7 @@
 FROM continuumio/miniconda3
 
 # Copy library scripts to execute
-COPY .devcontainer/library-scripts/*.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/
+COPY .devcontainer/library-scripts/*.sh .devcontainer/add-notice.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
@@ -13,6 +13,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
+    && bash /tmp/library-scripts/add-notice.sh \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # [Optional] Uncomment to install a different version of Python than the default
