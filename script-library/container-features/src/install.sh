@@ -39,15 +39,11 @@ while IFS= read -r feature_line; do
         echo "(*) Script: ${script_command}"
 
         # Check if script with same args has already been run
-        should_execute=true
         feature_marker="${feature_marker_path}/${feature_var_name}";
         if [ -e "${feature_marker}" ] && [ "${script_command}" = "$(cat ${feature_marker})" ]; then
             echo "(*) Skipping. Script already run with same arguments."
-            should_execute=false
-        fi
-
-        # Execute script if not already run and set a marker
-        if [ "${should_execute}" = "true" ]; then        
+        else
+            # Execute script and create a marker with the script args
             echo "${script_command}" > "${feature_marker}"
             ./${script_command}
         fi
