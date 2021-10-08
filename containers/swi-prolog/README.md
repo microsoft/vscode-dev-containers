@@ -47,7 +47,9 @@ corresponds to the host interface.
 
 On Windows, you can install an X11 server using [VcXsrv Windows X
 Server](https://community.chocolatey.org/packages/vcxsrv) using Chocolatey. Do
-not forget to disable access control.
+not forget to disable access control. The enclosed `config.xlaunch` X launcher
+configuration includes the necessary `DisableAC="True"` setting. Double-click it
+to launch the X server on Windows.
 
 ## License
 
