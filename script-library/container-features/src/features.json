@@ -462,6 +462,9 @@
 			"init": true,
 			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
 			"entrypoint": "/usr/local/share/desktop-init.sh",
+			"containerEnv": {
+				"DISPLAY": ":1"
+			},
 			"include": [
 				"cpp",
 				"kubernetes-helm",
