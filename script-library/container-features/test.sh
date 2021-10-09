@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-IMAGE_TO_TEST="${1:-"mcr.microsoft.com/vscode/devcontainers/base:buster"}"
+IMAGE_TO_TEST="${1:-"mcr.microsoft.com/vscode/devcontainers/base:bullseye"}"
 PLATFORMS="${2:-""}"
 SCRIPT_DIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 
