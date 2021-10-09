@@ -79,6 +79,71 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
 elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
+# Add default Fluxbox config files if none are already present
+fluxbox_apps="$(cat \
+<< 'EOF'
+[transient] (role=GtkFileChooserDialog)
+  [Dimensions]	{70% 70%}
+  [Position]	(CENTER)	{0 0}
+[end]
+EOF
+)"
+
+fluxbox_init="$(cat \
+<< 'EOF'
+session.configVersion:	13
+session.menuFile:	~/.fluxbox/menu
+session.keyFile: ~/.fluxbox/keys
+session.styleFile: /usr/share/fluxbox/styles/qnx-photon
+session.screen0.workspaces: 1
+session.screen0.workspacewarping: false
+session.screen0.toolbar.widthPercent: 100
+session.screen0.strftimeFormat: %a %l:%M %p
+session.screen0.toolbar.tools: RootMenu, clock, iconbar, systemtray
+session.screen0.workspaceNames: One,
+EOF
+)"
+
+fluxbox_menu="$(cat \
+<< 'EOF'
+[begin] (  Application Menu  )
+    [exec] (File Manager) { nautilus ~ } <>
+    [exec] (Text Editor) { mousepad } <>
+    [exec] (Terminal) { tilix -w ~ -e $(readlink -f /proc/$$/exe) -il } <>
+    [exec] (Web Browser) { x-www-browser --disable-dev-shm-usage } <>
+    [submenu] (System) {}
+        [exec] (Set Resolution) { tilix -t "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
+        [exec] (Edit Application Menu) { mousepad ~/.fluxbox/menu } <>
+        [exec] (Passwords and Keys) { seahorse } <>
+        [exec] (Top Processes) { tilix -t "Top" -e htop } <>
+        [exec] (Disk Utilization) { tilix -t "Disk Utilization" -e ncdu / } <>
+        [exec] (Editres) {editres} <>
+        [exec] (Xfontsel) {xfontsel} <>
+        [exec] (Xkill) {xkill} <>
+        [exec] (Xrefresh) {xrefresh} <>
+    [end]
+    [config] (Configuration)
+    [workspaces] (Workspaces)
+[end]
+EOF
+)"
+
+# Copy config files if the don't already exist
+copy_fluxbox_config() {
+    local target_dir="$1"
+    mkdir -p "${target_dir}/.fluxbox"
+    touch "${target_dir}/.Xmodmap"
+    if [ ! -e "${target_dir}/.fluxbox/apps" ]; then
+        echo "${fluxbox_apps}" > "${target_dir}/.fluxbox/apps"
+    fi
+    if [ ! -e "${target_dir}/.fluxbox/init" ]; then
+        echo "${fluxbox_init}" > "${target_dir}/.fluxbox/init"
+    fi
+    if [ ! -e "${target_dir}/.fluxbox/menu" ]; then
+        echo "${fluxbox_menu}" > "${target_dir}/.fluxbox/menu"
+    fi
+}
+
 
 # Function to run apt-get if needed
 apt_get_update_if_needed()
@@ -165,11 +230,10 @@ if [ "${INSTALL_NOVNC}" = "true" ] && [ ! -d "/usr/local/novnc" ]; then
 fi
 
 # Set up folders for scripts and init files
-mkdir -p /var/run/dbus /usr/local/etc/vscode-dev-containers/ /root/.fluxbox
+mkdir -p /var/run/dbus /usr/local/etc/vscode-dev-containers/
 
 # Script to change resolution of desktop
-tee /usr/local/bin/set-resolution > /dev/null \
-<< EOF
+cat << EOF > /usr/local/bin/set-resolution
 #!/bin/bash
 RESOLUTION=\${1:-\${VNC_RESOLUTION:-1920x1080}}
 DPI=\${2:-\${VNC_DPI:-96}}
@@ -206,8 +270,7 @@ echo -e "\nSuccess!\n"
 EOF
 
 # Container ENTRYPOINT script
-tee /usr/local/share/desktop-init.sh > /dev/null \
-<< EOF
+cat << EOF > /usr/local/share/desktop-init.sh
 #!/bin/bash
 
 USERNAME=${USERNAME}
@@ -305,60 +368,13 @@ log "** SCRIPT EXIT **"
 EOF
 
 echo "${VNC_PASSWORD}" | vncpasswd -f > /usr/local/etc/vscode-dev-containers/vnc-passwd
-touch /root/.Xmodmap
 chmod +x /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution
 
-tee /root/.fluxbox/apps > /dev/null \
-<<EOF
-[transient] (role=GtkFileChooserDialog)
-  [Dimensions]	{70% 70%}
-  [Position]	(CENTER)	{0 0}
-[end]
-EOF
-
-tee /root/.fluxbox/init > /dev/null \
-<<EOF
-session.configVersion:	13
-session.menuFile:	~/.fluxbox/menu
-session.keyFile: ~/.fluxbox/keys
-session.styleFile: /usr/share/fluxbox/styles/qnx-photon
-session.screen0.workspaces: 1
-session.screen0.workspacewarping: false
-session.screen0.toolbar.widthPercent: 100
-session.screen0.strftimeFormat: %a %l:%M %p
-session.screen0.toolbar.tools: RootMenu, clock, iconbar, systemtray
-session.screen0.workspaceNames: One,
-EOF
-
-tee /root/.fluxbox/menu > /dev/null \
-<<EOF
-[begin] (  Application Menu  )
-    [exec] (File Manager) { nautilus ~ } <>
-    [exec] (Text Editor) { mousepad } <>
-    [exec] (Terminal) { tilix -w ~ -e $(readlink -f /proc/$$/exe) -il } <>
-    [exec] (Web Browser) { x-www-browser --disable-dev-shm-usage } <>
-    [submenu] (System) {}
-        [exec] (Set Resolution) { tilix -t "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
-        [exec] (Edit Application Menu) { mousepad ~/.fluxbox/menu } <>
-        [exec] (Passwords and Keys) { seahorse } <>
-        [exec] (Top Processes) { tilix -t "Top" -e htop } <>
-        [exec] (Disk Utilization) { tilix -t "Disk Utilization" -e ncdu / } <>
-        [exec] (Editres) {editres} <>
-        [exec] (Xfontsel) {xfontsel} <>
-        [exec] (Xkill) {xkill} <>
-        [exec] (Xrefresh) {xrefresh} <>
-    [end]
-    [config] (Configuration)
-    [workspaces] (Workspaces)
-[end]
-EOF
-
-# Set up non-root user (if one exists)
+# Set up fluxbox config
+copy_fluxbox_config "/root"
 if [ "${USERNAME}" != "root" ]; then
-    touch /home/${USERNAME}/.Xmodmap
-    cp -R /root/.fluxbox /home/${USERNAME}
-    chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox
-    chown ${USERNAME}:root /usr/local/share/desktop-init.sh /usr/local/bin/set-resolution /usr/local/etc/vscode-dev-containers/vnc-passwd
+    copy_fluxbox_config "/home/${USERNAME}"
+    chown -R ${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox
 fi
 
 cat << EOF
@@ -372,5 +388,6 @@ You now have a working desktop! Connect to in one of the following ways:
 In both cases, use the password "${VNC_PASSWORD}" when connecting
 
 (*) Done!
+
 EOF
 
