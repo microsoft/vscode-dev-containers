@@ -350,7 +350,7 @@
 				"ruby",
 				"rust",
 				"typescript-node",
-				"Javascript-node",
+				"javascript-node",
 				"python-3",
 				"python-3-anaconda",
 				"python-3-miniconda",
@@ -457,6 +457,24 @@
 					"enum": ["latest"],
 					"default": "latest",
 					"description": "Currently unused."
+				},
+				"password": {
+					"type": "string",
+					"proposal": ["vscode","codespaces","password"],
+					"default": "vscode",
+					"description": "Enter a password for desktop connections"
+				},
+				"webPort": {
+					"type": "string",
+					"proposal": ["6080"],
+					"default": "6080",
+					"description": "Enter a port for the desktop web client"
+				},
+				"vncPort": {
+					"type": "string",
+					"proposal": ["5901"],
+					"default": "5901",
+					"description": "Enter a port for the desktop VNC server"
 				}
 			},
 			"init": true,
