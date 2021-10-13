@@ -9,12 +9,12 @@
 | *Contributors* | The VS Code Team |
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
-| *Published images* | mcr.microsoft.com/vscode/devcontainers/dotnet <br/> mcr.microsoft.com/vscode/devcontainers/dotnetcore |
-| *Available image variants* | 2.1, 3.1, 5.0 ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list)) |
+| *Published images* | mcr.microsoft.com/vscode/devcontainers/dotnet |
+| *Available image variants* | 3.1 / 3.1-focal, 5.0 / 5.0-focal, 6.0 /6.0-bullseye, 6.0-focal, 5.0-bullseye, 3.1-bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list)) |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Ubuntu |
+| *Container OS* | Ubuntu (`-focal`), Debian (`-bullseye`) |
 | *Languages, platforms* | .NET, .NET Core, C# |
 
 See **[history](history)** for information on the contents of published images.
@@ -24,21 +24,24 @@ See **[history](history)** for information on the contents of published images.
 While this definition should work unmodified, you can select the version of .NET / .NET Core the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
+// Or you can use 3.1-bullseye or 3.1-focal if you want to pin to an OS version
 "args": { "VARIANT": "3.1" }
 ```
+
+Note that .NET 6.0 has switched its default OS to Debian 12 / bullseye. We also offer a `6.0-focal` image if you would prefer to use Ubuntu 20.04 / Focal.
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/dotnet` (latest)
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:2.1` (or `dotnetcore:2.1`)
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:3.1` (or `dotnetcore:3.1`)
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:5.0`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:3.1` (or `3.1-bullseye`, `3.1-focal` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:5.0` (or `5.0-bullseye`, `5.0-focal` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:6.0` (or `6.0-bullseye`, `6.0-focal` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/dotnet:0-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.201-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.201.6-3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.203-3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.203.0-3.1`
 
 See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list).
 
