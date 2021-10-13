@@ -21,8 +21,8 @@ sudo -u ${USERNAME} mkdir -p /home/${USERNAME}/.local/bin
 
 # Display a notice on conda when not running in GitHub Codespaces
 cat << 'EOF' > /usr/local/etc/vscode-dev-containers/conda-notice.txt
-When using "conda", note that the Anaconda repository contains restrictions on commercial use 
-that may impact certain organizations. See https://www.anaconda.com/terms-of-service
+When using "conda" from outside of GitHub Codespaces, note the Anaconda repository contains
+restrictions on commercial use that may impact certain organizations. See https://aka.ms/ghcs-conda
 
 EOF
 

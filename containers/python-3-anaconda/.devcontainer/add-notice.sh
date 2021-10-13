@@ -1,11 +1,9 @@
 # Display a notice when not running in GitHub Codespaces
 
 cat << 'EOF' > /usr/local/etc/vscode-dev-containers/conda-notice.txt
-👋 Welcome to your new Anaconda development container!
-
-Note that your use of third-party packages may be subject to additional licensing requirements.
-When using "conda", note that the Anaconda repository contains restrictions on commercial use 
-that may impact certain organizations. See https://www.anaconda.com/terms-of-service
+When using "conda" from outside of GitHub Codespaces, note the Anaconda repository 
+contains restrictions on commercial use that may impact certain organizations. See
+https://aka.ms/vscode-remote/conda/anaconda
 
 EOF
 

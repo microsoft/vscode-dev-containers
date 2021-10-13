@@ -1,7 +1,7 @@
 {
 	"name": "GitHub Codespaces (Default)",
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "base.Dockerfile"
 	},
 	"settings": {
 		"go.toolsManagement.checkForUpdates": "local",

@@ -3,7 +3,7 @@
 	"runArgs": ["--init"],
 	"build": { 
 		"context": "..",
-		"dockerfile": "Dockerfile",
+		"dockerfile": "base.Dockerfile",
 		"args": {
 			"NODE_VERSION": "lts/*"
 		}
