@@ -1,6 +1,6 @@
 {
 	"variants": ["2.7-bullseye", "2.7-buster"],
-	"definitionVersion": "0.1.0",
+	"definitionVersion": "0.1.1",
 	"build": {
 		"latest": "2.7-bullseye",
 		"parent": "ruby",
