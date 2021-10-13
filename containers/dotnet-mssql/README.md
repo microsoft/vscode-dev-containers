@@ -10,10 +10,10 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Published image architecture(s)* | x86-64 |
-| *Available image variants* | 2.1, 3.1, 5.0 |
+| *Available image variants* | [See .NET definition](../dotnet). |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Ubuntu |
+| *Container OS* | Ubuntu (.NET 3.1-6.0), Debian (.NET 6.0 default) |
 | *Languages, platforms* | .NET, .NET Core, C#, Microsoft SQL |
 
 ## Description
