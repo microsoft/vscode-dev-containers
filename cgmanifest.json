@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "dc83d0b7204cf66315471e980729490813b7d915"
+                    "commitHash": "19f9b6f1ade7788b07480be685cf3fcb117cad84"
                 }
             }
         },
@@ -850,6 +850,24 @@
         },
         {
             "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "flake8",
+                    "Version": "4.0.1"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "pycodestyle",
+                    "Version": "2.8.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -1053,7 +1071,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "7.32.0"
+                    "Version": "8.0.0"
                 }
             }
         },
@@ -1063,7 +1081,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "dc83d0b7204cf66315471e980729490813b7d915"
+                    "commitHash": "19f9b6f1ade7788b07480be685cf3fcb117cad84"
                 }
             }
         },
@@ -1141,7 +1159,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.4.3"
+                    "Version": "4.4.4"
                 }
             }
         },
