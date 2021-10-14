@@ -5,11 +5,10 @@
 		"dockerfile": "Dockerfile",
 		"args": { 
 			// Update 'VARIANT' to pick a .NET Core version: 3.1, 5.0, 6.0
-			// Append -bullseye or -buster to pin to an OS version.
+			// Append -bullseye or -focal to pin to an OS version.
 			"VARIANT": "5.0-bullseye",
 			// Options
 			"NODE_VERSION": "lts/*",
-			"INSTALL_AZURE_CLI": "false"
 		}
 	},
 

@@ -1,4 +1,4 @@
-# [Choice] .NET version: 6.0, 5.0, 3.1, 6.0-bullseye, 
+# [Choice] .NET version: 6.0-bullseye, 5.0-bullseye, 3.1-bullseye, 6.0-focal, 5.0-focal, 3.1-focal
 ARG VARIANT="5.0-bullseye"
 FROM mcr.microsoft.com/dotnet/sdk:${VARIANT}
 
@@ -22,11 +22,6 @@ ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
-
-# [Option] Install Azure CLI
-ARG INSTALL_AZURE_CLI="false"
-RUN if [ "$INSTALL_AZURE_CLI" = "true" ]; then bash /tmp/library-scripts/azcli-debian.sh; fi \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Remove library scripts for final image

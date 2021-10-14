@@ -96,13 +96,14 @@ args:
   NODE_VERSION: "14" # Set to "none" to skip Node.js installation
 ```
 
-If you would like to install the Azure CLI update you can set the `INSTALL_AZURE_CLI` argument line in `.devcontainer/docker-compose.yml`:
+If you would like to install the Azure CLI, you can reference [a dev container feature](https://aka.ms/vscode-remote/containers/dev-container-features) by adding the following to `.devcontainer/devcontainer.json`:
 
-```yaml
-args:
-  VARIANT: "3.1"
-  NODE_VERSION: "14"
-  INSTALL_AZURE_CLI: "true"
+```json
+{
+  "features": {
+    "azure-cli": "latest"
+  }
+}
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.

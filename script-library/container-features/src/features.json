@@ -381,6 +381,9 @@
 			],
 			"include": [
 				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
 				"kubernetes-helm",
 				"kubernetes-helm-minikube",
 				"docker-from-docker",

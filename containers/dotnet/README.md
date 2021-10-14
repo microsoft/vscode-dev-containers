@@ -126,13 +126,13 @@ Given JavaScript front-end web client code written for use in conjunction with a
 }
 ```
 
-If you would like to install the Azure CLI update you can set the `INSTALL_AZURE_CLI` argument line in `.devcontainer/devcontainer.json`:
+If you would like to install the Azure CLI, you can reference [a dev container feature](https://aka.ms/vscode-remote/containers/dev-container-features) by adding the following to `.devcontainer/devcontainer.json`:
 
-```jsonc
-"args": {
-    "VARIANT": "3.1",
-    "NODE_VERSION": "14", 
-    "INSTALL_AZURE_CLI": "true"
+```json
+{
+  "features": {
+    "azure-cli": "latest"
+  }
 }
 ```
 
