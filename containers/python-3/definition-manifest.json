@@ -10,7 +10,7 @@
 			"3.8-bullseye": ["linux/amd64", "linux/arm64"],
 			"3.7-bullseye": ["linux/amd64", "linux/arm64"],
 			"3.6-bullseye": ["linux/amd64", "linux/arm64"],
-			"3.10-buster": ["linux/arm64"],
+			"3.10-buster": ["linux/amd64"],
 			"3.9-buster": ["linux/amd64"],
 			"3.8-buster": ["linux/amd64"],
 			"3.7-buster": ["linux/amd64"],
