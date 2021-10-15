@@ -605,6 +605,16 @@
 					"enum": [ "latest", "os-provided", "3.10", "3.9", "3.8", "3.7", "3.6" ],
 					"default": "os-provided",
 					"description": "Select a Python version to install."
+				},
+				"installTools": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install common Python tools like pylint"
+				},
+				"optimize": {
+					"type": "boolean",
+					"default": false,
+					"description": "Optimize Python for performance when compiled (slow)"
 				}
 			},
 			"init": true,
