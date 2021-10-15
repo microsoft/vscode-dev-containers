@@ -732,7 +732,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["lts", "latest", "16", "11", "8"],
+					"proposals": ["lts", "latest", "17", "11", "8"],
 					"default": "lts",
 					"description": "Select or enter a Java version to install"
 				}
