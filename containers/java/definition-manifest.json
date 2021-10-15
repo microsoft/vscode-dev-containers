@@ -1,38 +1,56 @@
 {
-	"variants": [ "16-jdk-bullseye", "11-jdk-bullseye", "16-jdk-buster", "11-jdk-buster" ],
-	"definitionVersion": "0.203.0",
+	"variants": [ "17-bullseye", "17-buster", "11-bullseye", "11-buster" ],
+	"definitionVersion": "0.204.0",
 	"build": {
-		"latest": "16-jdk-buster",
+		"latest": "17-bullseye",
 		"rootDistro": "debian",
+		"variantBuildArgs": {
+			"17-bullseye": {
+				"TARGET_JAVA_VERSION": "17",
+				"BASE_IMAGE_VERSION_CODENAME": "bullseye"
+			},
+			"11-bullseye": {
+				"TARGET_JAVA_VERSION": "11",
+				"BASE_IMAGE_VERSION_CODENAME": "bullseye"
+			},
+			"17-buster": {
+				"TARGET_JAVA_VERSION": "17",
+				"BASE_IMAGE_VERSION_CODENAME": "buster"
+			},
+			"11-buster": {
+				"JAVA_IMAGE_TAG": "11",
+				"BASE_IMAGE_VERSION_CODENAME": "buster"
+			}
+		},
 		"architectures": {
-			"16-jdk-bullseye": ["linux/amd64", "linux/arm64"],
-			"11-jdk-bullseye": ["linux/amd64", "linux/arm64"],
-			"16-jdk-buster": ["linux/amd64"],
-			"11-jdk-buster": ["linux/amd64"]
+			"17-bullseye": ["linux/amd64", "linux/arm64"],
+			"11-bullseye": ["linux/amd64", "linux/arm64"],
+			"17-buster": ["linux/amd64"],
+			"11-buster": ["linux/amd64"]
 		},
 		"tags": [
 			"java:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"16-jdk-bullseye": [ 
-				"java:${VERSION}-16-bullseye",
+			"17-bullseye": [ 
+				"java:${VERSION}-17",
+				"java:${VERSION}-17-jdk-bullseye",
 				"java:${VERSION}-bullseye"
 			],
-			"11-jdk-bullseye": [ "java:${VERSION}-11-bullseye" ],
-			"16-jdk-buster": [ 
-				"java:${VERSION}-16",
-				"java:${VERSION}-16-buster",
+			"11-bullseye": [ 
+				"java:${VERSION}-11",
+				"java:${VERSION}-11-jdk-bullseye" 
+			],
+			"17-jdk-buster": [ 
+				"java:${VERSION}-17-jdk-buster",
 				"java:${VERSION}-buster"
 			],
-			"11-jdk-buster": [ 
-				"java:${VERSION}-11",
-				"java:${VERSION}-11-buster"
-			]
+			"11-buster": [ "java:${VERSION}-11-jdk-buster" ]
 		}
 	},
 	"dependencies": {
 		"image": "openjdk:${VARIANT}",
-		"imageLink": "https://hub.docker.com/_/java",
+		"imageLink": "https://hub.docker.com/_/openjdk",
 		"apt": [{
 			"cgIgnore": false,
 			"name": "yarn"
