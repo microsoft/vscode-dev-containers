@@ -8,7 +8,7 @@
 			// Append -bullseye or -focal to pin to an OS version.
 			"VARIANT": "5.0-bullseye",
 			// Options
-			"NODE_VERSION": "lts/*",
+			"NODE_VERSION": "lts/*"
 		}
 	},
 
