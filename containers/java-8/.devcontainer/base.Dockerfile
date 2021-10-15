@@ -10,7 +10,7 @@ ARG INSTALL_GRADLE="false"
 ARG GRADLE_VERSION=""
 COPY library-scripts/meta.env /usr/local/etc/vscode-dev-containers
 RUN su vscode -c "umask 0002 && . /usr/local/sdkman/bin/sdkman-init.sh && if [ "${JDK8_VERSION}" = "" ]; then \
-        sdk install java \$(sdk ls java | grep -m 1 -o ' 8.*.hs-adpt ' | awk '{print \$NF}'); \
+        sdk install java \$(sdk ls java | grep -m 1 -o ' 8.*.-tem ' | awk '{print \$NF}'); \
         else sdk install java '${JDK8_VERSION}'; fi" \
     && if [ "${INSTALL_MAVEN}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/sdkman/bin/sdkman-init.sh && sdk install maven \"${MAVEN_VERSION}\""; fi \
     && if [ "${INSTALL_GRADLE}" = "true" ]; then su vscode -c "umask 0002 &&  . /usr/local/sdkman/bin/sdkman-init.sh && sdk install gradle \"${GRADLE_VERSION}\""; fi

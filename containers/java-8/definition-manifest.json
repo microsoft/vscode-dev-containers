@@ -26,7 +26,7 @@
 	},
 	"dependencies": {
 		"image": "mcr.microsoft.com/vscode/devcontainers/java:11-${VARIANT}",
-		"imageLink": "https://hub.docker.com/_/java",
+		"imageLink": "https://hub.docker.com/_/openjdk",
 		"apt": [{
 			"cgIgnore": false,
 			"name": "yarn"
@@ -37,10 +37,10 @@
 		},
 		"other": {
 			"SDKMAN!": null,
-			"AdoptOpenJDK": {
+			"Eclipse Temurin": {
 				"markdownIgnore": true,
 				"versionCommand": "/usr/local/sdkman/candidates/java/current/bin/java -version 2>&1 | grep -ozP '^openjdk\\sversion\\s\\\"\\K[^\\\"]+' | tr '\\0' '\\n'",
-				"downloadUrl": "https://adoptopenjdk.net/"
+				"downloadUrl": "https://adoptium.net/"
 			}
 		},
 		"languages": {
