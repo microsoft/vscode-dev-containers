@@ -602,7 +602,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": [ "latest", "os-provided", "3.9", "3.8", "3.7", "3.6" ],
+					"enum": [ "latest", "os-provided", "3.10", "3.9", "3.8", "3.7", "3.6" ],
 					"default": "os-provided",
 					"description": "Select a Python version to install."
 				}
