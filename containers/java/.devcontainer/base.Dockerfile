@@ -1,6 +1,7 @@
-# [Choice] Java version (use -bullseye variants on local arm64/Apple Silicon): 11-jdk-bullseye, 16-jdk-bullseye, 11-jdk-buster, 16-jdk-buster
-ARG VARIANT=11-jdk-buster
-FROM openjdk:${VARIANT}
+# This base.Dockerfile uses separate build arguments instead of VARIANT
+ARG TARGET_JAVA_VERSION=11
+ARG BASE_IMAGE_VERSION_CODENAME=bullseye
+FROM openjdk:${TARGET_JAVA_VERSION}-jdk-${BASE_IMAGE_VERSION_CODENAME}
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/

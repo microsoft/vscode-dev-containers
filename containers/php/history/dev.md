@@ -14,7 +14,7 @@
 
 ## Variant: 8.0-apache-bullseye
 
-**Digest:** sha256:7b185725c8da20ef05b24e89b16b47fba05a98e7e6f83baa06132066eb78c23d
+**Digest:** sha256:fe8b4e8641913919ddc1aedab963235c2331c336baf74cf405ff6ad37a72daff
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -68,14 +68,14 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
 | less | 551-2 |
-| libc6 | 2.31-13 |
-| libgssapi-krb5-2 | 1.18.3-6 |
+| libc6 | 2.31-13+deb11u2 |
+| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
 | libicu67 | 67.1-7 |
-| libkrb5-3 | 1.18.3-6 |
+| libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
 | libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13 |
+| locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
@@ -89,7 +89,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 | openssh-client | 1:8.4p1-5 |
 | procps | 2:3.3.17-5 |
 | psmisc | 23.4-2 |
-| rsync | 3.2.3-4 |
+| rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 
 ## Variant: 7.4-apache-bullseye
 
-**Digest:** sha256:937dc0b70a712502abf63ac66f4b4f7d560339eea08fd62ade120c5b76e6ebfa
+**Digest:** sha256:cae9a9384eb9425fc188fa02f6035fd34cbfcdd459ec453fac7f9e93ab968e4d
 
 **Tags:**
 ```
@@ -131,7 +131,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -156,14 +156,14 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
 | less | 551-2 |
-| libc6 | 2.31-13 |
-| libgssapi-krb5-2 | 1.18.3-6 |
+| libc6 | 2.31-13+deb11u2 |
+| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
 | libicu67 | 67.1-7 |
-| libkrb5-3 | 1.18.3-6 |
+| libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
 | libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13 |
+| locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
@@ -177,7 +177,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 | openssh-client | 1:8.4p1-5 |
 | procps | 2:3.3.17-5 |
 | psmisc | 23.4-2 |
-| rsync | 3.2.3-4 |
+| rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
@@ -190,7 +190,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 
 ## Variant: 7.3-apache-bullseye
 
-**Digest:** sha256:09cccf2a5b3bedf1da1ee0f769f4f72b79ffca5a1277b49c4329de4f25a9d6fa
+**Digest:** sha256:62e0324b1f90636ffc94d2c8d1cbf77b1de82ad0e2b481939a716019cc157373
 
 **Tags:**
 ```
@@ -217,7 +217,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -242,14 +242,14 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
 | less | 551-2 |
-| libc6 | 2.31-13 |
-| libgssapi-krb5-2 | 1.18.3-6 |
+| libc6 | 2.31-13+deb11u2 |
+| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
 | libicu67 | 67.1-7 |
-| libkrb5-3 | 1.18.3-6 |
+| libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
 | libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13 |
+| locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
@@ -263,7 +263,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 | openssh-client | 1:8.4p1-5 |
 | procps | 2:3.3.17-5 |
 | psmisc | 23.4-2 |
-| rsync | 3.2.3-4 |
+| rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
@@ -276,7 +276,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 
 ## Variant: 8.0-apache-buster
 
-**Digest:** sha256:b46f9c52da5b0558f7456872d3cef9fed6d917d323673809269a3829a33e8083
+**Digest:** sha256:3015dbc25717f3e05a0a709a3e67ecfbdd0020298de21550333ef3fd9f089469
 
 **Tags:**
 ```
@@ -304,7 +304,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -331,9 +331,9 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u2 |
+| libgssapi-krb5-2 | 1.17-3+deb10u3 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u2 |
+| libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
@@ -350,7 +350,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 | net-tools | 1.60+git20180626.aebd88e-1 |
 | openssh-client | 1:7.9p1-10+deb10u2 |
 | procps | 2:3.3.15-2 |
-| psmisc | 23.2-1 |
+| psmisc | 23.2-1+deb10u1 |
 | rsync | 3.1.3-6 |
 | strace | 4.26-0.2 |
 | sudo | 1.8.27-1+deb10u3 |
@@ -364,7 +364,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 
 ## Variant: 7.4-apache-buster
 
-**Digest:** sha256:e9d785ba9e4b7201eb9969ef6e5791b201f1947baaeb0df0601f4ba998c9b139
+**Digest:** sha256:338efa15c3bc29e8859cacc8df0e7fa451f9a32bab0be8ae8f4fe9e9c14cf7f7
 
 **Tags:**
 ```
@@ -391,7 +391,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -418,9 +418,9 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u2 |
+| libgssapi-krb5-2 | 1.17-3+deb10u3 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u2 |
+| libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
@@ -437,7 +437,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 | net-tools | 1.60+git20180626.aebd88e-1 |
 | openssh-client | 1:7.9p1-10+deb10u2 |
 | procps | 2:3.3.15-2 |
-| psmisc | 23.2-1 |
+| psmisc | 23.2-1+deb10u1 |
 | rsync | 3.1.3-6 |
 | strace | 4.26-0.2 |
 | sudo | 1.8.27-1+deb10u3 |
@@ -451,7 +451,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 
 ## Variant: 7.3-apache-buster
 
-**Digest:** sha256:4fc7cb63ed8c7d94d270126b744e810cf7756e8077a9bf4628a1be2b5a6b6584
+**Digest:** sha256:ddcda41ac631f6369fb393d0947f27ea025a1d982c5d88189f5bc27bc57a2579
 
 **Tags:**
 ```
@@ -477,7 +477,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -504,9 +504,9 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-buster
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u2 |
+| libgssapi-krb5-2 | 1.17-3+deb10u3 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u2 |
+| libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
@@ -523,7 +523,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-buster
 | net-tools | 1.60+git20180626.aebd88e-1 |
 | openssh-client | 1:7.9p1-10+deb10u2 |
 | procps | 2:3.3.15-2 |
-| psmisc | 23.2-1 |
+| psmisc | 23.2-1+deb10u1 |
 | rsync | 3.1.3-6 |
 | strace | 4.26-0.2 |
 | sudo | 1.8.27-1+deb10u3 |

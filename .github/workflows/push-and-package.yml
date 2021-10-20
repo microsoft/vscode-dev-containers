@@ -63,7 +63,6 @@ jobs:
     name: Package and release
     needs: [build-and-push]
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     steps:
     - name: Checkout
       id: checkout
@@ -142,7 +141,6 @@ jobs:
 
   image-info:
     name: Trigger info extraction
-    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     needs: [package]
     runs-on: ubuntu-latest
     steps:

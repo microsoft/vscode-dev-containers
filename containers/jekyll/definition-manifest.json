@@ -1,6 +1,6 @@
 {
 	"variants": ["2.7-bullseye", "2.7-buster"],
-	"definitionVersion": "0.1.0",
+	"definitionVersion": "0.1.2",
 	"build": {
 		"latest": "2.7-bullseye",
 		"parent": "ruby",
@@ -10,10 +10,13 @@
 			"2.7-buster": ["linux/amd64"]
 		},
 		"tags": [
-			"jekyll:${VERSION}"
+			"jekyll:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"2.7-bullseye": [ "jekyll:${VERSION}-bullseye" ],
+			"2.7-bullseye": [ 
+				"jekyll:${VERSION}", 
+				"jekyll:${VERSION}-bullseye" 
+			],
 			"2.7-buster": [ "jekyll:${VERSION}-buster" ]
 		}
 	},

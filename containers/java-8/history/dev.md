@@ -10,7 +10,7 @@
 
 ## Variant: bullseye
 
-**Digest:** sha256:82d6e6d2799b8eba7179ce40dbfc9464716ef2749674425c387b51cd0e5dbc71
+**Digest:** sha256:62e7ebb4dee2687915e05ad915f6878b583e500e7f979776a942b7c84e20498e
 
 **Tags:**
 ```
@@ -36,7 +36,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -60,14 +60,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
 | less | 551-2 |
-| libc6 | 2.31-13 |
-| libgssapi-krb5-2 | 1.18.3-6 |
+| libc6 | 2.31-13+deb11u2 |
+| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
 | libicu67 | 67.1-7 |
-| libkrb5-3 | 1.18.3-6 |
+| libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
 | libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13 |
+| locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
@@ -81,7 +81,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 | openssh-client | 1:8.4p1-5 |
 | procps | 2:3.3.17-5 |
 | psmisc | 23.4-2 |
-| rsync | 3.2.3-4 |
+| rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
@@ -94,7 +94,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 
 ## Variant: buster
 
-**Digest:** sha256:9eba8e65e9da63cefe99c89f1c8c5cfcef367e3b42ffcd42fd282fae646023fd
+**Digest:** sha256:a859c14f3bce4e619d23f0a1d99c189592984fadb5fa898ac6224e072e24c447
 
 **Tags:**
 ```
@@ -121,7 +121,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | dc83d0b7204cf66315471e980729490813b7d915 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -147,9 +147,9 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-buster
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u2 |
+| libgssapi-krb5-2 | 1.17-3+deb10u3 |
 | libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u2 |
+| libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
@@ -166,7 +166,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-buster
 | net-tools | 1.60+git20180626.aebd88e-1 |
 | openssh-client | 1:7.9p1-10+deb10u2 |
 | procps | 2:3.3.15-2 |
-| psmisc | 23.2-1 |
+| psmisc | 23.2-1+deb10u1 |
 | rsync | 3.1.3-6 |
 | strace | 4.26-0.2 |
 | sudo | 1.8.27-1+deb10u3 |

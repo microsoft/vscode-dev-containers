@@ -268,7 +268,7 @@
 				"ruby",
 				"rust",
 				"typescript-node",
-				"Javascript-node",
+				"javascript-node",
 				"python-3",
 				"python-3-anaconda",
 				"python-3-miniconda",
@@ -350,7 +350,7 @@
 				"ruby",
 				"rust",
 				"typescript-node",
-				"Javascript-node",
+				"javascript-node",
 				"python-3",
 				"python-3-anaconda",
 				"python-3-miniconda",
@@ -381,6 +381,9 @@
 			],
 			"include": [
 				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
 				"kubernetes-helm",
 				"kubernetes-helm-minikube",
 				"docker-from-docker",
@@ -457,11 +460,32 @@
 					"enum": ["latest"],
 					"default": "latest",
 					"description": "Currently unused."
+				},
+				"password": {
+					"type": "string",
+					"proposal": ["vscode","codespaces","password"],
+					"default": "vscode",
+					"description": "Enter a password for desktop connections"
+				},
+				"webPort": {
+					"type": "string",
+					"proposal": ["6080"],
+					"default": "6080",
+					"description": "Enter a port for the desktop web client"
+				},
+				"vncPort": {
+					"type": "string",
+					"proposal": ["5901"],
+					"default": "5901",
+					"description": "Enter a port for the desktop VNC server"
 				}
 			},
 			"init": true,
 			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
 			"entrypoint": "/usr/local/share/desktop-init.sh",
+			"containerEnv": {
+				"DISPLAY": ":1"
+			},
 			"include": [
 				"cpp",
 				"kubernetes-helm",
@@ -578,9 +602,19 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": [ "latest", "os-provided", "3.9", "3.8", "3.7", "3.6" ],
+					"enum": [ "latest", "os-provided", "3.10", "3.9", "3.8", "3.7", "3.6" ],
 					"default": "os-provided",
 					"description": "Select a Python version to install."
+				},
+				"installTools": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install common Python tools like pylint"
+				},
+				"optimize": {
+					"type": "boolean",
+					"default": false,
+					"description": "Optimize Python for performance when compiled (slow)"
 				}
 			},
 			"init": true,
@@ -698,7 +732,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["lts", "latest", "16", "11", "8"],
+					"proposals": ["lts", "latest", "17", "11", "8"],
 					"default": "lts",
 					"description": "Select or enter a Java version to install"
 				}

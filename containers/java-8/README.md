@@ -73,9 +73,9 @@ You can also specify the version of Gradle or Maven if needed.
 ```json
 "args": {
    "INSTALL_GRADLE": "true",
-   "MAVEN_VERSION": "3.6.3",
+   "MAVEN_VERSION": "3.8.3",
    "INSTALL_MAVEN": "true",
-   "GRADLE_VERSION": "5.4.1"
+   "GRADLE_VERSION": "7.2"
 }
 ```
 

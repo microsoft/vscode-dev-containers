@@ -26,6 +26,8 @@ set +a
 chmod +x *.sh
 
 # Execute option scripts if correct environment variable is set to "true"
+feature_marker_path="/usr/local/etc/vscode-dev-containers/features"
+mkdir -p "${feature_marker_path}"
 while IFS= read -r feature_line; do
     # Extract the env var part of the line
     feature_var_name="${feature_line%%=*}"
@@ -33,9 +35,18 @@ while IFS= read -r feature_line; do
         # If a value is set for the env var, execute the script
         feature_script_and_args="${feature_line##*=}"
         feature_script_and_args="${feature_script_and_args%\"}"
-        # Execute the script line - but do not quote so arguments can be included in the 
-        echo "${feature_script_and_args#\"}"
-        eval "./${feature_script_and_args#\"}"
+        script_command="$(eval echo "${feature_script_and_args#\"}")"
+        echo "(*) Script: ${script_command}"
+
+        # Check if script with same args has already been run
+        feature_marker="${feature_marker_path}/${feature_var_name}";
+        if [ -e "${feature_marker}" ] && [ "${script_command}" = "$(cat ${feature_marker})" ]; then
+            echo "(*) Skipping. Script already run with same arguments."
+        else
+            # Execute script and create a marker with the script args
+            echo "${script_command}" > "${feature_marker}"
+            ./${script_command}
+        fi
     fi
 done < ./feature-scripts.env
 
