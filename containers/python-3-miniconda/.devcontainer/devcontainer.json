@@ -1,6 +1,5 @@
 {
 	"name": "Miniconda (Python 3)",
-	"runArgs": ["--init"],
 	"build": { 
 		"context": "..",
 		"dockerfile": "Dockerfile",
