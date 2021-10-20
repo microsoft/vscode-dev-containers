@@ -1,9 +1,8 @@
 {
 	"name": "Anaconda (Python 3)",
-	"runArgs": ["--init"],
 	"build": { 
 		"context": "..",
-		"dockerfile": "base.Dockerfile",
+		"dockerfile": "Dockerfile",
 		"args": {
 			"NODE_VERSION": "lts/*"
 		}
