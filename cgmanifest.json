@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "19f9b6f1ade7788b07480be685cf3fcb117cad84"
+                    "commitHash": "46f8765f4c871ef9b4e7f8bc448e45f4be15ff58"
                 }
             }
         },
@@ -175,7 +175,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.28.0-1~focal",
+                    "Version": "2.29.0-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -201,7 +201,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-cli",
-                    "Version": "20.10.8+azure-1",
+                    "Version": "20.10.9+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -214,7 +214,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-engine",
-                    "Version": "20.10.8+azure-1",
+                    "Version": "20.10.9+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -227,7 +227,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "powershell",
-                    "Version": "7.1.4-1.ubuntu.20.04",
+                    "Version": "7.1.5-1.ubuntu.20.04",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -249,7 +249,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "flake8",
-                    "Version": "3.9.2"
+                    "Version": "4.0.1"
                 }
             }
         },
@@ -303,7 +303,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pycodestyle",
-                    "Version": "2.7.0"
+                    "Version": "2.8.0"
                 }
             }
         },
@@ -420,7 +420,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.7.2"
+                    "Version": "0.7.3"
                 }
             }
         },
@@ -447,7 +447,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.1.1"
+                    "Version": "1.1.2"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "54783f66b8188297448bc725c578fdc7647e9fa0"
+                    "commitHash": "46f8765f4c871ef9b4e7f8bc448e45f4be15ff58"
                 }
             }
         },
@@ -523,7 +523,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "e7fd07dd91da0fe5f2ed2345d0b4c655b90aba12"
+                    "commitHash": "38e1fbb08e9d75d708a1ffb75fb9bbe179832ac8"
                 }
             }
         },
@@ -533,7 +533,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "e3909413561b85c80ddc3bb05949a38d8ec65114"
+                    "commitHash": "30eb72fe77c48eb8779096f6ef0d2b8f5e238b0f"
                 }
             }
         },
@@ -572,7 +572,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Helm",
-                    "Version": "3.7.0",
+                    "Version": "3.7.1",
                     "DownloadUrl": "https://github.com/helm/helm"
                 }
             }
@@ -592,7 +592,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.12.4",
+                    "Version": "5.13.0",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -612,7 +612,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "2.0.0",
+                    "Version": "2.1.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -632,7 +632,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.17.1",
+                    "Version": "1.17.2",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -663,8 +663,8 @@
                 "Linux": {
                     "Name": "yarn",
                     "Version": "1.22.15-1",
-                    "Distribution": "ubuntu",
-                    "Release": "20.04",
+                    "Distribution": "debian",
+                    "Release": "11",
                     "Pool-URL": "https://dl.yarnpkg.com/debian",
                     "Key-URL": "https://dl.yarnpkg.com/debian/pubkey.gpg"
                 }
@@ -685,7 +685,47 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
+                    "Version": "6.0-bullseye-slim",
+                    "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
+                    "Version": "6.0-focal",
+                    "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
+                    "Version": "5.0-bullseye-slim",
+                    "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
                     "Version": "5.0-focal",
+                    "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
+                    "Version": "3.1-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
                 }
             }
@@ -697,25 +737,6 @@
                     "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
                     "Version": "3.1-focal",
                     "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
-                    "Version": "2.1-focal",
-                    "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "go",
-                "Go": {
-                    "Name": "github.com/mgechev/revive",
-                    "Version": "1.1.2"
                 }
             }
         },
@@ -773,7 +794,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.1.0",
+                    "Version": "3.1.1",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -850,19 +871,11 @@
         },
         {
             "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "flake8",
-                    "Version": "4.0.1"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "pycodestyle",
-                    "Version": "2.8.0"
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: python",
+                    "Version": "3.10-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
         },
@@ -911,7 +924,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
-                    "Version": "3.6-buster",
+                    "Version": "3.10-buster",
                     "DownloadUrl": "https://hub.docker.com/_/python"
                 }
             }
@@ -1001,8 +1014,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: openjdk",
-                    "Version": "16-jdk-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
+                    "Version": "17-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/openjdk"
                 }
             }
         },
@@ -1011,8 +1024,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: openjdk",
-                    "Version": "11-jdk-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
+                    "Version": "17-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/openjdk"
                 }
             }
         },
@@ -1021,8 +1034,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: openjdk",
-                    "Version": "16-jdk-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
+                    "Version": "11-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/openjdk"
                 }
             }
         },
@@ -1031,8 +1044,8 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: openjdk",
-                    "Version": "11-jdk-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
+                    "Version": "11-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/openjdk"
                 }
             }
         },
@@ -1040,9 +1053,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "AdoptOpenJDK",
-                    "Version": "1.8.0_292",
-                    "DownloadUrl": "https://adoptopenjdk.net/"
+                    "Name": "Eclipse Temurin",
+                    "Version": "1.8.0_302",
+                    "DownloadUrl": "https://adoptium.net/"
                 }
             }
         },
@@ -1052,7 +1065,7 @@
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/java",
                     "Version": "11-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
+                    "DownloadUrl": "https://hub.docker.com/_/openjdk"
                 }
             }
         },
@@ -1062,7 +1075,7 @@
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/java",
                     "Version": "11-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/java"
+                    "DownloadUrl": "https://hub.docker.com/_/openjdk"
                 }
             }
         },
@@ -1071,7 +1084,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.0.0"
+                    "Version": "8.0.1"
                 }
             }
         },
@@ -1081,7 +1094,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "19f9b6f1ade7788b07480be685cf3fcb117cad84"
+                    "commitHash": "46f8765f4c871ef9b4e7f8bc448e45f4be15ff58"
                 }
             }
         },
@@ -1150,7 +1163,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.10.0"
+                    "Version": "2.10.1"
                 }
             }
         },

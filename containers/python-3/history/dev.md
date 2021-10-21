@@ -5,27 +5,122 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3)
 
 **Definition variations:**
+- [3.10-bullseye](#variant-310-bullseye)
 - [3.9-bullseye](#variant-39-bullseye)
 - [3.8-bullseye](#variant-38-bullseye)
 - [3.7-bullseye](#variant-37-bullseye)
 - [3.6-bullseye](#variant-36-bullseye)
-- [3.6-buster](#variant-36-buster)
+- [3.10-buster](#variant-310-buster)
 - [3.9-buster](#variant-39-buster)
 - [3.8-buster](#variant-38-buster)
 - [3.7-buster](#variant-37-buster)
 - [3.6-buster](#variant-36-buster)
 
+## Variant: 3.10-bullseye
+
+**Digest:** sha256:ac022f37f13e04f10ee7538b4b5c2068e09920645923320152f0614bd748fa4a
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.10-bullseye
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.10
+mcr.microsoft.com/vscode/devcontainers/python:dev-3
+mcr.microsoft.com/vscode/devcontainers/python:dev-3-bullseye
+mcr.microsoft.com/vscode/devcontainers/python:dev-bullseye
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [Python](https://www.python.org/) | 3.10.0 | /usr/local |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Pip / pipx installed tools and packages**
+
+| Tool / package | Version |
+|----------------|---------|
+| pylint | 2.11.1 |
+| flake8 | 4.0.1 |
+| autopep8 | 1.5.7 |
+| black | 21.9b0 |
+| yapf | 0.31.0 |
+| mypy | 0.910 |
+| pydocstyle | 6.1.1 |
+| pycodestyle | 2.8.0 |
+| bandit | 1.7.0 |
+| virtualenv | 20.8.1 |
+| pipx | 0.16.4 |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13+deb11u2 |
+| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6+deb11u1 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13+deb11u2 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4+deb11u1 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.15-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
+
 ## Variant: 3.9-bullseye
 
-**Digest:** sha256:800eaa34a9fad1495ebd3e997b24fc41033efd5e29caf21914fbe0e9d4d050a2
+**Digest:** sha256:f5d70b9afab073583f5d057d66e7761bb882b1f0786efb8808c6c82527dfa3d3
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/python:dev-3.9-bullseye
 mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
-mcr.microsoft.com/vscode/devcontainers/python:dev-3
-mcr.microsoft.com/vscode/devcontainers/python:dev-3-bullseye
-mcr.microsoft.com/vscode/devcontainers/python:dev-bullseye
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -46,7 +141,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -114,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-bullseye
 
 ## Variant: 3.8-bullseye
 
-**Digest:** sha256:540695791897e67039da8956a1888b4a9f9fb2d0db3204ff1f170176526cb02d
+**Digest:** sha256:ddb08c15f1260bc077e772391da98d54a76b38688ed20486987820290c802f6c
 
 **Tags:**
 ```
@@ -140,7 +235,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -208,7 +303,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7-bullseye
 
-**Digest:** sha256:6bf074747c4927cc3b3a239e4f0b49f16ac3b140a7ae2a8fc34f1e4643f36a17
+**Digest:** sha256:77c116b5bd4b3713f7093635758b676fdd70219c853be7cdc8bf96a788d1ac76
 
 **Tags:**
 ```
@@ -234,7 +329,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -302,7 +397,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6-bullseye
 
-**Digest:** sha256:affc764c2a72f2ac492127dfaea9d3f3a8edf83da68b241017733109550abbc4
+**Digest:** sha256:ded3104177a12017e93d3608f9bfde4c3bceb0976b9e8d9a0863e95b135d753d
 
 **Tags:**
 ```
@@ -328,7 +423,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -394,13 +489,15 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |
 
-## Variant: 3.6-buster
+## Variant: 3.10-buster
 
-**Digest:** sha256:88d7c5ddd78c694fae50c434161d60f7b8a7e33a66d2d239f16e9bdacb0c02d4
+**Digest:** sha256:b5d9911e3a66d4448e6980aca9625cfffe775ff20331f8a3db55885ecdc700c0
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/python:dev-3.6-buster
+mcr.microsoft.com/vscode/devcontainers/python:dev-3.10-buster
+mcr.microsoft.com/vscode/devcontainers/python:dev-3-buster
+mcr.microsoft.com/vscode/devcontainers/python:dev-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -415,13 +512,13 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.6.15 | /usr/local |
+| [Python](https://www.python.org/) | 3.10.0 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -490,13 +587,11 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6-buster
 
 ## Variant: 3.9-buster
 
-**Digest:** sha256:1db0c352dfd19b1dd0190803a3857440cca0de4dae38bc3ef3e2f4b7f301cf52
+**Digest:** sha256:5bf88dda61fd26274e41caac47b7ce2eb5af221a65425f08dbad1132e371a9e6
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/python:dev-3.9-buster
-mcr.microsoft.com/vscode/devcontainers/python:dev-3-buster
-mcr.microsoft.com/vscode/devcontainers/python:dev-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -517,7 +612,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -586,7 +681,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-buster
 
 ## Variant: 3.8-buster
 
-**Digest:** sha256:6d06f0974675a9979789b40fcf0b415c47cb1a20516faa90676f375717887020
+**Digest:** sha256:06b44a11c66daf6eed8a761102cc252dc629b2eef45f2af3705bc19f78cb68a6
 
 **Tags:**
 ```
@@ -611,7 +706,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -680,7 +775,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8-buster
 
 ## Variant: 3.7-buster
 
-**Digest:** sha256:9cedf9f40d9d704423b869d8822f81a90174abe059b5a680aad264ab506078f4
+**Digest:** sha256:4e4e818deded0f1e0d21b362ef663d3ea25d234d0c31e99eed8191e181147444
 
 **Tags:**
 ```
@@ -705,7 +800,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -774,7 +869,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7-buster
 
 ## Variant: 3.6-buster
 
-**Digest:** sha256:88d7c5ddd78c694fae50c434161d60f7b8a7e33a66d2d239f16e9bdacb0c02d4
+**Digest:** sha256:90db21808ac74a525002f315589dfdc13a13f6e26fb24957a0db78d981a31c22
 
 **Tags:**
 ```
@@ -799,7 +894,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 19f9b6f1ade7788b07480be685cf3fcb117cad84 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
