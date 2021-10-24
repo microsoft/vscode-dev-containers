@@ -46,7 +46,7 @@ jobs:
 
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Azure CLI login
       id: az_login
@@ -87,7 +87,7 @@ jobs:
     steps:
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Package
       id: package

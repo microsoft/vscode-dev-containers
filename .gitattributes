@@ -6,3 +6,4 @@
 *.png binary
 *.gz binary
 *.jar binary
+*.cjs binary

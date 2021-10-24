@@ -28,7 +28,7 @@ jobs:
 
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Test script library
       id: test_script_library
@@ -44,13 +44,13 @@ jobs:
     steps:
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Copy and commit script-library updates
       id: copy-scripts
       run: |
         set -e
-        yarn install
+        yarn
         build/vscdc copy-library-scripts
         git config --global user.email "vscr-feedback@microsoft.com"
         git config --global user.name "CI"
