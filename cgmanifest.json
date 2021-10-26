@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "46f8765f4c871ef9b4e7f8bc448e45f4be15ff58"
+                    "commitHash": "1e5e834e0f6486a569efd6b12ce4e33624fef0c9"
                 }
             }
         },
@@ -871,6 +871,24 @@
         },
         {
             "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "autopep8",
+                    "Version": "1.6.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "Pip",
+                "Pip": {
+                    "Name": "virtualenv",
+                    "Version": "20.9.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -991,6 +1009,33 @@
         },
         {
             "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rust-analysis",
+                    "Version": "1.56.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "rust-src",
+                    "Version": "1.56.0"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "cargo",
+                "Cargo": {
+                    "Name": "clippy",
+                    "Version": "1.56.0"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: rust",
@@ -1054,7 +1099,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Eclipse Temurin",
-                    "Version": "1.8.0_302",
+                    "Version": "1.8.0_312",
                     "DownloadUrl": "https://adoptium.net/"
                 }
             }
@@ -1084,7 +1129,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.0.1"
+                    "Version": "8.1.0"
                 }
             }
         },
@@ -1094,7 +1139,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "46f8765f4c871ef9b4e7f8bc448e45f4be15ff58"
+                    "commitHash": "1e5e834e0f6486a569efd6b12ce4e33624fef0c9"
                 }
             }
         },
