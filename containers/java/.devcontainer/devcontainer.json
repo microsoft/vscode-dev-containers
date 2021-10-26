@@ -1,10 +1,9 @@
 {
 	"name": "Java",
-	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			// Update the VARIANT arg to pick a Java version: 11, 16
+			// Update the VARIANT arg to pick a Java version: 11, 17
 			// Append -bullseye or -buster to pin to an OS version.
 			// Use the -bullseye variants on local arm64/Apple Silicon.
 			"VARIANT": "11-jdk-bullseye",
