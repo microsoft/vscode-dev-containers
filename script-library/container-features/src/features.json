@@ -923,13 +923,13 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposed": ["latest", "1.55", "1.54", "1.53"],
+					"proposals": ["latest", "1.55", "1.54", "1.53"],
 					"default": "latest",
 					"description": "Select or enter a version of Rust to install."
 				},
 				"profile": {
 					"type": "string",
-					"proposed": ["minimal", "default", "complete"],
+					"proposals": ["minimal", "default", "complete"],
 					"default": "minimal",
 					"description": "Select a rustup install profile."
 				}
