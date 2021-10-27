@@ -2,7 +2,7 @@
 	"name": "Anaconda (Python 3)",
 	"build": { 
 		"context": "..",
-		"dockerfile": "Dockerfile",
+		"dockerfile": "base.Dockerfile",
 		"args": {
 			"NODE_VERSION": "lts/*"
 		}

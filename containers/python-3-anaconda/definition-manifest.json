@@ -23,6 +23,11 @@
 			"conda": {
 				"cgIgnore": true,
 				"path": "/opt/conda"
+			},
+			"anaconda": {
+				"cgIgnore": true,
+				"path":"/opt/conda",
+				"versionCommand":  "conda list anaconda$ | grep -oP 'anaconda\\s+\\K[^\\s]+'"
 			}
 		},
 		"languages": {

@@ -14,6 +14,8 @@ ARG USER_GID=$USER_UID
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     && bash /tmp/library-scripts/add-notice.sh \
+    && conda update -y --all \
+    && conda clean -y --all \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Setup default python tools in a venv via pipx to avoid conflicts
