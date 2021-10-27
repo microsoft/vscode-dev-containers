@@ -630,7 +630,7 @@
 				"PATH":"${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}"
 			},
 			"settings": { 
-				"python.pythonPath": "/usr/local/bin/python",
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
 				"python.languageServer": "Pylance",
 				"python.linting.enabled": true,
 				"python.linting.pylintEnabled": true,
