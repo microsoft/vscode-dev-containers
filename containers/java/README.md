@@ -34,7 +34,7 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 
 - `mcr.microsoft.com/vscode/devcontainers/java` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/java:11` (or `11-bullseye`, `11-buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/java:16` (or `16-bullseye`, `16-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/java:17` (or `17-bullseye`, `17-buster` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
