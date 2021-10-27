@@ -13,7 +13,7 @@
 	},
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"python.pythonPath": "/opt/vscode/extensions/ms-python.devicesimulatorexpress/venv/bin/python",
+		"python.defaultInterpreterPath": "/opt/vscode/extensions/ms-python.devicesimulatorexpress/venv/bin/python",
 		"python.languageServer": "Pylance",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
