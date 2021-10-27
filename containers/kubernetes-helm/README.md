@@ -36,7 +36,7 @@ However, this section will outline the how you can selectively add this function
 
     ```json
     "mounts": [
-        "source=/var/run/docker.sock,target=/var/run/docker-host.sock",
+        "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind",
         "source=${env:HOME}${env:USERPROFILE}/.kube,target=/usr/local/share/kube-localhost,type=bind"
     ],
     "remoteEnv": {
@@ -48,7 +48,7 @@ However, this section will outline the how you can selectively add this function
 
     ```json
     "mounts": [
-        "source=/var/run/docker.sock,target=/var/run/docker.sock",
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
         "source=${env:HOME}${env:USERPROFILE}/.kube,target=/usr/local/share/kube-localhost,type=bind",
         "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/usr/local/share/minikube-localhost,type=bind"
     ],
