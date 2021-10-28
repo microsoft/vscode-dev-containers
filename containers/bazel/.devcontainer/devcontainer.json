@@ -1,6 +1,5 @@
 {
 	"name": "Bazel (Community)",
-	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {

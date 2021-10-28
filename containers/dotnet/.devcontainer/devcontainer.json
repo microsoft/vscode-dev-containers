@@ -1,6 +1,5 @@
 {
 	"name": "C# (.NET)",
-	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 
