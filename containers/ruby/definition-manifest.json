@@ -1,6 +1,6 @@
 {
 	"variants": ["3.0-bullseye", "2.7-bullseye", "2.6-bullseye","3.0-buster", "2.7-buster", "2.6-buster"],
-	"definitionVersion": "0.202.0",
+	"definitionVersion": "0.202.1",
 	"build": {
 		"latest": "3.0-bullseye",
 		"rootDistro": "debian",
