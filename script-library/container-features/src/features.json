@@ -195,7 +195,6 @@
 					"description": "Terragrunt version"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_TERRAFORM",
 			"extensions": [
 				"HashiCorp.terraform",
@@ -250,7 +249,6 @@
 					"description": "Install from PPA if available"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_GIT",
 			"include": [
 				"cpp",
@@ -291,7 +289,6 @@
 					"description": "Currently unused."
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_GIT_LFS",
 			"include": [
 				"cpp",
@@ -332,7 +329,6 @@
 					"description": "Select version of the GitHub CLI, if not latest."
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_GITHUB_CLI",
 			"include": [
 				"cpp",
@@ -374,7 +370,6 @@
 					"description": "Select or enter an Azure CLI version. (Available versions may vary by Linux distribution.)"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_AZURE_CLI",
 			"extensions": [
 				"ms-vscode.azurecli"
@@ -419,7 +414,6 @@
 					"description": "Currently unused."
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_SSH",
 			"entrypoint": "/usr/local/share/ssh-init.sh",
 			"include": [
@@ -526,7 +520,6 @@
 					"description": "Currently unused."
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_HOMEBREW",
 			"containerEnv": {
 				"BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
@@ -577,7 +570,6 @@
 					"description": "Install dependencies to compile native node modules (node-gyp)?"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_NODE",
 			"extensions": ["dbaeumer.vscode-eslint"],
 			"containerEnv": {
@@ -617,7 +609,6 @@
 					"description": "Optimize Python for performance when compiled (slow)"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_PYTHON",
 			"extensions": [
 				"ms-python.python",
@@ -631,9 +622,6 @@
 			},
 			"settings": { 
 				"python.defaultInterpreterPath": "/usr/local/bin/python",
-				"python.languageServer": "Pylance",
-				"python.linting.enabled": true,
-				"python.linting.pylintEnabled": true,
 				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
 				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
 				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
@@ -691,12 +679,6 @@
 			},
 			"capAdd": [ "SYS_PTRACE" ],
 			"securityOpt": [ "seccomp=unconfined" ],
-			"settings": {
-				"go.toolsManagement.checkForUpdates": "local",
-				"go.useLanguageServer": true,
-				"go.gopath": "/go",
-				"go.goroot": "/usr/local/go"
-			},
 			"include": [
 				"cpp",
 				"kubernetes-helm",
@@ -737,7 +719,6 @@
 					"description": "Select or enter a Java version to install"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_JAVA",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
@@ -788,7 +769,6 @@
 					"description": "Select or enter a Maven version to install"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_MAVEN",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
@@ -833,7 +813,6 @@
 					"description": "Select or enter a Gradle version to install"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_GRADLE",
 			"extensions": ["vscjava.vscode-java-pack"],
 			"containerEnv": {
@@ -878,7 +857,6 @@
 					"description": "Select or enter a Ruby version to install"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_RUBY",
 			"extensions": [
 				"rebornix.Ruby"
@@ -934,7 +912,6 @@
 					"description": "Select a rustup install profile."
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_RUST",
 			"extensions": [
 				"vadimcn.vscode-lldb",
@@ -997,7 +974,6 @@
 					"description": "Select or enter a version of PowerShell."
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_POWERSHELL",
 			"include": [
 				"cpp",
