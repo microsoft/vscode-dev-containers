@@ -1,6 +1,5 @@
 {
 	"name": "Jupyter Data Science Notebooks (Community)",
-	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile"
 	},

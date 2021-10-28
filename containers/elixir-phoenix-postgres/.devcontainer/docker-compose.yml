@@ -13,8 +13,6 @@ services:
         # Node Version: 10, 11, ...
         NODE_VERSION: "10"
 
-    init: true
-
     volumes:
       - ..:/workspace:cached
     # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.

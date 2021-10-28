@@ -18,7 +18,6 @@
 			"password": "postgres"
 		}],
 		"python.defaultInterpreterPath": "/usr/local/bin/python",
-		"python.languageServer": "Pylance",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",

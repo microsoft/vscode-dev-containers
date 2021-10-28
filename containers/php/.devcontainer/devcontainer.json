@@ -1,6 +1,5 @@
 {
 	"name": "PHP",
-	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 

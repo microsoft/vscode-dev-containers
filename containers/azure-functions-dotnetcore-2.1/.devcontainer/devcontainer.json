@@ -1,6 +1,5 @@
 {
 	"name": "Azure Functions & C# - .NET Core 2.1",
-	"runArgs": ["--init"],
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 
