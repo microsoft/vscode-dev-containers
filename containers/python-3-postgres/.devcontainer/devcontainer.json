@@ -17,7 +17,7 @@
 			"username": "postgres",
 			"password": "postgres"
 		}],
-		"python.pythonPath": "/usr/local/bin/python",
+		"python.defaultInterpreterPath": "/usr/local/bin/python",
 		"python.languageServer": "Pylance",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
