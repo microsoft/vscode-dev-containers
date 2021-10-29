@@ -5,7 +5,8 @@
       "salesforce.salesforcedx-vscode",
       "redhat.vscode-xml",
       "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode"
+      "esbenp.prettier-vscode",
+      "gfarb.sfdx-codespaces-auth"
     ],
     "settings": {
       "salesforcedx-vscode-apex.java.home": "/usr/lib/jvm/java-11-openjdk-amd64"
