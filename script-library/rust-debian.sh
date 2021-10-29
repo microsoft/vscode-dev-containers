@@ -119,13 +119,42 @@ apt_get_update_if_needed()
     fi
 }
 
+# Installs some packages, either using the pinned versions detailed in the /tmp/packages file given by the --pinned argument
+# or else falling back to unpinned versions of the specified packages
+possibly_pinned()
+{
+    local no_install_recommends=""
+    local pin_file=""
+
+    while [[ $# -gt 0 ]] && [[ "$1" == "--"* ]]; do
+        opt="$1"
+        shift
+        case "$opt" in
+            "--" ) break 2;;
+            "--no-install-recommends" )
+                no_install_recommends = $opt;;
+            "--pinned" )
+                pin_file="$1"; shift;;
+            "--pinned="* )
+                pin_file="${opt#*=}";;
+            *) echo >&2 "Illegal argument: $@"; exit 1;;
+        esac
+    done
+
+    if [ "$pin_file" != "" ] && [ -f "/tmp/packages/$pin_file" ]; then
+        xargs -a "/tmp/packages/$pin_file" apt-get -y install $no_install_recommends
+    else
+        apt-get -y install $no_install_recommends $@
+    fi
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, lldb, python3-minimal,libpython and rust dependencies if missing
-if ! dpkg -s curl ca-certificates gnupg2 lldb python3-minimal gcc libc6-dev > /dev/null 2>&1; then
+if ! dpkg -s curl ca-certificates lldb python3-minimal gcc libc6-dev > /dev/null 2>&1; then
     apt_get_update_if_needed
-    apt-get -y install --no-install-recommends curl ca-certificates gcc libc6-dev
-    apt-get -y install lldb python3-minimal libpython3.?
+    possibly_pinned --pinned=rustup --no-install-recommends curl ca-certificates gcc libc6-dev
+    possibly_pinned --pinned=rustup+recommendations lldb python3-minimal libpython3.?
 fi
 
 architecture="$(dpkg --print-architecture)"
@@ -159,7 +188,7 @@ else
         # Find version using soft match
         if ! type git > /dev/null 2>&1; then
             apt_get_update_if_needed
-            apt-get -y install --no-install-recommends git
+            possibly_pinned --pinned=git --no-install-recommends git
         fi
         find_version_from_git_tags RUST_VERSION "https://github.com/rust-lang/rust" "tags/"
         default_toolchain_arg="--default-toolchain ${RUST_VERSION}"
