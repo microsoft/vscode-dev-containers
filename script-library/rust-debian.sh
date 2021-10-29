@@ -7,7 +7,7 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/rust.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./rust-debian.sh [CARGO_HOME] [RUSTUP_HOME] [non-root user] [add CARGO/RUSTUP_HOME to rc files flag] [whether to update rust] [Rust version] [rustup install profile]
+# Syntax: ./rust-debian.sh [CARGO_HOME] [RUSTUP_HOME] [non-root user] [add CARGO/RUSTUP_HOME to rc files flag] [whether to update rust] [Rust version] [rustup install profile] [rustup version]
 
 export CARGO_HOME=${1:-"/usr/local/cargo"}
 export RUSTUP_HOME=${2:-"/usr/local/rustup"}
@@ -16,6 +16,7 @@ UPDATE_RC=${4:-"true"}
 UPDATE_RUST=${5:-"false"}
 RUST_VERSION=${6:-"latest"}
 RUSTUP_PROFILE=${7:-"minimal"}
+RUSTUP_VERSION=${8:-"dist"}
 
 set -e
 
@@ -163,11 +164,14 @@ else
         find_version_from_git_tags RUST_VERSION "https://github.com/rust-lang/rust" "tags/"
         default_toolchain_arg="--default-toolchain ${RUST_VERSION}"
     fi
+    if [ "${RUSTUP_VERSION}" != "dist" ]; then
+        RUSTUP_VERSION = "archive/${RUSTUP_VERSION}"
+    fi
     echo "Installing Rust..."
     # Download and verify rustup sha
     mkdir -p /tmp/rustup/target/x86_64-unknown-linux-gnu/release/
-    curl -sSL --proto '=https' --tlsv1.2 "https://static.rust-lang.org/rustup/dist/${download_architecture}-unknown-linux-gnu/rustup-init" -o /tmp/rustup/target/${download_architecture}-unknown-linux-gnu/release/rustup-init
-    curl -sSL --proto '=https' --tlsv1.2 "https://static.rust-lang.org/rustup/dist/${download_architecture}-unknown-linux-gnu/rustup-init.sha256" -o /tmp/rustup/rustup-init.sha256
+    curl -sSL --proto '=https' --tlsv1.2 "https://static.rust-lang.org/rustup/${RUSTUP_VERSION}/${download_architecture}-unknown-linux-gnu/rustup-init" -o /tmp/rustup/target/${download_architecture}-unknown-linux-gnu/release/rustup-init
+    curl -sSL --proto '=https' --tlsv1.2 "https://static.rust-lang.org/rustup/${RUSTUP_VERSION}/${download_architecture}-unknown-linux-gnu/rustup-init.sha256" -o /tmp/rustup/rustup-init.sha256
     cd /tmp/rustup
     sha256sum -c rustup-init.sha256
     chmod +x target/x86_64-unknown-linux-gnu/release/rustup-init
