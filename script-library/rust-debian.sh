@@ -151,10 +151,12 @@ mkdir -p "${CARGO_HOME}" "${RUSTUP_HOME}"
 chown :rustlang "${RUSTUP_HOME}" "${CARGO_HOME}"
 chmod g+r+w+s "${RUSTUP_HOME}" "${CARGO_HOME}"
 
-if [ "${RUST_VERSION}" = "none" ] || type rustup > /dev/null 2>&1; then
+if type rustup > /dev/null 2>&1; then
     echo "Rust already installed. Skipping..."
 else
-    if [ "${RUST_VERSION}" != "latest" ] && [ "${RUST_VERSION}" != "lts" ] && [ "${RUST_VERSION}" != "stable" ]; then
+    if [ "${RUST_VERSION}" = "none" ]; then
+        default_toolchain_arg="--default-toolchain none"
+    elif [ "${RUST_VERSION}" != "latest" ] && [ "${RUST_VERSION}" != "lts" ] && [ "${RUST_VERSION}" != "stable" ]; then
         # Find version using soft match
         if ! type git > /dev/null 2>&1; then
             apt_get_update_if_needed
@@ -181,8 +183,10 @@ if [ "${UPDATE_RUST}" = "true" ]; then
     echo "Updating Rust..."
     rustup update 2>&1
 fi
-echo "Installing common Rust dependencies..."
-rustup component add rls rust-analysis rust-src rustfmt clippy 2>&1
+if [ "${RUST_VERSION}" != "none" ]; then
+    echo "Installing common Rust dependencies..."
+    rustup component add rls rust-analysis rust-src rustfmt clippy 2>&1
+fi
 
 # Add CARGO_HOME, RUSTUP_HOME and bin directory into bashrc/zshrc files (unless disabled)
 updaterc "$(cat << EOF
