@@ -4,13 +4,12 @@
 		"dockerfile": "Dockerfile",
 		"args": {
 			// Update the VARIANT arg to pick a Swift version 
-			"VARIANT": "5.3",
+			"VARIANT": "5.5",
 			// Options
 			"NODE_VERSION": "lts/*"
 		}
 	},
 	"runArgs": [
-		"--init",
 		"--cap-add=SYS_PTRACE",
 		"--security-opt",
 		"seccomp=unconfined"

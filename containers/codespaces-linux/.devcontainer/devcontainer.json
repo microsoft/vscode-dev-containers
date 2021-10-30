@@ -8,7 +8,7 @@
 		"go.useLanguageServer": true,
 		"go.gopath": "/go",
 		"go.goroot": "/usr/local/go",
-		"python.pythonPath": "/opt/python/latest/bin/python",
+		"python.defaultInterpreterPath": "/opt/python/latest/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",

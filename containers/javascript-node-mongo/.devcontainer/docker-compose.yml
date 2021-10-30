@@ -12,7 +12,6 @@ services:
         VARIANT: 14-buster
     volumes:
       - ..:/workspace:cached
-    init: true
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity

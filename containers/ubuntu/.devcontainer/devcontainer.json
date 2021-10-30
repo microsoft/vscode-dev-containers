@@ -1,6 +1,5 @@
 {
 	"name": "Ubuntu",
-	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic

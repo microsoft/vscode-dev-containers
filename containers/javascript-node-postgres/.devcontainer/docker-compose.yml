@@ -11,8 +11,6 @@ services:
         # Use -bullseye variants on local arm64/Apple Silicon.
         VARIANT: 16-bullseye
 
-    init: true
-
     volumes:
       - ..:/workspace:cached
       
