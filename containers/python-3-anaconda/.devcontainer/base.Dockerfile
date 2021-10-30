@@ -5,13 +5,13 @@ RUN . /etc/os-release && if [ "${VERSION_CODENAME}" != "bullseye" ]; then exit 1
 
 # Update, change owner
 RUN groupadd -r conda --gid 900 \
-    && find /opt -type d | xargs -n 1 chmod g+s \
+    && chown -R :conda /opt/conda \
     && chmod -R g+w /opt/conda \
-    && chown -R :conda /opt/conda
+    && find /opt -type d | xargs -n 1 chmod g+s
 
 # Reset and copy updated files with updated privs to keep image size down
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
-COPY --from=upstream /opt/conda /opt/conda
+COPY --from=upstream /opt /opt/
 
 # Copy library scripts to execute
 COPY .devcontainer/library-scripts/node-debian.sh .devcontainer/add-notice.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/

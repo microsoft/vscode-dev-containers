@@ -1,0 +1,74 @@
+name: 'VSCDC smoke test'
+inputs:
+  definition:
+    description: 'Definition to test'
+    required: true
+    default: 'debian'
+  image:
+    description: 'Image to run smoke test in'
+    required: true
+    default: 'none'
+
+runs:
+  using: composite
+  steps:
+    - name: Build image
+      id: build_image
+      shell: bash
+      run: |
+        set -e
+
+        # Run test build
+        yarn install
+        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+        if [ "$GIT_BRANCH" == "" ]; then 
+            GIT_BRANCH=main
+        fi
+        chmod +x build/vscdc
+        build/vscdc push  ${{ inputs.definition }} \
+                          --no-push \
+                          --release $GIT_BRANCH \
+                          --github-repo "microsoft/vscode-dev-containers" \
+                          --registry "mcr.microsoft.com" \
+                          --registry-path "vscode/devcontainers" \
+                          --stub-registry "mcr.microsoft.com" \
+                          --stub-registry-path "vscode/devcontainers"
+
+    - name: Test image
+      id: test_image
+      shell: bash
+      run: |
+        if [ "${{ inputs.image }}" = "none" ]; then
+          echo "Image not specified. Skipping test."
+          exit 0
+        fi
+
+        set -e
+        
+        # Fake out existance of extensions, VS Code server
+        dev_container_relative_path="/containers/${{ inputs.definition }}/.devcontainer"
+        mkdir -p "/tmp/${dev_container_relative_path}"
+        cp -f $(pwd)/${dev_container_relative_path}/devcontainer.json "/tmp/${dev_container_relative_path}/"
+        dev_container_tmp="/tmp/${dev_container_relative_path}/devcontainer.json"
+        sed -i'.bak' -e "s/\\/\\/.*/ /g" "${dev_container_tmp}"
+        extensions="$(jq '.extensions' --compact-output "${dev_container_tmp}" | tr -d '[' | tr -d ']' | tr ',' ' ') 2>/dev/null || echo ''"
+        docker run --rm --init --privileged -u "${{ inputs.user }}" "${{ inputs.image }}" /bin/sh -c "\
+          mkdir -p \"\$HOME/.vscode-test-server/extensions\" \ 
+          cd \"\$HOME/.vscode-test-server/extensions\" \ 
+          if [ \"${extensions}\" != '' ]; then echo \"${extensions}\" | xargs -n 1 mkdir -p; fi"
+
+        # Run actual test
+        docker run --rm --init --privileged -u "${{ inputs.user }}" -v "$(pwd)/containers/${{ inputs.definition }}:/workspace" "${{ inputs.image }}" /bin/sh -c  '\
+          set -e
+          cd /workspace \
+          && if [ -f "test-project/test.sh" ]; then \
+            cd test-project \
+            && if [ "$(id -u)" = "0" ]; then \
+              chmod +x test.sh; \
+            else \
+              sudo chmod +x test.sh; \
+            fi \
+            && ./test.sh; \
+          else \
+            ls -a; 
+          fi'
