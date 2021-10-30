@@ -10,7 +10,8 @@
             "request": "launch",
             "program": "${workspaceFolder}/test-project/hello.py",
             "cwd":"${workspaceFolder}/test-project",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+			"preLaunchTask": "environment-install"
         }
     ]
 }
