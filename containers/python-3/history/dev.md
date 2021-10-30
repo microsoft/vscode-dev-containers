@@ -18,7 +18,7 @@
 
 ## Variant: 3.10-bullseye
 
-**Digest:** sha256:91029e4266fbd35cd27745bb7cfd9519cc4e67d3c5add25b40c40c084d9c26de
+**Digest:** sha256:1eadfcc31a8a62f8496fe7fc0d7c7266a5edc21a53504642869022f14b6e627e
 
 **Tags:**
 ```
@@ -47,7 +47,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -115,7 +115,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-bullseye
 
 ## Variant: 3.9-bullseye
 
-**Digest:** sha256:614a66fbfa3ef5d02435dfc6ced48303b0c4e6ef4f0cb5e2e2b50af7ffe6645b
+**Digest:** sha256:a9b95fd5a37f53e8eebb8f36c9bb900db95f5982da00119be5a7ff12e399ac1c
 
 **Tags:**
 ```
@@ -141,7 +141,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 
 ## Variant: 3.8-bullseye
 
-**Digest:** sha256:c37e1624edc35223e77d5a233bedbb4b481d36d11e1f49584152b027c5307d70
+**Digest:** sha256:f5fc75a9762464a7cbdfac58e4e9174453369202afbae864cab85e28add23d09
 
 **Tags:**
 ```
@@ -235,7 +235,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -303,7 +303,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7-bullseye
 
-**Digest:** sha256:bf920374fcffb2257ef2304f656258f2608be05c5ec05a55f00e0b3ca364aa09
+**Digest:** sha256:218d8c3fd00b029b9cbff5e3dcaefe4fd7914be98152c78cce5283f227f7cc37
 
 **Tags:**
 ```
@@ -329,7 +329,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -397,7 +397,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6-bullseye
 
-**Digest:** sha256:bf6d838bf82d10a0fbde83b9388adc5ebd87b3ddcb4c24b2c810b5ddcfb352f7
+**Digest:** sha256:0e8eb64f1707dd99cb7cd8ccca8692941ac5a5addc9cfa9294a6e80ae418daff
 
 **Tags:**
 ```
@@ -423,7 +423,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -491,7 +491,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 ## Variant: 3.10-buster
 
-**Digest:** sha256:32d90de9c30d06e669bbb5b0d179d8759fe41c2b030dcc2e6b979f931e82e4e3
+**Digest:** sha256:648323b1d8c9a5b7339961efb6f12e6713bba8fce58d65f533fbe59eeb378274
 
 **Tags:**
 ```
@@ -518,7 +518,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -587,7 +587,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-buster
 
 ## Variant: 3.9-buster
 
-**Digest:** sha256:581e4e0331fee6055baa5f5c079dd5ba3f5a67f4594b857f2b086578d811c7af
+**Digest:** sha256:1edd0afe977142af82d52933bea06bd93289ae84b433c07d879dbf57a210e090
 
 **Tags:**
 ```
@@ -612,7 +612,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -681,7 +681,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9-buster
 
 ## Variant: 3.8-buster
 
-**Digest:** sha256:b63787dd06c175f6af782e17379f0347c64da66ee0ef6fe7921df80d1c14c93b
+**Digest:** sha256:b703f6ed6c85d83c461a478bdaee8289ad63230f3aae85279fb23aa36abe7d9e
 
 **Tags:**
 ```
@@ -706,7 +706,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -775,7 +775,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8-buster
 
 ## Variant: 3.7-buster
 
-**Digest:** sha256:94fbc350be31c13d6beb3434b2c7a172017f09508a983157364a60f32fffe4f5
+**Digest:** sha256:a7933a00be0430455cf1992113cb5da38c852321645ff59a690173c64fe75cde
 
 **Tags:**
 ```
@@ -800,7 +800,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -869,7 +869,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7-buster
 
 ## Variant: 3.6-buster
 
-**Digest:** sha256:293ed2712a7a365a3e46c4f8714e932793a1540ecf060d335051e2eeb54227ef
+**Digest:** sha256:aae26f5a8eccfba82b932df01853906ae7617c8829bbc0697530c87806a4a859
 
 **Tags:**
 ```
@@ -894,7 +894,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**

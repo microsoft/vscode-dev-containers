@@ -14,7 +14,7 @@
 
 ## Variant: 16-bullseye
 
-**Digest:** sha256:3349d556bf1254600f5d393a0a7e198603c0a5c656b3a39517bcc082419da363
+**Digest:** sha256:7487d8dc347080445a8858721ce6a9d4f16b512d19fb3d03dc138f45da6271a6
 
 **Tags:**
 ```
@@ -34,14 +34,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.12.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.13.0 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.4.4 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -101,7 +101,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-bullseye
 
 ## Variant: 14-bullseye
 
-**Digest:** sha256:422dc923268620842bec8a355ea66a8d2af09d9ee3fdf65068ba0c9df1d78336
+**Digest:** sha256:2345cdb9c481df1e4518046b2117c1d2986d70fa059db16b8735ae9475538528
 
 **Tags:**
 ```
@@ -127,7 +127,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -187,7 +187,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-bullseye
 
 ## Variant: 12-bullseye
 
-**Digest:** sha256:59705321a8698b623ff565a72deb82b4c0db705ba7b6513225cc13af40fd5f5b
+**Digest:** sha256:c6f09456dd2519986e3ac4a19a704e86ca786ac3147c740aac304809027284b0
 
 **Tags:**
 ```
@@ -213,7 +213,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -273,7 +273,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12-bullseye
 
 ## Variant: 16-buster
 
-**Digest:** sha256:b22f190588e4c05ffcbdb77d4ce46c7b4f30719c7bb3757ee1ccfa5b0c91aecb
+**Digest:** sha256:3bbc60d60b0eabb4a9907f88472d38b58fd12c32f983b14c39d85f7af74a472c
 
 **Tags:**
 ```
@@ -294,14 +294,14 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.12.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.13.0 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.4.4 | /usr/local/share/npm-global |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -362,7 +362,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-buster
 
 ## Variant: 14-buster
 
-**Digest:** sha256:93dc1f70bdb6dd225f00447c62825e541c6540f95b832815c6a067a3fe25776f
+**Digest:** sha256:985f4d5e85b34b07d664efa075584e62c76dc29422c2956ee41466b3bbce45d6
 
 **Tags:**
 ```
@@ -389,7 +389,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -450,7 +450,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:187fa4ecc661d3f130ad7f4005884fc2234ef9aa9da7ae9fb055979cc130bf31
+**Digest:** sha256:c4c8bcd9b785e89e45ba8ef06aac256d9e67fe596c3ef5bf5ef3a5a68c8275df
 
 **Tags:**
 ```
@@ -477,7 +477,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**

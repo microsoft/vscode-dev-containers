@@ -14,7 +14,7 @@
 
 ## Variant: 16-bullseye
 
-**Digest:** sha256:537d5f3b6663ed474a969b4386f0a51ca8ede44626af02cefc7ba9641684db44
+**Digest:** sha256:a2aed098b2ffaaa6b6387062c51df926824e9ed6323a6b0d1d5185d5ebeb2053
 
 **Tags:**
 ```
@@ -34,13 +34,13 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.12.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.13.0 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -98,7 +98,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-bullseye
 
 ## Variant: 14-bullseye
 
-**Digest:** sha256:ac5420c5867c6f9fe9d3ca783bd463f832dfdc2c75f195352bc05e5038adfdac
+**Digest:** sha256:a09504299ecfbecebf05797b0fa91e07dc0409d960780e7125b963a9f7be4fc9
 
 **Tags:**
 ```
@@ -123,7 +123,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -181,7 +181,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-bullseye
 
 ## Variant: 12-bullseye
 
-**Digest:** sha256:4660b727534a6cf49e970f1e7ef1be9396433d9d1ade48796611a0f61a58af71
+**Digest:** sha256:f8b0360b735e05b0a00a6c630bacc509627bebdf9ee064c85853b8bf70d4883c
 
 **Tags:**
 ```
@@ -206,7 +206,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -264,7 +264,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12-bullseye
 
 ## Variant: 16-buster
 
-**Digest:** sha256:7f2a6ce4cf02b5c5b760d179ce50cf8a186b5ba09242f193bf3e27eb3e3dc301
+**Digest:** sha256:2d3cdb685a646aa25385e06eaa5ceff186d6a1a587e1d98d157db528755718ef
 
 **Tags:**
 ```
@@ -285,13 +285,13 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 16.12.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 16.13.0 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -350,7 +350,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-buster
 
 ## Variant: 14-buster
 
-**Digest:** sha256:f4c867e423c45856e102cd4c30c0a52bf1fbb3b61c36612adae5280292dbea34
+**Digest:** sha256:3d4ad2791b232929bbdeaa0040e22bf00f598de679618077551861bada2d655b
 
 **Tags:**
 ```
@@ -376,7 +376,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**
@@ -435,7 +435,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 12-buster
 
-**Digest:** sha256:0f456735ecd565e7d7bb91001f4ab4513683dd8fc61d6f33ec08b2161c18fc71
+**Digest:** sha256:47f71e0a20302aba4175c0c1aae1542307f1740d23187a1092ad3add67c3583d
 
 **Tags:**
 ```
@@ -461,7 +461,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/node/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/node/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Npm globally installed tools and packages**

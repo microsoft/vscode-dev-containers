@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
-**Digest:** sha256:6365199dcf78e0121afb8d962fc54dda5c654deb8b3800d2a90f974088e9d7c6
+**Digest:** sha256:7ef854eb46830011c63eecfb342ce070ab4eb9b4d09b389a2fc763e84d9c361e
 
 **Tags:**
 ```
@@ -31,7 +31,7 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1e5e834e0f6486a569efd6b12ce4e33624fef0c9 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2e46b2a2dcb96cadd94283bdce95eca75bef1433 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -39,6 +39,7 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 | Tool | Version | Path |
 |------|---------|------|
 | [conda](https://github.com/conda/conda) | 4.10.1 | /opt/conda |
+| anaconda | 2021.05 | /opt/conda |
 
 **Additional linux tools and packages**
 

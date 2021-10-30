@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:040780564c4bb7d36569419bbfb305a62bd1cf9217f3b3f0bb4f69c0cd226345
+**Digest:** sha256:43fd78ab16def8345e6cacff812c9178c1f4c2246f65202814f10e0cbc56e8ce
 
 **Tags:**
 ```
@@ -36,17 +36,17 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | GCC | 9.3.0-17ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
 | [Go](https://golang.org/dl) | 1.17.2 | /usr/local/go |
-| [Rust](https://github.com/rust-lang/rust) | 1.55.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.56.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.0 | 
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 46f8765f4c871ef9b4e7f8bc448e45f4be15ff58 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2e46b2a2dcb96cadd94283bdce95eca75bef1433 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 024dea3f7bc852312932c32c0957cb034f5f7917 | /home/codespace/.nvs |
-| [rbenv](https://github.com/rbenv/rbenv.git) | 38e1fbb08e9d75d708a1ffb75fb9bbe179832ac8 | /usr/local/share/rbenv |
+| [rbenv](https://github.com/rbenv/rbenv.git) | 6cc7bff383a603fb47325be80e3cac8a7f55f501 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | 30eb72fe77c48eb8779096f6ef0d2b8f5e238b0f | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
@@ -55,14 +55,14 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | pylint | 2.11.1 |
 | flake8 | 4.0.1 |
-| autopep8 | 1.5.7 |
+| autopep8 | 1.6.0 |
 | black | 21.9b0 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.0 |
-| virtualenv | 20.8.1 |
+| virtualenv | 20.9.0 |
 | pipx | 0.16.4 |
 
 **Go tools and modules**
@@ -93,9 +93,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.37 |
-| rust-analysis | 1.55.0 |
-| rust-src | 1.55.0 |
-| clippy | 1.55.0 |
+| rust-analysis | 1.56.0 |
+| rust-src | 1.56.0 |
+| clippy | 1.56.0 |
 
 **Other tools and utilities**
 
@@ -104,16 +104,16 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [git](https://github.com/git/git) | 2.33.0 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.0.4 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.22.2 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.22.3 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.7.1 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.0 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 2.1.0 | 
+| [GitHub CLI](https://github.com/cli/cli) | 2.2.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.1.1 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.9+azure | 
+| Docker (Moby) CLI &amp; Engine | 20.10.10+azure | 
 
 **Additional linux tools and packages**
 
@@ -121,7 +121,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| azure-cli (Azure CLI) | 2.29.0-1~focal |
+| azure-cli (Azure CLI) | 2.29.1-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
@@ -176,8 +176,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.9+azure-1 |
-| moby-engine (Docker Engine) | 20.10.9+azure-1 |
+| moby-cli (Docker CLI) | 20.10.10+azure-1 |
+| moby-engine (Docker Engine) | 20.10.10+azure-1 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |

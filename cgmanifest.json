@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "1e5e834e0f6486a569efd6b12ce4e33624fef0c9"
+                    "commitHash": "04c96e235ff522704a6f1482e7fd06a05467cbb7"
                 }
             }
         },
@@ -175,7 +175,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.29.0-1~focal",
+                    "Version": "2.29.1-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -201,7 +201,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-cli",
-                    "Version": "20.10.9+azure-1",
+                    "Version": "20.10.10+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -214,7 +214,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-engine",
-                    "Version": "20.10.9+azure-1",
+                    "Version": "20.10.10+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -258,7 +258,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "autopep8",
-                    "Version": "1.5.7"
+                    "Version": "1.6.0"
                 }
             }
         },
@@ -321,7 +321,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.8.1"
+                    "Version": "20.9.0"
                 }
             }
         },
@@ -393,7 +393,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.55.0"
+                    "Version": "1.56.0"
                 }
             }
         },
@@ -402,7 +402,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.55.0"
+                    "Version": "1.56.0"
                 }
             }
         },
@@ -411,7 +411,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.55.0"
+                    "Version": "1.56.0"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "46f8765f4c871ef9b4e7f8bc448e45f4be15ff58"
+                    "commitHash": "2e46b2a2dcb96cadd94283bdce95eca75bef1433"
                 }
             }
         },
@@ -523,7 +523,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "38e1fbb08e9d75d708a1ffb75fb9bbe179832ac8"
+                    "commitHash": "6cc7bff383a603fb47325be80e3cac8a7f55f501"
                 }
             }
         },
@@ -562,7 +562,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.22.2",
+                    "Version": "1.22.3",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -612,7 +612,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "2.1.0",
+                    "Version": "2.2.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -642,7 +642,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.55.0",
+                    "Version": "1.56.0",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -804,7 +804,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.1.9",
+                    "Version": "2.1.10",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -866,24 +866,6 @@
                     "Name": "Docker Image: php",
                     "Version": "7.3-apache-buster",
                     "DownloadUrl": "https://hub.docker.com/_/php"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "autopep8",
-                    "Version": "1.6.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "Pip",
-                "Pip": {
-                    "Name": "virtualenv",
-                    "Version": "20.9.0"
                 }
             }
         },
@@ -989,9 +971,19 @@
         },
         {
             "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "2e46b2a2dcb96cadd94283bdce95eca75bef1433"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: anaconda3",
+                    "Name": "Docker Image: continuumio/anaconda3",
                     "Version": "latest",
                     "DownloadUrl": "https://hub.docker.com/r/continuumio/anaconda3"
                 }
@@ -1001,36 +993,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: miniconda3",
+                    "Name": "Docker Image: continuumio/miniconda3",
                     "Version": "latest",
                     "DownloadUrl": "https://hub.docker.com/r/continuumio/miniconda3"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "rust-analysis",
-                    "Version": "1.56.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "rust-src",
-                    "Version": "1.56.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "cargo",
-                "Cargo": {
-                    "Name": "clippy",
-                    "Version": "1.56.0"
                 }
             }
         },
@@ -1139,7 +1104,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "1e5e834e0f6486a569efd6b12ce4e33624fef0c9"
+                    "commitHash": "04c96e235ff522704a6f1482e7fd06a05467cbb7"
                 }
             }
         },
