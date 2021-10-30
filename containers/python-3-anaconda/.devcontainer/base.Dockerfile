@@ -39,10 +39,7 @@ ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}
 RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
-
-# Remove library scripts for final image
-RUN rm -rf /tmp/library-scripts
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Copy environment.yml (if found) to a temp locaition so we update the environment. Also
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
