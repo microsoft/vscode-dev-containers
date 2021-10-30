@@ -8,7 +8,7 @@ services:
       args:
         # Update 'VARIANT' to pick a version of .NET: 3.1, 5.0, 6.0
         # Append -bullseye or -focal to pin to an OS version.
-        VARIANT: 5.0-bullseye
+        VARIANT: 5.0-focal
         # Optional version of Node.js
         NODE_VERSION: "lts/*"
 
