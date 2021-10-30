@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "0.202.1",
+	"definitionVersion": "0.202.2",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -9,7 +9,7 @@
 		]
 	},
 	"dependencies": {
-		"image": "anaconda3:latest",
+		"image": "continuumio/anaconda3:latest",
 		"imageLink": "https://hub.docker.com/r/continuumio/anaconda3",
 		"debian": [{
 			"cgIgnore": false,
