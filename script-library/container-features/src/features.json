@@ -1003,6 +1003,52 @@
 				"ruby-rails-postgres",
 				"python-3-postgres"
 			]
+		},
+		{
+			"id": "common",
+			"name": "Common OS utilities",
+			"options": {
+				"installZsh": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install ZSH?"
+				},
+				"installOhMyZsh": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install Oh My Zsh!?"
+				},
+				"upgradePackages": {
+					"type":"boolean",
+					"default": true,
+					"description": "Upgrade OS packages?"
+				},
+				"username": {
+					"type":"string",
+					"proposals": ["vscode", "codespace", "none", "automatic"],
+					"default": "automatic",
+					"description": "Enter name of non-root user to configure or none to skip"
+				},
+				"uid": {
+					"type":"string",
+					"proposals": ["1000", "automatic"],
+					"default": "automatic",
+					"description": "Enter uid for non-root user"
+				},
+				"gid": {
+					"type": "string",
+					"proposals": ["1000", "automatic"],
+					"default": "automatic",
+					"description": "Enter gid for non-root user"
+				},
+				"nonFreePackages": {
+					"type":"boolean",
+					"default": true,
+					"description": "Add packages from non-free Debain repository?"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_COMMON",
+			"include": []
 		}
 	]
 }
