@@ -1,18 +1,20 @@
 FROM continuumio/anaconda3 as upstream
 
+# Verify OS version is expected one
+RUN . /etc/os-release && if [ "${VERSION_CODENAME}" != "bullseye" ]; then exit 1; fi
+
 # Update, change owner
-RUN conda update -y \
-    && conda clean -yaf \
-    && groupadd -r conda --gid 900 \
+RUN groupadd -r conda --gid 900 \
     && find /opt -type d | xargs -n 1 chmod g+s \
     && chmod -R g+w /opt/conda \
     && chown -R :conda /opt/conda
 
+# Reset and copy updated files with updated privs to keep image size down
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
 COPY --from=upstream /opt/conda /opt/conda
 
 # Copy library scripts to execute
-COPY .devcontainer/library-scripts/*.sh .devcontainer/add-notice.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/
+COPY .devcontainer/library-scripts/node-debian.sh .devcontainer/add-notice.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/
 
 # Setup conda to mirror contents from https://github.com/ContinuumIO/docker-images/blob/master/anaconda3/debian/Dockerfile
 ENV LANG=C.UTF-8 \
@@ -23,12 +25,13 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y --no-install-recommends bzip2 libglib2.0-0 libsm6 libxext6 libxrender1 mercurial subversion \
     && apt-get upgrade -y \
     && bash /tmp/library-scripts/add-notice.sh \
-    && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    && echo "conda activate base" >> ~/.bashrc && \
+    && mv -f "/tmp/library-scripts/meta.env" /usr/local/etc/vscode-dev-containers/meta.env \
+    && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
+    && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc \
+    && echo "conda activate base" >> ~/.bashrc \
     && groupadd -r conda --gid 900 \
-    && usermod -a -G conda ${USERNAME} \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+    && usermod -aG conda ${USERNAME} \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/add-notice.sh
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
