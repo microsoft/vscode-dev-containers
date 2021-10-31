@@ -1,6 +1,6 @@
-# [Choice] Debian OS version (use bullseye on local arm64/Apple Silicon): buster, bullseye
-ARG VARIANT="bullseye"
-FROM rust:1-${VARIANT}
+# [Choice] Debian OS version (use bullseye or bullseye-slim on local arm64/Apple Silicon): buster, buster-slim, bullseye, bullseye-slim
+ARG VARIANT="bullseye-slim"
+FROM debian:${VARIANT}
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
