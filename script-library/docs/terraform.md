@@ -62,7 +62,7 @@ Usage:
 2. Add the following to your `.devcontainer/Dockerfile`:
 
     ```Dockerfile
-    COPY library-scripts/github-debian.sh /tmp/library-scripts/
+    COPY library-scripts/terraform-debian.sh /tmp/library-scripts/
     RUN apt-get update && bash /tmp/library-scripts/terraform-debian.sh
     ```
 
