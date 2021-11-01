@@ -1,5 +1,5 @@
 {
-	"name": "Elixir",
+	"name": "Elixir (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
