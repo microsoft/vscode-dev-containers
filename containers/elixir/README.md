@@ -6,9 +6,9 @@ _Develop Elixir based applications. Includes everything you need to get up and r
 
 | Metadata                    | Value                 |
 | --------------------------- | --------------------- |
-| _Contributors_              | [idyll](https://github.com/idyll), [Talk2MeGooseman](https://github.com/talk2MeGooseman)|
+| _Contributors_              | [idyll](https://github.com/idyll), [Talk2MeGooseman](https://github.com/talk2MeGooseman), [krainboltgreene](https://github.com/krainboltgreene)|
 | _Category_                  | Community, Languages  |
-| _Definition type_            | Dockerfile             |
+| _Definition type_           | Dockerfile             |
 | _Works in Codespaces_       | Yes                   |
 | _Container host OS support_ | Linux, macOS, Windows |
 | _Languages, platforms_      | Elixir.               |
@@ -18,13 +18,7 @@ _Develop Elixir based applications. Includes everything you need to get up and r
 While this definition should work unmodified, you can select the version of Elixir the container uses by updating the `VARIANT` arg in the included `docker-compose.yml`.
 
 ```yml
-services:
-  elixir:
-    build: .
-    args:
-      # Elixir Version: 1.9, 1.10, 1.10.4, ...
-      VARIANT: 1.10
-      # ...
+"args": { "VARIANT": "1.10" }
 ```
 
 ### Adding the definition to your folder
