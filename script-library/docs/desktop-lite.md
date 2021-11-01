@@ -54,6 +54,22 @@ You can use this script for your primary dev container by adding it to the `feat
 
 If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
 
+If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json`:
+
+```json
+runArgs: ["--shm-size=1g"]
+```
+
+Or using Docker Compose:
+
+```yaml
+services:
+  your-service-here:
+    # ...
+    shm_size: '1gb'
+    # ...
+```
+
 ### Script use
 
 1. Add [`desktop-lite-debian.sh`](../desktop-lite-debian.sh) to `.devcontainer/library-scripts`
@@ -95,9 +111,26 @@ If you have already built your development container, run the **Rebuild Containe
 
     The `runArgs` / Docker Compose setting allows the container to take advantage of an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle application and process signals in a desktop environment.
 
-4. Once you've started the container / codespace, you'll be able to use a browser on port **6080** from anywhere or connect a [VNC viewer](https://www.realvnc.com/en/connect/download/viewer/) to port **5901** when accessing the codespace from VS Code.
+4. If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json`:
 
-5. Default **password**: `vscode`
+    ```json
+    runArgs: ["--init", "--shm-size=1g"]
+    ```
+
+    Or using Docker Compose:
+
+    ```yaml
+    services:
+      your-service-here:
+        # ...
+        init: true
+        shm_size: '1gb'
+        # ...
+    ```
+
+5. Once you've started the container / codespace, you'll be able to use a browser on port **6080** from anywhere or connect a [VNC viewer](https://www.realvnc.com/en/connect/download/viewer/) to port **5901** when accessing the codespace from VS Code.
+
+6. Default **password**: `vscode`
 
 The window manager is installed is [Fluxbox](http://fluxbox.org/). **Right-click** to see the application menu. In addition, any UI-based commands you execute in the VS Code integrated terminal will automatically appear on the desktop.
 
@@ -122,14 +155,9 @@ If you want the full version of **Google Chrome** in the desktop:
     ```Dockerfile
     RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         && curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb \
-        && apt-get -y install /tmp/chrome.deb \
-        && ALIASES="alias google-chrome='google-chrome --disable-dev-shm-usage'\nalias google-chrome-stable='google-chrome-stable --disable-dev-shm-usage'\n\alias x-www-browser='x-www-browser --disable-dev-shm-usage'\nalias gnome-www-browser='gnome-www-browser --disable-dev-shm-usage'" \
-        && echo "${ALIASES}" >> tee -a /etc/bash.bashrc \
-        && if type zsh > /dev/null 2>&1; then echo "${ALIASES}" >> /etc/zsh/zshrc; fi
+        && apt-get -y install /tmp/chrome.deb
     ```
 
-2. Chrome sandbox support requires you set up and run as a non-root user. The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). Alternatively, you can start Chrome using `google-chrome --no-sandbox --disable-dev-shm-usage`
-
-3. While Chrome should be aliased correctly with the instructions above, if you run into crashes, pass `--disable-dev-shm-usage` in as an argument when starting it: `google-chrome --disable-dev-shm-usage`
+2. Chrome sandbox support requires you set up and run as a non-root user. The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). Alternatively, you can start Chrome using `google-chrome --no-sandbox`
 
 That's it!
