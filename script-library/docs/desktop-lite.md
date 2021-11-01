@@ -111,7 +111,7 @@ services:
 
     The `runArgs` / Docker Compose setting allows the container to take advantage of an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle application and process signals in a desktop environment.
 
-4. If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json`:
+4. [Optional] If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json`:
 
     ```json
     runArgs: ["--init", "--shm-size=1g"]
