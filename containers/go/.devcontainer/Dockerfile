@@ -10,7 +10,8 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
-# [Optional] Uncomment the next line to use go get to install anything else you need
+# [Optional] Uncomment the next lines to use go get to install anything else you need
+# USER vscode
 # RUN go get -x <your-dependency-or-tool>
 
 # [Optional] Uncomment this line to install global node packages.
