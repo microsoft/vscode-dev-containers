@@ -20,6 +20,7 @@ runs:
       id: checkout_release
       uses: actions/checkout@v2
       with:
+        repository: 'microsoft/vscode-dev-containers'
         path: '__build'
         ref: 'main'
 
@@ -43,14 +44,10 @@ runs:
         fi
 
         # Run test build
-        GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
-        if [ "$GIT_BRANCH" == "" ]; then 
-            GIT_BRANCH=main
-        fi
         chmod +x build/vscdc
         build/vscdc push  ${{ inputs.definition }} \
                           --no-push \
-                          --release $GIT_BRANCH \
+                          --release dev \
                           --github-repo "microsoft/vscode-dev-containers" \
                           --registry "mcr.microsoft.com" \
                           --registry-path "vscode/devcontainers" \
