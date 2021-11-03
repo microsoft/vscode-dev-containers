@@ -30,12 +30,17 @@ runs:
         set -e
 
         # Symlink build scripts from main to improve security when testing PRs
-        cd "$GITHUB_WORKSPACE/__build"
-        yarn install
-        rm -rf build node_modules
-        ln -s "$GITHUB_WORKSPACE/__build/build" build
-        ln -s "$GITHUB_WORKSPACE/__build/node_modules" node_modules
-        cd "$GITHUB_WORKSPACE"
+        if [ -d "$GITHUB_WORKSPACE/__build/build" ]; then
+          cd "$GITHUB_WORKSPACE/__build"
+          yarn install
+          cd "$GITHUB_WORKSPACE"
+          rm -rf build node_modules
+          ln -s "$GITHUB_WORKSPACE/__build/build" build
+          ln -s "$GITHUB_WORKSPACE/__build/node_modules" node_modules
+        else
+          echo "WARNING: Using build/vscdc from ${{ github.ref }} instead of main."
+          yarn install
+        fi
 
         # Run test build
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
@@ -74,9 +79,9 @@ runs:
         # The dev container CLI handles this automatically but we're not using it.
         local_uid=$(id -u)
         local_gid=$(id -g)
+        echo "(*) Update container user UID/GID..."
         docker exec -u root ${container_name} /bin/sh -c "\
-          echo \"(*) Update user UID/GID...\" \
-          && groupmod -g ${local_gid} ${{ inputs.user }} \
+          groupmod -g ${local_gid} ${{ inputs.user }} \
           && usermod -u ${local_uid} -g ${local_gid} ${{ inputs.user }}"
 
         # Fake out existence of extensions, VS Code Server
@@ -87,12 +92,11 @@ runs:
         dev_container_tmp="/tmp/${dev_container_relative_path}/devcontainer.json"
         sed -i'.bak' -e "s/\\/\\/.*/ /g" "${dev_container_tmp}"
         extensions="$(jq '.extensions' --compact-output "${dev_container_tmp}" | tr -d '[' | tr -d ']' | tr ',' '\n' 2>/dev/null || echo -n '')"
-        echo "(*) Extensions in devcontainer.json: ${extensions}"
         docker exec -u "${{ inputs.user }}" ${container_name} /bin/sh -c "\
-          echo \"(*) Creating folders in \$HOME...\" \
-          && mkdir -p \$HOME/.vscode-server/bin \$HOME/.vscode-server/extensions \
+          mkdir -p \$HOME/.vscode-server/bin \$HOME/.vscode-server/extensions \
           && cd \$HOME/.vscode-server/extensions \
-          && if [ \"${extensions}\" != '' ]; then echo \"${extensions}\" | xargs -n 1 mkdir -p; fi"
+          && if [ \"${extensions}\" != '' ]; then echo \"${extensions}\" | xargs -n 1 mkdir -p; fi \
+          && find \$HOME/.vscode-server/ -type d"
 
         # Run actual test
         echo "(*) Running test..."
