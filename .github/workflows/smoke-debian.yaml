@@ -2,8 +2,14 @@ name: Smoke test "debian" build
 
 on: 
   workflow_dispatch:
+
   push:
     branches: [actions-test]
+    paths:
+      - 'containers/debian/**'
+  pull_request:
+    branches:
+      - main
     paths:
       - 'containers/debian/**'
 jobs:
@@ -21,3 +27,4 @@ jobs:
       with:
         definition: debian
         image: mcr.microsoft.com/vscode/devcontainers/base:dev-debian
+        user: vscode

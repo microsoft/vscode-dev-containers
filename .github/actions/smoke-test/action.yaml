@@ -8,6 +8,10 @@ inputs:
     description: 'Image to run smoke test in'
     required: true
     default: 'none'
+  user:
+    description: 'User in container image to use for smoke test'
+    required: true
+    default: 'vscode'
 
 runs:
   using: composite
@@ -38,29 +42,41 @@ runs:
       id: test_image
       shell: bash
       run: |
+        # Run test script for image if one exists
+
         if [ "${{ inputs.image }}" = "none" ]; then
-          echo "Image not specified. Skipping test."
+          echo "Image not specified. Aborting test."
           exit 0
         fi
 
         set -e
         
-        # Fake out existance of extensions, VS Code server
-        dev_container_relative_path="/containers/${{ inputs.definition }}/.devcontainer"
+        # Start container
+        container_name="vscdc-test-container"
+        docker run -d --name ${container_name} --rm --init --privileged -v "$(pwd)/containers/${{ inputs.definition }}:/workspace" ${{ inputs.image }} /bin/sh -c 'while sleep 1000; do :; done'
+
+        # Fake out existence of extensions, VS Code Server
+        echo "(*) Stubbing out extensions and VS Code Server..."
+        dev_container_relative_path="containers/${{ inputs.definition }}/.devcontainer"
         mkdir -p "/tmp/${dev_container_relative_path}"
-        cp -f $(pwd)/${dev_container_relative_path}/devcontainer.json "/tmp/${dev_container_relative_path}/"
+        cp -f "$(pwd)/${dev_container_relative_path}/devcontainer.json" "/tmp/${dev_container_relative_path}/"
         dev_container_tmp="/tmp/${dev_container_relative_path}/devcontainer.json"
         sed -i'.bak' -e "s/\\/\\/.*/ /g" "${dev_container_tmp}"
-        extensions="$(jq '.extensions' --compact-output "${dev_container_tmp}" | tr -d '[' | tr -d ']' | tr ',' ' ') 2>/dev/null || echo ''"
-        docker run --rm --init --privileged -u "${{ inputs.user }}" "${{ inputs.image }}" /bin/sh -c "\
-          mkdir -p \"\$HOME/.vscode-test-server/extensions\" \ 
-          cd \"\$HOME/.vscode-test-server/extensions\" \ 
-          if [ \"${extensions}\" != '' ]; then echo \"${extensions}\" | xargs -n 1 mkdir -p; fi"
+        extensions="$(jq '.extensions' --compact-output "${dev_container_tmp}" | tr -d '[' | tr -d ']' | tr ',' '\n' 2>/dev/null || echo -n '')"
+        echo "(*) Extensions in devcontainer.json: ${extensions}"
+        docker exec -u "${{ inputs.user }}" ${container_name} /bin/sh -c "\
+          echo \"(*) Creating folders in \$HOME...\" \
+          && mkdir -p \$HOME/.vscode-server/bin \$HOME/.vscode-server/extensions \
+          && cd \$HOME/.vscode-server/extensions \
+          && if [ \"${extensions}\" != '' ]; then echo \"${extensions}\" | xargs -n 1 mkdir -p; fi"
 
         # Run actual test
-        docker run --rm --init --privileged -u "${{ inputs.user }}" -v "$(pwd)/containers/${{ inputs.definition }}:/workspace" "${{ inputs.image }}" /bin/sh -c  '\
-          set -e
-          cd /workspace \
+        echo "(*) Running test..."
+        docker exec -u "${{ inputs.user }}" ${container_name} /bin/sh -c  '\
+          set -e \
+          && id \
+          && echo "$HOME" \
+          && cd /workspace \
           && if [ -f "test-project/test.sh" ]; then \
             cd test-project \
             && if [ "$(id -u)" = "0" ]; then \
