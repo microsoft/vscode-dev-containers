@@ -30,6 +30,8 @@ runs:
       run: |
         set -e
 
+        export DOCKER_BUILDKIT=1
+
         # Symlink build scripts from main to improve security when testing PRs
         if [ -d "$GITHUB_WORKSPACE/__build/build" ]; then
           cd "$GITHUB_WORKSPACE/__build"
@@ -60,6 +62,8 @@ runs:
       run: |
         # Run test script for image if one exists
 
+        export DOCKER_BUILDKIT=1
+
         if [ "${{ inputs.image }}" = "none" ]; then
           echo "Image not specified. Aborting test."
           exit 0
@@ -79,7 +83,7 @@ runs:
             && \${sudo_cmd} groupmod -g ${local_gid} ${{ inputs.user }} \
             && \${sudo_cmd} usermod -u ${local_uid} -g ${local_gid} ${{ inputs.user }}" > uid.Dockerfile
         cat uid.Dockerfile
-        docker buildx build --load -t ${{ inputs.image }}-uid -f uid.Dockerfile .
+        docker build -t ${{ inputs.image }}-uid -f uid.Dockerfile .
 
         # Start container
         echo "(*) Starting container..."
