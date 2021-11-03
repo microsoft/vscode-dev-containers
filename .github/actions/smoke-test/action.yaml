@@ -16,14 +16,28 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Checkout main
+      id: checkout_release
+      uses: actions/checkout@v2
+      with:
+        path: '__build'
+        ref: 'main'
+
     - name: Build image
       id: build_image
       shell: bash
       run: |
         set -e
 
-        # Run test build
+        # Symlink build scripts from main to improve security when testing PRs
+        cd "$GITHUB_WORKSPACE/__build"
         yarn install
+        rm -rf build node_modules
+        ln -s "$GITHUB_WORKSPACE/__build/build" build
+        ln -s "$GITHUB_WORKSPACE/__build/node_modules" node_modules
+        cd "$GITHUB_WORKSPACE"
+
+        # Run test build
         GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
         if [ "$GIT_BRANCH" == "" ]; then 
             GIT_BRANCH=main
@@ -55,6 +69,16 @@ runs:
         container_name="vscdc-test-container"
         docker run -d --name ${container_name} --rm --init --privileged -v "$(pwd)/containers/${{ inputs.definition }}:/workspace" ${{ inputs.image }} /bin/sh -c 'while sleep 1000; do :; done'
 
+        # Update UID/GID for user in container - Actions uses different UID/GID than container
+        # which causes bind mounts to be read only and cause certain write tests to fail
+        # The dev container CLI handles this automatically but we're not using it.
+        local_uid=$(id -u)
+        local_gid=$(id -g)
+        docker exec -u root ${container_name} /bin/sh -c "\
+          echo \"(*) Update user UID/GID...\" \
+          && groupmod -g ${local_gid} ${{ inputs.user }} \
+          && usermod -u ${local_uid} -g ${local_gid} ${{ inputs.user }}"
+
         # Fake out existence of extensions, VS Code Server
         echo "(*) Stubbing out extensions and VS Code Server..."
         dev_container_relative_path="containers/${{ inputs.definition }}/.devcontainer"
@@ -74,8 +98,6 @@ runs:
         echo "(*) Running test..."
         docker exec -u "${{ inputs.user }}" ${container_name} /bin/sh -c  '\
           set -e \
-          && id \
-          && echo "$HOME" \
           && cd /workspace \
           && if [ -f "test-project/test.sh" ]; then \
             cd test-project \
