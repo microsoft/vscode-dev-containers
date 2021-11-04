@@ -101,3 +101,4 @@ Given its size, we do not recommend extending this image. However, you can add i
 Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).
+
