@@ -1,4 +1,4 @@
-name: Smoke test "codespace-linux" build
+name: Smoke test "dotnet" build
 
 on: 
   workflow_dispatch:
@@ -6,12 +6,12 @@ on:
   push:
     branches: [main, actions-test]
     paths:
-      - 'containers/codespaces-linux/**'
+      - 'containers/dotnet/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'containers/codespaces-linux/**'
+      - 'containers/dotnet/**'
 jobs:
   smoke-test:
     name: Smoke test
@@ -27,6 +27,6 @@ jobs:
       id: smoke_test
       uses: ./.github/actions/smoke-test
       with:
-        definition: codespaces-linux
-        image: mcr.microsoft.com/vscode/devcontainers/universal:dev-linux
-        user: codespace
+        definition: dotnet
+        image: mcr.microsoft.com/vscode/devcontainers/dotnet:dev-5.0
+        user: vscode
