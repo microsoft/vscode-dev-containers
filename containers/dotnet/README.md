@@ -40,8 +40,8 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/dotnet:0-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.203-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.203.0-3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.202-3.1`
+- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.202.0-3.1`
 
 See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list).
 
@@ -55,19 +55,7 @@ Only the integrated terminal is supported by the Remote - Containers extension. 
 "console": "integratedTerminal"
 ```
 
-### Using the forwardPorts property
-
-By default, ASP.NET only listens to localhost inside the container. As a result, we recommend using the `forwardPorts` property in `.devcontainer/devcontainer.json` (available in v0.98.0+) to make these ports available locally.
-
-```json
-"forwardPorts": [5000, 5001]
-```
-
-The `appPort` property [publishes](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwards the port, so applications need to listen to `*` or `0.0.0.0` for the application to be accessible externally. This conflicts with ASP.NET's defaults, but fortunately the `forwardPorts` property does not have this limitation.
-
-If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
-
-### Enabling HTTPS in ASP.NET
+### Enabling HTTPS in ASP.NET using your own dev certificate
 
 To enable HTTPS in ASP.NET, you can mount an exported copy of your local dev certificate.
 

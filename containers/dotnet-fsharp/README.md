@@ -17,27 +17,6 @@
 
 ## Using this definition
 
-While this definition should work unmodified, you can select the version of .NET / .NET Core the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
-
-```json
-"args": { "VARIANT": "3.1" }
-```
-
-You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
-
-- `mcr.microsoft.com/vscode/devcontainers/dotnet` (latest)
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:2.1` (or `dotnetcore:2.1`)
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:3.1` (or `dotnetcore:3.1`)
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:5.0`
-
-Version specific tags tied to [releases in this repository](https://github.com/microsoft/vscode-dev-containers/releases) are also available.
-
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:0-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.149-3.1`
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:0.149.0-3.1`
-
-Alternatively, you can use the [contents of this `base.Dockerfile`](../dotnetcore/..devcontainer/base.Dockerfile) to fully customize your container's contents or to build it for a container host architecture not supported by the image.
-
 ### Debug Configuration
 
 Only the integrated terminal is supported by the Remote - Containers extension. You may need to modify your `.vscode/launch.json` configurations to include the following:
@@ -48,18 +27,7 @@ Only the integrated terminal is supported by the Remote - Containers extension. 
 
 **Note:** Currently the Ionide-fsharp extension appears to force the use of an external console when clicking on the Debug icon in the F# Solution Explorer. You can configure a .NET application launch [in `launch.json`](https://code.visualstudio.com/Docs/editor/debugging#_launch-configurations) with the property above instead.
 
-### Using the forwardPorts property
-
-By default, ASP.NET Core only listens to localhost inside the container. As a result, we recommend using the `forwardPorts` property in `.devcontainer/devcontainer.json` (available in v0.98.0+) to make these ports available locally.
-
-```json
-"forwardPorts": [5000, 5001]
-```
-
-The `appPort` property [publishes](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwards the port, so applications need to listen to `*` or `0.0.0.0` for the application to be accessible externally. This conflicts with ASP.NET Core's defaults, but fortunately the `forwardPorts` property does not have this limitation.
-If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
-
-### Enabling HTTPS in ASP.NET Core
+### Enabling HTTPS in ASP.NET using your own dev certificate
 
 To enable HTTPS in ASP.NET, you can mount an exported copy of your local dev certificate.
 
