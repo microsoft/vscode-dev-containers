@@ -1,8 +1,8 @@
 {
 	"variants": ["6.0-bullseye-slim", "6.0-focal", "5.0-bullseye-slim", "5.0-focal", "3.1-bullseye", "3.1-focal"],
-	"definitionVersion": "0.201.12",
+	"definitionVersion": "0.202.0",
 	"build": {
-		"latest": "5.0-focal",
+		"latest": "6.0-bullseye-slim",
 		"rootDistro": "debian",
 		"tags": [
 			"dotnet:${VERSION}-${VARIANT}"

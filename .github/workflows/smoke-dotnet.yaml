@@ -28,5 +28,5 @@ jobs:
       uses: ./.github/actions/smoke-test
       with:
         definition: dotnet
-        image: mcr.microsoft.com/vscode/devcontainers/dotnet:dev-5.0
+        image: mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0
         user: vscode
