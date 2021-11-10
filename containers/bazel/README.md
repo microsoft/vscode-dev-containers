@@ -4,33 +4,33 @@
 
 *Develop and compile efficiently on any language with the Bazel compilation tool.*
 
-| Metadata | Value |  
-|----------|-------|
-| *Contributors* | William Phetsinorath <deva.shikanime@protonmail.com> |
-| *Categories* | Community, Other |
-| *Definition type* | Dockerfile |
-| *Supported architecture(s)* | x86-64 |
-| *Works in Codespaces* | Yes |
-| *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Debian |
-| *Languages, platforms* | Any |
+| Metadata                    | Value                                                |
+| --------------------------- | ---------------------------------------------------- |
+| *Contributors*              | William Phetsinorath <deva.shikanime@protonmail.com> |
+| *Categories*                | Community, Other                                     |
+| *Definition type*           | Dockerfile                                           |
+| *Supported architecture(s)* | x86-64                                               |
+| *Works in Codespaces*       | Yes                                                  |
+| *Container host OS support* | Linux, macOS, Windows                                |
+| *Container OS*              | Debian                                               |
+| *Languages, platforms*      | Any                                                  |
 
 ## Using this definition
 
-While this definition works unmodified, you can set the Bazel version by updating the `BAZEL_VERSION` argument in `devcontainer.json`.
+While this definition works unmodified, you can set the Bazelisk version by updating the `BAZELISK_VERSION` argument in `devcontainer.json`.
 
 ```json
 "args": {
-   "BAZEL_VERSION": "3.4.1"
+   "BAZELISK_VERSION": "v1.10.1"
 }
 ```
 
-Optionally, you can validate the SHA256 checksum for `bazel-installer.sh` by adding it to the `BAZEL_DOWNLOAD_SHA` argument:
+Optionally, you can validate the SHA256 checksum for `bazel-installer.sh` by adding it to the `BAZELISK_DOWNLOAD_SHA` argument:
 
 ```json
 "args": {
-   "BAZEL_VERSION": "3.4.1",
-   "BAZEL_DOWNLOAD_SHA": "9808adad931ac652e8ff5022a74507c532250c2091d21d6aebc7064573669cc5"
+   "BAZELISK_VERSION": "v1.10.1",
+   "BAZELISK_DOWNLOAD_SHA": "4cb534c52cdd47a6223d4596d530e7c9c785438ab3b0a49ff347e991c210b2cd"
 }
 ```
 
@@ -40,7 +40,7 @@ Optionally, you can validate the SHA256 checksum for `bazel-installer.sh` by add
 
 2. Start VS Code and open your project folder or connect to a codespace.
 
-3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**. 
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
 
    > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
 
@@ -56,7 +56,7 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select this folder from the cloned repository.
-5. Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd> and type the following command to verify installation: `bazel run //test-project:hello-world`
+5. Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd> and type the following command to verify installation: `bazelisk run //test-project:hello-world`
 6. You should see "Hello remote world!" in the Debug Console after the program executes.
 
 ## License

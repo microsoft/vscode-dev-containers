@@ -1,5 +1,5 @@
 # You can pick any Debian/Ubuntu-based image. 😊
-FROM mcr.microsoft.com/vscode/devcontainers/base:bulleye
+FROM mcr.microsoft.com/vscode/devcontainers/base:bullseye
 
 # Options for setup script
 ARG INSTALL_ZSH="true"
@@ -15,12 +15,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install Bazel
-ARG BAZEL_VERSION=4.2.1
-ARG BAZEL_DOWNLOAD_SHA=dev-mode
-RUN curl -fSsL -o /tmp/bazel-installer.sh https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh \
-    && ([ "${BAZEL_DOWNLOAD_SHA}" = "dev-mode" ] || echo "${BAZEL_DOWNLOAD_SHA} */tmp/bazel-installer.sh" | sha256sum --check - ) \
-    && /bin/bash /tmp/bazel-installer.sh --base=/usr/local/bazel \
-    && rm /tmp/bazel-installer.sh
+ARG BAZELISK_VERSION=v1.10.1
+ARG BAZELISK_DOWNLOAD_SHA=dev-mode
+RUN curl -fSsL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-linux-amd64 \
+    && ([ "${BAZELISK_DOWNLOAD_SHA}" = "dev-mode" ] || echo "${BAZELISK_DOWNLOAD_SHA} */usr/local/bin/bazelisk" | sha256sum --check - ) \
+    && chmod 0755 /usr/local/bin/bazelisk
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
