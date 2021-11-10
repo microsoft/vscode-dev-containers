@@ -25,7 +25,7 @@ While this definition works unmodified, you can set the Bazelisk version by upda
 }
 ```
 
-Optionally, you can validate the SHA256 checksum for `bazel-installer.sh` by adding it to the `BAZELISK_DOWNLOAD_SHA` argument:
+Optionally, you can validate the SHA256 checksum for `bazelisk` executable by adding it to the `BAZELISK_DOWNLOAD_SHA` argument:
 
 ```json
 "args": {
