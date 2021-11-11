@@ -14,7 +14,7 @@
 
 ## Variant: 8.0-apache-bullseye
 
-**Digest:** sha256:70956a1a0b0a266495327305bcb97eed8180060992fc5e75cb03b49bae954937
+**Digest:** sha256:3ccfc7a45b18cd55c14c2d0b62a8ddb533d531fb8a0d7c2346121cad77077ddf
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -51,7 +51,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.10 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 
 ## Variant: 7.4-apache-bullseye
 
-**Digest:** sha256:290033a919811ea3079fddcd9b82b17524a227c7df6ce5c2bb5a9307be061775
+**Digest:** sha256:13df11b6693f0b2032b27abb63c507881837e4bc386a72b30826a75aa903f0af
 
 **Tags:**
 ```
@@ -131,7 +131,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -139,7 +139,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.10 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -190,7 +190,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 
 ## Variant: 7.3-apache-bullseye
 
-**Digest:** sha256:657e038d1b3fc2653315fc1e57656d152615d30a73d470cc34e3912273a2ee6a
+**Digest:** sha256:89b2ca779ea7612b659ea2862f3d26fa6a575fa5c7959ec028aaeb92f9a801d5
 
 **Tags:**
 ```
@@ -217,7 +217,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -225,7 +225,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.10 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -276,7 +276,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 
 ## Variant: 8.0-apache-buster
 
-**Digest:** sha256:2ae7f9cac042759a6bd578fbd3f3e7c17a47c99734ca9189357772ff1ab3a54d
+**Digest:** sha256:15d3e72751b3047ed023d727ddc33c408ca5df58fb326e514ed40df7a874b268
 
 **Tags:**
 ```
@@ -304,7 +304,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -312,7 +312,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.10 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -364,7 +364,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 
 ## Variant: 7.4-apache-buster
 
-**Digest:** sha256:19a9022d2400f29dc2c46119ee452f0591445e588336ecc5939654102465af30
+**Digest:** sha256:6875924b4fb000c0dbea1a5e26b316cc587db5f7b09e27844ab99da7c6d7ab65
 
 **Tags:**
 ```
@@ -391,7 +391,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -399,7 +399,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.10 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -451,7 +451,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 
 ## Variant: 7.3-apache-buster
 
-**Digest:** sha256:a31390529d21f29c8b4f5126371ed3839c765b851343f857fb320a274da5aa9b
+**Digest:** sha256:58a4271a4d83f7c7cc98ee811d66567e959d377747a708e81ac4b77027a8bdd7
 
 **Tags:**
 ```
@@ -477,7 +477,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -485,7 +485,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-buster
 | Tool | Version | Path |
 |------|---------|------|
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.10 | /usr/local |
+| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
 
 **Additional linux tools and packages**
 

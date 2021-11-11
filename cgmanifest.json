@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "04c96e235ff522704a6f1482e7fd06a05467cbb7"
+                    "commitHash": "1448d234d6d9c25f64a48b16379b34db28a36898"
                 }
             }
         },
@@ -175,7 +175,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.29.1-1~focal",
+                    "Version": "2.30.0-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -188,7 +188,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "git-lfs",
-                    "Version": "3.0.1",
+                    "Version": "3.0.2",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packagecloud.io/github/git-lfs/ubuntu",
@@ -227,7 +227,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "powershell",
-                    "Version": "7.1.5-1.ubuntu.20.04",
+                    "Version": "7.2.0-1.deb",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -267,7 +267,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "black",
-                    "Version": "21.9b0"
+                    "Version": "21.10b0"
                 }
             }
         },
@@ -321,7 +321,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.9.0"
+                    "Version": "20.10.0"
                 }
             }
         },
@@ -366,7 +366,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "jekyll",
-                    "Version": "4.2.0"
+                    "Version": "4.2.1"
                 }
             }
         },
@@ -393,7 +393,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.56.0"
+                    "Version": "1.56.1"
                 }
             }
         },
@@ -402,7 +402,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.56.0"
+                    "Version": "1.56.1"
                 }
             }
         },
@@ -411,7 +411,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.56.0"
+                    "Version": "1.56.1"
                 }
             }
         },
@@ -483,7 +483,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.42.1"
+                    "Version": "1.43.0"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "2e46b2a2dcb96cadd94283bdce95eca75bef1433"
+                    "commitHash": "1448d234d6d9c25f64a48b16379b34db28a36898"
                 }
             }
         },
@@ -513,7 +513,7 @@
                 "Git": {
                     "Name": "nvs",
                     "repositoryUrl": "https://github.com/jasongin/nvs",
-                    "commitHash": "024dea3f7bc852312932c32c0957cb034f5f7917"
+                    "commitHash": "5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f"
                 }
             }
         },
@@ -533,7 +533,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "30eb72fe77c48eb8779096f6ef0d2b8f5e238b0f"
+                    "commitHash": "d796c17945f6d837ffee601fbf71ac66be38a9c1"
                 }
             }
         },
@@ -552,7 +552,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.0.4",
+                    "Version": "3.1.1",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -592,7 +592,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.13.0",
+                    "Version": "5.13.1",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -632,7 +632,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.17.2",
+                    "Version": "1.17.3",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -642,7 +642,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.56.0",
+                    "Version": "1.56.1",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -804,7 +804,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.1.10",
+                    "Version": "2.1.12",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -866,6 +866,16 @@
                     "Name": "Docker Image: php",
                     "Version": "7.3-apache-buster",
                     "DownloadUrl": "https://hub.docker.com/_/php"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "b3ba9978cc42a5031c7b68e3cf917ec2e64643bc"
                 }
             }
         },
@@ -1094,7 +1104,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.1.0"
+                    "Version": "8.2.0"
                 }
             }
         },
@@ -1104,7 +1114,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "04c96e235ff522704a6f1482e7fd06a05467cbb7"
+                    "commitHash": "1448d234d6d9c25f64a48b16379b34db28a36898"
                 }
             }
         },

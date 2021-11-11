@@ -12,7 +12,7 @@
 
 ## Variant: 17-bullseye
 
-**Digest:** sha256:764052354f10096acdf24106727602ed7cb586c4b650e21b78544cbee17b5b21
+**Digest:** sha256:4316f0950c2f18302ca2e99a2a451e6197f8104a5269834773112e582164aaee
 
 **Tags:**
 ```
@@ -40,14 +40,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -98,7 +98,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 ## Variant: 17-buster
 
-**Digest:** sha256:e624778ab1a91868e4ff0881a8f43f8e1d7c022d2f311e9baa911d7f2668398f
+**Digest:** sha256:d4b21ccc44a51534626bc0321d33f7ebd7a54eff8276688b6d366ec1943b9890
 
 **Tags:**
 ```
@@ -123,14 +123,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -182,7 +182,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 
 ## Variant: 11-bullseye
 
-**Digest:** sha256:d014f47b79ffc9dd90d07a6923b5ce28feeca3293004286962871a5ef6d88ebf
+**Digest:** sha256:d58f609a6c8c30910257019244fd84dcdeeb5bc6d278b69ee8b967da0f8aa717
 
 **Tags:**
 ```
@@ -209,14 +209,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -267,7 +267,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 
 ## Variant: 11-buster
 
-**Digest:** sha256:2565ec0416fc7bd76d52bd974a3e3b0302c09e947aaead7aa7077441589ffbec
+**Digest:** sha256:c5b8257d24f2c53fd221a9c40c89d6a3073293ed7fd4bc6e2cba5b30014d0df6
 
 **Tags:**
 ```
@@ -293,14 +293,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 

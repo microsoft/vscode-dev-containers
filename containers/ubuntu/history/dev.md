@@ -11,7 +11,7 @@
 
 ## Variant: hirsute
 
-**Digest:** sha256:7e211be8583629c448a6fdbcf6f24a9bbc2fa21e5eca2f9b9b5f526f879e90bc
+**Digest:** sha256:781f6b970b1b4ea6e0eae124f943d8d0fa39eedd161ffde6510d388b8b40a5c8
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:8dc9266a6e0636c7460499ba595418420c1583199a47dce48a3ea6aa5241bc0c
+**Digest:** sha256:d5e55360acf8902e909cf33841889654e4880aa541e0f990ae11b2f3f2261f01
 
 **Tags:**
 ```
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -155,7 +155,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:4027010702848555837016bd8d1a92ae651135a7929e6dd243bc14b2bb37e227
+**Digest:** sha256:f53eee2f8de9b442c46ad48347385624c98d47153cf56b5560f730910a3d1799
 
 **Tags:**
 ```
@@ -176,7 +176,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -196,7 +196,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | libc6 | 2.27-3ubuntu1.4 |
 | libgcc1 | 1:8.4.0-1ubuntu1~18.04 |
 | libgssapi-krb5-2 | 1.16-2ubuntu0.2 |
-| libicu60 | 60.2-3ubuntu3.1 |
+| libicu60 | 60.2-3ubuntu3.2 |
 | libkrb5-3 | 1.16-2ubuntu0.2 |
 | liblttng-ust0 | 2.10.1-1 |
 | libssl1.0.0 | 1.0.2n-1ubuntu5.7 |

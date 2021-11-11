@@ -12,7 +12,7 @@
 
 ## Variant: 3.14
 
-**Digest:** sha256:eb55f31c571b50331eba71b439cb8d04a13f230eaca7dcfeca85d86af6bec939
+**Digest:** sha256:838b358b37806812871c182fb66c3174a9162deae425ca1d0445aec0b942fbab
 
 **Tags:**
 ```
@@ -33,7 +33,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -78,7 +78,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.13
 
-**Digest:** sha256:32f2c3ef55bc79ae2e8b0a6f87703c59237f1b16c9c1351be1c1e7f641ce0813
+**Digest:** sha256:3dab905657c6b5bf0f9e2c44760ff18e01a846feecbb2ca53cdbe631aabccb12
 
 **Tags:**
 ```
@@ -98,7 +98,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -143,7 +143,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 
 ## Variant: 3.12
 
-**Digest:** sha256:3591da113b4ba0a3c6c32d6904ace04e443f263b4862c0ae8b6998ea2b688303
+**Digest:** sha256:72756a8faa658eab624e346c304370c27e6c73eb0a1c7002afdd4dd5186cf8ed
 
 **Tags:**
 ```
@@ -163,7 +163,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -208,7 +208,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 
 ## Variant: 3.11
 
-**Digest:** sha256:6fd1303ab5a51a6750fb01da1968eacfe256d794f70dc2fdbebac0d3402d3268
+**Digest:** sha256:3f7d2b3f5267813b1d92b9edbf2e1f994fccdd0570fe06fc635e2070b82eb0fa
 
 **Tags:**
 ```
@@ -228,7 +228,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.11
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 

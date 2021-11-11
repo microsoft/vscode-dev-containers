@@ -12,7 +12,7 @@
 
 ## Variant: 1.17-bullseye
 
-**Digest:** sha256:b27b261a93d83812376d39d5e945a0ac2ca6f8a54a903ea7a0db618ae90a112f
+**Digest:** sha256:803aeb84cf3d26380d0c89ab1b8056587b2ed20a00185ecf8231c5488948ece2
 
 **Tags:**
 ```
@@ -35,13 +35,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.2 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.17.3 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -55,7 +55,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.7.2 |
-| github.com/golangci/golangci-lint | 1.42.1 |
+| github.com/golangci/golangci-lint | 1.43.0 |
 
 **Additional linux tools and packages**
 
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 ## Variant: 1.16-bullseye
 
-**Digest:** sha256:4cb894753858d8bec59147e471e658c0d06c6048c40eae64628ad9d9f10cdc7b
+**Digest:** sha256:8c52da5deb8360f761d606ea3ae98510c0c5b11f4d5f417d10f777afb7e623b4
 
 **Tags:**
 ```
@@ -131,13 +131,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.16.9 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.16.10 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -151,7 +151,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.7.2 |
-| github.com/golangci/golangci-lint | 1.42.1 |
+| github.com/golangci/golangci-lint | 1.43.0 |
 
 **Additional linux tools and packages**
 
@@ -207,7 +207,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 
 ## Variant: 1.17-buster
 
-**Digest:** sha256:81ad8803da254cfab2aeac0e396826e8e9307d49c1b4214d79ea329666291b63
+**Digest:** sha256:c1d56236f4b986e8ec8334f736d8caad3abf9f01ce7b1538ece64f0321f32f06
 
 **Tags:**
 ```
@@ -228,13 +228,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.2 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.17.3 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -248,7 +248,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.7.2 |
-| github.com/golangci/golangci-lint | 1.42.1 |
+| github.com/golangci/golangci-lint | 1.43.0 |
 
 **Additional linux tools and packages**
 
@@ -305,7 +305,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 ## Variant: 1.16-buster
 
-**Digest:** sha256:ec741548716bdc401bbae8a5a4033f1341b3a6aeccad0442adc4d137db4a8770
+**Digest:** sha256:dc087f123f657a8f2b2a6cd3a5dd80ab4f63370199651928a21780fd9c430920
 
 **Tags:**
 ```
@@ -324,13 +324,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.16.9 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.16.10 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 04c96e235ff522704a6f1482e7fd06a05467cbb7 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -344,7 +344,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16-buster
 | github.com/uudashr/gopkgs | 1.3.2 |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.7.2 |
-| github.com/golangci/golangci-lint | 1.42.1 |
+| github.com/golangci/golangci-lint | 1.43.0 |
 
 **Additional linux tools and packages**
 
