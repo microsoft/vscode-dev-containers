@@ -75,3 +75,5 @@ git config codespaces-theme.hide-status 1
 ```
 
 This setting will survive a rebuild since it is applied to the repository rather than the container.
+
+> **Note:** If this setting is not working and you have a copy of `common-debian.sh` in your `.devcontainer/library-scripts` folder, update it to the latest version of this script.
