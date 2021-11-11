@@ -113,8 +113,9 @@ fi
 # Create or update a non-root user to match UID/GID.
 if id -u ${USERNAME} > /dev/null 2>&1; then
     # User exists, update if needed
-    if [ "${USER_GID}" != "automatic" ] && [ "$USER_GID" != "$(id -G $USERNAME)" ]; then 
-        groupmod --gid $USER_GID $USERNAME 
+    if [ "${USER_GID}" != "automatic" ] && [ "$USER_GID" != "$(id -g $USERNAME)" ]; then 
+        default_group_name="$(id -gn $USERNAME)"
+        groupmod --gid $USER_GID ${default_group}
         usermod --gid $USER_GID $USERNAME
     fi
     if [ "${USER_UID}" != "automatic" ] && [ "$USER_UID" != "$(id -u $USERNAME)" ]; then 
@@ -211,13 +212,15 @@ __bash_prompt() {
         && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
         && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
     local gitbranch='`\
-        export BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null); \
-        if [ "${BRANCH}" != "" ]; then \
-            echo -n "\[\033[0;36m\](\[\033[1;31m\]${BRANCH}" \
-            && if git ls-files --error-unmatch -m --directory --no-empty-directory -o --exclude-standard ":/*" > /dev/null 2>&1; then \
-                    echo -n " \[\033[1;33m\]✗"; \
-               fi \
-            && echo -n "\[\033[0;36m\]) "; \
+        if [ "$(git config --get codespaces-theme.hide-status 2>/dev/null)" != 1 ]; then \
+            export BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null); \
+            if [ "${BRANCH}" != "" ]; then \
+                echo -n "\[\033[0;36m\](\[\033[1;31m\]${BRANCH}" \
+                && if git ls-files --error-unmatch -m --directory --no-empty-directory -o --exclude-standard ":/*" > /dev/null 2>&1; then \
+                        echo -n " \[\033[1;33m\]✗"; \
+                fi \
+                && echo -n "\[\033[0;36m\]) "; \
+            fi; \
         fi`'
     local lightblue='\[\033[1;34m\]'
     local removecolor='\[\033[0m\]'
@@ -228,8 +231,10 @@ __bash_prompt
 
 EOF
 )"
+
 codespaces_zsh="$(cat \
 <<'EOF'
+# Codespaces zsh prompt theme
 __zsh_prompt() {
     local prompt_username
     if [ ! -z "${GITHUB_USER}" ]; then 
@@ -237,8 +242,10 @@ __zsh_prompt() {
     else
         prompt_username="%n"
     fi
-    PROMPT="%{$fg[green]%}${prompt_username} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )"
-    PROMPT+='%{$fg_bold[blue]%}%~%{$reset_color%} $(git_prompt_info)%{$fg[white]%}$ %{$reset_color%}'
+    PROMPT="%{$fg[green]%}${prompt_username} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )" # User/exit code arrow
+    PROMPT+='%{$fg_bold[blue]%}%(5~|%-1~/…/%3~|%4~)%{$reset_color%} ' # cwd
+    PROMPT+='$([ $(git config --get codespaces-theme.hide-status 2>/dev/null) != 1 ] && git_prompt_info)' # Git status
+    PROMPT+='%{$fg[white]%}$ %{$reset_color%}'
     unset -f __zsh_prompt
 }
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}(%{$fg_bold[red]%}"
@@ -247,24 +254,6 @@ ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg_bold[yellow]%}✗%{$fg_bold[cyan]%})"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[cyan]%})"
 __zsh_prompt
 
-EOF
-)"
-
-# Add notice that Oh My Bash! has been removed from images and how to provide information on how to install manually
-omb_readme="$(cat \
-<<'EOF'
-"Oh My Bash!" has been removed from this image in favor of a simple shell prompt. If you 
-still wish to use it, remove "~/.oh-my-bash" and install it from: https://github.com/ohmybash/oh-my-bash
-You may also want to consider "Bash-it" as an alternative: https://github.com/bash-it/bash-it
-See here for infomation on adding it to your image or dotfiles: https://aka.ms/codespaces/omb-remove
-EOF
-)"
-omb_stub="$(cat \
-<<'EOF'
-#!/usr/bin/env bash
-if [ -t 1 ]; then
-    cat $HOME/.oh-my-bash/README.md
-fi
 EOF
 )"
 
@@ -277,20 +266,6 @@ if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
     fi
     chown ${USERNAME}:${USERNAME} "${user_rc_path}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
-fi
-
-# Add stub for Oh My Bash!
-if [ ! -d "${user_rc_path}/.oh-my-bash}" ] && [ "${INSTALL_OH_MYS}" = "true" ]; then
-    mkdir -p "${user_rc_path}/.oh-my-bash" "/root/.oh-my-bash"
-    echo "${omb_readme}" >> "${user_rc_path}/.oh-my-bash/README.md"
-    echo "${omb_stub}" >> "${user_rc_path}/.oh-my-bash/oh-my-bash.sh"
-    chmod +x "${user_rc_path}/.oh-my-bash/oh-my-bash.sh"
-    if [ "${USERNAME}" != "root" ]; then
-        echo "${omb_readme}" >> "/root/.oh-my-bash/README.md"
-        echo "${omb_stub}" >> "/root/.oh-my-bash/oh-my-bash.sh"
-        chmod +x "/root/.oh-my-bash/oh-my-bash.sh"
-    fi
-    chown -R "${USERNAME}:${USERNAME}" "${user_rc_path}/.oh-my-bash"
 fi
 
 # Optionally install and configure zsh and Oh My Zsh!
