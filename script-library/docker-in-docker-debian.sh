@@ -252,7 +252,7 @@ tee /usr/local/share/docker-init.sh > /dev/null \
 
 set -e
 
-dockerd_start() {
+dockerd_start="$(cat << 'INNEREOF'
     # explicitly remove dockerd and containerd PID file to ensure that it can start properly if it was stopped uncleanly
     # ie: docker kill <ID>
     find /run /var/run -iname 'docker*.pid' -delete || :
@@ -303,13 +303,14 @@ dockerd_start() {
 
     # Start docker/moby engine
     ( dockerd $CUSTOMDNS > /tmp/dockerd.log 2>&1 ) &
-}
+INNEREOF
+)"
 
 # Start using sudo if not invoked as root
 if [ "$(id -u)" -ne 0 ]; then
-    sudo /bin/sh -c "$(declare -f dockerd_start); dockerd_start"
+    sudo /bin/sh -c "${dockerd_start}"
 else
-    dockerd_start
+    eval "${dockerd_start}"
 fi
 
 set +e
