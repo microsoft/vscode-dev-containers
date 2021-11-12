@@ -1,6 +1,6 @@
 # Build and image generation for vscode-dev-containers
 
-This folder contains scripts to build and push images into the Microsoft Container Registry (MCR) from this repository, generate or modify any associated content to use the built image, track dependencies, and create an npm package with the result that is shipped in the VS Code Remote - Containers extension.
+This folder contains scripts to build and push images into the Microsoft Container Registry (MCR) from this repository, generate or modify any associated content to use the built image, track dependencies, and create an npm package with the result that is shipped in the VS Code Remote - Containers and Codespaces extension.
 
 ## Build CLI
 
@@ -108,7 +108,41 @@ In `devcontainer.json`:
 }
 ```
 
-## definition-manifest.json
+## The `.devcontainer/library-scripts` folder
+
+The `/script-library` folder in this repository contains a number of scripts to install tools or configure container contents. Of particular note is `common-debain.sh` that should generally be run in any definition that does not extend from an existing `mcr.microsoft.com/vscode/devcontainers` image.
+
+Since Dockerfiles can only COPY files relative to the Dockerfile itself, we cannot easily copy contents from a folder several levels up. This step could be scripted, but this becomes cumbersome when creating the definitions to begin with. Instead, the scripts can be added into a `.devcontainer/library-scripts` folder in the definition. A GitHub Actions workflow will automatically update files with the same name in this folder whenever something in `/script-library` is updated.
+
+This folder should be reserved for contents from the `script-library` folder for this reason.
+
+### `.devcontainer/library-scripts/meta.env`
+The one exception to this statement is the `meta.env` file. The buildsystem will automatically update this file if found with some key information like the image version, repository, and history file to power a `devcontainer-info` command added by the `common-debian.sh` script.
+
+To use it:
+
+1. Add a `meta.env` file into the `library-scripts` folder with one line in it:
+
+    ```
+    VERSION='dev'
+    ```
+
+2. Next update your `base.Dockerfile` to copy it into the correct location. If you are running `common-debian.sh`, you can just copy it to the same folder as you copy the script before running it. For example:
+
+    ```Dockerfile
+    COPY library-scripts/*.sh library-scripts/meta.env /tmp/library-scripts/
+    RUN bash /tmp/library-scripts/common-debian.sh
+    ```
+
+    Or if `common-debian.sh` was already run in your upstream image, you can copy it directly to the correct spot:
+
+    ```Dockerfile
+    COPY library-scripts/meta.env /usr/local/etc/vscode-dev-containers/
+    ```
+
+The build system will then automatically populate the file with the correct contents on build.
+
+## The `definition-manifest.json` file
 
 Let's run through the `definition-manifest.json` file.
 
