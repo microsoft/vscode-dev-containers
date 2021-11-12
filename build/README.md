@@ -34,9 +34,11 @@ Image build/push to MCR is managed using config in `definition-manifest.json` fi
 
     > **Note:** The `build.args` and `build.dockerfile` properties are **intentionally ignored** during image build so that you can vary image defaults and devcontainer.json defaults as appropriate. The only property considered is `build.context` since this may be required for the build to succeed.
 
-2. Create [a `definition-manifest.json` file](#definition-manifestjson)
+3. Create a [`base.Dockerfile` and stub Dockerfile](#creating-a-basedockerfile-and-stub-dockerfile)
 
-3. Create a [stub Dockerfile](#creating-an-alternate-stub-dockerfile)
+4. Set up any [library scripts you want to use and a meta.env file](#using-the-script-library)
+
+2. Create [a `definition-manifest.json` file](#the-definition-manifestjson-file)
 
 4. Update the `vscode` [config files for MCR](https://github.com/microsoft/vscode-internalbacklog/wiki/Remote-Container-Images-MCR-Setup) as appropriate (MS internal only).
 
@@ -78,7 +80,7 @@ Once you're happy with the result, you can also verify that the `devcontainer.js
 
 That's it!
 
-## Creating a "stub" Dockerfile
+## Creating a `base.Dockerfile` and "stub" `Dockerfile`
 
 By default, the **Remote-Containers: Add Development Container Configuration File...** and related properties will use a basic getting started stub / sample Dockerfile. However, in some cases you may want to include some special instructions for developers. In this case, you can add a custom stub Dockerfile by creating the following files:
 
@@ -108,7 +110,7 @@ In `devcontainer.json`:
 }
 ```
 
-## The `.devcontainer/library-scripts` folder
+## Using the script library
 
 The `/script-library` folder in this repository contains a number of scripts to install tools or configure container contents. Of particular note is `common-debain.sh` that should generally be run in any definition that does not extend from an existing `mcr.microsoft.com/vscode/devcontainers` image.
 
