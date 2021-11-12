@@ -118,10 +118,10 @@ Since Dockerfiles can only COPY files relative to the Dockerfile itself, we cann
 
 This folder should be reserved for contents from the `script-library` folder for this reason.
 
-### `.devcontainer/library-scripts/meta.env`
-The one exception to this statement is the `meta.env` file. The buildsystem will automatically update this file if found with some key information like the image version, repository, and history file to power a `devcontainer-info` command added by the `common-debian.sh` script.
+### Adding a `meta.env` file
+The one addition to this folder that is not from the `script-library` folder is the `.devcontainer/library-scripts/meta.env` file. The build system will automatically update this file if found with some key information like the image version, repository, and history file. This will power a `devcontainer-info` command added by the `common-debian.sh` script.
 
-To use it:
+To add one:
 
 1. Add a `meta.env` file into the `library-scripts` folder with one line in it:
 
