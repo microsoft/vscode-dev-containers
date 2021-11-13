@@ -180,11 +180,12 @@ if [ "${LOCALE_ALREADY_SET}" != "true" ] && ! grep -o -E '^\s*en_US.UTF-8\s+UTF-
 fi
 
 # Create or update a non-root user to match UID/GID.
+group_name="${USERNAME}"
 if id -u ${USERNAME} > /dev/null 2>&1; then
     # User exists, update if needed
     if [ "${USER_GID}" != "automatic" ] && [ "$USER_GID" != "$(id -g $USERNAME)" ]; then 
-        default_group_name="$(id -gn $USERNAME)"
-        groupmod --gid $USER_GID ${default_group}
+        group_name="$(id -gn $USERNAME)"
+        groupmod --gid $USER_GID ${group_name}
         usermod --gid $USER_GID $USERNAME
     fi
     if [ "${USER_UID}" != "automatic" ] && [ "$USER_UID" != "$(id -u $USERNAME)" ]; then 
@@ -335,7 +336,7 @@ __zsh_prompt() {
     fi
     PROMPT="%{$fg[green]%}${prompt_username} %(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )" # User/exit code arrow
     PROMPT+='%{$fg_bold[blue]%}%(5~|%-1~/…/%3~|%4~)%{$reset_color%} ' # cwd
-    PROMPT+='$([ $(git config --get codespaces-theme.hide-status 2>/dev/null) != 1 ] && git_prompt_info)' # Git status
+    PROMPT+='$([ "$(git config --get codespaces-theme.hide-status 2>/dev/null)" != 1 ] && git_prompt_info)' # Git status
     PROMPT+='%{$fg[white]%}$ %{$reset_color%}'
     unset -f __zsh_prompt
 }
@@ -357,7 +358,7 @@ if [ "${RC_SNIPPET_ALREADY_ADDED}" != "true" ]; then
         echo "${codespaces_bash}" >> "/root/.bashrc"
         echo 'export PROMPT_DIRTRIM=4' >> "/root/.bashrc"
     fi
-    chown ${USERNAME}:${USERNAME} "${user_rc_path}/.bashrc"
+    chown ${USERNAME}:${group_name} "${user_rc_path}/.bashrc"
     RC_SNIPPET_ALREADY_ADDED="true"
 fi
 
@@ -398,7 +399,7 @@ if [ "${INSTALL_ZSH}" = "true" ]; then
         # Copy to non-root user if one is specified
         if [ "${USERNAME}" != "root" ]; then
             cp -rf "${user_rc_file}" "${oh_my_install_dir}" /root
-            chown -R ${USERNAME}:${USERNAME} "${user_rc_path}"
+            chown -R ${USERNAME}:${group_name} "${user_rc_path}"
         fi
     fi
 fi
