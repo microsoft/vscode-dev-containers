@@ -273,7 +273,8 @@ EOF
 cat << EOF > /usr/local/share/desktop-init.sh
 #!/bin/bash
 
-USERNAME=${USERNAME}
+user_name="${USERNAME}"
+group_name="$(id -gn ${USERNAME})"
 LOG=/tmp/container-init.log
 
 export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-"autolaunch:"}"
@@ -318,8 +319,8 @@ sudoIf()
 # Use sudo to run as non-root user if not already running
 sudoUserIf()
 {
-    if [ "\$(id -u)" -eq 0 ] && [ "\${USERNAME}" != "root" ]; then
-        sudo -u \${USERNAME} "\$@"
+    if [ "\$(id -u)" -eq 0 ] && [ "\${user_name}" != "root" ]; then
+        sudo -u \${user_name} "\$@"
     else
         "\$@"
     fi
@@ -347,7 +348,7 @@ done
 sudo rm -rf /tmp/.X11-unix /tmp/.X*-lock
 mkdir -p /tmp/.X11-unix
 sudoIf chmod 1777 /tmp/.X11-unix
-sudoIf chown root:\${USERNAME} /tmp/.X11-unix
+sudoIf chown root:\${group_name} /tmp/.X11-unix
 if [ "\$(echo "\${VNC_RESOLUTION}" | tr -cd 'x' | wc -c)" = "1" ]; then VNC_RESOLUTION=\${VNC_RESOLUTION}x16; fi
 screen_geometry="\${VNC_RESOLUTION%*x*}"
 screen_depth="\${VNC_RESOLUTION##*x}"
