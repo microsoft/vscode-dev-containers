@@ -14,7 +14,7 @@ RUN . /etc/os-release \
     && if [ "${ID}" = "alpine" ] || [ "${ID_LIKE}" = "alpine" ]; then \
         addgroup -g 1001 the-borts && adduser -D -s /bin/bash -u 1001 -G the-borts ${USERNAME}; \
     else \
-        groupadd --gid 1001 the-borts && useradd --uid 1001 --gid 1001 -m ${USERNAME}; \
+        groupadd --gid 1001 the-borts && useradd -s /bin/bash --uid 1001 --gid 1001 -m ${USERNAME}; \
     fi
 
 # Run non-default tests
