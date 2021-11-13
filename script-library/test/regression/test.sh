@@ -24,15 +24,20 @@ else
     OTHER_ARGS="--builder vscode-dev-containers --platform ${PLATFORMS}"
 fi
 
+if [ "${USE_DEFAULTS}" = "false" ]; then
+    dockerfile_path="test/regression/alt.Dockerfile"
+else
+    dockerfile_path="test/regression/Dockerfile"
+fi
+
 BUILDX_COMMAND="docker buildx build \
     ${OTHER_ARGS} \
     --progress=plain \
     --build-arg IMAGE_TO_TEST=$IMAGE_TO_TEST \
     --build-arg RUN_ONE=${RUN_ONE} \
     --build-arg RUN_COMMON_SCRIPT=${RUN_COMMON_SCRIPT} \
-    --build-arg USE_DEFAULTS=${USE_DEFAULTS}
     -t vscdc-script-library-regression \
-    -f test/regression/Dockerfile \
+    -f ${dockerfile_path} \
     ."
 echo $BUILDX_COMMAND
 $BUILDX_COMMAND

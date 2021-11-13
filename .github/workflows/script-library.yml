@@ -14,6 +14,7 @@ jobs:
     strategy:
       matrix:
         os: ["debian:bullseye", "debian:buster", "ubuntu:focal", "ubuntu:bionic", alpine, centos, "mcr.microsoft.com/oryx/build:github-actions-20210902.1"]
+        defaults: ["true", "false"]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +35,7 @@ jobs:
       id: test_script_library
       run: |
         set -e
-        bash script-library/test/regression/test.sh "${{ matrix.os }}" false true true linux/amd64
+        bash script-library/test/regression/test.sh "${{ matrix.os }}" false "${{ matrix.defaults }}" true linux/amd64
 
   copy-scripts:
     name: Copy and commit script-library updates
