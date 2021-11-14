@@ -140,10 +140,14 @@ fi
 kubectl completion bash > /etc/bash_completion.d/kubectl
 
 # kubectl zsh completion
-zsh_completion_dir="/home/${USERNAME}/.oh-my-zsh/completions"
-mkdir -p "$zsh_completion_dir"
-kubectl completion zsh > "$zsh_completion_dir/_kubectl"
-chown ${USERNAME}:${group_name} "$zsh_completion_dir/_kubectl"
+if [ ! -z $USERNAME  ]; then
+  zsh_completion_dir="/home/${USERNAME}/.oh-my-zsh/completions"
+  mkdir -p "$zsh_completion_dir"
+  kubectl completion zsh > "$zsh_completion_dir/_kubectl"
+  if [ ! -z $group_name  ]; then
+    chown ${USERNAME}:${group_name} "$zsh_completion_dir/_kubectl"
+  fi
+fi
 
 # Install Helm, verify signature and checksum
 echo "Downloading Helm..."
