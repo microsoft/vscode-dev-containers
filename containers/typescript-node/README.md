@@ -47,7 +47,7 @@ See [history](history) for information on the contents of each version and [here
 
 Alternatively, you can use the contents of the `base.Dockerfile` or the [JavaScript and Node.js `base.Dockerfile`](../javascript-node/.devcontainer/base.Dockerfile) to fully customize your container's contents.
 
-Beyond TypeScript, Node.js, and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `node` user with `sudo` access, and a set of common dependencies for development. Since `tslint` is [now fully depreicated](https://github.com/palantir/tslint/issues/4534), the definition includes `tslint-to-eslint-config` globally to help you migrate.
+Beyond TypeScript, Node.js, and `git`, this image / `Dockerfile` includes `eslint`, `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `node` user with `sudo` access, and a set of common dependencies for development. Since `tslint` is [now fully deprecated](https://github.com/palantir/tslint/issues/4534), the definition includes `tslint-to-eslint-config` globally to help you migrate.
 
 Note that, while `eslint`and `typescript` are installed globally for convenance, [as of ESLint 6](https://eslint.org/docs/user-guide/migrating-to-6.0.0#-plugins-and-shareable-configs-are-no-longer-affected-by-eslints-location), you will need to install the following packages locally to lint TypeScript code: `@typescript-eslint/eslint-plugin`, `@typescript-eslint/parser`, `eslint`, `typescript`.
 
