@@ -53,6 +53,16 @@ Leiningen will be installed by default but you can change this behavior by setti
 }
 ```
 
+## Installing Polylith
+
+Polylith will be installed by default but you can change this behavior by setting the `"INSTALL_POLYLITH"` build argument to false in `.devcontainer/devcontainer.json`. The version of Polylith may be set with the `"POLYLITH_VERSION"` argument.
+
+```json
+"args": {
+   "POLYLITH_LEININGEN": "false"
+}
+```
+
 ## Installing a Specific Clojure Version
 
 You can set the default Clojure version used by Boot as well as the version of Clojure that is pre-loaded with Leiningen by adding the `"CLOJURE_VERSION"` to the build arguments in `.devcontainer/devcontainer.json`.

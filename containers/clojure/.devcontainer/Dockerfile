@@ -9,7 +9,7 @@ ENV BOOT_CLOJURE_VERSION=${CLOJURE_VERSION}
 # [Option] Install Clojure tools
 ARG INSTALL_CLOJURE_CLI="true"
 # [Option] Clojure tools version
-ARG CLOJURE_CLI_VERSION=1.10.3.981
+ARG CLOJURE_CLI_VERSION=1.10.3.1029
 
 # [Option] Install Boot
 ARG INSTALL_BOOT="true"
@@ -20,6 +20,11 @@ ENV BOOT_VERSION=2.8.3
 ARG INSTALL_LEININGEN="true"
 # [Option] Leiningen version
 ARG LEININGEN_VERSION="stable"
+
+# [Option] Install Polylith
+ARG INSTALL_POLYLITH="true"
+# [Option] POLYLITH version
+ARG POLYLITH_VERSION="0.2.13-alpha"
 
 RUN if [ "${INSTALL_CLOJURE_CLI}" = "true" ]; then \
     apt-get update \
@@ -47,6 +52,14 @@ RUN if [ "${INSTALL_LEININGEN}" = "true" ]; then \
     && echo '(defproject dummy \"\" :dependencies [[org.clojure/clojure \"'${CLOJURE_VERSION}'\"]])' > project.clj \
     && lein deps \
     && rm project.clj"; fi
+
+RUN if [ "${INSTALL_POLYLITH}" = "true" ]; then \
+    curl -OL "https://github.com/polyfy/polylith/releases/download/v${POLYLITH_VERSION}/poly-${POLYLITH_VERSION}.jar" \
+    && mkdir -p /usr/local/polylith \
+    && mv poly-$POLYLITH_VERSION.jar /usr/local/polylith \
+    && echo '#!/bin/sh\nARGS=""\nwhile [ "$1" != "" ] ; do\n  ARGS="$ARGS $1"\n  shift\ndone\nexec "java" $JVM_OPTS "-jar" "/usr/local/polylith/poly-'$POLYLITH_VERSION'.jar" $ARGS\n' > /usr/local/sbin/poly \
+    && chmod +x /usr/local/sbin/poly \
+    && /usr/local/sbin/poly version; fi
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

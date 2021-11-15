@@ -11,7 +11,8 @@
 			"CLOJURE_VERSION": "1.10.3",
 			"INSTALL_CLOJURE_CLI": "true",
 			"INSTALL_BOOT": "true",
-			"INSTALL_LEININGEN": "true"
+			"INSTALL_LEININGEN": "true",
+			"INSTALL_POLYLITH": "true"
 		}
 	},
 
