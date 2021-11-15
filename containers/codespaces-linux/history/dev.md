@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:7d7bb4b17a75fccbdbbb7b4964cff7a7450245162d0225139fe0d5a6e0802371
+**Digest:** sha256:379d50a46ac46b2f471fd163341a4ece398077e104cc59a99bdd666557a97695
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1448d234d6d9c25f64a48b16379b34db28a36898 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 6cc7bff383a603fb47325be80e3cac8a7f55f501 | /usr/local/share/rbenv |
@@ -61,7 +61,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
-| bandit | 1.7.0 |
+| bandit | 1.7.1 |
 | virtualenv | 20.10.0 |
 | pipx | 0.16.4 |
 

@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "1448d234d6d9c25f64a48b16379b34db28a36898"
+                    "commitHash": "b3ba9978cc42a5031c7b68e3cf917ec2e64643bc"
                 }
             }
         },
@@ -312,7 +312,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "bandit",
-                    "Version": "1.7.0"
+                    "Version": "1.7.1"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "1448d234d6d9c25f64a48b16379b34db28a36898"
+                    "commitHash": "b3ba9978cc42a5031c7b68e3cf917ec2e64643bc"
                 }
             }
         },
@@ -871,16 +871,6 @@
         },
         {
             "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "b3ba9978cc42a5031c7b68e3cf917ec2e64643bc"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -1114,7 +1104,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "1448d234d6d9c25f64a48b16379b34db28a36898"
+                    "commitHash": "b3ba9978cc42a5031c7b68e3cf917ec2e64643bc"
                 }
             }
         },
