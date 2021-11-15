@@ -6,7 +6,7 @@ on:
   push:
     branches: [main, actions-test]
     paths:
-      - 'containers/javscript-node/**'
+      - 'containers/javascript-node/**'
       - 'containers/typescript-node/**'
   pull_request:
     branches:
@@ -26,7 +26,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Smoke test javascript-node
-      id: smoke_test
+      id: smoke_test_js
       uses: ./.github/actions/smoke-test
       with:
         definition: javascript-node
@@ -34,7 +34,7 @@ jobs:
         user: node
 
     - name: Smoke test typescript-node
-      id: smoke_test
+      id: smoke_test_ts
       uses: ./.github/actions/smoke-test
       with:
         definition: typescript-node
