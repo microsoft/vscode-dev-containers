@@ -14,7 +14,7 @@
 
 ## Variant: 6.0-bullseye-slim
 
-**Digest:** sha256:32fe5f4b5db2539c1d3d83ec895617aebca77f09760d1952848ded776c78d656
+**Digest:** sha256:3d42520afbd079e4007a5339b689da2389d64d746c4c510bd2f8db08613a3e79
 
 **Tags:**
 ```
@@ -41,7 +41,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -93,7 +93,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-bullseye
 
 ## Variant: 6.0-focal
 
-**Digest:** sha256:1677c7be05c76422e31f843ed039f1d83e2152c39d3c84e2de28c04ea2516011
+**Digest:** sha256:ad4d32ac17e5ca27e8d16352030ab63347a887b42af60d21c56045695c29eb2c
 
 **Tags:**
 ```
@@ -118,7 +118,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -142,7 +142,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.8 |
+| libssl1.1 | 1.1.1f-1ubuntu2.9 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -158,11 +158,11 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 | openssh-client | 1:8.2p1-4ubuntu0.3 |
 | procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
-| rsync | 3.1.3-8 |
+| rsync | 3.1.3-8ubuntu0.1 |
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
-| vim-tiny | 2:8.1.2269-1ubuntu5.3 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.4 |
 | wget | 1.20.3-1ubuntu1 |
 | yarn | 1.22.15-1 |
 | zip | 3.0-11build1 |
@@ -171,7 +171,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 
 ## Variant: 5.0-bullseye-slim
 
-**Digest:** sha256:0c5a810a6864a1cf5efda3f748da190cff292bed4df60a8f5a9aad04848edb3f
+**Digest:** sha256:0101badd50bcd549fee85967c8990f713f365c4ff6891faae5781993e6c54a32
 
 **Tags:**
 ```
@@ -198,7 +198,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -250,7 +250,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0-bullseye
 
 ## Variant: 5.0-focal
 
-**Digest:** sha256:e0f0c5797e449f735776b6dba6b899f7e94b53b2565ef0d3e345035c590a4ce7
+**Digest:** sha256:276d0a95c09039e9554c81f67cc9ba2306866b8fbe0e89e9ef3c1afd74507b85
 
 **Tags:**
 ```
@@ -277,7 +277,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -301,7 +301,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.8 |
+| libssl1.1 | 1.1.1f-1ubuntu2.9 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -317,11 +317,11 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | openssh-client | 1:8.2p1-4ubuntu0.3 |
 | procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
-| rsync | 3.1.3-8 |
+| rsync | 3.1.3-8ubuntu0.1 |
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
-| vim-tiny | 2:8.1.2269-1ubuntu5.3 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.4 |
 | wget | 1.20.3-1ubuntu1 |
 | yarn | 1.22.15-1 |
 | zip | 3.0-11build1 |
@@ -330,7 +330,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1-bullseye
 
-**Digest:** sha256:b0abaebb258d8e6e85c4ce67f77153b3afce921a7bcce36772e9fd5314170ee3
+**Digest:** sha256:c372fc8811532a2b2c19a9456dc754684c795006fb23682c41ba2a6144335554
 
 **Tags:**
 ```
@@ -356,7 +356,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -408,7 +408,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1-bullseye
 
 ## Variant: 3.1-focal
 
-**Digest:** sha256:df3e2cba565a1670bb613b085a2f033dacf55b5e9c3b8a268a1e82e15092c420
+**Digest:** sha256:3f3abc30615caacb9f91915e70e4c9b5067e4f31ffb6764d4240246b9f1de543
 
 **Tags:**
 ```
@@ -435,7 +435,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Additional linux tools and packages**
@@ -459,7 +459,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.8 |
+| libssl1.1 | 1.1.1f-1ubuntu2.9 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -475,11 +475,11 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | openssh-client | 1:8.2p1-4ubuntu0.3 |
 | procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
-| rsync | 3.1.3-8 |
+| rsync | 3.1.3-8ubuntu0.1 |
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
-| vim-tiny | 2:8.1.2269-1ubuntu5.3 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.4 |
 | wget | 1.20.3-1ubuntu1 |
 | yarn | 1.22.15-1 |
 | zip | 3.0-11build1 |

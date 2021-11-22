@@ -14,7 +14,7 @@
 
 ## Variant: 8.0-apache-bullseye
 
-**Digest:** sha256:9a692713d282d1ca4fadc1cf869c6396ba8e84dd9e7188a3a9458fe8bd51d4c9
+**Digest:** sha256:116ed180dc5011ec29c4c67f75216be01f4dfc9dcb29f8b0498f5d397d3fc373
 
 **Tags:**
 ```
@@ -37,13 +37,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 8.0.12 | /usr/local |
+| [PHP](https://xdebug.org/) | 8.0.13 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 
 ## Variant: 7.4-apache-bullseye
 
-**Digest:** sha256:54498b988ab58253e52c2120b26811e31fe521c231b4b9c219bd8b8a6cf79ec1
+**Digest:** sha256:59cc107075c51851e9c64283a66a495c8ab3405103243f6a6ef7a3821baa24f8
 
 **Tags:**
 ```
@@ -125,13 +125,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.4.25 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.4.26 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -190,7 +190,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 
 ## Variant: 7.3-apache-bullseye
 
-**Digest:** sha256:d83839bd3a15e2676905cd7ac405ce6e3d40994c876fd0ea511887f1cf00f213
+**Digest:** sha256:e495f82c396a394028e56e944790834f1b649917239f4765b5dccf104ec8e965
 
 **Tags:**
 ```
@@ -211,13 +211,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.3.32 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.3.33 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -276,7 +276,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 
 ## Variant: 8.0-apache-buster
 
-**Digest:** sha256:c65060fa135ee1b1ab4f9c3a2ba9d818e2614d03660c89f5c5f90621f5bb31bd
+**Digest:** sha256:10287ae0e5a5cdf164d9d9b66cc97c847629bbc0520720ba5ee5af32ed568841
 
 **Tags:**
 ```
@@ -298,13 +298,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 8.0.12 | /usr/local |
+| [PHP](https://xdebug.org/) | 8.0.13 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -364,7 +364,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 
 ## Variant: 7.4-apache-buster
 
-**Digest:** sha256:2f2fdfbcdea70898e61031877f5d9806c0c46956e9f81dc22b6f70365b3cbe29
+**Digest:** sha256:78a9c4ea08202e7afd23b8603d7fc22b7e96556b4a873434c37e048b4a8d0cb1
 
 **Tags:**
 ```
@@ -385,13 +385,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.4.25 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.4.26 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
@@ -451,7 +451,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 
 ## Variant: 7.3-apache-buster
 
-**Digest:** sha256:e86a9585faaa637123ee737546559186f2abdeb37c58c438f286a5929c0fabd1
+**Digest:** sha256:8b97dacbc24cf2dd684a36caa75c6ce146f41cf97bd40a52adf8f1cb58ec3daa
 
 **Tags:**
 ```
@@ -471,13 +471,13 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.3.32 | /usr/local |
+| [PHP](https://xdebug.org/) | 7.3.33 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**

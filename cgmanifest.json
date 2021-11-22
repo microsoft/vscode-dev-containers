@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "b3ba9978cc42a5031c7b68e3cf917ec2e64643bc"
+                    "commitHash": "15fd9c84deae400ba52451d75548fb8f6ec26bcf"
                 }
             }
         },
@@ -201,7 +201,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-cli",
-                    "Version": "20.10.10+azure-1",
+                    "Version": "20.10.11+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -214,7 +214,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-engine",
-                    "Version": "20.10.10+azure-1",
+                    "Version": "20.10.11+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -267,7 +267,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "black",
-                    "Version": "21.10b0"
+                    "Version": "21.11b1"
                 }
             }
         },
@@ -474,7 +474,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/go-delve/delve",
-                    "Version": "1.7.2"
+                    "Version": "1.7.3"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "b3ba9978cc42a5031c7b68e3cf917ec2e64643bc"
+                    "commitHash": "15fd9c84deae400ba52451d75548fb8f6ec26bcf"
                 }
             }
         },
@@ -523,7 +523,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "6cc7bff383a603fb47325be80e3cac8a7f55f501"
+                    "commitHash": "304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5"
                 }
             }
         },
@@ -542,7 +542,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "git",
-                    "Version": "2.33.0",
+                    "Version": "2.34.0",
                     "DownloadUrl": "https://github.com/git/git"
                 }
             }
@@ -562,7 +562,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.22.3",
+                    "Version": "1.22.4",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -1094,7 +1094,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.2.0"
+                    "Version": "8.3.0"
                 }
             }
         },
@@ -1104,7 +1104,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "b3ba9978cc42a5031c7b68e3cf917ec2e64643bc"
+                    "commitHash": "15fd9c84deae400ba52451d75548fb8f6ec26bcf"
                 }
             }
         },
@@ -1182,7 +1182,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.4.4"
+                    "Version": "4.5.2"
                 }
             }
         },

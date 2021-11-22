@@ -11,7 +11,7 @@
 
 ## Variant: hirsute
 
-**Digest:** sha256:d6e4ec4f11e09b74673a66d0a23531437c83e312b19b6ffb9a4b189926063876
+**Digest:** sha256:70243bc723e30f530ba363ec6c97a1cd517998c5f50eb425f4bcc5060d2b80fd
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -74,7 +74,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 | strace | 5.11-0ubuntu1 |
 | sudo | 1.9.5p2-2ubuntu3 |
 | unzip | 6.0-26ubuntu1 |
-| vim-tiny | 2:8.2.2434-1ubuntu1.1 |
+| vim-tiny | 2:8.2.2434-1ubuntu1.2 |
 | wget | 1.21-1ubuntu3 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu6 |
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:15e74247dd816ec965c39824fab95fa71017050361d0c3cfd7d54340e6b93527
+**Digest:** sha256:b2e307b614a67f4ececc1b1ee95015b77847e223262958a72af4648bbed36432
 
 **Tags:**
 ```
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -127,7 +127,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | libicu66 | 66.1-2ubuntu2 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.8 |
+| libssl1.1 | 1.1.1f-1ubuntu2.9 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -143,11 +143,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | openssh-client | 1:8.2p1-4ubuntu0.3 |
 | procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
-| rsync | 3.1.3-8 |
+| rsync | 3.1.3-8ubuntu0.1 |
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
-| vim-tiny | 2:8.1.2269-1ubuntu5.3 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.4 |
 | wget | 1.20.3-1ubuntu1 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |
@@ -155,7 +155,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:897bad3037bb6dae78bffd4673561dbe176c16b2348bb47d3956d4db1970b9e4
+**Digest:** sha256:0a7b8eeb64678e774ec9c019721e96a1fcda4f5eddba7074b9a191c506065997
 
 **Tags:**
 ```
@@ -176,7 +176,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -216,11 +216,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | openssh-client | 1:7.6p1-4ubuntu0.5 |
 | procps | 2:3.3.12-3ubuntu1.2 |
 | psmisc | 23.1-1ubuntu0.1 |
-| rsync | 3.1.2-2.1ubuntu1.1 |
+| rsync | 3.1.2-2.1ubuntu1.2 |
 | strace | 4.21-1ubuntu1 |
 | sudo | 1.8.21p2-3ubuntu1.4 |
 | unzip | 6.0-21ubuntu1.1 |
-| vim-tiny | 2:8.0.1453-1ubuntu1.6 |
+| vim-tiny | 2:8.0.1453-1ubuntu1.7 |
 | wget | 1.19.4-1ubuntu2.2 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-0ubuntu2 |

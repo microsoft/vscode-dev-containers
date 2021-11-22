@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:379d50a46ac46b2f471fd163341a4ece398077e104cc59a99bdd666557a97695
+**Digest:** sha256:3bbfb02b5edb2ce612276cc44732762e3cf7ed1b8f73a613a005f541d65f1ef5
 
 **Tags:**
 ```
@@ -43,10 +43,10 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | b3ba9978cc42a5031c7b68e3cf917ec2e64643bc | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
-| [rbenv](https://github.com/rbenv/rbenv.git) | 6cc7bff383a603fb47325be80e3cac8a7f55f501 | /usr/local/share/rbenv |
+| [rbenv](https://github.com/rbenv/rbenv.git) | 304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | d796c17945f6d837ffee601fbf71ac66be38a9c1 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
@@ -56,7 +56,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | pylint | 2.11.1 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
-| black | 21.10b0 |
+| black | 21.11b1 |
 | yapf | 0.31.0 |
 | mypy | 0.910 |
 | pydocstyle | 6.1.1 |
@@ -75,7 +75,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | github.com/mgechev/revive | 1.1.2 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.7.2 |
+| github.com/go-delve/delve | 1.7.3 |
 | github.com/golangci/golangci-lint | 1.43.0 |
 
 **Ruby gems and tools**
@@ -101,10 +101,10 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Version | Path |
 |------|---------|------|
-| [git](https://github.com/git/git) | 2.33.0 | /usr/local |
+| [git](https://github.com/git/git) | 2.34.0 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.22.3 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.22.4 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.7.1 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
@@ -113,7 +113,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.1.1 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.10+azure | 
+| Docker (Moby) CLI &amp; Engine | 20.10.11+azure | 
 
 **Additional linux tools and packages**
 
@@ -145,7 +145,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libc6 | 2.31-0ubuntu9.2 |
 | libc6-dev | 2.31-0ubuntu9.2 |
 | libcups2 | 2.3.1-9ubuntu1.1 |
-| libgbm1 | 21.0.3-0ubuntu0.3~20.04.3 |
+| libgbm1 | 21.0.3-0ubuntu0.3~20.04.4 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libgtk-3-0 | 3.24.20-0ubuntu1 |
@@ -157,7 +157,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libpango-1.0-0 | 1.44.7-2ubuntu4 |
 | libpangocairo-1.0-0 | 1.44.7-2ubuntu4 |
 | libsecret-1-dev | 0.20.4-0ubuntu1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.8 |
+| libssl1.1 | 1.1.1f-1ubuntu2.9 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | libx11-6 | 2:1.6.9-2ubuntu1.2 |
 | libx11-xcb1 | 2:1.6.9-2ubuntu1.2 |
@@ -176,8 +176,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.10+azure-1 |
-| moby-engine (Docker Engine) | 20.10.10+azure-1 |
+| moby-cli (Docker CLI) | 20.10.11+azure-1 |
+| moby-engine (Docker Engine) | 20.10.11+azure-1 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
@@ -189,7 +189,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | psmisc | 23.3-1 |
 | python3-dev | 3.8.2-0ubuntu2 |
 | python3-minimal | 3.8.2-0ubuntu2 |
-| rsync | 3.1.3-8 |
+| rsync | 3.1.3-8ubuntu0.1 |
 | sed | 4.7-1 |
 | software-properties-common | 0.99.9.8 |
 | strace | 5.5-3ubuntu1 |
@@ -197,9 +197,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | tar | 1.30+dfsg-7ubuntu0.20.04.1 |
 | unzip | 6.0-25ubuntu1 |
 | valgrind | 1:3.15.0-1ubuntu9.1 |
-| vim | 2:8.1.2269-1ubuntu5.3 |
-| vim-doc | 2:8.1.2269-1ubuntu5.3 |
-| vim-tiny | 2:8.1.2269-1ubuntu5.3 |
+| vim | 2:8.1.2269-1ubuntu5.4 |
+| vim-doc | 2:8.1.2269-1ubuntu5.4 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.4 |
 | wget | 1.20.3-1ubuntu1 |
 | xtail | 2.1-6 |
 | zip | 3.0-11build1 |
