@@ -1,0 +1,124 @@
+{
+	"variants": [
+		"3.10-focal",
+		"3.9-focal",
+		"3.8-focal",
+		"3.7-focal",
+		"3.6-focal",
+		"3.10-bionic",
+		"3.9-bionic",
+		"3.8-bionic",
+		"3.7-bionic",
+		"3.6-bionic"
+	],
+	"definitionVersion": "0.1.0",
+	"build": {
+		"latest": "3.10-focal",
+		"rootDistro": "debian",
+		"parent": "python",
+		"variantBuildArgs": {
+			"3.10-focal": {
+				"CUDA_VERSION": "11.4.2",
+				"UBUNTU_VERSION": "20.04"
+			},
+			"3.9-focal": {
+				"CUDA_VERSION": "11.4.2",
+				"UBUNTU_VERSION": "20.04"
+			},
+			"3.8-focal": {
+				"CUDA_VERSION": "11.4.2",
+				"UBUNTU_VERSION": "20.04"
+			},
+			"3.7-focal": {
+				"CUDA_VERSION": "11.4.2",
+				"UBUNTU_VERSION": "20.04"
+			},
+			"3.6-focal": {
+				"CUDA_VERSION": "11.4.2",
+				"UBUNTU_VERSION": "20.04"
+			},
+			"3.10-bionic": {
+				"CUDA_VERSION": "11.4.1",
+				"UBUNTU_VERSION": "18.04"
+			},
+			"3.9-bionic": {
+				"CUDA_VERSION": "11.4.1",
+				"UBUNTU_VERSION": "18.04"
+			},
+			"3.8-bionic": {
+				"CUDA_VERSION": "11.4.1",
+				"UBUNTU_VERSION": "18.04"
+			},
+			"3.7-bionic": {
+				"CUDA_VERSION": "11.4.1",
+				"UBUNTU_VERSION": "18.04"
+			},
+			"3.6-bionic": {
+				"CUDA_VERSION": "11.4.1",
+				"UBUNTU_VERSION": "18.04"
+			}
+		},
+		"architectures": {
+			"3.10-focal": ["linux/amd64"],
+			"3.9-focal": ["linux/amd64"],
+			"3.8-focal": ["linux/amd64"],
+			"3.7-focal": ["linux/amd64"],
+			"3.6-focal": ["linux/amd64"],
+			"3.10-bionic": ["linux/amd64", "linux/arm64"],
+			"3.9-bionic": ["linux/amd64", "linux/arm64"],
+			"3.8-bionic": ["linux/amd64", "linux/arm64"],
+			"3.7-bionic": ["linux/amd64", "linux/arm64"],
+			"3.6-bionic": ["linux/amd64", "linux/arm64"]
+		},
+		"tags": [
+			"python-cuda:${VERSION}-${VARIANT}"
+		],
+		"variantTags": {
+			"3.10-focal": [ 
+				"python:${VERSION}-3.10",
+				"python:${VERSION}-3",
+				"python:${VERSION}-3-focal",
+				"python:${VERSION}-focal"
+			],
+			"3.9-focal": [ "python:${VERSION}-3.9" ], 
+			"3.8-focal": [ "python:${VERSION}-3.8" ],
+			"3.7-focal": [ "python:${VERSION}-3.7" ],
+			"3.6-focal": [ "python:${VERSION}-3.6" ],
+			"3.10-bionic": [ 
+				"python:${VERSION}-3-bionic",
+				"python:${VERSION}-bionic"
+			]
+		}
+	},
+	"dependencies": {
+		"image": "python:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/python",
+		"apt": [{
+			"cgIgnore": false,
+			"name": "yarn"
+		}],
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm"
+		},
+		"pipx": [
+			"pylint",
+			"flake8",
+			"autopep8",
+			"black",
+			"yapf",
+			"mypy",
+			"pydocstyle",
+			"pycodestyle",
+			"bandit",
+			"virtualenv",
+			"pipx"
+		],
+		"languages": {
+			"Python": {
+				"cgIgnore": true,
+				"path": "/usr/local"
+			}
+		}
+	}
+}
