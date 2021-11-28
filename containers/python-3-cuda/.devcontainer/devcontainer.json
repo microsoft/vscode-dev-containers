@@ -5,20 +5,23 @@
 		"context": "..",
 		"args": { 
 			// Update 'VARIANT' to pick a Python version: 3, 3.10, 3.9, 3.8, 3.7, 3.6
-			// Append -focal or -bionic to pin to an OS version.
-			// Use -fossa variants on local on arm64/Apple Silicon.
-			"VARIANT": "3.8-focal",
+			"VARIANT": "3.9",
 			// Options
 			"NODE_VERSION": "lts/*"
 		}
 	},
 	"runArgs": [
+		// Requires WSL2, see https://docs.nvidia.com/cuda/wsl-user-guide/index.html#wsl2-system-requirements
 		"--gpus=all",
+		// If multiprocessing used, see https://github.com/pytorch/pytorch#using-pre-built-images
+		"--ipc=host",
+		//"--shm-size=4gb"
 	],
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"python.defaultInterpreterPath": "/usr/local/bin/python",
+		"python.languageServer": "Pylance",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
@@ -35,7 +38,9 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
-		"ms-python.vscode-pylance"
+		"ms-python.vscode-pylance",
+		"ms-toolsai.jupyter",
+		"visualstudioexptteam.vscodeintellicode",
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
