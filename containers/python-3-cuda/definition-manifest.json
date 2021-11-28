@@ -17,26 +17,26 @@
 		"rootDistro": "debian",
 		"latest": "3.10-focal",
 		"tags": [
-			"python:${VERSION}-${VARIANT}-cuda",
-			"python:${VARIANT}-cuda"
+			"cuda:${VERSION}-${VARIANT}",
+			"cuda:${VARIANT}"
 		],
 		"parent": "python",
 		"variantTags": {
 			"3.10-focal": [ 
-				"python:${VERSION}-3.10-cuda",
-				"python:${VERSION}-3-cuda",
-				"python:${VERSION}-3-focal-cuda",
-				"python:${VERSION}-focal-cuda",
-				"python:3.10-cuda",
-				"python:3-cuda"
+				"cuda:${VERSION}-3.10",
+				"cuda:${VERSION}-3",
+				"cuda:${VERSION}-3-focal",
+				"cuda:${VERSION}-focal",
+				"cuda:3.10",
+				"cuda:3"
 			],
-			"3.9-focal": [ "python:${VERSION}-3.9-cuda", "python:3.9-cuda" ], 
-			"3.8-focal": [ "python:${VERSION}-3.8-cuda", "python:3.8-cuda" ],
-			"3.7-focal": [ "python:${VERSION}-3.7-cuda", "python:3.7-cuda" ],
-			"3.6-focal": [ "python:${VERSION}-3.6-cuda", "python:3.6-cuda" ],
+			"3.9-focal": [ "cuda:${VERSION}-3.9", "cuda:3.9" ], 
+			"3.8-focal": [ "cuda:${VERSION}-3.8", "cuda:3.8" ],
+			"3.7-focal": [ "cuda:${VERSION}-3.7", "cuda:3.7" ],
+			"3.6-focal": [ "cuda:${VERSION}-3.6", "cuda:3.6" ],
 			"3.10-bionic": [ 
-				"python:${VERSION}-3-bionic-cuda",
-				"python:${VERSION}-bionic-cuda"
+				"cuda:${VERSION}-3-bionic",
+				"cuda:${VERSION}-bionic"
 			]
 		},
 		"variantBuildArgs": {
@@ -93,6 +93,8 @@
 		}
 	},
 	"dependencies": {
+		"image": "python:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/python",
 		"apt": [{
 			"cgIgnore": false,
 			"name": "yarn"
