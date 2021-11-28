@@ -13,86 +13,86 @@
 	],
 	"definitionVersion": "0.1.0",
 	"build": {
-		"latest": "3.10-focal",
+		"architectures": [ "linux/amd64" ],
 		"rootDistro": "debian",
+		"latest": "3.10-focal",
+		"tags": [
+			"python:${VERSION}-${VARIANT}-cuda",
+			"python:${VARIANT}-cuda"
+		],
 		"parent": "python",
+		"variantTags": {
+			"3.10-focal": [ 
+				"python:${VERSION}-3.10-cuda",
+				"python:${VERSION}-3-cuda",
+				"python:${VERSION}-3-focal-cuda",
+				"python:${VERSION}-focal-cuda",
+				"python:3.10-cuda",
+				"python:3-cuda"
+			],
+			"3.9-focal": [ "python:${VERSION}-3.9-cuda", "python:3.9-cuda" ], 
+			"3.8-focal": [ "python:${VERSION}-3.8-cuda", "python:3.8-cuda" ],
+			"3.7-focal": [ "python:${VERSION}-3.7-cuda", "python:3.7-cuda" ],
+			"3.6-focal": [ "python:${VERSION}-3.6-cuda", "python:3.6-cuda" ],
+			"3.10-bionic": [ 
+				"python:${VERSION}-3-bionic-cuda",
+				"python:${VERSION}-bionic-cuda"
+			]
+		},
 		"variantBuildArgs": {
 			"3.10-focal": {
 				"CUDA_VERSION": "11.4.2",
-				"UBUNTU_VERSION": "20.04"
+				"UBUNTU_VERSION": "20.04",
+				"VARIANT": "3.10"
 			},
 			"3.9-focal": {
 				"CUDA_VERSION": "11.4.2",
-				"UBUNTU_VERSION": "20.04"
+				"UBUNTU_VERSION": "20.04",
+				"VARIANT": "3.9"
 			},
 			"3.8-focal": {
 				"CUDA_VERSION": "11.4.2",
-				"UBUNTU_VERSION": "20.04"
+				"UBUNTU_VERSION": "20.04",
+				"VARIANT": "3.8"
 			},
 			"3.7-focal": {
 				"CUDA_VERSION": "11.4.2",
-				"UBUNTU_VERSION": "20.04"
+				"UBUNTU_VERSION": "20.04",
+				"VARIANT": "3.7"
 			},
 			"3.6-focal": {
 				"CUDA_VERSION": "11.4.2",
-				"UBUNTU_VERSION": "20.04"
+				"UBUNTU_VERSION": "20.04",
+				"VARIANT": "3.6"
 			},
 			"3.10-bionic": {
 				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04"
+				"UBUNTU_VERSION": "18.04",
+				"VARIANT": "3.10"
 			},
 			"3.9-bionic": {
 				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04"
+				"UBUNTU_VERSION": "18.04",
+				"VARIANT": "3.9"
 			},
 			"3.8-bionic": {
 				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04"
+				"UBUNTU_VERSION": "18.04",
+				"VARIANT": "3.8"
 			},
 			"3.7-bionic": {
 				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04"
+				"UBUNTU_VERSION": "18.04",
+				"VARIANT": "3.7"
 			},
 			"3.6-bionic": {
 				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04"
+				"UBUNTU_VERSION": "18.04",
+				"VARIANT": "3.6"
 			}
-		},
-		"architectures": {
-			"3.10-focal": ["linux/amd64"],
-			"3.9-focal": ["linux/amd64"],
-			"3.8-focal": ["linux/amd64"],
-			"3.7-focal": ["linux/amd64"],
-			"3.6-focal": ["linux/amd64"],
-			"3.10-bionic": ["linux/amd64", "linux/arm64"],
-			"3.9-bionic": ["linux/amd64", "linux/arm64"],
-			"3.8-bionic": ["linux/amd64", "linux/arm64"],
-			"3.7-bionic": ["linux/amd64", "linux/arm64"],
-			"3.6-bionic": ["linux/amd64", "linux/arm64"]
-		},
-		"tags": [
-			"python-cuda:${VERSION}-${VARIANT}"
-		],
-		"variantTags": {
-			"3.10-focal": [ 
-				"python:${VERSION}-3.10",
-				"python:${VERSION}-3",
-				"python:${VERSION}-3-focal",
-				"python:${VERSION}-focal"
-			],
-			"3.9-focal": [ "python:${VERSION}-3.9" ], 
-			"3.8-focal": [ "python:${VERSION}-3.8" ],
-			"3.7-focal": [ "python:${VERSION}-3.7" ],
-			"3.6-focal": [ "python:${VERSION}-3.6" ],
-			"3.10-bionic": [ 
-				"python:${VERSION}-3-bionic",
-				"python:${VERSION}-bionic"
-			]
 		}
 	},
 	"dependencies": {
-		"image": "python:${VARIANT}",
-		"imageLink": "https://hub.docker.com/_/python",
 		"apt": [{
 			"cgIgnore": false,
 			"name": "yarn"
