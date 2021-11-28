@@ -1,93 +1,51 @@
 {
 	"variants": [
-		"3.10-focal",
-		"3.9-focal",
-		"3.8-focal",
-		"3.7-focal",
-		"3.6-focal",
-		"3.10-bionic",
-		"3.9-bionic",
-		"3.8-bionic",
-		"3.7-bionic",
-		"3.6-bionic"
+		"3.10",
+		"3.9",
+		"3.8",
+		"3.7",
+		"3.6"
 	],
 	"definitionVersion": "0.1.0",
 	"build": {
 		"architectures": [ "linux/amd64" ],
 		"rootDistro": "debian",
-		"latest": "3.10-focal",
+		"latest": "3",
 		"tags": [
 			"cuda:${VERSION}-${VARIANT}",
 			"cuda:${VARIANT}"
 		],
 		"parent": "python",
 		"variantTags": {
-			"3.10-focal": [ 
-				"cuda:${VERSION}-3.10",
+			"3.10": [ 
 				"cuda:${VERSION}-3",
-				"cuda:${VERSION}-3-focal",
-				"cuda:${VERSION}-focal",
-				"cuda:3.10",
 				"cuda:3"
-			],
-			"3.9-focal": [ "cuda:${VERSION}-3.9", "cuda:3.9" ], 
-			"3.8-focal": [ "cuda:${VERSION}-3.8", "cuda:3.8" ],
-			"3.7-focal": [ "cuda:${VERSION}-3.7", "cuda:3.7" ],
-			"3.6-focal": [ "cuda:${VERSION}-3.6", "cuda:3.6" ],
-			"3.10-bionic": [ 
-				"cuda:${VERSION}-3-bionic",
-				"cuda:${VERSION}-bionic"
 			]
 		},
 		"variantBuildArgs": {
-			"3.10-focal": {
+			"3.10": {
 				"CUDA_VERSION": "11.4.2",
 				"UBUNTU_VERSION": "20.04",
 				"VARIANT": "3.10"
 			},
-			"3.9-focal": {
+			"3.9": {
 				"CUDA_VERSION": "11.4.2",
 				"UBUNTU_VERSION": "20.04",
 				"VARIANT": "3.9"
 			},
-			"3.8-focal": {
+			"3.8": {
 				"CUDA_VERSION": "11.4.2",
 				"UBUNTU_VERSION": "20.04",
 				"VARIANT": "3.8"
 			},
-			"3.7-focal": {
+			"3.7": {
 				"CUDA_VERSION": "11.4.2",
 				"UBUNTU_VERSION": "20.04",
 				"VARIANT": "3.7"
 			},
-			"3.6-focal": {
+			"3.6": {
 				"CUDA_VERSION": "11.4.2",
 				"UBUNTU_VERSION": "20.04",
-				"VARIANT": "3.6"
-			},
-			"3.10-bionic": {
-				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04",
-				"VARIANT": "3.10"
-			},
-			"3.9-bionic": {
-				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04",
-				"VARIANT": "3.9"
-			},
-			"3.8-bionic": {
-				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04",
-				"VARIANT": "3.8"
-			},
-			"3.7-bionic": {
-				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04",
-				"VARIANT": "3.7"
-			},
-			"3.6-bionic": {
-				"CUDA_VERSION": "11.4.1",
-				"UBUNTU_VERSION": "18.04",
 				"VARIANT": "3.6"
 			}
 		}
