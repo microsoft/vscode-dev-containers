@@ -1,6 +1,6 @@
-# [Choice] Python version (use -focal variants on local arm64/Apple Silicon): 3, 3.10, 3.9, 3.8, 3.7, 3.6, 3-focal, 3.10-focal, 3.9-focal, 3.8-focal, 3.7-focal, 3.6-focal, 3-bionic, 3.10-bionic, 3.9-bionic, 3.8-bionic, 3.7-bionic, 3.6-bionic
+# [Choice] Python version: 3, 3.10, 3.9, 3.8, 3.7, 3.6, 3-focal, 3.10-focal, 3.9-focal, 3.8-focal, 3.7-focal, 3.6-focal, 3-bionic, 3.10-bionic, 3.9-bionic, 3.8-bionic, 3.7-bionic, 3.6-bionic
 ARG VARIANT=3-focal
-FROM mcr.microsoft.com/vscode/devcontainers/python-cuda:${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}-cuda
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
