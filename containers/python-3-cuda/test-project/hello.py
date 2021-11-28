@@ -5,4 +5,7 @@
 import subprocess
 
 print('Hello, remote world!')
+# The nvidia-smi command will generally report the driver version installed on the base machine,
 rc = subprocess.call("nvidia-smi")
+# whereas other version methods like nvcc will report the CUDA version installed inside the docker container
+rc = subprocess.call("nvcc --version")
