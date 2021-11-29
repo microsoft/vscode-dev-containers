@@ -165,13 +165,13 @@ else
     fi
     echo "Installing Rust..."
     # Download and verify rustup sha
-    mkdir -p /tmp/rustup/target/x86_64-unknown-linux-gnu/release/
+    mkdir -p /tmp/rustup/target/${download_architecture}-unknown-linux-gnu/release/
     curl -sSL --proto '=https' --tlsv1.2 "https://static.rust-lang.org/rustup/dist/${download_architecture}-unknown-linux-gnu/rustup-init" -o /tmp/rustup/target/${download_architecture}-unknown-linux-gnu/release/rustup-init
     curl -sSL --proto '=https' --tlsv1.2 "https://static.rust-lang.org/rustup/dist/${download_architecture}-unknown-linux-gnu/rustup-init.sha256" -o /tmp/rustup/rustup-init.sha256
     cd /tmp/rustup
     sha256sum -c rustup-init.sha256
-    chmod +x target/x86_64-unknown-linux-gnu/release/rustup-init
-    target/x86_64-unknown-linux-gnu/release/rustup-init -y --no-modify-path --profile ${RUSTUP_PROFILE} ${default_toolchain_arg}
+    chmod +x target/${download_architecture}-unknown-linux-gnu/release/rustup-init
+    target/${download_architecture}-unknown-linux-gnu/release/rustup-init -y --no-modify-path --profile ${RUSTUP_PROFILE} ${default_toolchain_arg}
     cd ~
     rm -rf /tmp/rustup
 fi
