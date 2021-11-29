@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "15fd9c84deae400ba52451d75548fb8f6ec26bcf"
+                    "commitHash": "bf303965e685489f2f1b764d5d22dc4766ca78c8"
                 }
             }
         },
@@ -240,7 +240,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.11.1"
+                    "Version": "2.12.1"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "15fd9c84deae400ba52451d75548fb8f6ec26bcf"
+                    "commitHash": "bf303965e685489f2f1b764d5d22dc4766ca78c8"
                 }
             }
         },
@@ -533,7 +533,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "d796c17945f6d837ffee601fbf71ac66be38a9c1"
+                    "commitHash": "6147a6dae9c64c288ae009118ecc42ba6776c4dc"
                 }
             }
         },
@@ -542,7 +542,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "git",
-                    "Version": "2.34.0",
+                    "Version": "2.34.1",
                     "DownloadUrl": "https://github.com/git/git"
                 }
             }
@@ -1104,7 +1104,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "15fd9c84deae400ba52451d75548fb8f6ec26bcf"
+                    "commitHash": "bf303965e685489f2f1b764d5d22dc4766ca78c8"
                 }
             }
         },

@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:3bbfb02b5edb2ce612276cc44732762e3cf7ed1b8f73a613a005f541d65f1ef5
+**Digest:** sha256:2fc5557bc470ad7faf76a10a9259ff31ad428e3e3116d5e9109a0b520114ca4b
 
 **Tags:**
 ```
@@ -43,17 +43,17 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | d796c17945f6d837ffee601fbf71ac66be38a9c1 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 6147a6dae9c64c288ae009118ecc42ba6776c4dc | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.11.1 |
+| pylint | 2.12.1 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
 | black | 21.11b1 |
@@ -101,7 +101,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Version | Path |
 |------|---------|------|
-| [git](https://github.com/git/git) | 2.34.0 | /usr/local |
+| [git](https://github.com/git/git) | 2.34.1 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.22.4 | /usr/local/bin |
@@ -149,7 +149,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libgtk-3-0 | 3.24.20-0ubuntu1 |
-| libicu66 | 66.1-2ubuntu2 |
+| libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
 | libnspr4 | 2:4.25-1 |
@@ -200,7 +200,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | vim | 2:8.1.2269-1ubuntu5.4 |
 | vim-doc | 2:8.1.2269-1ubuntu5.4 |
 | vim-tiny | 2:8.1.2269-1ubuntu5.4 |
-| wget | 1.20.3-1ubuntu1 |
+| wget | 1.20.3-1ubuntu2 |
 | xtail | 2.1-6 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |

@@ -14,7 +14,7 @@
 
 ## Variant: bullseye
 
-**Digest:** sha256:484c29165d3a8dec47afc5632351a1e0a65a0cf8620022359c02da321e0627de
+**Digest:** sha256:21b4eb9f52eaa4518a28286657c57bc27fd9fff96a1d9671a81d49dfedf8b95b
 
 **Tags:**
 ```
@@ -44,7 +44,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: buster
 
-**Digest:** sha256:f7671826764f1569b77bbbb674b658f0370572f1795844af2193ebc953d71ac4
+**Digest:** sha256:728d3f5c3f454d0d997507c0d18e373745d0a24a138228782240ba8a59ab3096
 
 **Tags:**
 ```
@@ -130,7 +130,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -155,7 +155,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian10
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
 | libgssapi-krb5-2 | 1.17-3+deb10u3 |
-| libicu63 | 63.1-6+deb10u1 |
+| libicu63 | 63.1-6+deb10u2 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u7 |
@@ -189,7 +189,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian10
 
 ## Variant: hirsute
 
-**Digest:** sha256:ffddd68ef5d8c9058fd9ffe3f3ce50beaf21900ad642a28bc71252a55550e44e
+**Digest:** sha256:e26eff1e9291f5a5dba8347d8c4d634dff6b76f685c4d58449fbff11f5a1755f
 
 **Tags:**
 ```
@@ -217,7 +217,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -241,7 +241,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu21.04
 | less | 551-2 |
 | libc6 | 2.33-0ubuntu5 |
 | libgssapi-krb5-2 | 1.18.3-4 |
-| libicu67 | 67.1-6ubuntu2 |
+| libicu67 | 67.1-6ubuntu2.1 |
 | libkrb5-3 | 1.18.3-4 |
 | liblttng-ust0 | 2.12.1-1ubuntu1 |
 | libssl1.1 | 1.1.1j-1ubuntu3.5 |
@@ -275,7 +275,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:bcedf2096f151835e7775d3468716018f7a4810498a9c7744ba197d388469933
+**Digest:** sha256:f8261cd3cfab13901d84af8892b71cd993aeefa7312ac3f3fd02171a64fd855e
 
 **Tags:**
 ```
@@ -304,7 +304,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -329,7 +329,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | libc6 | 2.31-0ubuntu9.2 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
-| libicu66 | 66.1-2ubuntu2 |
+| libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.9 |
@@ -356,14 +356,14 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | unzip | 6.0-25ubuntu1 |
 | valgrind | 1:3.15.0-1ubuntu9.1 |
 | vim-tiny | 2:8.1.2269-1ubuntu5.4 |
-| wget | 1.20.3-1ubuntu1 |
+| wget | 1.20.3-1ubuntu2 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |
 | zsh | 5.8-3ubuntu1 |
 
 ## Variant: bionic
 
-**Digest:** sha256:d6202d1636c64e9387f171a5f3b95b3078fa4229e575c5101c800f45071a8dcd
+**Digest:** sha256:1619fdfbad39e2d2e178428202b3b7a7b32099e1b6e883e587271e0bb9c7b419
 
 **Tags:**
 ```
@@ -391,7 +391,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -451,7 +451,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:d2b8cdf629c3af1f9460e2ff5169229f3df7b2349cffececa3eee36ef3ea1e56
+**Digest:** sha256:e93bffc368931552ceb150494e15514d738bd41871ebc8b2b09ef62e1d18e4c8
 
 **Tags:**
 ```
@@ -479,7 +479,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 15fd9c84deae400ba52451d75548fb8f6ec26bcf | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
