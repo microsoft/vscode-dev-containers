@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/rust |
-| *Available image variants* | buster, bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/rust/tags/list)) |
+| *Available image variants* | buster, buster-slim, bullseye, bullseye-slim ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/rust/tags/list)) |
 | *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variant |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -30,14 +30,14 @@ While this definition should work unmodified, you can select the version of Debi
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own `Dockerfile` to the following. An example `Dockerfile` is included in this repository.
 
-- `mcr.microsoft.com/vscode/devcontainers/rust:latest` (or `bullseye`, `buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/rust:1` (or `1-bullseye`, `1-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/rust:latest` (or `bullseye`, `bullseye-slim`, `buster`, `buster-slim` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/rust:1` (or `1-bullseye`, `1-bullseye-slim`, `1-buster`, `1-buster-slim` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/rust:0-1` (or `0-1-bullseye`, `0-1-buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/rust:0.201-1` (or `0.201-1-bullseye`, `0.201-1-buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/rust:0.201.0-1` (or `0.201.0-1-bullseye`, `0.201.0-1-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/rust:0-1` (or `0-1-bullseye`, `0-1-bullseye-slim`, `0-1-buster`, `0-1-buster-slim` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/rust:0.201-1` (or `0.201-1-bullseye`, `0.201-1-bullseye-slim`, `0.201-1-buster`, `0.201-1-buster-slim` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/rust:0.201.0-1` (or `0.201.0-1-bullseye`, `0.201.0-1-bullseye-slim`, `0.201.0-1-buster`, `0.201.0-1-buster-slim` to pin to an OS version)
 
 However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-1`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
 

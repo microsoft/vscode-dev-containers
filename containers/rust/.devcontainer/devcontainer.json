@@ -3,8 +3,8 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			// Use the VARIANT arg to pick a Debian OS version: buster, bullseye
-			// Use bullseye when on local on arm64/Apple Silicon.
+			// Use the VARIANT arg to pick a Debian OS version: buster, buster-slim, bullseye, bullseye-slim
+			// Use bullseye or bullseye-slim when on local on arm64/Apple Silicon.
 			"VARIANT": "buster"
 		}
 	},

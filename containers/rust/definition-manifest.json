@@ -1,5 +1,5 @@
 {
-	"variants": ["buster", "bullseye"],
+	"variants": ["buster", "buster-slim", "bullseye", "bullseye-slim"],
 	"definitionVersion": "0.201.1",
 	"build": {
 		"latest": "buster",
@@ -20,8 +20,8 @@
 		}
 	},
 	"dependencies": {
-		"image": "rust:1-${VARIANT}",
-		"imageLink": "https://hub.docker.com/_/rust",
+		"image": "debian:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/debian",
 		"apt": [
 			"lldb", 
 			"python3-minimal",
