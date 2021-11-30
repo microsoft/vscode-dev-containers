@@ -73,6 +73,17 @@ You can set the default Clojure version used by Boot as well as the version of C
 }
 ```
 
+### Installing Node.js
+
+Given JavaScript front-end web client code written for use in conjunction with a ClojureScript project often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+
+```jsonc
+"args": {
+   "NODE_VERSION": "10" // Set to "none" to skip Node.js installation
+}
+```
+
+
 ### Adding the definition to your folder
 
 1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.

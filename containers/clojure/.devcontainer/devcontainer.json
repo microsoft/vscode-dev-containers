@@ -12,7 +12,8 @@
 			"INSTALL_CLOJURE_CLI": "true",
 			"INSTALL_BOOT": "true",
 			"INSTALL_LEININGEN": "true",
-			"INSTALL_POLYLITH": "true"
+			"INSTALL_POLYLITH": "true",
+			"NODE_VERSION": "none"
 		}
 	},
 
