@@ -69,15 +69,11 @@ jobs:
         ACR_REGISTRY_NAME=$(echo ${{ secrets.REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
         az acr login --name $ACR_REGISTRY_NAME
 
-        # Setup build CLI
-        cd "$GITHUB_WORKSPACE/ref"
-        yarn install
-
-        # Go to the release, symlink the build tool from ref since this is the version for the workflow
+        # Go to the release, copy the build tool from ref since this is the version for the workflow
         cd "$GITHUB_WORKSPACE/release"
         rm -rf build node_modules
-        ln -s "$GITHUB_WORKSPACE/ref/build" build
-        ln -s "$GITHUB_WORKSPACE/ref/node_modules" node_modules
+        cp -r "$GITHUB_WORKSPACE/ref/build" "$GITHUB_WORKSPACE/release/"
+        yarn install
 
         # Pull images and update cgmanifest.json, but output back to ref
         build/vscdc info  --no-build \
