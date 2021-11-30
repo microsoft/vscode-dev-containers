@@ -49,8 +49,8 @@
 		}
 	},
 	"dependencies": {
-		"image": "openjdk:${VARIANT}",
-		"imageLink": "https://hub.docker.com/_/openjdk",
+		"image": "debian:${BASE_IMAGE_VERSION_CODENAME}",
+		"imageLink": "https://hub.docker.com/_/debian",
 		"apt": [{
 			"cgIgnore": false,
 			"name": "yarn"
