@@ -150,7 +150,7 @@ install_using_pip() {
     fi
 
     set +e
-        ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' -f azure-cli${ver}
+        ${pipx_bin} install --pip-args '--no-cache-dir --force-reinstall' -f azure-cli${ver}
 
         # Fail gracefully
         if [ "$?" != 0 ]; then

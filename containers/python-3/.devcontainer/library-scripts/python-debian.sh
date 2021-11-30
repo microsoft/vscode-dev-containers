@@ -333,7 +333,7 @@ export PYTHONUSERBASE=/tmp/pip-tmp
 export PIP_CACHE_DIR=/tmp/pip-tmp/cache
 pipx_path=""
 if ! type pipx > /dev/null 2>&1; then
-    pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
+    pip3 install --disable-pip-version-check --no-cache-dir --user pipx 2>&1
     /tmp/pip-tmp/bin/pipx install --pip-args=--no-cache-dir pipx
     pipx_path="/tmp/pip-tmp/bin/"
 fi
