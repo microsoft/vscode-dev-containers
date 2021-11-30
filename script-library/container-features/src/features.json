@@ -4,6 +4,7 @@
 		{
 			"id": "docker-in-docker",
 			"name": "Docker (Moby) support (Docker-in-Docker)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker-in-docker.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -64,6 +65,7 @@
 		{
 			"id": "docker-from-docker",
 			"name": "Docker (Moby) support, reuse host Docker Engine (Docker-from-Docker)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -115,6 +117,7 @@
 		{
 			"id": "kubectl-helm-minikube",
 			"name": "Kubectl, Helm, and Minkube",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/kubectl-helm.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -175,6 +178,7 @@
 		{
 			"id": "terraform",
 			"name": "Terraform, tflint, and TFGrunt",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/terraform.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -236,6 +240,7 @@
 		{
 			"id": "git",
 			"name": "Git (may require compilation)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/git-from-src.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -281,6 +286,7 @@
 		{
 			"id": "git-lfs",
 			"name": "Git Large File Support (LFS)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/git-lfs.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -321,6 +327,7 @@
 		{
 			"id": "github-cli",
 			"name": "GitHub CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/github.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -362,6 +369,7 @@
 		{
 			"id": "azure-cli",
 			"name": "Azure CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/azcli.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -406,6 +414,7 @@
 		{
 			"id": "sshd",
 			"name": "SSH server",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/sshd.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -448,6 +457,7 @@
 		{
 			"id": "desktop-lite",
 			"name": "Light-weight desktop (Fluxbox)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/desktop-lite.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -512,6 +522,7 @@
 		{
 			"id": "homebrew",
 			"name": "Homebrew",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/homebrew.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -557,6 +568,7 @@
 		{
 			"id": "node",
 			"name": "Node.js (via nvm) and yarn",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/node.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -591,6 +603,7 @@
 		{
 			"id": "python",
 			"name": "Python (may require compilation)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/python.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -661,6 +674,7 @@
 		{
 			"id": "golang",
 			"name": "Go",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/go.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -711,6 +725,7 @@
 		{
 			"id": "java",
 			"name": "Java (via SDKMAN!)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/java.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -761,6 +776,7 @@
 		{
 			"id": "maven",
 			"name": "Maven (via SDKMAN!)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/maven.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -805,6 +821,7 @@
 		{
 			"id": "gradle",
 			"name": "Gradle (via SDKMAN!)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/gradle.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -849,6 +866,7 @@
 		{
 			"id": "ruby",
 			"name": "Ruby (via rvm)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/ruby.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -898,6 +916,7 @@
 		{
 			"id": "rust",
 			"name": "Rust",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/rust.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -966,6 +985,7 @@
 		{
 			"id": "powershell",
 			"name": "PowerShell",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/powershell.md",
 			"options": {
 				"version": {
 					"type": "string",
@@ -1007,6 +1027,7 @@
 		{
 			"id": "common",
 			"name": "Common OS utilities",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/common.md",
 			"options": {
 				"installZsh": {
 					"type": "boolean",
