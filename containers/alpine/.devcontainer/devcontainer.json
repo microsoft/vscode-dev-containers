@@ -2,8 +2,8 @@
 	"name": "Alpine",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Alpine version: 3.11, 3.12, 3.13, 3.14
-		"args": { "VARIANT": "3.14" }
+		// Update 'VARIANT' to pick an Alpine version: 3.12, 3.13, 3.14, 3.15
+		"args": { "VARIANT": "3.15" }
 	},
 	
 	// Set *default* container specific settings.json values on container create. 
