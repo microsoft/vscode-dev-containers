@@ -22,7 +22,7 @@ While this definition should work unmodified, you can select the version of Java
 "args": { "VARIANT": "16" }
 ```
 
-## Installing Clojure CLI Tools
+### Installing Clojure CLI Tools
 
 The Clojure command line tools will be installed by default but you can change this behavior by setting the `"INSTALL_CLOJURE_CLI"` build argument to false in
 `.devcontainer/devcontainer.json`. The version of the tools may be set with the `"CLOJURE_CLI_VERSION"` argument.
@@ -33,7 +33,7 @@ The Clojure command line tools will be installed by default but you can change t
 }
 ```
 
-## Installing Boot
+### Installing Boot
 
 The Boot command line tools will be installed by default but you can change this behavior by setting the `"INSTALL_BOOT"` build argument to false in `.devcontainer/devcontainer.json`. The version of Boot may be set with the `"BOOT_VERSION"` argument.
 
@@ -43,7 +43,7 @@ The Boot command line tools will be installed by default but you can change this
 }
 ```
 
-## Installing Leiningen
+### Installing Leiningen
 
 Leiningen will be installed by default but you can change this behavior by setting the `"INSTALL_LEININGEN"` build argument to false in `.devcontainer/devcontainer.json`. The version of Leiningen may be set with the `"LEININGEN_VERSION"` argument.
 
@@ -53,7 +53,7 @@ Leiningen will be installed by default but you can change this behavior by setti
 }
 ```
 
-## Installing Polylith
+### Installing Polylith
 
 Polylith will be installed by default but you can change this behavior by setting the `"INSTALL_POLYLITH"` build argument to false in `.devcontainer/devcontainer.json`. The version of Polylith may be set with the `"POLYLITH_VERSION"` argument.
 
@@ -63,7 +63,7 @@ Polylith will be installed by default but you can change this behavior by settin
 }
 ```
 
-## Installing a Specific Clojure Version
+### Installing a Specific Clojure Version
 
 You can set the default Clojure version used by Boot as well as the version of Clojure that is pre-loaded with Leiningen by adding the `"CLOJURE_VERSION"` to the build arguments in `.devcontainer/devcontainer.json`.
 
