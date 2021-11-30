@@ -39,7 +39,7 @@
 				"php:${VERSION}-buster"
 			],
 			"8.0-apache-buster": [ 
-				"php:${VERSION}-8.0-buster",
+				"php:${VERSION}-8.0-buster"
 			],
 			"7.4-apache-buster": [
 				"php:${VERSION}-7-buster",
