@@ -1,4 +1,4 @@
-name: Smoke test "alpine" build
+name: Smoke test "php" build
 
 on: 
   workflow_dispatch:
@@ -6,25 +6,27 @@ on:
   push:
     branches: [main, actions-test]
     paths:
-      - 'containers/alpine/**'
+      - 'containers/php/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'containers/alpine/**'
+      - 'containers/php/**'
 jobs:
   smoke-test:
     name: Smoke test
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     runs-on: ubuntu-latest
     steps:
+
     - name: Checkout
       id: checkout
       uses: actions/checkout@v2
+
     - name: Smoke test
       id: smoke_test
       uses: ./.github/actions/smoke-test
       with:
-        definition: alpine
-        image: mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
+        definition: php
+        image: mcr.microsoft.com/vscode/devcontainers/php:dev-8
         user: vscode
