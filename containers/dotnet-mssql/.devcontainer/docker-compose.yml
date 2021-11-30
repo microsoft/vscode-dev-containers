@@ -7,8 +7,7 @@ services:
       dockerfile: Dockerfile
       args:
         # Update 'VARIANT' to pick a version of .NET: 3.1, 5.0, 6.0
-        # Append -bullseye or -focal to pin to an OS version.
-        VARIANT: 5.0-focal
+        VARIANT: 6.0
         # Optional version of Node.js
         NODE_VERSION: "lts/*"
 
