@@ -1,4 +1,4 @@
-(ns sample
+(ns clj.sample
   (:gen-class))
 
 (defn main
