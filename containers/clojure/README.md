@@ -111,12 +111,25 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/clojure` folder.
-5. Open the "test-project" folder and click on the "project.clj" file to open the project file.
-6. Open the command palette and choose "Calva: Start a Project REPL and Connect (aka Jack-In)".
-7. When prompted for a project type, choose "Leiningen".
-7. A new Clojure REPL panel will appear, type "(main)" and press "alt+enter".
-8. You should see "Hello from the test project!" in the a Debug Console after the program executes.
-9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+
+5. To test Clojure:
+   1. Open the "test-project" folder and click on the `project.clj` file to open the project file.
+   2. Open the command palette and choose "Calva: Start a Project REPL and Connect (aka Jack-In)".
+   3. When prompted for a project type, choose "Leiningen".
+   4. A new Clojure REPL panel will appear, type `(require 'sample)` and press "alt+enter".
+   5. Type `(sample/main)`. 
+   6. Should return "Hello world".
+
+6. To test ClojureScript with Node:
+   1. Modify `NODE_VERSION` build argument in `.devcontainer/devcontainer.json` from default `none` to `lts/*`.
+   2. Open the command palette and choose "Remote-Containers: Rebuild Container"
+   3. Once rebuild is complete, open the "test-project" folder and click on the `project.clj` file to open the project file.
+   4. Open the command palette and choose "Calva: Start a Project REPL and Connect (aka Jack-In)".
+   5. When prompted for a project type, choose "Leiningen + ClojureScript built-in for node"
+   6. A new ClojureScript REPL panel will appear, type `(require 'sample.main)` and press "alt+enter".
+   7. Should return "Hello world".
+
+7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 
