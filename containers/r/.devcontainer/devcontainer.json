@@ -13,12 +13,6 @@
 		"r.plot.useHttpgd": true,
 		"[r]": {
 			"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
-		},
-		"terminal.integrated.profiles.linux": {
-			"radian": {
-				"path": "/usr/local/bin/radian",
-				"overrideName": true
-			}
 		}
 	},
 
