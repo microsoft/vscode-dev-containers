@@ -1,9 +1,9 @@
-(ns clj.sample
+(ns sample
   (:gen-class))
 
 (defn main
   [& args]
-  (println "Hello from the test project!"))
+  (println "Hello world"))
 
 (defn -main
   [& args]
