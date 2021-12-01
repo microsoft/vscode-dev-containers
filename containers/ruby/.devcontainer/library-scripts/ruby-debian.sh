@@ -215,6 +215,11 @@ else
             DEFAULT_GEMS=""
         fi
     fi
+    # Create rvm group as a system group to reduce the odds of conflict with local user UIDs
+    if ! cat /etc/group | grep -e "^rvm:" > /dev/null 2>&1; then
+        groupadd -r rvm
+    fi
+    # Install rvm
     curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles ${RVM_INSTALL_ARGS} --with-default-gems="${DEFAULT_GEMS}" 2>&1
     usermod -aG rvm ${USERNAME}
     su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && rvm fix-permissions system"
