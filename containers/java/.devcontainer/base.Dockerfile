@@ -1,31 +1,20 @@
 # This base.Dockerfile uses separate build arguments instead of VARIANT
 ARG BASE_IMAGE_VERSION_CODENAME=bullseye
-FROM debian:${BASE_IMAGE_VERSION_CODENAME}
-
-# JDK Version
-ARG TARGET_JAVA_VERSION=11
-ENV LANG en_US.UTF-8
+FROM mcr.microsoft.com/vscode/devcontainers/base:${BASE_IMAGE_VERSION_CODENAME}
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
 
-# [Option] Install zsh
-ARG INSTALL_ZSH="true"
-# [Option] Upgrade OS packages to their latest versions
-ARG UPGRADE_PACKAGES="true"
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
-	&& apt-get clean -y && rm -rf /var/lib/apt/lists/*
-
+# JDK Version
+ARG TARGET_JAVA_VERSION=11
 # [Option] Install Maven
 ARG INSTALL_MAVEN="false"
 ARG MAVEN_VERSION=""
 # [Option] Install Gradle
 ARG INSTALL_GRADLE="false"
 ARG GRADLE_VERSION=""
+ENV LANG en_US.UTF-8
 ENV SDKMAN_DIR="/usr/local/sdkman"
 ENV PATH="${SDKMAN_DIR}/candidates/java/current/bin:${PATH}:${SDKMAN_DIR}/candidates/maven/current/bin:${SDKMAN_DIR}/candidates/gradle/current/bin"
 # Install Java tools such as JDK, Maven and Gradle

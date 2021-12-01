@@ -49,8 +49,8 @@
 		}
 	},
 	"dependencies": {
-		"image": "debian:${BASE_IMAGE_VERSION_CODENAME}",
-		"imageLink": "https://hub.docker.com/_/debian",
+		"image": "buildpack-deps:${BASE_IMAGE_VERSION_CODENAME}-curl",
+		"imageLink": "https://hub.docker.com/_/buildpack-deps",
 		"apt": [{
 			"cgIgnore": false,
 			"name": "yarn"
