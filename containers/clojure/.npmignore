@@ -6,9 +6,5 @@ definition-manifest.json
 .npmignore
 .calva
 .clj-kondo
-.nrepl-port
-.cpcache
 .cljs_node_repl
-target
-out
-main.js
+.nrepl-port
