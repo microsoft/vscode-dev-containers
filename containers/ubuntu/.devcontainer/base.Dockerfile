@@ -1,4 +1,4 @@
-# [Choice] Ubuntu version (use hirsuite or bionic on local arm64/Apple Silicon): hirsute, focal, bionic
+# [Choice] Ubuntu version (use hirsute or bionic on local arm64/Apple Silicon): hirsute, focal, bionic
 ARG VARIANT="focal"
 FROM buildpack-deps:${VARIANT}-curl
 
