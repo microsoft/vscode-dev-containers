@@ -1029,6 +1029,11 @@
 			"name": "Common OS utilities",
 			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/common.md",
 			"options": {
+				"version": {
+					"type": "boolean",
+					"default": true,
+					"description": "Indicates activiation of the common feature with all default values"
+				},
 				"installZsh": {
 					"type": "boolean",
 					"default": true,
