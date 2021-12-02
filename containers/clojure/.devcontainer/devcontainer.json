@@ -13,7 +13,7 @@
 			"INSTALL_BOOT": "true",
 			"INSTALL_LEININGEN": "true",
 			"INSTALL_POLYLITH": "true",
-			"NODE_VERSION": "none"
+			"NODE_VERSION": "lts/*"
 		}
 	},
 
