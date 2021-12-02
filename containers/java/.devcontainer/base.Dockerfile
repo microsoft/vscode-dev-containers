@@ -1,34 +1,53 @@
 # This base.Dockerfile uses separate build arguments instead of VARIANT
+ARG TARGET_JAVA_VERSION=11
 ARG BASE_IMAGE_VERSION_CODENAME=bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/base:${BASE_IMAGE_VERSION_CODENAME}
+
+ARG TARGET_JAVA_VERSION
+ENV JAVA_HOME /usr/lib/jvm/msopenjdk-${TARGET_JAVA_VERSION}
+ENV PATH "${JAVA_HOME}/bin:${PATH}"
+# Default to UTF-8 file.encoding
+ENV LANG en_US.UTF-8
+
+# Install Microsoft OpenJDK
+RUN arch="$(dpkg --print-architecture)" \
+	&& case "$arch" in \
+		"amd64") \
+			jdkUrl="https://aka.ms/download-jdk/microsoft-jdk-${TARGET_JAVA_VERSION}-linux-x64.tar.gz"; \
+			;; \
+		"arm64") \
+			jdkUrl="https://aka.ms/download-jdk/microsoft-jdk-${TARGET_JAVA_VERSION}-linux-aarch64.tar.gz"; \
+			;; \
+		*) echo >&2 "error: unsupported architecture: '$arch'"; exit 1 ;; \
+	esac \
+	\
+	&& wget --progress=dot:giga -O msopenjdk.tar.gz "$jdkUrl" \
+	&& mkdir -p "$JAVA_HOME" \
+	&& tar --extract \
+		--file msopenjdk.tar.gz \
+		--directory "$JAVA_HOME" \
+		--strip-components 1 \
+		--no-same-owner \
+	&& rm msopenjdk.tar.gz* \
+	\
+	&& ln -s ${JAVA_HOME} /docker-java-home
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
 
 ARG USERNAME=vscode
-# JDK Version
-ARG TARGET_JAVA_VERSION=11
 # [Option] Install Maven
 ARG INSTALL_MAVEN="false"
 ARG MAVEN_VERSION=""
 # [Option] Install Gradle
 ARG INSTALL_GRADLE="false"
 ARG GRADLE_VERSION=""
-ENV LANG en_US.UTF-8
 ENV SDKMAN_DIR="/usr/local/sdkman"
 ENV PATH="${SDKMAN_DIR}/candidates/java/current/bin:${PATH}:${SDKMAN_DIR}/candidates/maven/current/bin:${SDKMAN_DIR}/candidates/gradle/current/bin"
-# Install Java tools such as JDK, Maven and Gradle
-RUN bash /tmp/library-scripts/java-debian.sh $TARGET_JAVA_VERSION "${SDKMAN_DIR}" "${USERNAME}" "true" \
+RUN bash /tmp/library-scripts/java-debian.sh "none" "${SDKMAN_DIR}" "${USERNAME}" "true" \
 	&& if [ "${INSTALL_MAVEN}" = "true" ]; then bash /tmp/library-scripts/maven-debian.sh "${MAVEN_VERSION:-latest}" "${SDKMAN_DIR}" ${USERNAME} "true"; fi \
 	&& if [ "${INSTALL_GRADLE}" = "true" ]; then bash /tmp/library-scripts/gradle-debian.sh "${GRADLE_VERSION:-latest}" "${SDKMAN_DIR}" ${USERNAME} "true"; fi \
 	&& apt-get clean -y && rm -rf /var/lib/apt/lists/*
-
-# Add symlinks to the installed JDK
-RUN ls ${SDKMAN_DIR}/candidates/java | grep "^${TARGET_JAVA_VERSION}.*" > /tmp/library-scripts/jdkname \
-	&& jdkName="$(cat /tmp/library-scripts/jdkname)" \
-	&& ln -s ${SDKMAN_DIR}/candidates/java/${jdkName} /docker-java-home \
-	&& if [ ! -d "/usr/lib/jvm" ]; then mkdir /usr/lib/jvm ; fi \
-	&& ln -s ${SDKMAN_DIR}/candidates/java/${jdkName} /usr/lib/jvm/${jdkName}
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
