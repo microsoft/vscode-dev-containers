@@ -27,6 +27,7 @@ RUN arch="$(dpkg --print-architecture)" \
 	&& sha256sumText=$(cat sha256sum.txt) \
 	&& sha256=$(expr substr "${sha256sumText}" 1 64) \
 	&& echo "${sha256} msopenjdk.tar.gz" | sha256sum --strict --check - \
+	&& rm sha256sum.txt* \
 	\
 	&& mkdir -p "$JAVA_HOME" \
 	&& tar --extract \
