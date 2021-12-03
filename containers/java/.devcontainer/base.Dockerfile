@@ -21,7 +21,13 @@ RUN arch="$(dpkg --print-architecture)" \
 		*) echo >&2 "error: unsupported architecture: '$arch'"; exit 1 ;; \
 	esac \
 	\
-	&& wget --progress=dot:giga -O msopenjdk.tar.gz "$jdkUrl" \
+	&& wget --progress=dot:giga -O msopenjdk.tar.gz "${jdkUrl}" \
+	&& wget --progress=dot:giga -O sha256sum.txt "${jdkUrl}.sha256sum.txt" \
+	\
+	&& sha256sumText=$(cat sha256sum.txt) \
+	&& sha256=$(expr substr "${sha256sumText}" 1 64) \
+	&& echo "${sha256} msopenjdk.tar.gz" | sha256sum --strict --check - \
+	\
 	&& mkdir -p "$JAVA_HOME" \
 	&& tar --extract \
 		--file msopenjdk.tar.gz \
