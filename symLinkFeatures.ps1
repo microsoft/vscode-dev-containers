@@ -5,7 +5,7 @@
 
 
 # Run the script in powershell with the following three arguments:
-# ./symLinkFeatures.ps1 "full/path/to/vscode-dev-containers-repo" "full/path/to/vscode-dev-containers-repo/extensions" "full/path/to/vscode-dev-containers" "full/path/to/vscode-remote-containers"
+# ./symLinkFeatures.ps1 "full/path/to/vscode-dev-containers-repo" "full/path/to/vscode-dev-containers" "full/path/to/vscode-remote-containers"
 
 $devContainersRepoPath=$args[0]
 $devContainersReleasePath=$args[1]
