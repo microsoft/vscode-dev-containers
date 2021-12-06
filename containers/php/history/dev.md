@@ -5,24 +5,111 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/php)
 
 **Definition variations:**
+- [8.1-apache-bullseye](#variant-81-apache-bullseye)
 - [8.0-apache-bullseye](#variant-80-apache-bullseye)
 - [7.4-apache-bullseye](#variant-74-apache-bullseye)
-- [7.3-apache-bullseye](#variant-73-apache-bullseye)
+- [8.1-apache-buster](#variant-81-apache-buster)
 - [8.0-apache-buster](#variant-80-apache-buster)
 - [7.4-apache-buster](#variant-74-apache-buster)
-- [7.3-apache-buster](#variant-73-apache-buster)
+
+## Variant: 8.1-apache-bullseye
+
+**Digest:** sha256:df91cb09f9405440d42d185e909f4477903f5cb5211bcc6d8b501729ccbf2ff4
+
+**Tags:**
+```
+mcr.microsoft.com/vscode/devcontainers/php:dev-8.1-apache-bullseye
+mcr.microsoft.com/vscode/devcontainers/php:dev-8
+mcr.microsoft.com/vscode/devcontainers/php:dev-8.1
+mcr.microsoft.com/vscode/devcontainers/php:dev-8-bullseye
+mcr.microsoft.com/vscode/devcontainers/php:dev-8.1-bullseye
+mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
+```
+> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
+
+**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+
+**Architectures:** linux/amd64, linux/arm64
+
+**Available (non-root) user:** vscode
+
+### Contents
+**Languages and runtimes**
+
+| Language / runtime | Version | Path |
+|--------------------|---------|------|
+| [PHP](https://xdebug.org/) | 8.1.0 | /usr/local |
+
+**Tools installed using git**
+
+| Tool | Commit | Path |
+|------|--------|------|
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f | /home/vscode/.oh-my-zsh |
+| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
+
+**Other tools and utilities**
+
+| Tool | Version | Path |
+|------|---------|------|
+| [Xdebug](https://xdebug.org/) | 3.1.2 | /usr/local/lib/php/extensions |
+| [Composer](https://getcomposer.org/) | 2.1.14 | /usr/local |
+
+**Additional linux tools and packages**
+
+| Tool / library | Version |
+|----------------|---------|
+| apt-transport-https | 2.2.4 |
+| apt-utils | 2.2.4 |
+| ca-certificates | 20210119 |
+| curl | 7.74.0-1.3+b1 |
+| dialog | 1.3-20201126-1 |
+| git | 1:2.30.2-1 |
+| gnupg2 | 2.2.27-2 |
+| htop | 3.0.5-7 |
+| iproute2 | 5.10.0-4 |
+| jq | 1.6-2.1 |
+| less | 551-2 |
+| libc6 | 2.31-13+deb11u2 |
+| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
+| libicu67 | 67.1-7 |
+| libkrb5-3 | 1.18.3-6+deb11u1 |
+| liblttng-ust0 | 2.12.1-1 |
+| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libstdc++6 | 10.2.1-6 |
+| locales | 2.31-13+deb11u2 |
+| lsb-release | 11.1.0 |
+| lsof | 4.93.2+dfsg-1.1 |
+| man-db | 2.9.4-2 |
+| manpages | 5.10-1 |
+| manpages-dev | 5.10-1 |
+| manpages-posix | 2017a-2 |
+| manpages-posix-dev | 2017a-2 |
+| nano | 5.4-2 |
+| ncdu | 1.15.1-1 |
+| net-tools | 1.60+git20181103.0eebece-1 |
+| openssh-client | 1:8.4p1-5 |
+| procps | 2:3.3.17-5 |
+| psmisc | 23.4-2 |
+| rsync | 3.2.3-4+deb11u1 |
+| strace | 5.10-1 |
+| sudo | 1.9.5p2-3 |
+| unzip | 6.0-26 |
+| vim-tiny | 2:8.2.2434-3 |
+| wget | 1.21-1+b1 |
+| yarn | 1.22.15-1 |
+| zip | 3.0-12 |
+| zlib1g | 1:1.2.11.dfsg-2 |
+| zsh | 5.8-6+b2 |
 
 ## Variant: 8.0-apache-bullseye
 
-**Digest:** sha256:2d0363068d6a08b4dccf921f71c9c7c5b1d906a5ecc52816c705559ad58cce43
+**Digest:** sha256:a9474e05539ae435d9984c761e71bbed9b0a44883cf7c079c21666e9ab6e37d5
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/php:dev-8.0-apache-bullseye
-mcr.microsoft.com/vscode/devcontainers/php:dev-8
-mcr.microsoft.com/vscode/devcontainers/php:dev-8-bullseye
+mcr.microsoft.com/vscode/devcontainers/php:dev-8.0
 mcr.microsoft.com/vscode/devcontainers/php:dev-8.0-bullseye
-mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -43,15 +130,15 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
+| [Xdebug](https://xdebug.org/) | 3.1.2 | /usr/local/lib/php/extensions |
+| [Composer](https://getcomposer.org/) | 2.1.14 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -102,7 +189,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 
 ## Variant: 7.4-apache-bullseye
 
-**Digest:** sha256:8a5d07c40e15fb1aa7b52b566fa8eeb631edecaf1b18b8c25987a0cc00b2c6ea
+**Digest:** sha256:8ef713b9512e5c4596269fa3ccd22d8d49b3305372609db05700439288406907
 
 **Tags:**
 ```
@@ -131,15 +218,15 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
+| [Xdebug](https://xdebug.org/) | 3.1.2 | /usr/local/lib/php/extensions |
+| [Composer](https://getcomposer.org/) | 2.1.14 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -188,21 +275,22 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |
 
-## Variant: 7.3-apache-bullseye
+## Variant: 8.1-apache-buster
 
-**Digest:** sha256:0530470d5795b0093fa7b4dd0f03b18b8c7f1de14b611ce49b6977397446e0ec
+**Digest:** sha256:a88ab1969175347a1feaef3e8c443299367b83156a861767d46bde7443d4563b
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-apache-bullseye
-mcr.microsoft.com/vscode/devcontainers/php:dev-7.3
-mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
+mcr.microsoft.com/vscode/devcontainers/php:dev-8.1-apache-buster
+mcr.microsoft.com/vscode/devcontainers/php:dev-8-buster
+mcr.microsoft.com/vscode/devcontainers/php:dev-8.1-buster
+mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Debian GNU/Linux 11 (bullseye)
+**Linux distribution:** Debian GNU/Linux 10 (buster)
 
-**Architectures:** linux/amd64, linux/arm64
+**Architectures:** linux/amd64
 
 **Available (non-root) user:** vscode
 
@@ -211,79 +299,78 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.3.33 | /usr/local |
+| [PHP](https://xdebug.org/) | 8.1.0 | /usr/local |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
+| [Xdebug](https://xdebug.org/) | 3.1.2 | /usr/local/lib/php/extensions |
+| [Composer](https://getcomposer.org/) | 2.1.14 | /usr/local |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 2.2.4 |
-| apt-utils | 2.2.4 |
-| ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+b1 |
-| dialog | 1.3-20201126-1 |
-| git | 1:2.30.2-1 |
-| gnupg2 | 2.2.27-2 |
-| htop | 3.0.5-7 |
-| iproute2 | 5.10.0-4 |
-| jq | 1.6-2.1 |
-| less | 551-2 |
-| libc6 | 2.31-13+deb11u2 |
-| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
-| libicu67 | 67.1-7 |
-| libkrb5-3 | 1.18.3-6+deb11u1 |
-| liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1+deb11u1 |
-| libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13+deb11u2 |
-| lsb-release | 11.1.0 |
-| lsof | 4.93.2+dfsg-1.1 |
-| man-db | 2.9.4-2 |
-| manpages | 5.10-1 |
-| manpages-dev | 5.10-1 |
-| manpages-posix | 2017a-2 |
-| manpages-posix-dev | 2017a-2 |
-| nano | 5.4-2 |
-| ncdu | 1.15.1-1 |
-| net-tools | 1.60+git20181103.0eebece-1 |
-| openssh-client | 1:8.4p1-5 |
-| procps | 2:3.3.17-5 |
-| psmisc | 23.4-2 |
-| rsync | 3.2.3-4+deb11u1 |
-| strace | 5.10-1 |
-| sudo | 1.9.5p2-3 |
-| unzip | 6.0-26 |
-| vim-tiny | 2:8.2.2434-3 |
-| wget | 1.21-1+b1 |
+| apt-transport-https | 1.8.2.3 |
+| apt-utils | 1.8.2.3 |
+| ca-certificates | 20200601~deb10u2 |
+| curl | 7.64.0-4+deb10u2 |
+| dialog | 1.3-20190211-1 |
+| git | 1:2.20.1-2+deb10u3 |
+| gnupg2 | 2.2.12-1+deb10u1 |
+| htop | 2.2.0-1+b1 |
+| iproute2 | 4.20.0-2+deb10u1 |
+| jq | 1.5+dfsg-2+b1 |
+| less | 487-0.1+b1 |
+| libc6 | 2.28-10 |
+| libgcc1 | 1:8.3.0-6 |
+| libgssapi-krb5-2 | 1.17-3+deb10u3 |
+| libicu63 | 63.1-6+deb10u2 |
+| libkrb5-3 | 1.17-3+deb10u3 |
+| liblttng-ust0 | 2.10.3-1 |
+| libssl1.1 | 1.1.1d-0+deb10u7 |
+| libstdc++6 | 8.3.0-6 |
+| locales | 2.28-10 |
+| lsb-release | 10.2019051400 |
+| lsof | 4.91+dfsg-1 |
+| man-db | 2.8.5-2 |
+| manpages | 4.16-2 |
+| manpages-dev | 4.16-2 |
+| manpages-posix | 2013a-2 |
+| manpages-posix-dev | 2013a-2 |
+| nano | 3.2-3 |
+| ncdu | 1.13-1+b1 |
+| net-tools | 1.60+git20180626.aebd88e-1 |
+| openssh-client | 1:7.9p1-10+deb10u2 |
+| procps | 2:3.3.15-2 |
+| psmisc | 23.2-1+deb10u1 |
+| rsync | 3.1.3-6 |
+| strace | 4.26-0.2 |
+| sudo | 1.8.27-1+deb10u3 |
+| unzip | 6.0-23+deb10u2 |
+| vim-tiny | 2:8.1.0875-5 |
+| wget | 1.20.1-1.1 |
 | yarn | 1.22.15-1 |
-| zip | 3.0-12 |
-| zlib1g | 1:1.2.11.dfsg-2 |
-| zsh | 5.8-6+b2 |
+| zip | 3.0-11+b1 |
+| zlib1g | 1:1.2.11.dfsg-1 |
+| zsh | 5.7.1-1 |
 
 ## Variant: 8.0-apache-buster
 
-**Digest:** sha256:f6a39606cfb5800e1e8416d9e015c1506ed8af3519951d4050529c38c74059ee
+**Digest:** sha256:edd945d8a2809703eb2b6f9c68bb364b74ffcfe96b54c9a3a9395bc60b285265
 
 **Tags:**
 ```
 mcr.microsoft.com/vscode/devcontainers/php:dev-8.0-apache-buster
-mcr.microsoft.com/vscode/devcontainers/php:dev-8-buster
 mcr.microsoft.com/vscode/devcontainers/php:dev-8.0-buster
-mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -304,15 +391,15 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
+| [Xdebug](https://xdebug.org/) | 3.1.2 | /usr/local/lib/php/extensions |
+| [Composer](https://getcomposer.org/) | 2.1.14 | /usr/local |
 
 **Additional linux tools and packages**
 
@@ -364,7 +451,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 
 ## Variant: 7.4-apache-buster
 
-**Digest:** sha256:0aec6ab268fb99ea1741c3ae97a1e74fdcaec838c0aec389184ac6cbb12a77eb
+**Digest:** sha256:c60d1de01efddbf2766f8d6ab26d76d4d726ca891f1e2ae776d44d1c8e458202
 
 **Tags:**
 ```
@@ -391,101 +478,15 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
-
-**Additional linux tools and packages**
-
-| Tool / library | Version |
-|----------------|---------|
-| apt-transport-https | 1.8.2.3 |
-| apt-utils | 1.8.2.3 |
-| ca-certificates | 20200601~deb10u2 |
-| curl | 7.64.0-4+deb10u2 |
-| dialog | 1.3-20190211-1 |
-| git | 1:2.20.1-2+deb10u3 |
-| gnupg2 | 2.2.12-1+deb10u1 |
-| htop | 2.2.0-1+b1 |
-| iproute2 | 4.20.0-2+deb10u1 |
-| jq | 1.5+dfsg-2+b1 |
-| less | 487-0.1+b1 |
-| libc6 | 2.28-10 |
-| libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u3 |
-| libicu63 | 63.1-6+deb10u2 |
-| libkrb5-3 | 1.17-3+deb10u3 |
-| liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u7 |
-| libstdc++6 | 8.3.0-6 |
-| locales | 2.28-10 |
-| lsb-release | 10.2019051400 |
-| lsof | 4.91+dfsg-1 |
-| man-db | 2.8.5-2 |
-| manpages | 4.16-2 |
-| manpages-dev | 4.16-2 |
-| manpages-posix | 2013a-2 |
-| manpages-posix-dev | 2013a-2 |
-| nano | 3.2-3 |
-| ncdu | 1.13-1+b1 |
-| net-tools | 1.60+git20180626.aebd88e-1 |
-| openssh-client | 1:7.9p1-10+deb10u2 |
-| procps | 2:3.3.15-2 |
-| psmisc | 23.2-1+deb10u1 |
-| rsync | 3.1.3-6 |
-| strace | 4.26-0.2 |
-| sudo | 1.8.27-1+deb10u3 |
-| unzip | 6.0-23+deb10u2 |
-| vim-tiny | 2:8.1.0875-5 |
-| wget | 1.20.1-1.1 |
-| yarn | 1.22.15-1 |
-| zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.11.dfsg-1 |
-| zsh | 5.7.1-1 |
-
-## Variant: 7.3-apache-buster
-
-**Digest:** sha256:2e706ab8ce1ce50f2383d6cea0b9ff04ae3ef060341bd9e11142fb8b32a27165
-
-**Tags:**
-```
-mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-apache-buster
-mcr.microsoft.com/vscode/devcontainers/php:dev-7.3-buster
-```
-> *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
-
-**Linux distribution:** Debian GNU/Linux 10 (buster)
-
-**Architectures:** linux/amd64
-
-**Available (non-root) user:** vscode
-
-### Contents
-**Languages and runtimes**
-
-| Language / runtime | Version | Path |
-|--------------------|---------|------|
-| [PHP](https://xdebug.org/) | 7.3.33 | /usr/local |
-
-**Tools installed using git**
-
-| Tool | Commit | Path |
-|------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
-| [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
-
-**Other tools and utilities**
-
-| Tool | Version | Path |
-|------|---------|------|
-| [Xdebug](https://xdebug.org/) | 3.1.1 | /usr/local/lib/php/extensions |
-| [Composer](https://getcomposer.org/) | 2.1.12 | /usr/local |
+| [Xdebug](https://xdebug.org/) | 3.1.2 | /usr/local/lib/php/extensions |
+| [Composer](https://getcomposer.org/) | 2.1.14 | /usr/local |
 
 **Additional linux tools and packages**
 
