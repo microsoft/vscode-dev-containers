@@ -1069,7 +1069,10 @@
 				}
 			},
 			"buildArg": "_VSC_INSTALL_COMMON",
-			"include": []
+			"include": [
+				"puppet",
+				"chef"
+			]
 		}
 	]
 }
