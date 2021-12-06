@@ -7,13 +7,13 @@
 # Docs:
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./dotnet-install.sh [dotnet verison] [non-root user] [Add GOPATH, GOROOT to rc files flag]
+# Syntax: ./dotnet-debian.sh [dotnet verison] [non-root user] [Add GOPATH, GOROOT to rc files flag] [ACCESS_GROUP_NAME] [TARGET_INSTALL_PATH]
 
 DOTNET_VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}
 UPDATE_RC=${3:-"true"}
-ACCESS_GROUP_NAME="dotnet"
-TARGET_INSTALL_PATH="/opt/dotnet"
+ACCESS_GROUP_NAME=${4:-"dotnet"}
+TARGET_INSTALL_PATH=${5:-"/opt/dotnet"}
 
 set -e
 
