@@ -1073,14 +1073,14 @@
 		},
 		{
 			"id": "dotnet",
-			"name": "dotnet CLI",
+			"name": "Dotnet CLI",
 			"documentationURL": "",
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["6.0","5.0","3.1"],
-					"default": "6.0",
-					"description": "Select or enter an Azure CLI version. (Available versions may vary by Linux distribution.)"
+					"proposals": ["latest","6.0","5.0","3.1"],
+					"default": "latest",
+					"description": "Select or enter a dotnet CLI version. (Available versions may vary by Linux distribution.)"
 				},
 				"runtimeOnly": {
 					"type":"boolean",
