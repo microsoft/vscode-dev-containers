@@ -1070,6 +1070,53 @@
 			},
 			"buildArg": "_VSC_INSTALL_COMMON",
 			"include": []
+		},
+		{
+			"id": "dotnet",
+			"name": "dotnet CLI",
+			"documentationURL": "",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["6.0","5.0","3.1"],
+					"default": "6.0",
+					"description": "Select or enter an Azure CLI version. (Available versions may vary by Linux distribution.)"
+				},
+				"runtimeOnly": {
+					"type":"boolean",
+					"default": false,
+					"description": "Install just the dotnet runtime if true, and sdk if false."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_DOTNET",
+			"extensions": [
+				"ms-dotnettools.csharp"
+			],
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
 		}
 	]
 }

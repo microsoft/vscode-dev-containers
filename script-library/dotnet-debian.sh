@@ -7,18 +7,20 @@
 # Docs:
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./dotnet-debian.sh [dotnet version] [dotnet sdk/runtime]
+# Syntax: ./dotnet-debian.sh [dotnet version] [dotnet runtime only]
 
 set -e
 
-DOTNET_VERSION=${1:-"6.0"} # TODO: Ask Chuck about default versions and 'latest' support
-DOTNET_SDK_OR_RUNTIME=${2:-"sdk"} # TODO: Ask Chuck about if runtime installation is a usecase we want to cover
+DOTNET_VERSION=${1:-"latest"}
+DOTNET_RUNTIME_ONLY=${2:-"false"} # TODO: Ask Chuck about if runtime installation is a usecase we want to cover
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
+
+# Function to validate inputs
 
 # Get central common setting
 get_common_setting() {
@@ -55,6 +57,8 @@ check_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
+# validate inputs
+
 echo "(*) Installing dotnet CLI..."
 . /etc/os-release
 architecture="$(dpkg --print-architecture)"
@@ -67,6 +71,16 @@ get_common_setting MICROSOFT_GPG_KEYS_URI
 curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
 echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
 apt-get update
+
+if [ "${DOTNET_VERSION}" = "latest" ] || [ "${DOTNET_VERSION}" = "lts" ]; then
+    DOTNET_VERSION="6.0"
+fi
+
+if [ "${DOTNET_RUNTIME_ONLY}" = "true" ]; then
+    DOTNET_SDK_OR_RUNTIME="runtime"
+else
+    DOTNET_SDK_OR_RUNTIME="sdk"
+fi
 
 if ! (apt-get install -yq dotnet-${DOTNET_SDK_OR_RUNTIME}-${DOTNET_VERSION}); then
     return 1
