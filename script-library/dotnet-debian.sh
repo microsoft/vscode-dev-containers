@@ -7,12 +7,12 @@
 # Docs:
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./dotnet-debian.sh [dotnet verison] [dotnet sdk/runtime] [Add GOPATH, GOROOT to rc files flag] [ACCESS_GROUP_NAME] [TARGET_INSTALL_PATH]
+# Syntax: ./dotnet-debian.sh [dotnet verison] [dotnet sdk/runtime]
 
 set -e
 
-DOTNET_VERSION=${1:-"6.0"}
-DOTNET_SDK_OR_RUNTIME=${2:-"sdk"} # TODO: Ask Chuck
+DOTNET_VERSION=${1:-"6.0"} # TODO: Ask Chuck about default versions and 'latest' support
+DOTNET_SDK_OR_RUNTIME=${2:-"sdk"} # TODO: Ask Chuck about if runtime installation is a usecase we want to cover
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 
 if [ "$(id -u)" -ne 0 ]; then
