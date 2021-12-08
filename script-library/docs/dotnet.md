@@ -18,7 +18,10 @@ Or as a feature:
 
 ```json
 "features": {
-    "dotnet": "latest"
+    "dotnet": {
+      "version": "latest",
+      "runtimeOnly": false
+    }
 }
 ```
 
