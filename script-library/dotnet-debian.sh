@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs:
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/dotnet.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./dotnet-debian.sh [dotnet version] [dotnet runtime only]

@@ -1074,7 +1074,7 @@
 		{
 			"id": "dotnet",
 			"name": "Dotnet CLI",
-			"documentationURL": "",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/dotnet.md",
 			"options": {
 				"version": {
 					"type": "string",
