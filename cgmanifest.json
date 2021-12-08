@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f"
+                    "commitHash": "5b987e59d0fce1a74bcfd51750c6f52d7c29c647"
                 }
             }
         },
@@ -175,7 +175,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.30.0-1~focal",
+                    "Version": "2.31.0-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f"
+                    "commitHash": "5b987e59d0fce1a74bcfd51750c6f52d7c29c647"
                 }
             }
         },
@@ -562,7 +562,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.22.4",
+                    "Version": "1.23.0",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -971,6 +971,16 @@
         },
         {
             "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: continuumio/anaconda3",
@@ -1054,7 +1064,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.4.0"
+                    "Version": "8.4.1"
                 }
             }
         },
@@ -1064,7 +1074,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f"
+                    "commitHash": "5b987e59d0fce1a74bcfd51750c6f52d7c29c647"
                 }
             }
         },

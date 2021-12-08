@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:6253283ee6f214603951c2504a07418a5020e1802be3b6f30fac8af7ea646c68
+**Digest:** sha256:ef31d5412f5dd1c42af009c7568578449e661ec053fe4bc406adbfec61a41873
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 841f3cb0bb7663fa1062ffc59acb7b4581dc1d0f | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b987e59d0fce1a74bcfd51750c6f52d7c29c647 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5 | /usr/local/share/rbenv |
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [git](https://github.com/git/git) | 2.34.1 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.22.4 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.0 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.7.1 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
@@ -121,7 +121,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| azure-cli (Azure CLI) | 2.30.0-1~focal |
+| azure-cli (Azure CLI) | 2.31.0-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
@@ -157,7 +157,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libpango-1.0-0 | 1.44.7-2ubuntu4 |
 | libpangocairo-1.0-0 | 1.44.7-2ubuntu4 |
 | libsecret-1-dev | 0.20.4-0ubuntu1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.9 |
+| libssl1.1 | 1.1.1f-1ubuntu2.10 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | libx11-6 | 2:1.6.9-2ubuntu1.2 |
 | libx11-xcb1 | 2:1.6.9-2ubuntu1.2 |
