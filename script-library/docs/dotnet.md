@@ -38,7 +38,10 @@ To install these capabilities in your primary dev container, reference it in `de
 
 ```json
 "features": {
-    "dotnet": "latest"
+    "dotnet": {
+      "version": "latest",
+      "runtimeOnly": false
+    }
 }
 ```
 
