@@ -1,4 +1,4 @@
-# Azure CLI Install Script
+# Dotnet CLI Install Script
 
 *Installs the Dotnet CLI. Provides option of installing sdk or runtime, and option of versions to install. Uses latest version of Dotnet sdk as defaults to install.*
 
