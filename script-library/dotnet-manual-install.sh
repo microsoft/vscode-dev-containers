@@ -137,7 +137,7 @@ get_download_link_from_aka_ms() {
     # disable_feed_credential=true
     response="$(curl -I -sSL --retry 5 --retry-delay 2 --connect-timeout 15 $aka_ms_link)"
 
-    # echo "Received response: $response"
+    echo "Received response: $response"
     # Get results of all the redirects.
     http_codes=$( echo "$response" | awk '$1 ~ /^HTTP/ {print $2}' )
     # They all need to be 301, otherwise some links are broken (except for the last, which is not a redirect but 200 or 404).
@@ -160,14 +160,39 @@ get_download_link_from_aka_ms() {
     fi
 }
 
+# args:
+# input - $1
+to_lowercase() {
+    echo "$1" | tr '[:upper:]' '[:lower:]'
+    return 0
+}
+
+
+get_latest_version() {
+    if [ "${DOTNET_VERSION}" = "latest" ]; then
+        DOTNET_VERSION="6.0"
+    fi
+
+    local url="https://dotnetcli.blob.core.windows.net/dotnet/$1/${DOTNET_VERSION}/latest.version"
+    latest_version=$(curl -sSL "${url}")
+    echo "LATEST VERSION: ${latest_version}"
+}
+
+get_download_link() {
+    local sdk_or_runtime="$1"
+    local full_version="$2"
+    local arch="$3"
+    download_link="https://dotnetcli.azureedge.net/dotnet/${sdk_or_runtime}/${full_version}/dotnet-$(to_lowercase "${sdk_or_runtime}")-${full_version}-linux-${arch}.tar.gz"
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
-# TODO: See above, check on libicu-dev
-check_packages curl ca-certificates tar libc6 libgcc-s1 libgssapi-krb5-2 libicu-dev libssl1.1 libstdc++6 zlib1g
-if ! type git > /dev/null 2>&1; then
-    apt_get_update_if_needed
-    apt-get -y install --no-install-recommends git
-fi
+# NOTE: icu-devtools will install the appropriate dependencies based on the OS
+#       libgcc-s1 OR libgcc1 depending on OS
+#       the latest libicuXX depending on OS (eg libicu57 for stretch)
+#       also installs libc6 and libstdc++6 which are required by dotnet 
+# NOTE: swapped libicu-dev for icu-devtools, same dependency on libicuXX but 10x smaller
+check_packages curl ca-certificates tar icu-devtools libgssapi-krb5-2 libssl1.1 zlib1g
 
 # TODO: Check this script across other OSs including ARM64-bullseye
 architecture="$(uname -m)"
@@ -177,10 +202,17 @@ case $architecture in
     *) echo "(!) Architecture $architecture unsupported"; exit 1 ;;
 esac
 
+get_latest_version "Runtime" 
+runtime_full_version="${latest_version}"
+get_latest_version "Sdk" 
+sdk_full_version="${latest_version}"
+
 if [ "${DOTNET_RUNTIME_ONLY}" = "true" ]; then
-    DOTNET_SDK_OR_RUNTIME="runtime"
+    DOTNET_SDK_OR_RUNTIME="Runtime"
+    DOTNET_FULL_VERSION="${runtime_full_version}"
 else
-    DOTNET_SDK_OR_RUNTIME="sdk"
+    DOTNET_SDK_OR_RUNTIME="Sdk"
+    DOTNET_FULL_VERSION="${sdk_full_version}"
 fi
 
 # TODO: add echo statements detailing steps
@@ -193,38 +225,41 @@ usermod -a -G "${ACCESS_GROUP}" "${USERNAME}"
 mkdir -p "${TARGET_INSTALL_PATH}"
 
 # use aka.ms url header for dotnet runtime to extract the correct version
-get_download_link_from_aka_ms "runtime"
-runtime_download_link="${aka_ms_download_link}"
+# get_download_link_from_aka_ms "runtime"
+# runtime_download_link="${aka_ms_download_link}"
 
-# TODO: Update to use "read -ra pathElems" below for 3.1 compat
-runtime_full_version=$(echo ${runtime_download_link} | cut -d/ -f6)
+# # TODO: Update to use "read -ra pathElems" below for 3.1 compat
+# # runtime_full_version=$(echo ${runtime_download_link} | cut -d/ -f6)
 
-#get version from the path
-# IFS='/'
-# read -ra pathElems <<< "$download_link"
-# count=${#pathElems[@]}
-# specific_version="${pathElems[count-2]}"
-# unset IFS;
-# say_verbose "Version: '$specific_version'."
 
-echo "RUNTIME VERSION: ${runtime_full_version}"
 
-# download checksum from dotnet CLI blob storage
-mkdir -p /tmp/dotnetinstall
-curl -sSL "https://dotnetcli.blob.core.windows.net/dotnet/checksums/${runtime_full_version}-sha.txt" -o /tmp/dotnetinstall/checksums.txt
+
 # download the runtime / runtime and sdk binaries from azureedge
-get_download_link_from_aka_ms $DOTNET_SDK_OR_RUNTIME
-binary_download_link="${aka_ms_download_link}"
-binary_file_name=$(echo ${binary_download_link} | cut -d/ -f7)
+get_download_link "${DOTNET_SDK_OR_RUNTIME}" "${DOTNET_FULL_VERSION}" "${architecture}"
+echo "DOWNLOAD LINK: ${download_link}"
+binary_download_link="${download_link}"
+# binary_file_name=$(echo ${binary_download_link} | cut -d/ -f7)
+#get filename from the path
+IFS='/'
+read -ra pathElems <<< "${binary_download_link}"
+count=${#pathElems[@]}
+binary_file_name="${pathElems[count-1]}"
+unset IFS;
+
 echo "BINARY FILE NAME: ${binary_file_name}"
+mkdir -p /tmp/dotnetinstall
 curl -sSL "${binary_download_link}" -o "/tmp/dotnetinstall/${binary_file_name}"
 
-# run validation (sha512 sum) of checksum against the expected list of checksums
+# download checksum from dotnet CLI blob storage and
+# run validation (sha512sum) of checksum against the expected list of checksums
+echo "FETCH AND VERIFY CHECKSUM"
+curl -sSL "https://dotnetcli.blob.core.windows.net/dotnet/checksums/${runtime_full_version}-sha.txt" -o /tmp/dotnetinstall/checksums.txt
 grep "${binary_file_name}" /tmp/dotnetinstall/checksums.txt | sed 's/\r$//' > "/tmp/dotnetinstall/${binary_file_name}.sha512"
 cd /tmp/dotnetinstall/
 sha512sum -c "${binary_file_name}.sha512"
 
 # extract binaries and add to path
+echo "Extract Binary to ${TARGET_INSTALL_PATH}"
 tar -xzf "/tmp/dotnetinstall/${binary_file_name}" -C "${TARGET_INSTALL_PATH}" --strip-components=1
 
 # TODO: clean up tmp dir
