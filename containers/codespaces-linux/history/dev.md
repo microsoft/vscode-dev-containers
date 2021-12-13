@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:ef31d5412f5dd1c42af009c7568578449e661ec053fe4bc406adbfec61a41873
+**Digest:** sha256:faa3328ec804af67b5df8899471040a4efcceeec0f8b2194846fea46ecbff7c6
 
 **Tags:**
 ```
@@ -35,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.2.0 | /opt/microsoft/powershell |
 | GCC | 9.3.0-17ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
-| [Go](https://golang.org/dl) | 1.17.4 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.17.5 | /usr/local/go |
 | [Rust](https://github.com/rust-lang/rust) | 1.57.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.1 | 
 
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b987e59d0fce1a74bcfd51750c6f52d7c29c647 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1b01496c21e9ca7ef79d6a1dcb4728abd7a2803a | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5 | /usr/local/share/rbenv |
@@ -105,7 +105,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Xdebug](https://xdebug.org/) | 3.1.1 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.23.0 | /usr/local/bin |
-| [Helm](https://github.com/helm/helm) | 3.7.1 | /usr/local/bin |
+| [Helm](https://github.com/helm/helm) | 3.7.2 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
@@ -176,8 +176,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.11+azure-2 |
-| moby-engine (Docker Engine) | 20.10.11+azure-2 |
+| moby-cli (Docker CLI) | 20.10.11+azure-3 |
+| moby-engine (Docker Engine) | 20.10.11+azure-3 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |

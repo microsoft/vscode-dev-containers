@@ -12,7 +12,7 @@
 
 ## Variant: 1.17-bullseye
 
-**Digest:** sha256:de0089e474b5d02f2c9beac7c631e6ad2dea795c7ede739f50abbbf8e0a87fbd
+**Digest:** sha256:52d112bde14f2cebb532da1dd20dac6f92bdd56a6425ca123c0894c6d356a107
 
 **Tags:**
 ```
@@ -35,13 +35,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.4 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.17.5 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b987e59d0fce1a74bcfd51750c6f52d7c29c647 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1b01496c21e9ca7ef79d6a1dcb4728abd7a2803a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 ## Variant: 1.16-bullseye
 
-**Digest:** sha256:554681d6f6e702e3c3c6d9c41b335ad6408b23af6855cb4df581bbd153923dc0
+**Digest:** sha256:925afb82e2ac3360b6562986930b9f21c834e4a75c38ca9f04e2b4a808672be9
 
 **Tags:**
 ```
@@ -131,13 +131,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.16.11 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.16.12 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b987e59d0fce1a74bcfd51750c6f52d7c29c647 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1b01496c21e9ca7ef79d6a1dcb4728abd7a2803a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -207,7 +207,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16
 
 ## Variant: 1.17-buster
 
-**Digest:** sha256:50ad5f5504fbd2708dd645efea4c42aa7aef622e518383135c137462e0b0bd2a
+**Digest:** sha256:bf4c7e30347f12f2bb4d51d6bcf6fcd066d6a3596c4a3d0c3eb4a603795c13eb
 
 **Tags:**
 ```
@@ -228,13 +228,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.4 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.17.5 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b987e59d0fce1a74bcfd51750c6f52d7c29c647 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1b01496c21e9ca7ef79d6a1dcb4728abd7a2803a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -305,7 +305,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 ## Variant: 1.16-buster
 
-**Digest:** sha256:c1d73830eaf44bcafebe34e934c5e57ebbdc28995c5b1a486e75e6e28b31a935
+**Digest:** sha256:f3d3a0b813c4825304655b4dcf179d8eb7fcfa7746c2b34deefc6beb33788101
 
 **Tags:**
 ```
@@ -324,13 +324,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.16-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.16.11 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.16.12 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b987e59d0fce1a74bcfd51750c6f52d7c29c647 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1b01496c21e9ca7ef79d6a1dcb4728abd7a2803a | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
