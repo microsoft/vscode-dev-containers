@@ -4,7 +4,7 @@ ARG BASE_IMAGE_VERSION_CODENAME=bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/base:${BASE_IMAGE_VERSION_CODENAME}
 
 ARG TARGET_JAVA_VERSION
-ENV JAVA_HOME /usr/local/openjdk-${TARGET_JAVA_VERSION}
+ENV JAVA_HOME /usr/lib/jvm/msopenjdk-${TARGET_JAVA_VERSION}
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 # Default to UTF-8 file.encoding
 ENV LANG en_US.UTF-8
@@ -37,7 +37,8 @@ RUN arch="$(dpkg --print-architecture)" \
 		--no-same-owner \
 	&& rm msopenjdk.tar.gz* \
 	\
-	&& ln -s ${JAVA_HOME} /docker-java-home
+	&& ln -s ${JAVA_HOME} /docker-java-home \
+	&& ln -s ${JAVA_HOME} /usr/local/openjdk-${TARGET_JAVA_VERSION}
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
