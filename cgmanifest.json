@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "1b01496c21e9ca7ef79d6a1dcb4728abd7a2803a"
+                    "commitHash": "9a3d853481645ae0f961e9cc8421fc5d84e2c3c3"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "1b01496c21e9ca7ef79d6a1dcb4728abd7a2803a"
+                    "commitHash": "9a3d853481645ae0f961e9cc8421fc5d84e2c3c3"
                 }
             }
         },
@@ -552,7 +552,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.1.1",
+                    "Version": "3.1.2",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -875,7 +875,17 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "aa99472c8ac5bdd111ea306e800bb152fb8580ac"
+                    "commitHash": "5403db85998ff0c087bc97d972e1e76551127b7e"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "f42aa49cfdfc56b784744d3e421f297ab03efbdc"
                 }
             }
         },
@@ -1084,7 +1094,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "1b01496c21e9ca7ef79d6a1dcb4728abd7a2803a"
+                    "commitHash": "9a3d853481645ae0f961e9cc8421fc5d84e2c3c3"
                 }
             }
         },
@@ -1162,7 +1172,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.5.3"
+                    "Version": "4.5.4"
                 }
             }
         },

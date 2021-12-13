@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:faa3328ec804af67b5df8899471040a4efcceeec0f8b2194846fea46ecbff7c6
+**Digest:** sha256:6716d2b6b99f04dfd4156480d6be355da15923ba6e3047ae8920ad9afd7fc1bb
 
 **Tags:**
 ```
@@ -28,8 +28,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |--------------------|---------|------|
 | [Node.js](https://nodejs.org/en/) | 10.23.0<br />12.22.6<br />14.17.6 | /opt/nodejs/&lt;version&gt; |
 | [Python](https://www.python.org/) | 3.6.15<br />3.7.12<br />3.8.12 | /opt/python/&lt;version&gt; |
-| [Java](https://adoptopenjdk.net/) | 11.0.8 | /opt/java/&lt;version&gt; |
-| [.NET](https://dotnet.microsoft.com/) | 2.1.818<br />3.1.412<br />5.0.400 | /home/codespaces/.dotnet<br />/opt/dotnet |
+| [Java](https://adoptopenjdk.net/) | 17.0.1 | /opt/java/&lt;version&gt; |
+| [.NET](https://dotnet.microsoft.com/) | 3.1.415<br />5.0.403<br />6.0.100 | /home/codespaces/.dotnet<br />/opt/dotnet |
 | [Ruby](https://www.ruby-lang.org/en/) | 2.7.2 | /opt/ruby/&lt;version&gt; |
 | [PHP](https://xdebug.org/) | 7.2.34<br />7.3.27<br />7.4.24 | /opt/php/&lt;version&gt; |
 | [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.2.0 | /opt/microsoft/powershell |
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 1b01496c21e9ca7ef79d6a1dcb4728abd7a2803a | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 9a3d853481645ae0f961e9cc8421fc5d84e2c3c3 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5 | /usr/local/share/rbenv |
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | Tool | Version | Path |
 |------|---------|------|
 | [git](https://github.com/git/git) | 2.34.1 | /usr/local |
-| [Xdebug](https://xdebug.org/) | 3.1.1 | /opt/php/lts |
+| [Xdebug](https://xdebug.org/) | 3.1.2 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.23.0 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.7.2 | /usr/local/bin |
