@@ -6,11 +6,17 @@
 package com.mycompany.app;
 
 import org.junit.Test;
+
+import junit.framework.AssertionFailedError;
+
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 public class AppTest
 {
+    App newApp = new App();
     public AppTest() {
     }
 
@@ -24,5 +30,15 @@ public class AppTest
     public void testMore()
     {
         assertTrue( true );
+    }
+
+    @Test
+    public void testIP()
+    {
+        try {
+            assertTrue( App.pingAddress("postgresdb") );
+        } catch (Exception e) {
+            throw new AssertionFailedError("Could not reach PostgresDB. Error: " + e);
+        }
     }
 }
