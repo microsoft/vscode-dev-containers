@@ -94,8 +94,8 @@ Given how frequently ASP.NET applications use Node.js for front end code, this c
 
 ```yaml
 args:
-  VARIANT: "3.1"
-  NODE_VERSION: "14" # Set to "none" to skip Node.js installation
+  VARIANT: "3.1-focal"
+  NODE_VERSION: "16" # Set to "none" to skip Node.js installation
 ```
 
 If you would like to install the Azure CLI, you can reference [a dev container feature](https://aka.ms/vscode-remote/containers/dev-container-features) by adding the following to `.devcontainer/devcontainer.json`:
