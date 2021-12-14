@@ -47,13 +47,13 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-# TODO: validate inputs
-
-
-
 # Helper Functions:
 
-# TODO: test this
+# Setup STDERR.
+err() {
+    echo "(!) $*" >&2
+}
+
 # Cleanup temporary directory and associated files when exiting the script.
 cleanup() {
     EXIT_CODE=$?
@@ -106,16 +106,21 @@ to_lowercase() {
 
 # Get latest available dotnet version
 get_latest_version() {
+    local sdk_or_runtime="$1" 
+
     if [ "${DOTNET_VERSION}" = "latest" ]; then
         DOTNET_VERSION="6.0"
     fi
 
-    local url="https://dotnetcli.blob.core.windows.net/dotnet/$1/${DOTNET_VERSION}/latest.version"
+    local url="https://dotnetcli.blob.core.windows.net/dotnet/${sdk_or_runtime}/${DOTNET_VERSION}/latest.version"
     latest_version=$(curl -sSL "${url}")
-    echo "LATEST VERSION: ${latest_version}"
 
-    #TODO(bderusha): Add var setting for easier readability
-    # if [ ! -z "${result}" ]; then declare -g $1="${result}"; fi
+    if [ -n "${latest_version}" ] && [ ! "${latest_version}" = *"Error"* ]; then
+        echo "$latest_version"
+    else
+        err "Unsupported Dotnet $sdk_or_runtime version $DOTNET_VERSION."
+        exit 1
+    fi
 }
 
 # Create and return url of where to download dotnet runtime or sdk.
@@ -128,8 +133,8 @@ get_download_link() {
     local full_version="$2"
     local arch="$3"
     download_link="https://dotnetcli.azureedge.net/dotnet/${sdk_or_runtime}/${full_version}/dotnet-$(to_lowercase "${sdk_or_runtime}")-${full_version}-linux-${arch}.tar.gz"
-    #TODO(bderusha): Add var setting for easier readability
-    # if [ ! -z "${result}" ]; then declare -g $1="${result}"; fi
+    
+    echo "$download_link"
 }
 
 export DEBIAN_FRONTEND=noninteractive
@@ -147,23 +152,24 @@ architecture="$(uname -m)"
 case $architecture in
     x86_64) architecture="x64";;
     aarch64 | armv8*) architecture="arm64";;
-    *) echo "(!) Architecture $architecture unsupported"; exit 1 ;;
+    *) err "Architecture $architecture unsupported"; exit 1 ;;
 esac
 
 # Determine if the user wants to download dotnet Runtime only, or dotnet SDK & Runtime,
 # and get the latest versions for dotnet Runtime and dotnet SDK for 
 # installing the binaries and downloading the checksum.
-get_latest_version "Runtime" 
-runtime_full_version="${latest_version}"
-get_latest_version "Sdk" 
-sdk_full_version="${latest_version}"
+get_latest_version "Runtime"
+runtime_full_version=$(get_latest_version "Runtime")
 
 if [ "${DOTNET_RUNTIME_ONLY}" = "true" ]; then
     DOTNET_SDK_OR_RUNTIME="Runtime"
     DOTNET_FULL_VERSION="${runtime_full_version}"
-else
+elif [ "${DOTNET_RUNTIME_ONLY}" = "false" ]; then
     DOTNET_SDK_OR_RUNTIME="Sdk"
-    DOTNET_FULL_VERSION="${sdk_full_version}"
+    DOTNET_FULL_VERSION=$(get_latest_version "Sdk")
+else
+    err "Expected true for installing dotnet Runtime only or false for installing SDK and Runtime. Received $DOTNET_RUNTIME_ONLY."
+    exit 1
 fi
 
 # Install the CLI
@@ -176,9 +182,11 @@ usermod -a -G "${ACCESS_GROUP}" "${USERNAME}"
 mkdir -p "${TARGET_INSTALL_PATH}"
 
 # Get download link for dotnet binaries from azureedge.
-get_download_link "${DOTNET_SDK_OR_RUNTIME}" "${DOTNET_FULL_VERSION}" "${architecture}"
-echo "DOWNLOAD LINK: ${download_link}"
-binary_download_link="${download_link}"
+echo "$DOTNET_SDK_OR_RUNTIME"
+echo "$DOTNET_FULL_VERSION"
+echo "$architecture"
+binary_download_link=$(get_download_link "${DOTNET_SDK_OR_RUNTIME}" "${DOTNET_FULL_VERSION}" "${architecture}")
+echo "DOWNLOAD LINK: ${binary_download_link}"
 
 # Get binaries' filename from the path elements in the url and download dotnet binaries in temp folder path.
 IFS='/'
@@ -189,7 +197,7 @@ unset IFS;
 
 echo "BINARY FILE NAME: ${binary_file_name}"
 echo "DOWNLOADING BINARIES..."
-TMP_DIR=$(mkdir -p /tmp/dotnetinstall) #########
+TMP_DIR=$(mkdir -p /tmp/dotnetinstall)
 curl -sSL "${binary_download_link}" -o "/tmp/dotnetinstall/${binary_file_name}"
 
 # Get checksum from dotnet CLI blob storage using the runtime version and
@@ -215,7 +223,5 @@ EOF
 chown -R ":${ACCESS_GROUP}" "${TARGET_INSTALL_PATH}"
 chmod g+r+w+s "${TARGET_INSTALL_PATH}"
 chmod -R g+r+w "${TARGET_INSTALL_PATH}"
-
-# TODO: clean up tmp dir
 
 echo "Done!"
