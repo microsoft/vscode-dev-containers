@@ -1,6 +1,8 @@
+pool:
+  vmImage: ubuntu-latest
+
 trigger:
-  branches:
-    include: ['main']
+- main
 
 steps:
 - task: ComponentGovernanceComponentDetection@0

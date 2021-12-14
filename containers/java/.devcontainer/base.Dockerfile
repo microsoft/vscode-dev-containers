@@ -37,7 +37,8 @@ RUN arch="$(dpkg --print-architecture)" \
 		--no-same-owner \
 	&& rm msopenjdk.tar.gz* \
 	\
-	&& ln -s ${JAVA_HOME} /docker-java-home
+	&& ln -s ${JAVA_HOME} /docker-java-home \
+	&& ln -s ${JAVA_HOME} /usr/local/openjdk-${TARGET_JAVA_VERSION}
 
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/

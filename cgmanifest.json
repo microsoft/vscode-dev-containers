@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "5b987e59d0fce1a74bcfd51750c6f52d7c29c647"
+                    "commitHash": "9a3d853481645ae0f961e9cc8421fc5d84e2c3c3"
                 }
             }
         },
@@ -201,7 +201,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-cli",
-                    "Version": "20.10.11+azure-2",
+                    "Version": "20.10.11+azure-3",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -214,7 +214,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-engine",
-                    "Version": "20.10.11+azure-2",
+                    "Version": "20.10.11+azure-3",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "5b987e59d0fce1a74bcfd51750c6f52d7c29c647"
+                    "commitHash": "9a3d853481645ae0f961e9cc8421fc5d84e2c3c3"
                 }
             }
         },
@@ -552,7 +552,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.1.1",
+                    "Version": "3.1.2",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -572,7 +572,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Helm",
-                    "Version": "3.7.1",
+                    "Version": "3.7.2",
                     "DownloadUrl": "https://github.com/helm/helm"
                 }
             }
@@ -632,7 +632,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.17.4",
+                    "Version": "1.17.5",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -871,6 +871,26 @@
         },
         {
             "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "5403db85998ff0c087bc97d972e1e76551127b7e"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "f42aa49cfdfc56b784744d3e421f297ab03efbdc"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -1074,7 +1094,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "5b987e59d0fce1a74bcfd51750c6f52d7c29c647"
+                    "commitHash": "9a3d853481645ae0f961e9cc8421fc5d84e2c3c3"
                 }
             }
         },
@@ -1152,7 +1172,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.5.2"
+                    "Version": "4.5.4"
                 }
             }
         },
