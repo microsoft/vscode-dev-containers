@@ -60,9 +60,9 @@ fi
 cleanup() {
     EXIT_CODE=$?
     set +e
-    if [[ -n $TMP_DIR ]]; then
+    if [[ -n "${TMP_DIR}" ]]; then
         echo "Executing cleanup of tmp files"
-        rm -Rf $TMP_DIR
+        rm -Rf "${TMP_DIR}"
     fi
     exit $EXIT_CODE
 }
@@ -120,9 +120,9 @@ get_latest_version() {
     latest_version=$(curl -sSL "${url}")
 
     if [ -n "${latest_version}" ] && [ ! "${latest_version}" = *"Error"* ]; then
-        echo "$latest_version"
+        echo "${latest_version}"
     else
-        err "Unsupported Dotnet $sdk_or_runtime version $DOTNET_VERSION."
+        err "Unsupported Dotnet ${sdk_or_runtime} version ${DOTNET_VERSION}."
         exit 1
     fi
 }
@@ -138,7 +138,7 @@ get_download_link() {
     local arch="$3"
     download_link="https://dotnetcli.azureedge.net/dotnet/${sdk_or_runtime}/${full_version}/dotnet-$(to_lowercase "${sdk_or_runtime}")-${full_version}-linux-${arch}.tar.gz"
     
-    echo "$download_link"
+    echo "${download_link}"
 }
 
 # Get binaries' filename from the path elements in the download url
@@ -175,7 +175,7 @@ architecture="$(uname -m)"
 case $architecture in
     x86_64) architecture="x64";;
     aarch64 | armv8*) architecture="arm64";;
-    *) err "Architecture $architecture unsupported"; exit 1 ;;
+    *) err "Architecture ${architecture} unsupported"; exit 1 ;;
 esac
 
 # Get the latest version for dotnet Runtime for use in generating the checksum URL 
@@ -190,7 +190,7 @@ elif [ "${DOTNET_RUNTIME_ONLY}" = "false" ]; then
     DOTNET_SDK_OR_RUNTIME="Sdk"
     DOTNET_FULL_VERSION=$(get_latest_version "Sdk")
 else
-    err "Expected true for installing dotnet Runtime only or false for installing SDK and Runtime. Received $DOTNET_RUNTIME_ONLY."
+    err "Expected true for installing dotnet Runtime only or false for installing SDK and Runtime. Received ${DOTNET_RUNTIME_ONLY}."
     exit 1
 fi
 
