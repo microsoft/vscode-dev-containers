@@ -1,50 +1,52 @@
-# Java
+# Java & PostgreSQL
 
 ## Summary
 
-*Develop Java applications. Includes the JDK and Java extensions.*
+*Develop applications with Java and PostgreSQL. Includes a Java application container and PostgreSQL server.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The VS Code Java Team |
 | *Categories* | Core, Languages |
-| *Definition type* | Dockerfile |
-| *Published images* | mcr.microsoft.com/vscode/devcontainers/java |
-| *Available image variants* | 11 / 11-bullseye, 17 / 17-bullseye, 11-buster, 17-buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
-| *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
+| *Definition type* | Docker Compose |
+| *Available image variants* | [See Java definition](../java). |
+| *Supported architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
 | *Languages, platforms* | Java |
 
-See **[history](history)** for information on the contents of published images.
-
 ## Using this definition
 
-While this definition should work unmodified, you can select the version of Java the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
+This definition creates two containers, one for Java and one for PostgreSQL. VS Code will attach to the Java container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `postgres-data`.
 
-```json
-// Or you can use 11-bullseye or 11-buster if you want to pin to an OS version
-"args": { "VARIANT": "11" }
+While the definition itself works unmodified, it uses the `mcr.microsoft.com/vscode/devcontainers/java` image which includes `git`, a non-root `vscode` user with `sudo` access, and a set of common dependencies and Java tools for development. You can pick a different version of this image by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` to pick a Java version.
+
+```yaml
+build:
+  context: ..
+  dockerfile: .devcontainer/Dockerfile
+    args:
+      # Update 'VARIANT' to pick an version of Java: 11, 17.
+      # Append -bullseye or -buster to pin to an OS version.
+      # Use -bullseye variants on local arm64/Apple Silicon.
+      VARIANT: 11-bullseye
 ```
 
-You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
+You also can connect to PostgreSQL from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
 
-- `mcr.microsoft.com/vscode/devcontainers/java` (latest)
-- `mcr.microsoft.com/vscode/devcontainers/java:11` (or `11-bullseye`, `11-buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/java:17` (or `17-bullseye`, `17-buster` to pin to an OS version)
+```json
+"forwardPorts": [ "5432" ]
+```
 
-You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
+### Adding another service
 
-- `mcr.microsoft.com/vscode/devcontainers/java:0-11` (or `0-11-bullseye`, `0-11-buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/java:0.203-11` (or `0.203-11-bullseye`, `0.203-11-buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/java:0.203.0-11` (or `0.203.0-11-bullseye`, `0.203.0-11-buster` to pin to an OS version)
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentation](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
 
-However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-11`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
-
-See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list).
-
-Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+```yaml
+# Runs the service on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+network_mode: service:db
+```
 
 ### Debug Configuration
 
@@ -56,39 +58,36 @@ Note that only the integrated terminal is supported by the Remote - Containers e
 
 ### Installing Maven or Gradle
 
-You can opt to install a version of Maven or Gradle by adding `"INSTALL_MAVEN: "true"` or `"INSTALL_GRADLE: "true"` to build args in `.devcontainer/devcontainer.json`. Both of these are set by default. For example:
+You can opt to install a version of Maven or Gradle by adding `INSTALL_MAVEN: "true"` or `INSTALL_GRADLE: "true"` to build args in `.devcontainer/docker-compose.yml`. Both of these are set by default. For example:
 
-```json
-"args": {
-   "VARIANT": "11",
-   "INSTALL_GRADLE": "true",
-   "INSTALL_MAVEN": "true"
-}
+```yaml
+args:
+  VARIANT: 11
+  INSTALL_GRADLE: "true"
+  INSTALL_MAVEN: "true"
 ```
 
 Remove the appropriate arg or set its value to `"false"` to skip installing the specified tool.
 
 You can also specify the version of Gradle or Maven if needed.
 
-```json
-"args": {
-   "VARIANT": "11",
-   "INSTALL_GRADLE": "true",
-   "MAVEN_VERSION": "3.8.3",
-   "INSTALL_MAVEN": "true",
-   "GRADLE_VERSION": "7.2"
-}
+```yaml
+args:
+  VARIANT: 11
+  INSTALL_GRADLE: "true"
+  MAVEN_VERSION: "3.8.3"
+  INSTALL_MAVEN: "true"
+  GRADLE_VERSION: "7.2"
 ```
 
 ### Installing Node.js
 
-Given JavaScript front-end web client code written for use in conjunction with a Java back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+Given JavaScript front-end web client code written for use in conjunction with a Java back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/docker-compose.yml`.
 
-```jsonc
-"args": {
-   "VARIANT": "11",
-    "NODE_VERSION": "10" // Set to "none" to skip Node.js installation
-}
+```yaml
+args:
+  VARIANT: 11
+  NODE_VERSION: "10" # Set to "none" to skip Node.js installation
 ```
 
 ### Adding the definition to your folder
