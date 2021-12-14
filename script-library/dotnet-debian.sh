@@ -19,9 +19,14 @@ ACCESS_GROUP=${6:-"dotnet"}
 # Exit on failure.
 set -e
 
+# Setup STDERR.
+err() {
+    echo "(!) $*" >&2
+}
+
 # Ensure the appropriate root user is running the script.
 if [ "$(id -u)" -ne 0 ]; then
-    echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
+    err 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
 
@@ -47,12 +52,9 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-# Helper Functions:
-
-# Setup STDERR.
-err() {
-    echo "(!) $*" >&2
-}
+###################
+# Helper Functions
+###################
 
 # Cleanup temporary directory and associated files when exiting the script.
 cleanup() {
@@ -97,14 +99,16 @@ check_packages() {
     fi
 }
 
+# Convert string to lowercase.
 # args:
-# input - $1
+# string to convert - $1
 to_lowercase() {
     echo "$1" | tr '[:upper:]' '[:lower:]'
-    return 0
 }
 
 # Get latest available dotnet version
+# args:
+# sdk_or_runtime - $1
 get_latest_version() {
     local sdk_or_runtime="$1" 
 
@@ -125,9 +129,9 @@ get_latest_version() {
 
 # Create and return url of where to download dotnet runtime or sdk.
 # args:
-# boolean sdk_or_runtime - $1
+# sdk_or_runtime - $1
 # dotnet version - $2
-# architecture - $3
+# system architecture - $3
 get_download_link() {
     local sdk_or_runtime="$1"
     local full_version="$2"
@@ -137,14 +141,33 @@ get_download_link() {
     echo "$download_link"
 }
 
+# Get binaries' filename from the path elements in the download url
+# args:
+# binary_download_link - $1
+get_filename_from_url() {
+    local binary_download_link="$1"
+    
+    IFS='/'
+    read -ra pathElems <<< "${binary_download_link}"
+    count=${#pathElems[@]}
+    binary_file_name="${pathElems[count-1]}"
+    unset IFS;
+
+    echo "${binary_file_name}"
+}
+
+###########################
+# Start Dotnet installation
+###########################
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Check listed package dependecies and install them if they are not already installed. 
-# NOTE: icu-devtools will install the appropriate dependencies based on the OS
-#       libgcc-s1 OR libgcc1 depending on OS
-#       the latest libicuXX depending on OS (eg libicu57 for stretch)
-#       also installs libc6 and libstdc++6 which are required by dotnet 
-# NOTE: swapped libicu-dev for icu-devtools, same dependency on libicuXX but 10x smaller.
+# NOTE: icu-devtools is a small package with similar dependecies to dotnet. 
+#       It will install the appropriate dependencies based on the OS:
+#         - libgcc-s1 OR libgcc1 depending on OS
+#         - the latest libicuXX depending on OS (eg libicu57 for stretch)
+#         - also installs libc6 and libstdc++6 which are required by dotnet 
 check_packages curl ca-certificates tar icu-devtools libgssapi-krb5-2 libssl1.1 zlib1g
 
 # Set architecture variable to current user's architecture (x64 or ARM64).
@@ -155,12 +178,11 @@ case $architecture in
     *) err "Architecture $architecture unsupported"; exit 1 ;;
 esac
 
-# Determine if the user wants to download dotnet Runtime only, or dotnet SDK & Runtime,
-# and get the latest versions for dotnet Runtime and dotnet SDK for 
-# installing the binaries and downloading the checksum.
-get_latest_version "Runtime"
+# Get the latest version for dotnet Runtime for use in generating the checksum URL 
 runtime_full_version=$(get_latest_version "Runtime")
 
+# Determine if the user wants to download dotnet Runtime only, or dotnet SDK & Runtime
+# and set the appropriate variables.
 if [ "${DOTNET_RUNTIME_ONLY}" = "true" ]; then
     DOTNET_SDK_OR_RUNTIME="Runtime"
     DOTNET_FULL_VERSION="${runtime_full_version}"
@@ -174,43 +196,39 @@ fi
 
 # Install the CLI
 echo "(*) Installing dotnet CLI..."
+
+# Setup the access group and add the user to it.
 umask 0002
 if ! cat /etc/group | grep -e "^${ACCESS_GROUP}:" > /dev/null 2>&1; then
     groupadd -r "${ACCESS_GROUP}"
 fi
 usermod -a -G "${ACCESS_GROUP}" "${USERNAME}"
-mkdir -p "${TARGET_INSTALL_PATH}"
 
 # Get download link for dotnet binaries from azureedge.
-echo "$DOTNET_SDK_OR_RUNTIME"
-echo "$DOTNET_FULL_VERSION"
-echo "$architecture"
 binary_download_link=$(get_download_link "${DOTNET_SDK_OR_RUNTIME}" "${DOTNET_FULL_VERSION}" "${architecture}")
 echo "DOWNLOAD LINK: ${binary_download_link}"
 
-# Get binaries' filename from the path elements in the url and download dotnet binaries in temp folder path.
-IFS='/'
-read -ra pathElems <<< "${binary_download_link}"
-count=${#pathElems[@]}
-binary_file_name="${pathElems[count-1]}"
-unset IFS;
 
+# Download the dotnet binaries.
+binary_file_name=$(get_filename_from_url "${binary_download_link}")
 echo "BINARY FILE NAME: ${binary_file_name}"
 echo "DOWNLOADING BINARIES..."
-TMP_DIR=$(mkdir -p /tmp/dotnetinstall)
-curl -sSL "${binary_download_link}" -o "/tmp/dotnetinstall/${binary_file_name}"
+TMP_DIR="/tmp/dotnetinstall"
+mkdir -p "${TMP_DIR}"
+curl -sSL "${binary_download_link}" -o "${TMP_DIR}/${binary_file_name}"
 
 # Get checksum from dotnet CLI blob storage using the runtime version and
 # run validation (sha512sum) of checksum against the expected list of checksums.
 echo "FETCH AND VERIFY CHECKSUM"
-curl -sSL "https://dotnetcli.blob.core.windows.net/dotnet/checksums/${runtime_full_version}-sha.txt" -o /tmp/dotnetinstall/checksums.txt
-grep "${binary_file_name}" /tmp/dotnetinstall/checksums.txt | sed 's/\r$//' > "/tmp/dotnetinstall/${binary_file_name}.sha512"
-cd /tmp/dotnetinstall/
+curl -sSL "https://dotnetcli.blob.core.windows.net/dotnet/checksums/${runtime_full_version}-sha.txt" -o "${TMP_DIR}/checksums.txt"
+grep "${binary_file_name}" "${TMP_DIR}/checksums.txt" | sed 's/\r$//' > "${TMP_DIR}/${binary_file_name}.sha512"
+cd "${TMP_DIR}/"
 sha512sum -c "${binary_file_name}.sha512"
 
 # Extract binaries and add to path.
+mkdir -p "${TARGET_INSTALL_PATH}"
 echo "Extract Binary to ${TARGET_INSTALL_PATH}"
-tar -xzf "/tmp/dotnetinstall/${binary_file_name}" -C "${TARGET_INSTALL_PATH}" --strip-components=1
+tar -xzf "${TMP_DIR}/${binary_file_name}" -C "${TARGET_INSTALL_PATH}" --strip-components=1
 
 # Add DOTNET_PATH variable and bin directory into PATH in bashrc/zshrc files (unless disabled).
 updaterc "$(cat << EOF
