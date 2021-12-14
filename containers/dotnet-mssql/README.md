@@ -10,10 +10,10 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Published image architecture(s)* | x86-64 |
-| *Available image variants* | 3.1, 5.0, 6.0 |
+| *Available image variants* | 3.1-focal, 5.0-focal, 6.0-focal |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Ubuntu (Debian .NET 6.0 image variant not yet supported) |
+| *Container OS* | Ubuntu 20.04/focal (Debian 11/bullseye image variants not yet supported by MSSQL client) |
 | *Languages, platforms* | .NET, .NET Core, C#, Microsoft SQL |
 
 ## Description
@@ -25,7 +25,7 @@ While this definition should work unmodified, you can select the version of .NET
 
 ```yaml
 args:
-  VARIANT: "3.1"
+  VARIANT: "3.1-focal"
 ```
 
 This will currently always use an Ubuntu 20.04/focal based .NET image since there is not yet a Debian 11/Bullseye ODBC driver.
