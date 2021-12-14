@@ -1,4 +1,4 @@
-# [Choice] .NET version: 6.0, 5.0, 3.1
+# [Choice] .NET version: 6.0-focal, 5.0-focal, 3.1-focal
 ARG VARIANT="6.0-focal"
 FROM mcr.microsoft.com/vscode/devcontainers/dotnet:${VARIANT}
 
