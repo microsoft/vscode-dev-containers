@@ -94,7 +94,8 @@ if [ "${DISTRO}" = "debian" ]; then
     fi
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ]; then
         runScript homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
-    fi 
+    fi
+    runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet" 
 fi
 
 if [ "${DISTRO}" != "alpine" ]; then
