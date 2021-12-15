@@ -39,9 +39,9 @@ chmod +x /etc/profile.d/00-restore-env.sh
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
     POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
-    for CURRENT_USER in ${POSSIBLE_USERS[@]}; do
-        if id -u ${CURRENT_USER} > /dev/null 2>&1; then
-            USERNAME=${CURRENT_USER}
+    for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
+        if id -u "${CURRENT_USER}" > /dev/null 2>&1; then
+            USERNAME="${CURRENT_USER}"
             break
         fi
     done
@@ -119,7 +119,7 @@ get_latest_version() {
     local url="https://dotnetcli.blob.core.windows.net/dotnet/${sdk_or_runtime}/${DOTNET_VERSION}/latest.version"
     latest_version=$(curl -sSL "${url}")
 
-    if [ -n "${latest_version}" ] && [ ! "${latest_version}" = *"Error"* ]; then
+    if [[ -n "${latest_version}" ]] && [[ ! "${latest_version}" = *"Error"* ]]; then
         echo "${latest_version}"
     else
         err "Unsupported Dotnet ${sdk_or_runtime} version ${DOTNET_VERSION}."
