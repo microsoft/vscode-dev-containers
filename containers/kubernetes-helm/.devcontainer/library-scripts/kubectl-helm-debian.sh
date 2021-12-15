@@ -140,12 +140,13 @@ fi
 kubectl completion bash > /etc/bash_completion.d/kubectl
 
 # kubectl zsh completion
-if [ "$USERNAME" != "root"  ]; then
-  zsh_completion_dir="/home/${USERNAME}/.oh-my-zsh/completions"
-  mkdir -p "$zsh_completion_dir"
-  kubectl completion zsh > "$zsh_completion_dir/_kubectl"
-  group_name=$(id -g $USERNAME)
-  chown ${USERNAME}:${group_name} "$zsh_completion_dir/_kubectl"
+if [ "${USERNAME}" != "root"  ]; then
+  omz_dir="/home/${USERNAME}/.oh-my-zsh"
+  zsh_completion_dir="${omz_dir}/completions"
+  mkdir -p "${zsh_completion_dir}"
+  kubectl completion zsh > "${zsh_completion_dir}/_kubectl"
+  group_name=$(id -g "${USERNAME}")
+  chown -R "${USERNAME}:${group_name}" "${omz_dir}"
 fi
 
 # Install Helm, verify signature and checksum
