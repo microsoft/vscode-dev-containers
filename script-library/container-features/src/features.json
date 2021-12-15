@@ -1065,11 +1065,14 @@
 				"nonFreePackages": {
 					"type":"boolean",
 					"default": true,
-					"description": "Add packages from non-free Debain repository?"
+					"description": "Add packages from non-free Debian repository?"
 				}
 			},
 			"buildArg": "_VSC_INSTALL_COMMON",
-			"include": []
+			"include": [
+				"puppet",
+				"chef"
+			]
 		},
 		{
 			"id": "dotnet",
@@ -1120,4 +1123,3 @@
 		}
 	]
 }
- 
