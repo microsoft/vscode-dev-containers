@@ -1,7 +1,7 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.205.2/containers/debian/.devcontainer/base.Dockerfile
 
 # [Choice] Debian version (use bullseye or stretch on local arm64/Apple Silicon): bullseye, buster, stretch
-ARG VARIANT="buster"
+ARG VARIANT="stretch"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 # ** [Optional] Uncomment this section to install additional packages. **
