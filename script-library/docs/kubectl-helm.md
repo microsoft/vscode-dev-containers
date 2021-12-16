@@ -11,7 +11,7 @@
 ## Syntax
 
 ```text
-./kubectl-helm-debian.sh [kubectl version] [Helm version] [Minikube version] [kubectl SHA256] [Helm SHA256] [minikube SHA256]
+./kubectl-helm-debian.sh [kubectl version] [Helm version] [Minikube version] [kubectl SHA256] [Helm SHA256] [minikube SHA256] [Non-root user]
 ```
 
 Or as a feature:
@@ -34,6 +34,8 @@ Or as a feature:
 |kubectl SHA256| | `automatic`| SHA256 checksum to use to verify the kubectl download. `automatic` will download the checksum. |
 |Helm SHA256| | `automatic`| SHA256 checksum to use to verify the Helm download. `automatic` will both acquire the checksum and do a signature verification of it. |
 |minikube SHA256| | `automatic`| SHA256 checksum to use to verify the minikube download. `automatic` will download the checksum. |
+|minikube SHA256| | `automatic`| SHA256 checksum to use to verify the minikube download. `automatic` will download the checksum. |
+|Non-root user| | `automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 
 ## Usage
 
