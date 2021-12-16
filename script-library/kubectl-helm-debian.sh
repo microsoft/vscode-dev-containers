@@ -140,7 +140,7 @@ fi
 kubectl completion bash > /etc/bash_completion.d/kubectl
 
 # kubectl zsh completion
-if [ "${USERNAME}" != "root"  ]; then
+if [ -n "${USERNAME}" && "${USERNAME}" != "root"  ]; then
   omz_dir="/home/${USERNAME}/.oh-my-zsh"
   zsh_completion_dir="${omz_dir}/completions"
   mkdir -p "${zsh_completion_dir}"
