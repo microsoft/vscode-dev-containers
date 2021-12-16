@@ -120,10 +120,10 @@ This definition includes some test code that will help you verify it is working 
 
 The `docker-compose` file sets up a networked PostgreSQL database that is accessible from the Java Dev Container. The port is forwarded to `localhost:5432` by default, but can be changed in the [devcontainer.json](.devcontainer\devcontainer.json).
 
-1. After starting the Dev Container as above, you can use the **Debug Console** to test the PostgreSQL Database.
+1. After starting the Dev Container as above, you can run the individual tests, which will output in the debug console.
 2. The [AppTest.java](test-project\src\test\java\com\mycompany\app\AppTest.java) contains a Test Method, `testIP` which will ping the Postgres Database using it's default container name, `postgresdb`.
 3. Running this test will let you know that the PostgreSQL DB is accessible. **This does not make or authorize a connection to the database, only checks for connectivity between containers.**
-4. Alternatively, running `./test.sh` will also run all the connectivity tests and verify that the PostgresDB is actually accessible. 
+4. Alternatively, running [./test.sh](test-project/test-utils.sh) will also run all the connectivity tests and verify that the PostgresDB is actually accessible. 
 
 ## License
 
