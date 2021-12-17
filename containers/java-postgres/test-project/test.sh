@@ -15,6 +15,8 @@ rm -rf mv maven-wrapper-maven-wrapper-0.5.5
 
 # Definition specific tests
 checkExtension "vscjava.vscode-java-pack"
+checkExtension "mtxr.sqltools"
+checkExtension "mtxr.sqltools-driver-pg"
 check "java" java -version
 check "build-and-test-jar" ./mvnw -q package
 check "test-project" java -jar target/my-app-1.0-SNAPSHOT.jar
