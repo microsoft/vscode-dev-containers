@@ -180,11 +180,77 @@ If there is an urgent need for an update to the definitions outside of this rele
 
 ### Creating a new feature
 
+A dev container feature is an installation script which can be run on an existing container to add additional tools and functionality.  
+
 **Registering a feature**
+
+Create the install script in the [script-library](script-library/) directory with the naming convention `<lowercase-feature-name>-<target-os>.sh`. EG `python-debian.sh` or `common-alpine.sh`
+
+Add a new object to the [features.json](script-library/container-features/src/features.json) file:
+
+    ```json
+        "id": "<lowercase-feature-name>", // Must match the <lowercase-feature-name> used to name the install script.
+        "name": "Display Name of Feature",
+        "documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/<lowercase-feature-name>.md", 
+        "options": {
+            "scriptArgument$1": {
+                "type": "string", // Either "string" or "boolean"
+                "proposals": [], // Array of valid string values for this option.
+                "default": "", // Default value if user does not specify.
+                "description": "" // User-facing description of this option.
+            },
+            "scriptArgument$2": {
+                "type":"boolean", // Either "string" or "boolean"
+                "default": false, // Either true or false
+                "description": "" // User-facing description of this option.
+            }
+        },
+        "buildArg": "_VSC_INSTALL_<CAPITALIZED_ID>", // Must match the ENV VAR defined in the feature-scripts.env file.
+        "extensions": [], // Array of VS Code extensions to install with this feature. 
+        "include": [] // Array of base containers this script can be used on.
+    ```
+
+Add your buildArg to the [feature-scripts.env](script-library/container-features/src/feature-scripts.env) file with all script arguments specified (even if they duplicate a script default).
+
+    ```
+    _VSC_INSTALL_<FEATURE>="<feature>-debian.sh ${_BUILD_ARG_<FEATURE>_<OPTION1>:-<option1 default>} ${_BUILD_ARG_<FEATURE>_<OPTION2>:-<option2 default} hardcodedThirdArgument"
+    ```
+
+Options declared in `features.json` are mapped using the naming convention `_BUILD_ARG_<FEATURE>_<OPTIONNAME>` and their default should match the declared default for that option.
+
+EG `_VSC_INSTALL_AZURE_CLI="azcli-debian.sh ${_BUILD_ARG_AZURE_CLI_VERSION:-latest}"`
 
 **Feature testing**
 
+Unit tests
+- Add your feature to the [run-scripts.sh](script-library/test/regression/run-scripts.sh) file to ensure it is included in CI tests.
+- Your addition should take the form `runScript <feature> <non-default-args>`. EG `runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"`
+- If your script takes the installation user as an argument, be sure to specify it as ${USERNAME} in the tests for programatic testing.
+
+Regression tests
+- Add your feature to the [test-features.env](script-library/container-features/test-features.env) file to include it in regression tests of the container-feature functionality. By setting the `_VSC_INSTALL_<FEATURE>` ENV VAR to true and adding the expected _BUILD_ARG options for your feature.
+
+EG
+    ```
+        _VSC_INSTALL_DOTNET=true
+        _BUILD_ARG_DOTNET_VERSION=latest
+        _BUILD_ARG_DOTNET_RUNTIMEONLY=false
+    ```
+
 **Feature documentation**
+
+Add your new feature to the list of scripts in the [script-library README.md](https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/README.md#scripts).
+
+Add documentation for your new feature script to the [script-library/docs](https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs) directory.
+
+Documentation should include: 
+- the status of the script and supported operating systems
+- the syntax expected to run as a feature or script
+- a description of the arguments
+- detailed usage instructions
+
+Feel free to use other scripts in that directory as inspiration.
+
 
 ### Best practices for writing an install script
 
