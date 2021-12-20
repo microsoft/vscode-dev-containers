@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:6716d2b6b99f04dfd4156480d6be355da15923ba6e3047ae8920ad9afd7fc1bb
+**Digest:** sha256:f619fe4f7c18eb6937efef4d9228a284aab23f4751916e2d15e528bd537baaeb
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [.NET](https://dotnet.microsoft.com/) | 3.1.415<br />5.0.403<br />6.0.100 | /home/codespaces/.dotnet<br />/opt/dotnet |
 | [Ruby](https://www.ruby-lang.org/en/) | 2.7.2 | /opt/ruby/&lt;version&gt; |
 | [PHP](https://xdebug.org/) | 7.2.34<br />7.3.27<br />7.4.24 | /opt/php/&lt;version&gt; |
-| [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.2.0 | /opt/microsoft/powershell |
+| [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.2.1 | /opt/microsoft/powershell |
 | GCC | 9.3.0-17ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
 | [Go](https://golang.org/dl) | 1.17.5 | /usr/local/go |
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 9a3d853481645ae0f961e9cc8421fc5d84e2c3c3 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5 | /usr/local/share/rbenv |
@@ -58,7 +58,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | autopep8 | 1.6.0 |
 | black | 21.12b0 |
 | yapf | 0.31.0 |
-| mypy | 0.910 |
+| mypy | 0.920 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.1 |
@@ -69,8 +69,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.7.3 |
-| honnef.co/go/tools | 0.2.0 |
+| golang.org/x/tools/gopls | 0.7.4 |
+| honnef.co/go/tools | 0.2.1 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.1.2 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [git](https://github.com/git/git) | 2.34.1 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.2 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.0 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.1 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.7.2 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
@@ -112,7 +112,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [GitHub CLI](https://github.com/cli/cli) | 2.3.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
-| [Gradle](https://gradle.org/) | 7.3.1 | 
+| [Gradle](https://gradle.org/) | 7.3.2 | 
 | Docker (Moby) CLI &amp; Engine | 20.10.11+azure | 
 
 **Additional linux tools and packages**

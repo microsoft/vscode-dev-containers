@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "9a3d853481645ae0f961e9cc8421fc5d84e2c3c3"
+                    "commitHash": "904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a"
                 }
             }
         },
@@ -227,7 +227,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "powershell",
-                    "Version": "7.2.0-1.deb",
+                    "Version": "7.2.1-1.deb",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -285,7 +285,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "mypy",
-                    "Version": "0.910"
+                    "Version": "0.920"
                 }
             }
         },
@@ -420,7 +420,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.7.3"
+                    "Version": "0.7.4"
                 }
             }
         },
@@ -429,7 +429,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "honnef.co/go/tools",
-                    "Version": "0.2.0"
+                    "Version": "0.2.1"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "9a3d853481645ae0f961e9cc8421fc5d84e2c3c3"
+                    "commitHash": "904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a"
                 }
             }
         },
@@ -562,7 +562,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.23.0",
+                    "Version": "1.23.1",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -622,7 +622,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Gradle",
-                    "Version": "7.3.1",
+                    "Version": "7.3.2",
                     "DownloadUrl": "https://gradle.org/"
                 }
             }
@@ -662,7 +662,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "yarn",
-                    "Version": "1.22.15-1",
+                    "Version": "1.22.17-1",
                     "Distribution": "debian",
                     "Release": "11",
                     "Pool-URL": "https://dl.yarnpkg.com/debian",
@@ -871,26 +871,6 @@
         },
         {
             "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "5403db85998ff0c087bc97d972e1e76551127b7e"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "f42aa49cfdfc56b784744d3e421f297ab03efbdc"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -1084,7 +1064,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.4.1"
+                    "Version": "8.5.0"
                 }
             }
         },
@@ -1094,7 +1074,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "9a3d853481645ae0f961e9cc8421fc5d84e2c3c3"
+                    "commitHash": "904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a"
                 }
             }
         },
