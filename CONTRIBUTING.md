@@ -176,6 +176,20 @@ The Remote - Containers extension ships into **VS Code Insiders** as new feature
 
 If there is an urgent need for an update to the definitions outside of this release cycle, please raise an issue in this repository requesting an out-of-band release to fix a critical issue.
 
+## Contributing Dev Container Features
+
+### Creating a new feature
+
+**Registering a feature**
+
+**Feature testing**
+
+**Feature documentation**
+
+### Best practices for writing an install script
+
+### Contributing container features in vscode-dev-containers vs. in a new repository
+
 ## Contributing to Documentation
 
 The majority of VS Code Remote's documentation can be found in the [VS Code docs repository](https://github.com/Microsoft/vscode-docs). This is usually the best place to contribute, but if you have a correction or suggestion for the content found here, we welcome your contributions.
