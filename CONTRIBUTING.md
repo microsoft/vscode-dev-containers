@@ -322,7 +322,7 @@ Feel free to use other scripts in that directory as inspiration.
 
 - Consider using [shellcheck](https://github.com/koalaman/shellcheck) or the [vscode-shellcheck extension](https://github.com/vscode-shellcheck/vscode-shellcheck) to apply linting and static code analysis to the bash script to ensure it is formatted correctly.
 
-- Consider using common helper functions from [shared/utils.sh](script-library\shared\utils.sh) when managing common tasks (like updating PATH variables, or managing gpg keys) by copying them directly into your script.  
+- Consider using common helper functions from [shared/utils.sh](script-library/shared/utils.sh) when managing common tasks (like updating PATH variables, or managing gpg keys) by copying them directly into your script.  
     - NOTE: This is done to minimize the impact that any change can have on existing working scripts.
     - Similarly, if you add a helper function to your script that could benefit others in the future, consider adding it to the `utils.sh` file as well.
 
