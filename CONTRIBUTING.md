@@ -239,20 +239,46 @@ EG
 
 **Feature documentation**
 
-Add your new feature to the list of scripts in the [script-library README.md](https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/README.md#scripts).
+### Best practices for writing feature install scripts
 
-Add documentation for your new feature script to the [script-library/docs](https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs) directory.
+- Decouple sections of the shellscript that handle user setup, helper functions, and feature installation. Doing so will apply a logical and natural flow to the script for future developers and maintainers to follow. One way to denote this distinction is to use in-line comments throughout the script.
+    ```md
+    # Logical flow recommended:
+    1. File header and description.
+    2. Define constants and default values.
+    3. User setup and user validation.
+    4. Helper functions.
+    5. Checks for dependencies being installed or Installs dependencies.
+    6. Runs container feature installs.
+    7. Gives the user correct permissions if necessary.
+    ```
 
-Documentation should include: 
-- the status of the script and supported operating systems
-- the syntax expected to run as a feature or script
-- a description of the arguments
-- detailed usage instructions
+- Error messages from the script should echo to `STDERR`, while regular status messages should echo to `STDOUT`. This makes troubleshooting the script easier for developers. One way to facilitate this is to create an `err()` function like so:
+    ```sh
+    # Setup STDERR.
+    err() {
+        echo "(!) $*" >&2
+    } 
+    ```
 
-Feel free to use other scripts in that directory as inspiration.
+- Always make sure to use double quotes and braces when referencing variables:
+    ```sh
+    echo "${variable}"
+    ```
 
+- For code clarity, assign return values from functions to a new variable and use the keyword `local` for vars inside of functions. This will ensure the global space is not crowded with unnecessary variables. For example:
+    ```sh
+    test_function() {
+        local test = "hello world!"
+        echo "${test}"
+    }
 
-### Best practices for writing an install script
+    test=$(test_function)
+    ```
+
+- If you are using temporary files within the script, make sure to run a cleanup function when the script exists. The recommended method is to use `trap`.
+
+- Consider using [shellcheck](https://github.com/koalaman/shellcheck) to apply linting and static code analysis to the bash script to ensure it is formatted correctly.
 
 ### Contributing container features in vscode-dev-containers vs. in a new repository
 
