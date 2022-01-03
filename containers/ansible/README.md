@@ -18,6 +18,14 @@
 
 The environment is heavily based on the [Python 3 devcontainers](https://github.com/rockaut/vscode-dev-containers/tree/main/containers/python-3) and slightly modified to automate the Ansible installs. So maybe also look at those too.
 
+### Included
+
+The container as such already includes pip and wheel for easier installation of ansible things.
+It also creates the basic directory requirements for ansible itself and also for collection/role creation.
+You may just mount your workspace folder (see devcontainer.json).
+
+The devcontainer also enables redhat.ansible plugin (see devcontainer.json).
+
 ### Configuration
 
 While the definition itself works unmodified, you can select the version of Python the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
@@ -38,33 +46,6 @@ RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requ
 ```
 
 Since `requirements.txt` is likely in the folder you opened rather than the `.devcontainer` folder, be sure to include `"context": ".."` to `devcontainer.json`. This allows the Dockerfile to access everything in the opened folder instead of just the contents of the `.devcontainer` folder.
-
-#### [Optional] Allowing the non-root vscode user to pip install globally without sudo
-
-You can opt into using the `vscode` non-root user in the container by adding `"remoteUser": "vscode"` to `devcontainer.json`. However, by default, this you will need to use `sudo` to perform global pip installs.
-
-```bash
-sudo pip install <your-package-here>
-```
-
-Or stick with user installs:
-
-```bash
-pip install --user <your-package-here>
-```
-
-If you prefer, you can add the following to your `Dockerfile` to cause global installs to go into a different folder that the `vscode` user can write to.
-
-```Dockerfile
-ENV PIP_TARGET=/usr/local/pip-global
-ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
-ENV PATH=${PIP_TARGET}/bin:${PATH}
-RUN if ! cat /etc/group | grep -e "^pip-global:" > /dev/null 2>&1; then groupadd -r pip-global; fi \
-    && usermod -a -G pip-global vscode \
-    && umask 0002 && mkdir -p ${PIP_TARGET} \
-    && chown :pip-global ${PIP_TARGET} \
-    && ( [ ! -f "/etc/profile.d/00-restore-env.sh" ] || sed -i -e "s/export PATH=/export PATH=\/usr\/local\/pip-global:/" /etc/profile.d/00-restore-env.sh )
-```
 
 ### Adding the definition to a project or codespace
 
