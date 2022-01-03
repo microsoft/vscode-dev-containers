@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a"
+                    "commitHash": "d87ab251c7fe18626b2d0c4e4a184e7bed7c508b"
                 }
             }
         },
@@ -276,7 +276,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "yapf",
-                    "Version": "0.31.0"
+                    "Version": "0.32.0"
                 }
             }
         },
@@ -285,7 +285,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "mypy",
-                    "Version": "0.920"
+                    "Version": "0.930"
                 }
             }
         },
@@ -321,7 +321,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.10.0"
+                    "Version": "20.13.0"
                 }
             }
         },
@@ -330,7 +330,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pipx",
-                    "Version": "0.16.4"
+                    "Version": "0.17.0"
                 }
             }
         },
@@ -474,7 +474,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/go-delve/delve",
-                    "Version": "1.7.3"
+                    "Version": "1.8.0"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a"
+                    "commitHash": "d87ab251c7fe18626b2d0c4e4a184e7bed7c508b"
                 }
             }
         },
@@ -533,7 +533,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "7ffe3c35a48a5004c077a36172f076217941cb64"
+                    "commitHash": "c97d64e306b8292b09ca311a3eb1c6720b366f9a"
                 }
             }
         },
@@ -612,7 +612,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "2.3.0",
+                    "Version": "2.4.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -622,7 +622,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Gradle",
-                    "Version": "7.3.2",
+                    "Version": "7.3.3",
                     "DownloadUrl": "https://gradle.org/"
                 }
             }
@@ -804,7 +804,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.1.14",
+                    "Version": "2.2.3",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -1064,7 +1064,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.5.0"
+                    "Version": "8.6.0"
                 }
             }
         },
@@ -1074,7 +1074,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a"
+                    "commitHash": "d87ab251c7fe18626b2d0c4e4a184e7bed7c508b"
                 }
             }
         },
