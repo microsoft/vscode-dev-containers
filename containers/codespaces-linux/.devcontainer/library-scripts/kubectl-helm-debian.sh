@@ -158,8 +158,9 @@ fi
 kubectl completion bash > /etc/bash_completion.d/kubectl
 
 # kubectl zsh completion
-mkdir -p /home/${USERNAME}/.oh-my-zsh/completions
-kubectl completion zsh > /home/${USERNAME}/.oh-my-zsh/completions/_kubectl
+mkdir -p "/home/${USERNAME}/.oh-my-zsh/completions"
+kubectl completion zsh > "/home/${USERNAME}/.oh-my-zsh/completions/_kubectl"
+chown -R "${USERNAME}" "/home/${USERNAME}/.oh-my-zsh"
 
 # Install Helm, verify signature and checksum
 echo "Downloading Helm..."
