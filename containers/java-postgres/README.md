@@ -122,8 +122,10 @@ The `docker-compose` file sets up a networked PostgreSQL database that is access
 
 1. After starting the Dev Container as above, you can run the individual tests, which will output in the debug console.
 2. The [AppTest.java](test-project\src\test\java\com\mycompany\app\AppTest.java) contains a Test Method, `testIP` which will ping the Postgres Database using it's default container name, `postgresdb`.
-3. Running this test will let you know that the PostgreSQL DB is accessible. **This does not make or authorize a connection to the database, only checks for connectivity between containers.**
-4. Alternatively, running [./test.sh](test-project/test-utils.sh) will also run all the connectivity tests and verify that the PostgresDB is actually accessible. 
+3. Running this test will let you know that the PostgreSQL DB is accessible. **This does not make or authorize a connection to the database, only checks for connectivity between containers.** You can run the tests either by:
+   a. Hovering over individual tests and pressing the Green Play Button. This will compile the class and run a single test.
+   b. Finding `AppTest.java`, right-clicking and hitting "Run Java". This will compile the class and run all tests.
+5. Alternatively, running [./test.sh](test-project/test-utils.sh) will also run all the connectivity tests and verify that the PostgresDB is actually accessible. 
 
 ## License
 
