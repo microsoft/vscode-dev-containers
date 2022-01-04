@@ -699,7 +699,7 @@ The below provides a mechanism to build and test against targeted platforms (e.g
 
 ### Build
 
-Run the docker build command using Buildx from the .devcontainer in the dotnet directory within the project repo (`containers/dotnet/.devcontainer`). [Buildx](https://docs.docker.com/buildx/working-with-buildx/) is a Docker CLI plugin that provides the ability to target multi-architectures (e.g. ARM64).
+Run the docker build command using `buildx` from the .devcontainer in the dotnet directory within the project repo (`containers/dotnet/.devcontainer`). [buildx](https://docs.docker.com/buildx/working-with-buildx/) is a Docker CLI plugin that provides the ability to target multi-architectures (e.g. ARM64).
 
 Note a few of the arguments:
 
@@ -713,7 +713,7 @@ docker buildx build --build-arg VARIANT=6.0.100-bullseye-slim-arm64v8 --platform
 Once the build is complete, run the image using the below example. Note that the dotnet directory is mounted. The dotnet directory includes test scripts which will be used in the subsequent steps.
 
 ```bash
-docker run -v ~/home/usr/local/repo/vscode-dev-containers/containers/dotnet/:/workspace --platform linux/arm64 -it dotnet-arm64 bash
+docker run -v $REPODIR/vscode-dev-containers/containers/dotnet/:/workspace --platform linux/arm64 -it dotnet-arm64 bash
 ```
 
 Once in the running container, verify that the architecture is ARM64 by running the command:
@@ -725,16 +725,16 @@ Once in the running container, verify that the architecture is ARM64 by running 
 For ARM64 on Linux, the architecture will show as `aarch64`.
 
 ### Test
+
 Once in the container, run the `test.sh` script from the `workspace/test-project` directory:
 
 ```bash
-./test.sh
+/workspace/test-project/test.sh
 ```
 
-For Linux ARM64 and the Dotnet container, the tests should all pass except for the `vscode-server` test. This test requires that VS Code attach to the running container instance. Using VS Code and the `Remote-Containers` extension, attach to the running instance of the image previously created, re-run the tests and they should all pass, including `vscode-server`.
+For Linux ARM64 and the Dotnet container, the tests should all pass except for the `vscode-server` test. This test requires that VS Code attaches to the running container instance. Using VS Code and the `Remote-Containers` extension, attach to the running instance of the image previously created, re-run the tests and they should all pass, including `vscode-server`.
 
 ### Reference
 
 - [ARM documentation](https://developer.arm.com/documentation/102475/0100/Multi-architecture-images) for how to build multi-architecture images.
 - [List of Supported Linux ARM64 DotNet SDK Images](https://hub.docker.com/_/microsoft-dotnet-sdk)
-
