@@ -1,5 +1,3 @@
 README.md
-test-project
-.devcontainer/library-scripts
-.vscode
+.devcontainer/library-scripts/README.md
 .npmignore

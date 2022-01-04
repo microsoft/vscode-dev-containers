@@ -16,6 +16,7 @@ check "oryx" oryx --version
 check "dotnet" dotnet --list-sdks
 check "oryx-install-dotnet-3.1.0" oryx prep --skip-detection --platforms-and-versions dotnet=3.1.0
 check "dotnet-3.1.0-installed" bash -c 'dotnet --info | grep -E "\s3\.1\.0\s"'
+check "dotnet-6-installed-by-oryx" dotnet --info | grep "/opt/dotnet/6\.0\.[0-9]*/sdk"
 
 # Check Python
 check "python" python --version

@@ -14,6 +14,8 @@
 | *Container OS* | Debian (though Ubuntu could be used instead) |
 | *Languages, platforms* | Any |
 
+> **Note:** Your host chip architecture needs to match the your container image architecture for this script to function. Cross-architecture emulation will not work.
+
 ## Description
 
 Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into your local Docker Desktop instance without affecting your dev container.

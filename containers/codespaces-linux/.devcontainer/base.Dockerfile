@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/oryx/build:vso-focal-20211102.1 as kitchensink
+FROM mcr.microsoft.com/oryx/build:vso-focal-20211210.1 as kitchensink
 
 ARG USERNAME=codespace
 ARG USER_UID=1000
@@ -97,10 +97,10 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     # Clean up
     && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
 
-# Install SDKMAN, OpenJDK8 (JDK 11 already present), gradle (maven already present)
+# Install SDKMAN, OpenJDK8 (JDK 17 already present), gradle (maven already present)
 RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
     && su ${USERNAME} -c ". ${SDKMAN_DIR}/bin/sdkman-init.sh \
-        && sdk install java 11-opt-java /opt/java/11.0 \
+        && sdk install java 11-opt-java /opt/java/17.0 \
         && sdk install java lts-opt-java /opt/java/lts"
 
 # Install Rust, Go, remove scripts now that we're done with them

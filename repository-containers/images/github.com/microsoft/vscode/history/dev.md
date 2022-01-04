@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
-**Digest:** sha256:a5ad2c464f757fac82d909fb8cf49dac2423c4a09def76b658580a579662abe9
+**Digest:** sha256:800b1e6cc6de4178974510f20fd8d40fe3c4b343c5e0104f932d48e254b2e252
 
 **Tags:**
 ```
@@ -26,7 +26,7 @@ mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+b1 |
+| curl | 7.74.0-1.3+deb11u1 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1 |
 | gnupg2 | 2.2.27-2 |
@@ -59,8 +59,8 @@ mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
-| vim-tiny | 2:8.2.2434-3 |
-| wget | 1.21-1+b1 |
+| vim-tiny | 2:8.2.2434-3+deb11u1 |
+| wget | 1.21-1+deb11u1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |

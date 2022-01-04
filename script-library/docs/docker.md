@@ -1,5 +1,7 @@
 # Docker-from-Docker Install Script
 
+> Need to mount files from inside your container into new ones you create? You may need to use [docker-in-docker](./docker-in-docker.md) instead.
+
 *Adds the Docker CLI to a container along with a script to enable using a forwarded Docker socket within a container to run Docker commands.*
 
 **Script status**: Stable
