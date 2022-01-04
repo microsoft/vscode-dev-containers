@@ -1,18 +1,12 @@
-name: 'Deploy Devcontainer Features'
+name: 'Deploy Devcontainer Features (Manually)'
 on:
-  push:
-    tags:
-    - 'v*'
+  workflow_dispatch:
 
 jobs:
   deploy: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Get tag name
-        id: get_tag_name  
-        run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
         
       - name: Copy scripts to src folder
         id: copy_scripts
