@@ -97,7 +97,7 @@ public class AppTest
     public void testIP()
     {
         try {
-            assertTrue( pingAddress("postgresdb") );
+            assertTrue( pingAddress(System.getenv("POSTGRES_IP")) );
         } catch (Exception e) {
             throw new AssertionFailedError("Postgresdb is not routable. Container may be offline. Error: " + e);
         }
@@ -107,7 +107,7 @@ public class AppTest
     public void testLogin()
     {
         try {
-            assertTrue( dbLogin("postgresdb", "postgres", "postgres") );
+            assertTrue( dbLogin(System.getenv("POSTGRES_IP"), System.getenv("POSTGRES_USER"), System.getenv("POSTGRES_PASSWORD")) );
         } catch (Exception e) {
             throw new AssertionFailedError("Unable to login to the Postgres DB. Check credentials. Error: " + e);
         }
@@ -117,7 +117,7 @@ public class AppTest
     public void testSQLCommand()
     {
         try {
-            assertTrue( listDatabases("postgresdb", "postgres", "postgres") );
+            assertTrue( listDatabases(System.getenv("POSTGRES_IP"), System.getenv("POSTGRES_USER"), System.getenv("POSTGRES_PASSWORD")) );
         } catch (Exception e) {
             throw new AssertionFailedError("Unable to get a list of Databases from postgresDB. Error: " + e);
         }

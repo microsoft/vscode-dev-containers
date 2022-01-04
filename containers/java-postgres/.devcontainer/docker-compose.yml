@@ -20,6 +20,12 @@ services:
         INSTALL_GRADLE: "false"
         GRADLE_VERSION: ""
         NODE_VERSION: "lts/*"
+    environment:
+      # NOTE: POSTGRES_DB/USER/PASSWORD should match values in devcontainer.json and in db container
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_IP=postgresdb
 
     volumes:
       - ..:/workspace:cached
@@ -43,7 +49,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-      # NOTE: POSTGRES_DB/USER/PASSWORD should match values in devcontainer.json
+      # NOTE: POSTGRES_DB/USER/PASSWORD should match values in devcontainer.json and in app container
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
