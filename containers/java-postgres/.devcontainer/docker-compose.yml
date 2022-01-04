@@ -15,8 +15,8 @@ services:
         # Use -bullseye variants on local arm64/Apple Silicon.
         VARIANT: 11-bullseye
         # Options
-        INSTALL_MAVEN: "true"
-        MAVEN_VERSION: "3.8.3"
+        INSTALL_MAVEN: "false"
+        MAVEN_VERSION: ""
         INSTALL_GRADLE: "false"
         GRADLE_VERSION: ""
         NODE_VERSION: "lts/*"
@@ -25,7 +25,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
-      - POSTGRES_IP=postgresdb
+      - POSTGRES_HOSTNAME=postgresdb
 
     volumes:
       - ..:/workspace:cached
