@@ -1,5 +1,17 @@
 # Java & PostgreSQL
 
+- [Java & PostgreSQL](#java--postgresql)
+  - [Summary](#summary)
+  - [Using this definition](#using-this-definition)
+    - [Adding another service](#adding-another-service)
+    - [Debug Configuration](#debug-configuration)
+    - [Installing Maven or Gradle](#installing-maven-or-gradle)
+    - [Installing Node.js](#installing-nodejs)
+    - [Adding the definition to your folder](#adding-the-definition-to-your-folder)
+  - [Testing the definition](#testing-the-definition)
+  - [Testing the PostgreSQL container](#testing-the-postgresql-container)
+  - [License](#license)
+
 ## Summary
 
 *Develop applications with Java and PostgreSQL. Includes a Java application container and PostgreSQL server.*
