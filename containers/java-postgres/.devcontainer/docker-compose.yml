@@ -22,10 +22,10 @@ services:
         NODE_VERSION: "lts/*"
     environment:
       # NOTE: POSTGRES_DB/USER/PASSWORD should match values in devcontainer.json and in db container
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
-      - POSTGRES_HOSTNAME=postgresdb
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_USER: postgres
+        POSTGRES_DB: postgres
+        POSTGRES_HOSTNAME: postgresdb
 
     volumes:
       - ..:/workspace:cached
