@@ -18,7 +18,7 @@ Or as a feature:
 
 ```json
 "features": {
-    "github": "latest"
+    "github-cli": "latest"
 }
 ```
 
@@ -34,7 +34,7 @@ To install these capabilities in your primary dev container, reference it in `de
 
 ```json
 "features": {
-    "github": "latest"
+    "github-cli": "latest"
 }
 ```
 
