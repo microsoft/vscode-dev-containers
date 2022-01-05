@@ -7,13 +7,13 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/dotnet.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./dotnet-debian.sh [dotnet version] [dotnet runtime only] [non-root user] [add TARGET_INSTALL_PATH to rc files flag] [install path] [access group name]
+# Syntax: ./dotnet-debian.sh [.NET version] [.NET runtime only] [non-root user] [add TARGET_DOTNET_ROOT to rc files flag] [.NET root] [access group name]
 
 DOTNET_VERSION=${1:-"latest"}
 DOTNET_RUNTIME_ONLY=${2:-"false"}
 USERNAME=${3:-"automatic"}
 UPDATE_RC=${4:-"true"}
-TARGET_INSTALL_PATH=${5:-"/usr/local/dotnet"}
+TARGET_DOTNET_ROOT=${5:-"/usr/local/dotnet"}
 ACCESS_GROUP=${6:-"dotnet"}
 
 # Exit on failure.
@@ -68,7 +68,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Add TARGET_INSTALL_PATH variable into PATH in bashrc/zshrc files.
+# Add TARGET_DOTNET_ROOT variable into PATH in bashrc/zshrc files.
 updaterc()  {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
@@ -226,20 +226,20 @@ cd "${TMP_DIR}/"
 sha512sum -c "${binary_file_name}.sha512"
 
 # Extract binaries and add to path.
-mkdir -p "${TARGET_INSTALL_PATH}"
-echo "Extract Binary to ${TARGET_INSTALL_PATH}"
-tar -xzf "${TMP_DIR}/${binary_file_name}" -C "${TARGET_INSTALL_PATH}" --strip-components=1
+mkdir -p "${TARGET_DOTNET_ROOT}"
+echo "Extract Binary to ${TARGET_DOTNET_ROOT}"
+tar -xzf "${TMP_DIR}/${binary_file_name}" -C "${TARGET_DOTNET_ROOT}" --strip-components=1
 
-# Add DOTNET_PATH variable and bin directory into PATH in bashrc/zshrc files (unless disabled).
+# Add DOTNET_ROOT variable and bin directory into PATH in bashrc/zshrc files (unless disabled).
 updaterc "$(cat << EOF
-export DOTNET_PATH="${TARGET_INSTALL_PATH}"
-if [[ "\${PATH}" != *"\${DOTNET_PATH}"* ]]; then export PATH="\${PATH}:\${DOTNET_PATH}"; fi
+export DOTNET_ROOT="${TARGET_DOTNET_ROOT}"
+if [[ "\${PATH}" != *"\${DOTNET_ROOT}"* ]]; then export PATH="\${PATH}:\${DOTNET_ROOT}"; fi
 EOF
 )"
 
 # Give write permissions to the user.
-chown -R ":${ACCESS_GROUP}" "${TARGET_INSTALL_PATH}"
-chmod g+r+w+s "${TARGET_INSTALL_PATH}"
-chmod -R g+r+w "${TARGET_INSTALL_PATH}"
+chown -R ":${ACCESS_GROUP}" "${TARGET_DOTNET_ROOT}"
+chmod g+r+w+s "${TARGET_DOTNET_ROOT}"
+chmod -R g+r+w "${TARGET_DOTNET_ROOT}"
 
 echo "Done!"

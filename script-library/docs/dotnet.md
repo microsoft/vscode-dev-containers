@@ -11,7 +11,7 @@
 ## Syntax
 
 ```text
-./dotnet-debian.sh [dotnet version] [dotnet runtime only] [non-root user] [add TARGET_INSTALL_PATH to rc files flag] [install path] [access group name]
+./dotnet-debian.sh [.NET version] [.NET runtime only] [non-root user] [add TARGET_DOTNET_ROOT to rc files flag] [.NET root] [access group name]
 ```
 
 Or as a feature:
@@ -58,6 +58,8 @@ If you have already built your development container, run the **Rebuild Containe
 2. Add the following to your `.devcontainer/Dockerfile`:
 
     ```Dockerfile
+    ENV DOTNET_ROOT="/usr/local/dotnet"
+    ENV PATH="${PATH}:${DOTNET_ROOT}"
     COPY library-scripts/dotnet-debian.sh /tmp/library-scripts/
     RUN apt-get update && bash /tmp/library-scripts/dotnet-debian.sh
     ```

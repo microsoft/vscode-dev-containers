@@ -1092,6 +1092,10 @@
 				}
 			},
 			"buildArg": "_VSC_INSTALL_DOTNET",
+			"containerEnv": {
+				"DOTNET_ROOT": "/usr/local/dotnet",
+				"PATH": "${PATH}:${DOTNET_ROOT}"
+			},
 			"extensions": [
 				"ms-dotnettools.csharp"
 			],
