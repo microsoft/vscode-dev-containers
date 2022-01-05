@@ -1,6 +1,6 @@
 # Docker-in-Docker Install Script
 
-> Interested in running docker commands from inside a container?  Chances are the [Docker-from-Docker](./docker.md) technique may suit your needs better.
+> Interested in running docker commands from inside a container?  The [Docker-from-Docker](./docker.md) technique may suit your needs better.
 
 *Create child containers _inside_ a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.* 
 

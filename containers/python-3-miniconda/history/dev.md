@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:28c74fa0173bb9c03be77f2915232204b11f25e77f21ea24af54781233394984
+**Digest:** sha256:f460d6e31575e7394b36d88f022db9258da4aab0e81714735a6aae2478d8125a
 
 **Tags:**
 ```
@@ -40,13 +40,13 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
 | black | 21.12b0 |
-| yapf | 0.31.0 |
-| mypy | 0.910 |
+| yapf | 0.32.0 |
+| mypy | 0.930 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.1 |
-| virtualenv | 20.10.0 |
-| pipx | 0.16.4 |
+| virtualenv | 20.13.0 |
+| pipx | 0.17.0 |
 
 **Other tools and utilities**
 
@@ -61,7 +61,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+b1 |
+| curl | 7.74.0-1.3+deb11u1 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1 |
 | gnupg2 | 2.2.27-2 |
@@ -94,9 +94,9 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
-| vim-tiny | 2:8.2.2434-3 |
-| wget | 1.21-1+b1 |
-| yarn | 1.22.15-1 |
+| vim-tiny | 2:8.2.2434-3+deb11u1 |
+| wget | 1.21-1+deb11u1 |
+| yarn | 1.22.17-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |

@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
-**Digest:** sha256:400edec8ad780e13f2e1da60b0132f887e0a9ae7b5d3e3f1a6ed2cfac601c108
+**Digest:** sha256:b2c840c6653b7709471cc3543c3d5e82258fc422b3b5f8cd8d38a3ad1b29172d
 
 **Tags:**
 ```
@@ -48,7 +48,7 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+b1 |
+| curl | 7.74.0-1.3+deb11u1 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1 |
 | gnupg2 | 2.2.27-2 |
@@ -81,9 +81,9 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
-| vim-tiny | 2:8.2.2434-3 |
-| wget | 1.21-1+b1 |
-| yarn | 1.22.15-1 |
+| vim-tiny | 2:8.2.2434-3+deb11u1 |
+| wget | 1.21-1+deb11u1 |
+| yarn | 1.22.17-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |
