@@ -726,8 +726,7 @@ For ARM64 on Linux, the architecture will show as `aarch64`.
 
 ### Test
 
-For Linux ARM64 and the Dotnet container requires that VS Code attaches to the running container instance. Using VS Code and the `Remote-Containers` extension, attach to the running instance of the image previously created, run the tests and they should all pass.
-Once in the container, run the `test.sh` script from:
+For Linux ARM64 and the Dotnet container requires that [VS Code attaches](https://code.visualstudio.com/docs/remote/attach-container) to the running container instance. Using VS Code and the [Remote-Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), attach to the running instance of the image previously created, run the test script and they should all pass.
 
 ```bash
 /workspace/test-project/test.sh
