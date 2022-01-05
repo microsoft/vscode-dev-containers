@@ -37,7 +37,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "swiftc --version",
+	"postCreateCommand": "[[ ! -d /workspaces/swift-format ]] && cd /workspaces && git clone --single-branch -b 0.50500.0 https://github.com/apple/swift-format.git --quiet && cd swift-format && swift build -c release --product swift-format",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
