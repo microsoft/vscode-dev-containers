@@ -37,7 +37,7 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/azure-functions-dotnet-6` folder.
+4. Select the `containers/azure-functions-dotnet-6-inprocess` folder.
 5. After the folder has opened in the container, press <kbd>F1</kbd> and select **Azure Functions: Create Function...**.
 6. Enter these options:
    1. Yes (when prompted to create a new project)
