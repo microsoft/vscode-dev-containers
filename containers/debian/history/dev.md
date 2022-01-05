@@ -11,7 +11,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:f1bdb75fac2893c03d0024bdc233b2186ea1fbf19a42981fb3e1e2d3d3033486
+**Digest:** sha256:9d1b9aa492b18a61d1c083237b08211034660d34805cb78795c36c66e5eddf42
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 9a3d853481645ae0f961e9cc8421fc5d84e2c3c3 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -83,7 +83,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 ## Variant: bullseye
 
-**Digest:** sha256:e1aebb7524cbf1ba33b6f619f07ad69a2b7bd80bb0cf7c13e9e810934aa05992
+**Digest:** sha256:b6b77024a66f66a3d1b27099b2cca6676268143d3a1afb674d08761f0dbebb46
 
 **Tags:**
 ```
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 9a3d853481645ae0f961e9cc8421fc5d84e2c3c3 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -156,7 +156,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:aaae0edbfbf0e4604ed7ae56996f5158f86ee7d336869ea433b4dc055f4b04c1
+**Digest:** sha256:bb893d37f7acc15be116c5d9d5ffb4e5775ba14fc55e8cb856109ce5e5c8cc0f
 
 **Tags:**
 ```
@@ -177,7 +177,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | bf303965e685489f2f1b764d5d22dc4766ca78c8 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 9a3d853481645ae0f961e9cc8421fc5d84e2c3c3 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -217,7 +217,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 | openssh-client | 1:7.4p1-10+deb9u7 |
 | procps | 2:3.3.12-3+deb9u1 |
 | psmisc | 22.21-2.1+b2 |
-| rsync | 3.1.2-1+deb9u2 |
+| rsync | 3.1.2-1+deb9u3 |
 | strace | 4.15-2 |
 | sudo | 1.8.19p1-2.1+deb9u3 |
 | unzip | 6.0-21+deb9u2 |

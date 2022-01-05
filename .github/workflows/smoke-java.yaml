@@ -29,7 +29,7 @@ jobs:
       id: smoke_test_java
       uses: ./.github/actions/smoke-test
       with:
-        definition: javascript-node
+        definition: java
         image: mcr.microsoft.com/vscode/devcontainers/java:dev-17
         user: vscode
 

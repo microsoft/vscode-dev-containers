@@ -6,14 +6,14 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # Update 'VARIANT' to pick a version of .NET: 3.1, 5.0, 6.0
-        VARIANT: "6.0"
+        # Update 'VARIANT' to pick a version of .NET: 3.1-focal, 5.0-focal, 6.0-focal
+        VARIANT: "6.0-focal"
         # Optional version of Node.js
         NODE_VERSION: "lts/*"
 
     volumes:
       - ..:/workspace:cached
-      
+
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
 
