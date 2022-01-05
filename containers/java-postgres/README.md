@@ -56,6 +56,12 @@ Once the PostgreSQL container has port forwarding enabled, it will be accessible
 1. [An Installation Guide for PSQL], a CLI tool to work with a PostgreSQL database.
 2. [Tips on populating data](https://www.postgresql.org/docs/14/populate.html) in the database. 
 
+If needed, you can use `postCreateCommand` to run commands after the container is created, by updating `.devcontainer/devcontainer.json` similar to what follows:
+
+```json
+"postCreateCommand": "java -version && git --version && node --version"
+```
+
 ### Adding another service
 
 You can add other services to your `docker-compose.yml` file [as described in Docker's documentation](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
@@ -104,7 +110,7 @@ Given JavaScript front-end web client code written for use in conjunction with a
 ```yaml
 args:
   VARIANT: 11
-  NODE_VERSION: "10" # Set to "none" to skip Node.js installation
+  NODE_VERSION: "10" # Set to "none" to skip Node.js installation, or "lts/*" for latest
 ```
 
 ### Adding the definition to your folder
