@@ -21,27 +21,27 @@ import java.sql.Statement;
 
 public class AppTest
 {
-
-
-    public static boolean pingAddress(String ipAddress) throws UnknownHostException, IOException
+    public static boolean pingAddress(String host) throws UnknownHostException, IOException
     {
-        InetAddress postgresAddress = InetAddress.getByName(ipAddress);
-        System.out.println("Sending Ping Request to " + ipAddress);
+        InetAddress postgresAddress = InetAddress.getByName(host);
+        System.out.println("Sending Ping Request to " + host);
         if (postgresAddress.isReachable(5000)){
-            System.out.println("Successfully Reached: " + ipAddress);
+            System.out.println("Successfully Reached: " + host);
             return true;
         }
-        System.out.println("Could not reach or connect to: " + ipAddress);
+        System.out.println("Could not reach or connect to: " + host);
         return false;
     }
 
-    public static boolean dbLogin(String ipAddress, String username, String password){
+    public static boolean dbLogin(String host, String username, String password){
         Connection c = null;
         try {
             Class.forName("org.postgresql.Driver");
+            System.out.println("Logging into postgresql at " + host);
             c = DriverManager
-               .getConnection("jdbc:postgresql://postgresdb/postgres",
-               "postgres", "postgres");
+               .getConnection("jdbc:postgresql://" + host + "/postgres",
+               username, password);
+            System.out.println("Successfully logged into: " + host);
             return true;
          } catch (Exception e) {
             e.printStackTrace();
@@ -50,15 +50,15 @@ public class AppTest
          }
     }
 
-    public static boolean listDatabases(String ipAddress, String username, String password){
+    public static boolean listDatabases(String host, String username, String password){
         Connection c = null;
         Statement stmt = null;
 
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-               .getConnection("jdbc:postgresql://postgresdb/postgres",
-               "postgres", "postgres");
+               .getConnection("jdbc:postgresql://" + host + "/postgres",
+               username, password);
             c.setAutoCommit(false);
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery( "select * from pg_database;" );
@@ -76,8 +76,6 @@ public class AppTest
          }
     }
 
-
-    App newApp = new App();
     public AppTest() {
     }
 
@@ -97,7 +95,7 @@ public class AppTest
     public void testIP()
     {
         try {
-            assertTrue( pingAddress(System.getenv("POSTGRES_IP")) );
+            assertTrue( pingAddress(System.getenv("POSTGRES_HOSTNAME")) );
         } catch (Exception e) {
             throw new AssertionFailedError("Postgresdb is not routable. Container may be offline. Error: " + e);
         }
@@ -107,7 +105,7 @@ public class AppTest
     public void testLogin()
     {
         try {
-            assertTrue( dbLogin(System.getenv("POSTGRES_IP"), System.getenv("POSTGRES_USER"), System.getenv("POSTGRES_PASSWORD")) );
+            assertTrue( dbLogin(System.getenv("POSTGRES_HOSTNAME"), System.getenv("POSTGRES_USER"), System.getenv("POSTGRES_PASSWORD")) );
         } catch (Exception e) {
             throw new AssertionFailedError("Unable to login to the Postgres DB. Check credentials. Error: " + e);
         }
@@ -117,7 +115,7 @@ public class AppTest
     public void testSQLCommand()
     {
         try {
-            assertTrue( listDatabases(System.getenv("POSTGRES_IP"), System.getenv("POSTGRES_USER"), System.getenv("POSTGRES_PASSWORD")) );
+            assertTrue( listDatabases(System.getenv("POSTGRES_HOSTNAME"), System.getenv("POSTGRES_USER"), System.getenv("POSTGRES_PASSWORD")) );
         } catch (Exception e) {
             throw new AssertionFailedError("Unable to get a list of Databases from postgresDB. Error: " + e);
         }
