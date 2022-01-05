@@ -127,6 +127,62 @@ get_latest_version() {
     fi
 }
 
+# Get up to major.minor version from user input
+# Look it up in releases-index.json
+# grab releases.json if found ELSE return error message to user
+# if major.minor.patch is found, return the file object (name, download url, checksum)
+# if major.minor is found, return the latest file object (name, download url, checksum)
+# if major.minor.patch NOT found, return error msg to user.
+
+# Get available dotnet version
+get_full_version_details() {
+    local sdk_or_runtime="$1"
+    local DOTNET_CHANNEL_VERSION
+    local DOTNET_RELEASES_URL
+    local DOTNET_RELEASES_JSON
+    local DOTNET_LATEST_VERSION
+    local DOTNET_DOWNLOAD_DETAILS
+
+    export DOTNET_DOWNLOAD_URL
+    export DOTNET_DOWNLOAD_HASH
+    export DOTNET_DOWNLOAD_NAME
+
+    if [ "${DOTNET_VERSION}" = "latest" ]; then
+        DOTNET_VERSION=""
+    fi
+
+    DOTNET_CHANNEL_VERSION="$(echo "${DOTNET_VERSION}" | cut -d "." --field=1,2)"
+    echo "DOTNET_CHANNEL_VERSION: ${DOTNET_CHANNEL_VERSION}"
+
+    DOTNET_RELEASES_URL="$(curl -sS https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${DOTNET_CHANNEL_VERSION}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
+    echo "DOTNET_RELEASES_URL: ${DOTNET_RELEASES_URL}"
+
+    if [[ -n "${DOTNET_RELEASES_URL}" ]]; then
+        DOTNET_RELEASES_JSON="$(curl -sS "${DOTNET_RELEASES_URL}")"
+        DOTNET_LATEST_VERSION="$(echo "${DOTNET_RELEASES_JSON}" | jq -r '."latest-version"')"
+        echo "DOTNET_LATEST_VERSION: ${DOTNET_LATEST_VERSION}"
+        # If user-specified version has 2 or more dots, use it as is.  Otherwise use latest version.
+        echo "DOTNET_VERSION: ${DOTNET_VERSION}"
+        if [[ "$(echo "${DOTNET_VERSION}" | grep -o "\." | wc -l)" -lt "2" ]]; then
+            DOTNET_VERSION="${DOTNET_LATEST_VERSION}"
+            echo "NEW DOTNET_VERSION: ${DOTNET_VERSION}"
+        fi
+        # TODO(bderusha): add arch as variable
+        DOTNET_DOWNLOAD_DETAILS="$(echo "${DOTNET_RELEASES_JSON}" |  jq -r --arg sdk_or_runtime "${sdk_or_runtime}" --arg dotnet_version "${DOTNET_VERSION}" '.releases[] | select( ."release-version"==$dotnet_version) | .[$sdk_or_runtime].files[] | select(.rid=="linux-arm64")')"
+        echo "DOTNET_DOWNLOAD_DETAILS: ${DOTNET_DOWNLOAD_DETAILS}"
+
+        DOTNET_DOWNLOAD_URL="$(echo "${DOTNET_DOWNLOAD_DETAILS}" | jq -r '.url')"
+        DOTNET_DOWNLOAD_HASH="$(echo "${DOTNET_DOWNLOAD_DETAILS}" | jq -r '.hash')"
+        DOTNET_DOWNLOAD_NAME="$(echo "${DOTNET_DOWNLOAD_DETAILS}" | jq -r '.name')"
+        echo "DOTNET_DOWNLOAD_URL: ${DOTNET_DOWNLOAD_URL}"
+        echo "DOTNET_DOWNLOAD_HASH: ${DOTNET_DOWNLOAD_HASH}"
+        echo "DOTNET_DOWNLOAD_NAME: ${DOTNET_DOWNLOAD_NAME}"
+    else
+        err "Unsupported .NET version ${DOTNET_VERSION}."
+        exit 1
+    fi
+}
+
 # Create and return url of where to download dotnet runtime or sdk.
 # args:
 # sdk_or_runtime - $1
@@ -168,7 +224,7 @@ export DEBIAN_FRONTEND=noninteractive
 #         - libgcc-s1 OR libgcc1 depending on OS
 #         - the latest libicuXX depending on OS (eg libicu57 for stretch)
 #         - also installs libc6 and libstdc++6 which are required by dotnet 
-check_packages curl ca-certificates tar icu-devtools libgssapi-krb5-2 libssl1.1 zlib1g
+check_packages curl ca-certificates tar jq icu-devtools libgssapi-krb5-2 libssl1.1 zlib1g
 
 # Set architecture variable to current user's architecture (x64 or ARM64).
 architecture="$(uname -m)"
