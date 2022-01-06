@@ -99,159 +99,106 @@ check_packages() {
     fi
 }
 
-# Convert string to lowercase.
-# args:
-# string to convert - $1
-to_lowercase() {
-    echo "$1" | tr '[:upper:]' '[:lower:]'
+# Get appropriate architecture name for .NET binaries for the target OS
+get_architecture_name_for_target_os() {
+    local architecture
+    architecture="$(uname -m)"
+    case $architecture in
+        x86_64) architecture="x64";;
+        aarch64 | armv8*) architecture="arm64";;
+        *) err "Architecture ${architecture} unsupported"; exit 1 ;;
+    esac
+
+    echo "${architecture}"
 }
 
-# Get latest available dotnet version
+
+# Find and extract .NET binary download details based on user-requested version
 # args:
-# sdk_or_runtime - $1
-get_latest_version() {
-    local sdk_or_runtime="$1" 
-
-    if [ "${DOTNET_VERSION}" = "latest" ]; then
-        DOTNET_VERSION="6.0"
-    fi
-
-    local url="https://dotnetcli.blob.core.windows.net/dotnet/${sdk_or_runtime}/${DOTNET_VERSION}/latest.version"
-    latest_version=$(curl -sSL "${url}")
-
-    if [[ -n "${latest_version}" ]] && [[ ! "${latest_version}" = *"Error"* ]]; then
-        echo "${latest_version}"
-    else
-        err "Unsupported Dotnet ${sdk_or_runtime} version ${DOTNET_VERSION}."
-        exit 1
-    fi
-}
-
-# Get up to major.minor version from user input
-# Look it up in releases-index.json
-# grab releases.json if found ELSE return error message to user
-# if major.minor.patch is found, return the file object (name, download url, checksum)
-# if major.minor is found, return the latest file object (name, download url, checksum)
-# if major.minor.patch NOT found, return error msg to user.
-
-# Get available dotnet version
+# sdk_or_runtime $1
+# exports:
+# DOTNET_DOWNLOAD_URL
+# DOTNET_DOWNLOAD_HASH
+# DOTNET_DOWNLOAD_NAME
 get_full_version_details() {
     local sdk_or_runtime="$1"
-    local DOTNET_CHANNEL_VERSION
-    local DOTNET_RELEASES_URL
-    local DOTNET_RELEASES_JSON
-    local DOTNET_LATEST_VERSION
-    local DOTNET_DOWNLOAD_DETAILS
+    local architecture
+    local dotnet_channel_version
+    local dotnet_releases_url
+    local dotnet_releases_json
+    local dotnet_latest_version
+    local dotnet_download_details
 
     export DOTNET_DOWNLOAD_URL
     export DOTNET_DOWNLOAD_HASH
     export DOTNET_DOWNLOAD_NAME
 
+    # Set architecture variable to current user's architecture (x64 or ARM64).
+    architecture="$(get_architecture_name_for_target_os)"
+
+    # Set DOTNET_VERSION to empty string to ensure jq includes all .NET versions in reverse sort below 
     if [ "${DOTNET_VERSION}" = "latest" ]; then
         DOTNET_VERSION=""
     fi
 
-    DOTNET_CHANNEL_VERSION="$(echo "${DOTNET_VERSION}" | cut -d "." --field=1,2)"
-    echo "DOTNET_CHANNEL_VERSION: ${DOTNET_CHANNEL_VERSION}"
+    dotnet_channel_version="$(echo "${DOTNET_VERSION}" | cut -d "." --field=1,2)"
+    dotnet_releases_url="$(curl -sS https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${dotnet_channel_version}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
 
-    DOTNET_RELEASES_URL="$(curl -sS https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${DOTNET_CHANNEL_VERSION}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
-    echo "DOTNET_RELEASES_URL: ${DOTNET_RELEASES_URL}"
-
-    if [[ -n "${DOTNET_RELEASES_URL}" ]]; then
-        DOTNET_RELEASES_JSON="$(curl -sS "${DOTNET_RELEASES_URL}")"
-        DOTNET_LATEST_VERSION="$(echo "${DOTNET_RELEASES_JSON}" | jq -r '."latest-version"')"
-        echo "DOTNET_LATEST_VERSION: ${DOTNET_LATEST_VERSION}"
+    if [ -n "${dotnet_releases_url}" ] && [ "${dotnet_releases_url}" != "null" ]; then
+        dotnet_releases_json="$(curl -sS "${dotnet_releases_url}")"
+        dotnet_latest_version="$(echo "${dotnet_releases_json}" | jq -r '."latest-release"')"
         # If user-specified version has 2 or more dots, use it as is.  Otherwise use latest version.
-        echo "DOTNET_VERSION: ${DOTNET_VERSION}"
-        if [[ "$(echo "${DOTNET_VERSION}" | grep -o "\." | wc -l)" -lt "2" ]]; then
-            DOTNET_VERSION="${DOTNET_LATEST_VERSION}"
-            echo "NEW DOTNET_VERSION: ${DOTNET_VERSION}"
+        if [ "$(echo "${DOTNET_VERSION}" | grep -o "\." | wc -l)" -lt "2" ]; then
+            DOTNET_VERSION="${dotnet_latest_version}"
         fi
-        # TODO(bderusha): add arch as variable
-        DOTNET_DOWNLOAD_DETAILS="$(echo "${DOTNET_RELEASES_JSON}" |  jq -r --arg sdk_or_runtime "${sdk_or_runtime}" --arg dotnet_version "${DOTNET_VERSION}" '.releases[] | select( ."release-version"==$dotnet_version) | .[$sdk_or_runtime].files[] | select(.rid=="linux-arm64")')"
-        echo "DOTNET_DOWNLOAD_DETAILS: ${DOTNET_DOWNLOAD_DETAILS}"
 
-        DOTNET_DOWNLOAD_URL="$(echo "${DOTNET_DOWNLOAD_DETAILS}" | jq -r '.url')"
-        DOTNET_DOWNLOAD_HASH="$(echo "${DOTNET_DOWNLOAD_DETAILS}" | jq -r '.hash')"
-        DOTNET_DOWNLOAD_NAME="$(echo "${DOTNET_DOWNLOAD_DETAILS}" | jq -r '.name')"
-        echo "DOTNET_DOWNLOAD_URL: ${DOTNET_DOWNLOAD_URL}"
-        echo "DOTNET_DOWNLOAD_HASH: ${DOTNET_DOWNLOAD_HASH}"
-        echo "DOTNET_DOWNLOAD_NAME: ${DOTNET_DOWNLOAD_NAME}"
+        dotnet_download_details="$(echo "${dotnet_releases_json}" |  jq -r --arg sdk_or_runtime "${sdk_or_runtime}" --arg dotnet_version "${DOTNET_VERSION}" --arg arch "${architecture}" '.releases[] | select( ."release-version"==$dotnet_version) | .[$sdk_or_runtime].files[] | select(.name=="dotnet-\($sdk_or_runtime)-linux-\($arch).tar.gz")')"
+        if [ -n "${dotnet_download_details}" ]; then
+            echo "Found .NET binary version ${DOTNET_VERSION}"
+            DOTNET_DOWNLOAD_URL="$(echo "${dotnet_download_details}" | jq -r '.url')"
+            DOTNET_DOWNLOAD_HASH="$(echo "${dotnet_download_details}" | jq -r '.hash')"
+            DOTNET_DOWNLOAD_NAME="$(echo "${dotnet_download_details}" | jq -r '.name')"
+        else
+            err "Unable to find .NET binary for version ${DOTNET_VERSION}"
+            exit 1
+        fi
     else
         err "Unsupported .NET version ${DOTNET_VERSION}."
         exit 1
     fi
 }
 
-# Create and return url of where to download dotnet runtime or sdk.
-# args:
-# sdk_or_runtime - $1
-# dotnet version - $2
-# system architecture - $3
-get_download_link() {
-    local sdk_or_runtime="$1"
-    local full_version="$2"
-    local arch="$3"
-    download_link="https://dotnetcli.azureedge.net/dotnet/${sdk_or_runtime}/${full_version}/dotnet-$(to_lowercase "${sdk_or_runtime}")-${full_version}-linux-${arch}.tar.gz"
-    
-    echo "${download_link}"
-}
-
-# Get binaries' filename from the path elements in the download url
-# args:
-# binary_download_link - $1
-get_filename_from_url() {
-    local binary_download_link="$1"
-    
-    IFS='/'
-    read -ra pathElems <<< "${binary_download_link}"
-    count=${#pathElems[@]}
-    binary_file_name="${pathElems[count-1]}"
-    unset IFS;
-
-    echo "${binary_file_name}"
-}
-
 ###########################
-# Start Dotnet installation
+# Start .NET installation
 ###########################
 
 export DEBIAN_FRONTEND=noninteractive
 
 # Check listed package dependecies and install them if they are not already installed. 
-# NOTE: icu-devtools is a small package with similar dependecies to dotnet. 
+# NOTE: icu-devtools is a small package with similar dependecies to .NET. 
 #       It will install the appropriate dependencies based on the OS:
 #         - libgcc-s1 OR libgcc1 depending on OS
 #         - the latest libicuXX depending on OS (eg libicu57 for stretch)
-#         - also installs libc6 and libstdc++6 which are required by dotnet 
+#         - also installs libc6 and libstdc++6 which are required by .NET 
 check_packages curl ca-certificates tar jq icu-devtools libgssapi-krb5-2 libssl1.1 zlib1g
 
-# Set architecture variable to current user's architecture (x64 or ARM64).
-architecture="$(uname -m)"
-case $architecture in
-    x86_64) architecture="x64";;
-    aarch64 | armv8*) architecture="arm64";;
-    *) err "Architecture ${architecture} unsupported"; exit 1 ;;
-esac
-
-# Get the latest version for dotnet Runtime for use in generating the checksum URL 
-runtime_full_version=$(get_latest_version "Runtime")
-
-# Determine if the user wants to download dotnet Runtime only, or dotnet SDK & Runtime
+# Determine if the user wants to download .NET Runtime only, or .NET SDK & Runtime
 # and set the appropriate variables.
 if [ "${DOTNET_RUNTIME_ONLY}" = "true" ]; then
-    DOTNET_SDK_OR_RUNTIME="Runtime"
-    DOTNET_FULL_VERSION="${runtime_full_version}"
+    DOTNET_SDK_OR_RUNTIME="runtime"
 elif [ "${DOTNET_RUNTIME_ONLY}" = "false" ]; then
-    DOTNET_SDK_OR_RUNTIME="Sdk"
-    DOTNET_FULL_VERSION=$(get_latest_version "Sdk")
+    DOTNET_SDK_OR_RUNTIME="sdk"
 else
     err "Expected true for installing dotnet Runtime only or false for installing SDK and Runtime. Received ${DOTNET_RUNTIME_ONLY}."
     exit 1
 fi
 
-# Install the CLI
-echo "(*) Installing dotnet CLI..."
+get_full_version_details "${DOTNET_SDK_OR_RUNTIME}"
+# exports DOTNET_DOWNLOAD_URL, DOTNET_DOWNLOAD_HASH, DOTNET_DOWNLOAD_NAME
+echo "DOWNLOAD LINK: ${DOTNET_DOWNLOAD_URL}"
+
+# Install the .NET CLI
+echo "(*) Installing .NET CLI..."
 
 # Setup the access group and add the user to it.
 umask 0002
@@ -260,31 +207,22 @@ if ! cat /etc/group | grep -e "^${ACCESS_GROUP}:" > /dev/null 2>&1; then
 fi
 usermod -a -G "${ACCESS_GROUP}" "${USERNAME}"
 
-# Get download link for dotnet binaries from azureedge.
-binary_download_link=$(get_download_link "${DOTNET_SDK_OR_RUNTIME}" "${DOTNET_FULL_VERSION}" "${architecture}")
-echo "DOWNLOAD LINK: ${binary_download_link}"
-
-
-# Download the dotnet binaries.
-binary_file_name=$(get_filename_from_url "${binary_download_link}")
-echo "BINARY FILE NAME: ${binary_file_name}"
-echo "DOWNLOADING BINARIES..."
+# Download the .NET binaries.
+echo "DOWNLOADING BINARY..."
 TMP_DIR="/tmp/dotnetinstall"
 mkdir -p "${TMP_DIR}"
-curl -sSL "${binary_download_link}" -o "${TMP_DIR}/${binary_file_name}"
+curl -sSL "${DOTNET_DOWNLOAD_URL}" -o "${TMP_DIR}/${DOTNET_DOWNLOAD_NAME}"
 
-# Get checksum from dotnet CLI blob storage using the runtime version and
-# run validation (sha512sum) of checksum against the expected list of checksums.
-echo "FETCH AND VERIFY CHECKSUM"
-curl -sSL "https://dotnetcli.blob.core.windows.net/dotnet/checksums/${runtime_full_version}-sha.txt" -o "${TMP_DIR}/checksums.txt"
-grep "${binary_file_name}" "${TMP_DIR}/checksums.txt" | sed 's/\r$//' > "${TMP_DIR}/${binary_file_name}.sha512"
-cd "${TMP_DIR}/"
-sha512sum -c "${binary_file_name}.sha512"
+# Get checksum from .NET CLI blob storage using the runtime version and
+# run validation (sha512sum) of checksum against the expected checksum hash.
+echo "VERIFY CHECKSUM"
+cd "${TMP_DIR}"
+echo "${DOTNET_DOWNLOAD_HASH} *${DOTNET_DOWNLOAD_NAME}" | sha512sum -c -
 
 # Extract binaries and add to path.
 mkdir -p "${TARGET_DOTNET_ROOT}"
 echo "Extract Binary to ${TARGET_DOTNET_ROOT}"
-tar -xzf "${TMP_DIR}/${binary_file_name}" -C "${TARGET_DOTNET_ROOT}" --strip-components=1
+tar -xzf "${TMP_DIR}/${DOTNET_DOWNLOAD_NAME}" -C "${TARGET_DOTNET_ROOT}" --strip-components=1
 
 # Add DOTNET_ROOT variable and bin directory into PATH in bashrc/zshrc files (unless disabled).
 updaterc "$(cat << EOF
