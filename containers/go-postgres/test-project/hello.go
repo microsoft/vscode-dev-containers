@@ -5,8 +5,57 @@
 
 package main
 
-import "fmt"
+import (
+	"database/sql"
+	"fmt"
+	"os"
+
+	_ "github.com/lib/pq"
+)
+
+func CheckError(err error) {
+	if err != nil {
+		panic(err)
+	}
+
+}
 
 func main() {
-	fmt.Println("Hello remote world!")
+	var host string = os.Getenv("POSTGRES_HOSTNAME")
+	var user string = os.Getenv("POSTGRES_USER")
+	var password string = os.Getenv("POSTGRES_PASSWORD")
+	var dbname string = os.Getenv("POSTGRES_DB")
+
+	psqlconn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=disable", host, user, password, dbname)
+
+	// Ready the Database connection
+	db, err := sql.Open("postgres", psqlconn)
+	CheckError(err)
+
+	// close database after the connection is no longer used
+	defer db.Close()
+
+	// check db
+	err = db.Ping()
+	CheckError(err)
+
+	fmt.Println("Connected!")
+
+	fmt.Println("Sending Query to Database")
+	rows, err := db.Query(`select datname from pg_database limit 1;`)
+	CheckError(err)
+
+	// close the query when no longer needed
+	defer rows.Close()
+
+	for rows.Next() {
+		var datname string
+
+		err = rows.Scan(&datname)
+		CheckError(err)
+
+		fmt.Printf("One database in this cluster is: %s", datname)
+	}
+
+	CheckError(err)
 }
