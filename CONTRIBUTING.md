@@ -2,6 +2,28 @@
 
 This document outlines a number of ways you can get involved.
 
+- [Contributing](#contributing)
+  - [Contributing Dev Container Definitions](#contributing-dev-container-definitions)
+    - [What makes a good Dev Container Definition?](#what-makes-a-good-dev-container-definition)
+    - [A note on referenced images and Dockerfile contents](#a-note-on-referenced-images-and-dockerfile-contents)
+    - [Expectations for new definitions](#expectations-for-new-definitions)
+    - [Anatomy of a Dev Container Definition](#anatomy-of-a-dev-container-definition)
+    - [Creating a new definition](#creating-a-new-definition)
+    - [Why do Dockerfiles in this repository use RUN statements with commands separated by &&?](#why-do-dockerfiles-in-this-repository-use-run-statements-with-commands-separated-by-)
+    - [Developing and testing a definition](#developing-and-testing-a-definition)
+    - [Adding a Database Definition to an existing Container](#adding-a-database-definition-to-an-existing-container)
+    - [Release cadence for new containers or container updates](#release-cadence-for-new-containers-or-container-updates)
+  - [Contributing to Documentation](#contributing-to-documentation)
+  - [Reporting Issues](#reporting-issues)
+    - [Identify Where to Report](#identify-where-to-report)
+    - [Look For an Existing Issue](#look-for-an-existing-issue)
+    - [Writing Good Bug Reports and Feature Requests](#writing-good-bug-reports-and-feature-requests)
+    - [Final Checklist](#final-checklist)
+    - [Follow Your Issue](#follow-your-issue)
+    - [Automated Issue Management](#automated-issue-management)
+  - [Code of Conduct](#code-of-conduct)
+  - [Thank You!](#thank-you)
+
 ## Contributing Dev Container Definitions
 
 This repository contains a set of **dev container definitions** to help get you up and running with a containerized environment. The definitions describe the appropriate container image, runtime arguments for starting the container, and VS Code extensions that should be installed. They are intended to be dropped into an existing project or folder rather than acting as sample projects. (See the [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) repositories if you are looking for sample projects.)  
@@ -161,6 +183,46 @@ VS Code Remote provides a straightforward development loop for creating and edit
 Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy.
 
 After you get your container up and running, you can test it by adding test assets / projects into the definition folder and then adding their locations to the `.npmignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form relative to the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `.npmignore` files.
+
+Finally, commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in. We appreciate any and all feedback!
+
+### Adding a Database Definition to an existing Container
+
+VS Code Dev Containers allow fairly straightforward modification for allowing multiple containers to run together. This is useful when adding database support to an existing container.
+
+1. Create a new copy of an existing language definition folder, and hyphenate the database name.
+   1. For example, `java` becomes `java-postgres`.
+2. Create a new `docker-compose.yml` file.
+   1. Add the existing `Dockerfile` to the `docker-compose` as an `app`. This will be the Dev Container.
+   2. Add the definition for database to the `docker-compose`, version tagging it or using the `latest`. We don't use custom images for databases, as this is generally not needed.
+   3. It will likely be necessary to network the containers so that the `app` can connect to the `db`. This can normally be done by adding the following to the `app` definition:
+
+    ```yaml
+        network_mode: service:db
+    ```
+
+3. Modify the `devcontainer.json` with any launch options or VS Code specific `settings.json` options that may be needed. 
+   1. For example, when working with a SQL database, it might be necessary to modify the settings with something like the following:
+   ```json
+   		"sqltools.connections": [
+			{
+			  "name": "Container database",
+			  "driver": "PostgreSQL",
+			  "previewLimit": 50,
+			  "server": "localhost",
+			  "port": 5432,
+			  // NOTE: database/username/password should match values in docker.compose.yml
+			  "database": "postgres",
+			  "username": "postgres",
+			  "password": "postgres"
+			}
+		  ],
+    ```
+    2. It might be necessary to add additional VS Code Extensions to allow for an easier dev experience.
+4. Modify the existing Tests or existing Application to ensure that the following criteria are met:
+    1. The application can successfuly ping the DB Container.
+    2. The application can login to the DB Container using the default login data. 
+    3. The application can send a query to the existing DB and receive data from the DB. (Typically listing the databases in the cluster is considered a valid test.)
 
 Finally, commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in. We appreciate any and all feedback!
 
