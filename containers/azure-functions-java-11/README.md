@@ -41,9 +41,10 @@ This definition includes some test code that will help you verify it is working 
 5. After the folder has opened in the container, press <kbd>F1</kbd> and select **Azure Functions: Create Function...**.
 6. Enter these options:
    1. Yes (when prompted to create a new project)
-   2. Java 11
-   3. (Accept defaults for group, artifact, and package information)
-   4. Open in current window
+   2. Java
+   3. Java 11
+   4. (Accept defaults for group, artifact, and package information)
+   5. Open in current window
 7. Press <kbd>F5</kbd> to start debugging project.
 8. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTrigger-Java?name=remote`.
     - If the port 7071 is not already open, press <kbd>F1</kbd>, select **Remote-Containers: Forward Port from Container...**, and then port 7071.
