@@ -45,20 +45,36 @@ public class AppTest
     public void testIP() throws Exception
     {
         String host = System.getenv("POSTGRES_HOSTNAME");
+        
+        try {
+            assertNotNull(host);
+        } 
+        catch(AssertionError e){
+            System.out.println("Please ensure that the environment variables are correctly set.");      
+            System.out.println("Error Code: " + e.toString());      
+        }
 
         InetAddress postgresAddress = InetAddress.getByName(host);
         System.out.println("Sending Ping Request to " + host);
-        if (postgresAddress.isReachable(5000)){
-            System.out.println("Successfully Reached: " + host);
-            return;
-        }
-        System.out.println("Could not reach or connect to: " + host);
+        
+        assertTrue("Unable to reach PostGres Container Host", postgresAddress.isReachable(5000));
+        System.out.println("Successfully Reached: " + host);
     }
 
     @Test
     public void testLogin() throws Exception
     {
         String host = System.getenv("POSTGRES_HOSTNAME"), username = System.getenv("POSTGRES_USER"), password = System.getenv("POSTGRES_PASSWORD");
+
+        try {
+            assertNotNull(host);
+            assertNotNull(username);
+            assertNotNull(password);
+        } 
+        catch(AssertionError e){
+            System.out.println("Please ensure that the environment variables are correctly set.");
+            System.out.println("Error Code: " + e.toString());      
+        }
 
         System.out.println("Logging into postgresql at " + host);
         Connection c = CreateConnection(host, username, password);
@@ -70,13 +86,25 @@ public class AppTest
     {
         String host = System.getenv("POSTGRES_HOSTNAME"), username = System.getenv("POSTGRES_USER"), password = System.getenv("POSTGRES_PASSWORD");
 
+        try {
+            assertNotNull(host);
+            assertNotNull(username);
+            assertNotNull(password);
+        } 
+        catch(AssertionError e){
+            System.out.println("Please ensure that the environment variables are correctly set.");
+            System.out.println("Error Code: " + e.toString());      
+        }
+
         Connection c = CreateConnection(host, username, password);
         Statement stmt = null;
 
         c.setAutoCommit(false);
         stmt = c.createStatement();
+
         ResultSet rs = stmt.executeQuery( "select * from pg_database limit 1;" );
         System.out.println("Name of 1st database in this cluster.");
+
         while (rs.next()){
             String databaseName = rs.getString("datname");
             System.out.printf("Database Name = %s ", databaseName);
