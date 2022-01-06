@@ -9,7 +9,6 @@
 | *Contributors* | The VS Code Team |
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
-| *Published images* | mcr.microsoft.com/vscode/devcontainers/cpp |
 | *Available image variants* | stretch, buster, bullseye, bionic, focal, hirsute ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/cpp/tags/list)) |
 | *Published image architecture(s)* | x86-64, aarch64/arm64 for `bullseye`, `stretch`, `bionic`, and `hirsute` variants |
 | *Works in Codespaces* | Yes |
@@ -20,6 +19,8 @@
 See **[history](history)** for information on the contents of published images.
 
 ## Using this definition
+This definition creates two containers, one for C++ and one for MariaDB (MySQL). VS Code will attach to the C++ dev container, and from within that container the MariaDB container will be available on **`localhost`** port 5432. The default database is named `mariadb` with a user of `mariadb` whose password is `mariadb`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `mariadb-data`.
+
 
 While the definition itself works unmodified, you can select the version of Debian or Ubuntu the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
@@ -69,8 +70,29 @@ Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohm
    4. Update `.devcontainer/devcontainer.json` to reference `"dockerfile": "base.Dockerfile"`.
 
 4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+   1. We recommend setting up your workspace with `g++ (Debian 10.2.1-6)` or later as MariaDB explicitly supports `g++` and all testing has been done with `g++`.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
+
+## Using the MariaDB Database
+You can connect to MariaDB from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
+
+```json
+"forwardPorts": [ "5432" ]
+```
+
+Once the MariaDB container has port forwarding enabled, it will be accessible from the Host machine at `localhost:5432`. The [MariaDB Documentation](https://mariadb.com/docs/) has:
+
+1. [An Installation Guide for MySQL](https://mariadb.com/kb/en/mysql-client/), a CLI tool to work with a PostgreSQL database.
+2. [Tips on populating data](https://mariadb.com/kb/en/how-to-quickly-insert-data-into-mariadb/) in the database. 
+
+If needed, you can use `postCreateCommand` to run commands after the container is created, by updating `.devcontainer/devcontainer.json` similar to what follows:
+
+```json
+"postCreateCommand": "g++ --version && git --version"
+```
+
+
 
 ## Testing the definition
 
@@ -81,8 +103,17 @@ This definition includes some test code that will help you verify it is working 
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/cpp` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. You should see "Hello, Remote World!" in the a terminal window after the program finishes executing.
-7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+6. You should see the following in the a terminal window after the program finishes executing.
+```
+Hello, Remote World!
+DB Connecting
+DB Executing
+Cluster has the following user created databases
+mariadb
+DB Success
+```
+7. You can also run [test.sh](test-project/test.sh) in order to build and test the project.
+8. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 

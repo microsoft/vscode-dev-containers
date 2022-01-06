@@ -13,13 +13,9 @@ services:
         # Update 'VARIANT' to pick a version of CPP
         # See the README for more information on available versions.
         VARIANT: debian-11
-    environment:
-      # NOTE: these variables should match values in devcontainer.json and in db container
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    
+    env_file:
+      - .env
+      
     # Security Opt and cap_add allow for C++ based debuggers to work. 
     # See `runArgs`: https://github.com/Microsoft/vscode-docs/blob/main/docs/remote/devcontainerjson-reference.md
     security_opt:
@@ -47,12 +43,8 @@ services:
     image: mariadb:latest
     restart: unless-stopped
     volumes:
-      - mariadb-data:/var/lib/mysql
-    environment:
-      # NOTE: these variables should match values in devcontainer.json and in app container
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      - mariadb-data:/var/lib/MARIADB
+    env_file:
+      - .env
     # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward DB locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
