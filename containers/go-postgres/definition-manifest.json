@@ -1,0 +1,63 @@
+{
+	"variants": ["1.17-bullseye", "1.16-bullseye", "1.17-buster", "1.16-buster"],
+	"definitionVersion": "0.205.2",
+	"build": {
+		"latest": "1.17-bullseye",
+		"rootDistro": "debian",
+		"tags": [
+			"go:${VERSION}-${VARIANT}"
+		],
+		"architectures": {
+			"1.17-bullseye": ["linux/amd64", "linux/arm64"],
+			"1.16-bullseye": ["linux/amd64", "linux/arm64"],
+			"1.17-buster": ["linux/amd64"],
+			"1.16-buster": ["linux/amd64"]
+		},
+		"variantTags": {
+			"1.17-bullseye": [ 
+				"go:${VERSION}-1.17",
+				"go:${VERSION}-1",
+				"go:${VERSION}-1-bullseye",
+				"go:${VERSION}-bullseye" 
+			],
+			"1.16-bullseye": ["go:${VERSION}-1.16"],
+			"1.17-buster": [
+				"go:${VERSION}-1-buster",
+				"go:${VERSION}-buster"
+			]
+		}
+	},
+	"dependencies": {
+		"image": "golang:${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/golang",
+		"debian": [{
+			"cgIgnore": false,
+			"name": "yarn"
+			},
+			"g++",
+			"gcc",
+			"libc6-dev", 
+			"make",
+			"pkg-config"
+		],
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
+			"nvm": "/usr/local/share/nvm"
+		},
+		"go": {
+			"golang.org/x/tools/gopls": null,
+			"honnef.co/go/tools": null,
+			"golang.org/x/lint": null,
+			"github.com/mgechev/revive": null,
+			"github.com/uudashr/gopkgs": null,
+			"github.com/ramya-rao-a/go-outline": null,
+			"github.com/go-delve/delve": null,
+			"github.com/golangci/golangci-lint": null
+		},
+		"languages": {
+			"Go": {
+				"cgIgnore": true
+			}
+		}
+	}
+}
