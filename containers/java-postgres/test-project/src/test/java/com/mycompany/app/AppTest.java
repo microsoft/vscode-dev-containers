@@ -46,13 +46,7 @@ public class AppTest
     {
         String host = System.getenv("POSTGRES_HOSTNAME");
         
-        try {
-            assertNotNull(host);
-        } 
-        catch(AssertionError e){
-            System.out.println("Please ensure that the environment variables are correctly set.");      
-            System.out.println("Error Code: " + e.toString());      
-        }
+        assertNotNull(host);
 
         InetAddress postgresAddress = InetAddress.getByName(host);
         System.out.println("Sending Ping Request to " + host);
@@ -66,15 +60,9 @@ public class AppTest
     {
         String host = System.getenv("POSTGRES_HOSTNAME"), username = System.getenv("POSTGRES_USER"), password = System.getenv("POSTGRES_PASSWORD");
 
-        try {
-            assertNotNull(host);
-            assertNotNull(username);
-            assertNotNull(password);
-        } 
-        catch(AssertionError e){
-            System.out.println("Please ensure that the environment variables are correctly set.");
-            System.out.println("Error Code: " + e.toString());      
-        }
+        assertNotNull(host);
+        assertNotNull(username);
+        assertNotNull(password);
 
         System.out.println("Logging into postgresql at " + host);
         Connection c = CreateConnection(host, username, password);
@@ -86,15 +74,9 @@ public class AppTest
     {
         String host = System.getenv("POSTGRES_HOSTNAME"), username = System.getenv("POSTGRES_USER"), password = System.getenv("POSTGRES_PASSWORD");
 
-        try {
-            assertNotNull(host);
-            assertNotNull(username);
-            assertNotNull(password);
-        } 
-        catch(AssertionError e){
-            System.out.println("Please ensure that the environment variables are correctly set.");
-            System.out.println("Error Code: " + e.toString());      
-        }
+        assertNotNull(host);
+        assertNotNull(username);
+        assertNotNull(password);
 
         Connection c = CreateConnection(host, username, password);
         Statement stmt = null;
