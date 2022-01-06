@@ -1,5 +1,17 @@
 # Go
 
+- [Go](#go)
+  - [Summary](#summary)
+  - [Using this definition](#using-this-definition)
+    - [Installing Node.js](#installing-nodejs)
+    - [Adding the definition to a project or codespace](#adding-the-definition-to-a-project-or-codespace)
+  - [Using the PostgreSQL Database](#using-the-postgresql-database)
+    - [Adding another service](#adding-another-service)
+    - [Installing GO Dependencies](#installing-go-dependencies)
+  - [Testing the definition](#testing-the-definition)
+    - [Debugging Security](#debugging-security)
+  - [License](#license)
+
 ## Summary
 
 *Use and develop Go + Postgres applications. Includes appropriate runtime args, Go, common tools, extensions, and dependencies.*
