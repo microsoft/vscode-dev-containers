@@ -16,6 +16,8 @@ UPDATE_RC=${4:-"true"}
 TARGET_DOTNET_ROOT=${5:-"/usr/local/dotnet"}
 ACCESS_GROUP=${6:-"dotnet"}
 
+MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
+
 # Exit on failure.
 set -e
 
@@ -112,6 +114,76 @@ get_architecture_name_for_target_os() {
     echo "${architecture}"
 }
 
+# Soft version matching that resolves a version for a given package in the *current apt-cache*
+# Return value is stored in first argument (the unprocessed version)
+apt_cache_version_soft_match() {
+    # Version
+    local variable_name="$1"
+    local requested_version=${!variable_name}
+    # Package Name
+    local package_name="$2"
+    # Exit on no match?
+    local exit_on_no_match="${3:-true}"
+
+    # Ensure we've exported useful variables
+    . /etc/os-release
+    local architecture="$(dpkg --print-architecture)"
+    
+    dot_escaped="${requested_version//./\\.}"
+    dot_plus_escaped="${dot_escaped//+/\\+}"
+    # Regex needs to handle debian package version number format: https://www.systutorials.com/docs/linux/man/5-deb-version/
+    version_regex="^(.+:)?${dot_plus_escaped}([\\.\\+ ~:-]|$)"
+    set +e # Don't exit if finding version fails - handle gracefully
+        fuzzy_version="$(apt-cache madison ${package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${version_regex}")"
+    set -e
+    if [ -z "${fuzzy_version}" ]; then
+        echo "(!) No full or partial for package \"${package_name}\" match found in apt-cache for \"${requested_version}\" on OS ${ID} ${VERSION_CODENAME} (${architecture})."
+
+        if $exit_on_no_match; then
+            echo "Available versions:"
+            apt-cache madison ${package_name} | awk -F"|" '{print $2}' | grep -oP '^(.+:)?\K.+'
+            exit 1 # Fail entire script
+        else
+            echo "Continuing to fallback method (if available)"
+            return 1;
+        fi
+    fi
+
+    # Globally assign fuzzy_version to this value
+    # Use this value as the return value of this function
+    declare -g ${variable_name}="=${fuzzy_version}"
+    echo "${variable_name} ${!variable_name}"
+}
+
+# Install .NET CLI using apt-get package installer
+install_using_apt() {
+    local sdk_or_runtime="$1"
+
+    # Install dependencies
+    check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
+
+    # Import key safely and import Microsoft apt repo
+    get_common_setting MICROSOFT_GPG_KEYS_URI
+    curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
+    echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+    apt-get update
+
+    if [ "${DOTNET_VERSION}" = "latest" ] || [ "${DOTNET_VERSION}" = "lts" ]; then
+        DOTNET_VERSION="6.0"
+    else
+        #TODO [kristi]: this currently cannot find dotnet packages
+        # Sets DOTNET_VERSION to our desired version, if match found.
+        echo "dotnet-${sdk_or_runtime}"
+        apt_cache_version_soft_match DOTNET_VERSION "dotnet-${sdk_or_runtime}" false
+        if [ "$?" != 0 ]; then
+            return 1
+        fi
+    fi
+
+    if ! (apt-get install -yq dotnet-${sdk_or_runtime}-${DOTNET_VERSION}); then
+        return 1
+    fi
+}
 
 # Find and extract .NET binary download details based on user-requested version
 # args:
@@ -141,8 +213,13 @@ get_full_version_details() {
         DOTNET_VERSION=""
     fi
 
+    # dotnet_patchless_version
     dotnet_channel_version="$(echo "${DOTNET_VERSION}" | cut -d "." --field=1,2)"
-    dotnet_releases_url="$(curl -sS https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${dotnet_channel_version}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
+
+    set +e
+    # CDN link uses: dotnetcli.azureedge.net
+    dotnet_releases_url="$(curl -s https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${dotnet_channel_version}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
+    set -e
 
     if [ -n "${dotnet_releases_url}" ] && [ "${dotnet_releases_url}" != "null" ]; then
         dotnet_releases_json="$(curl -sS "${dotnet_releases_url}")"
@@ -168,19 +245,63 @@ get_full_version_details() {
     fi
 }
 
+# Install .NET CLI using the .NET releases url
+install_using_dotnet_releases_url() {
+    local sdk_or_runtime="$1"
+
+    # Check listed package dependecies and install them if they are not already installed. 
+    # NOTE: icu-devtools is a small package with similar dependecies to .NET. 
+    #       It will install the appropriate dependencies based on the OS:
+    #         - libgcc-s1 OR libgcc1 depending on OS
+    #         - the latest libicuXX depending on OS (eg libicu57 for stretch)
+    #         - also installs libc6 and libstdc++6 which are required by .NET 
+    check_packages curl ca-certificates tar jq icu-devtools libgssapi-krb5-2 libssl1.1 zlib1g
+
+    get_full_version_details "${sdk_or_runtime}"
+    # exports DOTNET_DOWNLOAD_URL, DOTNET_DOWNLOAD_HASH, DOTNET_DOWNLOAD_NAME
+    echo "DOWNLOAD LINK: ${DOTNET_DOWNLOAD_URL}"
+
+    # Setup the access group and add the user to it.
+    umask 0002
+    if ! cat /etc/group | grep -e "^${ACCESS_GROUP}:" > /dev/null 2>&1; then
+        groupadd -r "${ACCESS_GROUP}"
+    fi
+    usermod -a -G "${ACCESS_GROUP}" "${USERNAME}"
+
+    # Download the .NET binaries.
+    echo "DOWNLOADING BINARY..."
+    TMP_DIR="/tmp/dotnetinstall"
+    mkdir -p "${TMP_DIR}"
+    curl -sSL "${DOTNET_DOWNLOAD_URL}" -o "${TMP_DIR}/${DOTNET_DOWNLOAD_NAME}"
+
+    # Get checksum from .NET CLI blob storage using the runtime version and
+    # run validation (sha512sum) of checksum against the expected checksum hash.
+    echo "VERIFY CHECKSUM"
+    cd "${TMP_DIR}"
+    echo "${DOTNET_DOWNLOAD_HASH} *${DOTNET_DOWNLOAD_NAME}" | sha512sum -c -
+
+    # Extract binaries and add to path.
+    mkdir -p "${TARGET_DOTNET_ROOT}"
+    echo "Extract Binary to ${TARGET_DOTNET_ROOT}"
+    tar -xzf "${TMP_DIR}/${DOTNET_DOWNLOAD_NAME}" -C "${TARGET_DOTNET_ROOT}" --strip-components=1
+
+    updaterc "$(cat << EOF
+    export DOTNET_ROOT="${TARGET_DOTNET_ROOT}"
+    if [[ "\${PATH}" != *"\${DOTNET_ROOT}"* ]]; then export PATH="\${PATH}:\${DOTNET_ROOT}"; fi
+EOF
+    )"
+    
+    # Give write permissions to the user.
+    chown -R ":${ACCESS_GROUP}" "${TARGET_DOTNET_ROOT}"
+    chmod g+r+w+s "${TARGET_DOTNET_ROOT}"
+    chmod -R g+r+w "${TARGET_DOTNET_ROOT}"
+}
+
 ###########################
 # Start .NET installation
 ###########################
 
 export DEBIAN_FRONTEND=noninteractive
-
-# Check listed package dependecies and install them if they are not already installed. 
-# NOTE: icu-devtools is a small package with similar dependecies to .NET. 
-#       It will install the appropriate dependencies based on the OS:
-#         - libgcc-s1 OR libgcc1 depending on OS
-#         - the latest libicuXX depending on OS (eg libicu57 for stretch)
-#         - also installs libc6 and libstdc++6 which are required by .NET 
-check_packages curl ca-certificates tar jq icu-devtools libgssapi-krb5-2 libssl1.1 zlib1g
 
 # Determine if the user wants to download .NET Runtime only, or .NET SDK & Runtime
 # and set the appropriate variables.
@@ -193,47 +314,21 @@ else
     exit 1
 fi
 
-get_full_version_details "${DOTNET_SDK_OR_RUNTIME}"
-# exports DOTNET_DOWNLOAD_URL, DOTNET_DOWNLOAD_HASH, DOTNET_DOWNLOAD_NAME
-echo "DOWNLOAD LINK: ${DOTNET_DOWNLOAD_URL}"
-
 # Install the .NET CLI
 echo "(*) Installing .NET CLI..."
 
-# Setup the access group and add the user to it.
-umask 0002
-if ! cat /etc/group | grep -e "^${ACCESS_GROUP}:" > /dev/null 2>&1; then
-    groupadd -r "${ACCESS_GROUP}"
-fi
-usermod -a -G "${ACCESS_GROUP}" "${USERNAME}"
+# Check if we're on x86 and if so, install via apt-get, otherwise use dotnetcli url.
+. /etc/os-release
+architecture="$(dpkg --print-architecture)"
+# TODO [kristi]: add list of architectures to check against.
+#if []
+    install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
+#else
+#    use_dotnet_releases_url="true"
+#fi
 
-# Download the .NET binaries.
-echo "DOWNLOADING BINARY..."
-TMP_DIR="/tmp/dotnetinstall"
-mkdir -p "${TMP_DIR}"
-curl -sSL "${DOTNET_DOWNLOAD_URL}" -o "${TMP_DIR}/${DOTNET_DOWNLOAD_NAME}"
-
-# Get checksum from .NET CLI blob storage using the runtime version and
-# run validation (sha512sum) of checksum against the expected checksum hash.
-echo "VERIFY CHECKSUM"
-cd "${TMP_DIR}"
-echo "${DOTNET_DOWNLOAD_HASH} *${DOTNET_DOWNLOAD_NAME}" | sha512sum -c -
-
-# Extract binaries and add to path.
-mkdir -p "${TARGET_DOTNET_ROOT}"
-echo "Extract Binary to ${TARGET_DOTNET_ROOT}"
-tar -xzf "${TMP_DIR}/${DOTNET_DOWNLOAD_NAME}" -C "${TARGET_DOTNET_ROOT}" --strip-components=1
-
-# Add DOTNET_ROOT variable and bin directory into PATH in bashrc/zshrc files (unless disabled).
-updaterc "$(cat << EOF
-export DOTNET_ROOT="${TARGET_DOTNET_ROOT}"
-if [[ "\${PATH}" != *"\${DOTNET_ROOT}"* ]]; then export PATH="\${PATH}:\${DOTNET_ROOT}"; fi
-EOF
-)"
-
-# Give write permissions to the user.
-chown -R ":${ACCESS_GROUP}" "${TARGET_DOTNET_ROOT}"
-chmod g+r+w+s "${TARGET_DOTNET_ROOT}"
-chmod -R g+r+w "${TARGET_DOTNET_ROOT}"
+#if [ "${use_dotnet_releases_url}" = "true" ]; then
+#    install_using_dotnet_releases_url "${DOTNET_SDK_OR_RUNTIME}"
+#fi
 
 echo "Done!"
