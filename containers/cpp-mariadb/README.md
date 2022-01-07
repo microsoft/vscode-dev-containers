@@ -16,8 +16,6 @@
 | *Container OS* | Debian, Ubuntu |
 | *Languages, platforms* | C++ |
 
-See **[history](history)** for information on the contents of published images.
-
 ## Using this definition
 This definition creates two containers, one for C++ and one for MariaDB (MySQL). VS Code will attach to the C++ dev container, and from within that container the MariaDB container will be available on **`localhost`** port 3306. The default database is named `mariadb` with a user of `mariadb` whose password is `mariadb`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `mariadb-data`.
 
