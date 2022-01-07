@@ -1,0 +1,47 @@
+{
+	"variants": ["buster", "bullseye"],
+	"definitionVersion": "0.201.2",
+	"build": {
+		"latest": "buster",
+		"rootDistro": "debian",
+		"architectures": {
+			"bullseye": ["linux/amd64", "linux/arm64"],
+			"buster": ["linux/amd64"]
+		},
+		"tags": [
+			"rust:${VERSION}-${VARIANT}"
+		],
+		"variantTags": {
+			"buster": [ 
+				"rust:${VERSION}-1",
+				"rust:${VERSION}-1-buster"
+			],
+			"bullseye": [ "rust:${VERSION}-1-bullseye" ]
+		}
+	},
+	"dependencies": {
+		"image": "rust:1-${VARIANT}",
+		"imageLink": "https://hub.docker.com/_/rust",
+		"apt": [
+			"lldb", 
+			"python3-minimal",
+			"gcc", 
+			"libc6-dev"
+		],
+		"git": {
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
+		},
+		"cargo": {
+			"rls": null,
+			"rustfmt": null,
+			"rust-analysis": "rustc --version",
+			"rust-src": "rustc --version",
+			"clippy": "rustc --version"
+		},
+		"languages": {
+			"Rust": {
+				"cgIgnore": true
+			}
+		}
+	}
+}
