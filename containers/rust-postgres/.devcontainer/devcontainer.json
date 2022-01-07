@@ -1,13 +1,8 @@
 {
-	"name": "Rust",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			// Use the VARIANT arg to pick a Debian OS version: buster, bullseye
-			// Use bullseye when on local on arm64/Apple Silicon.
-			"VARIANT": "buster"
-		}
-	},
+	"name": "Rust and PostgreSQL",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
 	"runArgs": [
 		"--cap-add=SYS_PTRACE",
 		"--security-opt",
@@ -21,7 +16,20 @@
 		"files.watcherExclude": {
 			"**/target/**": true
 		},
-		"rust-analyzer.checkOnSave.command": "clippy"
+		"rust-analyzer.checkOnSave.command": "clippy",
+		"sqltools.connections": [
+			{
+			  "name": "Container database",
+			  "driver": "PostgreSQL",
+			  "previewLimit": 50,
+			  "server": "localhost",
+			  "port": 5432,
+			  // NOTE: database/username/password should match values in docker.compose.yml
+			  "database": "postgres",
+			  "username": "postgres",
+			  "password": "postgres"
+			}
+		  ],
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -30,7 +38,9 @@
 		"mutantdino.resourcemonitor",
 		"matklad.rust-analyzer",
 		"tamasfe.even-better-toml",
-		"serayuzgur.crates"
+		"serayuzgur.crates",
+		"mtxr.sqltools",
+		"mtxr.sqltools-driver-pg"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
