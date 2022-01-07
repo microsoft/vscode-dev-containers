@@ -18,26 +18,19 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"lldb.library": "/usr/lib/liblldb.so",
-		"sourcekit-lsp.toolchainPath": "/usr/bin/",
-		"sourcekit-lsp.serverPath": "/usr/bin/sourcekit-lsp",
-		"apple-swift-format.path": "/workspaces/swift-format/.build/release/swift-format",
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"sswg.swift-lang",
 		"vadimcn.vscode-lldb",
-		"hbenl.vscode-test-explorer",
-		"makeitbetter.vscode-swift-test-adapter",
-		"fredapackages.swift-add-documentation",
-		"vknabel.vscode-apple-swift-format",
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "[[ ! -d /workspaces/swift-format ]] && cd /workspaces && git clone --single-branch -b 0.50500.0 https://github.com/apple/swift-format.git --quiet && cd swift-format && swift build -c release --product swift-format",
+	// "postCreateCommand": "",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
