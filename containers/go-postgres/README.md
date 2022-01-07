@@ -80,7 +80,7 @@ You can connect to PostgreSQL from an external tool when using VS Code by updati
 
 Once the PostgreSQL container has port forwarding enabled, it will be accessible from the Host machine at `localhost:5432`. The [PostgreSQL Documentation](https://www.postgresql.org/docs/14/index.html) has:
 
-1. [An Installation Guide for PSQL], a CLI tool to work with a PostgreSQL database.
+1. [An Installation Guide for PSQL](https://www.postgresql.org/docs/14/installation.html), a CLI tool to work with a PostgreSQL database.
 2. [Tips on populating data](https://www.postgresql.org/docs/14/populate.html) in the database. 
 
 If needed, you can use `postCreateCommand` to run commands after the container is created, by updating `.devcontainer/devcontainer.json` similar to what follows:
