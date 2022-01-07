@@ -116,14 +116,20 @@ get_architecture_name_for_target_os() {
 
 # Soft version matching that resolves a version for a given package in the *current apt-cache*
 # Return value is stored in first argument (the unprocessed version)
-apt_cache_version_soft_match() {
+apt_cache_package_and_version_soft_match() {
     # Version
-    local variable_name="$1"
-    local requested_version=${!variable_name}
+    local version_variable_name="$1"
+    local requested_version=${!version_variable_name}
     # Package Name
-    local package_name="$2"
+    local package_variable_name="$2"
+    local partial_package_name="$3"
+    local package_name
     # Exit on no match?
-    local exit_on_no_match="${3:-true}"
+    local exit_on_no_match="${4:-true}"
+    local major_minor_version
+
+    major_minor_version="$(echo "${requested_version}" | cut -d "." --field=1,2)"
+    package_name="$(apt-cache search "${partial_package_name}-[0-9].[0-9]" | awk -F" - " '{print $1}' | grep -m 1 "${partial_package_name}-${major_minor_version}")"
 
     # Ensure we've exported useful variables
     . /etc/os-release
@@ -151,13 +157,20 @@ apt_cache_version_soft_match() {
 
     # Globally assign fuzzy_version to this value
     # Use this value as the return value of this function
-    declare -g ${variable_name}="=${fuzzy_version}"
-    echo "${variable_name} ${!variable_name}"
+    declare -g ${version_variable_name}="=${fuzzy_version}"
+    echo "${version_variable_name} ${!version_variable_name}"
+
+    # Globally assign package to this value
+    # Use this value as the return value of this function
+    declare -g ${package_variable_name}="${package_name}"
+    echo "${package_variable_name} ${!package_variable_name}"
 }
 
 # Install .NET CLI using apt-get package installer
 install_using_apt() {
     local sdk_or_runtime="$1"
+    local dotnet_major_minor_version
+    export DOTNET_PACKAGE
 
     # Install dependencies
     check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
@@ -171,16 +184,16 @@ install_using_apt() {
     if [ "${DOTNET_VERSION}" = "latest" ] || [ "${DOTNET_VERSION}" = "lts" ]; then
         DOTNET_VERSION="6.0"
     else
-        #TODO [kristi]: this currently cannot find dotnet packages
-        # Sets DOTNET_VERSION to our desired version, if match found.
-        echo "dotnet-${sdk_or_runtime}"
-        apt_cache_version_soft_match DOTNET_VERSION "dotnet-${sdk_or_runtime}" false
+        # Sets DOTNET_VERSION and DOTNET_PACKAGE if matches found. 
+        apt_cache_package_and_version_soft_match DOTNET_VERSION DOTNET_PACKAGE "dotnet-${sdk_or_runtime}" false
+        echo "DOTNET_VERSION: ${DOTNET_VERSION}"
         if [ "$?" != 0 ]; then
             return 1
         fi
     fi
 
-    if ! (apt-get install -yq dotnet-${sdk_or_runtime}-${DOTNET_VERSION}); then
+    echo "INSTALLING PACKAGE NAME: ${DOTNET_PACKAGE}${DOTNET_VERSION}"
+    if ! (apt-get install -yq ${DOTNET_PACKAGE}${DOTNET_VERSION}); then
         return 1
     fi
 }
@@ -213,14 +226,17 @@ get_full_version_details() {
         DOTNET_VERSION=""
     fi
 
-    # dotnet_patchless_version
+    # TODO(bderusha): Rename and plumb through as dotnet_patchless_version
     dotnet_channel_version="$(echo "${DOTNET_VERSION}" | cut -d "." --field=1,2)"
 
     set +e
-    # CDN link uses: dotnetcli.azureedge.net
-    dotnet_releases_url="$(curl -s https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${dotnet_channel_version}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
+    # TODO(bderusha): grab channel-version instead of URL
+    dotnet_releases_url="$(curl -s https://dotnetcli.azureedge.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${dotnet_channel_version}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
     set -e
 
+    # TODO(bderusha): construct CDN release.json url
+    # [https://dotnetcli.azureedge.net/dotnet/release-metadata/{CHANNEL_OR_PATCHLESS_VERSION}/releases.json]
+    # CURL that url and check IF response body ELSE error msg
     if [ -n "${dotnet_releases_url}" ] && [ "${dotnet_releases_url}" != "null" ]; then
         dotnet_releases_json="$(curl -sS "${dotnet_releases_url}")"
         dotnet_latest_version="$(echo "${dotnet_releases_json}" | jq -r '."latest-release"')"
@@ -321,14 +337,17 @@ echo "(*) Installing .NET CLI..."
 . /etc/os-release
 architecture="$(dpkg --print-architecture)"
 # TODO [kristi]: add list of architectures to check against.
-#if []
-    install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
-#else
-#    use_dotnet_releases_url="true"
-#fi
+use_dotnet_releases_url="false"
 
-#if [ "${use_dotnet_releases_url}" = "true" ]; then
-#    install_using_dotnet_releases_url "${DOTNET_SDK_OR_RUNTIME}"
-#fi
+# TODO(bderusha): switch on valid architectures SEE azcli
+if [  ]; then
+    install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
+else
+   use_dotnet_releases_url="true"
+fi
+
+if [ "${use_dotnet_releases_url}" = "true" ]; then
+   install_using_dotnet_releases_url "${DOTNET_SDK_OR_RUNTIME}"
+fi
 
 echo "Done!"
