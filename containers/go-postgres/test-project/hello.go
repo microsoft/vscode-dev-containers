@@ -54,7 +54,7 @@ func main() {
 		err = rows.Scan(&datname)
 		CheckError(err)
 
-		fmt.Printf("One database in this cluster is: %s", datname)
+		fmt.Printf("One database in this cluster is: %s \n", datname)
 	}
 
 	CheckError(err)
