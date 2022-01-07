@@ -98,6 +98,18 @@ DB Success
 7. You can also run [test.sh](test-project/test.sh) in order to build and test the project.
 8. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
+### Debugging Security
+To allow C++ debuggers to run within the Docker Containers, the [docker-compose.yml](.devcontainer/docker-compose.yml) contains the following lines:
+
+```yaml
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE
+```
+
+As these can create security vulnerabilities, it is advisable to not use this unless needed. This should only be used in a Debug or Dev container, not in Production.
+
 ## License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
