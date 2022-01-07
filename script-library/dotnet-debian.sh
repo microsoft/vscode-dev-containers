@@ -237,15 +237,19 @@ get_full_version_details() {
     # TODO(bderusha): construct CDN release.json url
     # [https://dotnetcli.azureedge.net/dotnet/release-metadata/{CHANNEL_OR_PATCHLESS_VERSION}/releases.json]
     # CURL that url and check IF response body ELSE error msg
+    echo "dotnet_releases_url: ${dotnet_releases_url}"
     if [ -n "${dotnet_releases_url}" ] && [ "${dotnet_releases_url}" != "null" ]; then
         dotnet_releases_json="$(curl -sS "${dotnet_releases_url}")"
+        # TODO(bderusha): make this ."latest-RUNTIME_OR_SDK"
         dotnet_latest_version="$(echo "${dotnet_releases_json}" | jq -r '."latest-release"')"
         # If user-specified version has 2 or more dots, use it as is.  Otherwise use latest version.
+        echo "${DOTNET_VERSION}"
         if [ "$(echo "${DOTNET_VERSION}" | grep -o "\." | wc -l)" -lt "2" ]; then
             DOTNET_VERSION="${dotnet_latest_version}"
         fi
+        echo "${DOTNET_VERSION}"
 
-        dotnet_download_details="$(echo "${dotnet_releases_json}" |  jq -r --arg sdk_or_runtime "${sdk_or_runtime}" --arg dotnet_version "${DOTNET_VERSION}" --arg arch "${architecture}" '.releases[] | select( ."release-version"==$dotnet_version) | .[$sdk_or_runtime].files[] | select(.name=="dotnet-\($sdk_or_runtime)-linux-\($arch).tar.gz")')"
+        dotnet_download_details="$(echo "${dotnet_releases_json}" |  jq -r --arg sdk_or_runtime "${sdk_or_runtime}" --arg dotnet_version "${DOTNET_VERSION}" --arg arch "${architecture}" '.releases[]."\($sdk_or_runtime)" | select(.version==$dotnet_version) | .files[] | select(.name=="dotnet-\($sdk_or_runtime)-linux-\($arch).tar.gz")')"
         if [ -n "${dotnet_download_details}" ]; then
             echo "Found .NET binary version ${DOTNET_VERSION}"
             DOTNET_DOWNLOAD_URL="$(echo "${dotnet_download_details}" | jq -r '.url')"
@@ -337,14 +341,14 @@ echo "(*) Installing .NET CLI..."
 . /etc/os-release
 architecture="$(dpkg --print-architecture)"
 # TODO [kristi]: add list of architectures to check against.
-use_dotnet_releases_url="false"
+use_dotnet_releases_url="true"
 
 # TODO(bderusha): switch on valid architectures SEE azcli
-if [  ]; then
-    install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
-else
-   use_dotnet_releases_url="true"
-fi
+# if [  ]; then
+#     install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
+# else
+#    use_dotnet_releases_url="true"
+# fi
 
 if [ "${use_dotnet_releases_url}" = "true" ]; then
    install_using_dotnet_releases_url "${DOTNET_SDK_OR_RUNTIME}"
