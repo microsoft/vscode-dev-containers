@@ -46,5 +46,5 @@ services:
       - mariadb-data:/var/lib/MARIADB
     env_file:
       - .env
-    # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward DB locally.
+    # Add "forwardPorts": ["3306"] to **devcontainer.json** to forward DB locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
