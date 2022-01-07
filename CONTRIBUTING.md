@@ -188,7 +188,7 @@ Finally, commit your changes and submit a PR - we'll take a look at it, provide 
 
 ### Adding a Database Definition to an existing Container
 
-VS Code Dev Containers allow fairly straightforward modification for allowing multiple containers to run together. This is useful when adding database support to an existing container.
+VS Code Dev Containers allow fairly straightforward modification for allowing multiple containers to run together. This is useful when adding database support to an existing container, and can be leveraged with `docker compose.`
 
 1. Create a new copy of an existing language definition folder, and hyphenate the database name.
    1. For example, `java` becomes `java-postgres`.
@@ -218,8 +218,8 @@ VS Code Dev Containers allow fairly straightforward modification for allowing mu
 			}
 		  ],
     ```
-    2. It might be necessary to add additional VS Code Extensions to allow for an easier dev experience.
-4. Modify the existing Tests or existing Application to ensure that the following criteria are met:
+    2. It might be necessary to add additional VS Code Extensions to allow for an easier dev experience. This could be database dependent (`MSSQL`, `NoSQL`, etc.)
+4. Modify the existing Tests or add new tests to ensure that the following criteria are met:
     1. The application can successfuly ping the DB Container.
     2. The application can login to the DB Container using the default login data. 
     3. The application can send a query to the existing DB and receive data from the DB. (Typically listing the databases in the cluster is considered a valid test.)
