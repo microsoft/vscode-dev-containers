@@ -55,7 +55,6 @@ tar -xvzf mariadb-connector-cpp-1.0.1-$OSURL.tar.gz
 ls
 
 cd mariadb-connector-cpp-1.0.1-$OSURL
-# cd ./mariadb-connector
 install -d /usr/include/mariadb/conncpp
 
 #Header Files being copied into the necessary directories
