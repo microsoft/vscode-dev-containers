@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/test-project",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "mymodule/com.mycompany.app.App",
+            "args": "",
+            "projectName": "my-app"
+        }
+    ]
+}
