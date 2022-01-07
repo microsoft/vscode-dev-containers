@@ -10,6 +10,7 @@ checkCommon
 checkExtension "ms-vscode.cpptools"
 checkOSPackages "command-line-tools" build-essential cmake cppcheck valgrind clang lldb llvm gdb
 check "g++"  g++ -g main.cpp -o main.out -lmariadbcpp
+check "main.out" ./main.out
 rm main.out
 mkdir -p build
 cd build
