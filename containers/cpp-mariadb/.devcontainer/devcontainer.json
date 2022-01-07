@@ -23,8 +23,8 @@
 		"ms-vscode.cpptools",
 		"ms-vscode.cmake-tools",
 		"ms-vscode.cpptools-extension-pack",
-        "mtxr.sqltools",
-        "mtxr.sqltools-driver-mysql"		
+		"mtxr.sqltools",
+		"mtxr.sqltools-driver-mysql"		
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
