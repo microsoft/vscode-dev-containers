@@ -16,8 +16,6 @@
 | *Container OS* | Debian |
 | *Languages, platforms* | Go |
 
-See **[history](history)** for information on the contents of published images.
-
 ## Table of Contents
 
 - [Go](#go)
