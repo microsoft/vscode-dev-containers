@@ -14,11 +14,8 @@ checkExtension "tamasfe.even-better-toml"
 checkExtension "serayuzgur.crates"
 checkExtension "mtxr.sqltools"
 checkExtension "mtxr.sqltools-driver-pg"
-check "cargo" cargo -V
+check "cargo-version" cargo -V
 check "build-and-run" cargo run
-
-# Clean up
-rm -f Cargo.lock
 
 # Report result
 reportResults
