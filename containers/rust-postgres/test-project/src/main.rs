@@ -16,6 +16,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let db = env::var("POSTGRES_DB")?;
     let conn_str = format!("postgresql://{}:{}@{}:5432/{}", user, passwd, host, db);
 
+    println!("Connecting to databasse");
     let mut conn = match Client::connect(&conn_str, NoTls) {
         Ok(conn) => conn,
         Err(err) => {
@@ -26,7 +27,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     };
     println!("Connection succeed");
-    let rows = conn.execute("select * from pg_database limit 1;", &[])?;
-    println!("Rows found: {}", rows);
+    for row in conn.query("select * from pg_database limit 1;", &[])? {
+        let val: String = row.get("datname");
+        println!("Database name = {}", val);
+    }
     Ok(())
 }
