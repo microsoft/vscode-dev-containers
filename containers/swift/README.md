@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | [cloudnull](https://github.com/cloudnull) |
+| *Contributors* | [0xTim](https://github.com/0xTim), [adam-fowler](https://github.com/adam-fowler), [cloudnull](https://github.com/cloudnull) |
 | *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
 | *Supported architecture(s)* | x86-64 |
