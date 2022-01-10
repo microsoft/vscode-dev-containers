@@ -19,6 +19,8 @@ ACCESS_GROUP=${6:-"dotnet"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOTNET_ARCHIVE_ARCHITECTURES="amd64"
 DOTNET_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute"
+# Feed URI sourced from the official dotnet-install.sh
+# https://github.com/dotnet/install-scripts/blob/1b98b94a6f6d81cc4845eb88e0195fac67caa0a6/src/dotnet-install.sh#L1342-L1343
 DOTNET_CDN_FEED_URI="https://dotnetcli.azureedge.net"
 
 # Exit on failure.
