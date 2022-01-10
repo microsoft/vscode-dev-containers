@@ -19,6 +19,7 @@ ACCESS_GROUP=${6:-"dotnet"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOTNET_ARCHIVE_ARCHITECTURES="amd64"
 DOTNET_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute"
+DOTNET_CDN_FEED_URI="https://dotnetcli.azureedge.net"
 
 # Exit on failure.
 set -e
@@ -71,6 +72,21 @@ cleanup() {
     exit $EXIT_CODE
 }
 trap cleanup EXIT
+
+# Get central common setting
+get_common_setting() {
+    if [ "${common_settings_file_loaded}" != "true" ]; then
+        curl -sfL "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+        common_settings_file_loaded=true
+    fi
+    if [ -f "/tmp/vsdc-settings.env" ]; then
+        local multi_line=""
+        if [ "$2" = "true" ]; then multi_line="-z"; fi
+        local result="$(grep ${multi_line} -oP "$1=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"
+        if [ ! -z "${result}" ]; then declare -g $1="${result}"; fi
+    fi
+    echo "$1=${!1}"
+}
 
 # Add TARGET_DOTNET_ROOT variable into PATH in bashrc/zshrc files.
 updaterc()  {
@@ -344,7 +360,6 @@ architecture="$(dpkg --print-architecture)"
 
 use_dotnet_releases_url="false"
 
-# TODO(bderusha): switch on valid architectures SEE azcli
 if [[ "${DOTNET_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${DOTNET_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
     install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
 else
