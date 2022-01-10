@@ -1,12 +1,25 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
 . /etc/os-release
 
+MARIADB_REPO_SETUP=mariadb_repo_setup
+TMP_DIR=$(mktemp -d -t maria-XXXXXXXXXX)
+MARIADB_CONNECTOR=""
+
+function cleanup {
+    cd /
+    rm -rf ${TMP_DIR}/${MARIADB_REPO_SETUP}
+    rm -rf ${TMP_DIR}/${MARIADB_CONNECTOR}*
+}
+trap cleanup EXIT
+
 #Set up external repository and install C Connector
-curl -O -L https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
-echo "5feb2aac767c512cc9e2af674d1aef42df0b775ba2968fffa8700eb42702bd44  mariadb_es_repo_setup" | sha256sum -c - 
-chmod +x mariadb_repo_setup
-./mariadb_repo_setup --mariadb-server-version="mariadb-10.6"
+cd ${TMP_DIR}
+curl -Ls https://downloads.mariadb.com/MariaDB/${MARIADB_REPO_SETUP} -o ${MARIADB_REPO_SETUP}
+echo "fd3f41eefff54ce144c932100f9e0f9b1d181e0edd86a6f6b8f2a0212100c32c  ${MARIADB_REPO_SETUP}" | sha256sum -c -
+chmod +x ${MARIADB_REPO_SETUP}
+./${MARIADB_REPO_SETUP} --mariadb-server-version="mariadb-10.6"
 apt install -y libmariadb3 libmariadb-dev
 
 #Depending on the OS, install different C++ connectors
@@ -49,18 +62,15 @@ case $ID in
 esac
 
 # Instructions are copied and modified from: https://mariadb.com/docs/clients/mariadb-connectors/connector-cpp/install/
-curl -O -L https://dlm.mariadb.com/$OSTAG/connectors/cpp/connector-cpp-1.0.1/mariadb-connector-cpp-1.0.1-$OSURL.tar.gz
-tar -xvzf mariadb-connector-cpp-1.0.1-$OSURL.tar.gz
-
-ls
-
-cd mariadb-connector-cpp-1.0.1-$OSURL
+MARIADB_CONNECTOR=mariadb-connector-cpp-1.0.1-$OSURL
+curl -Ls https://dlm.mariadb.com/$OSTAG/connectors/cpp/connector-cpp-1.0.1/${MARIADB_CONNECTOR}.tar.gz -o ${MARIADB_CONNECTOR}.tar.gz
+tar -xvzf ${MARIADB_CONNECTOR}.tar.gz && cd ${MARIADB_CONNECTOR}
 install -d /usr/include/mariadb/conncpp
 
 #Header Files being copied into the necessary directories
 cp -R ./include/mariadb/* /usr/include/mariadb/
 cp -R ./include/mariadb/conncpp/* /usr/include/mariadb/conncpp
-cp -R include/mariadb/conncpp/compat/* /usr/include/mariadb/conncpp/compat
+cp -R ./include/mariadb/conncpp/compat/* /usr/include/mariadb/conncpp/compat
 
 install -d /usr/lib/mariadb
 install -d /usr/lib/mariadb/plugin
