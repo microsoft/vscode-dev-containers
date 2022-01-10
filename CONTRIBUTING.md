@@ -220,9 +220,14 @@ VS Code Dev Containers allow fairly straightforward modification for allowing mu
     ```
     2. It might be necessary to add additional VS Code Extensions to allow for an easier dev experience. This could be database dependent (`MSSQL`, `NoSQL`, etc.)
 4. Modify the existing Tests or add new tests to ensure that the following criteria are met:
-    1. The application can successfuly ping the DB Container.
+    1. The application can successfully ping the DB Container.
     2. The application can login to the DB Container using the default login data. 
     3. The application can send a query to the existing DB and receive data from the DB. (Typically listing the databases in the cluster is considered a valid test.)
+5. Remove the following from your new container:
+   1. The `history` folder
+   2. The `'.devcontainer/base.Dockerfile` file
+   3. The `'definition-manifest.json` file
+6. Make changes to your `README.md` similar to the ones you see by comparing `/containers/java/README.md` with `/containers/java-postgres/README.md`
 
 Finally, commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in. We appreciate any and all feedback!
 
