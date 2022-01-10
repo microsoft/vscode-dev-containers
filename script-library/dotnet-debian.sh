@@ -140,10 +140,10 @@ apt_cache_package_and_version_soft_match() {
     local requested_version=${!version_variable_name}
     # Package Name
     local package_variable_name="$2"
-    local partial_package_name="$3"
+    local partial_package_name=${!package_variable_name}
     local package_name
     # Exit on no match?
-    local exit_on_no_match="${4:-true}"
+    local exit_on_no_match="${3:-true}"
     local major_minor_version
 
     major_minor_version="$(echo "${requested_version}" | cut -d "." --field=1,2)"
@@ -188,7 +188,7 @@ apt_cache_package_and_version_soft_match() {
 install_using_apt() {
     local sdk_or_runtime="$1"
     local dotnet_major_minor_version
-    export DOTNET_PACKAGE
+    export DOTNET_PACKAGE="dotnet-${sdk_or_runtime}"
 
     # Install dependencies
     check_packages apt-transport-https curl ca-certificates gnupg2 dirmngr
@@ -200,17 +200,16 @@ install_using_apt() {
     apt-get update
 
     if [ "${DOTNET_VERSION}" = "latest" ] || [ "${DOTNET_VERSION}" = "lts" ]; then
-        DOTNET_VERSION="6.0"
+        DOTNET_VERSION=""
+        DOTNET_PACKAGE="${DOTNET_PACKAGE}-6.0"
     else
         # Sets DOTNET_VERSION and DOTNET_PACKAGE if matches found. 
-        apt_cache_package_and_version_soft_match DOTNET_VERSION DOTNET_PACKAGE "dotnet-${sdk_or_runtime}" false
-        echo "DOTNET_VERSION: ${DOTNET_VERSION}"
+        apt_cache_package_and_version_soft_match DOTNET_VERSION DOTNET_PACKAGE false
         if [ "$?" != 0 ]; then
             return 1
         fi
     fi
 
-    echo "INSTALLING PACKAGE NAME: ${DOTNET_PACKAGE}${DOTNET_VERSION}"
     if ! (apt-get install -yq ${DOTNET_PACKAGE}${DOTNET_VERSION}); then
         return 1
     fi
@@ -360,7 +359,6 @@ echo "(*) Installing .NET CLI..."
 architecture="$(dpkg --print-architecture)"
 
 use_dotnet_releases_url="false"
-
 if [[ "${DOTNET_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${DOTNET_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
     install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
 else
