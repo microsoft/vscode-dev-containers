@@ -31,7 +31,7 @@ Or as a feature:
 |DOTNET_RUNTIME_ONLY| `runtimeOnly` | `false` | Install just the .NET runtime if true, and sdk if false. |
 |Non-root user| | `automatic`| Specifies a user in the container other than root. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 | Add to rc files flag | | `true` | A `true`/`false` flag that indicates whether the `PATH` should be updated and `TARGET_INSTALL_PATH` set via `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
-|Target installation path| | `/usr/local/dotnet`| Location to install .NET. |
+|Target installation root| | `/usr/local/dotnet`| Location to install .NET. |
 |.NET access group| |`dotnet`| Specifies the name of the group that will own the .NET installation. The installing user will be added to that group automatically.|
 
 ## Supported Versions
