@@ -17,6 +17,8 @@ TARGET_DOTNET_ROOT=${5:-"/usr/local/dotnet"}
 ACCESS_GROUP=${6:-"dotnet"}
 
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
+DOTNET_ARCHIVE_ARCHITECTURES="amd64"
+DOTNET_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute"
 
 # Exit on failure.
 set -e
@@ -227,11 +229,11 @@ get_full_version_details() {
     fi
 
     # TODO(bderusha): Rename and plumb through as dotnet_patchless_version
-    dotnet_channel_version="$(echo "${DOTNET_VERSION}" | cut -d "." --field=1,2)"
+    dotnet_patchless_version="$(echo "${DOTNET_VERSION}" | cut -d "." --field=1,2)"
 
     set +e
     # TODO(bderusha): grab channel-version instead of URL
-    dotnet_releases_url="$(curl -s https://dotnetcli.azureedge.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${dotnet_channel_version}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
+    dotnet_releases_url="$(curl -s https://dotnetcli.azureedge.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${dotnet_patchless_version}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
     set -e
 
     # TODO(bderusha): construct CDN release.json url
@@ -241,7 +243,7 @@ get_full_version_details() {
     if [ -n "${dotnet_releases_url}" ] && [ "${dotnet_releases_url}" != "null" ]; then
         dotnet_releases_json="$(curl -sS "${dotnet_releases_url}")"
         # TODO(bderusha): make this ."latest-RUNTIME_OR_SDK"
-        dotnet_latest_version="$(echo "${dotnet_releases_json}" | jq -r '."latest-release"')"
+        dotnet_latest_version="$(echo "${dotnet_releases_json}" | jq -r --arg sdk_or_runtime "${sdk_or_runtime}" '."latest-\($sdk_or_runtime)"')"
         # If user-specified version has 2 or more dots, use it as is.  Otherwise use latest version.
         echo "${DOTNET_VERSION}"
         if [ "$(echo "${DOTNET_VERSION}" | grep -o "\." | wc -l)" -lt "2" ]; then
@@ -337,18 +339,17 @@ fi
 # Install the .NET CLI
 echo "(*) Installing .NET CLI..."
 
-# Check if we're on x86 and if so, install via apt-get, otherwise use dotnetcli url.
 . /etc/os-release
 architecture="$(dpkg --print-architecture)"
-# TODO [kristi]: add list of architectures to check against.
-use_dotnet_releases_url="true"
+
+use_dotnet_releases_url="false"
 
 # TODO(bderusha): switch on valid architectures SEE azcli
-# if [  ]; then
-#     install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
-# else
-#    use_dotnet_releases_url="true"
-# fi
+if [[ "${DOTNET_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${DOTNET_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
+    install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
+else
+   use_dotnet_releases_url="true"
+fi
 
 if [ "${use_dotnet_releases_url}" = "true" ]; then
    install_using_dotnet_releases_url "${DOTNET_SDK_OR_RUNTIME}"
