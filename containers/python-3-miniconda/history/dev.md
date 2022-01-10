@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:f460d6e31575e7394b36d88f022db9258da4aab0e81714735a6aae2478d8125a
+**Digest:** sha256:df4a602ddde46a2e9ed946181ebeae6d302e9dbe69c4b319cf38ee6aac9ae241
 
 **Tags:**
 ```
@@ -41,12 +41,12 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | autopep8 | 1.6.0 |
 | black | 21.12b0 |
 | yapf | 0.32.0 |
-| mypy | 0.930 |
+| mypy | 0.931 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.1 |
 | virtualenv | 20.13.0 |
-| pipx | 0.17.0 |
+| pipx | 1.0.0 |
 
 **Other tools and utilities**
 

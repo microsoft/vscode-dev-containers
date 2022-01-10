@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "d87ab251c7fe18626b2d0c4e4a184e7bed7c508b"
+                    "commitHash": "9c84c344d762b200de7acc794b9a0e7832144e7a"
                 }
             }
         },
@@ -175,7 +175,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.31.0-1~focal",
+                    "Version": "2.32.0-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -285,7 +285,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "mypy",
-                    "Version": "0.930"
+                    "Version": "0.931"
                 }
             }
         },
@@ -330,7 +330,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pipx",
-                    "Version": "0.17.0"
+                    "Version": "1.0.0"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "d87ab251c7fe18626b2d0c4e4a184e7bed7c508b"
+                    "commitHash": "9c84c344d762b200de7acc794b9a0e7832144e7a"
                 }
             }
         },
@@ -533,7 +533,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "c97d64e306b8292b09ca311a3eb1c6720b366f9a"
+                    "commitHash": "cdc215eba8082451db2b1416e1f6b1e5b5c26d8e"
                 }
             }
         },
@@ -632,7 +632,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.17.5",
+                    "Version": "1.17.6",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -804,7 +804,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.2.3",
+                    "Version": "2.2.4",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -1074,7 +1074,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "d87ab251c7fe18626b2d0c4e4a184e7bed7c508b"
+                    "commitHash": "9c84c344d762b200de7acc794b9a0e7832144e7a"
                 }
             }
         },

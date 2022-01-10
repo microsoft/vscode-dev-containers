@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:5b35af3db01f4f0685d4a9c42f38e26aa93e7f9ae9f1e7a93674bd8d5c93276b
+**Digest:** sha256:9ccf95d9eceb72d38e407adb5dcd12d4036de34b7bc93abc3822ece753b1544f
 
 **Tags:**
 ```
@@ -35,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.2.1 | /opt/microsoft/powershell |
 | GCC | 9.3.0-17ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
-| [Go](https://golang.org/dl) | 1.17.5 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.17.6 | /usr/local/go |
 | [Rust](https://github.com/rust-lang/rust) | 1.57.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.1 | 
 
@@ -43,11 +43,11 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | d87ab251c7fe18626b2d0c4e4a184e7bed7c508b | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 9c84c344d762b200de7acc794b9a0e7832144e7a | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | c97d64e306b8292b09ca311a3eb1c6720b366f9a | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | cdc215eba8082451db2b1416e1f6b1e5b5c26d8e | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
@@ -58,12 +58,12 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | autopep8 | 1.6.0 |
 | black | 21.12b0 |
 | yapf | 0.32.0 |
-| mypy | 0.930 |
+| mypy | 0.931 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.1 |
 | virtualenv | 20.13.0 |
-| pipx | 0.17.0 |
+| pipx | 1.0.0 |
 
 **Go tools and modules**
 
@@ -121,7 +121,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| azure-cli (Azure CLI) | 2.31.0-1~focal |
+| azure-cli (Azure CLI) | 2.32.0-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
@@ -181,8 +181,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
-| openssh-client | 1:8.2p1-4ubuntu0.3 |
-| openssh-server | 1:8.2p1-4ubuntu0.3 |
+| openssh-client | 1:8.2p1-4ubuntu0.4 |
+| openssh-server | 1:8.2p1-4ubuntu0.4 |
 | pigz | 2.4-1 |
 | pkg-config | 0.29.1-0ubuntu4 |
 | procps | 2:3.3.16-1ubuntu2.3 |
