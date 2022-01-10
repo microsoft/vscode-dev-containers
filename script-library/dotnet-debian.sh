@@ -244,28 +244,29 @@ get_full_version_details() {
         DOTNET_VERSION=""
     fi
 
-    # TODO(bderusha): Rename and plumb through as dotnet_patchless_version
     dotnet_patchless_version="$(echo "${DOTNET_VERSION}" | cut -d "." --field=1,2)"
 
     set +e
-    # TODO(bderusha): grab channel-version instead of URL
-    dotnet_releases_url="$(curl -s https://dotnetcli.azureedge.net/dotnet/release-metadata/releases-index.json | jq -r --arg channel_version "${dotnet_patchless_version}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."releases.json"')"
+    dotnet_channel_version="$(curl -s "${DOTNET_CDN_FEED_URI}/dotnet/release-metadata/releases-index.json" | jq -r --arg channel_version "${dotnet_patchless_version}" '[."releases-index"[]] | sort_by(."channel-version") | reverse | map( select(."channel-version" | startswith($channel_version))) | first | ."channel-version"')"
     set -e
 
-    # TODO(bderusha): construct CDN release.json url
-    # [https://dotnetcli.azureedge.net/dotnet/release-metadata/{CHANNEL_OR_PATCHLESS_VERSION}/releases.json]
-    # CURL that url and check IF response body ELSE error msg
-    echo "dotnet_releases_url: ${dotnet_releases_url}"
-    if [ -n "${dotnet_releases_url}" ] && [ "${dotnet_releases_url}" != "null" ]; then
-        dotnet_releases_json="$(curl -sS "${dotnet_releases_url}")"
-        # TODO(bderusha): make this ."latest-RUNTIME_OR_SDK"
+    # Construct the releases URL using the official channel-version if one was found.  Otherwise make a best-effort using the user input.
+    if [ -n "${dotnet_channel_version}" ] && [ "${dotnet_channel_version}" != "null" ]; then
+        dotnet_releases_url="${DOTNET_CDN_FEED_URI}/dotnet/release-metadata/${dotnet_channel_version}/releases.json"
+    else
+        dotnet_releases_url="${DOTNET_CDN_FEED_URI}/dotnet/release-metadata/${dotnet_patchless_version}/releases.json"
+    fi
+
+    set +e
+    dotnet_releases_json="$(curl -s "${dotnet_releases_url}")"
+    set -e
+    
+    if [ -n "${dotnet_releases_json}" ] && [[ ! "${dotnet_releases_json}" = *"Error"* ]]; then
         dotnet_latest_version="$(echo "${dotnet_releases_json}" | jq -r --arg sdk_or_runtime "${sdk_or_runtime}" '."latest-\($sdk_or_runtime)"')"
         # If user-specified version has 2 or more dots, use it as is.  Otherwise use latest version.
-        echo "${DOTNET_VERSION}"
         if [ "$(echo "${DOTNET_VERSION}" | grep -o "\." | wc -l)" -lt "2" ]; then
             DOTNET_VERSION="${dotnet_latest_version}"
         fi
-        echo "${DOTNET_VERSION}"
 
         dotnet_download_details="$(echo "${dotnet_releases_json}" |  jq -r --arg sdk_or_runtime "${sdk_or_runtime}" --arg dotnet_version "${DOTNET_VERSION}" --arg arch "${architecture}" '.releases[]."\($sdk_or_runtime)" | select(.version==$dotnet_version) | .files[] | select(.name=="dotnet-\($sdk_or_runtime)-linux-\($arch).tar.gz")')"
         if [ -n "${dotnet_download_details}" ]; then
@@ -278,7 +279,7 @@ get_full_version_details() {
             exit 1
         fi
     else
-        err "Unsupported .NET version ${DOTNET_VERSION}."
+        err "Unable to find .NET release details for version ${DOTNET_VERSION} at ${dotnet_releases_url}"
         exit 1
     fi
 }
