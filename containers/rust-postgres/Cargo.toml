@@ -7,5 +7,9 @@ authors = ["VS Code <vscode@microsoft.com>"]
 name = "hello_remote_world"
 path = "test-project/src/main.rs"
 
-[dependencies]
+[[test]]
+name = "tests"
+path = "test-project/tests/conn_test.rs"
+
+[dev-dependencies]
 postgres = "0.19"

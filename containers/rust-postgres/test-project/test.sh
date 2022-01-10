@@ -15,7 +15,8 @@ checkExtension "serayuzgur.crates"
 checkExtension "mtxr.sqltools"
 checkExtension "mtxr.sqltools-driver-pg"
 check "cargo-version" cargo -V
-check "build-and-run" cargo run
+check "cargo-run" cargo run
+check "cargo-test" cargo test
 
 # Report result
 reportResults
