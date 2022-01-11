@@ -1,16 +1,59 @@
 #!/bin/bash
 set -e
 
-. /etc/os-release
+OSURL=""
+OSTAG=""
+
+find_os_props() {
+    . /etc/os-release
+    case $ID in
+        debian)
+            case $VERSION_CODENAME in
+                stretch)
+                    OSTAG="1683458"
+                    OSURL="debian-9-stretch-amd64"
+                    ;;
+                *)
+                    OSTAG="1683461"
+                    OSURL="debian-buster-amd64"
+                    ;;
+            esac
+            ;;
+        ubuntu)
+            case $VERSION_CODENAME in
+                bionic)
+                    OSTAG="1683439"
+                    OSURL="ubuntu-bionic-amd64"
+                    ;;
+                groovy)
+                    OSTAG="1683454"
+                    OSURL="ubuntu-groovy-amd64"
+                    ;;
+                *)
+                    OSTAG="1683444"
+                    OSURL="ubuntu-focal-amd64"
+                    ;;
+            esac
+            ;;
+        *)
+            echo "Unsupported OS choice."
+            exit 1
+            ;;
+    esac
+}
 
 MARIADB_REPO_SETUP=mariadb_repo_setup
 TMP_DIR=$(mktemp -d -t maria-XXXXXXXXXX)
 MARIADB_CONNECTOR=""
 
-function cleanup {
-    cd /
-    rm -rf ${TMP_DIR}/${MARIADB_REPO_SETUP}
-    rm -rf ${TMP_DIR}/${MARIADB_CONNECTOR}*
+cleanup() {
+    EXIT_CODE=$?
+    set +e
+    if [[ -n ${TMP_DIR} ]]; then
+        cd /
+        rm -rf ${TMP_DIR}
+    fi
+    exit $EXIT_CODE
 }
 trap cleanup EXIT
 
@@ -23,44 +66,7 @@ chmod +x ${MARIADB_REPO_SETUP}
 apt install -y libmariadb3 libmariadb-dev
 
 #Depending on the OS, install different C++ connectors
-OSURL=""
-OSTAG=""
-case $ID in
-
-    debian)
-        case $VERSION_CODENAME in
-            stretch)
-                OSTAG="1683458"
-                OSURL="debian-9-stretch-amd64"
-                ;;
-            *)
-                OSTAG="1683461"
-                OSURL="debian-buster-amd64"
-                ;;
-        esac
-        ;;
-    ubuntu)
-        case $VERSION_CODENAME in
-            bionic)
-                OSTAG="1683439"
-                OSURL="ubuntu-bionic-amd64"
-                ;;
-            groovy)
-                OSTAG="1683454"
-                OSURL="ubuntu-groovy-amd64"
-                ;;
-            *)
-                OSTAG="1683444"
-                OSURL="ubuntu-focal-amd64"
-                ;;
-        esac
-        ;;
-    *)
-        echo "Unsupported OS choice."
-        exit 1
-        ;;
-esac
-
+find_os_props
 # Instructions are copied and modified from: https://mariadb.com/docs/clients/mariadb-connectors/connector-cpp/install/
 MARIADB_CONNECTOR=mariadb-connector-cpp-1.0.1-$OSURL
 curl -Ls https://dlm.mariadb.com/$OSTAG/connectors/cpp/connector-cpp-1.0.1/${MARIADB_CONNECTOR}.tar.gz -o ${MARIADB_CONNECTOR}.tar.gz
