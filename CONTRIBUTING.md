@@ -188,7 +188,7 @@ Finally, commit your changes and submit a PR - we'll take a look at it, provide 
 
 ### Adding a Database Definition to an existing Container
 
-VS Code Dev Containers allow fairly straightforward modification for allowing multiple containers to run together. This is useful when adding database support to an existing container, and can be leveraged with `docker compose.`
+VS Code Dev Containers allow multiple containers to run together. This is useful, for example, when adding database support to an existing container, and can be leveraged with `docker compose.`
 
 1. Create a new copy of an existing language definition folder, and hyphenate the database name.
    1. For example, `java` becomes `java-postgres`.
