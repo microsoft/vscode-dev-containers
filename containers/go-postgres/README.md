@@ -31,7 +31,7 @@
   - [License](#license)
 
 ## Using this definition
-This definition creates two containers, one for Go and one for PostgreSQL. VS Code will attach to the Go container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `postgres-data`.
+This definition creates two containers, one for Go and one for PostgreSQL. VS Code will attach to the Go container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The `.env` file sets the default credentials for the Postgres Database. The database is named `postgres` with a user of `postgres` whose password is `postgres`, and if desired this may be changed in `.devcontainer.json` and `.env`. Data is stored in a volume named `postgres-data`.
 
 While the definition itself works unmodified, you can select the version of Go the container uses by updating the `VARIANT` arg in the included `.devcontainer/docker-compose.yml` (and rebuilding if you've already created the container).
 
