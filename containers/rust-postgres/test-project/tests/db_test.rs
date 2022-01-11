@@ -3,9 +3,17 @@
  * Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
  *-------------------------------------------------------------------------------------------------------------*/
 
-use std::env;
+use std::{env, net::TcpStream};
 extern crate postgres;
 use postgres::{Client, NoTls};
+
+#[test]
+fn test_ping_database() -> Result<(), Box<dyn std::error::Error>> {
+    let host = env::var("POSTGRES_HOSTNAME")?;
+    let _ = TcpStream::connect(format!("{}:5432", host))?;
+    println!("Ping database succeed");
+    Ok(())
+}
 
 #[test]
 fn test_connection_query_database() -> Result<(), Box<dyn std::error::Error>> {

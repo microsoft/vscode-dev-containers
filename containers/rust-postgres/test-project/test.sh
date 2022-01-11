@@ -16,7 +16,7 @@ checkExtension "mtxr.sqltools"
 checkExtension "mtxr.sqltools-driver-pg"
 check "cargo-version" cargo -V
 check "cargo-run" cargo run
-check "cargo-integration-test" cargo test --test '*'
+check "cargo-integration-test" cargo test --test '*' -- --nocapture
 
 # Report result
 reportResults
