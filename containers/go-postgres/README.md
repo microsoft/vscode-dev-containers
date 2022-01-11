@@ -128,7 +128,7 @@ This definition includes some test code that will help you verify it is working 
 8. The Application can also be tested by running `./test.sh` from the Terminal. This will test the `hello.go` application.
 
 ### Debugging Security
-To allow C++ debuggers to run within the Docker Containers, the [docker-compose.yml](.devcontainer/docker-compose.yml) contains the following lines:
+To allow C++ based debuggers to run within the Docker Containers, the [docker-compose.yml](.devcontainer/docker-compose.yml) contains the following lines which can be uncommented:
 
 ```yaml
     security_opt:
