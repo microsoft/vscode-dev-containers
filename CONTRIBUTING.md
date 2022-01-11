@@ -195,7 +195,7 @@ VS Code Dev Containers allow multiple containers to run together. This is useful
 2. Create a new `docker-compose.yml` file.
    1. Add the existing `Dockerfile` to the `docker-compose` as an `app`. This will be the Dev Container where your code gets executed.
    2. Add the definition for the database to the `docker-compose`, version tagging it or using the `latest`. Most usage scenarios don't require custom images for the database.
-   3. It will likely be necessary to network the containers so that the `app` can connect to the `db`. This can normally be done by adding the following to the `app` definition:
+   3. It's common that containers will need to be connected through a network so that the `app` can connect to the `db`. This can normally be done by adding the following to the `app` definition:
 
     ```yaml
         network_mode: service:db
