@@ -30,20 +30,20 @@ func main() {
 
 	// Ready the Database connection
 	db, err := sql.Open("postgres", psqlconn)
-	CheckError(err)
+	checkError(err)
 
 	// close database connection after it is no longer used
 	defer db.Close()
 
 	// check db
 	err = db.Ping()
-	CheckError(err)
+	checkError(err)
 
 	fmt.Println("Connected!")
 
 	fmt.Println("Sending Query to Database")
 	rows, err := db.Query(`select datname from pg_database limit 1;`)
-	CheckError(err)
+	checkError(err)
 
 	// close the query when no longer needed
 	defer rows.Close()
@@ -52,7 +52,7 @@ func main() {
 		var datname string
 
 		err = rows.Scan(&datname)
-		CheckError(err)
+		checkError(err)
 
 		fmt.Printf("One database in this cluster is: %s \n", datname)
 	}
