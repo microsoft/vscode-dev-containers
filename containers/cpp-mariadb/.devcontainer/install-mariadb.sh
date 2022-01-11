@@ -57,7 +57,7 @@ case $ID in
         ;;
     *)
         echo "Unsupported OS choice."
-        exit 0
+        exit 1
         ;;
 esac
 
