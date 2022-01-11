@@ -692,3 +692,47 @@ After everything builds successfully, the packaging process kicks off and perfor
      📄 devcontainer.json
      📄 Dockerfile
 ```
+
+## Linux ARM64 Specific Builds
+
+The below provides a mechanism to build and test against targeted platforms (e.g. Linux ARM64). The following example uses the the dotnet container image for reference.
+
+### Build
+
+Run the docker build command using `buildx` from the .devcontainer in the dotnet directory within the project repo (`containers/dotnet/.devcontainer`). [buildx](https://docs.docker.com/buildx/working-with-buildx/) is a Docker CLI plugin that provides the ability to target multi-architectures (e.g. ARM64).
+
+Note a few of the arguments:
+
+- `--platform`: specifies the architecture to target, in this case we will be targeting Linux ARM64
+- `--build-arg`: for this example, we will be targeting specific dotnet versions (e.g. 6.0, 5.0, and 3.1) and Linux versions and distros.
+
+```bash
+docker buildx build --build-arg VARIANT=6.0.100-bullseye-slim-arm64v8 --platform linux/arm64 -t dotnet-arm64  --load -f base.Dockerfile .
+```
+
+Once the build is complete, run the image using the below example. Note that the dotnet directory is mounted. The dotnet directory includes test scripts which will be used in the subsequent steps.
+
+```bash
+docker run -v $REPODIR/vscode-dev-containers/containers/dotnet/:/workspace --platform linux/arm64 -it dotnet-arm64 bash
+```
+
+Once in the running container, verify that the architecture is ARM64 by running the command:
+
+```bash
+ uname -m
+```
+
+For ARM64 on Linux, the architecture will show as `aarch64`.
+
+### Test
+
+For Linux ARM64 and the Dotnet container requires that [VS Code attaches](https://code.visualstudio.com/docs/remote/attach-container) to the running container instance. Using VS Code and the [Remote-Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), attach to the running instance of the image previously created, run the test script and they should all pass.
+
+```bash
+/workspace/test-project/test.sh
+```
+
+### Reference
+
+- [ARM documentation](https://developer.arm.com/documentation/102475/0100/Multi-architecture-images) for how to build multi-architecture images.
+- [List of Supported Linux ARM64 DotNet SDK Images](https://hub.docker.com/_/microsoft-dotnet-sdk)
