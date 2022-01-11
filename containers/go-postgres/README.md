@@ -95,7 +95,7 @@ You can add other services to your `docker-compose.yml` file [as described in Do
 
 ```yaml
 # Runs the service on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-network_mode: service:db
+network_mode: service:[$SERVICENAME]
 ```
 
 ### Installing GO Dependencies
