@@ -171,7 +171,7 @@ jobs:
           https://api.github.com/repos/${{ github.repository }}/actions/workflows/version-history.yml/dispatches \
           --data "{\"ref\": \"main\", \"inputs\": {\"release\": \"${{ steps.get_tag_name.outputs.tag }}\", \"cg\": \"false\", \"push\": \"true\", \"overwrite\": \"false\"}"
 
-container-features:
+  container-features:
     name: Deploy Dev Container Features
     runs-on: ubuntu-latest
     steps:
