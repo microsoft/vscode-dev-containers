@@ -55,7 +55,7 @@ You can add other services to your `docker-compose.yml` file [as described in Do
 
 ```yaml
 # Runs the service on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-network_mode: service:db
+network_mode: service:[$SERVICENAME]
 ```
 
 ## Testing the definition
@@ -63,12 +63,13 @@ network_mode: service:db
 This definition includes some test code that will help you verify it is working as expected on your system. Follow these steps:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
-2. Clone this repository.
-3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/rust-postgres` folder.
-5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. You should see "Hello, VS Code Remote - Containers!" in the Debug Console after the program executes.
-7. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+1. Clone this repository.
+1. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
+1. Select the `containers/rust-postgres` folder.
+1. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
+1. You should see "Hello, VS Code Remote - Containers!" in the Debug Console after the program executes.
+1. You can also run [test.sh](test-project/test.sh) in order to build and test the project.
+1. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 
