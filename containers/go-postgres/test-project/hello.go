@@ -13,7 +13,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func CheckError(err error) {
+func checkError(err error) {
 	if err != nil {
 		panic(err)
 	}
@@ -56,6 +56,4 @@ func main() {
 
 		fmt.Printf("One database in this cluster is: %s \n", datname)
 	}
-
-	CheckError(err)
 }
