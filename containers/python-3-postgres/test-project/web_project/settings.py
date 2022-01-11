@@ -4,10 +4,11 @@
 #-------------------------------------------------------------------------------------------------------------
 
 import os
+import uuid
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'placeholder'
+SECRET_KEY = str(uuid.uuid4())
 
 DEBUG = True
 
