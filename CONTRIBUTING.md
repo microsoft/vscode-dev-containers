@@ -219,7 +219,7 @@ VS Code Dev Containers allow multiple containers to run together. This is useful
 		  ],
     ```
     2. It might be necessary to add additional VS Code Extensions to allow for an easier dev experience. This could be database dependent (`MSSQL`, `NoSQL`, etc.)
-4. Modify the existing Tests or add new tests to ensure that the following criteria are met:
+4. Modify the existing Tests or add new tests to ensure that the following scenarios are possible:
     1. The application can successfully ping the DB Container.
     2. The application can login to the DB Container using the default login data. 
     3. The application can send a query to the existing DB and receive data from the DB. (Typically listing the databases in the cluster is considered a valid test.)
