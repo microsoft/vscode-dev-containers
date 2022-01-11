@@ -22,10 +22,10 @@ services:
 
     # Security Opt and cap_add allow for C++ based debuggers to work. 
     # See `runArgs`: https://github.com/Microsoft/vscode-docs/blob/main/docs/remote/devcontainerjson-reference.md
-    security_opt:
-      - seccomp:unconfined
-    cap_add:
-      - SYS_PTRACE
+#     security_opt:
+#       - seccomp:unconfined
+#     cap_add:
+#       - SYS_PTRACE
 
     volumes:
       - ..:/workspace:cached
