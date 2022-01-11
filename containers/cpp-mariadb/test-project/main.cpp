@@ -12,8 +12,8 @@ int main()
 {
     cout << "Hello, Remote World!" << "\n";
     
-    try{
-        
+    try
+    {    
         string databasename = getenv("MARIADB_DATABASE");
         string password = getenv("MARIADB_PASSWORD");
         string username = getenv("MARIADB_USER");
