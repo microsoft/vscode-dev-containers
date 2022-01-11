@@ -2,6 +2,6 @@
 ARG VARIANT="bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/rust:1-${VARIANT}
 
-# [Optional] Uncomment this section to install additional packages.
+# Add lld linker
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install clang lld

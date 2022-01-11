@@ -8,7 +8,7 @@ name = "hello_remote_world"
 path = "test-project/src/main.rs"
 
 [[test]]
-name = "tests"
+name = "test_db"
 path = "test-project/tests/conn_test.rs"
 
 [dev-dependencies]
