@@ -17,7 +17,7 @@
 | *Languages, platforms* | C++ |
 
 ## Using this definition
-This definition creates two containers, one for C++ and one for MariaDB (MySQL). VS Code will attach to the C++ dev container, and from within that container the MariaDB container will be available on **`localhost`** port 3306. The default database is named `mariadb` with a user of `mariadb` whose password is `mariadb`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `mariadb-data`.
+This definition creates two containers, one for C++ and one for MariaDB (MySQL). VS Code will attach to the C++ dev container, and from within that container the MariaDB container will be available on **`localhost`** port 3306. The `.env` file sets the default credentials for the MariaDB Database. The default database is named `mariadb` with a user of `mariadb` whose password is `mariadb`, and if desired this may be changed in `.devcontainer.json` and `.env`. Data is stored in a volume named `mariadb-data`.
 
 
 While the definition itself works unmodified, you can select the version of Debian or Ubuntu the container uses by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` (and rebuilding if you've already created the container).
@@ -72,7 +72,7 @@ You can add other services to your `docker-compose.yml` file [as described in Do
 
 ```yaml
 # Runs the service on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-network_mode: service:db
+network_mode: service:[$SERVICENAME]
 ```
 
 ## Testing the definition
@@ -97,7 +97,7 @@ DB Success
 8. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ### Debugging Security
-To allow C++ debuggers to run within the Docker Containers, the [docker-compose.yml](.devcontainer/docker-compose.yml) contains the following lines:
+To allow C++ based debuggers to run within the Docker Containers, the [docker-compose.yml](.devcontainer/docker-compose.yml) contains the following lines which can be uncommented::
 
 ```yaml
     security_opt:
