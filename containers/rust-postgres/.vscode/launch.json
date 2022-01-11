@@ -13,7 +13,7 @@
                     "build",
                     "--bin=hello_remote_world",
                     "--package=hello_remote_world",
-                    "--manifest-path=Cargo.toml"
+                    "--manifest-path=test-project/Cargo.toml"
                 ],
                 "filter": {
                     "kind": "bin"
