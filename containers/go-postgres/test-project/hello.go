@@ -32,7 +32,7 @@ func main() {
 	db, err := sql.Open("postgres", psqlconn)
 	CheckError(err)
 
-	// close database after the connection is no longer used
+	// close database connection after it is no longer used
 	defer db.Close()
 
 	// check db
