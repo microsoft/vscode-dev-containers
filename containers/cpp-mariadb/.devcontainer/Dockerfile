@@ -2,7 +2,7 @@
 ARG VARIANT=debian-11
 FROM mcr.microsoft.com/vscode/devcontainers/cpp:0-${VARIANT}
 
-# Everything Below this is needed for installing MariaDB
+# Everything below this is needed for installing MariaDB
 # Instructions are copied and modified from: https://mariadb.com/docs/clients/mariadb-connectors/connector-cpp/install/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install curl
