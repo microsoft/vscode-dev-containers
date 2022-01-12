@@ -4,6 +4,7 @@
  *-------------------------------------------------------------------------------------------------------------*/
 
 #include <iostream>
+#include <cassert>
 #include <mariadb/conncpp.hpp>
 
 using namespace std;
@@ -12,57 +13,37 @@ int main()
 {
     cout << "Hello, Remote World!" << endl;
 
-    try
+    char *databasename = getenv("MARIADB_DATABASE");
+    assert(databasename != NULL);
+    char *password = getenv("MARIADB_PASSWORD");
+    assert(password != NULL);
+    char *username = getenv("MARIADB_USER");
+    assert(username != NULL);
+    char *hostname = getenv("MARIADB_DATABASE");
+    assert(hostname != NULL);
+
+    string jointURL = "jdbc:mariadb://" + string(hostname) + "/" + string(databasename);
+    // Configure Connection
+    sql::SQLString url(jointURL);
+    sql::Properties properties({{"user", string(username)},
+        {"password", string(password)}});
+
+    // Establish Connection
+    cout << "DB Connecting" << endl;
+    unique_ptr<sql::Connection> conn(sql::DriverManager::getConnection(url, properties));
+
+    string query = "show databases "
+                    "where `database` not in "
+                    "('information_schema', 'performance_schema');";
+    cout << "DB Executing Query" << endl;
+    unique_ptr<sql::Statement> stmnt(conn->createStatement());
+    unique_ptr<sql::ResultSet> res(stmnt->executeQuery(query));
+
+    cout << "Listing user created databases" << endl;
+    while(res->next())
     {
-        string databasename = getenv("MARIADB_DATABASE");
-        string password = getenv("MARIADB_PASSWORD");
-        string username = getenv("MARIADB_USER");
-        string hostname = getenv("MARIADB_DATABASE");
-        string jointURL = "jdbc:mariadb://" + hostname + "/" + databasename;
-
-        // Instantiate Driver
-        sql::Driver* driver = sql::mariadb::get_driver_instance();
-
-        cout << "DB Connecting" << endl;
-
-        // Configure Connection
-        sql::SQLString url(jointURL);
-        sql::Properties properties({{"user", username}, {"password", password}});
-
-        // Establish Connection
-        unique_ptr<sql::Connection> conn(driver->connect(url, properties));
-
-        cout << "DB Executing" << endl;
-
-        // Create a new Statement
-        sql::Statement *stmt;
-        // Create resultSet
-        sql::ResultSet *res;
-
-        string query = "show databases "
-                        "where `database` not in " 
-                        "('information_schema', 'performance_schema');";
-
-        stmt = conn->createStatement();
-        res = stmt->executeQuery(query);
-
-        cout << "Cluster has the following user created databases" << endl;
-
-        while(res -> next())
-        {
-            cout << res->getString(1) << endl;
-        }
-
-        cout << "DB Success" << endl;
-
-        delete res;
-        delete stmt;
-        conn.release();
+        cout << res->getString(1) << endl;
     }
-    catch(sql::SQLException& e)
-    {
-        cerr << "Error Connecting to MariaDB Platform: " << e.what() << endl;
-        return 1;
-    }
+    conn->close();
     return 0;
 }
