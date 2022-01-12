@@ -40,7 +40,7 @@ services:
 
   db:
     container_name: mariadb
-    image: mariadb:latest
+    image: mariadb:10.3.32-focal
     restart: unless-stopped
     volumes:
       - mariadb-data:/var/lib/MARIADB
