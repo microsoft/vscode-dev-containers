@@ -193,16 +193,17 @@ VS Code Dev Containers allow multiple containers to run together. This is useful
 1. Create a new copy of an existing language definition folder, and hyphenate the database name.
    1. For example, `java` becomes `java-postgres`.
 2. Create a new `docker-compose.yml` file.
-   1. Add the existing `Dockerfile` to the `docker-compose` as an `app`. This will be the Dev Container where your code gets executed.
-   2. Add the definition for the database to the `docker-compose`, version tagging it or using the `latest`. Most usage scenarios don't require custom images for the database.
-   3. It's common that containers will need to be connected through a network so that the `app` can connect to the `db`. This can normally be done by adding the following to the `app` definition:
+   1. For both, the app and the database dev container, add the service `docker-compose.yml`. The database container typically is referenced by it's stadard image or by the `db` tag. The `app` container is the dev container that is defined via the Dockerfile definition.
+   2. For more details on the sections in the docker-compose file see: https://github.com/compose-spec/compose-spec/blob/master/spec.md
+   3. We recommend using a major stable version tag for the Database, as using `latest` is generally considered to be less secure and can introduce breaking bugs.
+   4. It's common that containers will need to be connected through a network so that the `app` can connect to the `db`. This can normally be done by adding the following to the `app` definition:
 
     ```yaml
         network_mode: service:db
     ```
 
 3. Modify the `devcontainer.json` with any launch options or VS Code specific `settings.json` options that may be needed. 
-   1. For example, when working with a SQL database, it might be necessary to modify the settings with something like the following:
+   1. For example, when working with a SQL database, it might be necessary to add the following:
    ```json
    		"sqltools.connections": [
 			{
@@ -218,11 +219,12 @@ VS Code Dev Containers allow multiple containers to run together. This is useful
 			}
 		  ],
     ```
+    This allows the [SQL Tools Extension](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) to connect to a specific database (In this example, a PostgreSQL database.)
     2. It might be necessary to add additional VS Code Extensions to allow for an easier dev experience. This could be database dependent (`MSSQL`, `NoSQL`, etc.)
 4. Modify the existing Tests or add new tests to ensure that the following scenarios are possible:
     1. The application can successfully ping the DB Container.
     2. The application can login to the DB Container using the default login data. 
-    3. The application can send a query to the existing DB and receive data from the DB. (Typically listing the databases in the cluster is considered a valid test.)
+    3. The application can send a query to the existing DB and receive data from the DB. (Typically listing the named databases is considered a valid test.)
 5. Remove the following from your new container:
    1. The `history` folder
    2. The `'.devcontainer/base.Dockerfile` file
