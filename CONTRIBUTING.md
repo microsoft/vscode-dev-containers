@@ -215,7 +215,7 @@ Add a new object to the [features.json](script-library/container-features/src/fe
 Add your buildArg to the [feature-scripts.env](script-library/container-features/src/feature-scripts.env) file with all script arguments specified (even if they duplicate a script default).
 
 ```
-_VSC_INSTALL_<FEATURE>="<feature>-debian.sh ${_BUILD_ARG_<FEATURE>_<OPTION1>:-<option1 default>} ${_BUILD_ARG_<FEATURE>_<OPTION2>:-<option2 default} hardcodedThirdArgument"
+_VSC_INSTALL_<FEATURE>="<feature>-debian.sh ${_BUILD_ARG_<FEATURE>_<OPTION1>:-<option1 default>} ${_BUILD_ARG_<FEATURE>_<OPTION2>:-<option2 default>} hardcodedThirdArgument"
 ```
 
 - Options declared in `features.json` are mapped using the naming convention `_BUILD_ARG_<FEATURE>_<OPTIONNAME>` and their default should match the declared default for that option.
@@ -277,7 +277,7 @@ Feel free to use other scripts in that directory as inspiration.
     7. Gives the user correct permissions if necessary.
     ```
 
-- Error messages from the script should echo to `STDERR`, while regular status messages should echo to `STDOUT`. This makes troubleshooting the script easier for developers. One way to facilitate this is to create an `err()` function like so:
+- One way to make troubleshooting the script easier when writing a bash shell script is to echo error messages to `STDERR`. A possible way we implemented this in bash scripts is to create an `err()` function like so:
     ```sh
     # Setup STDERR.
     err() {
@@ -288,13 +288,13 @@ Feel free to use other scripts in that directory as inspiration.
     exit 1
     ```
 
-- Always make sure to use double quotes and braces when referencing named variables:
+- If writing a bash shellscript, we recommend using double quotes and braces when referencing named variables:
     ```sh
     variable="My example var"
     echo "${variable}"
     ```
 
-- For code clarity, assign return values from functions to a new variable and use the keyword `local` for vars inside of functions. This will ensure the global space is not crowded with unnecessary variables. For example:
+- One method to to ensure the global space in a script is not too crowded with unnecessary variables is to assign return values from functions to a new variable, and use the keyword `local` for vars inside of functions. For example:
     ```sh
     test_function() {
         local test = "hello world!"
@@ -304,8 +304,7 @@ Feel free to use other scripts in that directory as inspiration.
     global_test=$(test_function)
     ```
 
-- If you are using temporary files within the script, make sure to run a cleanup function when the script exists. The recommended method is to use `trap`. For example:
-
+- If using temporary files within the script, we recommend removing all those files once they are no longer needed. One method for doing this is running a cleanup function with a `trap` method when the script exits:
     ```sh
     # Cleanup temporary directory and associated files when exiting the script.
     cleanup() {
@@ -324,7 +323,7 @@ Feel free to use other scripts in that directory as inspiration.
 
 - Consider using common helper functions from [shared/utils.sh](script-library/shared/utils.sh) when managing common tasks (like updating PATH variables, or managing gpg keys) by copying them directly into your script.  
     - NOTE: This is done to minimize the impact that any change can have on existing working scripts.
-    - Similarly, if you add a helper function to your script that could benefit others in the future, consider adding it to the `utils.sh` file as well.
+    - Similarly, if you add a helper function to your script that could benefit others in the future, consider adding it to the `shared/utils.sh` file as well.
 
 ## Contributing to Documentation
 
