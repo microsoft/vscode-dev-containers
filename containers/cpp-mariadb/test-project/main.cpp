@@ -30,20 +30,30 @@ int main()
 
     // Establish Connection
     cout << "DB Connecting" << endl;
-    unique_ptr<sql::Connection> conn(sql::DriverManager::getConnection(url, properties));
 
-    string query = "show databases "
-                    "where `database` not in "
-                    "('information_schema', 'performance_schema');";
-    cout << "DB Executing Query" << endl;
-    unique_ptr<sql::Statement> stmnt(conn->createStatement());
-    unique_ptr<sql::ResultSet> res(stmnt->executeQuery(query));
-
-    cout << "Listing user created databases" << endl;
-    while(res->next())
+    try
     {
-        cout << res->getString(1) << endl;
+        unique_ptr<sql::Connection> conn(sql::DriverManager::getConnection(url, properties));
+
+        string query = "show databases "
+                        "where `database` not in "
+                        "('information_schema', 'performance_schema');";
+        cout << "DB Executing Query" << endl;
+        unique_ptr<sql::Statement> stmnt(conn->createStatement());
+        unique_ptr<sql::ResultSet> res(stmnt->executeQuery(query));
+
+        cout << "Listing user created databases" << endl;
+        while(res->next())
+        {
+            cout << res->getString(1) << endl;
+        }
+        conn->close();
     }
-    conn->close();
+    catch(const sql::SQLException& e)
+    {
+        cerr << "Error Connecting to MariaDB Platform: " << e.what() << endl;
+        return 1;
+    }
+    
     return 0;
 }
