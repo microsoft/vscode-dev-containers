@@ -9,9 +9,7 @@
 | *Contributors* | The VS Code Team |
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
-| *Published images* | mcr.microsoft.com/vscode/devcontainers/rust |
 | *Available image variants* | buster, bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/rust/tags/list)) |
-| *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variant |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
@@ -19,7 +17,7 @@
 
 ## Using this definition
 
-This definition creates two containers, one for Rust and one for PostgreSQL. VS Code will attach to the Rust dev container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `postgres-data`.
+This definition creates two containers, one for Rust and one for PostgreSQL. VS Code will attach to the Rust dev container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The `.env` file sets the default credentials. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `postgres-data`.
 
 While the definition itself works unmodified, you can select the version of Debian the container uses by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` (and rebuilding if you've already created the container).
 
@@ -32,8 +30,6 @@ build:
         # Use bullseye when on local on arm64/Apple Silicon.
         VARIANT: buster
 ```
-
-Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
 
 ### Adding the definition to a project or codespace
 
