@@ -1,6 +1,6 @@
-# Find the Dockerfile for mcr.microsoft.com/azure-functions/java:3.0-java8-core-tools at this URL
-# https://github.com/Azure/azure-functions-docker/blob/dev/host/3.0/buster/amd64/java/java8/java8-core-tools.Dockerfile
-FROM mcr.microsoft.com/azure-functions/java:3.0-java11-core-tools
+# Find the Dockerfile at this URL
+# https://github.com/Azure/azure-functions-docker/blob/dev/host/4/bullseye/amd64/java/java11/java11-core-tools.Dockerfile
+FROM mcr.microsoft.com/azure-functions/java:4-java11-core-tools
 
 RUN apt-get -qq update && \
     apt-get install -y software-properties-common && \

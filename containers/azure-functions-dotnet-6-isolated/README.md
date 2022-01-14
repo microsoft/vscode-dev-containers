@@ -1,8 +1,8 @@
-# Azure Functions & Python 3
+# Azure Functions & C# - .NET 6 (Isolated)
 
 ## Summary
 
-*Develop Azure Functions in Python. Includes Python 3, the Azure Functions SDK, Docker CLI (required to publish to Azure with native dependencies) and related extensions and dependencies.*
+*Develop Azure Functions in C# (isolated). Includes NET 6, the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -12,7 +12,7 @@
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
-| *Languages, platforms* | Azure Functions, Python |
+| *Languages, platforms* | Azure Functions, .NET Core, C# |
 
 ## Using this definition
 
@@ -37,20 +37,20 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/azure-functions-python-3` folder.
+4. Select the `containers/azure-functions-dotnet-6-isolated` folder.
 5. After the folder has opened in the container, press <kbd>F1</kbd> and select **Azure Functions: Create Function...**.
 6. Enter these options:
    1. Yes (when prompted to create a new project)
-   1. Python
-   1. Python3
+   1. C#
+   1. .NET 6 (Isolated)
    1. HTTP Trigger
-   1. HTTPTrigger
+   1. HttpTriggerCSharp
    1. Anonymous
    1. Open in current window
 7. Press <kbd>F5</kbd> to start debugging project.
-8. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTrigger?name=remote`.
+8. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTriggerCSharp`.
     - If the port 7071 is not already open, press <kbd>F1</kbd>, select **Remote-Containers: Forward Port from Container...**, and then port 7071.
-9. You should see "Hello remote" echoed by the Azure Function.
+9.  You should see "Welcome to Azure Functions!" returned by the Azure Function.
 10. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
