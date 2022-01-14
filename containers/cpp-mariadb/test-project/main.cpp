@@ -19,7 +19,7 @@ int main()
     assert(password != NULL);
     char *username = getenv("MARIADB_USER");
     assert(username != NULL);
-    char *hostname = getenv("MARIADB_DATABASE");
+    char *hostname = getenv("MARIADB_HOSTNAME");
     assert(hostname != NULL);
 
     string jointURL = "jdbc:mariadb://" + string(hostname) + "/" + string(databasename);
