@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:9ccf95d9eceb72d38e407adb5dcd12d4036de34b7bc93abc3822ece753b1544f
+**Digest:** sha256:83597f5a34fa513f250b571f1d2a345f26aa46c08cc99eddd5fc6309c10015ca
 
 **Tags:**
 ```
@@ -36,14 +36,14 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | GCC | 9.3.0-17ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
 | [Go](https://golang.org/dl) | 1.17.6 | /usr/local/go |
-| [Rust](https://github.com/rust-lang/rust) | 1.57.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.58.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.1 | 
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 9c84c344d762b200de7acc794b9a0e7832144e7a | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 567bd593954641bd59376f6fd5f9c06bf37bc9e7 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | 304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5 | /usr/local/share/rbenv |
@@ -92,10 +92,10 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | Tool / crate | Version |
 |--------------|---------|
 | rls | 1.41.0 |
-| rustfmt | 1.4.37 |
-| rust-analysis | 1.57.0 |
-| rust-src | 1.57.0 |
-| clippy | 1.57.0 |
+| rustfmt | 1.4.38 |
+| rust-analysis | 1.58.0 |
+| rust-src | 1.58.0 |
+| clippy | 1.58.0 |
 
 **Other tools and utilities**
 
