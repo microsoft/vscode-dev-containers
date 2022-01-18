@@ -13,6 +13,9 @@ This document outlines a number of ways you can get involved.
     - [Developing and testing a definition](#developing-and-testing-a-definition)
     - [Adding a Database Definition to an existing Container](#adding-a-database-definition-to-an-existing-container)
     - [Release cadence for new containers or container updates](#release-cadence-for-new-containers-or-container-updates)
+  - [Contributing Dev Container Features](#contributing-dev-container-features)
+    - [Creating a new feature](#creating-a-new-feature)
+    - [Best practices for writing feature install scripts](#best-practices-for-writing-feature-install-scripts)
   - [Contributing to Documentation](#contributing-to-documentation)
   - [Reporting Issues](#reporting-issues)
     - [Identify Where to Report](#identify-where-to-report)
@@ -305,7 +308,14 @@ Repeat as needed to iterate from a clean workspace.
 
 *Unit tests*
 - Add your feature to the [run-scripts.sh](script-library/test/regression/run-scripts.sh) file to ensure it is included in CI tests.
-- Your addition should take the form `runScript <feature> <non-default-args>`. EG `runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"`
+
+- Your addition should take the form `runScript <feature> <non-default-args>`.
+
+EG
+```sh
+runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"
+```
+
 - If your script takes the installation user as an argument, be sure to specify it as ${USERNAME} in the tests for programatic testing.
 
 *Regression tests*
@@ -393,6 +403,8 @@ Feel free to use other scripts in that directory as inspiration.
 - Consider using common helper functions from [shared/utils.sh](script-library/shared/utils.sh) when managing common tasks (like updating PATH variables, or managing gpg keys) by copying them directly into your script.  
     - NOTE: This is done to minimize the impact that any change can have on existing working scripts.
     - Similarly, if you add a helper function to your script that could benefit others in the future, consider adding it to the `shared/utils.sh` file as well.
+
+- [shared/settings.env](script-library/shared/settings.env) contains shared environment variables used in many install scripts, such as `GPG Keys` and `Archive Architectures`. Consider adding your new env. variables to this script when applicable, or reusing existing variables when pertinent.
 
 ## Contributing to Documentation
 
