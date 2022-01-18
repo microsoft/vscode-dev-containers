@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "9c84c344d762b200de7acc794b9a0e7832144e7a"
+                    "commitHash": "567bd593954641bd59376f6fd5f9c06bf37bc9e7"
                 }
             }
         },
@@ -384,7 +384,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rustfmt",
-                    "Version": "1.4.37"
+                    "Version": "1.4.38"
                 }
             }
         },
@@ -393,7 +393,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.57.0"
+                    "Version": "1.58.0"
                 }
             }
         },
@@ -402,7 +402,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.57.0"
+                    "Version": "1.58.0"
                 }
             }
         },
@@ -411,7 +411,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.57.0"
+                    "Version": "1.58.0"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "9c84c344d762b200de7acc794b9a0e7832144e7a"
+                    "commitHash": "567bd593954641bd59376f6fd5f9c06bf37bc9e7"
                 }
             }
         },
@@ -642,7 +642,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.57.0",
+                    "Version": "1.58.0",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -871,6 +871,16 @@
         },
         {
             "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "4f2d8b4d4cbc51e609f4b568e87907883422ab41"
+                }
+            }
+        },
+        {
+            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: python",
@@ -1064,7 +1074,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.6.0"
+                    "Version": "8.7.0"
                 }
             }
         },
@@ -1074,7 +1084,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "9c84c344d762b200de7acc794b9a0e7832144e7a"
+                    "commitHash": "567bd593954641bd59376f6fd5f9c06bf37bc9e7"
                 }
             }
         },

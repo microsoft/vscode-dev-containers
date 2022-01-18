@@ -1,10 +1,6 @@
 {
-	"name": "Azure Functions & Node.js",
-	"build": {
-		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick a Node.js version: 14, 16
-		"args": { "VARIANT": "14" }
-	},
+	"name": "Azure Functions & C# - .NET 6 (In-Process)",
+	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 
 	// Set *default* container specific settings.json values on container create.
@@ -13,12 +9,12 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-azuretools.vscode-azurefunctions",
-		"dbaeumer.vscode-eslint"
+		"ms-dotnettools.csharp"
 	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "npm install",
+	// "postCreateCommand": "dotnet restore",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "node"
+	"remoteUser": "vscode"
 }
