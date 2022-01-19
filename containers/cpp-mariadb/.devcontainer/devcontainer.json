@@ -5,29 +5,17 @@
 	"workspaceFolder": "/workspace",
 
 	// Set *default* container specific settings.json values on container create.
-    "settings": {
-        "sqltools.connections": [{
-            "name": "Container database",
-            "driver": "MariaDB",
-            "server": "localhost",
-            "previewLimit": 50,
-            "port": 3306,
-            "database": "mariadb",
-            "username": "root",
-            "password": "mariadb"
-        }]
-    },
+    "settings": {},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-vscode.cpptools",
 		"ms-vscode.cmake-tools",
 		"ms-vscode.cpptools-extension-pack",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-mysql"		
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This is the recommended way to access the container from the host
 	// "forwardPorts": [3306],
 
 	// Use 'postCreateCommand' to run commands after the container is created.

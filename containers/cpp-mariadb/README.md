@@ -17,7 +17,7 @@
 | *Languages, platforms* | C++ |
 
 ## Using this definition
-This definition creates two containers, one for C++ and one for MariaDB (MySQL). VS Code will attach to the C++ dev container, and from within that container the MariaDB container will be available on **`localhost`** port 3306. The `.env` file sets the default credentials for the MariaDB Database. The default database is named `mariadb` with a user of `mariadb` whose password is `mariadb`, and if desired this may be changed in `.devcontainer.json` and `.env`. Data is stored in a volume named `mariadb-data`.
+This definition creates two containers, one for C++ and one for MariaDB (MySQL). VS Code will attach to the C++ dev container, and from within that container the MariaDB container will be available on **`localhost`** port 3306. The `.env` file sets the default credentials for the MariaDB Database. The default database is named `mariadb` with a user of `mariadb` whose password is `mariadb`, and if desired this may be changed in `.env`. Data is stored in a volume named `mariadb-data`.
 
 
 While the definition itself works unmodified, you can select the version of Debian or Ubuntu the container uses by updating the `VARIANT` arg in `.devcontainer/docker-compose.yml` (and rebuilding if you've already created the container).

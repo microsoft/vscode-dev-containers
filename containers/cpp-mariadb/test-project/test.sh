@@ -10,8 +10,6 @@ checkCommon
 checkExtension "ms-vscode.cpptools"
 checkExtension "ms-vscode.cmake-tools"
 checkExtension "ms-vscode.cpptools-extension-pack"
-checkExtension "mtxr.sqltools"
-checkExtension "mtxr.sqltools-driver-mysql"
 checkOSPackages "command-line-tools" build-essential cmake cppcheck valgrind clang lldb llvm gdb
 check "g++"  g++ -g main.cpp -o main.out -lmariadbcpp
 check "main.out" ./main.out
