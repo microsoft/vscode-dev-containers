@@ -10,26 +10,11 @@
 		"go.useLanguageServer": true,
 		"go.gopath": "/go",
 		"go.goroot": "/usr/local/go",
-		"sqltools.connections": [
-			{
-			  "name": "Container database",
-			  "driver": "PostgreSQL",
-			  "previewLimit": 50,
-			  "server": "localhost",
-			  "port": 5432,
-			  // NOTE: database/username/password should match values in docker.compose.yml
-			  "database": "postgres",
-			  "username": "postgres",
-			  "password": "postgres"
-			}
-		  ],
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"golang.Go",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg"
+		"golang.Go"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
