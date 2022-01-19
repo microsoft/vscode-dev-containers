@@ -32,9 +32,7 @@
 		"mutantdino.resourcemonitor",
 		"matklad.rust-analyzer",
 		"tamasfe.even-better-toml",
-		"serayuzgur.crates",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg"
+		"serayuzgur.crates"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
