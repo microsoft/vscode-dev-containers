@@ -23,15 +23,7 @@ fn test_connection_query_database() -> Result<(), Box<dyn std::error::Error>> {
     let db = env::var("POSTGRES_DB")?;
     let conn_str = format!("postgresql://{}:{}@{}:5432/{}", user, passwd, host, db);
 
-    let mut conn = match Client::connect(&conn_str, NoTls) {
-        Ok(conn) => conn,
-        Err(err) => {
-            return Err(Box::new(std::io::Error::new(
-                std::io::ErrorKind::NotConnected,
-                format!("Connection failed {}", err),
-            )))
-        }
-    };
+    let mut conn = Client::connect(&conn_str, NoTls)?;
 
     for row in conn.query("select * from pg_database limit 1;", &[])? {
         let val: String = row.get("datname");
