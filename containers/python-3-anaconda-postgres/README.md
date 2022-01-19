@@ -108,18 +108,13 @@ RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env up
 
 1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
-2. To use the pre-built image:
-   1. Start VS Code and open your project folder or connect to a codespace.
-   2. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
-   4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
+2. Start VS Code and open your project folder or connect to a codespace.
 
-3. To build a custom version of the image instead:
-   1. Clone this repository locally.
-   2. Start VS Code and open your project folder or connect to a codespace.
-   3. Use your local operating system's file explorer to drag-and-drop the locally cloned copy of the `.devcontainer` folder for this definition into the VS Code file explorer for your opened project or codespace.
-   4. Update `.devcontainer/devcontainer.json` to reference `"dockerfile": "base.Dockerfile"`.
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
 
-4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+   > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
+
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
@@ -130,9 +125,9 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/python-3-anaconda` folder.
+4. Select the `containers/python-3-anaconda-postgres` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. A `test-project/plot.png` file should be added to the folder after it runs with the plot result.
+6. You should see `DATABASE CONNECTED` in the debug console and a `test-project/plot.png` file should be added to the folder after it runs with the plot result.
 7. Next, open `test-project/hello.py` and press <kbd>ctrl/cmd</kbd>+<kbd>a</kbd> then <kbd>shift</kbd>+<kbd>enter</kbd>.
 8. You should see the `matplotlib` output in the interactive window.
 9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
