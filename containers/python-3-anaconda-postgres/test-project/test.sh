@@ -16,11 +16,12 @@ checkExtension "ms-python.vscode-pylance"
 checkExtension "mtxr.sqltools"
 checkExtension "mtxr.sqltools-driver-pg"
 check "python" python --version
-check "test-project" python ./hello.py
-check "plot.png" wc ./plot.png
+python ./hello.py > out.txt
+check "test-project: plot.png" test -f ./plot.png
+check "test-project: database" grep -qF "DATABASE CONNECTED" out.txt
 
 # Clean up
-rm plot.png
+rm plot.png out.txt
 
 # Report result
 reportResults
