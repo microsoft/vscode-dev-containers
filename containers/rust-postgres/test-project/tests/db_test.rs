@@ -3,31 +3,41 @@
  * Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
  *-------------------------------------------------------------------------------------------------------------*/
 
-use std::{env, net::TcpStream};
+use std::{env, net::TcpStream, panic};
 extern crate postgres;
 use postgres::{Client, NoTls};
 
-#[test]
-fn test_ping_database() -> Result<(), Box<dyn std::error::Error>> {
-    let host = env::var("POSTGRES_HOSTNAME")?;
-    let _ = TcpStream::connect(format!("{}:5432", host))?;
-    println!("Ping database succeed");
-    Ok(())
+fn getenv(name: &str) -> String {
+    let val = match env::var(name) {
+        Ok(val) => val,
+        Err(err) => panic!("{} {}", name, err.to_string()),
+    };
+    assert!(!val.is_empty());
+    val
 }
 
 #[test]
-fn test_connection_query_database() -> Result<(), Box<dyn std::error::Error>> {
-    let host = env::var("POSTGRES_HOSTNAME")?;
-    let user = env::var("POSTGRES_USER")?;
-    let passwd = env::var("POSTGRES_PASSWORD")?;
-    let db = env::var("POSTGRES_DB")?;
+fn test_ping_database() {
+    let host = getenv("POSTGRES_HOSTNAME");
+    let _ = TcpStream::connect(format!("{}:5432", host)).expect("Failed to connect");
+    println!("Ping database succeed");
+}
+
+#[test]
+fn test_connection_query_database() {
+    let host = getenv("POSTGRES_HOSTNAME");
+    let user = getenv("POSTGRES_USER");
+    let passwd = getenv("POSTGRES_PASSWORD");
+    let db = getenv("POSTGRES_DB");
     let conn_str = format!("postgresql://{}:{}@{}:5432/{}", user, passwd, host, db);
 
-    let mut conn = Client::connect(&conn_str, NoTls)?;
+    let mut conn = Client::connect(&conn_str, NoTls).expect("Connection failed");
 
-    for row in conn.query("select * from pg_database limit 1;", &[])? {
+    for row in conn
+        .query("select * from pg_database limit 1;", &[])
+        .expect("Data expected")
+    {
         let val: String = row.get("datname");
         println!("Database name = {}", val);
     }
-    Ok(())
 }

@@ -41,7 +41,7 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    container_name: postgresdb
+    container_name: rust_postgresdb
     image: postgres:14.1
     restart: unless-stopped
     volumes:
