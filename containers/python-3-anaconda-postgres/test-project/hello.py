@@ -20,7 +20,7 @@ try:
         cur.execute("""SELECT COUNT(1) from pg_database WHERE datname='postgres'""")
         rows = cur.fetchone()
 
-    if(rows[0]==1):
+    if rows[0]==1:
         print("DATABASE CONNECTED")
     else:
         print("ERROR FINDING DATABASE")

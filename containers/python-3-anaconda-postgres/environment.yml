@@ -3,3 +3,4 @@ dependencies:
   - matplotlib
   - numpy
   - psycopg2
+  - pylint

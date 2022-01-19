@@ -9,7 +9,7 @@
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
-| *Published image architecture(s)* | x86-64, aarch64/arm64 |
+| *Supported architecture(s)* | x86-64, aarch64/arm64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
@@ -43,7 +43,7 @@ You can add other services to your `docker-compose.yml` file [as described in Do
 
 ```yaml
 # Runs the service on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-network_mode: service:db
+network_mode: service:[$SERVICE_NAME]
 ```
 
 ### Using Conda
@@ -73,12 +73,11 @@ If you've already opened your folder in a container, rebuild the container using
 
 ### Installing Node.js
 
-Given JavaScript front-end web client code written for use in conjunction with a Python back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+Given JavaScript front-end web client code written for use in conjunction with a Python back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/docker-compose.yml`.
 
-```jsonc
-"args": {
-    "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
-}
+```yaml
+args:
+  NODE_VERSION: "14" # Set to "none" to skip Node.js installation
 ```
 
 #### Installing a different version of Python
