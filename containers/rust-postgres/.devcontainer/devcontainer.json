@@ -10,20 +10,7 @@
 		"files.watcherExclude": {
 			"**/target/**": true
 		},
-		"rust-analyzer.checkOnSave.command": "clippy",
-		"sqltools.connections": [
-			{
-			  "name": "Container database",
-			  "driver": "PostgreSQL",
-			  "previewLimit": 50,
-			  "server": "localhost",
-			  "port": 5432,
-			  // NOTE: database/username/password should match values in docker.compose.yml
-			  "database": "postgres",
-			  "username": "postgres",
-			  "password": "postgres"
-			}
-		  ],
+		"rust-analyzer.checkOnSave.command": "clippy"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
