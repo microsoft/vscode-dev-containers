@@ -4,13 +4,23 @@
 #-------------------------------------------------------------------------------------------------------------
 
 #%%
+import os
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import psycopg2
 
 try:
-    conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' password='postgres'")
+    pg_user = os.getenv('POSTGRES_USER')
+    pg_password = os.getenv('POSTGRES_PASSWORD')
+    pg_db = os.getenv('POSTGRES_DB')
+    pg_host = os.getenv('POSTGRES_HOST')
+    conn = psycopg2.connect("dbname='{pg_db}' user='{pg_user}' host='{pg_host}' password='{pg_password}'".format(
+        pg_db=pg_db,
+        pg_user=pg_user,
+        pg_host=pg_host,
+        pg_password=pg_password
+    ))
 except:
     print("Unable to connect to the database")
     exit()
