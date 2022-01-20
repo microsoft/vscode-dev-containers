@@ -7,16 +7,6 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"sqltools.connections": [{
-			"name": "Container database",
-			"driver": "PostgreSQL",
-			"previewLimit": 50,
-			"server": "localhost",
-			"port": 5432,
-			"database": "postgres",
-			"username": "postgres",
-			"password": "postgres"
-		}],
 		"python.defaultInterpreterPath": "/opt/conda/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
@@ -31,9 +21,7 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
-		"ms-python.vscode-pylance",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg"
+		"ms-python.vscode-pylance"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

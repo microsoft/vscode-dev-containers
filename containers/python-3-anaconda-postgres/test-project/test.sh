@@ -13,8 +13,6 @@ checkCommon
 # Definition specific tests
 checkExtension "ms-python.python"
 checkExtension "ms-python.vscode-pylance"
-checkExtension "mtxr.sqltools"
-checkExtension "mtxr.sqltools-driver-pg"
 check "python" python --version
 python ./hello.py > out.txt
 check "test-project: plot.png" test -f ./plot.png
