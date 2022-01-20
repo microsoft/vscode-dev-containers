@@ -20,6 +20,23 @@
                 }
             },
             "args": []
-        }
+        },
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Debug Test",
+            "cargo": {
+				"args": [
+					"test",
+                    "--test",
+                    "*",
+                    "--manifest-path=test-project/Cargo.toml"
+				],
+				"filter": {
+					"kind": "test"
+				}
+			},
+			"args": []
+		}
     ]
 }
