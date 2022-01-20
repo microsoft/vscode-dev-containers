@@ -21,22 +21,22 @@
             },
             "args": []
         },
-		{
-			"type": "lldb",
-			"request": "launch",
-			"name": "Debug Test",
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Test",
             "cargo": {
-				"args": [
-					"test",
+                "args": [
+                    "test",
                     "--test",
                     "*",
                     "--manifest-path=test-project/Cargo.toml"
-				],
-				"filter": {
-					"kind": "test"
-				}
-			},
-			"args": []
-		}
+                ],
+                "filter": {
+                    "kind": "test"
+                }
+            },
+            "args": []
+        }
     ]
 }
