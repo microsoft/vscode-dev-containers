@@ -14,6 +14,7 @@ checkCommon
 checkExtension "ms-python.python"
 checkExtension "ms-python.vscode-pylance"
 check "python" python --version
+check "test-project" python ./hello.py
 python ./hello.py > out.txt
 check "test-project: plot.png" test -f ./plot.png
 check "test-project: database" grep -qF "DATABASE CONNECTED" out.txt
