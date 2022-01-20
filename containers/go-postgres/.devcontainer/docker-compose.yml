@@ -5,7 +5,6 @@ volumes:
 
 services:
   app:
-    container_name: godev
     build: 
       context: .
       dockerfile: Dockerfile
@@ -43,7 +42,6 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    container_name: postgresdb
     image: postgres:latest
     restart: unless-stopped
     volumes:
