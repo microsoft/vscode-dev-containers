@@ -5,7 +5,6 @@ volumes:
 
 services:
   app:
-    container_name: rust
     build:
       context: .
       dockerfile: Dockerfile
