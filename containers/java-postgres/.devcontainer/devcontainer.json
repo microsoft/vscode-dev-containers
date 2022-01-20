@@ -1,0 +1,40 @@
+{
+	"name": "Java & PostgreSQL",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+	
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"sqltools.connections": [
+			{
+			  "name": "Container database",
+			  "driver": "PostgreSQL",
+			  "previewLimit": 50,
+			  "server": "localhost",
+			  "port": 5432,
+			  // NOTE: database/username/password should match values in docker.compose.yml
+			  "database": "postgres",
+			  "username": "postgres",
+			  "password": "postgres"
+			}
+		  ],
+		"java.home": "/docker-java-home"
+	},
+	
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"vscjava.vscode-java-pack",
+		"mtxr.sqltools",
+		"mtxr.sqltools-driver-pg"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [5432],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

@@ -17,24 +17,20 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"lldb.adapterType": "bundled",
-		"lldb.executable": "/usr/bin/lldb",
-		"sde.languageservermode": "sourcekite",
-		"swift.path.sourcekite": "/usr/local/bin/sourcekite"
-	},
+ 		"lldb.library": "/usr/lib/liblldb.so",
+ 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"vknabel.vscode-swift-development-environment",
-		"vadimcn.vscode-lldb"
+		"sswg.swift-lang",
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "swiftc --version",
+	// "postCreateCommand": "",
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

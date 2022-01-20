@@ -1,12 +1,12 @@
-# Azure Functions & C# - .NET Core 2.1
+# Azure Functions & C# - .NET 6 (In-Process)
 
 ## Summary
 
-*Develop Azure Functions in C#. Includes NET Core 2.1, the Azure Functions SDK, and related extensions and dependencies.*
+*Develop Azure Functions in C# (in-process). Includes NET 6, the Azure Functions SDK, and related extensions and dependencies.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The Azure Functions Team, @brandonh-msft |
+| *Contributors* | The Azure Functions Team |
 | *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
@@ -37,15 +37,16 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/azure-functions-dotnetcore-2.1` folder.
+4. Select the `containers/azure-functions-dotnet-6-inprocess` folder.
 5. After the folder has opened in the container, press <kbd>F1</kbd> and select **Azure Functions: Create Function...**.
 6. Enter these options:
    1. Yes (when prompted to create a new project)
-   2. C#
-   3. HTTP Trigger
-   4. HttpTriggerCSharp
-   5. Anonymous
-   6. Open in current window
+   1. C#
+   1. .NET 6
+   1. HTTP Trigger
+   1. HttpTriggerCSharp
+   1. Anonymous
+   1. Open in current window
 7. Press <kbd>F5</kbd> to start debugging project.
 8. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTriggerCSharp?name=remote`.
     - If the port 7071 is not already open, press <kbd>F1</kbd>, select **Remote-Containers: Forward Port from Container...**, and then port 7071.
@@ -56,4 +57,4 @@ This definition includes some test code that will help you verify it is working 
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscode-dev-containers/blob/main/LICENSE).
+Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).

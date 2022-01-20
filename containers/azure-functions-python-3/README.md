@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The Azure Functions Team, [Anthony Chu](https://github.com/anthonychu) |
+| *Contributors* | The Azure Functions Team |
 | *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Works in Codespaces* | Yes |
@@ -41,11 +41,12 @@ This definition includes some test code that will help you verify it is working 
 5. After the folder has opened in the container, press <kbd>F1</kbd> and select **Azure Functions: Create Function...**.
 6. Enter these options:
    1. Yes (when prompted to create a new project)
-   2. Python
-   3. HTTP Trigger
-   4. HTTPTrigger
-   5. Anonymous
-   6. Open in current window
+   1. Python
+   1. Python3
+   1. HTTP Trigger
+   1. HTTPTrigger
+   1. Anonymous
+   1. Open in current window
 7. Press <kbd>F5</kbd> to start debugging project.
 8. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTrigger?name=remote`.
     - If the port 7071 is not already open, press <kbd>F1</kbd>, select **Remote-Containers: Forward Port from Container...**, and then port 7071.

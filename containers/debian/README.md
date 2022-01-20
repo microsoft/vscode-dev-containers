@@ -10,8 +10,8 @@
 | *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:debian |
-| *Available image variants* | stretch, buster, bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
-| *Published image architecture(s)* | x86-64, aarch64/arm64 for `bullseye` and `stretch` variants |
+| *Available image variants* | buster, bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
+| *Published image architecture(s)* | x86-64, aarch64/arm64 for `bullseye` variant |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
@@ -32,7 +32,6 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/base:debian` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/base:bullseye` (or `debian-11`)
 - `mcr.microsoft.com/vscode/devcontainers/base:buster` (or `debian-10`)
-- `mcr.microsoft.com/vscode/devcontainers/base:stretch` (or `debian-9`)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
