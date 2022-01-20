@@ -5,7 +5,6 @@ volumes:
 
 services:
   app:
-    container_name: cppdev
     build: 
       context: .
       dockerfile: Dockerfile
@@ -39,7 +38,6 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    container_name: mariadb
     image: mariadb:10.3.32-focal
     restart: unless-stopped
     volumes:
