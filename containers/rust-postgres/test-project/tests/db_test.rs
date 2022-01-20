@@ -19,7 +19,8 @@ fn getenv(name: &str) -> String {
 #[test]
 fn test_ping_database() {
     let host = getenv("POSTGRES_HOSTNAME");
-    let _ = TcpStream::connect(format!("{}:5432", host)).expect("Failed to connect");
+    let port = getenv("POSTGRES_PORT");
+    let _ = TcpStream::connect(format!("{}:{}", host, port)).expect("Failed to connect");
     println!("Ping database succeed");
 }
 
@@ -29,7 +30,8 @@ fn test_connection_query_database() {
     let user = getenv("POSTGRES_USER");
     let passwd = getenv("POSTGRES_PASSWORD");
     let db = getenv("POSTGRES_DB");
-    let conn_str = format!("postgresql://{}:{}@{}:5432/{}", user, passwd, host, db);
+    let port = getenv("POSTGRES_PORT");
+    let conn_str = format!("postgresql://{}:{}@{}:{}/{}", user, passwd, host, port, db);
 
     let mut conn = Client::connect(&conn_str, NoTls).expect("Connection failed");
 
