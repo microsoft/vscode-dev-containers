@@ -43,6 +43,7 @@ find_os_props() {
 }
 
 MARIADB_REPO_SETUP=mariadb_repo_setup
+MARIADB_REPO_SETUP_SHA256=mariadb_repo_setup.sha256
 TMP_DIR=$(mktemp -d -t maria-XXXXXXXXXX)
 MARIADB_CONNECTOR=""
 
@@ -59,8 +60,9 @@ trap cleanup EXIT
 
 #Set up external repository and install C Connector
 cd ${TMP_DIR}
-curl -Ls https://downloads.mariadb.com/MariaDB/${MARIADB_REPO_SETUP} -o ${MARIADB_REPO_SETUP}
-echo "fd3f41eefff54ce144c932100f9e0f9b1d181e0edd86a6f6b8f2a0212100c32c  ${MARIADB_REPO_SETUP}" | sha256sum -c -
+curl -Ls "https://downloads.mariadb.com/MariaDB/${MARIADB_REPO_SETUP}" -o ${MARIADB_REPO_SETUP}
+curl -Ls "https://downloads.mariadb.com/MariaDB/${MARIADB_REPO_SETUP_SHA256}" -o ${MARIADB_REPO_SETUP_SHA256}
+sha256sum -c ${MARIADB_REPO_SETUP_SHA256}
 chmod +x ${MARIADB_REPO_SETUP}
 ./${MARIADB_REPO_SETUP} --mariadb-server-version="mariadb-10.6"
 apt install -y libmariadb3 libmariadb-dev
