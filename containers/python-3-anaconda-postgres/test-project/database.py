@@ -7,17 +7,22 @@
 import os
 import traceback
 
-import matplotlib
-import matplotlib.pyplot as plt
-import numpy as np
 import psycopg2
 
 # Connect to the database
+pg_user = os.getenv('POSTGRES_USER')
+assert pg_user is not None, "POSTGRES_USER environment variable not set"
+
+pg_password = os.getenv('POSTGRES_PASSWORD')
+assert pg_password is not None, "POSTGRES_PASSWORD environment variable not set"
+
+pg_db = os.getenv('POSTGRES_DB')
+assert pg_db is not None, "POSTGRES_DB environment variable not set"
+
+pg_host = os.getenv('POSTGRES_HOST')
+assert pg_host is not None, "POSTGRES_HOST environment variable not set"
+
 try:
-    pg_user = os.environ['POSTGRES_USER']
-    pg_password = os.environ['POSTGRES_PASSWORD']
-    pg_db = os.environ['POSTGRES_DB']
-    pg_host = os.environ['POSTGRES_HOST']
     conn = psycopg2.connect("dbname='{pg_db}' user='{pg_user}' host='{pg_host}' password='{pg_password}'".format(
         pg_db=pg_db,
         pg_user=pg_user,
@@ -29,16 +34,20 @@ except Exception:
     traceback.print_exc()
     exit(1)
 
+
 # Execute a query
 try:
     with conn.cursor() as cur:
-        cur.execute("""SELECT COUNT(1) from pg_database WHERE datname='postgres'""")
+        cur.execute("""SELECT datname FROM pg_database LIMIT 1;""")
         rows = cur.fetchone()
 
-    if rows[0]==1:
+    if len(rows)==1:
         print("DATABASE CONNECTED")
+        print("One database in this cluster is: {db_name}".format(
+            db_name=rows[0]
+        ))
     else:
-        print("ERROR FINDING DATABASE")
+        print("ERROR EXECUTING DATABASE QUERY")
         exit(1)
 except Exception:
     print("ERROR EXECUTING DATABASE QUERY")
@@ -46,19 +55,3 @@ except Exception:
     exit(1)
 finally:
     conn.close()
-
-# Data for plotting
-t = np.arange(0.0, 2.0, 0.01)
-s = 1 + np.sin(2 * np.pi * t)
-
-fig, ax = plt.subplots()
-ax.plot(t, s)
-
-ax.set(xlabel='time (s)', ylabel='voltage (mV)',
-       title='About as simple as it gets, folks')
-ax.grid()
-
-fig.savefig("plot.png")
-plt.show()
-
-print('Open test-project/plot.png to see the result!')

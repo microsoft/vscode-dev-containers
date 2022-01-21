@@ -14,13 +14,12 @@ checkCommon
 checkExtension "ms-python.python"
 checkExtension "ms-python.vscode-pylance"
 check "python" python --version
-check "test-project" python ./hello.py
-python ./hello.py > out.txt
-check "test-project: plot.png" test -f ./plot.png
-check "test-project: database" grep -qF "DATABASE CONNECTED" out.txt
+check "test-project: database.py" python ./database.py
+check "test-project: plot.py" python ./plot.py
+check "test-project: plot.png created" test -f ./plot.png
 
 # Clean up
-rm plot.png out.txt
+rm plot.png
 
 # Report result
 reportResults
