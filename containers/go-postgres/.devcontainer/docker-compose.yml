@@ -35,8 +35,8 @@ services:
     # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
     network_mode: service:db
 
-    # Comment out the next line to use a root user for all processes.
-    user: vscode
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: vscode
 
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
     # (Adding the "ports" property to this file will not forward from a Codespace.)
