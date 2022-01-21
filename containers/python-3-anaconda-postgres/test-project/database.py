@@ -48,6 +48,7 @@ try:
         ))
     else:
         print("ERROR EXECUTING DATABASE QUERY")
+        print("Expected 1 record; Retrieved {num_rows}".format(num_rows=len(rows)))
         exit(1)
 except Exception:
     print("ERROR EXECUTING DATABASE QUERY")
