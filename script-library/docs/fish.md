@@ -8,7 +8,7 @@
 
 **OS support**: Debian 9+, Ubuntu 16.04+.
 
-**Maintainer:** [@andreiborisov](https://github.com/andreiborisov)
+**Maintainer:** [@andreiborisov](https://github.com/andreiborisov), [@eitsupi](https://github.com/eitsupi)
 
 ## Syntax
 
@@ -16,12 +16,32 @@
 ./fish-debian.sh [Install Fisher flag] [Non-root user]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-| Install Fisher flag | `true` | A `true`/`false` flag that indicates whether to install [Fisher plugin manager](https://github.com/jorgebucaran/fisher). |
-|Non-root user|`automatic`| Specifies a user in the container other than root that will use fish shell. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+Or as a feature:
+
+```json
+"features": {
+    "fish": "latest"
+}
+```
+
+| Argument            | Feature option | Default     | Description                                                                                                                                                                                                                                                    |
+| ------------------- | -------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Install Fisher flag |                | `true`      | A `true`/`false` flag that indicates whether to install [Fisher plugin manager](https://github.com/jorgebucaran/fisher).                                                                                                                                       |
+| Non-root user       |                | `automatic` | Specifies a user in the container other than root that will use fish shell. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 
 ## Usage
+
+### Feature use
+
+To install these capabilities in your primary dev container, reference it in `devcontainer.json` as follows:
+
+```json
+"features": {
+    "fish": "latest"
+}
+```
+
+### Script use
 
 Usage:
 
