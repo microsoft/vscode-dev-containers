@@ -2,7 +2,7 @@
 set -e
 
 set -a
-. /tmp/library-scripts/features.env
+. /tmp/library-scripts/devcontainer-features.env
 set +a
 
 chmod +x /tmp/library-scripts/*.sh
