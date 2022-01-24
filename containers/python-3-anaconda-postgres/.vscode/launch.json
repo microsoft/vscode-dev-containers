@@ -8,7 +8,7 @@
             "name": "Python (Integrated Terminal)",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/test-project/hello.py",
+            "program": "${workspaceFolder}/test-project/database.py",
             "cwd":"${workspaceFolder}/test-project",
             "console": "integratedTerminal"
         }
