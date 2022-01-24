@@ -6,7 +6,17 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "567bd593954641bd59376f6fd5f9c06bf37bc9e7"
+                    "commitHash": "3f5402e2687475d83ec98613dc93373620e5ce57"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "d4f5fa37e8be25e1b4f281fcf5b90cf700dc3c95"
                 }
             }
         },
@@ -393,7 +403,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.58.0"
+                    "Version": "1.58.1"
                 }
             }
         },
@@ -402,7 +412,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.58.0"
+                    "Version": "1.58.1"
                 }
             }
         },
@@ -411,7 +421,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.58.0"
+                    "Version": "1.58.1"
                 }
             }
         },
@@ -420,7 +430,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.7.4"
+                    "Version": "0.7.5"
                 }
             }
         },
@@ -447,7 +457,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.1.2"
+                    "Version": "1.1.3"
                 }
             }
         },
@@ -493,7 +503,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "567bd593954641bd59376f6fd5f9c06bf37bc9e7"
+                    "commitHash": "d4f5fa37e8be25e1b4f281fcf5b90cf700dc3c95"
                 }
             }
         },
@@ -523,7 +533,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5"
+                    "commitHash": "a76c4aaafa3dc710e16e1aefe2208bad0247b595"
                 }
             }
         },
@@ -533,7 +543,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "cdc215eba8082451db2b1416e1f6b1e5b5c26d8e"
+                    "commitHash": "4f1e62f2f031c28a4bdbed8a28bf959b02b1b885"
                 }
             }
         },
@@ -562,7 +572,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "1.23.1",
+                    "Version": "1.23.2",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -642,7 +652,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.58.0",
+                    "Version": "1.58.1",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -804,7 +814,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.2.4",
+                    "Version": "2.2.5",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -875,7 +885,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "4f2d8b4d4cbc51e609f4b568e87907883422ab41"
+                    "commitHash": "788802af68af9a1adbfdb678086939c89d79d999"
                 }
             }
         },
@@ -1084,7 +1094,17 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "567bd593954641bd59376f6fd5f9c06bf37bc9e7"
+                    "commitHash": "3f5402e2687475d83ec98613dc93373620e5ce57"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "d4f5fa37e8be25e1b4f281fcf5b90cf700dc3c95"
                 }
             }
         },
@@ -1162,7 +1182,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.5.4"
+                    "Version": "4.5.5"
                 }
             }
         },
