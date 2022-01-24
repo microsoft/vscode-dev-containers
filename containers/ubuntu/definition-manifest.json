@@ -1,5 +1,5 @@
 {
-	"variants": ["impish", "focal", "bionic"],
+	"variants": ["hirsute", "focal", "bionic"],
 	"definitionVersion": "0.202.1",
 	"build": {
 		"latest": false,
