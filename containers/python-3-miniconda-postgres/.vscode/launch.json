@@ -10,8 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/test-project/database.py",
             "cwd":"${workspaceFolder}/test-project",
-            "console": "integratedTerminal",
-			"preLaunchTask": "environment-install"
+            "console": "integratedTerminal"
         }
     ]
 }
