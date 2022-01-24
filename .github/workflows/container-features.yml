@@ -22,5 +22,5 @@ jobs:
         with:
           allowUpdates: true # Lets us upload our own artifact from previous step
           artifactErrorsFailBuild: true
-          artifacts: './features.tgz'
+          artifacts: './devcontainer-features.tgz'
           token: ${{ secrets.GITHUB_TOKEN }}

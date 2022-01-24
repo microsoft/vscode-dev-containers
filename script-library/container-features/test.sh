@@ -8,7 +8,7 @@ set -e
 cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "${SCRIPT_DIR}/stage.sh"
-cp -f test-features.env out/features.env
+cp -f test-features.env out/devcontainer-features.env
 
 if [ ! -z "${PLATFORMS}" ]; then
     CURRENT_BUILDERS="$(docker buildx ls)"

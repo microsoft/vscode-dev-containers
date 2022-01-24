@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:83597f5a34fa513f250b571f1d2a345f26aa46c08cc99eddd5fc6309c10015ca
+**Digest:** sha256:136409193d2ef0cf5afe6e4f59ae2843154c34fdee758869db585f55d545c74d
 
 **Tags:**
 ```
@@ -31,23 +31,23 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Java](https://adoptopenjdk.net/) | 17.0.1 | /opt/java/&lt;version&gt; |
 | [.NET](https://dotnet.microsoft.com/) | 3.1.415<br />5.0.403<br />6.0.100 | /home/codespaces/.dotnet<br />/opt/dotnet |
 | [Ruby](https://www.ruby-lang.org/en/) | 2.7.2 | /opt/ruby/&lt;version&gt; |
-| [PHP](https://xdebug.org/) | 7.2.34<br />7.3.27<br />7.4.24 | /opt/php/&lt;version&gt; |
+| [PHP](https://xdebug.org/) | 7.2.34<br />7.3.27<br />7.4.26 | /opt/php/&lt;version&gt; |
 | [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.2.1 | /opt/microsoft/powershell |
 | GCC | 9.3.0-17ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
 | [Go](https://golang.org/dl) | 1.17.6 | /usr/local/go |
-| [Rust](https://github.com/rust-lang/rust) | 1.58.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.58.1 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.1 | 
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 567bd593954641bd59376f6fd5f9c06bf37bc9e7 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | d4f5fa37e8be25e1b4f281fcf5b90cf700dc3c95 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
-| [rbenv](https://github.com/rbenv/rbenv.git) | 304cb7b6a7d666d9ab8d7f7e98f265c689c04cc5 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | cdc215eba8082451db2b1416e1f6b1e5b5c26d8e | /usr/local/share/ruby-build |
+| [rbenv](https://github.com/rbenv/rbenv.git) | a76c4aaafa3dc710e16e1aefe2208bad0247b595 | /usr/local/share/rbenv |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 4f1e62f2f031c28a4bdbed8a28bf959b02b1b885 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
@@ -69,10 +69,10 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.7.4 |
+| golang.org/x/tools/gopls | 0.7.5 |
 | honnef.co/go/tools | 0.2.1 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.1.2 |
+| github.com/mgechev/revive | 1.1.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.0 |
@@ -93,9 +93,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.38 |
-| rust-analysis | 1.58.0 |
-| rust-src | 1.58.0 |
-| clippy | 1.58.0 |
+| rust-analysis | 1.58.1 |
+| rust-src | 1.58.1 |
+| clippy | 1.58.1 |
 
 **Other tools and utilities**
 
@@ -104,13 +104,13 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [git](https://github.com/git/git) | 2.34.1 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.2 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.1 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.2 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.7.2 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
 | [GitHub CLI](https://github.com/cli/cli) | 2.4.0 | 
-| [yarn](https://yarnpkg.com/) | 1.22.10 | /opt/yarn |
+| [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.3.3 | 
 | Docker (Moby) CLI &amp; Engine | 20.10.11+azure | 
@@ -131,7 +131,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | dialog | 1.3-20190808-1 |
 | g++ | 4:9.3.0-1ubuntu2 |
 | gcc | 4:9.3.0-1ubuntu2 |
-| gdb | 9.2-0ubuntu1~20.04 |
+| gdb | 9.2-0ubuntu1~20.04.1 |
 | git | 1:2.25.1-1ubuntu3.2 |
 | git-lfs (Git Large File Support) | 3.0.2 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
@@ -197,9 +197,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | tar | 1.30+dfsg-7ubuntu0.20.04.1 |
 | unzip | 6.0-25ubuntu1 |
 | valgrind | 1:3.15.0-1ubuntu9.1 |
-| vim | 2:8.1.2269-1ubuntu5.4 |
-| vim-doc | 2:8.1.2269-1ubuntu5.4 |
-| vim-tiny | 2:8.1.2269-1ubuntu5.4 |
+| vim | 2:8.1.2269-1ubuntu5.6 |
+| vim-doc | 2:8.1.2269-1ubuntu5.6 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.6 |
 | wget | 1.20.3-1ubuntu2 |
 | xtail | 2.1-6 |
 | zip | 3.0-11build1 |
