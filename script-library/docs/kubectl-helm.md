@@ -30,7 +30,7 @@ Or as a feature:
 |--------|----------------|-------|-----------|
 |kubectl version| `version` | `latest`| Version of kubectl to install. e.g. `v1.19` Use `latest` to install the latest stable version. |
 |Helm version|`helm`|`latest`| Version of Helm to install. e.g. `v3.5` Use `latest` to install the latest stable version. |
-|minikube version| `minkube`| `none`| Version of Minkube to install. e.g. `v1.19` Specifying `none` skips installation while `latest` installs the latest stable version.  |
+|minikube version| `minikube`| `none`| Version of Minikube to install. e.g. `v1.19` Specifying `none` skips installation while `latest` installs the latest stable version.  |
 |kubectl SHA256| | `automatic`| SHA256 checksum to use to verify the kubectl download. `automatic` will download the checksum. |
 |Helm SHA256| | `automatic`| SHA256 checksum to use to verify the Helm download. `automatic` will both acquire the checksum and do a signature verification of it. |
 |minikube SHA256| | `automatic`| SHA256 checksum to use to verify the minikube download. `automatic` will download the checksum. |
