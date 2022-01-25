@@ -24,7 +24,7 @@ fi
 docker buildx build --progress plain --load ${PLATFORMS_ARG} --build-arg BASE_IMAGE=$IMAGE_TO_TEST -t container-features-regression -f test.Dockerfile out
 docker run --init --privileged container-features-regression bash -c 'uname -m && env'
 
-# Remove features.env from out folder so we can use it to test the VS Code extension
-rm -f out/features.env
+# Remove devcontainer-features.env from out folder so we can use it to test the VS Code extension
+rm -f out/devcontainer-features.env
 
 echo -e "\n🎉 All tests passed!"
