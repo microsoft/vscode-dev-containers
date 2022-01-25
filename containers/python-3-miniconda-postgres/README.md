@@ -8,21 +8,18 @@
 |----------|-------|
 | *Contributors* | The [VS Code Python extension](https://marketplace.visualstudio.com/itemdetails?itemName=ms-python.python) team |
 | *Categories* | Core, Languages |
-| *Definition type* | Dockerfile |
-| *Published image* | mcr.microsoft.com/vscode/devcontainers/miniconda:3 |
-| *Published image architecture(s)* | x86-64 |
+| *Definition type* | Docker Compose |
+| *Supported architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian |
 | *Languages, platforms* | Python, Anaconda, Miniconda |
 
-See **[history](history)** for information on the contents of published images.
-
 ## Using this definition
 
-### Configuration
+This definition creates two containers, one for Minconda/Python and one for PostgreSQL. VS Code will attach to the Miniconda container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. The default database is named `postgres` with a user of `postgres` whose password is `postgres`, and if desired this may be changed in `docker-compose.yml`. Data is stored in a volume named `postgres-data`.
 
-While the definition itself works unmodified, you can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own `Dockerfile` to the following. An example `Dockerfile` is included in this repository.
+While the definition itself works unmodified, you can also directly reference pre-built versions by updating the `FROM` statement in your own `Dockerfile` to the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/minconda` (or `minconda:3`)
 
@@ -32,12 +29,25 @@ You can decide how often you want updates by referencing a [semantic version](ht
 - `mcr.microsoft.com/vscode/devcontainers/miniconda:0.201-3`
 - `mcr.microsoft.com/vscode/devcontainers/miniconda:0.201.4-3`
 
-See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/miniconda/tags/list).
+See the [python-3-miniconda history](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda/history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/miniconda/tags/list).
 
-Alternatively, you can use the contents of `base.Dockerfile` to fully customize your container's contents or to build it for a container host architecture not supported by the image.
+You also can connect to PostgreSQL from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
+
+```json
+"forwardPorts": [ "5432" ]
+```
+
+### Adding another service
+
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentation](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
+
+```yaml
+# Runs the service on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+network_mode: service:[$SERVICE_NAME]
+```
 
 ### Using Conda
-This dev container and its associated image includes [the `conda` package manager](https://aka.ms/vscode-remote/conda/about). Additional packages installed using Conda will be downloaded from Anaconda or another repository if you configure one. To reconfigure Conda in this container to access an alternative repository, please see information on [configuring Conda channels here](https://aka.ms/vscode-remote/conda/channel-setup).
+This dev container and its associated miniconda image includes [the `conda` package manager](https://aka.ms/vscode-remote/conda/about). Additional packages installed using Conda will be downloaded from Anaconda or another repository if you configure one. To reconfigure Conda in this container to access an alternative repository, please see information on [configuring Conda channels here](https://aka.ms/vscode-remote/conda/channel-setup).
 
 Access to the Anaconda repository is covered by the [Anaconda Terms of Service](https://aka.ms/vscode-remote/conda/terms), which may require some organizations to obtain a commercial license from Anaconda. **However**, when this dev container or its associated image is used with GitHub Codespaces or GitHub Actions, **all users are permitted** to use the Anaconda Repository through the service, including organizations normally required by Anaconda to obtain a paid license for commercial activities. Note that third-party packages may be licensed by their publishers in ways that impact your intellectual property, and are used at your own risk.
 
@@ -63,12 +73,11 @@ If you've already opened your folder in a container, rebuild the container using
 
 #### Installing Node.js
 
-Given JavaScript front-end web client code written for use in conjunction with a Python back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+Given JavaScript front-end web client code written for use in conjunction with a Python back-end often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/docker-compose.yml`.
 
-```jsonc
-"args": {
-    "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
-}
+```yaml
+args:
+  NODE_VERSION: "14" # Set to "none" to skip Node.js installation
 ```
 
 #### Installing or updating Python utilities
@@ -116,18 +125,13 @@ RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env up
 
 1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
 
-2. To use the pre-built image:
-   1. Start VS Code and open your project folder or connect to a codespace.
-   2. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
-   4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
+2. Start VS Code and open your project folder or connect to a codespace.
 
-3. To build a custom version of the image instead:
-   1. Clone this repository locally.
-   2. Start VS Code and open your project folder or connect to a codespace.
-   3. Use your local operating system's file explorer to drag-and-drop the locally cloned copy of the `.devcontainer` folder for this definition into the VS Code file explorer for your opened project or codespace.
-   4. Update `.devcontainer/devcontainer.json` to reference `"dockerfile": "base.Dockerfile"`.
+3. Press <kbd>F1</kbd> select and **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
 
-4. After following step 2 or 3, the contents of the `.devcontainer` folder in your project can be adapted to meet your needs.
+   > **Note:** If needed, you can drag-and-drop the `.devcontainer` folder from this sub-folder in a locally cloned copy of this repository into the VS Code file explorer instead of using the command.
+
+4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
 
@@ -138,9 +142,9 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/python-3-miniconda` folder.
+4. Select the `containers/python-3-miniconda-postgres` folder.
 5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. A `test-project/plot.png` file should be added to the folder after it runs with the plot result.
+6. You should see `DATABASE CONNECTED` in the debug console and a `test-project/plot.png` file should be added to the folder after it runs with the plot result.
 7. Next, open `test-project/hello.py` and press <kbd>ctrl/cmd</kbd>+<kbd>a</kbd> then <kbd>shift</kbd>+<kbd>enter</kbd>.
 8. You should see the `matplotlib` output in the interactive window.
 9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
