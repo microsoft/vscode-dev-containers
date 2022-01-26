@@ -143,11 +143,13 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select the `containers/python-3-miniconda-postgres` folder.
-5. After the folder has opened in the container, press <kbd>F5</kbd> to start the project.
-6. You should see `DATABASE CONNECTED` in the debug console and a `test-project/plot.png` file should be added to the folder after it runs with the plot result.
-7. Next, open `test-project/hello.py` and press <kbd>ctrl/cmd</kbd>+<kbd>a</kbd> then <kbd>shift</kbd>+<kbd>enter</kbd>.
+5. After the folder has opened in the container, press <kbd>F5</kbd> to run the `plot.py` script in the project.
+6. You should see `Open test-project/plot.png to see the result!` in the terminal and a `test-project/plot.png` file should be added to the folder after it runs with the plot result.
+7. Next, open `test-project/plot.py` and press <kbd>ctrl/cmd</kbd>+<kbd>a</kbd> then <kbd>shift</kbd>+<kbd>enter</kbd>.
 8. You should see the `matplotlib` output in the interactive window.
-9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
+9. To run the `database.py` PostgreSQL connection script, navigate to the "Run and Debug" pane ( <kbd>ctrl/cmd</kbd>+<kbd>shift</kbd>+<kbd>D</kbd>) and select `Python database.py (Integrated Terminal)` from the dropdown and press <kbd>F5</kbd>.
+10. You should see `DATABASE CONNECTED` and `One database in this database server is: postgres` in the terminal.
+11. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
 
