@@ -1,6 +1,6 @@
 {
 	"variants": ["hirsute", "focal", "bionic"],
-	"definitionVersion": "0.202.3",
+	"definitionVersion": "0.202.1",
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",

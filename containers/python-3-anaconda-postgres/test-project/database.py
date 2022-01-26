@@ -1,3 +1,5 @@
+# pylint: disable=line-too-long, missing-module-docstring, broad-except, consider-using-f-string
+
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
@@ -5,6 +7,7 @@
 
 #%%
 import os
+import sys
 import traceback
 
 import psycopg2
@@ -32,7 +35,7 @@ try:
 except Exception:
     print("Unable to connect to the database")
     traceback.print_exc()
-    exit(1)
+    sys.exit(1)
 
 
 # Execute a query
@@ -49,10 +52,10 @@ try:
     else:
         print("ERROR EXECUTING DATABASE QUERY")
         print("Expected 1 record; Retrieved {num_rows}".format(num_rows=len(rows)))
-        exit(1)
+        sys.exit(1)
 except Exception:
     print("ERROR EXECUTING DATABASE QUERY")
     traceback.print_exc()
-    exit(1)
+    sys.exit(1)
 finally:
     conn.close()
