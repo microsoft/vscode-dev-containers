@@ -205,21 +205,9 @@ VS Code Dev Containers allow multiple containers to run together. This is useful
 3. Modify the `devcontainer.json` with any launch options or VS Code specific `settings.json` options that may be needed. 
    1. For example, when working with a SQL database, it might be necessary to add the following:
    ```json
-   		"sqltools.connections": [
-			{
-			  "name": "Container database",
-			  "driver": "PostgreSQL",
-			  "previewLimit": 50,
-			  "server": "localhost",
-			  "port": 5432,
-			  // NOTE: database/username/password should match values in docker.compose.yml
-			  "database": "postgres",
-			  "username": "postgres",
-			  "password": "postgres"
-			}
-		  ],
+    "forwardPorts": [5000, 5432],    
     ```
-    This allows the [SQL Tools Extension](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) to connect to a specific database (In this example, a PostgreSQL database.)
+    This allows the PostgreSQL database to be available on ports 5000 and 5432, allowing other containers and the host to connect to it. See the [Visual Studio devcontainer.json Reference](https://code.visualstudio.com/docs/remote/devcontainerjson-reference#_general-devcontainerjson-properties) for more information.
     2. It might be necessary to add additional VS Code Extensions to allow for an easier dev experience. This could be database dependent (`MSSQL`, `NoSQL`, etc.)
 4. Modify the existing Tests or add new tests to ensure that the following scenarios are possible:
     1. The application can successfully ping the DB Container.
