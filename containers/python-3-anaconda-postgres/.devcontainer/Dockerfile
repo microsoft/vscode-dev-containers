@@ -8,9 +8,6 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
 COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
 
-# Remove spyder (a tool for a different IDE with a dependency bug that prevents updating the conda environment).
-# See https://stackoverflow.com/a/69713849 for more details
-RUN /opt/conda/bin/conda remove spyder -y
 RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then umask 0002 && /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
     && rm -rf /tmp/conda-tmp
 
