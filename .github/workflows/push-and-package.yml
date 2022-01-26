@@ -146,7 +146,24 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./${{ steps.package.outputs.package_name }}
         asset_name: ${{ steps.package.outputs.package_name }}
-        asset_content_type: application/gzip 
+        asset_content_type: application/gzip
+
+    - name: Copy container-features scripts to src folder
+      id: copy_scripts
+      run: cp -r ./script-library/*.sh ./script-library/container-features/src
+
+    - name: Publish devcontainer container-features
+      uses: microsoft/publish-dev-container-features-action@main
+      with:
+        path-to-features: './script-library/container-features/src'
+
+    - name: Update release to include features asset
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true # Lets us upload our own artifact from previous step
+        artifactErrorsFailBuild: true
+        artifacts: './devcontainer-features.tgz'
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   image-info:
     name: Trigger info extraction
@@ -170,30 +187,3 @@ jobs:
           -H "Content-Type: application/json" \
           https://api.github.com/repos/${{ github.repository }}/actions/workflows/version-history.yml/dispatches \
           --data "{\"ref\": \"main\", \"inputs\": {\"release\": \"${{ steps.get_tag_name.outputs.tag }}\", \"cg\": \"false\", \"push\": \"true\", \"overwrite\": \"false\"}"
-
-  container-features:
-    name: Deploy Dev Container Features
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: Get tag name
-        id: get_tag_name  
-        run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
-        
-      - name: Copy scripts to src folder
-        id: copy_scripts
-        run: cp -r ./script-library/*.sh ./script-library/container-features/src
-          
-      - name: Publish Dev container features
-        uses: microsoft/publish-dev-container-features-action@main
-        with:
-          path-to-features: './script-library/container-features/src'
-          
-      - name: Get or Create Release at current tag
-        uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true # Lets us upload our own artifact from previous step
-          artifactErrorsFailBuild: true
-          artifacts: './devcontainer-features.tgz'
-          token: ${{ secrets.GITHUB_TOKEN }}
