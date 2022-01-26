@@ -5,12 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python (Integrated Terminal)",
+            "name": "Python plot.py (Integrated Terminal)",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/test-project/hello.py",
+            "program": "${workspaceFolder}/test-project/plot.py",
             "cwd":"${workspaceFolder}/test-project",
             "console": "integratedTerminal"
-        }
+        },
+        {
+            "name": "Python database.py (Integrated Terminal)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/test-project/database.py",
+            "cwd":"${workspaceFolder}/test-project",
+            "console": "integratedTerminal"
+        },
     ]
 }

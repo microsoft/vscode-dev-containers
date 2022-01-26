@@ -43,7 +43,7 @@ try:
 
     if len(rows)==1:
         print("DATABASE CONNECTED")
-        print("One database in this cluster is: {db_name}".format(
+        print("One database in this database server is: {db_name}".format(
             db_name=rows[0]
         ))
     else:
