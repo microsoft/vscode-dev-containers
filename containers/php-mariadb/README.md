@@ -16,7 +16,7 @@ Develop PHP based applications with MariaDB (MySQL Compatible).  Includes necess
 
 ## Description
 
-This definition creates two containers, one for PHP and one for MariaDB.  Code will attach to the PHP container, and from within that container the MariaDB container will be available on **`localhost`** port 3306. The MariaDB instance can be managed via the automatically installed SQLTools extension, or from the container's command line with:
+This definition creates two containers, one for PHP and one for MariaDB.  Code will attach to the PHP container, and from within that container the MariaDB container will be available on **`localhost`** port 3306. The MariaDB instance can be managed from the container's command line with:
 
 ```bash
 mariadb -h localhost -P 3306  --protocol=tcp -u root --password=mariadb -D mariadb
