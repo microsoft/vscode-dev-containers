@@ -71,6 +71,7 @@ Have a question or feedback?
 - Contribute or provide feedback for the [VS Code Remote](https://github.com/Microsoft/vscode-remote-release/blob/main/CONTRIBUTING.md) extensions or [GitHub Codespaces](https://github.com/github/feedback/discussions/categories/codespaces-feedback).
 - Search [existing issues](https://github.com/Microsoft/vscode-dev-containers/issues) with dev container definitions or [report a problem](https://github.com/Microsoft/vscode-dev-containers/issues/new).
 - Contribute a [development container definition](CONTRIBUTING.md#contributing-dev-container-definitions) to the repository.
+- Review and file issues to shape the direction of development containers and the dev container CLI in the [dev container spec repository](https://github.com/microsoft/dev-container-spec).
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or

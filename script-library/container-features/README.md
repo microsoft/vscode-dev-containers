@@ -10,7 +10,7 @@ This folder includes some explorations around dynamic container feature injectio
 
 Create the install script in the [script-library](../../script-library/) directory with the naming convention `<lowercase-feature-name>-<target-os>.sh`. EG `python-debian.sh` or `common-alpine.sh`
 
-Add a new object to the [features.json](../../script-library/container-features/src/features.json) file:
+Add a new object to the [devcontainer-features.json](../../script-library/container-features/src/devcontainer-features.json) file:
 
 ```json
 {
@@ -42,7 +42,7 @@ Add your buildArg to the [feature-scripts.env](../../script-library/container-fe
 _VSC_INSTALL_<FEATURE>="<feature>-debian.sh ${_BUILD_ARG_<FEATURE>_<OPTION1>:-<option1 default>} ${_BUILD_ARG_<FEATURE>_<OPTION2>:-<option2 default>} hardcodedThirdArgument"
 ```
 
-- Options declared in `features.json` are mapped using the naming convention `_BUILD_ARG_<FEATURE>_<OPTIONNAME>` and their default should match the declared default for that option.
+- Options declared in `devcontainer-features.json` are mapped using the naming convention `_BUILD_ARG_<FEATURE>_<OPTIONNAME>` and their default should match the declared default for that option.
 - EG `_VSC_INSTALL_AZURE_CLI="azcli-debian.sh ${_BUILD_ARG_AZURE_CLI_VERSION:-latest}"`
 
 **Feature testing**
