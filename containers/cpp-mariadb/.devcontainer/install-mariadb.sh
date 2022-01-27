@@ -42,8 +42,6 @@ find_os_props() {
     esac
 }
 
-MARIADB_REPO_SETUP=mariadb_repo_setup
-MARIADB_REPO_SETUP_SHA256=mariadb_repo_setup.sha256
 TMP_DIR=$(mktemp -d -t maria-XXXXXXXXXX)
 MARIADB_CONNECTOR=""
 
@@ -59,18 +57,13 @@ cleanup() {
 trap cleanup EXIT
 
 #Set up external repository and install C Connector
-cd ${TMP_DIR}
-curl -Ls "https://downloads.mariadb.com/MariaDB/${MARIADB_REPO_SETUP}" -o ${MARIADB_REPO_SETUP}
-curl -Ls "https://downloads.mariadb.com/MariaDB/${MARIADB_REPO_SETUP_SHA256}" -o ${MARIADB_REPO_SETUP_SHA256}
-sha256sum -c ${MARIADB_REPO_SETUP_SHA256}
-chmod +x ${MARIADB_REPO_SETUP}
-./${MARIADB_REPO_SETUP} --mariadb-server-version="mariadb-10.6"
 apt install -y libmariadb3 libmariadb-dev
 
 #Depending on the OS, install different C++ connectors
 find_os_props
 # Instructions are copied and modified from: https://mariadb.com/docs/clients/mariadb-connectors/connector-cpp/install/
 MARIADB_CONNECTOR=mariadb-connector-cpp-1.0.1-$OSURL
+cd ${TMP_DIR}
 curl -Ls https://dlm.mariadb.com/$OSTAG/connectors/cpp/connector-cpp-1.0.1/${MARIADB_CONNECTOR}.tar.gz -o ${MARIADB_CONNECTOR}.tar.gz
 tar -xvzf ${MARIADB_CONNECTOR}.tar.gz && cd ${MARIADB_CONNECTOR}
 install -d /usr/include/mariadb/conncpp
