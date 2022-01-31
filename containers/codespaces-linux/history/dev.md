@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:136409193d2ef0cf5afe6e4f59ae2843154c34fdee758869db585f55d545c74d
+**Digest:** sha256:c37c089154a150d7bd0f5a3e55b75ecc884df9444e583263aea1087fd0abb27d
 
 **Tags:**
 ```
@@ -43,11 +43,11 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | d4f5fa37e8be25e1b4f281fcf5b90cf700dc3c95 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | eabec36586f990b883e7dbf4583e6d86ac46c7ea | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | a76c4aaafa3dc710e16e1aefe2208bad0247b595 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 4f1e62f2f031c28a4bdbed8a28bf959b02b1b885 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | cbdbc6e44be4756df3fc526ee97c1a5ce0632b74 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
@@ -56,12 +56,12 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | pylint | 2.12.2 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
-| black | 21.12b0 |
+| black | 22.1.0 |
 | yapf | 0.32.0 |
 | mypy | 0.931 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
-| bandit | 1.7.1 |
+| bandit | 1.7.2 |
 | virtualenv | 20.13.0 |
 | pipx | 1.0.0 |
 
@@ -76,7 +76,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.0 |
-| github.com/golangci/golangci-lint | 1.43.0 |
+| github.com/golangci/golangci-lint | 1.44.0 |
 
 **Ruby gems and tools**
 
@@ -101,11 +101,11 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Version | Path |
 |------|---------|------|
-| [git](https://github.com/git/git) | 2.34.1 | /usr/local |
+| [git](https://github.com/git/git) | 2.35.1 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.2 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.2 | /usr/local/bin |
-| [Helm](https://github.com/helm/helm) | 3.7.2 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.3 | /usr/local/bin |
+| [Helm](https://github.com/helm/helm) | 3.8.0 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
