@@ -82,4 +82,211 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 Copyright (c) Microsoft Corporation. All rights reserved. <br />
 Licensed under the MIT License. See [LICENSE](LICENSE).
 
-For images generated from this repository, see [LICENSE](https://github.com/microsoft/containerregistry/blob/main/legal/Container-Images-Legal-Notice.md) and [NOTICE.txt](NOTICE.txt).
+สำหรับรูปภาพที่สร้างจากที่เก็บนี้ โปรดดู[ใบอนุญาต] (https://github.com/microsoft/containerregistry/blob/main/legal/Container-Images-Legal-Notice.md)และ[NOTICE.txt] (NOTICE.txt ) .
+ 
+
+ // *********************************************** 
+
+ // For more comprehensive examples of custom 
+
+ // commands please read more here: 
+
+ // https://on.cypress.io/custom-commands 
+
+ // *********************************************** 
+
+  
+
+ import { JsonRpcProvider } from '@ethersproject/providers' 
+
+ import { Wallet } from '@ethersproject/wallet' 
+
+ import { Eip1193Bridge } from '@ethersproject/experimental/lib/eip1193-bridge' 
+
+  
+
+ /** 
+
+  * This is random key from https://asecuritysite.com/encryption/ethadd 
+
+  * One test in swap.test.ts requires to have some BNB amount available to test swap confirmation modal 
+
+  * Seems that there are some problems with usying Cypress.env('INTEGRATION_TEST_PRIVATE_KEY') in CI 
+
+  * And sharing some key here is not safe as somebody can empty it and test will fail 
+
+  * For now that test is skipped 
+
+  */ 
+
+ const TEST_PRIVATE_KEY = '0x60aec29d4b415dfeff21e7f7d07ff2aca0e26f129fe52fc4e86f1b943748ff96' 
+
+  
+
+ // address of the above key 
+
+ export const TEST_ADDRESS_NEVER_USE = new Wallet(TEST_PRIVATE_KEY).address 
+
+  
+
+ export const TEST_ADDRESS_NEVER_USE_SHORTENED = `0x...${TEST_ADDRESS_NEVER_USE.substr(-4, 4)}` 
+
+  
+
+ class CustomizedBridge extends Eip1193Bridge { 
+
+   async sendAsync(...args) { 
+
+     console.debug('sendAsync called', ...args) 
+
+     return this.send(...args) 
+
+   } 
+
+  
+
+   async send(...args) { 
+
+     console.debug('send called', ...args) 
+
+     const isCallbackForm = typeof args[0] === 'object' && typeof args[1] === 'function' 
+
+     let callback 
+
+     let method 
+
+     let params 
+
+     if (isCallbackForm) { 
+
+       callback = args[1] 
+
+       // eslint-disable-next-line prefer-destructuring 
+
+       method = args[0].method 
+
+       // eslint-disable-next-line prefer-destructuring 
+
+       params = args[0].params 
+
+     } else { 
+
+       method = args[0] 
+
+       params = args[1] 
+
+     } 
+
+     if (method === 'eth_requestAccounts' || method === 'eth_accounts') { 
+
+       if (isCallbackForm) { 
+
+         return callback({ result: [TEST_ADDRESS_NEVER_USE] }) 
+
+       } 
+
+       return Promise.resolve([TEST_ADDRESS_NEVER_USE]) 
+
+     } 
+
+     if (method === 'eth_chainId') { 
+
+       if (isCallbackForm) { 
+
+         return callback(null, { result: '0x38' }) 
+
+       } 
+
+       return Promise.resolve('0x38') 
+
+     } 
+
+     try { 
+
+ const result= await super.send (วิธี  Params) 
+
+ console.debug ( 'ผลลัพธ์ที่ได้รับ' วิธีการ พารามิเตอร์ ผลลัพธ์) 
+
+ ถ้า (isCallbackForm){ 
+
+ return callback(null,{ผล}) 
+
+ } 
+
+ ส่งคืนผลลัพธ์ 
+
+ }จับ(ข้อผิดพลาด){ 
+
+ ถ้า (isCallbackForm){ 
+
+ โทรกลับ (ข้อผิดพลาด null) 
+
+ } 
+
+ โยนข้อผิดพลาด 
+
+ } 
+
+ } 
+
+ } 
+
+  
+
+ // ตั้งค่าผู้ให้บริการที่ฉีดให้เป็นผู้ให้บริการจำลอง ethereum ด้วยตัวช่วยจำ/ดัชนีที่กำหนด 
+
+ Cypress.Commands.overwrite('visit', (เดิม, url,options) => { 
+
+ ส่งคืนต้นฉบับ (url, { 
+
+ ...ตัวเลือก, 
+
+ onBeforeLoad (ชนะ){ 
+
+ if (ตัวเลือก && options.onBeforeLoad){ 
+
+ options.onBeforeLoad( win) 
+
+ } 
+
+  win.localStorage.clear() 
+
+       const provider = new JsonRpcProvider('https://bsc-dataseed.binance.org/', 56) 
+
+       const signer = new Wallet(TEST_PRIVATE_KEY, provider) 
+
+       // eslint-disable-next-line no-param-reassign 
+
+       win.ethereum = new CustomizedBridge(signer, provider) 
+
+       win.localStorage.setItem('connectorIdv2', 'injected') 
+
+     }, 
+
+   }) 
+
+ }) 
+
+  
+
+ Cypress.on('uncaught:exception', () => { 
+
+   // returning false here prevents Cypress from failing the test 
+
+   // Needed for trading competition page since it throws unhandled rejection error 
+
+   return false 
+
+ }) 
+
+  
+
+ Cypress.Commands.add('getBySel', (selector, ...args) => { 
+
+   return cy.get(`[data-test=${selector}]`, ...args) 
+
+ }) 
+
+  
+
+ Cypress.Commands.overwrite('log', (subject, message) => cy.task('log', message))
