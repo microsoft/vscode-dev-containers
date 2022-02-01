@@ -10,6 +10,9 @@
 	"remoteEnv": {
 		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}",
 		"MYSQL_HOST": "mariadb", // Your application should pull the MYSQL_HOST environment variable to use the MariaDB service
+		"MYSQL_USER": "app_user",
+		"MYSQL_PASSWORD": "app_password",
+		"MYSQL_DATABASE": "app_db_name",
 	},
 	
 	// Set *default* container specific settings.json values on container create.
