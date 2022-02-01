@@ -14,6 +14,8 @@ services:
             MYSQL_DATABASE: app_db_name
             MYSQL_USER: app_user
             MYSQL_PASSWORD: app_password
+            MYSQL_TCP_PORT: 3306
+            MYSQL_UNIX_PORT: 3306
   app:
     depends_on:
       - mariadb
