@@ -18,6 +18,7 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-azuretools.vscode-docker",
+		"vscjava.vscode-java-pack",
 		"vscjava.vscode-java-debug",
 		"vscjava.vscode-java-dependency",
 		"mtxr.sqltools"
