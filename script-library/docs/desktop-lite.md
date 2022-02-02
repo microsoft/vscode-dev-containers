@@ -57,7 +57,7 @@ If you have already built your development container, run the **Rebuild Containe
 If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json`:
 
 ```json
-runArgs: ["--shm-size=1g"]
+"runArgs": ["--shm-size=1g"]
 ```
 
 Or using Docker Compose:
@@ -114,7 +114,7 @@ services:
 4. [Optional] If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json`:
 
     ```json
-    runArgs: ["--init", "--shm-size=1g"]
+    "runArgs": ["--init", "--shm-size=1g"]
     ```
 
     Or using Docker Compose:
