@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "eabec36586f990b883e7dbf4583e6d86ac46c7ea"
+                    "commitHash": "2d3bae965a445ac0f6edeed0b277a15d09e6a261"
                 }
             }
         },
@@ -321,7 +321,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.13.0"
+                    "Version": "20.13.1"
                 }
             }
         },
@@ -493,7 +493,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "eabec36586f990b883e7dbf4583e6d86ac46c7ea"
+                    "commitHash": "2d3bae965a445ac0f6edeed0b277a15d09e6a261"
                 }
             }
         },
@@ -612,7 +612,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "2.4.0",
+                    "Version": "2.5.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -794,7 +794,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.1.2",
+                    "Version": "3.1.3",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -804,7 +804,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.2.5",
+                    "Version": "2.2.6",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -1083,7 +1083,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "eabec36586f990b883e7dbf4583e6d86ac46c7ea"
+                    "commitHash": "2d3bae965a445ac0f6edeed0b277a15d09e6a261"
                 }
             }
         },

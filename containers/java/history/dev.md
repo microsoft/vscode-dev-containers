@@ -12,7 +12,7 @@
 
 ## Variant: 17-bullseye
 
-**Digest:** sha256:18bc70be271d6e9bca0258f9ce46a37497ea2f44cb9bdd2a343b206d41c3f7b9
+**Digest:** sha256:a37b964b96146a5ea5c972a0f9c596db7998398242328f72bc0771b88ace01f4
 
 **Tags:**
 ```
@@ -34,7 +34,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 17.0.1 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 17.0.2 | /usr/local/ |
 
 **Tools installed using git**
 
@@ -98,7 +98,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 ## Variant: 17-buster
 
-**Digest:** sha256:4237865377f64414669d4b5c84454a59be02e855af7b4ce13f19c406ad45b42b
+**Digest:** sha256:a4cbf3b6b2e3182c9b6102e2e79236ec7ddfe951a913b6f61990c1d1a806e885
 
 **Tags:**
 ```
@@ -117,7 +117,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 17.0.1 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 17.0.2 | /usr/local/ |
 
 **Tools installed using git**
 
@@ -182,7 +182,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 
 ## Variant: 11-bullseye
 
-**Digest:** sha256:4a47bb1136299888aa160c39fe24ab85c91a6d2fcca1a3b30a3ff1120cb37da0
+**Digest:** sha256:83ddd53aa73de4bd7641dc39a08667a23eb9df13df90be29583a9eefcf3e2878
 
 **Tags:**
 ```
@@ -203,7 +203,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 11.0.13 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 11.0.14 | /usr/local/ |
 
 **Tools installed using git**
 
@@ -267,7 +267,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 
 ## Variant: 11-buster
 
-**Digest:** sha256:c61d6365f5fc8bbc7d00519f7cc026ff1229bc4f335bab65db9956eee624ee6d
+**Digest:** sha256:b6d0fbac0d12891e93fe4fc551c4f737726720edae368eeb58e3f5448b57a09a
 
 **Tags:**
 ```
@@ -287,7 +287,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 11.0.13 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 11.0.14 | /usr/local/ |
 
 **Tools installed using git**
 
