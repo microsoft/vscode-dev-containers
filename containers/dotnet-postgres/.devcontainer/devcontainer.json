@@ -5,28 +5,10 @@
     "workspaceFolder": "/workspace",
 
     // Set *default* container specific settings.json values on container create.
-    "settings": {
-        "sqltools.connections": [
-            {
-                "name": "Container database",
-                "driver": "PostgreSQL",
-                "previewLimit": 50,
-                "server": "localhost",
-                "port": 5432,
-                // NOTE: database/username/password should match values in docker.compose.yml
-                "database": "postgres",
-                "username": "postgres",
-                "password": "postgres"
-            }
-        ]
-    },
+    "settings": {},
 
     // Add the IDs of extensions you want installed when the container is created.
-    "extensions": [
-        "ms-dotnettools.csharp",
-        "mtxr.sqltools",
-        "mtxr.sqltools-driver-pg"
-    ],
+    "extensions": ["ms-dotnettools.csharp"],
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [5000, 5001],

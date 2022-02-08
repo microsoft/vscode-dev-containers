@@ -12,8 +12,6 @@ checkCommon
 
 # Definition specific tests
 checkExtension "ms-dotnettools.csharp"
-checkExtension "mtxr.sqltools"
-checkExtension "mtxr.sqltools-driver-pg"
 check "dotnet" dotnet --info
 check "nuget" dotnet restore
 check "msbuild" dotnet msbuild
