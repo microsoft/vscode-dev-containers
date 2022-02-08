@@ -45,7 +45,7 @@ DISTRO="${ID_LIKE}"
 if [ -z "${DISTRO}" ]; then
     DISTRO="${ID}"
 fi
-if [ "${DISTRO}" = *"rhel"* ] || [ "${DISTRO}" = *"centos"* ] || [ "${DISTRO}" = *"fedora"* ]; then
+if [[ "${DISTRO}" = *"rhel"* ]] ||[[ "${DISTRO}" = *"centos"* ]] || [[ "${DISTRO}" = *"fedora"* ]]; then
     DISTRO="redhat"
 fi
 
