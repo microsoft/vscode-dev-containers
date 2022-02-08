@@ -1,4 +1,4 @@
-# C# (.NET) and MS SQL
+# C# (.NET) and PostgreSQL (Community)
 
 ## Summary
 
