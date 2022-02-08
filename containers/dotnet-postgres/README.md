@@ -6,7 +6,7 @@
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The VS Code Team, [Berkays](https://github.com/Berkays)  |
+| *Contributors* | [Berkays](https://github.com/Berkays)  |
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Published image architecture(s)* | x86-64 |
