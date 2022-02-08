@@ -1,5 +1,5 @@
 {
-    "name": "C# (.NET) and PostgreSQL",
+    "name": "C# (.NET) and PostgreSQL (Community)",
     "dockerComposeFile": "docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/workspace",
