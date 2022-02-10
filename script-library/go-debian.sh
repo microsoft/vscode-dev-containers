@@ -195,8 +195,7 @@ else
 fi
 
 # Install Go tools that are isImportant && !replacedByGopls based on
-# https://github.com/golang/vscode-go/blob/0ff533d408e4eb8ea54ce84d6efa8b2524d62873/src/goToolsInformation.ts
-# Exception `dlv-dap` is a copy of github.com/go-delve/delve/cmd/dlv built from the master.
+# https://github.com/golang/vscode-go/blob/v0.31.1/src/goToolsInformation.ts
 GO_TOOLS="\
     golang.org/x/tools/gopls@latest \
     honnef.co/go/tools/cmd/staticcheck@latest \
@@ -226,16 +225,6 @@ if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
 
     # Move Go tools into path and clean up
     mv /tmp/gotools/bin/* ${TARGET_GOPATH}/bin/
-
-    # install dlv-dap (dlv@master) - but do not exit on failure
-    set +e
-    go ${go_install_command} -v github.com/go-delve/delve/cmd/dlv@master 2>&1 | tee -a /usr/local/etc/vscode-dev-containers/go.log
-    set -e
-    if [ -e "/tmp/gotools/bin/dlv" ]; then
-        mv /tmp/gotools/bin/dlv ${TARGET_GOPATH}/bin/dlv-dap
-    else
-        echo "(*) Failed to install github.com/go-delve/delve/cmd/dlv@master. Skipping."
-    fi
 
     rm -rf /tmp/gotools
 fi
