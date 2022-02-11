@@ -1,6 +1,6 @@
 {
 	"name": "vscode-dev-containers",
-	"version": "0.221.0",
+	"version": "0.217.3",
 	"description": "VS Code Dev Containers: Definitions and Templates",
 	"repository": {
 		"type": "git",
