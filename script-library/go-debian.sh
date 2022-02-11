@@ -165,7 +165,7 @@ if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
     gpg -q --import /tmp/tmp-gnupg/golang_key
     echo "Downloading Go ${TARGET_GO_VERSION}..."
     set +e
-    curl -fsSL -o /tmp/go.tar.gz https://golang.org/dl/go1.177.linux-amd64.tar.gz
+    curl -fsSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz"
     set -e
     if [ ! -s "/tmp/go.tar.gz" ] || [ "$?" != "0" ]; then
         echo "(!) Download failed."
