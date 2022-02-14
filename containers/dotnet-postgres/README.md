@@ -1,23 +1,23 @@
-# C# (.NET) and MS SQL
+# C# (.NET) and PostgreSQL (Community)
 
 ## Summary
 
-*Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and an MS SQL container for parallel database development. Adds an additional MS SQL container to the C# (.NET Core) container definition and deploys any .dacpac files from the mssql .devcontainer folder.*
+*Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and a PostgreSQL container for parallel database development. Adds an additional PostgreSQL container to the C# (.NET Core) container definition.*
 
 | Metadata | Value |  
 |----------|-------|
-| *Contributors* | The Azure Data Team (@dzsquared) |
+| *Contributors* | [Berkays](https://github.com/Berkays)  |
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Published image architecture(s)* | x86-64 |
-| *Available image variants* | 3.1-focal, 5.0-focal, 6.0-focal |
+| *Available image variants* | [See C# (.NET) definition](../dotnet). |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Ubuntu 20.04/focal (Debian 11/bullseye image variants not yet supported by MSSQL client) |
-| *Languages, platforms* | .NET, .NET Core, C#, Microsoft SQL |
+| *Container OS* | Ubuntu (`-focal`), Debian (`-bullseye`) |
+| *Languages, platforms* | .NET, .NET Core, C#, PostgreSQL |
 
 ## Description
-This definition creates two containers, one for C# (.NET) and one for Microsoft SQL. VS Code will attach to the .NET Core container, and from within that container the Microsoft SQL container will be available on **`localhost`** port 1433. By default, the `sa` user password is `P@ssw0rd`. For more on the configuration of MS SQL, see the section [MS SQL Configuration](#MS-SQL-Configuration)
+This definition creates two containers, one for C# (.NET) and one for PostgreSQL. VS Code will attach to the .NET Core container, and from within that container the PostgreSQL container will be available on **`localhost`** port 5432. By default, the `postgre` user password is `postgre`. Default database parameters may be changed in `docker-compose.yml` file if desired.
 
 ## Using this definition
 
@@ -28,7 +28,7 @@ args:
   VARIANT: "3.1-focal"
 ```
 
-This will currently always use an Ubuntu 20.04/focal based .NET image since there is not yet a Debian 11/Bullseye ODBC driver.
+This will use an Ubuntu 20.04/focal based .NET image by default.
 
 ### Debug Configuration
 
@@ -110,16 +110,11 @@ If you would like to install the Azure CLI, you can reference [a dev container f
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
-## MS SQL Configuration
-A secondary container for MS SQL is defined in `devcontainer.json` with the Dockerfile and supporting scripts in the `mssql` folder.  This container is deployed from the latest developer edition of Microsoft SQL 2019.  The database(s) are made available directly in the Codespace/VS Code through the MSSQL extension with a connection labeled "mssql-container".  The default `sa` user password is set to `P@ssw0rd`. The default SQL port is mapped to port `1433` in `docker-compose.yml`.
+## PostgreSQL Configuration
+A secondary container for PostgreSQL is defined in `devcontainer.json` and `docker-compose.yml` files. This container is deployed from the latest version available at the time of this commit. `latest` tag is avoided to prevent breaking bugs. The default `postgres` user password is set to `postgres`. The database instance uses the default port of `5432`.
 
-### Changing the sa password
-To change the `sa` user password, change the value in `docker-compose.yml` and `devcontainer.json`.
-
-### Database deployment
-By default, a blank user database is created titled "ApplicationDB".  To add additional database objects or data through T-SQL during Codespace configuration, edit the file `.devcontainer/mssql/setup.sql` or place additional `.sql` files in the `.devcontainer/mssql/` folder. *Large numbers of scripts may take a few minutes following container creation to complete, even when the SQL server is available the database(s) may not be available yet.*
-
-Alternatively, .dacpac files placed in the `./bin/Debug` folder will be published as databases in the container during Codespace configuration. [SqlPackage](https://docs.microsoft.com/sql/tools/sqlpackage) is used to deploy a database schema from a data-tier application file (dacpac), allowing you to bring your application's database structures into the dev container easily. *The publish process may take a few minutes following container creation to complete, even when the server is available the database(s) may not be available yet.*
+### Changing the postgres user password
+To change the `postgres` user password, change the value in `docker-compose.yml` and `devcontainer.json`.
 
 ## Adding the definition to your folder
 
@@ -142,11 +137,11 @@ This definition includes some test code that will help you verify it is working 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started) to set up your machine.
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
-4. Select the `containers/dotnetcore` folder.
+4. Select the `containers/dotnet-postgres` folder.
 5. After the folder has opened in the container, if prompted to restore packages in a notification, click "Restore".
 6. After packages are restored, press <kbd>F5</kbd> to start the project. *Note: if Auto Forward Ports has been disabled, you will need to manually forward port 8090 from the container with "Remote-Containers: Forward Ports..."*
 7. Open the browser to [localhost:8090](http://localhost:8090).
-8. You should see "The databases are: ApplicationDB,msdb,model,tempdb,master" after the page loads.
+8. You should see "The databases are: postgres, template1, template0" after the page loads.
 9. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.
 
 ## License
@@ -155,4 +150,4 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).
 
-Licenses for [SqlPackage](https://docs.microsoft.com/sql/tools/sqlpackage-download), [SQLCMD](https://docs.microsoft.com/sql/linux/sql-server-linux-setup-tools), and [SQL Server Developer Edition](https://go.microsoft.com/fwlink/?linkid=857698).
+Licenses for [POSTGRESQL](https://www.postgresql.org/about/licence/)
