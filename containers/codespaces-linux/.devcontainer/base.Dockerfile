@@ -79,6 +79,8 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
     && ln -s $(which composer.phar) /usr/local/bin/composer \
     && apt-get clean -y
 
+RUN bash /tmp/library-scripts/jupyterlab-debian.sh
+
 # Install PowerShell
 RUN bash /tmp/scripts/powershell-debian.sh \
     && apt-get clean -y
