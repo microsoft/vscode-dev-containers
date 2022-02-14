@@ -1,0 +1,48 @@
+version: '3.8'
+
+volumes:
+  mariadb-data:
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Update 'VARIANT' to pick a version of CPP
+        # See the README for more information on available versions.
+        VARIANT: debian-11
+    env_file:
+      - .env
+
+    # Security Opt and cap_add allow for C++ based debuggers to work. 
+    # See `runArgs`: https://github.com/Microsoft/vscode-docs/blob/main/docs/remote/devcontainerjson-reference.md
+    # security_opt:
+    #   - seccomp:unconfined
+    # cap_add:
+    #   - SYS_PTRACE
+
+    volumes:
+      - ..:/workspace:cached
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:db
+
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: vscode
+
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+  db:
+    image: mariadb:10.3.32-focal
+    restart: unless-stopped
+    volumes:
+      - mariadb-data:/var/lib/MARIADB
+    env_file:
+      - .env
+    # Add "forwardPorts": ["3306"] to **devcontainer.json** to forward DB locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)

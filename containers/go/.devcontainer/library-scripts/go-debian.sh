@@ -16,6 +16,9 @@ USERNAME=${4:-"automatic"}
 UPDATE_RC=${5:-"true"}
 INSTALL_GO_TOOLS=${6:-"true"}
 
+# https://www.google.com/linuxrepositories/
+GO_GPG_KEY_URI="https://dl.google.com/linux/linux_signing_key.pub"
+
 set -e
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -90,6 +93,21 @@ find_version_from_git_tags() {
     echo "${variable_name}=${!variable_name}"
 }
 
+# Get central common setting
+get_common_setting() {
+    if [ "${common_settings_file_loaded}" != "true" ]; then
+        curl -sfL "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+        common_settings_file_loaded=true
+    fi
+    if [ -f "/tmp/vsdc-settings.env" ]; then
+        local multi_line=""
+        if [ "$2" = "true" ]; then multi_line="-z"; fi
+        local result="$(grep ${multi_line} -oP "$1=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"
+        if [ ! -z "${result}" ]; then declare -g $1="${result}"; fi
+    fi
+    echo "$1=${!1}"
+}
+
 # Function to run apt-get if needed
 apt_get_update_if_needed()
 {
@@ -112,7 +130,7 @@ check_packages() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install curl, tar, git, other dependencies if missing
-check_packages curl ca-certificates tar g++ gcc libc6-dev make pkg-config
+check_packages curl ca-certificates gnupg2 tar g++ gcc libc6-dev make pkg-config
 if ! type git > /dev/null 2>&1; then
     apt_get_update_if_needed
     apt-get -y install --no-install-recommends git
@@ -131,26 +149,53 @@ case $architecture in
 esac
 
 # Install Go
-GO_INSTALL_SCRIPT="$(cat <<EOF
-    set -e
+umask 0002
+if ! cat /etc/group | grep -e "^golang:" > /dev/null 2>&1; then
+    groupadd -r golang
+fi
+usermod -a -G golang "${USERNAME}"
+mkdir -p "${TARGET_GOROOT}" "${TARGET_GOPATH}" 
+if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
+    # Use a temporary locaiton for gpg keys to avoid polluting image
+    export GNUPGHOME="/tmp/tmp-gnupg"
+    mkdir -p ${GNUPGHOME}
+    chmod 700 ${GNUPGHOME}
+    get_common_setting GO_GPG_KEY_URI
+    curl -sSL -o /tmp/tmp-gnupg/golang_key "${GO_GPG_KEY_URI}"
+    gpg -q --import /tmp/tmp-gnupg/golang_key
     echo "Downloading Go ${TARGET_GO_VERSION}..."
-    curl -sSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz"
+    set +e
+    curl -fsSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz"
+    set -e
+    if [ ! -s "/tmp/go.tar.gz" ] || [ "$?" != "0" ]; then
+        echo "(!) Download failed."
+        # Try one break fix version number less if we get a failure
+        major="$(echo "${TARGET_GO_VERSION}" | grep -oE '^[0-9]+')"
+        minor="$(echo "${TARGET_GO_VERSION}" | grep -oP '^[0-9]+\.\K[0-9]+')"
+        breakfix="$(echo "${TARGET_GO_VERSION}" | grep -oP '^[0-9]+\.[0-9]+\.\K[0-9]+' 2>/dev/null)"
+        if [ "${breakfix}" = "" ] || [ "${breakfix}" = "0" ]; then
+            ((minor=minor-1))
+            TARGET_GO_VERSION="${major}.${minor}"
+            find_version_from_git_tags TARGET_GO_VERSION "https://go.googlesource.com/go" "tags/go" "." "true"
+        else 
+            ((breakfix=breakfix-1))
+           TARGET_GO_VERSION="${major}.${minor}.${breakfix}"
+        fi
+        echo "Trying ${TARGET_GO_VERSION}..."
+        curl -fsSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz"
+    fi
+    set -e
+    curl -fsSL -o /tmp/go.tar.gz.asc "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz.asc"
+    gpg --verify /tmp/go.tar.gz.asc /tmp/go.tar.gz
     echo "Extracting Go ${TARGET_GO_VERSION}..."
     tar -xzf /tmp/go.tar.gz -C "${TARGET_GOROOT}" --strip-components=1
-    rm -f /tmp/go.tar.gz
-EOF
-)"
-if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
-    mkdir -p "${TARGET_GOROOT}" "${TARGET_GOPATH}" 
-    chown -R ${USERNAME} "${TARGET_GOROOT}" "${TARGET_GOPATH}"
-    su ${USERNAME} -c "${GO_INSTALL_SCRIPT}"
+    rm -rf /tmp/go.tar.gz /tmp/go.tar.gz.asc /tmp/tmp-gnupg
 else
     echo "Go already installed. Skipping."
 fi
 
 # Install Go tools that are isImportant && !replacedByGopls based on
-# https://github.com/golang/vscode-go/blob/0ff533d408e4eb8ea54ce84d6efa8b2524d62873/src/goToolsInformation.ts
-# Exception `dlv-dap` is a copy of github.com/go-delve/delve/cmd/dlv built from the master.
+# https://github.com/golang/vscode-go/blob/v0.31.1/src/goToolsInformation.ts
 GO_TOOLS="\
     golang.org/x/tools/gopls@latest \
     honnef.co/go/tools/cmd/staticcheck@latest \
@@ -181,12 +226,7 @@ if [ "${INSTALL_GO_TOOLS}" = "true" ]; then
     # Move Go tools into path and clean up
     mv /tmp/gotools/bin/* ${TARGET_GOPATH}/bin/
 
-    # install dlv-dap (dlv@master)
-    go ${go_install_command} -v github.com/go-delve/delve/cmd/dlv@master 2>&1 | tee -a /usr/local/etc/vscode-dev-containers/go.log
-    mv /tmp/gotools/bin/dlv ${TARGET_GOPATH}/bin/dlv-dap
-
     rm -rf /tmp/gotools
-    chown -R ${USERNAME} "${TARGET_GOPATH}"
 fi
 
 # Add GOPATH variable and bin directory into PATH in bashrc/zshrc files (unless disabled)
@@ -197,6 +237,11 @@ export GOROOT="${TARGET_GOROOT}"
 if [[ "\${PATH}" != *"\${GOROOT}/bin"* ]]; then export PATH="\${PATH}:\${GOROOT}/bin"; fi
 EOF
 )"
+
+chown -R :golang "${TARGET_GOROOT}" "${TARGET_GOPATH}"
+chmod -R g+r+w "${TARGET_GOROOT}" "${TARGET_GOPATH}"
+find "${TARGET_GOROOT}" -type d | xargs -n 1 chmod g+s
+find "${TARGET_GOPATH}" -type d | xargs -n 1 chmod g+s
 
 echo "Done!"
 

@@ -1,6 +1,6 @@
 # Docker-in-Docker Install Script
 
-> Interested in running docker commands from inside a container?  Chances are the [Docker-from-Docker](./docker.md) technique may suit your needs better.
+> Interested in running docker commands from inside a container?  The [Docker-from-Docker](./docker.md) technique may suit your needs better.
 
 *Create child containers _inside_ a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.* 
 
@@ -15,16 +15,62 @@
 ## Syntax
 
 ```text
-./docker-in-docker-debian.sh [enable non-root docker access flag] [non-root user] [use moby]
+./docker-in-docker-debian.sh [Enable non-root docker access flag] [Non-root user] [Use Moby] [Docker / Moby Version]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-|Non-root access flag|`true`| Flag (`true`/`false`) that specifies whether a non-root user should be granted access to Docker.|
-|Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
-|Use Moby|`true`| Specifies that a build of the open source [Moby CLI](https://github.com/moby/moby/tree/master/cli) should be used instead of the Docker CLI distribution of it. |
+Or as a feature:
+
+```json
+"features": {
+    "docker-in-docker": {
+        "version": "latest",
+        "moby": true
+    }
+}
+```
+
+|Argument| Feature option |Default|Description|
+|--------|----------------|-------|-----------|
+|Non-root access flag| | `true`| Flag (`true`/`false`) that specifies whether a non-root user should be granted access to Docker.|
+|Non-root user| | `automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|Use Moby | `moby`|`true` | Specifies that a build of the open source [Moby CLI](https://github.com/moby/moby/tree/master/cli) should be used instead of the Docker CLI distribution of it. |
+| Docker / Moby version | `version` | `latest` |  Docker/Moby Engine version or `latest`. Partial version numbers allowed. Availability can vary by OS version. |
+
 
 ## Usage
+
+### Feature use
+
+You can use this script for your primary dev container by adding it to the `features` property in `devcontainer.json`.
+
+```json
+"features": {
+    "docker-in-docker": {
+        "version": "latest",
+        "moby": true
+    }
+}
+```
+
+**[Optional]** You may also want to enable the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle signals and clean up [Zombie processes](https://en.wikipedia.org/wiki/Zombie_process) if you do not have an alternative set up. To enable it, add the following to `devcontainer.json` if you are referencing an image or Dockerfile:
+
+```json
+"runArgs": ["--init"]
+```
+
+Or when using Docker Compose:
+
+```yaml
+services:
+  your-service-here:
+    # ...
+    init: true
+    # ...
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a complete working example. However, here are the general steps to use the script:
 
@@ -63,7 +109,7 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
 
     The `dind-var-lib-docker` volume mount is optional but will ensure that containers / volumes you create within the dev container survive a rebuild. You should update `dind-var-lib-docker` with a unique name for your container to avoid corruption when multiple containers write to it at the same time.
 
-    While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up. 
+    While technically optional, `--init` enables the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up. 
 
 4. If you want any containers or volumes you create inside the container to survive it being deleted, you can use a "named volume". And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile replacing `dind-var-lib-docker` with a unique name for your container:
 

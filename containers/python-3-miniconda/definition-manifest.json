@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "0.201.8",
+	"definitionVersion": "0.202.2",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -7,8 +7,9 @@
 			"miniconda:${VERSION}-3"
 		]
 	},
+	"architectures": ["linux/amd64", "linux/arm64"],
 	"dependencies": {
-		"image": "miniconda3:latest",
+		"image": "continuumio/miniconda3:latest",
 		"imageLink": "https://hub.docker.com/r/continuumio/miniconda3",
 		"debian": [{
 			"cgIgnore": false,

@@ -1,7 +1,7 @@
 {
 	"name": "Kubernetes - Minikube-in-Docker",
 	"dockerFile": "Dockerfile",
-	"runArgs": ["--init", "--privileged"],
+	"runArgs": ["--privileged"],
 	"mounts": [
 		"source=minikube-var-lib-docker,target=/var/lib/docker,type=volume",
 		"source=minikube-config,target=/home/vscode/.minikube,type=volume",

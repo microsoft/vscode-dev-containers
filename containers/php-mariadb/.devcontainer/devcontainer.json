@@ -6,26 +6,13 @@
 	"workspaceFolder": "/workspace",
 	
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"sqltools.connections": [{
-			"name": "Container database",
-			"driver": "MariaDB",
-			"server": "localhost",
-			"previewLimit": 50,
-			"port": 3306,
-			"database": "mariadb",
-			"username": "root",
-			"password": "mariadb"
-		}]
-	},
+	"settings": { },
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"felixfbecker.php-debug",
 		"felixfbecker.php-intellisense",
-		"mrmlnc.vscode-apache",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-mysql"
+		"mrmlnc.vscode-apache"
 	],
 
 	// For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
@@ -34,6 +21,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

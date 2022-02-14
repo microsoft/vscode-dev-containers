@@ -27,7 +27,7 @@ build:
   context: ..
   dockerfile: .devcontainer/Dockerfile
   args:
-    # Update 'VARIANT' to pick a version of Python: 3, 3.9, 3.8, 3.7, 3.6
+    # Update 'VARIANT' to pick a version of Python: 3, 3.10, 3.9, 3.8, 3.7, 3.6
     # Append -bullseye or -buster to pin to an OS version.
     # Use -bullseye variants on local arm64/Apple Silicon.
     VARIANT: 3.7-bullseye
@@ -41,7 +41,7 @@ You also can connect to PostgreSQL from an external tool when using VS Code by u
 
 ### Adding another service
 
-You can add other services to your `docker-compose.yml` file [as described in Docker's documentaiton](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
+You can add other services to your `docker-compose.yml` file [as described in Docker's documentation](https://docs.docker.com/compose/compose-file/#service-configuration-reference). However, if you want anything running in this service to be available in the container on localhost, or want to forward the service locally, be sure to add this line to the service config:
 
 ```yaml
 # Runs the service on the same network as the database container, allows "forwardPorts" in devcontainer.json function.

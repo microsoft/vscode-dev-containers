@@ -82,7 +82,7 @@ sdk_install() {
     local suffix="${4:-"\\s*"}"
     local full_version_check=${5:-".*-[a-z]+"}
     if [ "${requested_version}" = "none" ]; then return; fi
-    # Blank will install latest stable AdoptOpenJDK version
+    # Blank will install latest stable version
     if [ "${requested_version}" = "lts" ] || [ "${requested_version}" = "default" ]; then
          requested_version=""
     elif echo "${requested_version}" | grep -oE "${full_version_check}" > /dev/null 2>&1; then
@@ -131,6 +131,12 @@ if [ ! -d "${SDKMAN_DIR}" ]; then
     # Add sourcing of sdkman into bashrc/zshrc files (unless disabled)
     updaterc "export SDKMAN_DIR=${SDKMAN_DIR}\n. \${SDKMAN_DIR}/bin/sdkman-init.sh"
 fi
-sdk_install java ${JAVA_VERSION} "\\s*" "(\\.[a-z0-9]+)?-adpt\\s*" ".*-[a-z]+$"
+
+# Use Microsoft JDK for everything but JDK 8
+jdk_distro="ms"
+if echo "${JAVA_VERSION}" | grep -E '^8([\s\.]|$)' > /dev/null 2>&1; then
+    jdk_distro="tem"
+fi
+sdk_install java ${JAVA_VERSION} "\\s*" "(\\.[a-z0-9]+)*-${jdk_distro}\\s*" ".*-[a-z]+$"
 
 echo "Done!"

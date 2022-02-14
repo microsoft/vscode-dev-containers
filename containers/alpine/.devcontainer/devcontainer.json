@@ -2,8 +2,8 @@
 	"name": "Alpine",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Alpine version: 3.11, 3.12, 3.13, 3.14
-		"args": { "VARIANT": "3.13" }
+		// Update 'VARIANT' to pick an Alpine version: 3.12, 3.13, 3.14, 3.15
+		"args": { "VARIANT": "3.15" }
 	},
 	
 	// Set *default* container specific settings.json values on container create. 
@@ -21,8 +21,7 @@
 
 	// Replace when using a ptrace-based debugger like C++, Go, and Rust
 	// "runArgs": [ "--init", "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-	"runArgs": ["--init"],
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

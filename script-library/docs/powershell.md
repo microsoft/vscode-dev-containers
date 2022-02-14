@@ -4,17 +4,42 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
 ## Syntax
 
 ```text
-./powsershell-debian.sh
+./powsershell-debian.sh [Version]
+```
+Or as a feature:
+
+```json
+"features": {
+    "powershell": "latest"
+}
 ```
 
+|Argument|Feature option|Default|Description|
+|--------|--------------|-------|-----------|
+|Version|`version`| `latest` | Version of PowerShell to install. Use `latest` to install the latest released version. Partial version numbers are allowed. |
+
 ## Usage
+
+### Feature use
+
+To install these capabilities in your primary dev container, reference it in `devcontainer.json` as follows:
+
+```json
+"features": {
+    "powershell": "latest"
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 Usage:
 

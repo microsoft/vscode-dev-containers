@@ -1,6 +1,6 @@
 # Build and image generation for vscode-dev-containers
 
-This folder contains scripts to build and push images into the Microsoft Container Registry (MCR) from this repository, generate or modify any associated content to use the built image, track dependencies, and create an npm package with the result that is shipped in the VS Code Remote - Containers extension.
+This folder contains scripts to build and push images into the Microsoft Container Registry (MCR) from this repository, generate or modify any associated content to use the built image, track dependencies, and create an npm package with the result that is shipped in the VS Code Remote - Containers and Codespaces extension.
 
 ## Build CLI
 
@@ -8,16 +8,19 @@ The Node.js based build CLI (`build/vsdc`) has commands to:
 
 1. Build and push to a repository: `build/vsdc push`
 2. Build, push, and npm package assets that are modified as described above: `build/vsdc package`
-3. Generate cgmanifest.json: `build/vsdc cg`
+3. Generate cgmanifest.json and history markdown files: `build/vsdc cg`, `build/vsdc info`
 4. Update all script source URLs in Dockerfiles to a tag or branch: `build/vsdc update-script-sources`
+5. Overwrite scripts in the `.devcontainer/library-scripts` folder with the most recent copy from the `scripts-library` folder: `build/vscdc copy-library-scripts` 
 
 Run with the `--help` option to see inputs.
 
 This CLI is used in the GitHub Actions workflows in this repository.
 
 - `push-dev.yml`: Pushes a "dev" tag for each image to be generated in this repository and fires repository dispatch to trigger cgmanifest.json generation, and attaches an npm package with the definitions to the actions run.
-- `push-and-package.yml`: Triggers when a release tag is pushed (`vX.Y.Z`). Builds and pushes a release version of the images, creates a release, and attaches an npm package with the definitions to the release. Note that this update the tag with source files that contain a SHA hash for script sources. You maay need to run `git fetch --tags --force` locally after it runs.
-- `cgmanifest.yml`: Listens to the repository dispatch event to trigger cgmanifest.json generation.
+- `push-and-package.yml`: Triggers when a release tag is pushed (`vX.Y.Z`). Builds and pushes a release version of the images, creates a release, and attaches an npm package with the definitions to the release. Note that this update the tag with source files that contain a SHA hash for script sources. You may need to run `git fetch --tags --force` locally after it runs.
+- `push-again.yml`: A manually triggered workflow that can be used to push an updated version of an image for an existing release. This should only be used in cases where the image push to the registry only partially succeeded (e.g. `linux/amd64` was pushed, but a connection error happened when pushing `linux/arm64` for the same image.)
+- `smoke-*.yaml` (using the `smoke-test` action in this repository) - Runs a build without pushing and executes `test-project/test.sh` (if present) inside the container to verify that there are no breaking changes to the image when the repository contents are updated.
+- `version-history.yml`: Listens for workflow dispatch events to trigger cgmanifest.json and history markdown generation.
 
 ## Setting up a container to be built
 
@@ -31,9 +34,11 @@ Image build/push to MCR is managed using config in `definition-manifest.json` fi
 
     > **Note:** The `build.args` and `build.dockerfile` properties are **intentionally ignored** during image build so that you can vary image defaults and devcontainer.json defaults as appropriate. The only property considered is `build.context` since this may be required for the build to succeed.
 
-2. Create [a `definition-manifest.json` file](#definition-manifestjson)
+3. Create a [`base.Dockerfile` and stub Dockerfile](#creating-a-basedockerfile-and-stub-dockerfile)
 
-3. [Optional] Create a [stub Dockerfile](#creating-an-alternate-stub-dockerfile)
+4. Set up any [library scripts you want to use and a meta.env file](#using-the-script-library)
+
+2. Create [a `definition-manifest.json` file](#the-definition-manifestjson-file)
 
 4. Update the `vscode` [config files for MCR](https://github.com/microsoft/vscode-internalbacklog/wiki/Remote-Container-Images-MCR-Setup) as appropriate (MS internal only).
 
@@ -50,10 +55,10 @@ Once you have your build configuration setup, you can use the `vscdc` CLI to tes
 2. Use the Docker CLI to verify all of the expected images and tags and have the right contents:
 
     ```bash
-    docker run -it --rm mcr.microsoft.com/vscode/devcontainers/<expected-repository>:dev-<expected tag> bash
+    docker run -it --init --privileged --rm mcr.microsoft.com/vscode/devcontainers/<expected-repository>:dev-<expected tag> bash
     ```
 
-3. Finally, test cgmanifest generation by running:
+3. Finally, test cgmanifest/markdown generation by running:
 
    ```bash
    build/vscdc cg --registry mcr.microsoft.com --registry-path vscode/devcontainers --release main <you-definition-id-here>
@@ -75,14 +80,12 @@ Once you're happy with the result, you can also verify that the `devcontainer.js
 
 That's it!
 
-## Creating an alternate "stub" Dockerfile
+## Creating a `base.Dockerfile` and "stub" `Dockerfile`
 
-By default, the **Remote-Containers: Add Development Container Configuration File...** and related properties will use a basic getting started stub / sample Dockerfile [from here](./assets) and with a reference to the appropriate image. This provides some basic getting started information for developers.
-
-However, in some cases you may want to include some special instructions for developers. In this case, you can add a custom stub Dockerfile by creating the following files:
+By default, the **Remote-Containers: Add Development Container Configuration File...** and related properties will use a basic getting started stub / sample Dockerfile. However, in some cases you may want to include some special instructions for developers. In this case, you can add a custom stub Dockerfile by creating the following files:
 
 - `base.Dockerfile`: Dockerfile used to generate the image itself
-- `Dockerfile`: A stub Dockerfile
+- `Dockerfile`: A stub Dockerfile that references the generated image and includes tips for using it.
 
 You can then reference `base.Dockerfile` in `devcontainer.json` to make editing the file that is used to create the image easy.
 
@@ -107,16 +110,51 @@ In `devcontainer.json`:
 }
 ```
 
-## definition-manifest.json
+## Using the script library
+
+The `/script-library` folder in this repository contains a number of scripts to install tools or configure container contents. Of particular note is `common-debain.sh` that should generally be run in any definition that does not extend from an existing `mcr.microsoft.com/vscode/devcontainers` image.
+
+Since Dockerfiles can only COPY files relative to the Dockerfile itself, we cannot easily copy contents from a folder several levels up. This step could be scripted, but this becomes cumbersome when creating the definitions to begin with. Instead, the scripts can be added into a `.devcontainer/library-scripts` folder in the definition. A GitHub Actions workflow will automatically update files with the same name in this folder whenever something in `/script-library` is updated.
+
+This folder should be reserved for contents from the `script-library` folder for this reason.
+
+### Adding a `meta.env` file
+The one addition to this folder that is not from the `script-library` folder is the `.devcontainer/library-scripts/meta.env` file. The build system will automatically update this file if found with some key information like the image version, repository, and history file. This will power a `devcontainer-info` command added by the `common-debian.sh` script.
+
+To add one:
+
+1. Add a `meta.env` file into the `library-scripts` folder with one line in it:
+
+    ```
+    VERSION='dev'
+    ```
+
+2. Next update your `base.Dockerfile` to copy it into the correct location. If you are running `common-debian.sh`, you can just copy it to the same folder as you copy the script before running it. For example:
+
+    ```Dockerfile
+    COPY library-scripts/*.sh library-scripts/meta.env /tmp/library-scripts/
+    RUN bash /tmp/library-scripts/common-debian.sh
+    ```
+
+    Or if `common-debian.sh` was already run in your upstream image, you can copy it directly to the correct spot:
+
+    ```Dockerfile
+    COPY library-scripts/meta.env /usr/local/etc/vscode-dev-containers/
+    ```
+
+The build system will then automatically populate the file with the correct contents on build.
+
+## The `definition-manifest.json` file
 
 Let's run through the `definition-manifest.json` file.
 
-### The build property
+### The `build` namespace
 
-The `build` property defines how the definition maps to image tags and what type of "stub" should be used. Consider the Debian 9 [definition-manifest.json](../containers/debian-9-git/definition-manifest.json) file.
+The `build` namespace includes properties that defines how the definition maps to image tags. For example:
 
 ```json
 "build": {
+    "architectures": [ "linux/amd64", "linux/arm64" ],
     "rootDistro": "debian",
     "latest": true,
     "tags": [
@@ -126,9 +164,11 @@ The `build` property defines how the definition maps to image tags and what type
 }
 ```
 
-The **`rootDistro`** property can be `debian`, `alpine`, or `redhat` currently. Ubuntu-based containers should use `debian`.
+The **`build.architectures`** property specifies how many chip architectures should be built for the image. By default only 64-bit x86 (`linux/amd64`) is built. Note that there are a suprising number of problems when adding another architecture. For example, adding `linux/arm64` does not work well with Debian 10/buster or Ubuntu 20.04/focal because of an OS issue with libssl, so each architecture needs to be tested carefully.
 
-The **`latest`** and **`tags`** properties affect how tags are applied. For example, here is how several dev container folders map:
+The **`build.rootDistro`** property can be `debian`, `alpine`, or `redhat` currently, but stick with Debian or Ubuntu for definitions wherever possible. Ubuntu-based containers should use `debian`. 
+
+The **`build.latest`** and **`build.tags`** properties affect how tags are applied. For example, here is how several dev container folders map:
 
 ```text
 debian => mcr.microsoft.com/vscode/devcontainers/base:debian
@@ -157,7 +197,9 @@ In this case, Debian is also the one that is used for `latest` for the `base` re
 
 There's a special "dev" version that can be used to build main on CI - I ended up needing this to test and others would if they base an image off of one of the MCR images.  e.g. `dev-debian-9`.
 
-Finally, there is a **`parent`** property that can be used to specify if the container depends an image created as a part of another container build. For example, `typescript-node` uses the image from `javascript-node` and therefore includes the following:
+### The `build.parent` property
+
+The `build.parent` property that can be used to specify if the container image depends on an image created as a part of another dev container definition build. For example, the `typescript-node` definition uses the image from `javascript-node` and therefore includes the following:
 
 ```json
 "build" {
@@ -165,42 +207,41 @@ Finally, there is a **`parent`** property that can be used to specify if the con
 }
 ```
 
-### The definitionVersion property
+### The `definitionVersion` property
 
-While in most cases it makes sense to version the contents of a definition with the repository, there may be scenarios where you want to be able to version independantly. A good example of this [is the `vsonline-linux` defintion](../containers/vsonline-linux) where upstream edits could cause breaking changes in this image. Rather than increasing the major version of the extension and all defintions whenever this happens, the definition has its own version number.
+While in most cases it makes sense to version the contents of a definition with the repository, there may be scenarios where you want to be able to version independently. A good example of this [is the `codespaces-linux` definition](../containers/vsonline-linux) where upstream edits could cause breaking changes in this image. Rather than increasing the major version of the extension and all definitions whenever this happens, the definition has its own version number.
 
 When this is necessary, the `definitionVersion` property in the `definition-manifest.json` file can be set.
 
 ```json
-"definitionVersion": "0.1.0"
+"definitionVersion": "1.0.0"
 ```
 
-### The variants property
+### The `variants` property
 
 In many cases, you will only need to create one image per dev container definition. Even if there is only one or two versions of a given runtime available at a given time, it can be useful to simply have different definitions to aid discoverability.
 
 In other cases, you may want to generate multiple images from the same definition but with one small change. This is where the variants property comes in. Consider this `definition-manifest.json`:
 
 ```json
+"variants": [ "3", "3.6", "3.7", "3.8" ],
 "build": {
     "rootDistro": "debian",
     "tags": [
         "python:${VERSION}-${VARIANT}"
     ],
-    "variants": [ "3", "3.6", "3.7", "3.8" ]
+    "latest": "3"
 }
 ```
 
-The **left-most** item in the list is the one that will have the `latest` tag applied if applicable.
+The variant specified in the `build.latest` property is the one that will have the `latest` tag applied if applicable. Set this to `false` if you do not want any variant to get the `latest` tag.
 
-And in its corresponding Dockerfile:
+Here is its corresponding Dockerfile:
 
 ```Dockerfile
 ARG VARIANT=3
 FROM python:${VARIANT}
 ```
-
-> **Note:** You may want to customize the "stub" Dockerfile that is actually used by developers rather than using the default one.  [See below for details](#creating-an-alternate-stub-dockerfile).
 
 This configuration would cause separate image variants, each with a different `VARIANT` build argument value passed in, that are then tagged as follows:
 
@@ -211,46 +252,271 @@ This configuration would cause separate image variants, each with a different `V
 
 In addition `mcr.microsoft.com/vscode/devcontainers/python` would point to `mcr.microsoft.com/vscode/devcontainers/python:3` since it is the first in the list.
 
-### The dependencies property
+#### The `build.variantTags` property
 
-The dependencies property is used for dependency and version tracking. Consider the Debian 9 [definition-manifest.json](../containers/debian-9-git/definition-manifest.json) file.
+In some cases you may want to have different tags for each variant in the `variants` property. This is where `variantTags` come in. These tags add to the common list already set in `tags`.
 
-```json
-"dependencies": {
-    "image": "debian:9",
-    "imageLink": "https://hub.docker.com/_/debian",
-    "debian": [
-        "apt-utils",
-        "..."
+For example:
+
+```jsonc
+"variants": ["buster", "bullseye",  "stretch"],
+"build": {
+    "latest": "bullseye",
+    "tags": [
+        "base:${VARIANT}"
     ],
-    "manual": [
-        {
-            "Component": {
-                "Type": "git",
-                "git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/robbyrussell/oh-my-zsh",
-                    "commitHash": "c130aadb6a66aa680a322c08d87ad773316f713d"
-                }
-            }
+    "variantTags": {
+        "bullseye": [
+            "base:debian-11",
+            "base:debian11",
+            "base:debian",
+        ],
+        "buster": [
+            "base:debian-10",
+            "base:debian10"
+        ],
+        "stretch": [
+            "base:debian-9",
+            "base:debian9"
+        ]
+    },
+    //...
+}
+```
+
+In this case, the image built for the `bullseye` variant will be tagged as follows:
+
+- mcr.microsoft.com/vscode/devcontaienrs/base:latest
+- mcr.microsoft.com/vscode/devcontaienrs/base:bullseye
+- mcr.microsoft.com/vscode/devcontaienrs/base:debian
+- mcr.microsoft.com/vscode/devcontaienrs/base:debian-11
+- mcr.microsoft.com/vscode/devcontaienrs/base:debian11
+
+#### The `build.variantBuildArgs` property
+In some cases, you may need to vary build arguments in the definition's `base.Dockerfile` by variant (beyond the `VARIANT` build arg itself). This can be done using the `build.variantBuildArgs` property. For example, consider the following:
+
+```jsonc
+"build": {
+    "variantBuildArgs": {
+        "17-bullseye": {
+            "TARGET_JAVA_VERSION": "17",
+            "BASE_IMAGE_VERSION_CODENAME": "bullseye"
+        },
+        "11-bullseye": {
+            "TARGET_JAVA_VERSION": "11",
+            "BASE_IMAGE_VERSION_CODENAME": "bullseye"
+        },
+        "17-buster": {
+            "TARGET_JAVA_VERSION": "17",
+            "BASE_IMAGE_VERSION_CODENAME": "buster"
+        },
+        "11-buster": {
+            "JAVA_IMAGE_TAG": "11",
+            "BASE_IMAGE_VERSION_CODENAME": "buster"
         }
+    },
+    //...
+}
+```
+
+...and the related `base.Dockerfile`:
+
+```Dockerfile
+# This base.Dockerfile uses separate build arguments instead of VARIANT
+ARG TARGET_JAVA_VERSION=11
+ARG BASE_IMAGE_VERSION_CODENAME=bullseye
+FROM openjdk:${TARGET_JAVA_VERSION}-jdk-${BASE_IMAGE_VERSION_CODENAME}
+```
+
+The value of these arguments is then passed in for a given variant.
+
+#### Using `build.architecture` with variants
+Because of problems with different OS versions, you may need to specify different architectures to build for different variants of the same definition. This can be done using the `build.architecture` property with an object that maps a variant to an array of architectures. For example, the actual `debian` definition contains the following:
+
+```jsonc
+"build": {
+    "architectures": {
+        "bullseye": ["linux/amd64", "linux/arm64"],
+        "buster": ["linux/amd64"],
+        "stretch": ["linux/amd64", "linux/arm64"]
+    },
+    //...
+}
+```
+
+This configuration will build ARM64 and x86_64 for Debian 11/bullseye and Debian 9/stretch but not Debian 10/buster.
+
+### The `dependencies` namespace
+
+> **Note:** Whenever a new 3rd party OSS dependency is added to an image, be sure to also update NOTICES.txt in the root of this repository with its license terms. Packages installed from Linux distros directly via their package manager (not from 3rd party feeds) can be skipped as they are covered by the distribution image. Closed source dependencies are not allowed.
+
+The dependencies namespace is used for dependency management and generation of [history markdown files](). It has no affect on the build process.  Consider the Debian [definition-manifest.json](../containers/debian/definition-manifest.json) file.
+
+```jsonc
+"dependencies": {
+    "image": "debian:${VARIANT}",
+    "imageLink": "https://hub.docker.com/_/debian",
+    "apt": [
+        "apt-utils",
+        //...
     ]
 }
 ```
 
-The **`image`** property is the actual base Docker image either in Docker Hub or MCR. **`imageLink`** is then the link to a dscription of the image.
+The **`image`** property is the actual base Docker image either in Docker Hub or MCR. **`imageLink`** is then the link to a description of the image.
 
 Following this is a list of libraries installed in the image by its Dockerfile. The following package types are currently supported:
 
-- `debian` - Debian packages (apt-get)
-- `ubuntu` - Ubuntu packages (apt-get)
-- `alpine` - Alpine Linux packages (apk)
+- `apt` - Debian/Ubuntu packages (apt-get)
+- `apk` - Alpine Linux packages (apk)
+- `git` - Dependencies downloaded using Git
 - `pip` - Python pip packages
 - `pipx` - Python utilities installed using pipx
 - `npm` - npmjs.com packages installed using npm or yarn
-- `manual` - Useful for other types of registrations that do not have a specific type, like `git` in the example above.
+- `go` - Dependencies downloaded using go get/install
+- `cargo` - Rust dependencies downloaded using cargo
+- `gem` - Ruby dependencies downloaded using gem
+- `other` - Useful for other types of registrations that do not have a specific type that should be registered.
+- `language` - Used primarily to elevate certain dependencies as language runtimes in history markdown files.
 
-For everything but `manual`, the image that is generated is started so the package versions can be queried automatically.
+#### `dependencies.apt`, `dependencies.apk`
+
+These two properties are arrays of either strings or objects that reference apt or apk package names. Given most installed packages are there simply for visibility because they come with the distro, these are not tracked in `cgmanifest.json` by default. When something comes from a 3rd party repository, the object syntax can be used to set `"cgIgnore": false`. An `annotation` property can also be used to for a description that should appear in history markdown files.
+
+For example:
+
+```jsonc
+"apt": [{
+        "cgIgnore": false,
+        "name": "azure-cli",
+        "annotation": "Azure CLI"
+    },
+    "cmake",
+    "cppcheck",
+    "valgrind"
+]
+```
+
+Needed version information will be automatically extracted.
+
+#### `dependencies.git`
+Some dependencies like nvm or Oh My Zsh! are installed using a shallow git clone. The `git` property accepts a mapping of a description to a the path where the clone occurred in the resulting image. For example:
+
+```jsonc
+"git": {
+    "Oh My Zsh!": "/home/codespace/.oh-my-zsh",
+    "nvm": "/home/codespace/.nvm"
+}
+```
+
+The commit ID will be automatically extracted.
+
+#### `dependencies.pip`, `dependencies.pipx`, `dependencies.gem`, `dependencies.npm`
+Any installed PyPl packages can be tracked by adding them to an array for the `pip` property. Tools installed using pipx can similarly be referenced using the `pipx` property.  For example:
+
+```jsonc
+"pipx": [
+    "pylint",
+    "virtualenv"
+]
+```
+
+Ruby Gems and globally installed npm packages can be referenced the same way:
+
+```jsonc
+"gem": [
+    "rake",
+    "ruby-debug-ide",
+    "debase",
+    "jekyll"
+],
+"npm": [
+    "eslint",
+    "typescript"
+]
+```
+
+#### `dependencies.go`, `dependencies.cargo`
+
+Both Go modules/packages and Cargo packages can be referenced in a form similar to Gems, npm packages, or PyPl packages. However, there can sometimes be cases that require different commands to determine the version number that as actually installed. As a result, the `go` and `cargo` properties accept an object that maps the package to a command. A command of `null` causes the system to try to automatically detect the version.
+
+For example:
+
+```json
+"cargo": {
+    "rls": null,
+    "rustfmt": null,
+    "rust-analysis": "rustc --version",
+    "rust-src": "rustc --version",
+    "clippy": "rustc --version"
+},
+"go": {
+    "golang.org/x/tools/gopls": null
+}
+```
+
+
+#### `dependencies.other`, `dependencies.language`
+
+The `other` property is intended to handle scenarios that one of the other supported `dependencies` properties cannot. It is an object that maps dependency names to a `versionCommand`, install `path`, and a `downloadUrl`.  The optional `cgIgnore` and `markdownIgnore` boolean properties can be used to specify whether the dependency should be excluded from tracking (`cgIgnore`) or excluded from history markdown output (`markdownIgnore`).
+
+For example, if `kubectl` is installed by downloading the binary directly, the following would registry it and add it to the history markdown:
+
+```jsonc
+"other": {
+    "kubectl": {
+        "versionCommand": "kubectl version --client | grep -oP 'GitVersion\\s*:\\s*\\\"v\\K[0-9]+\\.[0-9]+\\.[0-9]+'",
+        "path": "/usr/local/bin",
+        "downloadUrl": "https://github.com/kubernetes/kubectl"
+    }
+}
+```
+
+The `languages` property is similar, but is primarily intended to provide an easy way to add things that are installed into the "Languages" section of the history markdown. If `"cgIgnore": true`, the version command can return a newline delimited list of versions if more than one is installed. Each line will then appear in the history markdown for the entry.
+
+For example:
+
+```jsonc
+"languages": {
+    "Java": {
+        "cgIgnore": true,
+        "versionCommand": "ls /opt/java | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+        "path": "/opt/java/&lt;version&gt;"
+    },
+    ".NET": {
+        "cgIgnore": true,
+        "versionCommand": "ls /opt/dotnet | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+        "path": "/home/codespaces/.dotnet<br />/opt/dotnet"
+    },
+    "Ruby": {
+        "cgIgnore": true,
+        "versionCommand": "ls /opt/ruby | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
+        "path": "/opt/ruby/&lt;version&gt;"
+    }
+}
+```
+
+Since the same dependencies can be in more than one definition, default settings named dependencies can be set in the `otherDependencyDefaultSettings` property in [config.json](./config.json). When present in this file, only the name of the dependency and any overrides need to be specified for in `definition-manifest.json`. For example, consider these examples that have default settings:
+
+```jsonc
+"other": {
+    "kubectl": null,
+    "Helm": null,
+    "git": {
+        "path": "/usr/local"
+    }
+},
+"languages": {
+    "PowerShell": {
+        "cgIgnore": true
+    },
+    "GCC": {
+        "cgIgnore": true
+    },
+    "Go": null
+}
+```
+
 
 ---
 
@@ -426,3 +692,47 @@ After everything builds successfully, the packaging process kicks off and perfor
      📄 devcontainer.json
      📄 Dockerfile
 ```
+
+## Linux ARM64 Specific Builds
+
+The below provides a mechanism to build and test against targeted platforms (e.g. Linux ARM64). The following example uses the the dotnet container image for reference.
+
+### Build
+
+Run the docker build command using `buildx` from the .devcontainer in the dotnet directory within the project repo (`containers/dotnet/.devcontainer`). [buildx](https://docs.docker.com/buildx/working-with-buildx/) is a Docker CLI plugin that provides the ability to target multi-architectures (e.g. ARM64).
+
+Note a few of the arguments:
+
+- `--platform`: specifies the architecture to target, in this case we will be targeting Linux ARM64
+- `--build-arg`: for this example, we will be targeting specific dotnet versions (e.g. 6.0, 5.0, and 3.1) and Linux versions and distros.
+
+```bash
+docker buildx build --build-arg VARIANT=6.0.100-bullseye-slim-arm64v8 --platform linux/arm64 -t dotnet-arm64  --load -f base.Dockerfile .
+```
+
+Once the build is complete, run the image using the below example. Note that the dotnet directory is mounted. The dotnet directory includes test scripts which will be used in the subsequent steps.
+
+```bash
+docker run -v $REPODIR/vscode-dev-containers/containers/dotnet/:/workspace --platform linux/arm64 -it dotnet-arm64 bash
+```
+
+Once in the running container, verify that the architecture is ARM64 by running the command:
+
+```bash
+ uname -m
+```
+
+For ARM64 on Linux, the architecture will show as `aarch64`.
+
+### Test
+
+For Linux ARM64 and the Dotnet container requires that [VS Code attaches](https://code.visualstudio.com/docs/remote/attach-container) to the running container instance. Using VS Code and the [Remote-Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), attach to the running instance of the image previously created, run the test script and they should all pass.
+
+```bash
+/workspace/test-project/test.sh
+```
+
+### Reference
+
+- [ARM documentation](https://developer.arm.com/documentation/102475/0100/Multi-architecture-images) for how to build multi-architecture images.
+- [List of Supported Linux ARM64 DotNet SDK Images](https://hub.docker.com/_/microsoft-dotnet-sdk)

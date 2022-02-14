@@ -14,7 +14,7 @@
 
 ## Variant: bullseye
 
-**Digest:** sha256:7170e7e9ce8005d5966f5549425a67d9f62282057da8f3dc9d6025145c195f79
+**Digest:** sha256:7336fd8b3d04d26518bc1e33303a775e3fc73f4ca92f5846ac79aef7a1274070
 
 **Tags:**
 ```
@@ -44,7 +44,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -55,9 +55,9 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 | build-essential | 12.9 |
 | ca-certificates | 20210119 |
 | clang | 1:11.0-51+nmu5 |
-| cmake | 3.18.4-2 |
+| cmake | 3.18.4-2+deb11u1 |
 | cppcheck | 2.3-1 |
-| curl | 7.74.0-1.3+b1 |
+| curl | 7.74.0-1.3+deb11u1 |
 | dialog | 1.3-20201126-1 |
 | gdb | 10.1-1.7 |
 | git | 1:2.30.2-1 |
@@ -66,16 +66,16 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
 | less | 551-2 |
-| libc6 | 2.31-13 |
-| libgssapi-krb5-2 | 1.18.3-6 |
+| libc6 | 2.31-13+deb11u2 |
+| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
 | libicu67 | 67.1-7 |
-| libkrb5-3 | 1.18.3-6 |
+| libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
 | libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | lldb | 1:11.0-51+nmu5 |
 | llvm | 1:11.0-51+nmu5 |
-| locales | 2.31-13 |
+| locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
@@ -89,20 +89,20 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 | openssh-client | 1:8.4p1-5 |
 | procps | 2:3.3.17-5 |
 | psmisc | 23.4-2 |
-| rsync | 3.2.3-4 |
+| rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
 | valgrind | 1:3.16.1-1 |
-| vim-tiny | 2:8.2.2434-3 |
-| wget | 1.21-1+b1 |
+| vim-tiny | 2:8.2.2434-3+deb11u1 |
+| wget | 1.21-1+deb11u1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |
 
 ## Variant: buster
 
-**Digest:** sha256:78a8c342abe2dcf82cd70f332d8fb1ebea8449d2f996067abc3baa88654d959c
+**Digest:** sha256:bf7d1fefcfe90739e4b27712641dec0de4b51d6a48a90b1d38915535a62b2970
 
 **Tags:**
 ```
@@ -130,7 +130,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -154,9 +154,9 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian10
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u2 |
-| libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u2 |
+| libgssapi-krb5-2 | 1.17-3+deb10u3 |
+| libicu63 | 63.1-6+deb10u2 |
+| libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
@@ -175,7 +175,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian10
 | net-tools | 1.60+git20180626.aebd88e-1 |
 | openssh-client | 1:7.9p1-10+deb10u2 |
 | procps | 2:3.3.15-2 |
-| psmisc | 23.2-1 |
+| psmisc | 23.2-1+deb10u1 |
 | rsync | 3.1.3-6 |
 | strace | 4.26-0.2 |
 | sudo | 1.8.27-1+deb10u3 |
@@ -189,7 +189,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian10
 
 ## Variant: hirsute
 
-**Digest:** sha256:026bb4c570a7c435d2da89fea8fe690bfc6e6e78a0c5b9bc827706fd1eb1a077
+**Digest:** sha256:16051e95d627db846dd96e5e8d0d87d2521ace9fed8241c573947c11f9f6b4bd
 
 **Tags:**
 ```
@@ -217,7 +217,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -226,7 +226,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu21.04
 | apt-transport-https | 2.2.4ubuntu0.1 |
 | apt-utils | 2.2.4ubuntu0.1 |
 | build-essential | 12.8ubuntu3 |
-| ca-certificates | 20210119build1 |
+| ca-certificates | 20210119ubuntu0.21.04.1 |
 | clang | 1:12.0-52~exp1 |
 | cmake | 3.18.4-2ubuntu1 |
 | cppcheck | 2.3-1 |
@@ -241,10 +241,10 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu21.04
 | less | 551-2 |
 | libc6 | 2.33-0ubuntu5 |
 | libgssapi-krb5-2 | 1.18.3-4 |
-| libicu67 | 67.1-6ubuntu2 |
+| libicu67 | 67.1-6ubuntu2.1 |
 | libkrb5-3 | 1.18.3-4 |
 | liblttng-ust0 | 2.12.1-1ubuntu1 |
-| libssl1.1 | 1.1.1j-1ubuntu3.5 |
+| libssl1.1 | 1.1.1j-1ubuntu3.6 |
 | libstdc++6 | 11.1.0-1ubuntu1~21.04 |
 | lldb | 1:12.0-52~exp1 |
 | llvm | 1:12.0-52~exp1 |
@@ -259,7 +259,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu21.04
 | nano | 5.4-2build1 |
 | ncdu | 1.15.1-1 |
 | net-tools | 1.60+git20181103.0eebece-1ubuntu2 |
-| openssh-client | 1:8.4p1-5ubuntu1.1 |
+| openssh-client | 1:8.4p1-5ubuntu1.2 |
 | procps | 2:3.3.16-5ubuntu3.1 |
 | psmisc | 23.4-2build1 |
 | rsync | 3.2.3-3ubuntu1 |
@@ -267,7 +267,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu21.04
 | sudo | 1.9.5p2-2ubuntu3 |
 | unzip | 6.0-26ubuntu1 |
 | valgrind | 1:3.17.0-0ubuntu1 |
-| vim-tiny | 2:8.2.2434-1ubuntu1 |
+| vim-tiny | 2:8.2.2434-1ubuntu1.3 |
 | wget | 1.21-1ubuntu3 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu6 |
@@ -275,7 +275,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:154e587dd5b79d8c5d5939c91638e97727251c13e7e4e5037a75a69b2460f58e
+**Digest:** sha256:edb2bd731fb82a9784034e70dd4d0f3db1d01f0a4ab0cd3adb795585ec429773
 
 **Tags:**
 ```
@@ -304,7 +304,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -313,13 +313,13 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
 | build-essential | 12.8ubuntu1.1 |
-| ca-certificates | 20210119~20.04.1 |
+| ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
 | cmake | 3.16.3-1ubuntu1 |
 | cppcheck | 1.90-4build1 |
 | curl | 7.68.0-1ubuntu2.7 |
 | dialog | 1.3-20190808-1 |
-| gdb | 9.2-0ubuntu1~20.04 |
+| gdb | 9.2-0ubuntu1~20.04.1 |
 | git | 1:2.25.1-1ubuntu3.2 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
 | htop | 2.2.0-2build1 |
@@ -329,10 +329,10 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | libc6 | 2.31-0ubuntu9.2 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
-| libicu66 | 66.1-2ubuntu2 |
+| libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.8 |
+| libssl1.1 | 1.1.1f-1ubuntu2.10 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | lldb | 1:10.0-50~exp1 |
 | llvm | 1:10.0-50~exp1 |
@@ -347,23 +347,23 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
-| openssh-client | 1:8.2p1-4ubuntu0.3 |
+| openssh-client | 1:8.2p1-4ubuntu0.4 |
 | procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
-| rsync | 3.1.3-8 |
+| rsync | 3.1.3-8ubuntu0.1 |
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
 | valgrind | 1:3.15.0-1ubuntu9.1 |
-| vim-tiny | 2:8.1.2269-1ubuntu5 |
-| wget | 1.20.3-1ubuntu1 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.7 |
+| wget | 1.20.3-1ubuntu2 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |
 | zsh | 5.8-3ubuntu1 |
 
 ## Variant: bionic
 
-**Digest:** sha256:393ffc7c99f04bbcb3c28a69d9d0e17b9ca374bd6a598d18ead4a07811603da4
+**Digest:** sha256:20c6ee17f7dfb729821980a1e1ca2d0751d649d0f036a3c44ed8abd2311ce0fe
 
 **Tags:**
 ```
@@ -391,7 +391,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -400,7 +400,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 | apt-transport-https | 1.6.14 |
 | apt-utils | 1.6.14 |
 | build-essential | 12.4ubuntu1 |
-| ca-certificates | 20210119~18.04.1 |
+| ca-certificates | 20210119~18.04.2 |
 | clang | 1:6.0-41~exp5~ubuntu1 |
 | cmake | 3.10.2-1ubuntu2.18.04.2 |
 | cppcheck | 1.82-1 |
@@ -416,11 +416,11 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 | libc6 | 2.27-3ubuntu1.4 |
 | libgcc1 | 1:8.4.0-1ubuntu1~18.04 |
 | libgssapi-krb5-2 | 1.16-2ubuntu0.2 |
-| libicu60 | 60.2-3ubuntu3.1 |
+| libicu60 | 60.2-3ubuntu3.2 |
 | libkrb5-3 | 1.16-2ubuntu0.2 |
 | liblttng-ust0 | 2.10.1-1 |
 | libssl1.0.0 | 1.0.2n-1ubuntu5.7 |
-| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.13 |
+| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.14 |
 | libstdc++6 | 8.4.0-1ubuntu1~18.04 |
 | lldb | 1:6.0-41~exp5~ubuntu1 |
 | llvm | 1:6.0-41~exp5~ubuntu1 |
@@ -438,12 +438,12 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 | openssh-client | 1:7.6p1-4ubuntu0.5 |
 | procps | 2:3.3.12-3ubuntu1.2 |
 | psmisc | 23.1-1ubuntu0.1 |
-| rsync | 3.1.2-2.1ubuntu1.1 |
+| rsync | 3.1.2-2.1ubuntu1.2 |
 | strace | 4.21-1ubuntu1 |
 | sudo | 1.8.21p2-3ubuntu1.4 |
 | unzip | 6.0-21ubuntu1.1 |
 | valgrind | 1:3.13.0-2ubuntu2.3 |
-| vim-tiny | 2:8.0.1453-1ubuntu1.4 |
+| vim-tiny | 2:8.0.1453-1ubuntu1.8 |
 | wget | 1.19.4-1ubuntu2.2 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-0ubuntu2 |
@@ -451,7 +451,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 
 ## Variant: stretch
 
-**Digest:** sha256:f847bff739d3b77403241b821fe026cef2b45b000548a331eb5de07c378f47f4
+**Digest:** sha256:e1808a4881c9b297651ac7a8a9d6506cfd335505b9e1731becf6aee83565da2f
 
 **Tags:**
 ```
@@ -479,7 +479,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -492,7 +492,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian9
 | clang | 1:3.8-36 |
 | cmake | 3.7.2-1 |
 | cppcheck | 1.76.1-1 |
-| curl | 7.52.1-5+deb9u15 |
+| curl | 7.52.1-5+deb9u16 |
 | dialog | 1.3-20160828-2 |
 | gdb | 7.12-6 |
 | git | 1:2.11.0-3+deb9u7 |
@@ -503,12 +503,12 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian9
 | less | 481-2.1 |
 | libc6 | 2.24-11+deb9u4 |
 | libgcc1 | 1:6.3.0-18+deb9u1 |
-| libgssapi-krb5-2 | 1.15-1+deb9u2 |
-| libicu57 | 57.1-6+deb9u4 |
-| libkrb5-3 | 1.15-1+deb9u2 |
+| libgssapi-krb5-2 | 1.15-1+deb9u3 |
+| libicu57 | 57.1-6+deb9u5 |
+| libkrb5-3 | 1.15-1+deb9u3 |
 | liblttng-ust0 | 2.9.0-2+deb9u1 |
-| libssl1.0.2 | 1.0.2u-1~deb9u5 |
-| libssl1.1 | 1.1.0l-1~deb9u3 |
+| libssl1.0.2 | 1.0.2u-1~deb9u6 |
+| libssl1.1 | 1.1.0l-1~deb9u4 |
 | libstdc++6 | 6.3.0-18+deb9u1 |
 | lldb | 1:3.8-36 |
 | llvm | 1:3.8-36 |
@@ -526,12 +526,12 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian9
 | openssh-client | 1:7.4p1-10+deb9u7 |
 | procps | 2:3.3.12-3+deb9u1 |
 | psmisc | 22.21-2.1+b2 |
-| rsync | 3.1.2-1+deb9u2 |
+| rsync | 3.1.2-1+deb9u3 |
 | strace | 4.15-2 |
 | sudo | 1.8.19p1-2.1+deb9u3 |
 | unzip | 6.0-21+deb9u2 |
 | valgrind | 1:3.12.0~svn20160714-1+b1 |
-| vim-tiny | 2:8.0.0197-4+deb9u3 |
+| vim-tiny | 2:8.0.0197-4+deb9u4 |
 | wget | 1.18-5+deb9u3 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.8.dfsg-5 |

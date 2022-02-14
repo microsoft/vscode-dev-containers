@@ -10,8 +10,7 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"python.pythonPath": "/usr/local/bin/python",
-		"python.languageServer": "Pylance",
+		"python.defaultInterpreterPath": "/usr/local/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
@@ -39,6 +38,6 @@
 	// "postCreateCommand": "uname -a",
 
 
-	// Comment out connect as root instead. To add a non-root user, see: https://aka.ms/vscode-remote/containers/non-root.
+	// Comment out to connect as root instead. To add a non-root user, see: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

@@ -7,13 +7,14 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby]
+# Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby] [CLI version]
 
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 SOURCE_SOCKET=${2:-"/var/run/docker-host.sock"}
 TARGET_SOCKET=${3:-"/var/run/docker.sock"}
 USERNAME=${4:-"automatic"}
 USE_MOBY=${5:-"true"}
+DOCKER_VERSION=${6:-"latest"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOCKER_DASH_COMPOSE_VERSION="1"
 
@@ -119,27 +120,62 @@ if ! type git > /dev/null 2>&1; then
     apt-get -y install git
 fi
 
-# Install Docker / Moby CLI if not already installed
+# Source /etc/os-release to get OS info
+. /etc/os-release
+# Fetch host/container arch.
 architecture="$(dpkg --print-architecture)"
+
+# Set up the necessary apt repos (either Microsoft's or Docker's)
+if [ "${USE_MOBY}" = "true" ]; then
+
+    cli_package_name="moby-cli"
+
+    # Import key safely and import Microsoft apt repo
+    get_common_setting MICROSOFT_GPG_KEYS_URI
+    curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
+    echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+else
+    # Name of proprietary engine package
+    cli_package_name="docker-ce-cli"
+
+    # Import key safely and import Docker apt repo
+    curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
+fi
+
+# Refresh apt lists
+apt-get update
+
+# Soft version matching for CLI
+if [ "${DOCKER_VERSION}" = "latest" ] || [ "${DOCKER_VERSION}" = "lts" ] || [ "${DOCKER_VERSION}" = "stable" ]; then
+    # Empty, meaning grab whatever "latest" is in apt repo
+    cli_version_suffix=""
+else    
+    # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
+    docker_version_dot_escaped="${DOCKER_VERSION//./\\.}"
+    docker_version_dot_plus_escaped="${docker_version_dot_escaped//+/\\+}"
+    # Regex needs to handle debian package version number format: https://www.systutorials.com/docs/linux/man/5-deb-version/
+    docker_version_regex="^(.+:)?${docker_version_dot_plus_escaped}([\\.\\+ ~:-]|$)"
+    set +e # Don't exit if finding version fails - will handle gracefully
+    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${docker_version_regex}")"
+    set -e
+    if [ -z "${cli_version_suffix}" ] || [ "${cli_version_suffix}" = "=" ]; then
+        echo "(!) No full or partial Docker / Moby version match found for \"${DOCKER_VERSION}\" on OS ${ID} ${VERSION_CODENAME} (${architecture}). Available versions:"
+        apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | grep -oP '^(.+:)?\K.+'
+        exit 1
+    fi
+    echo "cli_version_suffix ${cli_version_suffix}"
+fi
+
+# Install Docker / Moby CLI if not already installed
 if type docker > /dev/null 2>&1; then
     echo "Docker / Moby CLI already installed."
 else
-    # Source /etc/os-release to get OS info
-    . /etc/os-release
     if [ "${USE_MOBY}" = "true" ]; then
-        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-        get_common_setting MICROSOFT_GPG_KEYS_URI
-        curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
-        echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
-        apt-get update
-        apt-get -y install --no-install-recommends moby-cli moby-buildx moby-engine
-        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for ${VERSION_CODENAME} ${architecture}. Skipping."
+        apt-get -y install --no-install-recommends moby-cli${cli_version_suffix} moby-buildx
+        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for OS ${ID} ${VERSION_CODENAME} (${architecture}). Skipping."
     else
-        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-        curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
-        apt-get update
-        apt-get -y install --no-install-recommends docker-ce-cli
+        apt-get -y install --no-install-recommends docker-ce-cli${cli_version_suffix}
     fi
 fi
 
@@ -164,10 +200,10 @@ else
         export PIP_CACHE_DIR=/tmp/pip-tmp/cache
         pipx_bin=pipx
         if ! type pipx > /dev/null 2>&1; then
-            pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
+            pip3 install --disable-pip-version-check --no-cache-dir --user pipx
             pipx_bin=/tmp/pip-tmp/bin/pipx
         fi
-        ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
+        ${pipx_bin} install --pip-args '--no-cache-dir --force-reinstall' docker-compose
         rm -rf /tmp/pip-tmp
     else 
         find_version_from_git_tags DOCKER_DASH_COMPOSE_VERSION "https://github.com/docker/compose" "tags/"

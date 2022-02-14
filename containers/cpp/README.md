@@ -10,8 +10,8 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/cpp |
-| *Available image variants* | stretch, buster, bullseye, bionic, focal, hirsute ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/cpp/tags/list)) |
-| *Published image architecture(s)* | x86-64, aarch64/arm64 for `bullseye`, `stretch`, `bionic`, and `hirsute` variants |
+| *Available image variants* | buster, bullseye, bionic, focal, hirsute ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/cpp/tags/list)) |
+| *Published image architecture(s)* | x86-64, aarch64/arm64 for `bullseye`, `bionic`, and `hirsute` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian, Ubuntu |
@@ -33,7 +33,6 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/cpp:debian` (latest Debian GA)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:bullseye` (or `debian-11`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:buster` (or `debian-10`)
-- `mcr.microsoft.com/vscode/devcontainers/cpp:stretch` (or `debian-9`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:ubuntu` (latest Ubuntu LTS)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:hirsute` (or `ubuntu-21.04`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:focal` (or `ubuntu-20.04`)

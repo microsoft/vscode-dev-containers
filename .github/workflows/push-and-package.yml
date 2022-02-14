@@ -1,7 +1,6 @@
 name: Release Containers
 
 on:
-  #repository_dispatch:
   push:
     tags:
     - 'v*'
@@ -38,7 +37,12 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZ_ACR_CREDS }}
-      
+
+    - name: Setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
     - name: Build and push
       id: build_and_push
       run: |
@@ -63,7 +67,6 @@ jobs:
     name: Package and release
     needs: [build-and-push]
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     steps:
     - name: Checkout
       id: checkout
@@ -72,6 +75,11 @@ jobs:
     - name: Get tag name
       id: get_tag_name
       run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
+
+    - name: Setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
 
     - name: Update Dockerfile common script sources and re-tag
       id: update_script_source
@@ -138,11 +146,27 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./${{ steps.package.outputs.package_name }}
         asset_name: ${{ steps.package.outputs.package_name }}
-        asset_content_type: application/gzip 
+        asset_content_type: application/gzip
+
+    - name: Copy container-features scripts to src folder
+      id: copy_scripts
+      run: cp -r ./script-library/*.sh ./script-library/container-features/src
+
+    - name: Publish devcontainer container-features
+      uses: microsoft/publish-dev-container-features-action@main
+      with:
+        path-to-features: './script-library/container-features/src'
+
+    - name: Update release to include features asset
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true # Lets us upload our own artifact from previous step
+        artifactErrorsFailBuild: true
+        artifacts: './devcontainer-features.tgz'
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   image-info:
     name: Trigger info extraction
-    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     needs: [package]
     runs-on: ubuntu-latest
     steps:

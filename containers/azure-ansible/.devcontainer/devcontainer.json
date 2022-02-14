@@ -1,6 +1,5 @@
 {
 	"name": "Azure Ansible (Community)",
-	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
@@ -9,6 +8,7 @@
 			"NODE_VERSION": "lts"
 		}
 	},
+	"runArgs": ["--init"],
 	"mounts": [
 		// [Optional] Anisble Collections: Uncomment if you want to mount your local .ansible/collections folder.
 		// "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ansible/collections,target=/root/.ansible/collections,type=bind,consistency=cached",
@@ -33,6 +33,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "ansible --version",
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

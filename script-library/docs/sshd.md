@@ -4,7 +4,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
@@ -14,23 +14,45 @@
 ./sshd-debian.sh [SSH Port] [Non-root user] [Start SSHD now flag] [New password for user] [Fix environment flag]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-| SSH port |`2222`| Port to host SSH server on. `22` is frequently in use, so using a different port is recommended. |
-| Non-root user |`automatic`| Specifies a user in the container other than root that will use SSH. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
-|Start SSHD now flag |`false`| Flag (`true`/`false`) that specifies whether the SSH server should be started after the script runs.|
-|New password for user|`skip`| Sets a new password for the specified non-root user. A value of `skip` will skip this step. A value of `random` will generate a random password and print it out when the script finishes. |
-|Fix environment flag|`true`|Connections using the SSH daemon use "fresh" login shells. While Remote - Containers and Codespaces handle most environment variables automatically, Codespaces secrets require additional processing. |
+Or as a feature:
+
+```json
+"features": {
+    "sshd": "latest"
+}
+```
+
+|Argument|Feature option|Default|Description|
+|--------|--------------|-------|-----------|
+| SSH port | | `2222`| Port to host SSH server on. `22` is frequently in use, so using a different port is recommended. |
+| Non-root user | | `automatic`| Specifies a user in the container other than root that will use SSH. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|Start SSHD now flag | | `false`| Flag (`true`/`false`) that specifies whether the SSH server should be started after the script runs.|
+|New password for user| | `skip`| Sets a new password for the specified non-root user. A value of `skip` will skip this step. A value of `random` will generate a random password and print it out when the script finishes. |
+|Fix environment flag| |`true`|Connections using the SSH daemon use "fresh" login shells. While Remote - Containers and Codespaces handle most environment variables automatically, Codespaces secrets require additional processing. |
 
 ## Usage
 
-This script can be used either ad-hoc in an already running container or in a Dockerfile. 
+This script can be used as a feature, ad-hoc in an already running container, or in a Dockerfile. 
+
+### Feature use
+
+To install these capabilities in your primary dev container, reference it in `devcontainer.json` as follows:
+
+```json
+"features": {
+    "sshd": "latest"
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
 
 ### Usage when this script is already installed in an image 
 The SSH script is included in the default Codespaces image (codespaces-linux) that is used in Codespaces when you do not have a custom `devcontainer.json`. It may also be in images you or your organization has created. Here's how to enable SSH in these cases. 
 
 Usage:
-1. The first time you've started the codespace, you will want to set a password for your user. If running as a user other than root, and you have `sudo` installed:
+1. Connect to your container or [codespace using VS Code (client)](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-codeusing).
+
+1. The first time you've started the container / codespace, you will want to set a password for your user. If running as a user other than root, and you have `sudo` installed:
 
     ```bash
     sudo passwd $(whoami)
@@ -92,7 +114,7 @@ Usage:
     passwd
     ```
 
-5. Connect to the container or [codespace using VS Code](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code). You can now SSH into the container on port `2222`. For example, if you are in the container as the `vscode` user, run the following command in a **local terminal**:
+5. Connect to the container or [codespace using VS Code (client)](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code). You can now SSH into the container on port `2222`. For example, if you are in the container as the `vscode` user, run the following command in a **local terminal**:
 
     ```bash
     ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o GlobalKnownHostsFile=/dev/null vscode@localhost
@@ -107,7 +129,7 @@ If you are unable to connect, it's possible SSH is available on a different loca
 
 If you already have a running container, you can use the script to spin up SSH inside it.
 
-1. Connect to the container or [codespace using VS Code](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code).
+1. Connect to the container or [codespace using VS Code (client)](https://docs.github.com/en/github/developing-online-with-codespaces/connecting-to-your-codespace-from-visual-studio-code).
 
 2. Open a terminal in VS Code and run the following if you're connected as a non-root user and `sudo` is installed:
 

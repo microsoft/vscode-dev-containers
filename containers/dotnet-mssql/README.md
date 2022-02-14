@@ -2,22 +2,22 @@
 
 ## Summary
 
-*Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and an MS SQL container for parallel database development. Adds an additional MS SQL container to the C# (.NET Core) container definion and deploys any .dacpac files from the mssql .devcontainer folder.*
+*Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and an MS SQL container for parallel database development. Adds an additional MS SQL container to the C# (.NET Core) container definition and deploys any .dacpac files from the mssql .devcontainer folder.*
 
 | Metadata | Value |  
 |----------|-------|
 | *Contributors* | The Azure Data Team (@dzsquared) |
-| *Categories* | Languages |
+| *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Published image architecture(s)* | x86-64 |
-| *Available image variants* | 2.1, 3.1, 5.0 |
+| *Available image variants* | 3.1-focal, 5.0-focal, 6.0-focal |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
-| *Container OS* | Ubuntu |
+| *Container OS* | Ubuntu 20.04/focal (Debian 11/bullseye image variants not yet supported by MSSQL client) |
 | *Languages, platforms* | .NET, .NET Core, C#, Microsoft SQL |
 
 ## Description
-This definition creates two containers, one for C# (.NET) and one for Microsoft SQL.  VS Code will attach to the .NET Core container, and from within that container the Microsoft SQL container will be available on **`localhost`** port 1433. By default, the `sa` user password is `P@ssw0rd`. For more on the configuration of MS SQL, see the section [MS SQL Configuration](#MS-SQL-Configuration)
+This definition creates two containers, one for C# (.NET) and one for Microsoft SQL. VS Code will attach to the .NET Core container, and from within that container the Microsoft SQL container will be available on **`localhost`** port 1433. By default, the `sa` user password is `P@ssw0rd`. For more on the configuration of MS SQL, see the section [MS SQL Configuration](#MS-SQL-Configuration)
 
 ## Using this definition
 
@@ -25,8 +25,10 @@ While this definition should work unmodified, you can select the version of .NET
 
 ```yaml
 args:
-  VARIANT: "3.1"
+  VARIANT: "3.1-focal"
 ```
+
+This will currently always use an Ubuntu 20.04/focal based .NET image since there is not yet a Debian 11/Bullseye ODBC driver.
 
 ### Debug Configuration
 
@@ -92,17 +94,18 @@ Given how frequently ASP.NET applications use Node.js for front end code, this c
 
 ```yaml
 args:
-  VARIANT: "3.1"
-  NODE_VERSION: "14" # Set to "none" to skip Node.js installation
+  VARIANT: "3.1-focal"
+  NODE_VERSION: "16" # Set to "none" to skip Node.js installation
 ```
 
-If you would like to install the Azure CLI update you can set the `INSTALL_AZURE_CLI` argument line in `.devcontainer/docker-compose.yml`:
+If you would like to install the Azure CLI, you can reference [a dev container feature](https://aka.ms/vscode-remote/containers/dev-container-features) by adding the following to `.devcontainer/devcontainer.json`:
 
-```yaml
-args:
-  VARIANT: "3.1"
-  NODE_VERSION: "14"
-  INSTALL_AZURE_CLI: "true"
+```json
+{
+  "features": {
+    "azure-cli": "latest"
+  }
+}
 ```
 
 If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.

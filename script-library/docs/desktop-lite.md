@@ -1,10 +1,10 @@
 # Desktop (Lightweight) Install Script
 
-*Adds a lightweight [Fluxbox](http://fluxbox.org/) based desktop to the container that can be accessed using a VNC viewer or the web. UI-based commands executed from the built in VS code terminal will open on the desktop automatically.*
+*Adds a lightweight [Fluxbox](http://fluxbox.org/) based desktop to the container that can be accessed using a VNC viewer or the web. GUI-based commands executed from the built-in VS code terminal will open on the desktop automatically.*
 
 **Script status**: Preview
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
@@ -13,16 +13,80 @@
 ## Syntax
 
 ```text
-./desktop-lite-debian.sh [Non-root user] [VNC password] [Install noVNC flag]
+./desktop-lite-debian.sh [Non-root user] [Desktop password] [Install web client flag] [VNC port] [Web port]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-|Non-root user|`automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
-|VNC password|`vscode`| Password for connecting to the desktop.|
-|Install noVNC flag|`true`| Flag (`true`/`false`) that specifies whether to enable web access to the desktop using [noVNC](https://novnc.com/info.html).|
+Or as a feature:
+
+```json
+"features": {
+    "desktop-lite": {
+        "password": "vscode",
+        "webPort": "6080",
+        "vncPort": "5901"
+    }
+}
+```
+
+|Argument| Feature option |Default|Description|
+|--------|----------------|-------|-----------|
+|Non-root user| | `automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
+|Desktop password| `password` | `vscode`| Password for connecting to the desktop.|
+|Install web client flag| | `true`| Flag (`true`/`false`) that specifies whether to enable web access to the desktop using [noVNC](https://novnc.com/info.html).|
+|VNC Port| `vncPort` | `5901`| Port to host a VNC server that you can use to connect to the desktop using a VNC Viewer.|
+|Web port | `webPort` | `6080`| Port to host the [noVNC](https://novnc.com/info.html) web client that you can use to connect to the desktop from a browser.|
 
 ## Usage
+
+### Feature use
+
+You can use this script for your primary dev container by adding it to the `features` property in `devcontainer.json`. 
+
+```json
+"features": {
+    "desktop-lite": {
+        "password": "vscode",
+        "webPort": "6080",
+        "vncPort": "5901"
+    }
+}
+```
+
+If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json` when you are referencing an image or Dockerfile:
+
+```json
+"runArgs": ["--shm-size=1g"]
+```
+
+Or when using Docker Compose:
+
+```yaml
+services:
+  your-service-here:
+    # ...
+    shm_size: '1gb'
+    # ...
+```
+
+**[Optional]** You may also want to enable the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle signals and clean up [Zombie processes](https://en.wikipedia.org/wiki/Zombie_process) if you do not have an alternative set up. To enable it, add the following to `devcontainer.json` if you are referencing an image or Dockerfile:
+
+```json
+"runArgs": ["--init"]
+```
+
+Or when using Docker Compose:
+
+```yaml
+services:
+  your-service-here:
+    # ...
+    init: true
+    # ...
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 1. Add [`desktop-lite-debian.sh`](../desktop-lite-debian.sh) to `.devcontainer/library-scripts`
 
@@ -49,7 +113,7 @@
 3. And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile:
 
     ```json
-    "runArgs": ["--init", "--security-opt", "seccomp=unconfined"],
+    "runArgs": ["--init"],
     "forwardPorts": [6080, 5901],
     "overrideCommand": false
     ```
@@ -59,15 +123,30 @@
     ```yaml
     your-service-here:
       init: true
-      security_opt:
-        - seccomp:unconfined
     ```
 
-    The `runArgs` / Docker Compose setting allows the container to take advantage of an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle application and process signals in a desktop environment.
+    The `runArgs` / Docker Compose setting allows the container to take advantage of an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle application and process signals in a desktop environment. However, this is optional.
 
-4. Once you've started the container / codespace, you'll be able to use a browser on port **6080** from anywhere or connect a [VNC viewer](https://www.realvnc.com/en/connect/download/viewer/) to port **5901** when accessing the codespace from VS Code.
+4. [Optional] If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json`:
 
-5. Default **password**: `vscode`
+    ```json
+    "runArgs": ["--init", "--shm-size=1g"]
+    ```
+
+    Or using Docker Compose:
+
+    ```yaml
+    services:
+      your-service-here:
+        # ...
+        init: true
+        shm_size: '1gb'
+        # ...
+    ```
+
+5. Once you've started the container / codespace, you'll be able to use a browser on port **6080** from anywhere or connect a [VNC viewer](https://www.realvnc.com/en/connect/download/viewer/) to port **5901** when accessing the codespace from VS Code.
+
+6. Default **password**: `vscode`
 
 The window manager is installed is [Fluxbox](http://fluxbox.org/). **Right-click** to see the application menu. In addition, any UI-based commands you execute in the VS Code integrated terminal will automatically appear on the desktop.
 
@@ -92,14 +171,9 @@ If you want the full version of **Google Chrome** in the desktop:
     ```Dockerfile
     RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         && curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb \
-        && apt-get -y install /tmp/chrome.deb \
-        && ALIASES="alias google-chrome='google-chrome --disable-dev-shm-usage'\nalias google-chrome-stable='google-chrome-stable --disable-dev-shm-usage'\n\alias x-www-browser='x-www-browser --disable-dev-shm-usage'\nalias gnome-www-browser='gnome-www-browser --disable-dev-shm-usage'" \
-        && echo "${ALIASES}" >> tee -a /etc/bash.bashrc \
-        && if type zsh > /dev/null 2>&1; then echo "${ALIASES}" >> /etc/zsh/zshrc; fi
+        && apt-get -y install /tmp/chrome.deb
     ```
 
-2. Chrome sandbox support requires you set up and run as a non-root user. The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). Alternatively, you can start Chrome using `google-chrome --no-sandbox --disable-dev-shm-usage`
-
-3. While Chrome should be aliased correctly with the instructions above, if you run into crashes, pass `--disable-dev-shm-usage` in as an argument when starting it: `google-chrome --disable-dev-shm-usage`
+2. Chrome sandbox support requires you set up and run as a non-root user. The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root). Alternatively, you can start Chrome using `google-chrome --no-sandbox`
 
 That's it!

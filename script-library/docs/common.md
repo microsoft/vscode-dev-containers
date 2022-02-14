@@ -11,25 +11,66 @@
 ## Syntax
 
 ```text
-./common-debian.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My Zsh! flag]
+./common-debian.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My Zsh! flag] [Non-free packages flag]
 ./common-redhat.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My Zsh! flag]
 ./common-alpine.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Install Oh My Zsh! flag]
 ```
 
+Or as a feature (Debian/Ubuntu only):
+
+```json
+"features": {
+    "common": {
+        "username": "automatic",
+        "uid": "automatic",
+        "gid": "automatic",
+        "installZsh": true,
+        "installOhMyZsh": true,
+        "upgradePackages": true,
+        "nonFreePackages": false
+    }
+}
+```
+
+
+
 > **Note:** `common-redhat.sh` is community supported.
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-|Install zsh flag|`true`| A `true`/`false` flag that indicates whether zsh should be installed. |
-|Non-root user|`automatic`| Specifies a user in the container other than root that should be created or modified. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. A value of `none` will skip this step. |
-|User UID|`automatic`| A specific UID (e.g. `1000`) for the user that will be created modified. A value of `automatic` will pick a free one if the user is created. |
-|User GID|`automatic`| A specific GID (e.g. `1000`) for the user's group that will be created modified. A value of `automatic` will pick a free one if the group is created. |
-| Upgrade packages flag | `true` | A `true`/`false` flag that indicates whether packages should be upgraded to the latest for the distro. |
-| Install Oh My Zsh! flag | `true` | A `true`/`false` flag that indicates whether Oh My Zsh! should be installed. |
+|Argument| Feature option |Default|Description|
+|--------|----------------|-------|-----------|
+|Install zsh flag| `installZsh` | `true`| A `true`/`false` flag that indicates whether zsh should be installed. |
+|Non-root user| `username` |`automatic`| Specifies a user in the container other than root that should be created or modified. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. A value of `none` will skip this step. |
+|User UID| `uid` |`automatic`| A specific UID (e.g. `1000`) for the user that will be created modified. A value of `automatic` will pick a free one if the user is created. |
+|User GID| `gid` | `automatic`| A specific GID (e.g. `1000`) for the user's group that will be created modified. A value of `automatic` will pick a free one if the group is created. |
+| Upgrade packages flag | `upgradePackages` | `true` | A `true`/`false` flag that indicates whether packages should be upgraded to the latest for the distro. |
+| Install Oh My Zsh! flag | `installOhMyZsh` | `true` | A `true`/`false` flag that indicates whether Oh My Zsh! should be installed. |
+| Non-free packages flag | `nonFreePackages` | `false` | A `true`/`false` flag that non-free channel packages like `manpages-posix` should be installed. |
 
 > **Note:** Previous versions of this script also installed Oh My Bash! but this has been dropped in favor of a simplified, default PS1 since it conflicted with common user configuration. A stub has been added so those that may have referenced it in places like their dotfiles are informed of the change and how to add it back if needed.
 
 ## Usage
+
+### Feature use
+
+To install these capabilities in your primary dev container, reference it in `devcontainer.json` as follows:
+
+```json
+"features": {
+    "common": {
+        "username": "automatic",
+        "uid": "automatic",
+        "gid": "automatic",
+        "installZsh": true,
+        "installOhMyZsh": true,
+        "upgradePackages": true,
+        "nonFreePackages": false
+    }
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 **Ubuntu / Debian:**
 
@@ -63,3 +104,17 @@
     RUN ash /tmp/library-scripts/common-alpine.sh
 
 That's it!
+
+## Speeding up the command prompt in large repositories
+
+This script provides a custom command prompt that includes information about the git repository for the current folder. However, with certain large repositories, this can result in a slow command prompt since the required git status command can be slow. To resolve this, you can update a git setting to remove the git portion of the command prompt.
+
+To disable the prompt for the current folder's repository, enter the following in a terminal or add it to your `postCreateCommand` or dotfiles:
+
+```bash
+git config codespaces-theme.hide-status 1
+```
+
+This setting will survive a rebuild since it is applied to the repository rather than the container.
+
+> **Note:** If this setting is not working and you have a copy of `common-debian.sh` in your `.devcontainer/library-scripts` folder, update it to the latest version of this script.

@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/java |
-| *Available image variants* | 11 / 11-buster, 16 / 16-buster, 11-bullseye, 16-bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
+| *Available image variants* | 11 / 11-bullseye, 17 / 17-bullseye, 11-buster, 17-buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/java/tags/list)) |
 | *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -26,15 +26,15 @@ See **[history](history)** for information on the contents of published images.
 While this definition should work unmodified, you can select the version of Java the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
-// Or you can use 16-bullseye or 16-buster if you want to pin to an OS version
-"args": { "VARIANT": "16" }
+// Or you can use 11-bullseye or 11-buster if you want to pin to an OS version
+"args": { "VARIANT": "11" }
 ```
 
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/java` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/java:11` (or `11-bullseye`, `11-buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/java:16` (or `16-bullseye`, `16-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/java:17` (or `17-bullseye`, `17-buster` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
@@ -76,9 +76,9 @@ You can also specify the version of Gradle or Maven if needed.
 "args": {
    "VARIANT": "11",
    "INSTALL_GRADLE": "true",
-   "MAVEN_VERSION": "3.6.3",
+   "MAVEN_VERSION": "3.8.3",
    "INSTALL_MAVEN": "true",
-   "GRADLE_VERSION": "5.4.1"
+   "GRADLE_VERSION": "7.2"
 }
 ```
 

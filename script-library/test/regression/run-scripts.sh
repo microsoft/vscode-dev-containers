@@ -44,7 +44,8 @@ runScript()
 DISTRO="${ID_LIKE}"
 if [ -z "${DISTRO}" ]; then
     DISTRO="${ID}"
-elif [ "${DISTRO}" = "rhel fedora" ] ||  [ "${DISTRO}" = "rhel" ] || [ "${DISTRO}" = "fedora" ]; then
+fi
+if [[ "${DISTRO}" = *"rhel"* ]] ||[[ "${DISTRO}" = *"centos"* ]] || [[ "${DISTRO}" = *"fedora"* ]]; then
     DISTRO="redhat"
 fi
 
@@ -94,7 +95,8 @@ if [ "${DISTRO}" = "debian" ]; then
     fi
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ]; then
         runScript homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
-    fi 
+    fi
+    runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet" 
 fi
 
 if [ "${DISTRO}" != "alpine" ]; then

@@ -9,13 +9,12 @@ FROM ${IMAGE_TO_TEST}
 
 USER root
 
-ARG USE_DEFAULTS="true"
 ARG USERNAME="vscode"
 ARG RUN_COMMON_SCRIPT="true"
 ARG UPGRADE_PACKAGES="false"
 ARG RUN_ONE="false"
 RUN --mount=target=/script-library,source=.,type=bind,rw \
-    sh /script-library/test/regression/run-scripts.sh /script-library ${USE_DEFAULTS} ${USERNAME} ${RUN_COMMON_SCRIPT} ${UPGRADE_PACKAGES} ${RUN_ONE}
+    sh /script-library/test/regression/run-scripts.sh /script-library true ${USERNAME} ${RUN_COMMON_SCRIPT} ${UPGRADE_PACKAGES} ${RUN_ONE}
 
 ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
 ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh", "/usr/local/share/desktop-init.sh" ]

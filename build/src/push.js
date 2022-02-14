@@ -30,7 +30,7 @@ async function push(repo, release, updateLatest, registry, registryPath, stubReg
     const stagingFolder = await configUtils.getStagingFolder(release);
     await configUtils.loadConfig(stagingFolder);
 
-    // Use or create a buildx / buildkit "builder" that using the docker-container driver that 
+    // Use or create a buildx / buildkit "builder" that using the docker-container driver which internally 
     // uses QEMU to emulate different architectures for cross-platform builds. Setting up a separate
     // builder avoids problems with the default config being different otherwise altered. It also can
     // be tweaked down the road to use a different driver like using separate machines per architecture.
@@ -99,7 +99,8 @@ async function pushImage(definitionId, repo, release, updateLatest,
             // Determine tags to use
             const versionTags = configUtils.getTagList(definitionId, release, updateLatest, registry, registryPath, variant);
             console.log(`(*) Tags:${versionTags.reduce((prev, current) => prev += `\n     ${current}`, '')}`);
-            let architectures = configUtils.getBuildSettings(definitionId).architectures;
+            const buildSettings = configUtils.getBuildSettings(definitionId);
+            let architectures = buildSettings.architectures;
             switch (typeof architectures) {
                 case 'string': architectures = [architectures]; break;
                 case 'object': if (!Array.isArray(architectures)) { architectures = architectures[variant]; } break;
@@ -122,9 +123,23 @@ async function pushImage(definitionId, repo, release, updateLatest,
             if (replaceImage || !await isDefinitionVersionAlreadyPublished(definitionId, release, registry, registryPath, variant)) {
                 const context = devContainerJson.build ? devContainerJson.build.context || '.' : devContainerJson.context || '.';
                 const workingDir = path.resolve(dotDevContainerPath, context);
+                // Add tags to buildx command params
+                const buildParams = versionTags.reduce((prev, current) => prev.concat(['-t', current]), []);
                 // Note: build.args in devcontainer.json is intentionally ignored so you can vary image contents and defaults as needed
-                const buildParams = (variant ? ['--build-arg', `VARIANT=${variant}`] : [])
-                    .concat(versionTags.reduce((prev, current) => prev.concat(['-t', current]), []));
+                // Add VARIANT --build-arg if applicable
+                if(variant) {
+                    buildParams.push('--build-arg', `VARIANT=${variant}`);
+                }
+                // Generate list of --build-arg values if applicable
+                for (let buildArg in buildSettings.buildArgs || {}) {
+                    buildParams.push('--build-arg', `${buildArg}=${buildSettings.buildArgs[buildArg]}`);
+                }
+                // Generate list of variant specific --build-arg values if applicable
+                if (buildSettings.variantBuildArgs) {
+                    for (let buildArg in buildSettings.variantBuildArgs[variant] || {}) {
+                        buildParams.push('--build-arg', `${buildArg}=${buildSettings.variantBuildArgs[variant][buildArg]}`);
+                    }
+                }
                 const spawnOpts = { stdio: 'inherit', cwd: workingDir, shell: true };
                 await asyncUtils.spawn('docker', [
                         'buildx',

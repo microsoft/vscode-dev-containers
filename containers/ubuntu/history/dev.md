@@ -11,7 +11,7 @@
 
 ## Variant: hirsute
 
-**Digest:** sha256:1b2bee1d8a5d65ff8dc2c17cc5ff933381ab6ca7408b24a06bedf5eb4f3904ab
+**Digest:** sha256:d9b68455f14e5cef6bfb0707c7967b5f9d5c0b48cf060d5918eaec395467b028
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -40,7 +40,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 |----------------|---------|
 | apt-transport-https | 2.2.4ubuntu0.1 |
 | apt-utils | 2.2.4ubuntu0.1 |
-| ca-certificates | 20210119build1 |
+| ca-certificates | 20210119ubuntu0.21.04.1 |
 | curl | 7.74.0-1ubuntu2.3 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1ubuntu1 |
@@ -51,10 +51,10 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 | less | 551-2 |
 | libc6 | 2.33-0ubuntu5 |
 | libgssapi-krb5-2 | 1.18.3-4 |
-| libicu67 | 67.1-6ubuntu2 |
+| libicu67 | 67.1-6ubuntu2.1 |
 | libkrb5-3 | 1.18.3-4 |
 | liblttng-ust0 | 2.12.1-1ubuntu1 |
-| libssl1.1 | 1.1.1j-1ubuntu3.5 |
+| libssl1.1 | 1.1.1j-1ubuntu3.6 |
 | libstdc++6 | 11.1.0-1ubuntu1~21.04 |
 | locales | 2.33-0ubuntu5 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -67,14 +67,14 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 | nano | 5.4-2build1 |
 | ncdu | 1.15.1-1 |
 | net-tools | 1.60+git20181103.0eebece-1ubuntu2 |
-| openssh-client | 1:8.4p1-5ubuntu1.1 |
+| openssh-client | 1:8.4p1-5ubuntu1.2 |
 | procps | 2:3.3.16-5ubuntu3.1 |
 | psmisc | 23.4-2build1 |
 | rsync | 3.2.3-3ubuntu1 |
 | strace | 5.11-0ubuntu1 |
 | sudo | 1.9.5p2-2ubuntu3 |
 | unzip | 6.0-26ubuntu1 |
-| vim-tiny | 2:8.2.2434-1ubuntu1 |
+| vim-tiny | 2:8.2.2434-1ubuntu1.3 |
 | wget | 1.21-1ubuntu3 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu6 |
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:b594ad9a36ac9f7ecfc5944ae4e572a94bb9d1a851ad585e2488fb5202c9bba0
+**Digest:** sha256:8b2fbf87f7712d829c90d0b353bf7b62e9a0fbed4b50f0f932c60d9c0ef910c1
 
 **Tags:**
 ```
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -112,7 +112,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| ca-certificates | 20210119~20.04.1 |
+| ca-certificates | 20210119~20.04.2 |
 | curl | 7.68.0-1ubuntu2.7 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.2 |
@@ -124,10 +124,10 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | libc6 | 2.31-0ubuntu9.2 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
-| libicu66 | 66.1-2ubuntu2 |
+| libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.8 |
+| libssl1.1 | 1.1.1f-1ubuntu2.10 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.2 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -140,22 +140,22 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
-| openssh-client | 1:8.2p1-4ubuntu0.3 |
+| openssh-client | 1:8.2p1-4ubuntu0.4 |
 | procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
-| rsync | 3.1.3-8 |
+| rsync | 3.1.3-8ubuntu0.1 |
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
-| vim-tiny | 2:8.1.2269-1ubuntu5 |
-| wget | 1.20.3-1ubuntu1 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.7 |
+| wget | 1.20.3-1ubuntu2 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |
 | zsh | 5.8-3ubuntu1 |
 
 ## Variant: bionic
 
-**Digest:** sha256:3dab859ad3e1585c68c59d7484a3f4370e6a4a02ba79e625af9474d3710e89c0
+**Digest:** sha256:bcbab763e34d588a7d6fa7c20cb8f1ba4aa9dee8e698eaa64645b36d732e8be6
 
 **Tags:**
 ```
@@ -176,7 +176,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -184,7 +184,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 |----------------|---------|
 | apt-transport-https | 1.6.14 |
 | apt-utils | 1.6.14 |
-| ca-certificates | 20210119~18.04.1 |
+| ca-certificates | 20210119~18.04.2 |
 | curl | 7.58.0-2ubuntu3.16 |
 | dialog | 1.3-20171209-1 |
 | git | 1:2.17.1-1ubuntu0.9 |
@@ -196,11 +196,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | libc6 | 2.27-3ubuntu1.4 |
 | libgcc1 | 1:8.4.0-1ubuntu1~18.04 |
 | libgssapi-krb5-2 | 1.16-2ubuntu0.2 |
-| libicu60 | 60.2-3ubuntu3.1 |
+| libicu60 | 60.2-3ubuntu3.2 |
 | libkrb5-3 | 1.16-2ubuntu0.2 |
 | liblttng-ust0 | 2.10.1-1 |
 | libssl1.0.0 | 1.0.2n-1ubuntu5.7 |
-| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.13 |
+| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.14 |
 | libstdc++6 | 8.4.0-1ubuntu1~18.04 |
 | locales | 2.27-3ubuntu1.4 |
 | lsb-release | 9.20170808ubuntu1 |
@@ -216,11 +216,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | openssh-client | 1:7.6p1-4ubuntu0.5 |
 | procps | 2:3.3.12-3ubuntu1.2 |
 | psmisc | 23.1-1ubuntu0.1 |
-| rsync | 3.1.2-2.1ubuntu1.1 |
+| rsync | 3.1.2-2.1ubuntu1.2 |
 | strace | 4.21-1ubuntu1 |
 | sudo | 1.8.21p2-3ubuntu1.4 |
 | unzip | 6.0-21ubuntu1.1 |
-| vim-tiny | 2:8.0.1453-1ubuntu1.4 |
+| vim-tiny | 2:8.0.1453-1ubuntu1.8 |
 | wget | 1.19.4-1ubuntu2.2 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-0ubuntu2 |

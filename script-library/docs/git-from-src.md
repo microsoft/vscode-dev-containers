@@ -4,7 +4,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 16.04+, and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams
 
@@ -14,12 +14,40 @@
 ./git-from-src-debian.sh [Version] [Use PPA if available]
 ```
 
-|Argument|Default|Description|
-|--------|-------|-----------|
-|Version|`latest`| Version of Git to build and install. Use `latest` to install the latest stable version. |
-|Use PPA if available|`false`| If using Ubuntu and a build already exists in the git-core PPA, use it instead of building from scratch. |
+Or as a feature:
+
+```json
+"features": {
+    "git": {
+        "version": "latest",
+        "ppa": false
+    }
+}
+```
+
+|Argument|Feature option|Default|Description|
+|--------|--------------|-------|-----------|
+|Version| `version` | `latest`| Version of Git to build and install. Use `latest` to install the latest stable version. Use `os-provided` to skip building and install the pre-compiled version of Git comes with the Linux distribution instead (much faster). |
+|Use PPA if available| `ppa` | `false`| If using Ubuntu and a build already exists in the git-core PPA, use it instead of building from scratch. |
 
 ## Usage
+
+### Feature use
+
+You can use this script for your primary dev container by adding it to the `features` property in `devcontainer.json`.
+
+```json
+"features": {
+    "git": {
+        "version": "latest",
+        "ppa": false
+    }
+}
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
+
+### Script use
 
 1. Add [`git-from-src-debian.sh`](../git-from-src-debian.sh) to `.devcontainer/library-scripts`
 

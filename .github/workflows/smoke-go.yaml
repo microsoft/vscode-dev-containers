@@ -1,0 +1,32 @@
+name: Smoke test "go" build
+
+on: 
+  workflow_dispatch:
+
+  push:
+    branches: [main, actions-test]
+    paths:
+      - 'containers/go/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'containers/go/**'
+jobs:
+  smoke-test:
+    name: Smoke test
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v2
+
+    - name: Smoke test
+      id: smoke_test
+      uses: ./.github/actions/smoke-test
+      with:
+        definition: go
+        image: mcr.microsoft.com/vscode/devcontainers/go:dev-1
+        user: vscode

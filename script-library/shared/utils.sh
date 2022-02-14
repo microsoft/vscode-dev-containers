@@ -69,7 +69,7 @@ sdk_install() {
     local suffix="${4:-"\\s*"}"
     local full_version_check=${5:-".*-[a-z]+"}
     if [ "${requested_version}" = "none" ]; then return; fi
-    # Blank will install latest stable AdoptOpenJDK version
+    # Blank will install latest stable version
     if [ "${requested_version}" = "lts" ] || [ "${requested_version}" = "default" ]; then
          requested_version=""
     elif echo "${requested_version}" | grep -oE "${full_version_check}" > /dev/null 2>&1; then
@@ -206,4 +206,46 @@ check_packages() {
         apt_get_update_if_needed
         apt-get -y install --no-install-recommends "$@"
     fi
+}
+
+# Soft version matching that resolves a version for a given package in the *current apt-cache*
+# Return value is stored in first argument (the unprocessed version)
+apt_cache_version_soft_match() {
+    
+    # Version
+    local variable_name="$1"
+    local requested_version=${!variable_name}
+    # Package Name
+    local package_name="$2"
+    # Exit on no match?
+    local exit_on_no_match="${3:-true}"
+
+    # Ensure we've exported useful variables
+    . /etc/os-release
+    local architecture="$(dpkg --print-architecture)"
+    
+    dot_escaped="${requested_version//./\\.}"
+    dot_plus_escaped="${dot_escaped//+/\\+}"
+    # Regex needs to handle debian package version number format: https://www.systutorials.com/docs/linux/man/5-deb-version/
+    version_regex="^(.+:)?${dot_plus_escaped}([\\.\\+ ~:-]|$)"
+    set +e # Don't exit if finding version fails - handle gracefully
+        fuzzy_version="$(apt-cache madison ${package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${version_regex}")"
+    set -e
+    if [ -z "${fuzzy_version}" ]; then
+        echo "(!) No full or partial for package \"${package_name}\" match found in apt-cache for \"${requested_version}\" on OS ${ID} ${VERSION_CODENAME} (${architecture})."
+
+        if $exit_on_no_match; then
+            echo "Available versions:"
+            apt-cache madison ${package_name} | awk -F"|" '{print $2}' | grep -oP '^(.+:)?\K.+'
+            exit 1 # Fail entire script
+        else
+            echo "Continuing to fallback method (if available)"
+            return 1;
+        fi
+    fi
+
+    # Globally assign fuzzy_version to this value
+    # Use this value as the return value of this function
+    declare -g ${variable_name}="=${fuzzy_version}"
+    echo "${variable_name}=${!variable_name}"
 }

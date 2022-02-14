@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
-**Digest:** sha256:626280df421c883b00c8f45d104a22410ac32bec4645291a52788fcd6cf420ef
+**Digest:** sha256:be04f34e2c364e7136849f7cfc5e09b92c3b568bc2d928f9cc4141e4b3cab1ee
 
 **Tags:**
 ```
@@ -23,22 +23,23 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.8.8 | /opt/conda |
-| [Jupyter Notebooks](https://jupyter.org/) | 6.3.0 | /opt/conda |
-| [Jupyter Lab](https://jupyter.org/) | 3.0.14 | /opt/conda |
+| [Python](https://www.python.org/) | 3.9.7 | /opt/conda |
+| [Jupyter Notebooks](https://jupyter.org/) | 6.4.5 | /opt/conda |
+| [Jupyter Lab](https://jupyter.org/) | 3.2.1 | /opt/conda |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | fc40b53e6460560ed9b256deb87f2165f8d48f1f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [conda](https://github.com/conda/conda) | 4.10.1 | /opt/conda |
+| [conda](https://github.com/conda/conda) | 4.10.3 | /opt/conda |
+| anaconda | 2021.11 | /opt/conda |
 
 **Additional linux tools and packages**
 
@@ -47,7 +48,7 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+b1 |
+| curl | 7.74.0-1.3+deb11u1 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1 |
 | gnupg2 | 2.2.27-2 |
@@ -55,14 +56,14 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
 | less | 551-2 |
-| libc6 | 2.31-13 |
-| libgssapi-krb5-2 | 1.18.3-6 |
+| libc6 | 2.31-13+deb11u2 |
+| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
 | libicu67 | 67.1-7 |
-| libkrb5-3 | 1.18.3-6 |
+| libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
 | libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13 |
+| locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
@@ -76,13 +77,13 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 | openssh-client | 1:8.4p1-5 |
 | procps | 2:3.3.17-5 |
 | psmisc | 23.4-2 |
-| rsync | 3.2.3-4 |
+| rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
-| vim-tiny | 2:8.2.2434-3 |
-| wget | 1.21-1+b1 |
-| yarn | 1.22.5-1 |
+| vim-tiny | 2:8.2.2434-3+deb11u1 |
+| wget | 1.21-1+deb11u1 |
+| yarn | 1.22.17-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |

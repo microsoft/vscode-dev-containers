@@ -1,6 +1,6 @@
 # Update VARIANT in devcontainer.json to pick a Dart version
 ARG VARIANT=2
-FROM google/dart:${VARIANT}
+FROM dart:${VARIANT}
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"

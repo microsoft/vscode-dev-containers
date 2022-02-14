@@ -1,14 +1,13 @@
 {
 	"name": "Python 3",
-	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "..",
 		"args": { 
-			// Update 'VARIANT' to pick a Python version: 3, 3.9, 3.8, 3.7, 3.6.
+			// Update 'VARIANT' to pick a Python version: 3, 3.10, 3.9, 3.8, 3.7, 3.6
 			// Append -bullseye or -buster to pin to an OS version.
 			// Use -bullseye variants on local on arm64/Apple Silicon.
-			"VARIANT": "3-bullseye",
+			"VARIANT": "3.10-bullseye",
 			// Options
 			"NODE_VERSION": "lts/*"
 		}
@@ -16,8 +15,7 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"python.pythonPath": "/usr/local/bin/python",
-		"python.languageServer": "Pylance",
+		"python.defaultInterpreterPath": "/usr/local/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
@@ -43,6 +41,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "pip3 install --user -r requirements.txt",
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

@@ -2,7 +2,7 @@
 	"name": "CPython",
 	"dockerFile": "Dockerfile",
 	"settings": { 
-		"python.pythonPath": "${workspaceFolder}/python",
+		"python.defaultInterpreterPath": "${workspaceFolder}/python",
 		"python.testing.unittestArgs": [
 			"-v",
 			"-s",

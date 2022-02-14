@@ -11,7 +11,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:95b5e4473c159368e94c2c2bfd16f10bd5b445b5aa45927eb4bfb4aeafbc0192
+**Digest:** sha256:343190df885c9214d783386f844e76832c73f0b19d647388d2ff5eab65e252ce
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -51,9 +51,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 | less | 487-0.1+b1 |
 | libc6 | 2.28-10 |
 | libgcc1 | 1:8.3.0-6 |
-| libgssapi-krb5-2 | 1.17-3+deb10u2 |
-| libicu63 | 63.1-6+deb10u1 |
-| libkrb5-3 | 1.17-3+deb10u2 |
+| libgssapi-krb5-2 | 1.17-3+deb10u3 |
+| libicu63 | 63.1-6+deb10u2 |
+| libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
 | libssl1.1 | 1.1.1d-0+deb10u7 |
 | libstdc++6 | 8.3.0-6 |
@@ -70,7 +70,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 | net-tools | 1.60+git20180626.aebd88e-1 |
 | openssh-client | 1:7.9p1-10+deb10u2 |
 | procps | 2:3.3.15-2 |
-| psmisc | 23.2-1 |
+| psmisc | 23.2-1+deb10u1 |
 | rsync | 3.1.3-6 |
 | strace | 4.26-0.2 |
 | sudo | 1.8.27-1+deb10u3 |
@@ -83,7 +83,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 ## Variant: bullseye
 
-**Digest:** sha256:8630e6db06ff84f583ff3da9e6e35accab5aa11985d9f4f058adcba201a79f0f
+**Digest:** sha256:6dba26c80d3b55cffe127a4a6b224972f07f7830aae0f79b83205a159cd7ed3e
 
 **Tags:**
 ```
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -115,7 +115,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+b1 |
+| curl | 7.74.0-1.3+deb11u1 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1 |
 | gnupg2 | 2.2.27-2 |
@@ -123,14 +123,14 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
 | less | 551-2 |
-| libc6 | 2.31-13 |
-| libgssapi-krb5-2 | 1.18.3-6 |
+| libc6 | 2.31-13+deb11u2 |
+| libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
 | libicu67 | 67.1-7 |
-| libkrb5-3 | 1.18.3-6 |
+| libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
 | libssl1.1 | 1.1.1k-1+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13 |
+| locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
@@ -144,19 +144,19 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 | openssh-client | 1:8.4p1-5 |
 | procps | 2:3.3.17-5 |
 | psmisc | 23.4-2 |
-| rsync | 3.2.3-4 |
+| rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
 | unzip | 6.0-26 |
-| vim-tiny | 2:8.2.2434-3 |
-| wget | 1.21-1+b1 |
+| vim-tiny | 2:8.2.2434-3+deb11u1 |
+| wget | 1.21-1+deb11u1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+b2 |
 
 ## Variant: stretch
 
-**Digest:** sha256:2f5d2ad73470f4f5c5b0c8bc613c81b2d9aa05c3c7ca6bf6ab651d20af41b625
+**Digest:** sha256:6f4a404a286308db33016641b0611647b4ca460f20e66bb696f5f434e5ce3912
 
 **Tags:**
 ```
@@ -177,7 +177,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 5b3d2b2f0c02ef059fcbcbdb619b22318b8cc13a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -186,7 +186,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 | apt-transport-https | 1.4.11 |
 | apt-utils | 1.4.11 |
 | ca-certificates | 20200601~deb9u2 |
-| curl | 7.52.1-5+deb9u15 |
+| curl | 7.52.1-5+deb9u16 |
 | dialog | 1.3-20160828-2 |
 | git | 1:2.11.0-3+deb9u7 |
 | gnupg2 | 2.1.18-8~deb9u4 |
@@ -196,12 +196,12 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 | less | 481-2.1 |
 | libc6 | 2.24-11+deb9u4 |
 | libgcc1 | 1:6.3.0-18+deb9u1 |
-| libgssapi-krb5-2 | 1.15-1+deb9u2 |
-| libicu57 | 57.1-6+deb9u4 |
-| libkrb5-3 | 1.15-1+deb9u2 |
+| libgssapi-krb5-2 | 1.15-1+deb9u3 |
+| libicu57 | 57.1-6+deb9u5 |
+| libkrb5-3 | 1.15-1+deb9u3 |
 | liblttng-ust0 | 2.9.0-2+deb9u1 |
-| libssl1.0.2 | 1.0.2u-1~deb9u5 |
-| libssl1.1 | 1.1.0l-1~deb9u3 |
+| libssl1.0.2 | 1.0.2u-1~deb9u6 |
+| libssl1.1 | 1.1.0l-1~deb9u4 |
 | libstdc++6 | 6.3.0-18+deb9u1 |
 | locales | 2.24-11+deb9u4 |
 | lsb-release | 9.20161125 |
@@ -217,11 +217,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 | openssh-client | 1:7.4p1-10+deb9u7 |
 | procps | 2:3.3.12-3+deb9u1 |
 | psmisc | 22.21-2.1+b2 |
-| rsync | 3.1.2-1+deb9u2 |
+| rsync | 3.1.2-1+deb9u3 |
 | strace | 4.15-2 |
 | sudo | 1.8.19p1-2.1+deb9u3 |
 | unzip | 6.0-21+deb9u2 |
-| vim-tiny | 2:8.0.0197-4+deb9u3 |
+| vim-tiny | 2:8.0.0197-4+deb9u4 |
 | wget | 1.18-5+deb9u3 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.8.dfsg-5 |

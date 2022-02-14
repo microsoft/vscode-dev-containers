@@ -1,6 +1,5 @@
 {
 	"name": "Azure Functions & C# - .NET Core 3.1",
-	"runArgs": ["--init"],
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 
@@ -16,6 +15,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

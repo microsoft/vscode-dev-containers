@@ -7,11 +7,12 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker-in-docker.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./docker-in-docker-debian.sh [enable non-root docker access flag] [non-root user] [use moby]
+# Syntax: ./docker-in-docker-debian.sh [enable non-root docker access flag] [non-root user] [use moby] [Engine/CLI Version]
 
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 USERNAME=${2:-"automatic"}
 USE_MOBY=${3:-"true"}
+DOCKER_VERSION=${4:-"latest"} # The Docker/Moby Engine + CLI should match in version
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOCKER_DASH_COMPOSE_VERSION="1"
 
@@ -123,33 +124,74 @@ if type iptables-legacy > /dev/null 2>&1; then
     update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 fi
 
-# Install Docker / Moby CLI if not already installed
+# Source /etc/os-release to get OS info
+. /etc/os-release
+# Fetch host/container arch.
 architecture="$(dpkg --print-architecture)"
+
+# Set up the necessary apt repos (either Microsoft's or Docker's)
+if [ "${USE_MOBY}" = "true" ]; then
+
+    # Name of open source engine/cli
+    engine_package_name="moby-engine"
+    cli_package_name="moby-cli"
+
+    # Import key safely and import Microsoft apt repo
+    get_common_setting MICROSOFT_GPG_KEYS_URI
+    curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
+    echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
+else
+    # Name of licensed engine/cli
+    engine_package_name="docker-ce"
+    cli_package_name="docker-ce-cli"
+
+    # Import key safely and import Docker apt repo
+    curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
+fi
+
+# Refresh apt lists
+apt-get update
+
+# Soft version matching
+if [ "${DOCKER_VERSION}" = "latest" ] || [ "${DOCKER_VERSION}" = "lts" ] || [ "${DOCKER_VERSION}" = "stable" ]; then
+    # Empty, meaning grab whatever "latest" is in apt repo
+    engine_version_suffix=""
+    cli_version_suffix=""
+else
+    # Fetch a valid version from the apt-cache (eg: the Microsoft repo appends +azure, breakfix, etc...)
+    docker_version_dot_escaped="${DOCKER_VERSION//./\\.}"
+    docker_version_dot_plus_escaped="${docker_version_dot_escaped//+/\\+}"
+    # Regex needs to handle debian package version number format: https://www.systutorials.com/docs/linux/man/5-deb-version/
+    docker_version_regex="^(.+:)?${docker_version_dot_plus_escaped}([\\.\\+ ~:-]|$)"
+    set +e # Don't exit if finding version fails - will handle gracefully
+    cli_version_suffix="=$(apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${docker_version_regex}")"
+    engine_version_suffix="=$(apt-cache madison ${engine_package_name} | awk -F"|" '{print $2}' | sed -e 's/^[ \t]*//' | grep -E -m 1 "${docker_version_regex}")"
+    set -e
+    if [ -z "${engine_version_suffix}" ] || [ "${engine_version_suffix}" = "=" ] || [ -z "${cli_version_suffix}" ] || [ "${cli_version_suffix}" = "=" ] ; then
+        echo "(!) No full or partial Docker / Moby version match found for \"${DOCKER_VERSION}\" on OS ${ID} ${VERSION_CODENAME} (${architecture}). Available versions:"
+        apt-cache madison ${cli_package_name} | awk -F"|" '{print $2}' | grep -oP '^(.+:)?\K.+'
+        exit 1
+    fi
+    echo "engine_version_suffix ${engine_version_suffix}"
+    echo "cli_version_suffix ${cli_version_suffix}"
+fi
+
+# Install Docker / Moby CLI if not already installed
 if type docker > /dev/null 2>&1 && type dockerd > /dev/null 2>&1; then
     echo "Docker / Moby CLI and Engine already installed."
 else
-    # Source /etc/os-release to get OS info
-    . /etc/os-release
     if [ "${USE_MOBY}" = "true" ]; then
-        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-        get_common_setting MICROSOFT_GPG_KEYS_URI
-        curl -sSL ${MICROSOFT_GPG_KEYS_URI} | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg
-        echo "deb [arch=${architecture} signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/microsoft-${ID}-${VERSION_CODENAME}-prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft.list
-        apt-get update
-        apt-get -y install --no-install-recommends moby-cli moby-buildx moby-engine
-        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for ${VERSION_CODENAME} ${architecture}. Skipping."
+        apt-get -y install --no-install-recommends moby-cli${cli_version_suffix} moby-buildx moby-engine${engine_version_suffix}
+        apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for OS ${ID} ${VERSION_CODENAME} (${architecture}). Skipping."
     else
-        # Import key safely (new 'signed-by' method rather than deprecated apt-key approach) and install
-        curl -fsSL https://download.docker.com/linux/${ID}/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" > /etc/apt/sources.list.d/docker.list
-        apt-get update
-        apt-get -y install --no-install-recommends docker-ce-cli docker-ce
+        apt-get -y install --no-install-recommends docker-ce-cli${cli_version_suffix} docker-ce${engine_version_suffix}
     fi
 fi
 
-echo "Finished installing docker / moby"
+echo "Finished installing docker / moby!"
 
-# Install Docker Compose if not already installed  and is on a supported architecture
+# Install Docker Compose if not already installed and is on a supported architecture
 if type docker-compose > /dev/null 2>&1; then
     echo "Docker Compose already installed."
 else
@@ -170,12 +212,13 @@ else
         export PIP_CACHE_DIR=/tmp/pip-tmp/cache
         pipx_bin=pipx
         if ! type pipx > /dev/null 2>&1; then
-            pip3 install --disable-pip-version-check --no-warn-script-location  --no-cache-dir --user pipx
+            pip3 install --disable-pip-version-check --no-cache-dir --user pipx
             pipx_bin=/tmp/pip-tmp/bin/pipx
         fi
-        ${pipx_bin} install --system-site-packages --pip-args '--no-cache-dir --force-reinstall' docker-compose
+        ${pipx_bin} install --pip-args '--no-cache-dir --force-reinstall' docker-compose
         rm -rf /tmp/pip-tmp
     else
+        # Only supports docker-compose v1
         find_version_from_git_tags DOCKER_DASH_COMPOSE_VERSION "https://github.com/docker/compose" "tags/"
         echo "(*) Installing docker-compose ${DOCKER_DASH_COMPOSE_VERSION}..."
         curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_DASH_COMPOSE_VERSION}/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
@@ -201,72 +244,74 @@ fi
 
 tee /usr/local/share/docker-init.sh > /dev/null \
 << 'EOF'
-#!/usr/bin/env bash
+#!/bin/sh
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-sudoIf()
-{
-    if [ "$(id -u)" -ne 0 ]; then
-        sudo "$@"
-    else
-        "$@"
+set -e
+
+dockerd_start="$(cat << 'INNEREOF'
+    # explicitly remove dockerd and containerd PID file to ensure that it can start properly if it was stopped uncleanly
+    # ie: docker kill <ID>
+    find /run /var/run -iname 'docker*.pid' -delete || :
+    find /run /var/run -iname 'container*.pid' -delete || :
+
+    ## Dind wrapper script from docker team, adapted to a function
+    # Maintained: https://github.com/moby/moby/blob/master/hack/dind
+
+    export container=docker
+
+    if [ -d /sys/kernel/security ] && ! mountpoint -q /sys/kernel/security; then
+        mount -t securityfs none /sys/kernel/security || {
+            echo >&2 'Could not mount /sys/kernel/security.'
+            echo >&2 'AppArmor detection and --privileged mode might break.'
+        }
     fi
-}
 
-# explicitly remove dockerd and containerd PID file to ensure that it can start properly if it was stopped uncleanly
-# ie: docker kill <ID>
-sudoIf find /run /var/run -iname 'docker*.pid' -delete || :
-sudoIf find /run /var/run -iname 'container*.pid' -delete || :
+    # Mount /tmp (conditionally)
+    if ! mountpoint -q /tmp; then
+        mount -t tmpfs none /tmp
+    fi
 
-set -e
+    # cgroup v2: enable nesting
+    if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
+        # move the processes from the root group to the /init group,
+        # otherwise writing subtree_control fails with EBUSY.
+        # An error during moving non-existent process (i.e., "cat") is ignored.
+        mkdir -p /sys/fs/cgroup/init
+        xargs -rn1 < /sys/fs/cgroup/cgroup.procs > /sys/fs/cgroup/init/cgroup.procs || :
+        # enable controllers
+        sed -e 's/ / +/g' -e 's/^/+/' < /sys/fs/cgroup/cgroup.controllers \
+            > /sys/fs/cgroup/cgroup.subtree_control
+    fi
+    ## Dind wrapper over.
 
-## Dind wrapper script from docker team
-# Maintained: https://github.com/moby/moby/blob/master/hack/dind
+    # Handle DNS
+    set +e
+    cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
+    if [ $? -eq 0 ]
+    then
+        echo "Setting dockerd Azure DNS."
+        CUSTOMDNS="--dns 168.63.129.16"
+    else
+        echo "Not setting dockerd DNS manually."
+        CUSTOMDNS=""
+    fi
+    set -e
 
-export container=docker
+    # Start docker/moby engine
+    ( dockerd $CUSTOMDNS > /tmp/dockerd.log 2>&1 ) &
+INNEREOF
+)"
 
-if [ -d /sys/kernel/security ] && ! sudoIf mountpoint -q /sys/kernel/security; then
-	sudoIf mount -t securityfs none /sys/kernel/security || {
-		echo >&2 'Could not mount /sys/kernel/security.'
-		echo >&2 'AppArmor detection and --privileged mode might break.'
-	}
-fi
-
-# Mount /tmp (conditionally)
-if ! sudoIf mountpoint -q /tmp; then
-	sudoIf mount -t tmpfs none /tmp
-fi
-
-# cgroup v2: enable nesting
-if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
-	# move the init process (PID 1) from the root group to the /init group,
-	# otherwise writing subtree_control fails with EBUSY.
-	sudoIf mkdir -p /sys/fs/cgroup/init
-	sudoIf echo 1 > /sys/fs/cgroup/init/cgroup.procs
-	# enable controllers
-	sudoIf sed -e 's/ / +/g' -e 's/^/+/' < /sys/fs/cgroup/cgroup.controllers \
-		> /sys/fs/cgroup/cgroup.subtree_control
-fi
-## Dind wrapper over.
-
-# Handle DNS
-set +e
-cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
-if [ $? -eq 0 ]
-then
-  echo "Setting dockerd Azure DNS."
-  CUSTOMDNS="--dns 168.63.129.16"
+# Start using sudo if not invoked as root
+if [ "$(id -u)" -ne 0 ]; then
+    sudo /bin/sh -c "${dockerd_start}"
 else
-  echo "Not setting dockerd DNS manually."
-  CUSTOMDNS=""
+    eval "${dockerd_start}"
 fi
-set -e
-
-# Start docker/moby engine
-( sudoIf dockerd $CUSTOMDNS > /tmp/dockerd.log 2>&1 ) &
 
 set +e
 

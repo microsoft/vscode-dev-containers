@@ -1,0 +1,26 @@
+name: 'Deploy Devcontainer Features (Manually)'
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        
+      - name: Copy scripts to src folder
+        id: copy_scripts
+        run: cp -r ./script-library/*.sh ./script-library/container-features/src
+          
+      - name: Publish Dev container features
+        uses: microsoft/publish-dev-container-features-action@main
+        with:
+          path-to-features: './script-library/container-features/src'
+          
+      - name: Get or Create Release at current tag
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true # Lets us upload our own artifact from previous step
+          artifactErrorsFailBuild: true
+          artifacts: './devcontainer-features.tgz'
+          token: ${{ secrets.GITHUB_TOKEN }}
