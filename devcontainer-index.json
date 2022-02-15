@@ -1,10 +1,12 @@
 {
     "publisher": "Microsoft",
+    "repository": "joshspicer/vscode-dev-containers",
 
     "features": {},
     "definitions": [
         {
             "id": "base",
+            "sha256checksum": "blahblah",
             "displayName": "Ubuntu",
             "description": "A simple Ubuntu container with Git and other common utilities installed.",
             "type": "singleContainer",
