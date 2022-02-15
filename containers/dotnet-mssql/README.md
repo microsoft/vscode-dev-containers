@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and an MS SQL container for parallel database development. Adds an additional MS SQL container to the C# (.NET Core) container definion and deploys any .dacpac files from the mssql .devcontainer folder.*
+*Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and an MS SQL container for parallel database development. Adds an additional MS SQL container to the C# (.NET Core) container definition and deploys any .dacpac files from the mssql .devcontainer folder.*
 
 | Metadata | Value |  
 |----------|-------|

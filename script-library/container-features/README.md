@@ -8,9 +8,9 @@ This folder includes some explorations around dynamic container feature injectio
 
 **Registering a feature**
 
-Create the install script in the [script-library](script-library/) directory with the naming convention `<lowercase-feature-name>-<target-os>.sh`. EG `python-debian.sh` or `common-alpine.sh`
+Create the install script in the [script-library](../../script-library/) directory with the naming convention `<lowercase-feature-name>-<target-os>.sh`. EG `python-debian.sh` or `common-alpine.sh`
 
-Add a new object to the [features.json](script-library/container-features/src/features.json) file:
+Add a new object to the [devcontainer-features.json](../../script-library/container-features/src/devcontainer-features.json) file:
 
 ```json
 {
@@ -36,13 +36,13 @@ Add a new object to the [features.json](script-library/container-features/src/fe
 }
 ```
 
-Add your buildArg to the [feature-scripts.env](script-library/container-features/src/feature-scripts.env) file with all script arguments specified (even if they duplicate a script default).
+Add your buildArg to the [feature-scripts.env](../../script-library/container-features/src/feature-scripts.env) file with all script arguments specified (even if they duplicate a script default).
 
 ```
 _VSC_INSTALL_<FEATURE>="<feature>-debian.sh ${_BUILD_ARG_<FEATURE>_<OPTION1>:-<option1 default>} ${_BUILD_ARG_<FEATURE>_<OPTION2>:-<option2 default>} hardcodedThirdArgument"
 ```
 
-- Options declared in `features.json` are mapped using the naming convention `_BUILD_ARG_<FEATURE>_<OPTIONNAME>` and their default should match the declared default for that option.
+- Options declared in `devcontainer-features.json` are mapped using the naming convention `_BUILD_ARG_<FEATURE>_<OPTIONNAME>` and their default should match the declared default for that option.
 - EG `_VSC_INSTALL_AZURE_CLI="azcli-debian.sh ${_BUILD_ARG_AZURE_CLI_VERSION:-latest}"`
 
 **Feature testing**
@@ -59,7 +59,7 @@ _VSC_INSTALL_<FEATURE>="<feature>-debian.sh ${_BUILD_ARG_<FEATURE>_<OPTION1>:-<o
 Repeat as needed to iterate from a clean workspace.
 
 *Unit tests*
-- Add your feature to the [run-scripts.sh](script-library/test/regression/run-scripts.sh) file to ensure it is included in CI tests.
+- Add your feature to the [run-scripts.sh](../../script-library/test/regression/run-scripts.sh) file to ensure it is included in CI tests.
 
 - Your addition should take the form `runScript <feature> <non-default-args>`.
 
@@ -71,7 +71,7 @@ runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"
 - If your script takes the installation user as an argument, be sure to specify it as ${USERNAME} in the tests for programatic testing.
 
 *Regression tests*
-- Add your feature to the [test-features.env](script-library/container-features/test-features.env) file to include it in regression tests of the container-feature functionality. By setting the `_VSC_INSTALL_<FEATURE>` ENV VAR to true and adding the expected _BUILD_ARG options for your feature.
+- Add your feature to the [test-features.env](../../script-library/container-features/test-features.env) file to include it in regression tests of the container-feature functionality. By setting the `_VSC_INSTALL_<FEATURE>` ENV VAR to true and adding the expected _BUILD_ARG options for your feature.
 
 EG
 ```
@@ -150,8 +150,8 @@ Feel free to use other scripts in that directory as inspiration.
 
 - Consider using [shellcheck](https://github.com/koalaman/shellcheck) or the [vscode-shellcheck extension](https://github.com/vscode-shellcheck/vscode-shellcheck) to apply linting and static code analysis to the bash script to ensure it is formatted correctly.
 
-- Consider using common helper functions from [shared/utils.sh](script-library/shared/utils.sh) when managing common tasks (like updating PATH variables, or managing gpg keys) by copying them directly into your script.  
+- Consider using common helper functions from [shared/utils.sh](../../script-library/shared/utils.sh) when managing common tasks (like updating PATH variables, or managing gpg keys) by copying them directly into your script.  
     - NOTE: This is done to minimize the impact that any change can have on existing working scripts.
     - Similarly, if you add a helper function to your script that could benefit others in the future, consider adding it to the `shared/utils.sh` file as well.
 
-- [shared/settings.env](script-library/shared/settings.env) contains shared environment variables used in many install scripts, such as `GPG Keys` and `Archive Architectures`. Consider adding your new env. variables to this script when applicable, or reusing existing variables when pertinent.
+- [shared/settings.env](../../script-library/shared/settings.env) contains shared environment variables used in many install scripts, such as `GPG Keys` and `Archive Architectures`. Consider adding your new env. variables to this script when applicable, or reusing existing variables when pertinent.

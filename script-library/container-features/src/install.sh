@@ -20,7 +20,7 @@ EOF
 fi
 
 set -a
-. ./features.env
+. ./devcontainer-features.env
 set +a
 
 chmod +x *.sh
