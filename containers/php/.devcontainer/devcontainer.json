@@ -6,7 +6,7 @@
 			// Update VARIANT to pick a PHP version: 8, 8.1, 8.0, 7, 7.4
 			// Append -bullseye or -buster to pin to an OS version.
 			// Use -bullseye variants on local on arm64/Apple Silicon.
-			"VARIANT": "8-apache-bullseye",
+			"VARIANT": "8.1-apache-bullseye",
 			"NODE_VERSION": "lts/*"
 		}
 	},
@@ -18,7 +18,7 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"felixfbecker.php-debug",
+		"xdebug.php-debug",
 		"bmewburn.vscode-intelephense-client",
 		"mrmlnc.vscode-apache"
 	],

@@ -52,6 +52,22 @@ You can use this script for your primary dev container by adding it to the `feat
 }
 ```
 
+**[Optional]** You may also want to enable the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle signals and clean up [Zombie processes](https://en.wikipedia.org/wiki/Zombie_process) if you do not have an alternative set up. To enable it, add the following to `devcontainer.json` if you are referencing an image or Dockerfile:
+
+```json
+"runArgs": ["--init"]
+```
+
+Or when using Docker Compose:
+
+```yaml
+services:
+  your-service-here:
+    # ...
+    init: true
+    # ...
+```
+
 If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
 
 ### Script use
@@ -93,7 +109,7 @@ See the [`docker-in-docker`](../../containers/docker-in-docker) definition for a
 
     The `dind-var-lib-docker` volume mount is optional but will ensure that containers / volumes you create within the dev container survive a rebuild. You should update `dind-var-lib-docker` with a unique name for your container to avoid corruption when multiple containers write to it at the same time.
 
-    While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up. 
+    While technically optional, `--init` enables the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up. 
 
 4. If you want any containers or volumes you create inside the container to survive it being deleted, you can use a "named volume". And the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile replacing `dind-var-lib-docker` with a unique name for your container:
 

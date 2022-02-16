@@ -52,6 +52,22 @@ You can use this script for your primary dev container by adding it to the `feat
 }
 ```
 
+**[Optional]** You may also want to enable the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle signals and clean up [Zombie processes](https://en.wikipedia.org/wiki/Zombie_process) if you do not have an alternative set up. To enable it, add the following to `devcontainer.json` if you are referencing an image or Dockerfile:
+
+```json
+"runArgs": ["--init"]
+```
+
+Or when using Docker Compose:
+
+```yaml
+services:
+  your-service-here:
+    # ...
+    init: true
+    # ...
+```
+
 If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
 
 ### Script use
@@ -73,6 +89,23 @@ Usage:
     COPY library-scripts/kubectl-helm-debian.sh /tmp/library-scripts/
     RUN apt-get update && bash /tmp/library-scripts/kubectl-helm-debian.sh latest latest latest
     ```
+
+3. **[Optional]** You may also want to enable the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up if you do not have an alternative set up. To do so, add the following to `.devcontainer/devcontainer.json` if you are referencing an image or Dockerfile:
+
+    ```json
+    "runArgs": ["--init"]
+    ```
+
+    Or if you are referencing a Docker Compose file, add this to your `docker-compose.yml` file instead:
+    
+    ```yaml
+    your-service-name-here:
+      # ...
+      init: true
+      # ...
+    ```
+
+    While technically optional, `
 
 3. You may also want to install Docker using the [docker-in-docker](docker-in-docker.md) or [docker-from-docker](docker.md) scripts.
 

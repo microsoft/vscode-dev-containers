@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:c37c089154a150d7bd0f5a3e55b75ecc884df9444e583263aea1087fd0abb27d
+**Digest:** sha256:673660c71b71ee9c5a585d58417a9f94c64fbfb5417095cd09ee26e2a49ae451
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | eabec36586f990b883e7dbf4583e6d86ac46c7ea | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | a76c4aaafa3dc710e16e1aefe2208bad0247b595 | /usr/local/share/rbenv |
@@ -62,7 +62,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.2 |
-| virtualenv | 20.13.0 |
+| virtualenv | 20.13.1 |
 | pipx | 1.0.0 |
 
 **Go tools and modules**
@@ -109,7 +109,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 2.4.0 | 
+| [GitHub CLI](https://github.com/cli/cli) | 2.5.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.3.3 | 
@@ -197,9 +197,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | tar | 1.30+dfsg-7ubuntu0.20.04.1 |
 | unzip | 6.0-25ubuntu1 |
 | valgrind | 1:3.15.0-1ubuntu9.1 |
-| vim | 2:8.1.2269-1ubuntu5.6 |
-| vim-doc | 2:8.1.2269-1ubuntu5.6 |
-| vim-tiny | 2:8.1.2269-1ubuntu5.6 |
+| vim | 2:8.1.2269-1ubuntu5.7 |
+| vim-doc | 2:8.1.2269-1ubuntu5.7 |
+| vim-tiny | 2:8.1.2269-1ubuntu5.7 |
 | wget | 1.20.3-1ubuntu2 |
 | xtail | 2.1-6 |
 | zip | 3.0-11build1 |
