@@ -4,7 +4,7 @@
 		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick an Debian / Ubuntu OS version: debian-11, debian-10, debian-9, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
 		// Use Debian 11, Debian 9, Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
-		"args": { "VARIANT": "debian-11", "REINSTALL_CMAKE_FROM_SOURCE": "false", "CMAKE_VERSION": "none" }
+		"args": { "VARIANT": "debian-11" }
 	},
 	"runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
 

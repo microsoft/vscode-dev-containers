@@ -55,13 +55,12 @@ Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohm
 ### Using Vcpkg
 This dev container and its associated image includes a clone of the [`Vcpkg`](https://github.com/microsoft/vcpkg) repo for library packages, and a bootstrapped instance of the [Vcpkg-tool](https://github.com/microsoft/vcpkg-tool) itself.
 
-The minimum version of `cmake` required to install packages is higher than the version available in the main package repositories for Debian (<=11) and Ubuntu (<=21.10).  `Vcpkg` will download a compatible version of `cmake` for its own use if that is the case (on x86_64 architectures), however you can opt to reinstall a different version of `cmake` globally by adding `"REINSTALL_CMAKE_FROM_SOURCE: "true"` and `"CMAKE_VERSION: "<VERSION>"` to build args in `.devcontainer/devcontainer.json`. This will install `cmake` from its github releases. For example:
+The minimum version of `cmake` required to install packages is higher than the version available in the main package repositories for Debian (<=11) and Ubuntu (<=21.10).  `Vcpkg` will download a compatible version of `cmake` for its own use if that is the case (on x86_64 architectures), however you can opt to reinstall a different version of `cmake` globally by adding `"REINSTALL_CMAKE_VERSION_FROM_SOURCE: "<VERSION>"` to build args in `.devcontainer/devcontainer.json`. This will install `cmake` from its github releases. For example:
 
 ```json
 "args": {
-   "VARIANT": "11",
-   "REINSTALL_CMAKE_FROM_SOURCE": "true",
-   "CMAKE_VERSION": "3.21.5"
+   "VARIANT": "debian-11",
+   "REINSTALL_CMAKE_VERSION_FROM_SOURCE": "3.21.5"
 }
 ```
 

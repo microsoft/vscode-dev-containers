@@ -15,7 +15,7 @@ ENV VCPKG_ROOT=/usr/local/vcpkg \
 ARG USERNAME=vscode
 
 # Install vcpkg itself: https://github.com/microsoft/vcpkg/blob/master/README.md#quick-start-unix
-COPY library-scripts/install-vcpkg.sh /tmp/
+COPY base-scripts/install-vcpkg.sh /tmp/
 RUN /tmp/install-vcpkg.sh ${USERNAME}
 RUN rm -f /tmp/install-vcpkg.sh
 

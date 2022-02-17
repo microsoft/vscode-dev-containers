@@ -2,17 +2,16 @@
 ARG VARIANT=debian-11
 FROM mcr.microsoft.com/vscode/devcontainers/cpp:0-${VARIANT}
 
-# [Optional] Install CMake version different from base image.
-# [Choice] CMake Version: none, 3.21.5, 3.22.2, or versions from https://cmake.org/download/
-ARG REINSTALL_CMAKE_FROM_SOURCE="false"
-ARG CMAKE_VERSION="none"
+# [Optional] Install CMake version different from what base image has already installed. 
+# CMake reinstall choices: none, 3.21.5, 3.22.2, or versions from https://cmake.org/download/
+ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="none"
 
 # Optionally install the cmake for vcpkg
-COPY library-scripts/*.sh /tmp/library-scripts/
-RUN if [ "${REINSTALL_CMAKE_FROM_SOURCE}" = "true" ]; then \
-        /tmp/library-scripts/reinstall-cmake.sh ${CMAKE_VERSION}; \
+COPY ./reinstall-cmake.sh /tmp/
+RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
+        /tmp/reinstall-cmake.sh ${REINSTALL_CMAKE_VERSION_FROM_SOURCE}; \
     fi
-RUN rm -rf /tmp/library-scripts
+RUN rm -f /tmp/reinstall-cmake.sh
 
 # [Optional] Uncomment this section to install additional vcpkg ports.
 # RUN su vscode -c "${VCPKG_ROOT}/vcpkg install <your-port-name-here>"
