@@ -1,0 +1,24 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run Chunk* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Try a function too?
+```{r}
+# R Function that returns an awesome message
+say_hello <- function(name) {
+  message(paste0("Hello, ", name, "!"))
+}
+
+# Call the function
+say_hello("remote world")
+```
+
