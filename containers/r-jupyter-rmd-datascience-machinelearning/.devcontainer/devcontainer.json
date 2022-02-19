@@ -1,0 +1,54 @@
+{
+	"name": "R Data Science Environment",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update VARIANT to pick a specific R version: 4, 4.1, 4.0
+		"args": { "VARIANT": "4" }
+	},
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"r.rpath.linux": "/usr/local/lib/R/bin/R",
+		"r.rterm.linux": "/usr/local/bin/radian",
+		"r.bracketedPaste": true,
+		"r.plot.useHttpgd": true,
+		"r.lsp.enabled": true,
+		"[r]": {
+			"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+		}
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		// Add Jupyter, R and Python vscode extensions
+		"ikuyadeu.r",
+		"rdebugger.r-debugger",
+		"ms-toolsai.jupyter",
+		"ms-python.python",
+
+		// Other extensions that make life a little bit easier right off the bat
+		"ionutvmi.path-autocomplete",
+		"usernamehw.errorlens",
+		"mhutchie.git-graph",
+		"tomoki1207.pdf",
+		"DavidAnson.vscode-markdownlint",
+		"Rubymaniac.vscode-paste-and-indent",
+		"GrapeCity.gc-excelviewer",
+		"IBM.output-colorizer",
+		"Mohamed-El-Fodil-Ihaddaden.shinysnip",
+		"hediet.vscode-drawio",
+		"MS-vsliveshare.vsliveshare-pack",
+		"eamodio.gitlens",
+		"GitHub.vscode-pull-request-github"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "R --version",
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Jupyter seems to detect the R kernel out of the box when user is root
+	//"remoteUser": "vscode"
+}
