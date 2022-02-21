@@ -11,6 +11,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # Setup ENV vars for vcpkg
 ENV VCPKG_ROOT=/usr/local/vcpkg \
     VCPKG_DOWNLOADS=/usr/local/vcpkg-downloads
+ENV PATH="${PATH}:${VCPKG_ROOT}"
 
 ARG USERNAME=vscode
 
