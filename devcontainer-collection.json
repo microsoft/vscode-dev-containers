@@ -1,6 +1,6 @@
 {
     "publisher": "Microsoft",
-    "repository": "joshspicer/vscode-dev-containers",
+    "repository": "microsoft/vscode-dev-containers",
 
     "features": {},
     "definitions": [
