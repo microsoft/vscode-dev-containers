@@ -22,6 +22,7 @@ if [ "$(dpkg --print-architecture)" = "amd64" ] || [[ ! "${VCPKG_UNSUPPORTED_ARM
     VCPKG_FORCE_SYSTEM_BINARIES=1 check "vcpkg-from-root" ${VCPKG_ROOT}/vcpkg --version
     VCPKG_FORCE_SYSTEM_BINARIES=1 check "vcpkg-from-bin" vcpkg --version
 fi 
+checkOSPackages "tools-for-mariadb" libmariadb3 libmariadb-dev
 check "g++"  g++ -g main.cpp -o main.out -lmariadbcpp
 check "main.out" ./main.out
 rm main.out
