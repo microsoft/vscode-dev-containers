@@ -12,7 +12,6 @@ services:
         # Update 'VARIANT' to pick a version of CPP
         # See the README for more information on available versions.
         VARIANT: debian-11
-        REINSTALL_CMAKE_VERSION_FROM_SOURCE: "none"
     env_file:
       - .env
 
