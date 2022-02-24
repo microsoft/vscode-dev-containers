@@ -6,7 +6,7 @@ You may review [further documentation](https://code.visualstudio.com/docs/remote
 
 This is **not supported** from [GitHub Codespaces](https://github.com/features/codespaces) currently. 
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing a container.
+We are not accepting contributions for new repository containers. If you are interested in repository containers, we encourage you to use the [Remote - Containers capability](https://code.visualstudio.com/docs/remote/create-dev-container#_alternative-repository-configuration-folders) to have a local set of them.
 
 If you are looking for a list of additional dev container definitions that are included in the [Remote - Containers](https://aka.ms/vscode-remote/download/containers) extension, see the [containers](../containers) folder instead.
 
