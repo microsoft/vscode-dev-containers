@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:326a366681e55721ba137a93d8e490c15930fa5e36837d625eb0e0bcce70caac
+**Digest:** sha256:a054c67da192f212eefc50e555f82130e524f88610d3822487c8c70fd1b0e572
 
 **Tags:**
 ```
@@ -99,5 +99,5 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | yarn | 1.22.17-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
-| zsh | 5.8-6+b2 |
+| zsh | 5.8-6+deb11u1 |
 

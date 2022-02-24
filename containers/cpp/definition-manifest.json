@@ -1,6 +1,6 @@
 {
 	"variants": ["bullseye", "buster", "hirsute", "focal", "bionic", "stretch"],
-	"definitionVersion": "0.203.4",
+	"definitionVersion": "0.204.0",
 	"build": {
 		"latest": "bullseye",
 		"parent": {
@@ -64,10 +64,18 @@
 			"clang",
 			"lldb",
 			"llvm",
-			"gdb"
+			"gdb",
+			"tar",
+			"curl",
+			"zip",
+			"unzip",
+			"pkg-config",
+			"bash-completion",
+			"ninja-build"
 		],
 		"git": {
-			"Oh My Zsh!": "/home/vscode/.oh-my-zsh"
+			"Oh My Zsh!": "/home/vscode/.oh-my-zsh",
+			"vcpkg": "/usr/local/vcpkg"
 		},
 		"languages": {
 			"GCC": {
