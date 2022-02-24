@@ -11,7 +11,7 @@
 		"variantTags": {
 			"6.0-focal": [
 				"dotnet:${VERSION}-6.0",
-				"dotnet:${VERSION}-6.0"
+				"dotnetcore:${VERSION}-6.0"
 			],
 			"6.0-bullseye-slim": [
 				"dotnet:${VERSION}-6.0",
