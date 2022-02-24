@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Available image variants* | [See cpp definition](../cpp). |
-| *Supported architecture(s)* | x86-64 for `bullseye`, `stretch`, `bionic`, and `hirsute` variants |
+| *Supported architecture(s)* | x86-64, aarch64/arm64 for `bullseye`, `stretch`, `bionic`, and `hirsute` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian, Ubuntu |
