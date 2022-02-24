@@ -17,7 +17,7 @@ jobs:
         with:
           publish-features: 'true'
           path-to-features: './script-library/container-features/src'
-          publish-definitions: 'false'
+          publish-definitions: 'true'
           path-to-definitions: './containers'
 
           
@@ -26,5 +26,5 @@ jobs:
         with:
           allowUpdates: true # Lets us upload our own artifact from previous step
           artifactErrorsFailBuild: true
-          artifacts: './devcontainer-*.tgz'
+          artifacts: './devcontainer-*'
           token: ${{ secrets.GITHUB_TOKEN }}
