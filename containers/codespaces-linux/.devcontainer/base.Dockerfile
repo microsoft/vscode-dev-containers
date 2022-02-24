@@ -77,7 +77,7 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
     # Link composer
     && ln -s $(which composer.phar) /usr/local/bin/composer \
-    && bash /tmp/scripts/jupyterlab-debian.sh \
+    && pip install jupyterlab \
     && apt-get clean -y
 
 # Install PowerShell
