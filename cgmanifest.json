@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "3427da4057dbe302933a7b5b19b4e23bfb9d0969"
+                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
                 }
             }
         },
@@ -76,7 +76,17 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "5cf60186a241e84e8232641ee973395d4fde90e1"
+                    "commitHash": "b86c0c35b88e2bf3557ff49dc831689c2f085090"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "vcpkg",
+                    "repositoryUrl": "https://github.com/microsoft/vcpkg",
+                    "commitHash": "d699e78f848027d18d337e6ae4803c2c7c18dbbb"
                 }
             }
         },
@@ -331,7 +341,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.13.1"
+                    "Version": "20.13.2"
                 }
             }
         },
@@ -403,7 +413,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.58.1"
+                    "Version": "1.59.0"
                 }
             }
         },
@@ -412,7 +422,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.58.1"
+                    "Version": "1.59.0"
                 }
             }
         },
@@ -421,7 +431,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.58.1"
+                    "Version": "1.59.0"
                 }
             }
         },
@@ -503,7 +513,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "3427da4057dbe302933a7b5b19b4e23bfb9d0969"
+                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
                 }
             }
         },
@@ -543,7 +553,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "2a0475f03ec1df72b64777ed14be2204af97105b"
+                    "commitHash": "10a56a289c4699f076b654e94dc3d07aad3dee56"
                 }
             }
         },
@@ -652,7 +662,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Rust",
-                    "Version": "1.58.1",
+                    "Version": "1.59.0",
                     "DownloadUrl": "https://github.com/rust-lang/rust"
                 }
             }
@@ -1093,7 +1103,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "3427da4057dbe302933a7b5b19b4e23bfb9d0969"
+                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
                 }
             }
         },
@@ -1162,7 +1172,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.10.1"
+                    "Version": "2.11.0"
                 }
             }
         },

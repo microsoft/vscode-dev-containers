@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:54b2925734becafd8cc37705cf0cf1af3e7d3d58d0ccfd8acfaa569a485880d6
+**Digest:** sha256:ea3bdb58eb55dad511af539cba29ccd6d64b291ecc537938fe942064a5f2568b
 
 **Tags:**
 ```
@@ -36,18 +36,18 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | GCC | 9.3.0-17ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
 | [Go](https://golang.org/dl) | 1.17.6 | /usr/local/go |
-| [Rust](https://github.com/rust-lang/rust) | 1.58.1 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.59.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.1 | 
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3427da4057dbe302933a7b5b19b4e23bfb9d0969 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e9348575371aa8ec8811356d997942559c026d07 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | ea01809b665810685135d480a23ad6c9ca30c227 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | e4f61e67e2336c86622e3efa0473e2c04add5c08 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 2a0475f03ec1df72b64777ed14be2204af97105b | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 10a56a289c4699f076b654e94dc3d07aad3dee56 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
@@ -62,7 +62,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.2 |
-| virtualenv | 20.13.1 |
+| virtualenv | 20.13.2 |
 | pipx | 1.0.0 |
 
 **Go tools and modules**
@@ -93,9 +93,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.38 |
-| rust-analysis | 1.58.1 |
-| rust-src | 1.58.1 |
-| clippy | 1.58.1 |
+| rust-analysis | 1.59.0 |
+| rust-src | 1.59.0 |
+| clippy | 1.59.0 |
 
 **Other tools and utilities**
 
