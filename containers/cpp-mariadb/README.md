@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Available image variants* | [See cpp definition](../cpp). |
-| *Supported architecture(s)* | x86-64, aarch64/arm64 for `bullseye`, `stretch`, `bionic`, and `hirsute` variants |
+| *Supported architecture(s)* | x86-64 for `bullseye`, `stretch`, `bionic`, and `hirsute` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian, Ubuntu |
@@ -32,7 +32,29 @@ build:
       VARIANT: debian-11
 ```
 
-Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, and a set of common dependencies for development.
+Beyond `git`, this image / `Dockerfile` includes `zsh`, [Oh My Zsh!](https://ohmyz.sh/), a non-root `vscode` user with `sudo` access, a set of common dependencies for development, and [Vcpkg](https://github.com/microsoft/vcpkg) a cross-platform package manager for C++.
+
+### Using Vcpkg
+This dev container and its associated image includes a clone of the [`Vcpkg`](https://github.com/microsoft/vcpkg) repo for library packages, and a bootstrapped instance of the [Vcpkg-tool](https://github.com/microsoft/vcpkg-tool) itself.
+
+The minimum version of `cmake` required to install packages is higher than the version available in the main package repositories for Debian (<=11) and Ubuntu (<=21.10).  `Vcpkg` will download a compatible version of `cmake` for its own use if that is the case (on x86_64 architectures), however you can opt to reinstall a different version of `cmake` globally by adding `REINSTALL_CMAKE_VERSION_FROM_SOURCE: <VERSION>` to build args in `.devcontainer/docker-compose.yml`. This will install `cmake` from its github releases. For example:
+
+```yaml
+args:
+  VARIANT: debian-11
+  REINSTALL_CMAKE_VERSION_FROM_SOURCE: "3.21.5" # Set to "none" to skip re-install of cmake
+```
+
+Most additional library packages installed using Vcpkg will be downloaded from their [official distribution locations](https://github.com/microsoft/vcpkg#security). To configure Vcpkg in this container to access an alternate registry, more information can be found here: [Registries: Bring your own libraries to vcpkg](https://devblogs.microsoft.com/cppblog/registries-bring-your-own-libraries-to-vcpkg/).
+
+To update the available library packages, pull the latest from the git repository using the following command in the terminal:
+
+```sh
+cd "${VCPKG_ROOT}"
+git pull --ff-only
+```
+
+> Note: Please review the [Vcpkg license details](https://github.com/microsoft/vcpkg#license) to better understand its own license and additional license information pertaining to library packages and supported ports.
 
 ### Adding the definition to a project or codespace
 
