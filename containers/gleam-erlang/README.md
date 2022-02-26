@@ -2,7 +2,7 @@
 
 ## Summary
 
-_Develop leam based applications. Includes everything you need to get up and running._
+_Develop Gleam based applications. Includes everything you need to get up and running._
 
 | Metadata                    | Value                 |
 | --------------------------- | --------------------- |
