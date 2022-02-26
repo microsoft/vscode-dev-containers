@@ -364,6 +364,53 @@
 			]
 		},
 		{
+			"id": "aws-cli",
+			"name": "AWS CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/awscli.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": [
+						"latest"
+					],
+					"default": "latest",
+					"description": "Select or enter an AWS CLI version. (Available versions here: https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_AWS_CLI",
+			"extensions": [
+				"AmazonWebServices.aws-toolkit-vscode"
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
 			"id": "azure-cli",
 			"name": "Azure CLI",
 			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/azcli.md",

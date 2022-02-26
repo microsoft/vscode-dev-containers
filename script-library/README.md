@@ -14,6 +14,7 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 
 | Document | Script | Maintainers |
 |----------|--------|------------|
+| [AWS CLI Install Script](docs/awscli.md) | `awscli-debian.sh` | VS Code and GitHub Codespaces teams |
 | [Azure CLI Install Script](docs/azcli.md) | `azcli-debian.sh` | VS Code and GitHub Codespaces teams |
 | [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` (Community) | VS Code and GitHub Codespaces teams |
 | [Desktop (Lightweight) Install Script](docs/desktop-lite.md) | `desktop-lite-debian.sh` | VS Code and GitHub Codespaces teams|
