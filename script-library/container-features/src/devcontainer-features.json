@@ -201,7 +201,7 @@
 				"HashiCorp.terraform",
 				"ms-azuretools.vscode-azureterraform"
 			],
-			"settings": { 
+			"settings": {
 				"terraform.languageServer": {
 					"enabled": true,
 					"args": []
@@ -585,7 +585,8 @@
 				"NVM_DIR":"/usr/local/share/nvm",
 				"NVM_SYMLINK_CURRENT": "true",
 				"PATH": "${NVM_DIR}/current/bin:${PATH}"
-			}, "include": [
+			},
+			"include": [
 				"cpp",
 				"kubernetes-helm",
 				"kubernetes-helm-minikube",
@@ -630,7 +631,7 @@
 				"PIPX_BIN_DIR": "/usr/local/py-utils/bin",
 				"PATH":"${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}"
 			},
-			"settings": { 
+			"settings": {
 				"python.defaultInterpreterPath": "/usr/local/bin/python",
 				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
 				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
@@ -832,7 +833,8 @@
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}"
-			}, "include": [
+			},
+			"include": [
 				"cpp",
 				"kubernetes-helm",
 				"kubernetes-helm-minikube",
@@ -934,7 +936,7 @@
 				"mutantdino.resourcemonitor",
 				"matklad.rust-analyzer",
 				"tamasfe.even-better-toml",
-				"serayuzgur.crates"	
+				"serayuzgur.crates"
 			],
 			"containerEnv": {
 				"CARGO_HOME": "/usr/local/cargo",
