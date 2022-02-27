@@ -1,4 +1,4 @@
-# Clojure
+# Clojure (Community)
 
 ## Summary
 
@@ -6,7 +6,8 @@
 
 | Metadata                    | Value                 |
 |-----------------------------|-----------------------|
-| *Categories*                | Core, Languages       |
+| *Contributors*              | [Christopher Miles](https://github.com/cmiles74), [Matthew Ferry](https://github.com/matthewferry) |
+| *Categories*                | Community, Languages  |
 | *Definition Type*           | Dockerfile            |
 | *Works in Codespaces*       | Yes                   |
 | *Container host OS support* | Linux, MacOS, Windows |
@@ -18,8 +19,18 @@
 While this definition should work unmodified, you can select the version of Java the container uses by updating the `VARIANT` arg in the included `devcontainer.json` (and rebuilding if you've already created the container).
 
 ```json
-// Or you can use 16-bullseye or 16-buster if you want to pin to an OS version
-"args": { "VARIANT": "16" }
+// Or you can use 17-bullseye or 17-buster if you want to pin to an OS version
+"args": { "VARIANT": "17" }
+```
+
+### Installing a Specific Clojure Version
+
+You can set the default Clojure version used by Boot as well as the version of Clojure that is pre-loaded with Leiningen by adding the `"CLOJURE_VERSION"` to the build arguments in `.devcontainer/devcontainer.json`.
+
+```json
+"args": {
+   "CLOJURE_VERSION": "1.10.3"
+}
 ```
 
 ### Installing Clojure CLI Tools
@@ -43,9 +54,17 @@ The Boot command line tools will be installed by default but you can change this
 }
 ```
 
+Boot will use the same Clojure verson as specified with the `"CLOJURE_VERSION"` argument. You may set a specific version just for Boot by customizing the `"BOOT_CLOJURE_VERSION"` environment variable.
+
+```json
+"args": {
+    "BOOT_CLOJURE_VERSION": "1.10.3"
+}
+```
+
 ### Installing Leiningen
 
-Leiningen will be installed by default but you can change this behavior by setting the `"INSTALL_LEININGEN"` build argument to false in `.devcontainer/devcontainer.json`. The version of Leiningen may be set with the `"LEININGEN_VERSION"` argument.
+Leiningen will be installed by default but you can change this behavior by setting the `"INSTALL_LEININGEN"` build argument to false in `.devcontainer/devcontainer.json`. The version of Leiningen may be set with the `"LEININGEN_VERSION"` argument, the default value is "stable".
 
 ```json
 "args": {
@@ -63,26 +82,17 @@ Polylith will be installed by default but you can change this behavior by settin
 }
 ```
 
-### Installing a Specific Clojure Version
-
-You can set the default Clojure version used by Boot as well as the version of Clojure that is pre-loaded with Leiningen by adding the `"CLOJURE_VERSION"` to the build arguments in `.devcontainer/devcontainer.json`.
-
-```json
-"args": {
-   "CLOJURE_VERSION": "1.10.3"
-}
-```
-
 ### Installing Node.js
 
-Given JavaScript front-end web client code written for use in conjunction with a ClojureScript project often requires the use of Node.js-based utilities to build, this container also includes `nvm` so that you can easily install Node.js. You can enable installation and change the version of Node.js installed or disable its installation by updating the `args` property in `.devcontainer/devcontainer.json`.
+Clojurescript is a compiler for Clojure that targets Javascript. By default the newest long term support release of NodeJS will be installed but you can change this behavior by setting the `"NODE_VERSION"` argument. Setting this argument to "none" will prevent the installation of NodeJS.
 
-```jsonc
+```json
 "args": {
    "NODE_VERSION": "10" // Set to "none" to skip Node.js installation
 }
 ```
 
+This container also includes `nvm` so that you can easily install and switch between multiple Node.js versions.
 
 ### Adding the definition to your folder
 
