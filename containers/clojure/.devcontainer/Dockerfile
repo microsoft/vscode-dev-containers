@@ -1,30 +1,36 @@
-# [Choice] Java version (use -bullseye variants on local arm64/Apple Silicon): 11, 16, 11-bullseye, 16-bullseye, 11-buster, 16-buster
-ARG VARIANT=11-bullseye
+# [Choice] Java version (use -bullseye variants on local arm64/Apple Silicon): 11, 17, 11-bullseye, 17-bullseye, 11-buster, 17-buster
+ARG VARIANT=17
 FROM mcr.microsoft.com/vscode/devcontainers/java:${VARIANT}
 
-# [Option] Clojure version
+# [Optional] Clojure version
 ARG CLOJURE_VERSION=1.10.3
+
+# [Optional] Clojure tools version
+ARG CLOJURE_CLI_VERSION=1.10.3.1075
+
+# [Optional] Leiningen version
+ARG LEININGEN_VERSION="stable"
+
+# [Optional] POLYLITH version
+ARG POLYLITH_VERSION="0.2.13-alpha"
+
+# [Optional] Boot version
+ENV BOOT_VERSION=2.8.3
+
+# [Optional] Clojure version used by Boot
 ENV BOOT_CLOJURE_VERSION=${CLOJURE_VERSION}
 
-# [Option] Install Clojure tools
+# [Option] Install Clojure CLI tool
 ARG INSTALL_CLOJURE_CLI="true"
-# [Option] Clojure tools version
-ARG CLOJURE_CLI_VERSION=1.10.3.1029
 
 # [Option] Install Boot
 ARG INSTALL_BOOT="true"
-# [Option] Boot version
-ENV BOOT_VERSION=2.8.3
 
 # [Option] Install Leiningen
 ARG INSTALL_LEININGEN="true"
-# [Option] Leiningen version
-ARG LEININGEN_VERSION="stable"
 
 # [Option] Install Polylith
 ARG INSTALL_POLYLITH="true"
-# [Option] POLYLITH version
-ARG POLYLITH_VERSION="0.2.13-alpha"
 
 RUN if [ "${INSTALL_CLOJURE_CLI}" = "true" ]; then \
     apt-get update \
