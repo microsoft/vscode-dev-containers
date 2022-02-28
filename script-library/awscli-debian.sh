@@ -76,7 +76,12 @@ install() {
     if [ "${AWSCLI_VERSION}" != "latest" ]; then
         local versionStr=-${AWSCLI_VERSION}
     fi
-    local scriptUrl=https://awscli.amazonaws.com/awscli-exe-linux-x86_64${versionStr}.zip
+    arch=$(uname -m)
+    if [ "$arch" != "x86_64" -a "$arch" != "aarch64" ]; then
+        echo "AWS CLI does not support machine architecture '$arch'. Please use an x86-64 or ARM64 machine."
+        exit 1
+    fi
+    local scriptUrl=https://awscli.amazonaws.com/awscli-exe-linux-${arch}${versionStr}.zip
     curl "${scriptUrl}" -o "${scriptZipFile}"
     curl "${scriptUrl}.sig" -o "${scriptSigFile}"
 
