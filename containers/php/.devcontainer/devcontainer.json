@@ -24,7 +24,7 @@
 	"portsAttributes": {
 		"8080": {
 			"label": "Application",
-			"onAutoForward": "openBrowser",
+			"onAutoForward": "notify",
 		},
 		"9003": {
 			"label": "PHP Xdebug",
