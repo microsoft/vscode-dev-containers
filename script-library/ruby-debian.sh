@@ -12,8 +12,6 @@
 RUBY_VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}
 UPDATE_RC=${3:-"true"}
-RBENV_ENABLED=${4:-"true"}
-RVM_ENABLED=${5:-"true"}
 INSTALL_RUBY_TOOLS=${6:-"true"}
 
 # Note: ruby-debug-ide will install the right version of debase if missing and
@@ -238,11 +236,12 @@ if [ "${INSTALL_RUBY_TOOLS}" = "true" ]; then
     su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && \"$(which gem || echo ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
 fi
 
-if [ "${RVM_ENABLED}" = "true" ]; then
-    echo "Enabling RVM usage"
-    # VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it
-    updaterc "if ! grep rvm_silence_path_mismatch_check_flag \$HOME/.rvmrc > /dev/null 2>&1; then echo 'rvm_silence_path_mismatch_check_flag=1' >> \$HOME/.rvmrc; fi\nsource /usr/local/rvm/scripts/rvm > /dev/null 2>&1"
-fi
+
+##TODO
+# VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it
+updaterc $'if [ "${RVM_ENABLED}" = "true" ]; then
+    "if ! grep rvm_silence_path_mismatch_check_flag \$HOME/.rvmrc > /dev/null 2>&1; then echo 'rvm_silence_path_mismatch_check_flag=1' >> \$HOME/.rvmrc; fi\nsource /usr/local/rvm/scripts/rvm > /dev/null 2>&1"
+fi'
 
 # Install rbenv/ruby-build for good measure
 git clone --depth=1 \
@@ -253,17 +252,21 @@ git clone --depth=1 \
     -c receive.fsck.zeroPaddedFilemode=ignore \
     https://github.com/rbenv/rbenv.git /usr/local/share/rbenv
 
-if [ "${RBENV_ENABLED}" = "true" ]; then
-    echo "Enabling rbenv usage"
+##TODO
+updaterc 'if [ "${RBENV_ENABLED}" = "true" ]; then
     ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
-    updaterc 'eval "$(rbenv init -)"'
-    git clone --depth=1 \
-        -c core.eol=lf \
-        -c core.autocrlf=false \
-        -c fsck.zeroPaddedFilemode=ignore \
-        -c fetch.fsck.zeroPaddedFilemode=ignore \
-        -c receive.fsck.zeroPaddedFilemode=ignore \
-        https://github.com/rbenv/ruby-build.git /usr/local/share/ruby-build
+    eval "$(rbenv init -)"
+fi'
+
+git clone --depth=1 \
+    -c core.eol=lf \
+    -c core.autocrlf=false \
+    -c fsck.zeroPaddedFilemode=ignore \
+    -c fetch.fsck.zeroPaddedFilemode=ignore \
+    -c receive.fsck.zeroPaddedFilemode=ignore \
+    https://github.com/rbenv/ruby-build.git /usr/local/share/ruby-build
+    
+if [ "${RBENV_ENABLED}" = "true" ]; then
     mkdir -p /root/.rbenv/plugins
     ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
     if [ "${USERNAME}" != "root" ]; then
@@ -274,7 +277,10 @@ if [ "${RBENV_ENABLED}" = "true" ]; then
 fi
 
 # Clean up
-source /usr/local/rvm/scripts/rvm
+if [ "${RVM_ENABLED}" = "true" ]; then 
+    source /usr/local/rvm/scripts/rvm
+fi
+
 rvm cleanup all 
 gem cleanup
 echo "Done!"

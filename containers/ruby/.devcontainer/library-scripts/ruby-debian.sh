@@ -225,7 +225,7 @@ else
     # Install rvm
     curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles ${RVM_INSTALL_ARGS} --with-default-gems="${DEFAULT_GEMS}" 2>&1
     usermod -aG rvm ${USERNAME}
-    su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && rvm fix-permissions system"
+    su ${USERNAME} -c "/usr/local/rvm/scripts/rvm fix-permissions system"
     rm -rf ${GNUPGHOME}
 fi
 
@@ -233,11 +233,12 @@ if [ "${INSTALL_RUBY_TOOLS}" = "true" ]; then
     # Non-root user may not have "gem" in path when script is run and no ruby version
     # is installed by rvm, so handle this by using root's default gem in this case
     ROOT_GEM='$(which gem || echo "")'
-    su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && \"$(which gem || echo ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
+    su ${USERNAME} -c "\"$(which gem || echo ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
 fi
 
 # VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it
-updaterc "if ! grep rvm_silence_path_mismatch_check_flag \$HOME/.rvmrc > /dev/null 2>&1; then echo 'rvm_silence_path_mismatch_check_flag=1' >> \$HOME/.rvmrc; fi\nsource /usr/local/rvm/scripts/rvm > /dev/null 2>&1"
+updaterc "if ! grep rvm_silence_path_mismatch_check_flag \$HOME/.rvmrc > /dev/null 2>&1; then echo 'rvm_silence_path_mismatch_check_flag=1' >> \$HOME/.rvmrc; fi"
+# \nsource /usr/local/rvm/scripts/rvm > /dev/null 2>&1
 
 # Install rbenv/ruby-build for good measure
 git clone --depth=1 \
@@ -247,8 +248,12 @@ git clone --depth=1 \
     -c fetch.fsck.zeroPaddedFilemode=ignore \
     -c receive.fsck.zeroPaddedFilemode=ignore \
     https://github.com/rbenv/rbenv.git /usr/local/share/rbenv
-ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
-updaterc 'eval "$(rbenv init -)"'
+
+updaterc 'if [ "${RBENV_ENABLED}" = "true" ]; then
+    ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
+    eval "$(rbenv init -)"
+fi'
+
 git clone --depth=1 \
     -c core.eol=lf \
     -c core.autocrlf=false \
@@ -265,7 +270,9 @@ if [ "${USERNAME}" != "root" ]; then
 fi
 
 # Clean up
-source /usr/local/rvm/scripts/rvm
-rvm cleanup all 
+updaterc 'if [ "${RVM_ENABLED}" = "true" ]; then 
+    source /usr/local/rvm/scripts/rvm 
+fi'
+/usr/local/rvm/scripts/rvm cleanup all
 gem cleanup
 echo "Done!"
