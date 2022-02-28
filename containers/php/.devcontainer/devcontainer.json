@@ -25,7 +25,6 @@
 		"8080": {
 			"label": "Application",
 			"onAutoForward": "openBrowser",
-			"requireLocalPort": true
 		},
 		"9003": {
 			"label": "PHP Xdebug",
