@@ -36,7 +36,7 @@ This definition includes some test code that will help you verify it is working 
 2. Clone this repository.
 3. Start VS Code, press <kbd>F1</kbd>, and select **Remote-Containers: Open Folder in Container...**
 4. Select this folder from the cloned repository.
-5. **There is included a "HelloWorld" sample in COBOL included (main.cbl), to try it you must first, compile it, and then run it**
+5. There is a hello world sample included (`main.cbl`) to verify your dev container is working. Follow the steps below to try it.
 
 ### Compile
 
