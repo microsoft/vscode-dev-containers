@@ -17,7 +17,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     && apt-get -y install --no-install-recommends lynx \
     && usermod -aG www-data ${USERNAME} \
-    && sed -i -e "s/Listen 80/Listen 80\\nListen 8080/g" /etc/apache2/ports.conf \
+    && sed -i -e "s/Listen 80/Listen 8080/g" $APACHE_CONFDIR/ports.conf \
+    && echo "ServerName localhost" >> $APACHE_CONFDIR/apache2.conf \
+    && sed -i -e "s/<VirtualHost \*:80>/<VirtualHost *:8080>/g" $APACHE_CONFDIR/sites-available/000-default.conf \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Install xdebug
@@ -25,7 +27,7 @@ RUN yes | pecl install xdebug \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.mode = debug" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.client_port = 9000" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.client_port = 9003" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && rm -rf /tmp/pear
 
 # Install composer

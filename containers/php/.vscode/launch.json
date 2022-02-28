@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/test-project/main.php",
             "cwd": "${workspaceFolder}/test-project",
-            "port": 9000
+            "port": 9003
         }
     ]
 }
