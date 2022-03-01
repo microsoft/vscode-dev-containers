@@ -47,7 +47,6 @@ If you want to try a sample project which already has a dev container, check out
 
 - [`containers`](containers) - Contains reusable dev container definitions.
 - [`script-library`](script-library) - Includes scripts used in this repository to install things. Also useful in your own Dockerfiles.
-- [`repository-containers`](repository-containers) - Dev container definitions for working public source code repositories. Only used by Remote - Containers.
 - [`container-templates`](container-templates) - Contains templates for creating your own container definitions or to [contribute back](CONTRIBUTING.md#contributing-dev-container-definitions).
 
 ## Common Questions

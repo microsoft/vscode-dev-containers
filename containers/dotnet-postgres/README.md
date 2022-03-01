@@ -9,7 +9,7 @@
 | *Contributors* | [Berkays](https://github.com/Berkays)  |
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
-| *Published image architecture(s)* | x86-64 |
+| *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants|
 | *Available image variants* | [See C# (.NET) definition](../dotnet). |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
