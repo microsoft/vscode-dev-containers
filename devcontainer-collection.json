@@ -5,7 +5,7 @@
     "features": {},
     "definitions": [
         {
-            "id": "base",
+            "id": "ubuntu",
             "sha256checksum": "blahblah",
             "displayName": "Ubuntu",
             "description": "A simple Ubuntu container with Git and other common utilities installed.",
