@@ -7,7 +7,7 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/ruby.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add to rc files flag] [rbenv enabled] [RVM enabled] [Install tools flag]
+# Syntax: ./ruby-debian.sh [Ruby version] [non-root user] [Add to rc files flag] [Install tools flag]
 
 RUBY_VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}
@@ -225,7 +225,7 @@ else
     # Install rvm
     curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles ${RVM_INSTALL_ARGS} --with-default-gems="${DEFAULT_GEMS}" 2>&1
     usermod -aG rvm ${USERNAME}
-    su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && rvm fix-permissions system"
+    su ${USERNAME} -c "/usr/local/rvm/scripts/rvm fix-permissions system"
     rm -rf ${GNUPGHOME}
 fi
 
@@ -233,15 +233,11 @@ if [ "${INSTALL_RUBY_TOOLS}" = "true" ]; then
     # Non-root user may not have "gem" in path when script is run and no ruby version
     # is installed by rvm, so handle this by using root's default gem in this case
     ROOT_GEM='$(which gem || echo "")'
-    su ${USERNAME} -c ". /usr/local/rvm/scripts/rvm && \"$(which gem || echo ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
+    su ${USERNAME} -c "\"$(which gem || echo ${ROOT_GEM})\" install ${DEFAULT_GEMS}"
 fi
 
-
-##TODO
 # VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it
-updaterc $'if [ "${RVM_ENABLED}" = "true" ]; then
-    "if ! grep rvm_silence_path_mismatch_check_flag \$HOME/.rvmrc > /dev/null 2>&1; then echo 'rvm_silence_path_mismatch_check_flag=1' >> \$HOME/.rvmrc; fi\nsource /usr/local/rvm/scripts/rvm > /dev/null 2>&1"
-fi'
+updaterc "if ! grep rvm_silence_path_mismatch_check_flag \$HOME/.rvmrc > /dev/null 2>&1; then echo 'rvm_silence_path_mismatch_check_flag=1' >> \$HOME/.rvmrc; fi"
 
 # Install rbenv/ruby-build for good measure
 git clone --depth=1 \
@@ -252,12 +248,6 @@ git clone --depth=1 \
     -c receive.fsck.zeroPaddedFilemode=ignore \
     https://github.com/rbenv/rbenv.git /usr/local/share/rbenv
 
-##TODO
-updaterc 'if [ "${RBENV_ENABLED}" = "true" ]; then
-    ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
-    eval "$(rbenv init -)"
-fi'
-
 git clone --depth=1 \
     -c core.eol=lf \
     -c core.autocrlf=false \
@@ -265,22 +255,34 @@ git clone --depth=1 \
     -c fetch.fsck.zeroPaddedFilemode=ignore \
     -c receive.fsck.zeroPaddedFilemode=ignore \
     https://github.com/rbenv/ruby-build.git /usr/local/share/ruby-build
-    
-if [ "${RBENV_ENABLED}" = "true" ]; then
-    mkdir -p /root/.rbenv/plugins
-    ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
-    if [ "${USERNAME}" != "root" ]; then
-        mkdir -p /home/${USERNAME}/.rbenv/plugins
+
+mkdir -p /root/.rbenv/plugins
+
+if [ "${USERNAME}" != "root" ]; then
+    mkdir -p /home/${USERNAME}/.rbenv/plugins
+fi
+
+# Update bashrc and zshrc with conditionals
+# We use "not false" so that the default state is true, i.e., enabled
+updaterc 'if [ "${RVM_ENABLED}" != "false" ]; then 
+    source /usr/local/rvm/scripts/rvm 
+fi'
+
+if [ "${USERNAME}" != "root" ]; then
+    mkdir -p /home/${USERNAME}/.rbenv/plugins
+    updaterc 'if [ "${RBENV_ENABLED}" != "false" ]; then
         chown -R ${USERNAME} /home/${USERNAME}/.rbenv
         ln -s /usr/local/share/ruby-build /home/${USERNAME}/.rbenv/plugins/ruby-build
-    fi
+    fi'
 fi
+
+updaterc 'if [ "${RBENV_ENABLED}" != "false" ]; then
+    sudo ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
+    eval "$(rbenv init -)"
+    sudo ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
+fi'
 
 # Clean up
-if [ "${RVM_ENABLED}" = "true" ]; then 
-    source /usr/local/rvm/scripts/rvm
-fi
-
-rvm cleanup all 
+/usr/local/rvm/scripts/rvm cleanup all
 gem cleanup
 echo "Done!"

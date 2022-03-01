@@ -238,7 +238,6 @@ fi
 
 # VS Code server usually first in the path, so silence annoying rvm warning (that does not apply) and then source it
 updaterc "if ! grep rvm_silence_path_mismatch_check_flag \$HOME/.rvmrc > /dev/null 2>&1; then echo 'rvm_silence_path_mismatch_check_flag=1' >> \$HOME/.rvmrc; fi"
-# \nsource /usr/local/rvm/scripts/rvm > /dev/null 2>&1
 
 # Install rbenv/ruby-build for good measure
 git clone --depth=1 \
@@ -249,11 +248,6 @@ git clone --depth=1 \
     -c receive.fsck.zeroPaddedFilemode=ignore \
     https://github.com/rbenv/rbenv.git /usr/local/share/rbenv
 
-updaterc 'if [ "${RBENV_ENABLED}" = "true" ]; then
-    ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
-    eval "$(rbenv init -)"
-fi'
-
 git clone --depth=1 \
     -c core.eol=lf \
     -c core.autocrlf=false \
@@ -261,18 +255,34 @@ git clone --depth=1 \
     -c fetch.fsck.zeroPaddedFilemode=ignore \
     -c receive.fsck.zeroPaddedFilemode=ignore \
     https://github.com/rbenv/ruby-build.git /usr/local/share/ruby-build
+
 mkdir -p /root/.rbenv/plugins
-ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
+
 if [ "${USERNAME}" != "root" ]; then
     mkdir -p /home/${USERNAME}/.rbenv/plugins
-    chown -R ${USERNAME} /home/${USERNAME}/.rbenv
-    ln -s /usr/local/share/ruby-build /home/${USERNAME}/.rbenv/plugins/ruby-build
 fi
 
-# Clean up
-updaterc 'if [ "${RVM_ENABLED}" = "true" ]; then 
+# Update bashrc and zshrc with conditionals
+# We use "not false" so that the default state is true, i.e., enabled
+updaterc 'if [ "${RVM_ENABLED}" != "false" ]; then 
     source /usr/local/rvm/scripts/rvm 
 fi'
+
+if [ "${USERNAME}" != "root" ]; then
+    mkdir -p /home/${USERNAME}/.rbenv/plugins
+    updaterc 'if [ "${RBENV_ENABLED}" != "false" ]; then
+        chown -R ${USERNAME} /home/${USERNAME}/.rbenv
+        ln -s /usr/local/share/ruby-build /home/${USERNAME}/.rbenv/plugins/ruby-build
+    fi'
+fi
+
+updaterc 'if [ "${RBENV_ENABLED}" != "false" ]; then
+    sudo ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
+    eval "$(rbenv init -)"
+    sudo ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
+fi'
+
+# Clean up
 /usr/local/rvm/scripts/rvm cleanup all
 gem cleanup
 echo "Done!"

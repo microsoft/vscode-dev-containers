@@ -12,6 +12,11 @@
 		}
 	},
 
+	"containerEnv": {
+		"RBENV_ENABLED": "false",
+		"RVM_ENABLED": "false"
+	},
+
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
 
