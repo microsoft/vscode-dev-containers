@@ -1,10 +1,10 @@
 import subprocess
 
 # Eg. /Users/jospicer/dev/vscode-dev-containers/containers
-ABS_PATH_TO_CONTAINERS_FOLDER = '/Users/jospicer/dev/vscode-dev-containers/containers'
+ABS_PATH_TO_CONTAINERS_FOLDER = ''
 
 # Eg. /Users/jospicer/dev/vscode-dev-containers/migrations/options.json
-OPTIONS_FILE = '/Users/jospicer/dev/vscode-dev-containers/migrations/options.json'
+OPTIONS_FILE = ''
 
 containers = [
     'alpine',
