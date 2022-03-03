@@ -1,7 +1,12 @@
 {
-	"publisher": "Microsoft",
-	"repository": "microsoft/vscode-dev-containers",
-
+	"sourceInformation": {
+		"source": "github",
+		"owner": "microsoft",
+		"repo": "vscode-dev-containers",
+		"ref": "",
+		"sha": "",
+		"tag": ""
+    },
 	"definitions": [
 		{
 			"id": "alpine",
