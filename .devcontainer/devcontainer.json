@@ -1,0 +1,37 @@
+{
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"runArgs": [
+		"--shm-size=1g",
+	],
+	"settings": {},
+	"extensions": [
+		"ms-azuretools.vscode-docker",
+		"dbaeumer.vscode-eslint",
+		"rogalmic.bash-debug",
+		"mads-hartmann.bash-ide-vscode",
+		"streetsidesoftware.code-spell-checker",
+		"mutantdino.resourcemonitor",
+		"bierner.github-markdown-preview",
+		"EditorConfig.EditorConfig",
+		"chrisdias.vscode-opennewinstance"
+	],
+	"forwardPorts": [6080, 5901],
+	"portsAttributes": {
+		"6080": {
+			"label": "Desktop web client (noVNC)",
+			"onAutoForward": "silent"
+		},
+		"5901": {
+			"label": "VNC TCP port",
+			"onAutoForward": "silent"
+		},
+	},
+	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+	"remoteUser": "node",
+	"features": {
+		"docker-in-docker": "latest",
+		"github-cli": "latest"
+	}
+}
