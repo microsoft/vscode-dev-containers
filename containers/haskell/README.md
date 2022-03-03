@@ -1,10 +1,11 @@
 # Haskell (Community)
 
+_This definition will hopefully get you going quickly with Haskell running as a remote container in vscode_
+
 ## Summary
 
 [Haskell](https://www.haskell.org/) is an advanced, purely functional programming language
 
-This definition will hopefully get you going quickly with Haskell running as a remote container in vscode.
 
 | Metadata                    | Value                                                                        |
 |---------------------------- | -----------------------------------------------------------------------------|
