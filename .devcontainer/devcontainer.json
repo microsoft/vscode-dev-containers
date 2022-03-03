@@ -5,7 +5,10 @@
 	"runArgs": [
 		"--shm-size=1g",
 	],
-	"settings": {},
+	"settings": {
+		"resmon.show.battery": false,
+		"resmon.show.cpufreq": false
+	},
 	"extensions": [
 		"ms-azuretools.vscode-docker",
 		"dbaeumer.vscode-eslint",
@@ -17,7 +20,7 @@
 		"EditorConfig.EditorConfig",
 		"chrisdias.vscode-opennewinstance"
 	],
-	"forwardPorts": [6080, 5901],
+	"forwardPorts": [6080],
 	"portsAttributes": {
 		"6080": {
 			"label": "Desktop web client (noVNC)",
@@ -33,5 +36,9 @@
 	"features": {
 		"docker-in-docker": "latest",
 		"github-cli": "latest"
+	},
+	"overrideCommand": false,
+	"hostRequirements": {
+		"memory": "6gb"
 	}
 }
