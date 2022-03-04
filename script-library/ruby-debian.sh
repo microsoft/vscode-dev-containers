@@ -257,9 +257,12 @@ git clone --depth=1 \
     https://github.com/rbenv/ruby-build.git /usr/local/share/ruby-build
 
 mkdir -p /root/.rbenv/plugins
+ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
 
 if [ "${USERNAME}" != "root" ]; then
     mkdir -p /home/${USERNAME}/.rbenv/plugins
+    chown -R ${USERNAME} /home/${USERNAME}/.rbenv
+    ln -s /usr/local/share/ruby-build /home/${USERNAME}/.rbenv/plugins/ruby-build
 fi
 
 # Update bashrc and zshrc with conditionals
@@ -268,19 +271,10 @@ updaterc 'if [ "${RVM_ENABLED}" != "false" ]; then
     source /usr/local/rvm/scripts/rvm 
 fi'
 
-if [ "${USERNAME}" != "root" ]; then
-    mkdir -p /home/${USERNAME}/.rbenv/plugins
-    updaterc 'if [ "${RBENV_ENABLED}" != "false" ]; then
-        chown -R ${USERNAME} /home/${USERNAME}/.rbenv
-        ln -s /usr/local/share/ruby-build /home/${USERNAME}/.rbenv/plugins/ruby-build
-    fi'
-fi
-
 updaterc 'if [ "${RBENV_ENABLED}" != "false" ]; then
-    sudo ln -s /usr/local/share/rbenv/bin/rbenv /usr/local/bin
-    eval "$(rbenv init -)"
-    sudo ln -s /usr/local/share/ruby-build /root/.rbenv/plugins/ruby-build
-fi'
+        export PATH=$PATH:/usr/local/share/rbenv/bin
+        eval "$(rbenv init -)"
+    fi'
 
 # Clean up
 /usr/local/rvm/scripts/rvm cleanup all
