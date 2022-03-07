@@ -9,6 +9,9 @@ FROM ${IMAGE_TO_TEST}
 
 USER root
 
+RUN . /etc/os-release \
+    && if [ "${ID}" = "alpine" ] || [ "${ID_LIKE}" = "alpine" ]; then apk add bash; fi
+
 ARG USERNAME="vscode"
 ARG RUN_COMMON_SCRIPT="true"
 ARG UPGRADE_PACKAGES="false"
