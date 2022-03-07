@@ -1,5 +1,7 @@
 # Azure Terraform (Community)
 
+_build, change, and version Azure infrastructure with terraform_
+
 ## Summary
 
 [Terraform](https://www.terraform.io/) is an open-source tool that provides the ability to build, change, and version infrastructure as code using declarative configuration files with HashiCorp Configuration Language (HCL).

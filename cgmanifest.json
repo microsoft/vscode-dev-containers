@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
+                    "commitHash": "4f0b680248e1acf71e9e557af62f3a08bb5b96c6"
                 }
             }
         },
@@ -76,17 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "b86c0c35b88e2bf3557ff49dc831689c2f085090"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "vcpkg",
-                    "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "d699e78f848027d18d337e6ae4803c2c7c18dbbb"
+                    "commitHash": "bd602277bf7fc3188b3d086b302c6840464db900"
                 }
             }
         },
@@ -195,7 +185,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "azure-cli",
-                    "Version": "2.33.1-1~focal",
+                    "Version": "2.34.1-1~focal",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/azure-cli",
@@ -332,7 +322,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "bandit",
-                    "Version": "1.7.2"
+                    "Version": "1.7.4"
                 }
             }
         },
@@ -341,7 +331,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.13.2"
+                    "Version": "20.13.3"
                 }
             }
         },
@@ -440,7 +430,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.7.5"
+                    "Version": "0.8.0"
                 }
             }
         },
@@ -449,7 +439,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "honnef.co/go/tools",
-                    "Version": "0.2.1"
+                    "Version": "0.2.2"
                 }
             }
         },
@@ -513,7 +503,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
+                    "commitHash": "4f0b680248e1acf71e9e557af62f3a08bb5b96c6"
                 }
             }
         },
@@ -632,7 +622,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "2.5.1",
+                    "Version": "2.5.2",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -652,7 +642,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.17.6",
+                    "Version": "1.17.7",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -824,7 +814,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.2.6",
+                    "Version": "2.2.7",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -1004,7 +994,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "fc40b53e6460560ed9b256deb87f2165f8d48f1f"
+                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
                 }
             }
         },
@@ -1093,7 +1083,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.9.0"
+                    "Version": "8.10.0"
                 }
             }
         },
@@ -1103,7 +1093,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
+                    "commitHash": "4f0b680248e1acf71e9e557af62f3a08bb5b96c6"
                 }
             }
         },
@@ -1172,7 +1162,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "tslint-to-eslint-config",
-                    "Version": "2.11.0"
+                    "Version": "2.12.3"
                 }
             }
         },
@@ -1181,7 +1171,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "typescript",
-                    "Version": "4.5.5"
+                    "Version": "4.6.2"
                 }
             }
         },

@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:e036ad8d973eaad5b1edbf27d8dd7be053ca4c41a272eba663c0c428a5ac0398
+**Digest:** sha256:1253a03c65fffa0e3a5ad0c090903b0b891df03c57af6a6b1bfb83c6933a41b9
 
 **Tags:**
 ```
@@ -29,7 +29,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | fc40b53e6460560ed9b256deb87f2165f8d48f1f | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e9348575371aa8ec8811356d997942559c026d07 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Pip / pipx installed tools and packages**
@@ -44,8 +44,8 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | mypy | 0.931 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
-| bandit | 1.7.2 |
-| virtualenv | 20.13.2 |
+| bandit | 1.7.4 |
+| virtualenv | 20.13.3 |
 | pipx | 1.0.0 |
 
 **Other tools and utilities**
