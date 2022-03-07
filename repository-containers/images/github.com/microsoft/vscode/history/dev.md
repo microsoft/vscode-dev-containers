@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
-**Digest:** sha256:8aed6d4cc997a43746f2873204be08f410476e0bfe92bfda8e4440234d592b55
+**Digest:** sha256:baf3626ba6b2a017351823fb0e02ac7a5daa5102774c2c30a38126753eff16a0
 
 **Tags:**
 ```
