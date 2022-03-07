@@ -1,4 +1,4 @@
-name: PR tests for script library
+name: Test script library (Debian) for PR
 
 on: 
   workflow_dispatch:
@@ -6,14 +6,14 @@ on:
     branches:
       - main
     paths:
-      - 'script-library/*.sh'  
+      - 'script-library/*-debian.sh'  
 jobs:
   test-script-library:
     name: Test script library
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     strategy:
       matrix:
-        os: ["debian:bullseye", "debian:buster", "ubuntu:focal", "ubuntu:bionic", alpine, rockylinux, "mcr.microsoft.com/oryx/build:github-actions-20210902.1"]
+        os: ["debian:bullseye", "debian:buster", "ubuntu:focal", "ubuntu:bionic"]
         defaults: ["true", "false"]
       fail-fast: true
     runs-on: ubuntu-latest
