@@ -11,7 +11,7 @@
 
 ## Variant: hirsute
 
-**Digest:** sha256:d9b68455f14e5cef6bfb0707c7967b5f9d5c0b48cf060d5918eaec395467b028
+**Digest:** sha256:4ea623e91890cf7d16901fe2da3392bc067a91367d8572054735fc566944381d
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4f0b680248e1acf71e9e557af62f3a08bb5b96c6 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:8b2fbf87f7712d829c90d0b353bf7b62e9a0fbed4b50f0f932c60d9c0ef910c1
+**Digest:** sha256:cc80a204ebd9b658455128966c1e2608e6cd66f6ad0674b8e409c85db1a7781a
 
 **Tags:**
 ```
@@ -93,7 +93,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Ubuntu 20.04.3 LTS (debian-like distro)
+**Linux distribution:** Ubuntu 20.04.4 LTS (debian-like distro)
 
 **Architectures:** linux/amd64
 
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4f0b680248e1acf71e9e557af62f3a08bb5b96c6 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -121,15 +121,15 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.2 |
+| libc6 | 2.31-0ubuntu9.7 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.10 |
+| libssl1.1 | 1.1.1f-1ubuntu2.11 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
-| locales | 2.31-0ubuntu9.2 |
+| locales | 2.31-0ubuntu9.7 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |
@@ -155,7 +155,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:bcbab763e34d588a7d6fa7c20cb8f1ba4aa9dee8e698eaa64645b36d732e8be6
+**Digest:** sha256:6e3cd6c4821056b7d137416493a5c37397e257c49dfbc80d347b1d439566e997
 
 **Tags:**
 ```
@@ -176,7 +176,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4f0b680248e1acf71e9e557af62f3a08bb5b96c6 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -193,7 +193,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | iproute2 | 4.15.0-2ubuntu1.3 |
 | jq | 1.5+dfsg-2 |
 | less | 487-0.1 |
-| libc6 | 2.27-3ubuntu1.4 |
+| libc6 | 2.27-3ubuntu1.5 |
 | libgcc1 | 1:8.4.0-1ubuntu1~18.04 |
 | libgssapi-krb5-2 | 1.16-2ubuntu0.2 |
 | libicu60 | 60.2-3ubuntu3.2 |
@@ -202,7 +202,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | libssl1.0.0 | 1.0.2n-1ubuntu5.7 |
 | libssl1.1 | 1.1.1-1ubuntu2.1~18.04.14 |
 | libstdc++6 | 8.4.0-1ubuntu1~18.04 |
-| locales | 2.27-3ubuntu1.4 |
+| locales | 2.27-3ubuntu1.5 |
 | lsb-release | 9.20170808ubuntu1 |
 | lsof | 4.89+dfsg-0.1 |
 | man-db | 2.8.3-2ubuntu0.1 |
@@ -213,10 +213,10 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | nano | 2.9.3-2 |
 | ncdu | 1.12-1 |
 | net-tools | 1.60+git20161116.90da8a0-1ubuntu1 |
-| openssh-client | 1:7.6p1-4ubuntu0.5 |
+| openssh-client | 1:7.6p1-4ubuntu0.6 |
 | procps | 2:3.3.12-3ubuntu1.2 |
 | psmisc | 23.1-1ubuntu0.1 |
-| rsync | 3.1.2-2.1ubuntu1.2 |
+| rsync | 3.1.2-2.1ubuntu1.3 |
 | strace | 4.21-1ubuntu1 |
 | sudo | 1.8.21p2-3ubuntu1.4 |
 | unzip | 6.0-21ubuntu1.1 |

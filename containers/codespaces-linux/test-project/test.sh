@@ -31,6 +31,9 @@ check "pydocstyle" pydocstyle --version
 check "bandit" bandit --version
 check "virtualenv" virtualenv --version
 
+# Check JupyterLab
+check "jupyter-lab" jupyter-lab --version
+
 # Check Java tools
 check "java" java -version
 check "sdkman" bash -c ". /usr/local/sdkman/bin/sdkman-init.sh && sdk version"

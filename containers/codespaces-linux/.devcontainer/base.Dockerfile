@@ -70,13 +70,14 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mkdir -p /usr/local/etc/vscode-dev-containers/ \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
-# Install Python, PHP, Ruby utilities
+# Install Python, PHP, Ruby utilities, and JupyterLab
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install rvm, rbenv, any missing base gems
     && chown -R ${USERNAME} /opt/ruby/* \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
     # Link composer
     && ln -s $(which composer.phar) /usr/local/bin/composer \
+    && pip install jupyterlab \
     && apt-get clean -y
 
 # Install PowerShell

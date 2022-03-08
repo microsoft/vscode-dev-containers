@@ -1,6 +1,6 @@
 {
 	"variants": ["1.17-bullseye", "1.16-bullseye", "1.17-buster", "1.16-buster"],
-	"definitionVersion": "0.205.3",
+	"definitionVersion": "0.205.4",
 	"build": {
 		"latest": "1.17-bullseye",
 		"rootDistro": "debian",

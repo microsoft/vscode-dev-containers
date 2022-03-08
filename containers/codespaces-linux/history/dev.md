@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:673660c71b71ee9c5a585d58417a9f94c64fbfb5417095cd09ee26e2a49ae451
+**Digest:** sha256:75ad09be6e60b362468f3b62a1ffb981039f5fdf520ad6a179f18e2f201e8e1b
 
 **Tags:**
 ```
@@ -15,7 +15,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
-**Linux distribution:** Ubuntu 20.04.3 LTS (debian-like distro)
+**Linux distribution:** Ubuntu 20.04.4 LTS (debian-like distro)
 
 **Architectures:** linux/amd64
 
@@ -33,21 +33,21 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Ruby](https://www.ruby-lang.org/en/) | 2.7.2 | /opt/ruby/&lt;version&gt; |
 | [PHP](https://xdebug.org/) | 7.2.34<br />7.3.27<br />7.4.26 | /opt/php/&lt;version&gt; |
 | [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.2.1 | /opt/microsoft/powershell |
-| GCC | 9.3.0-17ubuntu1~20.04 | 
+| GCC | 9.4.0-1ubuntu1~20.04 | 
 | Clang | 10.0.0-4ubuntu1 | 
-| [Go](https://golang.org/dl) | 1.17.6 | /usr/local/go |
-| [Rust](https://github.com/rust-lang/rust) | 1.58.1 | /usr/local/cargo<br />/usr/local/rustup |
+| [Go](https://golang.org/dl) | 1.17.7 | /usr/local/go |
+| [Rust](https://github.com/rust-lang/rust) | 1.59.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.1 | 
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 2d3bae965a445ac0f6edeed0b277a15d09e6a261 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4f0b680248e1acf71e9e557af62f3a08bb5b96c6 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
-| [nvs](https://github.com/jasongin/nvs) | 5c04eb39ade8148d1424cfd80fc4f035f9c3ac0f | /home/codespace/.nvs |
-| [rbenv](https://github.com/rbenv/rbenv.git) | a76c4aaafa3dc710e16e1aefe2208bad0247b595 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | cbdbc6e44be4756df3fc526ee97c1a5ce0632b74 | /usr/local/share/ruby-build |
+| [nvs](https://github.com/jasongin/nvs) | ea01809b665810685135d480a23ad6c9ca30c227 | /home/codespace/.nvs |
+| [rbenv](https://github.com/rbenv/rbenv.git) | e4f61e67e2336c86622e3efa0473e2c04add5c08 | /usr/local/share/rbenv |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 10a56a289c4699f076b654e94dc3d07aad3dee56 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
@@ -61,22 +61,22 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | mypy | 0.931 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
-| bandit | 1.7.2 |
-| virtualenv | 20.13.1 |
+| bandit | 1.7.4 |
+| virtualenv | 20.13.3 |
 | pipx | 1.0.0 |
 
 **Go tools and modules**
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.7.5 |
-| honnef.co/go/tools | 0.2.1 |
+| golang.org/x/tools/gopls | 0.8.0 |
+| honnef.co/go/tools | 0.2.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.1.3 |
+| github.com/mgechev/revive | 1.1.4 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.8.0 |
-| github.com/golangci/golangci-lint | 1.44.0 |
+| github.com/go-delve/delve | 1.8.1 |
+| github.com/golangci/golangci-lint | 1.44.2 |
 
 **Ruby gems and tools**
 
@@ -93,9 +93,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.38 |
-| rust-analysis | 1.58.1 |
-| rust-src | 1.58.1 |
-| clippy | 1.58.1 |
+| rust-analysis | 1.59.0 |
+| rust-src | 1.59.0 |
+| clippy | 1.59.0 |
 
 **Other tools and utilities**
 
@@ -104,12 +104,12 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [git](https://github.com/git/git) | 2.35.1 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.2 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.3 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.4 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.8.0 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.1 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.2 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 2.5.0 | 
+| [GitHub CLI](https://github.com/cli/cli) | 2.5.2 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.3.3 | 
@@ -121,7 +121,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| azure-cli (Azure CLI) | 2.32.0-1~focal |
+| azure-cli (Azure CLI) | 2.34.1-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
@@ -133,7 +133,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | gcc | 4:9.3.0-1ubuntu2 |
 | gdb | 9.2-0ubuntu1~20.04.1 |
 | git | 1:2.25.1-1ubuntu3.2 |
-| git-lfs (Git Large File Support) | 3.0.2 |
+| git-lfs (Git Large File Support) | 3.1.2 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
 | htop | 2.2.0-2build1 |
 | iproute2 | 5.5.0-1ubuntu1 |
@@ -142,13 +142,13 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | less | 551-1ubuntu0.1 |
 | libatk-bridge2.0-0 | 2.34.2-0ubuntu2~20.04.1 |
 | libatk1.0-0 | 2.35.1-1ubuntu2 |
-| libc6 | 2.31-0ubuntu9.2 |
-| libc6-dev | 2.31-0ubuntu9.2 |
+| libc6 | 2.31-0ubuntu9.7 |
+| libc6-dev | 2.31-0ubuntu9.7 |
 | libcups2 | 2.3.1-9ubuntu1.1 |
-| libgbm1 | 21.0.3-0ubuntu0.3~20.04.5 |
+| libgbm1 | 21.2.6-0ubuntu0.1~20.04.1 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
-| libgtk-3-0 | 3.24.20-0ubuntu1 |
+| libgtk-3-0 | 3.24.20-0ubuntu1.1 |
 | libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
@@ -157,7 +157,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libpango-1.0-0 | 1.44.7-2ubuntu4 |
 | libpangocairo-1.0-0 | 1.44.7-2ubuntu4 |
 | libsecret-1-dev | 0.20.4-0ubuntu1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.10 |
+| libssl1.1 | 1.1.1f-1ubuntu2.11 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | libx11-6 | 2:1.6.9-2ubuntu1.2 |
 | libx11-xcb1 | 2:1.6.9-2ubuntu1.2 |
@@ -166,7 +166,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libxfixes3 | 1:5.0.3-2 |
 | lldb | 1:10.0-50~exp1 |
 | llvm | 1:10.0-50~exp1 |
-| locales | 2.31-0ubuntu9.2 |
+| locales | 2.31-0ubuntu9.7 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | lxc | 1:4.0.6-0ubuntu1~20.04.1 |
