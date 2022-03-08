@@ -91,7 +91,7 @@ verify_aws_cli_gpg_signature() {
     local sigFilePath=$2
 
     get_common_setting AWSCLI_GPG_KEY
-    get_common_setting AWSCLI_GPG_KEY_MATERIAL
+    get_common_setting AWSCLI_GPG_KEY_MATERIAL true
     local awsCliPublicKeyFile=aws-cli-public-key.pem
     echo "${AWSCLI_GPG_KEY_MATERIAL}" > "${awsCliPublicKeyFile}"
     gpg --quiet --import "${awsCliPublicKeyFile}"
