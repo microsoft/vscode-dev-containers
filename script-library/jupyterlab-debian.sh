@@ -24,5 +24,5 @@ echo "Installing JupyterLab..."
 if [ "${JUPYTER_LAB_VERSION}" = "latest" ]; then
   pip install jupyterlab
 else
-  pip install jupyterlab=="${JUPYTER_LAB_VERSION}"
+  pip install jupyterlab=="${JUPYTER_LAB_VERSION}" --no-cache-dir
 fi
