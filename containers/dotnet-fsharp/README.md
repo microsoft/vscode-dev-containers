@@ -9,7 +9,7 @@
 | *Contributors* | The VS Code Team, F# team |
 | *Categories* | Languages |
 | *Definition type* | Dockerfile |
-| *Published image architecture(s)* | x86-64 |
+| *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Ubuntu |

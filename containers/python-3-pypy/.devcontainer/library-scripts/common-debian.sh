@@ -289,7 +289,7 @@ set -e
 if [ -d "/run/systemd/system" ]; then
     exec /bin/systemctl/systemctl "$@"
 else
-    echo '\n"systemd" is not running in this container due to its overhead.\nUse the "service" command to start services intead. e.g.: \n\nservice --status-all'
+    echo '\n"systemd" is not running in this container due to its overhead.\nUse the "service" command to start services instead. e.g.: \n\nservice --status-all'
 fi
 EOF
 chmod +x /usr/local/bin/systemctl

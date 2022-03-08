@@ -3,26 +3,18 @@ detect_user() {
     local user_variable_name=${1:-username}
     local user_variable_value=${!user_variable_name}
     local possible_users=${2:-("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")}
-    local uid_variable_name=${3:-user_uid}
-    local gid_variable_name=${4:-user_gid}
     if [ "${user_variable_value}" = "auto" ] || [ "${user_variable_value}" = "automatic" ]; then
         declare -g ${user_variable_name}=vscode
         for current_user in ${possible_users[@]}; do
             if id -u ${current_user} > /dev/null 2>&1; then
-                declare -g ${user_variable_nam}e=${current_user}
+                declare -g ${user_variable_name}=${current_user}
                 break
             fi
         done
-        if [ "${user_variable_value}" = "" ]; then
-            declare -g ${user_variable_name}=vscode
-        fi
-    elif [ "${user_variable_value}" = "none" ]; then
+    elif [ "${user_variable_value}" = "none" ] || ! id "${user_variable_value}" > /dev/null 2>&1; then
         declare -g ${user_variable_name}=root
-        declare -g ${uid_variable_name}=0
-        declare -g ${gid_variable_name}=0
     fi
 }
-
 # Use Oryx to install something using a partial version match
 oryx_install() {
     local platform=$1

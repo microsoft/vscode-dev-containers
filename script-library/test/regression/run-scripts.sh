@@ -44,7 +44,8 @@ runScript()
 DISTRO="${ID_LIKE}"
 if [ -z "${DISTRO}" ]; then
     DISTRO="${ID}"
-elif [ "${DISTRO}" = "rhel fedora" ] ||  [ "${DISTRO}" = "rhel" ] || [ "${DISTRO}" = "fedora" ]; then
+fi
+if [[ "${DISTRO}" = *"rhel"* ]] ||[[ "${DISTRO}" = *"centos"* ]] || [[ "${DISTRO}" = *"fedora"* ]]; then
     DISTRO="redhat"
 fi
 

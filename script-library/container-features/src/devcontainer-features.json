@@ -21,7 +21,6 @@
 			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
 			"privileged": true,
-			"init": true,
 			"containerEnv": {
 				"DOCKER_BUILDKIT": "1"
 			},
@@ -76,7 +75,6 @@
 			},
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
 			"entrypoint": "/usr/local/share/docker-init.sh",
-			"init": true,
 			"containerEnv": {
 				"DOCKER_BUILDKIT": "1"
 			},
@@ -138,7 +136,6 @@
 					"description": "Select or enter a Minikube version to install"
 				}
 			},
-			"init": true,
 			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
 			"extensions": [
 				"ms-kubernetes-tools.vscode-kubernetes-tools"
@@ -467,19 +464,19 @@
 				},
 				"password": {
 					"type": "string",
-					"proposal": ["vscode","codespaces","password"],
+					"proposals": ["vscode","codespaces","password"],
 					"default": "vscode",
 					"description": "Enter a password for desktop connections"
 				},
 				"webPort": {
 					"type": "string",
-					"proposal": ["6080"],
+					"proposals": ["6080"],
 					"default": "6080",
 					"description": "Enter a port for the desktop web client"
 				},
 				"vncPort": {
 					"type": "string",
-					"proposal": ["5901"],
+					"proposals": ["5901"],
 					"default": "5901",
 					"description": "Enter a port for the desktop VNC server"
 				}

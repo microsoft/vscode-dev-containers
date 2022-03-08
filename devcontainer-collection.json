@@ -1,0 +1,2175 @@
+{
+	"sourceInformation": {
+		"owner": "microsoft",
+		"repo": "vscode-dev-containers",
+		"ref": "",
+		"sha": "",
+		"tag": ""
+    },
+	"definitions": [
+		{
+			"id": "alpine",
+			"displayName": "Alpine",
+			"description": "Simple Alpine container with Git installed.",
+			"categories": ["Core", "Other"],
+			"platforms": ["Any"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": ["3.14", "3.13", "3.12", "3.11"],
+					"default": "3.13"
+				},
+				"INSTALL_ZSH": {
+					"type": "boolean",
+					"default": false,
+					"description": "Install zsh"
+				}
+			}
+		},
+
+		{
+			"id": "azure-ansible",
+			"displayName": "Azure Ansible (Community)",
+			"description": "Get going quickly with Ansible in Azure. Includes Ansible, the Azure CLI, the Docker CLI (for testing locally), Node.js for Cloud Shell, and related extensions and dependencies.",
+			"categories": ["Community", "Azure", "Other"],
+			"platforms": ["Azure", "Ansible"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-bicep",
+			"displayName": "Azure Bicep (Community)",
+			"description": "Debian container with the Azure Bicep, Azure CLI, related extensions, and dependencies.",
+			"categories": ["Community", "Services", "Azure"],
+			"platforms": ["Azure"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-cli",
+			"displayName": "Azure CLI",
+			"description": "Debian container with the Azure CLI, related extensions, and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-functions-dotnet-6-inprocess",
+			"displayName": "Azure Functions & C- .NET 6 (In-Process)",
+			"description": "Develop Azure Functions in C# (in-process). Includes NET 6, the Azure Functions SDK, and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Functions", ".NET Core", "C#"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-functions-dotnet-6-isolated",
+			"displayName": "Azure Functions & C- .NET 6 (Isolated)",
+			"description": "Develop Azure Functions in C# (isolated). Includes NET 6, the Azure Functions SDK, and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Functions", ".NET Core", "C#"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-functions-dotnetcore-3.1",
+			"displayName": "Azure Functions & C- .NET Core 3.1",
+			"description": "Develop Azure Functions in C#. Includes NET Core 3.1, the Azure Functions SDK, and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Functions", ".NET Core", "C#"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-functions-java-11",
+			"displayName": "Azure Functions & Java 11",
+			"description": "Develop Azure Functions in Java. Includes JDK 11, Maven, XML tools, the Azure Functions SDK, and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Functions", "Java"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-functions-java-8",
+			"displayName": "Azure Functions & Java 8",
+			"description": "Develop Azure Functions in Java. Includes JDK 8, Maven, XML tools, the Azure Functions SDK, and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Functions", "Java"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-functions-node",
+			"displayName": "Azure Functions & Node.js",
+			"description": "Develop Azure Functions in Node.js. Includes Node.js, eslint, the Azure Functions SDK, and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Functions", "Node.js", "JavaScript"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-functions-pwsh",
+			"displayName": "Azure Functions & PowerShell",
+			"description": "Develop Azure Functions in PowerShell. Includes .NET Core , PowerShell, the Azure Functions SDK, and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Functions", ".NET Core", "PowerShell"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-functions-python-3",
+			"displayName": "Azure Functions & Python 3",
+			"description": "Develop Azure Functions in Python. Includes Python 3, the Azure Functions SDK, Docker CLI (required to publish to Azure with native dependencies) and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Functions", "Python"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-machine-learning-python-3",
+			"displayName": "Azure Machine Learning & Python 3 - Anaconda",
+			"description": "Use Azure Machine Learning with Python 3 - Anaconda. Includes Anaconda, the Docker CLI (for local testing), and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Machine Learning", "Python", "Anaconda"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-static-web-apps",
+			"displayName": "Azure Static Web Apps",
+			"description": "Develop Azure Static Web Apps & Azure Functions in any supported language. Includes Node.js, eslint, Python, .NET Core, the Azure Functions SDK, and related extensions and dependencies.",
+			"categories": ["Services", "Azure"],
+			"platforms": ["Azure Functions", "Python", "C#", "Node.js", "JavaScript"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "azure-terraform",
+			"displayName": "Azure Terraform (Community)",
+			"description": "_build, change, and version Azure infrastructure with terraform_",
+			"categories": ["Community", "Azure", "Other"],
+			"platforms": ["Azure", "Terraform"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "bash",
+			"displayName": "Bash (Community)",
+			"description": "Develop scripts with Bash, includes [Bash IDE](https://marketplace.visualstudio.com/items?itemName=mads-hartmann.bash-ide-vscode), and [Bash Debug](https://github.com/rogalmic/vscode-bash-debug).",
+			"categories": ["Community", "Languages"],
+			"platforms": ["Bash"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "bazel",
+			"displayName": "Bazel (Community)",
+			"description": "Develop and compile efficiently on any language with the Bazel compilation tool.",
+			"categories": ["Community", "Other"],
+			"platforms": ["Any"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "chef-workstation",
+			"displayName": "Chef Workstation Docker Container",
+			"description": "_Everything you need to get started using Chef products._",
+			"categories": ["Community"],
+			"platforms": [
+				"Chef Infra Client",
+				"Chef InSpec",
+				"Chef Command Line Tool",
+				"Test Kitchen",
+				"and Various Test Kitchen and Knife plugins for clouds"
+			],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "codespaces-linux",
+			"displayName": "GitHub Codespaces (Default Linux Universal)",
+			"description": "Use or extend the new Ubuntu-based default, large, multi-language universal container for GitHub Codespaces.",
+			"categories": ["Services", "GitHub"],
+			"platforms": [
+				"Python",
+				"Node.js",
+				"JavaScript",
+				"TypeScript",
+				"C++",
+				"Java",
+				"C#",
+				"F#",
+				".NET Core",
+				"PHP",
+				"PowerShell",
+				"Go",
+				"Ruby",
+				"Rust",
+				"Conda"
+			],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "cpp",
+			"displayName": "C++",
+			"description": "Develop C++ applications on Linux. Includes Debian C++ build tools.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["C++"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": [
+						"debian-11",
+						"debian-10",
+						"ubuntu-21.04",
+						"ubuntu-20.04",
+						"ubuntu-18.04"
+					],
+					"default": "debian-10"
+				}
+			}
+		},
+
+		{
+			"id": "cpp-mariadb",
+			"displayName": "C++ & MariaDB",
+			"description": "Develop C++ applications on Linux. Includes Debian C++ build tools.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["C++"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "dapr-dotnet",
+			"displayName": "Dapr with C(Community)",
+			"description": "Develop Dapr applications using C# and .NET. Includes all needed SDKs, extensions, and dependencies.",
+			"categories": ["Community", "Frameworks"],
+			"platforms": [".NET Core", "C#", "Dapr"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "dapr-javascript-node",
+			"displayName": "Dapr with Node.js & JavaScript (Community)",
+			"description": "Develop Dapr applications using Node.js and JavaScript. Includes Dapr, Node.js, eslint, yarn, and the TypeScript compiler.",
+			"categories": ["Community", "Frameworks"],
+			"platforms": ["Node.js", "TypeScript", "Dapr"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "dart",
+			"displayName": "Dart (Community)",
+			"description": "Develop Dart based applications. Includes the Dart SDK, needed extensions, and dependencies.",
+			"categories": ["Community", "Languages"],
+			"platforms": ["Dart"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "debian",
+			"displayName": "Debian",
+			"description": "Simple Debian container with Git installed.",
+			"categories": ["Core", "Other"],
+			"platforms": ["Any"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": ["bullseye", "buster"],
+					"default": "bullseye"
+				}
+			}
+		},
+
+		{
+			"id": "deno",
+			"displayName": "Deno (Community)",
+			"description": "_Develop Deno applications. Includes the latest Deno runtime and extension._",
+			"categories": ["Community", "Languages"],
+			"platforms": ["Deno", "TypeScript", "JavaScript"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "docker-existing-docker-compose",
+			"displayName": "Existing Docker Compose (Extend)",
+			"description": "Sample illustrating how to extend an existing Docker Compose file for use in a dev container.",
+			"categories": ["Core", "Other"],
+			"platforms": ["Any"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "docker-existing-dockerfile",
+			"displayName": "Existing Dockerfile",
+			"description": "Sample illustrating reuse of an existing Dockefile.",
+			"categories": ["Core", "Other"],
+			"platforms": ["Any"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "docker-from-docker",
+			"displayName": "Docker from Docker",
+			"description": "Access your host's Docker install from inside a dev container. Installs Docker extension in the container along with needed CLIs.",
+			"categories": ["Other"],
+			"platforms": ["Any"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "docker-from-docker-compose",
+			"displayName": "Docker from Docker Compose",
+			"description": "Access your host's Docker install from inside a container when using Docker Compose. Installs Docker extension in the container along with needed CLIs.",
+			"categories": ["Other"],
+			"platforms": ["Any"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "docker-in-docker",
+			"displayName": "Docker in Docker",
+			"description": "Create child containers _inside_ a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.",
+			"categories": ["Other"],
+			"platforms": ["Any"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "dotnet",
+			"displayName": "C(.NET)",
+			"description": "Develop C# and .NET based applications. Includes all needed SDKs, extensions, and dependencies.",
+			"categories": ["Core", "Languages"],
+			"platforms": [".NET", ".NET Core", "C#"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": [
+						"6.0-bullseye",
+						"5.0-bullseye",
+						"3.1-bullseye",
+						"6.0-focal",
+						"5.0-focal",
+						"3.1-focal"
+					],
+					"default": "6.0-bullseye-slim"
+				}
+			}
+		},
+
+		{
+			"id": "dotnet-fsharp",
+			"displayName": "F(.NET)",
+			"description": "Develop F# and .NET based applications. Includes all needed SDKs, extensions, and dependencies.",
+			"categories": ["Languages"],
+			"platforms": [".NET", ".NET Core", "F#"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "dotnet-mssql",
+			"displayName": "C(.NET) and MS SQL",
+			"description": "Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and an MS SQL container for parallel database development. Adds an additional MS SQL container to the C# (.NET Core) container definition and deploys any .dacpac files from the mssql .devcontainer folder.",
+			"categories": ["Core", "Languages"],
+			"platforms": [".NET", ".NET Core", "C#", "Microsoft SQL"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "dotnet-postgres",
+			"displayName": "C(.NET) and PostgreSQL (Community)",
+			"description": "Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and a PostgreSQL container for parallel database development. Adds an additional PostgreSQL container to the C# (.NET Core) container definition.",
+			"categories": ["Core", "Languages"],
+			"platforms": [".NET", ".NET Core", "C#", "PostgreSQL"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "elixir",
+			"displayName": "Elixir (Community)",
+			"description": "_Develop Elixir based applications. Includes everything you need to get up and running._",
+			"categories": ["Community", "Languages"],
+			"platforms": ["Elixir"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "elixir-phoenix-postgres",
+			"displayName": "Elixir, Phoenix, Node.js & PostgresSQL (Community)",
+			"description": "_Develop Elixir/Phoenix based applications. Includes everything you need to get up and running._",
+			"categories": ["Community", "Languages", "Frameworks"],
+			"platforms": ["Elixir", "Postgres DB"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "elm",
+			"displayName": "Elm (Community)",
+			"description": "Develop Elm based applications. Includes the Elm language server extension & binary",
+			"categories": ["Community", "Languages"],
+			"platforms": ["Elm"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "go",
+			"displayName": "Go",
+			"description": "Develop Go based applications. Includes appropriate runtime args, Go, common tools, extensions, and dependencies.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Go"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": [
+						"1",
+						"1.16",
+						"1.17",
+						"1-bullseye",
+						"1.16-bullseye",
+						"1.17-bullseye",
+						"1-buster",
+						"1.16-buster",
+						"1.17-buster"
+					],
+					"default": "1-bullseye"
+				}
+			}
+		},
+
+		{
+			"id": "go-postgres",
+			"displayName": "Go",
+			"description": "Use and develop Go + Postgres applications. Includes appropriate runtime args, Go, common tools, extensions, and dependencies.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Go"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "haskell",
+			"displayName": "Haskell (Community)",
+			"description": "_This definition will hopefully get you going quickly with Haskell running as a remote container in vscode_",
+			"categories": ["Community", "Haskell"],
+			"platforms": ["Haskell"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "hugo",
+			"displayName": "Hugo",
+			"description": "Develop static sites with Hugo, includes everything you need to get up and running.",
+			"categories": ["Community", "Frameworks"],
+			"platforms": ["Hugo"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "java",
+			"displayName": "Java",
+			"description": "Develop Java applications. Includes the JDK and Java extensions.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Java"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": [
+						"11",
+						"17",
+						"11-bullseye",
+						"17-bullseye",
+						"11-buster",
+						"17-buster"
+					],
+					"default": "11-bullseye"
+				}
+			}
+		},
+
+		{
+			"id": "java-8",
+			"displayName": "Java 8",
+			"description": "Develop Java applications. Includes the JDK 8 (and 11) and Java extensions.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Java"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "java-postgres",
+			"displayName": "Java & PostgreSQL",
+			"description": "Develop applications with Java and PostgreSQL. Includes a Java application container and PostgreSQL server.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Java"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "javascript-node",
+			"displayName": "Node.js & JavaScript",
+			"description": "Develop Node.js based applications. Includes Node.js, eslint, nvm, and yarn.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Node.js", "JavaScript"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": [
+						"16-bullseye",
+						"14-bullseye",
+						"12-bullseye",
+						"16-buster",
+						"14-buster",
+						"12-buster"
+					],
+					"default": "16-bullseye"
+				}
+			}
+		},
+
+		{
+			"id": "javascript-node-azurite",
+			"displayName": "Node.js & Azurite (Community)",
+			"description": "3. Start VS Code, press <kbd>F1</kbd>, and select Remote-Containers: Open Folder in Container...",
+			"categories": ["Community", "Azure"],
+			"platforms": ["Azurite", "Node.js"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "javascript-node-mongo",
+			"displayName": "Node.js & Mongo DB",
+			"description": "Develop applications in Node.js and Mongo DB. Includes Node.js, eslint, and yarn in a container linked to a Mongo DB.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Node.js", "JavaScript", "Mongo DB"],
+			"type": "dockerCompose",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": [
+						"16-bullseye",
+						"14-bullseye",
+						"12-bullseye",
+						"16-buster",
+						"14-buster",
+						"12-buster",
+						"16",
+						"14",
+						"12"
+					],
+					"default": "14"
+				}
+			}
+		},
+
+		{
+			"id": "javascript-node-postgres",
+			"displayName": "Node.js & PostgreSQL",
+			"description": "Develop applications in Node.js and PostgreSQL. Includes Node.js, eslint, and yarn in a container linked to a Postgres DB container",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Node.js", "JavaScript", "PostgreSQL DB"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "jekyll",
+			"displayName": "Jekyll",
+			"description": "Develop static sites with Jekyll, includes everything you need to get up and running.",
+			"categories": ["Community", "Languages", "Frameworks"],
+			"platforms": ["Ruby", "Jekyll"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "julia",
+			"displayName": "Julia (Community)",
+			"description": "Develop Julia applications.",
+			"categories": ["Community", "Languages"],
+			"platforms": ["Julia"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "jupyter-datascience-notebooks",
+			"displayName": "Jupyter Data Science Notebooks (Community)",
+			"description": "Use Jupyter Data Science Notebooks with Python, R, Julia, and more.",
+			"categories": ["Data Science"],
+			"platforms": [
+				"Python",
+				"R",
+				"Julia",
+				"numpy",
+				"pandas",
+				"tidyverse",
+				"much more"
+			],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "kubernetes-helm",
+			"displayName": "Kubernetes - Local Configuration",
+			"description": "Access a local (or remote) Kubernetes cluster from inside a dev container using your local config. Includes kubectl, Helm, and the Docker CLI.",
+			"categories": ["Other"],
+			"platforms": ["Any"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "kubernetes-helm-minikube",
+			"displayName": "Kubernetes - Minikube-in-Docker",
+			"description": "Access an embedded minikube instance or remote a Kubernetes cluster from inside a dev container. Includes kubectl, Helm, minikube, and the Docker.",
+			"categories": ["Other"],
+			"platforms": ["Any"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "markdown",
+			"displayName": "Markdown",
+			"description": "A simple container for editing markdown.",
+			"categories": ["Languages"],
+			"platforms": ["Markdown"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "mit-scheme",
+			"displayName": "MIT-Scheme (Community)",
+			"description": "Simple mit-scheme container with Git installed.",
+			"categories": ["Community"],
+			"platforms": ["MIT-Scheme"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "perl",
+			"displayName": "Perl (Community)",
+			"description": "Develop Perl applications on Linux",
+			"categories": ["Community", "Languages"],
+			"platforms": ["Perl"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "php",
+			"displayName": "PHP",
+			"description": "Develop PHP based applications. Includes needed tools, extensions, and dependencies.",
+			"categories": ["Languages"],
+			"platforms": ["PHP"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": [
+						"8-apache-bullseye",
+						"8.1-apache-bullseye",
+						"8.0-apache-bullseye",
+						"7-apache-bullseye",
+						"7.4-apache-bullseye",
+						"8-apache-buster",
+						"8.1-apache-buster",
+						"8.0-apache-buster",
+						"7-apache-buster",
+						"7.4-apache-buster"
+					],
+					"default": "7-apache-bullseye"
+				}
+			}
+		},
+
+		{
+			"id": "php-mariadb",
+			"displayName": "PHP & MariaDB (Community)",
+			"description": "3. Start VS Code, press <kbd>F1</kbd>, and select Remote-Containers: Open Folder in Container...",
+			"categories": ["Community", "Languages"],
+			"platforms": ["PHP", "MariaDB (MySQL Compatible)"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "powershell",
+			"displayName": "PowerShell",
+			"description": "Develop PowerShell scripts without installing anything locally.",
+			"categories": ["Languages"],
+			"platforms": ["PowerShell"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "puppet",
+			"displayName": "Puppet Development Kit Docker Container (Community)",
+			"description": "Develop Puppet based applications. Includes everything you need to get up and running.",
+			"categories": ["Community", "Other"],
+			"platforms": ["Puppet"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "python-3",
+			"displayName": "Python 3",
+			"description": "Develop Python 3 applications.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Python"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": [
+						"3",
+						"3.10",
+						"3.9",
+						"3.8",
+						"3.7",
+						"3.6",
+						"3-bullseye",
+						"3.10-bullseye",
+						"3.9-bullseye",
+						"3.8-bullseye",
+						"3.7-bullseye",
+						"3.6-bullseye",
+						"3-buster",
+						"3.10-buster",
+						"3.9-buster",
+						"3.8-buster",
+						"3.7-buster",
+						"3.6-buster"
+					],
+					"default": "3-bullseye"
+				}
+			}
+		},
+
+		{
+			"id": "python-3-anaconda",
+			"displayName": "Anaconda (Python 3)",
+			"description": "Develop Anaconda applications in Python3. Installs dependencies from your environment.yml file and the Python extension.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Python", "Anaconda"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "python-3-anaconda-postgres",
+			"displayName": "Anaconda (Python 3) & PostgreSQL",
+			"description": "Develop Anaconda applications in Python3. Installs dependencies from your environment.yml file and the Python extension.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Python", "Anaconda"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "python-3-device-simulator-express",
+			"displayName": "Python 3 & Device Simulator Express (Community)",
+			"description": "Develop for ci}uit boards, with or without a physical device using Python 3 and [Device Simulator Express](https://www.microsoft.com/en-us/garage/profiles/device-simulator-express/)",
+			"categories": ["Community", "Other"],
+			"platforms": ["Python"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "python-3-miniconda",
+			"displayName": "Miniconda (Python 3)",
+			"description": "Develop Miniconda applications in Python 3. Installs dependencies from your environment.yml file and the Python extension.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Python", "Anaconda", "Miniconda"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "python-3-miniconda-postgres",
+			"displayName": "Miniconda (Python 3)",
+			"description": "Develop Miniconda applications in Python 3. Installs dependencies from your environment.yml file and the Python extension.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Python", "Anaconda", "Miniconda"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "python-3-postgres",
+			"displayName": "Python 3 & PostgreSQL",
+			"description": "Develop applications with Python 3 and PostgreSQL. Includes a Python application container and PostgreSQL server.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Python"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "python-3-pypy",
+			"displayName": "PyPy (Community)",
+			"description": "Develop python applications using the PyPy interpreter",
+			"categories": ["Community", "Languages"],
+			"platforms": ["Python", "PyPy"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "r",
+			"displayName": "R (Community)",
+			"description": "Perform statistical computing using the R language on Linux. Includes R and needed extensions.",
+			"categories": ["Community", "Languages"],
+			"platforms": ["R"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "reasonml",
+			"displayName": "ReasonML (Community)",
+			"description": "Develop ReasonML applications.",
+			"categories": ["Community", "Languages"],
+			"platforms": ["ReasonML"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "ruby",
+			"displayName": "Ruby",
+			"description": "Develop Ruby based applications. includes everything you need to get up and running.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Ruby"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"enum": ["3", "2.7", "3-bullseye", "2.7-bullseye"],
+					"default": "3",
+					"description": "Select variant of the vscode/devcontainers/ruby image to be set as the base image of this Dockerfile."
+				},
+				"NODE_VERSION": {
+					"type": "string",
+					"proposals": ["lts", "16", "14", "10", "none"],
+					"default": "16",
+					"description": "Specify version of node, or 'none' to skip node installation."
+				}
+			}
+		},
+
+		{
+			"id": "ruby-rails",
+			"displayName": "Ruby on Rails (Community)",
+			"description": "_Develop Ruby on Rails applications, includes everything you need to get up and running._",
+			"categories": ["Community", "Frameworks"],
+			"platforms": ["Ruby"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "ruby-rails-postgres",
+			"displayName": "Ruby on Rails & Postgres",
+			"description": "Develop Ruby on Rails applications with Postgres. Includes a Rails application container and PostgreSQL server.",
+			"categories": ["Core", "Frameworks"],
+			"platforms": ["Ruby"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "ruby-sinatra",
+			"displayName": "Ruby & Sinatra (Community)",
+			"description": "Develop Ruby and Sinatra applications. Includes everything you need to get up and running.",
+			"categories": ["Community", "Frameworks"],
+			"platforms": ["Ruby"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "rust",
+			"displayName": "Rust",
+			"description": "Develop Rust based applications. Includes appropriate runtime args and everything you need to get up and running.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Rust"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": ["buster", "bullseye"],
+					"default": "bullseye"
+				}
+			}
+		},
+
+		{
+			"id": "rust-postgres",
+			"displayName": "Rust & PostgreSQL",
+			"description": "Develop applications with Rust and PostgreSQL. Includes a Rust application container and PostgreSQL server.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Rust"],
+			"type": "dockerCompose",
+			"options": {}
+		},
+
+		{
+			"id": "sfdx-project",
+			"displayName": "SFDX Project (Community)",
+			"description": "_Salesfo}e Extension for VS Code supports remote development and allows you to use a docker container as a full-featured development environment._",
+			"categories": ["Community", "Services"],
+			"platforms": [
+				"Salesfo}e CLI",
+				"Lightning Web Components",
+				"Apex",
+				"Aura",
+				"Java",
+				"Node.js",
+				"JavaScript",
+				"HTML",
+				"CSS",
+				"Git"
+			],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "swift",
+			"displayName": "Swift (Community)",
+			"description": "Develop Swift based applications. Includes everything you need to get up and running.",
+			"categories": ["Community", "Languages"],
+			"platforms": ["Swift"],
+			"type": "singleContainer",
+			"options": {}
+		},
+
+		{
+			"id": "typescript-node",
+			"displayName": "Node.js & TypeScript",
+			"description": "Develop Node.js based applications in TypeScript. Includes Node.js, eslint, nvm, yarn, and the TypeScript compiler.",
+			"categories": ["Core", "Languages"],
+			"platforms": ["Node.js", "TypeScript"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": [
+						"16-bullseye",
+						"14-bullseye",
+						"12-bullseye",
+						"16-buster",
+						"14-buster",
+						"12-buster"
+					],
+					"default": "16-bullseye"
+				}
+			}
+		},
+
+		{
+			"id": "ubuntu",
+			"displayName": "Ubuntu",
+			"description": "A simple Ubuntu container with Git and other common utilities installed.",
+			"categories": ["Core", "Other"],
+			"platforms": ["Any"],
+			"type": "singleContainer",
+			"options": {
+				"VARIANT": {
+					"type": "string",
+					"proposals": ["hirsute", "bionic", "focal"],
+					"default": "focal"
+				}
+			}
+		},
+
+		{
+			"id": "vue",
+			"displayName": "Vue",
+			"description": "Develop applications with Vue.js, includes everything you need to get up and running.",
+			"categories": ["Community", "Frameworks"],
+			"platforms": ["Javascript"],
+			"type": "singleContainer",
+			"options": {}
+		}
+	],
+	"features": [
+		//  Problem #1 - you should be able to pick docker-in-docker or docker-from-docker, but not both, and settings need to be different
+		{
+			"id": "docker-in-docker",
+			"name": "Docker (Moby) support (Docker-in-Docker)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker-in-docker.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "20.10" ],
+					"default": "latest",
+					"description": "Select or enter a Docker/Moby Engine version. (Availability can vary by OS version.)"
+				},
+				"moby": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install OSS Moby build instead of Docker CE"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
+			"entrypoint": "/usr/local/share/docker-init.sh",
+			"privileged": true,
+			"containerEnv": {
+				"DOCKER_BUILDKIT": "1"
+			},
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			],
+			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
+			"mounts": [
+				{
+					"source":"dind-var-lib-docker", 
+				 	"target":"/var/lib/docker", 
+				 	"type":"volume"
+				}
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "docker-from-docker",
+			"name": "Docker (Moby) support, reuse host Docker Engine (Docker-from-Docker)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "20.10"],
+					"default": "latest",
+					"description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
+			"entrypoint": "/usr/local/share/docker-init.sh",
+			"containerEnv": {
+				"DOCKER_BUILDKIT": "1"
+			},
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			],
+			"mounts": [
+				{
+					"source":"/var/run/docker.sock", 
+				 	"target":"/var/run/docker-host.sock", 
+				 	"type":"bind"
+				}
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "kubectl-helm-minikube",
+			"name": "Kubectl, Helm, and Minkube",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/kubectl-helm.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.22", "1.21", "1.20"],
+					"default": "latest",
+					"description": "Select or enter a Kubernetes version to install"
+				},
+				"helm": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select or enter a Helm version to install"
+				},
+				"minikube": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select or enter a Minikube version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
+			"extensions": [
+				"ms-kubernetes-tools.vscode-kubernetes-tools"
+			],
+			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
+			"mounts": [
+				{
+					"source":"minikube-config", 
+				 	"target":"/home/vscode/.minikube", 
+				 	"type":"volume"
+				}
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "terraform",
+			"name": "Terraform, tflint, and TFGrunt",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/terraform.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.0", "0.15"],
+					"default": "latest",
+					"description": "Terraform version"
+				},
+				"tflint": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Tflint version"
+				},
+				"terragrunt": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Terragrunt version"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_TERRAFORM",
+			"extensions": [
+				"HashiCorp.terraform",
+				"ms-azuretools.vscode-azureterraform"
+			],
+			"settings": { 
+				"terraform.languageServer": {
+					"enabled": true,
+					"args": []
+				},
+				"azureTerraform.terminal": "integrated"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "git",
+			"name": "Git (may require compilation)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/git-from-src.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "os-provided"],
+					"default": "os-provided",
+					"description": "Select or enter a Git version."
+				},
+				"ppa": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install from PPA if available"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_GIT",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "git-lfs",
+			"name": "Git Large File Support (LFS)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/git-lfs.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_GIT_LFS",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"Javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "github-cli",
+			"name": "GitHub CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/github.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select version of the GitHub CLI, if not latest."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_GITHUB_CLI",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "azure-cli",
+			"name": "Azure CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/azcli.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select or enter an Azure CLI version. (Available versions may vary by Linux distribution.)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_AZURE_CLI",
+			"extensions": [
+				"ms-vscode.azurecli"
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "sshd",
+			"name": "SSH server",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/sshd.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_SSH",
+			"entrypoint": "/usr/local/share/ssh-init.sh",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "desktop-lite",
+			"name": "Light-weight desktop (Fluxbox)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/desktop-lite.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				},
+				"password": {
+					"type": "string",
+					"proposals": ["vscode","codespaces","password"],
+					"default": "vscode",
+					"description": "Enter a password for desktop connections"
+				},
+				"webPort": {
+					"type": "string",
+					"proposals": ["6080"],
+					"default": "6080",
+					"description": "Enter a port for the desktop web client"
+				},
+				"vncPort": {
+					"type": "string",
+					"proposals": ["5901"],
+					"default": "5901",
+					"description": "Enter a port for the desktop VNC server"
+				}
+			},
+			"init": true,
+			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
+			"entrypoint": "/usr/local/share/desktop-init.sh",
+			"containerEnv": {
+				"DISPLAY": ":1"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "homebrew",
+			"name": "Homebrew",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/homebrew.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_HOMEBREW",
+			"containerEnv": {
+				"BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
+				"PATH": "${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:${PATH}"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "node",
+			"name": "Node.js (via nvm) and yarn",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/node.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": [ "lts", "latest", "16", "14", "12" ],
+					"default": "lts",
+					"description": "Select or enter a Node.js version to install"
+				},
+				"nodeGypDependencies": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install dependencies to compile native node modules (node-gyp)?"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_NODE",
+			"extensions": ["dbaeumer.vscode-eslint"],
+			"containerEnv": {
+				"NVM_DIR":"/usr/local/share/nvm",
+				"NVM_SYMLINK_CURRENT": "true",
+				"PATH": "${NVM_DIR}/current/bin:${PATH}"
+			}, "include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"rust",
+				"ubuntu",
+				"debian"
+			]
+		},
+		{
+			"id": "python",
+			"name": "Python (may require compilation)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/python.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": [ "latest", "os-provided", "3.10", "3.9", "3.8", "3.7", "3.6" ],
+					"default": "os-provided",
+					"description": "Select a Python version to install."
+				},
+				"installTools": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install common Python tools like pylint"
+				},
+				"optimize": {
+					"type": "boolean",
+					"default": false,
+					"description": "Optimize Python for performance when compiled (slow)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_PYTHON",
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance"
+			],
+			"containerEnv": {
+				"PYTHON_PATH": "/usr/local/python",
+				"PIPX_HOME": "/usr/local/py-utils",
+				"PIPX_BIN_DIR": "/usr/local/py-utils/bin",
+				"PATH":"${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}"
+			},
+			"settings": { 
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+				"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+				"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
+				"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+				"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"java-8",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres"
+			]
+		},
+		{
+			"id": "golang",
+			"name": "Go",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/go.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.17", "1.16"],
+					"default": "latest",
+					"description": "Select or enter a Go version to install"
+				}
+			},
+			"init": true,
+			"buildArg": "_VSC_INSTALL_GOLANG",
+			"extensions": ["golang.Go"],
+			"containerEnv": {
+				"GOPATH": "/go",
+				"GOROOT": "/usr/local/go",
+				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
+			},
+			"capAdd": [ "SYS_PTRACE" ],
+			"securityOpt": [ "seccomp=unconfined" ],
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "java",
+			"name": "Java (via SDKMAN!)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/java.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["lts", "latest", "17", "11", "8"],
+					"default": "lts",
+					"description": "Select or enter a Java version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_JAVA",
+			"extensions": ["vscjava.vscode-java-pack"],
+			"containerEnv": {
+				"SDKMAN_DIR": "/usr/local/sdkman",
+				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}"
+			},
+			"settings": {
+				"java.home": "/extension-java-home",
+				"java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		// Problem #6 - Maven and gradle options should not be presented if Java isn't checked
+		{
+			"id": "maven",
+			"name": "Maven (via SDKMAN!)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/maven.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "3.8", "3.6", "3.5"],
+					"default": "latest",
+					"description": "Select or enter a Maven version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_MAVEN",
+			"extensions": ["vscjava.vscode-java-pack"],
+			"containerEnv": {
+				"SDKMAN_DIR": "/usr/local/sdkman",
+				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${PATH}"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "gradle",
+			"name": "Gradle (via SDKMAN!)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/gradle.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "7", "6", "5"],
+					"default": "latest",
+					"description": "Select or enter a Gradle version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_GRADLE",
+			"extensions": ["vscjava.vscode-java-pack"],
+			"containerEnv": {
+				"SDKMAN_DIR": "/usr/local/sdkman",
+				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}"
+			}, "include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "ruby",
+			"name": "Ruby (via rvm)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/ruby.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "3.0", "2.7", "2.6"],
+					"default": "latest",
+					"description": "Select or enter a Ruby version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_RUBY",
+			"extensions": [
+				"rebornix.Ruby"
+			],
+			"containerEnv": {
+				"GEM_PATH": "/usr/local/rvm/gems/default:/usr/local/rvm/gems/default@global",
+				"GEM_HOME": "/usr/local/rvm/gems/default",
+				"MY_RUBY_HOME": "/usr/local/rvm/rubies/default",
+				"PATH": "/usr/local/rvm/gems/default/bin:/usr/local/rvm/gems/default@global/bin:/usr/local/rvm/rubies/default/bin:${PATH}"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "rust",
+			"name": "Rust",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/rust.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.55", "1.54", "1.53"],
+					"default": "latest",
+					"description": "Select or enter a version of Rust to install."
+				},
+				"profile": {
+					"type": "string",
+					"proposals": ["minimal", "default", "complete"],
+					"default": "minimal",
+					"description": "Select a rustup install profile."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_RUST",
+			"extensions": [
+				"vadimcn.vscode-lldb",
+				"mutantdino.resourcemonitor",
+				"matklad.rust-analyzer",
+				"tamasfe.even-better-toml",
+				"serayuzgur.crates"	
+			],
+			"containerEnv": {
+				"CARGO_HOME": "/usr/local/cargo",
+				"RUSTUP_HOME": "/usr/local/rustup",
+				"PATH": "${CARGO_HOME}/bin:${PATH}"
+			},
+			"capAdd": [ "SYS_PTRACE" ],
+			"securityOpt": ["seccomp=unconfined"],
+			"settings": {
+				"lldb.executable": "/usr/bin/lldb",
+				"files.watcherExclude": {
+					"**/target/**": true
+				},
+				"rust-analyzer.checkOnSave.command": "clippy"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "powershell",
+			"name": "PowerShell",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/powershell.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "7.1"],
+					"default": "latest",
+					"description": "Select or enter a version of PowerShell."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_POWERSHELL",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "common",
+			"name": "Common OS utilities",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/common.md",
+			"options": {
+				"installZsh": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install ZSH?"
+				},
+				"installOhMyZsh": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install Oh My Zsh!?"
+				},
+				"upgradePackages": {
+					"type":"boolean",
+					"default": true,
+					"description": "Upgrade OS packages?"
+				},
+				"username": {
+					"type":"string",
+					"proposals": ["vscode", "codespace", "none", "automatic"],
+					"default": "automatic",
+					"description": "Enter name of non-root user to configure or none to skip"
+				},
+				"uid": {
+					"type":"string",
+					"proposals": ["1000", "automatic"],
+					"default": "automatic",
+					"description": "Enter uid for non-root user"
+				},
+				"gid": {
+					"type": "string",
+					"proposals": ["1000", "automatic"],
+					"default": "automatic",
+					"description": "Enter gid for non-root user"
+				},
+				"nonFreePackages": {
+					"type":"boolean",
+					"default": true,
+					"description": "Add packages from non-free Debian repository?"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_COMMON",
+			"include": [
+				"puppet",
+				"chef"
+			]
+		},
+		{
+			"id": "dotnet",
+			"name": "Dotnet CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/dotnet.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest","6.0","5.0","3.1"],
+					"default": "latest",
+					"description": "Select or enter a dotnet CLI version. (Available versions may vary by Linux distribution.)"
+				},
+				"runtimeOnly": {
+					"type":"boolean",
+					"default": false,
+					"description": "Install just the dotnet runtime if true, and sdk if false."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_DOTNET",
+			"containerEnv": {
+				"DOTNET_ROOT": "/usr/local/dotnet",
+				"PATH": "${PATH}:${DOTNET_ROOT}"
+			},
+			"extensions": [
+				"ms-dotnettools.csharp"
+			],
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		}
+	]
+}

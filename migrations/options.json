@@ -1,0 +1,238 @@
+[
+	{
+		"id": "ubuntu",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": ["hirsute", "bionic", "focal"],
+				"default": "focal"
+			}
+		}
+	},
+	{
+		"id": "debian",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": ["bullseye", "buster"],
+				"default": "bullseye"
+			}
+		}
+	},
+	{
+		"id": "alpine",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": ["3.14", "3.13", "3.12", "3.11"],
+				"default": "3.13"
+			},
+			"INSTALL_ZSH": {
+				"type": "boolean",
+				"default": false,
+				"description": "Install zsh"
+			}
+		}
+	},
+	{
+		"id": "javascript-node",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": [
+					"16-bullseye",
+					"14-bullseye",
+					"12-bullseye",
+					"16-buster",
+					"14-buster",
+					"12-buster"
+				],
+				"default": "16-bullseye"
+			}
+		}
+	},
+	{
+		"id": "typescript-node",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": [
+					"16-bullseye",
+					"14-bullseye",
+					"12-bullseye",
+					"16-buster",
+					"14-buster",
+					"12-buster"
+				],
+				"default": "16-bullseye"
+			}
+		}
+	},
+	{
+		"id": "python-3",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": [
+					"3",
+					"3.10",
+					"3.9",
+					"3.8",
+					"3.7",
+					"3.6",
+					"3-bullseye",
+					"3.10-bullseye",
+					"3.9-bullseye",
+					"3.8-bullseye",
+					"3.7-bullseye",
+					"3.6-bullseye",
+					"3-buster",
+					"3.10-buster",
+					"3.9-buster",
+					"3.8-buster",
+					"3.7-buster",
+					"3.6-buster"
+				],
+				"default": "3-bullseye"
+			}
+		}
+	},
+	{
+		"id": "cpp",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": [
+					"debian-11",
+					"debian-10",
+					"ubuntu-21.04",
+					"ubuntu-20.04",
+					"ubuntu-18.04"
+				],
+				"default": "debian-10"
+			}
+		}
+	},
+	{
+		"id": "php",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": [
+					"8-apache-bullseye",
+					"8.1-apache-bullseye",
+					"8.0-apache-bullseye",
+					"7-apache-bullseye",
+					"7.4-apache-bullseye",
+					"8-apache-buster",
+					"8.1-apache-buster",
+					"8.0-apache-buster",
+					"7-apache-buster",
+					"7.4-apache-buster"
+				],
+				"default": "7-apache-bullseye"
+			}
+		}
+	},
+	{
+		"id": "rust",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": ["buster", "bullseye"],
+				"default": "bullseye"
+			}
+		}
+	},
+	{
+		"id": "ruby",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"enum": ["3", "2.7", "3-bullseye", "2.7-bullseye"],
+				"default": "3",
+				"description": "Select variant of the vscode/devcontainers/ruby image to be set as the base image of this Dockerfile."
+			},
+			"NODE_VERSION": {
+				"type": "string",
+				"proposals": ["lts", "16", "14", "10", "none"],
+				"default": "16",
+				"description": "Specify version of node, or 'none' to skip node installation."
+			}
+		}
+	},
+	{
+		"id": "go",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": [
+					"1",
+					"1.16",
+					"1.17",
+					"1-bullseye",
+					"1.16-bullseye",
+					"1.17-bullseye",
+					"1-buster",
+					"1.16-buster",
+					"1.17-buster"
+				],
+				"default": "1-bullseye"
+			}
+		}
+	},
+	{
+		"id": "java",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": [
+					"11",
+					"17",
+					"11-bullseye",
+					"17-bullseye",
+					"11-buster",
+					"17-buster"
+				],
+				"default": "11-bullseye"
+			}
+		}
+	},
+	{
+		"id": "dotnet",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": [
+					"6.0-bullseye",
+					"5.0-bullseye",
+					"3.1-bullseye",
+					"6.0-focal",
+					"5.0-focal",
+					"3.1-focal"
+				],
+				"default": "6.0-bullseye-slim"
+			}
+		}
+	},
+	{
+		"id": "javascript-node-mongo",
+		"options": {
+			"VARIANT": {
+				"type": "string",
+				"proposals": [
+					"16-bullseye",
+					"14-bullseye",
+					"12-bullseye",
+					"16-buster",
+					"14-buster",
+					"12-buster",
+					"16",
+					"14",
+					"12"
+				],
+				"default": "14"
+			}
+		}
+	}
+]

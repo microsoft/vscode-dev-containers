@@ -155,14 +155,17 @@ jobs:
     - name: Publish devcontainer container-features
       uses: microsoft/publish-dev-container-features-action@main
       with:
+        publish-features: 'true'
         path-to-features: './script-library/container-features/src'
+        publish-definitions: 'true'
+        path-to-definitions: './containers'
 
     - name: Update release to include features asset
       uses: ncipollo/release-action@v1
       with:
         allowUpdates: true # Lets us upload our own artifact from previous step
         artifactErrorsFailBuild: true
-        artifacts: './devcontainer-features.tgz'
+        artifacts: './devcontainer-*'
         token: ${{ secrets.GITHUB_TOKEN }}
 
   image-info:
