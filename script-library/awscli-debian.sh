@@ -18,6 +18,29 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Function to run apt-get if needed
+apt_get_update_if_needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
+export DEBIAN_FRONTEND=noninteractive
+
+check_packages curl ca-certificates gnupg2 dirmngr
+
 verify_aws_cli_gpg_signature() {
     local filePath=$1
     local sigFilePath=$2
@@ -26,9 +49,6 @@ verify_aws_cli_gpg_signature() {
     get_common_setting AWSCLI_GPG_KEY_MATERIAL
     local awsCliPublicKeyFile=aws-cli-public-key.pem
     echo "${AWSCLI_GPG_KEY_MATERIAL}" > "${awsCliPublicKeyFile}"
-    gpg --quiet --import "${awsCliPublicKeyFile}"
-    (
-    ) > "${awsCliPublicKeyFile}"
     gpg --quiet --import "${awsCliPublicKeyFile}"
 
     gpg --batch --quiet --verify "${sigFilePath}" "${filePath}"
@@ -48,12 +68,15 @@ install() {
     if [ "${AWSCLI_VERSION}" != "latest" ]; then
         local versionStr=-${AWSCLI_VERSION}
     fi
-    arch=$(uname -m)
-    if [ "$arch" != "x86_64" -a "$arch" != "aarch64" ]; then
-        echo "AWS CLI does not support machine architecture '$arch'. Please use an x86-64 or ARM64 machine."
-        exit 1
-    fi
-    local scriptUrl=https://awscli.amazonaws.com/awscli-exe-linux-${arch}${versionStr}.zip
+    architecture=$(dpkg --print-architecture)
+    case "${architecture}" in
+        amd64) architectureStr=x86_64 ;;
+        arm64) architectureStr=aarch64 ;;
+        *)
+            echo "AWS CLI does not support machine architecture '$architecture'. Please use an x86-64 or ARM64 machine."
+            exit 1
+    esac
+    local scriptUrl=https://awscli.amazonaws.com/awscli-exe-linux-${architectureStr}${versionStr}.zip
     curl "${scriptUrl}" -o "${scriptZipFile}"
     curl "${scriptUrl}.sig" -o "${scriptSigFile}"
 
