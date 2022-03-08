@@ -22,13 +22,14 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && sed -i -e "s/<VirtualHost \*:80>/<VirtualHost *:8080>/g" $APACHE_CONFDIR/sites-available/000-default.conf \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# Install xdebug
+# Install xdebug and set default development config
 RUN yes | pecl install xdebug \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.mode = debug" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.client_port = 9003" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && rm -rf /tmp/pear
+    && rm -rf /tmp/pear \
+    && cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 # Install composer
 RUN curl -sSL https://getcomposer.org/installer | php \
