@@ -14,6 +14,7 @@ set -e
 AWSCLI_VERSION=${1:-"latest"}
 AWSCLI_GPG_KEY=FB5DB77FD5C118B80511ADA8A6310ACC4672475C
 AWSCLI_GPG_KEY_MATERIAL="-----BEGIN PGP PUBLIC KEY BLOCK-----
+
 mQINBF2Cr7UBEADJZHcgusOJl7ENSyumXh85z0TRV0xJorM2B/JL0kHOyigQluUG
 ZMLhENaG0bYatdrKP+3H91lvK050pXwnO/R7fB/FSTouki4ciIx5OuLlnJZIxSzx
 PqGl0mkxImLNbGWoi6Lto0LYxqHN2iQtzlwTVmq9733zd3XfcXrZ3+LblHAgEt5G
@@ -83,7 +84,7 @@ check_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
-check_packages curl ca-certificates gnupg2 dirmngr
+check_packages curl ca-certificates gnupg2 dirmngr unzip
 
 verify_aws_cli_gpg_signature() {
     local filePath=$1
