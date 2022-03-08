@@ -72,6 +72,7 @@ fi
 
 architecture="$(uname -m)"
 if [ "${DISTRO}" = "debian" ]; then
+    runScript awscli
     runScript azcli
     runScript fish "false ${USERNAME}"
     runScript git-from-src "latest true"
@@ -80,7 +81,7 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript go "1.14 /opt/go /go ${USERNAME} false"
     runScript gradle "4.4 /usr/local/sdkman1 ${USERNAME} false"
     runScript kubectl-helm "latest latest latest"
-    runScript maven "3.6.3 /usr/local/sdkman3 ${USERNAME} false" 
+    runScript maven "3.6.3 /usr/local/sdkman3 ${USERNAME} false"
     runScript node "/usr/local/share/nvm 10 ${USERNAME}"
     runScript python "3.4.10 /opt/python /opt/python-tools ${USERNAME} false false"
     runScript ruby "${USERNAME} false" "2.7.3"
@@ -96,7 +97,7 @@ if [ "${DISTRO}" = "debian" ]; then
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ]; then
         runScript homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
     fi
-    runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet" 
+    runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"
 fi
 
 if [ "${DISTRO}" != "alpine" ]; then

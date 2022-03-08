@@ -8,7 +8,7 @@ This folder includes some explorations around dynamic container feature injectio
 
 **Registering a feature**
 
-Create the install script in the [script-library](../../script-library/) directory with the naming convention `<lowercase-feature-name>-<target-os>.sh`. EG `python-debian.sh` or `common-alpine.sh`
+Create the install script in the [script-library](../../script-library/) directory with the naming convention `<lowercase-feature-name>-<target-os>.sh`. E.g., `python-debian.sh` or `common-alpine.sh`
 
 Add a new object to the [devcontainer-features.json](../../script-library/container-features/src/devcontainer-features.json) file:
 
@@ -16,7 +16,7 @@ Add a new object to the [devcontainer-features.json](../../script-library/contai
 {
     "id": "<lowercase-feature-name>", // Must match the <lowercase-feature-name> used to name the install script.
     "name": "Display Name of Feature",
-    "documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/<lowercase-feature-name>.md", 
+    "documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/<lowercase-feature-name>.md",
     "options": {
         "scriptArgument$1": {
             "type": "string", // Either "string" or "boolean"
@@ -31,7 +31,7 @@ Add a new object to the [devcontainer-features.json](../../script-library/contai
         }
     },
     "buildArg": "_VSC_INSTALL_<CAPITALIZED_ID>", // Must match the ENV VAR defined in the feature-scripts.env file.
-    "extensions": [], // Array of VS Code extensions to install with this feature. 
+    "extensions": [], // Array of VS Code extensions to install with this feature.
     "include": [] // Array of base containers this script can be used on.
 }
 ```
@@ -43,7 +43,7 @@ _VSC_INSTALL_<FEATURE>="<feature>-debian.sh ${_BUILD_ARG_<FEATURE>_<OPTION1>:-<o
 ```
 
 - Options declared in `devcontainer-features.json` are mapped using the naming convention `_BUILD_ARG_<FEATURE>_<OPTIONNAME>` and their default should match the declared default for that option.
-- EG `_VSC_INSTALL_AZURE_CLI="azcli-debian.sh ${_BUILD_ARG_AZURE_CLI_VERSION:-latest}"`
+- E.g., `_VSC_INSTALL_AZURE_CLI="azcli-debian.sh ${_BUILD_ARG_AZURE_CLI_VERSION:-latest}"`
 
 **Feature testing**
 
@@ -59,11 +59,13 @@ _VSC_INSTALL_<FEATURE>="<feature>-debian.sh ${_BUILD_ARG_<FEATURE>_<OPTION1>:-<o
 Repeat as needed to iterate from a clean workspace.
 
 *Unit tests*
+
 - Add your feature to the [run-scripts.sh](../../script-library/test/regression/run-scripts.sh) file to ensure it is included in CI tests.
 
 - Your addition should take the form `runScript <feature> <non-default-args>`.
 
-EG
+E.g.:
+
 ```sh
 runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"
 ```
@@ -71,9 +73,11 @@ runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"
 - If your script takes the installation user as an argument, be sure to specify it as ${USERNAME} in the tests for programatic testing.
 
 *Regression tests*
+
 - Add your feature to the [test-features.env](../../script-library/container-features/test-features.env) file to include it in regression tests of the container-feature functionality. By setting the `_VSC_INSTALL_<FEATURE>` ENV VAR to true and adding the expected _BUILD_ARG options for your feature.
 
-EG
+E.g.:
+
 ```
     _VSC_INSTALL_DOTNET=true
     _BUILD_ARG_DOTNET_VERSION=latest
@@ -82,11 +86,12 @@ EG
 
 **Feature documentation**
 
-Add your new feature to the list of scripts in the [script-library README.md](https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/README.md#scripts).
+Add your new feature to the list of scripts in the [script-library README.md](../../script-library/README.md#scripts).
 
-Add documentation for your new feature script to the [script-library/docs](https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs) directory.
+Add documentation for your new feature script to the [script-library/docs](../../script-library/docs) directory.
 
-Documentation should include: 
+Documentation should include:
+
 - the status of the script, supported operating systems, and maintainer.
 - the syntax expected to run as a feature or script
 - a description of the script arguments
@@ -97,6 +102,7 @@ Feel free to use other scripts in that directory as inspiration.
 ### Best practices for writing feature install scripts
 
 - Decouple sections of the shellscript that handle user setup, helper functions, and feature installation. Doing so will apply a logical and natural flow to the script for future developers and maintainers to follow. One way to denote this distinction is to use in-line comments throughout the script.
+
     ```md
     # Logical flow recommended:
     1. File header and description.
@@ -109,6 +115,7 @@ Feel free to use other scripts in that directory as inspiration.
     ```
 
 - One way to make troubleshooting the script easier when writing a bash shell script is to echo error messages to `STDERR`. A possible way we implemented this in bash scripts is to create an `err()` function like so:
+
     ```sh
     # Setup STDERR.
     err() {
@@ -119,12 +126,14 @@ Feel free to use other scripts in that directory as inspiration.
     ```
 
 - If writing a bash shellscript, we recommend using double quotes and braces when referencing named variables:
+
     ```sh
     variable="My example var"
     echo "${variable}"
     ```
 
 - One method to to ensure the global space in a script is not too crowded with unnecessary variables is to assign return values from functions to a new variable, and use the keyword `local` for vars inside of functions. For example:
+
     ```sh
     test_function() {
         local test = "hello world!"
@@ -134,6 +143,7 @@ Feel free to use other scripts in that directory as inspiration.
     ```
 
 - If using temporary files within the script, we recommend removing all those files once they are no longer needed. One method for doing this is running a cleanup function with a `trap` method when the script exits:
+
     ```sh
     # Cleanup temporary directory and associated files when exiting the script.
     cleanup() {
@@ -150,7 +160,7 @@ Feel free to use other scripts in that directory as inspiration.
 
 - Consider using [shellcheck](https://github.com/koalaman/shellcheck) or the [vscode-shellcheck extension](https://github.com/vscode-shellcheck/vscode-shellcheck) to apply linting and static code analysis to the bash script to ensure it is formatted correctly.
 
-- Consider using common helper functions from [shared/utils.sh](../../script-library/shared/utils.sh) when managing common tasks (like updating PATH variables, or managing gpg keys) by copying them directly into your script.  
+- Consider using common helper functions from [shared/utils.sh](../../script-library/shared/utils.sh) when managing common tasks (like updating PATH variables, or managing gpg keys) by copying them directly into your script.
     - NOTE: This is done to minimize the impact that any change can have on existing working scripts.
     - Similarly, if you add a helper function to your script that could benefit others in the future, consider adding it to the `shared/utils.sh` file as well.
 

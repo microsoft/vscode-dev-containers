@@ -14,6 +14,7 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 
 | Document | Script | Maintainers |
 |----------|--------|------------|
+| [AWS CLI Install Script](docs/awscli.md) | `awscli-debian.sh` | VS Code and GitHub Codespaces teams |
 | [Azure CLI Install Script](docs/azcli.md) | `azcli-debian.sh` | VS Code and GitHub Codespaces teams |
 | [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` (Community) | VS Code and GitHub Codespaces teams |
 | [Desktop (Lightweight) Install Script](docs/desktop-lite.md) | `desktop-lite-debian.sh` | VS Code and GitHub Codespaces teams|
@@ -97,7 +98,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
-As before, the last line is technically optional, but minimizes the size of the layer by removing temporary contents.  
+As before, the last line is technically optional, but minimizes the size of the layer by removing temporary contents.
 
 You can also use `wget`:
 
@@ -153,4 +154,3 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definition
 Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE)
-

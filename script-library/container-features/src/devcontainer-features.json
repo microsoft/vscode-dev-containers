@@ -201,7 +201,7 @@
 				"HashiCorp.terraform",
 				"ms-azuretools.vscode-azureterraform"
 			],
-			"settings": { 
+			"settings": {
 				"terraform.languageServer": {
 					"enabled": true,
 					"args": []
@@ -343,6 +343,53 @@
 				"dotnet",
 				"dotnet-fsharp",
 				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "aws-cli",
+			"name": "AWS CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/awscli.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": [
+						"latest"
+					],
+					"default": "latest",
+					"description": "Select or enter an AWS CLI version. (Available versions here: https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_AWS_CLI",
+			"extensions": [
+				"AmazonWebServices.aws-toolkit-vscode"
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
 				"powershell",
 				"java",
 				"go",
@@ -585,7 +632,8 @@
 				"NVM_DIR":"/usr/local/share/nvm",
 				"NVM_SYMLINK_CURRENT": "true",
 				"PATH": "${NVM_DIR}/current/bin:${PATH}"
-			}, "include": [
+			},
+			"include": [
 				"cpp",
 				"kubernetes-helm",
 				"kubernetes-helm-minikube",
@@ -630,7 +678,7 @@
 				"PIPX_BIN_DIR": "/usr/local/py-utils/bin",
 				"PATH":"${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}"
 			},
-			"settings": { 
+			"settings": {
 				"python.defaultInterpreterPath": "/usr/local/bin/python",
 				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
 				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
@@ -832,7 +880,8 @@
 			"containerEnv": {
 				"SDKMAN_DIR": "/usr/local/sdkman",
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}"
-			}, "include": [
+			},
+			"include": [
 				"cpp",
 				"kubernetes-helm",
 				"kubernetes-helm-minikube",
@@ -934,7 +983,7 @@
 				"mutantdino.resourcemonitor",
 				"matklad.rust-analyzer",
 				"tamasfe.even-better-toml",
-				"serayuzgur.crates"	
+				"serayuzgur.crates"
 			],
 			"containerEnv": {
 				"CARGO_HOME": "/usr/local/cargo",
