@@ -1135,9 +1135,17 @@
 				}
 			},
 			"buildArg": "_VSC_INSTALL_JUPYTERLAB",
-			"extensions": [],
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance"
+			],
 			"include": [
-				"codespaces-linux"
+				"codespaces-linux",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian"
 			]
 		}
 	]
