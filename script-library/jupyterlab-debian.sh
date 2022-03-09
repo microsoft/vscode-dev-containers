@@ -19,10 +19,12 @@ if ! python --version > /dev/null ; then
   exit 1
 fi
 
-# Install JupyterLab
-echo "Installing JupyterLab..."
-if [ "${VERSION}" = "latest" ]; then
-  pip install jupyterlab
-else
-  pip install jupyterlab=="${VERSION}" --no-cache-dir
+# If we don't already have JupyterLab installed, install it now.
+if ! jupyter-lab --version > /dev/null ; then
+  echo "Installing JupyterLab..."
+  if [ "${VERSION}" = "latest" ]; then
+    pip install jupyterlab
+  else
+    pip install jupyterlab=="${VERSION}" --no-cache-dir
+  fi
 fi
