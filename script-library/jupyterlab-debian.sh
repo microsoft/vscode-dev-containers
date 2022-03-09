@@ -11,7 +11,7 @@
 
 set -e
 
-JUPYTER_LAB_VERSION=${1:-"latest"}
+VERSION=${1:-"latest"}
 
 # If we don't yet have Python, install it now.
 if ! python --version > /dev/null ; then
@@ -21,8 +21,8 @@ fi
 
 # Install JupyterLab
 echo "Installing JupyterLab..."
-if [ "${JUPYTER_LAB_VERSION}" = "latest" ]; then
+if [ "${VERSION}" = "latest" ]; then
   pip install jupyterlab
 else
-  pip install jupyterlab=="${JUPYTER_LAB_VERSION}" --no-cache-dir
+  pip install jupyterlab=="${VERSION}" --no-cache-dir
 fi
