@@ -72,6 +72,7 @@ fi
 
 architecture="$(uname -m)"
 if [ "${DISTRO}" = "debian" ]; then
+    runScript nix
     runScript awscli
     runScript azcli
     runScript fish "false ${USERNAME}"
