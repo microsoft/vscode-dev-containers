@@ -1170,6 +1170,33 @@
 				"ruby-rails-postgres",
 				"python-3-postgres"
 			]
+		},
+		{
+			"id": "jupyterlab",
+			"name": "Jupyter Lab",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/jupyterlab.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "3.6.2"],
+					"default": "latest",
+					"description": "Select or enter a jupyterlab version."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_JUPYTERLAB",
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-toolsai.jupyter"
+			],
+			"include": [
+				"codespaces-linux",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian"
+			]
 		}
 	]
 }
