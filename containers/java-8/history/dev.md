@@ -10,7 +10,7 @@
 
 ## Variant: bullseye
 
-**Digest:** sha256:e4a6731decaf5c447b469c72acb4c5be9b6bbda9b104cd6011e64221a665f88b
+**Digest:** sha256:7efbee41f103e3c698297e76ffcf3a74a5b2ec92ba8f37da4c2aaaf421dd1c12
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.2 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -94,7 +94,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 
 ## Variant: buster
 
-**Digest:** sha256:c8df640fd725d7a841e84ec29f86bbafdb8eb36e55b3c98d066c0f91ef65cac3
+**Digest:** sha256:09cb85adfd717a792c11407472d41e14c362dbefdf05f5349844fff8afc8421c
 
 **Tags:**
 ```
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-buster
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.13.2 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
