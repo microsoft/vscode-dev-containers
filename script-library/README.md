@@ -29,6 +29,7 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 | [Gradle Install Script](docs/gradle.md) | `gradle-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Homebrew Install Script](docs/homebrew.md) | `homebrew-debian.sh` (Community) | [@andreiborisov](https://github.com/andreiborisov) |
 | [Java Install Script](docs/java.md) | `java-debian.sh` | VS Code and GitHub Codespaces teams|
+| [JupyterLab Install Script](docs/jupyterlab.md) | `jupyterlab-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Kubectl and Helm Install Script](docs/kubectl-helm.md) | `kubectl-helm-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Maven Install Script](docs/maven.md) | `maven-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Node.js Install Script](docs/node.md) | `node-debian.sh` | VS Code and GitHub Codespaces teams|
