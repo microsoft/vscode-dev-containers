@@ -24,7 +24,18 @@ if [ "$(dpkg --print-architecture)" = "amd64" ] || [[ ! "${VCPKG_UNSUPPORTED_ARM
 fi 
 checkOSPackages "tools-for-mariadb" libmariadb3 libmariadb-dev
 check "g++"  g++ -g main.cpp -o main.out -lmariadbcpp
-check "main.out" ./main.out
+# MariaDB may take a few seconds to start, so retry on failure
+check_ok=false
+retry_count=0
+until [ "${check_ok}" = "true" ] || [ "${retry_count}" -eq "5" ]; do
+    ./main.out && check_ok=true
+    if [ "${check_ok}" != "true" ]; then
+        echo "(*) Check failed, DB may not be up yet. Retrying in 5s..."
+        (( retry_count++ ))
+        sleep 5s
+    fi
+done
+check "main.out" sh -c "[ \"${check_ok}\" = \"true\" ]"
 rm main.out
 mkdir -p build
 cd build
