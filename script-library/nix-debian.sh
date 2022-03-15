@@ -188,12 +188,12 @@ fi
 find_version_from_git_tags NIX_VERSION https://github.com/NixOS/nix "tags/"
 
 # Create nix group, dir, and set sticky bit to handle user UID/GID changes
-if ! cat /etc/group | grep -e "^nixbld:" > /dev/null 2>&1; then
-    groupadd -g 30000 nixbld
-    useradd -u 30000 -g nixbld -G nixbld nixbld
-fi
 if ! cat /etc/group | grep -e "^nix:" > /dev/null 2>&1; then
     groupadd -r nix
+fi
+if ! cat /etc/group | grep -e "^nixbld:" > /dev/null 2>&1; then
+    groupadd -g 30000 nixbld
+    useradd --home-dir /var/empty --shell /usr/sbin/nologin --system -u 30000 -g nixbld -G nixbld,nix nixbld
 fi
 usermod -a -G nix ${USERNAME}
 umask 0002
@@ -209,7 +209,7 @@ receive_gpg_keys NIX_GPG_KEYS
 curl -sSLf -o install-nix https://releases.nixos.org/nix/nix-${NIX_VERSION}/install
 curl -sSLf -o install-nix.asc https://releases.nixos.org/nix/nix-${NIX_VERSION}/install.asc
 gpg2 --verify ./install-nix.asc
-su $USERNAME -c 'sh ./install-nix --no-daemon && . $HOME/.nix-profile/etc/profile.d/nix.sh && nix-collect-garbage'
+su $USERNAME -c 'sh ./install-nix --no-daemon'
 cd "${orig_cwd}"
 rm -rf /tmp/nix
 
@@ -221,7 +221,7 @@ fi
 if [ -r "${NIXFILE_PATH}" ] && [ "${NIXFILE_PATH}" != "none" ]; then
     post_processing_script="${post_processing_script} && nix-env --install -f \"${NIXFILE_PATH}\""
 fi
-post_processing_script="${post_processing_script} && nix-collect-garbage"
+post_processing_script="${post_processing_script} && nix-collect-garbage --delete-old && nix-store --optimise"
 su ${USERNAME} -c "${post_processing_script}"
 
 # Setup privs and set sticky bit to handle user UID/GID changes
