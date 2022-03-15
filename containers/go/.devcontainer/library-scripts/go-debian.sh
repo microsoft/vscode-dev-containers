@@ -166,13 +166,14 @@ if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
     echo "Downloading Go ${TARGET_GO_VERSION}..."
     set +e
     curl -fsSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz"
+    exit_code=$?
     set -e
-    if [ ! -s "/tmp/go.tar.gz" ] || [ "$?" != "0" ]; then
+    if [ "$exit_code" != "0" ]; then
         echo "(!) Download failed."
         # Try one break fix version number less if we get a failure
-        major="$(echo "${TARGET_GO_VERSION}" | grep -oE '^[0-9]+')"
-        minor="$(echo "${TARGET_GO_VERSION}" | grep -oP '^[0-9]+\.\K[0-9]+')"
-        breakfix="$(echo "${TARGET_GO_VERSION}" | grep -oP '^[0-9]+\.[0-9]+\.\K[0-9]+' 2>/dev/null)"
+        major="$(echo "${TARGET_GO_VERSION}" | grep -oE '^[0-9]+' || echo '')"
+        minor="$(echo "${TARGET_GO_VERSION}" | grep -oP '^[0-9]+\.\K[0-9]+' || echo '')"
+        breakfix="$(echo "${TARGET_GO_VERSION}" | grep -oP '^[0-9]+\.[0-9]+\.\K[0-9]+' 2>/dev/null || echo '')"
         if [ "${breakfix}" = "" ] || [ "${breakfix}" = "0" ]; then
             ((minor=minor-1))
             TARGET_GO_VERSION="${major}.${minor}"
@@ -184,7 +185,6 @@ if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
         echo "Trying ${TARGET_GO_VERSION}..."
         curl -fsSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz"
     fi
-    set -e
     curl -fsSL -o /tmp/go.tar.gz.asc "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz.asc"
     gpg --verify /tmp/go.tar.gz.asc /tmp/go.tar.gz
     echo "Extracting Go ${TARGET_GO_VERSION}..."
