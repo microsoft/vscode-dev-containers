@@ -1,7 +1,0 @@
-{
-    "search.exclude": {
-        "**/target": true
-    },
-    "lldb.verboseLogging": true,
-    "lldb.launch.initCommands": ["settings set target.disable-aslr false"]
-}

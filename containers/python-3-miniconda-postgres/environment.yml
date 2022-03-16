@@ -1,6 +1,0 @@
-dependencies:
-  - jupyter
-  - numpy
-  - matplotlib
-  - psycopg2
-  - pylint

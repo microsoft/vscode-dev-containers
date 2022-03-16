@@ -1,8 +1,0 @@
-{
-	"name": "Chef Workstation (Community)",
-	"image": "chef/chefworkstation:stable",
-	"settings": {},
-	"extensions": [
-		"chef-software.chef"
-	]
-}
