@@ -1,1 +1,0 @@
-Patch for CVE-2019-10131
