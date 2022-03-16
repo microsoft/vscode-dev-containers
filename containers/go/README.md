@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/go |
-| *Available image variants* | 1 / 1-bullseye, 1.16 / 1.16-bullseye, 1.17 / 1.17-bullseye, 1-buster, 1.17-buster, 1.16-buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/go/tags/list)) |
+| *Available image variants* | 1 / 1-bullseye, 1.18 / 1.18-bullseye, 1.17 / 1.17-bullseye, 1-buster, 1.18-buster, 1.17-buster  ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/go/tags/list)) |
 | *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -32,14 +32,14 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 
 - `mcr.microsoft.com/vscode/devcontainers/go` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/go:1` (or `1-bullseye`, `1-buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/go:1.16` (or `1.16-bullseye`, `1.16-buster` to pin to an OS version)
 - `mcr.microsoft.com/vscode/devcontainers/go:1.17` (or `1.17-bullseye`, `1.17-buster` to pin to an OS version)
+- `mcr.microsoft.com/vscode/devcontainers/go:1.18` (or `1.18-bullseye`, `1.18-buster` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
-- `mcr.microsoft.com/vscode/devcontainers/go:0-1.16` (or `0-1.16-bullseye`, `0-1.16-buster`)
-- `mcr.microsoft.com/vscode/devcontainers/go:0.205-1.16` (or `0.205-1.16-bullseye`, `0.205-1.16-buster`)
-- `mcr.microsoft.com/vscode/devcontainers/go:0.205.0-1.16` (or `0.205.0-1.16-bullseye`, `0.205.0-1.16-buster`)
+- `mcr.microsoft.com/vscode/devcontainers/go:0-1.18` (or `0-1.18-bullseye`, `0-1.18-buster`)
+- `mcr.microsoft.com/vscode/devcontainers/go:0.206-1.18` (or `0.205-1.18-bullseye`, `0.205-1.18-buster`)
+- `mcr.microsoft.com/vscode/devcontainers/go:0.206.0-1.18` (or `0.205.0-1.18-bullseye`, `0.205.0-1.18-buster`)
 
 However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-1.16`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
 

@@ -40,7 +40,7 @@ build:
   context: .
   dockerfile: Dockerfile
     args:
-      # [Choice] Go version 1, 1.16, 1.17
+      # [Choice] Go version 1, 1.18, 1.17
       # Append -bullseye or -buster to pin to an OS version.
       # Use -bullseye variants on local arm64/Apple Silicon.
       VARIANT: 1.17
