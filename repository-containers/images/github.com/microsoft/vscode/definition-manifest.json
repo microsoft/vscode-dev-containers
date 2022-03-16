@@ -7,7 +7,8 @@
 		"parentVariant": "14-bullseye",
 		"tags": [
 			"repos/microsoft/vscode:${VERSION}"
-		]
+		],
+		"architectures": ["linux/arm64", "linux/amd64"]
 	}, 
 	"dependencies": {
 		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:14-buster",
