@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "iostream": "cpp"
-    },
-    "cmake.sourceDirectory": "${workspaceRoot}/test-project"
-}
