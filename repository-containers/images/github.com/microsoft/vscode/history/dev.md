@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
-**Digest:** sha256:18ad264927c9f041a10f9c02f272122d7334793a6bbc9e99c16f07664b59e824
+**Digest:** sha256:94d9f3ebd2956f0e5824a9423587a5a3d540bd7feca36803145e78f9464c8a63
 
 **Tags:**
 ```
@@ -14,7 +14,7 @@ mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 
 **Linux distribution:** Debian GNU/Linux 11 (bullseye)
 
-**Architectures:** linux/amd64
+**Architectures:** linux/arm64, linux/amd64
 
 **Available (non-root) user:** node
 
@@ -39,7 +39,7 @@ mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libssl1.1 | 1.1.1k-1+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |

@@ -11,7 +11,7 @@
 
 ## Variant: hirsute
 
-**Digest:** sha256:ea2d663c3b05eb80fd81857e695a4e9e58dd2bad2120b15b3ca9481bdb221a5c
+**Digest:** sha256:893b8486af71ba43d129b70e1e49aed548e7ce1f4cbd812453ed3a3d641075bf
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 345976874550efa09fa7e9cdbe1215ce27d1541b | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -82,7 +82,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu21.04
 
 ## Variant: focal
 
-**Digest:** sha256:2380323dee50c9ac12cf43a9ad4fde40cf7fe8ec9a8e9d4479397a8f16efd4e6
+**Digest:** sha256:f221feb143a3c41fd0b00959153083a1a65870d65921a1239977a4bd8ae55e85
 
 **Tags:**
 ```
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 345976874550efa09fa7e9cdbe1215ce27d1541b | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -127,7 +127,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.11 |
+| libssl1.1 | 1.1.1f-1ubuntu2.12 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.7 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -151,11 +151,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | wget | 1.20.3-1ubuntu2 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |
-| zsh | 5.8-3ubuntu1 |
+| zsh | 5.8-3ubuntu1.1 |
 
 ## Variant: bionic
 
-**Digest:** sha256:984cfb391dd45410fdc50d5970780b0dd926a7c6300028d079514de0fd8bccb3
+**Digest:** sha256:93708f86488befd10d1b835bf1725971cf810ec4766ea9e1f896a32143024fd4
 
 **Tags:**
 ```
@@ -176,7 +176,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 345976874550efa09fa7e9cdbe1215ce27d1541b | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -199,8 +199,8 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | libicu60 | 60.2-3ubuntu3.2 |
 | libkrb5-3 | 1.16-2ubuntu0.2 |
 | liblttng-ust0 | 2.10.1-1 |
-| libssl1.0.0 | 1.0.2n-1ubuntu5.7 |
-| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.14 |
+| libssl1.0.0 | 1.0.2n-1ubuntu5.8 |
+| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.15 |
 | libstdc++6 | 8.4.0-1ubuntu1~18.04 |
 | locales | 2.27-3ubuntu1.5 |
 | lsb-release | 9.20170808ubuntu1 |
@@ -224,5 +224,5 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | wget | 1.19.4-1ubuntu2.2 |
 | zip | 3.0-11build1 |
 | zlib1g | 1:1.2.11.dfsg-0ubuntu2 |
-| zsh | 5.4.2-3ubuntu3.1 |
+| zsh | 5.4.2-3ubuntu3.2 |
 
