@@ -106,7 +106,7 @@ def template(defId, displayName, description, categories, defType, platforms, op
         options = 'lc rc'
 
     subst = '''
-		lc
+		l-c
 			"id": "{}",
 			"displayName": "{}",
 			"description": "{}",
@@ -114,9 +114,9 @@ def template(defId, displayName, description, categories, defType, platforms, op
 			"platforms": [ "{}" ],
 			"type": "{}",
 			"options": {}
-		rc,'''.format(defId, displayName, description, categories, platforms, defType, options)
+		r-c,'''.format(defId, displayName, description, categories, platforms, defType, options)
 
-    return subst.replace('lc', '{').replace('rc', '}')
+    return subst.replace('l-c', '{').replace('r-c', '}')
 
 
 exceptions = 0
