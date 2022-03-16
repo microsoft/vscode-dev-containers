@@ -733,7 +733,6 @@
 			"extensions": ["golang.Go"],
 			"containerEnv": {
 				"GOPATH": "/go",
-				"GOROOT": "/usr/local/go",
 				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
 			},
 			"capAdd": [ "SYS_PTRACE" ],
