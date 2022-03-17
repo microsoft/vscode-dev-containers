@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:1ee60e5f972972477daa3dccacff92e31e7c2e7da580e9577dd8a5b69810bd9d
+**Digest:** sha256:0857f55ef0498cdde8de427bc90490cf65c01a940ef5dbfe4b9ced03c1db40c4
 
 **Tags:**
 ```
@@ -41,7 +41,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | autopep8 | 1.6.0 |
 | black | 22.1.0 |
 | yapf | 0.32.0 |
-| mypy | 0.940 |
+| mypy | 0.941 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.4 |
@@ -74,7 +74,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libssl1.1 | 1.1.1k-1+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |
@@ -96,7 +96,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | unzip | 6.0-26 |
 | vim-tiny | 2:8.2.2434-3+deb11u1 |
 | wget | 1.21-1+deb11u1 |
-| yarn | 1.22.17-1 |
+| yarn | 1.22.18-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+deb11u1 |
