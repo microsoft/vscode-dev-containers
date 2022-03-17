@@ -88,15 +88,26 @@ if [ VERSION="latest" ] || [ VERSION="lts" ]; then
     export VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4)}')
 fi
 
-# Install Hugo
-installation_dir="$HUGO_DIR/bin"
-mkdir -p "$installation_dir"
-hugo_filename="hugo_${VERSION}_Linux-64bit.tar.gz"
+# Install Hugo if it's missing
+if ! hugo version > /dev/null ; then
+    echo "Installing Hugo..."
+    installation_dir="$HUGO_DIR/bin"
+    mkdir -p "$installation_dir"
 
-curl -fsSLO --compressed "https://github.com/gohugoio/hugo/releases/download/v${VERSION}/${hugo_filename}"
-tar -xzf "$hugo_filename" -C "$installation_dir"
-rm "$hugo_filename"
+    # Install ARM or x86 version of hugo based on current machine architecture
+    if [ "$(uname -m)" == "aarch64" ]; then
+        arch="ARM64"
+    else
+        arch="64bit"
+    fi
 
-updaterc "export HUGO_DIR=${HUGO_DIR}"
+    hugo_filename="hugo_${VERSION}_Linux-${arch}.tar.gz"
+
+    curl -fsSLO --compressed "https://github.com/gohugoio/hugo/releases/download/v${VERSION}/${hugo_filename}"
+    tar -xzf "$hugo_filename" -C "$installation_dir"
+    rm "$hugo_filename"
+
+    updaterc "export HUGO_DIR=${HUGO_DIR}"
+fi
 
 echo "Done!"
