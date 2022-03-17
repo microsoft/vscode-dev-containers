@@ -139,14 +139,14 @@ architecture="$(dpkg --print-architecture)"
 if [ "${USE_MOBY}" = "true" ]; then
     # Lets us dynamically update this attribute if script is embedded _somewhere_
     get_common_setting DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES
-    if [[ ! "${DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}" == *"${VERSION_CODENAME}"* ]]; then
+    if [[ "${DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
         err "Unsupported  distribution version '${VERSION_CODENAME}'. To resolve, either: (1) set feature option '\"moby\": false' , or (2) choose a compatible OS distribution"
         err "Support distributions include:  ${DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}"
         exit 1
     fi
 else
     get_common_setting DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES
-    if [[ ! "${DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}" == *"${VERSION_CODENAME}"* ]]; then
+    if [[ "${DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
         err "Unsupported distribution version '${VERSION_CODENAME}'. To resolve, please choose a compatible OS distribution"
         err "Support distributions include:  ${DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}"
         exit 1
