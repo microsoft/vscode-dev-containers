@@ -144,6 +144,7 @@ if [ "${USE_MOBY}" = "true" ]; then
         err "Support distributions include:  ${DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}"
         exit 1
     fi
+    echo "Distro codename  '${VERSION_CODENAME}'  matched filter  '${DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}'"
 else
     get_common_setting DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES
     if [[ "${DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
@@ -151,7 +152,9 @@ else
         err "Support distributions include:  ${DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}"
         exit 1
     fi
+    echo "Distro codename  '${VERSION_CODENAME}'  matched filter  '${DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}'"
 fi
+
 
 
 # Install dependencies
@@ -371,3 +374,5 @@ EOF
 
 chmod +x /usr/local/share/docker-init.sh
 chown ${USERNAME}:root /usr/local/share/docker-init.sh
+
+echo 'docker-in-docker-debian script has completed!'
