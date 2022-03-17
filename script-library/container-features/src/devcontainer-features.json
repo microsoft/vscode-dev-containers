@@ -1197,6 +1197,55 @@
 				"ubuntu",
 				"debian"
 			]
+		},
+		{
+			"id": "hugo",
+			"name": "Hugo",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/hugo.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "0.95.0", "0.94.0"],
+					"default": "latest",
+					"description": "Select or enter a hugo version"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_HUGO",
+			"extensions": [ "eliostruyf.vscode-hugo-themer" ],
+			"containerEnv": {
+				"HUGO_PATH": "/usr/local/hugo",
+				"PATH":"${HUGO_PATH}/bin:${PATH}"
+			},
+			"include": [
+				"codespaces-linux",
+				"go",
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
 		}
 	]
 }

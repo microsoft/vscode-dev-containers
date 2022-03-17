@@ -28,6 +28,7 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 | [Go (golang) Install Script](docs/go.md) | `go-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Gradle Install Script](docs/gradle.md) | `gradle-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Homebrew Install Script](docs/homebrew.md) | `homebrew-debian.sh` (Community) | [@andreiborisov](https://github.com/andreiborisov) |
+| [Hugo Install Script](docs/hugo.md) | `hugo-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Java Install Script](docs/java.md) | `java-debian.sh` | VS Code and GitHub Codespaces teams|
 | [JupyterLab Install Script](docs/jupyterlab.md) | `jupyterlab-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Kubectl and Helm Install Script](docs/kubectl-helm.md) | `kubectl-helm-debian.sh` | VS Code and GitHub Codespaces teams|
