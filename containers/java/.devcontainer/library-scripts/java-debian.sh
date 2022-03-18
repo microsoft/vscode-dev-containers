@@ -9,7 +9,7 @@
 #
 # Syntax: ./java-debian.sh [JDK version] [SDKMAN_DIR] [non-root user] [Add to rc files flag]
 
-JAVA_VERSION=${1:-"default"}
+JAVA_VERSION=${1:-"lts"}
 export SDKMAN_DIR=${2:-"/usr/local/sdkman"}
 USERNAME=${3:-"automatic"}
 UPDATE_RC=${4:-"true"}
@@ -82,7 +82,7 @@ sdk_install() {
     local suffix="${4:-"\\s*"}"
     local full_version_check=${5:-".*-[a-z]+"}
     if [ "${requested_version}" = "none" ]; then return; fi
-    # Blank will install latest stable version
+    # Blank will install latest stable version SDKMAN has
     if [ "${requested_version}" = "lts" ] || [ "${requested_version}" = "default" ]; then
          requested_version=""
     elif echo "${requested_version}" | grep -oE "${full_version_check}" > /dev/null 2>&1; then
@@ -136,6 +136,9 @@ fi
 jdk_distro="ms"
 if echo "${JAVA_VERSION}" | grep -E '^8([\s\.]|$)' > /dev/null 2>&1; then
     jdk_distro="tem"
+fi
+if [ "${JAVA_VERSION}" = "lts" ]; then
+    JAVA_VERSION="17"
 fi
 sdk_install java ${JAVA_VERSION} "\\s*" "(\\.[a-z0-9]+)*-${jdk_distro}\\s*" ".*-[a-z]+$"
 
