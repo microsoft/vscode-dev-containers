@@ -119,7 +119,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "1.22", "1.21", "1.20"],
+					"proposals": ["latest", "1.23", "1.22", "1.21"],
 					"default": "latest",
 					"description": "Select or enter a Kubernetes version to install"
 				},
@@ -179,7 +179,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "1.0", "0.15"],
+					"proposals": ["latest", "1.1", "1.0", "0.15"],
 					"default": "latest",
 					"description": "Terraform version"
 				},
@@ -723,7 +723,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "1.17", "1.16"],
+					"proposals": ["latest", "1.18", "1.17"],
 					"default": "latest",
 					"description": "Select or enter a Go version to install"
 				}
@@ -915,7 +915,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "3.0", "2.7", "2.6"],
+					"proposals": ["latest", "3.1", "3.0", "2.7"],
 					"default": "latest",
 					"description": "Select or enter a Ruby version to install"
 				}
