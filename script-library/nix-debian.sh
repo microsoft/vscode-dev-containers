@@ -14,7 +14,7 @@ set -e
 NIX_VERSION="${1:-"latest"}"
 USERNAME="${2:-"vscode"}"
 NIX_PACKAGES="${4:-"none"}"
-NIXFILE_PATH="${5:-"$(pwd)/default.nix"}"
+NIXFILE_PATH="${5:-"none"}"
 NIX_GPG_KEYS="B541D55301270E0BCF15CA5D8170B4726D7198DE"
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
 keyserver hkps://keys.openpgp.org
@@ -167,9 +167,19 @@ find_version_from_git_tags() {
 }
 
 
+update_rc_file() {
+    # see if folder containing file exists
+    local rc_file_folder="$(dirname "$1")"
+    if [ ! -d "${rc_file_folder}" ]; then
+        echo "${rc_file_folder} does not exist. Skipping update of $1."
+    elif [ ! -e "$1" ] || [[ "$(cat "$1")" != *"$2"* ]]; then
+        echo "$2" >> "$1"
+    fi
+}
+
 if [ -e "/nix" ]; then
     echo "(!) Nix is already installed! Aborting."
-    exit 1
+    exit 0
 fi
 
 # Verify dependencies
@@ -179,27 +189,34 @@ check_command dirmngr dirmngr
 check_command xz xz-utils
 check_command git git
 
-detect_user USERNAME
-if [ "${USERNAME}" = "root" ]; then
-    echo -e "(!) Nix requires a non-root user to function. Add a non-root user with a UID of 1000.\nYou may use the following script to do this for you:\n\nhttps://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/common.md"
-fi
-
 # Determine version
 find_version_from_git_tags NIX_VERSION https://github.com/NixOS/nix "tags/"
 
-# Create nix group, dir, and set sticky bit to handle user UID/GID changes
-if ! cat /etc/group | grep -e "^nix:" > /dev/null 2>&1; then
-    groupadd -r nix
-fi
-if ! cat /etc/group | grep -e "^nixbld:" > /dev/null 2>&1; then
+# Setup nixbld group, dir, and set sticky bit to handle user UID/GID changes, allow root to function
+if ! grep -e "^nixbld:" /etc/group > /dev/null 2>&1; then
     groupadd -g 30000 nixbld
-    useradd --home-dir /var/empty --shell /usr/sbin/nologin --system -u 30000 -g nixbld -G nixbld,nix nixbld
+
 fi
-usermod -a -G nix ${USERNAME}
+#for i in $(seq 1 32); do
+#    nixbuild_user="nixbuild${i}"
+#    if ! id "${nixbuild_user}" > /dev/null 2>&1; then
+#        useradd --system --home-dir /var/empty --gid 30000 --groups nixbld --no-user-group --shell /usr/sbin/nologin --uid $((30000 + i)) "${nixbuild_user}"
+#    fi
+#done
+# Create nix 
+detect_user USERNAME
+if [ "${USERNAME}" = "root" ]; then
+    echo "Non-root user required. Creating user nixuser."
+    USERNAME=nixuser
+    groupadd --gid 1000 -r nixuser
+    useradd -s /bin/bash -u 1000 -g nixuser -m nixuser
+fi
+# Adding user to nixbld is ok since we're really doing a single user 
+# install and root installed packages will still be owned by root
+usermod -a -G nixbld ${USERNAME}
 umask 0002
 mkdir -p /nix
-chown ":nix" /nix
-chmod g+s /nix 
+chown ":nixbld" /nix
 
 # Adapted from https://nixos.org/download.html#nix-verify-installation
 orig_cwd="$(pwd)"
@@ -209,33 +226,43 @@ receive_gpg_keys NIX_GPG_KEYS
 curl -sSLf -o install-nix https://releases.nixos.org/nix/nix-${NIX_VERSION}/install
 curl -sSLf -o install-nix.asc https://releases.nixos.org/nix/nix-${NIX_VERSION}/install.asc
 gpg2 --verify ./install-nix.asc
-su $USERNAME -c 'sh ./install-nix --no-daemon'
-cd "${orig_cwd}"
-rm -rf /tmp/nix
+# Save off profile for user since we'll revert edits
+cp /home/${USERNAME}/.profile /home/${USERNAME}/.profile.bak
+# Install nix
+su ${USERNAME} -c 'sh ./install-nix --no-daemon'
+# Revert .profile edits
+mv -f /home/${USERNAME}/.profile.bak /home/${USERNAME}/.profile
+# Make default profile root's profile
+mv /nix/var/nix/profiles/per-user/${USERNAME} /nix/var/nix/profiles/per-user/root
+ln -s /nix/var/nix/profiles/per-user/root/profile /nix/var/nix/profiles/default
+# Clean out channels to avoid duplication since we've now setup the "default" profile
+rm -rf /tmp/nix "/home/${USERNAME}/.nix-profile" "/home/${USERNAME}/.nix-channels" "/home/${USERNAME}/.nix-defexpr" "/home/${USERNAME}/.cache/nix"
+
+# Setup rcs and profiles
+snippet='
+if [ "${PATH#*/nix/var/nix/profiles/default/bin}" = "${PATH}" ]; then export PATH=/nix/var/nix/profiles/default/bin:${PATH}; fi
+if [ "${PATH#*$HOME/.nix-profile/bin}" = "${PATH}" ]; then if [ -z "$USER" ]; then USER=$(whoami); fi; . /nix/var/nix/profiles/default/etc/profile.d/nix.sh; fi
+'
+update_rc_file /etc/bash.bashrc "${snippet}"
+update_rc_file /etc/zsh/zshenv "${snippet}"
+update_rc_file /etc/profile.d/nix.sh "${snippet}"
+chmod +x /etc/profile.d/nix.sh
 
 # Post-install processing
-post_processing_script='. $HOME/.nix-profile/etc/profile.d/nix.sh'
+cd "${orig_cwd}"
+. /etc/profile.d/nix.sh
 if [ ! -z "${PACKAGE_LIST}" ] && [ "${PACKAGE_LIST}" != "none" ]; then
-    post_processing_script="${post_processing_script} && nix-env --install ${PACKAGE_LIST}"
+    nix-env --install ${PACKAGE_LIST}
 fi
-if [ -r "${NIXFILE_PATH}" ] && [ "${NIXFILE_PATH}" != "none" ]; then
-    post_processing_script="${post_processing_script} && nix-env --install -f \"${NIXFILE_PATH}\""
+if [ "${NIXFILE_PATH}" != "none" ] && [ -r "${NIXFILE_PATH}" ]; then
+    nix-env --install -f "${NIXFILE_PATH}"
 fi
-post_processing_script="${post_processing_script} && nix-collect-garbage --delete-old && nix-store --optimise"
-su ${USERNAME} -c "${post_processing_script}"
+nix-collect-garbage --delete-old
+nix-store --optimise
 
 # Setup privs and set sticky bit to handle user UID/GID changes
 echo "Updating permissions..."
-chown -R ":nix" /nix
-chmod -R g+rw /nix
-find /nix -type d | xargs chmod g+s
+chown -R ":nixbld" /nix
+#chmod -R g+rw /nix
 
-# Initalize nix from interactive shell in addition to login shells (~/.profile was added by installer)
-# The init script takes 2 ms, a check for nix existing is 1 ms, so adding a command check for a login interactive shell would be 4 ms regardless
-nix_snippet="if [ -e /home/${USERNAME}/.nix-profile/etc/profile.d/nix.sh ]; then . /home/${USERNAME}/.nix-profile/etc/profile.d/nix.sh; fi"
-echo "${nix_snippet}" >> /home/${USERNAME}/.bashrc 
-if type zsh > /dev/null 2>&1; then
-    echo "${nix_snippet}" | tee -a /home/${USERNAME}/.zshrc >> /home/${USERNAME}/.zenv
-fi
-
-echo -e "\nNix is now available for user ${USERNAME}.\n\nDone!"
+echo "Done!"
