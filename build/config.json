@@ -24,7 +24,8 @@
 		"LICENSE",
 		"package.json",
 		"yarn.lock",
-		".npmignore"
+		".npmignore",
+		"devcontainer-collection.json"
 	],
 
 	"needsDedicatedPage": [ 

@@ -7,7 +7,6 @@
 		"go.toolsManagement.checkForUpdates": "local",
 		"go.useLanguageServer": true,
 		"go.gopath": "/go",
-		"go.goroot": "/usr/local/go",
 		"python.defaultInterpreterPath": "/opt/python/latest/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,

@@ -14,7 +14,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
 COPY --from=upstream /opt /opt/
 
 # Copy library scripts to execute
-COPY .devcontainer/library-scripts/node-debian.sh .devcontainer/add-notice.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/
+COPY .devcontainer/library-scripts/*.sh .devcontainer/add-notice.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/
 
 # Setup conda to mirror contents from https://github.com/ContinuumIO/docker-images/blob/master/anaconda3/debian/Dockerfile
 ENV LANG=C.UTF-8 \
