@@ -24,7 +24,7 @@ Or as a feature:
 
 |Argument| Feature option |Default|Description|
 |--------|----------------|-------|-----------|
-|Java version| `version` | `lts`| Version of Java to install. Specify `lts` to install the LTS version. |
+|Java version| `version` | `latest`| Version of Java to install. Specify `latest` to install the latest supported Microsoft JDK or `lts` for the latest LTS version. Specify `default` to install default version SDKMAN provides. |
 |SDKMAN_DIR| | `/usr/local/sdkman`| Location to find [SDKMAN!](https://sdkman.io/), or if not found, where to install it. |
 |Non-root user| | `automatic`| Specifies a user in the container other than root that will use Gradle. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 | Add to rc files flag | | `true` | A `true`/`false` flag that indicates whether sourcing the nvm script should be added to `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |

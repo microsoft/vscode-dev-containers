@@ -11,7 +11,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:e9dfdfe27d4937d259633bf7584051682692142f26f9f877553e4068ede0c1a3
+**Digest:** sha256:b12368b9fbc05622ad157af0dc060659e10918fbfa63575b2910db6d76662689
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4f0b680248e1acf71e9e557af62f3a08bb5b96c6 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -55,7 +55,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 | libicu63 | 63.1-6+deb10u2 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u7 |
+| libssl1.1 | 1.1.1d-0+deb10u8 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10 |
 | lsb-release | 10.2019051400 |
@@ -83,7 +83,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 ## Variant: bullseye
 
-**Digest:** sha256:66ca447d585821a43c17b57db188ad6772a711327f7dbf964f4b7273f1443a78
+**Digest:** sha256:7e6724a0dcf594206d8b2a3f7dd6dc61da994396875a406e0735b08e7b547969
 
 **Tags:**
 ```
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4f0b680248e1acf71e9e557af62f3a08bb5b96c6 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libssl1.1 | 1.1.1k-1+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u2 |
 | lsb-release | 11.1.0 |
@@ -156,7 +156,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:cd65e8bd0890ccc87a69678833a4b4255bf6a7e0175b3e03952501ef20c60b6a
+**Digest:** sha256:cc4bc6c80f9849eaa054432824041388fa42c4035d9b8320da0dd390df139b99
 
 **Tags:**
 ```
@@ -177,7 +177,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4f0b680248e1acf71e9e557af62f3a08bb5b96c6 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -221,7 +221,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 | strace | 4.15-2 |
 | sudo | 1.8.19p1-2.1+deb9u3 |
 | unzip | 6.0-21+deb9u2 |
-| vim-tiny | 2:8.0.0197-4+deb9u4 |
+| vim-tiny | 2:8.0.0197-4+deb9u5 |
 | wget | 1.18-5+deb9u3 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.8.dfsg-5 |

@@ -10,7 +10,7 @@ COPY library-scripts/common-debian.sh /tmp/library-scripts/
 USER root
 RUN apt-get update \
  && groupadd jovyan \
- && usermod -a -G jovyan jovyan \
+ && usermod -g jovyan -a -G users jovyan \
  && bash /tmp/library-scripts/common-debian.sh \
  && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
@@ -22,3 +22,5 @@ RUN apt-get update \
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
+
+USER jovyan

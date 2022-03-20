@@ -112,7 +112,7 @@ find_version_from_git_tags() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
-check_packages apt-transport-https curl ca-certificates lxc pigz iptables gnupg2 dirmngr
+check_packages apt-transport-https curl ca-certificates pigz iptables gnupg2 dirmngr
 if ! type git > /dev/null 2>&1; then
     apt_get_update_if_needed
     apt-get -y install git
