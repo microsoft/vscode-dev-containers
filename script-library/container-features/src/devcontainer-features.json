@@ -610,6 +610,48 @@
 			]
 		},
 		{
+			"id": "fish",
+			"name": "fish shell and Fisher",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/fish.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_FISH",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
 			"id": "node",
 			"name": "Node.js (via nvm) and yarn",
 			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/node.md",
