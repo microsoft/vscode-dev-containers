@@ -10,7 +10,7 @@
 
 ## Variant: bullseye
 
-**Digest:** sha256:d5f5c102c25fb4989aec6684c69a8124aaea8bd704b4b200e14b89f08931f8cd
+**Digest:** sha256:a5b25f5ac2f4a1de87da6800894992abda62e2fe82263abdd7a3fbaa038e6d08
 
 **Tags:**
 ```
@@ -94,7 +94,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 
 ## Variant: buster
 
-**Digest:** sha256:080e3212816d1f8c882aaf51a7f5f1ef7de95bffa902ed72761f375beba84340
+**Digest:** sha256:cd7aea224d34e7e7321b694da2e124fa6b150b379defd4f96fb094f624193a60
 
 **Tags:**
 ```

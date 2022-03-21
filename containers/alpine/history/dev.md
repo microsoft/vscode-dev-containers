@@ -12,7 +12,7 @@
 
 ## Variant: 3.15
 
-**Digest:** sha256:af74603fb8cc202dfc0b4500bad808a816f13b152d89ca0cfe1de99c0e9f6559
+**Digest:** sha256:0bbedb58b91a646b2ec2120e62432a82052cbbf8466c2aefe057e8f97dff1624
 
 **Tags:**
 ```
@@ -33,7 +33,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -61,9 +61,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 | libstdc++ | 10.3.1_git20211027-r0 |
 | krb5-libs | 1.19.2-r4 |
 | libintl | 0.21-r0 |
-| libssl1.1 | 1.1.1l-r7 |
+| libssl1.1 | 1.1.1n-r0 |
 | lttng-ust | 2.12.0-r3 |
-| tzdata | 2021e-r0 |
+| tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.2-r0 |
 | zlib | 1.2.11-r3 |
 | sudo | 1.9.8_p2-r1 |
@@ -78,7 +78,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.14
 
-**Digest:** sha256:0d131e238244bdf5c95617b996753c50145127aec435f62f5c42c8589cba1412
+**Digest:** sha256:752c7e35958b6d19b064bd96138bcc10390617ec048d0017300da05089c01a0e
 
 **Tags:**
 ```
@@ -98,7 +98,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -126,9 +126,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 | libstdc++ | 10.3.1_git20210424-r2 |
 | krb5-libs | 1.18.4-r0 |
 | libintl | 0.21-r0 |
-| libssl1.1 | 1.1.1l-r0 |
+| libssl1.1 | 1.1.1n-r0 |
 | lttng-ust | 2.12.0-r3 |
-| tzdata | 2021e-r0 |
+| tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.2-r0 |
 | zlib | 1.2.11-r3 |
 | sudo | 1.9.7_p1-r1 |
@@ -143,7 +143,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 ## Variant: 3.13
 
-**Digest:** sha256:089c63260acf9993d4c3498c1e08c252c3a59816fbe1fdae366106fad597df17
+**Digest:** sha256:54715301e3cf3495822299613fad06e161294a70b6541658add976a0cadbcd97
 
 **Tags:**
 ```
@@ -163,7 +163,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -191,9 +191,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 | libstdc++ | 10.2.1_pre1-r3 |
 | krb5-libs | 1.18.4-r0 |
 | libintl | 0.20.2-r2 |
-| libssl1.1 | 1.1.1l-r0 |
+| libssl1.1 | 1.1.1n-r0 |
 | lttng-ust | 2.12.0-r2 |
-| tzdata | 2021e-r0 |
+| tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.1-r0 |
 | zlib | 1.2.11-r3 |
 | sudo | 1.9.5p2-r0 |
@@ -208,7 +208,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 
 ## Variant: 3.12
 
-**Digest:** sha256:e527239af9d54c28231e039370c71d36869712ea069eb1b9d3dd0b0b2fe681c2
+**Digest:** sha256:d2ba8bcedb25da1876f5c5feb1c2d809e887221aa2d1cdb3133ec5c9cca19a28
 
 **Tags:**
 ```
@@ -228,7 +228,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -256,9 +256,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 | libstdc++ | 9.3.0-r2 |
 | krb5-libs | 1.18.4-r0 |
 | libintl | 0.20.2-r0 |
-| libssl1.1 | 1.1.1l-r0 |
+| libssl1.1 | 1.1.1n-r0 |
 | lttng-ust | 2.12.0-r1 |
-| tzdata | 2021e-r0 |
+| tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.1-r0 |
 | zlib | 1.2.11-r3 |
 | sudo | 1.9.5p2-r0 |

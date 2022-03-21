@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:68d77392575782a519d7d7a84ab923ee884b7eb5585e3885675778395193f8e9
+**Digest:** sha256:da458facafeb0334071061c4257450e66afcb5ece1348cff6dbf7776e031255d
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 0f2715bb45ef025b48469817712a4cd3e23839b6 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 64c7a646c79768b5e6e5fa0847af5801de08c15f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c6cc0a1959da3403f524fcbb0fdfb6e08a4d8ae6 | /usr/local/share/rbenv |
@@ -62,7 +62,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.4 |
-| virtualenv | 20.13.3 |
+| virtualenv | 20.13.4 |
 | pipx | 1.0.0 |
 
 **Go tools and modules**
@@ -76,7 +76,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.2 |
-| github.com/golangci/golangci-lint | 1.44.2 |
+| github.com/golangci/golangci-lint | 1.45.0 |
 
 **Ruby gems and tools**
 
@@ -104,7 +104,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [git](https://github.com/git/git) | 2.35.1 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.2 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.0.8 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.4 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | 1.23.5 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.8.1 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.1 | /usr/local/sdkman |
