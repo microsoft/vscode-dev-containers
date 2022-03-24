@@ -69,6 +69,8 @@ You can adapt your own existing development container Dockerfile to support this
       - /var/run/docker.sock:/var/run/docker.sock
     ```
 
+In some containers which symlink /var/run to /run, you may need to change the last line to `/var/run/docker.sock:/run/docker.sock`
+
 3. Press <kbd>F1</kbd> and run **Remote-Containers: Rebuild Container** so the changes take effect.
 
 ### Enabling non-root access to Docker in the container
