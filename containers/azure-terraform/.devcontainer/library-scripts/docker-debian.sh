@@ -188,7 +188,7 @@ else
         TARGET_COMPOSE_ARCH="x86_64"
     fi
     if [ "${TARGET_COMPOSE_ARCH}" != "x86_64" ]; then
-        # Use pip to get a version that runs on this architecture
+        # Use pip to get a version that runns on this architecture
         if ! dpkg -s python3-minimal python3-pip libffi-dev python3-venv > /dev/null 2>&1; then
             apt_get_update_if_needed
             apt-get -y install python3-minimal python3-pip libffi-dev python3-venv
@@ -232,6 +232,13 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "false" ] || [ "${USERNAME}" = "root" ]; then
     exit 0
 fi
 
+# Setup a docker group in the event the docker socket's group is not root
+if ! grep -qE '^docker:' /etc/group; then
+    groupadd --system docker
+fi
+usermod -aG docker "${USERNAME}"
+DOCKER_GID="$(grep -oP '^docker:x:\K[^:]+' /etc/group)"
+
 # If enabling non-root access and specified user is found, setup socat and add script
 chown -h "${USERNAME}":root "${TARGET_SOCKET}"        
 if ! dpkg -s socat > /dev/null 2>&1; then
@@ -271,20 +278,13 @@ log()
 echo -e "\n** \$(date) **" | sudoIf tee -a \${SOCAT_LOG} > /dev/null
 log "Ensuring ${USERNAME} has access to ${SOURCE_SOCKET} via ${TARGET_SOCKET}"
 
-# If enabled, try to add a docker group with the right GID. If the group is root, 
+# If enabled, try to update the docker group with the right GID. If the group is root, 
 # fall back on using socat to forward the docker socket to another unix socket so 
 # that we can set permissions on it without affecting the host.
 if [ "${ENABLE_NONROOT_DOCKER}" = "true" ] && [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ] && [ "${USERNAME}" != "root" ] && [ "${USERNAME}" != "0" ]; then
     SOCKET_GID=\$(stat -c '%g' ${SOURCE_SOCKET})
-    if [ "\${SOCKET_GID}" != "0" ]; then
-        log "Adding user to group with GID \${SOCKET_GID}."
-        if [ "\$(cat /etc/group | grep :\${SOCKET_GID}:)" = "" ]; then
-            sudoIf groupadd --gid \${SOCKET_GID} docker-host
-        fi
-        # Add user to group if not already in it
-        if [ "\$(id ${USERNAME} | grep -E "groups.*(=|,)\${SOCKET_GID}\(")" = "" ]; then
-            sudoIf usermod -aG \${SOCKET_GID} ${USERNAME}
-        fi
+    if [ "\${SOCKET_GID}" != "0" ] && [ "\${SOCKET_GID}" != "${DOCKER_GID}" ]; then
+        sudoIf groupmod --gid "\${SOCKET_GID}" "${USERNAME}"
     else
         # Enable proxy if not already running
         if [ ! -f "\${SOCAT_PID}" ] || ! ps -p \$(cat \${SOCAT_PID}) > /dev/null; then
