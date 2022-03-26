@@ -15,8 +15,8 @@ USE_MOBY=${3:-"true"}
 DOCKER_VERSION=${4:-"latest"} # The Docker/Moby Engine + CLI should match in version
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOCKER_DASH_COMPOSE_VERSION="1"
-DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal"
-DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute"
+DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal"
+DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute"
 
 # Default: Exit on any failure.
 set -e
@@ -138,21 +138,21 @@ architecture="$(dpkg --print-architecture)"
 
 if [ "${USE_MOBY}" = "true" ]; then
     # Lets us dynamically update this attribute if script is embedded _somewhere_
-    get_common_setting DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES
-    if [[ "${DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
+    get_common_setting DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES
+    if [[ "${DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
         err "Unsupported  distribution version '${VERSION_CODENAME}'. To resolve, either: (1) set feature option '\"moby\": false' , or (2) choose a compatible OS distribution"
-        err "Support distributions include:  ${DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}"
+        err "Support distributions include:  ${DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}"
         exit 1
     fi
-    echo "Distro codename  '${VERSION_CODENAME}'  matched filter  '${DOCKER_IN_DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}'"
+    echo "Distro codename  '${VERSION_CODENAME}'  matched filter  '${DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}'"
 else
-    get_common_setting DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES
-    if [[ "${DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
+    get_common_setting DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES
+    if [[ "${DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
         err "Unsupported distribution version '${VERSION_CODENAME}'. To resolve, please choose a compatible OS distribution"
-        err "Support distributions include:  ${DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}"
+        err "Support distributions include:  ${DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}"
         exit 1
     fi
-    echo "Distro codename  '${VERSION_CODENAME}'  matched filter  '${DOCKER_IN_DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}'"
+    echo "Distro codename  '${VERSION_CODENAME}'  matched filter  '${DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}'"
 fi
 
 
