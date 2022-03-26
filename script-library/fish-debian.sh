@@ -20,6 +20,8 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+export DEBIAN_FRONTEND=noninteractive
+
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
@@ -37,13 +39,32 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-export DEBIAN_FRONTEND=noninteractive
+# Function to run apt-get if needed
+apt_get_update_if_needed()
+{
+    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update
+    else
+        echo "Skipping apt-get update."
+    fi
+}
+
+# Checks if packages are installed and installs them if not
+check_packages() {
+    if ! dpkg -s "$@" > /dev/null 2>&1; then
+        apt_get_update_if_needed
+        apt-get -y install --no-install-recommends "$@"
+    fi
+}
+
+check_packages curl ca-certificates gnupg2 apt-transport-https
 
 # Install fish shell
 echo "Installing fish shell..."
 if grep -q 'Ubuntu' < /etc/os-release; then
     apt-get -y install --no-install-recommends software-properties-common
-    apt-add-repository ppa:fish-shell/release-3
+    apt-add-repository -y ppa:fish-shell/release-3
     apt-get update
     apt-get -y install --no-install-recommends fish
     apt-get autoremove -y

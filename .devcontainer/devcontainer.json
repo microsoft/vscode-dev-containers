@@ -23,11 +23,11 @@
 	"forwardPorts": [6080],
 	"portsAttributes": {
 		"6080": {
-			"label": "Desktop web client (noVNC)",
+			"label": "Desktop access (password: vscode)",
 			"onAutoForward": "silent"
 		},
 		"5901": {
-			"label": "VNC TCP port",
+			"label": "VNC TCP port (password: vscode)",
 			"onAutoForward": "silent"
 		},
 	},

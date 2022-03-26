@@ -91,6 +91,7 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript desktop-lite "${USERNAME} changeme false"
     runScript docker-in-docker "false ${USERNAME} false"
     runScript powershell
+    runScript fish
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ] || [ "${architecture}" = "arm64" ] || [ "${architecture}" = "aarch64" ]; then
         runScript java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
     fi

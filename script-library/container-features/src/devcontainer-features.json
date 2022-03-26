@@ -119,7 +119,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "1.22", "1.21", "1.20"],
+					"proposals": ["latest", "1.23", "1.22", "1.21"],
 					"default": "latest",
 					"description": "Select or enter a Kubernetes version to install"
 				},
@@ -179,7 +179,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "1.0", "0.15"],
+					"proposals": ["latest", "1.1", "1.0", "0.15"],
 					"default": "latest",
 					"description": "Terraform version"
 				},
@@ -309,7 +309,7 @@
 				"ruby",
 				"rust",
 				"typescript-node",
-				"Javascript-node",
+				"javascript-node",
 				"python-3",
 				"python-3-anaconda",
 				"python-3-miniconda",
@@ -610,6 +610,48 @@
 			]
 		},
 		{
+			"id": "fish",
+			"name": "fish shell and Fisher",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/fish.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_FISH",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
 			"id": "node",
 			"name": "Node.js (via nvm) and yarn",
 			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/node.md",
@@ -723,7 +765,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "1.17", "1.16"],
+					"proposals": ["latest", "1.18", "1.17"],
 					"default": "latest",
 					"description": "Select or enter a Go version to install"
 				}
@@ -733,7 +775,6 @@
 			"extensions": ["golang.Go"],
 			"containerEnv": {
 				"GOPATH": "/go",
-				"GOROOT": "/usr/local/go",
 				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
 			},
 			"capAdd": [ "SYS_PTRACE" ],
@@ -916,7 +957,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "3.0", "2.7", "2.6"],
+					"proposals": ["latest", "3.1", "3.0", "2.7"],
 					"default": "latest",
 					"description": "Select or enter a Ruby version to install"
 				}

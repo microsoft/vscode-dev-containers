@@ -46,6 +46,12 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
+USERHOME="/home/$USERNAME"
+if [ "$USERNAME" = "root" ]; then
+    USERHOME="/root"
+fi
+
+
 # Get central common setting
 get_common_setting() {
     if [ "${common_settings_file_loaded}" != "true" ]; then
@@ -158,9 +164,11 @@ fi
 kubectl completion bash > /etc/bash_completion.d/kubectl
 
 # kubectl zsh completion
-mkdir -p "/home/${USERNAME}/.oh-my-zsh/completions"
-kubectl completion zsh > "/home/${USERNAME}/.oh-my-zsh/completions/_kubectl"
-chown -R "${USERNAME}" "/home/${USERNAME}/.oh-my-zsh"
+if [ -e "${USERHOME}}/.oh-my-zsh" ]; then
+    mkdir -p "${USERHOME}/.oh-my-zsh/completions"
+    kubectl completion zsh > "${USERHOME}/.oh-my-zsh/completions/_kubectl"
+    chown -R "${USERNAME}" "${USERHOME}/.oh-my-zsh"
+fi
 
 # Install Helm, verify signature and checksum
 echo "Downloading Helm..."
@@ -228,6 +236,10 @@ if [ "${MINIKUBE_VERSION}" != "none" ]; then
         echo '(!) minikube installation failed!'
         exit 1
     fi
+    # Create minkube folder with correct privs in case a volume is mounted here
+    mkdir -p "${USERHOME}/.minikube"
+    chown -R $USERNAME "${USERHOME}/.minikube"
+    chmod -R u+wrx "${USERHOME}/.minikube"
 fi
 
 if ! type docker > /dev/null 2>&1; then

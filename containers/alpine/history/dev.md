@@ -12,7 +12,7 @@
 
 ## Variant: 3.15
 
-**Digest:** sha256:8141e6a4623cd7d017ef19b6617e412ccdebfb25d811036ee68fc07a65ab1bf4
+**Digest:** sha256:0bbedb58b91a646b2ec2120e62432a82052cbbf8466c2aefe057e8f97dff1624
 
 **Tags:**
 ```
@@ -33,7 +33,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 345976874550efa09fa7e9cdbe1215ce27d1541b | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -61,9 +61,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 | libstdc++ | 10.3.1_git20211027-r0 |
 | krb5-libs | 1.19.2-r4 |
 | libintl | 0.21-r0 |
-| libssl1.1 | 1.1.1l-r7 |
+| libssl1.1 | 1.1.1n-r0 |
 | lttng-ust | 2.12.0-r3 |
-| tzdata | 2021e-r0 |
+| tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.2-r0 |
 | zlib | 1.2.11-r3 |
 | sudo | 1.9.8_p2-r1 |
@@ -78,7 +78,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.14
 
-**Digest:** sha256:901f09abd04569bcde88f23ef5392c526d9e9f962248941864c8a45b17699cf1
+**Digest:** sha256:752c7e35958b6d19b064bd96138bcc10390617ec048d0017300da05089c01a0e
 
 **Tags:**
 ```
@@ -98,7 +98,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 345976874550efa09fa7e9cdbe1215ce27d1541b | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -126,9 +126,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 | libstdc++ | 10.3.1_git20210424-r2 |
 | krb5-libs | 1.18.4-r0 |
 | libintl | 0.21-r0 |
-| libssl1.1 | 1.1.1l-r0 |
+| libssl1.1 | 1.1.1n-r0 |
 | lttng-ust | 2.12.0-r3 |
-| tzdata | 2021e-r0 |
+| tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.2-r0 |
 | zlib | 1.2.11-r3 |
 | sudo | 1.9.7_p1-r1 |
@@ -143,7 +143,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 ## Variant: 3.13
 
-**Digest:** sha256:1ea63e705576d7990f94c17033a9b6a8d00d464652b68892ac59086510ecad6b
+**Digest:** sha256:54715301e3cf3495822299613fad06e161294a70b6541658add976a0cadbcd97
 
 **Tags:**
 ```
@@ -163,7 +163,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 345976874550efa09fa7e9cdbe1215ce27d1541b | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -191,9 +191,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 | libstdc++ | 10.2.1_pre1-r3 |
 | krb5-libs | 1.18.4-r0 |
 | libintl | 0.20.2-r2 |
-| libssl1.1 | 1.1.1l-r0 |
+| libssl1.1 | 1.1.1n-r0 |
 | lttng-ust | 2.12.0-r2 |
-| tzdata | 2021e-r0 |
+| tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.1-r0 |
 | zlib | 1.2.11-r3 |
 | sudo | 1.9.5p2-r0 |
@@ -208,7 +208,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 
 ## Variant: 3.12
 
-**Digest:** sha256:98ab9976915753e9059c9d5cc7b78f1a968c5baf2aaace03f1272e1d54b439f9
+**Digest:** sha256:d2ba8bcedb25da1876f5c5feb1c2d809e887221aa2d1cdb3133ec5c9cca19a28
 
 **Tags:**
 ```
@@ -228,13 +228,13 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 345976874550efa09fa7e9cdbe1215ce27d1541b | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| git | 2.26.3-r0 |
+| git | 2.26.3-r1 |
 | openssh-client | 8.3_p1-r3 |
 | gnupg | 2.2.23-r1 |
 | procps | 3.3.16-r0 |
@@ -256,9 +256,9 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.12
 | libstdc++ | 9.3.0-r2 |
 | krb5-libs | 1.18.4-r0 |
 | libintl | 0.20.2-r0 |
-| libssl1.1 | 1.1.1l-r0 |
+| libssl1.1 | 1.1.1n-r0 |
 | lttng-ust | 2.12.0-r1 |
-| tzdata | 2021e-r0 |
+| tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.1-r0 |
 | zlib | 1.2.11-r3 |
 | sudo | 1.9.5p2-r0 |
