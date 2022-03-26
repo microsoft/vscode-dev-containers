@@ -18,7 +18,7 @@ DOCKER_VERSION=${6:-"latest"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOCKER_DASH_COMPOSE_VERSION="1"
 DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal"
-DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute"
+DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute impish"
 
 set -e
 
