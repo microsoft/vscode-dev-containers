@@ -128,9 +128,9 @@ See the section below for your operating system for more detailed setup instruct
 
 2. Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your local OS if you have not already.
 
-3. Start Minikube as follows:
+3. Start Minikube and add `--apiserver-names=host.docker.internal` whitelist the hostname when accessing the Kube API server:
     ```
-    minikube start
+    minikube start --apiserver-names=host.docker.internal
     kubectl config set-context minikube
     ```
 
