@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:da458facafeb0334071061c4257450e66afcb5ece1348cff6dbf7776e031255d
+**Digest:** sha256:33ab2276a58df5b43123e9612d9a0c8d6eab72381998482df99a4c1f06318094
 
 **Tags:**
 ```
@@ -33,7 +33,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Ruby](https://www.ruby-lang.org/en/) | 2.7.2 | /opt/ruby/&lt;version&gt; |
 | [PHP](https://xdebug.org/) | 7.2.34<br />7.3.27<br />7.4.26 | /opt/php/&lt;version&gt; |
 | [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.2.2 | /opt/microsoft/powershell |
-| GCC | 9.4.0-1ubuntu1~20.04 | 
+| GCC | 9.4.0-1ubuntu1~20.04.1 | 
 | Clang | 10.0.0-4ubuntu1 | 
 | [Go](https://golang.org/dl) | 1.18 | /usr/local/go |
 | [Rust](https://github.com/rust-lang/rust) | 1.59.0 | /usr/local/cargo<br />/usr/local/rustup |
@@ -43,26 +43,26 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3f214329d631b3ae39d6b283262c77819a0078de | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 64c7a646c79768b5e6e5fa0847af5801de08c15f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c6cc0a1959da3403f524fcbb0fdfb6e08a4d8ae6 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 528c6b13b588ce4bac45bbc83525b0407fd0c325 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | a5ca3e487287c123a17a1f4f5ff45d82e69c40cc | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.12.2 |
+| pylint | 2.13.2 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
 | black | 22.1.0 |
 | yapf | 0.32.0 |
-| mypy | 0.941 |
+| mypy | 0.942 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.4 |
-| virtualenv | 20.13.4 |
+| virtualenv | 20.14.0 |
 | pipx | 1.0.0 |
 
 **Go tools and modules**
@@ -76,7 +76,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.2 |
-| github.com/golangci/golangci-lint | 1.45.0 |
+| github.com/golangci/golangci-lint | 1.45.2 |
 
 **Ruby gems and tools**
 
@@ -107,13 +107,13 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.23.5 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.8.1 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.1 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.2 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
 | [GitHub CLI](https://github.com/cli/cli) | 2.6.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.4.1 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.13+azure | 
+| Docker (Moby) CLI &amp; Engine | 20.10.14+azure | 
 
 **Additional linux tools and packages**
 
@@ -175,8 +175,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.13+azure-1 |
-| moby-engine (Docker Engine) | 20.10.13+azure-1 |
+| moby-cli (Docker CLI) | 20.10.14+azure-1 |
+| moby-engine (Docker Engine) | 20.10.14+azure-1 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |

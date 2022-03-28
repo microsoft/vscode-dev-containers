@@ -10,7 +10,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:b7f0b67f78d7ce366e42009ec7053e9f3d47e54e6d279f2f7c67593a4e9d6772
+**Digest:** sha256:a0719868d72af7a08ab99876e5dd5a13d181cf52985afc8a574abcabb28c4ebe
 
 **Tags:**
 ```
@@ -37,7 +37,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3f214329d631b3ae39d6b283262c77819a0078de | /home/vscode/.oh-my-zsh |
 
 **Cargo / rustup (Rust) crates and tools**
 
@@ -65,17 +65,17 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 | iproute2 | 4.20.0-2+deb10u1 |
 | jq | 1.5+dfsg-2+b1 |
 | less | 487-0.1+b1 |
-| libc6 | 2.28-10 |
-| libc6-dev | 2.28-10 |
+| libc6 | 2.28-10+deb10u1 |
+| libc6-dev | 2.28-10+deb10u1 |
 | libgcc1 | 1:8.3.0-6 |
 | libgssapi-krb5-2 | 1.17-3+deb10u3 |
-| libicu63 | 63.1-6+deb10u2 |
+| libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u8 |
+| libssl1.1 | 1.1.1n-0+deb10u1 |
 | libstdc++6 | 8.3.0-6 |
 | lldb | 1:7.0-47 |
-| locales | 2.28-10 |
+| locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
 | lsof | 4.91+dfsg-1 |
 | man-db | 2.8.5-2 |
@@ -94,7 +94,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 | strace | 4.26-0.2 |
 | sudo | 1.8.27-1+deb10u3 |
 | unzip | 6.0-23+deb10u2 |
-| vim-tiny | 2:8.1.0875-5 |
+| vim-tiny | 2:8.1.0875-5+deb10u2 |
 | wget | 1.20.1-1.1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 
 ## Variant: bullseye
 
-**Digest:** sha256:95d01c6c08b25a498f1c38d860a24af4e40627f7ad2efa0f6cd092fee6bad1af
+**Digest:** sha256:a8e4086526badaf34c4e3cd8f092420b713f43dff5a5094df5c27e16d4034754
 
 **Tags:**
 ```
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | c96fc233c4903ba75fba5bc55e7f91f9dc8e460e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3f214329d631b3ae39d6b283262c77819a0078de | /home/vscode/.oh-my-zsh |
 
 **Cargo / rustup (Rust) crates and tools**
 
@@ -151,21 +151,21 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-bullseye
 | dialog | 1.3-20201126-1 |
 | gcc | 4:10.2.1-1 |
 | git | 1:2.30.2-1 |
-| gnupg2 | 2.2.27-2 |
+| gnupg2 | 2.2.27-2+deb11u1 |
 | htop | 3.0.5-7 |
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
 | less | 551-2 |
-| libc6 | 2.31-13+deb11u2 |
-| libc6-dev | 2.31-13+deb11u2 |
+| libc6 | 2.31-13+deb11u3 |
+| libc6-dev | 2.31-13+deb11u3 |
 | libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1+deb11u2 |
+| libssl1.1 | 1.1.1n-0+deb11u1 |
 | libstdc++6 | 10.2.1-6 |
 | lldb | 1:11.0-51+nmu5 |
-| locales | 2.31-13+deb11u2 |
+| locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
