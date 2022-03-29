@@ -215,7 +215,7 @@ fi
 # install and root installed packages will still be owned by root
 usermod -a -G nixbld ${USERNAME}
 umask 0002
-mkdir -p /nix
+mkdir -p /nix 
 chown ":nixbld" /nix
 
 # Adapted from https://nixos.org/download.html#nix-verify-installation
@@ -237,6 +237,14 @@ mv /nix/var/nix/profiles/per-user/${USERNAME} /nix/var/nix/profiles/per-user/roo
 ln -s /nix/var/nix/profiles/per-user/root/profile /nix/var/nix/profiles/default
 # Clean out channels to avoid duplication since we've now setup the "default" profile
 rm -rf /tmp/nix "/home/${USERNAME}/.nix-profile" "/home/${USERNAME}/.nix-channels" "/home/${USERNAME}/.nix-defexpr" "/home/${USERNAME}/.cache/nix"
+# Create new profile folder with corrct privs so created user can access it if needed
+mkdir -m 0775 -p /nix/var/nix/profiles/per-user/${USERNAME}
+chown "${USERNAME}:nixbld" /nix/var/nix/profiles/per-user/${USERNAME}
+
+cat << EOF >> /etc/nix.conf
+sandbox = false
+trusted-users = ${USERNAME}
+EOF
 
 # Setup rcs and profiles
 snippet='
