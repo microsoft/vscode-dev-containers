@@ -284,7 +284,7 @@ log "Ensuring ${USERNAME} has access to ${SOURCE_SOCKET} via ${TARGET_SOCKET}"
 if [ "${ENABLE_NONROOT_DOCKER}" = "true" ] && [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ] && [ "${USERNAME}" != "root" ] && [ "${USERNAME}" != "0" ]; then
     SOCKET_GID=\$(stat -c '%g' ${SOURCE_SOCKET})
     if [ "\${SOCKET_GID}" != "0" ] && [ "\${SOCKET_GID}" != "${DOCKER_GID}" ]; then
-        sudoIf groupmod --gid "\${SOCKET_GID}" "${USERNAME}"
+        sudoIf groupmod --gid "\${SOCKET_GID}" docker
     else
         # Enable proxy if not already running
         if [ ! -f "\${SOCAT_PID}" ] || ! ps -p \$(cat \${SOCAT_PID}) > /dev/null; then
