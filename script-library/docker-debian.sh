@@ -295,8 +295,7 @@ sudoIf()
 # Log messages
 log()
 {
-    echo -e "[\$(date)] \$@" | sudoIf tee -a \${SOCAT_LOG} 
-    #> /dev/null
+    echo -e "[\$(date)] \$@" | sudoIf tee -a \${SOCAT_LOG} > /dev/null
 }
 
 echo -e "\n** \$(date) **" | sudoIf tee -a \${SOCAT_LOG} > /dev/null
