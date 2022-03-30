@@ -227,7 +227,7 @@ fi
 
 # Add a stub if not adding non-root user access, user is root
 if [ "${ENABLE_NONROOT_DOCKER}" = "false" ] || [ "${USERNAME}" = "root" ]; then
-    echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
+    echo -e '#!/usr/bin/env bash\nexec "$@"' > /usr/local/share/docker-init.sh
     chmod +x /usr/local/share/docker-init.sh
     exit 0
 fi
