@@ -1,13 +1,12 @@
 {
-	"variants": ["bullseye", "buster", "hirsute", "focal", "bionic", "stretch"],
+	"variants": ["bullseye", "buster", "jammy", "focal", "bionic"],
 	"definitionVersion": "0.204.0",
 	"build": {
 		"latest": "bullseye",
 		"parent": {
 			"bullseye": "debian",
 			"buster": "debian", 
-			"stretch": "debian", 
-			"hirsute": "ubuntu",
+			"jammy": "ubuntu",
 			"focal": "ubuntu",
 			"bionic": "ubuntu"
 		},
@@ -15,7 +14,7 @@
 		"architectures": {
 			"bullseye": ["linux/amd64", "linux/arm64"],
 			"buster": ["linux/amd64"],
-			"stretch": ["linux/amd64", "linux/arm64"],
+			"jammy": ["linux/amd64", "linux/arm64"],
 			"hirsute": ["linux/amd64", "linux/arm64"],
 			"focal": ["linux/amd64"],
 			"bionic": ["linux/amd64", "linux/arm64"]
@@ -37,6 +36,10 @@
 			"stretch": [
 				"cpp:${VERSION}-debian-9",
 				"cpp:${VERSION}-debian9"
+			],
+			"jammy": [
+				"cpp:${VERSION}-ubuntu-22.04",
+				"cpp:${VERSION}-ubuntu22.04"
 			],
 			"hirsute": [
 				"cpp:${VERSION}-ubuntu-21.04",

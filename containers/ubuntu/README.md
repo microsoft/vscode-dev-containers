@@ -10,8 +10,8 @@
 | *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu |
-| *Available image variants* | hirsute, focal, bionic ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
-| *Published image architecture(s)* | x86-64, aarch64/arm64 for `hirsute` (21.04) and `bionic` (18.04) variants  |
+| *Available image variants* | jammy, hirsute, focal, bionic ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
+| *Published image architecture(s)* | x86-64, aarch64/arm64 for `jammy` (22.04), `hirsute` (21.04) and `bionic` (18.04) variants  |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Ubuntu |
@@ -30,15 +30,15 @@ While the definition itself works unmodified, you can select the version of Ubun
 You can also directly reference pre-built versions of `.devcontainer/base.Dockerfile` by using the `image` property in `.devcontainer/devcontainer.json` or updating the `FROM` statement in your own  `Dockerfile` to one of the following. An example `Dockerfile` is included in this repository.
 
 - `mcr.microsoft.com/vscode/devcontainers/base:ubuntu` (latest LTS release)
-- `mcr.microsoft.com/vscode/devcontainers/base:hirsute` (or `ubuntu-21.04`)
+- `mcr.microsoft.com/vscode/devcontainers/base:jammy` (or `ubuntu-22.04`)
 - `mcr.microsoft.com/vscode/devcontainers/base:focal` (or `ubuntu-20.04`)
 - `mcr.microsoft.com/vscode/devcontainers/base:bionic` (or `ubuntu-18.04`)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/base:0-focal`
-- `mcr.microsoft.com/vscode/devcontainers/base:0.202-focal`
-- `mcr.microsoft.com/vscode/devcontainers/base:0.202.0-focal`
+- `mcr.microsoft.com/vscode/devcontainers/base:0.203-focal`
+- `mcr.microsoft.com/vscode/devcontainers/base:0.203.0-focal`
 
 See [history](history) for information on the contents of each version and [here for a complete list of available tags](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list).
 

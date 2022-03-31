@@ -10,8 +10,8 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/cpp |
-| *Available image variants* | buster, bullseye, bionic, focal, hirsute ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/cpp/tags/list)) |
-| *Published image architecture(s)* | x86-64, aarch64/arm64 for `bullseye`, `bionic`, and `hirsute` variants |
+| *Available image variants* | buster, bullseye, bionic, focal, jammy ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/cpp/tags/list)) |
+| *Published image architecture(s)* | x86-64, aarch64/arm64 for `bullseye`, `bionic`, and `jammy` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Debian, Ubuntu |
@@ -34,15 +34,15 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/cpp:bullseye` (or `debian-11`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:buster` (or `debian-10`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:ubuntu` (latest Ubuntu LTS)
-- `mcr.microsoft.com/vscode/devcontainers/cpp:hirsute` (or `ubuntu-21.04`)
+- `mcr.microsoft.com/vscode/devcontainers/cpp:jammy` (or `ubuntu-22.04`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:focal` (or `ubuntu-20.04`)
 - `mcr.microsoft.com/vscode/devcontainers/cpp:bionic` (or `ubuntu-18.04`)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
 - `mcr.microsoft.com/vscode/devcontainers/cpp:0-bullseye`
-- `mcr.microsoft.com/vscode/devcontainers/cpp:0.203-bullseye`
-- `mcr.microsoft.com/vscode/devcontainers/cpp:0.203.0-bullseye`
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0.204-bullseye`
+- `mcr.microsoft.com/vscode/devcontainers/cpp:0.204.0-bullseye`
 
 However, we only do security patching on the latest [non-breaking, in support](https://github.com/microsoft/vscode-dev-containers/issues/532) versions of images (e.g. `0-bullseye`). You may want to run `apt-get update && apt-get upgrade` in your Dockerfile if you lock to a more specific version to at least pick up OS security updates.
 

@@ -1,5 +1,5 @@
-# [Choice] Ubuntu version (use hirsute or bionic on local arm64/Apple Silicon): hirsute, focal, bionic
-ARG VARIANT="focal"
+# [Choice] Ubuntu version (use 22.04 or 18.04 on local arm64/Apple Silicon): 22.04, 20.04, 18.04
+ARG VARIANT="20.04"
 FROM buildpack-deps:${VARIANT}-curl
 
 # Options for setup script

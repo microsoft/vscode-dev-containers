@@ -1,29 +1,29 @@
 {
-	"variants": ["hirsute", "focal", "bionic"],
-	"definitionVersion": "0.202.2",
+	"variants": ["22.04", "20.04", "18.04"],
+	"definitionVersion": "0.203.0",
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",
 		"architectures": {
-			"hirsute": ["linux/amd64", "linux/arm64"],
-			"focal": ["linux/amd64"],
-			"bionic": ["linux/amd64", "linux/arm64"]
+			"22.04": ["linux/amd64", "linux/arm64"],
+			"20.04": ["linux/amd64"],
+			"18.04": ["linux/amd64", "linux/arm64"]
 		},
 		"tags": [
-			"base:${VERSION}-${VARIANT}"
+			"base:${VERSION}-ubuntu-${VARIANT}"
 		],
 		"variantTags": {
-			"hirsute": [
-				"base:${VERSION}-ubuntu-21.04",
-				"base:${VERSION}-ubuntu21.04"
+			"jammy": [
+				"base:${VERSION}-jammy",
+				"base:${VERSION}-ubuntu22.04"
 			],
 			"focal": [
-				"base:${VERSION}-ubuntu-20.04",
+				"base:${VERSION}-focal",
 				"base:${VERSION}-ubuntu20.04",
 				"base:${VERSION}-ubuntu"
 			],
 			"bionic": [
-				"base:${VERSION}-ubuntu-18.04",
+				"base:${VERSION}-bionic",
 				"base:${VERSION}-ubuntu18.04"
 			]
 		}
