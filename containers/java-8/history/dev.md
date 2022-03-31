@@ -10,7 +10,7 @@
 
 ## Variant: bullseye
 
-**Digest:** sha256:a5b25f5ac2f4a1de87da6800894992abda62e2fe82263abdd7a3fbaa038e6d08
+**Digest:** sha256:57658c8afe12d3a4a2b22187c29626b2e1bae103e82e76d30de4baa29fd7860a
 
 **Tags:**
 ```
@@ -43,7 +43,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.1 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.2 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -60,7 +60,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
 | less | 551-2 |
-| libc6 | 2.31-13+deb11u2 |
+| libc6 | 2.31-13+deb11u3 |
 | libgssapi-krb5-2 | 1.18.3-6+deb11u1 |
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
@@ -94,7 +94,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 
 ## Variant: buster
 
-**Digest:** sha256:cd7aea224d34e7e7321b694da2e124fa6b150b379defd4f96fb094f624193a60
+**Digest:** sha256:4fe8034b74528abdeae0f65416cc711491aa1a91ce284e4e456b981fa2bf745c
 
 **Tags:**
 ```
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-buster
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.1 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.2 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -145,7 +145,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-buster
 | iproute2 | 4.20.0-2+deb10u1 |
 | jq | 1.5+dfsg-2+b1 |
 | less | 487-0.1+b1 |
-| libc6 | 2.28-10 |
+| libc6 | 2.28-10+deb10u1 |
 | libgcc1 | 1:8.3.0-6 |
 | libgssapi-krb5-2 | 1.17-3+deb10u3 |
 | libicu63 | 63.1-6+deb10u2 |
