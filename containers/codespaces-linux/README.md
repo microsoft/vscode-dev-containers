@@ -14,13 +14,13 @@
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Ubuntu |
-| *Languages, platforms* | Python, Node.js, JavaScript, TypeScript, C++, Java, C#, F#, .NET Core, PHP, PowerShell, Go, Ruby, Rust, Conda |
+| *Languages, platforms* | Python, Node.js, JavaScript, TypeScript, C++, Java, C#, F#, .NET Core, PHP, Go, Ruby, Conda |
 
 See **[history](history)** for information on the contents of published images.
 
 ## Description
 
-While language specific development containers can be useful, in some cases you may want to use more than one in a project without having to set them all up. In other cases you may be looking to create a general "sandbox" container you intend to use with multiple projects or repositories. The large container image generated here (`mcr.microsoft.com/vscode/devcontainers/universal:linux`) includes a number of runtime versions for popular languages lke Python, Node, PHP, Java, Go, C++, Ruby, Go, Rust and .NET Core/C# - many of which are [inherited from the Oryx build image](https://github.com/microsoft/oryx#supported-platforms) it is based on.
+While language specific development containers can be useful, in some cases you may want to use more than one in a project without having to set them all up. In other cases you may be looking to create a general "sandbox" container you intend to use with multiple projects or repositories. The large container image generated here (`mcr.microsoft.com/vscode/devcontainers/universal:linux`) includes a number of runtime versions for popular languages lke Python, Node, PHP, Java, Go, C++, Ruby, Go and .NET Core/C# - many of which are [inherited from the Oryx build image](https://github.com/microsoft/oryx#supported-platforms) it is based on.
 
 If you use GitHub Codespaces, this is the "universal" image that is used by default if no custom Dockerfile or image is specified. If you like what you see but want to make a few additions or changes, you can use a custom Dockerfile to extend it and add whatever you need.
 

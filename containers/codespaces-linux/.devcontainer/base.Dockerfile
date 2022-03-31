@@ -30,13 +30,11 @@ ENV SHELL=/bin/bash \
     RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev" \ 
     GOROOT="/usr/local/go" \
     GOPATH="/go" \
-    CARGO_HOME="/usr/local/cargo" \
-    RUSTUP_HOME="/usr/local/rustup" \
     SDKMAN_DIR="/usr/local/sdkman" \
     JUPYTERLAB_PATH="${HOMEDIR}/.local/bin" \
     DOCKER_BUILDKIT=1
 
-ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${ORIGINAL_PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${PYTHON_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${MAVEN_ROOT}/current/bin:${HUGO_ROOT}/current/bin:${JUPYTERLAB_PATH}:${ORYX_PATHS}"
+ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${ORIGINAL_PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${PYTHON_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${MAVEN_ROOT}/current/bin:${HUGO_ROOT}/current/bin:${JUPYTERLAB_PATH}:${ORYX_PATHS}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/* setup-user.sh first-run-notice.txt /tmp/scripts/
@@ -59,7 +57,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/git-lfs-debian.sh \
     && bash /tmp/scripts/github-debian.sh \
-    && bash /tmp/scripts/azcli-debian.sh \
     # Install Moby CLI and Engine
     && bash /tmp/scripts/docker-in-docker-debian.sh "true" "${USERNAME}" "true" \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
@@ -79,10 +76,6 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
     # Link composer
     && ln -s $(which composer.phar) /usr/local/bin/composer \
-    && apt-get clean -y
-
-# Install PowerShell
-RUN bash /tmp/scripts/powershell-debian.sh \
     && apt-get clean -y
 
 # Setup Node.js, install NVM and NVS
@@ -105,9 +98,8 @@ RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "t
         && sdk install java 11-opt-java /opt/java/17.0 \
         && sdk install java lts-opt-java /opt/java/lts"
 
-# Install Rust, Go, remove scripts now that we're done with them
-RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
-    && bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
+# Install Go, remove scripts now that we're done with them
+RUN bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
 # Mount for docker-in-docker 
