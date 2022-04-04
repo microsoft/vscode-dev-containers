@@ -11,7 +11,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:0d96dd61fad7b65d152f6b5ebc60117694fe386ff75f051d92e682b73fca5cde
+**Digest:** sha256:59769843dc9ea2fd143488951ff54a99b7bc8c07bc4de5200b498790b6326234
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3f214329d631b3ae39d6b283262c77819a0078de | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 53863e7b3ff0c2e2816e90dab3d870adebdf49c7 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -78,12 +78,12 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 | vim-tiny | 2:8.1.0875-5+deb10u2 |
 | wget | 1.20.1-1.1 |
 | zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.11.dfsg-1 |
+| zlib1g | 1:1.2.11.dfsg-1+deb10u1 |
 | zsh | 5.7.1-1+deb10u1 |
 
 ## Variant: bullseye
 
-**Digest:** sha256:3735c719485b551e487e71e3bc2334fd055e007bf67c44a719642db3f7bbc391
+**Digest:** sha256:feccbbd4c73c7354a718858212bd154106e64634b75ea62a1ee5312b3c3308d2
 
 **Tags:**
 ```
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3f214329d631b3ae39d6b283262c77819a0078de | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 53863e7b3ff0c2e2816e90dab3d870adebdf49c7 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -151,12 +151,12 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 | vim-tiny | 2:8.2.2434-3+deb11u1 |
 | wget | 1.21-1+deb11u1 |
 | zip | 3.0-12 |
-| zlib1g | 1:1.2.11.dfsg-2 |
+| zlib1g | 1:1.2.11.dfsg-2+deb11u1 |
 | zsh | 5.8-6+deb11u1 |
 
 ## Variant: stretch
 
-**Digest:** sha256:56012be0e6700d8c1f1bd4069dbdd151adfb886b03a33e13c0a9733bf44ba181
+**Digest:** sha256:0cf169864fabba2fc670c9b8617528d91d32d155538f9a258600d7e6a10554b5
 
 **Tags:**
 ```
@@ -177,7 +177,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3f214329d631b3ae39d6b283262c77819a0078de | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 53863e7b3ff0c2e2816e90dab3d870adebdf49c7 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -224,6 +224,6 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 | vim-tiny | 2:8.0.0197-4+deb9u5 |
 | wget | 1.18-5+deb9u3 |
 | zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.8.dfsg-5 |
+| zlib1g | 1:1.2.8.dfsg-5+deb9u1 |
 | zsh | 5.3.1-4+deb9u5 |
 

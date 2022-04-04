@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "3f214329d631b3ae39d6b283262c77819a0078de"
+                    "commitHash": "53863e7b3ff0c2e2816e90dab3d870adebdf49c7"
                 }
             }
         },
@@ -37,16 +37,6 @@
                     "Name": "Docker Image: buildpack-deps",
                     "Version": "stretch-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "9e967b4eccbe26701315860a3b0bad01fde725c8"
                 }
             }
         },
@@ -86,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "9ff4659a075d5f4f30aaca9f7c4e7f059ecc1d6d"
+                    "commitHash": "01d6f6ff1e5332b926099f0c23bda996940ad4e8"
                 }
             }
         },
@@ -260,7 +250,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.13.2"
+                    "Version": "2.13.4"
                 }
             }
         },
@@ -287,7 +277,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "black",
-                    "Version": "22.1.0"
+                    "Version": "22.3.0"
                 }
             }
         },
@@ -440,7 +430,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.8.1"
+                    "Version": "0.8.2"
                 }
             }
         },
@@ -467,7 +457,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.1.4"
+                    "Version": "1.2.0"
                 }
             }
         },
@@ -513,7 +503,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "3f214329d631b3ae39d6b283262c77819a0078de"
+                    "commitHash": "53863e7b3ff0c2e2816e90dab3d870adebdf49c7"
                 }
             }
         },
@@ -553,7 +543,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "a5ca3e487287c123a17a1f4f5ff45d82e69c40cc"
+                    "commitHash": "b02017edec9b6736833961a6ca4f4b4f98fe931b"
                 }
             }
         },
@@ -612,7 +602,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.14.2",
+                    "Version": "5.14.3",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -632,7 +622,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "2.6.0",
+                    "Version": "2.7.0",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -642,7 +632,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Gradle",
-                    "Version": "7.4.1",
+                    "Version": "7.4.2",
                     "DownloadUrl": "https://gradle.org/"
                 }
             }
@@ -805,7 +795,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Xdebug",
-                    "Version": "3.1.3",
+                    "Version": "3.1.4",
                     "DownloadUrl": "https://xdebug.org/"
                 }
             }
@@ -815,7 +805,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.2.9",
+                    "Version": "2.3.3",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -1094,17 +1084,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "9e967b4eccbe26701315860a3b0bad01fde725c8"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "3f214329d631b3ae39d6b283262c77819a0078de"
+                    "commitHash": "53863e7b3ff0c2e2816e90dab3d870adebdf49c7"
                 }
             }
         },

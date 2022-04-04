@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
-**Digest:** sha256:2b5cdc4aa0048d086a131e6de7aadafe8c87cc1d0aac43347a2d8dfd5cea755b
+**Digest:** sha256:01a4b5f35f47aa4c3f34f6b78b5a304d8affa28d7e66b269987456fce7d0b7a7
 
 **Tags:**
 ```
@@ -62,6 +62,6 @@ mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 | vim-tiny | 2:8.2.2434-3+deb11u1 |
 | wget | 1.21-1+deb11u1 |
 | zip | 3.0-12 |
-| zlib1g | 1:1.2.11.dfsg-2 |
+| zlib1g | 1:1.2.11.dfsg-2+deb11u1 |
 | zsh | 5.8-6+deb11u1 |
 

@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:33ab2276a58df5b43123e9612d9a0c8d6eab72381998482df99a4c1f06318094
+**Digest:** sha256:c2dd28ed7dfcc3604d2be959f25911b11f4d4c2d43f58161509c2ea80cb16210
 
 **Tags:**
 ```
@@ -43,20 +43,20 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3f214329d631b3ae39d6b283262c77819a0078de | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 53863e7b3ff0c2e2816e90dab3d870adebdf49c7 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | 64c7a646c79768b5e6e5fa0847af5801de08c15f | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c6cc0a1959da3403f524fcbb0fdfb6e08a4d8ae6 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | a5ca3e487287c123a17a1f4f5ff45d82e69c40cc | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | b02017edec9b6736833961a6ca4f4b4f98fe931b | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.13.2 |
+| pylint | 2.13.4 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
-| black | 22.1.0 |
+| black | 22.3.0 |
 | yapf | 0.32.0 |
 | mypy | 0.942 |
 | pydocstyle | 6.1.1 |
@@ -69,10 +69,10 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.1 |
+| golang.org/x/tools/gopls | 0.8.2 |
 | honnef.co/go/tools | 0.2.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.1.4 |
+| github.com/mgechev/revive | 1.2.0 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.2 |
@@ -107,12 +107,12 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.23.5 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.8.1 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.2 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.3 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 2.6.0 | 
+| [GitHub CLI](https://github.com/cli/cli) | 2.7.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
-| [Gradle](https://gradle.org/) | 7.4.1 | 
+| [Gradle](https://gradle.org/) | 7.4.2 | 
 | Docker (Moby) CLI &amp; Engine | 20.10.14+azure | 
 
 **Additional linux tools and packages**
@@ -188,7 +188,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | psmisc | 23.3-1 |
 | python3-dev | 3.8.2-0ubuntu2 |
 | python3-minimal | 3.8.2-0ubuntu2 |
-| rsync | 3.1.3-8ubuntu0.2 |
+| rsync | 3.1.3-8ubuntu0.3 |
 | sed | 4.7-1 |
 | software-properties-common | 0.99.9.8 |
 | strace | 5.5-3ubuntu1 |
@@ -202,6 +202,6 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | wget | 1.20.3-1ubuntu2 |
 | xtail | 2.1-6 |
 | zip | 3.0-11build1 |
-| zlib1g | 1:1.2.11.dfsg-2ubuntu1.2 |
+| zlib1g | 1:1.2.11.dfsg-2ubuntu1.3 |
 | zsh | 5.8-3ubuntu1.1 |
 
