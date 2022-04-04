@@ -94,11 +94,11 @@ verify_aws_cli_gpg_signature() {
     get_common_setting AWSCLI_GPG_KEY_MATERIAL true
     local awsGpgKeyring=aws-cli-public-key.gpg
 
-    echo "${AWSCLI_GPG_KEY_MATERIAL}" | gpg --dearmor > "${awsGpgKeyring}"
+    echo "${AWSCLI_GPG_KEY_MATERIAL}" | gpg --dearmor > "./${awsGpgKeyring}"
     gpg --batch --quiet --no-default-keyring --keyring "./${awsGpgKeyring}" --verify "${sigFilePath}" "${filePath}"
     local status=$?
 
-    rm "${awsGpgKeyring}"
+    rm "./${awsGpgKeyring}"
 
     return ${status}
 }
