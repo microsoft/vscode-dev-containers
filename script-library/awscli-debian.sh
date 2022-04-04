@@ -92,15 +92,13 @@ verify_aws_cli_gpg_signature() {
 
     get_common_setting AWSCLI_GPG_KEY
     get_common_setting AWSCLI_GPG_KEY_MATERIAL true
-    local awsCliPublicKeyFile=aws-cli-public-key.pem
-    echo "${AWSCLI_GPG_KEY_MATERIAL}" > "${awsCliPublicKeyFile}"
-    gpg --quiet --import "${awsCliPublicKeyFile}"
+    local awsGpgKeyring=aws-cli-public-key.gpg
 
-    gpg --batch --quiet --verify "${sigFilePath}" "${filePath}"
+    echo "${AWSCLI_GPG_KEY_MATERIAL}" | gpg --dearmor > "./${awsGpgKeyring}"
+    gpg --batch --quiet --no-default-keyring --keyring "./${awsGpgKeyring}" --verify "${sigFilePath}" "${filePath}"
     local status=$?
 
-    gpg --batch --quiet --delete-keys "${AWSCLI_GPG_KEY}"
-    rm "${awsCliPublicKeyFile}"
+    rm "./${awsGpgKeyring}"
 
     return ${status}
 }
