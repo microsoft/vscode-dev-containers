@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 install_extension() {
+    export DONT_PROMPT_WSL_INSTALL=true
     /usr/bin/code --install-extension $1
     /usr/bin/code-insiders --install-extension $1
 }
