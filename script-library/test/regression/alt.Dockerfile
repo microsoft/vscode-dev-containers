@@ -26,7 +26,7 @@ RUN --mount=target=/script-library,source=.,type=bind,rw \
     bash /script-library/test/regression/run-scripts.sh /script-library false ${USERNAME} ${RUN_COMMON_SCRIPT} ${UPGRADE_PACKAGES} ${RUN_ONE}
 
 ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" DISPLAY=":1" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
-ENTRYPOINT [ "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh", "/usr/local/share/desktop-init.sh" ]
+ENTRYPOINT [ "/usr/local/share/nix-init.sh", "/usr/local/share/docker-init.sh", "/usr/local/share/ssh-init.sh", "/usr/local/share/desktop-init.sh" ]
 CMD [ "sleep", "infinity" ]
 
 USER ${USERNAME}

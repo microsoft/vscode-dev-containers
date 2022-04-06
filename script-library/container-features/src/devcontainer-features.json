@@ -1196,6 +1196,49 @@
 				"ubuntu",
 				"debian"
 			]
+		},
+		{
+			"id": "nix",
+			"name": "Nix Package Manager",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/nix.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "2.7.0"],
+					"default": "latest",
+					"description": "Select or enter a Nix version."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_NIX",
+			"entrypoint": "/usr/local/share/nix-init.sh",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
 		}
 	]
 }

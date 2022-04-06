@@ -12,7 +12,7 @@
 set -e
 
 NIX_VERSION="${1:-"latest"}"
-USERNAME="${2:-"vscode"}"
+USERNAME="${2:-"automatic"}"
 NIX_PACKAGES="${4:-"none"}"
 NIXFILE_PATH="${5:-"none"}"
 NIX_GPG_KEYS="B541D55301270E0BCF15CA5D8170B4726D7198DE"
@@ -25,20 +25,20 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# If in automatic mode, determine if a user already exists, if not use vscode
+# If in automatic mode, determine if a user already exists, if not use root
 detect_user() {
     local user_variable_name=${1:-username}
-    local user_variable_value=${!user_variable_name}
     local possible_users=${2:-("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")}
-    if [ "${user_variable_value}" = "auto" ] || [ "${user_variable_value}" = "automatic" ]; then
-        declare -g ${user_variable_name}=vscode
+    if [ "${!user_variable_name}" = "auto" ] || [ "${!user_variable_name}" = "automatic" ]; then
+        declare -g ${user_variable_name}=""
         for current_user in ${possible_users[@]}; do
-            if id -u ${current_user} > /dev/null 2>&1; then
-                declare -g ${user_variable_name}=${current_user}
+            if id -u "${current_user}" > /dev/null 2>&1; then
+                declare -g ${user_variable_name}="${current_user}"
                 break
             fi
         done
-    elif [ "${user_variable_value}" = "none" ] || ! id "${user_variable_value}" > /dev/null 2>&1; then
+    fi
+    if [ "${!user_variable_name}" = "" ] || [ "${!user_variable_name}" = "none" ] || ! id -u "${!user_variable_name}" > /dev/null 2>&1; then
         declare -g ${user_variable_name}=root
     fi
 }
@@ -192,59 +192,73 @@ check_command git git
 # Determine version
 find_version_from_git_tags NIX_VERSION https://github.com/NixOS/nix "tags/"
 
-# Setup nixbld group, dir, and set sticky bit to handle user UID/GID changes, allow root to function
+detect_user USERNAME
+if [ "${USERNAME}" = "root" ]; then
+    USERNAME=nix
+    groupadd -g 1000 nix
+    useradd -s /bin/bash -u 1000 -g 1000 -m nix
+fi
+# Create a nixuser group to help deal with UID/GID changes, make that the default group for the user we will install as
+groupadd --system -r nixusers
+original_group="$(id -g "${USERNAME}")"
+original_uid="$(id -u "${USERNAME}")"
+usermod -g nixusers "${USERNAME}"
+
+# Adapted from https://nixos.org/download.html#nix-verify-installation
+orig_cwd="$(pwd)"
+mkdir -p /nix /tmp/nix
+chown "${USERNAME}:nixusers" /nix
+cd /tmp/nix
+receive_gpg_keys NIX_GPG_KEYS
+curl -sSLf -o ./install-nix https://releases.nixos.org/nix/nix-${NIX_VERSION}/install
+curl -sSLf -o ./install-nix.asc https://releases.nixos.org/nix/nix-${NIX_VERSION}/install.asc
+gpg2 --verify ./install-nix.asc
+cd "${orig_cwd}"
+# Install and post-install processing
+su ${USERNAME} -c "$(cat << EOF 
+    set -e
+    sh /tmp/nix/install-nix --no-daemon --no-modify-profile
+    ln -s /nix/var/nix/profiles/per-user/${USERNAME}/profile /nix/var/nix/profiles/default
+
+    . /home/${USERNAME}/.nix-profile/etc/profile.d/nix.sh
+    if [ ! -z "${PACKAGE_LIST}" ] && [ "${PACKAGE_LIST}" != "none" ]; then
+        nix-env --install ${PACKAGE_LIST}
+    fi
+    if [ "${NIXFILE_PATH}" != "none" ] && [ -r "${NIXFILE_PATH}" ]; then
+        nix-env --install -f "${NIXFILE_PATH}"
+    fi
+    nix-collect-garbage --delete-old
+    nix-store --optimise
+EOF
+)"
+rm -rf /tmp/nix
+# Restore default group for we used to install 
+usermod -a -G nixusers -g "${original_group}" "${USERNAME}"
+
+
+# Set nix config
+mkdir -p /etc/nix
+cat << EOF >> /etc/nix/nix.conf
+sandbox = false
+trusted-users = ${USERNAME}
+EOF
+
+# Setup nixbld group, dir to allow root to function if preferred
 if ! grep -e "^nixbld:" /etc/group > /dev/null 2>&1; then
     groupadd -g 30000 nixbld
 
 fi
-#for i in $(seq 1 32); do
-#    nixbuild_user="nixbuild${i}"
-#    if ! id "${nixbuild_user}" > /dev/null 2>&1; then
-#        useradd --system --home-dir /var/empty --gid 30000 --groups nixbld --no-user-group --shell /usr/sbin/nologin --uid $((30000 + i)) "${nixbuild_user}"
-#    fi
-#done
-# Create nix 
-detect_user USERNAME
-if [ "${USERNAME}" = "root" ]; then
-    echo "Non-root user required. Creating user nixuser."
-    USERNAME=nixuser
-    groupadd --gid 1000 -r nixuser
-    useradd -s /bin/bash -u 1000 -g nixuser -m nixuser
-fi
-# Adding user to nixbld is ok since we're really doing a single user 
-# install and root installed packages will still be owned by root
-usermod -a -G nixbld ${USERNAME}
-umask 0002
-mkdir -p /nix 
-chown ":nixbld" /nix
+for i in $(seq 1 10); do
+    nixbuild_user="nixbuild${i}"
+    if ! id "${nixbuild_user}" > /dev/null 2>&1; then
+        useradd --system --home-dir /var/empty --gid 30000 --groups nixbld --no-user-group --shell /usr/sbin/nologin --uid $((30000 + i)) "${nixbuild_user}"
+    fi
+done
 
-# Adapted from https://nixos.org/download.html#nix-verify-installation
-orig_cwd="$(pwd)"
-mkdir -p /tmp/nix
-cd /tmp/nix
-receive_gpg_keys NIX_GPG_KEYS
-curl -sSLf -o install-nix https://releases.nixos.org/nix/nix-${NIX_VERSION}/install
-curl -sSLf -o install-nix.asc https://releases.nixos.org/nix/nix-${NIX_VERSION}/install.asc
-gpg2 --verify ./install-nix.asc
-# Save off profile for user since we'll revert edits
-cp /home/${USERNAME}/.profile /home/${USERNAME}/.profile.bak
-# Install nix
-su ${USERNAME} -c 'sh ./install-nix --no-daemon'
-# Revert .profile edits
-mv -f /home/${USERNAME}/.profile.bak /home/${USERNAME}/.profile
-# Make default profile root's profile
-mv /nix/var/nix/profiles/per-user/${USERNAME} /nix/var/nix/profiles/per-user/root
-ln -s /nix/var/nix/profiles/per-user/root/profile /nix/var/nix/profiles/default
-# Clean out channels to avoid duplication since we've now setup the "default" profile
-rm -rf /tmp/nix "/home/${USERNAME}/.nix-profile" "/home/${USERNAME}/.nix-channels" "/home/${USERNAME}/.nix-defexpr" "/home/${USERNAME}/.cache/nix"
-# Create new profile folder with corrct privs so created user can access it if needed
-mkdir -m 0775 -p /nix/var/nix/profiles/per-user/${USERNAME}
-chown "${USERNAME}:nixbld" /nix/var/nix/profiles/per-user/${USERNAME}
-
-cat << EOF >> /etc/nix.conf
-sandbox = false
-trusted-users = ${USERNAME}
-EOF
+# Setup channels for root user to avoid conflicts, but link profile
+cp -R /home/${USERNAME}/.nix-channels /home/${USERNAME}/.nix-defexpr /home/${USERNAME}/.nix-channels /root/
+cp  /home/${USERNAME}/.nix-channels /root/.nix-channels
+ln -s /nix/var/nix/profiles/default /root/.nix-profile
 
 # Setup rcs and profiles
 snippet='
@@ -256,21 +270,25 @@ update_rc_file /etc/zsh/zshenv "${snippet}"
 update_rc_file /etc/profile.d/nix.sh "${snippet}"
 chmod +x /etc/profile.d/nix.sh
 
-# Post-install processing
-cd "${orig_cwd}"
-. /etc/profile.d/nix.sh
-if [ ! -z "${PACKAGE_LIST}" ] && [ "${PACKAGE_LIST}" != "none" ]; then
-    nix-env --install ${PACKAGE_LIST}
+# Add optional entrypoint script to attempt to tweak privs for user nix profile if needed
+echo "Setting up entrypoint..."
+cat << EOF > /usr/local/share/nix-init.sh
+#!/bin/bash
+# Nix is very picky about privs under /nix/var, so make sure they are correct in the event the 
+# user's UID changes. The group privs should be enough for the contents of /nix/store, but update dirs
+if [ "\$(stat -c '%U' /nix/var/nix/profiles/per-user/${USERNAME})" != "${USERNAME}" ]; then
+    if [ "\$(id -u)" = "0" ]; then
+        chown ${USERNAME} /nix /nix/store /nix/store/.links
+        find /nix/var -uid ${original_uid} -execdir chown ${USERNAME} "{}" \+ &
+    elif type sudo > /dev/null 2>&1; then 
+        sudo chown ${USERNAME} /nix /nix/store /nix/store/.links
+        sudo find /nix/var -uid ${original_uid} -execdir chown ${USERNAME} "{}" \+ &
+    else
+        echo "WARNING: Unable to change nix profile privledges for ${USERNAME}. Try running the container as root."
+    fi
 fi
-if [ "${NIXFILE_PATH}" != "none" ] && [ -r "${NIXFILE_PATH}" ]; then
-    nix-env --install -f "${NIXFILE_PATH}"
-fi
-nix-collect-garbage --delete-old
-nix-store --optimise
-
-# Setup privs and set sticky bit to handle user UID/GID changes
-echo "Updating permissions..."
-chown -R ":nixbld" /nix
-#chmod -R g+rw /nix
+exec "\$@"
+EOF
+chmod +x /usr/local/share/nix-init.sh
 
 echo "Done!"

@@ -60,11 +60,11 @@ cat << EOF
 
 EOF
 
-tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh > /usr/local/share/desktop-init.sh << 'EOF'
+tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/nix-init.sh > /usr/local/share/desktop-init.sh << 'EOF'
 #!/bin/bash
 "$@"
 EOF
-chmod +x /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh
+chmod +x /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh /usr/local/share/nix-init.sh
 if [ "${RUN_COMMON_SCRIPT}" = "true" ]; then
     runScript common "true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}"
     chown 1000 /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh
