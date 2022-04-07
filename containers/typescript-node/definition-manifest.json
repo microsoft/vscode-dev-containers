@@ -1,31 +1,31 @@
 {
-	"variants": ["16-bullseye", "14-bullseye", "12-bullseye", "16-buster", "14-buster", "12-buster"],
-	"definitionVersion": "0.203.4",
+	"variants": ["18-bullseye", "16-bullseye", "14-bullseye", "18-buster", "16-buster", "14-buster"],
+	"definitionVersion": "0.204.0",
 	"build": {
 		"latest": "16-buster",
 		"rootDistro": "debian",
 		"parent": "javascript-node",
 		"architectures": {
+			"18-bullseye": ["linux/amd64", "linux/arm64"],
 			"16-bullseye": ["linux/amd64", "linux/arm64"],
 			"14-bullseye": ["linux/amd64", "linux/arm64"],
-			"12-bullseye": ["linux/amd64", "linux/arm64"],
+			"18-buster": ["linux/amd64"],
 			"16-buster": ["linux/amd64"],
-			"14-buster": ["linux/amd64"],
-			"12-buster": ["linux/amd64"]
+			"14-buster": ["linux/amd64"]
 		},
 		"tags": [
 			"typescript-node:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"16-bullseye": [ 
+			"18-bullseye": [ 
+				"typescript-node:${VERSION}-18",
 				"typescript-node:${VERSION}-bullseye"
 			],
-			"16-buster": [ 
-				"typescript-node:${VERSION}-16",
+			"16-bullseye": [ "typescript-node:${VERSION}-16" ],
+			"14-bullseye": [ "typescript-node:${VERSION}-14" ],
+			"18-buster": [ 
 				"typescript-node:${VERSION}-buster"
-			],
-			"14-buster": [ "typescript-node:${VERSION}-14" ],
-			"12-buster": [ "typescript-node:${VERSION}-12" ]
+			]
 		}
 	},
 	"dependencies": {
