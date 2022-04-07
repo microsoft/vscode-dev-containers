@@ -10,8 +10,8 @@
 | *Categories* | Core, Other |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/base:ubuntu |
-| *Available image variants* | jammy, hirsute, focal, bionic ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
-| *Published image architecture(s)* | x86-64, aarch64/arm64 for `jammy` (22.04), `hirsute` (21.04) and `bionic` (18.04) variants  |
+| *Available image variants* | 22.04 / jammy, 20.04 / focal, 18.04 / bionic ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list)) |
+| *Published image architecture(s)* | x86-64, aarch64/arm64 for `jammy` (22.04), and `bionic` (18.04) variants  |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Ubuntu |
