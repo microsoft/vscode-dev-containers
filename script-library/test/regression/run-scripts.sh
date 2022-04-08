@@ -9,7 +9,10 @@ RUN_ONE=${6:-"false"} # false or script name
 
 set -e
 
-runScript()
+# Test runner. If RUN_ONE is set, then the script will only execute when the script argument martches.
+# This script will be fired twice. Once with "USE_DEFAULTS" true, once false to check both behaviors
+# run_script <script name minus OS> [non-default test arguments] [arugments to always pass]
+run_script()
 {
     local script_name=$1
     if [ "${RUN_ONE}" != "false" ] && [ "${script_name}" != "common" ] && [ "${script_name}" != "${RUN_ONE}" ]; then
@@ -41,6 +44,7 @@ runScript()
 
 # Determine distro scripts to use
 . /etc/os-release
+architecture="$(uname -m)"
 DISTRO="${ID_LIKE}"
 if [ -z "${DISTRO}" ]; then
     DISTRO="${ID}"
@@ -60,47 +64,54 @@ cat << EOF
 
 EOF
 
+# Add stub entrypoint scripts in the event RUN_ONE is set and not all of these would be executed
 tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh > /usr/local/share/desktop-init.sh << 'EOF'
 #!/bin/bash
 "$@"
 EOF
 chmod +x /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh
+
+# Run the common script unless disabled
 if [ "${RUN_COMMON_SCRIPT}" = "true" ]; then
-    runScript common "true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}"
+    run_script common "true ${USERNAME} 1000 1000 ${UPGRADE_PACKAGES}"
     chown 1000 /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh /usr/local/share/desktop-init.sh
 fi
 
-architecture="$(uname -m)"
+# Debian/Ubuntu specific tests
 if [ "${DISTRO}" = "debian" ]; then
-    runScript awscli
-    runScript azcli
-    runScript fish "false ${USERNAME}"
-    runScript git-from-src "latest true"
-    runScript git-lfs "" "2.13.3"
-    runScript github
-    runScript go "1.14 /opt/go /go ${USERNAME} false"
-    runScript gradle "4.4 /usr/local/sdkman1 ${USERNAME} false"
-    runScript kubectl-helm "latest latest latest"
-    runScript maven "3.6.3 /usr/local/sdkman3 ${USERNAME} false"
-    runScript node "/usr/local/share/nvm 10 ${USERNAME}"
-    runScript python "3.4.10 /opt/python /opt/python-tools ${USERNAME} false false"
-    runScript ruby "${USERNAME} false" "2.7.3"
-    runScript rust "/opt/rust/cargo /opt/rust/rustup ${USERNAME} false"
-    runScript terraform "0.15.0 0.12.1"
-    runScript sshd "2223 ${USERNAME} true random"
-    runScript desktop-lite "${USERNAME} changeme false"
-    runScript docker-in-docker "false ${USERNAME} false 20.10 v2"
-    runScript powershell
-    runScript fish
+    run_script awscli
+    run_script azcli
+    run_script fish "false ${USERNAME}"
+    run_script git-from-src "latest true"
+    run_script git-lfs "" "2.13.3"
+    run_script github
+    run_script go "1.17 /opt/go /go ${USERNAME} false"
+    run_script gradle "4.4 /usr/local/sdkman1 ${USERNAME} false"
+    run_script kubectl-helm "latest latest latest"
+    run_script maven "3.6.3 /usr/local/sdkman3 ${USERNAME} false"
+    run_script node "/usr/local/share/nvm 14 ${USERNAME}"
+    run_script python "3.4.10 /opt/python /opt/python-tools ${USERNAME} false false"
+    run_script ruby "${USERNAME} false" "2.7.3"
+    run_script rust "/opt/rust/cargo /opt/rust/rustup ${USERNAME} false"
+    run_script terraform "0.15.0 0.12.1"
+    run_script sshd "2223 ${USERNAME} true random"
+    run_script desktop-lite "${USERNAME} changeme false"
+    docker_version="20.10"
+    if [ "${VERSION_CODENAME}" = "stretch" ]; then
+        docker_version="19.03"
+    fi
+    run_script docker-in-docker "false ${USERNAME} false ${DOCKER_VERSION} v2"
+    run_script powershell
+    run_script fish
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ] || [ "${architecture}" = "arm64" ] || [ "${architecture}" = "aarch64" ]; then
-        runScript java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
+        run_script java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
     fi
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ]; then
-        runScript homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
+        run_script homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
     fi
-    runScript dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"
+    run_script dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"
 fi
 
 if [ "${DISTRO}" != "alpine" ]; then
-    runScript docker "true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}"
+    run_script docker "true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}"
 fi
