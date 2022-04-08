@@ -100,7 +100,7 @@ if [ "${DISTRO}" = "debian" ]; then
     if [ "${VERSION_CODENAME}" = "stretch" ]; then
         docker_version="19.03"
     fi
-    run_script docker-in-docker "false ${USERNAME} false ${DOCKER_VERSION} v2"
+    run_script docker-in-docker "false ${USERNAME} false ${docker_version} v2"
     run_script powershell
     run_script fish
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ] || [ "${architecture}" = "arm64" ] || [ "${architecture}" = "aarch64" ]; then
