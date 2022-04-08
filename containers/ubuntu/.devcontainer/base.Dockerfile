@@ -1,5 +1,5 @@
-# [Choice] Ubuntu version (use 22.04 or 18.04 on local arm64/Apple Silicon): 22.04, 20.04, 18.04
-ARG VARIANT="20.04"
+# [Choice] Ubuntu version (use jammy or bionic on local arm64/Apple Silicon): jammy, focal, bionic
+ARG VARIANT="focal"
 FROM buildpack-deps:${VARIANT}-curl
 
 # Options for setup script

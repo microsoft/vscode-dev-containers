@@ -1,6 +1,6 @@
-# [Choice] Ubuntu version (use 22.04 or 18.04 on local arm64/Apple Silicon): 22.04, 20.04, 18.04
-ARG VARIANT=20.04
-FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-${VARIANT}
+# [Choice] Ubuntu version (use 22.04 or 18.04 on local arm64/Apple Silicon): ubuntu-22.04, ubuntu-20.04, ubuntu-18.04
+ARG VARIANT=ubuntu-20.04
+FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
