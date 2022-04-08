@@ -15,7 +15,7 @@
 ## Syntax
 
 ```text
-./docker-in-docker-debian.sh [Enable non-root docker access flag] [Non-root user] [Use Moby] [Docker / Moby Version]
+./docker-in-docker-debian.sh [Enable non-root docker access flag] [Non-root user] [Use Moby] [Docker / Moby Version] [Major version for docker-compose]
 ```
 
 Or as a feature:
@@ -24,7 +24,8 @@ Or as a feature:
 "features": {
     "docker-in-docker": {
         "version": "latest",
-        "moby": true
+        "moby": true,
+        "dockerDashComposeVersion": "v1"
     }
 }
 ```
@@ -35,6 +36,7 @@ Or as a feature:
 |Non-root user| | `automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 |Use Moby | `moby`|`true` | Specifies that a build of the open source [Moby CLI](https://github.com/moby/moby/tree/master/cli) should be used instead of the Docker CLI distribution of it. |
 | Docker / Moby version | `version` | `latest` |  Docker/Moby Engine version or `latest`. Partial version numbers allowed. Availability can vary by OS version. |
+| Major version for docker-compose | `dockerDashComposeVersion` | `v1` | Updates `docker-compose` to either Docker Compose v1 or v2 ([learn more](https://docs.docker.com/compose/cli-command/#transitioning-to-ga-for-compose-v2)). |
 
 
 ## Usage
@@ -47,7 +49,8 @@ You can use this script for your primary dev container by adding it to the `feat
 "features": {
     "docker-in-docker": {
         "version": "latest",
-        "moby": true
+        "moby": true,
+        "dockerDashComposeVersion": "v1"
     }
 }
 ```

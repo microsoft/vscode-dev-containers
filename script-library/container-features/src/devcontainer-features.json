@@ -16,6 +16,12 @@
 					"type": "boolean",
 					"default": true,
 					"description": "Install OSS Moby build instead of Docker CE"
+				},
+				"dockerDashComposeVersion": {
+					"type": "string",
+					"enum": ["v1", "v2" ],
+					"default": "v1",
+					"description": "Default version of Docker Compose (v1 or v2)"
 				}
 			},
 			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
@@ -71,6 +77,17 @@
 					"proposals": ["latest", "20.10"],
 					"default": "latest",
 					"description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+				},
+				"moby": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install OSS Moby build instead of Docker CE"
+				},
+				"dockerDashComposeVersion": {
+					"type": "string",
+					"enum": ["v1", "v2" ],
+					"default": "v1",
+					"description": "Compose version to use for docker-compose (v1 or v2)"
 				}
 			},
 			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",

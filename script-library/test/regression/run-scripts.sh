@@ -89,7 +89,7 @@ if [ "${DISTRO}" = "debian" ]; then
     runScript terraform "0.15.0 0.12.1"
     runScript sshd "2223 ${USERNAME} true random"
     runScript desktop-lite "${USERNAME} changeme false"
-    runScript docker-in-docker "false ${USERNAME} false"
+    runScript docker-in-docker "false ${USERNAME} false 20.10 v2"
     runScript powershell
     runScript fish
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ] || [ "${architecture}" = "arm64" ] || [ "${architecture}" = "aarch64" ]; then
