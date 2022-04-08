@@ -1,5 +1,5 @@
 {
-	"variants": ["debian-11", "debian-10", "ubuntu-22.04", "ubuntu-20.04", "ubuntu-18.04"],
+	"variants": ["bullseye", "buster", "jammy", "focal", "bionic"],
 	"definitionVersion": "0.204.0",
 	"build": {
 		"latest": "bullseye",
@@ -12,37 +12,45 @@
 		},
 		"rootDistro": "debian",
 		"architectures": {
-			"debian-11": ["linux/amd64", "linux/arm64"],
-			"debian-10": ["linux/amd64"],
-			"ubuntu-22.04": ["linux/amd64", "linux/arm64"],
-			"ubuntu-20.04": ["linux/amd64"],
-			"ubuntu-18.04": ["linux/amd64", "linux/arm64"]
+			"bullseye": ["linux/amd64", "linux/arm64"],
+			"buster": ["linux/amd64"],
+			"jammy": ["linux/amd64", "linux/arm64"],
+			"focal": ["linux/amd64"],
+			"bionic": ["linux/amd64", "linux/arm64"]
 		},
 		"tags": [
 			"cpp:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
 			"bullseye": [
-				"cpp:${VERSION}-bullseye",
+				"cpp:${VERSION}-debian-11",
 				"cpp:${VERSION}-debian11",
 				"cpp:${VERSION}-debian",
 				"cpp:${VERSION}"
 			],
 			"buster": [
-				"cpp:${VERSION}-buster",
+				"cpp:${VERSION}-debian-10",
 				"cpp:${VERSION}-debian10"
 			],
+			"stretch": [
+				"cpp:${VERSION}-debian-9",
+				"cpp:${VERSION}-debian9"
+			],
 			"jammy": [
-				"cpp:${VERSION}-jammy",
+				"cpp:${VERSION}-ubuntu-22.04",
 				"cpp:${VERSION}-ubuntu22.04"
 			],
+			"hirsute": [
+				"cpp:${VERSION}-ubuntu-21.04",
+				"cpp:${VERSION}-ubuntu21.04"
+			],
 			"focal": [
-				"cpp:${VERSION}-focal",
+				"cpp:${VERSION}-ubuntu-20.04",
 				"cpp:${VERSION}-ubuntu20.04",
 				"cpp:${VERSION}-ubuntu"
 			],
 			"bionic": [
-				"cpp:${VERSION}-bionic",
+				"cpp:${VERSION}-ubuntu-18.04",
 				"cpp:${VERSION}-ubuntu18.04"
 			]
 		}
