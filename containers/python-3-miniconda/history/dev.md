@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:91ce79c45a0fcd4c252f6dbdde14dfbe7d57f6a4619ebde2b8769f778b597a54
+**Digest:** sha256:d3f49f413d64e0ce122d3d43a3d4e44428234a78037c5383b7abf61f15cbb525
 
 **Tags:**
 ```
@@ -36,7 +36,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.13.4 |
+| pylint | 2.13.5 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
 | black | 22.3.0 |
@@ -45,7 +45,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.4 |
-| virtualenv | 20.14.0 |
+| virtualenv | 20.14.1 |
 | pipx | 1.0.0 |
 
 **Other tools and utilities**
