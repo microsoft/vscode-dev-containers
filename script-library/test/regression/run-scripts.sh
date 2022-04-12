@@ -81,7 +81,7 @@ fi
 if [ "${DISTRO}" = "debian" ]; then
     run_script awscli
     run_script azcli
-    run_script fish "false ${USERNAME}"
+    # run_script fish "false ${USERNAME}"
     run_script git-from-src "latest true"
     run_script git-lfs "" "2.13.3"
     run_script github
