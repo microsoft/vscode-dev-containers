@@ -102,7 +102,6 @@ if [ "${DISTRO}" = "debian" ]; then
     fi
     run_script docker-in-docker "false ${USERNAME} false ${docker_version} v2"
     run_script powershell
-    run_script fish
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ] || [ "${architecture}" = "arm64" ] || [ "${architecture}" = "aarch64" ]; then
         run_script java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
     fi
