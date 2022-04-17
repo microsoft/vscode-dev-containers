@@ -63,11 +63,9 @@ check_packages curl ca-certificates gnupg2 apt-transport-https
 # Install fish shell
 echo "Installing fish shell..."
 if grep -q 'Ubuntu' < /etc/os-release; then
-    apt-get -y install --no-install-recommends software-properties-common
+    check_packages software-properties-common
     apt-add-repository -y ppa:fish-shell/release-3
-    apt-get update
-    apt-get -y install --no-install-recommends fish
-    apt-get autoremove -y
+    check_packages fish
 elif grep -q 'Debian' < /etc/os-release; then
     if grep -q 'stretch' < /etc/os-release; then
         echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_9.0/ /' | tee /etc/apt/sources.list.d/shells:fish:release:3.list
@@ -79,9 +77,7 @@ elif grep -q 'Debian' < /etc/os-release; then
         echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' | tee /etc/apt/sources.list.d/shells:fish:release:3.list
         curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null
     fi
-    apt update
-    apt install -y fish
-    apt autoremove -y
+    check_packages fish
 fi
 
 # Install Fisher
