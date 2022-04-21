@@ -144,3 +144,5 @@ Then reference the env var when running Docker commands from the terminal inside
 ```bash
 docker run -it --rm -v ${LOCAL_WORKSPACE_FOLDER}:/workspace debian bash
 ```
+
+> **Note:** There is no `${localWorkspaceFolder}` when using the **Clone Repository in Container Volume** command ([info](https://github.com/microsoft/vscode-remote-release/issues/6160#issuecomment-1014701007)).
