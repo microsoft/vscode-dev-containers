@@ -1,5 +1,5 @@
-# [Choice] Swift version: 5.5, 5.4, 5.3, 5.2, 5.1, 4.2
-ARG VARIANT=5.5
+# [Choice] Swift version: 5.6-focal, 5.5, 5.4, 5.3, 5.2, 5.1, 4.2
+ARG VARIANT=5.6-focal
 FROM swift:${VARIANT}
 
 # [Option] Install zsh
