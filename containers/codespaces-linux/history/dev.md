@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:c2dd28ed7dfcc3604d2be959f25911b11f4d4c2d43f58161509c2ea80cb16210
+**Digest:** sha256:34d4e4cc357e9a8603eb5089575dc6804acc4afac7d1e7d40c2ad3d1c1e6e307
 
 **Tags:**
 ```
@@ -36,16 +36,16 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | GCC | 9.4.0-1ubuntu1~20.04.1 | 
 | Clang | 10.0.0-4ubuntu1 | 
 | [Go](https://golang.org/dl) | 1.18 | /usr/local/go |
-| [Rust](https://github.com/rust-lang/rust) | 1.59.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.60.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.1 | 
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 53863e7b3ff0c2e2816e90dab3d870adebdf49c7 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 846f417eb8ec76e8eee70000e289b8b81f19d480 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
-| [nvs](https://github.com/jasongin/nvs) | 64c7a646c79768b5e6e5fa0847af5801de08c15f | /home/codespace/.nvs |
+| [nvs](https://github.com/jasongin/nvs) | 84787737c2c6ca56159f841f3e93186e55a15f3c | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c6cc0a1959da3403f524fcbb0fdfb6e08a4d8ae6 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | b02017edec9b6736833961a6ca4f4b4f98fe931b | /usr/local/share/ruby-build |
 
@@ -53,7 +53,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.13.4 |
+| pylint | 2.13.5 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
 | black | 22.3.0 |
@@ -62,7 +62,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.4 |
-| virtualenv | 20.14.0 |
+| virtualenv | 20.14.1 |
 | pipx | 1.0.0 |
 
 **Go tools and modules**
@@ -72,7 +72,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | golang.org/x/tools/gopls | 0.8.2 |
 | honnef.co/go/tools | 0.2.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.0 |
+| github.com/mgechev/revive | 1.2.1 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.2 |
@@ -93,9 +93,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.38 |
-| rust-analysis | 1.59.0 |
-| rust-src | 1.59.0 |
-| clippy | 1.59.0 |
+| rust-analysis | 1.60.0 |
+| rust-src | 1.60.0 |
+| clippy | 1.60.0 |
 
 **Other tools and utilities**
 
@@ -107,7 +107,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [kubectl](https://github.com/kubernetes/kubectl) | 1.23.5 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.8.1 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.14.3 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
 | [GitHub CLI](https://github.com/cli/cli) | 2.7.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
@@ -121,7 +121,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| azure-cli (Azure CLI) | 2.34.1-1~focal |
+| azure-cli (Azure CLI) | 2.35.0-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
