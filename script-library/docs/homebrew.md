@@ -28,7 +28,7 @@ Or as a feature:
 |--------|----------------|-------|-----------|
 |Non-root user| | `automatic`| Specifies a user in the container other than root that will use Homebrew. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 | Add to rc files flag | | `true` | A `true`/`false` flag that indicates whether the `PATH` should be updated via `/etc/bash.bashrc` and `/etc/zsh/zshrc`. |
-| Use shallow clone flag | | `false` | A `true`/`false` flag that indicates whether the script should install Homebrew using shallow clone. Shallow clone allows significantly reduce installation size at the expense of not being able to run `brew update` meaning the package index will be frozen at the moment of image creation. |
+| Use shallow clone flag | `shallow` | `false` | A `true`/`false` flag that indicates whether the script should install Homebrew using shallow clone. Shallow clone allows significantly reduce installation size at the expense of not being able to run `brew update` meaning the package index will be frozen at the moment of image creation. |
 | BREW_PREFIX | | `/home/linuxbrew/.linuxbrew` | Location to install Homebrew. Please note that changing this setting will prevent you from using some of the precompiled binaries and therefore isn't recommended. |
 
 ## Usage
@@ -39,7 +39,10 @@ You can use this script for your primary dev container by adding it to the `feat
 
 ```json
 "features": {
-    "homebrew": "latest"
+    "homebrew": {
+        "version": "latest",
+        "shallow": false
+    }
 }
 ```
 
