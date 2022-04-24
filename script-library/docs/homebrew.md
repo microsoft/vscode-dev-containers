@@ -20,7 +20,10 @@ Or as a feature:
 
 ```json
 "features": {
-    "homebrew": "latest"
+    "homebrew": {
+        "version": "latest",
+        "shallow": false
+    }
 }
 ```
 
