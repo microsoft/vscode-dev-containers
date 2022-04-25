@@ -590,6 +590,11 @@
 					"enum": ["latest"],
 					"default": "latest",
 					"description": "Currently unused."
+				},
+				"shallow": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use shallow clone for faster container build."
 				}
 			},
 			"buildArg": "_VSC_INSTALL_HOMEBREW",
