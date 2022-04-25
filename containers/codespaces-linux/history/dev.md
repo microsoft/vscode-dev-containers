@@ -85,19 +85,6 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | debase | 0.2.4.1 |
 | jekyll | 4.2.1 |
 
-<<<<<<< HEAD
-=======
-**Cargo / rustup (Rust) crates and tools**
-
-| Tool / crate | Version |
-|--------------|---------|
-| rls | 1.41.0 |
-| rustfmt | 1.4.38 |
-| rust-analysis | 1.60.0 |
-| rust-src | 1.60.0 |
-| clippy | 1.60.0 |
-
->>>>>>> 72b7d5a801df74a772ab1547a45955d256efc0f8
 **Other tools and utilities**
 
 | Tool | Version | Path |
@@ -113,13 +100,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [GitHub CLI](https://github.com/cli/cli) | 2.7.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
-<<<<<<< HEAD
 | [Gradle](https://gradle.org/) | 7.4.1 | 
 | Docker (Moby) CLI &amp; Engine | 20.10.14 | 
-=======
-| [Gradle](https://gradle.org/) | 7.4.2 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.14+azure | 
->>>>>>> 72b7d5a801df74a772ab1547a45955d256efc0f8
 
 **Additional linux tools and packages**
 
@@ -127,10 +109,6 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-<<<<<<< HEAD
-=======
-| azure-cli (Azure CLI) | 2.35.0-1~focal |
->>>>>>> 72b7d5a801df74a772ab1547a45955d256efc0f8
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
