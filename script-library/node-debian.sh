@@ -126,12 +126,15 @@ su ${USERNAME} -c "$(cat << EOF
     umask 0002
     # Do not update profile - we'll do this manually
     export PROFILE=/dev/null
+    echo "temporarily add /home/${USERNAME}/.nvs as git safe directory for nvm install script."
+    git config --global --add safe.directory /home/${USERNAME}/.nvs
     curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash 
     source ${NVM_DIR}/nvm.sh
     if [ "${NODE_VERSION}" != "" ]; then
         nvm alias default ${NODE_VERSION}
     fi
     nvm clear-cache 
+    git config --global --unset safe.directory /home/${USERNAME}/.nvs
 EOF
 )" 2>&1
 # Update rc files
