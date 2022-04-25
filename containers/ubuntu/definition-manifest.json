@@ -1,11 +1,11 @@
 {
-	"variants": ["hirsute", "focal", "bionic"],
-	"definitionVersion": "0.202.2",
+	"variants": ["jammy", "focal", "bionic"],
+	"definitionVersion": "0.203.0",
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",
 		"architectures": {
-			"hirsute": ["linux/amd64", "linux/arm64"],
+			"jammy": ["linux/amd64", "linux/arm64"],
 			"focal": ["linux/amd64"],
 			"bionic": ["linux/amd64", "linux/arm64"]
 		},
@@ -13,9 +13,9 @@
 			"base:${VERSION}-${VARIANT}"
 		],
 		"variantTags": {
-			"hirsute": [
-				"base:${VERSION}-ubuntu-21.04",
-				"base:${VERSION}-ubuntu21.04"
+			"jammy": [
+				"base:${VERSION}-ubuntu-22.04",
+				"base:${VERSION}-ubuntu22.04"
 			],
 			"focal": [
 				"base:${VERSION}-ubuntu-20.04",

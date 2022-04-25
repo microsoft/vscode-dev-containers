@@ -170,18 +170,26 @@ if [ "${TARGET_GO_VERSION}" != "none" ] && ! type go > /dev/null 2>&1; then
     set -e
     if [ "$exit_code" != "0" ]; then
         echo "(!) Download failed."
-        # Try one break fix version number less if we get a failure
+        # Try one break fix version number less if we get a failure. Use "set +e" since "set -e" can cause failures in valid scenarios.
+        set +e
         major="$(echo "${TARGET_GO_VERSION}" | grep -oE '^[0-9]+' || echo '')"
         minor="$(echo "${TARGET_GO_VERSION}" | grep -oP '^[0-9]+\.\K[0-9]+' || echo '')"
         breakfix="$(echo "${TARGET_GO_VERSION}" | grep -oP '^[0-9]+\.[0-9]+\.\K[0-9]+' 2>/dev/null || echo '')"
+        # Handle Go's odd version pattern where "0" releases omit the last part
         if [ "${breakfix}" = "" ] || [ "${breakfix}" = "0" ]; then
             ((minor=minor-1))
             TARGET_GO_VERSION="${major}.${minor}"
+            # Look for latest version from previous minor release
             find_version_from_git_tags TARGET_GO_VERSION "https://go.googlesource.com/go" "tags/go" "." "true"
         else 
             ((breakfix=breakfix-1))
-           TARGET_GO_VERSION="${major}.${minor}.${breakfix}"
+            if [ "${breakfix}" = "0" ]; then
+                TARGET_GO_VERSION="${major}.${minor}"
+            else 
+                TARGET_GO_VERSION="${major}.${minor}.${breakfix}"
+            fi
         fi
+        set -e
         echo "Trying ${TARGET_GO_VERSION}..."
         curl -fsSL -o /tmp/go.tar.gz "https://golang.org/dl/go${TARGET_GO_VERSION}.linux-${architecture}.tar.gz"
     fi

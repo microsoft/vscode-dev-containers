@@ -15,6 +15,7 @@ mkdir -p /root/.fluxbox /home/node/.fluxbox
 cp -f /tmp/fluxbox/* /root/.fluxbox/
 cp -f /tmp/fluxbox/* /home/node/.fluxbox/
 chown -R node:node /home/node/.fluxbox
+echo "export DONT_PROMPT_WSL_INSTALL=true" | tee -a /etc/bash.bashrc >> /etc/profile.d/not-wsl.sh
 
 # Install firefox
 apt-get install -y firefox-esr

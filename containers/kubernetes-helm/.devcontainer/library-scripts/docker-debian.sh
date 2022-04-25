@@ -7,7 +7,7 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby] [CLI version]
+# Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby] [CLI version] [Major version for docker-compose]
 
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 SOURCE_SOCKET=${2:-"/var/run/docker-host.sock"}
@@ -15,8 +15,8 @@ TARGET_SOCKET=${3:-"/var/run/docker.sock"}
 USERNAME=${4:-"automatic"}
 USE_MOBY=${5:-"true"}
 DOCKER_VERSION=${6:-"latest"}
+DOCKER_DASH_COMPOSE_VERSION=${7:-"v1"} # v1 or v2
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
-DOCKER_DASH_COMPOSE_VERSION="1"
 
 set -e
 
@@ -206,11 +206,34 @@ else
         ${pipx_bin} install --pip-args '--no-cache-dir --force-reinstall' docker-compose
         rm -rf /tmp/pip-tmp
     else 
-        find_version_from_git_tags DOCKER_DASH_COMPOSE_VERSION "https://github.com/docker/compose" "tags/"
-        echo "(*) Installing docker-compose ${DOCKER_DASH_COMPOSE_VERSION}..."
-        curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_DASH_COMPOSE_VERSION}/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
+        compose_v1_version="1"
+        find_version_from_git_tags compose_v1_version "https://github.com/docker/compose" "tags/"
+        echo "(*) Installing docker-compose ${compose_v1_version}..."
+        curl -fsSL "https://github.com/docker/compose/releases/download/${compose_v1_version}/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
         chmod +x /usr/local/bin/docker-compose
     fi
+fi
+
+# Install docker-compose switch if not already installed - https://github.com/docker/compose-switch#manual-installation
+current_v1_compose_path="$(which docker-compose)"
+target_v1_compose_path="$(dirname "${current_v1_compose_path}")/docker-compose-v1"
+if ! type compose-switch > /dev/null 2>&1; then
+    echo "(*) Installing compose-switch..."
+    compose_switch_version="latest"
+    find_version_from_git_tags compose_switch_version "https://github.com/docker/compose-switch"
+    curl -fsSL "https://github.com/docker/compose-switch/releases/download/v${compose_switch_version}/docker-compose-linux-${architecture}" -o /usr/local/bin/compose-switch
+    chmod +x /usr/local/bin/compose-switch
+    # TODO: Verify checksum once available: https://github.com/docker/compose-switch/issues/11
+
+    # Setup v1 CLI as alternative in addition to compose-switch (which maps to v2)
+    mv "${current_v1_compose_path}" "${target_v1_compose_path}"
+    update-alternatives --install /usr/local/bin/docker-compose docker-compose /usr/local/bin/compose-switch 99
+    update-alternatives --install /usr/local/bin/docker-compose docker-compose "${target_v1_compose_path}" 1
+fi
+if [ "${DOCKER_DASH_COMPOSE_VERSION}" = "v1" ]; then
+    update-alternatives --set docker-compose "${target_v1_compose_path}"
+else
+    update-alternatives --set docker-compose /usr/local/bin/compose-switch
 fi
 
 # If init file already exists, exit
@@ -283,7 +306,7 @@ log "Ensuring ${USERNAME} has access to ${SOURCE_SOCKET} via ${TARGET_SOCKET}"
 # that we can set permissions on it without affecting the host.
 if [ "${ENABLE_NONROOT_DOCKER}" = "true" ] && [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ] && [ "${USERNAME}" != "root" ] && [ "${USERNAME}" != "0" ]; then
     SOCKET_GID=\$(stat -c '%g' ${SOURCE_SOCKET})
-    if [ "\${SOCKET_GID}" != "0" ] && [ "\${SOCKET_GID}" != "${DOCKER_GID}" ]; then
+    if [ "\${SOCKET_GID}" != "0" ] && [ "\${SOCKET_GID}" != "${DOCKER_GID}" ] && ! grep -E ".+:x:\${SOCKET_GID}" /etc/group; then
         sudoIf groupmod --gid "\${SOCKET_GID}" docker
     else
         # Enable proxy if not already running
