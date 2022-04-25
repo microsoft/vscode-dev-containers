@@ -89,7 +89,9 @@ RUN bash /tmp/scripts/powershell-debian.sh \
 RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     && (cd ${NVM_DIR} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVM_DIR}/.git-remote-and-commit \
     # Install nvs (alternate cross-platform Node.js version-management tool)
-    && sudo -u ${USERNAME} git config --global --add safe.directory /home/codespace/.nvs \
+    && git config --global --add safe.directory /home/codespace/.nvs \
+    && mkdir -p ${NVS_HOME} \
+    && chown -R ${USERNAME}: ${NVS_HOME} \
     && sudo -u ${USERNAME} git clone -c advice.detachedHead=false --depth 1 https://github.com/jasongin/nvs ${NVS_HOME} 2>&1 \
     && (cd ${NVS_HOME} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVS_HOME}/.git-remote-and-commit \
     && sudo -u ${USERNAME} bash ${NVS_HOME}/nvs.sh install \
