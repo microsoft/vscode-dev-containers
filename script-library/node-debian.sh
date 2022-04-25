@@ -127,7 +127,6 @@ su ${USERNAME} -c "$(cat << EOF
     # Do not update profile - we'll do this manually
     export PROFILE=/dev/null
     ls -lah /home/${USERNAME}/.nvs || :
-    mkdir /home/${USERNAME}/.nvs || chown ${USERNAME}: /home/${USERNAME}/.nvs
     curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash 
     source ${NVM_DIR}/nvm.sh
     if [ "${NODE_VERSION}" != "" ]; then
