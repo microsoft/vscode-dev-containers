@@ -675,7 +675,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": [ "lts", "latest", "16", "14", "12" ],
+					"proposals": [ "lts", "latest", "18", "16", "14" ],
 					"default": "lts",
 					"description": "Select or enter a Node.js version to install"
 				},

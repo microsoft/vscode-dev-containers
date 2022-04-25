@@ -25,10 +25,10 @@ build:
   context: .
   dockerfile: Dockerfile
   args:
-    # Update 'VARIANT' to pick an LTS version of Node.js: 16, 14, 12.
+    # Update 'VARIANT' to pick an LTS version of Node.js: 18, 16, 14.
     # Append -bullseye or -buster to pin to an OS version.
     # Use -bullseye variants on local arm64/Apple Silicon.
-    VARIANT: 14-bullseye
+    VARIANT: 16-bullseye
 ```
 
 You also can connect to PostgreSQL from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
