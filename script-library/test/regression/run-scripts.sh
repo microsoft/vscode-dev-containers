@@ -42,6 +42,22 @@ run_script()
     echo "**** Done! ****"
 }
 
+get_common_setting() {
+    # if [ "${common_settings_file_loaded}" != "true" ]; then
+    #     curl -sfL "https://aka.ms/vscode-dev-containers/script-library/settings.env" 2>/dev/null -o /tmp/vsdc-settings.env || echo "Could not download settings file. Skipping."
+    #     common_settings_file_loaded=true
+    # fi
+    cp  ${SCRIPT_DIR}/shared/settings.env  /tmp/vsdc-settings.env
+
+    if [ -f "/tmp/vsdc-settings.env" ]; then
+        local multi_line=""
+        if [ "$2" = "true" ]; then multi_line="-z"; fi
+        local result="$(grep ${multi_line} -oP "$1=\"?\K[^\"]+" /tmp/vsdc-settings.env | tr -d '\0')"
+        if [ ! -z "${result}" ]; then declare -g $1="${result}"; fi
+    fi
+    echo "$1=${!1}"
+}
+
 # Determine distro scripts to use
 . /etc/os-release
 architecture="$(uname -m)"
@@ -96,11 +112,17 @@ if [ "${DISTRO}" = "debian" ]; then
     run_script terraform "0.15.0 0.12.1"
     run_script sshd "2223 ${USERNAME} true random"
     run_script desktop-lite "${USERNAME} changeme false"
-    docker_version="20.10"
-    if [ "${VERSION_CODENAME}" = "stretch" ]; then
-        docker_version="19.03"
+
+    # docker-in-docker
+    get_common_setting DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES
+    if [[ "${DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
+        # Do not use Moby
+        run_script docker-in-docker "false ${USERNAME} false latest v2"
+    else
+        # Use Moby
+        run_script docker-in-docker "false ${USERNAME} true latest v2"
     fi
-    run_script docker-in-docker "false ${USERNAME} false ${docker_version} v2"
+
     run_script powershell
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ] || [ "${architecture}" = "arm64" ] || [ "${architecture}" = "aarch64" ]; then
         run_script java "13.0.2.j9-adpt /usr/local/sdkman2 ${USERNAME} false"
@@ -111,6 +133,7 @@ if [ "${DISTRO}" = "debian" ]; then
     run_script dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"
 fi
 
+# TODO: Most of this script does not execute since 'docker-in-docker' is run above
 if [ "${DISTRO}" != "alpine" ]; then
     run_script docker "true /var/run/docker-host.sock /var/run/docker.sock ${USERNAME}"
 fi
