@@ -117,9 +117,11 @@ if [ "${DISTRO}" = "debian" ]; then
     get_common_setting DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES
     if [[ "${DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
         # Do not use Moby
+        echo 'testing moby: false'
         run_script docker-in-docker "false ${USERNAME} false latest v2"
     else
         # Use Moby
+         echo 'testing moby: true'
         run_script docker-in-docker "false ${USERNAME} true latest v2"
     fi
 
