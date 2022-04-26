@@ -155,7 +155,7 @@ Some other tips:
     rm -rf /var/lib/apt/lists/*
     ```
 
-    The only downside of doing this is that `apt-get update` has to be executed before you install a packages. However, in most cases adding this package to a Dockerfile is a better choice anyway since this will survive a "rebuild" of the image and the creation of an updated container. 
+    The only downside of doing this is that `apt-get update` has to be executed before you install a package. However, in most cases adding this package to a Dockerfile is a better choice anyway since this will survive a "rebuild" of the image and the creation of an updated container. 
 
 2. Use the scripts in the [script library](./script-library) in this repository where appropriate. You do not even need to copy the script into your `.devcontainer` folder to use it. See the [README](./script-library) for details. Most existing definitions use the "common" script to ensure things like `git`, a non-root user, and useful command line utilities like `ps`, `ip`, `jq` are present.
 

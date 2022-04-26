@@ -1,5 +1,5 @@
-# [Choice] Node.js version: 14, 12, 10
-ARG VARIANT=14
+# [Choice] Node.js version: 18, 16, 14
+ARG VARIANT=16
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 
 # [Option] Enable non-root Docker access in container

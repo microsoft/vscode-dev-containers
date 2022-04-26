@@ -4,7 +4,7 @@
 		"dockerfile": "Dockerfile",
 		"args": {
 			// Update the VARIANT arg to pick a Swift version 
-			"VARIANT": "5.5",
+			"VARIANT": "5.6-focal",
 			// Options
 			"NODE_VERSION": "lts/*"
 		}

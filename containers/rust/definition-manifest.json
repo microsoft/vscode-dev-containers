@@ -1,8 +1,8 @@
 {
 	"variants": ["buster", "bullseye"],
-	"definitionVersion": "0.201.5",
+	"definitionVersion": "0.202.0",
 	"build": {
-		"latest": "buster",
+		"latest": "bullseye",
 		"rootDistro": "debian",
 		"architectures": {
 			"bullseye": ["linux/amd64", "linux/arm64"],

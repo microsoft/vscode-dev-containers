@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        variant: 14
+        variant: 16-bullseye
 
     environment:
       DAPR_NETWORK: dapr-dev-container
