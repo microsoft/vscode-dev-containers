@@ -17,7 +17,6 @@ USE_MOBY=${5:-"true"}
 DOCKER_VERSION=${6:-"latest"}
 DOCKER_DASH_COMPOSE_VERSION=${7:-"v1"} # v1 or v2
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
-DOCKER_DASH_COMPOSE_VERSION="1"
 DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal jammy"
 DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute impish jammy"
 
