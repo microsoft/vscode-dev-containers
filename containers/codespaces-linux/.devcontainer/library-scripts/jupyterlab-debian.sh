@@ -58,3 +58,6 @@ if ! jupyter-lab --version > /dev/null ; then
     sudoUserIf pip install jupyterlab=="${VERSION}" --no-cache-dir
   fi
 fi
+
+# Install common ML packages for use with JupyterLab
+sudoUserIf pip install numpy pandas scipy matplotlib seaborn scikit-learn tensorflow keras torch requests
