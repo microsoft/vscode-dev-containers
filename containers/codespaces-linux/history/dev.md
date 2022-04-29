@@ -32,11 +32,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [.NET](https://dotnet.microsoft.com/) | 3.1.415<br />5.0.403<br />6.0.100 | /home/codespaces/.dotnet<br />/opt/dotnet |
 | [Ruby](https://www.ruby-lang.org/en/) | 2.7.2 | /opt/ruby/&lt;version&gt; |
 | [PHP](https://xdebug.org/) | 7.2.34<br />7.3.27<br />7.4.26 | /opt/php/&lt;version&gt; |
-| [PowerShell](https://docs.microsoft.com/en-us/powershell/) | 7.2.2 | /opt/microsoft/powershell |
 | GCC | 9.4.0-1ubuntu1~20.04.1 | 
 | Clang | 10.0.0-4ubuntu1 | 
 | [Go](https://golang.org/dl) | 1.18 | /usr/local/go |
-| [Rust](https://github.com/rust-lang/rust) | 1.60.0 | /usr/local/cargo<br />/usr/local/rustup |
 | [Jekyll](https://jekyllrb.com/) | 4.2.1 | 
 
 **Tools installed using git**
@@ -87,16 +85,6 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | debase | 0.2.4.1 |
 | jekyll | 4.2.1 |
 
-**Cargo / rustup (Rust) crates and tools**
-
-| Tool / crate | Version |
-|--------------|---------|
-| rls | 1.41.0 |
-| rustfmt | 1.4.38 |
-| rust-analysis | 1.60.0 |
-| rust-src | 1.60.0 |
-| clippy | 1.60.0 |
-
 **Other tools and utilities**
 
 | Tool | Version | Path |
@@ -113,7 +101,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.4.2 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.14+azure | 
+| Docker (Moby) CLI &amp; Engine | 20.10.14 | 
 
 **Additional linux tools and packages**
 
@@ -121,7 +109,6 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 |----------------|---------|
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
-| azure-cli (Azure CLI) | 2.35.0-1~focal |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
@@ -175,8 +162,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.14+azure-1 |
-| moby-engine (Docker Engine) | 20.10.14+azure-1 |
+| moby-cli (Docker CLI) | 20.10.14 |
+| moby-engine (Docker Engine) | 20.10.14 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |

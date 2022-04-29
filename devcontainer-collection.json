@@ -220,10 +220,8 @@
 				"F#",
 				".NET Core",
 				"PHP",
-				"PowerShell",
 				"Go",
 				"Ruby",
-				"Rust",
 				"Conda"
 			],
 			"type": "singleContainer",

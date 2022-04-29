@@ -66,17 +66,8 @@ check "npm" npm --version
 check "php" php --version
 check "Xdebug" php --version | grep 'Xdebug'
 
-# Rust
-check "cargo" cargo --version
-check "rustup" rustup --version
-check "rls" rls --version
-check "rustfmt" rustfmt --version
-check "clippy" cargo-clippy --version
-check "lldb" which lldb
-
 # Check utilities
 checkOSPackages "additional-os-packages" vim xtail software-properties-common
-check "az" az --version
 check "gh" gh --version
 check "git-lfs" git-lfs --version
 check "docker" docker --version
