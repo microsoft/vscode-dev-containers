@@ -6,7 +6,7 @@ _Adds [docfx](https://github.com/dotnet/docfx) to a container._
 
 **Script status**: Draft
 
-**OS support**: Debian 9+, Ubuntu 16.04+.
+**OS support**: Debian 9+, Ubuntu 18.04+, and downstream distros.
 
 **Maintainer:** [@JamieMagee](https://github.com/JamieMagee)
 
