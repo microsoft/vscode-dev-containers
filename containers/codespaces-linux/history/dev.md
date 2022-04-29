@@ -100,7 +100,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [GitHub CLI](https://github.com/cli/cli) | 2.7.0 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.6.3 | /opt/maven |
-| [Gradle](https://gradle.org/) | 7.4.1 | 
+| [Gradle](https://gradle.org/) | 7.4.2 | 
 | Docker (Moby) CLI &amp; Engine | 20.10.14 | 
 
 **Additional linux tools and packages**
