@@ -59,5 +59,5 @@ if ! jupyter-lab --version > /dev/null ; then
   fi
 fi
 
-# Install common ML packages for use with JupyterLab
+# Install common Python packages for use with JupyterLab
 sudoUserIf pip install numpy pandas scipy matplotlib seaborn scikit-learn tensorflow keras torch requests
