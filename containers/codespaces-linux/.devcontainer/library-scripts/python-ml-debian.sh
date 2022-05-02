@@ -7,13 +7,11 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/jupyterlab.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./jupyter-debian.sh
+# Syntax: ./python-ml-debian.sh
 
 set -e
 
-VERSION=${1:-"latest"}
-USERNAME=${2:-"automatic"}
-PYTHON=${3:-"python"}
+PYTHON=${1:-"python"}
 
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -44,18 +42,5 @@ sudoUserIf()
   fi
 }
 
-# If we don't yet have Python, install it now.
-if ! python --version > /dev/null ; then
-  echo "You need to install Python before installing JupyterLab."
-  exit 1
-fi
-
-# If we don't already have JupyterLab installed, install it now.
-if ! jupyter-lab --version > /dev/null ; then
-  echo "Installing JupyterLab..."
-  if [ "${VERSION}" = "latest" ]; then
-    sudoUserIf $PYTHON -m pip install jupyterlab
-  else
-    sudoUserIf $PYTHON -m pip install jupyterlab=="${VERSION}" --no-cache-dir
-  fi
-fi
+# Install common ML packages
+sudoUserIf $PYTHON -m pip install numpy pandas scipy matplotlib seaborn scikit-learn tensorflow keras torch requests
