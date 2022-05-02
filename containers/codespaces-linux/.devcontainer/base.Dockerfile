@@ -70,7 +70,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # Install Python, PHP, Ruby utilities, and JupyterLab
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
-    && bash /tmp/scripts/jupyterlab-debian.sh \
+    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" "/opt/python/latest/bin/python" \
     # Install rvm, rbenv, any missing base gems
     && chown -R ${USERNAME} /opt/ruby/* \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
