@@ -83,9 +83,9 @@ fi
 # Install Fisher
 if [ "${INSTALL_FISHER}" = "true" ]; then
     echo "Installing Fisher..."
-    fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
+    fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
     if [ "${USERNAME}" != "root" ]; then
-        sudo -u $USERNAME fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
+        sudo -u $USERNAME fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
     fi
 fi
 
