@@ -1,4 +1,4 @@
-# [Choice] R version: 4, 4.1, 4.0
+# [Choice] R version: 4, 4.2, 4.1, 4.0
 ARG VARIANT=4
 # [Choice] Base image. Minimal (r-ver), tidyverse installed (tidyverse), or full image (binder): rocker/r-ver, rocker/tidyverse, rocker/binder
 ARG BASE_IMAGE=rocker/r-ver
@@ -42,7 +42,7 @@ RUN export TAG=$(git ls-remote --tags --refs --sort='version:refname' https://gi
 
 # R Session watcher settings.
 # See more details: https://github.com/REditorSupport/vscode-R/wiki/R-Session-watcher
-RUN echo 'source(file.path(Sys.getenv("HOME"), ".vscode-R", "init.R"))' >> ${R_HOME}/etc/Rprofile.site
+RUN echo 'if (interactive() && Sys.getenv("TERM_PROGRAM") == "vscode") source(file.path(Sys.getenv("HOME"), ".vscode-R", "init.R"))' >>"${R_HOME}/etc/Rprofile.site"
 
 # [Option] Enable vscode-jupyter support
 ARG ENABLE_JUPYTER="false"
