@@ -26,7 +26,7 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	// For example, if you want to use vscode-jupyter, add "ms-toolsai.jupyter".
 	"extensions": [
-		"ikuyadeu.r",
+		"reditorsupport.r",
 		"rdebugger.r-debugger"
 	],
 
