@@ -44,18 +44,15 @@ sudoUserIf()
   fi
 }
 
-# If we don't yet have Python, install it now.
-if ! python --version > /dev/null ; then
+# Make sure that Python is installed correctly
+if ! $PYTHON --version > /dev/null ; then
   echo "You need to install Python before installing JupyterLab."
   exit 1
 fi
 
-# If we don't already have JupyterLab installed, install it now.
-if ! jupyter-lab --version > /dev/null ; then
-  echo "Installing JupyterLab..."
-  if [ "${VERSION}" = "latest" ]; then
-    sudoUserIf $PYTHON -m pip install jupyterlab
-  else
-    sudoUserIf $PYTHON -m pip install jupyterlab=="${VERSION}" --no-cache-dir
-  fi
+# pip skips installation when the requirement is already satisfied
+if [ $VERSION = "latest" ]; then
+  sudoUserIf $PYTHON -m pip install jupyterlab
+else
+  sudoUserIf $PYTHON -m pip install jupyterlab==$VERSION --no-cache-dir
 fi
