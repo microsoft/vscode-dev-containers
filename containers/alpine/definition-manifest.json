@@ -1,5 +1,5 @@
 {
-	"variants": ["3.15", "3.14", "3.13", "3.12"],
+	"variants": ["3.15", "3.14", "3.13"],
 	"definitionVersion": "0.204.2",
 	"build": {
 		"latest": false,
