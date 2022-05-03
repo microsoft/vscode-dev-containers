@@ -12,6 +12,7 @@
 set -e
 
 PYTHON=${1:-"python"}
+ML_PACKAGES=${2:-"numpy pandas scipy matplotlib seaborn scikit-learn tensorflow keras torch requests"}
 
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -42,5 +43,11 @@ sudoUserIf()
   fi
 }
 
-# Install common ML packages
-sudoUserIf $PYTHON -m pip install numpy pandas scipy matplotlib seaborn scikit-learn tensorflow keras torch requests
+# Make sure that Python is installed correctly
+if ! $PYTHON --version > /dev/null ; then
+  echo "You need to install Python before installing ML packages."
+  exit 1
+fi
+
+# pip skips installation when a requirement is already satisfied
+sudoUserIf $PYTHON -m pip install $ML_PACKAGES
