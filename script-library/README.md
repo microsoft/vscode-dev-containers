@@ -35,6 +35,7 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 | [Node.js Install Script](docs/node.md) | `node-debian.sh` | VS Code and GitHub Codespaces teams|
 | [PowerShell Install Script](docs/powershell.md) | `powershell-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Python Install Script](docs/python.md) | `python-debian.sh` | VS Code and GitHub Codespaces teams|
+| [Python Package Install Script](docs/python-package.md) | `python-package-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Ruby Install Script](docs/ruby.md) | `ruby-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Rust (rustlang) Install Script](docs/rust.md) | `rust-debian.sh` | VS Code and GitHub Codespaces teams|
 | [SSH Server Install Script](docs/sshd.md) | `sshd-debian.sh` | VS Code and GitHub Codespaces teams|
