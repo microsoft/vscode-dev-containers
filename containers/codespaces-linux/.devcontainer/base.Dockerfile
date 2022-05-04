@@ -68,10 +68,21 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mkdir -p /usr/local/etc/vscode-dev-containers/ \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
-# Install Python, PHP, Ruby utilities, and JupyterLab
+# Install Python, JupyterLab, common machine learning packages, and Ruby utilities
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
-    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" "/opt/python/latest/bin/python" \
-    && bash /tmp/scripts/python-ml-debian.sh "/opt/python/latest/bin/python" \
+    # Install JupyterLab and common machine learning packages
+    && PYTHON_BINARY="${PYTHON_ROOT}/bin/python" \
+    && bash /tmp/scripts/python-package-debian.sh "jupyterlab" "latest" $PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "numpy" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "pandas" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "scipy" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "matplotlib" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "seaborn" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "scikit-learn" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "tensorflow" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "keras" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "torch" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "requests" "latest" PYTHON_BINARY $USERNAME \
     # Install rvm, rbenv, any missing base gems
     && chown -R ${USERNAME} /opt/ruby/* \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
