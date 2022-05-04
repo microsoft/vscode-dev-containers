@@ -72,17 +72,17 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install JupyterLab and common machine learning packages
     && PYTHON_BINARY="${PYTHON_ROOT}/bin/python" \
-    && bash /tmp/scripts/python-package-debian.sh "jupyterlab" "latest" $PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "numpy" "latest" PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "pandas" "latest" PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "scipy" "latest" PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "matplotlib" "latest" PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "seaborn" "latest" PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "scikit-learn" "latest" PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "tensorflow" "latest" PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "keras" "latest" PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "torch" "latest" PYTHON_BINARY $USERNAME \
-    && bash /tmp/scripts/python-package-debian.sh "requests" "latest" PYTHON_BINARY $USERNAME \
+    && bash /tmp/scripts/python-package-debian.sh "jupyterlab" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "numpy" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "pandas" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "scipy" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "matplotlib" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "seaborn" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "scikit-learn" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "tensorflow" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "keras" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "torch" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/python-package-debian.sh "requests" "latest" $PYTHON_BINARY \
     # Install rvm, rbenv, any missing base gems
     && chown -R ${USERNAME} /opt/ruby/* \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
