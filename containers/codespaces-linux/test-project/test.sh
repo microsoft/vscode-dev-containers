@@ -20,7 +20,9 @@ check "dotnet-6-installed-by-oryx" dotnet --info | grep "/opt/dotnet/6\.0\.[0-9]
 
 # Check Python
 check "python" python --version
-check "pip" pip3 --version
+check "python3" python3 --version
+check "pip" pip --version
+check "pip3" pip3 --version
 check "pipx" pipx --version
 check "pylint" pylint --version
 check "flake8" flake8 --version
@@ -32,16 +34,16 @@ check "bandit" bandit --version
 check "virtualenv" virtualenv --version
 
 # Check Python packages
-check "numpy" sudo -u codespace python -c 'import numpy'
-check "pandas" sudo -u codespace python -c 'import pandas'
-check "scipy" sudo -u codespace python -c 'import scipy'
-check "matplotlib" sudo -u codespace python -c 'import matplotlib'
-check "seaborn" sudo -u codespace python -c 'import seaborn'
-check "scikit-learn" sudo -u codespace python -c 'import sklearn'
-check "tensorflow" sudo -u codespace python -c 'import tensorflow'
-check "keras" sudo -u codespace python -c 'import keras'
-check "torch" sudo -u codespace python -c 'import torch'
-check "requests" sudo -u codespace python -c 'import requests'
+check "numpy" python -c 'import numpy'
+check "pandas" python -c 'import pandas'
+check "scipy" python -c 'import scipy'
+check "matplotlib" python -c 'import matplotlib'
+check "seaborn" python -c 'import seaborn'
+check "scikit-learn" python -c 'import sklearn'
+check "tensorflow" python -c 'import tensorflow'
+check "keras" python -c 'import keras'
+check "torch" python -c 'import torch'
+check "requests" python -c 'import requests'
 
 # Check JupyterLab
 check "jupyter-lab" jupyter-lab --version
