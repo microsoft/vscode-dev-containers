@@ -13,7 +13,6 @@ set -e
 
 VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}
-PYTHON=${3:-"python"}
 
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -44,15 +43,18 @@ sudoUserIf()
   fi
 }
 
-# Make sure that Python is installed correctly
-if ! ${PYTHON} --version > /dev/null ; then
+# If we don't yet have Python, install it now.
+if ! python --version > /dev/null ; then
   echo "You need to install Python before installing JupyterLab."
   exit 1
 fi
 
-# pip skips installation when the requirement is already satisfied
-if [ ${VERSION} = "latest" ]; then
-  sudoUserIf ${PYTHON} -m pip install jupyterlab
-else
-  sudoUserIf ${PYTHON} -m pip install jupyterlab==${VERSION} --no-cache-dir
+# If we don't already have JupyterLab installed, install it now.
+if ! jupyter-lab --version > /dev/null ; then
+  echo "Installing JupyterLab..."
+  if [ "${VERSION}" = "latest" ]; then
+    sudoUserIf pip install jupyterlab
+  else
+    sudoUserIf pip install jupyterlab=="${VERSION}" --no-cache-dir
+  fi
 fi
