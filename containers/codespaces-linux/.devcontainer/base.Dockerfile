@@ -101,9 +101,6 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     && (cd ${NVS_HOME} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVS_HOME}/.git-remote-and-commit \
     && sudo -u ${USERNAME} bash ${NVS_HOME}/nvs.sh install \
     && rm ${NVS_HOME}/cache/* \
-    # Set npm global location
-    && sudo -u ${USERNAME} npm config set prefix ${NPM_GLOBAL} \
-    && npm config -g set prefix ${NPM_GLOBAL} \
     # Clean up
     && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
 
