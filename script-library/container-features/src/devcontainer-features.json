@@ -1253,7 +1253,6 @@
 				"ms-toolsai.jupyter"
 			],
 			"include": [
-				"codespaces-linux",
 				"python-3",
 				"python-3-anaconda",
 				"python-3-miniconda",
