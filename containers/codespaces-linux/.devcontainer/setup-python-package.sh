@@ -41,13 +41,6 @@ if ! ${PYTHON} --version > /dev/null ; then
   exit 1
 fi
 
-# pip skips installation when a requirement is already satisfied
-if [ ${VERSION} = "latest" ]; then
-  sudoUserIf ${PYTHON} -m pip install ${PACKAGE} --no-cache-dir
-else
-  sudoUserIf ${PYTHON} -m pip install ${PACKAGE}==${VERSION} --no-cache-dir
-fi
-
 # pip skips installation if the package is already installed
 echo "Installing $PACKAGE..."
 if [ "${VERSION}" = "latest" ]; then
