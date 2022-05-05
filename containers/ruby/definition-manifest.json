@@ -1,6 +1,6 @@
 {
-	"variants": ["3.1-bullseye", "3.0-bullseye", "2.7-bullseye", "2.6-bullseye", "3.1-buster", "3.0-buster", "2.7-buster", "2.6-buster"],
-	"definitionVersion": "0.203.2",
+	"variants": ["3.1-bullseye", "3.0-bullseye", "2.7-bullseye", "3.1-buster", "3.0-buster", "2.7-buster"],
+	"definitionVersion": "0.203.3",
 	"build": {
 		"latest": "3.1-bullseye",
 		"rootDistro": "debian",
@@ -8,11 +8,9 @@
 			"3.1-bullseye": ["linux/amd64", "linux/arm64"],
 			"3.0-bullseye": ["linux/amd64", "linux/arm64"],
 			"2.7-bullseye": ["linux/amd64", "linux/arm64"],
-			"2.6-bullseye": ["linux/amd64", "linux/arm64"],
 			"3.1-buster": ["linux/amd64"],
 			"3.0-buster": ["linux/amd64"],
-			"2.7-buster": ["linux/amd64"],
-			"2.6-buster": ["linux/amd64"]
+			"2.7-buster": ["linux/amd64"]
 		},
 		"tags": [
 			"ruby:${VERSION}-${VARIANT}"
@@ -32,7 +30,6 @@
 				"ruby:${VERSION}-2.7",
 				"ruby:${VERSION}-2-bullseye"
 			 ],
-			"2.6-bullseye": [ "ruby:${VERSION}-2.6" ],
 			"3.1-buster": [ 
 				"ruby:${VERSION}-3-buster",
 				"ruby:${VERSION}-buster"
