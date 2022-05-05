@@ -72,7 +72,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install JupyterLab and common machine learning packages
     && PYTHON_BINARY="${PYTHON_ROOT}/current/bin/python" \
-    && bash /tmp/scripts/python-package-debian.sh "jupyterlab" "latest" $PYTHON_BINARY \
+    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} \
     && bash /tmp/scripts/python-package-debian.sh "numpy" "latest" $PYTHON_BINARY \
     && bash /tmp/scripts/python-package-debian.sh "pandas" "latest" $PYTHON_BINARY \
     && bash /tmp/scripts/python-package-debian.sh "scipy" "latest" $PYTHON_BINARY \
