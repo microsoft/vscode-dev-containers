@@ -12,7 +12,7 @@
 
 ## Variant: 17-bullseye
 
-**Digest:** sha256:20997ea7ce610aeede17911d7c09847675e3b491233d9e43392bc00bb1036a67
+**Digest:** sha256:8ffc822f9be8d74b3fe0e7734893d71984878ba8a218fdfbdf054a77305e799e
 
 **Tags:**
 ```
@@ -34,7 +34,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 17.0.2 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 17.0.3 | /usr/local/ |
 
 **Tools installed using git**
 
@@ -98,7 +98,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 ## Variant: 17-buster
 
-**Digest:** sha256:df2e6e7e43df3287846ae96bc7abaac34d78f32401684c34792a67acaa293c6d
+**Digest:** sha256:ea72219d6ae9ad60210074547e537b089d51ce9abf51dc7d9c253c985add3a21
 
 **Tags:**
 ```
@@ -117,7 +117,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 17.0.2 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 17.0.3 | /usr/local/ |
 
 **Tools installed using git**
 
@@ -182,7 +182,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 
 ## Variant: 11-bullseye
 
-**Digest:** sha256:6639b8adf9978b508159067db111e78bbcb3cf14de618decf4f840176a98b99e
+**Digest:** sha256:e580b295833fd6bfc95554a629326a6f845eb60a86caecfe0663faf5feb50e9f
 
 **Tags:**
 ```
@@ -267,7 +267,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 
 ## Variant: 11-buster
 
-**Digest:** sha256:061bb5a40c3dfae5324bbeeb38f9fbd670e0fca6afe2320cd351a6dcb1903448
+**Digest:** sha256:0d940e8dea185741c11672b9adb7caf6ffa6204d18b6003592a5bb8fc542cde4
 
 **Tags:**
 ```
