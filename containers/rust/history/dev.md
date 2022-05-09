@@ -10,7 +10,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:015a2fa3c97f4d1d38599313f4495c229d926d510b96c9e6fd0d188daf980be5
+**Digest:** sha256:4ada0b5b772c53491ccc3a9810c32fdf226604d4c8f27746cbc2ccb6772a3409
 
 **Tags:**
 ```
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 
 ## Variant: bullseye
 
-**Digest:** sha256:22205dae8e8a1b8a360e929d93312c6f1f65e9b8f087d50c36057ac93db6a7b5
+**Digest:** sha256:82aaf6f7ece1432b82a5f502f935e78ea489027a309a253fc12214437191b343
 
 **Tags:**
 ```

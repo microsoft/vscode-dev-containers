@@ -11,7 +11,7 @@
 
 ## Variant: jammy
 
-**Digest:** sha256:6b577d56f63635730e14f758ce1a31fa4a5d67fa5a9396d59315f3634838329d
+**Digest:** sha256:e80fb4f266ed515fd39ef3c44b6ddb9954ffbcfe5a6ae7cad28a1d66227e4a4e
 
 **Tags:**
 ```
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 ## Variant: focal
 
-**Digest:** sha256:5706d0e04862c54c764277d5dd3c280e336bf3ff4699f8220be0512a75ae516f
+**Digest:** sha256:a9b7d151a6e864adbb08308bc829919bb66f3248a5b8e1152cec65b5a370aa5b
 
 **Tags:**
 ```
@@ -125,7 +125,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.12 |
+| libssl1.1 | 1.1.1f-1ubuntu2.13 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.7 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -153,7 +153,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:f179106c1d2dc9e4deca4fcbd42650510971db8c90425424b6559e22c05557a4
+**Digest:** sha256:501532d5afaa0ae556ddd84c33508df065964afb7dad4bb111a21a889aa9cd04
 
 **Tags:**
 ```
@@ -197,8 +197,8 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | libicu60 | 60.2-3ubuntu3.2 |
 | libkrb5-3 | 1.16-2ubuntu0.2 |
 | liblttng-ust0 | 2.10.1-1 |
-| libssl1.0.0 | 1.0.2n-1ubuntu5.8 |
-| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.15 |
+| libssl1.0.0 | 1.0.2n-1ubuntu5.9 |
+| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.17 |
 | libstdc++6 | 8.4.0-1ubuntu1~18.04 |
 | locales | 2.27-3ubuntu1.5 |
 | lsb-release | 9.20170808ubuntu1 |

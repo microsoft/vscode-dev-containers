@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:1d0bebbf343a0e267cd2b0c672a99f0376d4c2916dd2c3355a4a35c9c0b9db6a
+**Digest:** sha256:aa17db186ea17199a1b0fb07cb6b3f2f72e34a06f163664c0d3bccb0e9e50263
 
 **Tags:**
 ```
@@ -74,7 +74,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.45.2 |
+| github.com/golangci/golangci-lint | 1.46.0 |
 
 **Ruby gems and tools**
 
@@ -89,7 +89,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Version | Path |
 |------|---------|------|
-| [git](https://github.com/git/git) | 2.36.0 | /usr/local |
+| [git](https://github.com/git/git) | 2.36.1 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.4 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.3.4 | /opt/php-composer |
 | [kubectl](https://github.com/kubernetes/kubectl) | WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.<br />1.24.0 | /usr/local/bin |
@@ -144,7 +144,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libpango-1.0-0 | 1.44.7-2ubuntu4 |
 | libpangocairo-1.0-0 | 1.44.7-2ubuntu4 |
 | libsecret-1-dev | 0.20.4-0ubuntu1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.12 |
+| libssl1.1 | 1.1.1f-1ubuntu2.13 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | libx11-6 | 2:1.6.9-2ubuntu1.2 |
 | libx11-xcb1 | 2:1.6.9-2ubuntu1.2 |

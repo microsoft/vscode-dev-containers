@@ -14,7 +14,7 @@
 
 ## Variant: 6.0-bullseye-slim
 
-**Digest:** sha256:184d609b6c0834df2a8f7281b451630b7015ef22aae3895387a0530d6d8c9780
+**Digest:** sha256:647b67b71eefe63f0be56a751b582670f4d3ffb1c4b015cdad1c585f5a11e879
 
 **Tags:**
 ```
@@ -93,7 +93,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-bullseye
 
 ## Variant: 6.0-focal
 
-**Digest:** sha256:c56ac110b70a76c17774ac8a110bf357bb3a0adf162b6fa9ec90ef0cbb122a67
+**Digest:** sha256:32563038ab7cf9f84b913149d4745bc1de22456608cd7db667c78fa4d6423715
 
 **Tags:**
 ```
@@ -142,7 +142,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 | libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.12 |
+| libssl1.1 | 1.1.1f-1ubuntu2.13 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.7 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -171,7 +171,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 
 ## Variant: 5.0-bullseye-slim
 
-**Digest:** sha256:0b4557ea013e4b871d8adfbd7f54827ee76693d53211dfd9a3a08a61738c68e8
+**Digest:** sha256:3f528a707e1c941cf71ca88d006e8766e011d44a2c347868b942ac81a109bf44
 
 **Tags:**
 ```
@@ -250,7 +250,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0-bullseye
 
 ## Variant: 5.0-focal
 
-**Digest:** sha256:2a897bfd9fc3dce04ed0c8a69f947f4150a64ace2f4608a5339b1676bddef3b4
+**Digest:** sha256:fa28f5190b87943ab1eb7ac0026e823b49590d53ee6a888f6c49db67cfb9b8d9
 
 **Tags:**
 ```
@@ -301,7 +301,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.12 |
+| libssl1.1 | 1.1.1f-1ubuntu2.13 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.7 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -330,7 +330,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1-bullseye
 
-**Digest:** sha256:13b979835ca0850bef7bdf40ea4afa21cba3100fe5a0a2a065e76fef1f00d4d4
+**Digest:** sha256:66355ceb2a76e03e1255d2475b10b302f20c2a05885278a22701b7e35862fb87
 
 **Tags:**
 ```
@@ -408,7 +408,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1-bullseye
 
 ## Variant: 3.1-focal
 
-**Digest:** sha256:becfea566d6403c55fc36c55eebd33e1b9a6079e98e519291a6717de414e56aa
+**Digest:** sha256:52ebd2682c510725b3a46abd110e10bb4577beb1ced59821195251ff4832cf60
 
 **Tags:**
 ```
@@ -459,7 +459,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.12 |
+| libssl1.1 | 1.1.1f-1ubuntu2.13 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.7 |
 | lsb-release | 11.1.0ubuntu2 |

@@ -14,7 +14,7 @@
 
 ## Variant: 18-bullseye
 
-**Digest:** sha256:6739bf4af1487043df2ea5e5f7af7bd3a0faeca85b14bcbb6ed9bf78675de779
+**Digest:** sha256:0ba81bd2ddcd84e0563b2d7e924b0ffc50470c6110469b3ddfef44d69d3876f7
 
 **Tags:**
 ```
@@ -48,7 +48,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-bullseye
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.14.0 |
+| eslint | 8.15.0 |
 
 **Additional linux tools and packages**
 
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-bullseye
 
 ## Variant: 16-bullseye
 
-**Digest:** sha256:04adb7fe18709267db7f26d6d8192d108b48561a617bfa8915df1741ba79209a
+**Digest:** sha256:e4e0224b443342b2311feaf9b4043ecf694935d3d4ba18b418caea6c7a05a899
 
 **Tags:**
 ```
@@ -132,7 +132,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.14.0 |
+| eslint | 8.15.0 |
 
 **Additional linux tools and packages**
 
@@ -183,7 +183,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 ## Variant: 14-bullseye
 
-**Digest:** sha256:26ace27550e69525435d440dd68324b767fc651288f834f0fa2be5099b433da2
+**Digest:** sha256:f07dc0f514133caf252d176d992a460a33e0ca5f15c2e311fcbcc44e21969255
 
 **Tags:**
 ```
@@ -216,7 +216,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.14.0 |
+| eslint | 8.15.0 |
 
 **Additional linux tools and packages**
 
@@ -267,7 +267,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 18-buster
 
-**Digest:** sha256:3f6adf9947dde43cc11a07a73b149831500eb8d3223d9ca44d664a01a4149cf3
+**Digest:** sha256:54c0c1e9e4cb4a043c796db2f78a1bb67b01ae270f8221e005c209dfa5008a2e
 
 **Tags:**
 ```
@@ -300,7 +300,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-buster
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.14.0 |
+| eslint | 8.15.0 |
 
 **Additional linux tools and packages**
 
@@ -352,7 +352,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-buster
 
 ## Variant: 16-buster
 
-**Digest:** sha256:5cef3f4a249643b31ddb659661d75b01f8608d3c1cfa7054e60fac9eb4c55843
+**Digest:** sha256:8d7fdafb6186f2d40a8a66cae7fffe7d265fbb54c8c17a7ada86f7ad526b0a7e
 
 **Tags:**
 ```
@@ -384,7 +384,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16-buster
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.14.0 |
+| eslint | 8.15.0 |
 
 **Additional linux tools and packages**
 
@@ -436,7 +436,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16-buster
 
 ## Variant: 14-buster
 
-**Digest:** sha256:4465a4e48f39a0b630a6ce29b678888a10c36e7d463d3e87a6e094599883678d
+**Digest:** sha256:0fb6cf21402ddaedb6b2a3ad40e7443b7bddc10c25403cd956f61da2d7b91495
 
 **Tags:**
 ```
@@ -468,7 +468,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-buster
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.14.0 |
+| eslint | 8.15.0 |
 
 **Additional linux tools and packages**
 
