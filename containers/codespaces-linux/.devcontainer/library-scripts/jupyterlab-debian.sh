@@ -13,6 +13,7 @@ set -e
 
 VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}
+CONFIG=${3:-""}
 
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -57,4 +58,9 @@ if ! jupyter-lab --version > /dev/null ; then
   else
     sudoUserIf pip install jupyterlab=="${VERSION}" --no-cache-dir
   fi
+fi
+
+if [ -n "${CONFIG}" ]; then
+  JUPYTER_DIR="/home/${USERNAME}/.jupyter"
+  sudoUserIf mkdir -p ${JUPYTER_DIR} && cp ${CONFIG} ${JUPYTER_DIR}
 fi

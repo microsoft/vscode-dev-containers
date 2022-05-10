@@ -90,6 +90,9 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
     && ln -s $(which composer.phar) /usr/local/bin/composer \
     && apt-get clean -y
 
+RUN echo "c.ServerApp.allow_origin = '*'" >> /tmp/scripts/jupyter_notebook_config.py \
+    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" "/tmp/scripts/jupyter_notebook_config.py" \
+
 # Setup Node.js, install NVM and NVS
 RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     && (cd ${NVM_DIR} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVM_DIR}/.git-remote-and-commit \
