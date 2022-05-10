@@ -10,7 +10,7 @@
 
 ## Variant: bullseye
 
-**Digest:** sha256:0f14e9ca3e7cfb70fc81a2c85f2f15dc076683a19a8375238072d4e1c9f482bd
+**Digest:** sha256:c611174db5afb7b8d1ddde362f11becb5f2100bd1b365e2c1cdef7b6ad869062
 
 **Tags:**
 ```
@@ -30,7 +30,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 1.8.0_322<br />11.0.14 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
+| [Java](https://adoptopenjdk.net/) | 1.8.0_332<br />11.0.14 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
 
 **Tools installed using git**
 
@@ -94,7 +94,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-bullseye
 
 ## Variant: buster
 
-**Digest:** sha256:e3e74cea82b8f7e6e8145609c15b7e55644cafef247d7a8e6ca50f93c8810216
+**Digest:** sha256:5e3fc02a26e6aeb60db8b471a834474757708a4f3f6572c323d7c12dcb6030c8
 
 **Tags:**
 ```
@@ -115,7 +115,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-8-jdk-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 1.8.0_322<br />11.0.14 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
+| [Java](https://adoptopenjdk.net/) | 1.8.0_332<br />11.0.14 | /usr/local/sdkman/candidates/java/current<br />/usr/local |
 
 **Tools installed using git**
 

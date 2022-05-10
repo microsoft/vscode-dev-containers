@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/ruby |
-| *Available image variants* | 3 / 3-bullseye, 3.1 / 3.1-bullseye, 3.0 / 3.0-bullseye, 2 / 2-bullseye, 2.7 / 2.7-bullseye, 2.6 / 2.7-bullseye, 3-buster, 3.1-buster, 3.0-buster, 2-buster, 2.7-buster, 2.6-buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list)) |
+| *Available image variants* | 3 / 3-bullseye, 3.1 / 3.1-bullseye, 3.0 / 3.0-bullseye, 2 / 2-bullseye, 2.7 / 2.7-bullseye, 2.6 / 2.7-bullseye, 3-buster, 3.1-buster, 3.0-buster, 2-buster, 2.7-buster ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/ruby/tags/list)) |
 | *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -36,7 +36,6 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 - `mcr.microsoft.com/vscode/devcontainers/ruby:3.0` (or `3.0-bullseye`, `3.0-buster` to pin to an OS version)
 - `mcr.microsoft.com/vscode/devcontainers/ruby:2` (or `2-bullseye`, `2-buster` to pin to an OS version)
 - `mcr.microsoft.com/vscode/devcontainers/ruby:2.7` (or `2.7-bullseye`, `2.7-buster` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/ruby:2.6` (or `2.6-bullseye`, `2.6-buster` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
 
