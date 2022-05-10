@@ -60,6 +60,33 @@ Given JavaScript front-end web client code written for use in conjunction with a
 }
 ```
 
+### Enabling and Disabling Ruby Version Managers (RVM and RBENV)
+
+This Dev Container comes pre-packaged with a `ruby-debian.sh` shell script which installs `rbenv` and `rvm`. Both tools and their configuration files are enabled in the devcontainer by default. If you want to use them, simply start the container as normal. You can test the `rbenv` installation by running:
+
+```bash
+rbenv -v
+```
+
+And the `rvm` installation by running:
+
+```bash
+rvm -v
+```
+
+These commands can be run in the integrated terminal.
+
+To disable these tools, change the `containerEnv` variables in `devcontainer.json`:
+
+```jsonc
+"containerEnv": {
+   "RBENV_ENABLED": "false",
+   "RVM_ENABLED": "false"
+},
+```
+
+These variables need to be explicitly set to `false` for the tools to be disabled. Any other input will result in `rvm` and `rbenv` being enabled for the container.
+
 ### Adding the definition to your folder
 
 1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
