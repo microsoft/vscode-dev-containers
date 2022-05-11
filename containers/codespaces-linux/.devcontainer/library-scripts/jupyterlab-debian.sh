@@ -14,7 +14,7 @@ set -e
 VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}
 PYTHON=${3:-"python"}
-CONFIG=${4:-""}
+ALLOW_ORIGIN=${4:-""}
 
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -44,6 +44,18 @@ sudoUserIf() {
   fi
 }
 
+addToJupyterConfig() {
+  JUPYTER_DIR="/home/${USERNAME}/.jupyter"
+  JUPYTER_CONFIG="${JUPYTER_DIR}/jupyter_notebook_config.py"
+
+  # Make sure the config file exists
+  test -d ${JUPYTER_DIR} || sudoUserIf mkdir ${JUPYTER_DIR}
+  test -f ${JUPYTER_CONFIG} || sudoUserIf touch ${JUPYTER_CONFIG}
+
+  # Don't write the same line more than once
+  grep -q ${1} ${JUPYTER_CONFIG} || echo ${1} >> ${JUPYTER_CONFIG}
+}
+
 # Make sure that Python is available
 if ! ${PYTHON} --version > /dev/null ; then
   echo "You need to install Python before installing JupyterLab."
@@ -58,7 +70,6 @@ else
   sudoUserIf ${PYTHON} -m pip install jupyterlab=="${VERSION}" --no-cache-dir
 fi
 
-if [ -n "${CONFIG}" ]; then
-  JUPYTER_DIR="/home/${USERNAME}/.jupyter"
-  sudoUserIf mkdir -p ${JUPYTER_DIR} && cp ${CONFIG} ${JUPYTER_DIR}
+if [ "${ALLOW_ORIGIN}" = 'true' ]; then
+  addToJupyterConfig "c.ServerApp.allow_origin = '*'"
 fi

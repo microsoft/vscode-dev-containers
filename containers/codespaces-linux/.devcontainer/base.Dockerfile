@@ -72,7 +72,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install JupyterLab and common machine learning packages
     && PYTHON_BINARY="${PYTHON_ROOT}/current/bin/python" \
-    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} \
+    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} "true" \
     && bash /tmp/scripts/setup-python-tools.sh ${PYTHON_BINARY} \
     # Install rvm, rbenv, any missing base gems
     && chown -R ${USERNAME} /opt/ruby/* \
@@ -80,9 +80,6 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
     # Link composer
     && ln -s $(which composer.phar) /usr/local/bin/composer \
     && apt-get clean -y
-
-RUN echo "c.ServerApp.allow_origin = '*'" >> /tmp/scripts/jupyter_notebook_config.py \
-    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" "/tmp/scripts/jupyter_notebook_config.py" \
 
 # Setup Node.js, install NVM and NVS
 RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
