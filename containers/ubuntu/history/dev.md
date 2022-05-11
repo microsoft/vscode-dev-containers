@@ -11,7 +11,7 @@
 
 ## Variant: jammy
 
-**Digest:** sha256:e80fb4f266ed515fd39ef3c44b6ddb9954ffbcfe5a6ae7cad28a1d66227e4a4e
+**Digest:** sha256:f7ab7fad4c9734d3801c2eec00306666ee36d7f8f9263bc33b8161f145e9699b
 
 **Tags:**
 ```
@@ -41,7 +41,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 | apt-transport-https | 2.4.5 |
 | apt-utils | 2.4.5 |
 | ca-certificates | 20211016 |
-| curl | 7.81.0-1ubuntu1.1 |
+| curl | 7.81.0-1ubuntu1.2 |
 | dialog | 1.3-20211214-1 |
 | git | 1:2.34.1-1ubuntu1.2 |
 | gnupg2 | 2.2.27-3ubuntu2 |
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 ## Variant: focal
 
-**Digest:** sha256:a9b7d151a6e864adbb08308bc829919bb66f3248a5b8e1152cec65b5a370aa5b
+**Digest:** sha256:be9e672543ff7e97b83af7cbc2ef4e1e9bc2fcc27f40633c34cc6c62acf03324
 
 **Tags:**
 ```
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.2 |
-| curl | 7.68.0-1ubuntu2.10 |
+| curl | 7.68.0-1ubuntu2.11 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.4 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
@@ -119,7 +119,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.7 |
+| libc6 | 2.31-0ubuntu9.9 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2.1 |
@@ -127,7 +127,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.13 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
-| locales | 2.31-0ubuntu9.7 |
+| locales | 2.31-0ubuntu9.9 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |
@@ -153,7 +153,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:501532d5afaa0ae556ddd84c33508df065964afb7dad4bb111a21a889aa9cd04
+**Digest:** sha256:6c741401399beead018f90a54581f226f853905e9eeeb23bba68b14f7e239656
 
 **Tags:**
 ```
@@ -183,7 +183,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | apt-transport-https | 1.6.14 |
 | apt-utils | 1.6.14 |
 | ca-certificates | 20210119~18.04.2 |
-| curl | 7.58.0-2ubuntu3.17 |
+| curl | 7.58.0-2ubuntu3.18 |
 | dialog | 1.3-20171209-1 |
 | git | 1:2.17.1-1ubuntu0.11 |
 | gnupg2 | 2.2.4-1ubuntu1.4 |

@@ -14,7 +14,7 @@
 
 ## Variant: 6.0-bullseye-slim
 
-**Digest:** sha256:647b67b71eefe63f0be56a751b582670f4d3ffb1c4b015cdad1c585f5a11e879
+**Digest:** sha256:4a1b3209e7d26af551a12fea595039a388d236cb10f6901c2deafa55c2fd752b
 
 **Tags:**
 ```
@@ -35,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 6.0.202 (6.0.4) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 6.0.300 (6.0.5) | /usr |
 
 **Tools installed using git**
 
@@ -93,7 +93,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-bullseye
 
 ## Variant: 6.0-focal
 
-**Digest:** sha256:32563038ab7cf9f84b913149d4745bc1de22456608cd7db667c78fa4d6423715
+**Digest:** sha256:31f904820846f216abb9f23cdb50faf958e337fa4b948423e81229bf0b12f359
 
 **Tags:**
 ```
@@ -112,7 +112,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 6.0.202 (6.0.4) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 6.0.300 (6.0.5) | /usr |
 
 **Tools installed using git**
 
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.2 |
-| curl | 7.68.0-1ubuntu2.10 |
+| curl | 7.68.0-1ubuntu2.11 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.4 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
@@ -136,7 +136,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.7 |
+| libc6 | 2.31-0ubuntu9.9 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2.1 |
@@ -144,7 +144,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.13 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
-| locales | 2.31-0ubuntu9.7 |
+| locales | 2.31-0ubuntu9.9 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |
@@ -171,7 +171,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 
 ## Variant: 5.0-bullseye-slim
 
-**Digest:** sha256:3f528a707e1c941cf71ca88d006e8766e011d44a2c347868b942ac81a109bf44
+**Digest:** sha256:a14b22a315751a347695bcac7c1b35b0eaea09d72e5b11abf9ace656a22dd576
 
 **Tags:**
 ```
@@ -192,7 +192,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 5.0.407 (5.0.1) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 5.0.408 (5.0.1) | /usr |
 
 **Tools installed using git**
 
@@ -250,7 +250,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0-bullseye
 
 ## Variant: 5.0-focal
 
-**Digest:** sha256:fa28f5190b87943ab1eb7ac0026e823b49590d53ee6a888f6c49db67cfb9b8d9
+**Digest:** sha256:8c091ab00621adf9b467537a3715ca2288a23beb73f1d0ecb7f2e4784e69072c
 
 **Tags:**
 ```
@@ -271,7 +271,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 5.0.407 (5.0.1) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 5.0.408 (5.0.1) | /usr |
 
 **Tools installed using git**
 
@@ -287,7 +287,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.2 |
-| curl | 7.68.0-1ubuntu2.10 |
+| curl | 7.68.0-1ubuntu2.11 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.4 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
@@ -295,7 +295,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.7 |
+| libc6 | 2.31-0ubuntu9.9 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2.1 |
@@ -303,7 +303,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.13 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
-| locales | 2.31-0ubuntu9.7 |
+| locales | 2.31-0ubuntu9.9 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |
@@ -330,7 +330,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-5.0
 
 ## Variant: 3.1-bullseye
 
-**Digest:** sha256:66355ceb2a76e03e1255d2475b10b302f20c2a05885278a22701b7e35862fb87
+**Digest:** sha256:fd192bb157caf9460b482f362f8d7d982e87715e808153f8e8152b9c51b97190
 
 **Tags:**
 ```
@@ -350,7 +350,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 3.1.418 (3.1.2) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 3.1.419 (3.1.2) | /usr |
 
 **Tools installed using git**
 
@@ -408,7 +408,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1-bullseye
 
 ## Variant: 3.1-focal
 
-**Digest:** sha256:52ebd2682c510725b3a46abd110e10bb4577beb1ced59821195251ff4832cf60
+**Digest:** sha256:ba734789126e55ec4b95b743a5d13241a45baebeca8878f030b6aa83b98823ae
 
 **Tags:**
 ```
@@ -429,7 +429,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [.NET](https://dotnet.microsoft.com/) | 3.1.418 (3.1.2) | /usr |
+| [.NET](https://dotnet.microsoft.com/) | 3.1.419 (3.1.2) | /usr |
 
 **Tools installed using git**
 
@@ -445,7 +445,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | apt-transport-https | 2.0.6 |
 | apt-utils | 2.0.6 |
 | ca-certificates | 20210119~20.04.2 |
-| curl | 7.68.0-1ubuntu2.10 |
+| curl | 7.68.0-1ubuntu2.11 |
 | dialog | 1.3-20190808-1 |
 | git | 1:2.25.1-1ubuntu3.4 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
@@ -453,7 +453,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
 | less | 551-1ubuntu0.1 |
-| libc6 | 2.31-0ubuntu9.7 |
+| libc6 | 2.31-0ubuntu9.9 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
 | libicu66 | 66.1-2ubuntu2.1 |
@@ -461,7 +461,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | liblttng-ust0 | 2.11.0-1 |
 | libssl1.1 | 1.1.1f-1ubuntu2.13 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
-| locales | 2.31-0ubuntu9.7 |
+| locales | 2.31-0ubuntu9.9 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | man-db | 2.9.1-1 |

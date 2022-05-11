@@ -76,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "a5d6d145164e82e67fbf91a4a30f98699d30de63"
+                    "commitHash": "74ff2a04415691361b07b7dbd1d4762ad79bd82c"
                 }
             }
         },
@@ -178,7 +178,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-cli",
-                    "Version": "20.10.14+azure-1",
+                    "Version": "20.10.15+azure-1",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -191,7 +191,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-engine",
-                    "Version": "20.10.14+azure-1",
+                    "Version": "20.10.15+azure-2",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -452,7 +452,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "c0d87ea4526cac0e7c93f4170fdec637eb31f797"
+                    "commitHash": "1038c0786fd96a76a5798f837a1577cf8eb22895"
                 }
             }
         },
@@ -531,7 +531,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "2.9.0",
+                    "Version": "2.10.1",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -551,7 +551,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.18.1",
+                    "Version": "1.18.2",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }

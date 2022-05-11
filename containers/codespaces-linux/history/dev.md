@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:aa17db186ea17199a1b0fb07cb6b3f2f72e34a06f163664c0d3bccb0e9e50263
+**Digest:** sha256:ed83536a4f011d01c9ac3152e4553d4f10cd140c823933ca4ef411ad372eef8b
 
 **Tags:**
 ```
@@ -34,7 +34,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [PHP](https://xdebug.org/) | 8.0.17<br />8.1.4 | /opt/php/&lt;version&gt; |
 | GCC | 9.4.0-1ubuntu1~20.04.1 | 
 | Clang | 10.0.0-4ubuntu1 | 
-| [Go](https://golang.org/dl) | 1.18.1 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.18.2 | /usr/local/go |
 | [Jekyll](https://jekyllrb.com/) | 4.2.2 | 
 
 **Tools installed using git**
@@ -45,7 +45,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | e61130f76e9e07e8c0201ad9a79ec70bb714c0a0 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c6cc0a1959da3403f524fcbb0fdfb6e08a4d8ae6 | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | c0d87ea4526cac0e7c93f4170fdec637eb31f797 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 1038c0786fd96a76a5798f837a1577cf8eb22895 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
@@ -97,11 +97,11 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 2.9.0 | 
+| [GitHub CLI](https://github.com/cli/cli) | 2.10.1 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.8.5 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.4.2 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.14+azure | 
+| Docker (Moby) CLI &amp; Engine | 20.10.15+azure | 
 
 **Additional linux tools and packages**
 
@@ -114,7 +114,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | clang | 1:10.0-50~exp1 |
 | cmake | 3.16.3-1ubuntu1 |
 | cppcheck | 1.90-4build1 |
-| curl | 7.68.0-1ubuntu2.10 |
+| curl | 7.68.0-1ubuntu2.11 |
 | dialog | 1.3-20190808-1 |
 | g++ | 4:9.3.0-1ubuntu2 |
 | gcc | 4:9.3.0-1ubuntu2 |
@@ -129,8 +129,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | less | 551-1ubuntu0.1 |
 | libatk-bridge2.0-0 | 2.34.2-0ubuntu2~20.04.1 |
 | libatk1.0-0 | 2.35.1-1ubuntu2 |
-| libc6 | 2.31-0ubuntu9.7 |
-| libc6-dev | 2.31-0ubuntu9.7 |
+| libc6 | 2.31-0ubuntu9.9 |
+| libc6-dev | 2.31-0ubuntu9.9 |
 | libcups2 | 2.3.1-9ubuntu1.1 |
 | libgbm1 | 21.2.6-0ubuntu0.1~20.04.2 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
@@ -140,7 +140,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
 | libnspr4 | 2:4.25-1 |
-| libnss3 | 2:3.49.1-1ubuntu1.6 |
+| libnss3 | 2:3.49.1-1ubuntu1.7 |
 | libpango-1.0-0 | 1.44.7-2ubuntu4 |
 | libpangocairo-1.0-0 | 1.44.7-2ubuntu4 |
 | libsecret-1-dev | 0.20.4-0ubuntu1 |
@@ -153,7 +153,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libxfixes3 | 1:5.0.3-2 |
 | lldb | 1:10.0-50~exp1 |
 | llvm | 1:10.0-50~exp1 |
-| locales | 2.31-0ubuntu9.7 |
+| locales | 2.31-0ubuntu9.9 |
 | lsb-release | 11.1.0ubuntu2 |
 | lsof | 4.93.2+dfsg-1ubuntu0.20.04.1 |
 | make | 4.2.1-1.2 |
@@ -162,8 +162,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.14+azure-1 |
-| moby-engine (Docker Engine) | 20.10.14+azure-1 |
+| moby-cli (Docker CLI) | 20.10.15+azure-1 |
+| moby-engine (Docker Engine) | 20.10.15+azure-2 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |

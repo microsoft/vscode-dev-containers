@@ -12,7 +12,7 @@
 
 ## Variant: 1.18-bullseye
 
-**Digest:** sha256:d7cfc6c62de3f735ab308b0d6ff8137e0f36ab9d5a71dd9b17a33f84979c6775
+**Digest:** sha256:7083d37c777bf8fc9484d7bfe4861610d457385056edffcda419c915c06803ec
 
 **Tags:**
 ```
@@ -35,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.18.1 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.18.2 | /usr/local/go |
 
 **Tools installed using git**
 
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 ## Variant: 1.18-buster
 
-**Digest:** sha256:f1eab2171342bc00bf83facc4d24431fddfe1873a67603fd19844587c02da08b
+**Digest:** sha256:dcdda124e113c6f48b2a085c88b8d0312f89f0ab6a33b2ec8b37fd4f610fb16f
 
 **Tags:**
 ```
@@ -132,7 +132,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.18.1 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.18.2 | /usr/local/go |
 
 **Tools installed using git**
 
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 ## Variant: 1.17-bullseye
 
-**Digest:** sha256:626021f7fb4bfd670012708b976226f72863af6eddbebff5036d28b1aa8a9335
+**Digest:** sha256:aca3db9b316d9e41227b809dccea64af31f057a2e9e2af0ea48489f98de00dc6
 
 **Tags:**
 ```
@@ -229,7 +229,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.9 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.17.10 | /usr/local/go |
 
 **Tools installed using git**
 
@@ -305,7 +305,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 
 ## Variant: 1.17-buster
 
-**Digest:** sha256:135fa0350b3bddc0109bbd726d6cd42eb736831dc885d553a30b3b822415a9c6
+**Digest:** sha256:0af8e78be54561bd17150615871cc9b53dc690e6bdeea6ec237f5f040da81a3e
 
 **Tags:**
 ```
@@ -324,7 +324,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.9 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.17.10 | /usr/local/go |
 
 **Tools installed using git**
 
