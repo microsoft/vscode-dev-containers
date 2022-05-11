@@ -72,7 +72,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install JupyterLab and common machine learning packages
     && PYTHON_BINARY="${PYTHON_ROOT}/current/bin/python" \
-    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} \
+    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} "true" \
     && bash /tmp/scripts/setup-python-tools.sh ${PYTHON_BINARY} \
     # Install rvm, rbenv, any missing base gems
     && chown -R ${USERNAME} /opt/ruby/* \
