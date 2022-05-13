@@ -988,7 +988,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Eclipse Temurin",
-                    "Version": "1.8.0_332",
+                    "Version": "17.0.3_7",
                     "DownloadUrl": "https://adoptium.net/"
                 }
             }
@@ -998,7 +998,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/java",
-                    "Version": "11-bullseye",
+                    "Version": "17-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/openjdk"
                 }
             }
@@ -1008,7 +1008,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/java",
-                    "Version": "11-buster",
+                    "Version": "17-buster",
                     "DownloadUrl": "https://hub.docker.com/_/openjdk"
                 }
             }

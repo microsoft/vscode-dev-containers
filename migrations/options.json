@@ -194,7 +194,7 @@
 					"11-buster",
 					"17-buster"
 				],
-				"default": "11-bullseye"
+				"default": "17-bullseye"
 			}
 		}
 	},

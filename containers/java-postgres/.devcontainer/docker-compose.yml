@@ -13,7 +13,7 @@ services:
         # Update 'VARIANT' to pick an version of Java: 11, 17.
         # Append -bullseye or -buster to pin to an OS version.
         # Use -bullseye variants on local arm64/Apple Silicon.
-        VARIANT: 11-bullseye
+        VARIANT: 17-bullseye
         # Options
         INSTALL_MAVEN: "false"
         MAVEN_VERSION: ""
