@@ -988,7 +988,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Eclipse Temurin",
-                    "Version": "17.0.3_7",
+                    "Version": "1.8.0_332",
                     "DownloadUrl": "https://adoptium.net/"
                 }
             }
