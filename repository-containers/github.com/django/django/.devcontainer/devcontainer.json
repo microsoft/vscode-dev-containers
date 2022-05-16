@@ -1,9 +1,16 @@
 {
     "name": "Django",
     "dockerFile": "Dockerfile",
-    "extensions": [
-        "dbaeumer.jshint",
-        "EditorConfig.EditorConfig",
-        "ms-python.python"
-    ]
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"dbaeumer.jshint",
+                "EditorConfig.EditorConfig",
+                "ms-python.python"
+			]
+		}
+	}
 }

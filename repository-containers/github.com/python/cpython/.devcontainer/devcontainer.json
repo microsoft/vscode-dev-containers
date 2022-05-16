@@ -1,25 +1,34 @@
 {
 	"name": "CPython",
 	"dockerFile": "Dockerfile",
-	"settings": { 
-		"python.defaultInterpreterPath": "${workspaceFolder}/python",
-		"python.testing.unittestArgs": [
-			"-v",
-			"-s",
-			"Lib",
-			"test",
-			"-p",
-			"test_*.py"
-		],
-		"python.testing.cwd": "${workspaceFolder}/Lib/",
-		"python.testing.pytestEnabled": false,
-		"python.testing.nosetestsEnabled": false,
-		"python.testing.unittestEnabled": true
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"python.defaultInterpreterPath": "${workspaceFolder}/python",
+				"python.testing.unittestArgs": [
+					"-v",
+					"-s",
+					"Lib",
+					"test",
+					"-p",
+					"test_*.py"
+				],
+				"python.testing.cwd": "${workspaceFolder}/Lib/",
+				"python.testing.pytestEnabled": false,
+				"python.testing.nosetestsEnabled": false,
+				"python.testing.unittestEnabled": true
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-vscode.cpptools",
+				"ms-python.python"
+			]
+		}
 	},
-	"extensions": [
-		"ms-vscode.cpptools",
-		"ms-python.python"
-	],
 	"postCreateCommand": "./configure --with-pydebug && make -j4 regen-all &&  make -j4 -s && make install",
 	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ]
 }

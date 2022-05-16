@@ -5,8 +5,21 @@
         "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
         "-e", "DISPLAY=host.docker.internal:0"
     ],
-    "extensions": [
-        "ms-python.python",
-        "ms-vscode.cpptools"
-    ]
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+			
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+                "ms-python.python",
+                "ms-vscode.cpptools"
+			]
+		}
+	}
 }
