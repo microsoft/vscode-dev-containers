@@ -7,16 +7,16 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/kubectl-helm.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./kubectl-helm-debian.sh [kubectl verison] [Helm version] [minikube version] [kubectl SHA256] [Helm SHA256] [minikube SHA256]
+# Syntax: ./kubectl-helm-debian.sh [kubectl verison] [Helm version] [k3d version] [kubectl SHA256] [Helm SHA256] [k3d SHA256]
 
 set -e
 
 KUBECTL_VERSION="${1:-"latest"}"
 HELM_VERSION="${2:-"latest"}"
-MINIKUBE_VERSION="${3:-"none"}" # latest is also valid
+K3D_VERSION="${3:-"none"}" # latest is also valid
 KUBECTL_SHA256="${4:-"automatic"}"
 HELM_SHA256="${5:-"automatic"}"
-MINIKUBE_SHA256="${6:-"automatic"}"
+K3D_SHA256="${6:-"automatic"}"
 USERNAME=${7:-"automatic"}
 
 HELM_GPG_KEYS_URI="https://raw.githubusercontent.com/helm/helm/main/KEYS"
@@ -214,32 +214,25 @@ if ! type helm > /dev/null 2>&1; then
     exit 1
 fi
 
-# Install Minikube, verify checksum
-if [ "${MINIKUBE_VERSION}" != "none" ]; then
-    echo "Downloading minikube..."
-    if [ "${MINIKUBE_VERSION}" = "latest" ] || [ "${MINIKUBE_VERSION}" = "lts" ] || [ "${MINIKUBE_VERSION}" = "current" ] || [ "${MINIKUBE_VERSION}" = "stable" ]; then
-        MINIKUBE_VERSION="latest"
+# Install k3d with official installation method: 
+if [ "${K3D_VERSION}" != "none" ]; then
+    echo "Downloading k3d..."
+    if [ "${K3D_VERSION}" = "latest" ] || [ "${K3D_VERSION}" = "lts" ] || [ "${K3D_VERSION}" = "current" ] || [ "${K3D_VERSION}" = "stable" ]; then
+        # Install and check the hash
+        curl -sSL https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
     else
-        find_version_from_git_tags MINIKUBE_VERSION https://github.com/kubernetes/minikube
-        if [ "${MINIKUBE_VERSION::1}" != "v" ]; then
-            MINIKUBE_VERSION="v${MINIKUBE_VERSION}"
+        find_version_from_git_tags K3D_VERSION https://github.com/kubernetes/K3D
+        if [ "${K3D_VERSION::1}" != "v" ]; then
+            K3D_VERSION="v${K3D_VERSION}"
         fi
+        # Install and check the hash
+        curl -sSL https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG="${K3D_VERSION}" bash
     fi
-    # latest is also valid in the download URLs 
-    curl -sSL -o /usr/local/bin/minikube "https://storage.googleapis.com/minikube/releases/${MINIKUBE_VERSION}/minikube-linux-${architecture}"    
-    chmod 0755 /usr/local/bin/minikube
-    if [ "$MINIKUBE_SHA256" = "automatic" ]; then
-        MINIKUBE_SHA256="$(curl -sSL "https://storage.googleapis.com/minikube/releases/${MINIKUBE_VERSION}/minikube-linux-${architecture}.sha256")"
-    fi
-    ([ "${MINIKUBE_SHA256}" = "dev-mode" ] || (echo "${MINIKUBE_SHA256} */usr/local/bin/minikube" | sha256sum -c -))
-    if ! type minikube > /dev/null 2>&1; then
-        echo '(!) minikube installation failed!'
-        exit 1
-    fi
+    
     # Create minkube folder with correct privs in case a volume is mounted here
-    mkdir -p "${USERHOME}/.minikube"
-    chown -R $USERNAME "${USERHOME}/.minikube"
-    chmod -R u+wrx "${USERHOME}/.minikube"
+    mkdir -p "${USERHOME}/.k3d"
+    chown -R $USERNAME "${USERHOME}/.k3d"
+    chmod -R u+wrx "${USERHOME}/.k3d"
 fi
 
 if ! type docker > /dev/null 2>&1; then
