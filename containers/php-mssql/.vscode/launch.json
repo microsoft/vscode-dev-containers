@@ -5,6 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Built-in web server",
+            "type": "php",
+            "request": "launch",
+            "runtimeArgs": [
+                "-dxdebug.mode=debug",
+                "-dxdebug.start_with_request=yes",
+                "-S",
+                "localhost:0"
+            ],
+            "program": "",
+            "cwd": "${workspaceRoot}",
+            "port": 9000,
+            "serverReadyAction": {
+                "pattern": "Development Server \\(http://localhost:([0-9]+)\\) started",
+                "uriFormat": "http://localhost:%s/test-project/sqlsrv.php",
+                "action": "openExternally"
+            }
+        },
+        {
             "name": "Listen for Xdebug",
             "type": "php",
             "request": "launch",
@@ -24,25 +43,6 @@
                 "XDEBUG_MODE": "debug,develop",
                 "XDEBUG_CONFIG": "client_port=${port}"
             }
-        },
-        {
-            "name": "Launch Built-in web server",
-            "type": "php",
-            "request": "launch",
-            "runtimeArgs": [
-                "-dxdebug.mode=debug",
-                "-dxdebug.start_with_request=yes",
-                "-S",
-                "localhost:0"
-            ],
-            "program": "",
-            "cwd": "${workspaceRoot}",
-            "port": 9000,
-            "serverReadyAction": {
-                "pattern": "Development Server \\(http://localhost:([0-9]+)\\) started",
-                "uriFormat": "http://localhost:%s",
-                "action": "openExternally"
-            }
-        }
+        }        
     ]
 }

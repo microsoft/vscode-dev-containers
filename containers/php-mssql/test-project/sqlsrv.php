@@ -3,7 +3,8 @@ $serverName = "localhost";
 $connectionOptions = array(
     "database" => "tempdb",
     "uid" => "sa",
-    "pwd" => "A_STR0NG_Passw0rd!"
+    "pwd" => "A_STR0NG_Passw0rd!",
+    "TrustServerCertificate" => "1"
 );
 
 function exception_handler($exception) {
@@ -33,7 +34,7 @@ if ($stmt === false) {
 }
 ?>
 
-<h1> Success Results : </h1>
+<h1> Azure SQL / SQL Server Connection : </h1>
 
 <?php
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
