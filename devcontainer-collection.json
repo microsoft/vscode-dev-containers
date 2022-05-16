@@ -1785,7 +1785,6 @@
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}"
 			},
 			"settings": {
-				"java.home": "/extension-java-home",
 				"java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current"
 			},
 			"include": [

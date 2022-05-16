@@ -9,7 +9,6 @@
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
 			"settings": { 
-				"java.home": "/usr/lib/jvm/zulu-11-azure-amd64"
 			},
 			
 			// Add the IDs of extensions you want installed when the container is created.
