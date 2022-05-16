@@ -15,10 +15,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # Instal PHP MS SQL Drivers
 # Ref: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#debian18
-RUN pecl install sqlsrv
-RUN pecl install pdo_sqlsrv
-RUN printf "; priority=20\nextension=sqlsrv.so\n" > /usr/local/etc/php/conf.d/020-sqlsrv.ini
-RUN printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /usr/local/etc/php/conf.d/030-pdo_sqlsrv.ini
+RUN pecl install sqlsrv && pecl install pdo_sqlsrv
+RUN printf "; priority=20\nextension=sqlsrv.so\n" > /usr/local/etc/php/conf.d/020-sqlsrv.ini \
+     && printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /usr/local/etc/php/conf.d/030-pdo_sqlsrv.ini 
+
+ENV PATH="$PATH:/opt/mssql-tools18/bin"
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1

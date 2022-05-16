@@ -1,15 +1,8 @@
 {
-	"name": "PHP",
-	"build": {
-		"dockerfile": "PHP & MSSQL (Community)",
-		"args": { 
-			// Update VARIANT to pick a PHP version: 8, 8.1, 8.0, 7, 7.4
-			// Append -bullseye or -buster to pin to an OS version.
-			// Use -bullseye variants on local on arm64/Apple Silicon.
-			"VARIANT": "8.1-bullseye",
-			"NODE_VERSION": "none"
-		}
-	},
+	"name": "PHP & MSSQL (Community)",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",		
+	"workspaceFolder": "/workspace",
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
@@ -22,7 +15,7 @@
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [8080],
+	"forwardPorts": [ 8080, 1433 ],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
