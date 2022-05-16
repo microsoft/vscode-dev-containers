@@ -8,8 +8,8 @@
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"dbaeumer.jshint",
-                "EditorConfig.EditorConfig",
-                "ms-python.python"
+				"EditorConfig.EditorConfig",
+				"ms-python.python"
 			]
 		}
 	}
