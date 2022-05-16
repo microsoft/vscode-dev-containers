@@ -6,12 +6,24 @@
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"php.validate.executablePath": "/usr/local/bin/php"
+		"php.validate.executablePath": "/usr/local/bin/php",
+		"mssql.connections": [
+			{
+				"server": "localhost",
+				"database": "",
+				"authenticationType": "SqlLogin",
+				"user": "sa",
+				"password": "A_STR0NG_Passw0rd!",
+				"emptyPasswordInput": false,
+				"savePassword": true,
+				"profileName": "php-mssql-container"
+			}
+		]
 	},
-
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"xdebug.php-debug"
+		"xdebug.php-debug",
+		"ms-mssql.mssql"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -21,5 +33,11 @@
 	// "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	"remoteUser": "vscode",
+
+	// Supported features
+	"features": {
+		"github-cli": "latest",
+		"azure-cli": "latest"
+	}
 }
