@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "8f56a8bdf39d7727ab0e220f0164f78c77f9c50e"
+                    "commitHash": "39b600e9e564db3dec265fcf2e3db4b5568dd93a"
                 }
             }
         },
@@ -76,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "74ff2a04415691361b07b7dbd1d4762ad79bd82c"
+                    "commitHash": "5e7cbdceacd2b3cb85e057963fdb605136805bd3"
                 }
             }
         },
@@ -204,7 +204,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.13.8"
+                    "Version": "2.13.9"
                 }
             }
         },
@@ -402,7 +402,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.46.0"
+                    "Version": "1.46.1"
                 }
             }
         },
@@ -412,7 +412,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "8f56a8bdf39d7727ab0e220f0164f78c77f9c50e"
+                    "commitHash": "39b600e9e564db3dec265fcf2e3db4b5568dd93a"
                 }
             }
         },
@@ -571,7 +571,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "yarn",
-                    "Version": "1.22.18-1",
+                    "Version": "1.22.19-1",
                     "Distribution": "debian",
                     "Release": "11",
                     "Pool-URL": "https://dl.yarnpkg.com/debian",
@@ -1028,7 +1028,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "8f56a8bdf39d7727ab0e220f0164f78c77f9c50e"
+                    "commitHash": "39b600e9e564db3dec265fcf2e3db4b5568dd93a"
                 }
             }
         },

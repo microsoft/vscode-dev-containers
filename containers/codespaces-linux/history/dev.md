@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:ed83536a4f011d01c9ac3152e4553d4f10cd140c823933ca4ef411ad372eef8b
+**Digest:** sha256:0e722ac07f5d9393b601b227fbe808d56dab6c558f3675b0a8f8079af3e53384
 
 **Tags:**
 ```
@@ -41,7 +41,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 8f56a8bdf39d7727ab0e220f0164f78c77f9c50e | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | e61130f76e9e07e8c0201ad9a79ec70bb714c0a0 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c6cc0a1959da3403f524fcbb0fdfb6e08a4d8ae6 | /usr/local/share/rbenv |
@@ -51,7 +51,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.13.8 |
+| pylint | 2.13.9 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
 | black | 22.3.0 |
@@ -74,7 +74,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.0 |
+| github.com/golangci/golangci-lint | 1.46.1 |
 
 **Ruby gems and tools**
 
@@ -167,8 +167,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
-| openssh-client | 1:8.2p1-4ubuntu0.4 |
-| openssh-server | 1:8.2p1-4ubuntu0.4 |
+| openssh-client | 1:8.2p1-4ubuntu0.5 |
+| openssh-server | 1:8.2p1-4ubuntu0.5 |
 | pigz | 2.4-1 |
 | pkg-config | 0.29.1-0ubuntu4 |
 | procps | 2:3.3.16-1ubuntu2.3 |

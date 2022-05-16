@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
-**Digest:** sha256:366430e0201c0c29720ced13e1cf3a570f0681668b128d0424d6fbe8340b31fd
+**Digest:** sha256:1fb888feb54183fc55ac582cad24fdb0653a8ee25105e0d270792365dc2d903a
 
 **Tags:**
 ```
@@ -83,7 +83,7 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 | unzip | 6.0-26 |
 | vim-tiny | 2:8.2.2434-3+deb11u1 |
 | wget | 1.21-1+deb11u1 |
-| yarn | 1.22.18-1 |
+| yarn | 1.22.19-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2+deb11u1 |
 | zsh | 5.8-6+deb11u1 |

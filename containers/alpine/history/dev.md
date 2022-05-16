@@ -11,7 +11,7 @@
 
 ## Variant: 3.15
 
-**Digest:** sha256:14c1cb54996bd7c6150a8502f9d2935256ed288f11900881f8f7bb049cd5dc7f
+**Digest:** sha256:017397fc7d0eeb59adf56e02fb944f1660bdee7b0e1fd9122494886a03c4bc4e
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 8f56a8bdf39d7727ab0e220f0164f78c77f9c50e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -77,7 +77,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.14
 
-**Digest:** sha256:5393a9d1e0657d6376c0e10c101a7ff4c9270750ac86e7c24274cc36945d3e4a
+**Digest:** sha256:502938cadd21b86b4bff29c6aeba8a2e3d6097c8df5a400e8121f40e6b725fbf
 
 **Tags:**
 ```
@@ -97,7 +97,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 8f56a8bdf39d7727ab0e220f0164f78c77f9c50e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -142,7 +142,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 ## Variant: 3.13
 
-**Digest:** sha256:4bfdba2bc6cd6331daea243e5770309ba7b9667496b6a12c2aa5195d4938c39e
+**Digest:** sha256:2fd106575d31a8a2850f15e91cb82184e0bbc4eac213d26fd834319f77efaeac
 
 **Tags:**
 ```
@@ -162,7 +162,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 8f56a8bdf39d7727ab0e220f0164f78c77f9c50e | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 

@@ -12,7 +12,7 @@
 
 ## Variant: 17-bullseye
 
-**Digest:** sha256:a34de49c9731d08dde1907e39e77e2080a7fcd93465a4ed00093629a8f92f0ce
+**Digest:** sha256:1d148efb6a5c276f7e2ccae71e843237a20d8152189b026da9e94fc3e6a92bac
 
 **Tags:**
 ```
@@ -91,14 +91,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 | unzip | 6.0-26 |
 | vim-tiny | 2:8.2.2434-3+deb11u1 |
 | wget | 1.21-1+deb11u1 |
-| yarn | 1.22.18-1 |
+| yarn | 1.22.19-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+deb11u1 |
 
 ## Variant: 17-buster
 
-**Digest:** sha256:87c428e819158db52b054c72621598f52b369dffaf67ef0f3c7f042cf34b81a3
+**Digest:** sha256:3edefbeb4f80ac994f0ba75cf7a3254987e7b856600c4bac259e6f45b3a9f1df
 
 **Tags:**
 ```
@@ -175,14 +175,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 | unzip | 6.0-23+deb10u2 |
 | vim-tiny | 2:8.1.0875-5 |
 | wget | 1.20.1-1.1 |
-| yarn | 1.22.18-1 |
+| yarn | 1.22.19-1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1+deb10u1 |
 
 ## Variant: 11-bullseye
 
-**Digest:** sha256:5d2ae08d668ac11eff2fa35e025a31ff8e46873b03884b375dcd89583a00483b
+**Digest:** sha256:38c32a213f1a9c8a55d42f693bc5643e7337075883c6f493343ffad11bedb0d3
 
 **Tags:**
 ```
@@ -203,7 +203,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 11.0.14 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 11.0.15 | /usr/local/ |
 
 **Tools installed using git**
 
@@ -260,14 +260,14 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 | unzip | 6.0-26 |
 | vim-tiny | 2:8.2.2434-3+deb11u1 |
 | wget | 1.21-1+deb11u1 |
-| yarn | 1.22.18-1 |
+| yarn | 1.22.19-1 |
 | zip | 3.0-12 |
 | zlib1g | 1:1.2.11.dfsg-2 |
 | zsh | 5.8-6+deb11u1 |
 
 ## Variant: 11-buster
 
-**Digest:** sha256:ce680730875da2f78c0a13a64a9011783f39a38ab0a4ecab3db02a9d7a6ef35c
+**Digest:** sha256:d6860f7aabbe5ae8564011089df927dabbbbf31a12a9ec4f2f958a15a515589d
 
 **Tags:**
 ```
@@ -287,7 +287,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 11.0.14 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 11.0.15 | /usr/local/ |
 
 **Tools installed using git**
 
@@ -345,7 +345,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-buster
 | unzip | 6.0-23+deb10u2 |
 | vim-tiny | 2:8.1.0875-5 |
 | wget | 1.20.1-1.1 |
-| yarn | 1.22.18-1 |
+| yarn | 1.22.19-1 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.11.dfsg-1 |
 | zsh | 5.7.1-1+deb10u1 |
