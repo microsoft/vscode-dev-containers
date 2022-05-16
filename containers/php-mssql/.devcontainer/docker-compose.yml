@@ -9,7 +9,7 @@ services:
         # Update 'VARIANT' to pick a version of PHP version: 8, 8.1, 8.0, 7, 7.4
         # Append -bullseye or -buster to pin to an OS version.
         # Use -bullseye variants on local arm64/Apple Silicon.
-        VARIANT: "8-bullseye"
+        VARIANT: "8.1-bullseye"
         # Optional Node.js version
         NODE_VERSION: "none"
 
