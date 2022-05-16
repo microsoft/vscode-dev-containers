@@ -2,7 +2,19 @@
 {
 	"name": "Julia (Community)",
 	"image": "ghcr.io/julia-vscode/julia-devcontainer",
-	"extensions": ["julialang.language-julia"],
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"julialang.language-julia"
+			]
+		}
+	},
+
 	"postCreateCommand": "/julia-devcontainer-scripts/postcreate.jl",
+
 	"remoteUser": "vscode"
 }
