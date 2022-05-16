@@ -25,22 +25,29 @@
 		// Use 'TF_VAR' prefix to set input variables for terraform templates
 		// "TF_VAR_rg_name":  "${containerEnv:TF_VAR_RG_NAME}"
 	},
-	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"terraform.languageServer": {
-			"enabled": true,
-			"args": []
-		},
-		"azureTerraform.terminal": "integrated"
-	},
 
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"hashicorp.terraform",
-		"ms-vscode.azurecli",
-		"ms-azuretools.vscode-azureterraform",
-		"ms-azuretools.vscode-docker"
-	],
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+				// Set *default* container specific settings.json values on container create.
+				"settings": { 
+				"terraform.languageServer": {
+					"enabled": true,
+					"args": []
+				},
+				"azureTerraform.terminal": "integrated"
+				},
+
+				// Add the IDs of extensions you want installed when the container is created.
+				"extensions": [
+					"hashicorp.terraform",
+					"ms-vscode.azurecli",
+					"ms-azuretools.vscode-azureterraform",
+					"ms-azuretools.vscode-docker"
+				]
+		}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

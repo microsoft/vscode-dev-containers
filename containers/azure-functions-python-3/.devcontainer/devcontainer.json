@@ -3,15 +3,18 @@
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 
-	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-azuretools.vscode-azurefunctions",
-		"ms-azuretools.vscode-docker",
-		"ms-python.python"
-	],
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-azuretools.vscode-azurefunctions",
+				"ms-azuretools.vscode-docker",
+				"ms-python.python"
+			]
+		}
+	},
 	
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "npm install",
