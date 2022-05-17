@@ -21,10 +21,10 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "kubectl version",
+	// "postCreateCommand": "kubectl version --client=true --output=yaml",
 
 	// Use 'postStartCommand' to run commands after the container is created like starting k3d.
-	"postStartCommand": "k3d cluster create > k3d.log 2>&1",
+	// "postStartCommand": "k3d cluster create > k3d.log 2>&1",
 
 	// k3d does not like running as root, so use a non-root user.
 	"remoteUser": "vscode"
