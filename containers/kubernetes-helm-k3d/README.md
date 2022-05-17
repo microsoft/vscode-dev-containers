@@ -1,8 +1,8 @@
-# Kubernetes - Minikube-in-Docker
+# Kubernetes - K3d-in-Docker
 
 ## Summary
 
-*Access an embedded minikube instance or remote a Kubernetes cluster from inside a dev container. Includes kubectl, Helm, minikube, and the Docker.*
+*Access an embedded k3d instance or remote a Kubernetes cluster from inside a dev container. Includes kubectl, Helm, k3d, and the Docker.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -18,9 +18,9 @@
 
 > **Note:** If you're looking to reuse a local Kubernetes instance from Remote - Containers, you may find the [Kubernetes - Local Configuration](../kubernetes-helm) definition more interesting.
 
-Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into a local minikube or remote [Kubernetes](https://kubernetes.io/) cluster without affecting your dev container.
+Dev containers can be useful for all types of applications including those that also deploy into a container based-environment. While you can directly build and run the application inside the dev container you create, you may also want to test it by deploying a built container image into a local k3d or remote [Kubernetes](https://kubernetes.io/) cluster without affecting your dev container.
 
-This example illustrates how you can do this by using CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker), the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) right from inside your dev container.  This definition builds up from the [docker-in-docker](../docker-in-docker) container definition along with a [minikube](https://minikube.sigs.k8s.io/docs/) installation that can run right inside the container. It installs the Docker and Kubernetes extensions inside the container so you can use its full feature set with your project.
+This example illustrates how you can do this by using CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker), the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) right from inside your dev container.  This definition builds up from the [docker-in-docker](../docker-in-docker) container definition along with a [k3d](https://k3d.io/) installation that can run right inside the container. It installs the Docker and Kubernetes extensions inside the container so you can use its full feature set with your project.
 
 ## Using this definition with an existing folder
 
@@ -32,13 +32,13 @@ A few notes on the definition:
     FROM node:lts
     ```
 
-* If you want minikube to automatically start when the dev container starts, uncomment the following line:
+* If you want k3d to automatically start when the dev container starts, uncomment the following line:
 
     ```json
-    "postStartCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
+	"postStartCommand": "k3d cluster create > k3d.log 2>&1",
     ```
 
-    This will log minikube output to `minikube.log` in your workspace folder, but you can update that part of the line above to a different path if you wish (e.g. `/tmp/minikube.log`).
+    This will log k3d output to `k3d.log` in your workspace folder, but you can update that part of the line above to a different path if you wish (e.g. `/tmp/k3d.log`).
 
 Beyond that, just follow these steps to use the definition:
 
