@@ -1,4 +1,4 @@
-# [Choice] .NET version: 6.0-bullseye, 5.0-bullseye, 3.1-bullseye, 6.0-focal, 5.0-focal, 3.1-focal
+# [Choice] .NET version: 6.0-bullseye, 3.1-bullseye, 6.0-focal, 3.1-focal
 ARG VARIANT=6.0-bullseye-slim
 FROM mcr.microsoft.com/dotnet/sdk:${VARIANT}
 
@@ -16,7 +16,7 @@ ARG USER_GID=$USER_UID
 RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+# [Choice] Node.js version: none, lts/*, 16, 14
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
