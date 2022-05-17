@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Access an embedded k3d instance or remote a Kubernetes cluster from inside a dev container. Includes kubectl, Helm, k3d, and the Docker.*
+*Access an embedded k3d instance or remote a Kubernetes cluster from inside a dev container. Includes kubectl, Helm, k3d, and Docker.*
 
 | Metadata | Value |  
 |----------|-------|
@@ -53,6 +53,28 @@ Beyond that, just follow these steps to use the definition:
 4. Select this definition. You may also need to select **Show All Definitions...** for it to appear.
 
 5. Finally, press <kbd>F1</kbd> and run **Remote-Containers: Reopen Folder in Container** or **Codespaces: Rebuild Container** to start using the definition.
+
+## Getting started with Kubernetes Deployments
+
+Deploy an application into the local k3d cluster or remote kubernetes cluster by creating a Kubernetes Deployment object.
+
+```bash
+
+# Create a Deployment based on the YAML file
+kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+
+# Display information about the Deployment
+kubectl describe deployment nginx-deployment
+
+# List the Pods created by the deployment
+kubectl get pods -l app=nginx
+
+# Delete the deployment by name
+kubectl delete deployment nginx-deployment
+
+```
+
+Refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/) for a detailed walkthrough on deploying applications to a Kubernetes cluster.
 
 ## License
 
