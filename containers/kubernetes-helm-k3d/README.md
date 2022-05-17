@@ -35,7 +35,7 @@ A few notes on the definition:
 * If you want k3d to automatically start when the dev container starts, uncomment the following line:
 
     ```json
-	"postStartCommand": "k3d cluster create > k3d.log 2>&1",
+    "postStartCommand": "k3d cluster create > k3d.log 2>&1",
     ```
 
     This will log k3d output to `k3d.log` in your workspace folder, but you can update that part of the line above to a different path if you wish (e.g. `/tmp/k3d.log`).
@@ -80,4 +80,4 @@ Refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/run-app
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE). 
+Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).
