@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Docker Compose |
 | *Published image architecture(s)* | x86-64 |
-| *Available image variants* | 3.1-focal, 5.0-focal, 6.0-focal |
+| *Available image variants* | 3.1-focal, 6.0-focal |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Ubuntu 20.04/focal (Debian 11/bullseye image variants not yet supported by MSSQL client) |
