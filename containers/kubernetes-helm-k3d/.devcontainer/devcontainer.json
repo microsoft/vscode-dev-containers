@@ -1,10 +1,10 @@
 {
-	"name": "Kubernetes - Minikube-in-Docker",
+	"name": "Kubernetes - k3d-in-Docker",
 	"dockerFile": "Dockerfile",
 	"runArgs": ["--privileged"],
 	"mounts": [
-		"source=minikube-var-lib-docker,target=/var/lib/docker,type=volume",
-		"source=minikube-config,target=/home/vscode/.minikube,type=volume",
+		"source=k3d-var-lib-docker,target=/var/lib/docker,type=volume",
+		"source=k3d-config,target=/home/vscode/.k3d,type=volume",
 	],
 	"overrideCommand": false,
 
@@ -23,9 +23,9 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "kubectl version",
 
-	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
-	// "postStartCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
+	// Use 'postStartCommand' to run commands after the container is created like starting k3d.
+	"postStartCommand": "k3d cluster create > k3d.log 2>&1",
 
-	// Minikube does not like running as root, so use a non-root user.
+	// k3d does not like running as root, so use a non-root user.
 	"remoteUser": "vscode"
 }
