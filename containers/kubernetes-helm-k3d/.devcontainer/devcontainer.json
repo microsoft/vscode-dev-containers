@@ -4,7 +4,7 @@
 	"runArgs": ["--privileged"],
 	"mounts": [
 		"source=k3d-var-lib-docker,target=/var/lib/docker,type=volume",
-		"source=k3d-config,target=/home/vscode/.k3d,type=volume",
+		"source=k3d-config,target=/home/${remoteUser}/.k3d,type=volume"
 	],
 	"overrideCommand": false,
 
