@@ -1,6 +1,6 @@
 {
-	"variants": ["6.0-bullseye-slim", "6.0-focal", "5.0-bullseye-slim", "5.0-focal", "3.1-bullseye", "3.1-focal"],
-	"definitionVersion": "0.203.0",
+	"variants": ["6.0-bullseye-slim", "6.0-focal", "3.1-bullseye", "3.1-focal"],
+	"definitionVersion": "0.203.1",
 	"build": {
 		"latest": "6.0-bullseye-slim",
 		"rootDistro": "debian",
@@ -10,8 +10,6 @@
 		"architectures": {
 			"6.0-focal": ["linux/amd64"],
 			"6.0-bullseye-slim": ["linux/amd64", "linux/arm64"],
-			"5.0-focal": ["linux/amd64"],
-			"5.0-bullseye-slim": ["linux/amd64", "linux/arm64"],
 			"3.1-focal": ["linux/amd64"],
 			"3.1-bullseye": ["linux/amd64", "linux/arm64"]
 		},
@@ -19,14 +17,6 @@
 			"6.0-bullseye-slim": [
 				"dotnet:${VERSION}-6.0",
 				"dotnet:${VERSION}-6.0-bullseye"
-			],
-			"5.0-focal": [ 
-				"dotnet:${VERSION}-5.0",
-				"dotnetcore:${VERSION}-5.0"
-			],
-			"5.0-bullseye-slim": [ 
-				"dotnet:${VERSION}-5.0-bullseye",
-				"dotnetcore:${VERSION}-5.0-bullseye"
 			],
 			"3.1-focal": [ 
 				"dotnet:${VERSION}-3.1",
