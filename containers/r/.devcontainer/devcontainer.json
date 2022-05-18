@@ -13,22 +13,27 @@
 		}
 	},
 
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"r.rterm.linux": "/usr/local/bin/radian",
-		"r.bracketedPaste": true,
-		"r.plot.useHttpgd": true,
-		"[r]": {
-			"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"r.rterm.linux": "/usr/local/bin/radian",
+				"r.bracketedPaste": true,
+				"r.plot.useHttpgd": true,
+				"[r]": {
+					"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+				}
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"reditorsupport.r",
+				"rdebugger.r-debugger"
+			]
 		}
 	},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	// For example, if you want to use vscode-jupyter, add "ms-toolsai.jupyter".
-	"extensions": [
-		"reditorsupport.r",
-		"rdebugger.r-debugger"
-	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

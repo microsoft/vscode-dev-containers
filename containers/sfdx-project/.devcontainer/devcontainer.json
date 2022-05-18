@@ -1,14 +1,24 @@
 {
     "name": "Salesforce Project (Community)",
     "dockerFile": "Dockerfile",
-    "extensions": [
-      "salesforce.salesforcedx-vscode",
-      "redhat.vscode-xml",
-      "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode"
-    ],
-    "settings": {
-      "salesforcedx-vscode-apex.java.home": "/usr/lib/jvm/java-11-openjdk-amd64"
+
+    // Configure tool-specific properties.
+    "customizations": {
+      // Configure properties specific to VS Code.
+      "vscode": {
+        // Set *default* container specific settings.json values on container create.
+        "settings": { 
+          "salesforcedx-vscode-apex.java.home": "/usr/lib/jvm/java-11-openjdk-amd64"
+        },
+        
+        // Add the IDs of extensions you want installed when the container is created.
+        "extensions": [
+          "salesforce.salesforcedx-vscode",
+          "redhat.vscode-xml",
+          "dbaeumer.vscode-eslint",
+          "esbenp.prettier-vscode"
+        ]
+      }
     }
   }
   

@@ -5,21 +5,30 @@
 	"runArgs": [
 		"--shm-size=1g",
 	],
-	"settings": {
-		"resmon.show.battery": false,
-		"resmon.show.cpufreq": false
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"resmon.show.battery": false,
+				"resmon.show.cpufreq": false
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"dbaeumer.vscode-eslint",
+				"rogalmic.bash-debug",
+				"mads-hartmann.bash-ide-vscode",
+				"streetsidesoftware.code-spell-checker",
+				"mutantdino.resourcemonitor",
+				"bierner.github-markdown-preview",
+				"EditorConfig.EditorConfig",
+				"chrisdias.vscode-opennewinstance"
+			]
+		}
 	},
-	"extensions": [
-		"ms-azuretools.vscode-docker",
-		"dbaeumer.vscode-eslint",
-		"rogalmic.bash-debug",
-		"mads-hartmann.bash-ide-vscode",
-		"streetsidesoftware.code-spell-checker",
-		"mutantdino.resourcemonitor",
-		"bierner.github-markdown-preview",
-		"EditorConfig.EditorConfig",
-		"chrisdias.vscode-opennewinstance"
-	],
 	"forwardPorts": [6080],
 	"portsAttributes": {
 		"6080": {

@@ -1,7 +1,14 @@
 {
     "name": "TensorFlow-Examples",
     "dockerFile": "Dockerfile",
-    "extensions": [
-        "ms-python.python"
-    ]
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python"
+			]
+		}
+	}
 }

@@ -16,16 +16,22 @@
 		}
 	},
 
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"html.format.templating": true,
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"html.format.templating": true,
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"bungcip.better-toml",
+				"davidanson.vscode-markdownlint"
+			]
+		}
 	},
-	
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"bungcip.better-toml",
-		"davidanson.vscode-markdownlint"
-	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
