@@ -10,8 +10,6 @@
 		"architectures": {
 			"6.0-focal": ["linux/amd64"],
 			"6.0-bullseye-slim": ["linux/amd64", "linux/arm64"],
-			"5.0-focal": ["linux/amd64"],
-			"5.0-bullseye-slim": ["linux/amd64", "linux/arm64"],
 			"3.1-focal": ["linux/amd64"],
 			"3.1-bullseye": ["linux/amd64", "linux/arm64"]
 		},
