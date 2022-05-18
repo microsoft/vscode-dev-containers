@@ -20,14 +20,6 @@
 				"dotnet:${VERSION}-6.0",
 				"dotnet:${VERSION}-6.0-bullseye"
 			],
-			"5.0-focal": [ 
-				"dotnet:${VERSION}-5.0",
-				"dotnetcore:${VERSION}-5.0"
-			],
-			"5.0-bullseye-slim": [ 
-				"dotnet:${VERSION}-5.0-bullseye",
-				"dotnetcore:${VERSION}-5.0-bullseye"
-			],
 			"3.1-focal": [ 
 				"dotnet:${VERSION}-3.1",
 				"dotnetcore:${VERSION}-3.1"
