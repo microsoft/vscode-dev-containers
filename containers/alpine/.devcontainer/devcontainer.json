@@ -5,13 +5,6 @@
 		// Update 'VARIANT' to pick an Alpine version: 3.13, 3.14, 3.15
 		"args": { "VARIANT": "3.15" }
 	},
-	
-	// Set *default* container specific settings.json values on container create. 
-	"settings": {},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	// Note that some extensions may not work in Alpine Linux. See https://aka.ms/vscode-remote/linux.
-	"extensions": [],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
