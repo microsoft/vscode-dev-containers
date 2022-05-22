@@ -90,7 +90,7 @@ See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker
     CMD ["sleep", "infinity"]
     ```
 
-    For CentOS/RedHat, simply replace the `RUN` above with:
+    For CentOS/RedHat/Fedora, simply replace the `RUN` above with:
 
     ```Dockerfile
     RUN bash /tmp/library-scripts/docker-redhat.sh
