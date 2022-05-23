@@ -96,7 +96,7 @@ fi
 # Debian/Ubuntu specific tests
 if [ "${DISTRO}" = "debian" ]; then
     run_script dotnet "6.0 true ${USERNAME} false /opt/dotnet dotnet"
-    run_script ruby " false" "2.7.3"
+    run_script ruby "false" "3.1.2"
     run_script awscli
     run_script azcli
     run_script fish "false ${USERNAME}"
