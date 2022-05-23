@@ -95,6 +95,8 @@ fi
 
 # Debian/Ubuntu specific tests
 if [ "${DISTRO}" = "debian" ]; then
+    run_script dotnet "6.0 true ${USERNAME} false /opt/dotnet dotnet"
+    run_script ruby " false" "2.7.3"
     run_script awscli
     run_script azcli
     run_script fish "false ${USERNAME}"
@@ -107,7 +109,6 @@ if [ "${DISTRO}" = "debian" ]; then
     run_script maven "3.6.3 /usr/local/sdkman3 ${USERNAME} false"
     run_script node "/usr/local/share/nvm 14 ${USERNAME}"
     run_script python "3.4.10 /opt/python /opt/python-tools ${USERNAME} false false"
-    run_script ruby "${USERNAME} false" "2.7.3"
     run_script rust "/opt/rust/cargo /opt/rust/rustup ${USERNAME} false"
     run_script terraform "0.15.0 0.12.1"
     run_script sshd "2223 ${USERNAME} true random"
@@ -132,7 +133,6 @@ if [ "${DISTRO}" = "debian" ]; then
     if [ "${architecture}" = "amd64" ] || [ "${architecture}" = "x86_64" ]; then
         run_script homebrew "${USERNAME} false true /home/${USERNAME}/linuxbrew"
     fi
-    run_script dotnet "3.1 true ${USERNAME} false /opt/dotnet dotnet"
 fi
 
 # TODO: Most of this script does not execute since 'docker-in-docker' is run above
