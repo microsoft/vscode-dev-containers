@@ -22,8 +22,8 @@ DOTNET_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute jammy"
 # Feed URI sourced from the official dotnet-install.sh
 # https://github.com/dotnet/install-scripts/blob/1b98b94a6f6d81cc4845eb88e0195fac67caa0a6/src/dotnet-install.sh#L1342-L1343
 DOTNET_CDN_FEED_URI="https://dotnetcli.azureedge.net"
-# Ubuntu 22.04 and on do not ship with libssl1.1, which is required by all version of .NET < 6.0
-DOTNET_VERSION_CODENAMES_REQUIRE_LIBSSL_3="jammy"
+# Ubuntu 22.04 and on do not ship with libssl1.1, which is required for versions of .NET < 6.0
+DOTNET_VERSION_CODENAMES_REQUIRE_OLDER_LIBSSL_1="buster bullseye bionic focal hirsute"
 
 # Exit on failure.
 set -e
@@ -300,10 +300,10 @@ install_using_dotnet_releases_url() {
     check_packages curl ca-certificates tar jq icu-devtools libgssapi-krb5-2 zlib1g
 
     # Starting with Ubuntu 22.04 (jammy), libssl1.1 does not ship with the OS anymore.
-    if [[  "${DOTNET_VERSION_CODENAMES_REQUIRE_LIBSSL_3}" = *"${VERSION_CODENAME}"* ]]; then
-        check_packages libssl3.0
-    else
+    if [[  "${DOTNET_VERSION_CODENAMES_REQUIRE_OLDER_LIBSSL_1}" = *"${VERSION_CODENAME}"* ]]; then
         check_packages libssl1.1
+    else
+        check_packages libssl3.0
     fi
 
     get_full_version_details "${sdk_or_runtime}"
@@ -351,6 +351,18 @@ EOF
 ###########################
 
 export DEBIAN_FRONTEND=noninteractive
+
+# Dotnet 3.1 and 5.0 are not supported on Ubuntu 22.04 (jammy)+,
+# due to lack of libssl3.0 support.
+# See: https://github.com/microsoft/vscode-dev-containers/issues/1458#issuecomment-1135077775
+# NOTE: This will only guard against installation of the dotnet versions we propose via 'features'. 
+#       The user can attempt to install any other version at their own risk.
+if [[ "${DOTNET_VERSION}" = "3.1" ]] || [[ "${DOTNET_VERSION}" = "5.0" ]]; then
+    if [[ ! "${DOTNET_VERSION_CODENAMES_REQUIRE_OLDER_LIBSSL_1}" = *"${VERSION_CODENAME}"* ]]; then
+        err "Dotnet ${DOTNET_VERSION} is not supported on Ubuntu ${VERSION_CODENAME}.\n Please upgrade your version of dotnet, or downgrade your OS version."
+        exit 1
+    fi
+fi
 
 # Determine if the user wants to download .NET Runtime only, or .NET SDK & Runtime
 # and set the appropriate variables.
