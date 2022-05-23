@@ -18,10 +18,12 @@ ACCESS_GROUP=${6:-"dotnet"}
 
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOTNET_ARCHIVE_ARCHITECTURES="amd64"
-DOTNET_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute"
+DOTNET_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute jammy"
 # Feed URI sourced from the official dotnet-install.sh
 # https://github.com/dotnet/install-scripts/blob/1b98b94a6f6d81cc4845eb88e0195fac67caa0a6/src/dotnet-install.sh#L1342-L1343
 DOTNET_CDN_FEED_URI="https://dotnetcli.azureedge.net"
+# Ubuntu 22.04 and on do not ship with libssl1.1, which is required by all version of .NET < 6.0
+DOTNET_VERSION_CODENAMES_REQUIRE_LIBSSL_3="jammy"
 
 # Exit on failure.
 set -e
@@ -295,7 +297,14 @@ install_using_dotnet_releases_url() {
     #         - libgcc-s1 OR libgcc1 depending on OS
     #         - the latest libicuXX depending on OS (eg libicu57 for stretch)
     #         - also installs libc6 and libstdc++6 which are required by .NET 
-    check_packages curl ca-certificates tar jq icu-devtools libgssapi-krb5-2 libssl1.1 zlib1g
+    check_packages curl ca-certificates tar jq icu-devtools libgssapi-krb5-2 zlib1g
+
+    # Starting with Ubuntu 22.04 (jammy), libssl1.1 does not ship with the OS anymore.
+    if [[  "${DOTNET_VERSION_CODENAMES_REQUIRE_LIBSSL_3}" = *"${VERSION_CODENAME}"* ]]; then
+        check_packages libssl3.0
+    else
+        check_packages libssl1.1
+    fi
 
     get_full_version_details "${sdk_or_runtime}"
     # exports DOTNET_DOWNLOAD_URL, DOTNET_DOWNLOAD_HASH, DOTNET_DOWNLOAD_NAME
@@ -362,13 +371,15 @@ architecture="$(dpkg --print-architecture)"
 
 use_dotnet_releases_url="false"
 if [[ "${DOTNET_ARCHIVE_ARCHITECTURES}" = *"${architecture}"* ]] && [[  "${DOTNET_ARCHIVE_VERSION_CODENAMES}" = *"${VERSION_CODENAME}"* ]]; then
+    echo "Detected ${VERSION_CODENAME} on ${architecture}. Attempting to install dotnet from apt"
     install_using_apt "${DOTNET_SDK_OR_RUNTIME}" || use_dotnet_releases_url="true"
 else
    use_dotnet_releases_url="true"
 fi
 
 if [ "${use_dotnet_releases_url}" = "true" ]; then
-   install_using_dotnet_releases_url "${DOTNET_SDK_OR_RUNTIME}"
+    echo "Could not install dotnet from apt. Attempting to install dotnet from releases url"
+    install_using_dotnet_releases_url "${DOTNET_SDK_OR_RUNTIME}"
 fi
 
 echo "Done!"
