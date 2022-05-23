@@ -1,14 +1,9 @@
 {
 	"variants": [ "bullseye", "buster" ],
-	"definitionVersion": "0.205.3",
+	"definitionVersion": "1.0.0",
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",
-		"parent": "java",
-		"parentVariant": {
-			"bullseye": "11-bullseye",
-			"buster": "11-buster"
-		},
 		"architectures": {
 			"bullseye": ["linux/amd64", "linux/arm64"],
 			"buster": ["linux/amd64"]
@@ -25,8 +20,8 @@
 		}
 	},
 	"dependencies": {
-		"image": "mcr.microsoft.com/vscode/devcontainers/java:11-${VARIANT}",
-		"imageLink": "https://hub.docker.com/_/openjdk",
+		"image": "buildpack-deps:${BASE_IMAGE_VERSION_CODENAME}-curl",
+		"imageLink": "https://hub.docker.com/_/buildpack-deps",
 		"apt": [{
 			"cgIgnore": false,
 			"name": "yarn"

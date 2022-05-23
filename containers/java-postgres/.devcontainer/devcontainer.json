@@ -10,7 +10,6 @@
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
 			"settings": { 
-				"java.home": "/docker-java-home"
 			},
 			
 			// Add the IDs of extensions you want installed when the container is created.
