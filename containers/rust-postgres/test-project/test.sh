@@ -9,7 +9,7 @@ checkCommon
 # Definition specific tests
 checkExtension "vadimcn.vscode-lldb"
 checkExtension "mutantdino.resourcemonitor"
-checkExtension "matklad.rust-analyzer"
+checkExtension "rust-lang.rust-analyzer"
 checkExtension "tamasfe.even-better-toml"
 checkExtension "serayuzgur.crates"
 check "cargo-version" cargo -V
