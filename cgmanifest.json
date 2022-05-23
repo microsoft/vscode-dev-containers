@@ -76,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "5e7cbdceacd2b3cb85e057963fdb605136805bd3"
+                    "commitHash": "314018fef43c7e3a52a3e46599313b70ace3977a"
                 }
             }
         },
@@ -178,7 +178,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-cli",
-                    "Version": "20.10.15+azure-1",
+                    "Version": "20.10.16+azure-3",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -191,7 +191,7 @@
                 "Type": "linux",
                 "Linux": {
                     "Name": "moby-engine",
-                    "Version": "20.10.15+azure-2",
+                    "Version": "20.10.16+azure-2",
                     "Distribution": "ubuntu",
                     "Release": "20.04",
                     "Pool-URL": "https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod",
@@ -339,7 +339,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.8.3"
+                    "Version": "0.8.4"
                 }
             }
         },
@@ -402,7 +402,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.46.1"
+                    "Version": "1.46.2"
                 }
             }
         },
@@ -491,7 +491,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Helm",
-                    "Version": "3.8.2",
+                    "Version": "3.9.0",
                     "DownloadUrl": "https://github.com/helm/helm"
                 }
             }
@@ -605,26 +605,6 @@
                 "Other": {
                     "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
                     "Version": "6.0-focal",
-                    "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
-                    "Version": "5.0-bullseye-slim",
-                    "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: mcr.microsoft.com/dotnet/sdk",
-                    "Version": "5.0-focal",
                     "DownloadUrl": "https://hub.docker.com/_/microsoft-dotnet-sdk"
                 }
             }
@@ -931,7 +911,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.60.0"
+                    "Version": "1.61.0"
                 }
             }
         },
@@ -940,7 +920,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.60.0"
+                    "Version": "1.61.0"
                 }
             }
         },
@@ -949,7 +929,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.60.0"
+                    "Version": "1.61.0"
                 }
             }
         },
@@ -1018,7 +998,7 @@
                 "Type": "npm",
                 "Npm": {
                     "Name": "eslint",
-                    "Version": "8.15.0"
+                    "Version": "8.16.0"
                 }
             }
         },

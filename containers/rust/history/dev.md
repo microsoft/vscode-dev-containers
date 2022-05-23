@@ -10,7 +10,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:05e892bf55802b0998b395a70e882f8b3b88d8c9777dc26b44078116eee8edf7
+**Digest:** sha256:b38947ca05c532748a47afa05dc380ed853b437880903935c703f7a7a31d8e47
 
 **Tags:**
 ```
@@ -31,7 +31,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Rust](https://github.com/rust-lang/rust) | 1.60.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.61.0 | /usr/local/cargo<br />/usr/local/rustup |
 
 **Tools installed using git**
 
@@ -45,9 +45,9 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.38 |
-| rust-analysis | 1.60.0 |
-| rust-src | 1.60.0 |
-| clippy | 1.60.0 |
+| rust-analysis | 1.61.0 |
+| rust-src | 1.61.0 |
+| clippy | 1.61.0 |
 
 **Additional linux tools and packages**
 
@@ -72,7 +72,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | lldb | 1:7.0-47 |
 | locales | 2.28-10+deb10u1 |
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 
 ## Variant: bullseye
 
-**Digest:** sha256:b21fa36f0a871b0468a750d525e4c3ba7ea07ff1425da4f849f74d6ab97d860e
+**Digest:** sha256:40762a9e481b58aa602f7748dc545ec22078cf08a8d8eb740f5b3be97f5edaed
 
 **Tags:**
 ```
@@ -122,7 +122,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Rust](https://github.com/rust-lang/rust) | 1.60.0 | /usr/local/cargo<br />/usr/local/rustup |
+| [Rust](https://github.com/rust-lang/rust) | 1.61.0 | /usr/local/cargo<br />/usr/local/rustup |
 
 **Tools installed using git**
 
@@ -136,9 +136,9 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-bullseye
 |--------------|---------|
 | rls | 1.41.0 |
 | rustfmt | 1.4.38 |
-| rust-analysis | 1.60.0 |
-| rust-src | 1.60.0 |
-| clippy | 1.60.0 |
+| rust-analysis | 1.61.0 |
+| rust-src | 1.61.0 |
+| clippy | 1.61.0 |
 
 **Additional linux tools and packages**
 
@@ -162,7 +162,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | lldb | 1:11.0-51+nmu5 |
 | locales | 2.31-13+deb11u3 |

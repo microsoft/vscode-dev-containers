@@ -14,7 +14,7 @@
 
 ## Variant: 18-bullseye
 
-**Digest:** sha256:e9fc9ff12351e9b8329855d36282e5a27d62130696045aad31f440d094fc87c0
+**Digest:** sha256:f0cc5694576e4c3100c77b9a5ac3811d9ef8fc6ac5dc8ec246a930b73b3a369c
 
 **Tags:**
 ```
@@ -35,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 18.1.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 18.2.0 | /usr/local |
 
 **Tools installed using git**
 
@@ -48,7 +48,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-bullseye
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 
 **Additional linux tools and packages**
 
@@ -70,7 +70,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-bullseye
 
 ## Variant: 16-bullseye
 
-**Digest:** sha256:47c7209a2b8cd25d9af6c7e8b53f9af927ab23b9eb1105395c7534241d9cb198
+**Digest:** sha256:b3d595ecf6a2521a14bd0a9b6c09bab80c253933c4ee8ca34db833e59f8b4b73
 
 **Tags:**
 ```
@@ -132,7 +132,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 
 **Additional linux tools and packages**
 
@@ -154,7 +154,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -183,7 +183,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16
 
 ## Variant: 14-bullseye
 
-**Digest:** sha256:d4a019a5ed2069b6466ddf76d6b665c5e8392295c17f346f7156d1cd357060bb
+**Digest:** sha256:6df93c81cf9d323dacc041d09e3069dd547d98abeeaf48e6bfd45af4f8918d56
 
 **Tags:**
 ```
@@ -203,7 +203,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.19.1 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.19.3 | /usr/local |
 
 **Tools installed using git**
 
@@ -216,7 +216,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 
 **Additional linux tools and packages**
 
@@ -238,7 +238,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -267,7 +267,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14
 
 ## Variant: 18-buster
 
-**Digest:** sha256:b253f95ef7841cfa3a0e4a813f93e29c3f0b30b266129b64949230c412c31eaf
+**Digest:** sha256:440b652f57ea77692e0be89e6973d2b86dcb9795745f3961275b396d62198d1c
 
 **Tags:**
 ```
@@ -287,7 +287,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 18.1.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 18.2.0 | /usr/local |
 
 **Tools installed using git**
 
@@ -300,7 +300,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-buster
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 
 **Additional linux tools and packages**
 
@@ -323,7 +323,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -352,7 +352,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-buster
 
 ## Variant: 16-buster
 
-**Digest:** sha256:7a2766519b57c227bce3fd4ee98cf50d41421a81a0df70eff004387eddbbd066
+**Digest:** sha256:613d11fb32904751ed941699dc94d0c6bf49a797db12f072f467fb214abfda90
 
 **Tags:**
 ```
@@ -384,7 +384,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16-buster
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 
 **Additional linux tools and packages**
 
@@ -407,7 +407,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -436,7 +436,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-16-buster
 
 ## Variant: 14-buster
 
-**Digest:** sha256:356983fbc1ac8873349acee39f70b14981b03cff03fddc3bfe8a60d20ff7e1c4
+**Digest:** sha256:98483f354060f414f904fe79e46c68fa6a2447508478c6b7e1e45f8e08c09cc3
 
 **Tags:**
 ```
@@ -455,7 +455,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.19.1 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.19.3 | /usr/local |
 
 **Tools installed using git**
 
@@ -468,7 +468,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-buster
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 
 **Additional linux tools and packages**
 
@@ -491,7 +491,7 @@ mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-14-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |

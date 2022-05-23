@@ -11,7 +11,7 @@
 
 ## Variant: jammy
 
-**Digest:** sha256:488d0185f0947f8130d27fe93c5e149cecb00acbec2b03c085b203df190b7918
+**Digest:** sha256:451c8645955c688a313f4d64a7ff48b02d135928f6c4cee821550aa00be0af29
 
 **Tags:**
 ```
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 ## Variant: focal
 
-**Digest:** sha256:6d3f90b883869cbdd303a23df7fbff919f4481f374de80f1032717851b36fe05
+**Digest:** sha256:8df15afa77b3e7a02fdabd686fc8ec216d425d73589a65b081c2895ca59b46bc
 
 **Tags:**
 ```
@@ -108,8 +108,8 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 2.0.6 |
-| apt-utils | 2.0.6 |
+| apt-transport-https | 2.0.8 |
+| apt-utils | 2.0.8 |
 | ca-certificates | 20210119~20.04.2 |
 | curl | 7.68.0-1ubuntu2.11 |
 | dialog | 1.3-20190808-1 |
@@ -153,7 +153,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:9cf63befbe3bed48e759de61421d5dccbfeb31924d05fed3df1a4840e7f080f0
+**Digest:** sha256:8150e5e6da557027a79ae54524f02563c8e45cdd80b804684662e64d5e367fe4
 
 **Tags:**
 ```

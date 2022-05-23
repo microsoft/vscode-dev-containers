@@ -18,7 +18,7 @@
 
 ## Variant: 3.10-bullseye
 
-**Digest:** sha256:e7c3dab3b8179fc0dc91aa2eb530017d45ec226cddb0589f445eb43cb693ffe3
+**Digest:** sha256:ae759eb6330cbb1e24bb4985e13c4b42635791de6cd3f1d81a6d30801d58b228
 
 **Tags:**
 ```
@@ -86,7 +86,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -115,7 +115,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-bullseye
 
 ## Variant: 3.9-bullseye
 
-**Digest:** sha256:151cd4c9b30d6356ab202373f3a6b4ac1df574e0121955927b9febdaaa420f33
+**Digest:** sha256:0d6ef33a6365e40c015088de319793bcd805834d377a983585c76a43680e515d
 
 **Tags:**
 ```
@@ -135,7 +135,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.9.12 | /usr/local |
+| [Python](https://www.python.org/) | 3.9.13 | /usr/local |
 
 **Tools installed using git**
 
@@ -180,7 +180,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9
 
 ## Variant: 3.8-bullseye
 
-**Digest:** sha256:c4e7da7a269e2732aa3293eb09646c4761115f4191063ca3925280532892b6a5
+**Digest:** sha256:867e195d8db3d847032b3324183323634a02d0d688fcbc0d31fa7a82ebadb756
 
 **Tags:**
 ```
@@ -274,7 +274,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -303,7 +303,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8
 
 ## Variant: 3.7-bullseye
 
-**Digest:** sha256:768fdcdebaa02810fb2af90f0f2eabb5c792c50deb84e33c645a7d4f9ade31e1
+**Digest:** sha256:f8776f56283140005920f93aa5f6f40ba29f6774f0f53aea5e26372d025293ea
 
 **Tags:**
 ```
@@ -368,7 +368,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -397,7 +397,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7
 
 ## Variant: 3.6-bullseye
 
-**Digest:** sha256:fc7df5ba674d0b429b7c6b22693079a5e666794be6b9f368997e3eea5bfc41a9
+**Digest:** sha256:122912b6fdd674e9ec501ef8ad36f7dc3e20df5b84c444385016195e6ecb5061
 
 **Tags:**
 ```
@@ -462,7 +462,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -491,7 +491,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6
 
 ## Variant: 3.10-buster
 
-**Digest:** sha256:69b567dc0a44c0155943b526f830e810c139295aacf64d8d4e37de23c6818f67
+**Digest:** sha256:f151fdbaed5a2b2e786acd9c52534d18ae6ae2f4477ff993427c99729b37b341
 
 **Tags:**
 ```
@@ -558,7 +558,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -587,7 +587,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-buster
 
 ## Variant: 3.9-buster
 
-**Digest:** sha256:f0a348cba6f68cb7eb290b3e4d2b6afc1914c9c894b61425a3f3324259fbee9e
+**Digest:** sha256:80f4e29d8361614fd61aac8350661d21c7246afe1636369c6e6078a7ab0573cc
 
 **Tags:**
 ```
@@ -606,7 +606,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.9.12 | /usr/local |
+| [Python](https://www.python.org/) | 3.9.13 | /usr/local |
 
 **Tools installed using git**
 
@@ -652,7 +652,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -681,7 +681,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.9-buster
 
 ## Variant: 3.8-buster
 
-**Digest:** sha256:6854db1f7dc6ca386e19a61f8f77abf79a06cfee39d3a3fd8378725efc13df24
+**Digest:** sha256:fbf0f61fdb8ca887b10c8aecd564079b7f1944b822bf0616068c7e8a570179f5
 
 **Tags:**
 ```
@@ -746,7 +746,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -775,7 +775,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.8-buster
 
 ## Variant: 3.7-buster
 
-**Digest:** sha256:0b497b75c54693972546ee0294281873b92e80ddf255b24946cda8aed7a66605
+**Digest:** sha256:59679f97fe6c320e0e757ab97e3ba9eca497d65844b7035cc23efa02b7c194c1
 
 **Tags:**
 ```
@@ -840,7 +840,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -869,7 +869,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.7-buster
 
 ## Variant: 3.6-buster
 
-**Digest:** sha256:5e85a7c58262183e4d281d94ca66fbc58ed59e746ec21aa0f20a63baa7dbc7f9
+**Digest:** sha256:c099d5c79a02deda33587b429eb7a2a9db3f92da4d937030c39135aeed4d2b92
 
 **Tags:**
 ```
@@ -934,7 +934,7 @@ mcr.microsoft.com/vscode/devcontainers/python:dev-3.6-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |

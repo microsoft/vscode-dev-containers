@@ -11,7 +11,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:5d369214881747f036c5055dfd634eb8fde1b196ca11ab713f9d4d9bae54b1ff
+**Digest:** sha256:8129e00e27f2ec7744b1580e766abfe044f63dee5edc4890423fd65187f757c5
 
 **Tags:**
 ```
@@ -55,7 +55,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -83,7 +83,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 ## Variant: bullseye
 
-**Digest:** sha256:ad4bfacb2506cdecc0c629b65ab1c2bf7f6b4a0bcdf0540d7dd4af2af66b1a0b
+**Digest:** sha256:8da3df97fa243e26d207a3f56c4268aa96a4884f354a8bf19a0d856f11cea34d
 
 **Tags:**
 ```
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -156,7 +156,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:c909e41ce4f1b9cc0f3ef24df9037f14ffd207c4e5f97eb0236328b53a20eb38
+**Digest:** sha256:9ef4509e9f4ef16caa53d279442e99b145ba2439168900db0edc7d75e9e4750d
 
 **Tags:**
 ```
@@ -221,7 +221,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 | strace | 4.15-2 |
 | sudo | 1.8.19p1-2.1+deb9u3 |
 | unzip | 6.0-21+deb9u2 |
-| vim-tiny | 2:8.0.0197-4+deb9u5 |
+| vim-tiny | 2:8.0.0197-4+deb9u6 |
 | wget | 1.18-5+deb9u3 |
 | zip | 3.0-11+b1 |
 | zlib1g | 1:1.2.8.dfsg-5+deb9u1 |

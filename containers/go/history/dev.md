@@ -12,7 +12,7 @@
 
 ## Variant: 1.18-bullseye
 
-**Digest:** sha256:8a2dd678c35fb91caa86d3d75e80d713863824e352b798a123c33726af7cc222
+**Digest:** sha256:86fdc69f45059953047757c932f8261c6415782beed6e18d9e89edbba16eedd5
 
 **Tags:**
 ```
@@ -48,14 +48,14 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.3 |
+| golang.org/x/tools/gopls | 0.8.4 |
 | honnef.co/go/tools | 0.3.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.1 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.1 |
+| github.com/golangci/golangci-lint | 1.46.2 |
 
 **Additional linux tools and packages**
 
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 ## Variant: 1.18-buster
 
-**Digest:** sha256:8311d31ebd051635777eebbddf528de803fd33b3b185ae2be91d8b5ee1128b1b
+**Digest:** sha256:911be702eb2e3bd853e1d02b1df76d541a7465a1862290998caa6a0c6287dc00
 
 **Tags:**
 ```
@@ -145,14 +145,14 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.3 |
+| golang.org/x/tools/gopls | 0.8.4 |
 | honnef.co/go/tools | 0.3.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.1 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.1 |
+| github.com/golangci/golangci-lint | 1.46.2 |
 
 **Additional linux tools and packages**
 
@@ -178,7 +178,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 ## Variant: 1.17-bullseye
 
-**Digest:** sha256:3a405bb8a4de1e182019e6db6f5cf528bacad04b7d21467c5be96528de2f14b9
+**Digest:** sha256:a74bd1451367865531fb9020111a3fe084697bda35ba67904cf6ed941e799d00
 
 **Tags:**
 ```
@@ -242,14 +242,14 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.3 |
+| golang.org/x/tools/gopls | 0.8.4 |
 | honnef.co/go/tools | 0.3.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.1 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.1 |
+| github.com/golangci/golangci-lint | 1.46.2 |
 
 **Additional linux tools and packages**
 
@@ -274,7 +274,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -305,7 +305,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 
 ## Variant: 1.17-buster
 
-**Digest:** sha256:7d325422ba7ddbb0defc6a7fe42077034338102e1678000aad830271f4501364
+**Digest:** sha256:9e0d782b624b4b74d3335dc8ad3c906e4f9d5b7b247f7d149501bd94c02df3a7
 
 **Tags:**
 ```
@@ -337,14 +337,14 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.3 |
+| golang.org/x/tools/gopls | 0.8.4 |
 | honnef.co/go/tools | 0.3.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.1 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.1 |
+| github.com/golangci/golangci-lint | 1.46.2 |
 
 **Additional linux tools and packages**
 
@@ -370,7 +370,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |

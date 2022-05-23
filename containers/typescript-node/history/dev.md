@@ -14,7 +14,7 @@
 
 ## Variant: 18-bullseye
 
-**Digest:** sha256:f92a2840d40d81d15bd5b729bf09376c166a8f5b9b489f145c0779648fc0b5d6
+**Digest:** sha256:fa6ce196a4c06ca09bb9e2d4515847320d728aef36b32b62f54191bed14bf583
 
 **Tags:**
 ```
@@ -35,7 +35,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 18.1.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 18.2.0 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.6.4 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -49,7 +49,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-bullseye
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 | tslint-to-eslint-config | 2.13.0 |
 | typescript | 4.6.4 |
 
@@ -73,7 +73,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-bullseye
 
 ## Variant: 16-bullseye
 
-**Digest:** sha256:b7c656336afc659c33f6cfcc868a7915fd00f676f320cc753204ccab452f8190
+**Digest:** sha256:a2b8ce2afca098b3b1218d1ea37c0cfa898e7c93a6926ee9396e4ce374ee3c70
 
 **Tags:**
 ```
@@ -136,7 +136,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 | tslint-to-eslint-config | 2.13.0 |
 | typescript | 4.6.4 |
 
@@ -160,7 +160,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -189,7 +189,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16
 
 ## Variant: 14-bullseye
 
-**Digest:** sha256:dd6ae37db8db11c758863c5ecac41e38d677f167c219466d4d91662f63f5685b
+**Digest:** sha256:8c6213252d74d48492851cd327379a12a9bd63ddb02ef55c0633199c8e303a26
 
 **Tags:**
 ```
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.19.1 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.19.3 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.6.4 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -223,7 +223,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 | tslint-to-eslint-config | 2.13.0 |
 | typescript | 4.6.4 |
 
@@ -247,7 +247,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -276,7 +276,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14
 
 ## Variant: 18-buster
 
-**Digest:** sha256:95efb559b928ba70a691624d5d3d1c73f897bf346500270f8d6bc8f59cca0ed4
+**Digest:** sha256:8357d96553d2910444507a2919d4128c1ce3ce607b51484fdf606923b92287eb
 
 **Tags:**
 ```
@@ -296,7 +296,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 18.1.0 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 18.2.0 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.6.4 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -310,7 +310,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-buster
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 | tslint-to-eslint-config | 2.13.0 |
 | typescript | 4.6.4 |
 
@@ -335,7 +335,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -364,7 +364,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-buster
 
 ## Variant: 16-buster
 
-**Digest:** sha256:a4dc2d46d1d708576dddb1cfe6c4a65806d605782f861e95fb584061f180758c
+**Digest:** sha256:0db04a0745372853b48f6a53173264696383a7c9eb81bf6bf15704634b3b65c3
 
 **Tags:**
 ```
@@ -397,7 +397,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16-buster
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 | tslint-to-eslint-config | 2.13.0 |
 | typescript | 4.6.4 |
 
@@ -422,7 +422,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -451,7 +451,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-16-buster
 
 ## Variant: 14-buster
 
-**Digest:** sha256:f50a75fc82bf3fa35138706f71ce8d4b3fc47c946060d864ea59c0517a5e9cde
+**Digest:** sha256:05607f71aaab7d91c533f3d1b343ad0e88160503d8bba8c62a329c1d2ef60bc4
 
 **Tags:**
 ```
@@ -470,7 +470,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Node.js](https://nodejs.org/en/) | 14.19.1 | /usr/local |
+| [Node.js](https://nodejs.org/en/) | 14.19.3 | /usr/local |
 | [TypeScript](https://www.typescriptlang.org/) | 4.6.4 | /usr/local/share/npm-global |
 
 **Tools installed using git**
@@ -484,7 +484,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-buster
 
 | Tool / package | Version |
 |----------------|---------|
-| eslint | 8.15.0 |
+| eslint | 8.16.0 |
 | tslint-to-eslint-config | 2.13.0 |
 | typescript | 4.6.4 |
 
@@ -509,7 +509,7 @@ mcr.microsoft.com/vscode/devcontainers/typescript-node:dev-14-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |

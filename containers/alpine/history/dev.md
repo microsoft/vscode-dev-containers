@@ -11,7 +11,7 @@
 
 ## Variant: 3.15
 
-**Digest:** sha256:017397fc7d0eeb59adf56e02fb944f1660bdee7b0e1fd9122494886a03c4bc4e
+**Digest:** sha256:06df482420592784cc208c9f40160dd38adaaa7c2ab0a836d0571be2f39c8a3f
 
 **Tags:**
 ```
@@ -77,7 +77,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.14
 
-**Digest:** sha256:502938cadd21b86b4bff29c6aeba8a2e3d6097c8df5a400e8121f40e6b725fbf
+**Digest:** sha256:7d4dd8c778898e50238ac7a0cb487a79f1b6fc5e540c236099938585de22f184
 
 **Tags:**
 ```
@@ -103,7 +103,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 | Tool / library | Version |
 |----------------|---------|
-| git | 2.32.1-r0 |
+| git | 2.32.2-r0 |
 | openssh-client-default | 8.6_p1-r3 |
 | gnupg | 2.2.31-r0 |
 | procps | 3.3.17-r0 |
@@ -142,7 +142,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 ## Variant: 3.13
 
-**Digest:** sha256:2fd106575d31a8a2850f15e91cb82184e0bbc4eac213d26fd834319f77efaeac
+**Digest:** sha256:a1df1bcb913583801ff12b6c8a16742c85431415fd1354e0f9c8fed9b5aadaf6
 
 **Tags:**
 ```

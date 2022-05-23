@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:0e722ac07f5d9393b601b227fbe808d56dab6c558f3675b0a8f8079af3e53384
+**Digest:** sha256:8e6ffeb29965fef5b93007b8b44a5ce9e5d5183755168588339e4235bf469f56
 
 **Tags:**
 ```
@@ -67,14 +67,14 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.3 |
+| golang.org/x/tools/gopls | 0.8.4 |
 | honnef.co/go/tools | 0.3.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.1 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.1 |
+| github.com/golangci/golangci-lint | 1.46.2 |
 
 **Ruby gems and tools**
 
@@ -93,7 +93,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Xdebug](https://xdebug.org/) | 3.1.4 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.3.4 | /opt/php-composer |
 | [kubectl](https://github.com/kubernetes/kubectl) | WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.<br />1.24.0 | /usr/local/bin |
-| [Helm](https://github.com/helm/helm) | 3.8.2 | /usr/local/bin |
+| [Helm](https://github.com/helm/helm) | 3.9.0 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
@@ -101,14 +101,14 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.8.5 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.4.2 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.15+azure | 
+| Docker (Moby) CLI &amp; Engine | 20.10.16+azure | 
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 2.0.6 |
-| apt-utils | 2.0.6 |
+| apt-transport-https | 2.0.8 |
+| apt-utils | 2.0.8 |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
@@ -162,8 +162,8 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.15+azure-1 |
-| moby-engine (Docker Engine) | 20.10.15+azure-2 |
+| moby-cli (Docker CLI) | 20.10.16+azure-3 |
+| moby-engine (Docker Engine) | 20.10.16+azure-2 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |

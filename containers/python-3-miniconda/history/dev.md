@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:e491c23e196c5c50454070e453ea43bbca14cff87fcc5da9819549f071cb80f6
+**Digest:** sha256:cb4eab47f964e7e9c6cf97005a819ee2876c464dfbeaa752661dec8e13a4b0c3
 
 **Tags:**
 ```
@@ -74,7 +74,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |

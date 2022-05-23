@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
-**Digest:** sha256:1fb888feb54183fc55ac582cad24fdb0653a8ee25105e0d270792365dc2d903a
+**Digest:** sha256:159c2175e6c5cdc7d830bd0b4ed4b22fb516f621ffe70cf79a1abb5b62bc0bbd
 
 **Tags:**
 ```
@@ -61,7 +61,7 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |

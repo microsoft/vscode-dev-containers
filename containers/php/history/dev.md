@@ -14,7 +14,7 @@
 
 ## Variant: 8.1-apache-bullseye
 
-**Digest:** sha256:25d83f1914e2f908a3de54a8cfa8bfd965ef30945877e04bcc31c044399a676d
+**Digest:** sha256:5fb0e653074ed9d658dc5672394edab9277810a1f3ad1e64663c0c357815aaee
 
 **Tags:**
 ```
@@ -74,7 +74,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -103,7 +103,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-bullseye
 
 ## Variant: 8.0-apache-bullseye
 
-**Digest:** sha256:a1e89321427b834b1513473cb438a4c4291755d6829247ecd7303aba2e50ce2b
+**Digest:** sha256:0d43123921696e4e849e2fcec6d9eb8289ed379ea1aa6cde86e73572b543fba4
 
 **Tags:**
 ```
@@ -160,7 +160,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -189,7 +189,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0-bullseye
 
 ## Variant: 7.4-apache-bullseye
 
-**Digest:** sha256:cd62239e76dd6a439bb6d104afec4e07f7f4c1083e3080d9a83bde8dc31b7d91
+**Digest:** sha256:24f12ae1d181a68b68936425fc9d4d0a1cff04ed8b5f8e98dd41f0731cfddb5c
 
 **Tags:**
 ```
@@ -248,7 +248,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u2 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -277,7 +277,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-bullseye
 
 ## Variant: 8.1-apache-buster
 
-**Digest:** sha256:d2787fd0a75a3c5933f35bcebe9ecf535f71ae2f2a371bc7fc670481f7a58dbc
+**Digest:** sha256:6a1e58f314d59349c2b1859c3cbd7457766479d237bb450357c8214f2e4bbe8c
 
 **Tags:**
 ```
@@ -336,7 +336,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -365,7 +365,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-buster
 
 ## Variant: 8.0-apache-buster
 
-**Digest:** sha256:d4707abc6821eb0e4bf892fb8d02011f6cdf488237142b14e93ab7f00b432b0a
+**Digest:** sha256:1637925278c9c125ecde88667487187d73afa1c12e8ca0534a0c22792b4ba412
 
 **Tags:**
 ```
@@ -422,7 +422,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -451,7 +451,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-8.0-buster
 
 ## Variant: 7.4-apache-buster
 
-**Digest:** sha256:2f24372bd92054680c4b370100f00214c45815716cc7693a5d29d9f8ada2962c
+**Digest:** sha256:c82fc7cec28c6c7addbb0434ad810c81ec68b7554d162ee7074191f7b9a16b54
 
 **Tags:**
 ```
@@ -509,7 +509,7 @@ mcr.microsoft.com/vscode/devcontainers/php:dev-7.4-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u1 |
+| libssl1.1 | 1.1.1n-0+deb10u2 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
