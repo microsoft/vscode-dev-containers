@@ -359,7 +359,7 @@ export DEBIAN_FRONTEND=noninteractive
 #       The user can attempt to install any other version at their own risk.
 if [[ "${DOTNET_VERSION}" = "3.1" ]] || [[ "${DOTNET_VERSION}" = "5.0" ]]; then
     if [[ ! "${DOTNET_VERSION_CODENAMES_REQUIRE_OLDER_LIBSSL_1}" = *"${VERSION_CODENAME}"* ]]; then
-        err "Dotnet ${DOTNET_VERSION} is not supported on Ubuntu ${VERSION_CODENAME}.\n Please upgrade your version of dotnet, or downgrade your OS version."
+        err "Dotnet ${DOTNET_VERSION} is not supported on Ubuntu ${VERSION_CODENAME} due to a change in the 'libssl' dependency across distributions.\n Please upgrade your version of dotnet, or downgrade your OS version."
         exit 1
     fi
 fi
