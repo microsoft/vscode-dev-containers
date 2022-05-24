@@ -14,7 +14,7 @@ set -e
 VERSION=${1:-"latest"}
 USERNAME=${2:-"automatic"}
 PYTHON=${3:-"python"}
-ALLOW_ORIGIN=${4:-""}
+ALLOW_ALL_ORIGINS=${4:-""}
 
 # If in automatic mode, determine if a user already exists, if not use vscode
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
@@ -70,6 +70,7 @@ else
   sudoUserIf ${PYTHON} -m pip install jupyterlab=="${VERSION}" --no-cache-dir
 fi
 
-if [ "${ALLOW_ORIGIN}" = 'true' ]; then
+if [ "${ALLOW_ALL_ORIGINS}" = 'true' ]; then
   addToJupyterConfig "c.ServerApp.allow_origin = '*'"
+  addToJupyterConfig "c.NotebookApp.allow_origin = '*'"
 fi
