@@ -72,4 +72,5 @@ fi
 
 if [ "${ALLOW_ORIGIN}" = 'true' ]; then
   addToJupyterConfig "c.ServerApp.allow_origin = '*'"
+  addToJupyterConfig "c.NotebookApp.allow_origin = '*'"
 fi
