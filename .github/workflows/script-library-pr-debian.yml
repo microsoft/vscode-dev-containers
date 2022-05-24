@@ -13,7 +13,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     strategy:
       matrix:
-        os: ["debian:bullseye", "debian:buster", "ubuntu:focal", "ubuntu:bionic"]  # TODO: Add  "ubuntu:jammy"
+        os: ["debian:bullseye", "debian:buster", "ubuntu:focal", "ubuntu:bionic", "ubuntu:jammy"]
         defaults: ["true", "false"]
       fail-fast: true
     runs-on: ubuntu-latest

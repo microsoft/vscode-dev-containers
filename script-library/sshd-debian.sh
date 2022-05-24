@@ -75,6 +75,13 @@ elif [ "${NEW_PASSWORD}" != "skip" ]; then
     echo "${USERNAME}:${NEW_PASSWORD}" | chpasswd
 fi
 
+if [ $(getent group ssh) ]; then
+  echo "'ssh' group already exists."
+else
+  echo "adding 'ssh' group, as it does not already exist."
+  groupadd ssh
+fi
+
 # Add user to ssh group
 if [ "${USERNAME}" != "root" ]; then
     usermod -aG ssh ${USERNAME}
