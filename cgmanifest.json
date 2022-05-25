@@ -76,7 +76,17 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "314018fef43c7e3a52a3e46599313b70ace3977a"
+                    "commitHash": "93b38546e271ac8047a6dd00469f14845beb4642"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "vcpkg",
+                    "repositoryUrl": "https://github.com/microsoft/vcpkg",
+                    "commitHash": "6a66e95caad0c880393cd0b99dc0edecd7d7a751"
                 }
             }
         },
@@ -432,7 +442,7 @@
                 "Git": {
                     "Name": "nvs",
                     "repositoryUrl": "https://github.com/jasongin/nvs",
-                    "commitHash": "e61130f76e9e07e8c0201ad9a79ec70bb714c0a0"
+                    "commitHash": "bf45ef070e82356ed36a0f4d98f8ec651c8f0d98"
                 }
             }
         },
@@ -531,7 +541,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "2.10.1",
+                    "Version": "2.11.1",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -666,6 +676,36 @@
                     "Name": "Docker Image: golang",
                     "Version": "1.17-buster",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "git",
+                "Git": {
+                    "Name": "Oh My Zsh!",
+                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
+                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: buildpack-deps",
+                    "Version": "${BASE_IMAGE_VERSION_CODENAME}-curl",
+                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Eclipse Temurin",
+                    "Version": "1.8.0_332",
+                    "DownloadUrl": "https://adoptium.net/"
                 }
             }
         },
@@ -860,16 +900,6 @@
         },
         {
             "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: continuumio/anaconda3",
@@ -955,11 +985,10 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: buildpack-deps",
-                    "Version": "${BASE_IMAGE_VERSION_CODENAME}-curl",
-                    "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "debase",
+                    "Version": "0.2.5.beta2"
                 }
             }
         },
@@ -967,9 +996,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Eclipse Temurin",
-                    "Version": "1.8.0_332",
-                    "DownloadUrl": "https://adoptium.net/"
+                    "Name": "Docker Image: ruby",
+                    "Version": "3.1-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
         },
@@ -977,9 +1006,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/java",
-                    "Version": "11-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/openjdk"
+                    "Name": "Docker Image: ruby",
+                    "Version": "3.0-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
         },
@@ -987,28 +1016,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/java",
-                    "Version": "11-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/openjdk"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "npm",
-                "Npm": {
-                    "Name": "eslint",
-                    "Version": "8.16.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Oh My Zsh!",
-                    "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "39b600e9e564db3dec265fcf2e3db4b5568dd93a"
+                    "Name": "Docker Image: ruby",
+                    "Version": "2.7-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
         },
@@ -1016,9 +1026,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "18-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                    "Name": "Docker Image: ruby",
+                    "Version": "3.1-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
         },
@@ -1026,9 +1036,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "16-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                    "Name": "Docker Image: ruby",
+                    "Version": "3.0-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
                 }
             }
         },
@@ -1036,9 +1046,27 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                    "Name": "Docker Image: ruby",
+                    "Version": "2.7-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/ruby"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "bundler",
+                    "Version": "2.3.14"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "RubyGems",
+                "RubyGems": {
+                    "Name": "github-pages",
+                    "Version": "226"
                 }
             }
         },
@@ -1046,9 +1074,9 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "18-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
+                    "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/ruby",
+                    "Version": "2.7-bullseye",
+                    "DownloadUrl": "https://github.com/microsoft/vscode-dev-containers"
                 }
             }
         },
@@ -1056,136 +1084,8 @@
             "Component": {
                 "Type": "other",
                 "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "16-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "npm",
-                "Npm": {
-                    "Name": "tslint-to-eslint-config",
-                    "Version": "2.13.0"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "npm",
-                "Npm": {
-                    "Name": "typescript",
-                    "Version": "4.6.4"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "18-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "16-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "18-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "16-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: node",
-                    "Version": "14-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/node"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "Cascadia Code",
-                    "repositoryUrl": "https://github.com/microsoft/cascadia-code",
-                    "commitHash": "678eea921b0c8b921b9fb009bb16d3d2ca5b8112"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "noVNC",
-                    "repositoryUrl": "https://github.com/novnc/noVNC",
-                    "commitHash": "9142f8f0f7b4a53447f5cfec3a797cbf0d6204a9"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "git",
-                "Git": {
-                    "Name": "websockify",
-                    "repositoryUrl": "https://github.com/novnc/websockify",
-                    "commitHash": "654cbac77ea07819ed3bcf1ce6410be0211c0f1a"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/typescript-node",
-                    "Version": "14-buster",
+                    "Name": "Docker Image: mcr.microsoft.com/vscode/devcontainers/ruby",
+                    "Version": "2.7-buster",
                     "DownloadUrl": "https://github.com/microsoft/vscode-dev-containers"
                 }
             }

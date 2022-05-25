@@ -11,7 +11,7 @@
 
 ## Variant: jammy
 
-**Digest:** sha256:451c8645955c688a313f4d64a7ff48b02d135928f6c4cee821550aa00be0af29
+**Digest:** sha256:dd358a8b82d360eaf9795a0e1f69309ec0a0cf5fccddac857ec2dfca16d53bc4
 
 **Tags:**
 ```
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 ## Variant: focal
 
-**Digest:** sha256:8df15afa77b3e7a02fdabd686fc8ec216d425d73589a65b081c2895ca59b46bc
+**Digest:** sha256:f63a3e9dbdc3844f7a6ffaf66a2b20f10bc689956e6b2cb43c67a7925fd8b66a
 
 **Tags:**
 ```
@@ -153,7 +153,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:8150e5e6da557027a79ae54524f02563c8e45cdd80b804684662e64d5e367fe4
+**Digest:** sha256:6364957eef9733418b4e2b16e0f2439175d597ea2e14d8a83aba83f07b592af4
 
 **Tags:**
 ```

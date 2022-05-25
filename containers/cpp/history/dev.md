@@ -13,7 +13,7 @@
 
 ## Variant: bullseye
 
-**Digest:** sha256:7275fda4dd27fc44287650057e6ff7ede206180cae460fc45747aee2bfe977ca
+**Digest:** sha256:ba4f0ed1e5d5761bde296ce4ae20fa4f04c95c90f089cf7a88d0aa4de4491fbb
 
 **Tags:**
 ```
@@ -44,7 +44,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
-| [vcpkg](https://github.com/microsoft/vcpkg) | 314018fef43c7e3a52a3e46599313b70ace3977a | /usr/local/vcpkg |
+| [vcpkg](https://github.com/microsoft/vcpkg) | 93b38546e271ac8047a6dd00469f14845beb4642 | /usr/local/vcpkg |
 
 **Additional linux tools and packages**
 
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev
 
 ## Variant: buster
 
-**Digest:** sha256:921eb91540899ba4a05fb4d6c22ae3f1d5736c86f37983feca031bc181d39ee7
+**Digest:** sha256:76fabc22bd42048e287805fa752a83ddb3072415225db7b2a5cd9b37e3b3ea78
 
 **Tags:**
 ```
@@ -135,7 +135,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian10
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
-| [vcpkg](https://github.com/microsoft/vcpkg) | 314018fef43c7e3a52a3e46599313b70ace3977a | /usr/local/vcpkg |
+| [vcpkg](https://github.com/microsoft/vcpkg) | 93b38546e271ac8047a6dd00469f14845beb4642 | /usr/local/vcpkg |
 
 **Additional linux tools and packages**
 
@@ -198,7 +198,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-debian10
 
 ## Variant: jammy
 
-**Digest:** sha256:f943a045ba2c080f0eb75f37a347bfa2463e39b4fe81fa18f59773b989e08cc4
+**Digest:** sha256:1892843fec4ea66cfbceca7d02c5fc7eafa2ae5ab70952bec222db31a28174ca
 
 **Tags:**
 ```
@@ -227,7 +227,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu22.04
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
-| [vcpkg](https://github.com/microsoft/vcpkg) | 314018fef43c7e3a52a3e46599313b70ace3977a | /usr/local/vcpkg |
+| [vcpkg](https://github.com/microsoft/vcpkg) | 6a66e95caad0c880393cd0b99dc0edecd7d7a751 | /usr/local/vcpkg |
 
 **Additional linux tools and packages**
 
@@ -287,7 +287,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu22.04
 
 ## Variant: focal
 
-**Digest:** sha256:7df79ece1e31c8743b9d2818950c1a99ff96fab3f825456d51d298473def2daa
+**Digest:** sha256:e3516c19b20eef442603b64cfbe5265863aa47c5decd9b7fec73f431c36ee02c
 
 **Tags:**
 ```
@@ -317,7 +317,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
-| [vcpkg](https://github.com/microsoft/vcpkg) | 314018fef43c7e3a52a3e46599313b70ace3977a | /usr/local/vcpkg |
+| [vcpkg](https://github.com/microsoft/vcpkg) | 6a66e95caad0c880393cd0b99dc0edecd7d7a751 | /usr/local/vcpkg |
 
 **Additional linux tools and packages**
 
@@ -380,7 +380,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:24eb23f65b58ab875095a762a8089c6279a92f12d38152167b5e7f28d3424e7f
+**Digest:** sha256:8be80ee89af96cc4c6b363f55fcec556286df75ebdbfac237f7d3fd149397823
 
 **Tags:**
 ```
@@ -409,7 +409,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 | Tool | Commit | Path |
 |------|--------|------|
 | [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
-| [vcpkg](https://github.com/microsoft/vcpkg) | 314018fef43c7e3a52a3e46599313b70ace3977a | /usr/local/vcpkg |
+| [vcpkg](https://github.com/microsoft/vcpkg) | 6a66e95caad0c880393cd0b99dc0edecd7d7a751 | /usr/local/vcpkg |
 
 **Additional linux tools and packages**
 
@@ -432,7 +432,7 @@ mcr.microsoft.com/vscode/devcontainers/cpp:dev-ubuntu18.04
 | iproute2 | 4.15.0-2ubuntu1.3 |
 | jq | 1.5+dfsg-2 |
 | less | 487-0.1 |
-| libc6 | 2.27-3ubuntu1.5 |
+| libc6 | 2.27-3ubuntu1.6 |
 | libgcc1 | 1:8.4.0-1ubuntu1~18.04 |
 | libgssapi-krb5-2 | 1.16-2ubuntu0.2 |
 | libicu60 | 60.2-3ubuntu3.2 |

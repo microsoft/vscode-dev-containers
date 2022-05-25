@@ -12,7 +12,7 @@
 
 ## Variant: 1.18-bullseye
 
-**Digest:** sha256:86fdc69f45059953047757c932f8261c6415782beed6e18d9e89edbba16eedd5
+**Digest:** sha256:277c354d698816fcd49daa5db64dff0b782e4506b8406b39ebe90e782c5290bb
 
 **Tags:**
 ```
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 ## Variant: 1.18-buster
 
-**Digest:** sha256:911be702eb2e3bd853e1d02b1df76d541a7465a1862290998caa6a0c6287dc00
+**Digest:** sha256:46e9c79b0e72b17cf14c40fdae9040283a8ed7150df72f9c8e7223301af915a7
 
 **Tags:**
 ```
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 ## Variant: 1.17-bullseye
 
-**Digest:** sha256:a74bd1451367865531fb9020111a3fe084697bda35ba67904cf6ed941e799d00
+**Digest:** sha256:b70f2f0c27fb45bd4cd8ebd0747d09aa220f765451bd58d5fac79228190beba9
 
 **Tags:**
 ```
@@ -305,7 +305,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 
 ## Variant: 1.17-buster
 
-**Digest:** sha256:9e0d782b624b4b74d3335dc8ad3c906e4f9d5b7b247f7d149501bd94c02df3a7
+**Digest:** sha256:37dc6c02045a85bdb5912ef3ab206ffc1ce30028a2c097e1f10d8a7ffae2be34
 
 **Tags:**
 ```
