@@ -9,7 +9,7 @@ _This definition will hopefully get you going quickly with Haskell running as a 
 
 | Metadata                    | Value                                                                        |
 |---------------------------- | -----------------------------------------------------------------------------|
-| *Contributors*              | [Stuart Pike](https://github.com/stuartpike), [Javier Neira](https://github.com/jneira), [eitsupi](https://github.com/eitsupi) |
+| *Contributors*              | [Stuart Pike](https://github.com/stuartpike), [Javier Neira](https://github.com/jneira), [eitsupi](https://github.com/eitsupi), [gusbicalho](https://github.com/gusbicalho) |
 | *Categories*                | Community, Haskell |
 | *Definition type*           | Dockerfile |
 | *Works in Codespaces*       | Yes |
@@ -20,13 +20,15 @@ _This definition will hopefully get you going quickly with Haskell running as a 
 
 ## Using this definition
 
-While the definition itself works unmodified, you can select the version of Haskell the container uses by updating the `VARIANT` arg in the included `.devcontainer/devcontainer.json` file.
+This definition builds a container with the latest version of [GHCup](https://www.haskell.org/ghcup/). GHCup is then used to install the **recommended** (as defined by GHCup) version of GHC, cabal and stack.
+
+You can choose a different GHC version to start with by setting the GHC_VERSION option in `.devcontainer/devcontainer.json`. Alternatively, you can use the `ghcup` command in a running container to manage GHC versions.
 
 ```json
 "build": {
     "dockerfile": "Dockerfile",
     "args": {
-        "VARIANT": "9"
+        "GHC_VERSION": "9.2"
     }
 }
 ```
