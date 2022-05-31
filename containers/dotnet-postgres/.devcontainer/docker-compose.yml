@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # Update 'VARIANT' to pick a version of .NET: 3.1, 5.0, 6.0
+        # Update 'VARIANT' to pick a version of .NET: 3.1, 6.0
         VARIANT: "6.0"
         # Optional version of Node.js
         NODE_VERSION: "lts/*"
@@ -27,7 +27,7 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    image: postgres:14.1
+    image: postgres:14.3
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data

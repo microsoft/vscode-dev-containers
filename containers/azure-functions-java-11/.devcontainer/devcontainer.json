@@ -3,16 +3,21 @@
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 
-	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"java.home": "/usr/lib/jvm/zulu-11-azure-amd64"
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-azuretools.vscode-azurefunctions",
+				"vscjava.vscode-java-pack"
+			]
+		}
 	},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-azuretools.vscode-azurefunctions",
-		"vscjava.vscode-java-pack"
-	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "java -version",

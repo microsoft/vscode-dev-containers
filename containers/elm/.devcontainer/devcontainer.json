@@ -2,13 +2,16 @@
 	"name": "Elm (Community)",
 	"dockerFile": "Dockerfile",
 
-	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"Elmtooling.elm-ls-vscode"
-	],
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"Elmtooling.elm-ls-vscode"
+			]
+		}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// 8000 is the default port used for the `elm reactor` command

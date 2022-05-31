@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "2.0.1",
+	"definitionVersion": "2.0.2",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -13,26 +13,29 @@
 		"annotation": "This document describes the base contents of the default GitHub Codespaces dev container image. Note that this image also includes detection logic to dynamically install additional language / runtime versions based on your repository's contents. Dynamically installed content can be found in sub-folders under `/opt`.",
 		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210728.1",
 		"imageLink": "https://github.com/microsoft/oryx",
-		"apt": [{
+		"apt": [
+			{
 				"cgIgnore": false,
 				"name": "moby-cli",
 				"annotation": "Docker CLI"
-			}, {
+			},
+			{
 				"cgIgnore": false,
 				"name": "moby-engine",
 				"annotation": "Docker Engine"
-			}, {
+			},
+			{
 				"cgIgnore": false,
 				"name": "git-lfs",
 				"annotation": "Git Large File Support"
 			},
 			"cmake",
-			"build-essential", 
+			"build-essential",
 			"cmake",
 			"cppcheck",
 			"valgrind",
 			"lldb",
-			"llvm", 
+			"llvm",
 			"gdb",
 			"clang",
 			"python3-dev",
@@ -41,7 +44,7 @@
 			"xtail",
 			"software-properties-common",
 			"libsecret-1-dev",
-			"libnss3", 
+			"libnss3",
 			"libnspr4",
 			"libatk-bridge2.0-0",
 			"libatk1.0-0",
@@ -63,7 +66,7 @@
 			"g++",
 			"gcc",
 			"libc6-dev",
-			"make", 
+			"make",
 			"pkg-config",
 			"sed",
 			"python3-minimal"

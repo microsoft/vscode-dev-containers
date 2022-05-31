@@ -849,7 +849,6 @@
 				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}"
 			},
 			"settings": {
-				"java.home": "/extension-java-home",
 				"java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current"
 			},
 			"include": [
@@ -1044,7 +1043,7 @@
 			"extensions": [
 				"vadimcn.vscode-lldb",
 				"mutantdino.resourcemonitor",
-				"matklad.rust-analyzer",
+				"rust-lang.rust-analyzer",
 				"tamasfe.even-better-toml",
 				"serayuzgur.crates"
 			],

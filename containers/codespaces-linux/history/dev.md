@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:ed83536a4f011d01c9ac3152e4553d4f10cd140c823933ca4ef411ad372eef8b
+**Digest:** sha256:0b9c1b2a886062d29038278039d8f9c723dc5b330f86d63af9ed3e5c42e5a44d
 
 **Tags:**
 ```
@@ -41,9 +41,9 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 8f56a8bdf39d7727ab0e220f0164f78c77f9c50e | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
-| [nvs](https://github.com/jasongin/nvs) | e61130f76e9e07e8c0201ad9a79ec70bb714c0a0 | /home/codespace/.nvs |
+| [nvs](https://github.com/jasongin/nvs) | bf45ef070e82356ed36a0f4d98f8ec651c8f0d98 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c6cc0a1959da3403f524fcbb0fdfb6e08a4d8ae6 | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | 1038c0786fd96a76a5798f837a1577cf8eb22895 | /usr/local/share/ruby-build |
 
@@ -51,7 +51,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.13.8 |
+| pylint | 2.13.9 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
 | black | 22.3.0 |
@@ -67,14 +67,14 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.3 |
+| golang.org/x/tools/gopls | 0.8.4 |
 | honnef.co/go/tools | 0.3.0 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.1 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.0 |
+| github.com/golangci/golangci-lint | 1.46.2 |
 
 **Ruby gems and tools**
 
@@ -93,22 +93,22 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Xdebug](https://xdebug.org/) | 3.1.4 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.3.4 | /opt/php-composer |
 | [kubectl](https://github.com/kubernetes/kubectl) | WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.<br />1.24.0 | /usr/local/bin |
-| [Helm](https://github.com/helm/helm) | 3.8.2 | /usr/local/bin |
+| [Helm](https://github.com/helm/helm) | 3.9.0 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 2.10.1 | 
+| [GitHub CLI](https://github.com/cli/cli) | 2.11.1 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.8.5 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.4.2 | 
-| Docker (Moby) CLI &amp; Engine | 20.10.15+azure | 
+| Docker (Moby) CLI &amp; Engine | 20.10.16+azure | 
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| apt-transport-https | 2.0.6 |
-| apt-utils | 2.0.6 |
+| apt-transport-https | 2.0.8 |
+| apt-utils | 2.0.8 |
 | build-essential | 12.8ubuntu1.1 |
 | ca-certificates | 20210119~20.04.2 |
 | clang | 1:10.0-50~exp1 |
@@ -162,13 +162,13 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | manpages-dev | 5.05-1 |
 | manpages-posix | 2013a-2 |
 | manpages-posix-dev | 2013a-2 |
-| moby-cli (Docker CLI) | 20.10.15+azure-1 |
-| moby-engine (Docker Engine) | 20.10.15+azure-2 |
+| moby-cli (Docker CLI) | 20.10.16+azure-3 |
+| moby-engine (Docker Engine) | 20.10.16+azure-2 |
 | nano | 4.8-1ubuntu1 |
 | ncdu | 1.14.1-1 |
 | net-tools | 1.60+git20180626.aebd88e-1ubuntu1 |
-| openssh-client | 1:8.2p1-4ubuntu0.4 |
-| openssh-server | 1:8.2p1-4ubuntu0.4 |
+| openssh-client | 1:8.2p1-4ubuntu0.5 |
+| openssh-server | 1:8.2p1-4ubuntu0.5 |
 | pigz | 2.4-1 |
 | pkg-config | 0.29.1-0ubuntu4 |
 | procps | 2:3.3.16-1ubuntu2.3 |

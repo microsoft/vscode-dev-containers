@@ -56,6 +56,11 @@ package_list="
     nano \
     locales"
 
+# Packages to attempt to install if essential tools are missing (ie: vncpasswd).
+# This is useful, at least, for Ubuntu 22.04 (jammy)
+package_list_additional="
+    tigervnc-tools"
+
 set -e
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -164,6 +169,10 @@ check_packages() {
     fi
 }
 
+##########################
+#  Install starts here   #
+##########################
+
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
 
@@ -190,6 +199,12 @@ fi
 
 # Install X11, fluxbox and VS Code dependencies
 check_packages ${package_list}
+
+# On newer versions of Ubuntu (22.04), 
+# we need an additional package that isn't provided in earlier versions
+if ! type vncpasswd > /dev/null 2>&1; then
+    check_packages ${package_list_additional}
+fi
 
 # Install Emoji font if available in distro - Available in Debian 10+, Ubuntu 18.04+
 if dpkg-query -W fonts-noto-color-emoji > /dev/null 2>&1 && ! dpkg -s fonts-noto-color-emoji > /dev/null 2>&1; then

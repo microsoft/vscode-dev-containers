@@ -10,7 +10,7 @@
 | *Categories* | Core, Languages |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/vscode/devcontainers/dotnet |
-| *Available image variants* | 3.1 / 3.1-focal, 5.0 / 5.0-focal, 6.0 /6.0-bullseye, 6.0-focal, 5.0-bullseye, 3.1-bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list)) |
+| *Available image variants* | 3.1 / 3.1-focal / 6.0 /6.0-bullseye, 6.0-focal, 3.1-bullseye ([full list](https://mcr.microsoft.com/v2/vscode/devcontainers/dotnet/tags/list)) |
 | *Published image architecture(s)* | x86-64, arm64/aarch64 for `bullseye` variants |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -34,7 +34,6 @@ You can also directly reference pre-built versions of `.devcontainer/base.Docker
 
 - `mcr.microsoft.com/vscode/devcontainers/dotnet` (latest)
 - `mcr.microsoft.com/vscode/devcontainers/dotnet:3.1` (or `3.1-bullseye`, `3.1-focal` to pin to an OS version)
-- `mcr.microsoft.com/vscode/devcontainers/dotnet:5.0` (or `5.0-bullseye`, `5.0-focal` to pin to an OS version)
 - `mcr.microsoft.com/vscode/devcontainers/dotnet:6.0` (or `6.0-bullseye`, `6.0-focal` to pin to an OS version)
 
 You can decide how often you want updates by referencing a [semantic version](https://semver.org/) of each image. For example:
