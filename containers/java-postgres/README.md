@@ -45,7 +45,7 @@ build:
       # Update 'VARIANT' to pick an version of Java: 11, 17.
       # Append -bullseye or -buster to pin to an OS version.
       # Use -bullseye variants on local arm64/Apple Silicon.
-      VARIANT: 11-bullseye
+      VARIANT: 17-bullseye
 ```
 
 You also can connect to PostgreSQL from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
