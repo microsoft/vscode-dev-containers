@@ -28,7 +28,7 @@
 				"C_Cpp.default.includePath": [
 					"${workspaceFolder}/**",
 					"/usr/local/lib/python3.6/dist-packages/tensorflow/include/"
-					],
+					]
 			},
 			
 			// Add the IDs of extensions you want installed when the container is created.

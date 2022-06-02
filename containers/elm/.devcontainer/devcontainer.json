@@ -39,5 +39,5 @@
 	// Adding this volume will preserve the elm cache between rebuilds though, fixing this issue
 	"mounts": [
 		"source=vscode-devcontainer-elm-dependency-cache,target=/home/node/.elm,type=volume"
-	],
+	]
 }

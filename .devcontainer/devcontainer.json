@@ -3,7 +3,7 @@
 		"dockerfile": "Dockerfile"
 	},
 	"runArgs": [
-		"--shm-size=1g",
+		"--shm-size=1g"
 	],
 	// Configure tool-specific properties.
 	"customizations": {
@@ -38,7 +38,7 @@
 		"5901": {
 			"label": "VNC TCP port (password: vscode)",
 			"onAutoForward": "silent"
-		},
+		}
 	},
 	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
 	"remoteUser": "node",

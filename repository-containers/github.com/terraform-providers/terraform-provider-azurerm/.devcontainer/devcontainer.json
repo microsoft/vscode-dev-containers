@@ -25,9 +25,9 @@
 					"showGlobalVariables": true
 				},
 				"gopls": {
-					"ui.usePlaceholders": true, // add parameter placeholders when completing a function
+					"ui.usePlaceholders": true // add parameter placeholders when completing a function
 				},
-				"files.eol": "\n", // formatting only supports LF line endings	
+				"files.eol": "\n" // formatting only supports LF line endings	
 			},
 			
 			// Add the IDs of extensions you want installed when the container is created.
@@ -41,7 +41,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "make tools",
+	"postCreateCommand": "make tools"
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
