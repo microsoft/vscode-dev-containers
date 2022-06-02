@@ -22,7 +22,7 @@
 				],
 				"C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
 				"C_Cpp.default.includePath": [
-					"${workspaceFolder}/**",
+					"${workspaceFolder}/**"
 					],
 				"files.watcherExclude": {
 					"**/bazel-*/**": true

@@ -14,7 +14,7 @@
 					{
 					  "default": true,
 					  "name": "JavaSE-1.8",
-					  "path": "/usr/lib/jvm/zulu-8-amd64",
+					  "path": "/usr/lib/jvm/zulu-8-amd64"
 					}
 				]
 			},
