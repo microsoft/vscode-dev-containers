@@ -4,14 +4,14 @@
 		"latest": true,
 		"rootDistro": "debian",
 		"parent": "typescript-node",
-		"parentVariant": "14-bullseye",
+		"parentVariant": "16-bullseye",
 		"tags": [
 			"repos/microsoft/vscode:${VERSION}"
 		],
 		"architectures": ["linux/arm64", "linux/amd64"]
 	}, 
 	"dependencies": {
-		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:14-buster",
+		"image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:16-buster",
 		"imageLink": "https://github.com/microsoft/vscode-dev-containers",
 		"manual": [{
             "Component": {
