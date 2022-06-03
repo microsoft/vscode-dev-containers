@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:b8df46d3fa4cfb8c87a06dec30cff9e60308fdaf78aaee6f099f04a3740e94cc
+**Digest:** sha256:53ce49866d7cc8b654fc2030050525131ec5d10a2e63fed8ffb942ac8c1a0af7
 
 **Tags:**
 ```
