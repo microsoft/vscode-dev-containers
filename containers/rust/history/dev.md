@@ -10,7 +10,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:ec8e95dd0708d3dbc6ff0d134937da9a2ddd4bf0d938e894297fee61b83aaf91
+**Digest:** sha256:6b5519186f3570348422fa37374e7d198d9003c96207506a1f177e22ad2697d2
 
 **Tags:**
 ```
@@ -37,7 +37,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 18e7e5d0339f3491a6c0324e2443415309b56173 | /home/vscode/.oh-my-zsh |
 
 **Cargo / rustup (Rust) crates and tools**
 
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-buster
 
 ## Variant: bullseye
 
-**Digest:** sha256:2358dcbbb8960bd23bf5f9f859bab3e68ccaec4bf656a669c473e9acf6651dbb
+**Digest:** sha256:c3e2eab59ae2b9a19dd0262f9a4e5e789666c526b1bd803ba6e93b91328fc7b6
 
 **Tags:**
 ```
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/rust:dev-1-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 18e7e5d0339f3491a6c0324e2443415309b56173 | /home/vscode/.oh-my-zsh |
 
 **Cargo / rustup (Rust) crates and tools**
 
