@@ -12,7 +12,7 @@
 			// Rebuild the container if it already exists to update.
 			"VERSION": "latest",
 			// Update NODE_VERSION to pick the Node.js version: 12, 14
-			"NODE_VERSION": "14",
+			"NODE_VERSION": "14"
 		}
 	},
 
@@ -22,7 +22,7 @@
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
 			"settings": { 
-				"html.format.templating": true,
+				"html.format.templating": true
 			},
 			
 			// Add the IDs of extensions you want installed when the container is created.

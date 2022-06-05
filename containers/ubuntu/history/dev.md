@@ -11,7 +11,7 @@
 
 ## Variant: jammy
 
-**Digest:** sha256:dd358a8b82d360eaf9795a0e1f69309ec0a0cf5fccddac857ec2dfca16d53bc4
+**Digest:** sha256:88ebe3697eb3e37ed618065851c78608dfebaa77f452299ea158bd0a893ba73e
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 18e7e5d0339f3491a6c0324e2443415309b56173 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 ## Variant: focal
 
-**Digest:** sha256:f63a3e9dbdc3844f7a6ffaf66a2b20f10bc689956e6b2cb43c67a7925fd8b66a
+**Digest:** sha256:b120be2ed5adf6ec67a282b0cca94e13f072a3985fe1b916289a48bcfabbe99c
 
 **Tags:**
 ```
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 18e7e5d0339f3491a6c0324e2443415309b56173 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -153,7 +153,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:6364957eef9733418b4e2b16e0f2439175d597ea2e14d8a83aba83f07b592af4
+**Digest:** sha256:12e75fdec2d35b410475d71dcf884b0afc7c6cff035bb54beeda310c3ec2af7b
 
 **Tags:**
 ```
@@ -174,7 +174,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 18e7e5d0339f3491a6c0324e2443415309b56173 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -186,12 +186,12 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | curl | 7.58.0-2ubuntu3.18 |
 | dialog | 1.3-20171209-1 |
 | git | 1:2.17.1-1ubuntu0.11 |
-| gnupg2 | 2.2.4-1ubuntu1.4 |
+| gnupg2 | 2.2.4-1ubuntu1.5 |
 | htop | 2.1.0-3 |
 | iproute2 | 4.15.0-2ubuntu1.3 |
 | jq | 1.5+dfsg-2 |
 | less | 487-0.1 |
-| libc6 | 2.27-3ubuntu1.5 |
+| libc6 | 2.27-3ubuntu1.6 |
 | libgcc1 | 1:8.4.0-1ubuntu1~18.04 |
 | libgssapi-krb5-2 | 1.16-2ubuntu0.2 |
 | libicu60 | 60.2-3ubuntu3.2 |
@@ -200,7 +200,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | libssl1.0.0 | 1.0.2n-1ubuntu5.9 |
 | libssl1.1 | 1.1.1-1ubuntu2.1~18.04.17 |
 | libstdc++6 | 8.4.0-1ubuntu1~18.04 |
-| locales | 2.27-3ubuntu1.5 |
+| locales | 2.27-3ubuntu1.6 |
 | lsb-release | 9.20170808ubuntu1 |
 | lsof | 4.89+dfsg-0.1 |
 | man-db | 2.8.3-2ubuntu0.1 |

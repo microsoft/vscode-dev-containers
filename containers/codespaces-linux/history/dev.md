@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:0b9c1b2a886062d29038278039d8f9c723dc5b330f86d63af9ed3e5c42e5a44d
+**Digest:** sha256:7debd1f9d1c211b7695b5a2ed0f84a33ca7cf78816ffac774e5bb3e79fa40fe5
 
 **Tags:**
 ```
@@ -34,14 +34,14 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [PHP](https://xdebug.org/) | 8.0.17<br />8.1.4 | /opt/php/&lt;version&gt; |
 | GCC | 9.4.0-1ubuntu1~20.04.1 | 
 | Clang | 10.0.0-4ubuntu1 | 
-| [Go](https://golang.org/dl) | 1.18.2 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.18.3 | /usr/local/go |
 | [Jekyll](https://jekyllrb.com/) | 4.2.2 | 
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 39b600e9e564db3dec265fcf2e3db4b5568dd93a | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 18e7e5d0339f3491a6c0324e2443415309b56173 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | bf45ef070e82356ed36a0f4d98f8ec651c8f0d98 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c6cc0a1959da3403f524fcbb0fdfb6e08a4d8ae6 | /usr/local/share/rbenv |
@@ -51,17 +51,17 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.13.9 |
+| pylint | 2.14.0 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
 | black | 22.3.0 |
 | yapf | 0.32.0 |
-| mypy | 0.950 |
+| mypy | 0.960 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.4 |
 | virtualenv | 20.14.1 |
-| pipx | 1.0.0 |
+| pipx | 1.1.0 |
 
 **Go tools and modules**
 
@@ -92,12 +92,12 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [git](https://github.com/git/git) | 2.36.1 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.4 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.3.4 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.<br />1.24.0 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.<br />1.24.1 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.9.0 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 2.11.1 | 
+| [GitHub CLI](https://github.com/cli/cli) | 2.11.3 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.8.5 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.4.2 | 
@@ -120,7 +120,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | gcc | 4:9.3.0-1ubuntu2 |
 | gdb | 9.2-0ubuntu1~20.04.1 |
 | git | 1:2.25.1-1ubuntu3.4 |
-| git-lfs (Git Large File Support) | 3.1.4 |
+| git-lfs (Git Large File Support) | 3.2.0 |
 | gnupg2 | 2.2.19-3ubuntu2.1 |
 | htop | 2.2.0-2build1 |
 | iproute2 | 5.5.0-1ubuntu1 |
@@ -131,7 +131,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | libatk1.0-0 | 2.35.1-1ubuntu2 |
 | libc6 | 2.31-0ubuntu9.9 |
 | libc6-dev | 2.31-0ubuntu9.9 |
-| libcups2 | 2.3.1-9ubuntu1.1 |
+| libcups2 | 2.3.1-9ubuntu1.2 |
 | libgbm1 | 21.2.6-0ubuntu0.1~20.04.2 |
 | libgcc1 | 1:10.3.0-1ubuntu1~20.04 |
 | libgssapi-krb5-2 | 1.17-6ubuntu4.1 |
