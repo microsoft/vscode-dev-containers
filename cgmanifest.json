@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "18e7e5d0339f3491a6c0324e2443415309b56173"
+                    "commitHash": "d41ca84af1271e8bfbe26f581cebe3b86521d0db"
                 }
             }
         },
@@ -76,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "38bb87c5571555f1a4f64cb4ed9d2be0017f9fc1"
+                    "commitHash": "faed44dfa013088fe1910908a8a65887622f412f"
                 }
             }
         },
@@ -412,7 +412,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "18e7e5d0339f3491a6c0324e2443415309b56173"
+                    "commitHash": "d41ca84af1271e8bfbe26f581cebe3b86521d0db"
                 }
             }
         },
