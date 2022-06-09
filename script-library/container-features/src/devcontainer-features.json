@@ -196,7 +196,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "1.1", "1.0", "0.15"],
+					"proposals": ["latest", "1.2", "1.1", "1.0", "0.15"],
 					"default": "latest",
 					"description": "Terraform version"
 				},
