@@ -1,3 +1,4 @@
 definition-manifest.json
 .npmignore
 README.md
+base.Dockerfile
