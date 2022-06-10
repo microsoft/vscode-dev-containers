@@ -16,7 +16,7 @@ ENV SHELL=/bin/bash \
     JAVA_ROOT="${HOMEDIR}/.java" \
     NODE_ROOT="${HOMEDIR}/.nodejs" \
     PHP_ROOT="${HOMEDIR}/.php" \
-    PYTHON_ROOT="${HOMEDIR}/.python" \
+    PYTHON_ROOT="/opt/python/latest" \
     RUBY_ROOT="${HOMEDIR}/.ruby" \
     MAVEN_ROOT="${HOMEDIR}/.maven" \
     HUGO_ROOT="${HOMEDIR}/.hugo" \
@@ -34,7 +34,7 @@ ENV SHELL=/bin/bash \
     JUPYTERLAB_PATH="${HOMEDIR}/.local/bin" \
     DOCKER_BUILDKIT=1
 
-ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${PYTHON_ROOT}/current/bin:${ORIGINAL_PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${MAVEN_ROOT}/current/bin:${HUGO_ROOT}/current/bin:${JUPYTERLAB_PATH}:${ORYX_PATHS}"
+ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${PYTHON_ROOT}/bin:${ORIGINAL_PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${MAVEN_ROOT}/current/bin:${HUGO_ROOT}/current/bin:${JUPYTERLAB_PATH}:${ORYX_PATHS}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/* setup-user.sh setup-python-tools.sh first-run-notice.txt /tmp/scripts/
@@ -53,7 +53,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -yq vim vim-doc xtail software-properties-common libsecret-1-dev \
     # Install additional tools (useful for 'puppeteer' project)
     && apt-get install -y --no-install-recommends libnss3 libnspr4 libatk-bridge2.0-0 libatk1.0-0 libx11-6 libpangocairo-1.0-0 \
-                                                  libx11-xcb1 libcups2 libxcomposite1 libxdamage1 libxfixes3 libpango-1.0-0 libgbm1 libgtk-3-0 \
+    libx11-xcb1 libcups2 libxcomposite1 libxdamage1 libxfixes3 libpango-1.0-0 libgbm1 libgtk-3-0 \
     && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/git-lfs-debian.sh \
     && bash /tmp/scripts/github-debian.sh \
@@ -69,9 +69,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
 # Install Python, JupyterLab, common machine learning packages, and Ruby utilities
-RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
+RUN bash /tmp/scripts/python-debian.sh "latest" "${PYTHON_ROOT}" "${PIPX_HOME}" "${USERNAME}" "true"  "true" "false" \
     # Install JupyterLab and common machine learning packages
-    && PYTHON_BINARY="${PYTHON_ROOT}/current/bin/python" \
+    && PYTHON_BINARY="${PYTHON_ROOT}/bin/python" \
     && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} "true" \
     && bash /tmp/scripts/setup-python-tools.sh ${PYTHON_BINARY} \
     # Install rvm, rbenv, any missing base gems
@@ -98,8 +98,8 @@ RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
 # Install SDKMAN, OpenJDK8 (JDK 17 already present), gradle (maven already present)
 RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "true" \
     && su ${USERNAME} -c ". ${SDKMAN_DIR}/bin/sdkman-init.sh \
-        && sdk install java 11-opt-java /opt/java/17.0 \
-        && sdk install java lts-opt-java /opt/java/lts"
+    && sdk install java 11-opt-java /opt/java/17.0 \
+    && sdk install java lts-opt-java /opt/java/lts"
 
 # Install Go, remove scripts now that we're done with them
 RUN bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
@@ -115,9 +115,9 @@ CMD [ "sleep", "infinity" ]
 # [Optional] Install debugger for development of Codespaces - Not in resulting image by default
 ARG DeveloperBuild
 RUN if [ -z $DeveloperBuild ]; then \
-        echo "not including debugger" ; \
+    echo "not including debugger" ; \
     else \
-        curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
+    curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg ; \
     fi
 
 USER ${USERNAME}
