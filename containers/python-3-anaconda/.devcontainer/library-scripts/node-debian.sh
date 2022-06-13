@@ -126,6 +126,7 @@ su ${USERNAME} -c "$(cat << EOF
     umask 0002
     # Do not update profile - we'll do this manually
     export PROFILE=/dev/null
+    ls -lah /home/${USERNAME}/.nvs || :
     curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash 
     source ${NVM_DIR}/nvm.sh
     if [ "${NODE_VERSION}" != "" ]; then
