@@ -81,6 +81,7 @@ elif grep -q 'Debian' < /etc/os-release; then
     apt-get update
     apt-get -y install --no-install-recommends fish
 fi
+fish -v
 
 # Install Fisher
 if [ "${INSTALL_FISHER}" = "true" ]; then
@@ -89,6 +90,7 @@ if [ "${INSTALL_FISHER}" = "true" ]; then
     if [ "${USERNAME}" != "root" ]; then
         sudo -u $USERNAME fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
     fi
+    fish -c "fisher -v"
 fi
 
 echo "Done!"
