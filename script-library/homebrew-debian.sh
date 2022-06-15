@@ -39,6 +39,11 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
+if [ "${USERNAME}" = "root" ]; then
+    echo -e 'Running Homebrew as root is not supported. Please, provide a non-root user.'
+    exit 1
+fi
+
 function updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
