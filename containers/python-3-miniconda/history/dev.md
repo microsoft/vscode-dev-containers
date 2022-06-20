@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:694f0dd3b84fea86dfb81ebe52c4dcd8cdfbc195ed640666cf3792e92e298a95
+**Digest:** sha256:068f27e15a8a1982910dceb5df0d507762bcefe3dbd16995072eb7e6abba2512
 
 **Tags:**
 ```
@@ -23,7 +23,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.9.7 | /opt/conda |
+| [Python](https://www.python.org/) | 3.9.12 | /opt/conda |
 
 **Tools installed using git**
 
@@ -36,12 +36,12 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool / package | Version |
 |----------------|---------|
-| pylint | 2.14.0 |
+| pylint | 2.14.3 |
 | flake8 | 4.0.1 |
 | autopep8 | 1.6.0 |
 | black | 22.3.0 |
 | yapf | 0.32.0 |
-| mypy | 0.960 |
+| mypy | 0.961 |
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.4 |
@@ -52,7 +52,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 
 | Tool | Version | Path |
 |------|---------|------|
-| [conda](https://github.com/conda/conda) | 4.11.0 | /opt/conda |
+| [conda](https://github.com/conda/conda) | 4.12.0 | /opt/conda |
 
 **Additional linux tools and packages**
 

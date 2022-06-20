@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-anaconda)
 
-**Digest:** sha256:017f6fb611fb75f658a65ced7167020dc4bc863118bc7ee7ebb2877f0b8a6fe4
+**Digest:** sha256:c5b84ad279e497f88b38c5df257bcd340bd560efdd6cc0b9d1ca1e8870611260
 
 **Tags:**
 ```
@@ -23,9 +23,9 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Python](https://www.python.org/) | 3.9.7 | /opt/conda |
-| [Jupyter Notebooks](https://jupyter.org/) | 6.4.5 | /opt/conda |
-| [Jupyter Lab](https://jupyter.org/) | 3.2.1 | /opt/conda |
+| [Python](https://www.python.org/) | 3.9.12 | /opt/conda |
+| [Jupyter Notebooks](https://jupyter.org/) | 6.4.8 | /opt/conda |
+| [Jupyter Lab](https://jupyter.org/) | 3.3.2 | /opt/conda |
 
 **Tools installed using git**
 
@@ -38,8 +38,8 @@ mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 
 | Tool | Version | Path |
 |------|---------|------|
-| [conda](https://github.com/conda/conda) | 4.10.3 | /opt/conda |
-| anaconda | 2021.11 | /opt/conda |
+| [conda](https://github.com/conda/conda) | 4.12.0 | /opt/conda |
+| anaconda | 2022.05 | /opt/conda |
 
 **Additional linux tools and packages**
 
