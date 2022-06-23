@@ -30,6 +30,16 @@ else
     dockerfile_path="test/regression/Dockerfile"
 fi
 
+# gentoo log size is huge. require set custom log size.
+if [[ "${IMAGE_TO_TEST}" = *"gentoo"* ]]; then
+    # Ensure 1Gib log size 
+    log_max_size=$(((2**10)**3))
+
+    # create builder instance for setting log size
+    builder_instance=$(docker buildx create --driver-opt env.BUILDKIT_STEP_LOG_MAX_SIZE=${log_max_size} --driver-opt env.BUILDKIT_STEP_LOG_MAX_SPEED=10000000)
+    OTHER_ARGS="${OTHER_ARGS} --builder ${builder_instance}"
+fi
+
 BUILDX_COMMAND="docker buildx build \
     ${OTHER_ARGS} \
     --progress=plain \

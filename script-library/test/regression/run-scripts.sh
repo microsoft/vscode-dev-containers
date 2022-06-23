@@ -80,6 +80,13 @@ cat << EOF
 
 EOF
 
+# Sometimes, gentoo does not havs /usr/local/share directory.
+if [ "${DISTRO}" = "gentoo" ]; then
+    if [ ! -d /usr/local/share ]; then
+        mkdir /usr/local/share
+    fi
+fi
+
 # Add stub entrypoint scripts in the event RUN_ONE is set and not all of these would be executed
 tee /usr/local/share/docker-init.sh /usr/local/share/ssh-init.sh > /usr/local/share/desktop-init.sh << 'EOF'
 #!/bin/bash
