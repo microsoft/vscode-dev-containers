@@ -1,6 +1,6 @@
 {
 	"variants": ["bullseye", "buster", "jammy", "focal", "bionic"],
-	"definitionVersion": "0.205.0",
+	"definitionVersion": "0.205.1",
 	"build": {
 		"latest": "bullseye",
 		"parent": {

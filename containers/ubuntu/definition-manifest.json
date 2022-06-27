@@ -1,6 +1,6 @@
 {
 	"variants": ["jammy", "focal", "bionic"],
-	"definitionVersion": "0.203.0",
+	"definitionVersion": "0.203.1",
 	"build": {
 		"latest": false,
 		"rootDistro": "debian",

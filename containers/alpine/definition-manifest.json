@@ -1,6 +1,6 @@
 {
 	"variants": ["3.15", "3.14", "3.13"],
-	"definitionVersion": "0.204.3",
+	"definitionVersion": "0.204.4",
 	"build": {
 		"latest": false,
 		"rootDistro": "alpine",

@@ -1,6 +1,6 @@
 {
 	"variants": ["6.0-bullseye-slim", "6.0-focal", "3.1-bullseye", "3.1-focal"],
-	"definitionVersion": "0.203.1",
+	"definitionVersion": "0.203.2",
 	"build": {
 		"latest": "6.0-bullseye-slim",
 		"rootDistro": "debian",
