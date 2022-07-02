@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/oryx/build:vso-focal-20211210.1 as kitchensink
+FROM mcr.microsoft.com/oryx/build:vso-focal-20220429.1 as kitchensink
 
 ARG USERNAME=codespace
 ARG USER_UID=1000
@@ -30,15 +30,14 @@ ENV SHELL=/bin/bash \
     RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev" \ 
     GOROOT="/usr/local/go" \
     GOPATH="/go" \
-    CARGO_HOME="/usr/local/cargo" \
-    RUSTUP_HOME="/usr/local/rustup" \
     SDKMAN_DIR="/usr/local/sdkman" \
+    JUPYTERLAB_PATH="${HOMEDIR}/.local/bin" \
     DOCKER_BUILDKIT=1
 
-ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${ORIGINAL_PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${CARGO_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${PYTHON_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${MAVEN_ROOT}/current/bin:${HUGO_ROOT}/current/bin:${ORYX_PATHS}"
+ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${PYTHON_ROOT}/current/bin:${ORIGINAL_PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${MAVEN_ROOT}/current/bin:${HUGO_ROOT}/current/bin:${JUPYTERLAB_PATH}:${ORYX_PATHS}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
-COPY library-scripts/* setup-user.sh first-run-notice.txt /tmp/scripts/
+COPY library-scripts/* setup-user.sh setup-python-tools.sh first-run-notice.txt /tmp/scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Restore man command
     && yes | unminimize 2>&1 \ 
@@ -58,7 +57,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/git-lfs-debian.sh \
     && bash /tmp/scripts/github-debian.sh \
-    && bash /tmp/scripts/azcli-debian.sh \
     # Install Moby CLI and Engine
     && bash /tmp/scripts/docker-in-docker-debian.sh "true" "${USERNAME}" "true" \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
@@ -70,8 +68,12 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mkdir -p /usr/local/etc/vscode-dev-containers/ \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
-# Install Python, PHP, Ruby utilities
+# Install Python, JupyterLab, common machine learning packages, and Ruby utilities
 RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
+    # Install JupyterLab and common machine learning packages
+    && PYTHON_BINARY="${PYTHON_ROOT}/current/bin/python" \
+    && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} "true" \
+    && bash /tmp/scripts/setup-python-tools.sh ${PYTHON_BINARY} \
     # Install rvm, rbenv, any missing base gems
     && chown -R ${USERNAME} /opt/ruby/* \
     && bash /tmp/scripts/ruby-debian.sh "none" "${USERNAME}" "true" "true" \
@@ -79,21 +81,17 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
     && ln -s $(which composer.phar) /usr/local/bin/composer \
     && apt-get clean -y
 
-# Install PowerShell
-RUN bash /tmp/scripts/powershell-debian.sh \
-    && apt-get clean -y
-
 # Setup Node.js, install NVM and NVS
 RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     && (cd ${NVM_DIR} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVM_DIR}/.git-remote-and-commit \
     # Install nvs (alternate cross-platform Node.js version-management tool)
+    && git config --global --add safe.directory /home/codespace/.nvs \
+    && mkdir -p ${NVS_HOME} \
+    && chown -R ${USERNAME}: ${NVS_HOME} \
     && sudo -u ${USERNAME} git clone -c advice.detachedHead=false --depth 1 https://github.com/jasongin/nvs ${NVS_HOME} 2>&1 \
     && (cd ${NVS_HOME} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVS_HOME}/.git-remote-and-commit \
     && sudo -u ${USERNAME} bash ${NVS_HOME}/nvs.sh install \
     && rm ${NVS_HOME}/cache/* \
-    # Set npm global location
-    && sudo -u ${USERNAME} npm config set prefix ${NPM_GLOBAL} \
-    && npm config -g set prefix ${NPM_GLOBAL} \
     # Clean up
     && rm -rf ${NVM_DIR}/.git ${NVS_HOME}/.git
 
@@ -103,9 +101,8 @@ RUN bash /tmp/scripts/gradle-debian.sh "latest" "${SDKMAN_DIR}" "${USERNAME}" "t
         && sdk install java 11-opt-java /opt/java/17.0 \
         && sdk install java lts-opt-java /opt/java/lts"
 
-# Install Rust, Go, remove scripts now that we're done with them
-RUN bash /tmp/scripts/rust-debian.sh "${CARGO_HOME}" "${RUSTUP_HOME}" "${USERNAME}" "true" \
-    && bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
+# Install Go, remove scripts now that we're done with them
+RUN bash /tmp/scripts/go-debian.sh "latest" "${GOROOT}" "${GOPATH}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /tmp/scripts
 
 # Mount for docker-in-docker 

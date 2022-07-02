@@ -7,7 +7,7 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby] [CLI version]
+# Syntax: ./docker-debian.sh [enable non-root docker socket access flag] [source socket] [target socket] [non-root user] [use moby] [CLI version] [Major version for docker-compose]
 
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 SOURCE_SOCKET=${2:-"/var/run/docker-host.sock"}
@@ -15,8 +15,10 @@ TARGET_SOCKET=${3:-"/var/run/docker.sock"}
 USERNAME=${4:-"automatic"}
 USE_MOBY=${5:-"true"}
 DOCKER_VERSION=${6:-"latest"}
+DOCKER_DASH_COMPOSE_VERSION=${7:-"v1"} # v1 or v2
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
-DOCKER_DASH_COMPOSE_VERSION="1"
+DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal jammy"
+DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute impish jammy"
 
 set -e
 
@@ -125,6 +127,26 @@ fi
 # Fetch host/container arch.
 architecture="$(dpkg --print-architecture)"
 
+# Check if distro is suppported
+if [ "${USE_MOBY}" = "true" ]; then
+    # 'get_common_setting' allows attribute to be updated remotely
+    get_common_setting DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES
+    if [[ "${DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
+        err "Unsupported  distribution version '${VERSION_CODENAME}'. To resolve, either: (1) set feature option '\"moby\": false' , or (2) choose a compatible OS distribution"
+        err "Support distributions include:  ${DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}"
+        exit 1
+    fi
+    echo "Distro codename  '${VERSION_CODENAME}'  matched filter  '${DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES}'"
+else
+    get_common_setting DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES
+    if [[ "${DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}" != *"${VERSION_CODENAME}"* ]]; then
+        err "Unsupported distribution version '${VERSION_CODENAME}'. To resolve, please choose a compatible OS distribution"
+        err "Support distributions include:  ${DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}"
+        exit 1
+    fi
+    echo "Distro codename  '${VERSION_CODENAME}'  matched filter  '${DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES}'"
+fi
+
 # Set up the necessary apt repos (either Microsoft's or Docker's)
 if [ "${USE_MOBY}" = "true" ]; then
 
@@ -206,11 +228,34 @@ else
         ${pipx_bin} install --pip-args '--no-cache-dir --force-reinstall' docker-compose
         rm -rf /tmp/pip-tmp
     else 
-        find_version_from_git_tags DOCKER_DASH_COMPOSE_VERSION "https://github.com/docker/compose" "tags/"
-        echo "(*) Installing docker-compose ${DOCKER_DASH_COMPOSE_VERSION}..."
-        curl -fsSL "https://github.com/docker/compose/releases/download/${DOCKER_DASH_COMPOSE_VERSION}/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
+        compose_v1_version="1"
+        find_version_from_git_tags compose_v1_version "https://github.com/docker/compose" "tags/"
+        echo "(*) Installing docker-compose ${compose_v1_version}..."
+        curl -fsSL "https://github.com/docker/compose/releases/download/${compose_v1_version}/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
         chmod +x /usr/local/bin/docker-compose
     fi
+fi
+
+# Install docker-compose switch if not already installed - https://github.com/docker/compose-switch#manual-installation
+current_v1_compose_path="$(which docker-compose)"
+target_v1_compose_path="$(dirname "${current_v1_compose_path}")/docker-compose-v1"
+if ! type compose-switch > /dev/null 2>&1; then
+    echo "(*) Installing compose-switch..."
+    compose_switch_version="latest"
+    find_version_from_git_tags compose_switch_version "https://github.com/docker/compose-switch"
+    curl -fsSL "https://github.com/docker/compose-switch/releases/download/v${compose_switch_version}/docker-compose-linux-${architecture}" -o /usr/local/bin/compose-switch
+    chmod +x /usr/local/bin/compose-switch
+    # TODO: Verify checksum once available: https://github.com/docker/compose-switch/issues/11
+
+    # Setup v1 CLI as alternative in addition to compose-switch (which maps to v2)
+    mv "${current_v1_compose_path}" "${target_v1_compose_path}"
+    update-alternatives --install /usr/local/bin/docker-compose docker-compose /usr/local/bin/compose-switch 99
+    update-alternatives --install /usr/local/bin/docker-compose docker-compose "${target_v1_compose_path}" 1
+fi
+if [ "${DOCKER_DASH_COMPOSE_VERSION}" = "v1" ]; then
+    update-alternatives --set docker-compose "${target_v1_compose_path}"
+else
+    update-alternatives --set docker-compose /usr/local/bin/compose-switch
 fi
 
 # If init file already exists, exit
@@ -227,10 +272,17 @@ fi
 
 # Add a stub if not adding non-root user access, user is root
 if [ "${ENABLE_NONROOT_DOCKER}" = "false" ] || [ "${USERNAME}" = "root" ]; then
-    echo '/usr/bin/env bash -c "\$@"' > /usr/local/share/docker-init.sh
+    echo -e '#!/usr/bin/env bash\nexec "$@"' > /usr/local/share/docker-init.sh
     chmod +x /usr/local/share/docker-init.sh
     exit 0
 fi
+
+# Setup a docker group in the event the docker socket's group is not root
+if ! grep -qE '^docker:' /etc/group; then
+    groupadd --system docker
+fi
+usermod -aG docker "${USERNAME}"
+DOCKER_GID="$(grep -oP '^docker:x:\K[^:]+' /etc/group)"
 
 # If enabling non-root access and specified user is found, setup socat and add script
 chown -h "${USERNAME}":root "${TARGET_SOCKET}"        
@@ -271,20 +323,13 @@ log()
 echo -e "\n** \$(date) **" | sudoIf tee -a \${SOCAT_LOG} > /dev/null
 log "Ensuring ${USERNAME} has access to ${SOURCE_SOCKET} via ${TARGET_SOCKET}"
 
-# If enabled, try to add a docker group with the right GID. If the group is root, 
+# If enabled, try to update the docker group with the right GID. If the group is root, 
 # fall back on using socat to forward the docker socket to another unix socket so 
 # that we can set permissions on it without affecting the host.
 if [ "${ENABLE_NONROOT_DOCKER}" = "true" ] && [ "${SOURCE_SOCKET}" != "${TARGET_SOCKET}" ] && [ "${USERNAME}" != "root" ] && [ "${USERNAME}" != "0" ]; then
     SOCKET_GID=\$(stat -c '%g' ${SOURCE_SOCKET})
-    if [ "\${SOCKET_GID}" != "0" ]; then
-        log "Adding user to group with GID \${SOCKET_GID}."
-        if [ "\$(cat /etc/group | grep :\${SOCKET_GID}:)" = "" ]; then
-            sudoIf groupadd --gid \${SOCKET_GID} docker-host
-        fi
-        # Add user to group if not already in it
-        if [ "\$(id ${USERNAME} | grep -E "groups.*(=|,)\${SOCKET_GID}\(")" = "" ]; then
-            sudoIf usermod -aG \${SOCKET_GID} ${USERNAME}
-        fi
+    if [ "\${SOCKET_GID}" != "0" ] && [ "\${SOCKET_GID}" != "${DOCKER_GID}" ] && ! grep -E ".+:x:\${SOCKET_GID}" /etc/group; then
+        sudoIf groupmod --gid "\${SOCKET_GID}" docker
     else
         # Enable proxy if not already running
         if [ ! -f "\${SOCAT_PID}" ] || ! ps -p \$(cat \${SOCAT_PID}) > /dev/null; then

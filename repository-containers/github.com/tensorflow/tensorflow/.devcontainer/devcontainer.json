@@ -9,31 +9,36 @@
 	//			"IMAGE_TYPE": "-gpu"
 	//		} 
 	//	},
-	
 
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"python.testing.pytestEnabled": true,
-		"python.testing.pytestArgs": [ 
-			"./tensorflow"
-		],
-		"C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
-		"C_Cpp.default.includePath": [
-			"${workspaceFolder}/**",
-        	],
-		"files.watcherExclude": {
-			"**/bazel-*/**": true
-		},
-		"search.exclude": {
-			"**/bazel-*/**": true
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"python.testing.pytestEnabled": true,
+				"python.testing.pytestArgs": [ 
+					"./tensorflow"
+				],
+				"C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
+				"C_Cpp.default.includePath": [
+					"${workspaceFolder}/**"
+					],
+				"files.watcherExclude": {
+					"**/bazel-*/**": true
+				},
+				"search.exclude": {
+					"**/bazel-*/**": true
+				}
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python",
+				"ms-vscode.cpptools"
+			]
 		}
 	},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-python.python",
-		"ms-vscode.cpptools",
-	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

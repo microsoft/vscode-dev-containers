@@ -1,6 +1,6 @@
-# Find the Dockerfile for mcr.microsoft.com/azure-functions/java:3.0-java11-core-tools at this URL
-# https://github.com/Azure/azure-functions-docker/blob/dev/host/3.0/buster/amd64/java/java11/java11-core-tools.Dockerfile
-FROM mcr.microsoft.com/azure-functions/java:3.0-java11-core-tools
+# Find the Dockerfile at this URL
+# https://github.com/Azure/azure-functions-docker/blob/dev/host/4/bullseye/amd64/java/java11/java11-core-tools.Dockerfile
+FROM mcr.microsoft.com/azure-functions/java:4-java11-core-tools
 
 # Uncomment following lines If you want to enable Development Container Script
 # For more details https://github.com/microsoft/vscode-dev-containers/tree/main/script-library

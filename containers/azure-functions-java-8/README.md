@@ -44,12 +44,11 @@ This definition includes some test code that will help you verify it is working 
 6. Enter these options:
    1. Yes (when prompted to create a new project)
    2. Java
-   3. HTTP Trigger
-   4. HTTPTrigger-Java
-   5. Anonymous
-   6. Open in current window
+   3. Java 8
+   4. (Accept defaults for group, artifact, and package information)
+   5. Open in current window
 7. Press <kbd>F5</kbd> to start debugging project.
-8. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpTrigger-Java?name=remote`.
+8. After the debugger is started, open a local browser and enter the URL: `http://localhost:7071/api/HttpExample?name=remote`.
     - If the port 7071 is not already open, press <kbd>F1</kbd>, select **Remote-Containers: Forward Port from Container...**, and then port 7071.
 9. You should see "Hello, remote" echoed by the Azure Function.
 10. From here, you can add breakpoints or edit the contents of the `test-project` folder to do further testing.

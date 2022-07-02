@@ -104,10 +104,14 @@ if [ "${CODESPACES}" != "true" ] || [ "${VSCDC_FIXED_SECRETS}" = "true" ] || [ !
     # Not codespaces, already run, or secrets already in environment, so return
     return
 fi
-if [ -f /workspaces/.codespaces/shared/.env ]; then
-    set -o allexport
-    . /workspaces/.codespaces/shared/.env
-    set +o allexport
+if [ -f /workspaces/.codespaces/shared/.env-secrets ]; then
+    while read line
+    do
+        key=$(echo $line | sed "s/=.*//")
+        value=$(echo $line | sed "s/$key=//1")
+        decodedValue=$(echo $value | base64 -d)
+        export $key="$decodedValue"
+    done < /workspaces/.codespaces/shared/.env-secrets
 fi
 export VSCDC_FIXED_SECRETS=true
 EOF

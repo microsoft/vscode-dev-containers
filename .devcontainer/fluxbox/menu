@@ -1,0 +1,21 @@
+[begin] (  Application Menu  )
+    [exec] (File Manager) { nautilus ~ } <>
+    [exec] (Text Editor) { mousepad } <>
+    [exec] (VS Code) { /usr/bin/code } <>
+    [exec] (VS Code Insiders) { /usr/bin/code-insiders } <>
+    [exec] (Terminal) { tilix -w ~ -e /bin/bash -il } <>
+    [exec] (Web Browser) { x-www-browser --disable-dev-shm-usage } <>
+    [submenu] (System) {}
+        [exec] (Set Resolution) { tilix -t "Set Resolution" -e bash /usr/local/bin/set-resolution } <>
+        [exec] (Edit Application Menu) { mousepad ~/.fluxbox/menu } <>
+        [exec] (Passwords and Keys) { seahorse } <>
+        [exec] (Top Processes) { tilix -t "Top" -e htop } <>
+        [exec] (Disk Utilization) { tilix -t "Disk Utilization" -e ncdu / } <>
+        [exec] (Editres) {editres} <>
+        [exec] (Xfontsel) {xfontsel} <>
+        [exec] (Xkill) {xkill} <>
+        [exec] (Xrefresh) {xrefresh} <>
+    [end]
+    [config] (Configuration)
+    [workspaces] (Workspaces)
+[end]

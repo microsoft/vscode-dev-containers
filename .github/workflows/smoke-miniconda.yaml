@@ -27,6 +27,6 @@ jobs:
       id: smoke_test
       uses: ./.github/actions/smoke-test
       with:
-        definition: ruby
+        definition: python-3-miniconda
         image: mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
         user: vscode

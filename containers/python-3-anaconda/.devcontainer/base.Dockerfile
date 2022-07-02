@@ -14,7 +14,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
 COPY --from=upstream /opt /opt/
 
 # Copy library scripts to execute
-COPY .devcontainer/library-scripts/node-debian.sh .devcontainer/add-notice.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/
+COPY .devcontainer/library-scripts/*.sh .devcontainer/add-notice.sh .devcontainer/library-scripts/*.env /tmp/library-scripts/
 
 # Setup conda to mirror contents from https://github.com/ContinuumIO/docker-images/blob/master/anaconda3/debian/Dockerfile
 ENV LANG=C.UTF-8 \
@@ -22,7 +22,26 @@ ENV LANG=C.UTF-8 \
     PATH=/opt/conda/bin:$PATH
 ARG USERNAME=vscode
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -y --no-install-recommends bzip2 libglib2.0-0 libsm6 libxext6 libxrender1 mercurial subversion \
+    && apt-get install -y --no-install-recommends \
+        bzip2 \
+        ca-certificates \
+        git \
+        libglib2.0-0 \
+        libsm6 \
+        libxcomposite1 \
+        libxcursor1 \
+        libxdamage1 \
+        libxext6 \
+        libxfixes3 \
+        libxi6 \
+        libxinerama1 \
+        libxrandr2 \
+        libxrender1 \
+        mercurial \
+        openssh-client \
+        procps \
+        subversion \
+        wget \
     && apt-get upgrade -y \
     && bash /tmp/library-scripts/add-notice.sh \
     && mv -f "/tmp/library-scripts/meta.env" /usr/local/etc/vscode-dev-containers/meta.env \

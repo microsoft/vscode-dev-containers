@@ -1,4 +1,4 @@
-# [Choice] Debian version (use bullseye or stretch on local arm64/Apple Silicon): bullseye, buster, stretch
+# [Choice] Debian version (use bullseye on local arm64/Apple Silicon): bullseye, buster
 ARG VARIANT="bullseye"
 FROM buildpack-deps:${VARIANT}-curl
 

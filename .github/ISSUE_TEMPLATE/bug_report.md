@@ -14,6 +14,7 @@ about: Create a report to help us improve
 
 - VSCode Version:
 - Local OS Version:
+- Local chip architecture: <x86, arm64, Apple Silicon>
 - Reproduces in: <Codespaces | Remote - Containers | Both>
 - Name of Dev Container Definition with Issue:
 

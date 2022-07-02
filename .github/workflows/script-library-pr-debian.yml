@@ -1,0 +1,38 @@
+name: Test script library (Debian) for PR
+
+on: 
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'script-library/*-debian.sh'  
+jobs:
+  test-script-library:
+    name: Test script library
+    if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
+    strategy:
+      matrix:
+        os: ["debian:bullseye", "debian:buster", "ubuntu:focal", "ubuntu:bionic", "ubuntu:jammy"]
+        defaults: ["true", "false"]
+      fail-fast: true
+    runs-on: ubuntu-latest
+    steps:
+    - name: Free more space
+      id: free_space 
+      run: |
+        set -e
+        # Ensure enough space is available for build
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+        sudo rm -rf /usr/share/dotnet
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v1
+
+    - name: Test script library
+      id: test_script_library
+      run: |
+        set -e
+        bash script-library/test/regression/test.sh "${{ matrix.os }}" false "${{ matrix.defaults }}" true linux/amd64

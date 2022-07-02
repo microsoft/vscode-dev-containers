@@ -1,5 +1,5 @@
-# [Choice] Swift version: 5.5, 5.4, 5.3, 5.2, 5.1, 4.2
-ARG VARIANT=5.5
+# [Choice] Swift version: 5.6-focal, 5.5, 5.4, 5.3, 5.2, 5.1, 4.2
+ARG VARIANT=5.6-focal
 FROM swift:${VARIANT}
 
 # [Option] Install zsh
@@ -14,14 +14,7 @@ ARG USER_GID=$USER_UID
 COPY library-scripts/common-debian.sh /tmp/library-scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
-    && apt-get -y install --no-install-recommends lldb python3-minimal libpython3.7 \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/library-scripts
-
-# Install SourceKite, see https://github.com/vknabel/vscode-swift-development-environment/blob/master/README.md#installation
-RUN git clone https://github.com/vknabel/sourcekite \
-    && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/swift:/usr/lib \
-    && ln -s /usr/lib/libsourcekitdInProc.so /usr/lib/sourcekitdInProc \
-    && cd sourcekite && make install PREFIX=/usr/local -j2
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"

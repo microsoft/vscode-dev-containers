@@ -1,0 +1,53 @@
+{
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"runArgs": [
+		"--shm-size=1g"
+	],
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"resmon.show.battery": false,
+				"resmon.show.cpufreq": false
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"dbaeumer.vscode-eslint",
+				"rogalmic.bash-debug",
+				"mads-hartmann.bash-ide-vscode",
+				"streetsidesoftware.code-spell-checker",
+				"mutantdino.resourcemonitor",
+				"bierner.github-markdown-preview",
+				"EditorConfig.EditorConfig",
+				"chrisdias.vscode-opennewinstance"
+			]
+		}
+	},
+	"forwardPorts": [6080],
+	"portsAttributes": {
+		"6080": {
+			"label": "Desktop access (password: vscode)",
+			"onAutoForward": "silent"
+		},
+		"5901": {
+			"label": "VNC TCP port (password: vscode)",
+			"onAutoForward": "silent"
+		}
+	},
+	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+	"remoteUser": "node",
+	"features": {
+		"docker-in-docker": "latest",
+		"github-cli": "latest"
+	},
+	"overrideCommand": false,
+	"hostRequirements": {
+		"memory": "6gb"
+	}
+}

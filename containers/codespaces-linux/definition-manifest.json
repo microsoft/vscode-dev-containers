@@ -1,5 +1,5 @@
 {
-	"definitionVersion": "1.7.0",
+	"definitionVersion": "2.0.3",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
@@ -13,34 +13,29 @@
 		"annotation": "This document describes the base contents of the default GitHub Codespaces dev container image. Note that this image also includes detection logic to dynamically install additional language / runtime versions based on your repository's contents. Dynamically installed content can be found in sub-folders under `/opt`.",
 		"image": "mcr.microsoft.com/oryx/build:vso-focal-20210728.1",
 		"imageLink": "https://github.com/microsoft/oryx",
-		"apt": [{
+		"apt": [
+			{
 				"cgIgnore": false,
 				"name": "moby-cli",
 				"annotation": "Docker CLI"
-			}, {
+			},
+			{
 				"cgIgnore": false,
 				"name": "moby-engine",
 				"annotation": "Docker Engine"
-			}, {
+			},
+			{
 				"cgIgnore": false,
 				"name": "git-lfs",
 				"annotation": "Git Large File Support"
-			}, {
-				"cgIgnore": false,
-				"markdownIgnore": true,
-				"name": "powershell"
-			}, {
-				"cgIgnore": false,
-				"name": "azure-cli",
-				"annotation": "Azure CLI"
 			},
 			"cmake",
-			"build-essential", 
+			"build-essential",
 			"cmake",
 			"cppcheck",
 			"valgrind",
 			"lldb",
-			"llvm", 
+			"llvm",
 			"gdb",
 			"clang",
 			"python3-dev",
@@ -49,7 +44,7 @@
 			"xtail",
 			"software-properties-common",
 			"libsecret-1-dev",
-			"libnss3", 
+			"libnss3",
 			"libnspr4",
 			"libatk-bridge2.0-0",
 			"libatk1.0-0",
@@ -71,7 +66,7 @@
 			"g++",
 			"gcc",
 			"libc6-dev",
-			"make", 
+			"make",
 			"pkg-config",
 			"sed",
 			"python3-minimal"
@@ -102,13 +97,6 @@
 			"debase",
 			"jekyll"
 		],
-		"cargo": {
-			"rls": null,
-			"rustfmt": null,
-			"rust-analysis": "rustc --version",
-			"rust-src": "rustc --version",
-			"clippy": "rustc --version"
-		},
 		"go": {
 			"golang.org/x/tools/gopls": null,
 			"honnef.co/go/tools": null,
@@ -180,9 +168,6 @@
 				"versionCommand": "ls /opt/php | grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+'",
 				"path": "/opt/php/&lt;version&gt;"
 			},
-			"PowerShell": {
-				"cgIgnore": true
-			},
 			"GCC": {
 				"cgIgnore": true
 			},
@@ -190,7 +175,6 @@
 				"cgIgnore": true
 			},
 			"Go": null,
-			"Rust": null,
 			"Jekyll": {
 				"cgIgnore": true
 			}

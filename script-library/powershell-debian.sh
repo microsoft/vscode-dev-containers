@@ -122,7 +122,7 @@ install_using_apt() {
 
 install_using_github() {
     # Fall back on direct download if no apt package exists in microsoft pool
-    check_packages curl ca-certificates gnupg2 dirmngr libc6 libgcc1 libgssapi-krb5-2 liblttng-ust0 libstdc++6 libunwind8 libuuid1 zlib1g libicu[0-9][0-9]
+    check_packages curl ca-certificates gnupg2 dirmngr libc6 libgcc1 libgssapi-krb5-2 libstdc++6 libunwind8 libuuid1 zlib1g libicu[0-9][0-9]
     if ! type git > /dev/null 2>&1; then
         apt_get_update_if_needed
         apt-get install -y --no-install-recommends git

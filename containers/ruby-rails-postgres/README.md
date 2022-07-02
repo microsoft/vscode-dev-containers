@@ -33,36 +33,7 @@ build:
     VARIANT: "2-bullseye"
 ```
 
-To get the best experience, you'll need to update the [SQLTools configuration][sqltools] in `.devcontainer/devcontainer.json` to match the database names used by your application:
-
-```jsonc
-"settings": { 
-   "sqltools.connections": [
-      {
-         "name": "Rails Development Database",
-         "driver": "PostgreSQL",
-         "previewLimit": 50,
-         "server": "localhost",
-         "port": 5432,
-
-         // update this to match config/database.yml
-         "database": "my_app_name_development"
-      },
-      {
-         "name": "Rails Test Database",
-         "driver": "PostgreSQL",
-         "previewLimit": 50,
-         "server": "localhost",
-         "port": 5432,
-
-         // update this to match config/database.yml
-         "database": "my_app_name_test"
-      }
-   ]
-}
-```
-
-You also can connect to PostgreSQL from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
+You can connect to PostgreSQL from an external tool when using VS Code by updating `.devcontainer/devcontainer.json` as follows:
 
 ```json
 "forwardPorts": [ "5432" ]
@@ -127,4 +98,3 @@ Licensed under the MIT License. See [LICENSE](https://github.com/Microsoft/vscod
 
 <!-- links -->
 [jld]: https://github.com/jarrodldavis
-[sqltools]: https://vscode-sqltools.mteixeira.dev/settings#sqltools.connections

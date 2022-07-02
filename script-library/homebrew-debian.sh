@@ -117,12 +117,12 @@ if [ "${USE_SHALLOW_CLONE}" = "false" ]; then
     echo "Installing Homebrew..."
     git clone https://github.com/Homebrew/brew "${BREW_PREFIX}/Homebrew"
     mkdir -p "${BREW_PREFIX}/Homebrew/Library/Taps/homebrew"
-    git clone https://github.com/Homebrew/linuxbrew-core "${BREW_PREFIX}/Homebrew/Library/Taps/homebrew/homebrew-core"
+    git clone https://github.com/Homebrew/homebrew-core "${BREW_PREFIX}/Homebrew/Library/Taps/homebrew/homebrew-core"
 else
     echo "Installing Homebrew with shallow clone..."
     git clone --depth 1 https://github.com/Homebrew/brew "${BREW_PREFIX}/Homebrew"
     mkdir -p "${BREW_PREFIX}/Homebrew/Library/Taps/homebrew"
-    git clone --depth 1 https://github.com/Homebrew/linuxbrew-core "${BREW_PREFIX}/Homebrew/Library/Taps/homebrew/homebrew-core"
+    git clone --depth 1 https://github.com/Homebrew/homebrew-core "${BREW_PREFIX}/Homebrew/Library/Taps/homebrew/homebrew-core"
     # Disable automatic updates as they are not allowed with shallow clone installation
     updaterc "export HOMEBREW_NO_AUTO_UPDATE=1"
     updatefishconfig "set -gx HOMEBREW_NO_AUTO_UPDATE 1"

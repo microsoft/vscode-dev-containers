@@ -102,7 +102,7 @@ else
             exit
         fi
     else
-        RHEL_COMPAT_VER=$VERSION_ID
+        RHEL_COMPAT_VER=${VERSION_ID%%.*}
     fi
 fi
 

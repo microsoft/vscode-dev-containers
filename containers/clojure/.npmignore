@@ -1,0 +1,10 @@
+README.md
+test-project
+history
+definition-manifest.json
+.vscode
+.npmignore
+.calva
+.clj-kondo
+.cljs_node_repl
+.nrepl-port

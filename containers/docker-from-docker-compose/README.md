@@ -2,7 +2,7 @@
 
 ## Summary
 
-*Acess your host's Docker install from inside a container when using Docker Compose. Installs Docker extension in the container along with needed CLIs.*
+*Access your host's Docker install from inside a container when using Docker Compose. Installs Docker extension in the container along with needed CLIs.*
 
 | Metadata | Value |  
 |----------|-------|

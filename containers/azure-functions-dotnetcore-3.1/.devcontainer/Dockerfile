@@ -1,5 +1,5 @@
 # Find the Dockerfile for mcr.microsoft.com/azure-functions/dotnet:3.0-dotnet3-core-tools at this URL
-# https://github.com/Azure/azure-functions-docker/blob/main/host/3.0/buster/amd64/dotnet/dotnet-core-tools.Dockerfile
+# https://github.com/Azure/azure-functions-docker/blob/dev/host/3.0/buster/amd64/dotnet/dotnet-inproc/dotnet-core-tools.Dockerfile
 FROM mcr.microsoft.com/azure-functions/dotnet:3.0-dotnet3-core-tools
 
 # Uncomment following lines If you want to enable Development Container Script

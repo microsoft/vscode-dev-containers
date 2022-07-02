@@ -10,28 +10,36 @@
 	"overrideCommand": false,
 	"runArgs": [ "--init", "--security-opt", "seccomp=unconfined" ],
 
-	"settings": {
-		// zsh is also available
-		// "terminal.integrated.defaultProfile.linux": "zsh",
-		"resmon.show.battery": false,
-		"resmon.show.cpufreq": false,
-		"remote.extensionKind": {
-			"ms-vscode.js-debug-nightly": "workspace",
-			"msjsdiag.debugger-for-chrome": "workspace"
-		},
-		"debug.chrome.useV3": true
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				// zsh is also available
+				// "terminal.integrated.defaultProfile.linux": "zsh",
+				"resmon.show.battery": false,
+				"resmon.show.cpufreq": false,
+				"remote.extensionKind": {
+					"ms-vscode.js-debug-nightly": "workspace",
+					"msjsdiag.debugger-for-chrome": "workspace"
+				},
+				"debug.chrome.useV3": true
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"EditorConfig.EditorConfig",
+				"msjsdiag.debugger-for-chrome",
+				"mutantdino.resourcemonitor",
+				"GitHub.vscode-pull-request-github"
+			]
+		}
 	},
 
 	// noVNC, VNC ports
 	"forwardPorts": [6080, 5901],
-
-	"extensions": [
-		"dbaeumer.vscode-eslint",
-		"EditorConfig.EditorConfig",
-		"msjsdiag.debugger-for-chrome",
-		"mutantdino.resourcemonitor",
-		"GitHub.vscode-pull-request-github"
-	],
 
 	"remoteUser": "node"
 }

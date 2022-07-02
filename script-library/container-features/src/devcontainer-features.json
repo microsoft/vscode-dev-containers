@@ -1,0 +1,1263 @@
+{
+	"features": [
+		//  Problem #1 - you should be able to pick docker-in-docker or docker-from-docker, but not both, and settings need to be different
+		{
+			"id": "docker-in-docker",
+			"name": "Docker (Moby) support (Docker-in-Docker)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker-in-docker.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "20.10" ],
+					"default": "latest",
+					"description": "Select or enter a Docker/Moby Engine version. (Availability can vary by OS version.)"
+				},
+				"moby": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install OSS Moby build instead of Docker CE"
+				},
+				"dockerDashComposeVersion": {
+					"type": "string",
+					"enum": ["v1", "v2" ],
+					"default": "v1",
+					"description": "Default version of Docker Compose (v1 or v2)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_DOCKER_IN_DOCKER",
+			"entrypoint": "/usr/local/share/docker-init.sh",
+			"privileged": true,
+			"containerEnv": {
+				"DOCKER_BUILDKIT": "1"
+			},
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			],
+			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
+			"mounts": [
+				{
+					"source":"dind-var-lib-docker", 
+				 	"target":"/var/lib/docker", 
+				 	"type":"volume"
+				}
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "docker-from-docker",
+			"name": "Docker (Moby) support, reuse host Docker Engine (Docker-from-Docker)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "20.10"],
+					"default": "latest",
+					"description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+				},
+				"moby": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install OSS Moby build instead of Docker CE"
+				},
+				"dockerDashComposeVersion": {
+					"type": "string",
+					"enum": ["v1", "v2" ],
+					"default": "v1",
+					"description": "Compose version to use for docker-compose (v1 or v2)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_DOCKER_FROM_DOCKER",
+			"entrypoint": "/usr/local/share/docker-init.sh",
+			"containerEnv": {
+				"DOCKER_BUILDKIT": "1"
+			},
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			],
+			"mounts": [
+				{
+					"source":"/var/run/docker.sock", 
+				 	"target":"/var/run/docker-host.sock", 
+				 	"type":"bind"
+				}
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "kubectl-helm-minikube",
+			"name": "Kubectl, Helm, and Minkube",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/kubectl-helm.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.23", "1.22", "1.21"],
+					"default": "latest",
+					"description": "Select or enter a Kubernetes version to install"
+				},
+				"helm": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select or enter a Helm version to install"
+				},
+				"minikube": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select or enter a Minikube version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
+			"extensions": [
+				"ms-kubernetes-tools.vscode-kubernetes-tools"
+			],
+			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
+			"mounts": [
+				{
+					"source":"minikube-config", 
+				 	"target":"/home/vscode/.minikube", 
+				 	"type":"volume"
+				}
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "terraform",
+			"name": "Terraform, tflint, and TFGrunt",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/terraform.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.2", "1.1", "1.0", "0.15"],
+					"default": "latest",
+					"description": "Terraform version"
+				},
+				"tflint": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Tflint version"
+				},
+				"terragrunt": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Terragrunt version"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_TERRAFORM",
+			"extensions": [
+				"HashiCorp.terraform",
+				"ms-azuretools.vscode-azureterraform"
+			],
+			"settings": {
+				"terraform.languageServer": {
+					"enabled": true,
+					"args": []
+				},
+				"azureTerraform.terminal": "integrated"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "git",
+			"name": "Git (may require compilation)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/git-from-src.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "os-provided"],
+					"default": "os-provided",
+					"description": "Select or enter a Git version."
+				},
+				"ppa": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install from PPA if available"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_GIT",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "git-lfs",
+			"name": "Git Large File Support (LFS)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/git-lfs.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_GIT_LFS",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "github-cli",
+			"name": "GitHub CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/github.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select version of the GitHub CLI, if not latest."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_GITHUB_CLI",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "aws-cli",
+			"name": "AWS CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/awscli.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": [
+						"latest"
+					],
+					"default": "latest",
+					"description": "Select or enter an AWS CLI version. (Available versions here: https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_AWS_CLI",
+			"extensions": [
+				"AmazonWebServices.aws-toolkit-vscode"
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "azure-cli",
+			"name": "Azure CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/azcli.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest"],
+					"default": "latest",
+					"description": "Select or enter an Azure CLI version. (Available versions may vary by Linux distribution.)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_AZURE_CLI",
+			"extensions": [
+				"ms-vscode.azurecli"
+			],
+			"include": [
+				"cpp",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "sshd",
+			"name": "SSH server",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/sshd.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_SSH",
+			"entrypoint": "/usr/local/share/ssh-init.sh",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "desktop-lite",
+			"name": "Light-weight desktop (Fluxbox)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/desktop-lite.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				},
+				"password": {
+					"type": "string",
+					"proposals": ["vscode","codespaces","password"],
+					"default": "vscode",
+					"description": "Enter a password for desktop connections"
+				},
+				"webPort": {
+					"type": "string",
+					"proposals": ["6080"],
+					"default": "6080",
+					"description": "Enter a port for the desktop web client"
+				},
+				"vncPort": {
+					"type": "string",
+					"proposals": ["5901"],
+					"default": "5901",
+					"description": "Enter a port for the desktop VNC server"
+				}
+			},
+			"init": true,
+			"buildArg": "_VSC_INSTALL_DESKTOP_LITE",
+			"entrypoint": "/usr/local/share/desktop-init.sh",
+			"containerEnv": {
+				"DISPLAY": ":1"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "homebrew",
+			"name": "Homebrew",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/homebrew.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				},
+				"shallow": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use shallow clone for faster container build."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_HOMEBREW",
+			"containerEnv": {
+				"BREW_PREFIX": "/home/linuxbrew/.linuxbrew",
+				"PATH": "${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:${PATH}"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "fish",
+			"name": "fish shell and Fisher",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/fish.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": ["latest"],
+					"default": "latest",
+					"description": "Currently unused."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_FISH",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "node",
+			"name": "Node.js (via nvm) and yarn",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/node.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": [ "lts", "latest", "18", "16", "14" ],
+					"default": "lts",
+					"description": "Select or enter a Node.js version to install"
+				},
+				"nodeGypDependencies": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install dependencies to compile native node modules (node-gyp)?"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_NODE",
+			"extensions": ["dbaeumer.vscode-eslint"],
+			"containerEnv": {
+				"NVM_DIR":"/usr/local/share/nvm",
+				"NVM_SYMLINK_CURRENT": "true",
+				"PATH": "${NVM_DIR}/current/bin:${PATH}"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"rust",
+				"ubuntu",
+				"debian"
+			]
+		},
+		{
+			"id": "python",
+			"name": "Python (may require compilation)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/python.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"enum": [ "latest", "os-provided", "3.10", "3.9", "3.8", "3.7", "3.6" ],
+					"default": "os-provided",
+					"description": "Select a Python version to install."
+				},
+				"installTools": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install common Python tools like pylint"
+				},
+				"optimize": {
+					"type": "boolean",
+					"default": false,
+					"description": "Optimize Python for performance when compiled (slow)"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_PYTHON",
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance"
+			],
+			"containerEnv": {
+				"PYTHON_PATH": "/usr/local/python",
+				"PIPX_HOME": "/usr/local/py-utils",
+				"PIPX_BIN_DIR": "/usr/local/py-utils/bin",
+				"PATH":"${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}"
+			},
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+				"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+				"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
+				"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+				"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"java-8",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres"
+			]
+		},
+		{
+			"id": "golang",
+			"name": "Go",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/go.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.18", "1.17"],
+					"default": "latest",
+					"description": "Select or enter a Go version to install"
+				}
+			},
+			"init": true,
+			"buildArg": "_VSC_INSTALL_GOLANG",
+			"extensions": ["golang.Go"],
+			"containerEnv": {
+				"GOPATH": "/go",
+				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
+			},
+			"capAdd": [ "SYS_PTRACE" ],
+			"securityOpt": [ "seccomp=unconfined" ],
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "java",
+			"name": "Java (via SDKMAN!)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/java.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["lts", "latest", "17", "11", "8"],
+					"default": "lts",
+					"description": "Select or enter a Java version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_JAVA",
+			"extensions": ["vscjava.vscode-java-pack"],
+			"containerEnv": {
+				"SDKMAN_DIR": "/usr/local/sdkman",
+				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/java/current/bin:${PATH}"
+			},
+			"settings": {
+				"java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		// Problem #6 - Maven and gradle options should not be presented if Java isn't checked
+		{
+			"id": "maven",
+			"name": "Maven (via SDKMAN!)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/maven.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "3.8", "3.6", "3.5"],
+					"default": "latest",
+					"description": "Select or enter a Maven version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_MAVEN",
+			"extensions": ["vscjava.vscode-java-pack"],
+			"containerEnv": {
+				"SDKMAN_DIR": "/usr/local/sdkman",
+				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/maven/current/bin:${PATH}"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "gradle",
+			"name": "Gradle (via SDKMAN!)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/gradle.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "7", "6", "5"],
+					"default": "latest",
+					"description": "Select or enter a Gradle version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_GRADLE",
+			"extensions": ["vscjava.vscode-java-pack"],
+			"containerEnv": {
+				"SDKMAN_DIR": "/usr/local/sdkman",
+				"PATH": "${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${PATH}"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "ruby",
+			"name": "Ruby (via rvm)",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/ruby.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "3.1", "3.0", "2.7"],
+					"default": "latest",
+					"description": "Select or enter a Ruby version to install"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_RUBY",
+			"extensions": [
+				"rebornix.Ruby"
+			],
+			"containerEnv": {
+				"GEM_PATH": "/usr/local/rvm/gems/default:/usr/local/rvm/gems/default@global",
+				"GEM_HOME": "/usr/local/rvm/gems/default",
+				"MY_RUBY_HOME": "/usr/local/rvm/rubies/default",
+				"PATH": "/usr/local/rvm/gems/default/bin:/usr/local/rvm/gems/default@global/bin:/usr/local/rvm/rubies/default/bin:${PATH}"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "rust",
+			"name": "Rust",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/rust.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "1.55", "1.54", "1.53"],
+					"default": "latest",
+					"description": "Select or enter a version of Rust to install."
+				},
+				"profile": {
+					"type": "string",
+					"proposals": ["minimal", "default", "complete"],
+					"default": "minimal",
+					"description": "Select a rustup install profile."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_RUST",
+			"extensions": [
+				"vadimcn.vscode-lldb",
+				"mutantdino.resourcemonitor",
+				"rust-lang.rust-analyzer",
+				"tamasfe.even-better-toml",
+				"serayuzgur.crates"
+			],
+			"containerEnv": {
+				"CARGO_HOME": "/usr/local/cargo",
+				"RUSTUP_HOME": "/usr/local/rustup",
+				"PATH": "${CARGO_HOME}/bin:${PATH}"
+			},
+			"capAdd": [ "SYS_PTRACE" ],
+			"securityOpt": ["seccomp=unconfined"],
+			"settings": {
+				"lldb.executable": "/usr/bin/lldb",
+				"files.watcherExclude": {
+					"**/target/**": true
+				},
+				"rust-analyzer.checkOnSave.command": "clippy"
+			},
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"powershell",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "powershell",
+			"name": "PowerShell",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/powershell.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "7.1"],
+					"default": "latest",
+					"description": "Select or enter a version of PowerShell."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_POWERSHELL",
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"dotnet",
+				"dotnet-fsharp",
+				"dotnet-mssql",
+				"go",
+				"java",
+				"java-8",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "common",
+			"name": "Common OS utilities",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/common.md",
+			"options": {
+				"installZsh": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install ZSH?"
+				},
+				"installOhMyZsh": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install Oh My Zsh!?"
+				},
+				"upgradePackages": {
+					"type":"boolean",
+					"default": true,
+					"description": "Upgrade OS packages?"
+				},
+				"username": {
+					"type":"string",
+					"proposals": ["vscode", "codespace", "none", "automatic"],
+					"default": "automatic",
+					"description": "Enter name of non-root user to configure or none to skip"
+				},
+				"uid": {
+					"type":"string",
+					"proposals": ["1000", "automatic"],
+					"default": "automatic",
+					"description": "Enter uid for non-root user"
+				},
+				"gid": {
+					"type": "string",
+					"proposals": ["1000", "automatic"],
+					"default": "automatic",
+					"description": "Enter gid for non-root user"
+				},
+				"nonFreePackages": {
+					"type":"boolean",
+					"default": true,
+					"description": "Add packages from non-free Debian repository?"
+				}
+			},
+			"buildArg": "_VSC_INSTALL_COMMON",
+			"include": [
+				"puppet",
+				"chef"
+			]
+		},
+		{
+			"id": "dotnet",
+			"name": "Dotnet CLI",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/dotnet.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest","6.0","5.0","3.1"],
+					"default": "latest",
+					"description": "Select or enter a dotnet CLI version. (Available versions may vary by Linux distribution.)"
+				},
+				"runtimeOnly": {
+					"type":"boolean",
+					"default": false,
+					"description": "Install just the dotnet runtime if true, and sdk if false."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_DOTNET",
+			"containerEnv": {
+				"DOTNET_ROOT": "/usr/local/dotnet",
+				"PATH": "${PATH}:${DOTNET_ROOT}"
+			},
+			"extensions": [
+				"ms-dotnettools.csharp"
+			],
+			"include": [
+				"cpp",
+				"kubernetes-helm",
+				"kubernetes-helm-minikube",
+				"docker-from-docker",
+				"docker-in-docker",
+				"powershell",
+				"java",
+				"go",
+				"php",
+				"ruby",
+				"rust",
+				"typescript-node",
+				"javascript-node",
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian",
+				"javascript-node-mongo",
+				"javascript-node-postgres",
+				"php-mariadb",
+				"ruby-rails-postgres",
+				"python-3-postgres"
+			]
+		},
+		{
+			"id": "jupyterlab",
+			"name": "Jupyter Lab",
+			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/jupyterlab.md",
+			"options": {
+				"version": {
+					"type": "string",
+					"proposals": ["latest", "3.6.2"],
+					"default": "latest",
+					"description": "Select or enter a jupyterlab version."
+				}
+			},
+			"buildArg": "_VSC_INSTALL_JUPYTERLAB",
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-toolsai.jupyter"
+			],
+			"include": [
+				"python-3",
+				"python-3-anaconda",
+				"python-3-miniconda",
+				"ubuntu",
+				"debian"
+			]
+		}
+	]
+}

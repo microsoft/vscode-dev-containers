@@ -52,15 +52,13 @@ You can use this script for your primary dev container by adding it to the `feat
 }
 ```
 
-If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
-
-If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json`:
+If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json` when you are referencing an image or Dockerfile:
 
 ```json
-runArgs: ["--shm-size=1g"]
+"runArgs": ["--shm-size=1g"]
 ```
 
-Or using Docker Compose:
+Or when using Docker Compose:
 
 ```yaml
 services:
@@ -69,6 +67,24 @@ services:
     shm_size: '1gb'
     # ...
 ```
+
+**[Optional]** You may also want to enable the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle signals and clean up [Zombie processes](https://en.wikipedia.org/wiki/Zombie_process) if you do not have an alternative set up. To enable it, add the following to `devcontainer.json` if you are referencing an image or Dockerfile:
+
+```json
+"runArgs": ["--init"]
+```
+
+Or when using Docker Compose:
+
+```yaml
+services:
+  your-service-here:
+    # ...
+    init: true
+    # ...
+```
+
+If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
 
 ### Script use
 
@@ -109,12 +125,12 @@ services:
       init: true
     ```
 
-    The `runArgs` / Docker Compose setting allows the container to take advantage of an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle application and process signals in a desktop environment.
+    The `runArgs` / Docker Compose setting allows the container to take advantage of an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle application and process signals in a desktop environment. However, this is optional.
 
 4. [Optional] If you run into applications crashing, you may need to increase the size of the shared memory space. For example, this will bump it up to 1 GB in `devcontainer.json`:
 
     ```json
-    runArgs: ["--init", "--shm-size=1g"]
+    "runArgs": ["--init", "--shm-size=1g"]
     ```
 
     Or using Docker Compose:

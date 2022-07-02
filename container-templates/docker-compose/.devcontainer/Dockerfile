@@ -1,6 +1,6 @@
 # Use the [Choice] comment to indicate option arguments that should appear in VS Code UX. Use a comma separated list.
 #
-# [Choice] Debian OS version: bullseye, buster, stretch
+# [Choice] Debian OS version: bullseye, buster
 ARG VARIANT="bullseye"
 FROM buildpack-deps:${VARIANT}-curl
 

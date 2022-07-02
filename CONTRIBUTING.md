@@ -2,6 +2,28 @@
 
 This document outlines a number of ways you can get involved.
 
+- [Contributing](#contributing)
+  - [Contributing Dev Container Definitions](#contributing-dev-container-definitions)
+    - [What makes a good Dev Container Definition?](#what-makes-a-good-dev-container-definition)
+    - [A note on referenced images and Dockerfile contents](#a-note-on-referenced-images-and-dockerfile-contents)
+    - [Expectations for new definitions](#expectations-for-new-definitions)
+    - [Anatomy of a Dev Container Definition](#anatomy-of-a-dev-container-definition)
+    - [Creating a new definition](#creating-a-new-definition)
+    - [Why do Dockerfiles in this repository use RUN statements with commands separated by &&?](#why-do-dockerfiles-in-this-repository-use-run-statements-with-commands-separated-by-)
+    - [Developing and testing a definition](#developing-and-testing-a-definition)
+    - [Adding a Database Definition to an existing Container](#adding-a-database-definition-to-an-existing-container)
+    - [Release cadence for new containers or container updates](#release-cadence-for-new-containers-or-container-updates)
+  - [Contributing to Documentation](#contributing-to-documentation)
+  - [Reporting Issues](#reporting-issues)
+    - [Identify Where to Report](#identify-where-to-report)
+    - [Look For an Existing Issue](#look-for-an-existing-issue)
+    - [Writing Good Bug Reports and Feature Requests](#writing-good-bug-reports-and-feature-requests)
+    - [Final Checklist](#final-checklist)
+    - [Follow Your Issue](#follow-your-issue)
+    - [Automated Issue Management](#automated-issue-management)
+  - [Code of Conduct](#code-of-conduct)
+  - [Thank You!](#thank-you)
+
 ## Contributing Dev Container Definitions
 
 This repository contains a set of **dev container definitions** to help get you up and running with a containerized environment. The definitions describe the appropriate container image, runtime arguments for starting the container, and VS Code extensions that should be installed. They are intended to be dropped into an existing project or folder rather than acting as sample projects. (See the [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) repositories if you are looking for sample projects.)  
@@ -29,7 +51,7 @@ If the definition is too similar to others, consider contributing a PR to improv
 
 To help speed up PRs, we encourage you to install the recommended [EditorConfig extension](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig). This will ensure your changes adhere to our style guidelines.
 
-### A note on referenced images and Dockefile contents
+### A note on referenced images and Dockerfile contents
 
 One of the things we want to be sure anyone using a definition from this repository is able to do is understand what is inside it. In general, images referenced  by Dockerfiles, Docker Compose files, or devcontainer.json in this repository should reference known base Docker, Microsoft, or runtime/platform community/vendor managed base images. These images are already well maintained, regularly patched, and maintained by the platform/runtime community or vendor. From there you can use a Dockerfile to add any additional contents.
 
@@ -133,7 +155,7 @@ Some other tips:
     rm -rf /var/lib/apt/lists/*
     ```
 
-    The only downside of doing this is that `apt-get update` has to be executed before you install a packages. However, in most cases adding this package to a Dockerfile is a better choice anyway since this will survive a "rebuild" of the image and the creation of an updated container. 
+    The only downside of doing this is that `apt-get update` has to be executed before you install a package. However, in most cases adding this package to a Dockerfile is a better choice anyway since this will survive a "rebuild" of the image and the creation of an updated container. 
 
 2. Use the scripts in the [script library](./script-library) in this repository where appropriate. You do not even need to copy the script into your `.devcontainer` folder to use it. See the [README](./script-library) for details. Most existing definitions use the "common" script to ensure things like `git`, a non-root user, and useful command line utilities like `ps`, `ip`, `jq` are present.
 
@@ -161,6 +183,41 @@ VS Code Remote provides a straightforward development loop for creating and edit
 Note that if you make major changes, Docker may occasionally not pick up your edits. If this happens, you can delete the existing container and image, open the folder locally, and go to step 2 above. Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) locally (when not in a container) to make this easy.
 
 After you get your container up and running, you can test it by adding test assets / projects into the definition folder and then adding their locations to the `.npmignore` file in [glob](https://facelessuser.github.io/wcmatch/glob/) form relative to the root of the folder. By convention, most definitions place test assets in a `test-project` folder and this path is referenced in the template `.npmignore` files.
+
+Finally, commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in. We appreciate any and all feedback!
+
+### Adding a Database Definition to an existing Container
+
+VS Code Dev Containers allow multiple containers to run together. This is useful, for example, when adding database support to an existing container, and can be leveraged with `docker compose.`
+
+1. Create a new copy of an existing language definition folder, and hyphenate the database name.
+   1. For example, `java` becomes `java-postgres`.
+2. Create a new `docker-compose.yml` file.
+   1. For both, the app and the database dev container, add the service `docker-compose.yml`. The database container typically is referenced by it's stadard image or by the `db` tag. The `app` container is the dev container that is defined via the Dockerfile definition.
+   2. For more details on the sections in the docker-compose file see: https://github.com/compose-spec/compose-spec/blob/master/spec.md
+   3. We recommend using a major stable version tag for the Database, as using `latest` is generally considered to be less secure and can introduce breaking bugs.
+   4. It's common that containers will need to be connected through a network so that the `app` can connect to the `db`. This can normally be done by adding the following to the `app` definition:
+
+    ```yaml
+        network_mode: service:db
+    ```
+
+3. Modify the `devcontainer.json` with any launch options or VS Code specific `settings.json` options that may be needed. 
+   1. For example, when working with a SQL database, it might be necessary to add the following:
+   ```json
+    "forwardPorts": [5000, 5432],    
+    ```
+    This allows the PostgreSQL database to be available on ports 5000 and 5432, allowing other containers and the host to connect to it. See the [Visual Studio devcontainer.json Reference](https://code.visualstudio.com/docs/remote/devcontainerjson-reference#_general-devcontainerjson-properties) for more information.
+    2. It might be necessary to add additional VS Code Extensions to allow for an easier dev experience. This could be database dependent (`MSSQL`, `NoSQL`, etc.)
+4. Modify the existing Tests or add new tests to ensure that the following scenarios are possible:
+    1. The application can successfully ping the DB Container.
+    2. The application can login to the DB Container using the default login data. 
+    3. The application can send a query to the existing DB and receive data from the DB. (Typically listing the named databases is considered a valid test.)
+5. Remove the following from your new container:
+   1. The `history` folder
+   2. The `'.devcontainer/base.Dockerfile` file
+   3. The `'definition-manifest.json` file
+6. Make changes to your `README.md` similar to the ones you see by comparing `/containers/java/README.md` with `/containers/java-postgres/README.md`
 
 Finally, commit your changes and submit a PR - we'll take a look at it, provide any needed feedback, and then merge it in. We appreciate any and all feedback!
 

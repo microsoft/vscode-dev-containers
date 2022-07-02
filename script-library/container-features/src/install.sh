@@ -20,7 +20,7 @@ EOF
 fi
 
 set -a
-. ./features.env
+. ./devcontainer-features.env
 set +a
 
 chmod +x *.sh
@@ -44,8 +44,8 @@ while IFS= read -r feature_line; do
             echo "(*) Skipping. Script already run with same arguments."
         else
             # Execute script and create a marker with the script args
-            echo "${script_command}" > "${feature_marker}"
             ./${script_command}
+            echo "${script_command}" > "${feature_marker}"
         fi
     fi
 done < ./feature-scripts.env

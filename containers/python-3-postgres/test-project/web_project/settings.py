@@ -4,10 +4,11 @@
 #-------------------------------------------------------------------------------------------------------------
 
 import os
+import uuid
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'y*h8iua%%z%fv&45hva&d1fx3pxvy$a*tx^ed9*970l3y5j+0p'
+SECRET_KEY = str(uuid.uuid4())
 
 DEBUG = True
 

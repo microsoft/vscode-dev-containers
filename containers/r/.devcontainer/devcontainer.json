@@ -2,25 +2,38 @@
 	"name": "R (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update VARIANT to pick a specific R version: 4, 4.1, 4.0
-		"args": { "VARIANT": "4" }
-	},
-
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"r.rterm.linux": "/usr/local/bin/radian",
-		"r.bracketedPaste": true,
-		"r.plot.useHttpgd": true,
-		"[r]": {
-			"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+		"args": {
+			// Update VARIANT to pick a R version: 4, 4.1, 4.0
+			"VARIANT": "4",
+			// Start with a minimal image (rocker/r-ver) or a expanded image.
+			// See more details about rocker/r-ver's derived images: https://github.com/rocker-org/rocker-versioned2
+			"BASE_IMAGE": "rocker/r-ver",
+			// Options
+			"ENABLE_JUPYTER": "false"
 		}
 	},
 
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ikuyadeu.r",
-		"rdebugger.r-debugger"
-	],
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"r.rterm.linux": "/usr/local/bin/radian",
+				"r.bracketedPaste": true,
+				"r.plot.useHttpgd": true,
+				"[r]": {
+					"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+				}
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"reditorsupport.r",
+				"rdebugger.r-debugger"
+			]
+		}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -28,6 +41,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "R --version",
 
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "rstudio"
 }

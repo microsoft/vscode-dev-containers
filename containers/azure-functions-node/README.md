@@ -10,7 +10,7 @@
 | *Categories* | Services, Azure |
 | *Definition type* | Dockerfile |
 | *Published images* | mcr.microsoft.com/azure-functions/node |
-| *Available image variants* | 10, 12 |
+| *Available image variants* | 14, 16 |
 | *Published image architecture(s)* | x86-64 |
 | *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
@@ -24,7 +24,7 @@ This definition requires an Azure subscription to use. You can create a [free ac
 While this definition should work unmodified, you can select the version of Node.js the container uses by updating the `VARIANT` arg in the included `devcontainer.json` to a supported major Node.js release version.
 
 ```json
-"args": { "VARIANT": "10" }
+"args": { "VARIANT": "14" }
 ```
 
 ### Adding the definition to your folder

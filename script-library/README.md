@@ -14,19 +14,22 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 
 | Document | Script | Maintainers |
 |----------|--------|------------|
+| [AWS CLI Install Script](docs/awscli.md) | `awscli-debian.sh` | VS Code and GitHub Codespaces teams |
 | [Azure CLI Install Script](docs/azcli.md) | `azcli-debian.sh` | VS Code and GitHub Codespaces teams |
 | [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` (Community) | VS Code and GitHub Codespaces teams |
 | [Desktop (Lightweight) Install Script](docs/desktop-lite.md) | `desktop-lite-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Docker-in-Docker Install Script](docs/docker-in-docker.md) | `docker-in-docker-debian.sh` | VS Code and GitHub Codespaces teams |
 | [Docker-from-Docker Install Script](docs/docker.md) | `docker-debian.sh`<br />`docker-redhat.sh` (Community) | VS Code and GitHub Codespaces teams, [@smankoo](https://github.com/smankoo) (`docker-redhat.sh`) |
+| [Dotnet Install Script](docs/dotnet.md) | `dotnet-debian.sh` | VS Code and GitHub Codespaces teams |
 | [fish Install Script](docs/fish.md) | `fish-debian.sh` (Community) | [@andreiborisov](https://github.com/andreiborisov) |
 | [Git Build/Install from Source Script](docs/git-from-src.md) | `git-from-src-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Git LFS Install Script](docs/git-lfs.md) | `git-lfs-debian.sh` | VS Code and GitHub Codespaces teams|
-| [GitHub CLI Install Script](docs/github.md) | `github-debian.sh` | VS Code and GitHub Codespaces teams|
+| [GitHub CLI Install Script](docs/github-cli.md) | `github-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Go (golang) Install Script](docs/go.md) | `go-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Gradle Install Script](docs/gradle.md) | `gradle-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Homebrew Install Script](docs/homebrew.md) | `homebrew-debian.sh` (Community) | [@andreiborisov](https://github.com/andreiborisov) |
 | [Java Install Script](docs/java.md) | `java-debian.sh` | VS Code and GitHub Codespaces teams|
+| [JupyterLab Install Script](docs/jupyterlab.md) | `jupyterlab-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Kubectl and Helm Install Script](docs/kubectl-helm.md) | `kubectl-helm-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Maven Install Script](docs/maven.md) | `maven-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Node.js Install Script](docs/node.md) | `node-debian.sh` | VS Code and GitHub Codespaces teams|
@@ -96,7 +99,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive  \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 ```
 
-As before, the last line is technically optional, but minimizes the size of the layer by removing temporary contents.  
+As before, the last line is technically optional, but minimizes the size of the layer by removing temporary contents.
 
 You can also use `wget`:
 
@@ -152,4 +155,3 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details on contributing definition
 Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE)
-

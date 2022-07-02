@@ -15,7 +15,7 @@
 ## Syntax
 
 ```text
-./docker-debian.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user] [Use Moby] [Docker / Moby version]
+./docker-debian.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user] [Use Moby] [Docker / Moby version]  [Major version for docker-compose]
 ./docker-redhat.sh [Non-root access flag] [Source socket] [Target socket] [Non-root user]
 ```
 
@@ -25,7 +25,8 @@ Or as a feature (Debian/Ubuntu only):
 "features": {
     "docker-from-docker": {
         "version": "latest",
-        "moby": true
+        "moby": true,
+        "dockerDashComposeVersion": "v1"
     }
 }
 ```
@@ -38,7 +39,7 @@ Or as a feature (Debian/Ubuntu only):
 |Non-root user| | `automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 |Use Moby| `moby` | `true`| Specifies that a build of the open source [Moby CLI](https://github.com/moby/moby/tree/master/cli) should be used instead of the Docker CLI distribution of it. |
 | Docker / Moby version | `version` | `latest` |  Docker/Moby Engine version or `latest`. Partial version numbers allowed. Availability can vary by OS version. |
-
+| Major version for docker-compose | `dockerDashComposeVersion` | `v1` | Updates `docker-compose` to either Docker Compose v1 or v2 ([learn more](https://docs.docker.com/compose/cli-command/#transitioning-to-ga-for-compose-v2)). |
 
 ## Usage
 
@@ -55,11 +56,27 @@ You can use this script for your primary dev container by adding it to the `feat
 }
 ```
 
+**[Optional]** You may also want to enable the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to handle signals and clean up [Zombie processes](https://en.wikipedia.org/wiki/Zombie_process) if you do not have an alternative set up. To enable it, add the following to `devcontainer.json` if you are referencing an image or Dockerfile:
+
+```json
+"runArgs": ["--init"]
+```
+
+Or when using Docker Compose:
+
+```yaml
+services:
+  your-service-here:
+    # ...
+    init: true
+    # ...
+```
+
 If you have already built your development container, run the **Rebuild Container** command from the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>F1</kbd>) to pick up the change.
 
 ### Script use
 
-See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker-from-docker-compose`](....//containers/docker-from-docker) definition for a complete working example. However, here are the general steps to use the script:
+See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker-from-docker-compose`](../../containers/docker-from-docker-compose) definition for a complete working example. However, here are the general steps to use the script:
 
 1. Add [`docker-debian.sh`](../docker-debian.sh) or [`docker-redhat.sh`](../docker-redhat.sh) to `.devcontainer/library-scripts`
 
@@ -98,7 +115,7 @@ See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker
         - /var/run/docker.sock:/var/run/docker-host.sock
     ```
 
-    While technically optional, `--init` enables an [init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.
+    While technically optional, `--init` enables the [tini init process](https://docs.docker.com/engine/reference/run/#specify-an-init-process) to properly handle signals and ensure [Zombie Processes](https://en.wikipedia.org/wiki/Zombie_process) are cleaned up.
 
 4. If you are running the container as something other than root (either via `USER` in your Dockerfile or `containerUser`), you'll need to ensure that the user has `sudo` access. (If you run the container as root and just reference the user in `remoteUser` you will not have this problem, so this is recommended instead.) The [`debian-common.sh`](common.md) script can do this for you, or you [set one up yourself](https://aka.ms/vscode-remote/containers/non-root).
 
@@ -127,3 +144,5 @@ Then reference the env var when running Docker commands from the terminal inside
 ```bash
 docker run -it --rm -v ${LOCAL_WORKSPACE_FOLDER}:/workspace debian bash
 ```
+
+> **Note:** There is no `${localWorkspaceFolder}` when using the **Clone Repository in Container Volume** command ([info](https://github.com/microsoft/vscode-remote-release/issues/6160#issuecomment-1014701007)).
