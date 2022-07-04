@@ -1,6 +1,6 @@
 {
 	"variants": ["buster", "bullseye",  "stretch"],
-	"definitionVersion": "0.202.6",
+	"definitionVersion": "0.202.7",
 	"build": {
 		"latest": "bullseye",
 		"rootDistro": "debian",

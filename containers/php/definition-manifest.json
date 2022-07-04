@@ -1,6 +1,6 @@
 {
 	"variants": ["8.1-apache-bullseye", "8.0-apache-bullseye", "7.4-apache-bullseye", "8.1-apache-buster", "8.0-apache-buster", "7.4-apache-buster" ],
-	"definitionVersion": "0.203.3",
+	"definitionVersion": "0.203.4",
 	"build": {
 		"latest": "8.1-apache-bullseye",
 		"rootDistro": "debian",
