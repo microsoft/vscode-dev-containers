@@ -1,0 +1,11 @@
+{
+	"name": "Bun",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick an Debian OS version: bullseye, buster
+		"args": {
+			"VARIANT": "bullseye"
+		}
+	},
+	"remoteUser": "vscode"
+}
