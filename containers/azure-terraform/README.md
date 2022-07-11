@@ -29,9 +29,10 @@ You can also choose the specific version of Terraform installed by updating the 
 
 ```Dockerfile
 "arg": {
-   "TERRAFORM_VERSION": "0.14.5"
+   "TERRAFORM_VERSION": "0.14.5",
    "TFLINT_VERSION": "0.24.1",
-   "TERRAGRUNT_VERSION": "0.28.1"
+   "TERRAGRUNT_VERSION": "0.28.1",
+   "TERRAFORM_DOCS_VERSION": "0.16.0",
    "INSTALL_AZURE_CLI": "true",
    "INSTALL_DOCKER": "true",
    "NODE_VERSION": "lts"
@@ -80,6 +81,7 @@ Once the environment settings are configured with the `.devcontainer/devcontaine
 - `terraform init`: installs plugins and connect to terraform remote backend
 - `terraform format`: fix formatting issues
 - `terraform lint`: fix linting issues
+- `terraform docs`: generate terraform module documentation
 
 For additional terraform commands, you can use the [Azure Terraform extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform). 
 - Navigate to the directory where the templates are located (`test-project/templates`)
