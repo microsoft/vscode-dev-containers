@@ -75,7 +75,7 @@ find_version_from_git_tags() {
     local repository=$2
     local prefix=${3:-"tags/v"}
     local separator=${4:-"."}
-    local last_part_optional=${5:-"false"}    
+    local last_part_optional=${5:-"false"}
     if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
         local escaped_separator=${separator//./\\.}
         local last_part
@@ -225,8 +225,8 @@ if [ "${MINIKUBE_VERSION}" != "none" ]; then
             MINIKUBE_VERSION="v${MINIKUBE_VERSION}"
         fi
     fi
-    # latest is also valid in the download URLs 
-    curl -sSL -o /usr/local/bin/minikube "https://storage.googleapis.com/minikube/releases/${MINIKUBE_VERSION}/minikube-linux-${architecture}"    
+    # latest is also valid in the download URLs
+    curl -sSL -o /usr/local/bin/minikube "https://storage.googleapis.com/minikube/releases/${MINIKUBE_VERSION}/minikube-linux-${architecture}"
     chmod 0755 /usr/local/bin/minikube
     if [ "$MINIKUBE_SHA256" = "automatic" ]; then
         MINIKUBE_SHA256="$(curl -sSL "https://storage.googleapis.com/minikube/releases/${MINIKUBE_VERSION}/minikube-linux-${architecture}.sha256")"
@@ -236,7 +236,7 @@ if [ "${MINIKUBE_VERSION}" != "none" ]; then
         echo '(!) minikube installation failed!'
         exit 1
     fi
-    # Create minkube folder with correct privs in case a volume is mounted here
+    # Create minikube folder with correct privs in case a volume is mounted here
     mkdir -p "${USERHOME}/.minikube"
     chown -R $USERNAME "${USERHOME}/.minikube"
     chmod -R u+wrx "${USERHOME}/.minikube"

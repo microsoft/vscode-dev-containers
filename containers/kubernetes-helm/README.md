@@ -4,7 +4,7 @@
 
 *Access a local (or remote) Kubernetes cluster from inside a dev container using your local config. Includes kubectl, Helm, and the Docker CLI.*
 
-| Metadata | Value |  
+| Metadata | Value |
 |----------|-------|
 | *Contributors* | The VS Code team and Phetsinorath William |
 | *Categories* | Other |
@@ -80,9 +80,9 @@ However, this section will outline the how you can selectively add this function
 
 That's it!
 
-## A note on Minkube or otherwise using a local cluster
+## A note on Minikube or otherwise using a local cluster
 
-While this definition works with Minkube in most cases, if you hit trouble, make sure that your `~/.kube/config` file and Minikube certs reference your host's IP rather than `127.0.0.1` or `localhost` (since `localhost` resolve to the container itself rather than your local machine where Minikube is running).
+While this definition works with Minikube in most cases, if you hit trouble, make sure that your `~/.kube/config` file and Minikube certs reference your host's IP rather than `127.0.0.1` or `localhost` (since `localhost` resolve to the container itself rather than your local machine where Minikube is running).
 
 This should happen by default on Linux. On macOS and Windows, we recommend using the Kuberntes install that comes with Docker Desktop instead of Minikube to avoid these kinds of issues.
 
@@ -167,4 +167,4 @@ While you cannot sync or connect to your local Kubernetes configuration with Cod
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE). 
+Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).

@@ -8,7 +8,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "20.10" ],
+					"proposals": ["latest", "20.10"],
 					"default": "latest",
 					"description": "Select or enter a Docker/Moby Engine version. (Availability can vary by OS version.)"
 				},
@@ -19,7 +19,7 @@
 				},
 				"dockerDashComposeVersion": {
 					"type": "string",
-					"enum": ["v1", "v2" ],
+					"enum": ["v1", "v2"],
 					"default": "v1",
 					"description": "Default version of Docker Compose (v1 or v2)"
 				}
@@ -30,15 +30,13 @@
 			"containerEnv": {
 				"DOCKER_BUILDKIT": "1"
 			},
-			"extensions": [
-				"ms-azuretools.vscode-docker"
-			],
+			"extensions": ["ms-azuretools.vscode-docker"],
 			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
 			"mounts": [
 				{
-					"source":"dind-var-lib-docker", 
-				 	"target":"/var/lib/docker", 
-				 	"type":"volume"
+					"source": "dind-var-lib-docker",
+					"target": "/var/lib/docker",
+					"type": "volume"
 				}
 			],
 			"include": [
@@ -85,7 +83,7 @@
 				},
 				"dockerDashComposeVersion": {
 					"type": "string",
-					"enum": ["v1", "v2" ],
+					"enum": ["v1", "v2"],
 					"default": "v1",
 					"description": "Compose version to use for docker-compose (v1 or v2)"
 				}
@@ -95,14 +93,12 @@
 			"containerEnv": {
 				"DOCKER_BUILDKIT": "1"
 			},
-			"extensions": [
-				"ms-azuretools.vscode-docker"
-			],
+			"extensions": ["ms-azuretools.vscode-docker"],
 			"mounts": [
 				{
-					"source":"/var/run/docker.sock", 
-				 	"target":"/var/run/docker-host.sock", 
-				 	"type":"bind"
+					"source": "/var/run/docker.sock",
+					"target": "/var/run/docker-host.sock",
+					"type": "bind"
 				}
 			],
 			"include": [
@@ -131,7 +127,7 @@
 		},
 		{
 			"id": "kubectl-helm-minikube",
-			"name": "Kubectl, Helm, and Minkube",
+			"name": "Kubectl, Helm, and Minikube",
 			"documentationURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/kubectl-helm.md",
 			"options": {
 				"version": {
@@ -154,15 +150,13 @@
 				}
 			},
 			"buildArg": "_VSC_INSTALL_KUBECTL_HELM_MINIKUBE",
-			"extensions": [
-				"ms-kubernetes-tools.vscode-kubernetes-tools"
-			],
+			"extensions": ["ms-kubernetes-tools.vscode-kubernetes-tools"],
 			// Problem #2 - The volume name here should be something unique per dev container. Need ability to either get a var that points to one or ask for a volume name
 			"mounts": [
 				{
-					"source":"minikube-config", 
-				 	"target":"/home/vscode/.minikube", 
-				 	"type":"volume"
+					"source": "minikube-config",
+					"target": "/home/vscode/.minikube",
+					"type": "volume"
 				}
 			],
 			"include": [
@@ -387,17 +381,13 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": [
-						"latest"
-					],
+					"proposals": ["latest"],
 					"default": "latest",
 					"description": "Select or enter an AWS CLI version. (Available versions here: https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst)"
 				}
 			},
 			"buildArg": "_VSC_INSTALL_AWS_CLI",
-			"extensions": [
-				"AmazonWebServices.aws-toolkit-vscode"
-			],
+			"extensions": ["AmazonWebServices.aws-toolkit-vscode"],
 			"include": [
 				"cpp",
 				"dotnet",
@@ -440,9 +430,7 @@
 				}
 			},
 			"buildArg": "_VSC_INSTALL_AZURE_CLI",
-			"extensions": [
-				"ms-vscode.azurecli"
-			],
+			"extensions": ["ms-vscode.azurecli"],
 			"include": [
 				"cpp",
 				"dotnet",
@@ -528,7 +516,7 @@
 				},
 				"password": {
 					"type": "string",
-					"proposals": ["vscode","codespaces","password"],
+					"proposals": ["vscode", "codespaces", "password"],
 					"default": "vscode",
 					"description": "Enter a password for desktop connections"
 				},
@@ -680,7 +668,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": [ "lts", "latest", "18", "16", "14" ],
+					"proposals": ["lts", "latest", "18", "16", "14"],
 					"default": "lts",
 					"description": "Select or enter a Node.js version to install"
 				},
@@ -693,7 +681,7 @@
 			"buildArg": "_VSC_INSTALL_NODE",
 			"extensions": ["dbaeumer.vscode-eslint"],
 			"containerEnv": {
-				"NVM_DIR":"/usr/local/share/nvm",
+				"NVM_DIR": "/usr/local/share/nvm",
 				"NVM_SYMLINK_CURRENT": "true",
 				"PATH": "${NVM_DIR}/current/bin:${PATH}"
 			},
@@ -716,7 +704,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"enum": [ "latest", "os-provided", "3.10", "3.9", "3.8", "3.7", "3.6" ],
+					"enum": ["latest", "os-provided", "3.10", "3.9", "3.8", "3.7", "3.6"],
 					"default": "os-provided",
 					"description": "Select a Python version to install."
 				},
@@ -732,15 +720,12 @@
 				}
 			},
 			"buildArg": "_VSC_INSTALL_PYTHON",
-			"extensions": [
-				"ms-python.python",
-				"ms-python.vscode-pylance"
-			],
+			"extensions": ["ms-python.python", "ms-python.vscode-pylance"],
 			"containerEnv": {
 				"PYTHON_PATH": "/usr/local/python",
 				"PIPX_HOME": "/usr/local/py-utils",
 				"PIPX_BIN_DIR": "/usr/local/py-utils/bin",
-				"PATH":"${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}"
+				"PATH": "${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}"
 			},
 			"settings": {
 				"python.defaultInterpreterPath": "/usr/local/bin/python",
@@ -799,8 +784,8 @@
 				"GOPATH": "/go",
 				"PATH": "${GOPATH}/bin:${GOROOT}/bin:${PATH}"
 			},
-			"capAdd": [ "SYS_PTRACE" ],
-			"securityOpt": [ "seccomp=unconfined" ],
+			"capAdd": ["SYS_PTRACE"],
+			"securityOpt": ["seccomp=unconfined"],
 			"include": [
 				"cpp",
 				"kubernetes-helm",
@@ -984,9 +969,7 @@
 				}
 			},
 			"buildArg": "_VSC_INSTALL_RUBY",
-			"extensions": [
-				"rebornix.Ruby"
-			],
+			"extensions": ["rebornix.Ruby"],
 			"containerEnv": {
 				"GEM_PATH": "/usr/local/rvm/gems/default:/usr/local/rvm/gems/default@global",
 				"GEM_HOME": "/usr/local/rvm/gems/default",
@@ -1052,7 +1035,7 @@
 				"RUSTUP_HOME": "/usr/local/rustup",
 				"PATH": "${CARGO_HOME}/bin:${PATH}"
 			},
-			"capAdd": [ "SYS_PTRACE" ],
+			"capAdd": ["SYS_PTRACE"],
 			"securityOpt": ["seccomp=unconfined"],
 			"settings": {
 				"lldb.executable": "/usr/bin/lldb",
@@ -1148,18 +1131,18 @@
 					"description": "Install Oh My Zsh!?"
 				},
 				"upgradePackages": {
-					"type":"boolean",
+					"type": "boolean",
 					"default": true,
 					"description": "Upgrade OS packages?"
 				},
 				"username": {
-					"type":"string",
+					"type": "string",
 					"proposals": ["vscode", "codespace", "none", "automatic"],
 					"default": "automatic",
 					"description": "Enter name of non-root user to configure or none to skip"
 				},
 				"uid": {
-					"type":"string",
+					"type": "string",
 					"proposals": ["1000", "automatic"],
 					"default": "automatic",
 					"description": "Enter uid for non-root user"
@@ -1171,16 +1154,13 @@
 					"description": "Enter gid for non-root user"
 				},
 				"nonFreePackages": {
-					"type":"boolean",
+					"type": "boolean",
 					"default": true,
 					"description": "Add packages from non-free Debian repository?"
 				}
 			},
 			"buildArg": "_VSC_INSTALL_COMMON",
-			"include": [
-				"puppet",
-				"chef"
-			]
+			"include": ["puppet", "chef"]
 		},
 		{
 			"id": "dotnet",
@@ -1189,12 +1169,12 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest","6.0","5.0","3.1"],
+					"proposals": ["latest", "6.0", "5.0", "3.1"],
 					"default": "latest",
 					"description": "Select or enter a dotnet CLI version. (Available versions may vary by Linux distribution.)"
 				},
 				"runtimeOnly": {
-					"type":"boolean",
+					"type": "boolean",
 					"default": false,
 					"description": "Install just the dotnet runtime if true, and sdk if false."
 				}
@@ -1204,9 +1184,7 @@
 				"DOTNET_ROOT": "/usr/local/dotnet",
 				"PATH": "${PATH}:${DOTNET_ROOT}"
 			},
-			"extensions": [
-				"ms-dotnettools.csharp"
-			],
+			"extensions": ["ms-dotnettools.csharp"],
 			"include": [
 				"cpp",
 				"kubernetes-helm",
