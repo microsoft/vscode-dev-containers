@@ -1,5 +1,5 @@
-# [Choice] Alpine version: 3.15, 3.14, 3.13
-ARG VARIANT=3.15
+# [Choice] Alpine version: 3.16, 3.15, 3.14, 3.13
+ARG VARIANT=3.16
 FROM alpine:${VARIANT}
 
 # [Option] Install zsh

@@ -2,8 +2,8 @@
 	"name": "Alpine",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Alpine version: 3.13, 3.14, 3.15
-		"args": { "VARIANT": "3.15" }
+		// Update 'VARIANT' to pick an Alpine version: 3.13, 3.14, 3.15, 3.16
+		"args": { "VARIANT": "3.16" }
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
