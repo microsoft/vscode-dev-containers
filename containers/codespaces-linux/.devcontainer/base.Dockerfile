@@ -82,7 +82,8 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
     && apt-get clean -y
 
 # Setup Node.js, install NVM and NVS
-RUN bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
+RUN git config --global --add safe.directory "${NVM_DIR}" \
+    && bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     && (cd ${NVM_DIR} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVM_DIR}/.git-remote-and-commit \
     # Install nvs (alternate cross-platform Node.js version-management tool)
     && git config --global --add safe.directory /home/codespace/.nvs \
