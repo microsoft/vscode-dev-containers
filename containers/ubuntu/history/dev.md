@@ -11,7 +11,7 @@
 
 ## Variant: jammy
 
-**Digest:** sha256:123b71db1648f897b559563d0c2f430ab35158cde249d796747a149f69189386
+**Digest:** sha256:a47d28f726ffff0886cebaa537531a06110a12bb8aa847fa128adcfc794f9424
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 249c708ed3a4a7a63d16a6e911a46b6fb9623cbd | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -41,10 +41,10 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 | apt-transport-https | 2.4.5 |
 | apt-utils | 2.4.5 |
 | ca-certificates | 20211016 |
-| curl | 7.81.0-1ubuntu1.2 |
+| curl | 7.81.0-1ubuntu1.3 |
 | dialog | 1.3-20211214-1 |
-| git | 1:2.34.1-1ubuntu1.2 |
-| gnupg2 | 2.2.27-3ubuntu2 |
+| git | 1:2.34.1-1ubuntu1.4 |
+| gnupg2 | 2.2.27-3ubuntu2.1 |
 | htop | 3.0.5-7build2 |
 | iproute2 | 5.15.0-1ubuntu2 |
 | jq | 1.6-2.1ubuntu3 |
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 ## Variant: focal
 
-**Digest:** sha256:270d470543fa363e04966622a28b0a1ad82ae514cdaa332399150f8f2fb640c3
+**Digest:** sha256:aa031d4a42ceb31edaa09a886114f0fdaa2574d6124552c793565e2dbc1f365b
 
 **Tags:**
 ```
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 249c708ed3a4a7a63d16a6e911a46b6fb9623cbd | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -111,10 +111,10 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | apt-transport-https | 2.0.9 |
 | apt-utils | 2.0.9 |
 | ca-certificates | 20211016~20.04.1 |
-| curl | 7.68.0-1ubuntu2.11 |
+| curl | 7.68.0-1ubuntu2.12 |
 | dialog | 1.3-20190808-1 |
-| git | 1:2.25.1-1ubuntu3.4 |
-| gnupg2 | 2.2.19-3ubuntu2.1 |
+| git | 1:2.25.1-1ubuntu3.5 |
+| gnupg2 | 2.2.19-3ubuntu2.2 |
 | htop | 2.2.0-2build1 |
 | iproute2 | 5.5.0-1ubuntu1 |
 | jq | 1.6-1ubuntu0.20.04.1 |
@@ -125,7 +125,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | libicu66 | 66.1-2ubuntu2.1 |
 | libkrb5-3 | 1.17-6ubuntu4.1 |
 | liblttng-ust0 | 2.11.0-1 |
-| libssl1.1 | 1.1.1f-1ubuntu2.13 |
+| libssl1.1 | 1.1.1f-1ubuntu2.16 |
 | libstdc++6 | 10.3.0-1ubuntu1~20.04 |
 | locales | 2.31-0ubuntu9.9 |
 | lsb-release | 11.1.0ubuntu2 |
@@ -153,7 +153,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:d345227ec5cea39d07a6539ccf5be73773b71f2311db8b6e208d716cb6731c0e
+**Digest:** sha256:77778e671a7aa6db7c15895700535be822e5a4b830eae186c91498502f5ee67c
 
 **Tags:**
 ```
@@ -174,7 +174,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 249c708ed3a4a7a63d16a6e911a46b6fb9623cbd | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -183,10 +183,10 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | apt-transport-https | 1.6.14 |
 | apt-utils | 1.6.14 |
 | ca-certificates | 20211016~18.04.1 |
-| curl | 7.58.0-2ubuntu3.18 |
+| curl | 7.58.0-2ubuntu3.19 |
 | dialog | 1.3-20171209-1 |
-| git | 1:2.17.1-1ubuntu0.11 |
-| gnupg2 | 2.2.4-1ubuntu1.5 |
+| git | 1:2.17.1-1ubuntu0.12 |
+| gnupg2 | 2.2.4-1ubuntu1.6 |
 | htop | 2.1.0-3 |
 | iproute2 | 4.15.0-2ubuntu1.3 |
 | jq | 1.5+dfsg-2 |
@@ -197,8 +197,8 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | libicu60 | 60.2-3ubuntu3.2 |
 | libkrb5-3 | 1.16-2ubuntu0.2 |
 | liblttng-ust0 | 2.10.1-1 |
-| libssl1.0.0 | 1.0.2n-1ubuntu5.9 |
-| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.17 |
+| libssl1.0.0 | 1.0.2n-1ubuntu5.10 |
+| libssl1.1 | 1.1.1-1ubuntu2.1~18.04.20 |
 | libstdc++6 | 8.4.0-1ubuntu1~18.04 |
 | locales | 2.27-3ubuntu1.6 |
 | lsb-release | 9.20170808ubuntu1 |

@@ -11,7 +11,7 @@
 
 ## Variant: 3.15
 
-**Digest:** sha256:e3a9e08b1097e33261f68617aba2ef5574e129d8520f08458ad5e50a83406e4e
+**Digest:** sha256:50c3e1a443d8eeec92660580a166e4e1f43543c1fddd9feafc5a312c50596e2e
 
 **Tags:**
 ```
@@ -32,21 +32,21 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 249c708ed3a4a7a63d16a6e911a46b6fb9623cbd | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| git | 2.34.2-r0 |
+| git | 2.34.4-r0 |
 | openssh-client-default | 8.8_p1-r1 |
-| gnupg | 2.2.31-r1 |
+| gnupg | 2.2.31-r2 |
 | procps | 3.3.17-r0 |
 | lsof | 4.94.0-r0 |
 | htop | 3.1.1-r0 |
 | net-tools | 1.60_git20140218-r2 |
 | psmisc | 23.4-r0 |
-| curl | 7.80.0-r1 |
+| curl | 7.80.0-r2 |
 | wget | 1.21.2-r2 |
 | rsync | 3.2.3-r5 |
 | ca-certificates | 20211220-r0 |
@@ -60,11 +60,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 | libstdc++ | 10.3.1_git20211027-r0 |
 | krb5-libs | 1.19.3-r0 |
 | libintl | 0.21-r0 |
-| libssl1.1 | 1.1.1n-r0 |
+| libssl1.1 | 1.1.1q-r0 |
 | lttng-ust | 2.12.0-r3 |
 | tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.2-r0 |
-| zlib | 1.2.12-r0 |
+| zlib | 1.2.12-r1 |
 | sudo | 1.9.8_p2-r1 |
 | coreutils | 9.0-r2 |
 | sed | 4.8-r0 |
@@ -77,7 +77,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.14
 
-**Digest:** sha256:b57aa23bcea4b9825fde0dffa717af66efaad5f8f90441582bc12f83d61a810c
+**Digest:** sha256:f47dac787551476e00210e77e634717738c65ca3ebec51551cd70cfc5553be7f
 
 **Tags:**
 ```
@@ -97,21 +97,21 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 249c708ed3a4a7a63d16a6e911a46b6fb9623cbd | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| git | 2.32.2-r0 |
+| git | 2.32.3-r0 |
 | openssh-client-default | 8.6_p1-r3 |
-| gnupg | 2.2.31-r0 |
+| gnupg | 2.2.31-r1 |
 | procps | 3.3.17-r0 |
 | lsof | 4.94.0-r0 |
 | htop | 3.0.5-r2 |
 | net-tools | 1.60_git20140218-r2 |
 | psmisc | 23.4-r0 |
-| curl | 7.79.1-r1 |
+| curl | 7.79.1-r2 |
 | wget | 1.21.1-r1 |
 | rsync | 3.2.3-r4 |
 | ca-certificates | 20211220-r0 |
@@ -125,11 +125,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 | libstdc++ | 10.3.1_git20210424-r2 |
 | krb5-libs | 1.18.5-r0 |
 | libintl | 0.21-r0 |
-| libssl1.1 | 1.1.1n-r0 |
+| libssl1.1 | 1.1.1q-r0 |
 | lttng-ust | 2.12.0-r3 |
 | tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.2-r0 |
-| zlib | 1.2.12-r0 |
+| zlib | 1.2.12-r1 |
 | sudo | 1.9.7_p1-r1 |
 | coreutils | 8.32-r2 |
 | sed | 4.8-r0 |
@@ -142,7 +142,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 ## Variant: 3.13
 
-**Digest:** sha256:90558c34dce64823c7cb703404d7258f7b3da2c6fe43410bf5931e05605c630c
+**Digest:** sha256:25c7d2972a7740a37b3bae0f026c48bb598f981a9d9660a70e2773310af1e0fd
 
 **Tags:**
 ```
@@ -162,21 +162,21 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 249c708ed3a4a7a63d16a6e911a46b6fb9623cbd | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
 | Tool / library | Version |
 |----------------|---------|
-| git | 2.30.3-r0 |
+| git | 2.30.5-r0 |
 | openssh-client | 8.4_p1-r4 |
-| gnupg | 2.2.31-r0 |
+| gnupg | 2.2.31-r1 |
 | procps | 3.3.16-r0 |
 | lsof | 4.94.0-r0 |
 | htop | 3.0.5-r1 |
 | net-tools | 1.60_git20140218-r2 |
 | psmisc | 23.3-r0 |
-| curl | 7.79.1-r1 |
+| curl | 7.79.1-r2 |
 | wget | 1.21.1-r1 |
 | rsync | 3.2.3-r4 |
 | ca-certificates | 20211220-r0 |
@@ -190,11 +190,11 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 | libstdc++ | 10.2.1_pre1-r3 |
 | krb5-libs | 1.18.5-r0 |
 | libintl | 0.20.2-r2 |
-| libssl1.1 | 1.1.1n-r0 |
+| libssl1.1 | 1.1.1q-r0 |
 | lttng-ust | 2.12.0-r2 |
 | tzdata | 2022a-r0 |
 | userspace-rcu | 0.12.1-r0 |
-| zlib | 1.2.12-r0 |
+| zlib | 1.2.12-r1 |
 | sudo | 1.9.5p2-r0 |
 | coreutils | 8.32-r2 |
 | sed | 4.8-r0 |
