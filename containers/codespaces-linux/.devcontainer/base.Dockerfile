@@ -16,7 +16,7 @@ ENV SHELL=/bin/bash \
     JAVA_ROOT="${HOMEDIR}/.java" \
     NODE_ROOT="${HOMEDIR}/.nodejs" \
     PHP_ROOT="${HOMEDIR}/.php" \
-    PYTHON_ROOT="${HOMEDIR}/.python" \
+    PYTHON_ROOT="/opt/python" \
     RUBY_ROOT="${HOMEDIR}/.ruby" \
     MAVEN_ROOT="${HOMEDIR}/.maven" \
     HUGO_ROOT="${HOMEDIR}/.hugo" \
@@ -34,7 +34,7 @@ ENV SHELL=/bin/bash \
     JUPYTERLAB_PATH="${HOMEDIR}/.local/bin" \
     DOCKER_BUILDKIT=1
 
-ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${PYTHON_ROOT}/current/bin:${ORIGINAL_PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${MAVEN_ROOT}/current/bin:${HUGO_ROOT}/current/bin:${JUPYTERLAB_PATH}:${ORYX_PATHS}"
+ENV PATH="${NVM_DIR}/current/bin:${NPM_GLOBAL}/bin:${PYTHON_ROOT}/bin:${ORIGINAL_PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools:${SDKMAN_DIR}/bin:${SDKMAN_DIR}/candidates/gradle/current/bin:${SDKMAN_DIR}/candidates/java/current/bin:/opt/maven/lts:${GOROOT}/bin:${GOPATH}/bin:${PIPX_BIN_DIR}:/opt/conda/condabin:${JAVA_ROOT}/current/bin:${NODE_ROOT}/current/bin:${PHP_ROOT}/current/bin:${RUBY_ROOT}/current/bin:${MAVEN_ROOT}/current/bin:${HUGO_ROOT}/current/bin:${JUPYTERLAB_PATH}:${ORYX_PATHS}"
 
 # Install needed utilities and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/* setup-user.sh setup-python-tools.sh first-run-notice.txt /tmp/scripts/
@@ -69,9 +69,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
 # Install Python, JupyterLab, common machine learning packages, and Ruby utilities
-RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}" "${USERNAME}" "true" \
+RUN bash /tmp/scripts/python-debian.sh "latest" ${PYTHON_ROOT} "${PIPX_HOME}" "${USERNAME}" "true" \
     # Install JupyterLab and common machine learning packages
-    && PYTHON_BINARY="${PYTHON_ROOT}/current/bin/python" \
+    && PYTHON_BINARY="${PYTHON_ROOT}/bin/python" \
     && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} "true" \
     && bash /tmp/scripts/setup-python-tools.sh ${PYTHON_BINARY} \
     # Install rvm, rbenv, any missing base gems
@@ -85,7 +85,7 @@ RUN bash /tmp/scripts/python-debian.sh "none" "/opt/python/latest" "${PIPX_HOME}
 RUN git config --global --add safe.directory "${NVM_DIR}" \
     && bash /tmp/scripts/node-debian.sh "${NVM_DIR}" "none" "${USERNAME}" \
     && (cd ${NVM_DIR} && git remote get-url origin && echo $(git log -n 1 --pretty=format:%H -- .)) > ${NVM_DIR}/.git-remote-and-commit \
-    # Install nvs (alternate cross-platform Node.js version-management tool)
+    # Install nvs (alternate cross-platform Node.js versio-management tool)
     && git config --global --add safe.directory /home/codespace/.nvs \
     && mkdir -p ${NVS_HOME} \
     && chown -R ${USERNAME}: ${NVS_HOME} \
