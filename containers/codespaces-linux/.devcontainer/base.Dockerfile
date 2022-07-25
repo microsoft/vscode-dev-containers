@@ -16,7 +16,7 @@ ENV SHELL=/bin/bash \
     JAVA_ROOT="${HOMEDIR}/.java" \
     NODE_ROOT="${HOMEDIR}/.nodejs" \
     PHP_ROOT="${HOMEDIR}/.php" \
-    PYTHON_ROOT="/opt/python" \
+    PYTHON_ROOT="/opt/my_python" \
     RUBY_ROOT="${HOMEDIR}/.ruby" \
     MAVEN_ROOT="${HOMEDIR}/.maven" \
     HUGO_ROOT="${HOMEDIR}/.hugo" \
@@ -69,7 +69,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
 # Install Python, JupyterLab, common machine learning packages, and Ruby utilities
-RUN bash /tmp/scripts/python-debian.sh "latest" ${PYTHON_ROOT} "${PIPX_HOME}" "${USERNAME}" "true" \
+RUN bash /tmp/scripts/python-debian.sh "latest" ${PYTHON_ROOT} "${PIPX_HOME}" "${USERNAME}" "true" "true" "false" \
     # Install JupyterLab and common machine learning packages
     && PYTHON_BINARY="${PYTHON_ROOT}/bin/python" \
     && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} "true" \
