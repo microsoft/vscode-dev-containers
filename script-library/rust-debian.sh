@@ -95,6 +95,25 @@ find_version_from_git_tags() {
     echo "${variable_name}=${!variable_name}"
 }
 
+check_nightly_version() {
+    local variable_name=$1
+    local requested_version=${!variable_name}
+    if [ "${requested_version}" = "none" ]; then return; fi
+
+    local version_date=$(echo ${requested_version} | sed -e "s/^nightly-//")
+    
+    date -d ${version_date} &>/dev/null
+    if [ $? != 0 ]; then
+        echo -e "Invalid ${variable_name} value: ${requested_version}\nNightly version should be in the format nightly-YYYY-MM-DD" >&2
+        exit 1
+    fi
+
+    if [ $(date -d ${version_date} +%s) -ge $(date +%s) ]; then
+        echo -e "Invalid ${variable_name} value: ${requested_version}\nNightly version should not exceed current date" >&2
+        exit 1
+    fi
+}
+
 updaterc() {
     if [ "${UPDATE_RC}" = "true" ]; then
         echo "Updating /etc/bash.bashrc and /etc/zsh/zshrc..."
@@ -154,13 +173,17 @@ chmod g+r+w+s "${RUSTUP_HOME}" "${CARGO_HOME}"
 if [ "${RUST_VERSION}" = "none" ] || type rustup > /dev/null 2>&1; then
     echo "Rust already installed. Skipping..."
 else
-    if [ "${RUST_VERSION}" != "latest" ] && [ "${RUST_VERSION}" != "lts" ] && [ "${RUST_VERSION}" != "stable" ]; then
+    if [ "${RUST_VERSION}" != "latest" ] && [ "${RUST_VERSION}" != "lts" ] && [ "${RUST_VERSION}" != "stable" ] && [ "${RUST_VERSION}" != "nightly" ]; then
         # Find version using soft match
         if ! type git > /dev/null 2>&1; then
             apt_get_update_if_needed
             apt-get -y install --no-install-recommends git
         fi
-        find_version_from_git_tags RUST_VERSION "https://github.com/rust-lang/rust" "tags/"
+        if [ $(echo ${RUST_VERSION} | grep -q "nightly") ]; then
+            find_version_from_git_tags RUST_VERSION "https://github.com/rust-lang/rust" "tags/"
+        else
+            check_nightly_version RUST_VERSION
+        fi
         default_toolchain_arg="--default-toolchain ${RUST_VERSION}"
     fi
     echo "Installing Rust..."
