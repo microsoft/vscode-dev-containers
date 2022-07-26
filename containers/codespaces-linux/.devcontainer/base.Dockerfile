@@ -72,6 +72,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN rm -rf /opt/python \
     # Replace existing Python installation from Oryx image with a fresh installation
     && bash /tmp/scripts/python-debian.sh "3.10.4" "/opt/python/3.10.4" "${PIPX_HOME}" "${USERNAME}" "true" "true" "false" \
+    && ln -sf /opt/python/3.10.4 "${PYTHON_ROOT}/current" \
     # Install JupyterLab and common machine learning packages
     && PYTHON_BINARY="${PYTHON_ROOT}/current/bin/python" \
     && bash /tmp/scripts/jupyterlab-debian.sh "latest" "automatic" ${PYTHON_BINARY} "true" \
