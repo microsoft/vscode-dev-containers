@@ -33,6 +33,8 @@ check "pydocstyle" pydocstyle --version
 check "bandit" bandit --version
 check "virtualenv" virtualenv --version
 
+check "lzma library included" python -c "import lzma"
+
 # # Check Python packages
 # check "numpy" python -c 'import numpy'
 # check "pandas" python -c 'import pandas'
