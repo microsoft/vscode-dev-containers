@@ -14,8 +14,8 @@ check "oryx" oryx --version
 
 # Check .NET
 check "dotnet" dotnet --list-sdks
-check "oryx-install-dotnet-3.1.0" oryx prep --skip-detection --platforms-and-versions dotnet=3.1.0
-check "dotnet-3.1.0-installed" bash -c 'dotnet --info | grep -E "\s3\.1\.0\s"'
+# check "oryx-install-dotnet-3.1.0" oryx prep --skip-detection --platforms-and-versions dotnet=3.1.0
+# check "dotnet-3.1.0-installed" bash -c 'dotnet --info | grep -E "\s3\.1\.0\s"'
 check "dotnet-6-installed-by-oryx" dotnet --info | grep "/opt/dotnet/6\.0\.[0-9]*/sdk"
 
 # Check Python
@@ -64,7 +64,7 @@ check "rake" rake --version
 mkdir jekyll-test
 cd jekyll-test
 touch _config.yml
-check "oryx-build-jekyll" oryx build --apptype static-sites --manifest-dir /tmp
+# check "oryx-build-jekyll" oryx build --apptype static-sites --manifest-dir /tmp
 check "jekyll" jekyll --version
 cd ..
 rm -rf jekyll-test
