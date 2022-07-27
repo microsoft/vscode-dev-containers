@@ -16,7 +16,7 @@ USERNAME=${4:-"automatic"}
 UPDATE_RC=${5:-"true"}
 INSTALL_PYTHON_TOOLS=${6:-"true"}
 USE_ORYX_IF_AVAILABLE=${7:-"true"}
-OPTIMIZE_BUILD_FROM_SOURCE=${8:-"false"}
+OPTIMIZE_BUILD_FROM_SOURCE=${8-"false"}
 
 DEFAULT_UTILS=("pylint" "flake8" "autopep8" "black" "yapf" "mypy" "pydocstyle" "pycodestyle" "bandit" "pipenv" "virtualenv")
 PYTHON_SOURCE_GPG_KEYS="64E628F8D684696D B26995E310250568 2D347EA6AA65421D FB9921286F5E1540 3A5CA953F73C700D 04C367C218ADD4FF 0EDDC5F26A45C816 6AF053F07D9DC8D2 C9BE28DEE6DF025C 126EB563A74B06BF D9866941EA5BBD71 ED9D77D5"
@@ -215,9 +215,9 @@ install_from_source() {
     fi
     echo "(*) Building Python ${PYTHON_VERSION} from source..."
     # Install prereqs if missing
-    check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
-                libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
-                libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
+    check_packages curl gdb ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
+                libbz2-dev libreadline-dev libreadline6-dev libxml2-dev xz-utils libgdbm-dev libgdbm-compat-dev tk-dev dirmngr \
+                libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev lzma lzma-dev uuid-dev 
     if ! type git > /dev/null 2>&1; then
         apt_get_update_if_needed
         apt-get -y install --no-install-recommends git
@@ -249,7 +249,7 @@ install_from_source() {
     tar -xzf "/tmp/python-src/${tgz_filename}" -C "/tmp/python-src" --strip-components=1
     local config_args=""
     if [ "${OPTIMIZE_BUILD_FROM_SOURCE}" = "true" ]; then
-        config_args="--enable-optimizations"
+        config_args="--enable-optimizations --enable-framework"
     fi
     ./configure --prefix="${PYTHON_INSTALL_PATH}" --with-ensurepip=install ${config_args}
     make -j 8
@@ -281,7 +281,7 @@ export DEBIAN_FRONTEND=noninteractive
 # General requirements
 check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
             libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
-            libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
+            libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev lzma uuid-dev 
 
 
 # Install python from source if needed

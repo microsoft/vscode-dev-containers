@@ -217,7 +217,7 @@ install_from_source() {
     # Install prereqs if missing
     check_packages curl gdb ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
                 libbz2-dev libreadline-dev libreadline6-dev libxml2-dev xz-utils libgdbm-dev libgdbm-compat-dev tk-dev dirmngr \
-                libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev lzma zma-dev uuid-dev 
+                libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev lzma lzma-dev uuid-dev 
     if ! type git > /dev/null 2>&1; then
         apt_get_update_if_needed
         apt-get -y install --no-install-recommends git
