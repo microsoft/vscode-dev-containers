@@ -68,12 +68,13 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mkdir -p /usr/local/etc/vscode-dev-containers/ \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
-# Remove existing Python installation from Oryx base image
+# Remove existing Python installation from the Oryx base image
 RUN rm -rf /opt/python && rm "${PYTHON_ROOT}/current"
 
 # Install Python, JupyterLab, common machine learning packages, and Ruby utilities
-RUN bash /tmp/scripts/python-debian.sh "3.10.4" "/opt/python/3.10.4" "${PIPX_HOME}" "${USERNAME}" "true" "true" "true" \
-    # Preserve symbolic link from Oryx base image
+RUN bash /tmp/scripts/python-debian.sh "3.10.4" "/opt/python/3.10.4" "${PIPX_HOME}" "${USERNAME}" "true" "true" "false" \
+    && bash /tmp/scripts/python-debian.sh "3.9.7" "/opt/python/3.9.7" "${PIPX_HOME}" "${USERNAME}" "false" "false" "false" \
+    # Recreate symbolic link that existed in the Oryx base image
     && ln -sf /opt/python/3.10.4 "${PYTHON_ROOT}/current" \
     # Install JupyterLab and common machine learning packages
     && PYTHON_BINARY="${PYTHON_ROOT}/current/bin/python" \
