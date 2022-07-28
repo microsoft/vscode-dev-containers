@@ -38,28 +38,6 @@ check "pydocstyle" pydocstyle --version
 check "bandit" bandit --version
 check "virtualenv" virtualenv --version
 
-# TODO: Remove this chunk. I added this to debug python
-echo 'which python'
-which python
-echo "Searching for python on PATH and testing for lzma..."
-all_python="$(whereis -b python | sed 's/^python: \(.*\)/\1/')"
-for python in $all_python
-do
-    # Skip config binaries
-    if echo "$python" | grep config &>/dev/null; then
-        continue
-    fi
-    # Skip directories
-    if [[ -d "$python" ]]; then
-        continue
-    fi
-    if "$python" -c 'import lzma' &>/dev/null; then
-        echo "$python: true"
-    else
-        echo "$python: false"
-    fi
-done
-
 check "lzma cpython test" python /opt/python/3.10.4/lib/python3.10/test/test_lzma.py
 check "lzma library included" python -c "import lzma"
 
