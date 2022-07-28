@@ -3,11 +3,6 @@ cd $(dirname "$0")
 
 source test-utils.sh codespace
 
-echo '---'
-which python
-echo $PATH
-echo '---'
-
 # Run common tests
 checkCommon
 
