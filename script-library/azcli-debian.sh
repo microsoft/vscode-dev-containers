@@ -173,7 +173,7 @@ else
 fi
 
 if [ "${use_pip}" = "true" ]; then
-    AZURE_VERSION=${CACHED_AZURE_VERSION}
+    AZ_VERSION=${CACHED_AZURE_VERSION}
     install_using_pip
 
     if [ "$?" != 0 ]; then
