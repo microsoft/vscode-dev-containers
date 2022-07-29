@@ -140,6 +140,7 @@ install_using_apt() {
 
     if ! (apt-get update && apt-get install -yq git-lfs${version_suffix}); then
         rm -f /etc/apt/sources.list.d/git-lfs.list
+        echo "Could not fetch git-lfs from apt"
         return 1
     fi
 
@@ -152,6 +153,7 @@ install_using_github() {
     cd /tmp/git-lfs
     find_version_from_git_tags GIT_LFS_VERSION "https://github.com/git-lfs/git-lfs"
     git_lfs_filename="git-lfs-linux-${architecture}-v${GIT_LFS_VERSION}.tar.gz"
+    echo "Looking for release artfact: ${git_lfs_filename}"
     curl -sSL -o "${git_lfs_filename}" "https://github.com/git-lfs/git-lfs/releases/download/v${GIT_LFS_VERSION}/${git_lfs_filename}"
     # Verify file
     curl -sSL -o "sha256sums.asc" "https://github.com/git-lfs/git-lfs/releases/download/v${GIT_LFS_VERSION}/sha256sums.asc"
@@ -159,8 +161,20 @@ install_using_github() {
     gpg -q --decrypt "sha256sums.asc" > sha256sums
     sha256sum --ignore-missing -c "sha256sums"
     # Extract and install
+    echo "Validated release artifact integrity."
+    echo "Starting to extract..."
     tar xf "${git_lfs_filename}" -C .
-    ./install.sh
+    echo "Installing..."
+    if [ -f "./install.sh" ]; then
+        ./install.sh
+    else
+        # Starting around v3.2.0, the release
+        # artifact file structure changed slightly
+        enclosed_folder="git-lfs-${GIT_LFS_VERSION}"
+        cd ${enclosed_folder}
+            ./install.sh
+        cd ../
+    fi
     rm -rf /tmp/git-lfs /tmp/tmp-gnupg
 }
 
