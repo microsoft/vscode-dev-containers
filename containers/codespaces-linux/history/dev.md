@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:b989a1fb2d9f14df99f7bc14276f552dead0cea7cd2cfec21427ed84335544e5
+**Digest:** sha256:c88d186406fa8925161decc77e4d0bf4a7bbe213df8e12cccfb8b1224ab19e8a
 
 **Tags:**
 ```
@@ -41,11 +41,11 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 249c708ed3a4a7a63d16a6e911a46b6fb9623cbd | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 8362ae285a5c227cb20387543483a3597fa31931 | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | bf45ef070e82356ed36a0f4d98f8ec651c8f0d98 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c4395e58201966d9f90c12bd6b7342e389e7a4cb | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 7866a26bed9057772bd23acf694d80643c91f252 | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | 44c91aa270ebc1d7449e516e7a49ff1ecaf2550c | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
@@ -60,7 +60,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | pydocstyle | 6.1.1 |
 | pycodestyle | 2.8.0 |
 | bandit | 1.7.4 |
-| virtualenv | 20.15.1 |
+| virtualenv | 20.16.2 |
 | pipx | 1.1.0 |
 
 **Go tools and modules**
@@ -97,7 +97,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
-| [GitHub CLI](https://github.com/cli/cli) | 2.14.2 | 
+| [GitHub CLI](https://github.com/cli/cli) | 2.14.3 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.8.5 | /opt/maven |
 | [Gradle](https://gradle.org/) | 7.4.2 | 
