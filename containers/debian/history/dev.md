@@ -11,7 +11,7 @@
 
 ## Variant: buster
 
-**Digest:** sha256:bafeb2309b990fff18ec9b9e6d30c214c649fa90ebae68c47fd6bdb40304e60b
+**Digest:** sha256:bb5cbe3ff989d2936a7403997d41e2d070bd048c5564fbcfad5b15ff55164771
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 8362ae285a5c227cb20387543483a3597fa31931 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -83,7 +83,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian10
 
 ## Variant: bullseye
 
-**Digest:** sha256:92ba9d8441e83d0cf82d5fe1e5e0784900d531e6247ab32aeeb7ab2bd6bfb2bd
+**Digest:** sha256:27a7f666ca8c89ac4110c52eba59ae47d2bb86cca1a6e22b488dd4916f897361
 
 **Tags:**
 ```
@@ -106,7 +106,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 8362ae285a5c227cb20387543483a3597fa31931 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -156,7 +156,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev
 
 ## Variant: stretch
 
-**Digest:** sha256:1dfdab5166497e8be053cef417a94cdeb67908e2bca1ce6bd36ebe2ffb8b590a
+**Digest:** sha256:37b9604767c1dfe545fe85430ba5488c3ec8bc7d0ac06126453a35b8702696ef
 
 **Tags:**
 ```
@@ -177,7 +177,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-debian9
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 8362ae285a5c227cb20387543483a3597fa31931 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 

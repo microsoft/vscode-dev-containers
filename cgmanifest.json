@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "8362ae285a5c227cb20387543483a3597fa31931"
+                    "commitHash": "aa75eeea3348b906f2016be0e44335889e0faed1"
                 }
             }
         },
@@ -76,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "162a88fa440a3c785fd1c58bf7820424353cef68"
+                    "commitHash": "66045de4dcc5da3d1029c02b606307f5951dcb22"
                 }
             }
         },
@@ -213,7 +213,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "flake8",
-                    "Version": "4.0.1"
+                    "Version": "5.0.2"
                 }
             }
         },
@@ -267,7 +267,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pycodestyle",
-                    "Version": "2.8.0"
+                    "Version": "2.9.0"
                 }
             }
         },
@@ -402,7 +402,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.47.2"
+                    "Version": "1.47.3"
                 }
             }
         },
@@ -412,7 +412,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "8362ae285a5c227cb20387543483a3597fa31931"
+                    "commitHash": "aa75eeea3348b906f2016be0e44335889e0faed1"
                 }
             }
         },
@@ -694,7 +694,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Eclipse Temurin",
-                    "Version": "1.8.0_332",
+                    "Version": "1.8.0_342",
                     "DownloadUrl": "https://adoptium.net/"
                 }
             }
