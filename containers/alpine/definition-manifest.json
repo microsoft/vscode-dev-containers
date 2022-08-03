@@ -10,7 +10,7 @@
 			"base:${VERSION}-alpine${VARIANT}"
 		],
 		"variantTags": {
-			"3.15": [
+			"3.16": [
 				"base:${VERSION}-alpine"
 			]
 		}
