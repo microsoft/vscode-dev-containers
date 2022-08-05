@@ -113,7 +113,7 @@ if [ "${DISTRO}" = "debian" ]; then
     run_script git-from-src "latest true"
     run_script git-lfs "" "2.13.3"
     run_script github
-    run_script go "1.17 /opt/go /go ${USERNAME} false"
+    run_script go "1.19 /opt/go /go ${USERNAME} false"
     run_script gradle "4.4 /usr/local/sdkman1 ${USERNAME} false"
     run_script kubectl-helm "latest latest latest"
     run_script maven "3.6.3 /usr/local/sdkman3 ${USERNAME} false"
