@@ -11,7 +11,7 @@
 
 ## Variant: jammy
 
-**Digest:** sha256:e3877240992b1e0b162fb11dec60d2259f4b3609c1126d7fd8092af64e191587
+**Digest:** sha256:52c6036f1cfc3dfb3c18327c2c2e51ccba8a8816a573d77adb92a10c863fb515
 
 **Tags:**
 ```
@@ -32,7 +32,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 ## Variant: focal
 
-**Digest:** sha256:665b745a554bf2ee3eae5b913f743c4ed4780d1806db20b92a4ef1816ff2218f
+**Digest:** sha256:c7d07f84db2085d7cb57f5f222aa355db14543da5652589f31b1526d2e4c977e
 
 **Tags:**
 ```
@@ -102,7 +102,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 
@@ -153,7 +153,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:9458660dc1e1b7682c15fdfa12cb48b78e9eb2fe3762cc17010fb5df58258713
+**Digest:** sha256:4472adff3fe60d38ee1f5c2f72113c4bfef02ab0ce8cdb8991566f709fe3223b
 
 **Tags:**
 ```
@@ -174,7 +174,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
 
 **Additional linux tools and packages**
 

@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-miniconda)
 
-**Digest:** sha256:efa8bdcb4754f0e7f48164c3ab796e3f5128bcd64a24fe77e4b3cfd3f88218a0
+**Digest:** sha256:46ae7df988f597f5e7259379a4c7e71aeed29d6297eaae861d001939db19b4c2
 
 **Tags:**
 ```
@@ -37,15 +37,15 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | Tool / package | Version |
 |----------------|---------|
 | pylint | 2.14.5 |
-| flake8 | 5.0.2 |
+| flake8 | 5.0.4 |
 | autopep8 | 1.6.0 |
 | black | 22.6.0 |
 | yapf | 0.32.0 |
 | mypy | 0.971 |
 | pydocstyle | 6.1.1 |
-| pycodestyle | 2.9.0 |
+| pycodestyle | 2.9.1 |
 | bandit | 1.7.4 |
-| virtualenv | 20.16.2 |
+| virtualenv | 20.16.3 |
 | pipx | 1.1.0 |
 
 **Other tools and utilities**
@@ -61,7 +61,7 @@ mcr.microsoft.com/vscode/devcontainers/miniconda:dev-3
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+deb11u1 |
+| curl | 7.74.0-1.3+deb11u2 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1 |
 | gnupg2 | 2.2.27-2+deb11u2 |

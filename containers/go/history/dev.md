@@ -5,19 +5,19 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/go)
 
 **Definition variations:**
+- [1.19-bullseye](#variant-119-bullseye)
+- [1.19-buster](#variant-119-buster)
 - [1.18-bullseye](#variant-118-bullseye)
 - [1.18-buster](#variant-118-buster)
-- [1.17-bullseye](#variant-117-bullseye)
-- [1.17-buster](#variant-117-buster)
 
-## Variant: 1.18-bullseye
+## Variant: 1.19-bullseye
 
-**Digest:** sha256:a693667d75303a854c21f866d713900061631f4ff556e8089321bf923da79268
+**Digest:** sha256:cf123a12b932939d953047312f018104ec61b844bee770d3f7794117c707d59a
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-bullseye
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.18
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.19-bullseye
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.19
 mcr.microsoft.com/vscode/devcontainers/go:dev-1
 mcr.microsoft.com/vscode/devcontainers/go:dev-1-bullseye
 mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
@@ -35,13 +35,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.18.4 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.19 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -55,7 +55,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |
-| github.com/golangci/golangci-lint | 1.47.3 |
+| github.com/golangci/golangci-lint | 1.48.0 |
 
 **Additional linux tools and packages**
 
@@ -64,7 +64,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+deb11u1 |
+| curl | 7.74.0-1.3+deb11u2 |
 | dialog | 1.3-20201126-1 |
 | g++ | 4:10.2.1-1 |
 | gcc | 4:10.2.1-1 |
@@ -109,13 +109,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | zlib1g | 1:1.2.11.dfsg-2+deb11u1 |
 | zsh | 5.8-6+deb11u1 |
 
-## Variant: 1.18-buster
+## Variant: 1.19-buster
 
-**Digest:** sha256:4b4b0f7b98da47ea4daa0d64139b6206ee0be4c32622de7bd29f5de9f19e0ac7
+**Digest:** sha256:35316578c10ce72fd60fd10ab82c5e74de0251214cd080daed6c8890512a3c72
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-buster
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.19-buster
 mcr.microsoft.com/vscode/devcontainers/go:dev-1-buster
 mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 ```
@@ -132,13 +132,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.18.4 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.19 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -152,7 +152,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |
-| github.com/golangci/golangci-lint | 1.47.3 |
+| github.com/golangci/golangci-lint | 1.48.0 |
 
 **Additional linux tools and packages**
 
@@ -207,14 +207,14 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 | zlib1g | 1:1.2.11.dfsg-1+deb10u1 |
 | zsh | 5.7.1-1+deb10u1 |
 
-## Variant: 1.17-bullseye
+## Variant: 1.18-bullseye
 
-**Digest:** sha256:8115bceeb7225c5f2f893c10bf24fbb359dccfb6bba18b72cd75d220b9a9049f
+**Digest:** sha256:43ca1ca95c681f8fd791a6005fa33c8734bea445794941dfbbb74371fbc7b901
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-bullseye
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-bullseye
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.18
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -229,13 +229,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.12 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.18.5 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -249,7 +249,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |
-| github.com/golangci/golangci-lint | 1.47.3 |
+| github.com/golangci/golangci-lint | 1.48.0 |
 
 **Additional linux tools and packages**
 
@@ -258,7 +258,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+deb11u1 |
+| curl | 7.74.0-1.3+deb11u2 |
 | dialog | 1.3-20201126-1 |
 | g++ | 4:10.2.1-1 |
 | gcc | 4:10.2.1-1 |
@@ -303,13 +303,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 | zlib1g | 1:1.2.11.dfsg-2+deb11u1 |
 | zsh | 5.8-6+deb11u1 |
 
-## Variant: 1.17-buster
+## Variant: 1.18-buster
 
-**Digest:** sha256:63822d16157ce38e4b9ef09fd5fd37a91b074ec33962d13943b6145e51a2378c
+**Digest:** sha256:ba78c4e1600de8374dab24417ee461fcf2da969a7502b4bc41a6cb8c5e87c586
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -324,13 +324,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.12 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.18.5 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
@@ -344,7 +344,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |
-| github.com/golangci/golangci-lint | 1.47.3 |
+| github.com/golangci/golangci-lint | 1.48.0 |
 
 **Additional linux tools and packages**
 

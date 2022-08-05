@@ -10,7 +10,7 @@
 
 ## Variant: 2.7-bullseye
 
-**Digest:** sha256:a18e0ff91977727c343c0ae5e0d0fb965f29870bd75e0069607452cbe532c5c7
+**Digest:** sha256:0458d08274804eff3749b636060c35f4d704ad788dc0e5fe13d262a460712930
 
 **Tags:**
 ```
@@ -38,7 +38,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c4395e58201966d9f90c12bd6b7342e389e7a4cb | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | 44c91aa270ebc1d7449e516e7a49ff1ecaf2550c | /usr/local/share/ruby-build |
@@ -67,7 +67,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-bullseye
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+deb11u1 |
+| curl | 7.74.0-1.3+deb11u2 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1 |
 | gnupg2 | 2.2.27-2+deb11u2 |
@@ -109,7 +109,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-bullseye
 
 ## Variant: 2.7-buster
 
-**Digest:** sha256:9c4a498927d86bea78cb5d1ad74699bb4ca97fab4781f19c676f0303e131a1c9
+**Digest:** sha256:0428ad8d676cd48a96f110f5cf3f9dee3df48654d6855cd89518d62efaf85e16
 
 **Tags:**
 ```
@@ -136,7 +136,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c4395e58201966d9f90c12bd6b7342e389e7a4cb | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | 44c91aa270ebc1d7449e516e7a49ff1ecaf2550c | /usr/local/share/ruby-build |

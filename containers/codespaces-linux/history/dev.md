@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:c5e2767318e7055f9f75f0094bab738fb02851a49c44aade1cd12ac2734f9399
+**Digest:** sha256:03db863ab29f51ad2286f6a51f09c33f5e781ec522fd9f5d66f193c0146922fc
 
 **Tags:**
 ```
@@ -34,14 +34,14 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [PHP](https://xdebug.org/) | 8.0.17<br />8.1.4 | /opt/php/&lt;version&gt; |
 | GCC | 9.4.0-1ubuntu1~20.04.1 | 
 | Clang | 10.0.0-4ubuntu1 | 
-| [Go](https://golang.org/dl) | 1.18.4 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.19 | /usr/local/go |
 | [Jekyll](https://jekyllrb.com/) | 4.2.2 | 
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | aa75eeea3348b906f2016be0e44335889e0faed1 | /home/codespace/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/codespace/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | bf45ef070e82356ed36a0f4d98f8ec651c8f0d98 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c4395e58201966d9f90c12bd6b7342e389e7a4cb | /usr/local/share/rbenv |
@@ -52,15 +52,15 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | Tool / package | Version |
 |----------------|---------|
 | pylint | 2.14.5 |
-| flake8 | 5.0.2 |
+| flake8 | 5.0.4 |
 | autopep8 | 1.6.0 |
 | black | 22.6.0 |
 | yapf | 0.32.0 |
 | mypy | 0.971 |
 | pydocstyle | 6.1.1 |
-| pycodestyle | 2.9.0 |
+| pycodestyle | 2.9.1 |
 | bandit | 1.7.4 |
-| virtualenv | 20.16.2 |
+| virtualenv | 20.16.3 |
 | pipx | 1.1.0 |
 
 **Go tools and modules**
@@ -74,7 +74,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |
-| github.com/golangci/golangci-lint | 1.47.3 |
+| github.com/golangci/golangci-lint | 1.48.0 |
 
 **Ruby gems and tools**
 

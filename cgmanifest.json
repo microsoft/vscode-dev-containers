@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "aa75eeea3348b906f2016be0e44335889e0faed1"
+                    "commitHash": "97134d1eed19b72a9c4bf90a2effa847221608bf"
                 }
             }
         },
@@ -76,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "66045de4dcc5da3d1029c02b606307f5951dcb22"
+                    "commitHash": "52b66042533aaf7f5721941941fd12fbf46164d4"
                 }
             }
         },
@@ -127,6 +127,16 @@
                     "Name": "Docker Image: buildpack-deps",
                     "Version": "bionic-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: alpine",
+                    "Version": "3.16",
+                    "DownloadUrl": "https://hub.docker.com/_/alpine"
                 }
             }
         },
@@ -213,7 +223,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "flake8",
-                    "Version": "5.0.2"
+                    "Version": "5.0.4"
                 }
             }
         },
@@ -267,7 +277,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pycodestyle",
-                    "Version": "2.9.0"
+                    "Version": "2.9.1"
                 }
             }
         },
@@ -285,7 +295,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.16.2"
+                    "Version": "20.16.3"
                 }
             }
         },
@@ -402,7 +412,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.47.3"
+                    "Version": "1.48.0"
                 }
             }
         },
@@ -412,7 +422,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "aa75eeea3348b906f2016be0e44335889e0faed1"
+                    "commitHash": "97134d1eed19b72a9c4bf90a2effa847221608bf"
                 }
             }
         },
@@ -551,7 +561,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.18.4",
+                    "Version": "1.19",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -634,6 +644,26 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
+                    "Version": "1.19-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/golang"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: golang",
+                    "Version": "1.19-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/golang"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: golang",
                     "Version": "1.18-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
@@ -645,26 +675,6 @@
                 "Other": {
                     "Name": "Docker Image: golang",
                     "Version": "1.18-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/golang"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: golang",
-                    "Version": "1.17-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/golang"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: golang",
-                    "Version": "1.17-buster",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
             }
@@ -694,7 +704,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Eclipse Temurin",
-                    "Version": "1.8.0_342",
+                    "Version": "1.8.0_345",
                     "DownloadUrl": "https://adoptium.net/"
                 }
             }
