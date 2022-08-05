@@ -772,7 +772,7 @@
 			"options": {
 				"version": {
 					"type": "string",
-					"proposals": ["latest", "1.18", "1.17"],
+					"proposals": ["latest", "1.19", "1.18"],
 					"default": "latest",
 					"description": "Select or enter a Go version to install"
 				}

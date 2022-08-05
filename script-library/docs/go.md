@@ -24,7 +24,7 @@ Or as a feature:
 
 |Argument|Feature option|Default|Description|
 |--------|--------------|-------|-----------|
-|Go version|`version` | `latest`| Version of Go to install. Use `latest` to install the latest released version. Partial version numbers are accepted (e.g. `1.17`).|
+|Go version|`version` | `latest`| Version of Go to install. Use `latest` to install the latest released version. Partial version numbers are accepted (e.g. `1.19`).|
 |GOROOT| | `/usr/local/go`| Location to install Go. |
 |GOPATH| | `/go`| Location to use as the `GOPATH`. Tools are installed under `${GOPATH}/bin` |
 |Non-root user| | `automatic`| Specifies a user in the container other than root. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
