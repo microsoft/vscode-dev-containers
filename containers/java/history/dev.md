@@ -12,7 +12,7 @@
 
 ## Variant: 17-bullseye
 
-**Digest:** sha256:ea5cd8188b94fe0bf0aaf23e35facb96bc706d980cdb5f2588e71815988e3eb7
+**Digest:** sha256:8267bd9d5482bb57e6a1437624ababa257d5e6b8c5fdf58ac518472c8193c8b8
 
 **Tags:**
 ```
@@ -47,7 +47,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -98,7 +98,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 ## Variant: 17-buster
 
-**Digest:** sha256:663c17be08922712db8b428d6c9dda43ea2224c45cc34f0acda9ab7d78df6a37
+**Digest:** sha256:27423ec777ff349d9a7cc0e885fe2b95a849fa5034bfa9ace8e420df8adfc88d
 
 **Tags:**
 ```
@@ -130,7 +130,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -182,7 +182,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 
 ## Variant: 11-bullseye
 
-**Digest:** sha256:01f6bf39dcac68e617100916e9d2720274cbb47cd64c6d8b4aa9bafd8609be1f
+**Digest:** sha256:a6eb0d1f777e79cc4903d23fc0f2bdb5d4fbd51184bea07f751e3a81c4d13324
 
 **Tags:**
 ```
@@ -216,7 +216,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -267,7 +267,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 
 ## Variant: 11-buster
 
-**Digest:** sha256:0076e755cd27081328648ab4dac1583e3d342a6bf1b6203666894ef7c2818294
+**Digest:** sha256:46ce08b13cfac618e4c17abb78a54e26e15a37936dfbad847e1c7ff26aae9f32
 
 **Tags:**
 ```
@@ -300,7 +300,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-buster
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 

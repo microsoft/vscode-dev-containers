@@ -12,7 +12,7 @@
 
 ## Variant: 1.19-bullseye
 
-**Digest:** sha256:cf123a12b932939d953047312f018104ec61b844bee770d3f7794117c707d59a
+**Digest:** sha256:063b966978e0ac08da80fb46d041f773926d1fea9a3dbd6fb942a91e487247e1
 
 **Tags:**
 ```
@@ -51,7 +51,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | golang.org/x/tools/gopls | 0.9.1 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.1 |
+| github.com/mgechev/revive | 1.2.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 ## Variant: 1.19-buster
 
-**Digest:** sha256:35316578c10ce72fd60fd10ab82c5e74de0251214cd080daed6c8890512a3c72
+**Digest:** sha256:6d91694dcd40fbd891b339381534e25a6315d8a03e23f907a4c7fdafabe118f8
 
 **Tags:**
 ```
@@ -148,7 +148,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 | golang.org/x/tools/gopls | 0.9.1 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.1 |
+| github.com/mgechev/revive | 1.2.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 ## Variant: 1.18-bullseye
 
-**Digest:** sha256:43ca1ca95c681f8fd791a6005fa33c8734bea445794941dfbbb74371fbc7b901
+**Digest:** sha256:63f728731630139ef7ffa916316a8ff05c7f5163ff43cd116173cebba644842d
 
 **Tags:**
 ```
@@ -245,7 +245,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.18
 | golang.org/x/tools/gopls | 0.9.1 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.1 |
+| github.com/mgechev/revive | 1.2.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |
@@ -305,7 +305,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.18
 
 ## Variant: 1.18-buster
 
-**Digest:** sha256:ba78c4e1600de8374dab24417ee461fcf2da969a7502b4bc41a6cb8c5e87c586
+**Digest:** sha256:01fd649c6d8242bf0163a3e7b93d174887d32f2d2bfaff4fde62c71c9621d598
 
 **Tags:**
 ```
@@ -340,7 +340,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-buster
 | golang.org/x/tools/gopls | 0.9.1 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.1 |
+| github.com/mgechev/revive | 1.2.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |

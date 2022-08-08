@@ -76,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "52b66042533aaf7f5721941941fd12fbf46164d4"
+                    "commitHash": "75260879edfd87345260cd913f4f065c399253d1"
                 }
             }
         },
@@ -376,7 +376,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.2.1"
+                    "Version": "1.2.3"
                 }
             }
         },
@@ -462,7 +462,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "44c91aa270ebc1d7449e516e7a49ff1ecaf2550c"
+                    "commitHash": "a753b24551ed839fe25841adf3755a143797a14a"
                 }
             }
         },
@@ -521,7 +521,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.15.0",
+                    "Version": "5.16.0",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -551,7 +551,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Gradle",
-                    "Version": "7.4.2",
+                    "Version": "7.5.1",
                     "DownloadUrl": "https://gradle.org/"
                 }
             }

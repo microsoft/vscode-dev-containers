@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:03db863ab29f51ad2286f6a51f09c33f5e781ec522fd9f5d66f193c0146922fc
+**Digest:** sha256:0b3cc22b8c5fe1c02acef1dd068efd76e5f60f6d51af038dfa6c650e2dc050bc
 
 **Tags:**
 ```
@@ -45,7 +45,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | bf45ef070e82356ed36a0f4d98f8ec651c8f0d98 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c4395e58201966d9f90c12bd6b7342e389e7a4cb | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | 44c91aa270ebc1d7449e516e7a49ff1ecaf2550c | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | a753b24551ed839fe25841adf3755a143797a14a | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
@@ -70,7 +70,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | golang.org/x/tools/gopls | 0.9.1 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.1 |
+| github.com/mgechev/revive | 1.2.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
 | github.com/go-delve/delve | 1.9.0 |
@@ -95,12 +95,12 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [kubectl](https://github.com/kubernetes/kubectl) | WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.<br />1.24.3 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.9.2 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
 | [rvm](https://github.com/rvm/rvm) | 1.29.12 | /usr/local/rvm |
 | [GitHub CLI](https://github.com/cli/cli) | 2.14.3 | 
 | [yarn](https://yarnpkg.com/) | 1.22.15 | /opt/yarn |
 | [Maven](https://maven.apache.org/) | 3.8.5 | /opt/maven |
-| [Gradle](https://gradle.org/) | 7.4.2 | 
+| [Gradle](https://gradle.org/) | 7.5.1 | 
 | Docker (Moby) CLI &amp; Engine | 20.10.17+azure | 
 
 **Additional linux tools and packages**
