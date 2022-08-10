@@ -24,9 +24,9 @@ This example illustrates how you can do this by using CLIs ([kubectl](https://ku
 
 ## Ingress and port forwarding
 
-When configuring ingress for your Kubernetes cluster, note that by default Kubernetes will bind to an IP-based interface rather than localhost or all interfaces. This is why you need to use the Kubernetes Node's IP when connecting - even if there's only one Node as in the case of Minikube. Port forwarding in Remote - Containers will allow you to specify `<ip>:<port>` in either the `forwardPorts` property or through the port forwarding UI in VS Code.
+When configuring ingress for your Kubernetes cluster, note that by default Kubernetes will bind to a specific interface's IP rather than localhost or all interfaces. This is why you need to use the Kubernetes Node's IP when connecting - even if there's only one Node as in the case of Minikube. Port forwarding in Remote - Containers will allow you to specify `<ip>:<port>` in either the `forwardPorts` property or through the port forwarding UI in VS Code.
 
-However, GitHub Codespaces does not yet support this capability, so you'll need to use `kubectl` to forward the port to localhost. This adds minimal overhead since everything is on the same machine, but the Codespaces team is looking to add this capability to resolve the problem. E.g.:
+However, GitHub Codespaces does not yet support this capability, so you'll need to use `kubectl` to forward the port to localhost. This adds minimal overhead since everything is on the same machine. E.g.:
 
 ```bash
 kubectl port-forward service/ingress-nginx 80:80
