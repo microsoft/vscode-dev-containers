@@ -36,6 +36,16 @@ Or as a feature:
 |minikube SHA256| | `automatic`| SHA256 checksum to use to verify the minikube download. `automatic` will download the checksum. |
 |Non-root user| | `automatic`| Specifies a user in the container other than root that will be using the desktop. A value of `automatic` will cause the script to check for a user called `vscode`, then `node`, `codespace`, and finally a user with a UID of `1000` before falling back to `root`. |
 
+## A note on ingress and port forwarding
+
+When configuring ingress for your Kubernetes cluster, note that by default Kubernetes will bind to an IP-based interface rather than localhost or all interfaces. This is why you need to use the Kubernetes Node's IP when connecting - even if there's only one Node as in the case of Minikube. Port forwarding in Remote - Containers will allow you to specify `<ip>:<port>` in either the `forwardPorts` property or through the port forwarding UI in VS Code.
+
+However, GitHub Codespaces does not yet support this capability, so you'll need to use `kubectl` to forward the port to localhost. This adds minimal overhead since everything is on the same machine, but the Codespaces team is looking to add this capability to resolve the problem. E.g.:
+
+```bash
+kubectl port-forward service/ingress-nginx 80:80
+```
+
 ## Usage
 
 ### Feature use
