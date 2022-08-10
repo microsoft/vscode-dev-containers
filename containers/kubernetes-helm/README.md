@@ -93,7 +93,10 @@ When configuring [Ingress](https://kubernetes.io/docs/concepts/services-networki
 However, GitHub Codespaces does not yet support this capability, so you'll need to use `kubectl` to forward the port to localhost. This adds minimal overhead since everything is on the same machine. E.g.:
 
 ```bash
-kubectl port-forward service/ingress-nginx 80:80
+minikube start
+minikube addons enable ingress
+# Run this to forward to localhost in the background
+nohup kubectl port-forward --pod-running-timeout=24h -n ingress-nginx service/ingress-nginx-controller :80 &
 ```
 
 ## Using this definition with an existing folder
