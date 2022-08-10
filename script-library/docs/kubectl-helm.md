@@ -47,7 +47,6 @@ minikube start
 minikube addons enable ingress
 # Run this to forward to localhost in the background
 nohup kubectl port-forward --pod-running-timeout=24h -n ingress-nginx service/ingress-nginx-controller :80 &
-
 ```
 
 ## Usage
