@@ -20,13 +20,11 @@ ARG PHOENIX_VERSION="1.6.2"
 # [Optional] Setup nodejs
 ARG NODE_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/node-debian.sh"
 ARG NODE_SCRIPT_SHA="dev-mode"
+# [Optional, Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true
 ENV PATH=${NVM_DIR}/current/bin:${PATH}
-
-# [Optional, Choice] Node.js version: none, lts/*, 16, 14, 12, 10
-ARG NODE_VERSION="none"
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 RUN apt-get update \
