@@ -32,10 +32,9 @@ It will also install additional tools based on `.devcontainer/devcontainer.json`
 }
 ```
 
-There are a few options you can pick from including what version of GitHub Actions runner to use by updating `RUNNER_VERSION` in `.devcontainer/devcontainer.json`:
+There are a few options you can pick from including what version of GitHub Actions runner to use by updating `RUNNER_VERSION` in `.devcontainer/devcontainer.json` (Amend GitHub runner version with 'RUNNER_VERSION'. https://github.com/actions/runner/releases):
 
 ```json
-// Amend GitHub runner version with 'RUNNER_VERSION'. https://github.com/actions/runner/releases.
 "build": {
     "args": {
         "UPGRADE_PACKAGES": "true",
