@@ -55,16 +55,13 @@ apt_get_update_if_needed()
 # Checks if packages are installed and installs them if not
 check_packages() {
     if ! dpkg -s "$@" > /dev/null 2>&1; then
-        apt_get_update_if_needed
+        apt-get update -y
         apt-get -y install --no-install-recommends "$@"
     fi
 }
 
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
-
-# Initial apt get
-apt-get update -y
 
 # Install openssh-server openssh-client
 check_packages openssh-server openssh-client lsof
