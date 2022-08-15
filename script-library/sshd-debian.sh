@@ -46,7 +46,7 @@ apt_get_update_if_needed()
 {
     if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
         echo "Running apt-get update..."
-        apt-get update
+        apt-get update -y
     else
         echo "Skipping apt-get update."
     fi
@@ -62,6 +62,9 @@ check_packages() {
 
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
+
+# Initial apt get
+apt-get update -y
 
 # Install openssh-server openssh-client
 check_packages openssh-server openssh-client lsof
