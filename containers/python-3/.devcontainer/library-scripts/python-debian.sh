@@ -215,9 +215,9 @@ install_from_source() {
     fi
     echo "(*) Building Python ${PYTHON_VERSION} from source..."
     # Install prereqs if missing
-    check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
-                libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
-                libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
+    check_packages curl gdb ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
+                libbz2-dev libreadline-dev libreadline6-dev libxml2-dev xz-utils libgdbm-dev libgdbm-compat-dev tk-dev dirmngr \
+                libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev lzma lzma-dev uuid-dev 
     if ! type git > /dev/null 2>&1; then
         apt_get_update_if_needed
         apt-get -y install --no-install-recommends git
@@ -249,7 +249,7 @@ install_from_source() {
     tar -xzf "/tmp/python-src/${tgz_filename}" -C "/tmp/python-src" --strip-components=1
     local config_args=""
     if [ "${OPTIMIZE_BUILD_FROM_SOURCE}" = "true" ]; then
-        config_args="--enable-optimizations"
+        config_args="--enable-optimizations --enable-framework"
     fi
     ./configure --prefix="${PYTHON_INSTALL_PATH}" --with-ensurepip=install ${config_args}
     make -j 8
@@ -281,7 +281,7 @@ export DEBIAN_FRONTEND=noninteractive
 # General requirements
 check_packages curl ca-certificates gnupg2 tar make gcc libssl-dev zlib1g-dev libncurses5-dev \
             libbz2-dev libreadline-dev libxml2-dev xz-utils libgdbm-dev tk-dev dirmngr \
-            libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev uuid-dev 
+            libxmlsec1-dev libsqlite3-dev libffi-dev liblzma-dev lzma uuid-dev 
 
 
 # Install python from source if needed
