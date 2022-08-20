@@ -10,7 +10,7 @@
 
 ## Variant: 2.7-bullseye
 
-**Digest:** sha256:d77bd38740d077e7841db028913606be42832f83c5ff9aa56d519ffa74f2139c
+**Digest:** sha256:564b972d99756e50e88dd7d8039af918dc508f056732f2b8936d531951f6b5b9
 
 **Tags:**
 ```
@@ -38,7 +38,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-bullseye
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3668ec2a82250020ca0c285ef8b277f1385a8085 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c4395e58201966d9f90c12bd6b7342e389e7a4cb | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | a753b24551ed839fe25841adf3755a143797a14a | /usr/local/share/ruby-build |
@@ -50,7 +50,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-bullseye
 | rake | 13.0.6 |
 | ruby-debug-ide | 0.7.3 |
 | debase | 0.2.4.1 |
-| bundler | 2.3.19 |
+| bundler | 2.3.20 |
 | jekyll | 4.2.2 |
 | github-pages | 227 |
 
@@ -99,7 +99,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-bullseye
 | rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
-| unzip | 6.0-26 |
+| unzip | 6.0-26+deb11u1 |
 | vim-tiny | 2:8.2.2434-3+deb11u1 |
 | wget | 1.21-1+deb11u1 |
 | yarn | 1.22.19-1 |
@@ -109,7 +109,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-bullseye
 
 ## Variant: 2.7-buster
 
-**Digest:** sha256:2a3d3bd4e4e7ac88db063fac0433b26516149d4bf620869a2bee3402cfac036d
+**Digest:** sha256:0917065bbbf721d8a9830aa0c8b8ca45f1c17f508f6bec3244936dcc83cc991d
 
 **Tags:**
 ```
@@ -136,7 +136,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-buster
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 97134d1eed19b72a9c4bf90a2effa847221608bf | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3668ec2a82250020ca0c285ef8b277f1385a8085 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c4395e58201966d9f90c12bd6b7342e389e7a4cb | /usr/local/share/rbenv |
 | [ruby-build](https://github.com/rbenv/ruby-build.git) | a753b24551ed839fe25841adf3755a143797a14a | /usr/local/share/ruby-build |
@@ -148,7 +148,7 @@ mcr.microsoft.com/vscode/devcontainers/jekyll:dev-buster
 | rake | 13.0.6 |
 | ruby-debug-ide | 0.7.3 |
 | debase | 0.2.4.1 |
-| bundler | 2.3.19 |
+| bundler | 2.3.20 |
 | jekyll | 4.2.2 |
 | github-pages | 227 |
 
