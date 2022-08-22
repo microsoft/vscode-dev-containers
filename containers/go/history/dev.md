@@ -12,7 +12,7 @@
 
 ## Variant: 1.19-bullseye
 
-**Digest:** sha256:1e256f2f12814ef730e6dd756ffa4aa16834cea29f9d9d1eff1539b173cb18c9
+**Digest:** sha256:827941d7ef7ae5dc672204b1ada9e90b08e9954f04566d16889f169d9c592323
 
 **Tags:**
 ```
@@ -48,7 +48,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.9.3 |
+| golang.org/x/tools/gopls | 0.9.4 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.3 |
@@ -111,7 +111,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 ## Variant: 1.19-buster
 
-**Digest:** sha256:e436c47b5e44a7f0ddf7c82dd0919be0947c00bde8037c61776007b36a96aa68
+**Digest:** sha256:f5fa296f71314f0368c951f36533659cb811c9c911bc6a43a9be3952c75e098b
 
 **Tags:**
 ```
@@ -145,7 +145,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.9.3 |
+| golang.org/x/tools/gopls | 0.9.4 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.3 |
@@ -209,7 +209,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 ## Variant: 1.18-bullseye
 
-**Digest:** sha256:7efbee95670bf6f711844ee52190ca674629a4e1c8fa357627fdc35156ac04d6
+**Digest:** sha256:c0b9c7259140f2c02c646e1dd9101d82feeff029df68e46a18932871a6c35a38
 
 **Tags:**
 ```
@@ -242,7 +242,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.18
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.9.3 |
+| golang.org/x/tools/gopls | 0.9.4 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.3 |
@@ -305,7 +305,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.18
 
 ## Variant: 1.18-buster
 
-**Digest:** sha256:0b9a937901db5285770e0becc1ff06ee677a7b72d9fd435a8ac21412766d155c
+**Digest:** sha256:321baccc9e04f13cc8340e33f4b907f1cce8f9f88cd9f73f03b2676d6ddfba44
 
 **Tags:**
 ```
@@ -337,7 +337,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-buster
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.9.3 |
+| golang.org/x/tools/gopls | 0.9.4 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.3 |

@@ -11,7 +11,7 @@
 
 ## Variant: jammy
 
-**Digest:** sha256:f15eddcfb0cdf6557321c4b019f7fddcb22216c9c0d75d9b461485cc66f78896
+**Digest:** sha256:c17bebbf7c6a30504db0da3285e6ffc7f80fdf4196de164e02d8a9cf2f46cd6e
 
 **Tags:**
 ```
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu22.04
 
 ## Variant: focal
 
-**Digest:** sha256:a33410163792e9245ba92b2334f1b53de7f4b60bf0e85bfdbc651b443e380ac0
+**Digest:** sha256:0d5bb6d223466163e313a787c9338473844162f366dda6b8553a0d747c520d53
 
 **Tags:**
 ```
@@ -141,7 +141,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 | openssh-client | 1:8.2p1-4ubuntu0.5 |
 | procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
-| rsync | 3.1.3-8ubuntu0.3 |
+| rsync | 3.1.3-8ubuntu0.4 |
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
@@ -153,7 +153,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu
 
 ## Variant: bionic
 
-**Digest:** sha256:5c42da5a503dbd5980ed46e82ecfb463c79174c083e4ea2c1b0ebe6f10da35ca
+**Digest:** sha256:ed5996d06d022497fd13669746daebec0bccbf2dd44c1606af1d87f9830aa00e
 
 **Tags:**
 ```
@@ -214,13 +214,13 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-ubuntu18.04
 | openssh-client | 1:7.6p1-4ubuntu0.7 |
 | procps | 2:3.3.12-3ubuntu1.2 |
 | psmisc | 23.1-1ubuntu0.1 |
-| rsync | 3.1.2-2.1ubuntu1.4 |
+| rsync | 3.1.2-2.1ubuntu1.5 |
 | strace | 4.21-1ubuntu1 |
 | sudo | 1.8.21p2-3ubuntu1.4 |
 | unzip | 6.0-21ubuntu1.1 |
 | vim-tiny | 2:8.0.1453-1ubuntu1.8 |
 | wget | 1.19.4-1ubuntu2.2 |
 | zip | 3.0-11build1 |
-| zlib1g | 1:1.2.11.dfsg-0ubuntu2.1 |
+| zlib1g | 1:1.2.11.dfsg-0ubuntu2.2 |
 | zsh | 5.4.2-3ubuntu3.2 |
 

@@ -12,7 +12,7 @@
 
 ## Variant: 3.16
 
-**Digest:** sha256:33ec050fa90171f0b6d708c0c51e2a91567d598ac262dfb5fc40e6a022f4f3e8
+**Digest:** sha256:4141d188bcb06acf2fa05d460b83ec6ad0771218d50906cc0d387a38b38a6167
 
 **Tags:**
 ```
@@ -63,7 +63,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 | libintl | 0.21-r2 |
 | libssl1.1 | 1.1.1q-r0 |
 | lttng-ust | 2.13.2-r0 |
-| tzdata | 2022a-r0 |
+| tzdata | 2022c-r0 |
 | userspace-rcu | 0.13.1-r0 |
 | zlib | 1.2.12-r3 |
 | sudo | 1.9.10-r0 |
@@ -78,7 +78,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine
 
 ## Variant: 3.15
 
-**Digest:** sha256:5e0c1760c9e4ee1f56365813acfc10dc136f37f04c8a7b5181426153eb21b5ff
+**Digest:** sha256:de76de682a0bb5009696cfb7978f3f3ba7ff02ca4caa80afdb0b4b7a7b5143a0
 
 **Tags:**
 ```
@@ -128,7 +128,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.15
 | libintl | 0.21-r0 |
 | libssl1.1 | 1.1.1q-r0 |
 | lttng-ust | 2.12.0-r3 |
-| tzdata | 2022a-r0 |
+| tzdata | 2022c-r0 |
 | userspace-rcu | 0.12.2-r0 |
 | zlib | 1.2.12-r3 |
 | sudo | 1.9.8_p2-r1 |
@@ -143,7 +143,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.15
 
 ## Variant: 3.14
 
-**Digest:** sha256:ea8ae3b70ab89b0eadeb904992a8b05fc35eb688943adbb13c2498f668219a41
+**Digest:** sha256:2ab9c02495fbc7c4abb0b08a8d27a79634ef3f4dc1dc5f6e44a3bd459663f291
 
 **Tags:**
 ```
@@ -193,7 +193,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 | libintl | 0.21-r0 |
 | libssl1.1 | 1.1.1q-r0 |
 | lttng-ust | 2.12.0-r3 |
-| tzdata | 2022a-r0 |
+| tzdata | 2022c-r0 |
 | userspace-rcu | 0.12.2-r0 |
 | zlib | 1.2.12-r3 |
 | sudo | 1.9.7_p1-r1 |
@@ -208,7 +208,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.14
 
 ## Variant: 3.13
 
-**Digest:** sha256:defe0295774da300580b30911b652087506f00936957873b202ae75a229ca21c
+**Digest:** sha256:9801bd3dd06ad1099ab07cfd4a4f5e53e2f89a4f5acf39868ef4ba3fb012e85d
 
 **Tags:**
 ```
@@ -258,7 +258,7 @@ mcr.microsoft.com/vscode/devcontainers/base:dev-alpine3.13
 | libintl | 0.20.2-r2 |
 | libssl1.1 | 1.1.1q-r0 |
 | lttng-ust | 2.12.0-r2 |
-| tzdata | 2022a-r0 |
+| tzdata | 2022c-r0 |
 | userspace-rcu | 0.12.1-r0 |
 | zlib | 1.2.12-r3 |
 | sudo | 1.9.5p2-r0 |

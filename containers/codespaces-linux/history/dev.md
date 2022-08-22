@@ -5,7 +5,7 @@ This document describes the base contents of the default GitHub Codespaces dev c
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/codespaces-linux)
 
-**Digest:** sha256:9ef0b47ffe48248957d3405cf061c8be56c634a692f5e8b4b181500db89c9173
+**Digest:** sha256:4f6b9768c78a08a04de3110f5ca667a3820a3451a036bc6e96f2570e8abf2b95
 
 **Tags:**
 ```
@@ -45,7 +45,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /home/codespace/.nvm |
 | [nvs](https://github.com/jasongin/nvs) | bf45ef070e82356ed36a0f4d98f8ec651c8f0d98 | /home/codespace/.nvs |
 | [rbenv](https://github.com/rbenv/rbenv.git) | c4395e58201966d9f90c12bd6b7342e389e7a4cb | /usr/local/share/rbenv |
-| [ruby-build](https://github.com/rbenv/ruby-build.git) | a753b24551ed839fe25841adf3755a143797a14a | /usr/local/share/ruby-build |
+| [ruby-build](https://github.com/rbenv/ruby-build.git) | bd08de2e607119a7033c828e2fa0efbc41180d64 | /usr/local/share/ruby-build |
 
 **Pip / pipx installed tools and packages**
 
@@ -67,7 +67,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.9.3 |
+| golang.org/x/tools/gopls | 0.9.4 |
 | honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
 | github.com/mgechev/revive | 1.2.3 |
@@ -92,7 +92,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | [git](https://github.com/git/git) | 2.37.2 | /usr/local |
 | [Xdebug](https://xdebug.org/) | 3.1.4 | /opt/php/lts |
 | [Composer](https://getcomposer.org/) | 2.3.4 | /opt/php-composer |
-| [kubectl](https://github.com/kubernetes/kubectl) | WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.<br />1.24.3 | /usr/local/bin |
+| [kubectl](https://github.com/kubernetes/kubectl) | WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.<br />1.24.4 | /usr/local/bin |
 | [Helm](https://github.com/helm/helm) | 3.9.3 | /usr/local/bin |
 | [Docker Compose](https://github.com/docker/compose) | 1.29.2 | /usr/local/bin |
 | [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
@@ -175,7 +175,7 @@ mcr.microsoft.com/vscode/devcontainers/universal:dev
 | psmisc | 23.3-1 |
 | python3-dev | 3.8.2-0ubuntu2 |
 | python3-minimal | 3.8.2-0ubuntu2 |
-| rsync | 3.1.3-8ubuntu0.3 |
+| rsync | 3.1.3-8ubuntu0.4 |
 | sed | 4.7-1 |
 | software-properties-common | 0.99.9.8 |
 | strace | 5.5-3ubuntu1 |

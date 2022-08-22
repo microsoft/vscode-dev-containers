@@ -12,7 +12,7 @@
 
 ## Variant: 6.0-bullseye-slim
 
-**Digest:** sha256:189ed1f2c942f75c82bbd2e02670bf65b8a4427c2ed14b8145c28a4f98cd0d0f
+**Digest:** sha256:aabb79171ba45c09ad289e65c44d151beb6623b651e69ef9a91520072771a3b9
 
 **Tags:**
 ```
@@ -91,7 +91,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-bullseye
 
 ## Variant: 6.0-focal
 
-**Digest:** sha256:d50cb420d3c8fba000246ac213fc035c2408577150c29b9006a79a14c14ab20d
+**Digest:** sha256:1b4ce379680625ac8238c448eba67e2c8170db22012626249aa2c75e83f90d9d
 
 **Tags:**
 ```
@@ -156,7 +156,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 | openssh-client | 1:8.2p1-4ubuntu0.5 |
 | procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
-| rsync | 3.1.3-8ubuntu0.3 |
+| rsync | 3.1.3-8ubuntu0.4 |
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
@@ -169,7 +169,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnet:dev-6.0-focal
 
 ## Variant: 3.1-bullseye
 
-**Digest:** sha256:fb042e3caaee881d7e5f75e582bf47861113e16ad29481ccdd27e8868fb29242
+**Digest:** sha256:2005377e24c003b842d2333a01035b531b259519f462eee58e73a4c32ab836e0
 
 **Tags:**
 ```
@@ -247,7 +247,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1-bullseye
 
 ## Variant: 3.1-focal
 
-**Digest:** sha256:c6023d420ce991708ab421a7a0b1650ddb74d8306159b7f4c84a2a261bbf10e3
+**Digest:** sha256:2d3d02fd731500a4ca333d1d5191820d05e67a2fd8c2dc764adfa7e68d00bcfd
 
 **Tags:**
 ```
@@ -314,7 +314,7 @@ mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-3.1
 | openssh-client | 1:8.2p1-4ubuntu0.5 |
 | procps | 2:3.3.16-1ubuntu2.3 |
 | psmisc | 23.3-1 |
-| rsync | 3.1.3-8ubuntu0.3 |
+| rsync | 3.1.3-8ubuntu0.4 |
 | strace | 5.5-3ubuntu1 |
 | sudo | 1.8.31-1ubuntu1.2 |
 | unzip | 6.0-25ubuntu1 |
