@@ -119,6 +119,7 @@ if [ "${DISTRO}" = "debian" ]; then
     run_script maven "3.6.3 /usr/local/sdkman3 ${USERNAME} false"
     run_script node "/usr/local/share/nvm 14 ${USERNAME}"
     run_script rust "/opt/rust/cargo /opt/rust/rustup ${USERNAME} false"
+    run_script rust "/opt/rust/cargo /opt/rust/rustup ${USERNAME} false false 1.63.0"
     run_script terraform "0.15.0 0.12.1"
     run_script sshd "2223 ${USERNAME} true random"
     run_script desktop-lite "${USERNAME} changeme false"
