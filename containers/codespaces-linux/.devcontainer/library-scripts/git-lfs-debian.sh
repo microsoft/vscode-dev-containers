@@ -11,8 +11,8 @@
 
 GIT_LFS_VERSION=${1:-"latest"}
 GIT_LFS_ARCHIVE_GPG_KEY_URI="https://packagecloud.io/github/git-lfs/gpgkey"
-GIT_LFS_ARCHIVE_ARCHITECTURES="amd64"
-GIT_LFS_ARCHIVE_VERSION_CODENAMES="stretch buster bullseye bionic focal"
+GIT_LFS_ARCHIVE_ARCHITECTURES="amd64 arm64"
+GIT_LFS_ARCHIVE_VERSION_CODENAMES="stretch buster bullseye bionic focal jammy"
 GIT_LFS_CHECKSUM_GPG_KEYS="0x88ace9b29196305ba9947552f1ba225c0223b187 0x86cd3297749375bcf8206715f54fe648088335a9 0xaa3b3450295830d2de6db90caba67be5a5795889"
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
 keyserver hkps://keys.openpgp.org
@@ -140,6 +140,7 @@ install_using_apt() {
 
     if ! (apt-get update && apt-get install -yq git-lfs${version_suffix}); then
         rm -f /etc/apt/sources.list.d/git-lfs.list
+        echo "Could not fetch git-lfs from apt"
         return 1
     fi
 
@@ -152,6 +153,7 @@ install_using_github() {
     cd /tmp/git-lfs
     find_version_from_git_tags GIT_LFS_VERSION "https://github.com/git-lfs/git-lfs"
     git_lfs_filename="git-lfs-linux-${architecture}-v${GIT_LFS_VERSION}.tar.gz"
+    echo "Looking for release artfact: ${git_lfs_filename}"
     curl -sSL -o "${git_lfs_filename}" "https://github.com/git-lfs/git-lfs/releases/download/v${GIT_LFS_VERSION}/${git_lfs_filename}"
     # Verify file
     curl -sSL -o "sha256sums.asc" "https://github.com/git-lfs/git-lfs/releases/download/v${GIT_LFS_VERSION}/sha256sums.asc"
@@ -159,8 +161,20 @@ install_using_github() {
     gpg -q --decrypt "sha256sums.asc" > sha256sums
     sha256sum --ignore-missing -c "sha256sums"
     # Extract and install
+    echo "Validated release artifact integrity."
+    echo "Starting to extract..."
     tar xf "${git_lfs_filename}" -C .
-    ./install.sh
+    echo "Installing..."
+    if [ -f "./install.sh" ]; then
+        ./install.sh
+    else
+        # Starting around v3.2.0, the release
+        # artifact file structure changed slightly
+        enclosed_folder="git-lfs-${GIT_LFS_VERSION}"
+        cd ${enclosed_folder}
+            ./install.sh
+        cd ../
+    fi
     rm -rf /tmp/git-lfs /tmp/tmp-gnupg
 }
 
