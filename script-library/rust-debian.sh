@@ -183,8 +183,8 @@ else
             apt_get_update_if_needed
             apt-get -y install --no-install-recommends git
         fi
-        echo ${RUST_VERSION} | grep -q "nightly"
-        is_nightly=$?
+        is_nightly=0
+        echo ${RUST_VERSION} | grep -q "nightly" || is_nightly=$?
         if [ $is_nightly = 0 ]; then
             check_nightly_version_formatting RUST_VERSION
         else

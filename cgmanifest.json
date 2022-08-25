@@ -76,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "d293ac220dd126165d24907b6f07e6b658b3329f"
+                    "commitHash": "9259a0719d94c402aae2ab7975bc096afdec15df"
                 }
             }
         },
@@ -349,7 +349,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.9.3"
+                    "Version": "0.9.4"
                 }
             }
         },
@@ -462,7 +462,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "a753b24551ed839fe25841adf3755a143797a14a"
+                    "commitHash": "bd08de2e607119a7033c828e2fa0efbc41180d64"
                 }
             }
         },
@@ -491,7 +491,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.\n1.24.3",
+                    "Version": "WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.\n1.24.4",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -724,7 +724,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.3.10",
+                    "Version": "2.4.1",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
