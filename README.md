@@ -1,4 +1,4 @@
-> **Note**: We’ve migrated a set of Features to the new repo [devcontainers/features](https://github.com/devcontainers/features) and we will now be publishing images from [devcontainers/images](https://github.com/devcontainers/images).
+> **Note**: We’ve migrated a set of Features to the new repo [devcontainers/features](https://github.com/devcontainers/features) and we will now be publishing Images from [devcontainers/images](https://github.com/devcontainers/images).
 >
 > For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589).
 
