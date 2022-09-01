@@ -12,7 +12,7 @@
 
 ## Variant: 17-bullseye
 
-**Digest:** sha256:c512ba322cfb9036aa349c01b7a3d0c91590120e9f50fa642b69a036952bd552
+**Digest:** sha256:35426c0964ddb1bba4bd4a5954a9f9072b4517d065180b0ad0b1d1776fb4875e
 
 **Tags:**
 ```
@@ -34,20 +34,20 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 17.0.3 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 17.0.4 | /usr/local/ |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e9348575371aa8ec8811356d997942559c026d07 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -59,7 +59,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 | curl | 7.74.0-1.3+deb11u1 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1 |
-| gnupg2 | 2.2.27-2 |
+| gnupg2 | 2.2.27-2+deb11u1 |
 | htop | 3.0.5-7 |
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
@@ -69,9 +69,9 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u3 |
 | libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13+deb11u2 |
+| locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
@@ -93,12 +93,12 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-bullseye
 | wget | 1.21-1+deb11u1 |
 | yarn | 1.22.19-1 |
 | zip | 3.0-12 |
-| zlib1g | 1:1.2.11.dfsg-2 |
+| zlib1g | 1:1.2.11.dfsg-2+deb11u1 |
 | zsh | 5.8-6+deb11u1 |
 
 ## Variant: 17-buster
 
-**Digest:** sha256:9c4bbc29a3942bb091727495c95a17f399ba183b36ec625b77671786f1fbf680
+**Digest:** sha256:d3b347bcf6d7a4caefb817d6fc9e01d00ef24ef3319f4ac945da71397b35a2e7
 
 **Tags:**
 ```
@@ -117,20 +117,20 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 17.0.3 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 17.0.4 | /usr/local/ |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e9348575371aa8ec8811356d997942559c026d07 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -150,12 +150,12 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 | libc6 | 2.28-10+deb10u1 |
 | libgcc1 | 1:8.3.0-6 |
 | libgssapi-krb5-2 | 1.17-3+deb10u3 |
-| libicu63 | 63.1-6+deb10u2 |
+| libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u7 |
+| libssl1.1 | 1.1.1n-0+deb10u3 |
 | libstdc++6 | 8.3.0-6 |
-| locales | 2.28-10 |
+| locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
 | lsof | 4.91+dfsg-1 |
 | man-db | 2.8.5-2 |
@@ -173,16 +173,16 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-17-buster
 | strace | 4.26-0.2 |
 | sudo | 1.8.27-1+deb10u3 |
 | unzip | 6.0-23+deb10u2 |
-| vim-tiny | 2:8.1.0875-5 |
+| vim-tiny | 2:8.1.0875-5+deb10u2 |
 | wget | 1.20.1-1.1 |
 | yarn | 1.22.19-1 |
 | zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.11.dfsg-1 |
+| zlib1g | 1:1.2.11.dfsg-1+deb10u1 |
 | zsh | 5.7.1-1+deb10u1 |
 
 ## Variant: 11-bullseye
 
-**Digest:** sha256:bcb3c2aac1905f325c3e565605f5d24457e13dc832fea5cb5e20bec8937dafb9
+**Digest:** sha256:f04a25cc057d4e858812ba2f576c1376003408716b8d49b3fada0818a0a14b90
 
 **Tags:**
 ```
@@ -203,20 +203,20 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 11.0.15 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 11.0.16 | /usr/local/ |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e9348575371aa8ec8811356d997942559c026d07 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -228,7 +228,7 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 | curl | 7.74.0-1.3+deb11u1 |
 | dialog | 1.3-20201126-1 |
 | git | 1:2.30.2-1 |
-| gnupg2 | 2.2.27-2 |
+| gnupg2 | 2.2.27-2+deb11u1 |
 | htop | 3.0.5-7 |
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
@@ -238,9 +238,9 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1k-1+deb11u1 |
+| libssl1.1 | 1.1.1n-0+deb11u3 |
 | libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13+deb11u2 |
+| locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
@@ -262,12 +262,12 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-bullseye
 | wget | 1.21-1+deb11u1 |
 | yarn | 1.22.19-1 |
 | zip | 3.0-12 |
-| zlib1g | 1:1.2.11.dfsg-2 |
+| zlib1g | 1:1.2.11.dfsg-2+deb11u1 |
 | zsh | 5.8-6+deb11u1 |
 
 ## Variant: 11-buster
 
-**Digest:** sha256:ec539b964498ff40826985a868567733a6ec1b6956d4f4a775d3f2832280b0ff
+**Digest:** sha256:38eb4ca02035c57c6d4417d061bbe1aca6362619596b80f8e018a0ece0aa5ef7
 
 **Tags:**
 ```
@@ -287,20 +287,20 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Java](https://adoptopenjdk.net/) | 11.0.15 | /usr/local/ |
+| [Java](https://adoptopenjdk.net/) | 11.0.16 | /usr/local/ |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | e9348575371aa8ec8811356d997942559c026d07 | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 4c82a2eedf0c43d47601ffa8b0303ed1326fab8f | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Other tools and utilities**
 
 | Tool | Version | Path |
 |------|---------|------|
-| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.15.0 | /usr/local/sdkman |
+| [SDKMAN!](https://github.com/sdkman/sdkman-cli) | 5.16.0 | /usr/local/sdkman |
 
 **Additional linux tools and packages**
 
@@ -320,12 +320,12 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-buster
 | libc6 | 2.28-10+deb10u1 |
 | libgcc1 | 1:8.3.0-6 |
 | libgssapi-krb5-2 | 1.17-3+deb10u3 |
-| libicu63 | 63.1-6+deb10u2 |
+| libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1d-0+deb10u7 |
+| libssl1.1 | 1.1.1n-0+deb10u3 |
 | libstdc++6 | 8.3.0-6 |
-| locales | 2.28-10 |
+| locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
 | lsof | 4.91+dfsg-1 |
 | man-db | 2.8.5-2 |
@@ -343,10 +343,10 @@ mcr.microsoft.com/vscode/devcontainers/java:dev-11-jdk-buster
 | strace | 4.26-0.2 |
 | sudo | 1.8.27-1+deb10u3 |
 | unzip | 6.0-23+deb10u2 |
-| vim-tiny | 2:8.1.0875-5 |
+| vim-tiny | 2:8.1.0875-5+deb10u2 |
 | wget | 1.20.1-1.1 |
 | yarn | 1.22.19-1 |
 | zip | 3.0-11+b1 |
-| zlib1g | 1:1.2.11.dfsg-1 |
+| zlib1g | 1:1.2.11.dfsg-1+deb10u1 |
 | zsh | 5.7.1-1+deb10u1 |
 

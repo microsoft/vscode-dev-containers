@@ -6,7 +6,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "4c82a2eedf0c43d47601ffa8b0303ed1326fab8f"
+                    "commitHash": "3668ec2a82250020ca0c285ef8b277f1385a8085"
                 }
             }
         },
@@ -76,7 +76,7 @@
                 "Git": {
                     "Name": "vcpkg",
                     "repositoryUrl": "https://github.com/microsoft/vcpkg",
-                    "commitHash": "b49b2bdf22559c89eddbf29a29621a1dc6929320"
+                    "commitHash": "9259a0719d94c402aae2ab7975bc096afdec15df"
                 }
             }
         },
@@ -127,6 +127,16 @@
                     "Name": "Docker Image: buildpack-deps",
                     "Version": "bionic-curl",
                     "DownloadUrl": "https://hub.docker.com/_/buildpack-deps"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: alpine",
+                    "Version": "3.16",
+                    "DownloadUrl": "https://hub.docker.com/_/alpine"
                 }
             }
         },
@@ -204,7 +214,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pylint",
-                    "Version": "2.14.3"
+                    "Version": "2.14.5"
                 }
             }
         },
@@ -213,7 +223,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "flake8",
-                    "Version": "4.0.1"
+                    "Version": "5.0.4"
                 }
             }
         },
@@ -222,7 +232,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "autopep8",
-                    "Version": "1.6.0"
+                    "Version": "1.7.0"
                 }
             }
         },
@@ -231,7 +241,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "black",
-                    "Version": "22.3.0"
+                    "Version": "22.6.0"
                 }
             }
         },
@@ -249,7 +259,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "mypy",
-                    "Version": "0.961"
+                    "Version": "0.971"
                 }
             }
         },
@@ -267,7 +277,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "pycodestyle",
-                    "Version": "2.8.0"
+                    "Version": "2.9.1"
                 }
             }
         },
@@ -285,7 +295,7 @@
                 "Type": "Pip",
                 "Pip": {
                     "Name": "virtualenv",
-                    "Version": "20.14.1"
+                    "Version": "20.16.3"
                 }
             }
         },
@@ -339,7 +349,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "golang.org/x/tools/gopls",
-                    "Version": "0.8.4"
+                    "Version": "0.9.4"
                 }
             }
         },
@@ -348,7 +358,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "honnef.co/go/tools",
-                    "Version": "0.3.0"
+                    "Version": "0.3.2"
                 }
             }
         },
@@ -366,7 +376,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/mgechev/revive",
-                    "Version": "1.2.1"
+                    "Version": "1.2.3"
                 }
             }
         },
@@ -393,7 +403,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/go-delve/delve",
-                    "Version": "1.8.3"
+                    "Version": "1.9.0"
                 }
             }
         },
@@ -402,7 +412,7 @@
                 "Type": "go",
                 "Go": {
                     "Name": "github.com/golangci/golangci-lint",
-                    "Version": "1.46.2"
+                    "Version": "1.48.0"
                 }
             }
         },
@@ -412,7 +422,7 @@
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "4c82a2eedf0c43d47601ffa8b0303ed1326fab8f"
+                    "commitHash": "3668ec2a82250020ca0c285ef8b277f1385a8085"
                 }
             }
         },
@@ -442,7 +452,7 @@
                 "Git": {
                     "Name": "rbenv",
                     "repositoryUrl": "https://github.com/rbenv/rbenv.git",
-                    "commitHash": "c6cc0a1959da3403f524fcbb0fdfb6e08a4d8ae6"
+                    "commitHash": "c4395e58201966d9f90c12bd6b7342e389e7a4cb"
                 }
             }
         },
@@ -452,7 +462,7 @@
                 "Git": {
                     "Name": "ruby-build",
                     "repositoryUrl": "https://github.com/rbenv/ruby-build.git",
-                    "commitHash": "30d6879dbb53a9abd83908efae87cc23a38f2eec"
+                    "commitHash": "bd08de2e607119a7033c828e2fa0efbc41180d64"
                 }
             }
         },
@@ -461,7 +471,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "git",
-                    "Version": "2.36.1",
+                    "Version": "2.37.2",
                     "DownloadUrl": "https://github.com/git/git"
                 }
             }
@@ -481,7 +491,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "kubectl",
-                    "Version": "WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.\n1.24.2",
+                    "Version": "WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.\n1.24.4",
                     "DownloadUrl": "https://github.com/kubernetes/kubectl"
                 }
             }
@@ -491,7 +501,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Helm",
-                    "Version": "3.9.0",
+                    "Version": "3.9.3",
                     "DownloadUrl": "https://github.com/helm/helm"
                 }
             }
@@ -511,7 +521,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "SDKMAN!",
-                    "Version": "5.15.0",
+                    "Version": "5.16.0",
                     "DownloadUrl": "https://github.com/sdkman/sdkman-cli"
                 }
             }
@@ -531,7 +541,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "GitHub CLI",
-                    "Version": "2.12.1",
+                    "Version": "2.14.4",
                     "DownloadUrl": "https://github.com/cli/cli"
                 }
             }
@@ -541,7 +551,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Gradle",
-                    "Version": "7.4.2",
+                    "Version": "7.5.1",
                     "DownloadUrl": "https://gradle.org/"
                 }
             }
@@ -551,7 +561,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Go",
-                    "Version": "1.18.3",
+                    "Version": "1.19",
                     "DownloadUrl": "https://golang.org/dl"
                 }
             }
@@ -634,6 +644,26 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Docker Image: golang",
+                    "Version": "1.19-bullseye",
+                    "DownloadUrl": "https://hub.docker.com/_/golang"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: golang",
+                    "Version": "1.19-buster",
+                    "DownloadUrl": "https://hub.docker.com/_/golang"
+                }
+            }
+        },
+        {
+            "Component": {
+                "Type": "other",
+                "Other": {
+                    "Name": "Docker Image: golang",
                     "Version": "1.18-bullseye",
                     "DownloadUrl": "https://hub.docker.com/_/golang"
                 }
@@ -651,31 +681,11 @@
         },
         {
             "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: golang",
-                    "Version": "1.17-bullseye",
-                    "DownloadUrl": "https://hub.docker.com/_/golang"
-                }
-            }
-        },
-        {
-            "Component": {
-                "Type": "other",
-                "Other": {
-                    "Name": "Docker Image: golang",
-                    "Version": "1.17-buster",
-                    "DownloadUrl": "https://hub.docker.com/_/golang"
-                }
-            }
-        },
-        {
-            "Component": {
                 "Type": "git",
                 "Git": {
                     "Name": "Oh My Zsh!",
                     "repositoryUrl": "https://github.com/ohmyzsh/ohmyzsh",
-                    "commitHash": "e9348575371aa8ec8811356d997942559c026d07"
+                    "commitHash": "4c82a2eedf0c43d47601ffa8b0303ed1326fab8f"
                 }
             }
         },
@@ -694,7 +704,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Eclipse Temurin",
-                    "Version": "1.8.0_332",
+                    "Version": "1.8.0_345",
                     "DownloadUrl": "https://adoptium.net/"
                 }
             }
@@ -714,7 +724,7 @@
                 "Type": "other",
                 "Other": {
                     "Name": "Composer",
-                    "Version": "2.3.7",
+                    "Version": "2.4.1",
                     "DownloadUrl": "https://getcomposer.org/"
                 }
             }
@@ -940,7 +950,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rustfmt",
-                    "Version": "1.4.38"
+                    "Version": "1.5.1"
                 }
             }
         },
@@ -949,7 +959,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-analysis",
-                    "Version": "1.61.0"
+                    "Version": "1.63.0"
                 }
             }
         },
@@ -958,7 +968,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "rust-src",
-                    "Version": "1.61.0"
+                    "Version": "1.63.0"
                 }
             }
         },
@@ -967,7 +977,7 @@
                 "Type": "cargo",
                 "Cargo": {
                     "Name": "clippy",
-                    "Version": "1.61.0"
+                    "Version": "1.63.0"
                 }
             }
         },
@@ -1065,7 +1075,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "bundler",
-                    "Version": "2.3.16"
+                    "Version": "2.3.20"
                 }
             }
         },
@@ -1074,7 +1084,7 @@
                 "Type": "RubyGems",
                 "RubyGems": {
                     "Name": "github-pages",
-                    "Version": "226"
+                    "Version": "227"
                 }
             }
         },

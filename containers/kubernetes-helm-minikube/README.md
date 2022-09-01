@@ -22,6 +22,19 @@ Dev containers can be useful for all types of applications including those that 
 
 This example illustrates how you can do this by using CLIs ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), [Helm](https://helm.sh), Docker), the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools), and the [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) right from inside your dev container.  This definition builds up from the [docker-in-docker](../docker-in-docker) container definition along with a [minikube](https://minikube.sigs.k8s.io/docs/) installation that can run right inside the container. It installs the Docker and Kubernetes extensions inside the container so you can use its full feature set with your project.
 
+## Ingress and port forwarding
+
+When configuring [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) for your Kubernetes cluster, note that by default Kubernetes will bind to a specific interface's IP rather than localhost or all interfaces. This is why you need to use the Kubernetes Node's IP when connecting - even if there's only one Node as in the case of Minikube. Port forwarding in Remote - Containers will allow you to specify `<ip>:<port>` in either the `forwardPorts` property or through the port forwarding UI in VS Code.
+
+However, GitHub Codespaces does not yet support this capability, so you'll need to use `kubectl` to forward the port to localhost. This adds minimal overhead since everything is on the same machine. E.g.:
+
+```bash
+minikube start
+minikube addons enable ingress
+# Run this to forward to localhost in the background
+nohup kubectl port-forward --pod-running-timeout=24h -n ingress-nginx service/ingress-nginx-controller :80 &
+```
+
 ## Using this definition with an existing folder
 
 A few notes on the definition:
