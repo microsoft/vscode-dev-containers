@@ -28,11 +28,7 @@
 		"devcontainer-collection.json"
 	],
 
-	"needsDedicatedPage": [ 
-		"codespaces-linux",
-		"php",
-		"python-3"
-	],
+	"needsDedicatedPage": [],
 
 	"flattenBaseImage": [],
 
