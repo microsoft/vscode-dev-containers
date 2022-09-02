@@ -5,19 +5,19 @@
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/go)
 
 **Definition variations:**
+- [1.19-bullseye](#variant-119-bullseye)
+- [1.19-buster](#variant-119-buster)
 - [1.18-bullseye](#variant-118-bullseye)
 - [1.18-buster](#variant-118-buster)
-- [1.17-bullseye](#variant-117-bullseye)
-- [1.17-buster](#variant-117-buster)
 
-## Variant: 1.18-bullseye
+## Variant: 1.19-bullseye
 
-**Digest:** sha256:9615af811ebf7206f3eae9260bcf87a387bbecf8ccf23d2d1e85738563708b68
+**Digest:** sha256:827941d7ef7ae5dc672204b1ada9e90b08e9954f04566d16889f169d9c592323
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-bullseye
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.18
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.19-bullseye
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.19
 mcr.microsoft.com/vscode/devcontainers/go:dev-1
 mcr.microsoft.com/vscode/devcontainers/go:dev-1-bullseye
 mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
@@ -35,27 +35,27 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.18.3 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.19 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | d41ca84af1271e8bfbe26f581cebe3b86521d0db | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3668ec2a82250020ca0c285ef8b277f1385a8085 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.4 |
-| honnef.co/go/tools | 0.3.0 |
+| golang.org/x/tools/gopls | 0.9.4 |
+| honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.1 |
+| github.com/mgechev/revive | 1.2.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.2 |
+| github.com/go-delve/delve | 1.9.0 |
+| github.com/golangci/golangci-lint | 1.48.0 |
 
 **Additional linux tools and packages**
 
@@ -64,12 +64,12 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+deb11u1 |
+| curl | 7.74.0-1.3+deb11u2 |
 | dialog | 1.3-20201126-1 |
 | g++ | 4:10.2.1-1 |
 | gcc | 4:10.2.1-1 |
 | git | 1:2.30.2-1 |
-| gnupg2 | 2.2.27-2+deb11u1 |
+| gnupg2 | 2.2.27-2+deb11u2 |
 | htop | 3.0.5-7 |
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
@@ -80,7 +80,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u2 |
+| libssl1.1 | 1.1.1n-0+deb11u3 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -91,17 +91,17 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | manpages-dev | 5.10-1 |
 | manpages-posix | 2017a-2 |
 | manpages-posix-dev | 2017a-2 |
-| nano | 5.4-2 |
+| nano | 5.4-2+deb11u1 |
 | ncdu | 1.15.1-1 |
 | net-tools | 1.60+git20181103.0eebece-1 |
-| openssh-client | 1:8.4p1-5 |
+| openssh-client | 1:8.4p1-5+deb11u1 |
 | pkg-config | 0.29.2-1 |
 | procps | 2:3.3.17-5 |
 | psmisc | 23.4-2 |
 | rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
-| unzip | 6.0-26 |
+| unzip | 6.0-26+deb11u1 |
 | vim-tiny | 2:8.2.2434-3+deb11u1 |
 | wget | 1.21-1+deb11u1 |
 | yarn | 1.22.19-1 |
@@ -109,13 +109,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-bullseye
 | zlib1g | 1:1.2.11.dfsg-2+deb11u1 |
 | zsh | 5.8-6+deb11u1 |
 
-## Variant: 1.18-buster
+## Variant: 1.19-buster
 
-**Digest:** sha256:bebb0506ae066c860c45798075ba53531e55e679e5d30e9414f2eb5c36e3679d
+**Digest:** sha256:f5fa296f71314f0368c951f36533659cb811c9c911bc6a43a9be3952c75e098b
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-buster
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.19-buster
 mcr.microsoft.com/vscode/devcontainers/go:dev-1-buster
 mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 ```
@@ -132,27 +132,27 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.18.3 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.19 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | d41ca84af1271e8bfbe26f581cebe3b86521d0db | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3668ec2a82250020ca0c285ef8b277f1385a8085 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.4 |
-| honnef.co/go/tools | 0.3.0 |
+| golang.org/x/tools/gopls | 0.9.4 |
+| honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.1 |
+| github.com/mgechev/revive | 1.2.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.2 |
+| github.com/go-delve/delve | 1.9.0 |
+| github.com/golangci/golangci-lint | 1.48.0 |
 
 **Additional linux tools and packages**
 
@@ -166,7 +166,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 | g++ | 4:8.3.0-1 |
 | gcc | 4:8.3.0-1 |
 | git | 1:2.20.1-2+deb10u3 |
-| gnupg2 | 2.2.12-1+deb10u1 |
+| gnupg2 | 2.2.12-1+deb10u2 |
 | htop | 2.2.0-1+b1 |
 | iproute2 | 4.20.0-2+deb10u1 |
 | jq | 1.5+dfsg-2+b1 |
@@ -178,7 +178,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u2 |
+| libssl1.1 | 1.1.1n-0+deb10u3 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |
@@ -207,14 +207,14 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-buster
 | zlib1g | 1:1.2.11.dfsg-1+deb10u1 |
 | zsh | 5.7.1-1+deb10u1 |
 
-## Variant: 1.17-bullseye
+## Variant: 1.18-bullseye
 
-**Digest:** sha256:6640c02887e08937c108ea2a273e880a598ad3b28845b97dedbb5fc03dfa354b
+**Digest:** sha256:c0b9c7259140f2c02c646e1dd9101d82feeff029df68e46a18932871a6c35a38
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-bullseye
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-bullseye
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.18
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -229,27 +229,27 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.11 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.18.5 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | d41ca84af1271e8bfbe26f581cebe3b86521d0db | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3668ec2a82250020ca0c285ef8b277f1385a8085 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.4 |
-| honnef.co/go/tools | 0.3.0 |
+| golang.org/x/tools/gopls | 0.9.4 |
+| honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.1 |
+| github.com/mgechev/revive | 1.2.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.2 |
+| github.com/go-delve/delve | 1.9.0 |
+| github.com/golangci/golangci-lint | 1.48.0 |
 
 **Additional linux tools and packages**
 
@@ -258,12 +258,12 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 | apt-transport-https | 2.2.4 |
 | apt-utils | 2.2.4 |
 | ca-certificates | 20210119 |
-| curl | 7.74.0-1.3+deb11u1 |
+| curl | 7.74.0-1.3+deb11u2 |
 | dialog | 1.3-20201126-1 |
 | g++ | 4:10.2.1-1 |
 | gcc | 4:10.2.1-1 |
 | git | 1:2.30.2-1 |
-| gnupg2 | 2.2.27-2+deb11u1 |
+| gnupg2 | 2.2.27-2+deb11u2 |
 | htop | 3.0.5-7 |
 | iproute2 | 5.10.0-4 |
 | jq | 1.6-2.1 |
@@ -274,7 +274,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 | libicu67 | 67.1-7 |
 | libkrb5-3 | 1.18.3-6+deb11u1 |
 | liblttng-ust0 | 2.12.1-1 |
-| libssl1.1 | 1.1.1n-0+deb11u2 |
+| libssl1.1 | 1.1.1n-0+deb11u3 |
 | libstdc++6 | 10.2.1-6 |
 | locales | 2.31-13+deb11u3 |
 | lsb-release | 11.1.0 |
@@ -285,17 +285,17 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 | manpages-dev | 5.10-1 |
 | manpages-posix | 2017a-2 |
 | manpages-posix-dev | 2017a-2 |
-| nano | 5.4-2 |
+| nano | 5.4-2+deb11u1 |
 | ncdu | 1.15.1-1 |
 | net-tools | 1.60+git20181103.0eebece-1 |
-| openssh-client | 1:8.4p1-5 |
+| openssh-client | 1:8.4p1-5+deb11u1 |
 | pkg-config | 0.29.2-1 |
 | procps | 2:3.3.17-5 |
 | psmisc | 23.4-2 |
 | rsync | 3.2.3-4+deb11u1 |
 | strace | 5.10-1 |
 | sudo | 1.9.5p2-3 |
-| unzip | 6.0-26 |
+| unzip | 6.0-26+deb11u1 |
 | vim-tiny | 2:8.2.2434-3+deb11u1 |
 | wget | 1.21-1+deb11u1 |
 | yarn | 1.22.19-1 |
@@ -303,13 +303,13 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17
 | zlib1g | 1:1.2.11.dfsg-2+deb11u1 |
 | zsh | 5.8-6+deb11u1 |
 
-## Variant: 1.17-buster
+## Variant: 1.18-buster
 
-**Digest:** sha256:68783cfff24ebe37f08edd0707258f2af19dd1d2a8668ebf639eb4d3a6330b0a
+**Digest:** sha256:321baccc9e04f13cc8340e33f4b907f1cce8f9f88cd9f73f03b2676d6ddfba44
 
 **Tags:**
 ```
-mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
+mcr.microsoft.com/vscode/devcontainers/go:dev-1.18-buster
 ```
 > *To keep up to date, we recommend using partial version numbers. Use the major version number to get all non-breaking changes (e.g. `0-`) or major and minor to only get fixes (e.g. `0.200-`).*
 
@@ -324,27 +324,27 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
 
 | Language / runtime | Version | Path |
 |--------------------|---------|------|
-| [Go](https://golang.org/dl) | 1.17.11 | /usr/local/go |
+| [Go](https://golang.org/dl) | 1.18.5 | /usr/local/go |
 
 **Tools installed using git**
 
 | Tool | Commit | Path |
 |------|--------|------|
-| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | d41ca84af1271e8bfbe26f581cebe3b86521d0db | /home/vscode/.oh-my-zsh |
+| [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh) | 3668ec2a82250020ca0c285ef8b277f1385a8085 | /home/vscode/.oh-my-zsh |
 | [nvm](https://github.com/nvm-sh/nvm.git) | 3fea5493a431ac64470d4230d4b51438cf213bd1 | /usr/local/share/nvm |
 
 **Go tools and modules**
 
 | Tool / module | Version |
 |---------------|---------|
-| golang.org/x/tools/gopls | 0.8.4 |
-| honnef.co/go/tools | 0.3.0 |
+| golang.org/x/tools/gopls | 0.9.4 |
+| honnef.co/go/tools | 0.3.2 |
 | golang.org/x/lint | 0.0.0-20210508222113-6edffad5e616 |
-| github.com/mgechev/revive | 1.2.1 |
+| github.com/mgechev/revive | 1.2.3 |
 | github.com/uudashr/gopkgs | 2.0.1+incompatible |
 | github.com/ramya-rao-a/go-outline | 0.0.0-20210608161538-9736a4bde949 |
-| github.com/go-delve/delve | 1.8.3 |
-| github.com/golangci/golangci-lint | 1.46.2 |
+| github.com/go-delve/delve | 1.9.0 |
+| github.com/golangci/golangci-lint | 1.48.0 |
 
 **Additional linux tools and packages**
 
@@ -358,7 +358,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
 | g++ | 4:8.3.0-1 |
 | gcc | 4:8.3.0-1 |
 | git | 1:2.20.1-2+deb10u3 |
-| gnupg2 | 2.2.12-1+deb10u1 |
+| gnupg2 | 2.2.12-1+deb10u2 |
 | htop | 2.2.0-1+b1 |
 | iproute2 | 4.20.0-2+deb10u1 |
 | jq | 1.5+dfsg-2+b1 |
@@ -370,7 +370,7 @@ mcr.microsoft.com/vscode/devcontainers/go:dev-1.17-buster
 | libicu63 | 63.1-6+deb10u3 |
 | libkrb5-3 | 1.17-3+deb10u3 |
 | liblttng-ust0 | 2.10.3-1 |
-| libssl1.1 | 1.1.1n-0+deb10u2 |
+| libssl1.1 | 1.1.1n-0+deb10u3 |
 | libstdc++6 | 8.3.0-6 |
 | locales | 2.28-10+deb10u1 |
 | lsb-release | 10.2019051400 |

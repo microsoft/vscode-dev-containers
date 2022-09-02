@@ -4,7 +4,7 @@
 
 *Access a local (or remote) Kubernetes cluster from inside a dev container using your local config. Includes kubectl, Helm, and the Docker CLI.*
 
-| Metadata | Value |  
+| Metadata | Value |
 |----------|-------|
 | *Contributors* | The VS Code team and Phetsinorath William |
 | *Categories* | Other |
@@ -80,11 +80,24 @@ However, this section will outline the how you can selectively add this function
 
 That's it!
 
-## A note on Minkube or otherwise using a local cluster
+## A note on Minikube or otherwise using a local cluster
 
-While this definition works with Minkube in most cases, if you hit trouble, make sure that your `~/.kube/config` file and Minikube certs reference your host's IP rather than `127.0.0.1` or `localhost` (since `localhost` resolve to the container itself rather than your local machine where Minikube is running).
+While this definition works with Minikube in most cases, if you hit trouble, make sure that your `~/.kube/config` file and Minikube certs reference your host's IP rather than `127.0.0.1` or `localhost` (since `localhost` resolve to the container itself rather than your local machine where Minikube is running).
 
 This should happen by default on Linux. On macOS and Windows, we recommend using the Kuberntes install that comes with Docker Desktop instead of Minikube to avoid these kinds of issues.
+
+## Ingress and port forwarding
+
+When configuring [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) for your Kubernetes cluster, note that by default Kubernetes will bind to a specific interface's IP rather than localhost or all interfaces. This is why you need to use the Kubernetes Node's IP when connecting - even if there's only one Node as in the case of Minikube. Port forwarding in Remote - Containers will allow you to specify `<ip>:<port>` in either the `forwardPorts` property or through the port forwarding UI in VS Code.
+
+However, GitHub Codespaces does not yet support this capability, so you'll need to use `kubectl` to forward the port to localhost. This adds minimal overhead since everything is on the same machine. E.g.:
+
+```bash
+minikube start
+minikube addons enable ingress
+# Run this to forward to localhost in the background
+nohup kubectl port-forward --pod-running-timeout=24h -n ingress-nginx service/ingress-nginx-controller :80 &
+```
 
 ## Using this definition with an existing folder
 
@@ -167,4 +180,4 @@ While you cannot sync or connect to your local Kubernetes configuration with Cod
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE). 
+Licensed under the MIT License. See [LICENSE](https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE).

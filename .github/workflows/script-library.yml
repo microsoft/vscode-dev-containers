@@ -13,7 +13,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'Automated update') && !contains(github.event.head_commit.message, 'CI ignore')"
     strategy:
       matrix:
-        os: ["debian:bullseye", "debian:buster", "ubuntu:focal", "ubuntu:jammy", "ubuntu:bionic", alpine, rockylinux, "mcr.microsoft.com/oryx/build:vso-focal-20220429.1"]
+        os: ["debian:bullseye", "debian:buster", "ubuntu:focal", "ubuntu:jammy", "ubuntu:bionic", "alpine"]
         defaults: ["true", "false"]
       fail-fast: false
     runs-on: ubuntu-latest

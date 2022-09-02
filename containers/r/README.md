@@ -9,7 +9,7 @@
 | *Contributors* | [kmehant](mailto:kmehant@gmail.com), [eitsupi](https://github.com/eitsupi) |
 | *Categories* | Community, Languages |
 | *Definition type* | Dockerfile |
-| *Works in Codespaces* | No |
+| *Works in Codespaces* | Yes |
 | *Container host OS support* | Linux, macOS, Windows |
 | *Container OS* | Ubuntu |
 | *Languages, platforms* | R |

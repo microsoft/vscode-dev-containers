@@ -33,6 +33,9 @@ check "pydocstyle" pydocstyle --version
 check "bandit" bandit --version
 check "virtualenv" virtualenv --version
 
+check "lzma-cpython" python /opt/python/3.10.4/lib/python3.10/test/test_lzma.py
+check "lzma-import" python -c "import lzma"
+
 # # Check Python packages
 # check "numpy" python -c 'import numpy'
 # check "pandas" python -c 'import pandas'
