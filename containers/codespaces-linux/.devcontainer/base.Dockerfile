@@ -56,7 +56,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
                                                   libx11-xcb1 libcups2 libxcomposite1 libxdamage1 libxfixes3 libpango-1.0-0 libgbm1 libgtk-3-0 \
     && bash /tmp/scripts/sshd-debian.sh \
     && bash /tmp/scripts/git-lfs-debian.sh \
-    && bash /tmp/scripts/github-debian.sh \
     # Install Moby CLI and Engine
     && bash /tmp/scripts/docker-in-docker-debian.sh "true" "${USERNAME}" "true" \
     && bash /tmp/scripts/kubectl-helm-debian.sh \
@@ -67,6 +66,13 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Move first run notice to right spot
     && mkdir -p /usr/local/etc/vscode-dev-containers/ \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
+
+RUN mkdir -p /tmp/ghcli && \
+    pushd /tmp/ghcli && \
+    wget https://github.com/cli/cli/releases/download/v2.14.7/gh_2.14.7_linux_amd64.deb && \
+    dpkg -i /tmp/ghcli/gh_2.14.7_linux_amd64.deb && \
+    popd && \
+    rm -rf /tmp/ghcli
 
 # Remove existing Python installation from the Oryx base image
 RUN rm -rf /opt/python && rm "${PYTHON_ROOT}/current"
