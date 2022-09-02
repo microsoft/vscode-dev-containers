@@ -68,10 +68,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && mv -f /tmp/scripts/first-run-notice.txt /usr/local/etc/vscode-dev-containers/
 
 RUN mkdir -p /tmp/ghcli && \
-    pushd /tmp/ghcli && \
+    cd /tmp/ghcli && \
     wget https://github.com/cli/cli/releases/download/v2.14.7/gh_2.14.7_linux_amd64.deb && \
     dpkg -i /tmp/ghcli/gh_2.14.7_linux_amd64.deb && \
-    popd && \
     rm -rf /tmp/ghcli
 
 # Remove existing Python installation from the Oryx base image
