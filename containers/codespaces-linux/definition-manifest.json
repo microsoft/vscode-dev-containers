@@ -1,12 +1,10 @@
 {
-	"definitionVersion": "2.0.8",
+	"definitionVersion": "1.0.0",
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
 		"tags": [
-			"universal:${VERSION}-focal",
-			"universal:${VERSION}-linux",
-			"universal:${VERSION}"
+			"universal-patch:${VERSION}"
 		]
 	},
 	"dependencies": {
