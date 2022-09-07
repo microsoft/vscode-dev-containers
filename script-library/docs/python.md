@@ -1,3 +1,9 @@
+**IMPORTANT NOTE: We're starting to migrate contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open dev container specification](https://containers.dev).**
+
+**We've currently migrated the `python` Feature to [devcontainers/features/src/python](https://github.com/devcontainers/features/tree/main/src/python).**
+
+**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589).**
+
 # Python Install Script
 
 *Installs Python, PIPX, and common Python utilities.*

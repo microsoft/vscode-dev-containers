@@ -1,3 +1,9 @@
+**IMPORTANT NOTE: We're starting to migrate contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open dev container specification](https://containers.dev).**
+
+**We've currently migrated a set of Features to a new [devcontainers/features](https://github.com/devcontainers/features) repo.**
+
+**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589).**
+
 # Container Features
 
 This folder includes some explorations around dynamic container feature injection. Nothing stable yet.

@@ -1,3 +1,9 @@
+**IMPORTANT NOTE: We're starting to migrate contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open dev container specification](https://containers.dev).**
+
+**We've currently migrated the `docker-from-docker` Feature to [devcontainers/features/src/docker-from-docker](https://github.com/devcontainers/features/tree/main/src/docker-from-docker).**
+
+**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589).**
+
 # Docker-from-Docker Install Script
 
 > Need to mount files from inside your container into new ones you create? You may need to use [docker-in-docker](./docker-in-docker.md) instead.
