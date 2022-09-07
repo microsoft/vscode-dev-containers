@@ -1,3 +1,9 @@
+**IMPORTANT NOTE: We're starting to migrate contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open dev container specification](https://containers.dev).**
+
+**We've currently migrated the `git-lfs` Feature to [devcontainers/features/src/git-lfs](https://github.com/devcontainers/features/tree/main/src/git-lfs).**
+
+**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589).**
+
 # Git LFS Install Script
 
 *Installs Git Large File Support (Git LFS) along with needed dependencies. Useful for base Dockerfiles that often are missing required install dependencies like git and curl.*

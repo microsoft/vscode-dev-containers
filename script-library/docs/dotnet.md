@@ -1,3 +1,9 @@
+**IMPORTANT NOTE: We're starting to migrate contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open dev container specification](https://containers.dev).**
+
+**We've currently migrated the `dotnet` Feature to [devcontainers/features/src/dotnet](https://github.com/devcontainers/features/tree/main/src/dotnet).**
+
+**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589).**
+
 # Dotnet CLI Install Script
 
 *Installs the .NET CLI. Provides option of installing sdk or runtime, and option of versions to install. Uses latest version of .NET sdk as defaults to install.*
