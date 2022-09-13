@@ -6,6 +6,7 @@
 			"TERRAFORM_VERSION": "0.14.5",
 			"TFLINT_VERSION": "0.24.1",
 			"TERRAGRUNT_VERSION": "0.28.1",
+			"TERRAFORM_DOCS_VERSION": "0.16.0",
 			"INSTALL_AZURE_CLI": "true",
 			"INSTALL_DOCKER": "true",
 			"NODE_VERSION": "lts/*"

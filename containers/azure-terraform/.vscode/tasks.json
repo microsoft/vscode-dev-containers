@@ -52,6 +52,15 @@
             },
             "command": "tflint",
             "problemMatcher": []
-        }
+        },
+		{
+			"label": "terraform docs",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test-project/templates"
+			},
+			"command": "terraform-docs markdown table --output-file README.md ./",
+			"problemMatcher": []
+		}
     ]
 }
