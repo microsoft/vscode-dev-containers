@@ -7,7 +7,7 @@ RUN gem install rails webdrivers
 
 # Default value to allow debug server to serve content over GitHub Codespace's port forwarding service
 # The value is a comma-separated list of allowed domains 
-ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev"
+ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.app.github.dev"
 
 # [Choice] Node.js version: lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="lts/*"
