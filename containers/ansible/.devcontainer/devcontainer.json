@@ -15,7 +15,7 @@
 			"ANSIBLE_VARIANT": "ansible-core",
 
 			// Update 'ANSILBE_VERSION' to choose the version of your variant (for example): 2.9.*, 2.10.*, 2.11.*, 2.12.*
-			"ANSIBLE_VERSION": "2.11.*"
+			"ANSIBLE_VERSION": "2.13.*"
 		}
 	},
 
