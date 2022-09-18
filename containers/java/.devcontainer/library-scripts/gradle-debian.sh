@@ -128,6 +128,6 @@ fi
 
 # Install gradle
 sdk_install gradle ${GRADLE_VERSION} '\s\s' '\s\s' '^[0-9]+\.[0-9]+\.[0-9]+$'
-updaterc '[ -z "${GRADLE_USER_HOME}" ] && export GRADLE_USER_HOME=${HOME}/.gradle'
+updaterc '[ -z "${GRADLE_USER_HOME}" ] && export GRADLE_USER_HOME=$HOME/.gradle'
 
 echo "Done!"
