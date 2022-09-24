@@ -6,7 +6,7 @@ about: Create a report to help us improve
 <!--  🚨 Please only include bugs related to Dev Container Definitions here. 🚨 Other locations:
         VS Code Remote Development: http://github.com/Microsoft/vscode-remote-release 
         VS Code OSS: http://github.com/Microsoft/vscode
-        GitHub Codespaces: https://github.com/github/feedback/discussions/categories/codespaces-feedback
+        GitHub Codespaces: https://github.com/github/feedback/discussions/categories/codespaces
 -->
 
 <!-- Please search existing issues to avoid creating duplicates. -->
