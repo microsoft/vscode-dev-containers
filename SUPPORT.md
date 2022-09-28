@@ -8,7 +8,7 @@ This project primarily uses GitHub Issues to track bugs and feature requests.
 
 2. For bugs and issues related to the **VS Code Remote - Containers** extension, please use the [vscode-remote-release](https://github.com/microsoft/vscode-remote-release/issues) repository instead.
 
-3. However, for bugs and feature requests relating to **GitHub Codespaces**, please raise them in the [GitHub Codespaces discussion channel](https://github.com/github/feedback/discussions/categories/codespaces-feedback) instead.
+3. However, for bugs and feature requests relating to **GitHub Codespaces**, please raise them in the [GitHub Codespaces discussion channel](https://github.com/github/feedback/discussions/categories/codespaces) instead.
 
 Help and questions:
 1. For help using the VS Code Remote - Containers extension, please see the [VS Code Remote Development documentation](https://code.visualstudio.com/docs/remote/remote-overview) and [StackOverflow questions with the 'vscode-remote' label](https://stackoverflow.com/questions/tagged/vscode-remote).
