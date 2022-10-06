@@ -329,7 +329,8 @@ set -e
 AZURE_DNS_OVERRIDE=$AZURE_DNS_OVERRIDE
 EOF
 
-tee -a ./docker-init.sh > /dev/null << 'EOF'
+tee -a /usr/local/share/docker-init.sh > /dev/null \
+<< 'EOF'
 dockerd_start="$(cat << 'INNEREOF'
     # explicitly remove dockerd and containerd PID file to ensure that it can start properly if it was stopped uncleanly
     # ie: docker kill <ID>
@@ -369,7 +370,7 @@ dockerd_start="$(cat << 'INNEREOF'
     # Handle DNS
     set +e
     cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
-    if [ $? -eq 0 ] && [ $AZURE_DNS_OVERRIDE = "true" ]
+    if [ $? -eq 0 ] && [ ${AZURE_DNS_OVERRIDE} = "true" ]
     then
         echo "Setting dockerd Azure DNS."
         CUSTOMDNS="--dns 168.63.129.16"
