@@ -11,7 +11,7 @@
 
 CLI_VERSION=${1:-"latest"}
 
-GITHUB_CLI_ARCHIVE_GPG_KEY=C99B11DEB97541F0
+GITHUB_CLI_ARCHIVE_GPG_KEY=23F3D4EA75716059
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
 keyserver hkps://keys.openpgp.org
 keyserver hkp://keyserver.pgp.com"
