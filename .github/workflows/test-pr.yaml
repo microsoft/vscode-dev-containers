@@ -13,7 +13,6 @@ jobs:
         with:
           filters: |
             azure-ansible: ./**/azure-ansible/**
-            azure-cli: ./**/azure-cli/**
             azure-bicep: ./**/azure-bicep/**
             azure-cli: ./**/azure-cli/**
             azure-functions-dotnet-6-inprocess: ./**/azure-functions-dotnet-6-inprocess/**
