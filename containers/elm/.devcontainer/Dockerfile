@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:16
+FROM mcr.microsoft.com/devcontainers/javascript-node:16
 
 # Configuring Elm version
 ARG ELM_VERSION=latest-0.19.1

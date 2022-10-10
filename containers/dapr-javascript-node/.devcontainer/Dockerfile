@@ -1,6 +1,6 @@
 # [Choice] Node.js version: 18, 16, 14
 ARG VARIANT=${templateOption:imageVariant}
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
+FROM mcr.microsoft.com/devcontainers/javascript-node:${VARIANT}
 
 # [Option] Enable non-root Docker access in container
 ARG ENABLE_NONROOT_DOCKER="${templateOption:enableNonRootDocker}"

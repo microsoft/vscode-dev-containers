@@ -1,6 +1,6 @@
 # [Choice] Java version (use -bullseye variants on local arm64/Apple Silicon): 11, 17, 11-bullseye, 17-bullseye, 11-buster, 17-buster
 ARG VARIANT=${templateOption:imageVariant}
-FROM mcr.microsoft.com/vscode/devcontainers/java:${VARIANT}
+FROM mcr.microsoft.com/devcontainers/java:${VARIANT}
 
 # [Optional] Clojure version
 ARG CLOJURE_VERSION=1.10.3

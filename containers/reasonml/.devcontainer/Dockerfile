@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:16-bullseye
+FROM mcr.microsoft.com/devcontainers/javascript-node:16-bullseye
 
 RUN sudo -u node npm install -g bs-platform esy@latest
 

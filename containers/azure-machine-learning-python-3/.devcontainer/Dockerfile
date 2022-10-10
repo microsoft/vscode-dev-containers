@@ -1,5 +1,5 @@
 # Azure ML does not support Debian 10 yet, so cannot use Anaconda image as base
-FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-18.04
+FROM mcr.microsoft.com/devcontainers/base:ubuntu-18.04
 
 ARG ANACONDA_VERSION=2020.02
 
