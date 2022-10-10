@@ -1,0 +1,14 @@
+{
+	"id": "azure-machine-learning-python-3",
+	"version": "1.0.0",
+	"name": "Azure Machine Learning & Python 3 - Anaconda",
+	"description": "Use Azure Machine Learning with Python 3 - Anaconda. Includes Anaconda, the Docker CLI (for local testing), and related extensions and dependencies.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/azure-machine-learning-python-3",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"platforms": [
+		"Azure Machine Learning",
+		"Python",
+		"Anaconda"
+	]
+}

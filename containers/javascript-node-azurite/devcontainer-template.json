@@ -1,0 +1,31 @@
+{
+	"id": "javascript-node-azurite",
+	"version": "1.0.0",
+	"name": "Node.js & Azurite",
+	"description": "Everything you need to get started using Node with Azurite.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/javascript-node-azurite",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Node.js version (use -bullseye variants on local arm64/Apple Silicon):",
+			"proposals": [
+				"18",
+				"16",
+				"14",
+				"18-bullseye",
+				"16-bullseye",
+				"14-bullseye",
+				"18-buster",
+				"16-buster",
+				"14-buster"
+			],
+			"default": "16-bullseye"
+		}
+	},
+	"platforms": [
+		"Azurite",
+		"Node.js"
+	]
+}

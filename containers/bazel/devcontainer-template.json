@@ -1,0 +1,12 @@
+{
+	"id": "bazel",
+	"version": "1.0.0",
+	"name": "Bazel",
+	"description": "Develop and compile efficiently on any language with the Bazel compilation tool.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/bazel",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"platforms": [
+		"Any"
+	]
+}

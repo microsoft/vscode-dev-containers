@@ -1,0 +1,57 @@
+{
+	"id": "clojure",
+	"version": "1.0.0",
+	"name": "Clojure",
+	"description": "Develop Clojure Applications.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/clojure",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Java version (use -bullseye variants on local arm64/Apple Silicon):",
+			"proposals": [
+				"11",
+				"17",
+				"11-bullseye",
+				"17-bullseye",
+				"11-buster",
+				"17-buster"
+			],
+			"default": "17"
+		},
+		"installClojureCli": {
+			"type": "boolean",
+			"description": "Install Clojure CLI tool",
+			"default": "true"
+		},
+		"installBoot": {
+			"type": "boolean",
+			"description": "Install Boot",
+			"default": "true"
+		},
+		"installLeiningen": {
+			"type": "boolean",
+			"description": "Install Leiningen",
+			"default": "true"
+		},
+		"installPolylith": {
+			"type": "boolean",
+			"description": "Install Polylith",
+			"default": "true"
+		},
+		"nodeVersion": {
+			"type": "string",
+			"description": "Node.js version:",
+			"proposals": [
+				"none",
+				"lts/*",
+				"16",
+				"14",
+				"12",
+				"10"
+			],
+			"default": "lts/*"
+		}
+	}
+}

@@ -1,0 +1,27 @@
+{
+	"id": "bash",
+	"version": "1.0.0",
+	"name": "Bash",
+	"description": "Develop scripts with Bash, includes [Bash IDE](https://marketplace.visualstudio.com/items?itemName=mads-hartmann.bash-ide-vscode), and [Bash Debug](https://github.com/rogalmic/vscode-bash-debug).",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/bash",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Debian / Ubuntu version (use Debian 11/9, Ubuntu 18.04/21.04 on local arm64/Apple Silicon):",
+			"proposals": [
+				"debian-11",
+				"debian-10",
+				"debian-9",
+				"ubuntu-21.04",
+				"ubuntu-20.04",
+				"ubuntu-18.04"
+			],
+			"default": "debian-11"
+		}
+	},
+	"platforms": [
+		"Bash"
+	]
+}

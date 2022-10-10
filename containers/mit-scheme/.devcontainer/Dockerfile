@@ -1,11 +1,11 @@
 # [Choice] Debian version: buster, stretch
-ARG VARIANT_DEBIAN="buster"
+ARG VARIANT_DEBIAN="${templateOption:imageVariant}"
 FROM buildpack-deps:${VARIANT_DEBIAN}-curl
 
 # [Option] Install zsh
-ARG INSTALL_ZSH="true"
+ARG INSTALL_ZSH="${templateOption:installZsh}"
 # [Option] Upgrade OS packages to their latest versions
-ARG UPGRADE_PACKAGES="true"
+ARG UPGRADE_PACKAGES="${templateOption:upgradePackages}"
 
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.

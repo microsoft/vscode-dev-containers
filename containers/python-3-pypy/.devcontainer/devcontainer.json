@@ -3,9 +3,7 @@
 
 	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
 	"build": {
-		"dockerfile": "Dockerfile",
-		// [Optional] You can use build args to set options. e.g. 'VARIANT' below affects the image in the Dockerfile
-		"args": { "VARIANT": "3" }
+		"dockerfile": "Dockerfile"
 	},
 
 	// Configure tool-specific properties.

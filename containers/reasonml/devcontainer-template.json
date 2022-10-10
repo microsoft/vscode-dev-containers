@@ -1,0 +1,12 @@
+{
+	"id": "reasonml",
+	"version": "1.0.0",
+	"name": "ReasonML",
+	"description": "Develop ReasonML applications.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/reasonml",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"platforms": [
+		"ReasonML"
+	]
+}

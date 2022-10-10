@@ -1,0 +1,50 @@
+{
+	"id": "r",
+	"version": "1.0.0",
+	"name": "R",
+	"description": "Perform statistical computing using the R language on Linux. Includes R and needed extensions.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/r",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "R version:",
+			"proposals": [
+				"4",
+				"4.2",
+				"4.1",
+				"4.0"
+			],
+			"default": "4"
+		},
+		"baseVariant": {
+			"type": "string",
+			"description": "Base image. Minimal (r-ver), tidyverse installed (tidyverse), or full image (binder):",
+			"proposals": [
+				"rocker/r-ver",
+				"rocker/tidyverse",
+				"rocker/binder"
+			],
+			"default": "4"
+		},
+		"installZsh": {
+			"type": "boolean",
+			"description": "Install ZSH!?",
+			"default": "true"
+		},
+		"upgradePackages": {
+			"type": "boolean",
+			"description": "Upgrade OS packages to their latest versions",
+			"default": "false"
+		},
+		"enableJupyter": {
+			"type": "boolean",
+			"description": "Enable vscode-jupyter support",
+			"default": "false"
+		}
+	},
+	"platforms": [
+		"R"
+	]
+}

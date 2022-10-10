@@ -1,0 +1,13 @@
+{
+	"id": "azure-functions-python-3",
+	"version": "1.0.0",
+	"name": "Azure Functions & Python 3",
+	"description": "Develop Azure Functions in Python. Includes Python 3, the Azure Functions SDK, Docker CLI (required to publish to Azure with native dependencies) and related extensions and dependencies.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/azure-functions-python-3",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"platforms": [
+		"Azure Functions",
+		"Python"
+	]
+}

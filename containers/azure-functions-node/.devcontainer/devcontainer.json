@@ -1,9 +1,7 @@
 {
 	"name": "Azure Functions & Node.js",
 	"build": {
-		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick a Node.js version: 14, 16
-		"args": { "VARIANT": "14" }
+		"dockerfile": "Dockerfile"
 	},
 	"forwardPorts": [ 7071 ],
 
@@ -22,6 +20,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "npm install",
 
-	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "node"
 }

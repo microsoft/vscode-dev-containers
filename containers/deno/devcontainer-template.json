@@ -1,0 +1,25 @@
+{
+	"id": "deno",
+	"version": "1.0.0",
+	"name": "Deno",
+	"description": "Develop Deno applications. Includes the latest Deno runtime and extension.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/deno",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Debian OS version:",
+			"proposals": [
+				"bullseye",
+				"buster"
+			],
+			"default": "bullseye"
+		}
+	},
+	"platforms": [
+		"Deno",
+		"TypeScript",
+		"JavaScript"
+	]
+}

@@ -1,0 +1,34 @@
+{
+	"id": "python-3-pypy",
+	"version": "1.0.0",
+	"name": "PyPy",
+	"description": "Develop python applications using the PyPy interpreter",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/python-3-pypy",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Pypy version:",
+			"proposals": [
+				"2",
+				"3"
+			],
+			"default": "3"
+		},
+		"installZsh": {
+			"type": "boolean",
+			"description": "Install ZSH!?",
+			"default": "true"
+		},
+		"upgradePackages": {
+			"type": "boolean",
+			"description": "Upgrade OS packages?",
+			"default": "false"
+		}
+	},
+	"platforms": [
+		"Python",
+		"PyPy"
+	]
+}

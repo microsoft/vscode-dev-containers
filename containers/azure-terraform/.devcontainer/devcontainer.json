@@ -5,10 +5,7 @@
 		"args": { 
 			"TERRAFORM_VERSION": "0.14.5",
 			"TFLINT_VERSION": "0.24.1",
-			"TERRAGRUNT_VERSION": "0.28.1",
-			"INSTALL_AZURE_CLI": "true",
-			"INSTALL_DOCKER": "true",
-			"NODE_VERSION": "lts/*"
+			"TERRAGRUNT_VERSION": "0.28.1"
 		}
 	},
 	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
@@ -55,6 +52,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "terraform --version",
 
-	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }
