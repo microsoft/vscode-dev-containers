@@ -1,0 +1,24 @@
+{
+	"id": "dart",
+	"version": "1.0.0",
+	"name": "Dart",
+	"description": "Develop Dart based applications. Includes the Dart SDK, needed extensions, and dependencies.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/dart",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"installZsh": {
+			"type": "boolean",
+			"description": "Install ZSH!?",
+			"default": "true"
+		},
+		"upgradePackages": {
+			"type": "boolean",
+			"description": "Upgrade OS packages?",
+			"default": "false"
+		}
+	},
+	"platforms": [
+		"Dart"
+	]
+}

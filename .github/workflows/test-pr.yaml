@@ -13,6 +13,46 @@ jobs:
         with:
           filters: |
             azure-ansible: ./**/azure-ansible/**
+            azure-bicep: ./**/azure-bicep/**
+            azure-cli: ./**/azure-cli/**
+            azure-functions-dotnet-6-inprocess: ./**/azure-functions-dotnet-6-inprocess/**
+            azure-functions-dotnet-6-isolated: ./**/azure-functions-dotnet-6-isolated/**
+            azure-functions-dotnetcore-3.1: ./**/azure-functions-dotnetcore-3.1/**
+            azure-functions-java-8: ./**/azure-functions-java-8/**
+            azure-functions-java-11: ./**/azure-functions-java-11/**
+            azure-functions-node: ./**/azure-functions-node/**
+            azure-functions-pwsh: ./**/azure-functions-pwsh/**
+            azure-functions-python-3: ./**/azure-functions-python-3/**
+            azure-machine-learning-python-3: ./**/azure-machine-learning-python-3/**
+            azure-static-web-apps: ./**/azure-static-web-apps/**
+            azure-terraform: ./**/azure-terraform/**
+            bash: ./**/bash/**
+            bazel: ./**/bazel/**
+            chef-workstation: ./**/chef-workstation/**
+            clojure: ./**/clojure/**
+            dapr-dotnet: ./**/dapr-dotnet/**
+            dapr-javascript-node: ./**/dapr-javascript-node/**
+            dart: ./**/dart/**
+            deno: ./**/deno/**
+            elixir: ./**/elixir/**
+            elixir-phoenix-postgres: ./**/elixir-phoenix-postgres/**
+            elm: ./**/elm/**
+            haskell: ./**/haskell/**
+            hugo: ./**/hugo/**
+            javascript-node-azurite: ./**/javascript-node-azurite/**
+            julia: ./**/julia/**
+            jupyter-datascience-notebooks: ./**/jupyter-datascience-notebooks/**
+            mit-scheme: ./**/mit-scheme/**
+            perl: ./**/perl/**
+            puppet: ./**/puppet/**
+            python-3-pypy: ./**/python-3-pypy/**
+            r: ./**/r/**
+            reasonml: ./**/reasonml/**
+            ruby-rails: ./**/ruby-rails/**
+            ruby-sinatra: ./**/ruby-sinatra/**
+            sfdx-project: ./**/sfdx-project/**
+            swift: ./**/swift/**
+            vue: ./**/vue/**
 
   test:
     needs: [detect-changes]

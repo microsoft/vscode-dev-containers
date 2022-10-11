@@ -1,11 +1,11 @@
 # [Choice] Node.js version: 18, 16, 14
-ARG VARIANT=16
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
+ARG VARIANT=${templateOption:imageVariant}
+FROM mcr.microsoft.com/devcontainers/javascript-node:${VARIANT}
 
 # [Option] Enable non-root Docker access in container
-ARG ENABLE_NONROOT_DOCKER="true"
+ARG ENABLE_NONROOT_DOCKER="${templateOption:enableNonRootDocker}"
 # [Option] Use the OSS Moby Engine instead of the licensed Docker Engine
-ARG USE_MOBY="true"
+ARG USE_MOBY="${templateOption:moby}"
 
 ARG USERNAME=node
 

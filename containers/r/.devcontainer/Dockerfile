@@ -1,13 +1,13 @@
 # [Choice] R version: 4, 4.2, 4.1, 4.0
-ARG VARIANT=4
+ARG VARIANT=${templateOption:imageVariant}
 # [Choice] Base image. Minimal (r-ver), tidyverse installed (tidyverse), or full image (binder): rocker/r-ver, rocker/tidyverse, rocker/binder
-ARG BASE_IMAGE=rocker/r-ver
+ARG BASE_IMAGE=${templateOption:baseVariant}
 FROM ${BASE_IMAGE}:${VARIANT}
 
 # [Option] Install zsh
-ARG INSTALL_ZSH="true"
+ARG INSTALL_ZSH="${templateOption:installZsh}"
 # [Option] Upgrade OS packages to their latest versions
-ARG UPGRADE_PACKAGES="false"
+ARG UPGRADE_PACKAGES="${templateOption:upgradePackages}"
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=rstudio
@@ -45,7 +45,7 @@ RUN export TAG=$(git ls-remote --tags --refs --sort='version:refname' https://gi
 RUN echo 'if (interactive() && Sys.getenv("TERM_PROGRAM") == "vscode") source(file.path(Sys.getenv("HOME"), ".vscode-R", "init.R"))' >>"${R_HOME}/etc/Rprofile.site"
 
 # [Option] Enable vscode-jupyter support
-ARG ENABLE_JUPYTER="false"
+ARG ENABLE_JUPYTER="${templateOption:enableJupyter}"
 RUN if [ "${ENABLE_JUPYTER}" = "true" ]; then \
         if [ -z "$(dpkg --get-selections | grep libzmq3-dev)" ]; then \
             apt-get update \

@@ -1,0 +1,36 @@
+{
+	"id": "dapr-javascript-node",
+	"version": "1.0.0",
+	"name": "Dapr with Node.js & JavaScript",
+	"description": "Develop Dapr applications using Node.js and JavaScript. Includes Dapr, Node.js, eslint, yarn, and the TypeScript compiler.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/dapr-javascript-node",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Node.js version:",
+			"proposals": [
+				"18",
+				"16",
+				"14"
+			],
+			"default": "16"
+		},
+		"moby": {
+			"type": "boolean",
+			"default": "true",
+			"description": "Use the OSS Moby CLI instead of the licensed Docker CLI"
+		},
+		"enableNonRootDocker": {
+			"type": "boolean",
+			"description": "Enable non-root Docker access in container?",
+			"default": "true"
+		}
+	},
+	"platforms": [
+		"Node.js",
+		"TypeScript",
+		"Dapr"
+	]
+}

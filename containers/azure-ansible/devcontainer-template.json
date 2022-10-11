@@ -1,0 +1,48 @@
+{
+	"id": "azure-ansible",
+	"version": "1.0.0",
+	"name": "Azure Ansible",
+	"description": "Get going quickly with Ansible in Azure. Includes Ansible, the Azure CLI, the Docker CLI (for testing locally), Node.js for Cloud Shell, and related extensions and dependencies.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/azure-ansible",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"installZsh": {
+			"type": "boolean",
+			"description": "Install ZSH!?",
+			"default": "true"
+		},
+		"upgradePackages": {
+			"type": "boolean",
+			"description": "Upgrade OS packages?",
+			"default": "false"
+		},
+		"installAzureCli": {
+			"type": "boolean",
+			"description": "Install Azure CLI!?",
+			"default": "true"
+		},
+		"installDockerCli": {
+			"type": "boolean",
+			"description": "Install Docker CLI!?",
+			"default": "true"
+		},
+		"nodeVersion": {
+			"type": "string",
+			"description": "Node.js version:",
+			"proposals": [
+				"none",
+				"lts/*",
+				"16",
+				"14",
+				"12",
+				"10"
+			],
+			"default": "lts/*"
+		}
+	},
+	"platforms": [
+		"Azure",
+		"Ansible"
+	]
+}

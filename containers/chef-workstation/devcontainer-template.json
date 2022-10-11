@@ -1,0 +1,16 @@
+{
+	"id": "chef-workstation",
+	"version": "1.0.0",
+	"name": "Chef Workstation Docker Container",
+	"description": "_Everything you need to get started using Chef products._",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/chef-workstation",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"platforms": [
+		"Chef Infra Client",
+		"Chef InSpec",
+		"Chef Command Line Tool",
+		"Test Kitchen",
+		"and Various Test Kitchen and Knife plugins for clouds"
+	]
+}

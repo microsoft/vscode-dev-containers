@@ -1,0 +1,33 @@
+{
+	"id": "mit-scheme",
+	"version": "1.0.0",
+	"name": "MIT-Scheme",
+	"description": "Simple mit-scheme container with Git installed.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/mit-scheme",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Debian version:",
+			"proposals": [
+				"buster",
+				"stretch"
+			],
+			"default": "buster"
+		},
+		"installZsh": {
+			"type": "boolean",
+			"description": "Install ZSH!?",
+			"default": "true"
+		},
+		"upgradePackages": {
+			"type": "boolean",
+			"description": "Upgrade OS packages?",
+			"default": "true"
+		}
+	},
+	"platforms": [
+		"MIT-Scheme"
+	]
+}

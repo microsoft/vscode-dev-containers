@@ -1,10 +1,10 @@
 # You can pick any Debian/Ubuntu-based image. 😊
-FROM mcr.microsoft.com/vscode/devcontainers/base:bullseye
+FROM mcr.microsoft.com/devcontainers/base:bullseye
 
 # [Option] Install zsh
-ARG INSTALL_ZSH="true"
+ARG INSTALL_ZSH="${templateOption:installZsh}"
 # [Option] Upgrade OS packages to their latest versions
-ARG UPGRADE_PACKAGES="false"
+ARG UPGRADE_PACKAGES="${templateOption:upgradePackages}"
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode

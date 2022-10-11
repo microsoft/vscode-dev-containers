@@ -1,0 +1,38 @@
+{
+	"id": "haskell",
+	"version": "1.0.0",
+	"name": "Haskell",
+	"description": "_This definition will hopefully get you going quickly with Haskell running as a remote container in vscode_",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/haskell",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"installZsh": {
+			"type": "boolean",
+			"description": "Install ZSH!?",
+			"default": "true"
+		},
+		"upgradePackages": {
+			"type": "boolean",
+			"description": "Upgrade OS packages?",
+			"default": "false"
+		},
+		"ghcVersion": {
+			"type": "string",
+			"description": "GHC version:",
+			"proposals": [
+				"recommended",
+				"latest",
+				"9.2",
+				"9.0",
+				"8.10",
+				"8.8",
+				"8.6"
+			],
+			"default": "recommended"
+		}
+	},
+	"platforms": [
+		"Haskell"
+	]
+}

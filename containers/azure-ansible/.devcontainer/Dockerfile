@@ -1,12 +1,12 @@
 # You can pick any Debian/Ubuntu-based image. 😊
-FROM mcr.microsoft.com/vscode/devcontainers/base:bullseye
+FROM mcr.microsoft.com/devcontainers/base:bullseye
 
 COPY library-scripts/*.sh /tmp/library-scripts/
 
 # [Option] Install zsh
-ARG INSTALL_ZSH="true"
+ARG INSTALL_ZSH="${templateOption:installZsh}"
 # [Option] Upgrade OS packages to their latest versions
-ARG UPGRADE_PACKAGES="false"
+ARG upgradePackages="${templateOption:upgradePackages}"
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
@@ -21,11 +21,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN pip3 install ansible[azure]
 
 # [Option] Install Azure CLI
-ARG INSTALL_AZURE_CLI="true"
+ARG INSTALL_AZURE_CLI="${templateOption:installAzureCli}"
 # [Option] Install Docker CLI
-ARG INSTALL_DOCKER="true"
+ARG INSTALL_DOCKER="${templateOption:installDockerCli}"
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
-ARG NODE_VERSION="none"
+ARG NODE_VERSION="${templateOption:nodeVersion}"
 ENV NVM_DIR=/usr/local/share/nvm
 ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NVM_DIR}/current/bin:${PATH}

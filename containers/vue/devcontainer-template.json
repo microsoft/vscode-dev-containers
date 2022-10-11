@@ -1,0 +1,30 @@
+{
+	"id": "vue",
+	"version": "1.0.0",
+	"name": "Vue",
+	"description": "Develop applications with Vue.js, includes everything you need to get up and running.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/vue",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Node.js version (use -bullseye variants on local arm64/Apple Silicon):",
+			"proposals": [
+				"18",
+				"16",
+				"14",
+				"18-bullseye",
+				"16-bullseye",
+				"14-bullseye",
+				"18-buster",
+				"16-buster",
+				"14-buster"
+			],
+			"default": "16"
+		}
+	},
+	"platforms": [
+		"Javascript"
+	]
+}

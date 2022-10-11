@@ -4,8 +4,6 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-      args:
-        variant: 3.1
 
     environment:
       ASPNETCORE_Kestrel__Endpoints__Http__Url: http://*:5000

@@ -1,0 +1,52 @@
+{
+	"id": "ruby-rails",
+	"version": "1.0.0",
+	"name": "Ruby on Rails",
+	"description": "_Develop Ruby on Rails applications, includes everything you need to get up and running._",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/ruby-rails",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Ruby version (use -bullseye variants on local arm64/Apple Silicon):",
+			"proposals": [
+				"3",
+				"3.1",
+				"3.0",
+				"2",
+				"2.7",
+				"2.6",
+				"3-bullseye",
+				"3.1-bullseye",
+				"3.0-bullseye",
+				"2-bullseye",
+				"2.7-bullseye",
+				"2.6-bullseye",
+				"3-buster",
+				"3.1-buster",
+				"3.0-buster",
+				"2-buster",
+				"2.7-buster",
+				"2.6-buster"
+			],
+			"default": "2-bullseye"
+		},
+		"nodeVersion": {
+			"type": "string",
+			"description": "Node.js version:",
+			"proposals": [
+				"none",
+				"lts/*",
+				"16",
+				"14",
+				"12",
+				"10"
+			],
+			"default": "lts/*"
+		}
+	},
+	"platforms": [
+		"Ruby"
+	]
+}
