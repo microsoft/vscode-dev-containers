@@ -7,6 +7,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 	&& sed -i -E 's/.*Terminal.*/    [exec] (Terminal) { tilix -w ~ -e $(readlink -f \/proc\/$$\/exe) -il } <>\n    [exec] (Start Code - OSS) { tilix -t "Code - OSS Build" -e bash \/workspace\/vscode*\/scripts\/code.sh  } <>/' /home/node/.fluxbox/menu \
 	&& apt-get -y install firefox-esr \
 	&& bash -c ". /usr/local/share/nvm/nvm.sh && nvm alias ${VARIANT} system" \
+	# Work around issue with VS Code not liking "autolaunch"
+	&& echo 'export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$(pidof fluxbox)/environ|cut -d= -f2-)' | tee -a /etc/bash.bashrc > /etc/zsh/zshenv \
 	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
 
 # Core environment variables for X11, VNC, and fluxbox
