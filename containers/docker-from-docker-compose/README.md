@@ -191,6 +191,25 @@ Then reference the env var when running Docker commands from the terminal inside
 docker run -it --rm -v "${LOCAL_WORKSPACE_FOLDER//\\/\/}:/workspace" debian bash
 ```
 
+-------
+
+Another way to work around this limitation is to mount the local workspace folder into the dev container at the **host**'s path. 
+
+1. Update your `docker-compose.yml` to mount the workspace folder ** in the same place on the host as it is in the container** :
+ 
+```yaml
+volumes:
+    - ${PWD}:${PWD}:cached
+```
+
+ 2. Finally Add the following to `devcontainer.json`:
+
+```json
+"workspaceFolder": "${localWorkspaceFolder}"
+```
+
+This way the workspace folder is **available in the same place on the host as it is in the container** without the docker-in-docker performance penalty. This allow to mount folders within the dev container into your own containers if you need it.
+
 ## Using this definition
 
 1. If this is your first time using a development container, please see getting started information on [setting up](https://aka.ms/vscode-remote/containers/getting-started) Remote-Containers or [creating a codespace](https://aka.ms/ghcs-open-codespace) using GitHub Codespaces.
