@@ -96,7 +96,7 @@ find_version_from_git_tags() {
     local repository=$2
     local prefix=${3:-"tags/v"}
     local separator=${4:-"."}
-    local last_part_optional=${5:-"false"}    
+    local last_part_optional=${5:-"false"}
     if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
         local escaped_separator=${separator//./\\.}
         local last_part
@@ -370,7 +370,7 @@ dockerd_start="$(cat << 'INNEREOF'
     # Handle DNS
     set +e
     cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
-    if [ $? -eq 0 ] && [ ${AZURE_DNS_AUTO_DETECTION} = "true" ]
+    if [ $? -eq 0 ] && [ "${AZURE_DNS_AUTO_DETECTION}" = "true" ]
     then
         echo "Setting dockerd Azure DNS."
         CUSTOMDNS="--dns 168.63.129.16"
