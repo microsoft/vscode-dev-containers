@@ -46,7 +46,6 @@ jobs:
             perl: ./**/perl/**
             puppet: ./**/puppet/**
             python-3-pypy: ./**/python-3-pypy/**
-            r: ./**/r/**
             reasonml: ./**/reasonml/**
             ruby-rails: ./**/ruby-rails/**
             ruby-sinatra: ./**/ruby-sinatra/**
