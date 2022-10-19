@@ -1,4 +1,4 @@
-**IMPORTANT NOTE: The template `R` is migrated to [rocker-org/devcontainer-templates](https://github.com/rocker-org/devcontainer-templates/tree/main/src/r-ver) by the community author.**
+**IMPORTANT NOTE: The `R` template is now hosted by the community author in the repo [rocker-org/devcontainer-templates](https://github.com/rocker-org/devcontainer-templates/tree/main/src/r-ver).**
 
 # R (Community)
 
