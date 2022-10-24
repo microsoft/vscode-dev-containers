@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
-**Digest:** sha256:c3edb77f7b3f8ed7dfaa5a5bae3ba7213c7399ef1e6852399d6e946e5314b451
+**Digest:** sha256:70d6dece7153a9342b88eac5985e77fb848a9214f4d81ef69079fc9e6bb861d6
 
 **Tags:**
 ```
@@ -41,7 +41,7 @@ mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 | liblttng-ust0 | 2.12.1-1 |
 | libssl1.1 | 1.1.1n-0+deb11u3 |
 | libstdc++6 | 10.2.1-6 |
-| locales | 2.31-13+deb11u4 |
+| locales | 2.31-13+deb11u5 |
 | lsb-release | 11.1.0 |
 | lsof | 4.93.2+dfsg-1.1 |
 | man-db | 2.9.4-2 |
