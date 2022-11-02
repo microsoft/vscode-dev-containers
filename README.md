@@ -1,7 +1,7 @@
 **IMPORTANT NOTE: We've migrated most of the contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open dev container specification](https://containers.dev).**
 
-- **Features managed by the dev container spec maintainers are in [devcontainers/features](https://github.com/devcontainers/features) repo**
-- **Templates/definitions managed by the dev container spec maintainers are in [devcontainers/templates](https://github.com/devcontainers/templates)**
+- **Features managed by the dev container spec maintainers are now in [devcontainers/features](https://github.com/devcontainers/features).**
+- **Templates/definitions managed by the dev container spec maintainers are now in [devcontainers/templates](https://github.com/devcontainers/templates).**
 - **`mcr.microsoft.com/devcontainers` and `mcr.microsoft.com/vscode/devcontainers` images are now published from [devcontainers/images](https://github.com/devcontainers/images).**
 
 **As a result, this repository only used for community definitions that have not been migrated elsewhere by their owners. For new community templates or definitions, you can now publish and manage these without needing to PR into this repository!**
