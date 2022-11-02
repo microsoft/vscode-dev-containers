@@ -1,10 +1,10 @@
 ---
 name: Feature request
-about: 🚨 We are not accepting new feature requests for this repository. 🚨 
+about: 🚨 We are not accepting new feature requests for this repository - contents have been migrated to the https://github.com/devcontainers org. 🚨 
 
 ---
 
-🚨 We are not accepting new feature requests for this repository. 🚨 
+🚨 We are not accepting new feature requests for this repository - contents have been migrated to the https://github.com/devcontainers org. 🚨 
 
 Please raise a feature request in one of the following repositories:
 1. mcr.microsoft.com/devcontainers or mcr.microsoft.com/vscode/devcontainers images - https://github.com/devcontainers/images

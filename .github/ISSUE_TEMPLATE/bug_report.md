@@ -1,16 +1,28 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: 🚨 Most bugs should not be logged here as contents have been migrated to the https://github.com/devcontainers org. 🚨 
+
 ---
 
-<!--  🚨 Please only include bugs related to Dev Container Definitions here. 🚨 Other locations:
-        VS Code Remote Development: http://github.com/Microsoft/vscode-remote-release 
-        VS Code OSS: http://github.com/Microsoft/vscode
-        GitHub Codespaces: https://github.com/github/feedback/discussions/categories/codespaces
+<!--  
+
+🚨 Only bugs for community definitions that have not moved to the https://github.com/devcontainers org should be logged here 🚨
+
+Consider one of these locations:
+
+1. mcr.microsoft.com/devcontainers or mcr.microsoft.com/vscode/devcontainers images - https://github.com/devcontainers/images
+2. New Dev Container Features - You can now self publish your own Features that show up in UX. See https://github.com/devcontainers/feature-template to get started and add your feature into the index.
+3. Most templates / definitions in this repository are community contributed or have migrated to https://github.com/devcontainers/templates.
+
+🚨 Other possible locations 🚨
+ - VS Code Dev Containers extension: http://github.com/Microsoft/vscode-remote-release 
+ - GitHub Codespaces: https://github.com/github/feedback/discussions/categories/codespaces
+ - The Dev Container CLI: https://gtihub.com/devcontainers/cli
+ - VS Code OSS: http://github.com/Microsoft/vscode
+
 -->
 
-<!-- Please search existing issues to avoid creating duplicates. -->
-<!-- Also please test using the latest insiders build to make sure your issue has not already been fixed: https://code.visualstudio.com/insiders/ -->
+<!-- If you are logging an issue with a communty definition, please provide the following information -->
 
 - VSCode Version:
 - Local OS Version:
