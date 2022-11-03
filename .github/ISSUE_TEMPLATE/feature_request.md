@@ -4,12 +4,13 @@ about: 🚨 We are not accepting new feature requests for this repository - cont
 
 ---
 
-🚨 We are not accepting new feature requests for this repository - contents have been migrated to the https://github.com/devcontainers org. 🚨 
+🚨 We are not accepting feature requests in this repository. 🚨
 
-Please raise a feature request in one of the following repositories:
-1. mcr.microsoft.com/devcontainers or mcr.microsoft.com/vscode/devcontainers images - https://github.com/devcontainers/images
-2. New Dev Container Features - You can now self publish your own Features that show up in UX. See https://github.com/devcontainers/feature-template to get started and add your feature into the index.
-3. For creating new definitions / templates, you can now create and publish your own!  Templates/Definitions in this repository are either historical, or have migrated to https://github.com/devcontainers/templates.  See https://containers.dev/implementors/templates/ for information on creating and publishing your own.
+* Log requests for mcr.microsoft.com/devcontainers or mcr.microsoft.com/vscode/devcontainers images at https://github.com/devcontainers/images
+* Log requests for existing Dev Container Features managed by the Dev Container spec maintainers at https://github.com/devcontainers/features
+* Log requests for existing Dev Container Templates managed by the Dev Container spec maintainers at https://github.com/devcontainers/templates
+* For new Dev Container Features, see https://github.com/devcontainers/feature-template to get started and add your Feature into the index.
+* For creating new Definitions/Templates, see https://containers.dev/implementors/templates-distribution/. Getting information is coming soon!
 
 🚨 Other locations 🚨
  - VS Code Dev Containers extension: http://github.com/Microsoft/vscode-remote-release 
