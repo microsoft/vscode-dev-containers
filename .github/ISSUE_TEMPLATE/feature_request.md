@@ -9,8 +9,8 @@ about: 🚨 We are not accepting new feature requests for this repository - cont
 * Log requests for mcr.microsoft.com/devcontainers or mcr.microsoft.com/vscode/devcontainers images at https://github.com/devcontainers/images
 * Log requests for existing Dev Container Features managed by the Dev Container spec maintainers at https://github.com/devcontainers/features
 * Log requests for existing Dev Container Templates managed by the Dev Container spec maintainers at https://github.com/devcontainers/templates
+* For new Definitions/Templates, see https://github.com/devcontainers/template-starter To get started and add your Template into the index.
 * For new Dev Container Features, see https://github.com/devcontainers/feature-template to get started and add your Feature into the index.
-* For creating new Definitions/Templates, see https://containers.dev/implementors/templates-distribution/. Getting information is coming soon!
 
 🚨 Other locations 🚨
  - VS Code Dev Containers extension: http://github.com/Microsoft/vscode-remote-release 

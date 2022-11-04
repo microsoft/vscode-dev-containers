@@ -10,9 +10,11 @@ about: 🚨 Most bugs should not be logged here as contents have been migrated t
 
 Consider one of these locations:
 
-1. mcr.microsoft.com/devcontainers or mcr.microsoft.com/vscode/devcontainers images - https://github.com/devcontainers/images
-2. New Dev Container Features - You can now self publish your own Features that show up in UX. See https://github.com/devcontainers/feature-template to get started and add your feature into the index.
-3. Most templates / definitions in this repository are community contributed or have migrated to https://github.com/devcontainers/templates.
+* Log bugs for mcr.microsoft.com/devcontainers or mcr.microsoft.com/vscode/devcontainers images at https://github.com/devcontainers/images
+* Log bugs for existing Dev Container Features managed by the Dev Container spec maintainers at https://github.com/devcontainers/features
+* Log bugs for existing Dev Container Templates managed by the Dev Container spec maintainers at https://github.com/devcontainers/templates
+* For new Definitions/Templates, see https://github.com/devcontainers/template-starter To get started and add your Template into the index.
+* For new Dev Container Features, see https://github.com/devcontainers/feature-template to get started and add your Feature into the index.
 
 🚨 Other possible locations 🚨
  - VS Code Dev Containers extension: http://github.com/Microsoft/vscode-remote-release 
