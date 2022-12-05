@@ -96,7 +96,7 @@ If you get a number other than `0`, you can simply add your non-root user to rig
 
     ```json
     "runArgs": ["--init"],
-    "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ]
+    "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ]
     "remoteUser": "vscode",
     "overrideCommand": false
     ```
