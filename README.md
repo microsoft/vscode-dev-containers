@@ -31,7 +31,7 @@ The [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-rem
 ## Adding a definition to a project or codespace
   
   1. Either [create a codespace for your repository](https://aka.ms/ghcs-open-codespace) or [set up your local machine](https://aka.ms/vscode-remote/containers/getting-started) for use with the Remote - Containers extension, start VS Code, and open your project folder.
-  2. Press <kbd>F1</kbd>, and select the **Add Development Container Configuration Files...** command for **Remote-Containers** or **Codespaces**.
+  2. Press <kbd>F1</kbd>, and select the **Add Development Container Configuration Files...** command for **Dev Containers** or **Codespaces**.
   3. Pick one of the recommended definitions from the list or select **Show All Definitions...** to see all of them. You may need to choose the **From a predefined container configuration definition...** option if your project has an existing Dockerfile or Docker Compose file. Answer any questions that appear.
   4. See the definition's `README` for configuration options. A link is available in the `.devcontainer/devcontainer.json` file added to your folder.
   5. Run **Remote-Containers: Reopen in Container** to use it locally, or **Codespaces: Rebuild Container** from within a codespace.
@@ -73,18 +73,26 @@ Yes! If you have a Dockerfile or Docker Compose file in your project/repository,
 
 A `devcontainer.json` file is similar to `launch.json` for debugging, but designed to launch (or attach to) a development container instead. At its simplest, all you need is a `.devcontainer/devcontainer.json` file in your project that references an image, `Dockerfile`, or `docker-compose.yml`, and a few properties. You can [adapt it for use](https://aka.ms/vscode-remote/containers/folder-setup) in a wide variety of situations.
 
-### Why do Dockerfiles in this repo use `RUN` statements with commands separated by `&&`?
-
-Each `RUN` statement creates a Docker image "layer". If one `RUN` statement adds temporary contents, these contents remain in this layer in the image even if they are deleted in a subsequent `RUN`. This means the image takes more storage locally and results in slower image download times if you publish the image to a registry. You can resolve this problem by using a `RUN` statement that includes any clean up steps (separated by `&&`) after a given operation. See [CONTRIBUTING.md](./CONTRIBUTING.md#why-do-dockerfiles-in-this-repository-use-run-statements-with-commands-separated-by-) for more tips.
-
 ## Contributing and feedback
 
 Have a question or feedback?
 
-- Contribute or provide feedback for the [VS Code Remote](https://github.com/Microsoft/vscode-remote-release/blob/main/CONTRIBUTING.md) extensions or [GitHub Codespaces](https://github.com/github/feedback/discussions/categories/codespaces).
-- Search [existing issues](https://github.com/Microsoft/vscode-dev-containers/issues) with dev container definitions or [report a problem](https://github.com/Microsoft/vscode-dev-containers/issues/new).
-- Contribute a [development container definition](CONTRIBUTING.md#contributing-dev-container-definitions) to the repository.
-- Review and file issues to shape the direction of development containers and the dev container CLI in the [dev container spec repository](https://github.com/microsoft/dev-container-spec).
+ We've migrated most of the contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open dev container specification](https://containers.dev).
+
+- Features managed by the dev container spec maintainers are now in [devcontainers/features](https://github.com/devcontainers/features).
+- Definitions/Templates managed by the dev container spec maintainers are now in [devcontainers/templates](https://github.com/devcontainers/templates).
+- `mcr.microsoft.com/devcontainers` and `mcr.microsoft.com/vscode/devcontainers` images are now published from [devcontainers/images](https://github.com/devcontainers/images).
+
+As a result, this repository only used for community definitions that have not been migrated elsewhere by their owners. If you are a community owner and want us to remove an existing definition here, feel free to submit a PR to do so!
+
+For new Templates/Features, you can now self-publish by following the steps one of the quick start repositories: [Templates quick start](https://github.com/devcontainers/features), [Features quick start](https://github.com/devcontainers/features).
+
+You can also:
+
+- Provide feedback for the [VS Code Dev Containers](https://github.com/Microsoft/vscode-remote-release/blob/main/CONTRIBUTING.md) extension or [GitHub Codespaces](https://github.com/github/feedback/discussions/categories/codespaces).
+- Discuss the [Dev Container spec](https://github.com/orgs/devcontainers/discussions) or [join the Slack channel](https://github.com/orgs/devcontainers/discussions/3)
+- Make proposals for improvments to the [dev container spec repository](https://github.com/devcontainers/spec).
+- Contribute to the [dev container CLI](https://github.com/devcontainers/cli).
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
