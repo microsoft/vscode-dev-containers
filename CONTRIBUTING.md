@@ -1,21 +1,21 @@
 # Contributing
 
-We've migrated most of the contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open dev container specification](https://containers.dev).
+We've migrated most of the contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open Dev Container specification](https://containers.dev).
 
-- Features managed by the dev container spec maintainers (such as the VS Code team) are now in [devcontainers/features](https://github.com/devcontainers/features).
-- Definitions/Templates managed by the dev container spec maintainers are now in [devcontainers/templates](https://github.com/devcontainers/templates).
+- Features managed by the Dev Container spec maintainers (such as the VS Code team) are now in [devcontainers/features](https://github.com/devcontainers/features).
+- Definitions/Templates managed by the Dev Container spec maintainers are now in [devcontainers/templates](https://github.com/devcontainers/templates).
 - `mcr.microsoft.com/devcontainers` and `mcr.microsoft.com/vscode/devcontainers` images are now published from [devcontainers/images](https://github.com/devcontainers/images).
 
 As a result, this repository is only used for community definitions that have not been migrated elsewhere by their owners. If you are a community owner and want us to remove an existing definition here, feel free to submit a PR to do so!
 
-For new Templates/Features, you can now self-publish by following the steps one of the quick start repositories: [Templates quick start](https://github.com/devcontainers/features), [Features quick start](https://github.com/devcontainers/features).
+For new Templates/Features, you can now self-publish and optionally make them visibile in-tool by following the steps one of the quick start repositories: [Templates quick start](https://github.com/devcontainers/features), [Features quick start](https://github.com/devcontainers/features). No need to submit a PR here anymore.
 
 You can also:
 
 - Provide feedback for the [VS Code Dev Containers](https://github.com/Microsoft/vscode-remote-release/blob/main/CONTRIBUTING.md) extension or [GitHub Codespaces](https://github.com/github/feedback/discussions/categories/codespaces).
 - Discuss the [Dev Container spec](https://github.com/orgs/devcontainers/discussions) or [join the Slack channel](https://github.com/orgs/devcontainers/discussions/3)
-- Make proposals for improvments to the [dev container spec repository](https://github.com/devcontainers/spec).
-- Contribute to the [dev container CLI](https://github.com/devcontainers/cli).
+- Make proposals for improvments to the [Dev Container spec repository](https://github.com/devcontainers/spec).
+- Contribute to the [Dev Container CLI](https://github.com/devcontainers/cli).
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
