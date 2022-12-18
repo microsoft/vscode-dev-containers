@@ -4,7 +4,7 @@
 - **Definitions/Templates managed by the Dev Container spec maintainers are now in [devcontainers/templates](https://github.com/devcontainers/templates).**
 - **`mcr.microsoft.com/devcontainers` and `mcr.microsoft.com/vscode/devcontainers` images are now published from [devcontainers/images](https://github.com/devcontainers/images).**
 
-**For new Templates/Features, you can now self-publish and optionally make them visibile in-tool by following the steps one of the quick start repositories: [Templates quick start](https://github.com/devcontainers/template-starter), [Features quick start](https://github.com/devcontainers/feature-starter). No need to submit a PR here anymore.**
+**For new Templates/Features, you can now self-publish and optionally make them visible in-tool by following the steps one of the quick start repositories: [Templates quick start](https://github.com/devcontainers/template-starter), [Features quick start](https://github.com/devcontainers/feature-starter). No need to submit a PR here anymore.**
 
 **As a result, this repository only used for community definitions that have not been migrated elsewhere by their owners. If you are a community owner and want us to remove an existing definition here, feel free to submit a PR to do so!**
 
