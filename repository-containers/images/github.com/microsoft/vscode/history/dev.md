@@ -4,7 +4,7 @@
 
 **Source release/branch:** [main](https://github.com/microsoft/vscode-dev-containers/tree/main/containers/github.com/microsoft/vscode)
 
-**Digest:** sha256:824e848eb2d48e77c6f85dc60e518de52c2557d0c28a39eacd93fa08d08bc79f
+**Digest:** sha256:afe13531b2d84752aaba51543757249e28af96276febb04a2d69936131aa760e
 
 **Tags:**
 ```
@@ -47,7 +47,7 @@ mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 | man-db | 2.9.4-2 |
 | manpages | 5.10-1 |
 | manpages-dev | 5.10-1 |
-| nano | 5.4-2+deb11u1 |
+| nano | 5.4-2+deb11u2 |
 | ncdu | 1.15.1-1 |
 | net-tools | 1.60+git20181103.0eebece-1 |
 | openssh-client | 1:8.4p1-5+deb11u1 |
