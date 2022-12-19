@@ -31,19 +31,6 @@ RUN apt-get update \
 # Install latest GHCup in the non-root user home
 USER $USERNAME
 
-RUN mkdir -p "$HOME/.ghcup/bin" \
-    && curl -LJ "https://downloads.haskell.org/~ghcup/x86_64-linux-ghcup" -o "$HOME/.ghcup/bin/ghcup" \
-    && chmod +x "$HOME/.ghcup/bin/ghcup"
+RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | GHCUP_CURL_OPTS="-k" sh
+
 ENV PATH="/home/$USERNAME/.cabal/bin:/home/$USERNAME/.ghcup/bin:$PATH"
-
-# [Choice] GHC version: recommended, latest, 9.2, 9.0, 8.10, 8.8, 8.6
-ARG GHC_VERSION="${templateOption:ghcVersion}"
-
-# Use GHCup to install versions of main utilities
-# If you prefer to let the Haskell extension install everything on demand,
-# comment out the lines below. In that case, you may need to manually run "cabal update""."
-RUN ghcup install ghc "${GHC_VERSION}" --set \
-    && ghcup install cabal recommended --set \
-    && ghcup install stack recommended --set \
-    && ghcup install hls recommended --set \
-    && cabal update
