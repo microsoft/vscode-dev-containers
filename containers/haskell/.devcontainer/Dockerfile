@@ -31,6 +31,13 @@ RUN apt-get update \
 # Install latest GHCup in the non-root user home
 USER $USERNAME
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | GHCUP_CURL_OPTS="-k" sh
+ARG GHC_VERSION="${templateOption:ghcVersion}"
+
+ENV GHCUP_CURL_OPTS="-k"
+ENV BOOTSTRAP_HASKELL_NONINTERACTIVE="1"
+ENV BOOTSTRAP_HASKELL_GHC_VERSION="$GHC_VERSION"
+ENV BOOTSTRAP_HASKELL_CABAL_VERSION="recommended"
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 ENV PATH="/home/$USERNAME/.cabal/bin:/home/$USERNAME/.ghcup/bin:$PATH"
