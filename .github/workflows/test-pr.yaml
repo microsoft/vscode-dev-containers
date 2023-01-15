@@ -1,0 +1,136 @@
+name: "PR - Test Updated Templates"
+on:
+  pull_request:
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      templates: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            azure-ansible: ./**/azure-ansible/**
+            azure-bicep: ./**/azure-bicep/**
+            azure-cli: ./**/azure-cli/**
+            azure-functions-dotnet-6-inprocess: ./**/azure-functions-dotnet-6-inprocess/**
+            azure-functions-dotnet-6-isolated: ./**/azure-functions-dotnet-6-isolated/**
+            azure-functions-dotnetcore-3.1: ./**/azure-functions-dotnetcore-3.1/**
+            azure-functions-java-8: ./**/azure-functions-java-8/**
+            azure-functions-java-11: ./**/azure-functions-java-11/**
+            azure-functions-node: ./**/azure-functions-node/**
+            azure-functions-pwsh: ./**/azure-functions-pwsh/**
+            azure-functions-python-3: ./**/azure-functions-python-3/**
+            azure-machine-learning-python-3: ./**/azure-machine-learning-python-3/**
+            azure-static-web-apps: ./**/azure-static-web-apps/**
+            azure-terraform: ./**/azure-terraform/**
+            bash: ./**/bash/**
+            bazel: ./**/bazel/**
+            chef-workstation: ./**/chef-workstation/**
+            clojure: ./**/clojure/**
+            dapr-dotnet: ./**/dapr-dotnet/**
+            dapr-javascript-node: ./**/dapr-javascript-node/**
+            dart: ./**/dart/**
+            deno: ./**/deno/**
+            elixir: ./**/elixir/**
+            elixir-phoenix-postgres: ./**/elixir-phoenix-postgres/**
+            elm: ./**/elm/**
+            haskell: ./**/haskell/**
+            hugo: ./**/hugo/**
+            javascript-node-azurite: ./**/javascript-node-azurite/**
+            julia: ./**/julia/**
+            jupyter-datascience-notebooks: ./**/jupyter-datascience-notebooks/**
+            mit-scheme: ./**/mit-scheme/**
+            perl: ./**/perl/**
+            puppet: ./**/puppet/**
+            python-3-pypy: ./**/python-3-pypy/**
+            reasonml: ./**/reasonml/**
+            ruby-rails: ./**/ruby-rails/**
+            ruby-sinatra: ./**/ruby-sinatra/**
+            sfdx-project: ./**/sfdx-project/**
+            swift: ./**/swift/**
+            vue: ./**/vue/**
+
+  test:
+    needs: [detect-changes]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      matrix:
+        templates: ${{ fromJSON(needs.detect-changes.outputs.templates) }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "Install latest devcontainer CLI"
+        run: npm install -g @devcontainers/cli
+
+      - name: "Generating tests for '${{ matrix.templates }}'"
+        run: echo "${{ matrix.templates }}"
+
+      - name: Configure template
+        run: |
+          set -e
+          cd containers/${{ matrix.templates }}
+
+          # Configure templates only if `devcontainer-template.json` contains the `options` property.
+          optionProp=( $(jq -r '.options' devcontainer-template.json) )
+
+          if [ "${optionProp}" != "" ] && [ "${optionProp}" != "null" ] ; then  
+            options=( $(jq -r '.options | keys[]' devcontainer-template.json) )
+
+            if [ "${options[0]}" != "" ] && [ "${options[0]}" != "null" ] ; then
+              echo "(!) Configuring template options within 'containers/${{ matrix.templates }}' folder"
+              for option in "${options[@]}"
+              do
+                option_key="\${templateOption:$option}"
+                option_value=$(jq -r ".options | .${option} | .default" devcontainer-template.json)
+
+                if [ "${option_value}" = "" ] || [ "${option_value}" = "null" ] ; then
+                  echo "Template '${{ matrix.templates }}' is missing a default value for option '${option}'"
+                  exit 1
+                fi
+
+                echo "(!) Replacing '${option_key}' with '${option_value}'"
+                option_value_escaped=$(sed -e 's/[]\/$*.^[]/\\&/g' <<<"${option_value}")
+                find ./ -type f -print0 | xargs -0 sed -i "s/${option_key}/${option_value_escaped}/g"
+              done
+            fi
+          fi
+
+      - name: Run Smoke Test
+        run: |
+          template_id="${{ matrix.templates }}"
+
+          echo "Building dev container"
+          id_label="test-container=${template_id}"
+          devcontainer up --id-label ${id_label} --workspace-folder "containers/${template_id}/"
+
+          # Fake out existence of extensions, VS Code Server to validate extensions
+          echo "(*) Stubbing out extensions and VS Code Server..."
+
+          # Configuring path for 'devcontainer.json' 
+          dev_container_relative_path="containers/${template_id}/.devcontainer"
+          dev_container_json_name="devcontainer.json"
+
+          mkdir -p "/tmp/${dev_container_relative_path}"
+          cp -f "$(pwd)/${dev_container_relative_path}/${dev_container_json_name}" "/tmp/${dev_container_relative_path}/"
+          dev_container_tmp="/tmp/${dev_container_relative_path}/${dev_container_json_name}"
+          sed -i'.bak' -e "s/\\/\\/.*/ /g" "${dev_container_tmp}"
+
+          # Fetching extensions list defined in 'devcontainer.json'
+          extensions="$(jq '.extensions' --compact-output "${dev_container_tmp}" | tr -d '[' | tr -d ']' | tr ',' '\n' 2>/dev/null || echo -n '')"
+
+          # Stubbing extensions list for the tests validation with checkExtension() 
+          devcontainer exec --workspace-folder "containers/${template_id}/" --id-label ${id_label} /bin/sh -c "\
+              mkdir -p \$HOME/.vscode-server/bin \$HOME/.vscode-server/extensions \
+              && cd \$HOME/.vscode-server/extensions \
+              && if [ \"${extensions}\" != '' ]; then echo \"${extensions}\" | xargs -n 1 mkdir -p; fi \
+              && find \$HOME/.vscode-server/ -type d"
+
+          echo "Running Smoke Test"
+          devcontainer exec --workspace-folder "containers/${template_id}/" --id-label ${id_label} /bin/sh -c 'set -e && if [ -f "test-project/test.sh" ]; then cd test-project && if [ "$(id -u)" = "0" ]; then chmod +x test.sh; else sudo chmod +x test.sh; fi && ./test.sh; else ls -a; fi'
+
+          # Clean up
+          docker rm -f $(docker container ls -f "label=${id_label}" -q)

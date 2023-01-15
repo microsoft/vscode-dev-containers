@@ -1,3 +1,9 @@
+**IMPORTANT NOTE: We're starting to migrate contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open dev container specification](https://containers.dev).**
+
+**We've currently migrated `gradle` as [part of the `java` Feature](https://github.com/devcontainers/features/tree/main/src/java#options).**
+
+**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589).**
+
 # Gradle Install Script
 
 *Installs Gradle, SDKMAN! (if not installed), and needed dependencies.*

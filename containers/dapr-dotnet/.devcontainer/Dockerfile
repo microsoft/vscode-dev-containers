@@ -1,21 +1,21 @@
 # [Choice] .NET version: 5.0, 3.1, 2.1
-ARG VARIANT=3.1
-FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-${VARIANT}
+ARG VARIANT=${templateOption:imageVariant}
+FROM mcr.microsoft.com/devcontainers/dotnet:0-${VARIANT}
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
-ARG NODE_VERSION="none"
+ARG NODE_VERSION="${templateOption:nodeVersion}"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 # [Option] Install Azure CLI
-ARG INSTALL_AZURE_CLI="false"
+ARG INSTALL_AZURE_CLI="${templateOption:installAzureCli}"
 COPY library-scripts/azcli-debian.sh /tmp/library-scripts/
 RUN if [ "$INSTALL_AZURE_CLI" = "true" ]; then bash /tmp/library-scripts/azcli-debian.sh; fi \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # [Option] Enable non-root Docker access in container
-ARG ENABLE_NONROOT_DOCKER="true"
+ARG ENABLE_NONROOT_DOCKER="${templateOption:enableNonRootDocker}"
 # [Option] Use the OSS Moby CLI instead of the licensed Docker CLI
-ARG USE_MOBY="true"
+ARG USE_MOBY="${templateOption:moby}"
 
 ARG USERNAME=vscode
 

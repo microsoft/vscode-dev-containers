@@ -1,0 +1,13 @@
+{
+	"id": "azure-functions-java-11",
+	"version": "1.0.0",
+	"name": "Azure Functions & Java 11",
+	"description": "Develop Azure Functions in Java. Includes JDK 11, Maven, XML tools, the Azure Functions SDK, and related extensions and dependencies.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/azure-functions-java-11",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"platforms": [
+		"Azure Functions",
+		"Java"
+	]
+}

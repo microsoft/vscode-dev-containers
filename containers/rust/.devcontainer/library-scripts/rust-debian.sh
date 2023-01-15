@@ -24,6 +24,9 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+echo "Starting installation of Rust (${RUST_VERSION})"
+
+
 # Ensure that login shells get the correct path if the user updated the PATH using ENV.
 rm -f /etc/profile.d/00-restore-env.sh
 echo "export PATH=${PATH//$(sh -lc 'echo $PATH')/\$PATH}" > /etc/profile.d/00-restore-env.sh
@@ -95,7 +98,7 @@ find_version_from_git_tags() {
     echo "${variable_name}=${!variable_name}"
 }
 
-check_nightly_version() {
+check_nightly_version_formatting() {
     local variable_name=$1
     local requested_version=${!variable_name}
     if [ "${requested_version}" = "none" ]; then return; fi
@@ -104,7 +107,7 @@ check_nightly_version() {
     
     date -d ${version_date} &>/dev/null
     if [ $? != 0 ]; then
-        echo -e "Invalid ${variable_name} value: ${requested_version}\nNightly version should be in the format nightly-YYYY-MM-DD" >&2
+        echo -e "Invalid nightly version for ${variable_name} value: ${requested_version}\nNightly version should be in the format nightly-YYYY-MM-DD" >&2
         exit 1
     fi
 
@@ -173,20 +176,23 @@ chmod g+r+w+s "${RUSTUP_HOME}" "${CARGO_HOME}"
 if [ "${RUST_VERSION}" = "none" ] || type rustup > /dev/null 2>&1; then
     echo "Rust already installed. Skipping..."
 else
-    if [ "${RUST_VERSION}" != "latest" ] && [ "${RUST_VERSION}" != "lts" ] && [ "${RUST_VERSION}" != "stable" ] && [ "${RUST_VERSION}" != "nightly" ]; then
+    # Non-latest version of rust specified.
+    if [ "${RUST_VERSION}" != "latest" ] && [ "${RUST_VERSION}" != "lts" ] && [ "${RUST_VERSION}" != "stable" ]; then
         # Find version using soft match
         if ! type git > /dev/null 2>&1; then
             apt_get_update_if_needed
             apt-get -y install --no-install-recommends git
         fi
-        if [ $(echo ${RUST_VERSION} | grep -q "nightly") ]; then
-            find_version_from_git_tags RUST_VERSION "https://github.com/rust-lang/rust" "tags/"
+        is_nightly=0
+        echo ${RUST_VERSION} | grep -q "nightly" || is_nightly=$?
+        if [ $is_nightly = 0 ]; then
+            check_nightly_version_formatting RUST_VERSION
         else
-            check_nightly_version RUST_VERSION
+            find_version_from_git_tags RUST_VERSION "https://github.com/rust-lang/rust" "tags/"
         fi
         default_toolchain_arg="--default-toolchain ${RUST_VERSION}"
     fi
-    echo "Installing Rust..."
+    echo "Installing Rust (resolved version is '${RUST_VERSION}')..."
     # Download and verify rustup sha
     mkdir -p /tmp/rustup/target/${download_architecture}-unknown-linux-gnu/release/
     curl -sSL --proto '=https' --tlsv1.2 "https://static.rust-lang.org/rustup/dist/${download_architecture}-unknown-linux-gnu/rustup-init" -o /tmp/rustup/target/${download_architecture}-unknown-linux-gnu/release/rustup-init

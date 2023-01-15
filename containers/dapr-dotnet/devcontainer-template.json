@@ -1,0 +1,54 @@
+{
+	"id": "dapr-dotnet",
+	"version": "1.0.0",
+	"name": "Dapr with C#",
+	"description": "Develop Dapr applications using C# and .NET. Includes all needed SDKs, extensions, and dependencies.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/dapr-dotnet",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": ".NET Core version:",
+			"proposals": [
+				"5.0",
+				"3.1",
+				"2.1"
+			],
+			"default": "3.1"
+		},
+		"installAzureCli": {
+			"type": "boolean",
+			"description": "Install Azure CLI!?",
+			"default": "false"
+		},
+		"moby": {
+			"type": "boolean",
+			"default": "true",
+			"description": "Use the OSS Moby CLI instead of the licensed Docker CLI"
+		},
+		"enableNonRootDocker": {
+			"type": "boolean",
+			"description": "Enable non-root Docker access in container?",
+			"default": "true"
+		},
+		"nodeVersion": {
+			"type": "string",
+			"description": "Node.js version:",
+			"proposals": [
+				"none",
+				"lts/*",
+				"16",
+				"14",
+				"12",
+				"10"
+			],
+			"default": "lts/*"
+		}
+	},
+	"platforms": [
+		".NET Core",
+		"C#",
+		"Dapr"
+	]
+}

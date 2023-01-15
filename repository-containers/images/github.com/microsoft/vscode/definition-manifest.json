@@ -3,8 +3,6 @@
 	"build": {
 		"latest": true,
 		"rootDistro": "debian",
-		"parent": "typescript-node",
-		"parentVariant": "16-bullseye",
 		"tags": [
 			"repos/microsoft/vscode:${VERSION}"
 		],

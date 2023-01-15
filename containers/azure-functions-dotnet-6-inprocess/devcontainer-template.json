@@ -1,0 +1,14 @@
+{
+	"id": "azure-functions-dotnet-6-inprocess",
+	"version": "1.0.0",
+	"name": "Azure Functions & C# - .NET 6 (In-Process)",
+	"description": "Develop Azure Functions in C# (in-process). Includes NET 6, the Azure Functions SDK, and related extensions and dependencies.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/azure-functions-dotnet-6-inprocess",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"platforms": [
+		"Azure Functions",
+		".NET Core",
+		"C#"
+	]
+}

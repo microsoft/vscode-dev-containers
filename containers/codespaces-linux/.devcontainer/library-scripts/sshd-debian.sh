@@ -41,21 +41,10 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-# Function to run apt-get if needed
-apt_get_update_if_needed()
-{
-    if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-        echo "Running apt-get update..."
-        apt-get update
-    else
-        echo "Skipping apt-get update."
-    fi
-}
-
 # Checks if packages are installed and installs them if not
 check_packages() {
     if ! dpkg -s "$@" > /dev/null 2>&1; then
-        apt_get_update_if_needed
+        apt-get update -y
         apt-get -y install --no-install-recommends "$@"
     fi
 }
@@ -73,6 +62,13 @@ if [ "${NEW_PASSWORD}" = "random" ]; then
 elif [ "${NEW_PASSWORD}" != "skip" ]; then
     # If new password not set to skip, set it for the specified user
     echo "${USERNAME}:${NEW_PASSWORD}" | chpasswd
+fi
+
+if [ $(getent group ssh) ]; then
+  echo "'ssh' group already exists."
+else
+  echo "adding 'ssh' group, as it does not already exist."
+  groupadd ssh
 fi
 
 # Add user to ssh group

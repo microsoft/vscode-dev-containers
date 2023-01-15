@@ -1,0 +1,21 @@
+name: "Release dev container community templates"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "Publish"
+        uses: devcontainers/action@v1
+        with:
+          publish-templates: "true"
+          base-path-to-templates: "./containers"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

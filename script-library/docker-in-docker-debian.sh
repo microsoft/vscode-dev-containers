@@ -7,13 +7,14 @@
 # Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker-in-docker.md
 # Maintainer: The VS Code and Codespaces Teams
 #
-# Syntax: ./docker-in-docker-debian.sh [enable non-root docker access flag] [non-root user] [use moby] [Engine/CLI Version] [Major version for docker-compose]
+# Syntax: ./docker-in-docker-debian.sh [enable non-root docker access flag] [non-root user] [use moby] [Engine/CLI Version] [Major version for docker-compose] [azure DNS auto detection flag]
 
 ENABLE_NONROOT_DOCKER=${1:-"true"}
 USERNAME=${2:-"automatic"}
 USE_MOBY=${3:-"true"}
 DOCKER_VERSION=${4:-"latest"} # The Docker/Moby Engine + CLI should match in version
 DOCKER_DASH_COMPOSE_VERSION=${5:-"v1"} # v1 or v2
+AZURE_DNS_AUTO_DETECTION=${6:-"true"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 DOCKER_MOBY_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal jammy"
 DOCKER_LICENSED_ARCHIVE_VERSION_CODENAMES="buster bullseye bionic focal hirsute impish jammy"
@@ -95,7 +96,7 @@ find_version_from_git_tags() {
     local repository=$2
     local prefix=${3:-"tags/v"}
     local separator=${4:-"."}
-    local last_part_optional=${5:-"false"}    
+    local last_part_optional=${5:-"false"}
     if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
         local escaped_separator=${separator//./\\.}
         local last_part
@@ -316,7 +317,7 @@ if [ "${ENABLE_NONROOT_DOCKER}" = "true" ]; then
 fi
 
 tee /usr/local/share/docker-init.sh > /dev/null \
-<< 'EOF'
+<< EOF
 #!/bin/sh
 #-------------------------------------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -325,6 +326,11 @@ tee /usr/local/share/docker-init.sh > /dev/null \
 
 set -e
 
+AZURE_DNS_AUTO_DETECTION=$AZURE_DNS_AUTO_DETECTION
+EOF
+
+tee -a /usr/local/share/docker-init.sh > /dev/null \
+<< 'EOF'
 dockerd_start="$(cat << 'INNEREOF'
     # explicitly remove dockerd and containerd PID file to ensure that it can start properly if it was stopped uncleanly
     # ie: docker kill <ID>
@@ -364,7 +370,7 @@ dockerd_start="$(cat << 'INNEREOF'
     # Handle DNS
     set +e
     cat /etc/resolv.conf | grep -i 'internal.cloudapp.net'
-    if [ $? -eq 0 ]
+    if [ $? -eq 0 ] && [ "${AZURE_DNS_AUTO_DETECTION}" = "true" ]
     then
         echo "Setting dockerd Azure DNS."
         CUSTOMDNS="--dns 168.63.129.16"

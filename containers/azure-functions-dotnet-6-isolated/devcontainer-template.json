@@ -1,0 +1,14 @@
+{
+	"id": "azure-functions-dotnet-6-isolated",
+	"version": "1.0.0",
+	"name": "Azure Functions & C- .NET 6 (Isolated)",
+	"description": "Develop Azure Functions in C# (isolated). Includes NET 6, the Azure Functions SDK, and related extensions and dependencies.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/azure-functions-dotnet-6-isolated",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"platforms": [
+		"Azure Functions",
+		".NET Core",
+		"C#"
+	]
+}

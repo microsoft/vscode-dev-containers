@@ -1,0 +1,25 @@
+{
+	"id": "azure-functions-node",
+	"version": "1.0.0",
+	"name": "Azure Functions & Node.js",
+	"description": "Develop Azure Functions in Node.js. Includes Node.js, eslint, the Azure Functions SDK, and related extensions and dependencies.",
+	"documentationURL": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/azure-functions-node",
+	"publisher": "Community",
+	"licenseURL": "https://github.com/microsoft/vscode-dev-containers/blob/main/LICENSE",
+	"options": {
+		"imageVariant": {
+			"type": "string",
+			"description": "Node version:",
+			"proposals": [
+				"14",
+				"16"
+			],
+			"default": "14"
+		}
+	},
+	"platforms": [
+		"Azure Functions",
+		"Node.js",
+		"JavaScript"
+	]
+}
