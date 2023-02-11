@@ -94,7 +94,7 @@ If you get a number other than `0`, you can simply add your non-root user to rig
     ```Dockerfile
     ARG NONROOT_USER=vscode
 
-    RUN echo "#!/bin/sh\n\
+    RUN echo -e "#!/bin/sh\n\
         sudoIf() { if [ \"\$(id -u)\" -ne 0 ]; then sudo \"\$@\"; else \"\$@\"; fi }\n\
         SOCKET_GID=\$(stat -c '%g' /var/run/docker.sock) \n\
         if [ \"${SOCKET_GID}\" != '0' ]; then\n\

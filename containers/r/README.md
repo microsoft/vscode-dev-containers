@@ -1,3 +1,5 @@
+**IMPORTANT NOTE: The `R` template is now hosted by the community author in the repo [rocker-org/devcontainer-templates](https://github.com/rocker-org/devcontainer-templates/tree/main/src/r-ver).**
+
 # R (Community)
 
 ## Summary

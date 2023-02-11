@@ -4,6 +4,9 @@ pool:
 trigger:
 - main
 
+variables:
+  Codeql.Enabled: true
+
 steps:
 - task: ComponentGovernanceComponentDetection@0
   inputs:

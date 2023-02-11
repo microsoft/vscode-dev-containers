@@ -2,18 +2,23 @@
 
 ## How to file issues and get help
 
-This project primarily uses GitHub Issues to track bugs and feature requests.
+We've migrated most of the contents of this repo to the [devcontainers org](https://github.com/devcontainers), as part of the work on the [open Dev Container specification](https://containers.dev).
 
-1. For bugs and feature requests pertaining to the **development containers and associated images** in this repository, please search the [existing issues](https://github.com/microsoft/vscode-dev-containers/issues) before filing new issues to avoid duplicates. For new issues, file your bug or feature request as a new Issue.
+- Features managed by the Dev Container spec maintainers (such as the VS Code team) are now in [devcontainers/features](https://github.com/devcontainers/features).
+- Definitions/Templates managed by the Dev Container spec maintainers are now in [devcontainers/templates](https://github.com/devcontainers/templates).
+- `mcr.microsoft.com/devcontainers` and `mcr.microsoft.com/vscode/devcontainers` images are now published from [devcontainers/images](https://github.com/devcontainers/images). Information on image updates, patching, and deprecation [can be found in this pinned tracking issue](hhttps://github.com/devcontainers/images/issues/90).
 
-2. For bugs and issues related to the **VS Code Remote - Containers** extension, please use the [vscode-remote-release](https://github.com/microsoft/vscode-remote-release/issues) repository instead.
 
-3. However, for bugs and feature requests relating to **GitHub Codespaces**, please raise them in the [GitHub Codespaces discussion channel](https://github.com/github/feedback/discussions/categories/codespaces) instead.
+As a result, this repository is only used for community definitions that have not been migrated elsewhere by their owners. If you are a community owner and want us to remove an existing definition here, feel free to submit a PR to do so!
 
-Help and questions:
-1. For help using the VS Code Remote - Containers extension, please see the [VS Code Remote Development documentation](https://code.visualstudio.com/docs/remote/remote-overview) and [StackOverflow questions with the 'vscode-remote' label](https://stackoverflow.com/questions/tagged/vscode-remote).
-2. For GitHub Codespaces, please see [GitHub documentation](https://docs.github.com/en/github/developing-online-with-codespaces/) or the [GitHub beta feedback channel](https://github.community/c/code-to-cloud/codespaces-beta/45) instead.
-3. Information on pre-built image updates, patching, and deprecation [can be found in this pinned tracking issue](https://github.com/microsoft/vscode-dev-containers/issues/532#issue-689303932).
+For new Templates/Features, you can now self-publish and optionally make them visible in-tool by following the steps one of the quick start repositories: [Templates quick start](https://github.com/devcontainers/template-starter), [Features quick start](https://github.com/devcontainers/feature-starter). No need to submit a PR here anymore.
+
+You can also:
+
+- Provide feedback for the [VS Code Dev Containers](https://github.com/Microsoft/vscode-remote-release/blob/main/CONTRIBUTING.md) extension or [GitHub Codespaces](https://github.com/github/feedback/discussions/categories/codespaces).
+- Discuss the [Dev Container spec](https://github.com/orgs/devcontainers/discussions) or [join the Slack channel](https://github.com/orgs/devcontainers/discussions/3)
+- Make proposals for improvments to the [Dev Container spec repository](https://github.com/devcontainers/spec).
+- Contribute to the [Dev Container CLI](https://github.com/devcontainers/cli).
 
 ## Microsoft Support Policy
 
