@@ -50,7 +50,6 @@ jobs:
             ruby-rails: ./**/ruby-rails/**
             ruby-sinatra: ./**/ruby-sinatra/**
             sfdx-project: ./**/sfdx-project/**
-            swift: ./**/swift/**
             vue: ./**/vue/**
 
   test:
