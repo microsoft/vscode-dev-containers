@@ -1,4 +1,4 @@
-**IMPORTANT NOTE: The `Swift` template is now hosted by the community author in the repo [rocker-org/devcontainer-templates](https://github.com/swift-server/swift-devcontainer-template/tree/main/src/swift).**
+**IMPORTANT NOTE: The `Swift` template is now hosted by the community author in the repo [swift-server/swift-devcontainer-template](https://github.com/swift-server/swift-devcontainer-template/tree/main/src/swift).**
 
 # Swift (Community)
 
