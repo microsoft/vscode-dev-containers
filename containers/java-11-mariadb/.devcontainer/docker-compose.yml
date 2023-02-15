@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  mariadb:
+          image: mariadb:latest
+          expose:
+              # Expose mariadb port to app service (Access as hostname "mariadb" from within app container)
+              - "3306"
+          # Uncomment to allow access to mariadb from external tools
+          ports:
+               - "3306:3306"
+          environment:
+            MYSQL_ROOT_PASSWORD: root_password
+            MYSQL_DATABASE: app_db_name
+            MYSQL_USER: app_user
+            MYSQL_PASSWORD: app_password
+            MYSQL_TCP_PORT: 3306
+            MYSQL_UNIX_PORT: 3306
+  app:
+    depends_on:
+      - mariadb
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UPGRADE_PACKAGES: "true"
+
+    volumes:
+      # Forwards the local Docker socket to the container.
+      - /var/run/docker.sock:/var/run/docker-host.sock
+      # Update this to wherever you want VS Code to mount the folder of your project
+      - ..:/workspace:cached
+
+    # Overrides default command so things don't shut down after the process ends.
+    entrypoint: /usr/local/share/docker-init.sh
+    command: sleep infinity
+    # Uncomment the next four lines if you will use a ptrace-based debuggers like C++, Go, and Rust.
+    # cap_add:
+    #  - SYS_PTRACE
+    # security_opt:
+    #   - seccomp:unconfined
+
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: vscode
+
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # (Adding the "ports" property to this file will not forward from a Codespace.)

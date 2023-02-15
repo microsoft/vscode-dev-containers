@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "app_db",
+            "dialect": "MariaDB",
+            "name": "MariaDB Docker-Compose Service",
+            "password": "root_password",
+            "port": 3306,
+            "server": "mariadb",
+            "username": "root"
+        }
+    ]
+}

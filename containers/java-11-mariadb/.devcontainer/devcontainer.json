@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/docker-from-docker-compose
+{
+	"name": "Java 11 & MariaDB (Docker-Compose)",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+
+	// Use this environment variable if you need to bind mount your local source code into a new container.
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}",
+		"MYSQL_HOST": "mariadb", // Your application should pull the MYSQL_HOST environment variable to use the MariaDB service
+		"MYSQL_USER": "app_user",
+		"MYSQL_PASSWORD": "app_password",
+		"MYSQL_DATABASE": "app_db_name",
+		"MYSQL_PORT": "3306",
+	},
+	
+	// Set *default* container specific settings.json values on container create.
+	"settings": {},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-azuretools.vscode-docker",
+		"vscjava.vscode-java-pack",
+		"vscjava.vscode-java-debug",
+		"vscjava.vscode-java-dependency",
+		"mtxr.sqltools"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "docker --version",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+	"features": {
+		"java": "11",
+		"docker-in-docker": "latest",
+		"maven": "latest"
+	}
+}
