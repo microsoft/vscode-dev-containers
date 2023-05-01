@@ -1,3 +1,5 @@
+**IMPORTANT NOTE: The `Jupyter Data Science Notebooks` template is now hosted by the community author in the repo [devcontainers-community/templates](https://github.com/devcontainers-community/templates).**
+
 # Jupyter Data Science Notebooks (Community)
 
 ## Summary
