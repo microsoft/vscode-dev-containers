@@ -17,9 +17,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # Install Bazel
 ARG BAZELISK_VERSION=v1.10.1
 ARG BAZELISK_DOWNLOAD_SHA=dev-mode
-RUN curl -fSsL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-linux-amd64 \
-    && ([ "${BAZELISK_DOWNLOAD_SHA}" = "dev-mode" ] || echo "${BAZELISK_DOWNLOAD_SHA} */usr/local/bin/bazelisk" | sha256sum --check - ) \
-    && chmod 0755 /usr/local/bin/bazelisk
+RUN curl -fSsL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-linux-amd64 \
+    && ([ "${BAZELISK_DOWNLOAD_SHA}" = "dev-mode" ] || echo "${BAZELISK_DOWNLOAD_SHA} */usr/local/bin/bazel" | sha256sum --check - ) \
+    && chmod 0755 /usr/local/bin/bazel
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
