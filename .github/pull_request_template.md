@@ -1,9 +1,9 @@
-🚨 We are not accepting PRs for new Definitions/Templates or Features in this repository. 🚨
+🚨 We are not accepting PRs in this repository - contents have been migrated to the https://github.com/devcontainers org. This repo will be archived November 2023. 🚨
 
-If you are an owner of a community Definition/Template or Feature and would like to have it removed from this repository (e.g., because you are now self-publishing), please create a PR here and let us know. Otherwise, note that the majority of the contents of this repository been migrated to the https://github.com/devcontainers org.  
+Consider logging a request or issue in one of these locations instead:
 
 * For new Dev Container Features, see https://github.com/devcontainers/feature-template to get started and add your Feature into the index.
-* For new Definitions/Templates, see https://github.com/devcontainers/template-starter To get started and add your Template into the index.
+* For new Definitions/Templates, see https://github.com/devcontainers/template-starter to get started and add your Template into the index.
 * Create PRs related to mcr.microsoft.com/devcontainers or mcr.microsoft.com/vscode/devcontainers images at https://github.com/devcontainers/images
 * Create PRs related to existing Dev Container Features managed by the Dev Container spec maintainers at https://github.com/devcontainers/features
 * Create PRs related to existing Dev Container Templates managed by the Dev Container spec maintainers at https://github.com/devcontainers/templates

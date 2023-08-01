@@ -1,4 +1,4 @@
-**IMPORTANT NOTE: We've migrated most of the contents of this repo to the [devcontainers GitHub org](https://github.com/devcontainers), as part of the work on the [open Dev Container specification](https://containers.dev).**
+**IMPORTANT NOTE: This repository is no longer active and will be archived in November 2023. We've migrated most of the contents of this repo to the [devcontainers GitHub org](https://github.com/devcontainers), as part of the work on the [open Dev Container specification](https://containers.dev).**
 
 - **Features managed by the Dev Container spec maintainers (such as the VS Code team) are now in [devcontainers/features](https://github.com/devcontainers/features).**
 - **Definitions/Templates managed by the Dev Container spec maintainers are now in [devcontainers/templates](https://github.com/devcontainers/templates).**
@@ -6,13 +6,11 @@
 
 **For new Templates/Features, you can now self-publish and optionally make them visible in-tool by following the steps one of the quick start repositories: [Templates quick start](https://github.com/devcontainers/template-starter), [Features quick start](https://github.com/devcontainers/feature-starter). No need to submit a PR here anymore.**
 
-**As a result, this repository only used for community definitions that have not been migrated elsewhere by their owners. If you are a community owner and want us to remove an existing definition here, feel free to submit a PR to do so!**
-
-**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589).**
+**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589) and latest [archiving announcement](https://github.com/microsoft/vscode-dev-containers/issues/1762).**
 
 ---
 
-# VS Code / GitHub Codespaces Dev Container Definitions
+# [Deprecated] VS Code / GitHub Codespaces Dev Container Definitions
 
 <table style="width: 100%; border-style: none;"><tr>
 <td style="width: 140px; text-align: center;"><a href="https://aka.ms/vscode-remote/download/extension"><img width="128px" src="https://microsoft.github.io/vscode-remote-release/images/remote-extensionpack.png" alt="Visual Studio Code logo"/></a></td>
@@ -21,6 +19,8 @@
 <i>Open your code in the cloud, in a local container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
 </td>
 </tr></table>
+
+**IMPORTANT NOTE: As noted in the section above, this repository is no longer active and will be archived in November 2023.**
 
 A **development container** is a running [Docker](https://www.docker.com) container with a well-defined tool/runtime stack and its prerequisites. The [VS Code Dev Containers](https://aka.ms/vscode-remote/download/containers) extension and [GitHub Codespaces](https://github.com/features/codespaces) allow you to open or clone code in a local or cloud-hosted Dev Container and take advantage of VS Code's full development feature set.
 
