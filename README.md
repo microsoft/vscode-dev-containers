@@ -6,7 +6,7 @@
 
 **For new Templates/Features, you can now self-publish and optionally make them visible in-tool by following the steps one of the quick start repositories: [Templates quick start](https://github.com/devcontainers/template-starter), [Features quick start](https://github.com/devcontainers/feature-starter). No need to submit a PR here anymore.**
 
-**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589).**
+**For more details, you can review the [announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1589) and latest [archiving announcement](https://github.com/microsoft/vscode-dev-containers/issues/1762).**
 
 ---
 

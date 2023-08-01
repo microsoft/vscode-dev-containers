@@ -6,6 +6,10 @@ about: 🚨 We are not accepting new feature requests for this repo - contents h
 
 🚨 We are not accepting feature requests in this repository as all dev container resources have been migrated to https://github.com/devcontainers. Any feature requests logged in this repo will not be reviewed. This repo will be archived November 2023. 🚨
 
+There's more information in the [archiving announcement issue](https://github.com/microsoft/vscode-dev-containers/issues/1762).
+
+Consider logging an issue in one of these locations instead:
+
 * Log requests for Dev Container images managed by the Dev Container spec maintainers at https://github.com/devcontainers/images
 * Log requests for Dev Container Features managed by the Dev Container spec maintainers at https://github.com/devcontainers/features
 * Log requests for Dev Container Templates managed by the Dev Container spec maintainers at https://github.com/devcontainers/templates
