@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Dev Container Templates
+    url: https://github.com/devcontainers/templates
+    about: Log requests for Dev Container Templates managed by the Dev Container spec maintainers
+  - name: Dev Container Images
+    url: https://github.com/devcontainers/images
+    about: Log requests for Dev Container images managed by the Dev Container spec maintainers
+  - name: Dev Container Features
+    url: https://github.com/devcontainers/features
+    about: Log requests for Dev Container Features managed by the Dev Container spec maintainers
