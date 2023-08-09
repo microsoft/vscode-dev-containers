@@ -1,6 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:16-bullseye
+FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:18-bullseye
 
-ARG NODE_VERSION="16"
+ARG NODE_VERSION="18"
 COPY library-scripts/desktop-lite-debian.sh /tmp/library-scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 	&& bash /tmp/library-scripts/desktop-lite-debian.sh \
