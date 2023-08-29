@@ -1,3 +1,5 @@
+**IMPORTANT NOTE: The `Julia` template is now hosted by the `JuliaLang` organization in [JuliaLang/devcontainer-templates](https://github.com/JuliaLang/devcontainer-templates).**
+
 # Julia (Community)
 
 ## Summary
