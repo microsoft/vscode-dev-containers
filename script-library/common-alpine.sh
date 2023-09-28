@@ -95,6 +95,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         zlib \
         sudo \
         coreutils \
+        util-linux \
         sed \
         grep \
         which \
