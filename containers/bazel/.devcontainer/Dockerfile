@@ -15,7 +15,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install Bazel
-ARG BAZELISK_VERSION=v1.10.1
+ARG BAZELISK_VERSION=v1.12.0
 ARG BAZELISK_DOWNLOAD_SHA=dev-mode
 RUN curl -fSsL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-linux-amd64 \
     && ([ "${BAZELISK_DOWNLOAD_SHA}" = "dev-mode" ] || echo "${BAZELISK_DOWNLOAD_SHA} */usr/local/bin/bazelisk" | sha256sum --check - ) \
