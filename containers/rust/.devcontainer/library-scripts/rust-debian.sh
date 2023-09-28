@@ -213,6 +213,9 @@ fi
 echo "Installing common Rust dependencies..."
 rustup component add rls rust-analysis rust-src rustfmt clippy 2>&1
 
+echo "Installing common Rust tools..."
+sudo --user=$USERNAME cargo install bindgen cbindgen cargo-outdated cargo-audit cargo-edit cargo-diet cargo-about
+
 # Add CARGO_HOME, RUSTUP_HOME and bin directory into bashrc/zshrc files (unless disabled)
 updaterc "$(cat << EOF
 export RUSTUP_HOME="${RUSTUP_HOME}"
