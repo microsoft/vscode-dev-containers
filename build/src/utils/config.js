@@ -54,19 +54,6 @@ async function loadConfig(repoPath) {
         }
     });
 
-    // Load repo containers to build
-    const repoContainersToBuildPath = path.join(repoPath, getConfig('repoContainersToBuildPath', 'repository-containers/build'));
-    const repoContainerManifestFiles = glob.sync(`${repoContainersToBuildPath}/**/${definitionBuildConfigFile}`);
-    await asyncUtils.forEach(repoContainerManifestFiles, async (manifestFilePath) => {
-        const definitionPath = path.resolve(path.dirname(manifestFilePath));
-        const definitionId = path.relative(repoContainersToBuildPath, definitionPath);
-        allDefinitionPaths[definitionId] = {
-            path: definitionPath,
-            relativeToRootPath: path.relative(repoPath, definitionPath)
-        }
-        await loadDefinitionManifest(manifestFilePath, definitionId);
-    });
-
     // Populate image variants and tag lookup
     for (let definitionId in config.definitionBuildSettings) {
         const buildSettings = config.definitionBuildSettings[definitionId];
