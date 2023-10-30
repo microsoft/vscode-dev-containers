@@ -164,7 +164,7 @@ function getVersionFromRelease(release, definitionId) {
     }
 
     // Is a branch
-    return 'dev';
+    return '0.204.1';
 }
 
 // Look up distro and fallback to debian if not specified
