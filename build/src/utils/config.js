@@ -164,7 +164,7 @@ function getVersionFromRelease(release, definitionId) {
     }
 
     // Is a branch
-    return '0.204.1';
+    return 'dev';
 }
 
 // Look up distro and fallback to debian if not specified
@@ -202,7 +202,7 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
     // If the definition states that only versioned tags are returned and the version is 'dev', 
     // add the definition Id to ensure that we do not incorrectly hijack a tag from another definition.
     if (version === 'dev') {
-        version = config.definitionBuildSettings[definitionId].versionedTagsOnly ? `dev-${definitionId.replace(/-/mg,'')}` : 'dev';
+        version = config.definitionBuildSettings[definitionId].versionedTagsOnly ? `dev-${definitionId.replace(/-/mg,'')}` : 'branch-main';
     }
 
 
