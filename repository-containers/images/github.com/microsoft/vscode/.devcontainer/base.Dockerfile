@@ -23,3 +23,10 @@ ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" \
 
 ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
 CMD ["sleep", "infinity"]
+
+RUN echo 'echo "NOTE: This Docker image has been discontinued and no longer receives any updates."' \
+	| tee -a /home/node/.bashrc \
+	| tee -a /home/node/.zshrc \
+	| tee -a /root/.bashrc \
+	| tee -a /root/.zshrc \
+	>/dev/null
