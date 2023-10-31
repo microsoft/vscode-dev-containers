@@ -7,7 +7,6 @@
 	"githubRepoName": "microsoft/vscode-dev-containers",
 	"containersPathInRepo": "containers",
 	"historyFolderName": "history",
-	"repoContainersToBuildPath": "repository-containers/images",
 	"scriptLibraryPathInRepo": "script-library",
 	"scriptLibraryFolderNameInDefinition": "library-scripts",
 	"historyUrlPrefix": "https://github.com/microsoft/vscode-dev-containers/tree/main/containers/",
