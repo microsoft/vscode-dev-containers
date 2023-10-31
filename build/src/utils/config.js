@@ -24,48 +24,34 @@ async function loadConfig(repoPath) {
     repoPath = repoPath || path.join(__dirname, '..', '..', '..');
     const definitionBuildConfigFile = getConfig('definitionBuildConfigFile', 'definition-manifest.json');
 
-    // // Get list of definition folders
-    // const containersPath = path.join(repoPath, getConfig('containersPathInRepo', 'containers'));
-    // const definitions = await asyncUtils.readdir(containersPath, { withFileTypes: true });
-    // await asyncUtils.forEach(definitions, async (definitionFolder) => {
-    //     // If directory entry is a file (like README.md, skip
-    //     if (!definitionFolder.isDirectory()) {
-    //         return;
-    //     }
+    // Get list of definition folders
+    const containersPath = path.join(repoPath, getConfig('containersPathInRepo', 'containers'));
+    const definitions = await asyncUtils.readdir(containersPath, { withFileTypes: true });
+    await asyncUtils.forEach(definitions, async (definitionFolder) => {
+        // If directory entry is a file (like README.md, skip
+        if (!definitionFolder.isDirectory()) {
+            return;
+        }
 
-    //     const definitionId = definitionFolder.name;
-    //     const definitionPath = path.resolve(path.join(containersPath, definitionId));
+        const definitionId = definitionFolder.name;
+        const definitionPath = path.resolve(path.join(containersPath, definitionId));
 
-    //     // If a .deprecated file is found, remove the directory from staging and return
-    //     if(await asyncUtils.exists(path.join(definitionPath, '.deprecated'))) {
-    //         await asyncUtils.rimraf(definitionPath);
-    //         return;
-    //     }
+        // If a .deprecated file is found, remove the directory from staging and return
+        if(await asyncUtils.exists(path.join(definitionPath, '.deprecated'))) {
+            await asyncUtils.rimraf(definitionPath);
+            return;
+        }
 
-    //     // Add to complete list of definitions
-    //     allDefinitionPaths[definitionId] = {
-    //         path: definitionPath,
-    //         relativeToRootPath: path.relative(repoPath, definitionPath)
-    //     }
-    //     // If definition-manifest.json exists, load it
-    //     const manifestPath = path.join(definitionPath, definitionBuildConfigFile);
-    //     if (await asyncUtils.exists(manifestPath)) {
-    //         await loadDefinitionManifest(manifestPath, definitionId);
-    //     }
-    // });
-
-    // Load repo containers to build
-    const repoContainersToBuildPath = path.join(repoPath, getConfig('repoContainersToBuildPath', 'repository-containers/build'));
-    const repoContainerManifestFiles = glob.sync(`${repoContainersToBuildPath}/**/${definitionBuildConfigFile}`);
-    await asyncUtils.forEach(repoContainerManifestFiles, async (manifestFilePath) => {
-        const definitionPath = path.resolve(path.dirname(manifestFilePath));
-        const definitionId = path.relative(repoContainersToBuildPath, definitionPath);
-        console.log(`Loading definition ID: ${definitionId}`);
+        // Add to complete list of definitions
         allDefinitionPaths[definitionId] = {
             path: definitionPath,
             relativeToRootPath: path.relative(repoPath, definitionPath)
         }
-        await loadDefinitionManifest(manifestFilePath, definitionId);
+        // If definition-manifest.json exists, load it
+        const manifestPath = path.join(definitionPath, definitionBuildConfigFile);
+        if (await asyncUtils.exists(manifestPath)) {
+            await loadDefinitionManifest(manifestPath, definitionId);
+        }
     });
 
     // Populate image variants and tag lookup
@@ -202,7 +188,7 @@ function getTagsForVersion(definitionId, version, registry, registryPath, varian
     // If the definition states that only versioned tags are returned and the version is 'dev', 
     // add the definition Id to ensure that we do not incorrectly hijack a tag from another definition.
     if (version === 'dev') {
-        version = config.definitionBuildSettings[definitionId].versionedTagsOnly ? `dev-${definitionId.replace(/-/mg,'')}` : 'branch-main';
+        version = config.definitionBuildSettings[definitionId].versionedTagsOnly ? `dev-${definitionId.replace(/-/mg,'')}` : 'dev';
     }
 
 
