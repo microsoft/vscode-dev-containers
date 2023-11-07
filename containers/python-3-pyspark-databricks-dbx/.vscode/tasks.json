@@ -1,0 +1,71 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "New dbx project",
+            "type": "shell",
+            "command": "bash ${workspaceFolder}/scripts/new-dbx-project.sh ${workspaceFolder} \"${input:dbx_project_name}\" ${input:databricks_host} ${input:databricks_token} ${input:databricks_cluster_id}",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher":"$eslint-compact"   
+        },
+        {
+            "label": "New local pyspark project",
+            "type": "shell",
+            "command": "bash ${workspaceFolder}/scripts/new-local-pyspark-project.sh ${workspaceFolder} \"${input:dbx_project_name}\"",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher":"$eslint-compact"   
+        },
+        {
+            "label": "Run dbx project",
+            "type": "shell",
+            "command": "bash ${workspaceFolder}/scripts/run-dbx-project.sh ${workspaceFolder} \"${input:dbx_project_name}\"",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher":"$eslint-compact"   
+        }
+    ],
+    "inputs": [
+        {
+            "id": "databricks_host",
+            "description": "Enter your Databricks workspace host",
+            "type": "promptString"
+        },
+        {
+            "id": "databricks_token",
+            "description": "Enter your Databricks workspace PAT",
+            "type": "promptString"
+        },
+        {
+            "id": "databricks_cluster_id",
+            "description": "Enter your Databricks cluster ID",
+            "type": "promptString"
+        },
+        {
+            "id": "dbx_project_name",
+            "description": "Enter the name of your project",
+            "type": "promptString"
+        }
+    ]
+}
