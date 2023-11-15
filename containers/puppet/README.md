@@ -1,3 +1,5 @@
+**IMPORTANT NOTE: This Template is deprecated and is no longer supported.**
+
 # Puppet Development Kit Docker Container (Community)
 
 ## Summary

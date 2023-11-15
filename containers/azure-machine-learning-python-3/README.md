@@ -1,3 +1,5 @@
+**IMPORTANT NOTE: This Template is deprecated and is no longer supported.**
+
 # Azure Machine Learning & Python 3 - Anaconda
 
 ## Summary
