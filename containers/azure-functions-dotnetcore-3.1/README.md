@@ -1,3 +1,5 @@
+**IMPORTANT NOTE: This Template is deprecated and is no longer supported.**
+
 # Azure Functions & C# - .NET Core 3.1
 
 ## Summary

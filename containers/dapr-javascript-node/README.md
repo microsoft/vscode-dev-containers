@@ -1,3 +1,5 @@
+**IMPORTANT NOTE: This Template is deprecated and is no longer supported.**
+
 # Dapr with Node.js & JavaScript (Community)
 
 ## Summary

@@ -1,3 +1,5 @@
+**IMPORTANT NOTE: This Template is deprecated and is no longer supported.**
+
 # Haskell (Community)
 
 _This definition will hopefully get you going quickly with Haskell running as a remote container in vscode_

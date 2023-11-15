@@ -1,3 +1,5 @@
+**IMPORTANT NOTE: This Template is deprecated and is no longer supported.**
+
 # Azure Terraform (Community)
 
 _build, change, and version Azure infrastructure with terraform_
