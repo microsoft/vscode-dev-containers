@@ -31,9 +31,7 @@ RUN apt-get update \
 # Install latest GHCup in the non-root user home
 USER $USERNAME
 
-RUN mkdir -p "$HOME/.ghcup/bin" \
-    && curl -LJ "https://downloads.haskell.org/~ghcup/x86_64-linux-ghcup" -o "$HOME/.ghcup/bin/ghcup" \
-    && chmod +x "$HOME/.ghcup/bin/ghcup"
+RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 ENV PATH="/home/$USERNAME/.cabal/bin:/home/$USERNAME/.ghcup/bin:$PATH"
 
 # [Choice] GHC version: recommended, latest, 9.2, 9.0, 8.10, 8.8, 8.6
