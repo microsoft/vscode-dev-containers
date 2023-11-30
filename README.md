@@ -1,4 +1,6 @@
-**IMPORTANT NOTE: This repository is no longer active and will be archived in November 2023. We've migrated most of the contents of this repo to the [devcontainers GitHub org](https://github.com/devcontainers), as part of the work on the [open Dev Container specification](https://containers.dev).**
+**IMPORTANT NOTE: Dev containers have a new, expanded home in the [dev containers GitHub org](https://github.com/devcontainers)! We're so excited to connect with you there. To learn more, you can check out our [migration announcement](https://github.com/microsoft/vscode-dev-containers/issues/1762).**
+
+**This repository is no longer active and was archived in November 2023. We've migrated most of the contents of this repo to the [devcontainers GitHub org](https://github.com/devcontainers), as part of the work on the [open Dev Container specification](https://containers.dev).**
 
 - **Features managed by the Dev Container spec maintainers (such as the VS Code team) are now in [devcontainers/features](https://github.com/devcontainers/features).**
 - **Definitions/Templates managed by the Dev Container spec maintainers are now in [devcontainers/templates](https://github.com/devcontainers/templates).**
