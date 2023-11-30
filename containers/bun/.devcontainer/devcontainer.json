@@ -1,0 +1,14 @@
+{
+    "name": "Bun",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "Pandy.bun"
+            ]
+        }
+    }
+}
