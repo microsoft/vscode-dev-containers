@@ -17,7 +17,7 @@
 ## Syntax
 
 ```text
-./gradle-debian.sh [Java version] [SDKMAN_DIR] [Non-root user] [Add rc files flag]
+./java-debian.sh [Java version] [SDKMAN_DIR] [Non-root user] [Add rc files flag]
 ```
 
 Or as a feature:
