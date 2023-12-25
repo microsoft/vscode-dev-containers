@@ -16,10 +16,10 @@ Some scripts have special installation instructions (like `desktop-lite-debian.s
 |----------|--------|------------|
 | [AWS CLI Install Script](docs/awscli.md) | `awscli-debian.sh` | VS Code and GitHub Codespaces teams |
 | [Azure CLI Install Script](docs/azcli.md) | `azcli-debian.sh` | VS Code and GitHub Codespaces teams |
-| [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` (Community) | VS Code and GitHub Codespaces teams |
+| [Common Script](docs/common.md) | `common-debian.sh`<br />`common-alpine.sh`<br />`common-redhat.sh` (Community)<br />`common-gentoo.sh` (Community) | VS Code and GitHub Codespaces teams |
 | [Desktop (Lightweight) Install Script](docs/desktop-lite.md) | `desktop-lite-debian.sh` | VS Code and GitHub Codespaces teams|
 | [Docker-in-Docker Install Script](docs/docker-in-docker.md) | `docker-in-docker-debian.sh` | VS Code and GitHub Codespaces teams |
-| [Docker-from-Docker Install Script](docs/docker.md) | `docker-debian.sh`<br />`docker-redhat.sh` (Community) | VS Code and GitHub Codespaces teams, [@smankoo](https://github.com/smankoo) (`docker-redhat.sh`) |
+| [Docker-from-Docker Install Script](docs/docker.md) | `docker-debian.sh`<br />`docker-redhat.sh` (Community)<br />`docker-gentoo.sh` (Community) | VS Code and GitHub Codespaces teams, [@smankoo](https://github.com/smankoo) (`docker-redhat.sh`) |
 | [Dotnet Install Script](docs/dotnet.md) | `dotnet-debian.sh` | VS Code and GitHub Codespaces teams |
 | [fish Install Script](docs/fish.md) | `fish-debian.sh` (Community) | [@andreiborisov](https://github.com/andreiborisov) |
 | [Git Build/Install from Source Script](docs/git-from-src.md) | `git-from-src-debian.sh` | VS Code and GitHub Codespaces teams|
@@ -77,6 +77,14 @@ RUN ash /tmp/library-scripts/common-alpine.sh \
 COPY library-scripts/*.sh /tmp/library-scripts/
 RUN bash /tmp/library-scripts/common-redhat.sh \
     && yum clean all && rm -rf /tmp/library-scripts
+```
+
+**Gentoo**
+
+```Dockerfile
+COPY library-scripts/*.sh /tmp/library-scripts/
+RUN ash /tmp/library-scripts/common-gentoo.sh \
+    && rm -rf /tmp/library-scripts
 ```
 
 Note that the CI process for this repository will automatically keep scripts in the `.devcontainers/library-scripts` folder up to date for each definition in the `containers` folder.
