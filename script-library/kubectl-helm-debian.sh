@@ -214,6 +214,16 @@ if ! type helm > /dev/null 2>&1; then
     exit 1
 fi
 
+# helm bash completion
+helm completion bash > /etc/bash_completion.d/helm
+
+# helm zsh completion
+if [ -e "${USERHOME}}/.oh-my-zsh" ]; then
+    mkdir -p "${USERHOME}/.oh-my-zsh/completions"
+    helm completion zsh > "${USERHOME}/.oh-my-zsh/completions/_helm"
+    chown -R "${USERNAME}" "${USERHOME}/.oh-my-zsh"
+fi
+
 # Install Minikube, verify checksum
 if [ "${MINIKUBE_VERSION}" != "none" ]; then
     echo "Downloading minikube..."
