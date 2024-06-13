@@ -1,0 +1,9 @@
+{
+    "name": "Animate.css",
+    "dockerFile": "Dockerfile",
+
+    "extensions": [
+        "mrmlnc.vscode-scss",
+        "zignd.html-css-class-com"
+    ]
+}
