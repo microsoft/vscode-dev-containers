@@ -17,8 +17,6 @@ ENV NVM_SYMLINK_CURRENT=true \
     PATH=${NPM_GLOBAL}/bin:${NVM_DIR}/current/bin:${PATH}
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
-    && apt-get purge -y imagemagick imagemagick-6-common \
     # Install common packages, non-root user, update yarn and install nvm
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     # Install yarn, nvm
