@@ -12,7 +12,7 @@
 
 **Script status**: Stable
 
-**OS support**: Debian 9+, Ubuntu 18.04+, CentOS/RHEL 7+ (community supported) and downstream distros.
+**OS support**: Debian 9+, Ubuntu 18.04+, CentOS/RHEL 7+/Fedora (community supported) and downstream distros.
 
 **Maintainer:** The VS Code and GitHub Codespaces teams, [@smankoo](https://github.com/smankoo) (`docker-redhat.sh`)
 
@@ -96,7 +96,7 @@ See the [`docker-from-docker`](../../containers/docker-from-docker) and [`docker
     CMD ["sleep", "infinity"]
     ```
 
-    For CentOS/RedHat, simply replace the `RUN` above with:
+    For CentOS/RedHat/Fedora, simply replace the `RUN` above with:
 
     ```Dockerfile
     RUN bash /tmp/library-scripts/docker-redhat.sh

@@ -8,7 +8,7 @@ Script names end in the Linux distribution "tree" they support. The majority are
 
 - **Debian or Ubuntu**: `-debian`
 - **Alpine Linux**: `-alpine`
-- **CentOS, RHEL**: `-redhat` (when the `yum` package manager is available - usually community supported).
+- **CentOS, RHEL, Fedora**: `-redhat` (when the `yum` package manager is available - usually community supported).
 
 Some scripts have special installation instructions (like `desktop-lite-debian.sh`). Consult the following documents for more information (in order of the script name):
 
@@ -71,7 +71,7 @@ RUN ash /tmp/library-scripts/common-alpine.sh \
     && rm -rf /tmp/library-scripts
 ```
 
-**CentOS/RedHat/Oracle Linux**
+**CentOS/RedHat/Fedora/Oracle Linux**
 
 ```Dockerfile
 COPY library-scripts/*.sh /tmp/library-scripts/
